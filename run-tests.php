@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.20 2005/12/23 19:40:12 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.21 2005/12/30 13:31:48 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -109,18 +109,20 @@ if (getenv('TEST_PHP_EXECUTABLE')) {
 	}
 }
 
-if (empty($php) || !file_exists($php)) {
-	error("environment variable TEST_PHP_EXECUTABLE must be set to specify PHP executable!");
+if ($argc !=2 || ($argv[1] != '-h' && $argv[1] != '-help' && $argv != '--help'))
+{
+	if (empty($php) || !file_exists($php)) {
+		error("environment variable TEST_PHP_EXECUTABLE must be set to specify PHP executable!");
+	}
+	if (function_exists('is_executable') && !@is_executable($php)) {
+		error("invalid PHP executable specified by TEST_PHP_EXECUTABLE  = " . $php);
+	}
 }
 
 if (getenv('TEST_PHP_LOG_FORMAT')) {
 	$log_format = strtoupper(getenv('TEST_PHP_LOG_FORMAT'));
 } else {
 	$log_format = 'LEOD';
-}
-
-if (function_exists('is_executable') && !@is_executable($php)) {
-	error("invalid PHP executable specified by TEST_PHP_EXECUTABLE  = " . $php);
 }
 
 // Check whether a detailed log is wanted.
@@ -365,7 +367,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.20 $'."\n";
+					echo '$Revision: 1.226.2.21 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

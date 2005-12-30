@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.22 2005/12/30 13:39:54 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.23 2005/12/30 15:05:17 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -371,7 +371,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.22 $'."\n";
+					echo '$Revision: 1.226.2.23 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -984,16 +984,16 @@ TEST $file
 
 	$tested = trim($section_text['TEST']);
 
- 	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
- 	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {
- 		if (file_exists("./sapi/cgi/php")) {
- 			$old_php = $php;
- 			$php = realpath("./sapi/cgi/php") . ' -C ';
- 		} else {
+	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
+	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {
+		if (file_exists("./sapi/cgi/php")) {
+			$old_php = $php;
+			$php = realpath("./sapi/cgi/php") . ' -C ';
+		} else {
 			show_result("SKIP", $tested, $tested_file, "reason: CGI not available");
- 			return 'SKIPPED';
- 		}
- 	}
+			return 'SKIPPED';
+		}
+	}
 
 	show_test($test_idx, $shortname);
 
@@ -1322,7 +1322,7 @@ COMMAND $cmd
 				$php = $old_php;
 			}
 			if (!$leaked) {
-			    show_result("PASS", $tested, $tested_file, '', $temp_filenames);
+				show_result("PASS", $tested, $tested_file, '', $temp_filenames);
 				return 'PASSED';
 			}
 		}

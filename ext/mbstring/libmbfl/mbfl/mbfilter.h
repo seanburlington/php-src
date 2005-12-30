@@ -138,9 +138,10 @@ typedef struct _mbfl_encoding_detector mbfl_encoding_detector;
 struct _mbfl_encoding_detector {
 	mbfl_identify_filter **filter_list;
 	int filter_list_size;
+	int strict;
 };
 
-MBFLAPI extern mbfl_encoding_detector * mbfl_encoding_detector_new(enum mbfl_no_encoding *elist, int eliztsz);
+MBFLAPI extern mbfl_encoding_detector * mbfl_encoding_detector_new(enum mbfl_no_encoding *elist, int elistsz, int strict);
 MBFLAPI extern void mbfl_encoding_detector_delete(mbfl_encoding_detector *identd);
 MBFLAPI extern int mbfl_encoding_detector_feed(mbfl_encoding_detector *identd, mbfl_string *string);
 MBFLAPI extern enum mbfl_no_encoding mbfl_encoding_detector_judge(mbfl_encoding_detector *identd);
@@ -157,13 +158,13 @@ mbfl_convert_encoding(mbfl_string *string, mbfl_string *result, enum mbfl_no_enc
  * identify encoding
  */
 MBFLAPI extern const mbfl_encoding *
-mbfl_identify_encoding(mbfl_string *string, enum mbfl_no_encoding *elist, int eliztsz, int strict);
+mbfl_identify_encoding(mbfl_string *string, enum mbfl_no_encoding *elist, int elistsz, int strict);
 
 MBFLAPI extern const char *
-mbfl_identify_encoding_name(mbfl_string *string, enum mbfl_no_encoding *elist, int eliztsz, int strict);
+mbfl_identify_encoding_name(mbfl_string *string, enum mbfl_no_encoding *elist, int elistsz, int strict);
 
-MBFLAPI extern const enum mbfl_no_encoding
-mbfl_identify_encoding_no(mbfl_string *string, enum mbfl_no_encoding *elist, int eliztsz);
+MBFLAPI extern enum mbfl_no_encoding
+mbfl_identify_encoding_no(mbfl_string *string, enum mbfl_no_encoding *elist, int elistsz, int strict);
 
 /*
  * strlen
@@ -265,26 +266,16 @@ mbfl_mime_header_decode(
     mbfl_string *result,
     enum mbfl_no_encoding outcode);
 
-
 /*
  * convert HTML numeric entity
  */
 MBFLAPI extern mbfl_string *
 mbfl_html_numeric_entity(mbfl_string *string, mbfl_string *result, int *convmap, int mapsize, int type);
 
-
 /*
  * convert of harfwidth and fullwidth for japanese
  */
 MBFLAPI extern mbfl_string *
 mbfl_ja_jp_hantozen(mbfl_string *string, mbfl_string *result, int mode);
-
-/*
- * HTML Entity table
- */
-typedef struct _mbfl_html_entity {
-	char *  name;
-	int     code;
-} mbfl_html_entity;
 
 #endif	/* MBFL_MBFILTER_H */

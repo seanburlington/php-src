@@ -199,6 +199,10 @@ SOURCE=.\filters\mbfilter_iso8859_15.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\filters\mbfilter_iso8859_16.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\filters\mbfilter_iso8859_2.c
 # End Source File
 # Begin Source File
@@ -236,6 +240,10 @@ SOURCE=.\filters\mbfilter_jis.c
 # Begin Source File
 
 SOURCE=.\filters\mbfilter_koi8r.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\filters\mbfilter_armscii8.c
 # End Source File
 # Begin Source File
 
@@ -332,6 +340,10 @@ SOURCE=.\nls\nls_en.c
 # Begin Source File
 
 SOURCE=.\nls\nls_ja.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\nls\nls_hy.c
 # End Source File
 # Begin Source File
 
@@ -500,6 +512,10 @@ SOURCE=.\filters\mbfilter_iso8859_15.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\filters\mbfilter_iso8859_16.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\filters\mbfilter_iso8859_2.h
 # End Source File
 # Begin Source File
@@ -537,6 +553,10 @@ SOURCE=.\filters\mbfilter_jis.h
 # Begin Source File
 
 SOURCE=.\filters\mbfilter_koi8r.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\filters\mbfilter_armscii8.h
 # End Source File
 # Begin Source File
 
@@ -640,6 +660,10 @@ SOURCE=.\nls\nls_ja.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\nls\nls_hy.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\nls\nls_kr.h
 # End Source File
 # Begin Source File
@@ -708,6 +732,10 @@ SOURCE=.\filters\unicode_table_iso8859_15.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\filters\unicode_table_iso8859_16.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\filters\unicode_table_iso8859_2.h
 # End Source File
 # Begin Source File
@@ -745,6 +773,10 @@ SOURCE=.\filters\unicode_table_jis.h
 # Begin Source File
 
 SOURCE=.\filters\unicode_table_koi8r.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\filters\unicode_table_armscii8.h
 # End Source File
 # Begin Source File
 

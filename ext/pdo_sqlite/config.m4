@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.29 2005/11/27 23:00:55 tony2001 Exp $
+dnl $Id: config.m4,v 1.30 2005/12/31 00:53:21 sniper Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -85,6 +85,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
         $php_pdo_sqlite_sources_core $pdo_sqlite_sources,
         $ext_shared,,-I@ext_builddir@/sqlite/src -DPDO_SQLITE_BUNDLED=1 -DSQLITE_OMIT_CURSOR -I$pdo_inc_path)
 
+      PHP_SUBST(PDO_SQLITE_SHARED_LIBADD)
       PHP_ADD_BUILD_DIR($ext_builddir/sqlite/src, 1)
       AC_CHECK_SIZEOF(char *,4)
       AC_DEFINE(SQLITE_PTR_SZ, SIZEOF_CHAR_P, [Size of a pointer])
@@ -111,8 +112,11 @@ if test "$PHP_PDO_SQLITE" != "no"; then
 EOF
       AC_CHECK_FUNCS(usleep nanosleep)
       AC_CHECK_HEADERS(time.h)
-    
+      
+      dnl Solaris fix
+      PHP_CHECK_LIBRARY(rt, fdatasync, [PHP_ADD_LIBRARY(rt,, PDO_SQLITE_SHARED_LIBADD)])
   fi
+
   ifdef([PHP_ADD_EXTENSION_DEP],
   [
     PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)

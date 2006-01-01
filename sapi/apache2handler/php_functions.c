@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.13.2.2 2005/01/24 11:46:59 jorton Exp $ */
+/* $Id: php_functions.c,v 1.13.2.3 2006/01/01 20:13:44 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -58,13 +58,11 @@ php_apache2_info_struct php_apache2_info;
 
 static request_rec *php_apache_lookup_uri(char *filename TSRMLS_DC)
 {
-	php_struct *ctx;
+	php_struct *ctx = SG(server_context);
 	
-	if (!filename) {
+	if (!filename || !ctx || !ctx->r) {
 		return NULL;
 	}
-	
-	ctx = SG(server_context);
 
 	return ap_sub_req_lookup_uri(filename, ctx->r, ctx->r->output_filters);
 }

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.29 2006/01/01 20:34:21 helly Exp $ */
+/* $Id: phar.c,v 1.30 2006/01/01 20:40:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -459,7 +459,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Id: phar.c,v 1.29 2006/01/01 20:34:21 helly Exp $");
+	php_info_print_table_row(2, "CVS revision", "$Id: phar.c,v 1.30 2006/01/01 20:40:42 helly Exp $");
 #ifdef HAVE_PHAR_ZLIB
 	php_info_print_table_row(2, "compressed phar support", "enabled");
 #else
@@ -526,7 +526,7 @@ PHP_PHAR_API php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrappe
 #endif
 
 	resource = php_url_parse(path);
-	/* we must have at the very least phar:/*alias.phar/internalfile.php */*/
+	/* we must have at the very least phar://alias.phar/internalfile.php */
 	if (!resource || !resource->scheme || !resource->host || !resource->path) {
 		if (resource) {
 			php_url_free(resource);
@@ -933,7 +933,7 @@ PHP_PHAR_API int phar_stream_stat(php_stream_wrapper *wrapper, char *url, int fl
 	phar_manifest_entry *file_data;
 
 	resource = php_url_parse(url);
-	/* we must have at the very least phar:/*alias.phar/internalfile.php */*/
+	/* we must have at the very least phar://alias.phar/internalfile.php */
 	if (!resource || !resource->scheme || !resource->host || !resource->path) {
 		php_url_free(resource);
 		php_stream_wrapper_log_error(wrapper, flags TSRMLS_CC, "phar error: invalid url \"%s\"", url);
@@ -948,7 +948,7 @@ PHP_PHAR_API int phar_stream_stat(php_stream_wrapper *wrapper, char *url, int fl
 	}
 
 	internal_file = resource->path + 1; /* strip leading "/" */
-	/* find the phar in our trusty global hash indexed by alias (host of phar:/*blah.phar/file.whatever) */*/
+	/* find the phar in our trusty global hash indexed by alias (host of phar://blah.phar/file.whatever) */
 	if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_data), resource->host, strlen(resource->host), (void **) &data)) {
 		if (*internal_file == '\0') {
 			/* root directory requested */
@@ -1116,15 +1116,15 @@ PHP_PHAR_API php_stream *phar_opendir(php_stream_wrapper *wrapper, char *filenam
 	phar_manifest_entry *file_data;
 
 	resource = php_url_parse(filename);
-	/* we must have at the very least phar:/*alias.phar/ */*/
+	/* we must have at the very least phar://alias.phar/ */
 	if (!resource || !resource->scheme || !resource->host || !resource->path) {
 		if (resource->host && !resource->path) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: no directory in \"%s\", must have at least phar:/*%s/ for root directory", filename, resource->host);*/
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: no directory in \"%s\", must have at least phar://%s/ for root directory", filename, resource->host);
 			php_url_free(resource);
 			return NULL;
 		}
 		php_url_free(resource);
-		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\", must have at least phar:/*%s/", filename, filename);*/
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\", must have at least phar://%s/", filename, filename);
 		return NULL;
 	}
 

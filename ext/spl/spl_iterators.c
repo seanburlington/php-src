@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.17 2006/01/01 12:50:13 sniper Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.18 2006/01/01 19:48:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2045,7 +2045,9 @@ PHP_FUNCTION(iterator_to_array)
 	
 	iter = Z_OBJCE_P(obj)->get_iterator(Z_OBJCE_P(obj), obj TSRMLS_CC);
 
-	iter->funcs->rewind(iter TSRMLS_CC);
+	if (iter->funcs->rewind) {
+		iter->funcs->rewind(iter TSRMLS_CC);
+	}
 	while (iter->funcs->valid(iter TSRMLS_CC) == SUCCESS) {
 		key_type = iter->funcs->get_current_key(iter, &str_key, &str_key_len, &int_key TSRMLS_CC);
 		iter->funcs->get_current_data(iter, &data TSRMLS_CC);

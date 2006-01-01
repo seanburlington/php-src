@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.33 2006/01/01 22:20:25 cellog Exp $ */
+/* $Id: phar.c,v 1.34 2006/01/01 22:49:09 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,7 +98,7 @@ function_entry phar_functions[] = {
 };
 /* }}} */
 
-PHP_METHOD(PHP_Archive, canCompress)
+PHP_METHOD(Phar, canCompress)
 {
 #ifdef HAVE_PHAR_ZLIB
 	RETURN_TRUE;
@@ -109,7 +109,7 @@ PHP_METHOD(PHP_Archive, canCompress)
 
 /* {{{ php_archive_methods
  */
-PHP_METHOD(PHP_Archive, mapPhar)
+PHP_METHOD(Phar, mapPhar)
 {
 	char *fname, *alias, *buffer, *endbuffer, *unpack_var, *savebuf;
 	phar_file_data mydata;
@@ -284,12 +284,12 @@ PHP_METHOD(PHP_Archive, mapPhar)
 	php_stream_close(fp);
 }
 
-PHP_METHOD(PHP_Archive, apiVersion);
+PHP_METHOD(Phar, apiVersion);
 
 zend_function_entry php_archive_methods[] = {
-	PHP_ME(PHP_Archive, mapPhar, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
-	PHP_ME(PHP_Archive, apiVersion, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
-	PHP_ME(PHP_Archive, canCompress, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, mapPhar, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, apiVersion, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, canCompress, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -412,7 +412,7 @@ PHP_MINIT_FUNCTION(phar)
 		little_endian_long_map[2] = size - 3;
 		little_endian_long_map[3] = size - 4;
 	}
-	INIT_CLASS_ENTRY(php_archive_entry, "PHP_Archive", php_archive_methods);
+	INIT_CLASS_ENTRY(php_archive_entry, "Phar", php_archive_methods);
 	php_archive_entry_ptr = zend_register_internal_class(&php_archive_entry TSRMLS_CC);
 	return php_register_url_stream_wrapper("phar", &php_stream_phar_wrapper TSRMLS_CC);
 }
@@ -447,7 +447,7 @@ PHP_RSHUTDOWN_FUNCTION(phar)
 }
 /* }}} */
 
-PHP_METHOD(PHP_Archive, apiVersion)
+PHP_METHOD(Phar, apiVersion)
 {
 	RETURN_STRING("0.7.1", 3);
 }
@@ -459,7 +459,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.33 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.34 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

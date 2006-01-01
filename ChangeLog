@@ -1,3 +1,19 @@
+2005-12-31  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * run-tests.php:
+      - Fix environment handling
+
+    * ext/pgsql/tests/09notice.phpt
+      ext/pgsql/tests/80_bug32223.phpt
+      ext/pgsql/tests/80_bug32223b.phpt:
+      - Fix tests
+
+2005-12-31  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_5_1)
+      NEWS:
+      BFN
+
 2005-12-30  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * php.ini-dist
@@ -20527,7 +20543,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2210 2005/12/31 06:31:50 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2211 2006/01/01 06:31:59 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -23928,7 +23944,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2210 2005/12/31 06:31:50 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2211 2006/01/01 06:31:59 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -24409,7 +24425,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2210 2005/12/31 06:31:50 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2211 2006/01/01 06:31:59 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -25883,7 +25899,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2210 2005/12/31 06:31:50 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2211 2006/01/01 06:31:59 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

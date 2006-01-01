@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.14 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: com_com.c,v 1.16.2.1 2006/01/01 12:50:00 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -398,7 +398,7 @@ HRESULT php_com_invoke_helper(php_com_dotnet_object *obj, DISPID id_member,
 				
 			default:
 				desc = php_win_err(hr);
-				spprintf(&msg, 0, "Error %s", desc);
+				spprintf(&msg, 0, "Error [0x%08x] %s", hr, desc);
 				LocalFree(desc);
 				break;
 		}
@@ -620,7 +620,7 @@ int php_com_do_invoke_by_id(php_com_dotnet_object *obj, DISPID dispid,
 		efree(vargs);
 	}
 
-	/* a bit strange this, but... */
+	/* a bit of a hack this, but it's needed for COM array access. */
 	if (hr == DISP_E_BADPARAMCOUNT)
 		return hr;
 	

@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.12 2004/02/04 22:46:44 wez Exp $ */
+/* $Id: transports.c,v 1.16.2.1 2006/01/01 12:50:18 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -137,8 +137,8 @@ PHPAPI php_stream *_php_stream_xport_create(const char *name, long namelen, int 
 			/* client */
 
 			if (flags & STREAM_XPORT_CONNECT) {
-				if (0 != php_stream_xport_connect(stream, name, namelen,
-							flags & STREAM_XPORT_OP_CONNECT_ASYNC ? 1 : 0,
+				if (-1 == php_stream_xport_connect(stream, name, namelen,
+							flags & STREAM_XPORT_CONNECT_ASYNC ? 1 : 0,
 							timeout, &error_text, error_code TSRMLS_CC)) {
 
 					ERR_RETURN(error_string, error_text, "connect() failed: %s");
@@ -385,6 +385,7 @@ PHPAPI int php_stream_xport_recvfrom(php_stream *stream, char *buf, size_t bufle
 	php_stream_xport_param param;
 	int ret = 0;
 	int recvd_len = 0;
+#if 0
 	int oob;
 
 	if (flags == 0 && addr == NULL) {
@@ -416,6 +417,7 @@ PHPAPI int php_stream_xport_recvfrom(php_stream *stream, char *buf, size_t bufle
 			return recvd_len;
 		}
 	}
+#endif
 
 	/* otherwise, we are going to bypass the buffer */
 	
@@ -453,9 +455,11 @@ PHPAPI int php_stream_xport_sendto(php_stream *stream, const char *buf, size_t b
 	int ret = 0;
 	int oob;
 
+#if 0
 	if (flags == 0 && addr == NULL) {
 		return php_stream_write(stream, buf, buflen);
 	}
+#endif
 	
 	oob = (flags & STREAM_OOB) == STREAM_OOB;
 

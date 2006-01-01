@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.8 2004/06/23 13:26:08 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.10.2.1 2006/01/01 12:50:11 sniper Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -34,7 +34,7 @@
 #define SHORT_MAX (1 << (8*sizeof(short)-1))
 
 #if SIZEOF_LONG == 8
-# define LL_MASK l
+# define LL_MASK "l"
 # define LL_LIT(lit) lit ## L
 #else
 # ifdef PHP_WIN32

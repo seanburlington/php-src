@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documenttype.c,v 1.12 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: documenttype.c,v 1.15.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ zend_function_entry php_dom_documenttype_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto name	string	
+/* {{{ name	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-1844763134
 Since: 
@@ -64,7 +64,7 @@ int dom_documenttype_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto entities	DOMNamedNodeMap	
+/* {{{ entities	DOMNamedNodeMap	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-1788794630
 Since: 
@@ -88,7 +88,7 @@ int dom_documenttype_entities_read(dom_object *obj, zval **retval TSRMLS_DC)
 	entityht = (xmlHashTable *) doctypep->entities;
 
 	intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-	dom_namednode_iter(obj, XML_ENTITY_NODE, intern, entityht, NULL, NULL);
+	dom_namednode_iter(obj, XML_ENTITY_NODE, intern, entityht, NULL, NULL TSRMLS_CC);
 
 	return SUCCESS;
 }
@@ -97,7 +97,7 @@ int dom_documenttype_entities_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto notations	DOMNamedNodeMap	
+/* {{{ notations	DOMNamedNodeMap	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-D46829EF
 Since: 
@@ -121,7 +121,7 @@ int dom_documenttype_notations_read(dom_object *obj, zval **retval TSRMLS_DC)
 	notationht = (xmlHashTable *) doctypep->notations;
 
 	intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-	dom_namednode_iter(obj, XML_NOTATION_NODE, intern, notationht, NULL, NULL);
+	dom_namednode_iter(obj, XML_NOTATION_NODE, intern, notationht, NULL, NULL TSRMLS_CC);
 
 	return SUCCESS;
 }
@@ -130,7 +130,7 @@ int dom_documenttype_notations_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto publicId	string	
+/* {{{ publicId	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-Core-DocType-publicId
 Since: DOM Level 2
@@ -160,7 +160,7 @@ int dom_documenttype_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto systemId	string	
+/* {{{ systemId	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-Core-DocType-systemId
 Since: DOM Level 2
@@ -189,7 +189,7 @@ int dom_documenttype_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto internalSubset	string	
+/* {{{ internalSubset	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-Core-DocType-internalSubset
 Since: DOM Level 2

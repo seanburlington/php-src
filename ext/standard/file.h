@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.90 2004/06/21 21:08:05 pollita Exp $ */
+/* $Id: file.h,v 1.94.2.1 2006/01/01 12:50:14 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -39,6 +39,7 @@ PHPAPI PHP_FUNCTION(fgets);
 PHP_FUNCTION(fscanf);
 PHPAPI PHP_FUNCTION(fgetss);
 PHP_FUNCTION(fgetcsv);
+PHP_FUNCTION(fputcsv);
 PHPAPI PHP_FUNCTION(fwrite);
 PHPAPI PHP_FUNCTION(fflush);
 PHPAPI PHP_FUNCTION(rewind);
@@ -59,7 +60,7 @@ PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 PHP_FUNCTION(fd_set);
 PHP_FUNCTION(fd_isset);
-#if (!defined(__BEOS__) && !defined(NETWARE) && HAVE_REALPATH) || defined(ZTS)
+#if (!defined(__BEOS__) && HAVE_REALPATH) || defined(ZTS)
 PHP_FUNCTION(realpath);
 PHP_FUNCTION(fnmatch);
 #endif
@@ -122,7 +123,7 @@ typedef struct {
 extern PHPAPI int file_globals_id;
 #else
 #define FG(v) (file_globals.v)
-extern php_file_globals file_globals;
+extern PHPAPI php_file_globals file_globals;
 #endif
 
 

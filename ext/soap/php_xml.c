@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.22 2004/02/13 15:19:09 dmitry Exp $ */
+/* $Id: php_xml.c,v 1.25.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -76,15 +76,20 @@ static void soap_Comment(void *ctx, const xmlChar *value)
 {
 }
 
-xmlDocPtr soap_xmlParseFile(const char *filename)
+xmlDocPtr soap_xmlParseFile(const char *filename TSRMLS_DC)
 {
 	xmlParserCtxtPtr ctxt = NULL;
 	xmlDocPtr ret;
+	zend_bool old_allow_url_fopen;
 
 /*
 	xmlInitParser();
 */
+
+	old_allow_url_fopen = PG(allow_url_fopen);
+	PG(allow_url_fopen) = 1;
 	ctxt = xmlCreateFileParserCtxt(filename);
+	PG(allow_url_fopen) = old_allow_url_fopen;
 	if (ctxt) {
 		ctxt->keepBlanks = 0;
 		ctxt->sax->ignorableWhitespace = soap_ignorableWhitespace;

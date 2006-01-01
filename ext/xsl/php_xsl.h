@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.10 2004/02/04 11:14:47 zeev Exp $ */
+/* $Id: php_xsl.h,v 1.15.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -57,11 +57,17 @@ typedef struct _xsl_object {
 	HashTable *parameter;
 	int hasKeys;
 	int registerPhpFunctions;
+	HashTable *registered_phpfunctions;
+	HashTable *node_list;
+	php_libxml_node_object *doc;
 } xsl_object;
 
 void php_xsl_set_object(zval *wrapper, void *obj TSRMLS_DC);
 void xsl_objects_free_storage(void *object TSRMLS_DC);
 zval *php_xsl_create_object(xsltStylesheetPtr obj, int *found, zval *wrapper_in, zval *return_value  TSRMLS_DC);
+
+void xsl_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs);
+void xsl_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs);
 
 #define REGISTER_XSL_CLASS(ce, name, parent_ce, funcs, entry) \
 INIT_CLASS_ENTRY(ce, name, funcs); \

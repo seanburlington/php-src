@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.31 2004/02/24 15:06:41 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.37.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -109,7 +109,6 @@ typedef struct _sdlSoapBindingFunctionFault {
 struct _sdlSoapBindingFunctionBody {
 	char                *ns;
 	sdlEncodingUse       use;
-	char                *parts;          /* not implemented yet */
 	sdlRpcEncodingStyle  encodingStyle;  /* not implemented yet */
 	HashTable           *headers;        /* array of sdlSoapBindingFunctionHeaderPtr */
 };
@@ -153,7 +152,8 @@ typedef enum _sdlContentKind {
 	XSD_CONTENT_ALL,
 	XSD_CONTENT_CHOICE,
 	XSD_CONTENT_GROUP_REF,
-	XSD_CONTENT_GROUP
+	XSD_CONTENT_GROUP,
+	XSD_CONTENT_ANY
 } sdlContentKind;
 
 
@@ -180,6 +180,19 @@ typedef enum _sdlTypeKind {
 	XSD_TYPEKIND_EXTENSION
 } sdlTypeKind;
 
+typedef enum _sdlUse {
+	XSD_USE_DEFAULT,
+	XSD_USE_OPTIONAL,
+	XSD_USE_PROHIBITED,
+	XSD_USE_REQUIRED
+} sdlUse;
+
+typedef enum _sdlForm {
+	XSD_FORM_DEFAULT,
+	XSD_FORM_QUALIFIED,
+	XSD_FORM_UNQUALIFIED
+} sdlForm;
+
 struct _sdlType {
 	sdlTypeKind         kind;
 	char               *name;
@@ -193,6 +206,7 @@ struct _sdlType {
 	char               *def;
 	char               *fixed;
 	char               *ref;
+	sdlForm             form;
 };
 
 struct _sdlParam {
@@ -219,19 +233,6 @@ struct _sdlFunction {
 	HashTable          *faults;             /* array of sdlFaultPtr */
 };
 
-typedef enum _sdlUse {
-	XSD_USE_DEFAULT,
-	XSD_USE_OPTIONAL,
-	XSD_USE_PROHIBITED,
-	XSD_USE_REQUIRED
-} sdlUse;
-
-typedef enum _sdlForm {
-	XSD_FORM_DEFAULT,
-	XSD_FORM_QUALIFIED,
-	XSD_FORM_UNQUALIFIED
-} sdlForm;
-
 typedef struct _sdlExtraAttribute {
 	char *ns;
 	char *val;
@@ -239,6 +240,7 @@ typedef struct _sdlExtraAttribute {
 
 struct _sdlAttribute {
 	char      *name;
+	char      *namens;
 	char      *ref;
 	char      *def;
 	char      *fixed;
@@ -248,7 +250,7 @@ struct _sdlAttribute {
 	encodePtr  encode;
 };
 
-sdlPtr get_sdl(char *uri TSRMLS_DC);
+sdlPtr get_sdl(zval *this_ptr, char *uri TSRMLS_DC);
 
 encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr data, const char *type);
 encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type);

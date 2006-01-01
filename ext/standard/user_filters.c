@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.28 2004/06/21 21:08:05 pollita Exp $ */
+/* $Id: user_filters.c,v 1.31.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -116,7 +116,6 @@ static void userfilter_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 	zval *obj = (zval*)thisfilter->abstract;
 	zval func_name;
 	zval *retval = NULL;
-	zval **tmp; 
 
 	if (obj == NULL) {
 		/* If there's no object associated then there's nothing to dispose of */
@@ -134,11 +133,6 @@ static void userfilter_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 
 	if (retval)
 		zval_ptr_dtor(&retval);
-
-	if (SUCCESS == zend_hash_find(Z_OBJPROP_P(obj), "filter", sizeof("filter"), (void**)&tmp)) { 
-		zend_list_delete(Z_LVAL_PP(tmp));
-		FREE_ZVAL(*tmp);
-	} 
 
 	/* kill the object */
 	zval_ptr_dtor(&obj);
@@ -345,6 +339,8 @@ static php_stream_filter *user_filter_factory_create(const char *filtername,
 	ZEND_REGISTER_RESOURCE(zfilter, filter, le_userfilters);
 	filter->abstract = obj;
 	add_property_zval(obj, "filter", zfilter);
+	/* add_property_zval increments the refcount which is unwanted here */
+	zval_ptr_dtor(&zfilter);
 
 	return filter;
 }
@@ -470,6 +466,8 @@ PHP_FUNCTION(stream_bucket_new)
 	ZEND_REGISTER_RESOURCE(zbucket, bucket, le_bucket);
 	object_init(return_value);
 	add_property_zval(return_value, "bucket", zbucket);
+	/* add_property_zval increments the refcount which is unwanted here */
+	zval_ptr_dtor(&zbucket);
 	add_property_stringl(return_value, "data", bucket->buf, bucket->buflen, 1);
 	add_property_long(return_value, "datalen", bucket->buflen);
 }

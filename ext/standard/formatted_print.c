@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.77 2004/05/19 16:46:29 abies Exp $ */
+/* $Id: formatted_print.c,v 1.82.2.1 2006/01/01 12:50:14 sniper Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -303,7 +303,15 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 	char *cvt;
 	register int i = 0, j = 0;
 	int sign, decpt, cvt_len;
-	char decimal_point = EG(float_separator)[0];
+	char decimal_point = '.';
+#ifdef HAVE_LOCALE_H
+	struct lconv lc;
+	char locale_decimal_point;
+	localeconv_r(&lc);
+	locale_decimal_point = (lc.decimal_point)[0];
+#else
+	char locale_decimal_point = '.';
+#endif
 
 	PRINTF_DEBUG(("sprintf: appenddouble(%x, %x, %x, %f, %d, '%c', %d, %c)\n",
 				  *buffer, pos, size, number, width, padding, alignment, fmt));
@@ -336,12 +344,12 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 		numbuf[i++] = '+';
 	}
 
-	if (fmt == 'f') {
+	if (fmt == 'f' || fmt == 'F') {
 		if (decpt <= 0) {
 			numbuf[i++] = '0';
 			if (precision > 0) {
 				int k = precision;
-				numbuf[i++] = decimal_point;
+				numbuf[i++] = fmt == 'F' ? decimal_point : locale_decimal_point;
 				while ((decpt++ < 0) && k--) {
 					numbuf[i++] = '0';
 				}
@@ -351,7 +359,7 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 				numbuf[i++] = j < cvt_len ? cvt[j++] : '0';
 			}
 			if (precision > 0) {
-				numbuf[i++] = decimal_point;
+				numbuf[i++] = fmt == 'F' ? decimal_point : locale_decimal_point;
 				while (precision-- > 0) {
 					numbuf[i++] = j < cvt_len ? cvt[j++] : '0';
 				}
@@ -398,9 +406,6 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 
 	numbuf[i] = '\0';
 
-	if (precision > 0) {
-		width += (precision + 1);
-	}
 	php_sprintf_appendstring(buffer, pos, size, numbuf, width, 0, padding,
 							 alignment, i, sign, 0, always_sign);
 }
@@ -540,12 +545,6 @@ php_formatted_print(int ht, int *len, int use_array, int format_offset TSRMLS_DC
 			php_sprintf_appendchar(&result, &outpos, &size, '%' TSRMLS_CC);
 			inpos += 2;
 		} else {
-			if (currarg >= argc && format[inpos + 1] != '%') {
-				efree(result);
-				efree(args);
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too few arguments");
-				return NULL;
-			}
 			/* starting a new format specifier, reset variables */
 			alignment = ALIGN_RIGHT;
 			adjusting = 0;
@@ -576,13 +575,6 @@ php_formatted_print(int ht, int *len, int use_array, int format_offset TSRMLS_DC
 				}
 
 				argnum += format_offset;
-				
-				if (argnum >= argc) {
-					efree(result);
-					efree(args);
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too few arguments");
-					return NULL;
-				}
 
 				/* after argnum comes modifiers */
 				PRINTF_DEBUG(("sprintf: looking for modifiers\n"
@@ -636,6 +628,13 @@ php_formatted_print(int ht, int *len, int use_array, int format_offset TSRMLS_DC
 			} else {
 				width = precision = 0;
 				argnum = currarg++ + format_offset;
+			}
+
+			if (argnum >= argc) {
+				efree(result);
+				efree(args);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too few arguments");
+				return NULL;
 			}
 
 			if (format[inpos] == 'l') {
@@ -693,6 +692,7 @@ php_formatted_print(int ht, int *len, int use_array, int format_offset TSRMLS_DC
 
 				case 'e':
 				case 'f':
+				case 'F':
 					/* XXX not done */
 					convert_to_double(tmp);
 					php_sprintf_appenddouble(&result, &outpos, &size,

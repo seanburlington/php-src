@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.9 2004/01/08 17:32:34 sniper Exp $ */
+/* $Id: php_odbc_includes.h,v 1.12.2.1 2006/01/01 12:50:10 sniper Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -126,6 +126,20 @@ PHP_FUNCTION(solid_fetch_prev);
 #include <sqlext.h>
 #define HAVE_SQL_EXTENDED_FETCH 1
 
+#elif defined(HAVE_ODBC_ROUTER) /* ODBCRouter.com */
+
+#ifdef CHAR
+#undef CHAR
+#endif
+
+#ifdef SQLCHAR
+#undef SQLCHAR
+#endif
+
+#define ODBC_TYPE "ODBCRouter"
+#include <odbcsdk.h>
+#undef HAVE_SQL_EXTENDED_FETCH
+
 #elif defined(HAVE_OPENLINK) /* OpenLink ODBC drivers */
 
 #define ODBC_TYPE "Openlink"
@@ -216,7 +230,7 @@ typedef struct odbc_connection {
 typedef struct odbc_result_value {
 	char name[32];
 	char *value;
-	long int vallen;
+	SDWORD vallen;
 	SDWORD coltype;
 } odbc_result_value;
 

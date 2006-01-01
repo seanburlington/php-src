@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.109 2004/04/09 19:18:59 pollita Exp $ */
+/* $Id: network.c,v 1.118.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -29,12 +29,8 @@
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)
-#ifdef NEW_LIBC
 #include <sys/timeval.h>
 #include <sys/param.h>
-#else
-#include "netware/time_nw.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -57,15 +53,12 @@
 
 #if defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
-/* New headers for socket stuff */
-#ifdef NEW_LIBC
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/select.h>
-#endif
 #include <sys/socket.h>
 #endif
 #elif !defined(PHP_WIN32)
@@ -295,9 +288,6 @@ PHPAPI int php_network_connect_socket(php_socket_t sockfd,
 	int error = 0;
 	socklen_t len;
 	int ret = 0;
-	fd_set rset;
-	fd_set wset;
-	fd_set eset;
 
 	SET_SOCKET_BLOCKING_MODE(sockfd, orig_flags);
 	
@@ -325,18 +315,11 @@ PHPAPI int php_network_connect_socket(php_socket_t sockfd,
 		goto ok;
 	}
 
-	FD_ZERO(&rset);
-	FD_ZERO(&eset);
-	FD_SET(sockfd, &rset);
-	FD_SET(sockfd, &eset);
-
-	wset = rset;
-
-	if ((n = select(sockfd + 1, &rset, &wset, &eset, timeout)) == 0) {
+	if ((n = php_pollfd_for(sockfd, PHP_POLLREADABLE|POLLOUT, timeout)) == 0) {
 		error = PHP_TIMEOUT_ERROR_VALUE;
 	}
 
-	if(FD_ISSET(sockfd, &rset) || FD_ISSET(sockfd, &wset)) {
+	if (n > 0) {
 		len = sizeof(error);
 		/*
 		   BSD-derived systems set errno correctly
@@ -495,12 +478,15 @@ PHPAPI int php_network_parse_network_address_with_port(const char *addr, long ad
 	if (*addr == '[') {
 		colon = memchr(addr + 1, ']', addrlen-1);
 		if (!colon || colon[1] != ':') {
-			return 0;
+			return FAILURE;
 		}
 		port = atoi(colon + 2);
 		addr++;
 	} else {
 		colon = memchr(addr, ':', addrlen);
+		if (!colon) {
+			return FAILURE;
+		}
 		port = atoi(colon + 1);
 	}
 
@@ -589,8 +575,8 @@ PHPAPI void php_network_populate_name_from_sockaddr(
 				/* generally not thread safe, but it *is* thread safe under win32 */
 				buf = inet_ntoa(((struct sockaddr_in*)sa)->sin_addr);
 				if (buf) {
-					*textaddrlen = strlen(buf);
-					*textaddr = estrndup(buf, *textaddrlen);
+					*textaddrlen = spprintf(textaddr, 0, "%s:%d", 
+						buf, ntohs(((struct sockaddr_in*)sa)->sin_port));
 				}
 
 				break;
@@ -599,8 +585,8 @@ PHPAPI void php_network_populate_name_from_sockaddr(
 			case AF_INET6:
 				buf = (char*)inet_ntop(sa->sa_family, &((struct sockaddr_in6*)sa)->sin6_addr, (char *)&abuf, sizeof(abuf));
 				if (buf) {
-					*textaddrlen = strlen(buf);
-					*textaddr = estrndup(buf, *textaddrlen);
+					*textaddrlen = spprintf(textaddr, 0, "%s:%d", 
+						buf, ntohs(((struct sockaddr_in6*)sa)->sin6_port));
 				}
 
 				break;
@@ -689,21 +675,17 @@ PHPAPI php_socket_t php_network_accept_incoming(php_socket_t srvsock,
 		TSRMLS_DC)
 {
 	php_socket_t clisock = -1;
-	fd_set rset;
 	int error = 0, n;
 	php_sockaddr_storage sa;
 	socklen_t sl;
-
-	FD_ZERO(&rset);
-	FD_SET(srvsock, &rset);
 		
-	n = select(srvsock + 1, &rset, NULL, NULL, timeout);
+	n = php_pollfd_for(srvsock, PHP_POLLREADABLE, timeout);
 
 	if (n == 0) {
 		error = PHP_TIMEOUT_ERROR_VALUE;
 	} else if (n == -1) {
 		error = php_socket_errno();
-	} else if (FD_ISSET(srvsock, &rset)) {
+	} else {
 		sl = sizeof(sa);
 
 		clisock = accept(srvsock, (struct sockaddr*)&sa, &sl);
@@ -740,7 +722,7 @@ PHPAPI php_socket_t php_network_accept_incoming(php_socket_t srvsock,
 /* {{{ php_network_connect_socket_to_host */
 php_socket_t php_network_connect_socket_to_host(const char *host, unsigned short port,
 		int socktype, int asynchronous, struct timeval *timeout, char **error_string,
-		int *error_code
+		int *error_code, char *bindto, unsigned short bindport 
 		TSRMLS_DC)
 {
 	int num_addrs, n, fatal = 0;
@@ -803,6 +785,44 @@ php_socket_t php_network_connect_socket_to_host(const char *host, unsigned short
 
 		if (sa) {
 			/* make a connection attempt */
+
+			if (bindto) {
+				struct sockaddr local_address;
+			
+				if (sa->sa_family == AF_INET) {
+					struct sockaddr_in *in4 = (struct sockaddr_in*)&local_address;
+				
+					in4->sin_family = sa->sa_family;
+					in4->sin_port = htons(bindport);
+					if (!inet_aton(bindto, &in4->sin_addr)) {
+						goto bad_ip;
+					}
+					memset(&(in4->sin_zero), 0, sizeof(in4->sin_zero));
+				}
+#if HAVE_IPV6 && HAVE_INET_PTON
+				 else { /* IPV6 */
+					struct sockaddr_in6 *in6 = (struct sockaddr_in6*)&local_address;
+				
+					in6->sin6_family = sa->sa_family;
+					in6->sin6_port = htons(bindport);
+					if (inet_pton(AF_INET6, bindto, &in6->sin6_addr) < 1) {
+						goto bad_ip;
+					}
+				}
+#endif
+				if (bind(sock, &local_address, sizeof(struct sockaddr))) {
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to bind to '%s:%d', system said: %s", bindto, bindport, strerror(errno));
+				}
+				goto bind_done;
+bad_ip:
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid IP Address: %s", bindto);
+			}
+bind_done:
+			/* free error string recieved during previous iteration (if any) */
+			if (error_string && *error_string) {
+				efree(*error_string);
+				*error_string = NULL;
+			}
 			
 			n = php_network_connect_socket(sock, sa, socklen, asynchronous,
 					timeout ? &working_timeout : NULL,
@@ -1022,6 +1042,93 @@ PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC)
 #endif
       return ret;
 }
+
+PHPAPI void _php_emit_fd_setsize_warning(int max_fd)
+{
+	TSRMLS_FETCH();
+
+#ifdef PHP_WIN32
+	php_error_docref(NULL TSRMLS_CC, E_WARNING,
+		"PHP needs to be recompiled with a larger value of FD_SETSIZE.\n"
+		"If this binary is from an official www.php.net package, file a bug report\n"
+		"at http://bugs.php.net, including the following information:\n"
+		"FD_SETSIZE=%d, but you are using %d.\n"
+		" --enable-fd-setsize=%d is recommended, but you may want to set it\n"
+		"to match to maximum number of sockets each script will work with at\n"
+		"one time, in order to avoid seeing this error again at a later date.",
+		FD_SETSIZE, max_fd, (max_fd + 128) & ~127);
+#else
+	php_error_docref(NULL TSRMLS_CC, E_WARNING,
+		"You MUST recompile PHP with a larger value of FD_SETSIZE.\n"
+		"It is set to %d, but you have descriptors numbered at least as high as %d.\n"
+		" --enable-fd-setsize=%d is recommended, but you may want to set it\n"
+		"to equal the maximum number of open files supported by your system,\n"
+		"in order to avoid seeing this error again at a later date.",
+		FD_SETSIZE, max_fd, (max_fd + 1024) & ~1023);
+#endif
+}
+
+#if defined(PHP_USE_POLL_2_EMULATION)
+
+/* emulate poll(2) using select(2), safely. */
+
+PHPAPI int php_poll2(php_pollfd *ufds, unsigned int nfds, int timeout)
+{
+	fd_set rset, wset, eset;
+	php_socket_t max_fd = SOCK_ERR;
+	unsigned int i, n;
+	struct timeval tv;
+
+	/* check the highest numbered descriptor */
+	for (i = 0; i < nfds; i++) {
+		if (ufds[i].fd > max_fd)
+			max_fd = ufds[i].fd;
+	}
+
+	PHP_SAFE_MAX_FD(max_fd, nfds + 1);
+
+	FD_ZERO(&rset);
+	FD_ZERO(&wset);
+	FD_ZERO(&eset);
+
+	for (i = 0; i < nfds; i++) {
+		if (ufds[i].events & PHP_POLLREADABLE) {
+			PHP_SAFE_FD_SET(ufds[i].fd, &rset);
+		}
+		if (ufds[i].events & POLLOUT) {
+			PHP_SAFE_FD_SET(ufds[i].fd, &wset);
+		}
+		if (ufds[i].events & POLLPRI) {
+			PHP_SAFE_FD_SET(ufds[i].fd, &eset);
+		}
+	}
+
+	if (timeout >= 0) {
+		tv.tv_sec = timeout / 1000;
+		tv.tv_usec = (timeout - (tv.tv_sec * 1000)) * 1000;
+	}
+	n = select(max_fd + 1, &rset, &wset, &eset, timeout >= 0 ? &tv : NULL);
+
+	if (n >= 0) {
+		for (i = 0; i < nfds; i++) {
+			ufds[i].revents = 0;
+
+			if (PHP_SAFE_FD_ISSET(ufds[i].fd, &rset)) {
+				/* could be POLLERR or POLLHUP but can't tell without probing */
+				ufds[i].revents |= POLLIN;
+			}
+			if (PHP_SAFE_FD_ISSET(ufds[i].fd, &wset)) {
+				ufds[i].revents |= POLLOUT;
+			}
+			if (PHP_SAFE_FD_ISSET(ufds[i].fd, &eset)) {
+				ufds[i].revents |= POLLPRI;
+			}
+		}
+	}
+	return n;
+}
+
+#endif
 
 
 /*

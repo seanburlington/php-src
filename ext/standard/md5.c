@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,16 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.35 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: md5.c,v 1.39.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
  * md5_file() added by Alessandro Astarita <aleast@capri.it>
  */
 
-#include <stdio.h>
 #include "php.h"
-
 #include "md5.h"
 
 PHPAPI void make_digest(char *md5str, unsigned char *digest)
@@ -81,39 +79,30 @@ PHP_NAMED_FUNCTION(php_if_md5_file)
 	unsigned char digest[16];
 	PHP_MD5_CTX   context;
 	int           n;
-	FILE          *fp;
+	php_stream    *stream;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &arg, &arg_len, &raw_output) == FAILURE) {
 		return;
 	}
-
-	if (PG(safe_mode) && (!php_checkuid(arg, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
-
-	if (php_check_open_basedir(arg TSRMLS_CC)) {
-		RETURN_FALSE;
-	}
-
-	if ((fp = VCWD_FOPEN(arg, "rb")) == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open file");
+	
+	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS | ENFORCE_SAFE_MODE, NULL);
+	if (!stream) {
 		RETURN_FALSE;
 	}
 
 	PHP_MD5Init(&context);
 
-	while ((n = fread(buf, 1, sizeof(buf), fp)) > 0) {
+	while ((n = php_stream_read(stream, buf, sizeof(buf))) > 0) {
 		PHP_MD5Update(&context, buf, n);
 	}
 
 	PHP_MD5Final(digest, &context);
 
-	if (ferror(fp)) {
-		fclose(fp);
+	php_stream_close(stream);
+
+	if (n<0) {
 		RETURN_FALSE;
 	}
-
-	fclose(fp);
 
 	if (raw_output) {
 		RETURN_STRINGL(digest, 16, 1);

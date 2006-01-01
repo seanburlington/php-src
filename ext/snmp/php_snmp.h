@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.22 2004/01/08 17:32:47 sniper Exp $ */
+/* $Id: php_snmp.h,v 1.25.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
@@ -39,6 +39,7 @@ extern zend_module_entry snmp_module_entry;
 #endif
 
 PHP_MINIT_FUNCTION(snmp);
+PHP_MSHUTDOWN_FUNCTION(snmp);
 PHP_MINFO_FUNCTION(snmp);
 
 PHP_FUNCTION(snmpget);
@@ -50,6 +51,12 @@ PHP_FUNCTION(snmp_set_quick_print);
 PHP_FUNCTION(snmp_set_enum_print);
 PHP_FUNCTION(snmp_set_oid_numeric_print);
 PHP_FUNCTION(snmpset);
+
+PHP_FUNCTION(snmp2_get);
+PHP_FUNCTION(snmp2_getnext);
+PHP_FUNCTION(snmp2_walk);
+PHP_FUNCTION(snmp2_real_walk);
+PHP_FUNCTION(snmp2_set);
 
 PHP_FUNCTION(snmp3_get);
 PHP_FUNCTION(snmp3_getnext);

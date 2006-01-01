@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.21 2004/07/06 13:46:18 abies Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1 2006/01/01 12:50:08 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -910,6 +910,9 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 				   so we have to release it */
 				zend_list_delete(ib_query->trans_res_id);
 			}
+
+			RETVAL_TRUE;
+
 			return SUCCESS;
 
 		default:
@@ -1856,8 +1859,6 @@ PHP_FUNCTION(ibase_execute)
 			}
 			ib_query->result_res_id = zend_list_insert(result, le_result);
 			RETVAL_RESOURCE(ib_query->result_res_id);
-		} else {
-			RETVAL_TRUE;
 		}
 	} while (0);
 

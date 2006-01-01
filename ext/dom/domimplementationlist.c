@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementationlist.c,v 1.4 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: domimplementationlist.c,v 1.6.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@ zend_function_entry php_dom_domimplementationlist_class_functions[] = {
 
 /* {{{ attribute protos, not implemented yet */
 
-/* {{{ proto length	unsigned long	
+/* {{{ length	unsigned long	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMImplementationList-length
 Since: 
@@ -59,7 +59,7 @@ int dom_domimplementationlist_length_read(dom_object *obj, zval **retval TSRMLS_
 
 
 
-/* {{{ proto domdomimplementation dom_domimplementationlist_item(unsigned long index);
+/* {{{ proto domdomimplementation dom_domimplementationlist_item(int index);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMImplementationList-item
 Since: 
 */

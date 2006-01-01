@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.95 2004/06/21 21:08:05 pollita Exp $ */
+/* $Id: php_streams.h,v 1.103.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -30,6 +30,7 @@
 BEGIN_EXTERN_C()
 PHPAPI int php_file_le_stream(void);
 PHPAPI int php_file_le_pstream(void);
+PHPAPI int php_file_le_stream_filter(void);
 END_EXTERN_C()
 
 /* {{{ Streams memory debugging stuff */
@@ -103,11 +104,7 @@ typedef struct _php_stream_filter php_stream_filter;
 #include "streams/php_stream_filter_api.h"
 
 typedef struct _php_stream_statbuf {
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb; /* regular info */
-#else
 	struct stat sb; /* regular info */
-#endif
 	/* extended info to go here some day: content-type etc. etc. */
 } php_stream_statbuf;
 
@@ -331,11 +328,11 @@ PHPAPI php_stream_dirent *_php_stream_readdir(php_stream *dirstream, php_stream_
 #define php_stream_closedir(dirstream)	php_stream_close((dirstream))
 #define php_stream_rewinddir(dirstream)	php_stream_rewind((dirstream))
 
-PHPAPI int php_stream_dirent_alphasort(const php_stream_dirent **a, const php_stream_dirent **b);
-PHPAPI int php_stream_dirent_alphasortr(const php_stream_dirent **a, const php_stream_dirent **b);
+PHPAPI int php_stream_dirent_alphasort(const char **a, const char **b);
+PHPAPI int php_stream_dirent_alphasortr(const char **a, const char **b);
 
-PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], int flags, php_stream_context *context,
-			int (*compare) (const php_stream_dirent **a, const php_stream_dirent **b) TSRMLS_DC);
+PHPAPI int _php_stream_scandir(char *dirname, char **namelist[], int flags, php_stream_context *context,
+			int (*compare) (const char **a, const char **b) TSRMLS_DC);
 #define php_stream_scandir(dirname, namelist, context, compare) _php_stream_scandir((dirname), (namelist), 0, (context), (compare) TSRMLS_CC)
 
 PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);
@@ -411,7 +408,8 @@ END_EXTERN_C()
 
 /* copy up to maxlen bytes from src to dest.  If maxlen is PHP_STREAM_COPY_ALL, copy until eof(src).
  * Uses mmap if the src is a plain file and at offset 0 */
-#define PHP_STREAM_COPY_ALL		-1
+#define PHP_STREAM_COPY_ALL		((size_t)-1)
+
 BEGIN_EXTERN_C()
 PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);
 #define php_stream_copy_to_stream(src, dest, maxlen)	_php_stream_copy_to_stream((src), (dest), (maxlen) STREAMS_CC TSRMLS_CC)
@@ -504,12 +502,14 @@ END_EXTERN_C()
 
 int php_init_stream_wrappers(int module_number TSRMLS_DC);
 int php_shutdown_stream_wrappers(int module_number TSRMLS_DC);
+void php_shutdown_stream_hashes(TSRMLS_D);
 PHP_RSHUTDOWN_FUNCTION(streams);
 
 BEGIN_EXTERN_C()
 PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC);
 PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC);
 PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC);
+PHPAPI int php_unregister_url_stream_wrapper_volatile(char *protocol TSRMLS_DC);
 PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char **path_for_open, int options TSRMLS_DC);
 PHPAPI char *php_stream_locate_eol(php_stream *stream, char *buf, size_t buf_len TSRMLS_DC);
@@ -541,6 +541,7 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
 /* Give other modules access to the url_stream_wrappers_hash and stream_filters_hash */
 PHPAPI HashTable *_php_stream_get_url_stream_wrappers_hash(TSRMLS_D);
 #define php_stream_get_url_stream_wrappers_hash()	_php_stream_get_url_stream_wrappers_hash(TSRMLS_C)
+PHPAPI HashTable *php_stream_get_url_stream_wrappers_hash_global(void);
 PHPAPI HashTable *_php_get_stream_filters_hash(TSRMLS_D);
 #define php_get_stream_filters_hash()	_php_get_stream_filters_hash(TSRMLS_C)
 PHPAPI HashTable *php_get_stream_filters_hash_global();

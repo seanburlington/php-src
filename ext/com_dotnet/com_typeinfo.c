@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_typeinfo.c,v 1.4 2004/03/18 02:16:34 iliaa Exp $ */
+/* $Id: com_typeinfo.c,v 1.7.2.1 2006/01/01 12:50:00 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -227,34 +227,35 @@ void php_com_typelibrary_dtor(void *pDest)
 PHPAPI ITypeLib *php_com_load_typelib_via_cache(char *search_string,
 	int codepage, int *cached TSRMLS_DC)
 {
-	ITypeLib **TL;
+	ITypeLib **TLp;
+	ITypeLib *TL;
 	char *name_dup;
 	int l;
 
 	l = strlen(search_string);
 
 	if (zend_ts_hash_find(&php_com_typelibraries, search_string, l+1,
-			(void**)&TL) == SUCCESS) {
+			(void**)&TLp) == SUCCESS) {
 		*cached = 1;
 		/* add a reference for the caller */
-		ITypeLib_AddRef(*TL);
-		return *TL;
+		ITypeLib_AddRef(*TLp);
+		return *TLp;
 	}
 
 	*cached = 0;
 	name_dup = estrndup(search_string, l);
-	*TL = php_com_load_typelib(name_dup, codepage TSRMLS_CC);
+	TL = php_com_load_typelib(name_dup, codepage TSRMLS_CC);
 	efree(name_dup);
 
-	if (*TL) {
+	if (TL) {
 		if (SUCCESS == zend_ts_hash_update(&php_com_typelibraries,
-				search_string, l+1, (void*)*TL, sizeof(ITypeLib*), NULL)) {
+				search_string, l+1, (void*)TL, sizeof(ITypeLib*), NULL)) {
 			/* add a reference for the hash table */
-			ITypeLib_AddRef(*TL);
+			ITypeLib_AddRef(TL);
 		}
 	}
 
-	return *TL;
+	return TL;
 }
 
 ITypeInfo *php_com_locate_typeinfo(char *typelibname, php_com_dotnet_object *obj, char *dispname, int sink TSRMLS_DC)
@@ -399,6 +400,7 @@ static const struct {
 	{ VT_VOID,		"VT_VOID" },
 	{ VT_PTR,		"VT_PTR" },
 	{ VT_HRESULT,	"VT_HRESULT" },
+	{ VT_SAFEARRAY, "VT_SAFEARRAY" },
 	{ 0, NULL }
 };
 

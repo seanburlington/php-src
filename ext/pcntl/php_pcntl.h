@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.17 2004/01/08 17:32:37 sniper Exp $ */
+/* $Id: php_pcntl.h,v 1.20.2.1 2006/01/01 12:50:10 sniper Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -51,15 +51,24 @@ PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
 PHP_FUNCTION(pcntl_exec);
+#ifdef HAVE_GETPRIORITY
 PHP_FUNCTION(pcntl_getpriority);
+#endif
+#ifdef HAVE_SETPRIORITY
 PHP_FUNCTION(pcntl_setpriority);
+#endif
+
+struct php_pcntl_pending_signal {
+	struct php_pcntl_pending_signal *next;
+	long signo;
+};
 
 ZEND_BEGIN_MODULE_GLOBALS(pcntl)
 	HashTable php_signal_table;
-	zend_llist php_signal_queue;
-	int signal_queue_ready;
 	int processing_signal_queue;
+	struct php_pcntl_pending_signal *head, *tail, *spares;
 ZEND_END_MODULE_GLOBALS(pcntl)
+
 #ifdef ZTS
 #define PCNTL_G(v) TSRMG(pcntl_globals_id, zend_pcntl_globals *, v)
 #else

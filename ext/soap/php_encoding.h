@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.35 2004/02/24 10:12:45 dmitry Exp $ */
+/* $Id: php_encoding.h,v 1.38.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -43,6 +43,8 @@
 #define XSD_NS_PREFIX "xsd"
 #define XSI_NAMESPACE "http://www.w3.org/2001/XMLSchema-instance"
 #define XSI_NS_PREFIX "xsi"
+#define XML_NAMESPACE "http://www.w3.org/XML/1998/namespace"
+#define XML_NS_PREFIX "xml"
 
 #define XSD_STRING 101
 #define XSD_STRING_STRING "string"
@@ -137,6 +139,8 @@
 #define XSD_UR_TYPE 146
 #define XSD_UR_TYPE_STRING "ur-type"
 
+#define XSD_ANYXML 147
+
 #define APACHE_NAMESPACE "http://xml.apache.org/xml-soap"
 #define APACHE_MAP 200
 #define APACHE_MAP_STRING "Map"
@@ -211,6 +215,8 @@ zval *sdl_guess_convert_zval(encodeTypePtr enc, xmlNodePtr data);
 
 void encode_reset_ns();
 xmlNsPtr encode_add_ns(xmlNodePtr node, const char* ns);
+
+encodePtr get_conversion(int encode);
 
 void delete_encoder(void *handle);
 

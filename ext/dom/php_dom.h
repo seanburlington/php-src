@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.24 2004/02/12 10:43:20 zeev Exp $ */
+/* $Id: php_dom.h,v 1.28.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -91,6 +91,7 @@ zend_object_value dom_xpath_objects_new(zend_class_entry *class_type TSRMLS_DC);
 #endif
 int dom_get_strict_error(php_libxml_ref_obj *document);
 void php_dom_throw_error(int error_code, int strict_error TSRMLS_DC);
+void php_dom_throw_error_with_message(int error_code, char *error_message, int strict_error TSRMLS_DC);
 void node_list_unlink(xmlNodePtr node TSRMLS_DC);
 int dom_check_qname(char *qname, char **localname, char **prefix, int uri_len, int name_len);
 xmlNsPtr dom_get_ns(xmlNodePtr node, char *uri, int *errorcode, char *prefix);
@@ -104,7 +105,7 @@ int dom_has_feature(char *feature, char *version);
 int dom_node_is_read_only(xmlNodePtr node);
 int dom_node_children_valid(xmlNodePtr node);
 void php_dom_create_interator(zval *return_value, int ce_type TSRMLS_DC);
-void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xmlHashTablePtr ht, xmlChar *local, xmlChar *ns);
+void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xmlHashTablePtr ht, xmlChar *local, xmlChar *ns TSRMLS_DC);
 xmlNodePtr create_notation(const xmlChar *name, const xmlChar *ExternalID, const xmlChar *SystemID);
 xmlNode *php_dom_libxml_hash_iter(xmlHashTable *ht, int index);
 xmlNode *php_dom_libxml_notation_iter(xmlHashTable *ht, int index);
@@ -118,7 +119,7 @@ entry = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 #define DOM_GET_OBJ(__ptr, __id, __prtype, __intern) { \
 	__intern = (dom_object *)zend_object_store_get_object(__id TSRMLS_CC); \
 	if (__intern->ptr == NULL || !(__ptr = (__prtype)((php_libxml_node_ptr *)__intern->ptr)->node)) { \
-  		php_error(E_WARNING, "Couldn't fetch %s", __intern->std.ce->name);\
+  		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", __intern->std.ce->name);\
   		RETURN_NULL();\
   	} \
 }

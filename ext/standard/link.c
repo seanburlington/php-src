@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.48 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: link.c,v 1.52.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -33,8 +33,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif
@@ -65,6 +63,14 @@ PHP_FUNCTION(readlink)
 	}
 	convert_to_string_ex(filename);
 
+	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
 	ret = readlink(Z_STRVAL_PP(filename), buff, MAXPATHLEN-1);
 
 	if (ret == -1) {
@@ -83,11 +89,7 @@ PHP_FUNCTION(readlink)
 PHP_FUNCTION(linkinfo)
 {
 	zval **filename;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb;
-#else
 	struct stat sb;
-#endif
 	int ret;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {

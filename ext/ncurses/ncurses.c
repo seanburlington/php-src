@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -59,8 +59,8 @@ zend_module_entry ncurses_module_entry = {
 	ncurses_functions,
 	PHP_MINIT(ncurses),
 	PHP_MSHUTDOWN(ncurses),
-	PHP_RINIT(ncurses),     /* Replace with NULL if there's nothing to do at request start */
-	PHP_RSHUTDOWN(ncurses), /* Replace with NULL if there's nothing to do at request end */
+	NULL,
+	NULL,
 	PHP_MINFO(ncurses),
 	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
@@ -260,24 +260,6 @@ PHP_MSHUTDOWN_FUNCTION(ncurses)
 		endwin();
 	}
 
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request start */
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(ncurses)
-{
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request end */
-/* {{{ PHP_RSHUTDOWN_FUNCTION
- */
-PHP_RSHUTDOWN_FUNCTION(ncurses)
-{
 	return SUCCESS;
 }
 /* }}} */

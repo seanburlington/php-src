@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.37 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: pageinfo.c,v 1.40.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -27,11 +27,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#ifdef ZTS
-extern int basic_globals_id;
-#endif
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif
@@ -64,11 +59,7 @@ extern int basic_globals_id;
  */
 PHPAPI void php_statpage(TSRMLS_D)
 {
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc *pstat;
-#else
 	struct stat *pstat;
-#endif
 
 	pstat = sapi_get_stat(TSRMLS_C);
 
@@ -77,8 +68,8 @@ PHPAPI void php_statpage(TSRMLS_D)
 			BG(page_uid)   = pstat->st_uid;
 			BG(page_gid)   = pstat->st_gid;
 			BG(page_inode) = pstat->st_ino;
-#if defined(NETWARE) && defined(NEW_LIBC)
-			BG(page_mtime) = (pstat->st_mtime).tv_nsec;
+#ifdef NETWARE
+			BG(page_mtime) = (pstat->st_mtime).tv_sec;
 #else
 			BG(page_mtime) = pstat->st_mtime;
 #endif

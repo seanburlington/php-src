@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.30 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.34.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #include "php.h"
 
@@ -31,17 +31,11 @@
 #include "win32/winutil.h"
 #elif defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <sys/socket.h>
 #endif
-#ifdef NEW_LIBC
 #include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
-#include "netware/mktemp.h"
 #else
 #include <sys/param.h>
 #include <sys/socket.h>
@@ -104,6 +98,7 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 {
 	char *trailing_slash;
 	char *opened_path;
+	int path_len = 0;
 	int fd = -1;
 #ifndef HAVE_MKSTEMP
 	int open_flags = O_CREAT | O_TRUNC | O_RDWR
@@ -112,19 +107,18 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 #endif
 		;
 #endif
-#ifdef NETWARE
-    char *file_path = NULL;
-#endif
 
 	if (!path) {
 		return -1;
 	}
 
+	path_len = strlen(path);
+
 	if (!(opened_path = emalloc(MAXPATHLEN))) {
 		return -1;
 	}
 
-	if (IS_SLASH(path[strlen(path)-1])) {
+	if (!path_len || IS_SLASH(path[path_len - 1])) {
 		trailing_slash = "";
 	} else {
 		trailing_slash = "/";
@@ -138,12 +132,6 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 		 * which means that opening it will fail... */
 		VCWD_CHMOD(opened_path, 0600);
 		fd = VCWD_OPEN_MODE(opened_path, open_flags, 0600);
-	}
-#elif defined(NETWARE)
-	/* Using standard mktemp() implementation for NetWare */
-	file_path = mktemp(opened_path);
-	if (file_path) {
-		fd = VCWD_OPEN(file_path, open_flags);
 	}
 #elif defined(HAVE_MKSTEMP)
 	fd = mkstemp(opened_path);

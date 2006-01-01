@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,9 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sha1.c,v 1.9 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: sha1.c,v 1.13.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
-#include <stdio.h>
 #include "php.h"
 
 /* This code is heavily based on the PHP md5 implementation */ 
@@ -67,6 +66,7 @@ PHP_FUNCTION(sha1)
 
 /* }}} */
 
+
 /* {{{ proto string sha1_file(string filename [, bool raw_output])
    Calculate the sha1 hash of given filename */
 PHP_FUNCTION(sha1_file)
@@ -79,39 +79,30 @@ PHP_FUNCTION(sha1_file)
 	unsigned char digest[20];
 	PHP_SHA1_CTX   context;
 	int           n;
-	FILE          *fp;
+	php_stream    *stream;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &arg, &arg_len, &raw_output) == FAILURE) {
 		return;
 	}
-
-	if (PG(safe_mode) && (!php_checkuid(arg, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
-
-	if (php_check_open_basedir(arg TSRMLS_CC)) {
-		RETURN_FALSE;
-	}
-
-	if ((fp = VCWD_FOPEN(arg, "rb")) == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open file");
+	
+	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS | ENFORCE_SAFE_MODE, NULL);
+	if (!stream) {
 		RETURN_FALSE;
 	}
 
 	PHP_SHA1Init(&context);
 
-	while ((n = fread(buf, 1, sizeof(buf), fp)) > 0) {
+	while ((n = php_stream_read(stream, buf, sizeof(buf))) > 0) {
 		PHP_SHA1Update(&context, buf, n);
 	}
 
 	PHP_SHA1Final(digest, &context);
 
-	if (ferror(fp)) {
-		fclose(fp);
+	php_stream_close(stream);
+
+	if (n<0) {
 		RETURN_FALSE;
 	}
-
-	fclose(fp);
 
 	if (raw_output) {
 		RETURN_STRINGL(digest, 20, 1);

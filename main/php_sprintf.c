@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,23 +16,22 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.17 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: php_sprintf.c,v 1.23.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
-#ifdef NETWARE
-#include "config.nw.h"
+#include "php.h"
+#ifdef PHP_WIN32
+#include "config.w32.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 
-#if PHP_BROKEN_SPRINTF
-
-int
+PHPAPI int
 php_sprintf (char*s, const char* format, ...)
 {
   va_list args;
-  char *ret;
+  int ret;
 
   va_start (args, format);
   s[0] = '\0';
@@ -42,8 +41,6 @@ php_sprintf (char*s, const char* format, ...)
     return -1;
   return strlen (s);
 }
-
-#endif /* PHP_BROKEN_SPRINTF */
 
 /*
  * Local variables:

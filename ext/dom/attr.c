@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.15 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: attr.c,v 1.18.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ PHP_METHOD(domattr, __construct)
 /* }}} end DOMAttr::__construct */
 
 
-/* {{{ proto name	string	
+/* {{{ name	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-1112119403
 Since: 
@@ -114,7 +114,7 @@ int dom_attr_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto specified	boolean	
+/* {{{ specified	boolean	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-862529273
 Since: 
@@ -131,7 +131,7 @@ int dom_attr_specified_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto value	string	
+/* {{{ value	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-221662474
 Since: 
@@ -200,7 +200,7 @@ int dom_attr_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 
 
-/* {{{ proto ownerElement	DOMElement	
+/* {{{ ownerElement	DOMElement	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-ownerElement
 Since: DOM Level 2
@@ -225,7 +225,7 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING,  "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -236,7 +236,7 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto schemaTypeInfo	DOMTypeInfo	
+/* {{{ schemaTypeInfo	DOMTypeInfo	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-schemaTypeInfo
 Since: DOM Level 3

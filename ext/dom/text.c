@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.20 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: text.c,v 1.23.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,6 +38,7 @@
 zend_function_entry php_dom_text_class_functions[] = {
 	PHP_FALIAS(splitText, dom_text_split_text, NULL)
 	PHP_FALIAS(isWhitespaceInElementContent, dom_text_is_whitespace_in_element_content, NULL)
+	PHP_FALIAS(isElementContentWhitespace, dom_text_is_whitespace_in_element_content, NULL)
 	PHP_FALIAS(replaceWholeText, dom_text_replace_whole_text, NULL)
 	PHP_ME(domtext, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
@@ -78,7 +79,7 @@ PHP_METHOD(domtext, __construct)
 }
 /* }}} end DOMText::__construct */
 
-/* {{{ proto wholeText	string	
+/* {{{ wholeText	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-Text3-wholeText
 Since: DOM Level 3

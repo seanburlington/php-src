@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_soap.h,v 1.33 2004/05/05 10:31:26 dmitry Exp $ */
+/* $Id: php_soap.h,v 1.38.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #ifndef PHP_SOAP_H
 #define PHP_SOAP_H
@@ -26,7 +26,9 @@
 #include "php_globals.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_standard.h"
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 #include "ext/session/php_session.h"
+#endif
 #include "ext/standard/php_smart_str.h"
 #include "php_ini.h"
 #include "SAPI.h"
@@ -115,6 +117,8 @@ struct _soapService {
 	int        type;
 	char      *actor;
 	char      *uri;
+	xmlCharEncodingHandlerPtr encoding;
+	HashTable *class_map;
 };
 
 #define SOAP_CLASS 1
@@ -144,6 +148,9 @@ struct _soapService {
 #define SOAP_COMPRESSION_GZIP    0x00
 #define SOAP_COMPRESSION_DEFLATE 0x10
 
+#define SOAP_AUTHENTICATION_BASIC   0
+#define SOAP_AUTHENTICATION_DIGEST  1
+
 ZEND_BEGIN_MODULE_GLOBALS(soap)
 	HashTable  defEncNs;     /* mapping of default namespaces to prefixes */
 	HashTable  defEnc;
@@ -158,6 +165,8 @@ ZEND_BEGIN_MODULE_GLOBALS(soap)
 	zend_bool  cache_enabled;
 	char*      cache_dir;
 	long       cache_ttl;
+	xmlCharEncodingHandlerPtr encoding;
+	HashTable *class_map;
 ZEND_END_MODULE_GLOBALS(soap)
 
 #ifdef PHP_WIN32

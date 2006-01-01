@@ -3,12 +3,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-// $Id: confutils.js,v 1.42 2004/07/07 12:25:10 edink Exp $
+// $Id: confutils.js,v 1.60.2.1 2006/01/01 12:50:20 sniper Exp $
 
 var STDOUT = WScript.StdOut;
 var STDERR = WScript.StdErr;
@@ -349,7 +349,8 @@ can be built that way. \
 		'debug', 'crt-debug', 'lzf-better-compression',
 		 'php-build', 'snapshot-template',
 		 'pcre-regex', 'fastcgi', 'force-cgi-redirect',
-		 'path-info-check', 'zts', 'ipv6', 'memory-limit'
+		 'path-info-check', 'zts', 'ipv6', 'memory-limit',
+		 'zend-multibyte', 'fd-setsize', 'memory-manager', 't1lib'
 		);
 	var force;
 
@@ -708,7 +709,7 @@ function OLD_CHECK_LIB(libnames, target, path_to_check)
 
 }
 
-function CHECK_FUNC_IN_HEADER(header_name, func_name, path_to_check)
+function CHECK_FUNC_IN_HEADER(header_name, func_name, path_to_check, add_to_flag)
 {
 	var c = false;
 	var sym;
@@ -720,7 +721,11 @@ function CHECK_FUNC_IN_HEADER(header_name, func_name, path_to_check)
 	sym = func_name.toUpperCase();
 	sym = sym.replace(new RegExp("[\\\\/\.-]", "g"), "_");
 
-	AC_DEFINE("HAVE_" + sym, c ? 1 : 0);
+	if (typeof(add_to_flag) == "undefined") {
+		AC_DEFINE("HAVE_" + sym, c ? 1 : 0);
+	} else {
+		ADD_FLAG(add_to_flag, "/DHAVE_" + sym + "=" + (c ? "1" : "0"));
+	}
 
 	if (c) {
 		STDOUT.WriteLine("OK");
@@ -766,7 +771,7 @@ function GREP_HEADER(header_name, regex, path_to_check)
 	return false;
 }
 
-function CHECK_HEADER_ADD_INCLUDE(header_name, flag_name, path_to_check, use_env, add_dir_part)
+function CHECK_HEADER_ADD_INCLUDE(header_name, flag_name, path_to_check, use_env, add_dir_part, add_to_flag_only)
 {
 	var dir_part_to_add = "";
 	
@@ -810,7 +815,16 @@ function CHECK_HEADER_ADD_INCLUDE(header_name, flag_name, path_to_check, use_env
 	sym = header_name.toUpperCase();
 	sym = sym.replace(new RegExp("[\\\\/\.-]", "g"), "_");
 
-	AC_DEFINE("HAVE_" + sym, have);
+	if (typeof(add_to_flag_only) == "undefined" &&
+			flag_name.match(new RegExp("^CFLAGS_(.*)$"))) {
+		add_to_flag_only = true;
+	}
+
+	if (typeof(add_to_flag_only) != "undefined") {
+		ADD_FLAG(flag_name, "/DHAVE_" + sym + "=" + have);
+	} else {
+		AC_DEFINE("HAVE_" + sym, have, "have the " + header_name + " header file");
+	}
 
 	return p;
 }
@@ -862,7 +876,7 @@ function SAPI(sapiname, file_list, makefiletarget, cflags)
 	var SAPI = sapiname.toUpperCase();
 	var ldflags;
 	var resname;
-	var ld = "$(LD)";
+	var ld = "@$(LD)";
 
 	STDOUT.WriteLine("Enabling SAPI " + configure_module_dirname);
 
@@ -907,6 +921,15 @@ function SAPI(sapiname, file_list, makefiletarget, cflags)
 
 	MFO.WriteBlankLines(1);
 }
+
+function ADD_DIST_FILE(filename)
+{
+	if (configure_module_dirname.match("pecl")) {
+		ADD_FLAG("PECL_EXTRA_DIST_FILES", filename);
+	} else {
+		ADD_FLAG("PHP_EXTRA_DIST_FILES", filename);
+	}
+}	
 
 function file_get_contents(filename)
 {
@@ -959,10 +982,11 @@ function ADD_EXTENSION_DEP(extname, dependson, optional)
 	}
 }
 
-function EXTENSION(extname, file_list, shared, cflags, dllname)
+function EXTENSION(extname, file_list, shared, cflags, dllname, obj_dir)
 {
 	var objs = null;
 	var EXT = extname.toUpperCase();
+	var extname_for_printing;
 
 	if (shared == null) {
 		eval("shared = PHP_" + EXT + "_SHARED;");
@@ -971,12 +995,18 @@ function EXTENSION(extname, file_list, shared, cflags, dllname)
 		cflags = "";
 	}
 
+	if (typeof(obj_dir) == "undefined") {
+		extname_for_printing = configure_module_dirname;
+	} else {
+		extname_for_printing = configure_module_dirname + " (via " + obj_dir + ")";
+	}
+
 	if (shared) {
-		STDOUT.WriteLine("Enabling extension " + configure_module_dirname + " [shared]");
+		STDOUT.WriteLine("Enabling extension " + extname_for_printing + " [shared]");
 		cflags = "/D COMPILE_DL_" + EXT + " /D " + EXT + "_EXPORTS=1 " + cflags;
 		ADD_FLAG("CFLAGS_PHP", "/D COMPILE_DL_" + EXT);
 	} else {
-		STDOUT.WriteLine("Enabling extension " + configure_module_dirname);
+		STDOUT.WriteLine("Enabling extension " + extname_for_printing);
 	}
 
 	MFO.WriteBlankLines(1);
@@ -984,7 +1014,7 @@ function EXTENSION(extname, file_list, shared, cflags, dllname)
 	MFO.WriteBlankLines(1);
 
 
-	ADD_SOURCES(configure_module_dirname, file_list, extname);
+	ADD_SOURCES(configure_module_dirname, file_list, extname, obj_dir);
 	
 	MFO.WriteBlankLines(1);
 
@@ -995,7 +1025,7 @@ function EXTENSION(extname, file_list, shared, cflags, dllname)
 		var libname = dllname.substring(0, dllname.length-4) + ".lib";
 
 		var resname = generate_version_info_resource(dllname, configure_module_dirname);
-		var ld = "$(LD)";
+		var ld = "@$(LD)";
 
 		MFO.WriteLine("$(BUILD_DIR)\\" + dllname + " $(BUILD_DIR)\\" + libname + ": $(DEPS_" + EXT + ") $(" + EXT + "_GLOBAL_OBJS) $(BUILD_DIR)\\$(PHPLIB) $(BUILD_DIR)\\" + resname);
 		MFO.WriteLine("\t" + ld + " /out:$(BUILD_DIR)\\" + dllname + " $(DLL_LDFLAGS) $(LDFLAGS) $(LDFLAGS_" + EXT + ") $(" + EXT + "_GLOBAL_OBJS) $(BUILD_DIR)\\$(PHPLIB) $(LIBS_" + EXT + ") $(LIBS) $(BUILD_DIR)\\" + resname);
@@ -1040,7 +1070,7 @@ function EXTENSION(extname, file_list, shared, cflags, dllname)
 	ADD_FLAG("CFLAGS_" + EXT, cflags);
 }
 
-function ADD_SOURCES(dir, file_list, target)
+function ADD_SOURCES(dir, file_list, target, obj_dir)
 {
 	var i;
 	var tv;
@@ -1077,11 +1107,17 @@ function ADD_SOURCES(dir, file_list, target)
 	 * This probably breaks for non-sibling dirs, but that
 	 * is not a problem as buildconf only checks for pecl
 	 * as either a child or a sibling */
-	var build_dir = dir.replace(new RegExp("^..\\\\"), "");
-
-	var mangle_dir = build_dir.replace(new RegExp("[\\\\/.]", "g"), "_");
-	var bd_flags_name = "CFLAGS_BD_" + mangle_dir.toUpperCase();
-
+	if (obj_dir == null) {
+		var build_dir = dir.replace(new RegExp("^..\\\\"), "");
+		var mangle_dir = build_dir.replace(new RegExp("[\\\\/.]", "g"), "_");
+		var bd_flags_name = "CFLAGS_BD_" + mangle_dir.toUpperCase();
+	}
+	else {
+		var build_dir = obj_dir.replace(new RegExp("^..\\\\"), "");
+		var mangle_dir = build_dir.replace(new RegExp("[\\\\/.]", "g"), "_");
+		var bd_flags_name = "CFLAGS_BD_" + mangle_dir.toUpperCase();
+	}
+	
 	var dirs = build_dir.split("\\");
 	var i, d = "";
 	for (i = 0; i < dirs.length; i++) {
@@ -1092,7 +1128,7 @@ function ADD_SOURCES(dir, file_list, target)
 	sub_build += d;
 
 
-	DEFINE(bd_flags_name, "/Fo" + sub_build + " /Fd" + sub_build + " /Fp" + sub_build + " /FR" + sub_build + " ");
+	DEFINE(bd_flags_name, " /Fd" + sub_build + " /Fp" + sub_build + " /FR" + sub_build + " ");
 
 	for (i in file_list) {
 		src = file_list[i];
@@ -1109,13 +1145,13 @@ function ADD_SOURCES(dir, file_list, target)
 			}
 		} else {
 			MFO.WriteLine(sub_build + obj + ": " + dir + "\\" + src);
-			MFO.WriteLine("\t$(CC) $(" + flags + ") $(CFLAGS) $(" + bd_flags_name + ") -c " + dir + "\\" + src + " -o " + sub_build + obj);
+			MFO.WriteLine("\t@$(CC) $(" + flags + ") $(CFLAGS) $(" + bd_flags_name + ") /c " + dir + "\\" + src + " /Fo" + sub_build + obj);
 		}
 	}
 
 	if (PHP_ONE_SHOT == "yes") {
 		MFO.WriteLine(objs_line + ": " + srcs_line);
-		MFO.WriteLine("\t$(CC) $(" + flags + ") $(CFLAGS) $(" + bd_flags_name + ") -c " + srcs_line);
+		MFO.WriteLine("\t$(CC) $(" + flags + ") $(CFLAGS) /Fo" + sub_build + " $(" + bd_flags_name + ") /c " + srcs_line);
 	}
 
 	DEFINE(sym, tv);
@@ -1210,8 +1246,9 @@ function generate_config_h()
 	outfile.Write(indata);
 
 	var keys = (new VBArray(configure_hdr.Keys())).toArray();
-	var i;
+	var i, j;
 	var item;
+	var pieces, stuff_to_crack, chunk;
 
 	outfile.WriteBlankLines(1);
 	outfile.WriteLine("/* values determined by configure.js */");
@@ -1220,7 +1257,29 @@ function generate_config_h()
 		item = configure_hdr.Item(keys[i]);
 		outfile.WriteBlankLines(1);
 		outfile.WriteLine("/* " + item[1] + " */");
-		outfile.WriteLine("#define " + keys[i] + " " + item[0]);
+		pieces = item[0];
+
+		if (typeof(pieces) == "string" && pieces.charCodeAt(0) == 34) {
+			/* quoted string have a maximal length of 2k under vc.
+			 * solution is to crack them and let the compiler concat
+			 * them implicitly */
+			stuff_to_crack = pieces;
+			pieces = "";
+
+			while (stuff_to_crack.length) {
+				j = 65;
+				while (stuff_to_crack.charCodeAt(j) != 32 && j < stuff_to_crack.length)
+					j++;
+
+				chunk = stuff_to_crack.substr(0, j);
+				pieces += chunk;
+				stuff_to_crack = stuff_to_crack.substr(chunk.length);
+				if (stuff_to_crack.length)
+					pieces += '" "';
+			}
+		}
+		
+		outfile.WriteLine("#define " + keys[i] + " " + pieces);
 	}
 	
 	outfile.Close();

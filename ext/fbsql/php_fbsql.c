@@ -2,9 +2,9 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2005 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
    | http:/*www.php.net/license/3_0.txt.                                  |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.114.2.2 2005/12/06 02:25:21 sniper Exp $ */
+/* $Id: php_fbsql.c,v 1.114.2.3 2006/01/01 12:50:06 sniper Exp $ */
 
 /* TODO:
  *

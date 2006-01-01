@@ -1,12 +1,12 @@
 #  +----------------------------------------------------------------------+
 #  | PHP Version 5                                                        |
 #  +----------------------------------------------------------------------+
-#  | Copyright (c) 1997-2004 The PHP Group                                |
+#  | Copyright (c) 1997-2006 The PHP Group                                |
 #  +----------------------------------------------------------------------+
-#  | This source file is subject to version 3.0 of the PHP license,       |
+#  | This source file is subject to version 3.01 of the PHP license,      |
 #  | that is bundled with this package in the file LICENSE, and is        |
 #  | available through the world-wide-web at the following url:           |
-#  | http://www.php.net/license/3_0.txt.                                  |
+#  | http://www.php.net/license/3_01.txt                                  |
 #  | If you did not receive a copy of the PHP license and are unable to   |
 #  | obtain it through the world-wide-web, please send a note to          |
 #  | license@php.net so we can mail you a copy immediately.               |
@@ -14,19 +14,23 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.23 2004/05/25 12:57:45 wez Exp $
+# $Id: Makefile,v 1.35.2.1 2006/01/01 12:50:20 sniper Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
 LD="$(LINK)"
+MC="$(MC)"
 
-all: $(BUILD_DIR) $(BUILD_DIRS_SUB) generated_files $(EXT_TARGETS) $(PECL_TARGETS) $(SAPI_TARGETS)
+MCFILE=$(BUILD_DIR)\wsyslog.rc
 
-generated_files: Zend\zend_ini_parser.c \
+all: generated_files $(EXT_TARGETS) $(PECL_TARGETS) $(SAPI_TARGETS)
+
+build_dirs: $(BUILD_DIR) $(BUILD_DIRS_SUB)
+
+generated_files: build_dirs Zend\zend_ini_parser.c \
 	Zend\zend_language_parser.c Zend\zend_ini_scanner.c \
 	Zend\zend_language_scanner.c \
-	ext\standard\parsedate.c \
-	$(PHPDEF)
+	$(PHPDEF) $(MCFILE)
 
 $(BUILD_DIR)\$(PHPDLL).def: $(PHP_DLL_DEF_SOURCES)
 	type $(PHP_DLL_DEF_SOURCES) > $(BUILD_DIR)\$(PHPDLL).def
@@ -43,18 +47,21 @@ Zend\zend_ini_scanner.c: Zend\flex.skl Zend\zend_ini_scanner.l
 Zend\zend_language_scanner.c: Zend\flex.skl Zend\zend_language_scanner.l
 	$(FLEX) -i -SZend/flex.skl -Pzend -oZend/zend_language_scanner.c Zend/zend_language_scanner.l
 
-ext\standard\parsedate.c ext\standard\parsedate.h: ext\standard\parsedate.y
-	$(BISON) --output=ext/standard/parsedate.c -v -d ext/standard/parsedate.y 
-
 PHPDLL_RES=$(BUILD_DIR)\$(PHPDLL).res
+
+$(MCFILE): win32\build\wsyslog.mc
+	$(MC) -h win32\ -r $(BUILD_DIR)\ -x $(BUILD_DIR)\ win32\build\wsyslog.mc
+
+#	$(RC) /fo $(MCFILE) $(BUILD_DIR)\wsyslog.rc
 
 $(PHPDLL_RES): win32\build\template.rc
 	$(RC) /fo $(PHPDLL_RES) /d FILE_DESCRIPTION="\"PHP Script Interpreter\"" \
 		/d FILE_NAME="\"$(PHPDLL)\"" /d PRODUCT_NAME="\"PHP Script Interpreter\"" \
-		win32\build\template.rc
+		/I$(BUILD_DIR) /d MC_INCLUDE="\"$(MCFILE)\"" \
+		win32\build\template.rc 
 
-$(BUILD_DIR)\$(PHPDLL): $(PHPDEF) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(PHPDLL_RES)
-	$(LD) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES)
+$(BUILD_DIR)\$(PHPDLL): generated_files $(PHPDEF) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(PHPDLL_RES) $(MCFILE)
+	@$(LD) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES)
 	
 $(BUILD_DIR)\$(PHPLIB): $(BUILD_DIR)\$(PHPDLL)
 	
@@ -73,7 +80,7 @@ clean-sapi:
 clean: clean-sapi
 	@echo Cleaning build dirs
 	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @del /F /Q %D\*.* > NUL
-	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING).zip > NUL
+	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip > NUL
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING) 
 
 clean-pecl:
@@ -86,7 +93,7 @@ set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
 $(BUILD_DIR)\php.exe -d open_basedir= -d safe_mode=0 -d output_buffering=0 run-tests.php $(TESTS)
 <<NOKEEP
 
-build-snap:
+build-snap: generated_files
 	@$(MAKE) "$(BUILD_DIR)\$(PHPDLL)"
 	-for %T in ($(SAPI_TARGETS)) do $(MAKE) /I /nologo "%T"
 	-for %T in ($(EXT_TARGETS)) do $(MAKE) /I /nologo "%T"
@@ -95,13 +102,18 @@ build-snap:
 build-dist: $(BUILD_DIR)\deplister.exe
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
 	-rmdir /s /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING).zip
-	$(BUILD_DIR)\php.exe -n win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS)" "$(PECL_TARGETS)" "$(SNAPSHOT_TEMPLATE)"
+	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip
+	-del /f /q $(BUILD_DIR)\php-debug-pack-$(PHP_VERSION_STRING)-Win32.zip
+	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip
+	$(BUILD_DIR)\php.exe -n win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS) $(PHP_EXTRA_DIST_FILES)" "$(PECL_TARGETS) $(PECL_EXTRA_DIST_FILES)" "$(SNAPSHOT_TEMPLATE)"
 	cd $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING).zip .
+	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING)-Win32.zip .
 	cd ..\..
 	cd $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING).zip .
+	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING)-Win32.zip .
+	cd ..\..
+	cd $(BUILD_DIR)
+	-$(ZIP) -9 php-debug-pack-$(PHP_VERSION_STRING)-Win32.zip *.pdb
 	cd ..\..
 
 dist: all build-dist
@@ -113,8 +125,16 @@ $(BUILD_DIR)\deplister.exe:	win32\build\deplister.c
 msi-installer: dist
 	$(BUILD_DIR)\php.exe ..\php-installer\build-installer.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS)" "$(PECL_TARGETS)"
 
-install: all
+# need to redirect, since INSTALL is a file in the root...
+install: really-install
+
+really-install:
 	@if not exist $(PHP_PREFIX) mkdir $(PHP_PREFIX)
+	@echo Installing files under $(PHP_PREFIX)
 	@copy $(BUILD_DIR)\*.exe $(PHP_PREFIX) /y >nul
 	@copy $(BUILD_DIR)\*.dll $(PHP_PREFIX) /y >nul
-	
+	@echo Registering event source with syslog (requires admin rights)
+	@echo It's okay for this step to fail:
+	-$(PHP_PREFIX)\php.exe -n -dextension_dir=$(PHP_PREFIX) win32/build/registersyslog.php $(PHP_PREFIX)\$(PHPDLL)
+
+

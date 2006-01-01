@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.28 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -34,6 +34,11 @@
 #include "exec.h"
 #include "php_globals.h"
 #include "SAPI.h"
+
+#ifdef NETWARE
+#include <proc.h>
+#include <library.h>
+#endif
 
 #if HAVE_SYS_WAIT_H
 #include <sys/wait.h>
@@ -214,6 +219,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	WaitForSingleObject(proc->child, INFINITE);
 	GetExitCodeProcess(proc->child, &wstatus);
 	FG(pclose_ret) = wstatus;
+	CloseHandle(proc->child);
 	
 #elif HAVE_SYS_WAIT_H
 	
@@ -396,13 +402,20 @@ PHP_FUNCTION(proc_get_status)
 			exitcode = WEXITSTATUS(wstatus);
 		}
 		if (WIFSIGNALED(wstatus)) {
+			running = 0;
 			signaled = 1;
+#ifdef NETWARE
+			termsig = WIFTERMSIG(wstatus);
+#else
 			termsig = WTERMSIG(wstatus);
+#endif
 		}
 		if (WIFSTOPPED(wstatus)) {
 			stopped = 1;
 			stopsig = WSTOPSIG(wstatus);
 		}
+	} else if (wait_pid == -1) {
+		running = 0;
 	}
 #endif
 
@@ -477,6 +490,13 @@ PHP_FUNCTION(proc_open)
 	SECURITY_ATTRIBUTES security;
 	char *command_with_cmd;
 	UINT old_error_mode;
+#endif
+#ifdef NETWARE
+	char** child_argv = NULL;
+	char* command_dup = NULL;
+	char* orig_cwd = NULL;
+	int command_num_args = 0;
+	wiring_t channel;
 #endif
 	php_process_id_t child;
 	struct php_process_handle *proc;
@@ -677,7 +697,7 @@ PHP_FUNCTION(proc_open)
 				descriptors[ndesc].parentend = dup(dev_ptmx);
 				descriptors[ndesc].mode_flags = O_RDWR;
 #else
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "pty pseudo terminal is not support on this system");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "pty pseudo terminal not supported on this system");
 				goto exit_fail;
 #endif
 			} else {
@@ -741,6 +761,46 @@ PHP_FUNCTION(proc_open)
 	child = pi.hProcess;
 	CloseHandle(pi.hThread);
 
+#elif defined(NETWARE)
+	if (cwd) {
+		orig_cwd = getcwd(NULL, PATH_MAX);
+		chdir2(cwd);
+	}
+	channel.infd = descriptors[0].childend;
+	channel.outfd = descriptors[1].childend;
+	channel.errfd = -1;
+	/* Duplicate the command as processing downwards will modify it*/
+	command_dup = strdup(command);
+	/* get a number of args */
+	construct_argc_argv(command_dup, NULL, &command_num_args, NULL);
+	child_argv = (char**) malloc((command_num_args + 1) * sizeof(char*));
+	if(!child_argv) {
+		free(command_dup);
+		if (cwd && orig_cwd) {
+			chdir2(orig_cwd);
+			free(orig_cwd);
+		}
+	}
+	/* fill the child arg vector */
+	construct_argc_argv(command_dup, NULL, &command_num_args, child_argv);
+	child_argv[command_num_args] = NULL;
+	child = procve(child_argv[0], PROC_DETACHED|PROC_INHERIT_CWD, NULL, &channel, NULL, NULL, 0, NULL, (const char**)child_argv);
+	free(child_argv);
+	free(command_dup);
+	if (cwd && orig_cwd) {
+		chdir2(orig_cwd);
+		free(orig_cwd);
+	}
+	if (child < 0) {
+		/* failed to fork() */
+		/* clean up all the descriptors */
+		for (i = 0; i < ndesc; i++) {
+			close(descriptors[i].childend);
+			close(descriptors[i].parentend);
+		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "procve failed - %s", strerror(errno));
+		goto exit_fail;
+	}
 #elif HAVE_FORK
 	/* the unix way */
 	child = fork();

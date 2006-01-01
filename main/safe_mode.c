@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.58 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #include "php.h"
 
@@ -55,12 +55,14 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 	php_stream_wrapper *wrapper = NULL;
 	TSRMLS_FETCH();
 
-	strlcpy(filenamecopy, filename, MAXPATHLEN);
-	filename=(char *)&filenamecopy;
-
 	if (!filename) {
 		return 0; /* path must be provided */
 	}
+
+	if (strlcpy(filenamecopy, filename, MAXPATHLEN)>=MAXPATHLEN) {
+		return 0;
+	}
+	filename=(char *)&filenamecopy;
 
 	if (fopen_mode) {
 		if (fopen_mode[0] == 'r') {
@@ -187,7 +189,12 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 }
 
 PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode) {
+#ifdef NETWARE
+/* NetWare don't have uid*/
+	return 1;
+#else
 	return php_checkuid_ex(filename, fopen_mode, mode, 0);
+#endif
 }
 
 PHPAPI char *php_get_current_user()
@@ -207,11 +214,11 @@ PHPAPI char *php_get_current_user()
 	pstat = sapi_get_stat(TSRMLS_C);
 
 	if (!pstat) {
-		return empty_string;
+		return "";
 	}
 
 	if ((pwd=getpwuid(pstat->st_uid))==NULL) {
-		return empty_string;
+		return "";
 	}
 	SG(request_info).current_user_length = strlen(pwd->pw_name);
 	SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2005 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.10.2.4 2005/12/09 04:57:20 rrichards Exp $ */
+/* $Id: php_xmlwriter.h,v 1.10.2.5 2006/01/01 12:50:16 sniper Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H

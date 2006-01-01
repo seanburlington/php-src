@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pwd.c,v 1.9 2004/01/08 08:18:21 andi Exp $ */
+/* $Id: pwd.c,v 1.12.2.1 2006/01/01 12:50:19 sniper Exp $ */
 
 #include "php.h"				/*php specific */
 #include <lmaccess.h>
@@ -26,10 +26,7 @@
 #include <lmapibuf.h>
 #include "pwd.h"
 #include "grp.h"
-
-#ifndef THREAD_SAFE
-static struct passwd pwd;
-#endif
+#include "php_win32_globals.h"
 
 static char *home_dir = ".";
 static char *login_shell = "not command.com!";
@@ -44,21 +41,26 @@ getpwnam(char *name)
 char *
 getlogin()
 {
-	static char name[256];
+	char name[256];
 	DWORD max_len = 256;
+	TSRMLS_FETCH();
 
+	STR_FREE(PW32G(login_name));	
 	GetUserName(name, &max_len);
-	return name;
+	name[max_len] = '\0';
+	PW32G(login_name) = estrdup(name);
+	return PW32G(login_name);
 }
 
 struct passwd *
 getpwuid(int user_id)
 {
-	pwd.pw_name = getlogin();
-	pwd.pw_dir = home_dir;
-	pwd.pw_shell = login_shell;
-	pwd.pw_uid = 0;
+	TSRMLS_FETCH();
+	PW32G(pwd).pw_name = getlogin();
+	PW32G(pwd).pw_dir = home_dir;
+	PW32G(pwd).pw_shell = login_shell;
+	PW32G(pwd).pw_uid = 0;
 
-	return &pwd;
+	return &PW32G(pwd);
 }
 

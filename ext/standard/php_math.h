@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.22 2004/05/24 17:02:12 iliaa Exp $ */
+/* $Id: php_math.h,v 1.28.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -66,9 +66,7 @@ PHP_FUNCTION(rad2deg);
    WARNING: these functions are expermental: they could change their names or 
    disappear in the next version of PHP!
    */
-#ifdef HAVE_HYPOT
 PHP_FUNCTION(hypot);
-#endif
 PHP_FUNCTION(expm1);
 PHP_FUNCTION(log1p);
 

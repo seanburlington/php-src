@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_udf.c,v 1.7 2004/06/05 10:03:42 abies Exp $ */
+/* $Id: php_ibase_udf.c,v 1.9.2.1 2006/01/01 12:50:08 sniper Exp $ */
 
 /**
 * This UDF library adds the ability to call PHP functions from SQL
@@ -124,8 +124,8 @@ pthread_mutex_t mtx_res = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
 #ifdef PHP_EMBED
-#  include "php_main.h"
-#  include "php_embed.h"
+# include "php_main.h"
+# include "sapi/embed/php_embed.h"
 
 static void __attribute__((constructor)) init()
 {

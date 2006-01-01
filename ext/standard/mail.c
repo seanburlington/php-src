@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.82 2004/01/09 01:35:44 iliaa Exp $ */
+/* $Id: mail.c,v 1.87.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -42,8 +42,8 @@
 #endif
 
 #ifdef NETWARE
-#include "netware/pipe.h"    /* For popen(), pclose() */
-#include "netware/sysexits.h"   /* For exit status codes like EX_OK */
+#define EX_OK           0       /* successful termination */
+#define EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
 #endif
 
 #define SKIP_LONG_HEADER_SEP(str, pos)										\
@@ -86,7 +86,7 @@ PHP_FUNCTION(mail)
 	char *subject=NULL, *extra_cmd=NULL;
 	int to_len, message_len, headers_len;
 	int subject_len, extra_cmd_len, i;
-	char *force_extra_parameters = INI_STR("mail_force_extra_parameters");
+	char *force_extra_parameters = INI_STR("mail.force_extra_parameters");
 	char *to_r, *subject_r;
 
 	if (PG(safe_mode) && (ZEND_NUM_ARGS() == 5)) {
@@ -185,7 +185,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 	if (!sendmail_path) {
 #if (defined PHP_WIN32 || defined NETWARE)
 		/* handle old style win smtp sending */
-		if (TSendMail(INI_STR("SMTP"), &tsm_err, &tsm_errmsg, headers, subject, to, message, NULL, NULL, NULL) == FAILURE) {
+		if (TSendMail(INI_STR("SMTP"), &tsm_err, &tsm_errmsg, headers, subject, to, message, NULL, NULL, NULL TSRMLS_CC) == FAILURE) {
 			if (tsm_errmsg) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", tsm_errmsg);
 				efree(tsm_errmsg);

@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,14 +16,21 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.16 2004/02/22 17:51:01 chregu Exp $ */
+/* $Id: expat_compat.h,v 1.19.2.1 2006/01/01 12:50:16 sniper Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
 
+#ifdef PHP_WIN32
+#include "config.w32.h"
+#else
+#include <php_config.h>
+#endif
+
 #if !defined(HAVE_LIBEXPAT) && defined(HAVE_LIBXML)
 #define LIBXML_EXPAT_COMPAT 1
 
+#include "php.h"
 #include "php_compat.h"
 
 #include <libxml/parser.h>

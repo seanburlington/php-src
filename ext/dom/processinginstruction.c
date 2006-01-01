@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.15 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.17.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,7 +82,7 @@ PHP_METHOD(domprocessinginstruction, __construct)
 }
 /* }}} end DOMProcessingInstruction::__construct */
 
-/* {{{ proto target	string	
+/* {{{ target	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-1478689192
 Since: 
@@ -108,7 +108,7 @@ int dom_processinginstruction_target_read(dom_object *obj, zval **retval TSRMLS_
 
 
 
-/* {{{ proto data	string	
+/* {{{ data	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-837822393
 Since: 

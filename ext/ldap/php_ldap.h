@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.30 2004/01/08 17:32:19 sniper Exp $ */
+/* $Id: php_ldap.h,v 1.32.2.1 2006/01/01 12:50:08 sniper Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -70,14 +70,18 @@ PHP_FUNCTION(ldap_error);
 PHP_FUNCTION(ldap_compare);
 PHP_FUNCTION(ldap_sort);
 
-#if (LDAP_API_VERSION > 2000) || HAVE_NSLDAP
+#if (LDAP_API_VERSION > 2000) || HAVE_NSLDAP || HAVE_ORALDAP_10
 PHP_FUNCTION(ldap_get_option);
 PHP_FUNCTION(ldap_set_option);
-PHP_FUNCTION(ldap_parse_result);
 PHP_FUNCTION(ldap_first_reference);
 PHP_FUNCTION(ldap_next_reference);
-PHP_FUNCTION(ldap_parse_reference);
 PHP_FUNCTION(ldap_rename);
+#ifdef HAVE_LDAP_PARSE_RESULT
+PHP_FUNCTION(ldap_parse_result);
+#endif
+#ifdef HAVE_LDAP_PARSE_REFERENCE
+PHP_FUNCTION(ldap_parse_reference);
+#endif
 #endif
 
 #if LDAP_API_VERSION > 2000

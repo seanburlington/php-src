@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.46 2004/06/13 17:04:36 iliaa Exp $ */
+/* $Id: syslog.c,v 1.49.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include "php.h"
 
@@ -75,7 +75,7 @@ PHP_MINIT_FUNCTION(syslog)
 	/* AIX doesn't have LOG_AUTHPRIV */
 	REGISTER_LONG_CONSTANT("LOG_AUTHPRIV", LOG_AUTHPRIV, CONST_CS | CONST_PERSISTENT);
 #endif
-#if !defined(PHP_WIN32) && !defined(NETWARE)
+#ifndef PHP_WIN32
 	REGISTER_LONG_CONSTANT("LOG_LOCAL0", LOG_LOCAL0, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LOG_LOCAL1", LOG_LOCAL1, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LOG_LOCAL2", LOG_LOCAL2, CONST_CS | CONST_PERSISTENT);
@@ -119,6 +119,9 @@ PHP_RSHUTDOWN_FUNCTION(syslog)
 	if (BG(syslog_device)) {
 		efree(BG(syslog_device));
 	}
+#ifdef PHP_WIN32
+	closelog();
+#endif
 	return SUCCESS;
 }
 
@@ -141,7 +144,9 @@ static void start_syslog(TSRMLS_D)
 	SET_VAR_LONG("LOG_MAIL", LOG_MAIL); /* log to email */
 	SET_VAR_LONG("LOG_DAEMON", LOG_DAEMON); /* other system daemons */
 	SET_VAR_LONG("LOG_AUTH", LOG_AUTH);
+#ifndef NETWARE
 	SET_VAR_LONG("LOG_SYSLOG", LOG_SYSLOG);
+#endif
 	SET_VAR_LONG("LOG_LPR", LOG_LPR);
 #ifdef LOG_NEWS
 	/* No LOG_NEWS on HP-UX */

@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,20 +15,15 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.75 2004/02/11 19:00:42 bfrance Exp $ */
+/* $Id: head.c,v 1.84.2.1 2006/01/01 12:50:14 sniper Exp $ */
 
 #include <stdio.h>
-
-#if defined(NETWARE) && !defined(NEW_LIBC)
-#include <sys/socket.h>
-#endif
-
 #include "php.h"
 #include "ext/standard/php_standard.h"
+#include "ext/date/php_date.h"
 #include "SAPI.h"
 #include "php_main.h"
 #include "head.h"
-#include "SAPI.h"
 #ifdef TM_IN_SYS_TIME
 #include <sys/time.h>
 #else
@@ -69,7 +64,6 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 {
 	char *cookie, *encoded_value = NULL;
 	int len=sizeof("Set-Cookie: ");
-	time_t t;
 	char *dt;
 	sapi_header_line ctr = {0};
 	int result;
@@ -108,15 +102,15 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 		 * so in order to force cookies to be deleted, even on MSIE, we
 		 * pick an expiry date 1 year and 1 second in the past
 		 */
-		t = time(NULL) - 31536001;
-		dt = php_std_date(t TSRMLS_CC);
+		time_t t = time(NULL) - 31536001;
+		dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0 TSRMLS_CC);
 		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s", name, dt);
 		efree(dt);
 	} else {
 		sprintf(cookie, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");
-			dt = php_std_date(expires TSRMLS_CC);
+			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, expires, 0 TSRMLS_CC);
 			strcat(cookie, dt);
 			efree(dt);
 		}
@@ -244,7 +238,7 @@ static void php_head_apply_header_list_to_hash(void *data, void *arg TSRMLS_DC)
 	}
 }
 
-/* {{{ proto string headers_list(void)
+/* {{{ proto array headers_list(void)
    Return list of headers to be sent / already sent */
 PHP_FUNCTION(headers_list)
 {

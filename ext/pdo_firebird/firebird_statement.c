@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.11 2004/06/23 13:26:08 abies Exp $ */
+/* $Id: firebird_statement.c,v 1.18.2.1 2006/01/01 12:50:11 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -125,13 +125,14 @@ static int firebird_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 /* }}} */
 
 /* called by PDO to fetch the next row from a statement */
-static int firebird_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
+static int firebird_stmt_fetch(pdo_stmt_t *stmt, /* {{{ */
+	enum pdo_fetch_orientation ori, long offset TSRMLS_DC)
 {
 	pdo_firebird_stmt *S = (pdo_firebird_stmt*)stmt->driver_data;
 	pdo_firebird_db_handle *H = S->H;
 
 	if (!stmt->executed) {
-		stmt->error_code = PDO_ERR_CANT_MAP;
+		strcpy(stmt->error_code, "HY000");
 		H->last_app_error = "Cannot fetch from a closed cursor";
 	} else if (!S->exhausted) {
 
@@ -289,7 +290,7 @@ fetch_blob_end:
 /* }}} */
 
 static int firebird_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,  /* {{{ */
-	unsigned long *len TSRMLS_DC)
+	unsigned long *len, int *caller_frees TSRMLS_DC)
 {
 	pdo_firebird_stmt *S = (pdo_firebird_stmt*)stmt->driver_data;
 	XSQLVAR const *var = &S->out_sqlda.sqlvar[colno];
@@ -350,7 +351,7 @@ static int firebird_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,  /* {{
 					*ptr = var->sqldata;
 					*len = var->sqllen;
 					break;
-// --- cut here ---
+/* --- cut here --- */
 				case SQL_SHORT:
 				    *ptr = FETCH_BUF(S->fetch_buf[colno], char, 24, NULL);
 					*len = sprintf(*ptr, "%d", *(short*)var->sqldata);
@@ -371,7 +372,7 @@ static int firebird_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,  /* {{
 					*ptr = FETCH_BUF(S->fetch_buf[colno], char, 24, NULL);
 					*len = sprintf(*ptr, "%f" , *(double*)var->sqldata);
 					break;
-// --- cut here ---
+/* --- cut here --- */
 #if abies_0
 				case SQL_SHORT:
 					*ptr = FETCH_BUF(S->fetch_buf[colno], long, 0, *len);
@@ -481,7 +482,7 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 	}
 
 	if (!sqlda || param->paramno >= sqlda->sqld) {
-		stmt->error_code = PDO_ERR_NOT_FOUND;
+		strcpy(stmt->error_code, "HY093");
 		S->H->last_app_error = "Invalid parameter index";
 		return 0;
 	}
@@ -507,7 +508,7 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 				}
 			}
 			if (i >= sqlda->sqld) {
-				stmt->error_code = PDO_ERR_NOT_FOUND;
+				strcpy(stmt->error_code, "HY093");
 				S->H->last_app_error = "Invalid parameter name";
 				return 0;
 			}
@@ -519,6 +520,7 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 	switch (event_type) {
 		char *value;
 		unsigned long value_len;
+		int caller_frees;
 			
 		case PDO_PARAM_EVT_ALLOC:
 			if (param->is_param) {
@@ -537,7 +539,7 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 
 			switch (var->sqltype & ~1) {
 				case SQL_ARRAY:
-					stmt->error_code = PDO_ERR_NOT_IMPLEMENTED;
+					strcpy(stmt->error_code, "HY000");
 					S->H->last_app_error = "Cannot bind to array field";
 					return 0;
 	
@@ -584,14 +586,14 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 				case IS_NULL:
 					/* complain if this field doesn't allow NULL values */
 					if (~var->sqltype & 1) {
-						stmt->error_code = PDO_ERR_CONSTRAINT;
+						strcpy(stmt->error_code, "HY105");
 						S->H->last_app_error = "Parameter requires non-null value";
 						return 0;
 					}
 					*var->sqlind = -1;
 					break;
 				default:
-					stmt->error_code = PDO_ERR_NOT_IMPLEMENTED;
+					strcpy(stmt->error_code, "HY105");
 					S->H->last_app_error = "Binding arrays/objects is not supported";
 					return 0;
 			}
@@ -600,9 +602,10 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 		case PDO_PARAM_EVT_FETCH_POST:
 			value = NULL;
 			value_len = 0;
+			caller_frees = 0;
 			
-			if (firebird_stmt_get_col(stmt, param->paramno, &value, &value_len TSRMLS_CC)) {
-				switch (param->param_type) {
+			if (firebird_stmt_get_col(stmt, param->paramno, &value, &value_len, &caller_frees TSRMLS_CC)) {
+				switch (PDO_PARAM_TYPE(param->param_type)) {
 					case PDO_PARAM_STR:
 						if (value) {
 							ZVAL_STRINGL(param->parameter, value, value_len, 1);
@@ -622,6 +625,9 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 #endif
 					default:
 						ZVAL_NULL(param->parameter);
+				}
+				if (value && caller_frees) {
+					efree(value);
 				}
 				return 1;
 			}

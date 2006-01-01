@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.92 2004/01/08 08:18:18 andi Exp $ */
+/* $Id: thttpd.c,v 1.95.2.1 2006/01/01 12:50:19 sniper Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -393,6 +393,7 @@ static sapi_module_struct thttpd_sapi_module = {
 
 	sapi_thttpd_register_variables,
 	NULL,									/* Log message */
+	NULL,									/* Get request time */
 
 	NULL,									/* php.ini path override */
 	NULL,									/* Block interruptions */
@@ -450,6 +451,8 @@ static void thttpd_request_ctor(TSRMLS_D)
 	smart_str_0(&s);
 	SG(request_info).request_uri = s.c;
 	SG(request_info).request_method = httpd_method_str(TG(hc)->method);
+	if (TG(hc)->one_one) SG(request_info).proto_num = 1001;
+	else SG(request_info).proto_num = 1000;
 	SG(sapi_headers).http_response_code = 200;
 	if (TG(hc)->contenttype)
 		SG(request_info).content_type = strdup(TG(hc)->contenttype);

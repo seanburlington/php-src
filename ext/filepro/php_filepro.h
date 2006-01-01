@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filepro.h,v 1.12 2004/01/08 17:32:07 sniper Exp $ */
+/* $Id: php_filepro.h,v 1.14.2.1 2006/01/01 12:50:06 sniper Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -41,6 +41,8 @@ PHP_FUNCTION(filepro_fieldcount);
 PHP_FUNCTION(filepro_retrieve);
 
 PHP_MINIT_FUNCTION(filepro);
+PHP_RINIT_FUNCTION(filepro);
+PHP_RSHUTDOWN_FUNCTION(filepro);
 PHP_MSHUTDOWN_FUNCTION(filepro);
 #else
 #define phpext_filepro_ptr NULL

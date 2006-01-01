@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -16,19 +16,25 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_streams_int.h,v 1.5 2004/01/08 17:33:06 sniper Exp $ */
+/* $Id: php_streams_int.h,v 1.7.2.1 2006/01/01 12:50:18 sniper Exp $ */
+
 
 #if ZEND_DEBUG
-#define emalloc_rel_orig(size)	\
+
+#if USE_ZEND_ALLOC
+# define emalloc_rel_orig(size)	\
 		( __php_stream_call_depth == 0 \
 		? _emalloc((size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
 		: _emalloc((size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC) )
 
-#define erealloc_rel_orig(ptr, size)	\
+# define erealloc_rel_orig(ptr, size)	\
 		( __php_stream_call_depth == 0 \
 		? _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
 		: _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC) )
-
+#else
+# define emalloc_rel_orig(size)			emalloc(size)
+# define erealloc_rel_orig(ptr, size)	erealloc(ptr, size)
+#endif
 
 #define pemalloc_rel_orig(size, persistent)	((persistent) ? malloc((size)) : emalloc_rel_orig((size)))
 #define perealloc_rel_orig(ptr, size, persistent)	((persistent) ? realloc((ptr), (size)) : erealloc_rel_orig((ptr), (size)))

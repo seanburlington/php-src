@@ -1,13 +1,13 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP version 4.0                                                      |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hwapi.h,v 1.2 2003/06/10 20:03:29 imajes Exp $ */
+/* $Id: php_hwapi.h,v 1.4.2.1 2006/01/01 12:50:07 sniper Exp $ */
 
 #ifndef PHP_HWAPI_H
 #define PHP_HWAPI_H
@@ -66,8 +66,6 @@ extern PHP_HWAPI_API zend_hwapi_globals hwapi_globals;
 #endif
 
 extern PHP_MINIT_FUNCTION(hwapi);
-extern PHP_MSHUTDOWN_FUNCTION(hwapi);
-extern PHP_RINIT_FUNCTION(hwapi);
 PHP_MINFO_FUNCTION(hwapi);
 
 /* HW_API */

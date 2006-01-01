@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.39 2004/02/01 03:02:47 moriyoshi Exp $ */
+/* $Id: php_pcre.h,v 1.41.2.1 2006/01/01 12:50:11 sniper Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -41,7 +41,7 @@ PHP_FUNCTION(preg_split);
 PHP_FUNCTION(preg_quote);
 PHP_FUNCTION(preg_grep);
 
-PHPAPI char *php_pcre_replace(char *regex,   int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit TSRMLS_DC);
+PHPAPI char *php_pcre_replace(char *regex,   int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *options TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex_ex(char *regex, pcre_extra **extra, int *preg_options, int *coptions TSRMLS_DC);
 

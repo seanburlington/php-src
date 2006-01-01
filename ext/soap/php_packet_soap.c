@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.36 2004/05/21 14:50:19 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.42.2.1 2006/01/01 12:50:13 sniper Exp $ */
 
 #include "php_soap.h"
 
@@ -33,6 +33,11 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 	HashTable *hdrs = NULL;
 
 	ZVAL_NULL(return_value);
+
+	/* Response for one-way opearation */
+	if (buffer_size == 0) {
+		return TRUE;
+	}
 
 	/* Parse XML packet */
 	response = soap_xmlParseMemory(buffer, buffer_size);
@@ -222,6 +227,11 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			}
 		}
 		add_soap_fault(this_ptr, faultcode, faultstring, faultactor, details TSRMLS_CC);
+#ifdef ZEND_ENGINE_2
+		if (details) {
+			details->refcount--;
+		}
+#endif
 		xmlFreeDoc(response);
 		return FALSE;
 	}
@@ -250,8 +260,16 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 				while (zend_hash_get_current_data(fn->responseParameters, (void **)&h_param) == SUCCESS) {
 					param = (*h_param);
 					if (fnb->style == SOAP_DOCUMENT) {
-						name = param->encode->details.type_str;
-						ns = param->encode->details.ns;
+						if (param->element) {
+							name = param->element->name;
+							ns = param->element->namens;
+/*
+							name = param->encode->details.type_str;
+							ns = param->encode->details.ns;
+*/
+						} else {
+							name = param->paramName;
+						}
 					} else {
 						name = fn->responseName;
 						/* ns = ? */
@@ -262,6 +280,9 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 					if (!cur) {
 						cur = get_node(resp, name);
 						/* TODO: produce warning invalid ns */
+					}
+					if (!cur && fnb->style == SOAP_RPC) {
+					  cur = resp;
 					}
 					if (cur) {
 						if (fnb->style == SOAP_DOCUMENT) {

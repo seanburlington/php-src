@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.67 2004/01/08 17:32:40 sniper Exp $ */
+/* $Id: php_pgsql.h,v 1.73.2.1 2006/01/01 12:50:12 sniper Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -75,9 +75,30 @@ PHP_FUNCTION(pg_ping);
 #if HAVE_PQPARAMETERSTATUS
 PHP_FUNCTION(pg_parameter_status);
 #endif
+#if HAVE_PGTRANSACTIONSTATUS
+PHP_FUNCTION(pg_transaction_status);
+#endif
 /* query functions */
 PHP_FUNCTION(pg_query);
+#if HAVE_PQEXECPARAMS
+PHP_FUNCTION(pg_query_params);
+#endif
+#if HAVE_PQPREPARE
+PHP_FUNCTION(pg_prepare);
+#endif
+#if HAVE_PQEXECPREPARED
+PHP_FUNCTION(pg_execute);
+#endif
 PHP_FUNCTION(pg_send_query);
+#if HAVE_PQSENDQUERYPARAMS
+PHP_FUNCTION(pg_send_query_params);
+#endif
+#if HAVE_PQSENDPREPARE
+PHP_FUNCTION(pg_send_prepare);
+#endif
+#if HAVE_PQSENDQUERYPREPARED
+PHP_FUNCTION(pg_send_execute);
+#endif
 PHP_FUNCTION(pg_cancel_query);
 /* result functions */
 PHP_FUNCTION(pg_fetch_assoc);
@@ -86,7 +107,10 @@ PHP_FUNCTION(pg_fetch_object);
 PHP_FUNCTION(pg_fetch_result);
 PHP_FUNCTION(pg_fetch_row);
 PHP_FUNCTION(pg_fetch_all);
+PHP_FUNCTION(pg_fetch_all_columns);
+#if HAVE_PQCMDTUPLES
 PHP_FUNCTION(pg_affected_rows);
+#endif
 PHP_FUNCTION(pg_get_result);
 PHP_FUNCTION(pg_result_seek);
 PHP_FUNCTION(pg_result_status);
@@ -98,6 +122,7 @@ PHP_FUNCTION(pg_field_name);
 PHP_FUNCTION(pg_field_num);
 PHP_FUNCTION(pg_field_size);
 PHP_FUNCTION(pg_field_type);
+PHP_FUNCTION(pg_field_type_oid);
 PHP_FUNCTION(pg_field_prtlen);
 PHP_FUNCTION(pg_field_is_null);
 /* async message functions */
@@ -105,6 +130,9 @@ PHP_FUNCTION(pg_get_notify);
 PHP_FUNCTION(pg_get_pid);
 /* error message functions */
 PHP_FUNCTION(pg_result_error);
+#if HAVE_PQRESULTERRORFIELD
+PHP_FUNCTION(pg_result_error_field);
+#endif
 PHP_FUNCTION(pg_last_error);
 PHP_FUNCTION(pg_last_notice);
 /* copy functions */
@@ -132,6 +160,9 @@ PHP_FUNCTION(pg_untrace);
 /* utility functions */
 PHP_FUNCTION(pg_client_encoding);
 PHP_FUNCTION(pg_set_client_encoding);
+#if HAVE_PQSETERRORVERBOSITY
+PHP_FUNCTION(pg_set_error_verbosity);
+#endif
 #if HAVE_PQESCAPE
 PHP_FUNCTION(pg_escape_string);
 PHP_FUNCTION(pg_escape_bytea);

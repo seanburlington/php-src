@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.41 2004/03/12 18:37:55 sterling Exp $ */
+/* $Id: php_curl.h,v 1.44.2.1 2006/01/01 12:50:01 sniper Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -51,9 +51,9 @@ extern zend_module_entry curl_module_entry;
 #define PHP_CURL_BINARY 6
 #define PHP_CURL_IGNORE 7
 
-int  le_curl;
+extern int  le_curl;
 #define le_curl_name "cURL handle"
-int  le_curl_multi_handle;
+extern int  le_curl_multi_handle;
 #define le_curl_multi_handle_name "cURL Multi Handle"
 
 PHP_MINIT_FUNCTION(curl);
@@ -121,6 +121,7 @@ typedef struct {
 	php_curl_handlers       *handlers;
 	long                     id;
 	unsigned int             uses;
+	zend_bool                in_callback;
 } php_curl;
 
 typedef struct {

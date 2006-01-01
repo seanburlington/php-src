@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.96 2004/04/17 23:08:02 derick Exp $ */
+/* $Id: html.c,v 1.111.2.1 2006/01/01 12:50:14 sniper Exp $ */
 
 /*
  * HTML entity resources:
@@ -27,15 +27,15 @@
  * http://msdn.microsoft.com/workshop/author/dhtml/reference/charsets/charset3.asp
  * http://www.unicode.org/Public/MAPPINGS/OBSOLETE/UNI2SGML.TXT
  *
+ * http://www.w3.org/TR/2002/REC-xhtml1-20020801/dtds.html#h-A2
+ * 
  */
 
 #include "php.h"
 #if PHP_WIN32
 #include "config.w32.h"
-#elif defined NETWARE
-#include "config.nw.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 #include "reg.h"
 #include "html.h"
@@ -58,7 +58,7 @@ enum entity_charset { cs_terminator, cs_8859_1, cs_cp1252,
 					  cs_big5hkscs, cs_sjis, cs_eucjp, cs_koi8r,
 					  cs_cp1251, cs_8859_5, cs_cp866, cs_macroman
 					};
-typedef const char *entity_table_t;
+typedef const char *const entity_table_t;
 
 /* codepage 1252 is a Windows extension to iso-8859-1. */
 static entity_table_t ent_cp_1252[] = {
@@ -106,33 +106,29 @@ static entity_table_t ent_iso_8859_15[] = {
 };
 
 static entity_table_t ent_uni_338_402[] = {
-	/* 338 */
-	"OElig", "oelig", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL,
-	/* 352 */
-	"Scaron", "scaron",
-	/* 354 - 375 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 376 */
-	"Yuml",
-	/* 377 - 401 */
+	/* 338 (0x0152) */
+	"OElig", "oelig", NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 352 (0x0160) */
+	"Scaron", "scaron", NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 376 (0x0178) */
+	"Yuml", NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 402 */
-	"fnof"
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 400 (0x0190) */
+	NULL, NULL, "fnof"
 };
 
 static entity_table_t ent_uni_spacing[] = {
 	/* 710 */
 	"circ",
-	/* 711 - 731 */
+	/* 711 - 730 */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 732 */
-	"tilde",
+	/* 731 - 732 */
+	NULL, "tilde"
 };
 
 static entity_table_t ent_uni_greek[] = {
@@ -147,9 +143,9 @@ static entity_table_t ent_uni_greek[] = {
 	"sigmaf", "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega",
 	/* 970 - 976 are not mapped */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	"thetasym", "ups1h",
+	"thetasym", "upsih",
 	NULL, NULL, NULL,
-	"p1v" 
+	"piv" 
 };
 
 static entity_table_t ent_uni_punct[] = {
@@ -157,11 +153,13 @@ static entity_table_t ent_uni_punct[] = {
 	"ensp", "emsp", NULL, NULL, NULL, NULL, NULL,
 	"thinsp", NULL, NULL, "zwnj", "zwj", "lrm", "rlm",
 	NULL, NULL, NULL, "ndash", "mdash", NULL, NULL, NULL,
-	"lsquo", "rsquo", "sbquo", NULL, "ldquo", "rdquo", "bdquo",
+	/* 8216 */
+	"lsquo", "rsquo", "sbquo", NULL, "ldquo", "rdquo", "bdquo", NULL,
 	"dagger", "Dagger",	"bull", NULL, NULL, NULL, "hellip",
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "permil", NULL,
-	"prime", "Prime", NULL, NULL, NULL, NULL, NULL, "lsaquo", "rsaquo",
-	NULL, NULL, NULL, "oline", NULL, NULL, NULL, NULL, NULL,
+	/* 8242 */
+	"prime", "Prime", NULL, NULL, NULL, NULL, NULL, "lsaquo", "rsaquo", NULL,
+	NULL, NULL, "oline", NULL, NULL, NULL, NULL, NULL,
 	"frasl"
 };
 
@@ -191,7 +189,7 @@ static entity_table_t ent_uni_8592_9002[] = {
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	/* 8624 (0x21b0) */
-	NULL, NULL, NULL, NULL, "crarr", NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, "crarr", NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	/* 8640 (0x21c0) */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -206,9 +204,9 @@ static entity_table_t ent_uni_8592_9002[] = {
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	/* 8704 (0x2200) */
 	"forall", "comp", "part", "exist", "nexist", "empty", NULL, "nabla",
-	"isin", "notin", "epsis", NULL, "ni", "bepsi", NULL, "prod",
+	"isin", "notin", "epsis", "ni", "notni", "bepsi", NULL, "prod",
 	/* 8720 (0x2210) */
-	"coprod", "sum", "minus", "mnplus", "plusdo", NULL, "setmn", NULL,
+	"coprod", "sum", "minus", "mnplus", "plusdo", NULL, "setmn", "lowast",
 	"compfn", NULL, "radic", NULL, NULL, "prop", "infin", "ang90",
 	/* 8736 (0x2220) */
 	"ang", "angmsd", "angsph", "mid", "nmid", "par", "npar", "and",
@@ -218,7 +216,7 @@ static entity_table_t ent_uni_8592_9002[] = {
 	NULL, NULL, NULL, NULL, "sim", "bsim", NULL, NULL,
 	/* 8768 (0x2240) */
 	"wreath", "nsim", NULL, "sime", "nsime", "cong", NULL, "ncong",
-	"ap", "nap", "ape", NULL, "bcong", "asymp", "bump", "bumpe",
+	"asymp", "nap", "ape", NULL, "bcong", "asymp", "bump", "bumpe",
 	/* 8784 (0x2250) */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -230,38 +228,37 @@ static entity_table_t ent_uni_8592_9002[] = {
 	NULL, NULL, "pr", "sc", "cupre", "sscue", "prsim", "scsim",
 	/* 8832 (0x2280) */
 	"npr", "nsc", "sub", "sup", "nsub", "nsup", "sube", "supe",
-	/* 8840 - 8852 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 8853 */
-	"oplus", NULL, "otimes",
-	/* 8856 - 8868 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 8869 */
-	"perp",
-	/* 8870 - 8901 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL,
-	/* 8901 */
-	"sdot",
-	/* 8902 - 8967 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL,
-	/* 8968 */
-	"lceil", "rceil", "lfloor", "rfloor",
-	/* 8969 - 9000 */
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL,
-	/* 9001 */
-	"lang", "rang",
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8848 (0x2290) */
+	NULL, NULL, NULL, NULL, NULL, "oplus", NULL, "otimes",
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8864 (0x22a0) */
+	NULL, NULL, NULL, NULL, NULL, "perp", NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8880 (0x22b0) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8896 (0x22c0) */
+	NULL, NULL, NULL, NULL, NULL, "sdot", NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8912 (0x22d0) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8928 (0x22e0) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8944 (0x22f0) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8960 (0x2300) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	"lceil", "rceil", "lfloor", "rfloor", NULL, NULL, NULL, NULL,
+	/* 8976 (0x2310) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 8992 (0x2320) */
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, "lang", "rang"
 };
 
 static entity_table_t ent_uni_9674[] = {
@@ -468,6 +465,12 @@ static const struct {
 	{ 0, NULL, 0, 0 }
 };
 	
+struct basic_entities_dec {
+	unsigned short charcode;
+	char entity[8];
+	int entitylen;	
+};
+	
 #define MB_RETURN { \
 			*newpos = pos;       \
 		  	mbseq[mbpos] = '\0'; \
@@ -549,6 +552,7 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 							case 0x50:	/* 6, 2nd */
 								utf |= ((this_char & 0x3f) << 24);
 								stat++;
+								break;
 							default:
 								/* invalid */
 								more = 0;
@@ -898,8 +902,7 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 
 				if (entity_map[j].table[k - entity_map[j].basechar] == NULL)
 					continue;
-			
-				
+
 				entity[0] = '&';
 				entity_length = strlen(entity_map[j].table[k - entity_map[j].basechar]);
 				strncpy(&entity[1], entity_map[j].table[k - entity_map[j].basechar], sizeof(entity) - 2);
@@ -939,9 +942,11 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 						return 0;
 				}
 
-				replaced = php_str_to_str(ret, retlen, entity, entity_length, replacement, replacement_len, &retlen);
-				efree(ret);
-				ret = replaced;
+				if (php_memnstr(ret, entity, entity_length, ret+retlen)) {
+					replaced = php_str_to_str(ret, retlen, entity, entity_length, replacement, replacement_len, &retlen);
+					efree(ret);
+					ret = replaced;
+				}
 			}
 		}
 	}
@@ -953,10 +958,12 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 		
 		replacement[0] = (unsigned char)basic_entities[j].charcode;
 		replacement[1] = '\0';
-		
-		replaced = php_str_to_str(ret, retlen, basic_entities[j].entity, basic_entities[j].entitylen, replacement, 1, &retlen);
-		efree(ret);
-		ret = replaced;
+
+		if (php_memnstr(ret, basic_entities[j].entity, basic_entities[j].entitylen, ret+retlen)) {		
+			replaced = php_str_to_str(ret, retlen, basic_entities[j].entity, basic_entities[j].entitylen, replacement, 1, &retlen);
+			efree(ret);
+			ret = replaced;
+		}
 	}
 
 	/* replace numeric entities & "&amp;" */
@@ -987,7 +994,11 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 								if ((code >= 0x80 && code < 0xa0) || code > 0xff) {
 									invalid_code = 1;
 								} else {
-									*(q++) = code;
+									if (code == 39 || !quote_style) {
+										invalid_code = 1;
+									} else {
+										*(q++) = code;
+									}
 								}
 								break;
 
@@ -1198,6 +1209,72 @@ void register_html_constants(INIT_FUNC_ARGS)
 PHP_FUNCTION(htmlspecialchars)
 {
 	php_html_entities(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+/* }}} */
+
+/* {{{ proto string htmlspecialchars(string string [, int quote_style])
+   Convert special HTML entities back to characters */
+PHP_FUNCTION(htmlspecialchars_decode)
+{
+	char *str, *new_str, *e, *p;
+	int len, j, i, new_len;
+	long quote_style = ENT_COMPAT;
+	struct basic_entities_dec basic_entities_dec[8];
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &str, &len, &quote_style) == FAILURE) {
+		return;
+	}
+
+	new_str = estrndup(str, len);
+	new_len = len;
+	e = new_str + new_len;
+
+	if (!(p = memchr(new_str, '&', new_len))) {
+		RETURN_STRINGL(new_str, new_len, 0);
+	}
+
+	for (j = 0, i = 0; basic_entities[i].charcode != 0; i++) {
+		if (basic_entities[i].flags && !(quote_style & basic_entities[i].flags)) {
+			continue;
+		}
+		basic_entities_dec[j].charcode = basic_entities[i].charcode;
+		memcpy(basic_entities_dec[j].entity, basic_entities[i].entity, basic_entities[i].entitylen + 1);
+		basic_entities_dec[j].entitylen = basic_entities[i].entitylen;
+		j++;
+	}
+	basic_entities_dec[j].charcode = '&';
+	basic_entities_dec[j].entitylen = sizeof("&amp;") - 1;
+	memcpy(basic_entities_dec[j].entity, "&amp;", sizeof("&amp;"));
+	i = j + 1;
+	
+	do {
+		int l = e - p;
+	
+		for (j = 0; j < i; j++) {
+			if (basic_entities_dec[j].entitylen > l) {
+				continue;
+			}
+			if (!memcmp(p, basic_entities_dec[j].entity, basic_entities_dec[j].entitylen)) {
+				int e_len = basic_entities_dec[j].entitylen - 1;
+		
+				*p++ = basic_entities_dec[j].charcode;
+				memmove(p, p + e_len, (e - p - e_len));
+				e -= e_len;
+				goto done;
+			}
+		}
+		p++;
+
+done:
+		if (p >= e) {
+			break;
+		}
+	} while ((p = memchr(p, '&', (e - p))));
+
+	new_len = e - new_str;
+
+	new_str[new_len] = '\0';
+	RETURN_STRINGL(new_str, new_len, 0);
 }
 /* }}} */
 

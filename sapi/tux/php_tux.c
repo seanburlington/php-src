@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -287,6 +287,7 @@ static sapi_module_struct tux_sapi_module = {
 
 	sapi_tux_register_variables,
 	NULL,									/* Log message */
+	NULL,									/* Get request time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
@@ -335,6 +336,8 @@ static void tux_request_ctor(TSRMLS_D)
 	smart_str_0(&s);
 	SG(request_info).request_uri = s.c;
 	SG(request_info).request_method = CGI_REQUEST_METHOD(TG(req));
+	if(TG(req)->http_version == HTTP_1_1) SG(request_info).proto_num = 1001;
+	else SG(request_info).proto_num = 1000;
 	SG(sapi_headers).http_response_code = 200;
 	SG(request_info).content_type = TG(req)->content_type;
 	SG(request_info).content_length = 0; /* TG(req)->contentlength; */

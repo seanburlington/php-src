@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uuencode.c,v 1.3 2004/01/08 08:17:35 andi Exp $ */
+/* $Id: uuencode.c,v 1.5.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 /*
  * Portions of this code are based on Berkeley's uuencode/uudecode
@@ -136,9 +136,18 @@ PHPAPI int php_uudecode(char *src, int src_len, char **dest)
 		if ((len = PHP_UU_DEC(*s++)) <= 0) {
 			break;
 		}
+		/* sanity check */
+		if (len > src_len) {
+			goto err;
+		}
+
 		total_len += len;
 
 		ee = s + (len == 45 ? 60 : (int) floor(len * 1.33));
+		/* sanity check */
+		if (ee > e) {
+			goto err;
+		}
 
 		while (s < ee) {
 			*p++ = PHP_UU_DEC(*s) << 2 | PHP_UU_DEC(*(s + 1)) >> 4;
@@ -168,6 +177,10 @@ PHPAPI int php_uudecode(char *src, int src_len, char **dest)
 	*(*dest + total_len) = '\0';
 
 	return total_len;
+
+err:
+	efree(*dest);
+	return -1;
 }
 
 /* {{{ proto string uuencode(string data) 
@@ -199,6 +212,10 @@ PHP_FUNCTION(convert_uudecode)
 	}
 
 	dst_len = php_uudecode(src, src_len, &dst);
+	if (dst_len < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The given parameter is not a valid uuencoded string.");
+		RETURN_FALSE;
+	}
 
 	RETURN_STRINGL(dst, dst_len, 0);
 }

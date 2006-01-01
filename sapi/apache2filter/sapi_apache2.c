@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.125 2004/06/18 00:36:58 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.136.2.1 2006/01/01 12:50:18 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -128,9 +128,7 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 	else
 		apr_table_add(ctx->r->headers_out, sapi_header->header, val);
 	
-	sapi_free_header(sapi_header);
-
-	return 0;
+	return SAPI_HEADER_ADD;
 }
 
 static int
@@ -173,14 +171,14 @@ php_apache_sapi_get_stat(TSRMLS_D)
 	ctx->finfo.st_gid = ctx->r->finfo.group;
 	ctx->finfo.st_dev = ctx->r->finfo.device;
 	ctx->finfo.st_ino = ctx->r->finfo.inode;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	ctx->finfo.st_atime.tv_sec = ctx->r->finfo.atime/1000000;
-	ctx->finfo.st_mtime.tv_sec = ctx->r->finfo.mtime/1000000;
-	ctx->finfo.st_ctime.tv_sec = ctx->r->finfo.ctime/1000000;
+#ifdef NETWARE
+	ctx->finfo.st_atime.tv_sec = apr_time_sec(ctx->r->finfo.atime);
+	ctx->finfo.st_mtime.tv_sec = apr_time_sec(ctx->r->finfo.mtime);
+	ctx->finfo.st_ctime.tv_sec = apr_time_sec(ctx->r->finfo.ctime);
 #else
-	ctx->finfo.st_atime = ctx->r->finfo.atime/1000000;
-	ctx->finfo.st_mtime = ctx->r->finfo.mtime/1000000;
-	ctx->finfo.st_ctime = ctx->r->finfo.ctime/1000000;
+	ctx->finfo.st_atime = apr_time_sec(ctx->r->finfo.atime);
+	ctx->finfo.st_mtime = apr_time_sec(ctx->r->finfo.mtime);
+	ctx->finfo.st_ctime = apr_time_sec(ctx->r->finfo.ctime);
 #endif
 
 	ctx->finfo.st_size = ctx->r->finfo.size;
@@ -220,7 +218,7 @@ php_apache_sapi_register_variables(zval *track_vars_array TSRMLS_DC)
 	char *key, *val;
 	
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		php_register_variable(key, val, track_vars_array TSRMLS_CC);
 	APR_ARRAY_FOREACH_CLOSE()
 		
@@ -272,18 +270,11 @@ static void php_apache_sapi_log_message(char *msg)
 
 	ctx = SG(server_context);
    
-	/* We use APLOG_STARTUP because it keeps us from printing the
-	 * data and time information at the beginning of the error log
-	 * line.  Not sure if this is correct, but it mirrors what happens
-	 * with Apache 1.3 -- rbb
-	 */
 	if (ctx == NULL) { /* we haven't initialized our ctx yet, oh well */
-		ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO | APLOG_STARTUP,
-					 0, NULL, "%s", msg);
+		ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, NULL, "%s", msg);
 	}
 	else {
-		ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO | APLOG_STARTUP,
-					 0, ctx->r->server, "%s", msg);
+		ap_log_error(APLOG_MARK, APLOG_ERR, 0, ctx->r->server, "%s", msg);
 	}
 }
 
@@ -297,6 +288,12 @@ php_apache_disable_caching(ap_filter_t *f)
 	f->r->no_local_copy = 1;
 	
 	return OK;
+}
+
+static time_t php_apache_sapi_get_request_time(TSRMLS_D)
+{
+	php_struct *ctx = SG(server_context);
+	return apr_time_sec(ctx->r->request_time);
 }
 
 extern zend_module_entry php_apache_module;
@@ -335,6 +332,7 @@ static sapi_module_struct apache2_sapi_module = {
 
 	php_apache_sapi_register_variables,
 	php_apache_sapi_log_message,			/* Log message */
+	php_apache_sapi_get_request_time,		/* Get Request Time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
@@ -356,7 +354,7 @@ static int php_input_filter(ap_filter_t *f, apr_bucket_brigade *bb,
 
 	ctx = SG(server_context);
 	if (ctx == NULL) {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR|APLOG_NOERRNO, 0, f->r,
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, f->r,
 					 "php failed to get server context");
 		return HTTP_INTERNAL_SERVER_ERROR;
 	}
@@ -390,6 +388,7 @@ static void php_apache_request_ctor(ap_filter_t *f, php_struct *ctx TSRMLS_DC)
 #define safe_strdup(x) ((x)?strdup((x)):NULL)	
 	SG(request_info).query_string = safe_strdup(f->r->args);
 	SG(request_info).request_method = f->r->method;
+	SG(request_info).proto_num = f->r->proto_num;
 	SG(request_info).request_uri = safe_strdup(f->r->uri);
 	SG(request_info).path_translated = safe_strdup(f->r->filename);
 	f->r->no_local_copy = 1;
@@ -426,6 +425,9 @@ static void php_apache_request_dtor(ap_filter_t *f TSRMLS_DC)
 	}
 	if (SG(request_info).request_uri) {
 		free(SG(request_info).request_uri);
+	}
+	if (SG(request_info).path_translated) {
+		free(SG(request_info).path_translated);
 	}
 }
 
@@ -464,7 +466,7 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 	
 	ctx = SG(server_context);
 	if (ctx == NULL) {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR|APLOG_NOERRNO, 0, f->r,
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, f->r,
 					 "php failed to get server context");
 		zend_try {
 			zend_ini_deactivate(TSRMLS_C);
@@ -633,7 +635,7 @@ static void php_add_filter(request_rec *r, ap_filter_t *f)
 	/* for those who still have Set*Filter PHP configured */
 	while (f) {
 		if (strcmp(f->frec->name, "PHP") == 0) {
-			ap_log_error(APLOG_MARK, APLOG_WARNING | APLOG_NOERRNO,
+			ap_log_error(APLOG_MARK, APLOG_WARNING,
 				     0, r->server,
 				     "\"Set%sFilter PHP\" already configured for %s",
 				     output ? "Output" : "Input", r->uri);

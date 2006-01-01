@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_main.h,v 1.31 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_main.h,v 1.34.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #ifndef PHP_MAIN_H
 #define PHP_MAIN_H
@@ -36,7 +36,7 @@ PHPAPI void php_module_shutdown_for_exec(void);
 PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
 PHPAPI int php_request_startup_for_hook(TSRMLS_D);
 
-PHPAPI int php_startup_extensions(zend_module_entry **ptr, int count);
+PHPAPI int php_register_extensions(zend_module_entry **ptr, int count TSRMLS_DC);
 
 PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC);
 PHPAPI int php_execute_simple_script(zend_file_handle *primary_file, zval **ret TSRMLS_DC);
@@ -48,7 +48,8 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC);
 
 PHPAPI void php_html_puts(const char *str, uint siz TSRMLS_DC);
 
-extern void php_call_shutdown_functions(void);
+extern void php_call_shutdown_functions(TSRMLS_D);
+extern void php_free_shutdown_functions(TSRMLS_D);
 
 /* environment module */
 extern int php_init_environ(void);

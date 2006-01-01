@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.24 2004/04/07 08:06:09 stas Exp $ */
+/* $Id: incomplete_class.c,v 1.28.2.1 2006/01/01 12:50:15 sniper Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -26,39 +26,33 @@
 #define INCOMPLETE_CLASS_MSG \
 		"The script tried to execute a method or "  \
 		"access a property of an incomplete object. " \
-		"Please ensure that the class definition <b>%s</b> of the object " \
+		"Please ensure that the class definition \"%s\" of the object " \
 		"you are trying to operate on was loaded _before_ " \
-		"the session was started"
+		"unserialize() gets called or provide a __autoload() function " \
+		"to load the class definition "
 
 
 static zend_object_handlers php_incomplete_object_handlers;
 
 /* {{{ incomplete_class_message
  */
-static void incomplete_class_message(int error_type TSRMLS_DC)
+static void incomplete_class_message(zval *object, int error_type TSRMLS_DC)
 {
-	char buf[1024];
-	char *class_name = NULL;
+	char *class_name;
 
-	if(EG(This)) {
-		class_name = php_lookup_class_name(EG(This), NULL);
-	}
+	class_name = php_lookup_class_name(object, NULL);
 	
 	if (!class_name) {
-		class_name = estrndup("unknown", sizeof("unknown")-1);
+		class_name = "unknown";
 	}
 	
-	snprintf(buf, sizeof(buf)-1, INCOMPLETE_CLASS_MSG, class_name);
-	
-	efree(class_name);
-
-	php_error_docref(NULL TSRMLS_CC, error_type, "%s", buf);
+	php_error_docref(NULL TSRMLS_CC, error_type, INCOMPLETE_CLASS_MSG, class_name);
 }
 /* }}} */
 
 static zval *incomplete_class_get_property(zval *object, zval *member, int type TSRMLS_DC)
 {
-	incomplete_class_message(E_NOTICE TSRMLS_CC);
+	incomplete_class_message(object, E_NOTICE TSRMLS_CC);
 	if(type == BP_VAR_W || type == BP_VAR_RW) {
 		return EG(error_zval_ptr);
 	} else {
@@ -68,28 +62,28 @@ static zval *incomplete_class_get_property(zval *object, zval *member, int type 
 
 static void incomplete_class_write_property(zval *object, zval *member, zval *value TSRMLS_DC)
 {
-	incomplete_class_message(E_NOTICE TSRMLS_CC);
+	incomplete_class_message(object, E_NOTICE TSRMLS_CC);
 }
 	
 static zval **incomplete_class_get_property_ptr_ptr(zval *object, zval *member TSRMLS_DC)
 {
-	incomplete_class_message(E_NOTICE TSRMLS_CC);
+	incomplete_class_message(object, E_NOTICE TSRMLS_CC);
 	return &EG(error_zval_ptr);
 }
 
 static void incomplete_class_unset_property(zval *object, zval *member TSRMLS_DC)
 {
-	incomplete_class_message(E_NOTICE TSRMLS_CC);
+	incomplete_class_message(object, E_NOTICE TSRMLS_CC);
 }
 
 static int incomplete_class_has_property(zval *object, zval *member, int check_empty TSRMLS_DC)
 {
-	incomplete_class_message(E_NOTICE TSRMLS_CC);
+	incomplete_class_message(object, E_NOTICE TSRMLS_CC);
 	return 0;
 }
 
-static union _zend_function *incomplete_class_get_method(zval *object, char *method, int method_len TSRMLS_DC) {
-	incomplete_class_message(E_ERROR TSRMLS_CC);
+static union _zend_function *incomplete_class_get_method(zval **object, char *method, int method_len TSRMLS_DC) {
+	incomplete_class_message(*object, E_ERROR TSRMLS_CC);
 	return NULL;
 }
 
@@ -128,7 +122,7 @@ zend_class_entry *php_create_incomplete_class(TSRMLS_D)
 
 /* {{{ php_lookup_class_name
  */
-char *php_lookup_class_name(zval *object, size_t *nlen)
+char *php_lookup_class_name(zval *object, zend_uint *nlen)
 {
 	zval **val;
 	char *retval = NULL;
@@ -150,7 +144,7 @@ char *php_lookup_class_name(zval *object, size_t *nlen)
 
 /* {{{ php_store_class_name
  */
-void php_store_class_name(zval *object, const char *name, size_t len)
+void php_store_class_name(zval *object, const char *name, zend_uint len)
 {
 	zval *val;
 	TSRMLS_FETCH();

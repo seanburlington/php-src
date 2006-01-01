@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.29 2004/01/08 08:17:53 andi Exp $ */
+/* $Id: php_content_types.c,v 1.32.2.1 2006/01/01 12:50:17 sniper Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -72,12 +72,21 @@ SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
 
 /* {{{ php_startup_sapi_content_types
  */
-int php_startup_sapi_content_types(void)
+int php_startup_sapi_content_types(TSRMLS_D)
 {
-	sapi_register_post_entries(php_post_entries);
 	sapi_register_default_post_reader(php_default_post_reader);
 	sapi_register_treat_data(php_default_treat_data);
 	sapi_register_input_filter(php_default_input_filter);
+	return SUCCESS;
+}
+/* }}} */
+
+/* {{{ php_setup_sapi_content_types
+ */
+int php_setup_sapi_content_types(TSRMLS_D)
+{
+	sapi_register_post_entries(php_post_entries TSRMLS_CC);
+
 	return SUCCESS;
 }
 /* }}} */

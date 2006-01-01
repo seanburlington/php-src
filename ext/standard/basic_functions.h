@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 3.0 of the PHP license,       |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/3_0.txt.                                  |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.133 2004/03/27 00:50:39 helly Exp $ */
+/* $Id: basic_functions.h,v 1.139.2.1 2006/01/01 12:50:14 sniper Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -50,8 +50,15 @@ PHP_FUNCTION(sleep);
 PHP_FUNCTION(usleep);
 #if HAVE_NANOSLEEP
 PHP_FUNCTION(time_nanosleep);
+PHP_FUNCTION(time_sleep_until);
 #endif
 PHP_FUNCTION(flush);
+#ifdef HAVE_INET_NTOP
+PHP_NAMED_FUNCTION(php_inet_ntop);
+#endif
+#ifdef HAVE_INET_PTON
+PHP_NAMED_FUNCTION(php_inet_pton);
+#endif
 PHP_FUNCTION(ip2long);
 PHP_FUNCTION(long2ip);
 
@@ -82,7 +89,6 @@ PHP_FUNCTION(register_shutdown_function);
 PHP_FUNCTION(highlight_file);
 PHP_FUNCTION(highlight_string);
 PHP_FUNCTION(php_strip_whitespace);
-PHP_FUNCTION(php_check_syntax);
 ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
 
 PHP_FUNCTION(ini_get);
@@ -154,7 +160,6 @@ typedef struct _php_basic_globals {
 	ulong strtok_len;
 	char str_ebuf[40];
 	zval **array_walk_func_name;
-	zend_fcall_info_cache array_walk_fci_cache;
 	zval **user_compare_func_name;
 	zend_fcall_info_cache user_compare_fci_cache;
 	zend_llist *user_tick_functions;

@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.56.8.4 2004/04/21 00:11:30 iliaa Exp $ */
+/* $Id: sysvshm.c,v 1.56.8.6.2.1 2006/01/01 13:46:58 sniper Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -183,7 +183,7 @@ PHP_FUNCTION(shm_detach)
 	convert_to_long_ex(arg_id);
 	shm_list_ptr = (sysvshm_shm *) zend_list_find(Z_LVAL_PP(arg_id), &type);
 	if (!shm_list_ptr || type != php_sysvshm.le_shm) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The parameter is not a valid shm_indentifier");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The parameter is not a valid shm_identifier");
 		RETURN_FALSE;
 	}
 
@@ -214,7 +214,7 @@ PHP_FUNCTION(shm_remove)
 	shm_list_ptr = (sysvshm_shm *) zend_list_find(id, &type);
 
 	if (!shm_list_ptr) {
-		php_error(E_WARNING, "The parameter is not a valid shm_indentifier");
+		php_error(E_WARNING, "The parameter is not a valid shm_identifier");
 		RETURN_FALSE;
 	}
 
@@ -313,9 +313,9 @@ PHP_FUNCTION(shm_get_var)
 	shm_data=&shm_var->mem;
 	
 	PHP_VAR_UNSERIALIZE_INIT(var_hash);
-	if(php_var_unserialize(&return_value, (const char **) &shm_data, shm_data+shm_var->length,&var_hash TSRMLS_CC)!=1) {
+	if(php_var_unserialize(&return_value, (const unsigned char **) &shm_data, shm_data+shm_var->length,&var_hash TSRMLS_CC)!=1) {
 		PHP_VAR_UNSERIALIZE_DESTROY(var_hash);
-		php_error(E_WARNING, "variable data in shared memory is corruped");
+		php_error(E_WARNING, "variable data in shared memory is corrupted");
 		RETURN_FALSE;
 	}
 	PHP_VAR_UNSERIALIZE_DESTROY(var_hash);

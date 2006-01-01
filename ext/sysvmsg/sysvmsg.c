@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: sysvmsg.c,v 1.4.2.5.2.1 2005/08/11 21:55:28 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.4.2.5.2.2 2006/01/01 13:46:58 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.4.2.5.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.4.2.5.2.2 $");
 	php_info_print_table_end();
 }
 /* }}} */

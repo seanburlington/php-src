@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.1.4.3 2004/07/30 17:07:03 fmk Exp $ */
+/* $Id: php_win32_globals.h,v 1.1.4.3.2.1 2006/01/01 13:47:02 sniper Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H

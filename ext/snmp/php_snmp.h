@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 2.02 of the PHP license,      |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
-  | available at through the world-wide-web at                           |
-  | http://www.php.net/license/2_02.txt.                                 |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.14.2.4 2003/06/21 21:50:01 harrie Exp $ */
+/* $Id: php_snmp.h,v 1.14.2.7.2.1 2006/01/01 13:46:56 sniper Exp $ */
 
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
@@ -49,6 +49,12 @@ PHP_FUNCTION(snmp_set_quick_print);
 PHP_FUNCTION(snmp_set_enum_print);
 PHP_FUNCTION(snmp_set_oid_numeric_print);
 PHP_FUNCTION(snmpset);
+
+PHP_FUNCTION(snmp2_get);
+PHP_FUNCTION(snmp2_getnext);
+PHP_FUNCTION(snmp2_walk);
+PHP_FUNCTION(snmp2_real_walk);
+PHP_FUNCTION(snmp2_set);
 
 PHP_FUNCTION(snmp3_get);
 PHP_FUNCTION(snmp3_walk);

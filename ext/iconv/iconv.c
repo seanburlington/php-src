@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.65.2.12 2003/11/22 13:38:46 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.65.2.13.2.1 2006/01/01 13:46:53 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -83,24 +83,11 @@ ZEND_DECLARE_MODULE_GLOBALS(iconv)
 ZEND_GET_MODULE(iconv)
 #endif
 
-/* {{{ typedef enum php_iconv_err_t */
-typedef enum _php_iconv_err_t {
-	PHP_ICONV_ERR_SUCCESS           = SUCCESS,
-	PHP_ICONV_ERR_CONVERTER         = 1,
-	PHP_ICONV_ERR_WRONG_CHARSET     = 2,
-	PHP_ICONV_ERR_TOO_BIG           = 3,
-	PHP_ICONV_ERR_ILLEGAL_SEQ       = 4,
-	PHP_ICONV_ERR_ILLEGAL_CHAR      = 5,
-	PHP_ICONV_ERR_UNKNOWN           = 6
-} php_iconv_err_t;
-/* }}} */
-
 #ifdef HAVE_LIBICONV
 #define iconv libiconv
 #endif
 
 /* {{{ prototypes */ 
-static php_iconv_err_t php_iconv_string(const char * in_p, size_t in_len, char **out, size_t *out_len, const char *in_charset, const char *out_charset);
 static void _php_iconv_show_error(php_iconv_err_t err, const char *in_charset, const char *out_charset TSRMLS_DC);
 /* }}} */
 
@@ -185,7 +172,7 @@ PHP_MINFO_FUNCTION(miconv)
 
 /* {{{ php_iconv_string
  */
-php_iconv_err_t php_iconv_string(const char *in_p, size_t in_len,
+PHP_ICONV_API php_iconv_err_t php_iconv_string(const char *in_p, size_t in_len,
 							char **out, size_t *out_len,
 							const char *in_charset, const char *out_charset)
 {

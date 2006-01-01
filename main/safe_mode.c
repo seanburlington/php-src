@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.51.2.4 2003/03/17 13:50:23 wez Exp $ */
+/* $Id: safe_mode.c,v 1.51.2.5.2.1 2006/01/01 13:47:00 sniper Exp $ */
 
 #include "php.h"
 
@@ -54,12 +54,14 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 	php_stream_wrapper *wrapper = NULL;
 	TSRMLS_FETCH();
 
-	strlcpy(filenamecopy, filename, MAXPATHLEN);
-	filename=(char *)&filenamecopy;
-
 	if (!filename) {
 		return 0; /* path must be provided */
 	}
+
+	if (strlcpy(filenamecopy, filename, MAXPATHLEN)>=MAXPATHLEN) {
+		return 0;
+	}
+	filename=(char *)&filenamecopy;
 
 	if (fopen_mode) {
 		if (fopen_mode[0] == 'r') {

@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.46.2.2 2003/09/12 04:53:39 iliaa Exp $ */
+/* $Id: swf.c,v 1.46.2.5.2.1 2006/01/01 13:46:58 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -239,15 +239,19 @@ PHP_FUNCTION(swf_openfile)
 	}
 	na = tmpna;
 #endif
+	if (php_check_open_basedir(na TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(na, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+#ifdef VIRTUAL_DIR
+		free(na);
+#endif
+		return;
+	}
+	
 	if (!SWFG(use_file))
 		SWFG(tmpfile_name) = na;
 
 	swf_openfile(na,(float)Z_DVAL_PP(sizeX), (float)Z_DVAL_PP(sizeY),
       		 	 (float)Z_DVAL_PP(frameRate), (float)Z_DVAL_PP(r), 
       		 	 (float)Z_DVAL_PP(g), (float)Z_DVAL_PP(b));
-#ifdef VIRTUAL_DIR
-	free(na);
-#endif
 }
 /* }}} */
 
@@ -606,8 +610,13 @@ PHP_FUNCTION(swf_definepoly)
 	convert_to_double_ex(width);
 	
 	if (Z_TYPE_PP(coordinates) != IS_ARRAY) {
-		return;
 		php_error(E_WARNING, "Wrong datatype of second argument to swf_definepoly");
+		RETURN_FALSE;
+	}
+
+	if (Z_LVAL_PP(NumPoints) > 256) {
+		php_error(E_WARNING, "The npoints value cannot be larger then 256.");
+		RETURN_FALSE;
 	}
 	
 	npoints = Z_LVAL_PP(NumPoints);

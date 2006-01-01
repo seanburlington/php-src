@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Chris Faulhaber <jedgar@fxp.org>                            |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_mcve.h,v 1.6.2.4 2004/06/17 03:16:54 bradmssw Exp $ */
+/* $Id: php_mcve.h,v 1.6.2.4.2.1 2006/01/01 13:46:54 sniper Exp $ */
 
 #ifndef _PHP_MCVE_H
 #define _PHP_MCVE_H

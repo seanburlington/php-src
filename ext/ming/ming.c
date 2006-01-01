@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 2.02 of the PHP license,      |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
-  | available at through the world-wide-web at                           |
-  | http://www.php.net/license/2_02.txt.                                 |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.42.2.12 2003/11/08 00:33:57 fmk Exp $ */
+/* $Id: ming.c,v 1.42.2.13.2.1 2006/01/01 13:46:54 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1444,17 +1444,22 @@ PHP_FUNCTION(swfmovie_output)
 #ifdef HAVE_MING_ZLIB
 	zval **zlimit = NULL;
 	int limit = -1;
+	int argc = ZEND_NUM_ARGS();
 
-	if (zend_get_parameters_ex(1, &zlimit) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
+	if(argc==0) {
+		limit = 6;
+	} else {
+		if (zend_get_parameters_ex(1, &zlimit) == FAILURE) {
+			WRONG_PARAM_COUNT;
+		}
 
-	convert_to_long_ex(zlimit);
-	limit = Z_LVAL_PP(zlimit);
+		convert_to_long_ex(zlimit);
+		limit = Z_LVAL_PP(zlimit);
 
-	if ((limit < 0) || (limit > 9)) {
-		php_error(E_WARNING,"compression level must be within 0..9");
-		RETURN_FALSE;
+		if ((limit < 0) || (limit > 9)) {
+			php_error(E_WARNING,"compression level must be within 0..9");
+			RETURN_FALSE;
+		}
 	}
 #endif
 

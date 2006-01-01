@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.110.2.4 2004/01/16 19:12:42 sniper Exp $ */
+/* $Id: xml.c,v 1.110.2.5.2.1 2006/01/01 13:46:59 sniper Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1044,6 +1044,8 @@ PHP_FUNCTION(xml_parser_create)
 	parser->target_encoding = encoding;
 	parser->case_folding = 1;
 	parser->object = NULL;
+	parser->isparsing = 0;
+
 	XML_SetUserData(parser->parser, parser);
 
 	ZEND_REGISTER_RESOURCE(return_value,parser,le_xml_parser);
@@ -1337,7 +1339,9 @@ PHP_FUNCTION(xml_parse)
 		isFinal = 0;
 	}
 
+	parser->isparsing = 1;
 	ret = XML_Parse(parser->parser, Z_STRVAL_PP(data), Z_STRLEN_PP(data), isFinal);
+	parser->isparsing = 0;
 	RETVAL_LONG(ret);
 }
 
@@ -1376,7 +1380,9 @@ PHP_FUNCTION(xml_parse_into_struct)
 	XML_SetElementHandler(parser->parser, _xml_startElementHandler, _xml_endElementHandler);
 	XML_SetCharacterDataHandler(parser->parser, _xml_characterDataHandler);
 
+	parser->isparsing = 1;
 	ret = XML_Parse(parser->parser, Z_STRVAL_PP(data), Z_STRLEN_PP(data), 1);
+	parser->isparsing = 0;
 
 	RETVAL_LONG(ret);
 }
@@ -1476,6 +1482,11 @@ PHP_FUNCTION(xml_parser_free)
 	}
 
 	ZEND_FETCH_RESOURCE(parser,xml_parser *, pind, -1, "XML Parser", le_xml_parser);
+
+	if (parser->isparsing == 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parser cannot be freed while it is parsing.");
+		RETURN_FALSE;
+	}
 
 	if (zend_list_delete(parser->index) == FAILURE) {
 		RETURN_FALSE;

@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 2.02 of the PHP license,      |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
-  | available at through the world-wide-web at                           |
-  | http://www.php.net/license/2_02.txt.                                 |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snmp.c,v 1.70.2.14 2004/02/03 14:44:17 iliaa Exp $ */
+/* $Id: snmp.c,v 1.70.2.22.2.1 2006/01/01 13:46:56 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -133,6 +133,11 @@ function_entry snmp_functions[] = {
 	PHP_FE(snmp_set_oid_numeric_print, NULL)
 #endif
 	PHP_FE(snmpset, NULL)
+
+	PHP_FE(snmp2_get, NULL)
+	PHP_FE(snmp2_walk, NULL)
+	PHP_FE(snmp2_real_walk, NULL)
+	PHP_FE(snmp2_set, NULL)
 
 	PHP_FE(snmp3_get, NULL)
 	PHP_FE(snmp3_walk, NULL)
@@ -312,7 +317,7 @@ static void php_snmp_getvalue(struct variable_list *vars, zval *snmpval TSRMLS_D
 
 /* {{{ php_snmp_internal
 *
-* Generic SNMP object fetcher (for both v3 and v1)
+* Generic SNMP object fetcher (for all SNMP versions)
 *
 * st=1   snmpget()  - query an agent and return a single value.
 * st=2   snmpwalk() - walk the mib and return a single dimensional array 
@@ -332,9 +337,9 @@ static void php_snmp_internal(INTERNAL_FUNCTION_PARAMETERS,
 	struct snmp_pdu *pdu=NULL, *response;
 	struct variable_list *vars;
 	oid name[MAX_NAME_LEN];
-	int name_length;
+	size_t name_length;
 	oid root[MAX_NAME_LEN];
-	int rootlen = 0;
+	size_t rootlen = 0;
 	int gotroot = 0;
 	int status, count;
 	char buf[2048];
@@ -427,6 +432,7 @@ retry:
 					if (st == 1) {
 						*return_value = *snmpval;
 						zval_copy_ctor(return_value);
+						zval_ptr_dtor(&snmpval);
 						snmp_close(ss);
 						return;
 					} else if (st == 2) {
@@ -505,7 +511,7 @@ retry:
 
 /* {{{ php_snmp
 *
-* Generic SNMPv1 handler
+* Generic community based SNMP handler for version 1 and 2.
 * This function makes use of the internal SNMP object fetcher.
 * The object fetcher is shared with SNMPv3.
 *
@@ -518,7 +524,7 @@ retry:
 * st=11  snmpset() - query an agent and set a single value
 *
 */
-static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) 
+static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st, int version) 
 {
 	zval **a1, **a2, **a3, **a4, **a5, **a6, **a7;
 	struct snmp_session session;
@@ -580,7 +586,7 @@ static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st)
 
 	session.peername = hostname;
 	session.remote_port = remote_port;
-	session.version = SNMP_VERSION_1;
+	session.version = version;
 	/*
 	* FIXME: potential memory leak
 	* This is a workaround for an "artifact" (Mike Slifcak)
@@ -606,7 +612,7 @@ static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st)
    Fetch a SNMP object */
 PHP_FUNCTION(snmpget)
 {
-	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,1);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,1, SNMP_VERSION_1);
 }
 /* }}} */
 
@@ -614,7 +620,7 @@ PHP_FUNCTION(snmpget)
    Return all objects under the specified object id */
 PHP_FUNCTION(snmpwalk)
 {
-	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2, SNMP_VERSION_1);
 }
 /* }}} */
 
@@ -622,7 +628,7 @@ PHP_FUNCTION(snmpwalk)
    Return all objects including their respective object id withing the specified one */
 PHP_FUNCTION(snmprealwalk)
 {
-	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,3);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,3, SNMP_VERSION_1);
 }
 /* }}} */
 
@@ -700,7 +706,7 @@ PHP_FUNCTION(snmp_set_oid_numeric_print)
    Set the value of a SNMP object */
 PHP_FUNCTION(snmpset)
 {
-	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,11);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,11, SNMP_VERSION_1);
 }
 /* }}} */
 
@@ -769,7 +775,24 @@ static int netsnmp_session_set_sec_protocol(struct snmp_session *s, char *prot T
 			s->securityPrivProtoLen = OIDSIZE(usmDESPrivProtocol);
 			return (0);
 #ifdef HAVE_AES
-		} else if (!strcasecmp(prot, "AES128")) {
+		} else if (!strcasecmp(prot, "AES128")
+#ifdef SNMP_VALIDATE_ERR
+/* 
+* In Net-SNMP before 5.2, the following symbols exist:
+* usmAES128PrivProtocol, usmAES192PrivProtocol, usmAES256PrivProtocol
+* In an effort to be more standards-compliant, 5.2 removed the last two.
+* As of 5.2, the symbols are:
+* usmAESPrivProtocol, usmAES128PrivProtocol
+* 
+* As we want this extension to compile on both versions, we use the latter
+* symbol on purpose, as it's defined to be the same as the former.
+*/
+			|| !strcasecmp(prot, "AES")) {
+			s->securityPrivProto = usmAES128PrivProtocol;
+			s->securityPrivProtoLen = OIDSIZE(usmAES128PrivProtocol);
+			return (0);
+#else			
+		) {
 			s->securityPrivProto = usmAES128PrivProtocol;
 			s->securityPrivProtoLen = OIDSIZE(usmAES128PrivProtocol);
 			return (0);
@@ -781,6 +804,7 @@ static int netsnmp_session_set_sec_protocol(struct snmp_session *s, char *prot T
 			s->securityPrivProto = usmAES256PrivProtocol;
 			s->securityPrivProtoLen = OIDSIZE(usmAES256PrivProtocol);
 			return (0);
+#endif
 #endif
 		} else if (strlen(prot)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid privacy protocol: %s", prot);
@@ -801,7 +825,7 @@ static int netsnmp_session_gen_auth_key(struct snmp_session *s, char *pass TSRML
 		s->securityAuthKeyLen = USM_AUTH_KU_LEN;
 		if (s->securityAuthProto == NULL) {
 			/* get .conf set default */
-			oid *def = get_default_authtype(&(s->securityAuthProtoLen));
+			const oid *def = get_default_authtype(&(s->securityAuthProtoLen));
 			s->securityAuthProto = snmp_duplicate_objid(def, s->securityAuthProtoLen);
 		}
 		if (s->securityAuthProto == NULL) {
@@ -830,7 +854,7 @@ static int netsnmp_session_gen_sec_key(struct snmp_session *s, u_char *pass TSRM
 		s->securityPrivKeyLen = USM_PRIV_KU_LEN;
 		if (s->securityPrivProto == NULL) {
 			/* get .conf set default */
-			oid *def = get_default_privtype(&(s->securityPrivProtoLen));
+			const oid *def = get_default_privtype(&(s->securityPrivProtoLen));
 			s->securityPrivProto = snmp_duplicate_objid(def, s->securityPrivProtoLen);
 		}
 		if (s->securityPrivProto == NULL) {
@@ -851,6 +875,37 @@ static int netsnmp_session_gen_sec_key(struct snmp_session *s, u_char *pass TSRM
 }
 /* }}} */
 
+/* {{{ proto string snmp2_get(string host, string community, string object_id [, int timeout [, int retries]]) 
+   Fetch a SNMP object */
+PHP_FUNCTION(snmp2_get)
+{
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,1, SNMP_VERSION_2c);
+}
+/* }}} */
+
+/* {{{ proto array snmp2_walk(string host, string community, string object_id [, int timeout [, int retries]]) 
+   Return all objects under the specified object id */
+PHP_FUNCTION(snmp2_walk)
+{
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2, SNMP_VERSION_2c);
+}
+/* }}} */
+
+/* {{{ proto array snmp2_real_walk(string host, string community, string object_id [, int timeout [, int retries]])
+   Return all objects including their respective object id withing the specified one */
+PHP_FUNCTION(snmp2_real_walk)
+{
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,3, SNMP_VERSION_2c);
+}
+/* }}} */
+
+/* {{{ proto int snmp2_set(string host, string community, string object_id, string type, mixed value [, int timeout [, int retries]]) 
+   Set the value of a SNMP object */
+PHP_FUNCTION(snmp2_set)
+{
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,11, SNMP_VERSION_2c);
+}
+/* }}} */
 
 /* {{{ proto void php_snmpv3(INTERNAL_FUNCTION_PARAMETERS, int st)
 *

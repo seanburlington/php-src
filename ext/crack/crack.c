@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,7 +15,7 @@
    | Authors: Alexander Feldman                                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.18.8.3 2004/01/04 20:01:07 iliaa Exp $ */
+/* $Id: crack.c,v 1.18.8.5.2.1 2006/01/01 13:46:50 sniper Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -28,6 +28,10 @@
 #if HAVE_CRACK
 
 #include <packer.h>
+
+#ifndef STRINGSIZE
+#define STRINGSIZE 1024
+#endif
 
 extern char * FascistLook(PWDICT *pwp, char *instring);
 extern int PWClose(PWDICT *pwp);
@@ -230,6 +234,7 @@ ZEND_FUNCTION(crack_check)
 			if (zend_get_parameters_ex(2, &dictionary, &password) == FAILURE) {
 				RETURN_FALSE;
 			}
+			id = Z_LVAL_PP(dictionary);
 			break;
 		default:
 			WRONG_PARAM_COUNT;

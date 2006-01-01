@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -79,8 +79,10 @@ ZEND_GET_MODULE(dio)
 static void _dio_close_fd(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_fd_t *f = (php_fd_t *) rsrc->ptr;
-	close(f->fd);
-	free(f);
+	if (f) {
+		close(f->fd);
+		free(f);
+	}
 }
 
 #define RDIOC(c) REGISTER_LONG_CONSTANT(#c, c, CONST_CS | CONST_PERSISTENT)
@@ -142,10 +144,13 @@ PHP_MINFO_FUNCTION(dio)
 	php_info_print_table_end();
 }
 
-static void new_php_fd(php_fd_t **f, int fd)
+static int new_php_fd(php_fd_t **f, int fd)
 {
-	*f = malloc(sizeof(php_fd_t));
+	if (!(*f = malloc(sizeof(php_fd_t)))) {
+		return 0;
+	}
 	(*f)->fd = fd;
+	return 1;
 }
 
 /* {{{ proto resource dio_open(string filename, int flags[, int mode])
@@ -179,7 +184,10 @@ PHP_FUNCTION(dio_open)
 		RETURN_FALSE;
 	}
 
-	new_php_fd(&f, fd);
+	
+	if (!new_php_fd(&f, fd)) {
+		RETURN_FALSE;
+	}
 	ZEND_REGISTER_RESOURCE(return_value, f, le_fd);
 }
 /* }}} */
@@ -232,6 +240,12 @@ PHP_FUNCTION(dio_write)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|l", &r_fd, &data, &data_len, &trunc_len) == FAILURE) {
 		return;
 	}
+
+	if (trunc_len < 0 || trunc_len > data_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "length must be greater or equal to zero and less then the length of the specified string.");
+		RETURN_FALSE;
+ 	}
+
 	ZEND_FETCH_RESOURCE(f, php_fd_t *, &r_fd, -1, le_fd_name, le_fd);
 
 	res = write(f->fd, data, trunc_len ? trunc_len : data_len);
@@ -415,7 +429,9 @@ PHP_FUNCTION(dio_fcntl)
 			RETURN_FALSE;
 		}
 
-		new_php_fd(&new_f, fcntl(f->fd, cmd, Z_LVAL_P(arg)));
+		if (!new_php_fd(&new_f, fcntl(f->fd, cmd, Z_LVAL_P(arg)))) {
+			RETURN_FALSE;
+		}
 		ZEND_REGISTER_RESOURCE(return_value, new_f, le_fd);
 		break;
 	}
@@ -580,6 +596,8 @@ PHP_FUNCTION(dio_tcsetattr)
 			RETURN_FALSE;
 	}   
 
+	memset(&newtio, 0, sizeof(newtio));
+	tcgetattr(f->fd, &newtio);
 	newtio.c_cflag = BAUD | CRTSCTS | DATABITS | STOPBITS | PARITYON | PARITY | CLOCAL | CREAD;
 	newtio.c_iflag = IGNPAR;
 	newtio.c_oflag = 0;

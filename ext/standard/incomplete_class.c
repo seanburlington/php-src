@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.14.4.3 2003/01/04 19:42:37 helly Exp $ */
+/* $Id: incomplete_class.c,v 1.14.4.5.2.1 2006/01/01 13:46:57 sniper Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -26,7 +26,7 @@
 #define INCOMPLETE_CLASS_MSG \
 		"The script tried to execute a method or "  \
 		"access a property of an incomplete object. " \
-		"Please ensure that the class definition <b>%s</b> of the object " \
+		"Please ensure that the class definition %s of the object " \
 		"you are trying to operate on was loaded _before_ " \
 		"the session was started"
 
@@ -115,9 +115,6 @@ char *php_lookup_class_name(zval *object, size_t *nlen, zend_bool del TSRMLS_DC)
 
 		if (nlen)
 			*nlen = Z_STRLEN_PP(val);
-
-		if (del)
-			zend_hash_del(object_properties, MAGIC_MEMBER, sizeof(MAGIC_MEMBER));
 	}
 
 	return (retval);

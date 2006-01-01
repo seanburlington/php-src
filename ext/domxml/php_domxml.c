@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.48 2004/08/13 11:38:03 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.50.2.1 2006/01/01 13:46:52 sniper Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2471,6 +2471,10 @@ PHP_FUNCTION(domxml_node_append_child)
 	}
 	/* end libxml2 code */
 	else if (child->type == XML_ATTRIBUTE_NODE) {
+		if (parent->type != XML_ELEMENT_NODE) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Element node required to append Attribute");
+			RETURN_FALSE;
+		}
 		if (parent->properties != NULL) {
 			/* Check if an attribute with the same name exists */
 			xmlAttrPtr foundattrp;
@@ -2608,10 +2612,7 @@ PHP_FUNCTION(domxml_node_insert_before)
 		if (new_child == NULL)
 			new_child = xmlAddPrevSibling(refp, child);
 	} else {
-		/* first unlink node, if child is already a child of parent
-			for some strange reason, this is needed
-		 */
-		if (child->parent == parent){
+		if (child->parent != NULL){
 			xmlUnlinkNode(child);
 		}
 		new_child = xmlAddChild(parent, child);

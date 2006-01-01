@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.33.2.6 2003/07/24 00:03:51 iliaa Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.33.2.7.2.1 2006/01/01 13:46:59 sniper Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -26,6 +26,7 @@
 
 struct php_gz_stream_data_t	{
 	gzFile gz_file;
+	php_stream *stream;
 };
 
 static size_t php_gziop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)
@@ -70,6 +71,10 @@ static int php_gziop_close(php_stream *stream, int close_handle TSRMLS_DC)
 			ret = gzclose(self->gz_file);
 			self->gz_file = NULL;
 		}
+		if (self->stream) {
+			php_stream_close(self->stream);
+			self->stream = NULL;
+		}
 	}
 	efree(self);
 
@@ -95,7 +100,7 @@ php_stream_ops php_stream_gzio_ops = {
 php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode,
 		int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)
 {
-	struct php_gz_stream_data_t *self;
+	struct php_gz_stream_data_t *self = {0};
 	php_stream *stream = NULL, *innerstream = NULL;
 
 	/* sanity check the stream: it can be either read-only or write-only */
@@ -117,8 +122,9 @@ php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mod
 	
 	if (innerstream) {
 		int fd;
-		if (SUCCESS == php_stream_cast(innerstream, PHP_STREAM_AS_FD | PHP_STREAM_CAST_RELEASE, (void**)&fd, REPORT_ERRORS)) {
+		if (SUCCESS == php_stream_cast(innerstream, PHP_STREAM_AS_FD, (void**)&fd, REPORT_ERRORS)) {
 			self->gz_file = gzdopen(fd, mode);
+			self->stream = innerstream;
 			if (self->gz_file)	{
 				stream = php_stream_alloc_rel(&php_stream_gzio_ops, self, 0, mode);
 				if (stream) {

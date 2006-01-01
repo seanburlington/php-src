@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.31.2.1 2002/12/31 16:35:15 sebastian Exp $ */
+/* $Id: readline.c,v 1.31.2.3.2.1 2006/01/01 13:46:56 sniper Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -393,7 +393,13 @@ static char **_readline_completion_cb(char *text, int start, int end)
 
 	if (call_user_function(CG(function_table), NULL, params[0], &_readline_array, 3, params+1 TSRMLS_CC) == SUCCESS) {
 		if (Z_TYPE(_readline_array) == IS_ARRAY) {
-			matches = completion_matches(text,_readline_command_generator);
+			if (zend_hash_num_elements(Z_ARRVAL(_readline_array))) {
+				matches = completion_matches(text,_readline_command_generator);
+			} else {
+				matches = malloc(sizeof(char *) * 2);
+				matches[0] = strdup("");
+				matches[1] = '\0';
+			}
 		}
 	}
 	

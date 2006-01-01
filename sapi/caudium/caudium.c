@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.28.2.4 2003/05/31 01:37:44 sniper Exp $ */
+/* $Id: caudium.c,v 1.28.2.5.2.1 2006/01/01 13:47:01 sniper Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -287,7 +287,7 @@ php_caudium_set_header(char *header_name, char *value, char *p)
   struct svalue *s_headermap, *soldval;
   int vallen;
   GET_THIS();
-  //  hval = make_shared_string(value);
+  /*  hval = make_shared_string(value); */
   ind = make_shared_string(" _headers");
   hind = make_shared_binary_string(header_name,
 				   (int)(p - header_name));
@@ -444,7 +444,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.28.2.4 2003/05/31 01:37:44 sniper Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.28.2.5.2.1 2006/01/01 13:47:01 sniper Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -598,7 +598,7 @@ static void php_caudium_module_main(php_caudium_request *ureq)
   Pike_interpreter.recoveries = NULL;
   call_c_initializers(Pike_interpreter.thread_id);
   state->id=th_self();
-  //  SWAP_OUT_THREAD(OBJ2THREAD(Pike_interpreter.thread_id));
+  /*  SWAP_OUT_THREAD(OBJ2THREAD(Pike_interpreter.thread_id)); */
   num_threads++;
   thread_table_insert(Pike_interpreter.thread_id);
   state->status=THREAD_RUNNING;

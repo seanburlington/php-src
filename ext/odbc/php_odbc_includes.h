@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.2.4.2 2003/07/14 16:13:30 sniper Exp $ */
+/* $Id: php_odbc_includes.h,v 1.2.4.3.2.1 2006/01/01 13:46:55 sniper Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -216,7 +216,7 @@ typedef struct odbc_connection {
 typedef struct odbc_result_value {
 	char name[32];
 	char *value;
-	long int vallen;
+	SDWORD vallen;
 	SDWORD coltype;
 } odbc_result_value;
 

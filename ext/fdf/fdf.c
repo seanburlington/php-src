@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.12 2004/05/16 14:38:26 iliaa Exp $ */
+/* $Id: fdf.c,v 1.66.2.13.2.1 2006/01/01 13:46:52 sniper Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -867,7 +867,10 @@ PHP_FUNCTION(fdf_save_string)
 				struct stat stat;
 				char *buf;
 
-				fstat(fileno(fp), &stat);
+				if (fstat(fileno(fp), &stat) == -1) {
+					RETVAL_FALSE;
+					goto err;
+				}
 				buf = emalloc(stat.st_size +1);
 				fread(buf, stat.st_size, 1, fp);
 				buf[stat.st_size] = '\0';
@@ -885,7 +888,7 @@ PHP_FUNCTION(fdf_save_string)
 	if(err != FDFErcOK) {
 		FDF_FAILURE(err);
 	}
-
+err:
 	if(temp_filename) {
 		unlink(temp_filename);
 		efree(temp_filename);

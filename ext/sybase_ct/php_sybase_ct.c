@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.73.2.18 2004/07/21 16:25:27 sesser Exp $ */
+/* $Id: php_sybase_ct.c,v 1.73.2.18.2.1 2006/01/01 13:46:58 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H

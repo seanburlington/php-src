@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2004 The PHP Group                                |
+// | Copyright (c) 1997-2006 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: peclcmd.php,v 1.1.2.1 2005/11/02 16:57:24 cellog Exp $
+// $Id: peclcmd.php,v 1.1.2.2 2006/01/01 13:47:01 sniper Exp $
 
 /**
  * @nodep Gtk

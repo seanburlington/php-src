@@ -2,12 +2,12 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.02 of the PHP license,      |
+   | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
-   | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_02.txt.                                 |
+   | available through the world-wide-web at the following url:           |
+   | http://www.php.net/license/3_01.txt                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.52.2.17 2003/10/13 11:42:18 wez Exp $ */
+/* $Id: openssl.c,v 1.52.2.23.2.1 2006/01/01 13:46:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,7 +118,7 @@ zend_module_entry openssl_module_entry = {
 	"openssl",
 	openssl_functions,
 	PHP_MINIT(openssl),
-	NULL,
+	PHP_MSHUTDOWN(openssl),
 	NULL,
 	NULL,
 	PHP_MINFO(openssl),
@@ -208,9 +208,9 @@ static EVP_PKEY * php_openssl_generate_private_key(struct php_x509_request * req
 
 static void add_assoc_name_entry(zval * val, char * key, X509_NAME * name, int shortname TSRMLS_DC)
 {
-	zval * subitem;
-	int i;
-	char * sn, * ln;
+	zval *subitem, *subentries;
+	int i, j = -1, last = -1, obj_cnt = 0;
+	char *sname;
 	int nid;
 	X509_NAME_ENTRY * ne;
 	ASN1_STRING * str;
@@ -222,15 +222,41 @@ static void add_assoc_name_entry(zval * val, char * key, X509_NAME * name, int s
 	for (i = 0; i < X509_NAME_entry_count(name); i++) {
 		ne	= X509_NAME_get_entry(name, i);
 		obj = X509_NAME_ENTRY_get_object(ne);
-		str = X509_NAME_ENTRY_get_data(ne);
 		nid = OBJ_obj2nid(obj);
+		obj_cnt = 0;
+
 		if (shortname) {
-			sn = (char*)OBJ_nid2sn(nid);
-			add_assoc_stringl(subitem, sn, str->data, str->length, 1);
+			sname = (char *) OBJ_nid2sn(nid);
+		} else {
+			sname = (char *) OBJ_nid2ln(nid);
 		}
-		else	{
-			ln = (char*)OBJ_nid2ln(nid);
-			add_assoc_stringl(subitem, ln, str->data, str->length, 1);
+
+		MAKE_STD_ZVAL(subentries);
+		array_init(subentries);
+
+		last = -1;
+		for (;;) {
+			j = X509_NAME_get_index_by_OBJ(name, obj, last);
+			if (j < 0) {
+				if (last != -1) break;
+			} else {
+				obj_cnt++;
+				ne  = X509_NAME_get_entry(name, j);
+				str = X509_NAME_ENTRY_get_data(ne);
+				add_next_index_stringl(subentries, str->data, str->length, 1);
+			}
+			last = j;
+		}
+		i = last;
+		
+		if (obj_cnt > 1) {
+			add_assoc_zval_ex(subitem, sname, strlen(sname) + 1, subentries);
+		} else {
+			zval_dtor(subentries);
+			FREE_ZVAL(subentries);
+			if (obj_cnt) {
+				add_assoc_stringl(subitem, sname, str->data, str->length, 1);
+			}
 		}
 	}
 	zend_hash_update(HASH_OF(val), key, strlen(key) + 1, (void *)&subitem, sizeof(subitem), NULL);
@@ -1611,9 +1637,16 @@ PHP_FUNCTION(openssl_csr_new)
 						if (we_made_the_key) {
 							/* and a resource for the private key */
 							ZVAL_RESOURCE(out_pkey, zend_list_insert(req.priv_key, le_key));
+							req.priv_key = NULL; /* make sure the cleanup code doesn't zap it! */
 						}
 						else if (key_resource != -1)	
 							req.priv_key = NULL; /* make sure the cleanup code doesn't zap it! */
+					}
+				}
+				else {
+					if (!we_made_the_key) {
+						/* if we have not made the key we are not supposed to zap it by calling dispose! */
+						req.priv_key = NULL;
 					}
 				}
 			}
@@ -2477,7 +2510,7 @@ PHP_FUNCTION(openssl_private_encrypt)
 	cryptedlen = EVP_PKEY_size(pkey);
 	cryptedbuf = emalloc(cryptedlen + 1);
 
-	switch (Z_TYPE_P(pkey)) {
+	switch (pkey->type) {
 		case EVP_PKEY_RSA:
 		case EVP_PKEY_RSA2:
 			successful =  (RSA_private_encrypt(data_len, 
@@ -2533,7 +2566,7 @@ PHP_FUNCTION(openssl_private_decrypt)
 	cryptedlen = EVP_PKEY_size(pkey);
 	crypttemp = emalloc(cryptedlen + 1);
 
-	switch (Z_TYPE_P(pkey)) {
+	switch (pkey->type) {
 		case EVP_PKEY_RSA:
 		case EVP_PKEY_RSA2:
 			cryptedlen = RSA_private_decrypt(data_len, 
@@ -2596,7 +2629,7 @@ PHP_FUNCTION(openssl_public_encrypt)
 	cryptedlen = EVP_PKEY_size(pkey);
 	cryptedbuf = emalloc(cryptedlen + 1);
 
-	switch (Z_TYPE_P(pkey)) {
+	switch (pkey->type) {
 		case EVP_PKEY_RSA:
 		case EVP_PKEY_RSA2:
 			successful = (RSA_public_encrypt(data_len, 
@@ -2653,7 +2686,7 @@ PHP_FUNCTION(openssl_public_decrypt)
 	cryptedlen = EVP_PKEY_size(pkey);
 	crypttemp = emalloc(cryptedlen + 1);
 
-	switch (Z_TYPE_P(pkey)) {
+	switch (pkey->type) {
 		case EVP_PKEY_RSA:
 		case EVP_PKEY_RSA2:
 			cryptedlen = RSA_public_decrypt(data_len, 

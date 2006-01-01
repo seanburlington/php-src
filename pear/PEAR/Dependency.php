@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2004 The PHP Group                                |
+// | Copyright (c) 1997-2006 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
 // +----------------------------------------------------------------------+
 //
 // THIS FILE IS DEPRECATED IN FAVOR OF DEPENDENCY2.PHP, AND IS NOT USED IN THE INSTALLER
-// $Id: Dependency.php,v 1.14.4.21.2.1 2005/11/02 16:57:20 cellog Exp $
+// $Id: Dependency.php,v 1.14.4.21.2.2 2006/01/01 13:47:00 sniper Exp $
 
 require_once "PEAR.php";
 require_once "OS/Guess.php";

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.32 2006/01/01 22:19:50 helly Exp $ */
+/* $Id: phar.c,v 1.33 2006/01/01 22:20:25 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -459,7 +459,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.32 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.33 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");
@@ -1003,8 +1003,8 @@ static int compare_dir_name(const void *a, const void *b TSRMLS_DC)
 	f = *((Bucket **) a);
 	s = *((Bucket **) b);
 
-	result = zend_binary_strcmp(f->arKey, f->nKeyLength - 1,
-				    s->arKey, s->nKeyLength - 1);
+	result = zend_binary_strcmp(f->arKey, f->nKeyLength,
+				    s->arKey, s->nKeyLength);
 
 	if (result == 0) {
 		return 0;

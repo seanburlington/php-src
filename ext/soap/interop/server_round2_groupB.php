@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2.02 of the PHP license,      |
 // | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at                        |
+// | available through the world-wide-web at                              |
 // | http://www.php.net/license/2_02.txt.                                 |
 // | If you did not receive a copy of the PHP license and are unable to   |
 // | obtain it through the world-wide-web, please send a note to          |
@@ -17,7 +17,7 @@
 // | Authors: Dietrich Ayala <dietrich@ganx4.com> Original Author         |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupB.php,v 1.8 2006/01/01 13:13:11 sniper Exp $
+// $Id: server_round2_groupB.php,v 1.9 2006/01/01 13:25:34 sniper Exp $
 //
 
 class SOAP_Interop_GroupB {

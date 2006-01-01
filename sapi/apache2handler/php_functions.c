@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.12.2.1 2006/01/01 13:47:01 sniper Exp $ */
+/* $Id: php_functions.c,v 1.1.2.12.2.2 2006/01/01 20:14:06 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -56,13 +56,11 @@ php_apache2_info_struct php_apache2_info;
 
 static request_rec *php_apache_lookup_uri(char *filename TSRMLS_DC)
 {
-	php_struct *ctx;
+	php_struct *ctx = SG(server_context);
 	
-	if (!filename) {
+	if (!filename || !ctx || !ctx->r) {
 		return NULL;
 	}
-	
-	ctx = SG(server_context);
 
 	return ap_sub_req_lookup_uri(filename, ctx->r, ctx->r->output_filters);
 }

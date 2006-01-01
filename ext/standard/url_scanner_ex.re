@@ -2,12 +2,12 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 3.0 of the PHP license,       |
+  | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
   | available through the world-wide-web at the following url:           |
-  | http://www.php.net/license/3_0.txt.                                  |
+  | http://www.php.net/license/3_01.txt                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -15,6 +15,8 @@
   | Author: Sascha Schumann <sascha@schumann.cx>                         |
   +----------------------------------------------------------------------+
 */
+
+/* $Id: url_scanner_ex.re,v 1.76.2.1 2006/01/01 12:26:08 sniper Exp $ */
 
 #include "php.h"
 
@@ -416,16 +418,31 @@ static void php_url_scanner_output_handler(char *output, uint output_len, char *
 {
 	size_t len;
 
-    if (BG(url_adapt_state_ex).url_app.len != 0) {
-        *handled_output = url_adapt_ext(output, output_len, &len, (zend_bool) (mode & (PHP_OUTPUT_HANDLER_END|PHP_OUTPUT_HANDLER_CONT) ? 1 : 0) TSRMLS_CC);
+	if (BG(url_adapt_state_ex).url_app.len != 0) {
+		*handled_output = url_adapt_ext(output, output_len, &len, (zend_bool) (mode & PHP_OUTPUT_HANDLER_END ? 1 : 0) TSRMLS_CC);
 		if (sizeof(uint) < sizeof(size_t)) {
 			if (len > UINT_MAX)
 				len = UINT_MAX;
 		}
 		*handled_output_len = len;
-    } else {
-        *handled_output = NULL;
-    }
+	} else if (BG(url_adapt_state_ex).url_app.len == 0) {
+		url_adapt_state_ex_t *ctx = &BG(url_adapt_state_ex);
+		if (ctx->buf.len) {
+			smart_str_appendl(&ctx->result, ctx->buf.c, ctx->buf.len);
+			smart_str_appendl(&ctx->result, output, output_len);
+
+			*handled_output = ctx->result.c;
+			*handled_output_len = ctx->buf.len + output_len;
+
+			ctx->result.c = NULL;
+			ctx->result.len = 0;
+			smart_str_free(&ctx->buf);
+		} else {
+			*handled_output = NULL;
+		}
+	} else {
+		*handled_output = NULL;
+	}
 }
 
 int php_url_scanner_add_var(char *name, int name_len, char *value, int value_len, int urlencode TSRMLS_DC)
@@ -473,7 +490,7 @@ int php_url_scanner_reset_vars(TSRMLS_D)
 	BG(url_adapt_state_ex).form_app.len = 0;
 	BG(url_adapt_state_ex).url_app.len = 0;
 
-	return FAILURE;
+	return SUCCESS;
 }
 
 PHP_MINIT_FUNCTION(url_scanner)

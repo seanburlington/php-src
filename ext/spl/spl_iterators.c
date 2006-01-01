@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.19 2006/01/01 19:51:17 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.20 2006/01/01 19:55:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2085,7 +2085,9 @@ PHP_FUNCTION(iterator_count)
 	
 	iter = Z_OBJCE_P(obj)->get_iterator(Z_OBJCE_P(obj), obj TSRMLS_CC);
 
-	iter->funcs->rewind(iter TSRMLS_CC);
+	if (iter->funcs->rewind) {
+		iter->funcs->rewind(iter TSRMLS_CC);
+	}
 	while (iter->funcs->valid(iter TSRMLS_CC) == SUCCESS) {
 		count++;
 		iter->funcs->move_forward(iter TSRMLS_CC);

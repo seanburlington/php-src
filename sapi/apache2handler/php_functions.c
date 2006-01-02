@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.22 2006/01/02 22:19:53 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.23 2006/01/02 22:39:43 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -256,7 +256,7 @@ PHP_FUNCTION(apache_setenv)
 	int arg_count = ZEND_NUM_ARGS();
 	request_rec *r;
 
-	if (arg_count<1 || arg_count>3 ||
+	if (arg_count < 2 || arg_count > 3 ||
 		zend_get_parameters_ex(arg_count, &variable, &string_val, &walk_to_top) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}

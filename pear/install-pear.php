@@ -1,10 +1,13 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.14.4.5 2005/11/05 18:21:20 cellog Exp $ */
+/* $Id: install-pear.php,v 1.6.2.14.4.6 2006/01/02 15:24:33 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
+if (function_exists('mb_internal_encoding')) {
+    mb_internal_encoding('ASCII');
+}
 set_time_limit(0);
 include_once 'PEAR.php';
 include_once 'PEAR/Installer.php';

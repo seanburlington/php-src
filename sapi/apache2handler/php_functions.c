@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.12.2.3 2006/01/02 22:11:22 sniper Exp $ */
+/* $Id: php_functions.c,v 1.1.2.12.2.4 2006/01/02 22:22:07 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -263,10 +263,13 @@ PHP_FUNCTION(apache_setenv)
 	ctx = SG(server_context);
 
 	r = ctx->r;
-	if (arg_count == 3 && Z_STRVAL_PP(walk_to_top)) {
-		while(r->prev) {
-			r = r->prev;
-		}	
+	if (arg_count == 3) {
+		convert_to_boolean_ex(walk_to_top);
+		if (Z_LVAL_PP(walk_to_top)) {
+			while(r->prev) {
+				r = r->prev;
+			}
+		}
 	}
 
 	convert_to_string_ex(variable);
@@ -299,10 +302,13 @@ PHP_FUNCTION(apache_getenv)
 	ctx = SG(server_context);
 
 	r = ctx->r;
-	if (arg_count == 2 && Z_STRVAL_PP(walk_to_top)) {
-		while(r->prev) {
-			r = r->prev;
-		}	
+	if (arg_count == 2) {
+		convert_to_boolean_ex(walk_to_top);
+		if (Z_LVAL_PP(walk_to_top)) {
+			while(r->prev) {
+				r = r->prev;
+			}
+		}
 	}
 
 	convert_to_string_ex(variable);

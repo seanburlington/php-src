@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.18.2.4 2006/01/02 22:10:38 sniper Exp $ */
+/* $Id: php_functions.c,v 1.18.2.5 2006/01/02 22:19:37 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -264,10 +264,13 @@ PHP_FUNCTION(apache_setenv)
 	ctx = SG(server_context);
 
 	r = ctx->r;
-	if (arg_count == 3 && Z_STRVAL_PP(walk_to_top)) {
-		while(r->prev) {
-			r = r->prev;
-		}	
+	if (arg_count == 3) {
+		convert_to_boolean_ex(walk_to_top);
+		if (Z_LVAL_PP(walk_to_top)) {
+			while(r->prev) {
+				r = r->prev;
+			}
+		}
 	}
 
 	convert_to_string_ex(variable);
@@ -300,10 +303,13 @@ PHP_FUNCTION(apache_getenv)
 	ctx = SG(server_context);
 
 	r = ctx->r;
-	if (arg_count == 2 && Z_STRVAL_PP(walk_to_top)) {
-		while(r->prev) {
-			r = r->prev;
-		}	
+	if (arg_count == 2) {
+		convert_to_boolean_ex(walk_to_top);
+		if (Z_LVAL_PP(walk_to_top)) {
+			while(r->prev) {
+				r = r->prev;
+			}
+		}
 	}
 
 	convert_to_string_ex(variable);

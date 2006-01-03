@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33.2.3 2006/01/03 13:21:07 sniper Exp $
+dnl $Id: config.m4,v 1.33.2.4 2006/01/03 13:25:06 sniper Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -51,11 +51,11 @@ if test "$PHP_ICONV" != "no"; then
       php_iconv_old_ld="$LDFLAGS"
       LDFLAGS="-liconv $LDFLAGS"
       AC_TRY_RUN([
-        #include <$PHP_ICONV_H_PATH>
-	int main() {
-            printf("%d", _libiconv_version);
-            return 0;
-	}
+#include <$PHP_ICONV_H_PATH>
+int main() {
+	printf("%d", _libiconv_version);
+	return 0;
+}
       ],[
         AC_MSG_RESULT(yes)
         iconv_impl_name="gnu_libiconv"

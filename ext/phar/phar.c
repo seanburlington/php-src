@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.36 2006/01/03 15:59:06 helly Exp $ */
+/* $Id: phar.c,v 1.37 2006/01/03 16:22:22 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1002,12 +1002,14 @@ PHP_PHAR_API php_stream *phar_opendir(php_stream_wrapper *wrapper, char *filenam
 	resource = php_url_parse(filename);
 	/* we must have at the very least phar://alias.phar/ */
 	if (!resource || !resource->scheme || !resource->host || !resource->path) {
-		if (resource->host && !resource->path) {
+		if (resource && resource->host && !resource->path) {
 			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: no directory in \"%s\", must have at least phar://%s/ for root directory", filename, resource->host);
 			php_url_free(resource);
 			return NULL;
 		}
-		php_url_free(resource);
+		if (resource) {
+			php_url_free(resource);
+		}
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\", must have at least phar://%s/", filename, filename);
 		return NULL;
 	}
@@ -1157,7 +1159,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.36 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.37 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

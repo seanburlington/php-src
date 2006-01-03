@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.18.2.5 2006/01/02 22:19:37 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.18.2.6 2006/01/03 20:13:07 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -179,6 +179,10 @@ PHP_FUNCTION(apache_request_headers)
 	const apr_array_header_t *arr;
 	char *key, *val;
 
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
+
 	array_init(return_value);
 	
 	ctx = SG(server_context);
@@ -198,6 +202,10 @@ PHP_FUNCTION(apache_response_headers)
 	php_struct *ctx;
 	const apr_array_header_t *arr;
 	char *key, *val;
+
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
 
 	array_init(return_value);
 	

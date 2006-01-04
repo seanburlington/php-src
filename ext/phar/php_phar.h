@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_phar.h,v 1.6 2006/01/04 15:27:17 helly Exp $ */
+/* $Id: php_phar.h,v 1.7 2006/01/04 15:50:44 helly Exp $ */
 
 #ifndef PHP_PHAR_H
 #define PHP_PHAR_H
@@ -40,34 +40,6 @@ extern zend_module_entry phar_module_entry;
 #ifdef ZTS
 #include "TSRM.h"
 #endif
-
-PHP_MINIT_FUNCTION(phar);
-PHP_MSHUTDOWN_FUNCTION(phar);
-PHP_RINIT_FUNCTION(phar);
-PHP_RSHUTDOWN_FUNCTION(phar);
-PHP_MINFO_FUNCTION(phar);
-
-typedef struct _phar_manifest_entry {
-	php_uint32	filename_len;
-	char		*filename;
-	php_uint32	uncompressed_filesize;
-	php_uint32	timestamp;
-	php_uint32	offset_within_phar;
-	php_uint32	compressed_filesize;
-	zend_bool	crc_checked;
-	char        *filedata;
-} phar_manifest_entry;
-
-typedef struct _phar_file_data {
-	char		*filename;
-	int			filename_len;
-	char		*alias;
-	int			alias_len;
-	size_t		internal_file_start;
-	zend_bool	is_compressed;
-	HashTable	*manifest;
-	php_stream	*fp;
-} phar_file_data;
 
 ZEND_BEGIN_MODULE_GLOBALS(phar)
 	HashTable	phar_data;

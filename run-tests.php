@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.272 2006/01/04 15:17:32 helly Exp $ */
+/* $Id: run-tests.php,v 1.273 2006/01/04 15:51:06 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.272 $'."\n";
+					echo '$Revision: 1.273 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -906,7 +906,7 @@ function run_all_tests($test_files, $env, $redir_tested = NULL)
 		for(; $unicode_semantics < ($unicode_testing ? 2 : 1); $unicode_semantics++)
 		{
 			$test_idx++;
-			$result = run_test($php, $name, $rnv, $unicode_semantics);
+			$result = run_test($php, $name, $env, $unicode_semantics);
 			if (!is_array($name) && $result != 'REDIR')
 			{
 				$pu = $unicode_and_native && $unicode_semantics ? '.u' : '';

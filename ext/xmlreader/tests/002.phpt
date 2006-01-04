@@ -4,7 +4,7 @@ XMLReader: libxml2 XML Reader, file data
 <?php if (!extension_loaded("xmlreader")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: 002.phpt,v 1.1.2.2 2005/12/21 03:58:59 pajoye Exp $ */
+/* $Id: 002.phpt,v 1.1.2.3 2006/01/04 19:44:46 rrichards Exp $ */
 $filename = dirname(__FILE__) . '/_002.xml';
 $xmlstring = '<?xml version="1.0" encoding="UTF-8"?>
 <books></books>';
@@ -23,10 +23,12 @@ if (!$reader->open($filename)) {
 while ($reader->read()) {
 	echo $reader->name."\n";
 }
+$reader->close();
 unlink($filename);
 touch($filename);
 $reader = new XMLReader();
 $reader->open($filename);
+$reader->close();
 unlink($filename);
 
 ?>

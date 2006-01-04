@@ -38,7 +38,7 @@ RSC=rc.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "Release_TS"
+# PROP Output_Dir "../../Release_TS"
 # PROP Intermediate_Dir "Release_TS"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
@@ -243,6 +243,10 @@ SOURCE=.\libmbfl\filters\mbfilter_iso8859_15.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\libmbfl\filters\mbfilter_iso8859_16.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\libmbfl\filters\mbfilter_iso8859_2.c
 # End Source File
 # Begin Source File
@@ -284,6 +288,10 @@ SOURCE=.\libmbfl\filters\mbfilter_koi8r.c
 # Begin Source File
 
 SOURCE=.\libmbfl\mbfl\mbfilter_pass.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\libmbfl\filters\mbfilter_armscii8.c
 # End Source File
 # Begin Source File
 
@@ -396,6 +404,14 @@ SOURCE=.\libmbfl\nls\nls_uni.c
 # Begin Source File
 
 SOURCE=.\libmbfl\nls\nls_zh.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\libmbfl\nls\nls_hy.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\libmbfl\nls\nls_tr.c
 # End Source File
 # End Group
 # Begin Group "Header Files No. 1"
@@ -588,6 +604,10 @@ SOURCE=.\libmbfl\mbfl\mbfilter_pass.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\libmbfl\filters\mbfilter_armscii8.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\libmbfl\filters\mbfilter_qprint.h
 # End Source File
 # Begin Source File
@@ -708,6 +728,14 @@ SOURCE=.\libmbfl\nls\nls_zh.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\libmbfl\nls\nls_hy.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\libmbfl\nls\nls_tr.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\libmbfl\filters\unicode_prop.h
 # End Source File
 # Begin Source File
@@ -753,6 +781,10 @@ SOURCE=.\libmbfl\filters\unicode_table_iso8859_14.h
 # Begin Source File
 
 SOURCE=.\libmbfl\filters\unicode_table_iso8859_15.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\libmbfl\filters\unicode_table_iso8859_16.h
 # End Source File
 # Begin Source File
 

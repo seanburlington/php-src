@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.42 2006/01/04 15:50:44 helly Exp $ */
+/* $Id: phar.c,v 1.43 2006/01/04 16:18:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,6 +102,8 @@ static zend_class_entry *php_archive_entry_ptr;
 
 static void destroy_phar_data(void *pDest) /* {{{ */
 {
+	TSRMLS_FETCH();
+
 	phar_file_data *data = (phar_file_data *) pDest;
 	efree(data->alias);
 	zend_hash_destroy(data->manifest);
@@ -1398,7 +1400,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.42 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.43 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

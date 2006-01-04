@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.46 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: parse_date.re,v 1.47 2006/01/04 12:57:04 derick Exp $ */
 
 #include "timelib.h"
 
@@ -586,7 +586,7 @@ static timelib_tz_lookup_table* zone_search(const char *word, long gmtoffset, in
 	timelib_tz_lookup_table  *tp, *first_found_elem;
 	timelib_tz_lookup_table  *fmp;
 
-	if (strcasecmp("utc", word) == 0) {
+	if (strcasecmp("utc", word) == 0 || strcasecmp("gmt", word) == 0) {
 		return timelib_timezone_utc;
 	}
 	

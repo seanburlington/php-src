@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.26 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: php_date.h,v 1.27 2006/01/04 12:57:03 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -71,6 +71,11 @@ PHP_FUNCTION(timezone_abbreviations_list);
 /* Options and Configuration */
 PHP_FUNCTION(date_default_timezone_set);
 PHP_FUNCTION(date_default_timezone_get);
+
+/* Astro functions */
+PHP_FUNCTION(date_sunrise);
+PHP_FUNCTION(date_sunset);
+PHP_FUNCTION(date_sun_info);
 
 PHP_RINIT_FUNCTION(date);
 PHP_RSHUTDOWN_FUNCTION(date);

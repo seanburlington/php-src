@@ -12,11 +12,12 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Gregory Beaver <cellog@php.net>                              |
+  | Authors: Gregory Beaver <cellog@php.net>                             |
+  |          Marcus Boerger <helly@php.net>                              |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.39 2006/01/04 09:26:31 sebastian Exp $ */
+/* $Id: phar.c,v 1.40 2006/01/04 13:18:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1349,7 +1350,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.39 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.40 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

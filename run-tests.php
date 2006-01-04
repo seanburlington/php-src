@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.271 2006/01/04 15:07:49 helly Exp $ */
+/* $Id: run-tests.php,v 1.272 2006/01/04 15:17:32 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.271 $'."\n";
+					echo '$Revision: 1.272 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1368,7 +1368,7 @@ COMMAND $cmd
 				settings2params($clean_params);
 				$extra = substr(PHP_OS, 0, 3) !== "WIN" ?
 					"unset REQUEST_METHOD; unset QUERY_STRING; unset PATH_TRANSLATED; unset SCRIPT_FILENAME; unset REQUEST_METHOD;": "";
-				system_with_timeout("$extra $php -q $clean_params $clean_skipif", $env);
+				system_with_timeout("$extra $php -q $clean_params $test_clean", $env);
 			}
 			if (!$cfg['keep']['clean']) {
 				@unlink($test_clean);

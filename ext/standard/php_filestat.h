@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.26 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: php_filestat.h,v 1.27 2006/01/04 12:22:23 derick Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -47,9 +47,18 @@ PHP_FUNCTION(disk_total_space);
 PHP_FUNCTION(disk_free_space);
 PHP_FUNCTION(chown);
 PHP_FUNCTION(chgrp);
+#if HAVE_LCHOWN
+PHP_FUNCTION(lchown);
+#endif
+#if HAVE_LCHOWN
+PHP_FUNCTION(lchgrp);
+#endif
 PHP_FUNCTION(chmod);
 #if HAVE_UTIME
 PHP_FUNCTION(touch);
+# if HAVE_LTOUCH
+PHP_FUNCTION(ltouch);
+# endif
 #endif
 PHP_FUNCTION(clearstatcache);
 

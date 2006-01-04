@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.80.2.2 2005/11/29 18:26:01 tony2001 Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.80.2.3 2006/01/04 21:31:29 derick Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -489,7 +489,7 @@ PHP_NEW_EXTENSION(standard, array.c base64.c basic_functions.c browscap.c crc32.
                             incomplete_class.c url_scanner_ex.c ftp_fopen_wrapper.c \
                             http_fopen_wrapper.c php_fopen_wrapper.c credits.c css.c \
                             var_unserializer.c ftok.c sha1.c user_filters.c uuencode.c \
-                            filters.c proc_open.c sunfuncs.c streamsfuncs.c http.c)
+                            filters.c proc_open.c streamsfuncs.c http.c)
 
 PHP_ADD_MAKEFILE_FRAGMENT
 

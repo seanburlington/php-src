@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.12.2.3 2006/01/01 12:50:05 sniper Exp $ */
+/* $Id: unixtime2tm.c,v 1.12.2.4 2006/01/04 21:31:34 derick Exp $ */
 
 #include "timelib.h"
 
@@ -170,9 +170,6 @@ void timelib_unixtime2local(timelib_time *tm, timelib_sll ts)
 	timelib_time_offset *gmt_offset;
 	timelib_tzinfo      *tz = tm->tz_info;
 
-	tm->is_localtime = 1;
-	tm->have_zone = 1;
-
 	switch (tm->zone_type) {
 		case TIMELIB_ZONETYPE_ABBR:
 		case TIMELIB_ZONETYPE_OFFSET: {
@@ -203,7 +200,11 @@ void timelib_unixtime2local(timelib_time *tm, timelib_sll ts)
 		default:
 			tm->is_localtime = 0;
 			tm->have_zone = 0;
+			return;
 	}
+
+	tm->is_localtime = 1;
+	tm->have_zone = 1;
 }
 
 void timelib_set_timezone(timelib_time *t, timelib_tzinfo *tz)

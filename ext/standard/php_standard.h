@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.24.2.1 2006/01/01 12:50:15 sniper Exp $ */
+/* $Id: php_standard.h,v 1.24.2.2 2006/01/04 21:31:29 derick Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
@@ -59,7 +59,6 @@
 #include "php_versioning.h"
 #include "php_ftok.h"
 #include "php_type.h"
-#include "php_sunfuncs.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr
 PHP_MINIT_FUNCTION(standard_filters);

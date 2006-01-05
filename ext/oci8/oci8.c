@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.6 2006/01/01 12:50:10 sniper Exp $ */
+/* $Id: oci8.c,v 1.269.2.7 2006/01/05 13:42:35 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -635,7 +635,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.7 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -761,7 +761,7 @@ void php_oci_bind_hash_dtor(void *data)
 /* {{{ php_oci_column_hash_dtor()
  Column hash destructor */
 void php_oci_column_hash_dtor(void *data)
-{	
+{
 	php_oci_out_column *column = (php_oci_out_column *) data;
 	TSRMLS_FETCH();
 
@@ -790,10 +790,25 @@ void php_oci_descriptor_flush_hash_dtor(void *data)
 	php_oci_descriptor *descriptor = *(php_oci_descriptor **)data;
 	TSRMLS_FETCH();
 	
-	if (descriptor->buffering == PHP_OCI_LOB_BUFFER_USED && (descriptor->type == OCI_DTYPE_LOB || descriptor->type == OCI_DTYPE_FILE)) {
+	if (descriptor && descriptor->buffering == PHP_OCI_LOB_BUFFER_USED && (descriptor->type == OCI_DTYPE_LOB || descriptor->type == OCI_DTYPE_FILE)) {
 		php_oci_lob_flush(descriptor, OCI_LOB_BUFFER_FREE TSRMLS_CC);
 		descriptor->buffering = PHP_OCI_LOB_BUFFER_ENABLED;
 	}
+	data = NULL;
+}
+/* }}} */
+
+/* {{{ php_oci_descriptor_delete_from_hash()
+ Delete descriptor from the hash */
+int php_oci_descriptor_delete_from_hash(void *data, void *id TSRMLS_DC)
+{
+	php_oci_descriptor *descriptor = *(php_oci_descriptor **)data;
+	int *desc_id = (int *) id;
+	
+	if (descriptor && desc_id && descriptor->id == *desc_id) {
+		return 1;
+	}
+	return 0;
 }
 /* }}} */
 
@@ -1379,10 +1394,6 @@ int php_oci_connection_rollback(php_oci_connection *connection TSRMLS_DC)
  Commit connection */
 int php_oci_connection_commit(php_oci_connection *connection TSRMLS_DC)
 {
-	if (connection->descriptors) {
-		zend_hash_apply(connection->descriptors,(apply_func_t) php_oci_descriptor_flush_hash_dtor TSRMLS_CC);
-	}
-
 	connection->errcode = PHP_OCI_CALL(OCITransCommit, (connection->svc, connection->err, (ub4) 0));
 	connection->needs_commit = 0;
 
@@ -1683,13 +1694,13 @@ static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC)
 		connection = (php_oci_connection *)le->ptr;
 
 		if (connection->used_this_request) {
-			php_oci_connection_rollback(connection TSRMLS_CC);
-			
 			if (connection->descriptors) {
 				zend_hash_destroy(connection->descriptors);
 				efree(connection->descriptors);
 				connection->descriptors = NULL;
 			}
+			
+			php_oci_connection_rollback(connection TSRMLS_CC);
 			
 			if (OCI_G(persistent_timeout) > 0) {
 				connection->idle_expiry = timestamp + OCI_G(persistent_timeout);

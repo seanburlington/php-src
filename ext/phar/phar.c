@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.45 2006/01/05 00:53:40 helly Exp $ */
+/* $Id: phar.c,v 1.46 2006/01/05 00:55:54 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -286,6 +286,9 @@ static int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alia
 		PHAR_GET_VAL(buffer, entry.timestamp);
 		PHAR_GET_VAL(buffer, entry.offset_within_phar);
 		PHAR_GET_VAL(buffer, entry.compressed_filesize);
+		if (entry.uncompressed_filesize != entry.compressed_filesize) {
+			compressed = 1;
+		}
 		entry.crc_checked = 0;
 		entry.filedata = NULL;
 		if (entry.compressed_filesize < 9) {
@@ -1365,7 +1368,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.45 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.46 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

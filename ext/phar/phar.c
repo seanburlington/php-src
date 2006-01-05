@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.44 2006/01/05 00:39:30 helly Exp $ */
+/* $Id: phar.c,v 1.45 2006/01/05 00:53:40 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -382,8 +382,11 @@ static php_url* phar_open_url(php_stream_wrapper *wrapper, char *filename, char 
 		} else if (pos_z) {
 			ext_str = pos_z;
 			ext_len = 8;
+		} else if ((pos_p = strstr(filename, ".phar")) != NULL) {
+			ext_str = pos_p;
+			ext_len = 5;
 		} else {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\" (filename extension must be either .phar.php or .phar.gz)", filename);
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\" (filename extension must be .phar.php, .phar.gz or .phar)", filename);
 			return NULL;
 		}
 		resource = emalloc(sizeof(php_url));
@@ -1362,7 +1365,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.44 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.45 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.12 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_oci8_int.h,v 1.13 2006/01/05 13:40:10 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -276,6 +276,7 @@ void php_oci_column_hash_dtor (void *data);
 void php_oci_define_hash_dtor (void *data);
 void php_oci_bind_hash_dtor (void *data);
 void php_oci_descriptor_flush_hash_dtor (void *data);
+int php_oci_descriptor_delete_from_hash(void *data, void *id TSRMLS_DC);
 
 sb4 php_oci_error (OCIError *, sword TSRMLS_DC);
 sb4 php_oci_fetch_errmsg(OCIError *, text ** TSRMLS_DC);

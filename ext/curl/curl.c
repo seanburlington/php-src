@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.6 2006/01/01 13:46:50 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.7 2006/01/05 18:03:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1517,7 +1517,7 @@ static int php_curl_ssl_mutex_unlock(void **m)
 }
 
 static struct gcry_thread_cbs php_curl_gnutls_tsl = {
-	GCRY_THREAD_OPTIONS_USER,
+	GCRY_THREAD_OPTION_USER,
 	NULL,
 	php_curl_ssl_mutex_create,
 	php_curl_ssl_mutex_destroy,

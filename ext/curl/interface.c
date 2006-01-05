@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.72 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: interface.c,v 1.73 2006/01/05 18:06:15 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1762,7 +1762,7 @@ static int php_curl_ssl_mutex_unlock(void **m)
 }
 
 static struct gcry_thread_cbs php_curl_gnutls_tsl = {
-	GCRY_THREAD_OPTIONS_USER,
+	GCRY_THREAD_OPTION_USER,
 	NULL,
 	php_curl_ssl_mutex_create,
 	php_curl_ssl_mutex_destroy,

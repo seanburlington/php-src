@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.512 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: string.c,v 1.513 2006/01/05 20:49:28 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -514,7 +514,7 @@ PHP_FUNCTION(strcoll)
 /* {{{ php_charmask
  * Fills a 256-byte bytemask with input. You can specify a range like 'a..z',
  * it needs to be incrementing.  
- * Returns: FAILURE/SUCCESS wether the input was correct (i.e. no range errors)
+ * Returns: FAILURE/SUCCESS whether the input was correct (i.e. no range errors)
  */
 static inline int php_charmask(unsigned char *input, int len, char *mask TSRMLS_DC)
 {

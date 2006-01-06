@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.51 2006/01/06 17:32:33 helly Exp $ */
+/* $Id: phar.c,v 1.52 2006/01/06 19:20:20 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -183,9 +183,22 @@ PHP_METHOD(Phar, canCompress)
 static int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int alias_len, zend_bool compressed, long halt_offset TSRMLS_DC) /* {{{ */
 {
 	char *buffer, *endbuffer, *savebuf;
-	phar_file_data mydata;
+	phar_file_data mydata, *phar_data;
 	phar_manifest_entry entry;
 	php_uint32 manifest_len, manifest_count, manifest_index;
+
+	if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_data), alias, alias_len, (void **) &phar_data)) {
+		/* Overloading or reloading an archive would only be possible if we  */
+		/* refcount everything to be sure no stream for any file in the */
+		/* archive is open. */
+		if (fname_len != phar_data->filename_len || strncmp(fname, phar_data->filename, fname_len)) {
+			php_stream_close(fp);
+			php_error_docref(NULL TSRMLS_CC, E_ERROR, "alias \"%s\" is already used for archive \"%s\" cannot be overloaded with \"%s\"", alias, phar_data->filename, fname);
+		} else {
+			php_stream_close(fp);
+			return SUCCESS;
+		}
+	}
 
 	/* check for ?>\n and increment accordingly */
 	if (-1 == php_stream_seek(fp, halt_offset, SEEK_SET)) {
@@ -1340,7 +1353,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.51 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.52 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

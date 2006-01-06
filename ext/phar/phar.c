@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.50 2006/01/06 17:23:41 helly Exp $ */
+/* $Id: phar.c,v 1.51 2006/01/06 17:32:33 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ static phar_internal_file_data *phar_get_filedata(char *alias, char *path TSRMLS
  * Returns the api version */
 PHP_METHOD(Phar, apiVersion)
 {
-	RETURN_STRING("0.7.1", 3);
+	RETURN_STRINGL("0.7.1", sizeof("0.7.1")-1, 1);
 }
 /* }}}*/
 
@@ -1340,7 +1340,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.50 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.51 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

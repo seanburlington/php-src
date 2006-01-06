@@ -17,17 +17,17 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.59 2003/12/08 22:10:42 fmk Exp $ */
+/* $Id: sendmail.c,v 1.65.2.1 2006/01/06 02:04:33 sniper Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef NETWARE
 #include <winsock2.h>
-#else	/* NETWARE */
-#include <netware\sendmail_nw.h>
-#endif	/* NETWARE */
 #include "time.h"
+#else	/* NETWARE */
+#include <netware/sendmail_nw.h>
+#endif	/* NETWARE */
 #include <string.h>
 #include <math.h>
 #ifndef NETWARE
@@ -43,21 +43,13 @@
 #endif
 
 #include "ext/standard/php_string.h"
+#include "ext/date/php_date.h"
 
-/*
-   extern int _daylight;
-   extern long _timezone;
- */
 /*enum
    {
    DO_CONNECT = WM_USER +1
    };
  */
-
-static char *days[] =
-{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-static char *months[] =
-{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 /* '*error_message' has to be passed around from php_mail() */
 #define SMTP_ERROR_RESPONSE_SPEC	"SMTP server response: %s"
@@ -83,13 +75,11 @@ SOCKET sc;
 #ifndef NETWARE
 WSADATA Data;
 struct hostent *adr;
-#endif	/* NETWARE */
-SOCKADDR_IN sock_in;
-#ifndef NETWARE
 int WinsockStarted;
 /* values set by the constructor */
 char *AppName;
 #endif	/* NETWARE */
+SOCKADDR_IN sock_in;
 char MailHost[HOST_NAME_LEN];
 char LocalHost[HOST_NAME_LEN];
 #endif
@@ -99,8 +89,6 @@ char *php_mailer = "PHP 4 WIN32";
 #else
 char *php_mailer = "PHP 4 NetWare";
 #endif	/* NETWARE */
-
-char *get_header(char *h, char *headers);
 
 /* Error messages */
 static char *ErrorMessages[] =
@@ -182,7 +170,8 @@ static char *php_win32_mail_trim_header(char *header TSRMLS_DC)
 							  replace,
 							  0,
 							  &result_len,
-							  -1 TSRMLS_CC);
+							  -1,
+							  NULL TSRMLS_CC);
 	if (NULL == result) {
 		FREE_ZVAL(replace);
 		return NULL;
@@ -195,7 +184,8 @@ static char *php_win32_mail_trim_header(char *header TSRMLS_DC)
 							   replace,
 							   0,
 							   &result_len,
-							   -1 TSRMLS_CC);
+							   -1,
+							   NULL TSRMLS_CC);
 	efree(result);
 	FREE_ZVAL(replace);
 	return result2;
@@ -220,12 +210,12 @@ static char *php_win32_mail_trim_header(char *header TSRMLS_DC)
 //********************************************************************/
 PHPAPI int TSendMail(char *host, int *error, char **error_message,
 			  char *headers, char *Subject, char *mailTo, char *data,
-			  char *mailCc, char *mailBcc, char *mailRPath)
+			  char *mailCc, char *mailBcc, char *mailRPath TSRMLS_DC)
 {
 	int ret;
 	char *RPath = NULL;
 	char *headers_lc = NULL; /* headers_lc is only created if we've a header at all */
-	TSRMLS_FETCH();
+	char *pos1 = NULL, *pos2 = NULL;
 
 #ifndef NETWARE
 	WinsockStarted = FALSE;
@@ -266,9 +256,21 @@ PHPAPI int TSendMail(char *host, int *error, char **error_message,
 	/* Fall back to sendmail_from php.ini setting */
 	if (mailRPath && *mailRPath) {
 		RPath = estrdup(mailRPath);
-	}
-	else if (INI_STR("sendmail_from")) {
+	} else if (INI_STR("sendmail_from")) {
 		RPath = estrdup(INI_STR("sendmail_from"));
+	} else if (	headers_lc &&
+				(pos1 = strstr(headers_lc, "from:")) &&
+				((pos1 == headers_lc) || (*(pos1-1) == '\n'))
+	) {
+		/* Real offset is memaddress from the original headers + difference of
+		 * string found in the lowercase headrs + 5 characters to jump over   
+		 * the from: */
+		pos1 = headers + (pos1 - headers_lc) + 5;
+		if (NULL == (pos2 = strstr(pos1, "\r\n"))) {
+			RPath = estrndup(pos1, strlen(pos1));
+		} else {
+			RPath = estrndup(pos1, pos2 - pos1);
+		}
 	} else {
 		if (headers) {
 			efree(headers);
@@ -298,7 +300,7 @@ PHPAPI int TSendMail(char *host, int *error, char **error_message,
 			MailHost, !INI_INT("smtp_port") ? 25 : INI_INT("smtp_port"));
 		return FAILURE;
 	} else {
-		ret = SendText(RPath, Subject, mailTo, mailCc, mailBcc, data, headers, headers_lc, error_message);
+		ret = SendText(RPath, Subject, mailTo, mailCc, mailBcc, data, headers, headers_lc, error_message TSRMLS_CC);
 		TSMClose();
 		if (RPath) {
 			efree(RPath);
@@ -333,14 +335,7 @@ PHPAPI void TSMClose()
 	*/
 
 	shutdown(sc, 0); 
-#ifndef NETWARE
 	closesocket(sc);
-#else
-	/* closesocket commented out since it was giving undefined symbol linker error
-	 * close added in its place
-	 */
-	close(sc);
-#endif	/* NETWARE */
 }
 
 
@@ -365,7 +360,7 @@ PHPAPI char *GetSMErrorText(int index)
 
 
 /*********************************************************************
-// Name:  TSendText
+// Name:  SendText
 // Input:       1) RPath:   return path of the message
 //                                  Is used to fill the "Return-Path" and the
 //                                  "X-Sender" fields of the message.
@@ -382,8 +377,8 @@ PHPAPI char *GetSMErrorText(int index)
 // Author/Date:  jcar 20/9/96
 // History:
 //*******************************************************************/
-int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailBcc, char *data, 
-			 char *headers, char *headers_lc, char **error_message)
+static int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailBcc, char *data, 
+			 char *headers, char *headers_lc, char **error_message TSRMLS_DC)
 {
 	int res;
 	char *p;
@@ -416,17 +411,20 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 	/* attempt reconnect if the first Post fail */
 	if ((res = Post(Buffer)) != SUCCESS) {
 		MailConnect();
-		if ((res = Post(Buffer)) != SUCCESS)
+		if ((res = Post(Buffer)) != SUCCESS) {
 			return (res);
+		}
 	}
 	if ((res = Ack(&server_response)) != SUCCESS) {
 		SMTP_ERROR_RESPONSE(server_response);
 		return (res);
 	}
 
+	SMTP_SKIP_SPACE(RPath);
 	snprintf(Buffer, MAIL_BUFFER_SIZE, "MAIL FROM:<%s>\r\n", RPath);
-	if ((res = Post(Buffer)) != SUCCESS)
+	if ((res = Post(Buffer)) != SUCCESS) {
 		return (res);
+	}
 	if ((res = Ack(&server_response)) != SUCCESS) {
 		SMTP_ERROR_RESPONSE(server_response);
 		return W32_SM_SENDMAIL_FROM_MALFORMED;
@@ -435,8 +433,9 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 	tempMailTo = estrdup(mailTo);
 	/* Send mail to all rcpt's */
 	token = strtok(tempMailTo, ",");
-	while(token != NULL)
+	while (token != NULL)
 	{
+		SMTP_SKIP_SPACE(token);
 		snprintf(Buffer, MAIL_BUFFER_SIZE, "RCPT TO:<%s>\r\n", token);
 		if ((res = Post(Buffer)) != SUCCESS) {
 			efree(tempMailTo);
@@ -455,8 +454,9 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 		tempMailTo = estrdup(mailCc);
 		/* Send mail to all rcpt's */
 		token = strtok(tempMailTo, ",");
-		while(token != NULL)
+		while (token != NULL)
 		{
+			SMTP_SKIP_SPACE(token);
 			snprintf(Buffer, MAIL_BUFFER_SIZE, "RCPT TO:<%s>\r\n", token);
 			if ((res = Post(Buffer)) != SUCCESS) {
 				efree(tempMailTo);
@@ -472,29 +472,29 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 		efree(tempMailTo);
 	}
 	/* Send mail to all Cc rcpt's */
-	else if (headers && (pos1 = strstr(headers_lc, "cc:")) && ((pos1 == headers_lc) || iscntrl(*(pos1-1)))) {
+	else if (headers && (pos1 = strstr(headers_lc, "cc:")) && ((pos1 == headers_lc) || (*(pos1-1) == '\n'))) {
 		/* Real offset is memaddress from the original headers + difference of
 		 * string found in the lowercase headrs + 3 characters to jump over
 		 * the cc: */
 		pos1 = headers + (pos1 - headers_lc) + 3;
 		if (NULL == (pos2 = strstr(pos1, "\r\n"))) {
-
 			tempMailTo = estrndup(pos1, strlen(pos1));
-
 		} else {
-			tempMailTo = estrndup(pos1, pos2-pos1);
-
+			tempMailTo = estrndup(pos1, pos2 - pos1);
 		}
 
 		token = strtok(tempMailTo, ",");
-		while(token != NULL)
+		while (token != NULL)
 		{
 			SMTP_SKIP_SPACE(token);
-			sprintf(Buffer, "RCPT TO:<%s>\r\n", token);
-			if ((res = Post(Buffer)) != SUCCESS)
+			snprintf(Buffer, MAIL_BUFFER_SIZE, "RCPT TO:<%s>\r\n", token);
+			if ((res = Post(Buffer)) != SUCCESS) {
+				efree(tempMailTo);
 				return (res);
+			}
 			if ((res = Ack(&server_response)) != SUCCESS) {
 				SMTP_ERROR_RESPONSE(server_response);
+				efree(tempMailTo);
 				return (res);
 			}
 			token = strtok(NULL, ",");
@@ -509,7 +509,7 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 		tempMailTo = estrdup(mailBcc);
 		/* Send mail to all rcpt's */
 		token = strtok(tempMailTo, ",");
-		while(token != NULL)
+		while (token != NULL)
 		{
 			SMTP_SKIP_SPACE(token);
 			snprintf(Buffer, MAIL_BUFFER_SIZE, "RCPT TO:<%s>\r\n", token);
@@ -533,7 +533,6 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 			 * the bcc: */
 			pos1 = headers + (pos1 - headers_lc) + 4;
 			if (NULL == (pos2 = strstr(pos1, "\r\n"))) {
-				int foo = strlen(pos1);
 				tempMailTo = estrndup(pos1, strlen(pos1));
 				/* Later, when we remove the Bcc: out of the
 				   header we know it was the last thing. */
@@ -543,15 +542,17 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 			}
 
 			token = strtok(tempMailTo, ",");
-			while(token != NULL)
+			while (token != NULL)
 			{
 				SMTP_SKIP_SPACE(token);
-				sprintf(Buffer, "RCPT TO:<%s>\r\n", token);
+				snprintf(Buffer, MAIL_BUFFER_SIZE, "RCPT TO:<%s>\r\n", token);
 				if ((res = Post(Buffer)) != SUCCESS) {
+					efree(tempMailTo);
 					return (res);
 				}
 				if ((res = Ack(&server_response)) != SUCCESS) {
 					SMTP_ERROR_RESPONSE(server_response);
+					efree(tempMailTo);
 					return (res);
 				}
 				token = strtok(NULL, ",");
@@ -603,9 +604,9 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 
 	/* send message header */
 	if (Subject == NULL) {
-		res = PostHeader(RPath, "No Subject", mailTo, stripped_header);
+		res = PostHeader(RPath, "No Subject", mailTo, stripped_header TSRMLS_CC);
 	} else {
-		res = PostHeader(RPath, Subject, mailTo, stripped_header);
+		res = PostHeader(RPath, Subject, mailTo, stripped_header TSRMLS_CC);
 	}
 	if (stripped_header) {
 		efree(stripped_header);
@@ -659,7 +660,8 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 	return (SUCCESS);
 }
 
-int addToHeader(char **header_buffer, const char *specifier, char *string) {
+static int addToHeader(char **header_buffer, const char *specifier, char *string)
+{
 	if (NULL == (*header_buffer = erealloc(*header_buffer, strlen(*header_buffer) + strlen(specifier) + strlen(string) + 1))) {
 		return 0;
 	}
@@ -678,16 +680,12 @@ int addToHeader(char **header_buffer, const char *specifier, char *string) {
 // Author/Date:  jcar 20/9/96
 // History:
 //********************************************************************/
-int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders)
+static int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders TSRMLS_DC)
 {
-
 	/* Print message header according to RFC 822 */
 	/* Return-path, Received, Date, From, Subject, Sender, To, cc */
 
-	time_t tNow = time(NULL);
-	struct tm *tm = localtime(&tNow);
-	int zoneh = abs(_timezone);
-	int zonem, res;
+	int res;
 	char *header_buffer;
 	char *headers_lc = NULL;
 	size_t i;
@@ -705,21 +703,13 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders)
 		efree(headers_lc);
 		return OUT_OF_MEMORY;
 	}
-	zoneh /= (60 * 60);
-	zonem = (abs(_timezone) / 60) - (zoneh * 60);
 
-	if(!xheaders || !strstr(headers_lc, "date:")){
-		sprintf(header_buffer, "Date: %s, %02d %s %04d %02d:%02d:%02d %s%02d%02d\r\n",
-					 days[tm->tm_wday],
-					 tm->tm_mday,
-					 months[tm->tm_mon],
-					 tm->tm_year + 1900,
-					 tm->tm_hour,
-					 tm->tm_min,
-					 tm->tm_sec,
-					 (_timezone <= 0) ? "+" : (_timezone > 0) ? "-" : "",
-					 zoneh,
-					 zonem);
+	if (!xheaders || !strstr(headers_lc, "date:")) {
+		time_t tNow = time(NULL);
+		char *dt = php_format_date("r", 1, tNow, 1 TSRMLS_CC);
+
+		sprintf(header_buffer, "Date: %s\r\n", dt);
+		efree(dt);
 	}
 
 	if (!headers_lc || !strstr(headers_lc, "from:")) {
@@ -737,7 +727,7 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders)
 			goto PostHeader_outofmem;
 		}
 	}
-	if(xheaders){
+	if (xheaders) {
 		if (!addToHeader(&header_buffer, "%s\r\n", xheaders)) {
 			goto PostHeader_outofmem;
 		}
@@ -775,7 +765,7 @@ PostHeader_outofmem:
 // Author/Date:  jcar 20/9/96
 // History:
 //********************************************************************/
-int MailConnect()
+static int MailConnect()
 {
 
 	int res;
@@ -795,7 +785,7 @@ int MailConnect()
 	{
 		return (FAILED_TO_RESOLVE_HOST);
 	}
-        */
+	*/
 
 	portnum = (short) INI_INT("smtp_port");
 	if (!portnum) {
@@ -816,10 +806,6 @@ int MailConnect()
 }
 
 
-
-
-
-
 /*********************************************************************
 // Name:  Post
 // Input:
@@ -828,11 +814,7 @@ int MailConnect()
 // Author/Date:  jcar 20/9/96
 // History:
 //********************************************************************/
-#ifndef NETWARE
-int Post(LPCSTR msg)
-#else
-int Post(char *msg)
-#endif
+static int Post(LPCSTR msg)
 {
 	int len = strlen(msg);
 	int slen;
@@ -859,18 +841,18 @@ int Post(char *msg)
 // Author/Date:  jcar 20/9/96
 // History:
 //********************************************************************/
-int Ack(char **server_response)
+static int Ack(char **server_response)
 {
 	static char buf[MAIL_BUFFER_SIZE];
 	int rlen;
 	int Index = 0;
 	int Received = 0;
 
-  again:
+again:
 
-	if ((rlen = recv(sc, buf + Index, ((MAIL_BUFFER_SIZE) - 1) - Received, 0)) < 1)
+	if ((rlen = recv(sc, buf + Index, ((MAIL_BUFFER_SIZE) - 1) - Received, 0)) < 1) {
 		return (FAILED_TO_RECEIVE);
-
+	}
 	Received += rlen;
 	buf[Received] = 0;
 	/*err_msg   fprintf(stderr,"Received: (%d bytes) %s", rlen, buf + Index); */
@@ -919,11 +901,7 @@ int Ack(char **server_response)
 // Author/Date:  jcar 20/9/96
 // History:
 //********************************************************************/
-#ifndef NETWARE
-unsigned long GetAddr(LPSTR szHost)
-#else
-unsigned long GetAddr(char * szHost)
-#endif
+static unsigned long GetAddr(LPSTR szHost)
 {
 	LPHOSTENT lpstHost;
 	u_long lAddr = INADDR_ANY;
@@ -939,15 +917,11 @@ unsigned long GetAddr(char * szHost)
 
 			lpstHost = gethostbyname(szHost);
 			if (lpstHost) {		/* success */
-#ifndef NETWARE
 				lAddr = *((u_long FAR *) (lpstHost->h_addr));
-#else
-				lAddr = *((u_long *) (lpstHost->h_addr));
-#endif	/* NETWARE */
 			} else {
 				lAddr = INADDR_ANY;		/* failure */
 			}
 		}
 	}
 	return (lAddr);
-}								/* end GetAddr() */
+} /* end GetAddr() */

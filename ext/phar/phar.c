@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.49 2006/01/06 15:31:41 helly Exp $ */
+/* $Id: phar.c,v 1.50 2006/01/06 17:23:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -127,6 +127,7 @@ static phar_internal_file_data *phar_get_filedata(char *alias, char *path TSRMLS
 			if (internal_file->fp) {
 				/* transfer ownership */
 				ret->fp = internal_file->fp;
+				php_stream_seek(ret->fp, 0, SEEK_SET);
 				internal_file->fp = 0;
 			} else {
 				ret->fp = 0;
@@ -268,6 +269,11 @@ static int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alia
 		PHAR_GET_VAL(buffer, entry.offset_within_phar);
 		PHAR_GET_VAL(buffer, entry.compressed_filesize);
 		if (entry.uncompressed_filesize + 8 != entry.compressed_filesize) {
+#ifndef HAVE_PHAR_ZLIB
+			if (!compressed) {
+				MAPPHAR_FAIL("zlib extension is required for compressed .phar file \"%s\"");
+			}
+#endif
 			compressed = 1;
 		}
 		entry.crc_checked = 0;
@@ -477,6 +483,19 @@ PHP_METHOD(Phar, mapPhar)
 #endif
 
 	RETURN_BOOL(phar_open_compiled_file(alias, alias_len, compressed TSRMLS_CC) == SUCCESS);
+} /* }}} */
+
+/* {{{ proto mixed Phar::loadPhar(string url, string alias)
+ * Loads a phar archive with an alias */
+PHP_METHOD(Phar, loadPhar)
+{
+	char *fname, *alias;
+	int fname_len, alias_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &fname, &fname_len, &alias, &alias_len) == FAILURE) {
+		return;
+	}
+	RETURN_BOOL(phar_open_filename(fname, fname_len, alias, alias_len, 0 TSRMLS_CC) == SUCCESS);
 } /* }}} */
 
 static php_stream_ops phar_ops = {
@@ -1250,10 +1269,17 @@ ZEND_BEGIN_ARG_INFO(arginfo_phar_mapPhar, 0)
 	ZEND_ARG_INFO(0, compressed)
 ZEND_END_ARG_INFO();
 
+static
+ZEND_BEGIN_ARG_INFO(arginfo_phar_loadPhar, 0)
+	ZEND_ARG_INFO(0, fname)
+	ZEND_ARG_INFO(0, alias)
+ZEND_END_ARG_INFO();
+
 zend_function_entry php_archive_methods[] = {
-	PHP_ME(Phar, mapPhar, arginfo_phar_mapPhar, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
-	PHP_ME(Phar, apiVersion, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
-	PHP_ME(Phar, canCompress, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, apiVersion,    NULL,                      ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, canCompress,   NULL,                      ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, mapPhar,       arginfo_phar_mapPhar,      ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
+	PHP_ME(Phar, loadPhar,      arginfo_phar_loadPhar,     ZEND_ACC_PUBLIC|ZEND_ACC_STATIC|ZEND_ACC_FINAL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -1314,7 +1340,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.49 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.50 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

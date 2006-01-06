@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.52 2006/01/06 19:20:20 helly Exp $ */
+/* $Id: phar.c,v 1.53 2006/01/06 20:34:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -452,14 +452,12 @@ static int phar_open_compiled_file(char *alias, int alias_len, zend_bool compres
 
 	MAKE_STD_ZVAL(halt_constant);
 	if (0 == zend_get_constant("__COMPILER_HALT_OFFSET__", 24, halt_constant TSRMLS_CC)) {
-		zval_dtor(halt_constant);
-		FREE_ZVAL(halt_constant);
+	FREE_ZVAL(halt_constant);
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "__HALT_COMPILER(); must be declared in a phar");
 		return FAILURE;
 	}
 	halt_offset = Z_LVAL(*halt_constant);
-	zval_dtor(halt_constant);
-	FREE_ZVAL(halt_constant);
+	zval_ptr_dtor(&halt_constant);
 	
 	fp = php_stream_open_wrapper(fname, "rb", IGNORE_URL|STREAM_MUST_SEEK|REPORT_ERRORS, NULL);
 
@@ -1353,7 +1351,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.52 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.53 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

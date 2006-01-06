@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.48 2006/01/05 22:24:40 helly Exp $ */
+/* $Id: phar.c,v 1.49 2006/01/06 15:31:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -458,7 +458,7 @@ static int phar_open_compiled_file(char *alias, int alias_len, zend_bool compres
 /* }}} */
 
 /* {{{ proto mixed Phar::mapPhar(string alias, mixed compressed, [mixed unused [, mixed unused]])
- * Maps the curretnly executed file (a phar) with the given alias */
+ * Maps the currently executed file (a phar) with the given alias */
 PHP_METHOD(Phar, mapPhar)
 {
 	char *alias;
@@ -1314,7 +1314,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.7.1");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.48 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.49 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

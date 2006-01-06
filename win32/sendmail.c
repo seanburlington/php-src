@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.47.2.10.2.1 2005/07/28 10:10:16 hyanantha Exp $ */
+/* $Id: sendmail.c,v 1.47.2.10.2.2 2006/01/06 00:35:40 sniper Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -713,7 +713,7 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders)
 	zonem = (abs(_timezone) / 60) - (zoneh * 60);
 
 	if(!xheaders || !strstr(headers_lc, "date:")){
-		sprintf(header_buffer, "Date: %s, %02d %s %04d %02d:%02d:%02d %s%02d%02d\r\n",
+		sprintf(header_buffer, "Date: %3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d\r\n",
 					 days[tm->tm_wday],
 					 tm->tm_mday,
 					 months[tm->tm_mon],

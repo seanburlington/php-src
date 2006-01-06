@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.25 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: mod_php5.c,v 1.26 2006/01/06 17:54:35 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -581,7 +581,6 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		 */
 		if (!AP(engine)) {
 			r->content_type = php_apache_get_default_mimetype(r TSRMLS_CC);
-			r->allowed |= (1 << METHODS) - 1;
 			zend_try {
 				zend_ini_deactivate(TSRMLS_C);
 			} zend_end_try();
@@ -839,7 +838,6 @@ static int php_xbithack_handler(request_rec * r)
 	TSRMLS_FETCH();
 
 	if (!(r->finfo.st_mode & S_IXUSR)) {
-		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}
 	per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php5_module);
@@ -847,7 +845,6 @@ static int php_xbithack_handler(request_rec * r)
 		zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries TSRMLS_CC);
 	}
 	if(!AP(xbithack)) {
-		r->allowed |= (1 << METHODS) - 1;
 		zend_try {
 			zend_ini_deactivate(TSRMLS_C);
 		} zend_end_try();

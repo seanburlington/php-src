@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.14.4.6 2006/01/02 15:24:33 cellog Exp $ */
+/* $Id: install-pear.php,v 1.6.2.14.4.7 2006/01/07 17:51:54 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);
@@ -46,6 +46,9 @@ for ($i = 0; $i < sizeof($argv); $i++) {
     } elseif ($arg == '-b') {
         $bin_dir = $argv[$i+1];
         $i++;
+    } elseif ($arg == '-p') {
+        $php_bin = $argv[$i+1];
+        $i++;
     } elseif ($arg == '--debug') {
         $debug = 1;
     } elseif ($arg == '--extremedebug') {
@@ -89,6 +92,9 @@ if (!empty($with_dir)) {
         $config->set('cache_dir', $cdir);
     }
 }
+if (!empty($php_bin)) {
+    $config->set('php_bin', $php_bin);
+}
 /* Print PEAR Conf (useful for debuging do NOT REMOVE) */
 if ($debug) {
     sort($keys);
@@ -107,11 +113,12 @@ $options = array();
 $options['upgrade'] = true;
 $install_root = getenv('INSTALL_ROOT');
 if (!empty($install_root)) {
-    $options['installroot'] = $install_root;
-    $config->setInstallRoot($install_root);
+    $options['packagingroot'] = $install_root;
+    $reg = &new PEAR_Registry($options['packagingroot']);
+} else {
+    $reg = $config->getRegistry('default');
 }
 
-$reg = $config->getRegistry('default');
 $ui = &PEAR_Frontend::singleton('PEAR_Frontend_CLI');
 $installer = &new PEAR_Installer($ui);
 $pkg = &new PEAR_PackageFile($config, $debug);

@@ -17,7 +17,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Registry.php,v 1.35.2.18.2.1 2005/11/02 16:57:21 cellog Exp $
+ * @version    CVS: $Id: Registry.php,v 1.35.2.18.2.2 2006/01/07 17:51:54 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -690,7 +690,7 @@ class PEAR_Registry extends PEAR
     {
         $fp = @fopen($this->filemap, 'r');
         if (!$fp) {
-            return $this->raiseError('PEAR_Registry: could not open filemap', PEAR_REGISTRY_ERROR_FILE, null, null, $php_errormsg);
+            return $this->raiseError('PEAR_Registry: could not open filemap "' . $this->filemap . '"', PEAR_REGISTRY_ERROR_FILE, null, null, $php_errormsg);
         }
         clearstatcache();
         $rt = get_magic_quotes_runtime();

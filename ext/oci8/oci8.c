@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.288 2006/01/05 13:40:10 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.289 2006/01/10 08:29:19 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -88,6 +88,7 @@ static void php_oci_descriptor_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_collection_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 
 static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC);
+static int php_oci_regular_helper(zend_rsrc_list_entry *le TSRMLS_DC);
 static int php_oci_connection_ping(php_oci_connection * TSRMLS_DC);
 static int php_oci_connection_status(php_oci_connection * TSRMLS_DC);
 static int php_oci_connection_close(php_oci_connection * TSRMLS_DC);
@@ -623,6 +624,7 @@ PHP_RSHUTDOWN_FUNCTION(oci)
 	zend_hash_apply(&EG(persistent_list), (apply_func_t) php_oci_persistent_helper TSRMLS_CC);
 
 #ifdef ZTS
+	zend_hash_apply(&EG(regular_list), (apply_func_t) php_oci_regular_helper TSRMLS_CC);
 	php_oci_cleanup_global_handles(TSRMLS_C);
 #endif
 
@@ -635,7 +637,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.288 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.289 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1721,6 +1723,21 @@ static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC)
 				/* connection has timed out */
 				return 1;
 			}
+		}
+	}
+	return 0;
+} /* }}} */
+
+/* {{{ php_oci_regular_helper() 
+ Helper function to close non-persistent connections at the end of request in ZTS mode */
+static int php_oci_regular_helper(zend_rsrc_list_entry *le TSRMLS_DC)
+{
+	php_oci_connection *connection;
+
+	if (le->type == le_connection) {
+		connection = (php_oci_connection *)le->ptr;
+		if (connection) {
+			return 1;
 		}
 	}
 	return 0;

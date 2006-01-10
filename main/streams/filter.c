@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.19 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: filter.c,v 1.20 2006/01/10 16:14:45 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -273,6 +273,10 @@ PHPAPI void php_stream_bucket_prepend(php_stream_bucket_brigade *brigade, php_st
 
 PHPAPI void php_stream_bucket_append(php_stream_bucket_brigade *brigade, php_stream_bucket *bucket TSRMLS_DC)
 {
+	if (brigade->tail == bucket) {
+		return;
+	}
+
 	bucket->prev = brigade->tail;
 	bucket->next = NULL;
 

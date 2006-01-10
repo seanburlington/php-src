@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.36 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: levenshtein.c,v 1.37 2006/01/10 10:51:39 tony2001 Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -106,7 +106,7 @@ PHP_FUNCTION(levenshtein)
 	void *str1, *str2;
 	int32_t str1_len, str2_len;
 	zend_uchar str1_type, str2_type;
-	int cost_ins, cost_rep, cost_del;
+	long cost_ins, cost_rep, cost_del;
 	char *callback_name;
 	int distance = -1;
 

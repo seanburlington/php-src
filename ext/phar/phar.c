@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.57 2006/01/11 01:51:46 helly Exp $ */
+/* $Id: phar.c,v 1.58 2006/01/11 20:32:55 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -92,14 +92,14 @@ typedef struct _phar_manifest_entry {
 
 /* information about a phar file */
 typedef struct _phar_file_data {
-	char		*filename;
-	int		filename_len;
-	char		*alias;
-	int		alias_len;
-	size_t		internal_file_start;
-	zend_bool	has_compressed_files;
-	HashTable	manifest;
-	php_stream	*fp;
+	char        *filename;
+	int         filename_len;
+	char        *alias;
+	int         alias_len;
+	size_t      internal_file_start;
+	zend_bool   has_compressed_files;
+	HashTable   manifest;
+	php_stream  *fp;
 } phar_file_data;
 
 /* stream access data for one file entry in a phar file */
@@ -1441,7 +1441,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.8.0");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.57 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.58 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #ifdef HAVE_PHAR_ZLIB
 		"enabled");

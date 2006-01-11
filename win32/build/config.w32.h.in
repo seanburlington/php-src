@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.8 2005/09/21 08:40:52 derick Exp $
+	$Id: config.w32.h.in,v 1.9 2006/01/11 20:24:07 helly Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -112,6 +112,7 @@
 #define HAVE_CUSERID 0
 #undef HAVE_RINT
 #define HAVE_STRFTIME 1
+#define SIZEOF_SHORT 2
 /* int and long are stll 32bit in 64bit compiles */
 #define SIZEOF_INT 4
 #define SIZEOF_LONG 4

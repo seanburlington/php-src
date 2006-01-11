@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.273 2006/01/04 15:51:06 helly Exp $ */
+/* $Id: run-tests.php,v 1.274 2006/01/11 15:16:34 mike Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.273 $'."\n";
+					echo '$Revision: 1.274 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1047,7 +1047,10 @@ TEST $file
 
 	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
 	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {
-		if (file_exists("./sapi/cgi/php")) {
+        if (!strncasecmp(PHP_OS, "win", 3) && file_exists(dirname($php) ."/php-cgi.exe")) {
+            $old_php = $php;
+            $php = realpath(dirname($php) ."/php-cgi.exe") .' -C ';
+        } elseif (file_exists("./sapi/cgi/php")) {
 			$old_php = $php;
 			$php = realpath("./sapi/cgi/php") . ' -C ';
 		} else {

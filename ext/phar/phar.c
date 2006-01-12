@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.60 2006/01/11 23:55:56 helly Exp $ */
+/* $Id: phar.c,v 1.61 2006/01/12 02:33:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -689,7 +689,7 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 	char tmpbuf[8];
 	php_url *resource = NULL;
 	php_stream *fp, *fpf;
-	php_stream_filter *filter;
+	php_stream_filter *filter, *consumed;
 	php_uint32 offset;
 
 	resource = php_url_parse(path);
@@ -780,6 +780,12 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 			efree(internal_file);
 			return NULL;			
 		}
+		/* Nnfortunatley we cannot check the read position of fp after getting */
+		/* uncompressed data because the new stream posiition is being changed */
+		/* by the number of bytes read throughthe filter not by the raw number */
+		/* bytes being consumed on the stream. Therefor use a consumed filter. */ 
+		consumed = php_stream_filter_create("consumed", NULL, php_stream_is_persistent(fp) TSRMLS_CC);
+		php_stream_filter_append(&fp->readfilters, consumed);
 		php_stream_filter_append(&fp->readfilters, filter);
 
 		idata->fp = php_stream_temp_new();
@@ -792,10 +798,15 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 		}
 		php_stream_filter_flush(filter, 1);
 		php_stream_filter_remove(filter, 1 TSRMLS_CC);
-		/* Nnfortunatley we cannot check the read position of fp after getting */
-		/* uncompressed data because the new stream posiition is being changed */
-		/* by the number of bytes read throughthe filter not by the raw number */
-		/* bytes being consumed on the stream. Correct the stream pos anyway. */ 
+		php_stream_filter_flush(consumed, 1);
+		php_stream_filter_remove(consumed, 1 TSRMLS_CC);
+		if (offset + idata->internal_file->compressed_filesize != php_stream_tell(fp)) {
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", idata->phar->fname, internal_file);
+			php_stream_close(idata->fp);
+			efree(idata);
+			efree(internal_file);
+			return NULL;
+		}
 		php_stream_seek(fp, offset + idata->internal_file->compressed_filesize, SEEK_SET);
 	} else { /* from here is for non-compressed */
 		buffer = &tmpbuf[0];
@@ -1379,7 +1390,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "phar PHP Archive support", "enabled");
 	php_info_print_table_row(2, "phar API version", "0.8.0");
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.60 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.61 $");
 	php_info_print_table_row(2, "compressed phar support", 
 #if HAVE_ZLIB
 		"enabled");

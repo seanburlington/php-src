@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.20 2006/01/10 16:14:45 iliaa Exp $ */
+/* $Id: filter.c,v 1.21 2006/01/12 19:13:50 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -595,7 +595,7 @@ PHPAPI int _php_stream_filter_flush(php_stream_filter *filter, int finish TSRMLS
 			int datalen;
 
 			if (bucket->is_unicode) {
-				data = bucket->buf.ustr.val;
+				data = (char*)bucket->buf.ustr.val;
 				datalen = bucket->buf.ustr.len * sizeof(UChar);
 			} else {
 				data = bucket->buf.str.val;

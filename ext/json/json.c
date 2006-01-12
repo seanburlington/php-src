@@ -13,7 +13,7 @@
  *
  */
 
-/* $Id: json.c,v 1.3 2005/12/11 13:19:43 edink Exp $ */
+/* $Id: json.c,v 1.4 2006/01/12 03:50:22 omar Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -331,6 +331,7 @@ PHP_FUNCTION(json_decode)
 
     z = json_decode_r(jo, assoc TSRMLS_CC);
     if (!z) {
+    	json_object_put(jo);
         RETURN_NULL();
     }
  

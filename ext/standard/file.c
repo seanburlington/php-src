@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.3 2006/01/01 12:50:14 sniper Exp $ */
+/* $Id: file.c,v 1.409.2.4 2006/01/13 04:05:59 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1355,10 +1355,10 @@ PHPAPI PHP_FUNCTION(fseek)
 /* {{{ proto int mkdir(char *dir int mode)
 */
 
-PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC)
+PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC)
 {
 	int ret;
-	
+
 	if (PG(safe_mode) && (!php_checkuid(dir, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		return -1;
 	}
@@ -1367,11 +1367,16 @@ PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC)
 		return -1;
 	}
 
-	if ((ret = VCWD_MKDIR(dir, (mode_t)mode)) < 0) {
+	if ((ret = VCWD_MKDIR(dir, (mode_t)mode)) < 0 && (options & REPORT_ERRORS)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
 	}
 
-	return ret;	
+	return ret;
+}
+
+PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC)
+{
+	    return php_mkdir_ex(dir, mode, REPORT_ERRORS TSRMLS_CC);
 }
 /* }}} */
 

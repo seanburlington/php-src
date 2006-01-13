@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.69.2.28.2.2 2006/01/13 14:25:09 sas Exp $ */
+/* $Id: ifx.ec,v 1.69.2.28.2.3 2006/01/13 14:31:19 sas Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -3949,7 +3949,7 @@ static long php_intifx_create_char(char* param, long len, HashTable *list TSRMLS
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't create char-resource");
 		return -1;
 	}
-    memset(Ifx_char, 0, sizeof(IFX_IDRES));
+	memset(Ifx_char, 0, sizeof(IFX_IDRES));
 
 	Ifx_char->type = TYPE_CHAR;
 
@@ -4234,7 +4234,7 @@ static long php_intifxus_create_slob(long create_mode, HashTable *list TSRMLS_DC
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't create slob-resource");
 		return -1;
 	}
-    memset(Ifx_slob, 0, sizeof(IFX_IDRES));
+	memset(Ifx_slob, 0, sizeof(IFX_IDRES));
 
 	errcode = ifx_lo_def_create_spec(&(Ifx_slob->SLOB.createspec));
 	if (errcode < 0) {
@@ -4477,7 +4477,7 @@ static long php_intifxus_new_slob(HashTable *list TSRMLS_DC)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't create slob-resource");
 		return -1;
 	}
-    memset(Ifx_slob, 0, sizeof(IFX_IDRES));
+	memset(Ifx_slob, 0, sizeof(IFX_IDRES));
 	
 	Ifx_slob->type = TYPE_SLOB;
 	Ifx_slob->SLOB.lofd = -1;

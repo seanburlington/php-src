@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.17 2006/01/04 21:31:29 derick Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.18 2006/01/13 13:04:27 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -382,7 +382,9 @@ zend_function_entry basic_functions[] = {
 #endif
 #if !defined(PHP_WIN32) && !defined(NETWARE)
 	PHP_FE(expm1,															NULL)
+# ifdef HAVE_LOG1P
 	PHP_FE(log1p,															NULL)
+# endif
 #endif
 
 	PHP_FE(pi,																NULL)

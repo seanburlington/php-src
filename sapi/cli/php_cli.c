@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.10 2006/01/01 12:50:19 sniper Exp $ */
+/* $Id: php_cli.c,v 1.129.2.11 2006/01/14 02:09:37 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -774,7 +774,11 @@ int main(int argc, char *argv[])
 
 			case 'a':	/* interactive mode */
 				if (!interactive) {
+#if (HAVE_LIBREADLINE || HAVE_LIBEDIT) && !defined(COMPILE_DL_READLINE)
+					printf("Interactive shell\n\n");
+#else
 					printf("Interactive mode enabled\n\n");
+#endif
 					fflush(stdout);
 					interactive=1;
 				}

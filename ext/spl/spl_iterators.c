@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.107 2006/01/01 19:57:27 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.108 2006/01/15 16:05:49 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -929,7 +929,7 @@ static inline spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAME
 		case DIT_RecursiveRegExIterator: {
 			char *regex;
 			int len, poptions, coptions;
-			pcre_extra *extra;
+			pcre_extra *extra = NULL;
 
 			intern->u.regex.flags = 0;
 			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Os|l", &zobject, ce_inner, &regex, &len, &intern->u.regex.flags) == FAILURE) {

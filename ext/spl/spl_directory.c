@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.64 2006/01/13 19:35:27 helly Exp $ */
+/* $Id: spl_directory.c,v 1.65 2006/01/15 00:17:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -368,6 +368,7 @@ static spl_filesystem_object * spl_filesystem_object_create_type(int ht, spl_fil
 			Z_TYPE_P(return_value) = IS_NULL;
 			return NULL;
 		}
+		break;
 	case SPL_FS_DIR:	
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_RuntimeException), 0 TSRMLS_CC, "Operation not supported");

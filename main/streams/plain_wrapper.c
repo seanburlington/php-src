@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.57 2006/01/16 19:47:07 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.58 2006/01/17 02:32:34 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1120,7 +1120,9 @@ static int php_plain_files_mkdir(php_stream_wrapper *wrapper, char *dir, int mod
 				if (*p == '\0' && *(p + 1) != '\0') {
 					*p = DEFAULT_SLASH;
 					if ((ret = VCWD_MKDIR(buf, (mode_t)mode)) < 0) {
-						php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
+						if (options & REPORT_ERRORS) {
+							php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
+						}
 						break;
 					}
 				}

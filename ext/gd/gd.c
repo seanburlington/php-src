@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.14 2006/01/17 15:44:12 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.15 2006/01/17 19:04:06 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1103,7 +1103,6 @@ PHP_FUNCTION(imagecolorallocatealpha)
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, &IM, -1, "Image", le_gd);
 
-	RETURN_LONG(gdImageColorAllocateAlpha(im, red, green, blue, alpha));
 	ct = gdImageColorAllocateAlpha(im, red, green, blue, alpha);
 	if (ct < 0) {
 		RETURN_FALSE;

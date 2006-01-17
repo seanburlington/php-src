@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.339 2006/01/17 16:34:58 pajoye Exp $ */
+/* $Id: gd.c,v 1.340 2006/01/17 23:49:14 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2966,6 +2966,8 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 	fontname = (unsigned char *) fontname;
 #endif
 
+	PHP_GD_CHECK_OPEN_BASEDIR(fontname, "Invalid font filename");
+	
 #ifdef USE_GD_IMGSTRTTF
 # if HAVE_GD_STRINGFTEX
 	if (extended) {

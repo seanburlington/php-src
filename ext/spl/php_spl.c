@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.82 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: php_spl.c,v 1.83 2006/01/17 12:18:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -403,8 +403,7 @@ PHP_FUNCTION(spl_autoload_register)
 				}
 			}
 		} else if (Z_TYPE_P(zcallable) == IS_UNICODE) {
-			ZVAL_STRINGL(&ztmp, "spl_autoload_call", sizeof("spl_autoload_call"), 1);
-			convert_to_unicode(&ztmp);
+			ZVAL_ASCII_STRINGL(&ztmp, "spl_autoload_call", sizeof("spl_autoload_call")-1, 1);
 			if (zend_u_binary_zval_strcmp(&ztmp, zcallable)) {
 				if (!zend_binary_strcasecmp(Z_STRVAL_P(zcallable), sizeof("spl_autoload_call"), "spl_autoload_call", sizeof("spl_autoload_call"))) {
 					if (do_throw) {

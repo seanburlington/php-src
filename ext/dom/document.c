@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.73 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: document.c,v 1.74 2006/01/17 12:18:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1708,7 +1708,7 @@ PHP_FUNCTION(dom_document_savexml)
 		if (!size) {
 			RETURN_FALSE;
 		}
-		RETVAL_STRINGL(mem, size, 1);
+		RETVAL_RT_STRINGL(mem, size, 1);
 		xmlFree(mem);
 	}
 }

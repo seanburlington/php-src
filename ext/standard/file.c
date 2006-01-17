@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.415 2006/01/13 04:10:32 pajoye Exp $ */
+/* $Id: file.c,v 1.416 2006/01/17 12:18:52 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -844,7 +844,10 @@ PHP_FUNCTION(tempnam)
 
 	if ((fd = php_open_temporary_fd(d, p, &opened_path TSRMLS_CC)) >= 0) {
 		close(fd);
-		RETVAL_STRING(opened_path, 0);
+		RETVAL_RT_STRING(opened_path, 0);
+		if (UG(unicode)) {
+			efree(opened_path);
+		}
 	} else {
 		RETVAL_FALSE;
 	}

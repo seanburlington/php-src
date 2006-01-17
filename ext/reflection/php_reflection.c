@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.199 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: php_reflection.c,v 1.200 2006/01/17 12:18:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -604,8 +604,8 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 				}
 			} else if (Z_TYPE_P(zv) == IS_NULL) {
 				string_write(str, "NULL", sizeof("NULL")-1);
-			} else if (Z_TYPE_P(zv) == IS_STRING || Z_TYPE_P(zv) == IS_BINARY) {
-				if (Z_TYPE_P(zv) == IS_BINARY) {
+			} else if (Z_TYPE_P(zv) == IS_STRING) {
+				if (UG(unicode)) {
 					string_write(str, "b'", sizeof("b")-1);
 				}
 				string_write(str, "'", sizeof("'")-1);
@@ -1227,7 +1227,7 @@ ZEND_METHOD(reflection, export)
 	}
 
 	/* Invoke the __toString() method */
-	ZVAL_STRINGL(&fname, "__tostring", sizeof("__tostring") - 1, 1);
+	ZVAL_ASCII_STRINGL(&fname, "__tostring", sizeof("__tostring") - 1, 1);
 	result= call_user_function_ex(NULL, &object, &fname, &retval_ptr, 0, NULL, 0, NULL TSRMLS_CC);
 	zval_dtor(&fname);
 
@@ -4272,7 +4272,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.199 2006/01/01 13:09:53 sniper Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.200 2006/01/17 12:18:52 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

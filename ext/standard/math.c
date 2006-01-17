@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.132 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: math.c,v 1.133 2006/01/17 12:18:52 dmitry Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1073,6 +1073,7 @@ PHP_FUNCTION(number_format)
 {
 	zval **num, **dec, **t_s, **d_p;
 	char thousand_sep=',', dec_point='.';
+	char *tmp;
 	
 	switch(ZEND_NUM_ARGS()) {
 	case 1:
@@ -1080,16 +1081,24 @@ PHP_FUNCTION(number_format)
 			RETURN_FALSE;
 		}
 		convert_to_double_ex(num);
-		RETURN_STRING(_php_math_number_format(Z_DVAL_PP(num), 0, dec_point, thousand_sep), 0);
-		break;
+		tmp = _php_math_number_format(Z_DVAL_PP(num), 0, dec_point, thousand_sep);
+		RETVAL_RT_STRING(tmp, 0);
+		if (UG(unicode)) {
+			efree(tmp);
+		}
+		return;
 	case 2:
 		if (zend_get_parameters_ex(2, &num, &dec)==FAILURE) {
 			RETURN_FALSE;
 		}
 		convert_to_double_ex(num);
 		convert_to_long_ex(dec);
-		RETURN_STRING(_php_math_number_format(Z_DVAL_PP(num), Z_LVAL_PP(dec), dec_point, thousand_sep), 0);
-		break;
+		tmp = _php_math_number_format(Z_DVAL_PP(num), Z_LVAL_PP(dec), dec_point, thousand_sep);
+		RETVAL_RT_STRING(tmp, 0);
+		if (UG(unicode)) {
+			efree(tmp);
+		}
+		return;
 	case 4:
 		if (zend_get_parameters_ex(4, &num, &dec, &d_p, &t_s)==FAILURE) {
 			RETURN_FALSE;
@@ -1113,8 +1122,12 @@ PHP_FUNCTION(number_format)
 				thousand_sep=0;	
 			}
 		}
-		RETURN_STRING(_php_math_number_format(Z_DVAL_PP(num), Z_LVAL_PP(dec), dec_point, thousand_sep), 0);
-		break;
+		tmp = _php_math_number_format(Z_DVAL_PP(num), Z_LVAL_PP(dec), dec_point, thousand_sep);
+		RETVAL_RT_STRING(tmp, 0);
+		if (UG(unicode)) {
+			efree(tmp);
+		}
+		return;
 	default:
 		WRONG_PARAM_COUNT;
 		break;

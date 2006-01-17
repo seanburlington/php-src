@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.182 2006/01/01 13:09:54 sniper Exp $
+   $Id: sqlite.c,v 1.183 2006/01/17 12:18:52 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -442,7 +442,7 @@ static void php_sqlite_generic_function_callback(sqlite_func *func, int argc, co
 		return;
 	}
 
-	ZVAL_STRING(&funcname, (char*)argv[0], 1);
+	ZVAL_ASCII_STRING(&funcname, (char*)argv[0], 1);
 
 	if (!zend_make_callable(&funcname, &callable TSRMLS_CC)) {
 		spprintf(&errbuf, 0, "function `%R' is not a function name", Z_TYPE(callable), Z_UNIVAL(callable));
@@ -1128,7 +1128,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.182 2006/01/01 13:09:54 sniper Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.183 2006/01/17 12:18:52 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1862,7 +1862,7 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 			Z_STRVAL_P(decoded) = emalloc(strlen(rowdata[j]));
 			Z_STRLEN_P(decoded) = php_sqlite_decode_binary(rowdata[j]+1, Z_STRVAL_P(decoded));
 			Z_STRVAL_P(decoded)[Z_STRLEN_P(decoded)] = '\0';
-			Z_TYPE_P(decoded) = UG(unicode)?IS_BINARY:IS_STRING;
+			Z_TYPE_P(decoded) = IS_STRING;
 			if (!buffered) {
 				efree((char*)rowdata[j]);
 				rowdata[j] = NULL;
@@ -1951,7 +1951,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 		char *decoded = emalloc(l);
 		l = php_sqlite_decode_binary(rowdata[j]+1, decoded);
 		decoded[l] = '\0';
-		RETVAL_BINARYL(decoded, l, 0);
+		RETVAL_STRINGL(decoded, l, 0);
 		if (!res->buffered) {
 			efree((char*)rowdata[j]);
 			rowdata[j] = NULL;

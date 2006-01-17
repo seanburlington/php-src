@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.275 2006/01/11 15:18:58 mike Exp $ */
+/* $Id: run-tests.php,v 1.276 2006/01/17 12:18:51 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.275 $'."\n";
+					echo '$Revision: 1.276 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1077,8 +1077,8 @@ TEST $file
 	$exp_filename      = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'exp';
 	$output_filename   = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'out';
 	$memcheck_filename = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'mem';
-	$temp_file         = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'php';
-	$test_file         = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'php';
+	$temp_file         = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt')/*.$pu*/.'php';
+	$test_file         = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt')/*.$pu*/.'php';
 	$temp_skipif       = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'skip.php';
 	$test_skipif       = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'skip.php';
 	$temp_clean        = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'clean.php';

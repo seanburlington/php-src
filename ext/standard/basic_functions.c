@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.747 2006/01/13 13:04:01 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.748 2006/01/17 12:18:52 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -534,7 +534,6 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(is_numeric,														NULL)
 	PHP_FE(is_string,														NULL)
 	PHP_FE(is_unicode,													NULL)
-	PHP_FE(is_binary,														NULL)
 	PHP_FE(is_buffer,														NULL)
 	PHP_FE(is_array,														NULL)
 	PHP_FE(is_object,														NULL)
@@ -1425,7 +1424,7 @@ PHP_FUNCTION(getenv)
 		ptr = getenv(str);
 	}
 	if (ptr) {
-		RETURN_STRING(ptr, 1);
+		RETURN_RT_STRING(ptr, 1);
 	}
 	RETURN_FALSE;
 }
@@ -2572,7 +2571,7 @@ PHP_FUNCTION(ini_get)
 		RETURN_FALSE;
 	}
 
-	RETURN_STRING(str, 1);
+	RETURN_RT_STRING(str, 1);
 }
 /* }}} */
 

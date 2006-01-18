@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.28 2006/01/11 15:19:52 mike Exp $ */
+/* $Id: run-tests.php,v 1.226.2.29 2006/01/18 17:59:20 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -384,7 +384,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.28 $'."\n";
+					echo '$Revision: 1.226.2.29 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -714,7 +714,7 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 		$failed_tests_data .= "Bundled Libtool:\n$libtool\n";
 		$failed_tests_data .= "System Libtool:\n$sys_libtool\n";
 		$failed_tests_data .= "Compiler:\n$compiler\n";
-		$failed_tests_data .= "Bison:\n". @shell_exec('bison --version'). "\n";
+		$failed_tests_data .= "Bison:\n". @shell_exec('bison --version 2>/dev/null'). "\n";
 		$failed_tests_data .= "Libraries:\n$ldd\n";
 		$failed_tests_data .= "\n";
 		

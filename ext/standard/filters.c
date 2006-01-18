@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.44.2.4 2006/01/12 19:23:58 helly Exp $ */
+/* $Id: filters.c,v 1.44.2.5 2006/01/18 23:55:47 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -641,7 +641,7 @@ static php_conv_err_t php_conv_base64_decode_convert(php_conv_base64_decode *ins
 	size_t icnt, ocnt;
 	unsigned int ustat;
 
-	const static unsigned int nbitsof_pack = 8;
+	static const unsigned int nbitsof_pack = 8;
 
 	if (in_pp == NULL || in_left_p == NULL) {
 		if (inst->eos || inst->urem_nbits == 0) { 

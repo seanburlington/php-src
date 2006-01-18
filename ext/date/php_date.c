@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.37 2006/01/04 21:31:29 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.38 2006/01/18 21:40:38 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -76,7 +76,7 @@ zend_function_entry date_functions[] = {
 	/* Astronomical functions */
 	PHP_FE(date_sunrise, NULL)
 	PHP_FE(date_sunset, NULL)
-/*	PHP_FE(date_sun_info, NULL) */
+	PHP_FE(date_sun_info, NULL)
 	{NULL, NULL, NULL}
 };
 

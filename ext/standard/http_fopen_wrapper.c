@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.8 2006/01/01 12:50:14 sniper Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.9 2006/01/20 01:40:32 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -486,6 +486,10 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 				response_code = atoi(tmp_line + 9);
 			} else {
 				response_code = 0;
+			}
+			/* when we request only the header, don't fail even on error codes */
+			if (options & STREAM_ONLY_GET_HEADERS) {
+				reqok = 1;
 			}
 			switch(response_code) {
 				case 200:

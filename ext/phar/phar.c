@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | phar php single-file executable PHP extension                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2005 The PHP Group                                     |
+  | Copyright (c) 2005-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.62 2006/01/12 21:16:27 helly Exp $ */
+/* $Id: phar.c,v 1.63 2006/01/23 19:30:13 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1430,7 +1430,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.62 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.63 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");
@@ -1443,6 +1443,7 @@ PHP_MINFO_FUNCTION(phar)
 #else
 		"disabled");
 #endif
+	php_info_print_table_row(1, "Phar based on pear/PHP_Archive, original concept by Davey Shafik and fully realized by Gregory Beaver");
 	php_info_print_table_end();
 }
 /* }}} */

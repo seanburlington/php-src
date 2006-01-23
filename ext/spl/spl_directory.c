@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.12 2006/01/15 00:17:43 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.13 2006/01/23 15:24:10 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -391,6 +391,12 @@ SPL_METHOD(DirectoryIterator, __construct)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &path, &len) == FAILURE) {
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		return;
+	}
+
+	if (!len) {
+		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
+                zend_throw_exception_ex(spl_ce_RuntimeException, 0 TSRMLS_CC, "Directory name must not be empty.");
+                return;
 	}
 
 	intern = (spl_filesystem_object*)zend_object_store_get_object(getThis() TSRMLS_CC);

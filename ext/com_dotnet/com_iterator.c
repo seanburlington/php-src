@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_iterator.c,v 1.7 2004/03/08 21:17:39 helly Exp $ */
+/* $Id: com_iterator.c,v 1.7.2.1 2006/01/24 08:54:29 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -232,7 +232,7 @@ fail:
 	if (I) {
 		VariantClear(&I->safe_array);
 		VariantClear(&I->v);
-		free(I);
+		efree(I);
 	}
 	return NULL;
 }

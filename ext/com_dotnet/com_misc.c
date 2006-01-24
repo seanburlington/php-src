@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_misc.c,v 1.7 2004/05/09 14:28:19 wez Exp $ */
+/* $Id: com_misc.c,v 1.7.2.1 2006/01/24 08:54:29 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,6 +51,7 @@ PHPAPI void php_com_wrap_dispatch(zval *z, IDispatch *disp,
 	memset(obj, 0, sizeof(*obj));
 	obj->code_page = codepage;
 	obj->ce = php_com_variant_class_entry;
+	obj->zo.ce = php_com_variant_class_entry;
 
 	VariantInit(&obj->v);
 	V_VT(&obj->v) = VT_DISPATCH;
@@ -73,6 +74,7 @@ PHPAPI void php_com_wrap_variant(zval *z, VARIANT *v,
 	memset(obj, 0, sizeof(*obj));
 	obj->code_page = codepage;
 	obj->ce = php_com_variant_class_entry;
+	obj->zo.ce = php_com_variant_class_entry;
 
 	VariantInit(&obj->v);
 	VariantCopyInd(&obj->v, v);

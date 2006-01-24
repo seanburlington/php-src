@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.34 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: spprintf.c,v 1.35 2006/01/24 20:57:56 helly Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -722,7 +722,7 @@ fmt_string:
 
 				case 'n':
 					*(va_arg(ap, int *)) = xbuf->len;
-					break;
+					goto skip_output;
 
 					/*
 					 * Always extract the argument as a "char *" pointer. We 
@@ -802,6 +802,7 @@ fmt_error:
 				PAD(unicode, xbuf, min_width - s_len, pad_char);
 			}
 		}
+skip_output:
 		fmt++;
 	}
 	return;

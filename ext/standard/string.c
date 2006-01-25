@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.515 2006/01/24 23:09:43 andrei Exp $ */
+/* $Id: string.c,v 1.516 2006/01/25 00:02:23 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2278,15 +2278,8 @@ PHP_FUNCTION(strpos)
 				php_error(E_WARNING, "Needle argument codepoint value out of range (0 - 0x10FFFF)");
 				RETURN_FALSE;
 			}
-			/* supplementary codepoint values may require 2 UChar's */
-			if (U_IS_BMP(Z_LVAL_PP(needle))) {
-				u_needle_char[n_len++] = (UChar) Z_LVAL_PP(needle);
-				u_needle_char[n_len]   = 0;
-			} else {
-				u_needle_char[n_len++] = (UChar) U16_LEAD(Z_LVAL_PP(needle));
-				u_needle_char[n_len++] = (UChar) U16_TRAIL(Z_LVAL_PP(needle));
-				u_needle_char[n_len]   = 0;
-			}
+			n_len += zend_codepoint_to_uchar(Z_LVAL_PP(needle), u_needle_char);
+			u_needle_char[n_len] = 0;
 
 			/* locate the codepoint at the specified offset */
 			U16_FWD_N((UChar*)haystack, cp_offset, haystack_len, offset);

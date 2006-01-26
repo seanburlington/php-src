@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57.2.3 2006/01/01 12:50:15 sniper Exp $ */
+/* $Id: pack.c,v 1.57.2.4 2006/01/26 15:45:33 iliaa Exp $ */
 
 #include "php.h"
 
@@ -692,7 +692,9 @@ PHP_FUNCTION(unpack)
 							len = size * 2;
 						} 
 
-						len -= argb % 2;
+						if (argb > 0) {	
+							len -= argb % 2;
+						}
 
 						buf = emalloc(len + 1);
 

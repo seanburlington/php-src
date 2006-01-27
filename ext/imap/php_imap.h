@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.33 2006/01/01 13:09:50 sniper Exp $ */
+/* $Id: php_imap.h,v 1.34 2006/01/27 19:44:40 mike Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -114,6 +114,7 @@ PHP_FUNCTION(imap_rfc822_parse_headers);
 PHP_FUNCTION(imap_body);
 PHP_FUNCTION(imap_fetchstructure);
 PHP_FUNCTION(imap_fetchbody);
+PHP_FUNCTION(imap_savebody);
 PHP_FUNCTION(imap_expunge);
 PHP_FUNCTION(imap_delete);
 PHP_FUNCTION(imap_undelete);
@@ -205,6 +206,8 @@ ZEND_BEGIN_MODULE_GLOBALS(imap)
 	zval **quota_return;
 	zval *imap_acl_list;
 #endif
+	/* php_stream for php_mail_gets() */
+	php_stream *gets_stream;
 ZEND_END_MODULE_GLOBALS(imap)
 
 #ifdef ZTS

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.16 2006/01/17 23:47:08 tony2001 Exp $ */
+/* $Id: gd.c,v 1.312.2.17 2006/01/27 13:36:29 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -450,6 +450,22 @@ PHP_MINIT_FUNCTION(gd)
 	/* End Section Filters */
 #else
 	REGISTER_LONG_CONSTANT("GD_BUNDLED", 0, CONST_CS | CONST_PERSISTENT);
+#endif
+
+#ifdef HAVE_GD_PNG
+
+/*
+ * cannot include #include "png.h"
+ * /usr/include/pngconf.h:310:2: error: #error png.h already includes setjmp.h with some additional fixup.
+ * as error, use the values for now...
+ */
+	REGISTER_LONG_CONSTANT("PNG_NO_FILTER",		0x00, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_FILTER_NONE",	0x08, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_FILTER_SUB",	0x10, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_FILTER_UP",		0x20, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_FILTER_AVG",	0x40, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_FILTER_PAETH",	0x80, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PNG_ALL_FILTERS",	0x08 | 0x10 | 0x20 | 0x40 | 0x80, CONST_CS | CONST_PERSISTENT);
 #endif
 	return SUCCESS;
 }

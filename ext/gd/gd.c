@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.17 2006/01/27 13:36:29 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.18 2006/01/27 20:46:02 mike Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -27,6 +27,11 @@
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
+
+#ifdef HAVE_GD_PNG
+/* needs to be first */
+#include <png.h>
 #endif
 
 #include "php.h"

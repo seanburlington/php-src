@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.139.2.1 2006/01/01 12:50:14 sniper Exp $ */
+/* $Id: basic_functions.h,v 1.139.2.2 2006/01/28 06:14:34 fmk Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -216,10 +216,10 @@ typedef struct _php_basic_globals {
 
 #ifdef ZTS
 #define BG(v) TSRMG(basic_globals_id, php_basic_globals *, v)
-extern int basic_globals_id;
+PHPAPI extern int basic_globals_id;
 #else
 #define BG(v) (basic_globals.v)
-extern php_basic_globals basic_globals;
+PHPAPI extern php_basic_globals basic_globals;
 #endif
 
 #if HAVE_PUTENV

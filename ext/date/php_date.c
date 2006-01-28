@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.38 2006/01/18 21:40:38 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.39 2006/01/28 06:18:01 fmk Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -786,7 +786,7 @@ PHPAPI void php_date_set_tzdb(timelib_tzdb *tzdb)
 /* }}} */
 
 /* {{{ php_parse_date: Backwards compability function */
-signed long php_parse_date(char *string, signed long *now)
+PHPAPI signed long php_parse_date(char *string, signed long *now)
 {
 	timelib_time *parsed_time;
 	int           error1, error2;

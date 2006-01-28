@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.6 2006/01/05 20:49:37 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.7 2006/01/28 00:14:01 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4653,6 +4653,8 @@ PHP_FUNCTION(str_rot13)
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg)) {
 		WRONG_PARAM_COUNT;
 	}
+
+    convert_to_string_ex(arg);
 	RETVAL_ZVAL(*arg, 1, 0);
 
 	php_strtr(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), rot13_from, rot13_to, 52);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.10 2006/01/14 15:10:54 sniper Exp $ */
+/* $Id: sanitizing_filters.c,v 1.11 2006/01/29 16:37:42 derick Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -189,7 +189,7 @@ void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL)
 
 	if (new_len == 0) {
 		zval_dtor(value);
-		Z_TYPE_P(value) = IS_NULL;
+		ZVAL_EMPTY_STRING(value);
 		return;
 	}
 

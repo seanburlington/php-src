@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.7 2006/01/28 00:14:01 pajoye Exp $ */
+/* $Id: string.c,v 1.445.2.8 2006/01/29 17:54:45 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4654,7 +4654,7 @@ PHP_FUNCTION(str_rot13)
 		WRONG_PARAM_COUNT;
 	}
 
-    convert_to_string_ex(arg);
+	convert_to_string_ex(arg);
 	RETVAL_ZVAL(*arg, 1, 0);
 
 	php_strtr(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), rot13_from, rot13_to, 52);

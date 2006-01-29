@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.56 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: pgsql_driver.c,v 1.57 2006/01/29 17:36:12 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -222,23 +222,26 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
 	PGresult *res;
+	long ret = 1;
 	
 	if (!(res = PQexec(H->server, sql))) {
 		/* fatal error */
 		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR, NULL);
 		return -1;
-	} else {
-		ExecStatusType qs = PQresultStatus(res);
-		if (qs != PGRES_COMMAND_OK && qs != PGRES_TUPLES_OK) {
-			pdo_pgsql_error(dbh, qs, pdo_pgsql_sqlstate(res));
-			PQclear(res);
-			return -1;
-		}
-		H->pgoid = PQoidValue(res);
-		PQclear(res);
 	}
+	ExecStatusType qs = PQresultStatus(res);
+	if (qs != PGRES_COMMAND_OK && qs != PGRES_TUPLES_OK) {
+		pdo_pgsql_error(dbh, qs, pdo_pgsql_sqlstate(res));
+		PQclear(res);
+		return -1;
+	}
+	H->pgoid = PQoidValue(res);
+#if HAVE_PQCMDTUPLES
+	ret = atol(PQcmdTuples(res));
+#endif
+	PQclear(res);
 
-	return 1;
+	return ret;
 }
 
 static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)

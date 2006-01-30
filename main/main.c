@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.63.2.8 2006/01/01 13:46:59 sniper Exp $ */
+/* $Id: main.c,v 1.512.2.63.2.9 2006/01/30 15:31:10 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -496,7 +496,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 					}
 				}
 			}
-			if (!PG(html_errors) || !strlen(PG(docref_root))) {
+			if (!PG(html_errors) && !strlen(PG(docref_root))) {
 				/* no docref and no html errors -> do not point to any documentation (e.g. production boxes) */
 				php_error(type, "%s(%s): %s", get_active_function_name(TSRMLS_C), params, buffer);
 			} else if (PG(html_errors)) {

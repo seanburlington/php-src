@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.4 2006/01/05 13:42:35 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.5 2006/01/31 18:38:52 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -358,7 +358,7 @@ int php_oci_bind_post_exec(void *data TSRMLS_DC);
 int php_oci_bind_by_name(php_oci_statement *, char *, int, zval*, long, long TSRMLS_DC);
 sb4 php_oci_bind_in_callback(dvoid *, OCIBind *, ub4, ub4, dvoid **, ub4 *, ub1 *, dvoid **);
 sb4 php_oci_bind_out_callback(dvoid *, OCIBind *, ub4, ub4, dvoid **, ub4 **, ub1 *, dvoid **, ub2 **);
-php_oci_out_column *php_oci_statement_get_column_helper(INTERNAL_FUNCTION_PARAMETERS);
+php_oci_out_column *php_oci_statement_get_column_helper(INTERNAL_FUNCTION_PARAMETERS, int need_data);
 
 int php_oci_statement_get_type(php_oci_statement *, ub2 * TSRMLS_DC);
 int php_oci_statement_get_numrows(php_oci_statement *, ub4 * TSRMLS_DC);

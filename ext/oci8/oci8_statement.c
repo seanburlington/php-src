@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.9 2006/01/20 11:02:49 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.10 2006/01/31 18:38:52 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1004,7 +1004,7 @@ sb4 php_oci_bind_out_callback(
 
 /* {{{ php_oci_statement_get_column_helper() 
  Helper function to get column by name and index */
-php_oci_out_column *php_oci_statement_get_column_helper(INTERNAL_FUNCTION_PARAMETERS)
+php_oci_out_column *php_oci_statement_get_column_helper(INTERNAL_FUNCTION_PARAMETERS, int need_data)
 {
 	zval *z_statement, *column_index;
 	php_oci_statement *statement;
@@ -1020,7 +1020,7 @@ php_oci_out_column *php_oci_statement_get_column_helper(INTERNAL_FUNCTION_PARAME
 		return NULL;
 	}
 
-	if (!statement->has_data) {
+	if (need_data && !statement->has_data) {
 		return NULL;
 	}
 	

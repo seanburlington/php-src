@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.8 2006/01/26 13:23:50 mike Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.9 2006/01/31 10:57:52 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -159,7 +159,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 #define PHP_CURL_CHECK_OPEN_BASEDIR(str, len)													\
 	if (((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) &&                                                \
-	    strncasecmp(str, "file://", sizeof("file://") - 1) == 0)								\
+	    strncasecmp(str, "file:", sizeof("file:") - 1) == 0)								\
 	{ 																							\
 		php_url *tmp_url; 																		\
 																								\

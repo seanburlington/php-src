@@ -12,16 +12,16 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Omar Kilani <omar@rmilk.com>                                 |
+  | Author: Omar Kilani <omar@php.net>                                   |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.3 2006/01/21 01:14:14 omar Exp $ */
+/* $Id: php_json.h,v 1.4 2006/01/31 08:59:06 omar Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
 
-#define PHP_JSON_VERSION "1.1.1"
+#define PHP_JSON_VERSION "1.2.0-BETA"
 
 extern zend_module_entry json_module_entry;
 #define phpext_json_ptr &json_module_entry
@@ -47,7 +47,7 @@ PHP_FUNCTION(json_decode);
 #define JSON_G(v) (json_globals.v)
 #endif
 
-#endif	/* PHP_JSON_H */
+#endif  /* PHP_JSON_H */
 
 
 /*

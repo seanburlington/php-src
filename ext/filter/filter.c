@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.35 2006/01/23 09:04:50 derick Exp $ */
+/* $Id: filter.c,v 1.36 2006/01/31 18:51:49 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,7 +98,7 @@ zend_module_entry filter_module_entry = {
 	NULL,
 	PHP_RSHUTDOWN(filter),
 	PHP_MINFO(filter),
-	"0.9.4",
+	"0.9.5-dev",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -265,7 +265,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.35 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.36 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

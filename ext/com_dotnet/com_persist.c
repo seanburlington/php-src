@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_persist.c,v 1.2 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: com_persist.c,v 1.2.2.1 2006/02/01 07:42:40 sebastian Exp $ */
 
 /* Infrastructure for working with persistent COM objects.
  * Implements: IStream* wrapper for PHP streams.

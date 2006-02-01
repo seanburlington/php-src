@@ -15,11 +15,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.7 2006/01/01 13:09:56 sniper Exp $ */ 
+/* $Id: unicode.c,v 1.8 2006/02/01 23:50:50 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
 #include "zend_unicode.h"
+
+void php_register_unicode_iterators(TSRMLS_D);
 
 /* {{{ proto unicode unicode_decode(string input, string encoding)
    Takes a string in the source encoding and converts it to a UTF-16 unicode string, returning the result */
@@ -100,6 +102,8 @@ static PHP_FUNCTION(unicode_encode)
 
 	ucnv_close(conv);	
 }
+/* }}} */
+
 /* {{{ unicode_functions[] */
 zend_function_entry unicode_functions[] = {
 	PHP_FE(i18n_loc_get_default, NULL)
@@ -139,7 +143,8 @@ PHP_MINIT_FUNCTION(unicode)
 	if (php_stream_filter_register_factory("unicode.*", &php_unicode_filter_factory TSRMLS_CC) == FAILURE) {
 		return FAILURE;
 	}
-	/* add your stuff here */
+
+	php_register_unicode_iterators(TSRMLS_C);
 
 	return SUCCESS;
 }

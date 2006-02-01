@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.70.2.3 2006/01/01 13:46:57 sniper Exp $ */
+/* $Id: file.c,v 1.279.2.70.2.4 2006/02/01 10:32:38 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -819,7 +819,7 @@ PHP_FUNCTION(stream_select)
 
 	/* If seconds is not set to null, build the timeval, else we wait indefinitely */
 	if (sec != NULL) {
-		convert_to_long_ex(&sec);
+		convert_to_long(sec);
 
 		if (usec > 999999) {
 			tv.tv_sec = Z_LVAL_P(sec) + (usec / 1000000);

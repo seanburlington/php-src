@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.73 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pdo_driver.h,v 1.74 2006/02/01 09:10:23 tony2001 Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -489,6 +489,13 @@ struct _pdo_dbh_t {
 	zend_class_entry *def_stmt_ce;
 	
 	zval *def_stmt_ctor_args;
+    
+	/* when calling PDO::query(), we need to keep the error
+	 * context from the statement around until we next clear it.
+	 * This will allow us to report the correct error message
+	 * when PDO::query() fails */
+	pdo_stmt_t *query_stmt;
+	zval query_stmt_zval;
 };
 
 /* describes a column */

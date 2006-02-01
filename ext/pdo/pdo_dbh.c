@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.109 2006/01/31 17:21:25 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.110 2006/02/01 09:10:23 tony2001 Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -72,7 +72,7 @@ void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate
 	if (dbh->error_mode != PDO_ERRMODE_EXCEPTION) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", message);
 	} else {
-		zval *ex, info;
+		zval *ex, *info;
 		zend_class_entry *def_ex = php_pdo_get_exception_base(1 TSRMLS_CC), *pdo_ex = php_pdo_get_exception(TSRMLS_C);
 
 		MAKE_STD_ZVAL(ex);

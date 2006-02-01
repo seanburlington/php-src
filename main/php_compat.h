@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.26 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_compat.h,v 1.27 2006/02/01 13:10:04 jorton Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -319,6 +319,12 @@
 #define term_source php_gd_term_source
 #define writewbmp php_gd_writewbmp
 #define ZeroDataBlock php_gd_ZeroDataBlock
+#define gdCacheCreate php_gd_gdCacheCreate
+#define gdCacheDelete php_gd_gdCacheDelete
+#define gdCacheGet php_gd_gdCacheGet
+#define gdFontCacheSetup php_gd_gdFontCacheSetup
+#define gdFontCacheShutdown php_gd_gdFontCacheShutdown
+#define gdFreeFontCache php_gd_gdFreeFontCache
 #endif /* HAVE_GD_BUNDLED */
 
 /* Define to specify how much context to retain around the current parse

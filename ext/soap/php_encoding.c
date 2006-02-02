@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.118 2006/02/01 17:18:38 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.119 2006/02/02 11:42:12 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1156,6 +1156,14 @@ static void model_to_zval_object(zval *ret, sdlContentModelPtr model, xmlNodePtr
 							}
 							add_next_index_zval(array, val);
 						} while ((node = get_node(node->next, model->u.element->name)) != NULL);
+						val = array;
+					} else if ((SOAP_GLOBAL(features) & SOAP_SINGLE_ELEMENT_ARRAYS) && 
+					           (model->max_occurs == -1 || model->max_occurs > 1)) {
+						zval *array;
+
+						MAKE_STD_ZVAL(array);
+						array_init(array);
+						add_next_index_zval(array, val);
 						val = array;
 					}
 					set_zval_property(ret, model->u.element->name, val TSRMLS_CC);

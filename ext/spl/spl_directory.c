@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.13 2006/01/23 15:24:10 iliaa Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.14 2006/02/02 12:19:14 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -340,6 +340,8 @@ static spl_filesystem_object * spl_filesystem_object_create_type(int ht, spl_fil
 		spl_filesystem_object_get_file_name(source TSRMLS_CC);
 		intern->file_name = estrndup(source->file_name, source->file_name_len);
 		intern->file_name_len = source->file_name_len;
+		intern->path = estrndup(source->path, source->path_len);
+		intern->path_len = source->path_len;
 		break;
 	case SPL_FS_FILE:
 		return_value->value.obj = spl_filesystem_object_new_ex(ce ? ce : source->file_class, &intern TSRMLS_CC);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.16 2006/02/02 15:10:04 iliaa Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.17 2006/02/02 18:59:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1406,7 +1406,7 @@ SPL_METHOD(SplFileObject, __construct)
 	if (spl_filesystem_file_open(intern, use_include_path, 0 TSRMLS_CC) == SUCCESS) {
 		p1 = strrchr(intern->file_name, '/');
 #if defined(PHP_WIN32) || defined(NETWARE)
-		p2 = strrchr(path, '\\');
+		p2 = strrchr(intern->file_name, '\\');
 #else
 		p2 = 0;
 #endif

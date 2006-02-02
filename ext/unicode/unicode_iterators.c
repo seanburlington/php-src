@@ -10,11 +10,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andre Zmievski(andrei@php.net)                              |
+   | Authors: Andrei Zmievski <andrei@php.net>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.3 2006/02/02 00:05:21 andrei Exp $ */
+/* $Id: unicode_iterators.c,v 1.4 2006/02/02 06:01:27 sebastian Exp $ */
 
 
 #include "php.h"

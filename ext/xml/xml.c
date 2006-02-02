@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.162 2006/01/17 12:18:53 dmitry Exp $ */
+/* $Id: xml.c,v 1.163 2006/02/02 21:43:40 tony2001 Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1360,9 +1360,8 @@ PHP_FUNCTION(xml_parse_into_struct)
 {
 	xml_parser *parser;
 	zval **pind, **data, **xdata, **info = 0;
-	int argc, ret;
+	int ret;
 
-	argc = ZEND_NUM_ARGS();
 	if (zend_get_parameters_ex(4, &pind, &data, &xdata,&info) == SUCCESS) {
 		zval_dtor(*info);
 		array_init(*info);

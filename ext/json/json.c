@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.6 2006/01/31 08:59:06 omar Exp $ */
+/* $Id: json.c,v 1.7 2006/02/02 10:54:32 omar Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -208,6 +208,12 @@ static void json_escape_string(smart_str *buf, char *s, int len TSRMLS_DC)
     unsigned short us;
     unsigned short *utf16;
 
+    if (len == 0)
+    {
+        smart_str_appendl(buf, "\"\"", 2);
+        return;
+    }
+
     utf16 = (unsigned short *) emalloc(len * sizeof(unsigned short));
 
     len = utf8_to_utf16(utf16, s, len);
@@ -218,6 +224,7 @@ static void json_escape_string(smart_str *buf, char *s, int len TSRMLS_DC)
             efree(utf16);
         }
 
+        smart_str_appendl(buf, "\"\"", 2);
         return;
     }
 

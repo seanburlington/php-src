@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.5 2006/01/01 12:50:18 sniper Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.6 2006/02/02 08:17:23 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -79,9 +79,7 @@
 #include "php_getopt.h"
 
 #if PHP_FASTCGI
-#include "fcgi_config.h"
-#include "fcgiapp.h"
-/* don't want to include fcgios.h, causes conflicts */
+#include "fastcgi.h"
 #ifdef PHP_WIN32
 extern int OS_SetImpersonate(void);
 #else

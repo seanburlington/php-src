@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.34 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: xp_socket.c,v 1.35 2006/02/02 18:16:25 pollita Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -578,7 +578,7 @@ static inline int php_tcp_sockop_connect(php_stream *stream, php_netstream_data_
 		php_stream_xport_param *xparam TSRMLS_DC)
 {
 	char *host = NULL, *bindto = NULL;
-	int portno, bindport;
+	int portno, bindport = 0;
 	int err;
 	int ret;
 	zval **tmpzval = NULL;

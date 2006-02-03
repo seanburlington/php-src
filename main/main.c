@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.661 2006/01/17 12:18:53 dmitry Exp $ */
+/* $Id: main.c,v 1.662 2006/02/03 09:33:31 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -947,6 +947,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				AG(memory_limit) = PG(memory_limit); 
 #endif
 				efree(buffer);
+				zend_objects_store_mark_destructed(&EG(objects_store) TSRMLS_CC);
 				zend_bailout();
 				return;
 			}

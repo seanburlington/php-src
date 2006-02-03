@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.6 2006/02/02 08:17:23 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.7 2006/02/03 16:30:09 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -274,7 +274,7 @@ static void sapi_cgibin_flush(void *server_context)
 #ifndef PHP_WIN32
 		!parent && 
 #endif
-		(!request || FCGX_FFlush(request->out) == -1)) {
+		request && FCGX_FFlush(request->out) == -1) {
 			php_handle_aborted_connection();
 		}
 		return;
@@ -1242,7 +1242,8 @@ consult the installation file that came with this distribution, or visit \n\
 #ifdef DEBUG_FASTCGI
 				fprintf(stderr, "Wait for kids, pid %d\n", getpid());
 #endif
-				wait(&status);
+				while (wait(&status) < 0) {
+				}
 				running--;
 			}
 		}
@@ -1656,6 +1657,7 @@ fastcgi_request_done:
 		exit_status = 255;
 	} zend_end_try();
 
+	SG(server_context) = NULL;
 	php_module_shutdown(TSRMLS_C);
 	sapi_shutdown();
 

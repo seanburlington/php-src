@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.34 2006/01/26 11:18:09 rrichards Exp $ */
+/* $Id: com_handlers.c,v 1.35 2006/02/04 10:59:18 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -627,9 +627,11 @@ void php_com_object_free_storage(void *object TSRMLS_DC)
 	VariantClear(&obj->v);
 
 	if (obj->method_cache) {
+		zend_hash_destroy(obj->method_cache);
 		FREE_HASHTABLE(obj->method_cache);
 	}
 	if (obj->id_of_name_cache) {
+		zend_hash_destroy(obj->id_of_name_cache);
 		FREE_HASHTABLE(obj->id_of_name_cache);
 	}
 	efree(obj);

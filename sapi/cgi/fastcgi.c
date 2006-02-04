@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.3 2006/02/03 16:30:09 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.4 2006/02/04 23:54:21 fmk Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -623,6 +623,10 @@ static inline void fcgi_close(fcgi_request *req, int force, int destroy)
 
 int fcgi_accept_request(fcgi_request *req)
 {
+#ifdef _WIN32
+	HANDLE pipe;
+	OVERLAPPED ov;
+#endif
 	fcgi_finish_request(req);
 
 	while (1) {
@@ -632,8 +636,7 @@ int fcgi_accept_request(fcgi_request *req)
 					return -1;
 				}
 #ifdef _WIN32
-				HANDLE pipe = (HANDLE)_get_osfhandle(req->listen_socket);
-				OVERLAPPED ov;
+				pipe = (HANDLE)_get_osfhandle(req->listen_socket);
 
 				FCGI_LOCK(req->listen_socket);
 				ov.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.29 2006/01/18 17:59:20 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.30 2006/02/05 17:33:11 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -384,7 +384,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.29 $'."\n";
+					echo '$Revision: 1.226.2.30 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1028,17 +1028,19 @@ TEST $file
 		$temp_dir = str_replace($temp_source, $temp_target, $temp_dir);
 	}
 
-	$diff_filename     = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'diff';
-	$log_filename      = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'log';
-	$exp_filename      = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'exp';
-	$output_filename   = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'out';
-	$memcheck_filename = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'mem';
-	$temp_file         = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'php';
-	$test_file         = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'php';
-	$temp_skipif       = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'skip.php';
-	$test_skipif       = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'skip.php';
-	$temp_clean        = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'clean.php';
-	$test_clean        = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').'clean.php';
+	$main_file_name = basename($file,'phpt');
+
+	$diff_filename     = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'diff';
+	$log_filename      = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'log';
+	$exp_filename      = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'exp';
+	$output_filename   = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'out';
+	$memcheck_filename = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'mem';
+	$temp_file         = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'php';
+	$test_file         = $test_dir . DIRECTORY_SEPARATOR . $main_file_name.'php';
+	$temp_skipif       = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'skip.php';
+	$test_skipif       = $test_dir . DIRECTORY_SEPARATOR . $main_file_name.'skip.php';
+	$temp_clean        = $temp_dir . DIRECTORY_SEPARATOR . $main_file_name.'clean.php';
+	$test_clean        = $test_dir . DIRECTORY_SEPARATOR . $main_file_name.'clean.php';
 	$tmp_post          = $temp_dir . DIRECTORY_SEPARATOR . uniqid('/phpt.');
 	$tmp_relative_file = str_replace(dirname(__FILE__).DIRECTORY_SEPARATOR, '', $test_file) . 't';
 

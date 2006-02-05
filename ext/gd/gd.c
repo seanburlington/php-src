@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.343 2006/02/02 20:30:54 pajoye Exp $ */
+/* $Id: gd.c,v 1.344 2006/02/05 15:53:02 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1454,10 +1454,13 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 				im = gdImageCreateFromXpm(fn);
 				break;
 #endif
+
+#ifdef HAVE_GD_JPG
 			case PHP_GDIMG_TYPE_JPG:
 				ignore_warning = INI_INT("gd.jpeg_ignore_warning");
 				im = gdImageCreateFromJpeg(fp, ignore_warning);
 				break;
+#endif
 
 			default:
 				im = (*func_p)(fp);

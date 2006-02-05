@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.18 2006/02/05 11:43:44 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.19 2006/02/05 19:23:30 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1899,7 +1899,7 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_file_object_flock, 0, 0, 1) 
 	ZEND_ARG_INFO(0, operation)
-	ZEND_ARG_INFO(1, wouldblock])
+	ZEND_ARG_INFO(1, wouldblock)
 ZEND_END_ARG_INFO()
 
 static

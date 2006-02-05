@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.70 2006/02/02 19:02:05 helly Exp $ */
+/* $Id: spl_directory.c,v 1.71 2006/02/05 11:43:28 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1199,6 +1199,7 @@ static int spl_filesystem_object_cast(zval *readobj, zval *writeobj, int type TS
 			return SUCCESS;
 		}
 	}
+	ZVAL_NULL(writeobj);
 	return FAILURE;
 }
 /* }}} */

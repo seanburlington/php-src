@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.10 2006/02/04 00:41:42 andrei Exp $ */
+/* $Id: unicode_iterators.c,v 1.11 2006/02/05 23:31:47 helly Exp $ */
 
 /*
  * TODO
@@ -239,10 +239,16 @@ zend_object_iterator_funcs text_iter_cp_funcs = {
 	text_iter_rewind,
 };
 
-static zend_object_iterator* text_iter_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
+static zend_object_iterator* text_iter_get_iterator(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC)
 {
-	text_iter_it* 	iterator 	= emalloc(sizeof(text_iter_it));
-	text_iter_obj*	iter_object = (text_iter_obj *) zend_object_store_get_object(object TSRMLS_CC);
+	text_iter_it* 	iterator;
+	text_iter_obj*	iter_object;
+
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
+	iterator 	= emalloc(sizeof(text_iter_it));
+	iter_object = (text_iter_obj *) zend_object_store_get_object(object TSRMLS_CC);
 
 	ZVAL_ADDREF(object);
 	iterator->intern.data  = (void *) object;

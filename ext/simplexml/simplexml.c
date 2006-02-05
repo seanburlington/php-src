@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.183 2006/01/17 12:18:52 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.184 2006/02/05 23:31:47 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1769,9 +1769,14 @@ static xmlNodePtr php_sxe_reset_iterator(php_sxe_object *sxe, int use_data TSRML
 	return NULL;
 }
 
-zend_object_iterator *php_sxe_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator *php_sxe_get_iterator(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC)
 {
-	php_sxe_iterator *iterator = emalloc(sizeof(php_sxe_iterator));
+	php_sxe_iterator *iterator;
+
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
+	iterator = emalloc(sizeof(php_sxe_iterator));
 
 	object->refcount++;
 	iterator->intern.data = (void*)object;
@@ -2027,7 +2032,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.184 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

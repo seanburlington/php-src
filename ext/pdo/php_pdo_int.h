@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.23 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pdo_int.h,v 1.24 2006/02/05 23:31:47 helly Exp $ */
 
 #include "php_pdo_phpvers_compat.h"
 
@@ -42,7 +42,7 @@ extern zend_object_value pdo_dbstmt_new(zend_class_entry *ce TSRMLS_DC);
 extern zend_function_entry pdo_dbstmt_functions[];
 extern zend_class_entry *pdo_dbstmt_ce;
 void pdo_dbstmt_free_storage(pdo_stmt_t *stmt TSRMLS_DC);
-zend_object_iterator *pdo_stmt_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *pdo_stmt_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 extern zend_object_handlers pdo_dbstmt_object_handlers;
 int pdo_stmt_describe_columns(pdo_stmt_t *stmt TSRMLS_DC);
 int pdo_stmt_setup_fetch_mode(INTERNAL_FUNCTION_PARAMETERS, pdo_stmt_t *stmt, int skip_first_arg);

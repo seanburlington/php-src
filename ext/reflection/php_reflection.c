@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.19 2006/01/30 21:14:54 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.20 2006/02/06 20:12:48 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3320,7 +3320,7 @@ ZEND_METHOD(reflection_class, getInterfaces)
 			zval *interface;
 			ALLOC_ZVAL(interface);
 			zend_reflection_class_factory(ce->interfaces[i], interface TSRMLS_CC);
-			add_assoc_zval_ex(return_value, ce->interfaces[i]->name, ce->interfaces[i]->name_length, interface);
+			add_assoc_zval_ex(return_value, ce->interfaces[i]->name, ce->interfaces[i]->name_length + 1, interface);
 		}
 	}
 }
@@ -4328,7 +4328,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.19 2006/01/30 21:14:54 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.20 2006/02/06 20:12:48 mike Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

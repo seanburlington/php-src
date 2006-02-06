@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.119 2006/02/02 11:42:12 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.120 2006/02/06 13:17:20 dmitry Exp $ */
 
 #include <time.h>
 
@@ -327,7 +327,7 @@ xmlNodePtr master_to_xml(encodePtr encode, zval *data, int style, xmlNodePtr par
 				    /* TODO: namespace isn't stored */
 			    	encodePtr enc = get_encoder(SOAP_GLOBAL(sdl), SOAP_GLOBAL(sdl)->target_ns, type_name);
 			    	if (enc) {
-			    		encode = &enc->details;
+			    		encode = enc;
 				 	}		        
 			        break;
 				}

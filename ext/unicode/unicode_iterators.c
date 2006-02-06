@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.12 2006/02/06 17:42:28 andrei Exp $ */
+/* $Id: unicode_iterators.c,v 1.13 2006/02/06 18:18:41 andrei Exp $ */
 
 /*
  * TODO
@@ -22,6 +22,7 @@
  * - optimize current() to pass return_value to the handler so that it fills it
  *   in directly instead of creating a new zval
  * - return code units as binary strings? integers? or leave as unicode strings?
+ * - implement Countable (or count_elements handler) and Seekable interfaces
  */
 
 #include "php.h"
@@ -43,8 +44,8 @@ typedef struct {
 	zval*			current;
 	union {
 		struct {
-			int32_t	offset;
 			int32_t	index;
+			int32_t	offset;
 		} cp;
 		struct {
 			int32_t	index;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.112 2006/02/05 23:31:47 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.113 2006/02/06 11:28:20 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -838,7 +838,7 @@ static inline spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAME
 {
 	zval                 *zobject, *retval;
 	spl_dual_it_object   *intern;
-	zend_class_entry     *ce;
+	zend_class_entry     *ce = NULL;
 	int                   inc_refcount = 1;
 
 

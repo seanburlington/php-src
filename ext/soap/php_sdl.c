@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.93 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: php_sdl.c,v 1.94 2006/02/06 11:28:20 tony2001 Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -2264,7 +2264,7 @@ sdlPtr get_sdl(zval *this_ptr, char *uri TSRMLS_DC)
 	char* old_error_code = SOAP_GLOBAL(error_code);
 	int uri_len;
 	php_stream_context *context=NULL;
-	zval **tmp, **proxy_host, **proxy_port, *orig_context, *new_context;
+	zval **tmp, **proxy_host, **proxy_port, *orig_context = NULL, *new_context = NULL;
 	smart_str headers = {0};
 
 	if (SUCCESS == zend_hash_find(Z_OBJPROP_P(this_ptr),

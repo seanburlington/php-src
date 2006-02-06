@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.29 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_xmlwriter.c,v 1.30 2006/02/06 11:28:20 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1341,7 +1341,7 @@ PHP_FUNCTION(xmlwriter_open_uri)
 
 #ifdef ZEND_ENGINE_2
 	zval *this = getThis();
-	ze_xmlwriter_object *ze_obj;
+	ze_xmlwriter_object *ze_obj = NULL;
 #endif
 
 #ifndef ZEND_ENGINE_2
@@ -1420,7 +1420,7 @@ PHP_FUNCTION(xmlwriter_open_memory)
 
 #ifdef ZEND_ENGINE_2
 	zval *this = getThis();
-	ze_xmlwriter_object *ze_obj;
+	ze_xmlwriter_object *ze_obj = NULL;
 #endif
 
 #ifdef ZEND_ENGINE_2

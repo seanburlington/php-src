@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.13 2006/02/06 11:01:06 tony2001 Exp $ */
+/* $Id: soap.c,v 1.156.2.14 2006/02/06 11:28:41 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2523,7 +2523,7 @@ PHP_METHOD(SoapClient, __call)
 	zval **param;
 	int arg_count;
 	zval **tmp;
-	zend_bool free_soap_headers;
+	zend_bool free_soap_headers = 0;
 
 	HashPosition pos;
 

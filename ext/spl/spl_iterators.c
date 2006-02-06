@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.21 2006/01/23 02:26:32 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.22 2006/02/06 11:28:41 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -821,7 +821,7 @@ static inline spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAME
 {
 	zval                 *zobject, *retval;
 	spl_dual_it_object   *intern;
-	zend_class_entry     *ce;
+	zend_class_entry     *ce = NULL;
 	int                   inc_refcount = 1;
 
 	php_set_error_handling(EH_THROW, spl_ce_InvalidArgumentException TSRMLS_CC);

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.10 2006/01/01 12:50:13 sniper Exp $ */
+/* $Id: simplexml.c,v 1.151.2.11 2006/02/06 10:52:34 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -229,10 +229,10 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 	php_sxe_object *sxe;
 	char           *name;
 	xmlNodePtr      node;
-	xmlAttrPtr      attr;
+	xmlAttrPtr      attr = NULL;
 	zval            tmp_zv;
 	int				nodendx = 0;
-	int             test;
+	int             test = 0;
 
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 
@@ -394,7 +394,7 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 	int             counter = 0;
 	int             is_attr = 0;
 	int				nodendx = 0;
-	int             test;
+	int             test = 0;
 	zval            tmp_zv, trim_zv;
 
 	if (!member) {
@@ -558,7 +558,7 @@ static int sxe_prop_dim_exists(zval *object, zval *member, int check_empty, zend
 	xmlNodePtr      node;
 	xmlAttrPtr      attr = NULL;
 	int				exists = 0;
-	int             test;
+	int             test = 0;
 
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 
@@ -2018,7 +2018,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.11 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.5 2006/01/01 12:50:11 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.6 2006/02/06 19:02:53 andrei Exp $ */
+
+/*
+ * TODO
+ *
+ * - Allow NULL for $matches argument (helps when using preg_match only for
+ *   match condition)
+ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

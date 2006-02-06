@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.8 2006/01/01 13:46:54 sniper Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.9 2006/02/06 10:42:58 tony2001 Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3510,7 +3510,7 @@ PHP_FUNCTION(mb_send_mail)
 	mbfl_memory_device device;	/* automatic allocateable buffer for additional header */
 	const mbfl_language *lang;
 	int err = 0;
-	char *to_r;
+	char *to_r = NULL;
 	int to_len, i;
 
 	/* initialize */

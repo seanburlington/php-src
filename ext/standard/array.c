@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.338 2006/01/17 12:18:52 dmitry Exp $ */
+/* $Id: array.c,v 1.339 2006/02/07 17:54:52 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -92,20 +92,7 @@
 
 #define DOUBLE_DRIFT_FIX	0.000000000000001
 
-ZEND_BEGIN_MODULE_GLOBALS(array) 
-	int *multisort_flags[2];
-	int (*compare_func)(zval *result, zval *op1, zval *op2 TSRMLS_DC);
-ZEND_END_MODULE_GLOBALS(array) 
-
-ZEND_DECLARE_MODULE_GLOBALS(array)
-
-#ifdef ZTS
-#define ARRAYG(v) TSRMG(array_globals_id, zend_array_globals *, v)
-#else
-#define ARRAYG(v) (array_globals.v)
-#endif
-
-/* {{{ php_extname_init_globals
+/* {{{ php_array_init_globals
  */
 static void php_array_init_globals(zend_array_globals *array_globals)
 {

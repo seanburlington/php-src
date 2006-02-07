@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.31 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: php_dom.h,v 1.32 2006/02/07 11:48:37 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -109,7 +109,7 @@ void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xml
 xmlNodePtr create_notation(const xmlChar *name, const xmlChar *ExternalID, const xmlChar *SystemID);
 xmlNode *php_dom_libxml_hash_iter(xmlHashTable *ht, int index);
 xmlNode *php_dom_libxml_notation_iter(xmlHashTable *ht, int index);
-zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 int dom_set_doc_classmap(php_libxml_ref_obj *document, zend_class_entry *basece, zend_class_entry *ce TSRMLS_DC);
 
 #define REGISTER_DOM_CLASS(ce, name, parent_ce, funcs, entry) \

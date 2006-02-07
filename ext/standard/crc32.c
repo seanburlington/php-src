@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.16.2.1 2006/01/01 12:50:14 sniper Exp $ */
+/* $Id: crc32.c,v 1.16.2.2 2006/02/07 00:23:55 pajoye Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -38,7 +38,7 @@ PHP_NAMED_FUNCTION(php_if_crc32)
 	for (len += nr; nr--; ++p) {
 	    CRC32(crc, *p);
 	}
-	RETVAL_LONG(~crc);
+	RETVAL_LONG(~ (long) crc);
 }
 /* }}} */
 

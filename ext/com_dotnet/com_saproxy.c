@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.17 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: com_saproxy.c,v 1.18 2006/02/07 11:52:45 rrichards Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -554,11 +554,15 @@ static zend_object_iterator_funcs saproxy_iter_funcs = {
 };
 
 
-zend_object_iterator *php_com_saproxy_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator *php_com_saproxy_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC)
 {
 	php_com_saproxy *proxy = SA_FETCH(object);
 	php_com_saproxy_iter *I;
 	int i;
+
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
 
 	I = ecalloc(1, sizeof(*I));
 	I->iter.funcs = &saproxy_iter_funcs;

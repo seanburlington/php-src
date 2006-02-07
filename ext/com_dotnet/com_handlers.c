@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.35 2006/02/04 10:59:18 rrichards Exp $ */
+/* $Id: com_handlers.c,v 1.36 2006/02/07 11:52:45 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -499,7 +499,7 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 	VariantInit(&v);
 
 	if (V_VT(&obj->v) == VT_DISPATCH) {
-		if (FAILURE == php_com_do_invoke_by_id(obj, DISPID_VALUE,
+		if (SUCCESS != php_com_do_invoke_by_id(obj, DISPID_VALUE,
 				DISPATCH_METHOD|DISPATCH_PROPERTYGET, &v, 0, NULL, 1 TSRMLS_CC)) {
 			VariantCopy(&v, &obj->v);
 		}

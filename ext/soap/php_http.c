@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.84 2006/02/06 10:16:15 dmitry Exp $ */
+/* $Id: php_http.c,v 1.85 2006/02/07 12:49:30 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -677,6 +677,13 @@ try_again:
 	} else {
 		add_soap_fault(this_ptr, "HTTP", "Failed to create stream??", NULL, NULL TSRMLS_CC);
 		return FALSE;
+	}
+
+	if (!buffer) {
+		php_stream_close(stream);
+		zend_hash_del(Z_OBJPROP_P(this_ptr), "httpsocket", sizeof("httpsocket"));
+		zend_hash_del(Z_OBJPROP_P(this_ptr), "_use_proxy", sizeof("_use_proxy"));
+		return TRUE;
 	}
 
 	do {

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.8 2006/02/07 12:49:09 dmitry Exp $ */
+/* $Id: php_http.c,v 1.77.2.9 2006/02/07 12:57:28 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -250,6 +250,8 @@ int make_http_soap_request(zval  *this_ptr,
 		int level = Z_LVAL_PP(tmp) & 0x0f;
 		int kind  = Z_LVAL_PP(tmp) & SOAP_COMPRESSION_DEFLATE;
 
+		if (level > 9) {level = 9;}
+		
 	  if ((Z_LVAL_PP(tmp) & SOAP_COMPRESSION_ACCEPT) != 0) {
 			smart_str_append_const(&soap_headers_z,"Accept-Encoding: gzip, deflate\r\n");
 	  }

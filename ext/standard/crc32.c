@@ -16,12 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.16.2.3 2006/02/09 15:33:53 pajoye Exp $ */
+/* $Id: crc32.c,v 1.16.2.4 2006/02/09 15:48:46 pajoye Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
 #include "crc32.h"
 
+/* {{{ proto string crc32(string str)
+   Calculate the crc32 polynomial of a string */
 PHP_NAMED_FUNCTION(php_if_crc32)
 {
 	char *p;
@@ -39,6 +41,7 @@ PHP_NAMED_FUNCTION(php_if_crc32)
 	}
 	RETVAL_LONG(crc^0xFFFFFFFF);
 }
+/* }}} */
 
 /*
  * Local variables:

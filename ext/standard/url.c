@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.21.2.2 2006/01/01 13:46:58 sniper Exp $ */
+/* $Id: url.c,v 1.58.2.21.2.3 2006/02/12 16:43:03 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -137,7 +137,7 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 				p++;
 			}
 			
-			if ((*p) == '\0' || *p == '/') {
+			if ((*p == '\0' || *p == '/') && (p - e) < 7) {
 				goto parse_port;
 			}
 			

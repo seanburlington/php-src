@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.8 2006/02/02 22:17:42 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.9 2006/02/12 16:44:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -913,11 +913,10 @@ SPL_METHOD(Array, exchangeArray)
     array_init(return_value);
 	zend_hash_copy(HASH_OF(return_value), spl_array_get_hash_table(intern, 0 TSRMLS_CC), (copy_ctor_func_t) zval_add_ref, &tmp, sizeof(zval*));
 	
-	if (ZEND_NUM_ARGS() > 1 || zend_get_parameters_ex(1, &array) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z", &array) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	if (Z_TYPE_PP(array) == IS_OBJECT && intern == (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC))
-	{
+	if (Z_TYPE_PP(array) == IS_OBJECT && intern == (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC)) {
 		zval_ptr_dtor(&intern->array);
 		array = &object;
 		intern->array = object;

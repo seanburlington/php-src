@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.9 2006/02/13 09:20:19 helly Exp $ */ 
+/* $Id: unicode.c,v 1.10 2006/02/13 19:55:17 helly Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -68,9 +68,9 @@ static PHP_FUNCTION(unicode_decode)
 }
 /* }}} */
 
-/* {{{ proto bool unicode_enabled()
+/* {{{ proto bool unicode_semantics()
    Check whether unicode semantics is enabled */
-static PHP_FUNCTION(unicode_enabled)
+static PHP_FUNCTION(unicode_semantics)
 {
 	RETURN_BOOL(UG(unicode));
 }
@@ -117,7 +117,7 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(i18n_loc_get_default, NULL)
 	PHP_FE(i18n_loc_set_default, NULL)
 	PHP_FE(unicode_decode, NULL)
-	PHP_FE(unicode_enabled, NULL)
+	PHP_FE(unicode_semantics, NULL)
 	PHP_FE(unicode_encode, NULL)
 	PHP_FE(i18n_strtotitle, NULL)
 	{ NULL, NULL, NULL }

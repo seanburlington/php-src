@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.113 2006/02/13 12:18:31 dmitry Exp $ */
+/* $Id: php_variables.c,v 1.114 2006/02/13 16:35:36 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -239,7 +239,7 @@ plain_var:
 	}
 }
 
-PHPAPI void php_u_register_variable_ex(UChar *var, zval *val, pval *track_vars_array TSRMLS_DC)
+PHPAPI void php_u_register_variable_ex(UChar *var, zval *val, zval *track_vars_array TSRMLS_DC)
 {
 	UChar *p = NULL;
 	UChar *ip;		/* index pointer */

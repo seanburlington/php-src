@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.81.2.13 2005/09/28 22:35:42 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.81.2.14 2006/02/13 12:18:48 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -204,6 +204,7 @@ plain_var:
 				if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
 					zend_symtable_find(symtable1, escaped_index, index_len+1, (void **) &tmp) != FAILURE) {
 					efree(escaped_index);
+					zval_ptr_dtor(&gpc_element);
 					break;
 				}
 				zend_symtable_update(symtable1, escaped_index, index_len+1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);

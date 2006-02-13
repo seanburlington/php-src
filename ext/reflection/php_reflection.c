@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.204 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.205 2006/02/13 14:49:54 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3578,14 +3578,10 @@ ZEND_METHOD(reflection_property, __construct)
 	
 	if (!(property_info->flags & ZEND_ACC_PRIVATE)) {
 		/* we have to seach the class hierarchy for this (implicit) public or protected property */
-		zend_class_entry *tmp_ce = ce->parent;
+		zend_class_entry *tmp_ce = ce;
 		zend_property_info *tmp_info;
 		
-		while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, name_str, name_len + 1, (void **) &tmp_info) == SUCCESS) {
-			if (tmp_info->flags & ZEND_ACC_PRIVATE) {
-				/* private in super class => NOT the same property */
-				break;
-			}
+		while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, name_str, name_len + 1, (void **) &tmp_info) != SUCCESS) {
 			ce = tmp_ce;
 			property_info = tmp_info;
 			tmp_ce = tmp_ce->parent;
@@ -4342,7 +4338,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.204 2006/02/13 10:23:57 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.205 2006/02/13 14:49:54 iliaa Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

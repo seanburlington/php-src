@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.11 2006/01/29 17:35:54 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.12 2006/02/13 15:53:36 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -670,7 +670,7 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	H->pgoid = -1;
 
 	dbh->methods = &pgsql_methods;
-	dbh->alloc_own_columns = 0;
+	dbh->alloc_own_columns = 1;
 	dbh->max_escaped_char_length = 2;
 
 	ret = 1;

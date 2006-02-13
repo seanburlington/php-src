@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.13.2.5 2006/01/01 13:47:00 sniper Exp $ */
+/* $Id: php_variables.c,v 1.45.2.13.2.6 2006/02/13 12:19:10 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -201,6 +201,7 @@ plain_var:
 					if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
 							zend_hash_find(symtable1, escaped_index, index_len+1, (void **) &tmp) != FAILURE) {
 						efree(escaped_index);
+						zval_ptr_dtor(&gpc_element);
 						break;
 					}
 					
@@ -209,6 +210,7 @@ plain_var:
 				} else {
 					if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
 							zend_hash_find(symtable1, index, index_len+1, (void **) &tmp) != FAILURE) {
+						zval_ptr_dtor(&gpc_element);
 						break;
 					}
 				

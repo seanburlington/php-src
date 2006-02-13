@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.19 2006/02/11 00:16:43 andrei Exp $ */
+/* $Id: unicode_iterators.c,v 1.20 2006/02/13 10:23:58 dmitry Exp $ */
 
 /*
  * TODO
@@ -539,7 +539,7 @@ PHP_METHOD(TextIterator, __construct)
 		intern->flags = flags;
 	}
 
-	if (Z_OBJCE_P(this_ptr) == U_CLASS_ENTRY(rev_text_iterator_ce)) {
+	if (Z_OBJCE_P(this_ptr) == rev_text_iterator_ce) {
 		intern->flags |= ITER_REVERSE;
 	}
 

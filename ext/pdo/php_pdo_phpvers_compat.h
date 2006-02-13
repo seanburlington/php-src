@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_phpvers_compat.h,v 1.2 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pdo_phpvers_compat.h,v 1.3 2006/02/13 10:23:57 dmitry Exp $ */
 
 /* macros for backwards compatibility with PHP 5, so that HEAD of PDO and its
  * drivers may still build against PHP 5 */
@@ -27,7 +27,6 @@
 
 #  define ZVAL_RT_STRINGL(a, b, c, d)		ZVAL_STRINGL(a, b, c, d)
 #  define ZVAL_ASCII_STRINGL(a, b, c, d)	ZVAL_STRINGL(a, b, c, d)
-#  define U_CLASS_ENTRY(ce)					ce
 #  define PDO_ZVAL_PP_IS_TEXT(pp)			(Z_TYPE_PP(pp) == IS_STRING)
 #  define PDO_ZVAL_P_IS_TEXT(pp)			(Z_TYPE_P(pp) == IS_STRING)
 #  define Z_UNIVAL_PP(x)					Z_STRVAL_PP(x)

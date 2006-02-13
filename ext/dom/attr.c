@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.21 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: attr.c,v 1.22 2006/02/13 10:23:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -54,8 +54,8 @@ PHP_METHOD(domattr, __construct)
 	char *name, *value = NULL;
 	int name_len, value_len, name_valid;
 
-	php_set_error_handling(EH_THROW, U_CLASS_ENTRY(dom_domexception_class_entry) TSRMLS_CC);
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, U_CLASS_ENTRY(dom_attr_class_entry), &name, &name_len, &value, &value_len) == FAILURE) {
+	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, dom_attr_class_entry, &name, &name_len, &value, &value_len) == FAILURE) {
 		php_std_error_handling();
 		return;
 	}
@@ -263,7 +263,7 @@ PHP_FUNCTION(dom_attr_is_id)
 	dom_object *intern;
 	xmlAttrPtr attrp;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &id, U_CLASS_ENTRY(dom_attr_class_entry)) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &id, dom_attr_class_entry) == FAILURE) {
 		return;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_misc.c,v 1.10 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: com_misc.c,v 1.11 2006/02/13 10:23:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,7 +36,7 @@ void php_com_throw_exception(HRESULT code, char *message TSRMLS_DC)
 		message = php_win_err(code);
 		free_msg = 1;
 	}
-	zend_throw_exception(U_CLASS_ENTRY(php_com_exception_class_entry), message, (long)code TSRMLS_CC);
+	zend_throw_exception(php_com_exception_class_entry, message, (long)code TSRMLS_CC);
 	if (free_msg) {
 		LocalFree(message);
 	}

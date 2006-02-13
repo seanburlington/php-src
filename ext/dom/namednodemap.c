@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namednodemap.c,v 1.17 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: namednodemap.c,v 1.18 2006/02/13 10:23:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -104,7 +104,7 @@ PHP_FUNCTION(dom_namednodemap_get_named_item)
 	xmlNodePtr nodep;
 	xmlNotation *notep = NULL;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &id, U_CLASS_ENTRY(dom_namednodemap_class_entry), &named, &namedlen) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &id, dom_namednodemap_class_entry, &named, &namedlen) == FAILURE) {
 		return;
 	}
 
@@ -176,7 +176,7 @@ PHP_FUNCTION(dom_namednodemap_item)
 	xmlNodePtr nodep, curnode;
 	int count;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &id, U_CLASS_ENTRY(dom_namednodemap_class_entry), &index) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &id, dom_namednodemap_class_entry, &index) == FAILURE) {
 		return;
 	}
 	if (index >= 0) {
@@ -232,7 +232,7 @@ PHP_FUNCTION(dom_namednodemap_get_named_item_ns)
 	xmlNodePtr nodep;
 	xmlNotation *notep = NULL;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os!s", &id, U_CLASS_ENTRY(dom_namednodemap_class_entry), &uri, &urilen, &named, &namedlen) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os!s", &id, dom_namednodemap_class_entry, &uri, &urilen, &named, &namedlen) == FAILURE) {
 		return;
 	}
 

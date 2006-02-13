@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.116 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: SAPI.h,v 1.117 2006/02/13 10:23:58 dmitry Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -258,6 +258,8 @@ struct _sapi_module_struct {
 	
 	void (*ini_defaults)(HashTable *configuration_hash);
 	int phpinfo_as_text;
+
+	char *ini_entries;
 };
 
 

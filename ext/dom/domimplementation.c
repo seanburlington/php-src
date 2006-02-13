@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.17 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: domimplementation.c,v 1.18 2006/02/13 10:23:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,7 +134,7 @@ PHP_METHOD(domimplementation, createDocument)
 	char *prefix = NULL, *localname = NULL;
 	dom_object *doctobj;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|ssO", &uri, &uri_len, &name, &name_len, &node, U_CLASS_ENTRY(dom_documenttype_class_entry)) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|ssO", &uri, &uri_len, &name, &name_len, &node, dom_documenttype_class_entry) == FAILURE) {
 		return;
 	}
 

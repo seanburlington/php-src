@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.70 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: pdo.c,v 1.71 2006/02/13 10:23:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -55,7 +55,7 @@ zend_class_entry *pdo_exception_ce;
 
 PDO_API zend_class_entry *php_pdo_get_exception(TSRMLS_D)
 {
-	return U_CLASS_ENTRY(pdo_exception_ce);
+	return pdo_exception_ce;
 }
 
 PDO_API char *php_pdo_str_tolower_dup(const char *src, int len)

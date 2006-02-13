@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.140 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_ini.c,v 1.141 2006/02/13 10:23:58 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -524,6 +524,11 @@ int php_init_config(TSRMLS_D)
 			zend_llist_destroy(&scanned_ini_list);
 		}
 	}
+
+	if (sapi_module.ini_entries) {
+		zend_parse_ini_string(sapi_module.ini_entries, 1, php_config_ini_parser_cb, &extension_lists);
+	}
+	
 	return SUCCESS;
 }
 /* }}} */

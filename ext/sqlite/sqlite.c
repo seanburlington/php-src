@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.184 2006/02/13 10:23:58 dmitry Exp $
+   $Id: sqlite.c,v 1.185 2006/02/16 01:12:51 helly Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -895,7 +895,7 @@ static zval * sqlite_instanciate(zend_class_entry *pce, zval *object TSRMLS_DC)
 	Z_TYPE_P(object) = IS_OBJECT;
 	object_init_ex(object, pce);
 	object->refcount = 1;
-	object->is_ref = 1;
+	object->is_ref = 0;
 	return object;
 }
 
@@ -1002,9 +1002,15 @@ zend_object_iterator_funcs sqlite_query_iterator_funcs = {
 	sqlite_iterator_rewind
 };
 
-zend_object_iterator *sqlite_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator *sqlite_get_iterator(zend_class_entry *ce, zval *object, int by_ref  TSRMLS_DC)
 {
-	sqlite_object_iterator *iterator = emalloc(sizeof(sqlite_object_iterator));
+	sqlite_object_iterator *iterator;
+
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
+
+	iterator = emalloc(sizeof(sqlite_object_iterator));
 
 	sqlite_object *obj = (sqlite_object*) zend_object_store_get_object(object TSRMLS_CC);
 
@@ -1128,7 +1134,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.184 2006/02/13 10:23:58 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.185 2006/02/16 01:12:51 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

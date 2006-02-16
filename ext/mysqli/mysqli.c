@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.78 2006/01/01 13:09:52 sniper Exp $ 
+  $Id: mysqli.c,v 1.79 2006/02/16 16:05:02 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -200,6 +200,11 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 
 	ret = FAILURE;
 	obj = (mysqli_object *)zend_objects_get_address(object TSRMLS_CC);
+	/* object was already destroyed */
+	if (!obj->ptr) {
+		retval = EG(uninitialized_zval_ptr);
+		return(retval);
+	}
 
  	if (member->type != IS_STRING) {
 		tmp_member = *member;

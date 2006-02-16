@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.31 2006/02/12 18:51:12 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.32 2006/02/16 06:29:40 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -387,7 +387,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.31 $'."\n";
+					echo '$Revision: 1.226.2.32 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -427,7 +427,7 @@ Options:
     
     -s <file>   Write output to <file>.
 
-    -q          Quite, no user interaction (same as environment NO_INTERACTION).
+    -q          Quiet, no user interaction (same as environment NO_INTERACTION).
 
     --verbose
     -v          Verbose mode.

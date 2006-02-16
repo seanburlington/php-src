@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.20 2006/02/16 10:13:52 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.21 2006/02/16 22:49:13 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -425,7 +425,9 @@ zend_function_entry basic_functions[] = {
 #ifdef HAVE_GETOPT
 	PHP_FE(getopt,															NULL)
 #endif
-
+#ifdef HAVE_GETLOADAVG
+	PHP_FE(getloadavg,														NULL)
+#endif
 #ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(microtime,														NULL)
 	PHP_FE(gettimeofday,													NULL)
@@ -3343,6 +3345,23 @@ PHP_FUNCTION(import_request_variables)
 	}
 }
 /* }}} */
+
+#ifdef HAVE_GETLOADAVG
+PHP_FUNCTION(getloadavg)
+{
+	double load[3];
+
+	if (getloadavg(load, 3) == -1) {
+		RETURN_FALSE;
+	} else {
+		array_init(return_value);
+		add_index_double(return_value, 0, load[0]);
+		add_index_double(return_value, 1, load[1]);
+		add_index_double(return_value, 2, load[2]);
+	}
+}
+#endif
+
 
 /*
  * Local variables:

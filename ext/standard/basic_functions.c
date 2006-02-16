@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.19 2006/01/28 06:14:34 fmk Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.20 2006/02/16 10:13:52 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1766,13 +1766,16 @@ PHP_FUNCTION(sleep)
 PHP_FUNCTION(usleep)
 {
 #if HAVE_USLEEP
-	zval **num;
+	long num;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &num) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &num) == FAILURE) {
+		return;
 	}
-	convert_to_long_ex(num);
-	usleep(Z_LVAL_PP(num));
+	if (num < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of microseconds must be greater than or equal to 0");
+		RETURN_FALSE;
+	}
+	usleep(num);
 #endif
 }
 /* }}} */

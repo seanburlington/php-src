@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.21 2006/02/15 21:34:21 helly Exp $ */
+/* $Id: unicode_iterators.c,v 1.22 2006/02/17 08:24:56 helly Exp $ */
 
 /*
  * TODO
@@ -77,10 +77,7 @@ typedef struct {
 
 static inline text_iter_obj* text_iter_to_obj(zend_object_iterator *iter)
 {
-	static text_iter_obj adr;
-	static int ofs = (char*)&adr.iter - (char*)&adr;
-
-	return (text_iter_obj *)((char*)iter - ofs);
+	return (text_iter_obj *)((char*)iter - offsetof(text_iter_obj, iter));
 }
 
 typedef struct {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.176 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.177 2006/02/17 21:17:44 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1466,7 +1466,7 @@ PHP_FUNCTION(preg_quote)
 	
 	/* Allocate enough memory so that even if each character
 	   is quoted, we won't run out of room */
-	out_str = safe_emalloc(2, Z_STRLEN_PP(in_str_arg), 1);
+	out_str = safe_emalloc(4, Z_STRLEN_PP(in_str_arg), 1);
 	
 	/* Go through the string and quote necessary characters */
 	for(p = in_str, q = out_str; p != in_str_end; p++) {
@@ -1497,6 +1497,8 @@ PHP_FUNCTION(preg_quote)
 
 			case '\0':
 				*q++ = '\\';
+				*q++ = '0';
+				*q++ = '0';
 				*q++ = '0';
 				break;
 

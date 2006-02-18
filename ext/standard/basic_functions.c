@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.21 2006/02/16 22:49:13 wez Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.22 2006/02/18 05:41:59 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -426,7 +426,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(getopt,															NULL)
 #endif
 #ifdef HAVE_GETLOADAVG
-	PHP_FE(getloadavg,														NULL)
+	PHP_FE(sys_getloadavg,														NULL)
 #endif
 #ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(microtime,														NULL)
@@ -3347,7 +3347,7 @@ PHP_FUNCTION(import_request_variables)
 /* }}} */
 
 #ifdef HAVE_GETLOADAVG
-PHP_FUNCTION(getloadavg)
+PHP_FUNCTION(sys_getloadavg)
 {
 	double load[3];
 

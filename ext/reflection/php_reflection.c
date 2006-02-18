@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.22 2006/02/13 14:49:26 iliaa Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.23 2006/02/18 18:14:45 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1862,9 +1862,9 @@ ZEND_METHOD(reflection_parameter, getName)
 }
 /* }}} */
 
-/* {{{ proto public ReflectionClass ReflectionParameter::getClass()
+/* {{{ proto public ReflectionClass ReflectionParameter::getDeclaringClass()
    Returns this parameters's class hint or NULL if there is none */
-ZEND_METHOD(reflection_parameter, getClass)
+ZEND_METHOD(reflection_parameter, getDeclaringClass)
 {
 	reflection_object *intern;
 	parameter_reference *param;
@@ -4187,7 +4187,8 @@ static zend_function_entry reflection_parameter_functions[] = {
 	ZEND_ME(reflection_parameter, __toString, NULL, 0)
 	ZEND_ME(reflection_parameter, getName, NULL, 0)
 	ZEND_ME(reflection_parameter, isPassedByReference, NULL, 0)
-	ZEND_ME(reflection_parameter, getClass, NULL, 0)
+	ZEND_ME(reflection_parameter, getDeclaringClass, NULL, 0)
+	ZEND_MALIAS(reflection_parameter, getClass, getDeclaringClass, NULL, 0)
 	ZEND_ME(reflection_parameter, isArray, NULL, 0)
 	ZEND_ME(reflection_parameter, allowsNull, NULL, 0)
 	ZEND_ME(reflection_parameter, isOptional, NULL, 0)
@@ -4320,7 +4321,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.22 2006/02/13 14:49:26 iliaa Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.23 2006/02/18 18:14:45 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -16,14 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.77 2006/02/19 00:55:19 andi Exp $ */
+/* $Id: dbase.c,v 1.78 2006/02/19 18:20:51 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
-#include "safe_mode.h"
 #include "fopen_wrappers.h"
 #include "php_globals.h"
 

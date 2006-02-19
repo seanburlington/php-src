@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.60 2006/02/19 00:55:19 andi Exp $ */
+/* $Id: filepro.c,v 1.61 2006/02/19 18:20:51 iliaa Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -31,7 +31,6 @@
 #endif
 
 #include "php.h"
-#include "safe_mode.h"
 #include "fopen_wrappers.h"
 #include <string.h>
 #if HAVE_SYS_PARAM_H

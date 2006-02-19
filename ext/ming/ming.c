@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.81 2006/01/01 13:09:51 sniper Exp $ */
+/* $Id: ming.c,v 1.82 2006/02/19 00:55:19 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,7 +79,7 @@ static SWFPrebuiltClip getPrebuiltClip(zval *id TSRMLS_DC);
 #endif
 
 #define PHP_MING_FILE_CHK(file) \
-	if ((PG(safe_mode) && !php_checkuid((file), NULL, CHECKUID_CHECK_FILE_AND_DIR)) || php_check_open_basedir((file) TSRMLS_CC)) {	\
+	if (php_check_open_basedir((file) TSRMLS_CC)) {	\
 		RETURN_FALSE;	\
 	}	\
 

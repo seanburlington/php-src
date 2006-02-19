@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.54 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: link.c,v 1.55 2006/02/19 00:55:20 andi Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -62,10 +62,6 @@ PHP_FUNCTION(readlink)
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
-
-	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
-		RETURN_FALSE;
-	}
 
 	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
 		RETURN_FALSE;
@@ -132,14 +128,6 @@ PHP_FUNCTION(symlink)
 		RETURN_FALSE;	
 	}
 
-	if (PG(safe_mode) && !php_checkuid(dest_p, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
-		RETURN_FALSE;
-	}
-
-	if (PG(safe_mode) && !php_checkuid(source_p, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
-		RETURN_FALSE;
-	}
-
 	if (php_check_open_basedir(dest_p TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
@@ -185,14 +173,6 @@ PHP_FUNCTION(link)
 	{
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to link to a URL");
 		RETURN_FALSE;	
-	}
-
-	if (PG(safe_mode) && !php_checkuid(dest_p, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
-		RETURN_FALSE;
-	}
-
-	if (PG(safe_mode) && !php_checkuid(source_p, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
-		RETURN_FALSE;
 	}
 
 	if (php_check_open_basedir(dest_p TSRMLS_CC)) {

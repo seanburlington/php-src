@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.142 2006/01/04 17:34:44 rrichards Exp $ */
+/* $Id: filestat.c,v 1.143 2006/02/19 00:55:20 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -348,10 +348,6 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp)
 		gid = Z_LVAL_PP(group);
 	}
 
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
-		RETURN_FALSE;
-	}
-
 	/* Check the basedir */
 	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
 		RETURN_FALSE;
@@ -422,10 +418,6 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 		uid = Z_LVAL_PP(user);
 	}
 
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
-		RETURN_FALSE;
-	}
-
 	/* Check the basedir */
 	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
 		RETURN_FALSE;
@@ -486,10 +478,6 @@ PHP_FUNCTION(chmod)
 	convert_to_string_ex(filename);
 	convert_to_long_ex(mode);
 
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
-		RETURN_FALSE;
-	}
-
 	/* Check the basedir */
 	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
 		RETURN_FALSE;
@@ -545,10 +533,6 @@ PHP_FUNCTION(touch)
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
-
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
 
 	/* Check the basedir */
 	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {

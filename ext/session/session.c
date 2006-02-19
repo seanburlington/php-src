@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.428 2006/02/10 07:41:59 rasmus Exp $ */
+/* $Id: session.c,v 1.429 2006/02/19 00:55:20 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,10 +137,6 @@ static PHP_INI_MH(OnUpdateSaveDir)
 {
 	/* Only do the safemode/open_basedir check at runtime */
 	if (stage == PHP_INI_STAGE_RUNTIME) {
-		if (PG(safe_mode) && (!php_checkuid(new_value, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
-			return FAILURE;
-		}
-
 		if (php_check_open_basedir(new_value TSRMLS_CC)) {
 			return FAILURE;
 		}

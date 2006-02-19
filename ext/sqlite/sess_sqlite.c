@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sess_sqlite.c,v 1.19 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: sess_sqlite.c,v 1.20 2006/02/19 00:55:20 andi Exp $ */
 
 #include "php.h"
 
@@ -42,7 +42,6 @@ PS_OPEN_FUNC(sqlite)
 	char *errmsg = NULL;
 	sqlite *db;
 
-	/* TODO: do we need a safe_mode check here? */
 	db = sqlite_open(save_path, 0666, &errmsg);
 	if (db == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.49 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: pspell.c,v 1.50 2006/02/19 00:55:20 andi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -280,10 +280,6 @@ PHP_FUNCTION(pspell_new_personal)
 #endif
 
 	convert_to_string_ex(personal);
-
-	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(personal), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
 
 	if (php_check_open_basedir(Z_STRVAL_PP(personal) TSRMLS_CC)) {
 		RETURN_FALSE;
@@ -782,10 +778,6 @@ static void pspell_config_path(INTERNAL_FUNCTION_PARAMETERS, char *option)
 
 	convert_to_string_ex(value);
 
-	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(value), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
-
 	if (php_check_open_basedir(Z_STRVAL_PP(value) TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
@@ -839,10 +831,6 @@ PHP_FUNCTION(pspell_config_repl)
 	pspell_config_replace(config, "save-repl", "true");
 
 	convert_to_string_ex(repl);
-
-	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(repl), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
 
 	if (php_check_open_basedir(Z_STRVAL_PP(repl) TSRMLS_CC)) {
 		RETURN_FALSE;

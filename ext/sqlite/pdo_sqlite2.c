@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.10 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.11 2006/02/19 00:55:20 andi Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -518,11 +518,6 @@ static char *make_filename_safe(const char *filename TSRMLS_DC)
 	if (strncmp(filename, ":memory:", sizeof(":memory:")-1)) {
 		char *fullpath = expand_filepath(filename, NULL TSRMLS_CC);
 
-		if (PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-			efree(fullpath);
-			return NULL;
-		}
-
 		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
 			efree(fullpath);
 			return NULL;
@@ -581,7 +576,7 @@ static int pdo_sqlite2_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRML
 
 	if (!filename) {
 		zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC,
-				"safe_mode/open_basedir prohibits opening %s",
+				"open_basedir prohibits opening %s",
 				dbh->data_source);
 		goto cleanup;
 	}

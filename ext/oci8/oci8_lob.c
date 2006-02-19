@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.9 2006/01/05 13:40:10 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.10 2006/02/19 00:55:20 andi Exp $ */
 
 
 
@@ -504,7 +504,7 @@ int php_oci_lob_import (php_oci_descriptor *descriptor, char *filename TSRMLS_DC
 	char buf[8192];
 	ub4 offset = 1;
 	
-	if ((PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(filename TSRMLS_CC)) {
+	if (php_check_open_basedir(filename TSRMLS_CC)) {
 		return 1;
 	}
 	

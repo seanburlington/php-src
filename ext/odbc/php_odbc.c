@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.193 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.194 2006/02/19 00:55:20 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1016,13 +1016,6 @@ PHP_FUNCTION(odbc_execute)
 				Z_STRVAL_PP(tmp)[Z_STRLEN_PP(tmp) - 1] == '\'') {
 				filename = estrndup(&Z_STRVAL_PP(tmp)[1], Z_STRLEN_PP(tmp) - 2);
 				filename[strlen(filename)] = '\0';
-
-				/* Check for safe mode. */
-				if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-					efree(filename);
-					efree(params);
-					RETURN_FALSE;
-				}
 
 				/* Check the basedir */
 				if (php_check_open_basedir(filename TSRMLS_CC)) {

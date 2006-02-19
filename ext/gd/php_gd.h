@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.65 2006/02/19 00:55:19 andi Exp $ */
+/* $Id: php_gd.h,v 1.66 2006/02/19 05:05:42 andi Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -32,10 +32,9 @@
 
 /* open_basedir and safe_mode checks */
 #define PHP_GD_CHECK_OPEN_BASEDIR(filename, errormsg)                                   \
-	if (!filename || php_check_open_basedir(filename TSRMLS_CC))						\
-	) {                                                                                 \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, errormsg);                          \
-		RETURN_FALSE;                                                                   \
+	if (!filename || php_check_open_basedir(filename TSRMLS_CC)) {			\
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, errormsg);                 	\
+		RETURN_FALSE;                                                         	\
 	}
 
 #define PHP_GDIMG_TYPE_GIF      1

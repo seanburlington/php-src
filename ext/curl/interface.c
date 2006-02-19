@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.76 2006/02/19 03:07:38 andi Exp $ */
+/* $Id: interface.c,v 1.77 2006/02/19 05:05:42 andi Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -157,8 +157,8 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #define CAAZ(s, v) add_assoc_zval_ex(return_value, s, sizeof(s), (zval *) v);
 
 #define PHP_CURL_CHECK_OPEN_BASEDIR(str, len)													\
-	if (((PG(open_basedir) && *PG(open_basedir))) &&                                            \
-	    strncasecmp(str, "file:", sizeof("file:") - 1) == 0)									\
+	if ((PG(open_basedir) && *PG(open_basedir)) &&                                                \
+	    strncasecmp(str, "file:", sizeof("file:") - 1) == 0)								\
 	{ 																							\
 		php_url *tmp_url; 																		\
 																								\
@@ -167,8 +167,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 			RETURN_FALSE; 																		\
 		} 																						\
 																								\
-		if (tmp_url->query || tmp_url->fragment || php_check_open_basedir(tmp_url->path TSRMLS_CC))	\
-		) { 																					\
+		if (tmp_url->query || tmp_url->fragment || php_check_open_basedir(tmp_url->path TSRMLS_CC)) { \
 			php_url_free(tmp_url); 																\
 			RETURN_FALSE; 																		\
 		} 																						\

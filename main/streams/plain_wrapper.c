@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.61 2006/02/19 01:19:37 andi Exp $ */
+/* $Id: plain_wrapper.c,v 1.62 2006/02/19 03:41:25 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -964,8 +964,7 @@ static int php_plain_files_unlink(php_stream_wrapper *wrapper, char *url, int op
 		url = p + 3;
 	}
 
-	/* FIXME: Andi - Pending email I sent to internals@ re: ENFORCE_SAFE_MODE */
-	if (options & ENFORCE_SAFE_MODE) {
+	if (!(options & STREAM_DISABLE_OPEN_BASEDIR)) {
 		if (php_check_open_basedir(url TSRMLS_CC)) {
 			return 0;
 		}

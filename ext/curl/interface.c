@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.75 2006/02/19 00:55:19 andi Exp $ */
+/* $Id: interface.c,v 1.76 2006/02/19 03:07:38 andi Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1281,7 +1281,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 					 * use since curl needs a long not an int. */
 					if (*postval == '@') {
 						++postval;
-						/* safe_mode / open_basedir check */
+						/* open_basedir check */
 						if (php_check_open_basedir(postval TSRMLS_CC)) {
 							RETURN_FALSE;
 						}

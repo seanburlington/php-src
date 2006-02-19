@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.12 2006/02/19 00:55:20 andi Exp $ */
+/* $Id: oci8_interface.c,v 1.13 2006/02/19 04:29:41 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -913,7 +913,7 @@ PHP_FUNCTION(oci_lob_export)
 		RETURN_FALSE;
 	}
 
-	stream = php_stream_open_wrapper_ex(filename, "w", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, NULL);
+	stream = php_stream_open_wrapper_ex(filename, "w", REPORT_ERRORS, NULL, NULL);
 
 	block_length = PHP_OCI_LOB_BUFFER_SIZE;
 	if (block_length > length) {

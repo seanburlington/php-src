@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_sha.c,v 1.11 2006/01/01 13:09:50 sniper Exp $ */
+/* $Id: hash_sha.c,v 1.12 2006/02/19 04:29:40 andi Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_sha.h"
@@ -131,7 +131,7 @@ PHP_FUNCTION(sha1_file)
 		return;
 	}
 	
-	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS | ENFORCE_SAFE_MODE, NULL);
+	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS, NULL);
 	if (!stream) {
 		RETURN_FALSE;
 	}

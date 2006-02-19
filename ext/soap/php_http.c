@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.86 2006/02/07 12:57:43 dmitry Exp $ */
+/* $Id: php_http.c,v 1.87 2006/02/19 04:29:41 andi Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -147,7 +147,7 @@ static php_stream* http_connect(zval* this_ptr, php_url *phpurl, int use_ssl, in
 	namelen = spprintf(&name, 0, "%s://%s:%d", (use_ssl && !*use_proxy)? "ssl" : "tcp", host, port);
 
 	stream = php_stream_xport_create(name, namelen,
-		ENFORCE_SAFE_MODE | REPORT_ERRORS,
+		REPORT_ERRORS,
 		STREAM_XPORT_CLIENT | STREAM_XPORT_CONNECT,
 		NULL /*persistent_id*/,
 		timeout,

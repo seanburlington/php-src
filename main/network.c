@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.119 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: network.c,v 1.120 2006/02/19 04:29:41 andi Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1005,7 +1005,7 @@ PHPAPI php_stream *_php_stream_sock_open_host(const char *host, unsigned short p
 
 	reslen = spprintf(&res, 0, "tcp://%s:%d", host, port);
 
-	stream = php_stream_xport_create(res, reslen, ENFORCE_SAFE_MODE | REPORT_ERRORS,
+	stream = php_stream_xport_create(res, reslen, REPORT_ERRORS,
 			STREAM_XPORT_CLIENT | STREAM_XPORT_CONNECT, persistent_id, timeout, NULL, NULL, NULL);
 
 	efree(res);

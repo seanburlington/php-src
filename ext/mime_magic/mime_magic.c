@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.47 2006/01/01 13:09:51 sniper Exp $ 
+  $Id: mime_magic.c,v 1.48 2006/02/19 04:29:41 andi Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1060,7 +1060,7 @@ static int magic_process(zval *what TSRMLS_DC)
 
 	switch (Z_TYPE_P(what)) {
 	case IS_STRING:
-		stream = php_stream_open_wrapper(Z_STRVAL_P(what), "rb", IGNORE_PATH | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
+		stream = php_stream_open_wrapper(Z_STRVAL_P(what), "rb", IGNORE_PATH | REPORT_ERRORS, NULL);
 		if (stream == NULL) {
 			/* We can't open it, but we were able to stat it. */
 			if(MIME_MAGIC_G(debug))

@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.37 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: proc_open.c,v 1.38 2006/02/19 04:29:41 andi Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -660,7 +660,7 @@ PHP_FUNCTION(proc_open)
 
 				/* try a wrapper */
 				stream = php_stream_open_wrapper(Z_STRVAL_PP(zfile), Z_STRVAL_PP(zmode),
-						ENFORCE_SAFE_MODE|REPORT_ERRORS|STREAM_WILL_CAST, NULL);
+						REPORT_ERRORS|STREAM_WILL_CAST, NULL);
 
 				/* force into an fd */
 				if (stream == NULL || FAILURE == php_stream_cast(stream,

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.30 2006/02/06 11:28:20 tony2001 Exp $ */
+/* $Id: php_xmlwriter.c,v 1.31 2006/02/19 04:29:41 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -300,7 +300,7 @@ static void *php_xmlwriter_streams_IO_open_write_wrapper(const char *filename TS
 	php_stream_wrapper *wrapper = NULL;
 	void *ret_val = NULL;
 
-	ret_val = php_stream_open_wrapper_ex((char *)filename, "wb", ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL, NULL);
+	ret_val = php_stream_open_wrapper_ex((char *)filename, "wb", REPORT_ERRORS, NULL, NULL);
 	return ret_val;
 }
 /* }}} */

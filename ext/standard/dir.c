@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.152 2006/02/19 00:55:20 andi Exp $ */
+/* $Id: dir.c,v 1.153 2006/02/19 04:29:41 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -192,7 +192,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 		context = php_stream_context_from_zval(zcontext, 0);
 	}
 	
-	dirp = php_stream_opendir(dirname, ENFORCE_SAFE_MODE|REPORT_ERRORS, context);
+	dirp = php_stream_opendir(dirname, REPORT_ERRORS, context);
 
 	if (dirp == NULL) {
 		RETURN_FALSE;

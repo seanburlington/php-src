@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.17 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: bz2.c,v 1.18 2006/02/19 04:29:40 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -327,7 +327,7 @@ PHP_FUNCTION(bzopen)
 		stream = php_stream_bz2open(NULL,
 									Z_STRVAL_PP(file), 
 									Z_STRVAL_PP(mode), 
-									ENFORCE_SAFE_MODE | REPORT_ERRORS, 
+									REPORT_ERRORS, 
 									NULL);
 	} else {
 		/* If it is a resource, than its a stream resource */

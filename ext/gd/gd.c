@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.344 2006/02/05 15:53:02 pajoye Exp $ */
+/* $Id: gd.c,v 1.345 2006/02/19 04:29:40 andi Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -607,7 +607,7 @@ PHP_FUNCTION(imageloadfont)
 
 	convert_to_string_ex(file);
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(file), "rb", ENFORCE_SAFE_MODE | IGNORE_PATH | IGNORE_URL_WIN | REPORT_ERRORS, NULL);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(file), "rb", IGNORE_PATH | IGNORE_URL_WIN | REPORT_ERRORS, NULL);
 	if (stream == NULL) {
 		RETURN_FALSE;
 	}
@@ -1400,7 +1400,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 
 	fn = Z_STRVAL_PP(file);
 
-	stream = php_stream_open_wrapper(fn, "rb", ENFORCE_SAFE_MODE|REPORT_ERRORS|IGNORE_PATH|IGNORE_URL_WIN, NULL);
+	stream = php_stream_open_wrapper(fn, "rb", REPORT_ERRORS|IGNORE_PATH|IGNORE_URL_WIN, NULL);
 	if (stream == NULL)	{
 		RETURN_FALSE;
 	}

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.82 2006/02/19 00:55:19 andi Exp $ */
+/* $Id: ming.c,v 1.83 2006/02/19 04:29:41 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1422,7 +1422,7 @@ PHP_METHOD(swffont, __construct)
 		php_stream * stream;
 		FILE * file;
 	
-		stream = php_stream_open_wrapper(Z_STRVAL_PP(zfile), "rb", REPORT_ERRORS|ENFORCE_SAFE_MODE, NULL);
+		stream = php_stream_open_wrapper(Z_STRVAL_PP(zfile), "rb", REPORT_ERRORS, NULL);
 
 		if (stream == NULL) {
 			RETURN_FALSE;
@@ -2387,7 +2387,7 @@ PHP_METHOD(swfmovie, save)
 	}
 
 	convert_to_string_ex(x);
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(x), "wb", REPORT_ERRORS|ENFORCE_SAFE_MODE, NULL);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(x), "wb", REPORT_ERRORS, NULL);
 
 	if (stream == NULL) {
 		RETURN_FALSE;

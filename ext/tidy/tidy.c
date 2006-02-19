@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.74 2006/02/19 00:55:20 andi Exp $ */
+/* $Id: tidy.c,v 1.75 2006/02/19 04:29:41 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -514,7 +514,7 @@ static char *php_tidy_file_to_mem(char *filename, zend_bool use_include_path, in
 	php_stream *stream;
 	char *data = NULL;
 
-	if (!(stream = php_stream_open_wrapper(filename, "rb", (use_include_path ? USE_PATH : 0) | ENFORCE_SAFE_MODE, NULL))) {
+	if (!(stream = php_stream_open_wrapper(filename, "rb", (use_include_path ? USE_PATH : 0), NULL))) {
 		return NULL;
 	}
 	if ((*len = (int) php_stream_copy_to_mem(stream, &data, PHP_STREAM_COPY_ALL, 0)) == 0) {
@@ -983,7 +983,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.74 2006/02/19 00:55:20 andi Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.75 2006/02/19 04:29:41 andi Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

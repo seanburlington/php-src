@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.26 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: php_xml.c,v 1.27 2006/02/19 04:29:41 andi Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -176,7 +176,7 @@ int php_stream_xmlIO_match_wrapper(const char *filename)
 void *php_stream_xmlIO_open_wrapper(const char *filename)
 {
 	TSRMLS_FETCH();
-	return php_stream_open_wrapper((char*)filename, "rb", ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL);
+	return php_stream_open_wrapper((char*)filename, "rb", REPORT_ERRORS, NULL);
 }
 
 int php_stream_xmlIO_read(void *context, char *buffer, int len)

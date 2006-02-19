@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.44 2006/01/17 12:18:52 dmitry Exp $ */
+/* $Id: md5.c,v 1.45 2006/02/19 04:29:41 andi Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -85,7 +85,7 @@ PHP_NAMED_FUNCTION(php_if_md5_file)
 		return;
 	}
 	
-	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS | ENFORCE_SAFE_MODE, NULL);
+	stream = php_stream_open_wrapper(arg, "rb", REPORT_ERRORS, NULL);
 	if (!stream) {
 		RETURN_FALSE;
 	}

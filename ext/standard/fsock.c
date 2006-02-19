@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.122 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: fsock.c,v 1.123 2006/02/19 04:29:41 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -76,7 +76,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		ZVAL_STRING(zerrstr, "", 1);
 	}
 
-	stream = php_stream_xport_create(hostname, hostname_len, ENFORCE_SAFE_MODE | REPORT_ERRORS,
+	stream = php_stream_xport_create(hostname, hostname_len, REPORT_ERRORS,
 			STREAM_XPORT_CLIENT | STREAM_XPORT_CONNECT, hashkey, &tv, NULL, &errstr, &err);
 
 	if (port > 0) {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.189 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: zlib.c,v 1.190 2006/02/19 04:29:41 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -294,7 +294,7 @@ PHP_FUNCTION(gzfile)
 	use_include_path = flags ? USE_PATH : 0;
 
 	/* using a stream here is a bit more efficient (resource wise) than php_gzopen_wrapper */
-	stream = php_stream_gzopen(NULL, filename, "rb", use_include_path | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, filename, "rb", use_include_path | REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (stream == NULL) {
 		/* Error reporting is already done by stream code */
 		RETURN_FALSE;
@@ -336,7 +336,7 @@ PHP_FUNCTION(gzopen)
 
 	use_include_path = flags ? USE_PATH : 0;
 
-	stream = php_stream_gzopen(NULL, filename, mode, use_include_path | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, filename, mode, use_include_path | REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
 
 	if (!stream) {
 		RETURN_FALSE;
@@ -365,7 +365,7 @@ PHP_FUNCTION(readgzfile)
 
 	use_include_path = flags ? USE_PATH : 0;
 
-	stream = php_stream_gzopen(NULL, filename, "rb", use_include_path | ENFORCE_SAFE_MODE, NULL, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, filename, "rb", use_include_path, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (!stream) {
 		RETURN_FALSE;
 	}

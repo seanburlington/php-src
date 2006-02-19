@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.55 2006/02/19 00:55:20 andi Exp $ */
+/* $Id: link.c,v 1.56 2006/02/19 18:19:33 iliaa Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -47,7 +47,6 @@
 #include <errno.h>
 #include <ctype.h>
 
-#include "safe_mode.h"
 #include "php_link.h"
 
 /* {{{ proto string readlink(string filename)

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.61 2006/01/26 15:48:15 iliaa Exp $ */
+/* $Id: pack.c,v 1.62 2006/02/19 18:19:33 iliaa Exp $ */
 
 #include "php.h"
 
@@ -39,7 +39,6 @@
 #include <sys/param.h>
 #endif
 #include "ext/standard/head.h"
-#include "safe_mode.h"
 #include "php_string.h"
 #include "pack.h"
 #if HAVE_PWD_H

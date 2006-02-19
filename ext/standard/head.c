@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.85 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: head.c,v 1.86 2006/02/19 18:19:33 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -31,7 +31,6 @@
 #endif
 
 #include "php_globals.h"
-#include "safe_mode.h"
 
 
 /* Implementation of the language Header() function */

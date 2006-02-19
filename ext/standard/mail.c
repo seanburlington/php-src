@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.88 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: mail.c,v 1.89 2006/02/19 18:19:33 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -33,7 +33,6 @@
 
 #include "php_mail.h"
 #include "php_ini.h"
-#include "safe_mode.h"
 #include "exec.h"
 
 #if HAVE_SENDMAIL
@@ -89,11 +88,6 @@ PHP_FUNCTION(mail)
 	char *force_extra_parameters = INI_STR("mail.force_extra_parameters");
 	char *to_r, *subject_r;
 
-	if (PG(safe_mode) && (ZEND_NUM_ARGS() == 5)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SAFE MODE Restriction in effect.  The fifth parameter is disabled in SAFE MODE.");
-		RETURN_FALSE;
-	}	
-	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|ss",
 							  &to, &to_len,
 							  &subject, &subject_len,

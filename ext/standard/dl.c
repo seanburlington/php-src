@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.107 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: dl.c,v 1.108 2006/02/19 18:19:33 iliaa Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -67,9 +67,6 @@ PHP_FUNCTION(dl)
 
 	if (!PG(enable_dl)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't enabled");
-		RETURN_FALSE;
-	} else if (PG(safe_mode)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't allowed when running in Safe Mode");
 		RETURN_FALSE;
 	}
 

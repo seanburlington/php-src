@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.14 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: dom_iterators.c,v 1.15 2006/02/20 10:29:35 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -187,7 +187,7 @@ static void php_dom_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC)
 	dom_object *intern;
 	dom_object *nnmap;
 	dom_nnodemap_object *objmap;
-	int ret, previndex=1;
+	int ret, previndex=0;
 	HashTable *nodeht;
 	zval **entry;
 

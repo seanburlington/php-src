@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.23 2006/02/18 18:14:45 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.24 2006/02/20 15:27:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3789,11 +3789,19 @@ ZEND_METHOD(reflection_property, getDeclaringClass)
 {
 	reflection_object *intern;
 	property_reference *ref;
+	zend_class_entry *tmp_ce, *ce;
+	zend_property_info *tmp_info;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_property_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(ref);
 
-	zend_reflection_class_factory(ref->ce, return_value TSRMLS_CC);
+	ce = tmp_ce = ref->ce;
+	while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, ref->prop->name, ref->prop->name_length + 1, (void **) &tmp_info) == SUCCESS) {
+		ce = tmp_ce;
+                tmp_ce = tmp_ce->parent;
+	}
+
+	zend_reflection_class_factory(ce, return_value TSRMLS_CC);
 }
 
 /* {{{ proto public string ReflectionProperty::getDocComment()
@@ -4321,7 +4329,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.23 2006/02/18 18:14:45 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.24 2006/02/20 15:27:45 iliaa Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

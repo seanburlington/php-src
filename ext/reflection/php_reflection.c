@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.209 2006/02/20 23:01:27 helly Exp $ */
+/* $Id: php_reflection.c,v 1.210 2006/02/20 23:26:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -872,6 +872,41 @@ static void _extension_string(string *str, zend_module_entry *module, char *inde
 	string_printf(str, " extension #%d %s version %s ] {\n",
 				  module->module_number, module->name,
 				  (module->version == NO_VERSION_YET) ? "<no_version>" : module->version);
+
+	if (module->deps) {
+		zend_module_dep* dep = module->deps;
+
+		string_printf(str, "\n  - Dependencies {\n");
+
+		while(dep->name) {
+			string_printf(str, "%s    Dependency [ %s (", indent, dep->name);
+			
+			switch(dep->type) {
+			case MODULE_DEP_REQUIRED:
+				string_write(str, "Required", sizeof("Required") - 1);
+				break;
+			case MODULE_DEP_CONFLICTS:
+				string_write(str, "Conflicts", sizeof("Conflicts") - 1);
+				break;
+			case MODULE_DEP_OPTIONAL:
+				string_write(str, "Optional", sizeof("Optional") - 1);
+				break;
+			default:
+				string_write(str, "Error", sizeof("Error") - 1); /* shouldn't happen */
+				break;
+			}
+
+			if (dep->rel) {	
+				string_printf(str, " %s", dep->rel);
+			}
+			if (dep->version) {	
+				string_printf(str, " %s", dep->version);
+			}
+			string_write(str, ") ]\n", sizeof(") ]\n") - 1);
+			dep++;
+		}
+		string_printf(str, "%s  }\n", indent);
+	}
 
 	{
 		string str_ini;
@@ -4398,7 +4433,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.209 2006/02/20 23:01:27 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.210 2006/02/20 23:26:39 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

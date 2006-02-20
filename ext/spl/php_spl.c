@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.85 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.86 2006/02/20 22:23:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -610,6 +610,11 @@ PHP_MINFO_FUNCTION(spl)
 }
 /* }}} */
 
+static
+ZEND_BEGIN_ARG_INFO(arginfo_iterator, 0)
+	ZEND_ARG_INFO(0, iterator)
+ZEND_END_ARG_INFO();
+
 /* {{{ spl_functions
  */
 zend_function_entry spl_functions[] = {
@@ -623,8 +628,8 @@ zend_function_entry spl_functions[] = {
 	PHP_FE(class_parents,           NULL)
 	PHP_FE(class_implements,        NULL)
 #ifdef SPL_ITERATORS_H
-	PHP_FE(iterator_to_array,       NULL)
-	PHP_FE(iterator_count,          NULL)
+	PHP_FE(iterator_to_array,       arginfo_iterator)
+	PHP_FE(iterator_count,          arginfo_iterator)
 #endif /* SPL_ITERATORS_H */
 	{NULL, NULL, NULL}
 };

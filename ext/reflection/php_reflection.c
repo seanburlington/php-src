@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.206 2006/02/18 18:05:46 helly Exp $ */
+/* $Id: php_reflection.c,v 1.207 2006/02/20 11:15:02 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3581,7 +3581,7 @@ ZEND_METHOD(reflection_property, __construct)
 		zend_class_entry *tmp_ce = ce;
 		zend_property_info *tmp_info;
 		
-		while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, name_str, name_len + 1, (void **) &tmp_info) != SUCCESS) {
+		while (tmp_ce && zend_u_hash_find(&tmp_ce->properties_info, name_type, name_str, name_len + 1, (void **) &tmp_info) != SUCCESS) {
 			ce = tmp_ce;
 			property_info = tmp_info;
 			tmp_ce = tmp_ce->parent;
@@ -4338,7 +4338,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.206 2006/02/18 18:05:46 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.207 2006/02/20 11:15:02 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

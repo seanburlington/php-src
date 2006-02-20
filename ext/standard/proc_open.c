@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.39 2006/02/19 18:19:33 iliaa Exp $ */
+/* $Id: proc_open.c,v 1.40 2006/02/20 09:38:47 dmitry Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -809,7 +809,7 @@ PHP_FUNCTION(proc_open)
 
 	proc = (struct php_process_handle*)pemalloc(sizeof(struct php_process_handle), is_persistent);
 	proc->is_persistent = is_persistent;
-	proc->command = command;
+	proc->command = pestrdup(command, is_persistent);
 	proc->npipes = ndesc;
 	proc->child = child;
 	proc->env = env;

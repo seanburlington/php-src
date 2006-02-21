@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.213 2006/02/21 00:43:33 helly Exp $ */
+/* $Id: php_reflection.c,v 1.214 2006/02/21 09:12:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4171,6 +4171,7 @@ ZEND_METHOD(reflection_extension, getDependencies)
 	while(dep->name) {
 		char *relation;
 		char *rel_type;
+		int len;
 		
 		switch(dep->type) {
 		case MODULE_DEP_REQUIRED:
@@ -4187,7 +4188,7 @@ ZEND_METHOD(reflection_extension, getDependencies)
 			break;
 		}
 
-		int len = spprintf(&relation, 0, "%s%s%s%s%s", 
+		len = spprintf(&relation, 0, "%s%s%s%s%s", 
 						rel_type,
 						dep->rel ? " " : "",
 						dep->rel ? dep->rel : "", 
@@ -4471,7 +4472,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.213 2006/02/21 00:43:33 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.214 2006/02/21 09:12:32 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

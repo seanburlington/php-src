@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.12 2006/01/22 22:09:54 helly Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13 2006/02/21 21:15:13 johannes Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -434,10 +434,12 @@ static void php_cli_usage(char *argv0)
 				"  args...          Arguments passed to script. Use -- args when first argument\n"
 				"                   starts with - or script is read from stdin\n"
 				"\n"
+#if (HAVE_REFLECTION)
 				"  --rf <name>      Show information about function <name>.\n"
 				"  --rc <name>      Show information about class <name>.\n"
 				"  --re <name>      Show information about extension <name>.\n"
 				"\n"
+#endif
 				, prog, prog, prog, prog, prog, prog);
 }
 /* }}} */

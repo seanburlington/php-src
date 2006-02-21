@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_engine.h,v 1.20 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: spl_engine.h,v 1.21 2006/02/21 20:12:42 dmitry Exp $ */
 
 #ifndef SPL_ENGINE_H
 #define SPL_ENGINE_H
@@ -42,8 +42,9 @@ void spl_instantiate(zend_class_entry *pce, zval **object, int alloc TSRMLS_DC);
 static inline int spl_instantiate_arg_ex1(zend_class_entry *pce, zval **retval, int alloc, zval *arg1 TSRMLS_DC)
 {
 	spl_instantiate(pce, retval, alloc TSRMLS_CC);
-	
-	zend_call_method(retval, pce, &pce->constructor, pce->constructor->common.function_name, strlen(pce->constructor->common.function_name), NULL, 1, arg1, NULL TSRMLS_CC);
+
+	/* FIXME: Unicode support??? */
+	zend_call_method(retval, pce, &pce->constructor, pce->constructor->common.function_name.s, strlen(pce->constructor->common.function_name.s), NULL, 1, arg1, NULL TSRMLS_CC);
 	return 0;
 }
 /* }}} */
@@ -53,7 +54,8 @@ static inline int spl_instantiate_arg_ex2(zend_class_entry *pce, zval **retval, 
 {
 	spl_instantiate(pce, retval, alloc TSRMLS_CC);
 	
-	zend_call_method(retval, pce, &pce->constructor, pce->constructor->common.function_name, strlen(pce->constructor->common.function_name), NULL, 2, arg1, arg2 TSRMLS_CC);
+	/* FIXME: Unicode support??? */
+	zend_call_method(retval, pce, &pce->constructor, pce->constructor->common.function_name.s, strlen(pce->constructor->common.function_name.s), NULL, 2, arg1, arg2 TSRMLS_CC);
 	return 0;
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.39 2006/01/17 12:18:53 dmitry Exp $ */
+/* $Id: type.c,v 1.40 2006/02/21 20:12:42 dmitry Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -226,7 +226,8 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 				RETURN_TRUE;
 			}
 			ce = Z_OBJCE_PP(arg);
-			if (!strcmp(ce->name, INCOMPLETE_CLASS)) {
+			/* FIXME: Unicode support??? */
+			if (!strcmp(ce->name.s, INCOMPLETE_CLASS)) {
 				RETURN_FALSE;
 			}
 		}

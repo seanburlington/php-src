@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.112 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: pdo_dbh.c,v 1.113 2006/02/21 20:12:42 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1115,7 +1115,7 @@ int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 	while (funcs->fname) {
 		ifunc->type = ZEND_INTERNAL_FUNCTION;
 		ifunc->handler = funcs->handler;
-		ifunc->function_name = funcs->fname;
+		ifunc->function_name.s = funcs->fname;
 		ifunc->scope = dbh->ce;
 		ifunc->prototype = NULL;
 		if (funcs->arg_info) {
@@ -1157,10 +1157,10 @@ static union _zend_function *dbh_method_get(
 #else
 	zval *object,
 #endif
-	char *method_name, int method_len TSRMLS_DC)
+	zstr method_name, int method_len TSRMLS_DC)
 {
 	zend_function *fbc = NULL;
-	char *lc_method_name;
+	zstr lc_method_name;
 #if PHP_API_VERSION >= 20041225
 	zval *object = *object_pp;
 #endif
@@ -1191,7 +1191,7 @@ static union _zend_function *dbh_method_get(
 	}
 	
 out:
-	efree(lc_method_name);
+	efree(lc_method_name.v);
 	return fbc;
 }
 

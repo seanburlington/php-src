@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.28 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: spl_iterators.h,v 1.29 2006/02/21 20:12:42 dmitry Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -100,7 +100,7 @@ typedef struct _spl_dual_it_object {
 	} inner;
 	struct {
 		zval                 *data;
-		char                 *str_key;
+		zstr                 str_key;
 		uint                 str_key_len;
 		ulong                int_key;
 		int                  key_type; /* HASH_KEY_IS_STRING or HASH_KEY_IS_LONG */

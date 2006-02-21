@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.186 2006/02/19 00:55:20 andi Exp $
+   $Id: sqlite.c,v 1.187 2006/02/21 20:12:42 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -946,11 +946,11 @@ void sqlite_iterator_get_current_data(zend_object_iterator *iter, zval ***data T
 
 }
 
-int sqlite_iterator_get_current_key(zend_object_iterator *iter, char **str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
+int sqlite_iterator_get_current_key(zend_object_iterator *iter, zstr *str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
 {
 	struct php_sqlite_result *res = ((sqlite_object_iterator*)iter)->res;
 
-	*str_key = NULL;
+	str_key->v = NULL;
 	*str_key_len = 0;
 	*int_key = res ? res->curr_row : 0;
 	return HASH_KEY_IS_LONG;
@@ -1127,7 +1127,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.186 2006/02/19 00:55:20 andi Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.187 2006/02/21 20:12:42 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2043,7 +2043,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
 	zval *object = getThis();
-	char *class_name;
+	zstr class_name;
 	int class_name_len;
 	zend_class_entry *ce;
 	zval dataset;

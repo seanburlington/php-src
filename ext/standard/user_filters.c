@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.34 2006/01/17 12:18:53 dmitry Exp $ */
+/* $Id: user_filters.c,v 1.35 2006/02/21 20:12:42 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -509,7 +509,7 @@ PHP_FUNCTION(stream_bucket_new)
    Returns a list of registered filters */
 PHP_FUNCTION(stream_get_filters)
 {
-	char *filter_name;
+	zstr filter_name;
 	int key_flags, filter_name_len = 0;
 	HashTable *filters_hash;
 	ulong num_key;
@@ -527,7 +527,7 @@ PHP_FUNCTION(stream_get_filters)
 			(key_flags = zend_hash_get_current_key_ex(filters_hash, &filter_name, &filter_name_len, &num_key, 0, NULL)) != HASH_KEY_NON_EXISTANT;
 			zend_hash_move_forward(filters_hash))
 				if (key_flags == HASH_KEY_IS_STRING)
-					add_next_index_stringl(return_value, filter_name, filter_name_len, 1);
+					add_next_index_stringl(return_value, filter_name.s, filter_name_len, 1);
 	}
 	/* It's okay to return an empty array if no filters are registered */
 }

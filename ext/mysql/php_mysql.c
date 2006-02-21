@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.219 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_mysql.c,v 1.220 2006/02/21 20:12:42 dmitry Exp $ */
 
 /* TODO:
  *
@@ -1380,8 +1380,9 @@ PHP_FUNCTION(mysql_db_query)
 			WRONG_PARAM_COUNT;
 			break;
 	}
-	
-	if (MySG(trace_mode) || !strcasecmp(get_active_function_name(TSRMLS_C), "mysql")) {
+
+	/* FIXME: Unicode support??? */
+	if (MySG(trace_mode) || !strcasecmp(get_active_function_name(TSRMLS_C).s, "mysql")) {
 		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated; use mysql_query() instead.");
 	}
 	

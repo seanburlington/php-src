@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.71 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: pdo.c,v 1.72 2006/02/21 00:55:38 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -67,7 +67,7 @@ PDO_API char *php_pdo_str_tolower_dup(const char *src, int len)
 
 PDO_API zend_class_entry *php_pdo_get_exception_base(int root TSRMLS_DC)
 {
-#if can_handle_soft_dependency_on_SPL && defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
+#if can_handle_soft_dependency_on_SPL && defined(HAVE_SPL)
 	if (!root) {
 		if (!spl_ce_RuntimeException) {
 			zend_class_entry **pce;

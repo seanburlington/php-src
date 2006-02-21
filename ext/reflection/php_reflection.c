@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.212 2006/02/21 00:37:39 helly Exp $ */
+/* $Id: php_reflection.c,v 1.213 2006/02/21 00:43:33 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2502,14 +2502,20 @@ static void reflection_class_object_ctor(INTERNAL_FUNCTION_PARAMETERS, int is_ob
 	zval *classname;
 	reflection_object *intern;
 	zend_class_entry **ce;
+	char *name;
+	int name_len;
+	zend_uchar name_type;
 
 	if (is_object) {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &argument) == FAILURE) {
 			return;
 		}
 	} else {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &argument) == FAILURE) {
-			return;
+		if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "o", &argument) == FAILURE) {
+			argument = NULL;
+			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t", &name, &name_len, &name_type) == FAILURE) {
+				return;
+			}
 		}
 	}
 
@@ -2519,7 +2525,7 @@ static void reflection_class_object_ctor(INTERNAL_FUNCTION_PARAMETERS, int is_ob
 		return;
 	}
 	
-	if (Z_TYPE_P(argument) == IS_OBJECT) {
+	if (argument) {
 		MAKE_STD_ZVAL(classname);
 		ZVAL_TEXTL(classname, Z_OBJCE_P(argument)->name, Z_OBJCE_P(argument)->name_length, 1);
 		zend_hash_update(Z_OBJPROP_P(object), "name", sizeof("name"), (void **) &classname, sizeof(zval *), NULL);
@@ -2529,10 +2535,9 @@ static void reflection_class_object_ctor(INTERNAL_FUNCTION_PARAMETERS, int is_ob
 			zval_add_ref(&argument);
 		}
 	} else { 
-		convert_to_string_ex(&argument);
-		if (zend_u_lookup_class(Z_TYPE_P(argument), Z_UNIVAL_P(argument), Z_UNILEN_P(argument), &ce TSRMLS_CC) == FAILURE) {
+		if (zend_u_lookup_class(name_type, name, name_len, &ce TSRMLS_CC) == FAILURE) {
 			if (!EG(exception)) {
-				zend_throw_exception_ex(reflection_exception_ptr, -1 TSRMLS_CC, "Class %R does not exist", Z_TYPE_P(argument), Z_UNIVAL_P(argument));
+				zend_throw_exception_ex(reflection_exception_ptr, -1 TSRMLS_CC, "Class %R does not exist", name_type, name);
 			}
 			return;
 		}
@@ -4466,7 +4471,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.212 2006/02/21 00:37:39 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.213 2006/02/21 00:43:33 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

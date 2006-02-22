@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.68.2.4 2006/02/03 16:31:09 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.68.2.5 2006/02/22 15:11:53 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -483,7 +483,9 @@ static void sapi_cgi_log_message(char *message)
                                                                                                         
 	if (!FCGX_IsCGI() && logging) {
 		FCGX_Request *request = (FCGX_Request *)SG(server_context);
-		FCGX_FPrintF( request->err, "%s\n", message );
+		if (request) {
+			FCGX_FPrintF( request->err, "%s\n", message );
+		}
 		/* ignore return code */
 	} else
 #endif /* PHP_FASTCGI */

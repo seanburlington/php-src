@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.341 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: array.c,v 1.342 2006/02/22 13:10:32 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1438,8 +1438,9 @@ PHP_FUNCTION(extract)
 				/* break omitted intentionally */
 
 			case EXTR_OVERWRITE:
-				/* FIXME: Unicode support??? */
-				if (var_exists && !strcmp(var_name.s, "GLOBALS")) {
+				if (var_exists && 
+					var_name_len == sizeof("GLOBALS") &&
+				    ZEND_U_EQUAL(key_type, var_name, var_name_len-1, "GLOBALS", sizeof("GLOBALS")-1)) {
 					break;
 				}
 			

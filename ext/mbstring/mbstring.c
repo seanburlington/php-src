@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.237 2006/02/11 02:25:29 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.238 2006/02/23 20:15:36 helly Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -78,6 +78,8 @@
 
 #if HAVE_MBSTRING
 /* }}} */
+
+#include "oniguruma/oniguruma.h"
 
 /* {{{ prototypes */
 static void _php_mb_globals_ctor(zend_mbstring_globals *pglobals TSRMLS_DC);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.63 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: streamsfuncs.c,v 1.64 2006/02/23 18:28:37 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -762,6 +762,14 @@ PHP_FUNCTION(stream_select)
 	/* If seconds is not set to null, build the timeval, else we wait indefinitely */
 	if (sec != NULL) {
 		convert_to_long(sec);
+
+		if (sec < 0) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The seconds parameter must be greater then 0.");
+			RETURN_FALSE;
+		} else if (usec < 0) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The microseconds parameter must be greater then 0.");
+			RETURN_FALSE;
+		}
 
 		/* Solaris + BSD do not like microsecond values which are >= 1 sec */
 		if (usec > 999999) {

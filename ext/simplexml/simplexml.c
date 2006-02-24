@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.187 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.188 2006/02/24 15:49:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -390,6 +390,7 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 	char           *name;
 	xmlNodePtr      node;
 	xmlNodePtr      newnode = NULL;
+	xmlNodePtr      mynode;
 	xmlNodePtr		tempnode;
 	xmlAttrPtr      attr = NULL;
 	int             counter = 0;
@@ -449,6 +450,8 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 		attr = node ? node->properties : NULL;
 		test = 0;
 	}
+
+	mynode = node;
 
 	if (node) {
 		if (attribs) {
@@ -510,6 +513,8 @@ next_iter:
 			change_node_zval(newnode, value TSRMLS_CC);
 		} else if (counter > 1) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)");
+		} else if (elements && !node) {
+			xmlNewChild(mynode, mynode->ns, name, Z_STRVAL_P(value));	
 		} else {
 			if (attribs) {
 				switch (Z_TYPE_P(value)) {
@@ -2032,7 +2037,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.187 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.188 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.220 2006/02/24 13:37:20 helly Exp $ */
+/* $Id: php_reflection.c,v 1.221 2006/02/24 13:44:46 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4438,7 +4438,7 @@ PHP_MINIT_FUNCTION(reflection) /* {{{ */
 	reflection_register_implement(reflection_function_ptr, reflector_ptr TSRMLS_CC);
 	zend_declare_property_string(reflection_function_ptr, "name", sizeof("name")-1, "", ZEND_ACC_PUBLIC TSRMLS_CC);
 
-	REGISTER_REFLECTION_CLASS_CONST_LONG(function, "IS_STATIC", ZEND_ACC_DEPRECATED);
+	REGISTER_REFLECTION_CLASS_CONST_LONG(function, "IS_DEPRECATED", ZEND_ACC_DEPRECATED);
 
 	INIT_CLASS_ENTRY(_reflection_entry, "ReflectionParameter", reflection_parameter_functions);
 	_reflection_entry.create_object = reflection_objects_new;
@@ -4499,7 +4499,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.220 2006/02/24 13:37:20 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.221 2006/02/24 13:44:46 johannes Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

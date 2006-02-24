@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.218 2006/02/21 21:42:54 johannes Exp $ */
+/* $Id: php_reflection.c,v 1.219 2006/02/24 13:13:55 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2417,9 +2417,9 @@ ZEND_METHOD(reflection_method, isStatic)
 }
 /* }}} */
 
-/* {{{ proto public bool ReflectionMethod::isDeprecated()
-   Returns whether this method is deprecated */
-ZEND_METHOD(reflection_method, isDeprecated)
+/* {{{ proto public bool ReflectionFunction::isDeprecated()
+   Returns whether this function is deprecated */
+ZEND_METHOD(reflection_function, isDeprecated)
 {
 	_function_check_flag(INTERNAL_FUNCTION_PARAM_PASSTHRU, ZEND_ACC_DEPRECATED);
 }
@@ -4261,6 +4261,7 @@ static zend_function_entry reflection_function_functions[] = {
 	ZEND_ME(reflection_function, getNumberOfRequiredParameters, NULL, 0)
 	ZEND_ME(reflection_function, getExtension, NULL, 0)
 	ZEND_ME(reflection_function, getExtensionName, NULL, 0)
+	ZEND_ME(reflection_function, isDeprecated, NULL, 0)
 	{NULL, NULL, NULL}
 };
 
@@ -4274,7 +4275,6 @@ static zend_function_entry reflection_method_functions[] = {
 	ZEND_ME(reflection_method, isAbstract, NULL, 0)
 	ZEND_ME(reflection_method, isFinal, NULL, 0)
 	ZEND_ME(reflection_method, isStatic, NULL, 0)
-	ZEND_ME(reflection_method, isDeprecated, NULL, 0)
 	ZEND_ME(reflection_method, isConstructor, NULL, 0)
 	ZEND_ME(reflection_method, isDestructor, NULL, 0)
 	ZEND_ME(reflection_method, getModifiers, NULL, 0)
@@ -4437,6 +4437,8 @@ PHP_MINIT_FUNCTION(reflection) /* {{{ */
 	reflection_register_implement(reflection_function_ptr, reflector_ptr TSRMLS_CC);
 	zend_declare_property_string(reflection_function_ptr, "name", sizeof("name")-1, "", ZEND_ACC_PUBLIC TSRMLS_CC);
 
+	REGISTER_REFLECTION_CLASS_CONST_LONG(function, "IS_STATIC", ZEND_ACC_DEPRECATED);
+
 	INIT_CLASS_ENTRY(_reflection_entry, "ReflectionParameter", reflection_parameter_functions);
 	_reflection_entry.create_object = reflection_objects_new;
 	reflection_parameter_ptr = zend_register_internal_class(&_reflection_entry TSRMLS_CC);
@@ -4496,7 +4498,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.218 2006/02/21 21:42:54 johannes Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.219 2006/02/24 13:13:55 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.113 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: pdo_dbh.c,v 1.114 2006/02/24 15:56:03 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1238,6 +1238,7 @@ void pdo_dbh_init(TSRMLS_D)
 #if PHP_MAJOR_VERSION > 5 || PHP_MINOR_VERSION >= 1
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_SERIALIZE",(long)PDO_FETCH_SERIALIZE);
 #endif
+	REGISTER_PDO_CLASS_CONST_LONG("FETCH_PROPSLATE",(long)PDO_FETCH_PROPSLATE);
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_NAMED",(long)PDO_FETCH_NAMED);
 
 	REGISTER_PDO_CLASS_CONST_LONG("ATTR_AUTOCOMMIT",	(long)PDO_ATTR_AUTOCOMMIT);

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.219 2006/02/24 13:13:55 helly Exp $ */
+/* $Id: php_reflection.c,v 1.220 2006/02/24 13:37:20 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -757,13 +757,14 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 /* }}} */
 
 /* {{{ _property_string */
-static void _property_string(string *str, zend_property_info *prop, char *prop_name, char* indent TSRMLS_DC)
+static void _property_string(string *str, zend_property_info *prop, char *sz_prop_name, char* indent TSRMLS_DC)
 {
 	zstr class_name;
+	zstr prop_name;
 
 	string_printf(str, "%sProperty [ ", indent);
 	if (!prop) {
-		string_printf(str, "<dynamic> public $%s", prop_name);
+		string_printf(str, "<dynamic> public $%s", sz_prop_name);
 	} else {
 		if (!(prop->flags & ZEND_ACC_STATIC)) {
 			if (prop->flags & ZEND_ACC_IMPLICIT_PUBLIC) {
@@ -4498,7 +4499,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.219 2006/02/24 13:13:55 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.220 2006/02/24 13:37:20 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

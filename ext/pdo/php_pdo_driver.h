@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.75 2006/02/24 15:56:03 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.76 2006/02/24 16:04:13 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -98,7 +98,7 @@ enum pdo_fetch_type {
 #define PDO_FETCH_UNIQUE    0x00030000  /* fetch into groups assuming first col is unique */
 #define PDO_FETCH_CLASSTYPE 0x00040000  /* fetch class gets its class name from 1st column */
 #define PDO_FETCH_SERIALIZE 0x00080000  /* fetch class instances by calling serialize */
-#define PDO_FETCH_PROPSLATE 0x00100000  /* fetch props after calling ctor */
+#define PDO_FETCH_PROPS_LATE 0x00100000  /* fetch props after calling ctor */
 
 /* fetch orientation for scrollable cursors */
 enum pdo_fetch_orientation {

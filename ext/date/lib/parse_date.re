@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.23 2006/02/26 17:05:45 iliaa Exp $ */
+/* $Id: parse_date.re,v 1.26.2.24 2006/02/26 22:14:58 iliaa Exp $ */
 
 #include "timelib.h"
 
@@ -535,7 +535,7 @@ static long timelib_get_month(char **ptr)
 
 static void timelib_eat_spaces(char **ptr)
 {
-	while (**ptr == ' ' || **ptr == '\t') {
+	while (**ptr == ' ') {
 		++*ptr;
 	}
 }
@@ -736,7 +736,7 @@ std:
 /*!re2c
 any = [\000-\377];
 
-space = [ \t]+;
+space = [ ]+;
 frac = "."[0-9]+;
 
 ago = 'ago';

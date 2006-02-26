@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.665 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: main.c,v 1.666 2006/02/26 11:57:14 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -550,7 +550,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	char *space;
 	zstr class_name = get_active_class_name(&space TSRMLS_CC);
 	int origin_len;
-	zstr function = (zstr)NULL;
+	zstr function = NULL_ZSTR;
 	char *origin;
 	char *message;
 	char *stage;

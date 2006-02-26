@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.31 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: incomplete_class.c,v 1.32 2006/02/26 11:57:14 dmitry Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -126,7 +126,7 @@ zend_class_entry *php_create_incomplete_class(TSRMLS_D)
 PHPAPI zstr php_lookup_class_name(zval *object, zend_uint *nlen)
 {
 	zval **val;
-	zstr retval = (zstr)NULL;
+	zstr retval = NULL_ZSTR;
 	HashTable *object_properties;
 	TSRMLS_FETCH();
 

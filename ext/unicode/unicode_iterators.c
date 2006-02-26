@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.22 2006/02/17 08:24:56 helly Exp $ */
+/* $Id: unicode_iterators.c,v 1.23 2006/02/26 11:57:14 dmitry Exp $ */
 
 /*
  * TODO
@@ -415,7 +415,7 @@ static void text_iter_get_current_data(zend_object_iterator* iter, zval*** data 
 	*data = &obj->current;
 }
 
-static int text_iter_get_current_key(zend_object_iterator* iter, char **str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
+static int text_iter_get_current_key(zend_object_iterator* iter, zstr *str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
 {
 	text_iter_obj* obj = text_iter_to_obj(iter);
 

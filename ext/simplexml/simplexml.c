@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.192 2006/02/26 15:48:28 helly Exp $ */
+/* $Id: simplexml.c,v 1.193 2006/02/26 16:12:21 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -594,6 +594,7 @@ static zval** sxe_property_get_adr(zval *object, zval *member TSRMLS_DC) /* {{{ 
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 
 	GET_NODE(sxe, node);
+	convert_to_string(member);
 	name = Z_STRVAL_P(member);
 	node = sxe_get_element_by_name(sxe, node, &name, &type TSRMLS_CC);
 	if (!node) {
@@ -2112,7 +2113,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.192 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.193 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

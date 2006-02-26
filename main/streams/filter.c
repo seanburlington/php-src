@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.17.2.2 2006/01/10 16:14:16 iliaa Exp $ */
+/* $Id: filter.c,v 1.17.2.3 2006/02/26 10:49:51 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -351,7 +351,7 @@ PHPAPI void _php_stream_filter_append(php_stream_filter_chain *chain, php_stream
 		php_stream_bucket_append(brig_inp, bucket TSRMLS_CC);
 		status = filter->fops->filter(stream, filter, brig_inp, brig_outp, &consumed, PSFS_FLAG_NORMAL TSRMLS_CC);
 
-		if (stream->readpos + consumed > stream->writepos || consumed < 0) {
+		if (stream->readpos + consumed > (uint)stream->writepos || consumed < 0) {
 			/* No behaving filter should cause this. */
 			status = PSFS_ERR_FATAL;
 		}

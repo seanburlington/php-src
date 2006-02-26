@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.1 2006/01/01 12:50:15 sniper Exp $ */
+/* $Id: user_filters.c,v 1.31.2.2 2006/02/26 10:49:51 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -406,7 +406,7 @@ static void php_stream_bucket_attach(int append, INTERNAL_FUNCTION_PARAMETERS)
 		if (!bucket->own_buf) {
 			bucket = php_stream_bucket_make_writeable(bucket TSRMLS_CC);
 		}
-		if (bucket->buflen != Z_STRLEN_PP(pzdata)) {
+		if ((int)bucket->buflen != Z_STRLEN_PP(pzdata)) {
 			bucket->buf = perealloc(bucket->buf, Z_STRLEN_PP(pzdata), bucket->is_persistent);
 			bucket->buflen = Z_STRLEN_PP(pzdata);
 		}

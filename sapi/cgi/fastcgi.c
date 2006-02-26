@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.4 2006/02/04 23:54:21 fmk Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.5 2006/02/26 10:49:50 helly Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -531,7 +531,7 @@ static int fcgi_read_request(fcgi_request *req)
 		}
 		len = p - buf - sizeof(fcgi_header);
 		len += fcgi_make_header((fcgi_header*)buf, FCGI_GET_VALUES_RESULT, 0, len);
-		if (safe_write(req, buf, sizeof(fcgi_header)+len) != sizeof(fcgi_header)+len) {
+		if (safe_write(req, buf, sizeof(fcgi_header)+len) != (int)sizeof(fcgi_header)+len) {
 			return 0;
 		}
 		return 0;

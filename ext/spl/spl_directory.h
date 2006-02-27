@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.19 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: spl_directory.h,v 1.20 2006/02/27 18:15:29 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -40,6 +40,7 @@ typedef enum {
 
 typedef struct _spl_filesystem_object {
 	zend_object        std;
+	void               *oth;
 	char               *path;
 	int                path_len;
 	char               *file_name;

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.194 2006/02/27 11:55:23 helly Exp $ */
+/* $Id: simplexml.c,v 1.195 2006/02/27 13:32:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1438,9 +1438,14 @@ static int sxe_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ */
 {
 	php_sxe_object  *sxe;
 	xmlNodePtr       node;
+	zval            *data;
 
 	*count = 0;
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
+
+	data = sxe->iter.data;
+	sxe->iter.data = NULL;
+
 	node = php_sxe_reset_iterator(sxe, 0 TSRMLS_CC);
 	
 	while (node)
@@ -1449,6 +1454,10 @@ static int sxe_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ */
 		node = php_sxe_iterator_fetch(sxe, node->next, 0 TSRMLS_CC);
 	}
 
+	if (sxe->iter.data) {
+		zval_ptr_dtor(&sxe->iter.data);
+	}
+	sxe->iter.data = data;
 
 	return SUCCESS;
 }
@@ -2117,7 +2126,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.194 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.195 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

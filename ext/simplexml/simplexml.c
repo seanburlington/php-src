@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.13 2006/02/27 07:12:14 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.151.2.14 2006/02/27 11:55:18 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -332,8 +332,7 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 		zval_dtor(&tmp_zv);
 	}
 	if (Z_TYPE_P(return_value) == IS_NULL) {
-		return_value->refcount = 1;
-		zval_ptr_dtor(&return_value);
+		FREE_ZVAL(return_value);
 		return_value = &EG(uninitialized_zval);
 	}
 
@@ -2104,7 +2103,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.13 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.14 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

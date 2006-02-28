@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.5 2006/01/12 21:16:27 helly Exp $
+// $Id: config.w32,v 1.6 2006/02/28 01:36:29 helly Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
@@ -7,4 +7,5 @@ if (PHP_PHAR != "no") {
 	EXTENSION("phar", "phar.c");
 	ADD_EXTENSION_DEP('phar', 'zlib', true);
 	ADD_EXTENSION_DEP('phar', 'bz2', true);
+	ADD_EXTENSION_DEP('phar', 'spl', false);
 }

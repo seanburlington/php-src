@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.64 2006/02/28 01:36:29 helly Exp $ */
+/* $Id: phar.c,v 1.65 2006/02/28 01:45:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -843,9 +843,7 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 		php_url_free(resource);
 		return NULL;
 	}
-#if (PHP_MAJOR_VERSION >= 6)
 	php_url_free(resource);
-#endif
 	
 #if MBO_0
 		fprintf(stderr, "Pharname:   %s\n", idata->phar->filename);
@@ -1733,7 +1731,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.64 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.65 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

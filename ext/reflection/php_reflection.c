@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.28 2006/02/25 21:17:18 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.29 2006/02/28 02:22:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -554,7 +554,7 @@ static zend_op* _get_recv_op(zend_op_array *op_array, zend_uint offset)
 	++offset;
 	while (op < end) {
 		if ((op->opcode == ZEND_RECV || op->opcode == ZEND_RECV_INIT) &&
-		    op->op1.u.constant.value.lval == offset) {
+		    op->op1.u.constant.value.lval == (long)offset) {
 		  return op;
 	  }
 	  ++op;
@@ -4432,7 +4432,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.28 2006/02/25 21:17:18 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.29 2006/02/28 02:22:32 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

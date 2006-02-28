@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.65 2006/02/28 01:45:27 helly Exp $ */
+/* $Id: phar.c,v 1.66 2006/02/28 01:56:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1622,20 +1622,19 @@ function_entry phar_functions[] = {
 };
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_phar___construct, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phar___construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, fname)
-	ZEND_ARG_INFO(1, flags)
-	ZEND_ARG_INFO(1, alias)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO(arginfo_phar_mapPhar, 0)
+	ZEND_ARG_INFO(0, flags)
 	ZEND_ARG_INFO(0, alias)
-	ZEND_ARG_INFO(0, compressed)
 ZEND_END_ARG_INFO();
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_phar_loadPhar, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phar_mapPhar, 0, 0, 0)
+	ZEND_ARG_INFO(0, alias)
+ZEND_END_ARG_INFO();
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phar_loadPhar, 0, 0, 1)
 	ZEND_ARG_INFO(0, fname)
 	ZEND_ARG_INFO(0, alias)
 ZEND_END_ARG_INFO();
@@ -1653,9 +1652,9 @@ zend_function_entry php_archive_methods[] = {
 };
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_entry___construct, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_entry___construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, fname)
-	ZEND_ARG_INFO(1, flags)
+	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO();
 
 zend_function_entry php_entry_methods[] = {
@@ -1731,7 +1730,7 @@ PHP_MINFO_FUNCTION(phar)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.65 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.66 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.224 2006/02/25 18:05:16 helly Exp $ */
+/* $Id: php_reflection.c,v 1.225 2006/02/28 18:26:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4365,6 +4365,7 @@ static zend_function_entry reflection_parameter_functions[] = {
 	ZEND_ME(reflection_parameter, getName, NULL, 0)
 	ZEND_ME(reflection_parameter, isPassedByReference, NULL, 0)
 	ZEND_ME(reflection_parameter, getDeclaringClass, NULL, 0)
+	ZEND_MALIAS(reflection_parameter, getClass, getDeclaringClass, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_DEPRECATED)
 	ZEND_ME(reflection_parameter, isArray, NULL, 0)
 	ZEND_ME(reflection_parameter, allowsNull, NULL, 0)
 	ZEND_ME(reflection_parameter, isOptional, NULL, 0)
@@ -4500,7 +4501,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.224 2006/02/25 18:05:16 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.225 2006/02/28 18:26:24 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.195 2006/02/27 13:32:25 helly Exp $ */
+/* $Id: simplexml.c,v 1.196 2006/03/01 15:36:34 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1684,11 +1684,7 @@ PHP_FUNCTION(simplexml_load_file)
 		return;
 	}
 
-#if LIBXML_VERSION >= 20600
 	docp = xmlReadFile(filename, NULL, options);
-#else
-	docp = xmlParseFile(filename);
-#endif
 
 	if (! docp) {
 		RETURN_FALSE;
@@ -1728,11 +1724,7 @@ PHP_FUNCTION(simplexml_load_string)
 		return;
 	}
 
-#if LIBXML_VERSION >= 20600
 	docp = xmlReadMemory(data, data_len, NULL, NULL, options);
-#else
-	docp = xmlParseMemory(data, data_len);
-#endif
 
 	if (! docp) {
 		RETURN_FALSE;
@@ -1774,11 +1766,9 @@ SXE_METHOD(__construct)
 	}
 
 	php_std_error_handling();
-#if LIBXML_VERSION >= 20600
+
 	docp = is_url ? xmlReadFile(data, NULL, options) : xmlReadMemory(data, data_len, NULL, NULL, options);
-#else
-	docp = is_url ? xmlParseFile(data) : xmlParseMemory(data, data_len);
-#endif
+
 	if (!docp) {
 		((php_libxml_node_object *)sxe)->document = NULL;
 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "String could not be parsed as XML", 0 TSRMLS_CC);
@@ -2126,7 +2116,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.195 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.196 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

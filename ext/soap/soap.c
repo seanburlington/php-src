@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.15 2006/02/07 12:49:09 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.16 2006/03/02 14:07:48 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1724,7 +1724,13 @@ PHP_METHOD(SoapServer, handle)
 		    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {
 			soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);
 		} else {
-			if (soap_obj) {zval_ptr_dtor(&soap_obj);}
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
+			if (soap_obj && service->soap_class.persistance != SOAP_PERSISTENCE_SESSION) {
+#else
+			if (soap_obj) {
+#endif
+			  zval_ptr_dtor(&soap_obj);
+			}
 			php_end_ob_buffer(0, 0 TSRMLS_CC);
 			goto fail;
 		}

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.45 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: base64.c,v 1.46 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include <string.h>
 
@@ -207,9 +207,9 @@ PHP_FUNCTION(base64_encode)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
 		return;
 	}
-	result = php_base64_encode(str, str_len, &ret_length);
+	result = php_base64_encode((unsigned char*)str, str_len, &ret_length);
 	if (result != NULL) {
-		RETVAL_STRINGL(result, ret_length, 0);
+		RETVAL_STRINGL((char*)result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}
@@ -228,9 +228,9 @@ PHP_FUNCTION(base64_decode)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
 		return;
 	}
-	result = php_base64_decode(str, str_len, &ret_length);
+	result = php_base64_decode((unsigned char*)str, str_len, &ret_length);
 	if (result != NULL) {
-		RETVAL_STRINGL(result, ret_length, 0);
+		RETVAL_STRINGL((char*)result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}

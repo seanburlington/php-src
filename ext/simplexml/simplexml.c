@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.196 2006/03/01 15:36:34 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.197 2006/03/02 13:12:45 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1912,7 +1912,7 @@ static int php_sxe_iterator_current_key(zend_object_iterator *iter, zstr *str_ke
 
 	if (UG(unicode)) {
 		UErrorCode status = U_ZERO_ERROR;
-		int32_t u_len;
+		int u_len;
 
 		namelen = xmlStrlen(curnode->name);
 		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &str_key->u, &u_len, (char*)curnode->name, namelen, &status);
@@ -2116,7 +2116,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.196 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.197 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

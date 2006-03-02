@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.179 2006/02/19 01:19:37 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.180 2006/03/02 13:12:45 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -312,7 +312,6 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 	char *pathbuf, *ptr, *end;
 	char *exec_fname;
 	char trypath[MAXPATHLEN];
-	struct stat sb;
 	FILE *fp;
 	int path_length;
 	int filename_length;

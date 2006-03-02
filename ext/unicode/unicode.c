@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.10 2006/02/13 19:55:17 helly Exp $ */ 
+/* $Id: unicode.c,v 1.11 2006/03/02 13:12:45 dmitry Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -38,7 +38,7 @@ static PHP_FUNCTION(unicode_decode)
 	UErrorCode status;
 	UConverter *conv = NULL;
 	UChar *target;
-	int32_t targetlen;
+	int targetlen;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ts", &input.vptr, &len, &type, &encoding, &enclen)) {
 		return;
@@ -87,7 +87,7 @@ static PHP_FUNCTION(unicode_encode)
 	UErrorCode status;
 	UConverter *conv = NULL;
 	char *target;
-	int32_t targetlen;
+	int targetlen;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "us", &uni, &len, &encoding, &enclen)) {
 		return;

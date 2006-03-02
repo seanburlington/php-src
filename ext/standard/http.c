@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.18 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: http.c,v 1.19 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -33,7 +33,8 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 {
 	zstr key;
 	char *ekey, *newprefix, *p;
-	int arg_sep_len, key_len, ekey_len, key_type, newprefix_len;
+	uint key_len;
+	int arg_sep_len, ekey_len, key_type, newprefix_len;
 	ulong idx;
 	zval **zdata = NULL, *copyzval;
 

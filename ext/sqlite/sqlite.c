@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.187 2006/02/21 20:12:42 dmitry Exp $
+   $Id: sqlite.c,v 1.188 2006/03/02 13:12:45 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1127,7 +1127,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.187 2006/02/21 20:12:42 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.188 2006/03/02 13:12:45 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1685,7 +1685,7 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 			char *tmp = colnames[ncols + i] ? (char *)colnames[ncols + i] : "";
 			UErrorCode status = U_ZERO_ERROR;
 			UChar *u_str;
-			int32_t u_len;
+			int u_len;
 
 			zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, tmp, strlen(tmp), &status);
 			if (result_type == PHPSQLITE_ASSOC) {
@@ -1851,7 +1851,7 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 			if (UG(unicode)) {
 				UErrorCode status = U_ZERO_ERROR;
 				UChar *u_str;
-				int32_t u_len;
+				int u_len;
 
 				zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, (char*)rowdata[j], strlen((char*)rowdata[j]), &status);
 				ZVAL_UNICODEL(decoded, u_str, u_len, 0);
@@ -1939,7 +1939,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 	} else if (UG(unicode)) {
 		UErrorCode status = U_ZERO_ERROR;
 		UChar *u_str;
-		int32_t u_len;
+		int u_len;
 
 		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, (char*)rowdata[j], strlen((char*)rowdata[j]), &status);
 		RETVAL_UNICODEL(u_str, u_len, 0);
@@ -2271,7 +2271,7 @@ static void php_sqlite_fetch_single(struct php_sqlite_result *res, zend_bool dec
 	} else if (UG(unicode)) {
 		UErrorCode status = U_ZERO_ERROR;
 		UChar *u_str;
-		int32_t u_len;
+		int u_len;
 
 		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, decoded, decoded_len, &status);
 		if (free_decoded) {

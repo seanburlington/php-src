@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.222 2006/02/26 11:57:14 dmitry Exp $ */
+/* $Id: var.c,v 1.223 2006/03/02 13:12:45 dmitry Exp $ */
 
 
 
@@ -42,7 +42,7 @@
 /* {{{ php_var_dump */
 
 /* temporary, for debugging */
-static void php_var_dump_unicode(UChar *ustr, int32_t length, int verbose, char *quote, int escape TSRMLS_DC)
+static void php_var_dump_unicode(UChar *ustr, int length, int verbose, char *quote, int escape TSRMLS_DC)
 {
 	UChar32 c;
 	int32_t i;

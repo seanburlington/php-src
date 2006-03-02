@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.51 2006/01/18 23:55:27 tony2001 Exp $ */
+/* $Id: filters.c,v 1.52 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1362,7 +1362,7 @@ static int php_conv_get_int_prop_ex(const HashTable *ht, int *pretval, char *fie
 
 static int php_conv_get_uint_prop_ex(const HashTable *ht, unsigned int *pretval, char *field_name, size_t field_name_len)
 {
-	long l;
+	ulong l;
 	php_conv_err_t err;
 
 	*pretval = 0;

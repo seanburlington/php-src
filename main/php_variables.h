@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.25 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_variables.h,v 1.26 2006/03/02 13:12:45 dmitry Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -38,7 +38,7 @@ PHPAPI void php_register_variable(char *var, char *val, zval *track_vars_array T
 /* binary-safe version */
 PHPAPI void php_register_variable_safe(char *var, char *val, int val_len, zval *track_vars_array TSRMLS_DC);
 PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_array TSRMLS_DC);
-PHPAPI void php_u_register_variable_safe(UChar *var, UChar *strval, int32_t str_len, zval *track_vars_array TSRMLS_DC);
+PHPAPI void php_u_register_variable_safe(UChar *var, UChar *strval, int str_len, zval *track_vars_array TSRMLS_DC);
 PHPAPI void php_u_register_variable_ex(UChar *var, zval *val, zval *track_vars_array TSRMLS_DC);
 
 int php_hash_environment(TSRMLS_D);

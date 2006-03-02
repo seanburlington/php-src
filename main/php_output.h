@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.54 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_output.h,v 1.55 2006/03/02 13:12:45 dmitry Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -75,7 +75,7 @@ typedef struct _php_ob_buffer {
 	php_output_handler_func_t internal_output_handler;
 	char *internal_output_handler_buffer;
 	uint internal_output_handler_buffer_size;
-	char *handler_name;
+	zstr handler_name;
 	zend_bool erase;
 } php_ob_buffer;
 

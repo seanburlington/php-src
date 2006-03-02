@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.88 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.89 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -210,7 +210,7 @@ static php_stream *php_ftp_fopen_connect(php_stream_wrapper *wrapper, char *path
 	}
 
 #define PHP_FTP_CNTRL_CHK(val, val_len, err_msg) {	\
-	unsigned char *s = val, *e = s + val_len;	\
+	unsigned char *s = (unsigned char*)val, *e = s + val_len;	\
 	while (s < e) {	\
 		if (iscntrl(*s)) {	\
 			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, err_msg, val);	\

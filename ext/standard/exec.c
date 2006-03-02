@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.116 2006/02/19 18:19:33 iliaa Exp $ */
+/* $Id: exec.c,v 1.117 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -61,7 +61,7 @@ int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 	FILE *fp;
 	char *buf, *tmp=NULL;
 	int l, pclose_return;
-	char *cmd_p, *b, *c, *d=NULL;
+	char *cmd_p, *b, *d=NULL;
 	php_stream *stream;
 	size_t buflen, bufl = 0;
 #if PHP_SIGCHILD

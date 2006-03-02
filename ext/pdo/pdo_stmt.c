@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.148 2006/02/24 16:04:13 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.149 2006/03/02 13:12:45 dmitry Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -508,7 +508,7 @@ static inline void fetch_value(pdo_stmt_t *stmt, zval *dest, int colno TSRMLS_DC
 				if (UG(unicode)) {
 					UErrorCode status = U_ZERO_ERROR;
 					UChar *u_str;
-					int32_t u_len;
+					int u_len;
 			
 					zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, value, value_len, &status);
 					ZVAL_UNICODEL(dest, u_str, u_len, 0);

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.91 2006/02/12 16:40:34 iliaa Exp $ */
+/* $Id: url.c,v 1.92 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -450,8 +450,8 @@ PHPAPI char *php_url_encode(char const *s, int len, int *new_length)
 	unsigned char *to, *start;
 	unsigned char const *from, *end;
 	
-	from = s;
-	end = s + len;
+	from = (unsigned char*)s;
+	end = from + len;
 	start = to = (unsigned char *) safe_emalloc(3, len, 1);
 
 	while (from < end) {

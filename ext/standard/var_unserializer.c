@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.77 2006/02/19 18:19:33 iliaa Exp $ */
+/* $Id: var_unserializer.c,v 1.78 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -907,11 +907,11 @@ yy67:
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
 
-	if (!strncmp(start + 2, "NAN", 3)) {
+	if (!strncmp((char*)start + 2, "NAN", 3)) {
 		ZVAL_DOUBLE(*rval, php_get_nan());
-	} else if (!strncmp(start + 2, "INF", 3)) {
+	} else if (!strncmp((char*)start + 2, "INF", 3)) {
 		ZVAL_DOUBLE(*rval, php_get_inf());
-	} else if (!strncmp(start + 2, "-INF", 4)) {
+	} else if (!strncmp((char*)start + 2, "-INF", 4)) {
 		ZVAL_DOUBLE(*rval, -php_get_inf());
 	}
 

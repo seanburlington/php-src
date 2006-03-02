@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.666 2006/02/26 11:57:14 dmitry Exp $ */
+/* $Id: main.c,v 1.667 2006/03/02 13:12:45 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1926,7 +1926,7 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 		char *pass;
 		char *user;
 
-		user = php_base64_decode(auth + 6, strlen(auth) - 6, NULL);
+		user = (char*)php_base64_decode((unsigned char*)auth + 6, strlen(auth) - 6, NULL);
 		if (user) {
 			pass = strchr(user, ':');
 			if (pass) {

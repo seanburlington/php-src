@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.62 2006/02/19 03:41:25 andi Exp $ */
+/* $Id: plain_wrapper.c,v 1.63 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1160,7 +1160,6 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 	char *pathbuf, *ptr, *end;
 	char *exec_fname;
 	char trypath[MAXPATHLEN];
-	struct stat sb;
 	php_stream *stream;
 	int path_length;
 	int filename_length;

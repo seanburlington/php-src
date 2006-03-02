@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.35 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: user_filters.c,v 1.36 2006/03/02 13:12:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -474,7 +474,6 @@ PHP_FUNCTION(stream_bucket_new)
 	zval *zstream, *zbucket;
 	php_stream *stream;
 	zval *buffer;
-	char *pbuffer;
 	php_stream_bucket *bucket;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz", &zstream, &buffer) == FAILURE) {
@@ -510,7 +509,7 @@ PHP_FUNCTION(stream_bucket_new)
 PHP_FUNCTION(stream_get_filters)
 {
 	zstr filter_name;
-	int key_flags, filter_name_len = 0;
+	uint key_flags, filter_name_len = 0;
 	HashTable *filters_hash;
 	ulong num_key;
 

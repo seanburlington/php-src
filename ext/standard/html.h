@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.h,v 1.21 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: html.h,v 1.22 2006/03/02 13:12:45 dmitry Exp $ */
 
 #ifndef HTML_H
 #define HTML_H
@@ -37,6 +37,6 @@ PHP_FUNCTION(htmlspecialchars_decode);
 PHP_FUNCTION(html_entity_decode);
 PHP_FUNCTION(get_html_translation_table);
 
-PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newlen, int all, int quote_style, char *hint_charset TSRMLS_DC);
+PHPAPI char *php_escape_html_entities(char *old, int oldlen, int *newlen, int all, int quote_style, char *hint_charset TSRMLS_DC);
 
 #endif /* HTML_H */

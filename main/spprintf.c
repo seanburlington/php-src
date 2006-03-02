@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.35 2006/01/24 20:57:56 helly Exp $ */
+/* $Id: spprintf.c,v 1.36 2006/03/02 13:12:45 dmitry Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -208,8 +208,7 @@ static void xbuf_format_converter(int unicode, smart_str *xbuf, const char *fmt,
 	register char *s = NULL;
 	register UChar *u = NULL;
 	char *q;
-	int s_len, s_unicode;
-	int32_t u_len;
+	int s_len, s_unicode, u_len;
 
 	register int min_width = 0;
 	int precision = 0;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.9 2006/02/06 10:42:58 tony2001 Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.10 2006/03/02 00:39:57 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3513,6 +3513,11 @@ PHP_FUNCTION(mb_send_mail)
 	char *to_r = NULL;
 	int to_len, i;
 
+    if (PG(safe_mode) && (ZEND_NUM_ARGS() == 5)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SAFE MODE Restriction in effect.  The fifth parameter is disabled in SAFE MODE.");
+		RETURN_FALSE;
+	}
+    
 	/* initialize */
 	mbfl_memory_device_init(&device, 0, 0);
 	mbfl_string_init(&orig_str);

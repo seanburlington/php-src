@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.16 2006/03/02 14:07:48 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.17 2006/03/03 09:20:33 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2201,6 +2201,7 @@ PHP_METHOD(SoapClient, SoapClient)
 
 			MAKE_STD_ZVAL(class_map);
 			*class_map = **tmp;
+			INIT_PZVAL(class_map);
 			zval_copy_ctor(class_map);
 #ifdef ZEND_ENGINE_2
 			class_map->refcount--;

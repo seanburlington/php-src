@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.17 2006/03/03 09:20:33 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.18 2006/03/03 10:29:29 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1519,8 +1519,8 @@ PHP_METHOD(SoapServer, handle)
 	function = deserialize_function_call(service->sdl, doc_request, service->actor, &function_name, &num_params, &params, &soap_version, &soap_headers TSRMLS_CC);
 	xmlFreeDoc(doc_request);
 
+	soap_obj = NULL;
 	if (service->type == SOAP_CLASS) {
-		soap_obj = NULL;
 #if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 		/* If persistent then set soap_obj from from the previous created session (if available) */
 		if (service->soap_class.persistance == SOAP_PERSISTENCE_SESSION) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.29 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: spl_iterators.h,v 1.30 2006/03/03 21:35:16 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -59,6 +59,9 @@ PHP_FUNCTION(iterator_count);
 
 typedef enum {
 	DIT_Default = 0,
+	DIT_FilterIterator = DIT_Default,
+	DIT_RecursiveFilterIterator = DIT_Default,
+	DIT_ParentIterator = DIT_Default,
 	DIT_LimitIterator,
 	DIT_CachingIterator,
 	DIT_RecursiveCachingIterator,
@@ -70,6 +73,7 @@ typedef enum {
 	DIT_RegExIterator,
 	DIT_RecursiveRegExIterator,
 #endif
+	DIT_Unknown = ~0
 } dual_it_type;
 
 enum {

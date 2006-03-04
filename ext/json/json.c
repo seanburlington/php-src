@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.7 2006/02/02 10:54:32 omar Exp $ */
+/* $Id: json.c,v 1.8 2006/03/04 15:31:27 omar Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -174,11 +174,15 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) {
 
                         json_escape_string(buf, key, key_len - 1 TSRMLS_CC);
                         smart_str_appendc(buf, ':');
+
                         json_encode_r(buf, *data TSRMLS_CC);
                     } else {
                         smart_str_appendc(buf, '"');
                         smart_str_append_long(buf, (long) index);
                         smart_str_appendc(buf, '"');
+                        smart_str_appendc(buf, ':');
+
+                        json_encode_r(buf, *data TSRMLS_CC);
                     }
                 }
 

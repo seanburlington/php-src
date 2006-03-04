@@ -16,12 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.5 2006/02/02 10:54:32 omar Exp $ */
+/* $Id: php_json.h,v 1.6 2006/03/04 15:31:27 omar Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
 
-#define PHP_JSON_VERSION "1.2.0-BETA2"
+#define PHP_JSON_VERSION "1.2.0-BETA3"
 
 extern zend_module_entry json_module_entry;
 #define phpext_json_ptr &json_module_entry

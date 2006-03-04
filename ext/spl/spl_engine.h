@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_engine.h,v 1.21 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: spl_engine.h,v 1.22 2006/03/04 16:32:59 helly Exp $ */
 
 #ifndef SPL_ENGINE_H
 #define SPL_ENGINE_H
@@ -59,8 +59,6 @@ static inline int spl_instantiate_arg_ex2(zend_class_entry *pce, zval **retval, 
 	return 0;
 }
 /* }}} */
-
-int spl_is_instance_of(zval **obj, zend_class_entry *ce TSRMLS_DC);
 
 #endif /* SPL_ENGINE_H */
 

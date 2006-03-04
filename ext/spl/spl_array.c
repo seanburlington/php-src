@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.99 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: spl_array.c,v 1.100 2006/03/04 16:45:45 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -900,7 +900,7 @@ SPL_METHOD(Array, __construct)
 			return;
 		}
 	}
-	
+
 	spl_array_rewind(intern TSRMLS_CC);
 
 	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
@@ -975,15 +975,14 @@ SPL_METHOD(Array, exchangeArray)
 {
 	zval *object = getThis(), *tmp, **array;
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
-    
-   	array_init(return_value);
+
+	array_init(return_value);
 	zend_hash_copy(HASH_OF(return_value), spl_array_get_hash_table(intern, 0 TSRMLS_CC), (copy_ctor_func_t) zval_add_ref, &tmp, sizeof(zval*));
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z", &array) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	if (Z_TYPE_PP(array) == IS_OBJECT && intern == (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC))
-	{
+	if (Z_TYPE_PP(array) == IS_OBJECT && intern == (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC)) {
 		zval_ptr_dtor(&intern->array);
 		array = &object;
 		intern->array = object;

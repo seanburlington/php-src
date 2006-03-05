@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.66 2006/02/19 05:05:42 andi Exp $ */
+/* $Id: php_gd.h,v 1.67 2006/03/05 18:23:47 hholzgra Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -86,6 +86,7 @@ PHP_FUNCTION(imagecolorexact);
 PHP_FUNCTION(imagecolorset);
 PHP_FUNCTION(imagecolorstotal);
 PHP_FUNCTION(imagecolorsforindex);
+PHP_FUNCTION(imagecolorhistogram);
 PHP_FUNCTION(imagecolortransparent);
 PHP_FUNCTION(imagecopy);
 PHP_FUNCTION(imagecopymerge);

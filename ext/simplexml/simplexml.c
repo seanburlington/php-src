@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.16 2006/03/01 15:37:45 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.17 2006/03/05 15:36:03 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -408,7 +408,7 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 	int				nodendx = 0;
 	int             test = 0;
 	long            cnt;
-	zval            tmp_zv, trim_zv;
+	zval            tmp_zv, trim_zv, value_copy;
 
 	if (!member) {
 		/* This happens when the user did: $sxe[] = $value
@@ -475,6 +475,11 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 			case IS_BOOL:
 			case IS_DOUBLE:
 			case IS_NULL:
+				if (value->refcount > 1) {
+					value_copy = *value;
+					zval_copy_ctor(&value_copy);
+					value = &value_copy;
+				}
 				convert_to_string(value);
 				break;
 			case IS_STRING:
@@ -565,6 +570,9 @@ next_iter:
 	}
 	if (pnewnode) {
 		*pnewnode = newnode;
+	}
+	if (value && value == &value_copy) {
+		zval_dtor(value);
 	}
 }
 /* }}} */
@@ -2103,7 +2111,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.17 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

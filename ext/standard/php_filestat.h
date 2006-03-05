@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.27 2006/01/04 12:22:23 derick Exp $ */
+/* $Id: php_filestat.h,v 1.28 2006/03/05 19:02:11 derick Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -56,9 +56,6 @@ PHP_FUNCTION(lchgrp);
 PHP_FUNCTION(chmod);
 #if HAVE_UTIME
 PHP_FUNCTION(touch);
-# if HAVE_LTOUCH
-PHP_FUNCTION(ltouch);
-# endif
 #endif
 PHP_FUNCTION(clearstatcache);
 

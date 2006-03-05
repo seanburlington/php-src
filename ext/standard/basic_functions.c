@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.24 2006/02/23 03:51:46 bfrance Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.25 2006/03/05 18:57:54 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -698,8 +698,6 @@ zend_function_entry basic_functions[] = {
 #endif
 #if HAVE_LCHOWN
 	PHP_FE(lchown,															NULL)
-#endif
-#if HAVE_LCHOWN
 	PHP_FE(lchgrp,															NULL)
 #endif
 	PHP_FE(chmod,															NULL)

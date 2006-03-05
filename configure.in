@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.37 2006/02/16 22:49:13 wez Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.38 2006/03/05 18:57:53 derick Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -483,6 +483,7 @@ isascii \
 link \
 localtime_r \
 lockf \
+lchown \
 lrand48 \
 memcpy \
 memmove \

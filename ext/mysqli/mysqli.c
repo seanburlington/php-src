@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.81 2006/03/05 15:49:55 johannes Exp $ 
+  $Id: mysqli.c,v 1.82 2006/03/05 17:27:45 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -327,7 +327,7 @@ static union _zend_function *php_mysqli_constructor_get(zval *object TSRMLS_DC)
 		} else if (obj->zo.ce == mysqli_driver_class_entry) {
 			f.handler = ZEND_FN(mysqli_driver_construct);
 		} else if (obj->zo.ce == mysqli_warning_class_entry) {
-			f.handler = ZEND_FN(mysqli_warning___construct);
+			f.handler = ZEND_MN(mysqli_warning___construct);
 		}
 	
 		return (union _zend_function*)&f;

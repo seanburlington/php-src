@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.346 2006/03/05 18:23:47 hholzgra Exp $ */
+/* $Id: gd.c,v 1.347 2006/03/05 18:26:12 hholzgra Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1254,10 +1254,8 @@ static int _php_image_type (char data[8])
 		return PHP_GDIMG_TYPE_GD2;
 	} else if (!memcmp(data, php_sig_jpg, 3)) {
 		return PHP_GDIMG_TYPE_JPG;
-	} else if (!memcmp(data, php_sig_png, 3)) {
-		if (!memcmp(data, php_sig_png, 8)) {
-			return PHP_GDIMG_TYPE_PNG;
-		}
+	} else if (!memcmp(data, php_sig_png, 8)) {
+	    return PHP_GDIMG_TYPE_PNG;
 	} else if (!memcmp(data, php_sig_gif, 3)) {
 		return PHP_GDIMG_TYPE_GIF;
 	}

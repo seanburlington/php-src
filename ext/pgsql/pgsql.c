@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.8 2006/01/01 12:50:12 sniper Exp $ */
+/* $Id: pgsql.c,v 1.331.2.9 2006/03/05 13:35:52 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -257,7 +257,7 @@ ZEND_GET_MODULE(pgsql)
 
 static int le_link, le_plink, le_result, le_lofp, le_string;
 
-ZEND_DECLARE_MODULE_GLOBALS(pgsql);
+ZEND_DECLARE_MODULE_GLOBALS(pgsql)
 
 /* {{{ _php_pgsql_trim_message */
 static char * _php_pgsql_trim_message(const char *message, int *len)
@@ -1257,7 +1257,7 @@ PHP_FUNCTION(pg_query_params)
 			}
 
 			otype = (*tmp)->type;
-			convert_to_string(*tmp);
+			convert_to_string_ex(tmp);
 			if (Z_TYPE_PP(tmp) != IS_STRING) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Error converting parameter");
 				_php_pgsql_free_params(params, num_params);

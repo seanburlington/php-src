@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.30 2006/03/06 09:48:14 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.31 2006/03/06 23:26:28 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1319,7 +1319,7 @@ ZEND_METHOD(reflection, getModifierNames)
 }
 /* }}} */
 
-/* {{{ proto public static mixed ReflectionFunction::export(string name [, bool return]) throws ReflectionException
+/* {{{ proto public static mixed ReflectionFunction::export(string name [, bool return])
    Exports a reflection object. Returns the output if TRUE is specified for return, printing it otherwise. */
 ZEND_METHOD(reflection_function, export)
 {
@@ -4432,7 +4432,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.30 2006/03/06 09:48:14 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.31 2006/03/06 23:26:28 rasmus Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

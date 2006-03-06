@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.199 2006/03/05 15:58:09 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.200 2006/03/06 20:16:03 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -751,10 +751,10 @@ static void sxe_prop_dim_delete(zval *object, zval *member, zend_bool elements, 
 	php_sxe_object *sxe;
 	xmlNodePtr      node;
 	xmlNodePtr      nnext;
-	xmlAttrPtr      attr;
+	xmlAttrPtr      attr = NULL;
 	xmlAttrPtr      anext;
 	zval            tmp_zv;
-	int             test;
+	int             test = 0;
 
 	if (Z_TYPE_P(member) != IS_STRING && Z_TYPE_P(member) != IS_LONG) {
 		tmp_zv = *member;
@@ -1408,6 +1408,129 @@ SXE_METHOD(attributes)
 	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
 	_node_as_zval(sxe, node, return_value, SXE_ITER_ATTRLIST, NULL, nsprefix TSRMLS_CC);
+}
+/* }}} */
+
+/* {{{ proto void SimpleXMLElement::addChild(string qName [, string value [,string ns]])
+   Add Element with optional namespace information */
+SXE_METHOD(addChild)
+{
+	php_sxe_object *sxe;
+	char           *qname, *value = NULL, *nsuri = NULL;
+	int             qname_len, value_len = 0, nsuri_len = 0;
+	xmlNodePtr      node, newnode;
+	xmlNsPtr        nsptr = NULL;
+	xmlChar        *localname, *prefix = NULL;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s!s!",
+		&qname, &qname_len, &value, &value_len, &nsuri, &nsuri_len) == FAILURE) {
+		return;
+	}
+
+	if (qname_len == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Element name is required");
+		return;
+	}
+
+	sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
+	GET_NODE(sxe, node);
+
+	if (sxe->iter.type == SXE_ITER_ATTRLIST) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot add element to attributes");
+		return;
+	}
+
+	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
+
+	localname = xmlSplitQName2(qname, &prefix);
+	if (localname == NULL) {
+		localname = xmlStrdup(qname);
+	}
+
+
+	newnode = xmlNewChild(node, NULL, localname, value);
+
+	if (nsuri != NULL) {
+		nsptr = xmlSearchNsByHref(node->doc, node, nsuri);
+		if (nsptr == NULL) {
+			nsptr = xmlNewNs(newnode, nsuri, prefix);
+		}
+		newnode->ns = nsptr;
+	}
+
+	_node_as_zval(sxe, newnode, return_value, SXE_ITER_NONE, localname, prefix TSRMLS_CC);
+
+	xmlFree(localname);
+	if (prefix != NULL) {
+		xmlFree(prefix);
+	}
+}
+/* }}} */
+
+/* {{{ proto void SimpleXMLElement::addAttribute(string qName, string value [,string ns])
+   Add Attribute with optional namespace information */
+SXE_METHOD(addAttribute)
+{
+	php_sxe_object *sxe;
+	char           *qname, *value = NULL, *nsuri = NULL;
+	int             qname_len, value_len = 0, nsuri_len = 0;
+	xmlNodePtr      node;
+	xmlAttrPtr      attrp = NULL;
+	xmlNsPtr        nsptr = NULL;
+	xmlChar        *localname, *prefix = NULL;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|s!",
+		&qname, &qname_len, &value, &value_len, &nsuri, &nsuri_len) == FAILURE) {
+		return;
+	}
+
+	if (qname_len == 0 || value_len == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute name and value are required");
+		return;
+	}
+
+	sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
+	GET_NODE(sxe, node);
+
+	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
+
+	if (node->type != XML_ELEMENT_NODE) {
+		node = node->parent;
+	}
+
+	if (node == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to locate parent Element");
+		return;
+	}
+
+	localname = xmlSplitQName2(qname, &prefix);
+	if (localname == NULL) {
+		localname = xmlStrdup(qname);
+	}
+
+	attrp = xmlHasNsProp(node, localname, nsuri);
+	if (attrp != NULL && attrp->type != XML_ATTRIBUTE_DECL) {
+		xmlFree(localname);
+		if (prefix != NULL) {
+			xmlFree(prefix);
+		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute already exists");
+		return;
+	}
+
+	if (nsuri != NULL) {
+		nsptr = xmlSearchNsByHref(node->doc, node, nsuri);
+		if (nsptr == NULL) {
+			nsptr = xmlNewNs(node, nsuri, prefix);
+		}
+	}
+
+	attrp = xmlNewNsProp(node, nsptr, localname, value);
+
+	xmlFree(localname);
+	if (prefix != NULL) {
+		xmlFree(prefix);
+	}
 }
 /* }}} */
 
@@ -2126,6 +2249,8 @@ static zend_function_entry sxe_functions[] = {
 	SXE_ME(getNamespaces,          NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(getDocNamespaces,       NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(getName,                NULL, ZEND_ACC_PUBLIC)
+	SXE_ME(addChild,               NULL, ZEND_ACC_PUBLIC)
+	SXE_ME(addAttribute,           NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -2178,7 +2303,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.199 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.200 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

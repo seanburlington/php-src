@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.4 2006/03/05 18:57:54 derick Exp $ */
+/* $Id: filestat.c,v 1.136.2.5 2006/03/06 20:21:52 rrichards Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -323,7 +323,7 @@ PHP_FUNCTION(disk_free_space)
 }
 /* }}} */
 
-
+#if !defined(WINDOWS)
 static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp)
 {
 	zval **filename, **group;
@@ -368,6 +368,7 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp)
 	}
 	RETURN_TRUE;
 }
+#endif
 
 #ifndef NETWARE
 /* {{{ proto bool chgrp(string filename, mixed group)

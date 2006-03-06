@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.119 2006/03/06 09:45:25 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.120 2006/03/06 22:22:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2372,7 +2372,7 @@ static zend_function_entry spl_funcs_AppendIterator[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ array iterator_to_array(Traversable it) 
+/* {{{ proto array iterator_to_array(Traversable it) 
    Copy the iterator into an array */
 PHP_FUNCTION(iterator_to_array)
 {
@@ -2421,7 +2421,7 @@ PHP_FUNCTION(iterator_to_array)
 }
 /* }}} */
 
-/* {{{ int iterator_count(Traversable it) 
+/* {{{ proto int iterator_count(Traversable it) 
    Count the elements in an iterator */
 PHP_FUNCTION(iterator_count)
 {

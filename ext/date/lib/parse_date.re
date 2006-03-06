@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.52 2006/02/27 19:39:21 derick Exp $ */
+/* $Id: parse_date.re,v 1.53 2006/03/06 21:43:35 derick Exp $ */
 
 #include "timelib.h"
 
@@ -825,7 +825,7 @@ exif             = year4 ":" monthlz ":" daylz " " hour24lz ":" minutelz ":" sec
 clf              = day "/" monthabbr "/" year4 ":" hour24lz ":" minutelz ":" secondlz space tzcorrection;
 
 /* Timestamp format: @1126396800 */
-timestamp        = "@" "-"? [1-9] [0-9]*;
+timestamp        = "@" "-"? [0-9]+;
 
 /* To fix some ambiguities */
 dateshortwithtimeshort  = datenoyear timeshort24;

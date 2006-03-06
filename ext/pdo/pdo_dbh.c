@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.27 2006/01/31 17:20:32 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.28 2006/03/06 10:00:59 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -192,7 +192,7 @@ static char *dsn_from_uri(char *uri, char *buf, size_t buflen TSRMLS_DC)
 	return dsn;
 }
 
-/* {{{ proto object PDO::__construct(string dsn, string username, string passwd [, array options])
+/* {{{ proto void PDO::__construct(string dsn, string username, string passwd [, array options])
    */
 static PHP_METHOD(PDO, dbh_constructor)
 {

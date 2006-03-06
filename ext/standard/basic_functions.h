@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.143 2006/01/28 06:16:32 fmk Exp $ */
+/* $Id: basic_functions.h,v 1.144 2006/03/06 14:27:45 iliaa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -212,6 +212,8 @@ typedef struct _php_basic_globals {
 #if defined(_REENTRANT) && defined(HAVE_MBRLEN) && defined(HAVE_MBSTATE_T)
 	mbstate_t mblen_state;
 #endif
+
+	int umask;
 } php_basic_globals;
 
 #ifdef ZTS

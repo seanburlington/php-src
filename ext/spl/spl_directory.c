@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.22 2006/03/05 17:39:49 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.23 2006/03/06 09:50:44 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -741,7 +741,7 @@ SPL_METHOD(SplFileInfo, openFile)
 }
 /* }}} */
 
-/* {{{ proto SplFileObject SplFileInfo::setFileClass([string class_name])
+/* {{{ proto void SplFileInfo::setFileClass([string class_name])
    Class to use in openFile() */
 SPL_METHOD(SplFileInfo, setFileClass)
 {
@@ -758,7 +758,7 @@ SPL_METHOD(SplFileInfo, setFileClass)
 }
 /* }}} */
 
-/* {{{ proto SplFileObject SplFileInfo::setInfoClass([string class_name])
+/* {{{ proto void SplFileInfo::setInfoClass([string class_name])
    Class to use in getFileInfo(), getPathInfo() */
 SPL_METHOD(SplFileInfo, setInfoClass)
 {

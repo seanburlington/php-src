@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.276 2006/02/13 10:23:58 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.277 2006/03/07 22:37:18 alexwaugh Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -69,6 +69,7 @@
 
 #ifdef __riscos__
 #include <unixlib/local.h>
+int __riscosify_control = __RISCOSIFY_STRICT_UNIX_SPECS;
 #endif
 
 #include "zend_compile.h"

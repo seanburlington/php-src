@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.227 2006/02/24 13:30:21 helly Exp $ */
+/* $Id: php.h,v 1.228 2006/03/07 22:37:18 alexwaugh Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -415,7 +415,7 @@ END_EXTERN_C()
  */
 
 #ifndef XtOffset
-#if defined(CRAY) || (defined(__arm) && !defined(LINUX))
+#if defined(CRAY) || (defined(__arm) && !(defined(LINUX) || defined(__riscos__)))
 #ifdef __STDC__
 #define XtOffset(p_type, field) _Offsetof(p_type, field)
 #else

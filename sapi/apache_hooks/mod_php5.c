@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.15 2006/03/01 16:27:47 dmitry Exp $ */
+/* $Id: mod_php5.c,v 1.16 2006/03/07 00:20:54 pajoye Exp $ */
 
 #include "php_apache_http.h"
 
@@ -384,9 +384,6 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 	/* If PATH_TRANSLATED doesn't exist, copy it from SCRIPT_FILENAME */
 	if (track_vars_array) {
 		symbol_table = track_vars_array->value.ht;
-	} else if (PG(register_globals)) {
-		/* should never happen nowadays */
-		symbol_table = EG(active_symbol_table);
 	} else {
 		symbol_table = NULL;
 	}

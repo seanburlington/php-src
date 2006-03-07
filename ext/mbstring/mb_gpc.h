@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.h,v 1.6 2006/01/01 13:09:51 sniper Exp $ */
+/* $Id: mb_gpc.h,v 1.7 2006/03/07 00:20:53 pajoye Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -32,7 +32,6 @@
 typedef struct _php_mb_encoding_handler_info_t {
 	int data_type;
 	const char *separator;
-	unsigned int force_register_globals: 1;
 	unsigned int report_errors: 1;
 	enum mbfl_no_language to_language;
 	enum mbfl_no_encoding to_encoding;

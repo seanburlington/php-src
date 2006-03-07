@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.240 2006/03/03 20:41:52 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.241 2006/03/07 00:20:53 pajoye Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1401,7 +1401,6 @@ PHP_FUNCTION(mb_parse_str)
 
 	info.data_type              = PARSE_STRING;
 	info.separator              = PG(arg_separator).input; 
-	info.force_register_globals = (track_vars_array == NULL);
 	info.report_errors          = 1;
 	info.to_encoding            = MBSTRG(current_internal_encoding);
 	info.to_language            = MBSTRG(current_language);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.104 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: php_session.h,v 1.105 2006/03/07 00:20:53 pajoye Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -138,9 +138,6 @@ PHP_FUNCTION(session_save_path);
 PHP_FUNCTION(session_id);
 PHP_FUNCTION(session_regenerate_id);
 PHP_FUNCTION(session_decode);
-PHP_FUNCTION(session_register);
-PHP_FUNCTION(session_unregister);
-PHP_FUNCTION(session_is_registered);
 PHP_FUNCTION(session_encode);
 PHP_FUNCTION(session_start);
 PHP_FUNCTION(session_destroy);

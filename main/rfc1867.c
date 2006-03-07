@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.183 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: rfc1867.c,v 1.184 2006/03/07 00:20:54 pajoye Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -316,41 +316,25 @@ static void safe_u_php_register_variable_ex(UChar *var, zval *val, zval *track_v
 
 static void register_http_post_files_variable(char *strvar, char *val, zval *http_post_files, zend_bool override_protection TSRMLS_DC)
 {
-	int register_globals = PG(register_globals);
-
-	PG(register_globals) = 0;
 	safe_php_register_variable(strvar, val, http_post_files, override_protection TSRMLS_CC);
-	PG(register_globals) = register_globals;
 }
 
 
 static void register_u_http_post_files_variable(UChar *strvar, UChar *val, int val_len, zval *http_post_files, zend_bool override_protection TSRMLS_DC)
 {
-	int register_globals = PG(register_globals);
-
-	PG(register_globals) = 0;
 	safe_u_php_register_variable(strvar, val, val_len, http_post_files, override_protection TSRMLS_CC);
-	PG(register_globals) = register_globals;
 }
 
 
 static void register_http_post_files_variable_ex(char *var, zval *val, zval *http_post_files, zend_bool override_protection TSRMLS_DC)
 {
-	int register_globals = PG(register_globals);
-
-	PG(register_globals) = 0;
 	safe_php_register_variable_ex(var, val, http_post_files, override_protection TSRMLS_CC);
-	PG(register_globals) = register_globals;
 }
 
 
 static void register_u_http_post_files_variable_ex(UChar *var, zval *val, zval *http_post_files, zend_bool override_protection TSRMLS_DC)
 {
-	int register_globals = PG(register_globals);
-
-	PG(register_globals) = 0;
 	safe_u_php_register_variable_ex(var, val, http_post_files, override_protection TSRMLS_CC);
-	PG(register_globals) = register_globals;
 }
 
 

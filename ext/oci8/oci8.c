@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.10 2006/01/18 10:12:34 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.11 2006/03/07 07:47:43 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -645,7 +645,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.11 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -988,7 +988,7 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 		smart_str_appends_ex(&hashed_details, charset, 1);
 	}
 	else {
-		size_t rsize;
+		size_t rsize = 0;
 
 		PHP_OCI_CALL(OCINlsEnvironmentVariableGet, (&charsetid, 2, OCI_NLS_CHARSET_ID, 0, &rsize));
 		smart_str_append_unsigned_ex(&hashed_details, charsetid, 0);
@@ -1347,8 +1347,8 @@ open:
  * Ping connection. Uses OCIPing() or OCIServerVersion() depending on the Oracle Client version */
 static int php_oci_connection_ping(php_oci_connection *connection TSRMLS_DC)
 {
-#if OCI_MAJOR_VERSION >= 10 && OCI_MINOR_VERSION >= 2
-	/* OCIPing() is usable only in 10.2 */
+	/* OCIPing() crashes Oracle servers older than 10.2 */
+#if 0
 	OCI_G(errcode) = PHP_OCI_CALL(OCIPing, (connection->svc, OCI_G(err), OCI_DEFAULT));
 #else
 	char version[256];

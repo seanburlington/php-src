@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.63 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.64 2006/03/08 14:41:45 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1193,11 +1193,6 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 
 		return php_stream_fopen_rel(filename, mode, opened_path, options);
 	}
-
-	/*
-	 * files in safe_mode_include_dir (or subdir) are excluded from
-	 * safe mode GID/UID checks
-	 */
 
 not_relative_path:
 

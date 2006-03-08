@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.86 2005/09/15 19:10:13 derick Exp $
+	$Id: config.w32.h,v 1.87 2006/03/08 14:41:45 iliaa Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -82,8 +82,6 @@
 /* PHP Runtime Configuration */
 #define FORCE_CGI_REDIRECT 1
 #define PHP_URL_FOPEN 1
-#define PHP_SAFE_MODE 0
-#define MAGIC_QUOTES 0
 #define USE_CONFIG_FILE 1
 #define DEFAULT_SHORT_OPEN_TAG "1"
 #define ENABLE_PATHINFO_CHECK 1

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.280 2006/02/16 06:29:32 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.281 2006/03/08 14:41:45 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -82,21 +82,6 @@ if (ob_get_level()) echo "Not all buffers were deleted.\n";
 error_reporting(E_ALL);
 ini_set('magic_quotes_runtime',0); // this would break tests by modifying EXPECT sections
 
-if (ini_get('safe_mode')) {
-	echo <<< SAFE_MODE_WARNING
-
-+-----------------------------------------------------------+
-|                       ! WARNING !                         |
-| You are running the test-suite with "safe_mode" ENABLED ! |
-|                                                           |
-| Chances are high that no test will work at all,           |
-| depending on how you configured "safe_mode" !             |
-+-----------------------------------------------------------+
-
-
-SAFE_MODE_WARNING;
-}
-
 $environment = isset($_ENV) ? $_ENV : array();
 
 // Don't ever guess at the PHP executable location.
@@ -145,7 +130,6 @@ if (getenv('TEST_PHP_USER')) {
 $ini_overwrites = array(
 		'output_handler=',
 		'open_basedir=',
-		'safe_mode=0',
 		'disable_functions=',
 		'output_buffering=Off',
 		'error_reporting=8191',
@@ -405,7 +389,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.280 $'."\n";
+					echo '$Revision: 1.281 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";

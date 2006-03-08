@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.144 2006/03/06 14:27:45 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.145 2006/03/08 14:41:45 iliaa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -134,6 +134,7 @@ PHP_MINIT_FUNCTION(user_filters);
 PHP_RSHUTDOWN_FUNCTION(user_filters);
 
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC);
+PHPAPI char *php_get_current_user();
 
 #if SIZEOF_INT == 4
 /* Most 32-bit and 64-bit systems have 32-bit ints */

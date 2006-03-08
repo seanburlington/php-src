@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.180 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: fopen_wrappers.c,v 1.181 2006/03/08 14:41:45 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -39,7 +39,6 @@
 #include <sys/param.h>
 #endif
 
-#include "safe_mode.h"
 #include "ext/standard/head.h"
 #include "ext/standard/php_standard.h"
 #include "zend_compile.h"
@@ -331,11 +330,6 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 	if (*filename == '.') {
 		return php_fopen_and_set_opened_path(filename, mode, opened_path TSRMLS_CC);
 	}
-	
-	/*
-	 * files in safe_mode_include_dir (or subdir) are excluded from
-	 * safe mode GID/UID checks
-	 */
 	
 	/* Absolute path open */
 	/* FIXME: Andi - Do we actually need the if()? */

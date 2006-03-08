@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.228 2006/03/07 22:37:18 alexwaugh Exp $ */
+/* $Id: php.h,v 1.229 2006/03/08 14:41:45 iliaa Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -188,8 +188,6 @@ typedef zval pval;
 #  define memmove(d, s, n)	bcopy ((s), (d), (n))
 # endif
 #endif
-
-#include "safe_mode.h"
 
 #ifndef HAVE_STRERROR
 char *strerror(int);

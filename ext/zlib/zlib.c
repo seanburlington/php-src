@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.191 2006/03/08 00:43:29 pajoye Exp $ */
+/* $Id: zlib.c,v 1.192 2006/03/08 14:41:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,6 @@
 /* #include <sys/uio.h> */
 #endif
 #include "ext/standard/head.h"
-#include "safe_mode.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"
 #include "php_zlib.h"

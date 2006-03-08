@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.75 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: tidy.c,v 1.76 2006/03/08 14:41:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,6 @@
 
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "safe_mode.h"
 
 #include "Zend/zend_exceptions.h"
 #include "Zend/zend_object_handlers.h"
@@ -983,7 +982,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.75 2006/02/19 04:29:41 andi Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.76 2006/03/08 14:41:45 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

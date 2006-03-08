@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.18 2006/02/19 04:29:40 andi Exp $ */
+/* $Id: bz2.c,v 1.19 2006/03/08 00:43:27 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -291,12 +291,6 @@ PHP_FUNCTION(bzread)
 	}
 	
 	Z_STRVAL_P(return_value)[Z_STRLEN_P(return_value)] = 0;
-
-	if (PG(magic_quotes_runtime)) {
-		Z_STRVAL_P(return_value) = php_addslashes(	Z_STRVAL_P(return_value),
-													Z_STRLEN_P(return_value),
-													&Z_STRLEN_P(return_value), 1 TSRMLS_CC);
-	}
 
 	Z_TYPE_P(return_value) = IS_STRING;
 }

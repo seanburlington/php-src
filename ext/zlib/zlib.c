@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.190 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: zlib.c,v 1.191 2006/03/08 00:43:29 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -307,14 +307,7 @@ PHP_FUNCTION(gzfile)
 	memset(buf,0,sizeof(buf));
 
 	while (php_stream_gets(stream, buf, sizeof(buf) - 1) != NULL) {
-		if (PG(magic_quotes_runtime)) {
-			int len;
-			
-			slashed = php_addslashes(buf, 0, &len, 0 TSRMLS_CC); /* 0 = don't free source string */
-			add_index_stringl(return_value, i++, slashed, len, 0);
-		} else {
-			add_index_string(return_value, i++, buf, 1);
-		}
+		add_index_string(return_value, i++, buf, 1);
 	}
 	php_stream_close(stream);
 }

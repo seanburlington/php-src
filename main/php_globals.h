@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.101 2006/03/07 00:20:54 pajoye Exp $ */
+/* $Id: php_globals.h,v 1.102 2006/03/08 00:43:29 pajoye Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -50,10 +50,6 @@ typedef struct _arg_separators {
 } arg_separators;
 
 struct _php_core_globals {
-	zend_bool magic_quotes_gpc;
-	zend_bool magic_quotes_runtime;
-	zend_bool magic_quotes_sybase;
-
 	zend_bool safe_mode;
 
 	zend_bool allow_call_time_pass_reference;

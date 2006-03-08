@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.66 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: streamsfuncs.c,v 1.67 2006/03/08 00:43:28 pajoye Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -370,14 +370,7 @@ PHP_FUNCTION(stream_socket_recvfrom)
 		}
 		read_buf[recvd] = '\0';
 
-		if (PG(magic_quotes_runtime)) {
-			Z_TYPE_P(return_value) = IS_STRING;
-			Z_STRVAL_P(return_value) = php_addslashes(Z_STRVAL_P(return_value),
-					Z_STRLEN_P(return_value), &Z_STRLEN_P(return_value), 1 TSRMLS_CC);
-			return;
-		} else {
-			RETURN_STRINGL(read_buf, recvd, 0);
-		}
+		RETURN_STRINGL(read_buf, recvd, 0);
 	}
 
 	efree(read_buf);
@@ -407,12 +400,6 @@ PHP_FUNCTION(stream_get_contents)
 	}
 
 	if ((len = php_stream_copy_to_mem(stream, &contents, maxlen, 0)) > 0) {
-		
-		if (PG(magic_quotes_runtime)) {
-			contents = php_addslashes(contents, len, &newlen, 1 TSRMLS_CC); /* 1 = free source string */
-			len = newlen;
-		}
-
 		RETVAL_STRINGL(contents, len, 0);
 	} else if (len == 0) {
 		RETVAL_EMPTY_STRING();

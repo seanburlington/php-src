@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.109 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_sybase_ct.c,v 1.110 2006/03/08 00:43:28 pajoye Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1780,11 +1780,7 @@ static void php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int numerics)
 		ALLOC_ZVAL(tmp);
 		*tmp = result->data[result->store ? result->cur_row : 0][i];
 		INIT_PZVAL(tmp);
-		if (PG(magic_quotes_runtime) && Z_TYPE_P(tmp) == IS_STRING) {
-			Z_STRVAL_P(tmp) = php_addslashes(Z_STRVAL_P(tmp), Z_STRLEN_P(tmp), &Z_STRLEN_P(tmp), 0 TSRMLS_CC);
-		} else {
-			zval_copy_ctor(tmp);
-		}
+		zval_copy_ctor(tmp);
 		if (numerics) {
 			zend_hash_index_update(Z_ARRVAL_P(return_value), i, (void *) &tmp, sizeof(zval *), NULL);
 			tmp->refcount++;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.23 2006/03/09 23:03:08 helly Exp $ */
+/* $Id: spl_directory.h,v 1.24 2006/03/09 23:07:48 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -82,7 +82,6 @@ struct _spl_filesystem_object {
 			long               current_line_num;
 			zval               zresource;
 			zend_function      *func_getCurr;
-			zend_function      *func_fgetcsv;
 		} file;
 	} u;
 };

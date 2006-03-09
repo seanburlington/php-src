@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.670 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: main.c,v 1.671 2006/03/09 20:31:58 pollita Exp $ */
 
 /* {{{ includes
  */
@@ -1767,6 +1767,8 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 #endif
 
 	zend_try {
+		char realfile[MAXPATHLEN];
+
 #ifdef PHP_WIN32
 		UpdateIniFromRegistry(primary_file->filename TSRMLS_CC);
 #endif
@@ -1785,7 +1787,6 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 		}
 
 		if (primary_file->filename) {			
-			char realfile[MAXPATHLEN];
 			int realfile_len;
 			int dummy = 1;
 			if (VCWD_REALPATH(primary_file->filename, realfile)) {

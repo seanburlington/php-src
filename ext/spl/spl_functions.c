@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.34 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: spl_functions.c,v 1.35 2006/03/09 11:44:05 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -50,7 +50,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 /* }}} */
 
 /* {{{ spl_register_std_class */
-void spl_register_std_class(zend_class_entry ** ppce, char * class_name, void * obj_ctor, zend_function_entry * function_list TSRMLS_DC)
+PHPAPI void spl_register_std_class(zend_class_entry ** ppce, char * class_name, void * obj_ctor, zend_function_entry * function_list TSRMLS_DC)
 {
 	zend_class_entry ce;
 	
@@ -66,7 +66,7 @@ void spl_register_std_class(zend_class_entry ** ppce, char * class_name, void * 
 /* }}} */
 
 /* {{{ spl_register_sub_class */
-void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, void *obj_ctor, zend_function_entry * function_list TSRMLS_DC)
+PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, void *obj_ctor, zend_function_entry * function_list TSRMLS_DC)
 {
 	zend_class_entry ce;
 	

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.74 2006/03/10 23:52:56 helly Exp $ */
+/* $Id: phar.c,v 1.75 2006/03/10 23:53:40 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -216,7 +216,7 @@ static void phar_spl_foreign_clone(spl_filesystem_object *src, spl_filesystem_ob
 
 static spl_other_handler phar_spl_foreign_handler = {
 	phar_spl_foreign_dtor,
-	NULL
+	phar_spl_foreign_clone
 };
 
 static void destroy_phar_manifest(void *pDest) /* {{{ */
@@ -1866,7 +1866,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.74 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.75 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

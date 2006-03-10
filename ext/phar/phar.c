@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.73 2006/03/08 20:31:22 helly Exp $ */
+/* $Id: phar.c,v 1.74 2006/03/10 23:52:56 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -910,6 +910,7 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 	/* do we have the data already? */
 	if (idata->fp) {
 		fpf = php_stream_alloc(&phar_ops, idata, NULL, mode);
+		idata->phar->refcount++;
 		efree(internal_file);
 		return fpf;
 	}
@@ -1011,6 +1012,7 @@ static php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrapper, cha
 	idata->internal_file->crc_checked = 1;
 
 	fpf = php_stream_alloc(&phar_ops, idata, NULL, mode);
+	idata->phar->refcount++;
 	efree(internal_file);
 	return fpf;
 }
@@ -1028,6 +1030,9 @@ static int phar_close(php_stream *stream, int close_handle TSRMLS_DC) /* {{{ */
 		} else {
 			data->internal_file->fp = data->fp;
 		}
+	}
+	if (--data->phar->refcount < 0) {
+		phar_destroy_phar_data(data->phar TSRMLS_CC);
 	}
 
 	efree(data);
@@ -1861,7 +1866,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.73 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.74 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

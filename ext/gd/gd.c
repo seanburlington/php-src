@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.348 2006/03/05 19:20:11 pajoye Exp $ */
+/* $Id: gd.c,v 1.349 2006/03/10 18:15:21 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1456,7 +1456,11 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 #ifdef HAVE_GD_JPG
 			case PHP_GDIMG_TYPE_JPG:
 				ignore_warning = INI_INT("gd.jpeg_ignore_warning");
+#ifdef HAVE_GD_BUNDLED
 				im = gdImageCreateFromJpeg(fp, ignore_warning);
+#else
+				im = gdImageCreateFromJpeg(fp);
+#endif
 				break;
 #endif
 
@@ -3649,7 +3653,11 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 #ifdef HAVE_GD_JPG
 		case PHP_GDIMG_TYPE_JPG:
 			ignore_warning = INI_INT("gd.jpeg_ignore_warning");
+#ifdef HAVE_GD_BUNDLED
 			im_org = gdImageCreateFromJpeg(org, ignore_warning);
+#else
+			im_org = gdImageCreateFromJpeg(org);
+#endif
 			if (im_org == NULL) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' Not a valid JPEG file", fn_dest);
 				RETURN_FALSE;

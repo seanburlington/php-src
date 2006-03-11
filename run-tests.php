@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.282 2006/03/11 16:54:11 helly Exp $ */
+/* $Id: run-tests.php,v 1.283 2006/03/11 17:57:40 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -390,7 +390,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.282 $'."\n";
+					echo '$Revision: 1.283 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -883,9 +883,13 @@ function run_all_tests($test_files, $env, $redir_tested = NULL)
 	{
 		$test_cnt *= 2;
 	}
-	foreach($test_files AS $name)
+	foreach($test_files as $name)
 	{
-		$index = is_array($name) ? $name[0] : $name;
+		if ($redir_tested) {
+			$index = "# $redir_tested: $name";
+		} else {
+			$index = is_array($name) ? "# $name[1]: $name[0]" : $name;
+		}
 		$unicode_semantics = $unicode_and_native ? 0 : ($unicode_testing ? 1 : 0);
 		for(; $unicode_semantics < ($unicode_testing ? 2 : 1); $unicode_semantics++)
 		{
@@ -897,12 +901,7 @@ function run_all_tests($test_files, $env, $redir_tested = NULL)
 				$test_results[$index.$pu] = $result;
 				if ($failed_tests_file && ($result == 'FAILED' || $result == 'WARNED' || $result == 'LEAKED'))
 				{
-					if ($redir_tested)
-					{
-						fwrite($failed_tests_file, "# $redir_tested: $name\n");
-					} else {
-						fwrite($failed_tests_file, "$name\n");
-					}
+					fwrite($failed_tests_file, "$index\n");
 				}
 			}
 			if ($result == 'REDIR')

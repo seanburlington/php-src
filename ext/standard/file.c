@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.424 2006/03/13 04:40:11 pollita Exp $ */
+/* $Id: file.c,v 1.425 2006/03/13 15:01:44 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -662,7 +662,7 @@ PHP_FUNCTION(file_put_contents)
 				if (numchars < 0) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to write %d characters to %s", ustrlen, filename);
 					numchars = -1;
-				} else if (numchars != UBYTES(Z_USTRLEN_P(data))) {
+				} else if (numchars != ustrlen) {
 					int numchars = u_countChar32(Z_USTRVAL_P(data), numchars);
 
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only %d of %d characters written, possibly out of free disk space", numchars, ustrlen);

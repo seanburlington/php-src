@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.9 2006/03/05 13:35:52 tony2001 Exp $ */
+/* $Id: pgsql.c,v 1.331.2.10 2006/03/13 22:56:20 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -2360,7 +2360,7 @@ PHP_FUNCTION(pg_trace)
 		RETURN_FALSE;
 	}
 
-	if (FAILURE == php_stream_cast(stream, PHP_STREAM_AS_STDIO, (void**)fp, REPORT_ERRORS))	{
+	if (FAILURE == php_stream_cast(stream, PHP_STREAM_AS_STDIO, (void**)&fp, REPORT_ERRORS))	{
 		php_stream_close(stream);
 		RETURN_FALSE;
 	}

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.12 2006/02/13 15:53:36 derick Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.13 2006/03/13 11:37:51 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -271,13 +271,14 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
 	PGresult *res;
 	long ret = 1;
+	ExecStatusType qs;
 	
 	if (!(res = PQexec(H->server, sql))) {
 		/* fatal error */
 		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR, NULL);
 		return -1;
 	}
-	ExecStatusType qs = PQresultStatus(res);
+	qs = PQresultStatus(res);
 	if (qs != PGRES_COMMAND_OK && qs != PGRES_TUPLES_OK) {
 		pdo_pgsql_error(dbh, qs, pdo_pgsql_sqlstate(res));
 		PQclear(res);

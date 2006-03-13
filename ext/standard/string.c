@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.52.2.3 2006/01/01 13:46:58 sniper Exp $ */
+/* $Id: string.c,v 1.333.2.52.2.4 2006/03/13 14:41:27 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -672,15 +672,13 @@ PHP_FUNCTION(wordwrap)
 		/* Multiple character line break or forced cut */
 		if (linelength > 0) {
 			chk = (int)(textlen/linelength + 1);
+			newtext = safe_emalloc(chk, breakcharlen, textlen + 1);
 			alloced = textlen + chk * breakcharlen + 1;
 		} else {
 			chk = textlen;
+			newtext = safe_emalloc(textlen, (breakcharlen + 1), 1);
 			alloced = textlen * (breakcharlen + 1) + 1;
 		}
-		if (alloced <= 0) {
-			RETURN_FALSE;
-		}
-		newtext = emalloc(alloced);
 
 		/* now keep track of the actual new text length */
 		newtextlen = 0;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.672 2006/03/10 18:16:24 bfrance Exp $ */
+/* $Id: main.c,v 1.673 2006/03/13 09:36:05 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1752,7 +1752,6 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 #else
 	char *old_cwd;
 #endif
-	char *old_primary_file_path = NULL;
 	int retval = 0;
 
 	EG(exit_status) = 0;
@@ -1789,16 +1788,14 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
  		/* Only lookup the real file path and add it to the included_files list if already opened
 		 *   otherwise it will get opened and added to the included_files list in zend_execute_scripts
 		 */
- 		if (primary_file->filename && primary_file->type != ZEND_HANDLE_FILENAME) {			
+ 		if (primary_file->filename &&
+ 		    primary_file->opened_path == NULL &&
+ 		    primary_file->type != ZEND_HANDLE_FILENAME) {			
 			int realfile_len;
 			int dummy = 1;
 			if (VCWD_REALPATH(primary_file->filename, realfile)) {
 				realfile_len =  strlen(realfile);
 				zend_hash_add(&EG(included_files), realfile, realfile_len+1, (void *)&dummy, sizeof(int), NULL);
-				if (strncmp(realfile, primary_file->filename, realfile_len)) {
-					old_primary_file_path = primary_file->filename;
-					primary_file->filename = realfile;
-				}	
 			}
 		}
 
@@ -1826,10 +1823,6 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 #endif
 		zend_set_timeout(INI_INT("max_execution_time"));
 		retval = (zend_execute_scripts(ZEND_REQUIRE TSRMLS_CC, NULL, 3, prepend_file_p, primary_file, append_file_p) == SUCCESS);
-		
-		if (old_primary_file_path) {
-			primary_file->filename = old_primary_file_path;
-		}
 		
 	} zend_end_try();
 

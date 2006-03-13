@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.20 2006/03/07 00:20:53 pajoye Exp $ */
+/* $Id: mb_gpc.c,v 1.21 2006/03/13 15:04:03 masugata Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -196,7 +196,6 @@ enum mbfl_no_encoding _php_mb_encoding_handler_ex(const php_mb_encoding_handler_
 	enum mbfl_no_encoding from_encoding = mbfl_no_encoding_invalid;
 	mbfl_encoding_detector *identd = NULL; 
 	mbfl_buffer_converter *convd = NULL;
-	int prev_rg_state = 0;
 
 	mbfl_string_init_set(&string, info->to_language, info->to_encoding);
 	mbfl_string_init_set(&resvar, info->to_language, info->to_encoding);

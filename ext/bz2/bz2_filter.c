@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.6 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: bz2_filter.c,v 1.7 2006/03/13 04:40:11 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,18 +82,18 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 
 		bucket = buckets_in->head;
 
-		if (bucket->is_unicode) {
+		if (bucket->buf_type == IS_UNICODE) {
 			/* decompression not allowed for unicode data */
 			return PSFS_ERR_FATAL;
 		}
 
 		bucket = php_stream_bucket_make_writeable(bucket TSRMLS_CC);
-		while (bin < bucket->buf.str.len) {
-			desired = bucket->buf.str.len - bin;
+		while (bin < bucket->buflen) {
+			desired = bucket->buflen - bin;
 			if (desired > data->inbuf_len) {
 				desired = data->inbuf_len;
 			}
-			memcpy(data->strm.next_in, bucket->buf.str.val + bin, desired);
+			memcpy(data->strm.next_in, bucket->buf.s + bin, desired);
 			data->strm.avail_in = desired;
 
 			status = BZ2_bzDecompress(&(data->strm));
@@ -195,19 +195,19 @@ static php_stream_filter_status_t php_bz2_compress_filter(
 
 		bucket = buckets_in->head;
 
-		if (bucket->is_unicode) {
+		if (bucket->buf_type == IS_UNICODE) {
 			/* compression not allowed for unicode data */
 			return PSFS_ERR_FATAL;
 		}
 
 		bucket = php_stream_bucket_make_writeable(bucket TSRMLS_CC);
 
-		while (bin < bucket->buf.str.len) {
-			desired = bucket->buf.str.len - bin;
+		while (bin < bucket->buflen) {
+			desired = bucket->buflen - bin;
 			if (desired > data->inbuf_len) {
 				desired = data->inbuf_len;
 			}
-			memcpy(data->strm.next_in, bucket->buf.str.val + bin, desired);
+			memcpy(data->strm.next_in, bucket->buf.s + bin, desired);
 			data->strm.avail_in = desired;
 
 			status = BZ2_bzCompress(&(data->strm), flags & PSFS_FLAG_FLUSH_CLOSE ? BZ_FINISH : (flags & PSFS_FLAG_FLUSH_INC ? BZ_FLUSH : BZ_RUN));

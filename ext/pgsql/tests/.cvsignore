@@ -4,3 +4,6 @@ phpt.*
 *.exp
 *.out
 *.php
+*.gcda
+*.gcno
+trace.tmp

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.12 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: pdo_pgsql.c,v 1.13 2006/03/14 11:04:13 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,6 +29,10 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_pgsql.h"
 #include "php_pdo_pgsql_int.h"
+
+#ifdef HAVE_PG_CONFIG_H
+#include <pg_config.h>
+#endif
 
 /* {{{ pdo_pgsql_functions[] */
 zend_function_entry pdo_pgsql_functions[] = {
@@ -115,6 +119,12 @@ PHP_MINFO_FUNCTION(pdo_pgsql)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PDO Driver for PostgreSQL", "enabled");
+#ifdef HAVE_PG_CONFIG_H	
+	php_info_print_table_row(2, "PostgreSQL(libpq) Version", PG_VERSION);
+#endif	
+	php_info_print_table_row(2, "Module version", pdo_pgsql_module_entry.version);
+	php_info_print_table_row(2, "Revision", " $Id: pdo_pgsql.c,v 1.13 2006/03/14 11:04:13 edink Exp $ ");
+
 	php_info_print_table_end();
 }
 /* }}} */

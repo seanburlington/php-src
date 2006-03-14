@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.673 2006/03/13 09:36:05 dmitry Exp $ */
+/* $Id: main.c,v 1.674 2006/03/14 15:16:27 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1698,6 +1698,10 @@ void php_module_shutdown(TSRMLS_D)
 	if (!module_initialized) {
 		return;
 	}
+
+#ifdef ZTS
+	ts_free_worker_threads();
+#endif
 
 #if defined(PHP_WIN32) || (defined(NETWARE) && defined(USE_WINSOCK))
 	/*close winsock */

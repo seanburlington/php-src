@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.527 2006/03/14 14:55:27 iliaa Exp $ */
+/* $Id: string.c,v 1.528 2006/03/14 15:14:59 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6492,7 +6492,7 @@ PHP_FUNCTION(substr_compare)
 		offset = s1_len + offset;
 	}
 
-	if (offset + len >= s1_len) {
+	if ((offset + len) >= s1_len) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The start position cannot exceed initial string length.");
 		RETURN_FALSE;
 	}

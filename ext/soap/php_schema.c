@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.62 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: php_schema.c,v 1.63 2006/03/15 16:14:40 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -2117,7 +2117,7 @@ static void schema_attribute_fixup(sdlCtx *ctx, sdlAttributePtr attr)
 		}
 		if (attr->name == NULL && attr->ref != NULL) {
 			char *name = strrchr(attr->ref, ':');
-			if (*name) {
+			if (name) {
 				attr->name = estrdup(name+1);
 			} else{
 				attr->name = estrdup(attr->ref);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.426 2006/03/14 21:15:05 pollita Exp $ */
+/* $Id: file.c,v 1.427 2006/03/15 00:28:57 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -749,7 +749,7 @@ PHP_FUNCTION(file)
  		s = target_buf;
  		e = target_buf + target_len;
  	
- 		if (!(p = php_stream_locate_eol(stream, (zstr)target_buf, target_len TSRMLS_CC))) {
+ 		if (!(p = php_stream_locate_eol(stream, ZSTR(target_buf), target_len TSRMLS_CC))) {
  			p = e;
  			goto parse_eol;
 		}

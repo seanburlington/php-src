@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.149 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.150 2006/03/15 15:27:08 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -322,6 +322,10 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 	}
 
 	if (is_param && !rewrite_name_to_position(stmt, pparam TSRMLS_CC)) {
+		if (param->name) {
+			efree(param->name);
+			param->name = NULL;
+		}
 		return 0;
 	}
 	

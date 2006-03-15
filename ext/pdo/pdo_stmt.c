@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.31 2006/01/22 23:57:41 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.32 2006/03/15 15:25:50 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -326,8 +326,11 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 	
 	/* tell the driver we just created a parameter */
 	if (stmt->methods->param_hook) {
-		if (!stmt->methods->param_hook(stmt, param,
-				PDO_PARAM_EVT_ALLOC TSRMLS_CC)) {
+		if (!stmt->methods->param_hook(stmt, param, PDO_PARAM_EVT_ALLOC TSRMLS_CC)) {
+			if (param->name) {
+				efree(param->name);
+				param->name = NULL;
+			}
 			return 0;
 		}
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.761 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.762 2006/03/16 16:53:09 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -547,9 +547,6 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(spliti,															NULL)
 	PHP_FALIAS(join,				implode,								NULL)
 	PHP_FE(sql_regcase,														NULL)
-
-	/* functions from dl.c */
-	PHP_FE(dl,																NULL)
 
 	/* functions from file.c */
 	PHP_FE(pclose,															NULL)

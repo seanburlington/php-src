@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.278 2006/03/08 00:43:29 pajoye Exp $ */
+/* $Id: cgi_main.c,v 1.279 2006/03/16 16:53:09 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -482,7 +482,8 @@ static int sapi_cgi_deactivate(TSRMLS_D)
 
 static int php_cgi_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module, NULL, 0) == FAILURE) {
+	if (php_module_startup(sapi_module, NULL, 0) == FAILURE ||
+	    php_enable_dl() == FAILURE) {
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -1018,7 +1019,8 @@ int main(int argc, char *argv[])
 	cgi_sapi_module.executable_location = argv[0];
 
 	/* startup after we get the above ini override se we get things right */
-	if (php_module_startup(&cgi_sapi_module, NULL, 0) == FAILURE) {
+	if (php_module_startup(&cgi_sapi_module, NULL, 0) == FAILURE ||
+	    php_enable_dl() == FAILURE) {
 #ifdef ZTS
 		tsrm_shutdown();
 #endif

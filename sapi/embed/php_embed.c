@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.12 2006/01/01 13:09:58 sniper Exp $ */
+/* $Id: php_embed.c,v 1.13 2006/03/16 16:53:10 dmitry Exp $ */
 
 #include "php_embed.h"
 
@@ -93,7 +93,8 @@ static void php_embed_register_variables(zval *track_vars_array TSRMLS_DC)
 
 static int php_embed_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module, NULL, 0)==FAILURE) {
+	if (php_module_startup(sapi_module, NULL, 0)==FAILURE ||
+	    php_enable_dl()==FAILURE) {
 		return FAILURE;
 	}
 	return SUCCESS;

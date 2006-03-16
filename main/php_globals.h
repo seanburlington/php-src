@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.105 2006/03/16 11:32:00 dmitry Exp $ */
+/* $Id: php_globals.h,v 1.106 2006/03/16 16:53:09 dmitry Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -55,7 +55,6 @@ struct _php_core_globals {
 	long output_buffering;
 
 	zend_bool sql_safe_mode;
-	zend_bool enable_dl;
 
 	char *output_handler;
 

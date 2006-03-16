@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.104 2006/03/15 21:18:36 pollita Exp $ */
+/* $Id: streams.c,v 1.105 2006/03/16 00:53:58 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1236,7 +1236,7 @@ static size_t _php_stream_write_buffer(php_stream *stream, int buf_type, zstr bu
 		} else {
 			UErrorCode status = U_ZERO_ERROR;
 			char *t = freeme;
-			UChar *p = buf_orig.u;
+			const UChar *p = buf_orig.u;
 
 			switch (ucnv_getType(stream->output_encoding)) {
 				case UCNV_SBCS:

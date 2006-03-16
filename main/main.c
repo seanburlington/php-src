@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.675 2006/03/16 09:44:41 dmitry Exp $ */
+/* $Id: main.c,v 1.676 2006/03/16 10:33:23 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1578,6 +1578,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 			"magic_quotes_gpc",
 			"magic_quotes_runtime",
 			"magic_quotes_sybase",
+			"zend.ze1_compatibility_mode",
 			NULL};
 		const char **p = directives;
 		long val;

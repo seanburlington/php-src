@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.280 2006/03/17 09:32:47 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.281 2006/03/17 13:45:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -468,8 +468,7 @@ static int sapi_cgi_deactivate(TSRMLS_D)
 
 static int php_cgi_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module, NULL, 0) == FAILURE ||
-	    php_enable_dl() == FAILURE) {
+	if (php_module_startup(sapi_module, NULL, 0) == FAILURE) {
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -509,6 +508,11 @@ static sapi_module_struct cgi_sapi_module = {
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 /* }}} */
+
+static zend_function_entry additional_functions[] = {
+	ZEND_FE(dl, NULL)
+	{NULL, NULL, NULL}
+};
 
 /* {{{ php_cgi_usage
  */
@@ -1003,10 +1007,10 @@ int main(int argc, char *argv[])
 #endif
 
 	cgi_sapi_module.executable_location = argv[0];
+	cgi_sapi_module.additional_functions = additional_functions;
 
 	/* startup after we get the above ini override se we get things right */
-	if (php_module_startup(&cgi_sapi_module, NULL, 0) == FAILURE ||
-	    php_enable_dl() == FAILURE) {
+	if (php_module_startup(&cgi_sapi_module, NULL, 0) == FAILURE) {
 #ifdef ZTS
 		tsrm_shutdown();
 #endif

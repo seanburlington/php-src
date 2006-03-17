@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.117 2006/02/13 10:23:58 dmitry Exp $ */
+/* $Id: SAPI.h,v 1.118 2006/03/17 13:45:43 dmitry Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -260,6 +260,7 @@ struct _sapi_module_struct {
 	int phpinfo_as_text;
 
 	char *ini_entries;
+	zend_function_entry *additional_functions;
 };
 
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.148 2006/03/16 16:53:10 dmitry Exp $ */
+/* $Id: php_cli.c,v 1.149 2006/03/17 13:45:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -328,8 +328,7 @@ static void sapi_cli_send_header(sapi_header_struct *sapi_header, void *server_c
 
 static int php_cli_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module, NULL, 0)==FAILURE ||
-	    php_enable_dl()==FAILURE) {
+	if (php_module_startup(sapi_module, NULL, 0)==FAILURE) {
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -390,6 +389,11 @@ static sapi_module_struct cli_sapi_module = {
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 /* }}} */
+
+static zend_function_entry additional_functions[] = {
+	ZEND_FE(dl, NULL)
+	{NULL, NULL, NULL}
+};
 
 /* {{{ php_cli_usage
  */
@@ -672,6 +676,7 @@ int main(int argc, char *argv[])
 	php_optarg = orig_optarg;
 
 	cli_sapi_module.executable_location = argv[0];
+	cli_sapi_module.additional_functions = additional_functions;
 
 #ifdef ZTS
 	compiler_globals = ts_resource(compiler_globals_id);
@@ -682,8 +687,7 @@ int main(int argc, char *argv[])
 #endif
 
 	/* startup after we get the above ini override se we get things right */
-	if (php_module_startup(&cli_sapi_module, NULL, 0)==FAILURE ||
-	    php_enable_dl()==FAILURE) {
+	if (php_module_startup(&cli_sapi_module, NULL, 0)==FAILURE) {
 		/* there is no way to see if we must call zend_ini_deactivate()
 		 * since we cannot check if EG(ini_directives) has been initialised
 		 * because the executor's constructor does not set initialize it.

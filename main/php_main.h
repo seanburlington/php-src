@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_main.h,v 1.36 2006/03/16 16:53:09 dmitry Exp $ */
+/* $Id: php_main.h,v 1.37 2006/03/17 13:45:43 dmitry Exp $ */
 
 #ifndef PHP_MAIN_H
 #define PHP_MAIN_H
@@ -54,9 +54,6 @@ extern void php_free_shutdown_functions(TSRMLS_D);
 /* environment module */
 extern int php_init_environ(void);
 extern int php_shutdown_environ(void);
-
-/* dl() support */
-PHPAPI int php_enable_dl(void);
 
 END_EXTERN_C()
 

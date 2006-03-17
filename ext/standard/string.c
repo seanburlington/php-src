@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.530 2006/03/17 14:29:05 derick Exp $ */
+/* $Id: string.c,v 1.531 2006/03/17 22:51:20 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3263,13 +3263,13 @@ PHP_FUNCTION(chr)
    Makes an Unicode string's first character uppercase */
 static void php_u_ucfirst(zval *ustr, zval *return_value TSRMLS_DC)
 {
-	UChar tmp[3] = { 0, 0, 0 }; /* UChar32 will be converted to upto 2 UChar units ? */
-	int tmp_len = 2;
+	UChar tmp[3] = { 0, 0, 0 }; /* UChar32 will be converted to upto 2 UChar units */
+	int tmp_len = 0;
 	int pos = 0;
 	UErrorCode status = U_ZERO_ERROR;
 
 	U16_FWD_1(Z_USTRVAL_P(ustr), pos, Z_USTRLEN_P(ustr));
-	tmp_len = u_strToUpper(tmp, tmp_len, Z_USTRVAL_P(ustr), pos, UG(default_locale), &status);
+	tmp_len = u_strToUpper(tmp, sizeof(tmp)/sizeof(UChar), Z_USTRVAL_P(ustr), pos, UG(default_locale), &status);
 
 	Z_USTRVAL_P(return_value) = eumalloc(tmp_len+Z_USTRLEN_P(ustr)-pos+1);
 	Z_USTRVAL_P(return_value)[0] = tmp[0];

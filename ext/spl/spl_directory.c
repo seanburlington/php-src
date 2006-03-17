@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.85 2006/03/09 23:03:08 helly Exp $ */
+/* $Id: spl_directory.c,v 1.86 2006/03/17 22:52:55 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1349,7 +1349,7 @@ static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TS
 		return FAILURE;
 	}
 
-	buf = php_stream_get_line(intern->u.file.stream, NULL, intern->u.file.max_line_len, &line_len);
+	buf = php_stream_get_line(intern->u.file.stream, NULL_ZSTR, intern->u.file.max_line_len, &line_len);
 
 	if (!buf) {
 		intern->u.file.current_line = estrdup("");

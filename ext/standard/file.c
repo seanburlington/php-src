@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.427 2006/03/15 00:28:57 pollita Exp $ */
+/* $Id: file.c,v 1.428 2006/03/17 22:52:55 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1002,7 +1002,7 @@ PHPAPI PHP_FUNCTION(fgets)
 
 	php_stream_from_zval(stream, &zstream);
 
-	buf.v = php_stream_get_line_ex(stream, php_stream_reads_unicode(stream) ? IS_UNICODE : IS_STRING, NULL, 0, length, &retlen);
+	buf.v = php_stream_get_line_ex(stream, php_stream_reads_unicode(stream) ? IS_UNICODE : IS_STRING, NULL_ZSTR, 0, length, &retlen);
 	if (!buf.v) {
 		RETURN_FALSE;
 	}
@@ -1157,7 +1157,7 @@ PHP_FUNCTION(fscanf)
 	}
 
 
-	buf = php_stream_get_line((php_stream *) what, NULL, 0, &len);
+	buf = php_stream_get_line((php_stream *) what, NULL_ZSTR, 0, &len);
 	if (buf == NULL) {
 		efree(args);
 		RETURN_FALSE;
@@ -1991,7 +1991,7 @@ PHP_FUNCTION(fgetcsv)
 	}
 
 	if (len < 0) {
-		if ((buf = php_stream_get_line(stream, NULL, 0, &buf_len)) == NULL) {
+		if ((buf = php_stream_get_line(stream, NULL_ZSTR, 0, &buf_len)) == NULL) {
 			RETURN_FALSE;
 		}
 	} else {
@@ -2088,7 +2088,7 @@ PHP_FUNCTION(fgetcsv)
 								memcpy(tptr, line_end, line_end_len);
 								tptr += line_end_len;
 
-								if ((new_buf = php_stream_get_line(stream, NULL, 0, &new_len)) == NULL) {
+								if ((new_buf = php_stream_get_line(stream, NULL_ZSTR, 0, &new_len)) == NULL) {
 									/* we've got an unterminated enclosure,
 									 * assign all the data from the start of
 									 * the enclosure to end of data to the

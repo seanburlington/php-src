@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.120 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: image.c,v 1.121 2006/03/17 22:52:55 andrei Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -1023,7 +1023,7 @@ static int php_get_xbm(php_stream *stream, struct gfxinfo **result TSRMLS_DC)
 	if (php_stream_rewind(stream)) {
 		return 0;
 	}
-	while ((fline=php_stream_gets(stream, NULL, 0)) != NULL) {
+	while ((fline=php_stream_gets(stream, NULL_ZSTR, 0)) != NULL) {
 		iname = estrdup(fline); /* simple way to get necessary buffer of required size */
 		if (sscanf(fline, "#define %s %d", iname, &value) == 2) {
 			if (!(type = strrchr(iname, '_'))) {

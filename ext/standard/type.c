@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.41 2006/03/17 14:29:05 derick Exp $ */
+/* $Id: type.c,v 1.42 2006/03/17 23:00:20 andrei Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -294,10 +294,21 @@ PHP_FUNCTION(is_binary)
 /* }}} */
 
 /* {{{ proto bool is_string(mixed var)
-   Returns true if variable is a string */
+   Returns true if variable is a Unicode or binary string */
 PHP_FUNCTION(is_string)
 {
-	php_is_type(INTERNAL_FUNCTION_PARAM_PASSTHRU, UG(unicode) ? IS_UNICODE : IS_STRING);
+	zval **arg;
+
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only one argument expected");
+		RETURN_FALSE;
+	}
+
+	if (Z_TYPE_PP(arg) == IS_UNICODE || Z_TYPE_PP(arg) == IS_STRING) {
+		RETURN_TRUE;
+	} else {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

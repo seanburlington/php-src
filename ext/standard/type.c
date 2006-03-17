@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.40 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: type.c,v 1.41 2006/03/17 14:29:05 derick Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -285,11 +285,19 @@ PHP_FUNCTION(is_float)
 }
 /* }}} */
 
-/* {{{ proto bool is_string(mixed var)
-   Returns true if variable is a native string */
-PHP_FUNCTION(is_string)
+/* {{{ proto bool is_binary(mixed var)
+   Returns true if variable is a native (binary) string */
+PHP_FUNCTION(is_binary)
 {
 	php_is_type(INTERNAL_FUNCTION_PARAM_PASSTHRU, IS_STRING);
+}
+/* }}} */
+
+/* {{{ proto bool is_string(mixed var)
+   Returns true if variable is a string */
+PHP_FUNCTION(is_string)
+{
+	php_is_type(INTERNAL_FUNCTION_PARAM_PASSTHRU, UG(unicode) ? IS_UNICODE : IS_STRING);
 }
 /* }}} */
 

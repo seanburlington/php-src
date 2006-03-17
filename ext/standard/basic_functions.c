@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.762 2006/03/16 16:53:09 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.763 2006/03/17 14:53:57 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -530,8 +530,9 @@ zend_function_entry basic_functions[] = {
 	PHP_FALIAS(is_double,			is_float,								NULL)
 	PHP_FALIAS(is_real,				is_float,								NULL)
 	PHP_FE(is_numeric,														NULL)
+	PHP_FE(is_binary,														NULL)
 	PHP_FE(is_string,														NULL)
-	PHP_FE(is_unicode,													NULL)
+	PHP_FE(is_unicode,														NULL)
 	PHP_FE(is_buffer,														NULL)
 	PHP_FE(is_array,														NULL)
 	PHP_FE(is_object,														NULL)

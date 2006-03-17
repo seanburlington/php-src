@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.35 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: pgsql_statement.c,v 1.36 2006/03/17 22:17:15 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -174,7 +174,7 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 					} else {
 						/* resolve parameter name to rewritten name */
 						char *nameptr;
-						if (SUCCESS == zend_hash_find(stmt->bound_param_map,
+						if (stmt->bound_param_map && SUCCESS == zend_hash_find(stmt->bound_param_map,
 								param->name, param->namelen + 1, (void**)&nameptr)) {
 							param->paramno = atoi(nameptr + 1) - 1;
 						} else {

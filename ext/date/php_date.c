@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.42 2006/03/06 21:44:53 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.43 2006/03/18 23:43:48 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1746,7 +1746,8 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 
 	timelib_unixtime2local(t, time);
 	rs = timelib_astro_rise_set_altitude(t, longitude, latitude, altitude, altitude > -1 ? 1 : 0, &h_rise, &h_set, &rise, &set, &transit);
-
+	timelib_time_dtor(t);
+	
 	if (rs != 0) {
 		RETURN_FALSE;
 	}
@@ -1889,6 +1890,8 @@ PHP_FUNCTION(date_sun_info)
 			t2->sse = set;
 			add_assoc_long(return_value, "astronomical_twilight_end", timelib_date_to_int(t2, &dummy));
 	}
+	timelib_time_dtor(t);
+	timelib_time_dtor(t2);
 }
 /* }}} */
 /*

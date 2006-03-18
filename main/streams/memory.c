@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.13 2006/01/05 22:05:44 helly Exp $ */
+/* $Id: memory.c,v 1.14 2006/03/18 19:56:35 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -159,7 +159,7 @@ static int php_stream_memory_seek(php_stream *stream, off_t offset, int whence, 
 					return 0;
 				}
 			} else {
-				if (ms->fpos < (size_t)(offset)) {
+				if (ms->fpos + (size_t)(offset) > ms->fsize) {
 					ms->fpos = ms->fsize;
 					*newoffs = -1;
 					return -1;

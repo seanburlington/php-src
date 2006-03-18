@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.151 2006/03/18 22:25:29 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.152 2006/03/18 23:09:47 helly Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2120,10 +2120,9 @@ static void free_statement(pdo_stmt_t *stmt TSRMLS_DC)
 		int i;
 		struct pdo_column_data *cols = stmt->columns;
 
-		for (i = 0; i < stmt->column_count; i++) {
-			if (cols[i].name) {
+		for (i = stmt->column_count; i >= 0;) {
+			if (cols[--i].name) {
 				efree(cols[i].name);
-				cols[i].name = NULL;
 			}
 		}
 		efree(stmt->columns);

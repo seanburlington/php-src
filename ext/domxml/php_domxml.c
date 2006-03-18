@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.50.2.1 2006/01/01 13:46:52 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.50.2.2 2006/03/18 10:46:27 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -649,6 +649,7 @@ static inline void node_list_wrapper_dtor(xmlNodePtr node, int destroyref TSRMLS
 			/* Skip property freeing for the following types */
 			case XML_ATTRIBUTE_DECL:
 			case XML_DTD_NODE:
+			case XML_ELEMENT_DECL:
 			case XML_ENTITY_DECL:
 			case XML_ATTRIBUTE_NODE:
 				break;
@@ -689,6 +690,7 @@ static inline void node_list_unlink(xmlNodePtr node)
 				case XML_ATTRIBUTE_DECL:
 				case XML_DTD_NODE:
 				case XML_ENTITY_DECL:
+				case XML_ELEMENT_DECL:
 				case XML_ATTRIBUTE_NODE:
 					break;
 				default:

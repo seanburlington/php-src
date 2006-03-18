@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.76 2006/02/24 16:04:13 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.77 2006/03/18 23:10:40 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -476,6 +476,9 @@ struct _pdo_dbh_t {
 	enum pdo_error_mode error_mode;
 
 	enum pdo_case_conversion native_case, desired_case;
+
+	/* defaults for fetches */
+	enum pdo_fetch_type default_fetch_type;
 
 	/* persistent hash key associated with this handle */
 	const char *persistent_id;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.120 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: network.c,v 1.121 2006/03/19 22:34:26 tony2001 Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -988,10 +988,12 @@ PHPAPI php_stream *_php_stream_sock_open_from_socket(php_socket_t socket, const 
 	sock->socket = socket;
 
 	stream = php_stream_alloc_rel(&php_stream_generic_socket_ops, sock, persistent_id, "r+");
-	stream->flags |= PHP_STREAM_FLAG_AVOID_BLOCKING;
 
-	if (stream == NULL)	
+	if (stream == NULL) {
 		pefree(sock, persistent_id ? 1 : 0);
+	} else {
+		stream->flags |= PHP_STREAM_FLAG_AVOID_BLOCKING;
+	}
 
 	return stream;
 }

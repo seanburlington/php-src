@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.138 2006/03/07 14:43:16 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.139 2006/03/19 14:58:06 mike Exp $ */
 
 #include <fcntl.h>
 
@@ -103,7 +103,7 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 {
 	php_struct *ctx;
 	ap_filter_t *f;
-	char *val;
+	char *val, *ptr;
 
 	ctx = SG(server_context);
 	f = ctx->r->output_filters;
@@ -114,6 +114,7 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 		sapi_free_header(sapi_header);
 		return 0;
 	}
+	ptr = val;
 
 	*val = '\0';
 	
@@ -128,6 +129,7 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 	else
 		apr_table_add(ctx->r->headers_out, sapi_header->header, val);
 	
+	*ptr = ':';
 	return SAPI_HEADER_ADD;
 }
 

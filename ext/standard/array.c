@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.344 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: array.c,v 1.345 2006/03/19 22:12:39 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4335,12 +4335,10 @@ PHP_FUNCTION(array_filter)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument should be an array");
 		return;
 	}
-	if (callback) {
-		func = *callback;
-	}
 	array = *input;
 
 	if (ZEND_NUM_ARGS() > 1) {
+		func = *callback;
 		if (!zend_is_callable(func, 0, &callback_name)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The second argument, '%R', should be a valid callback", Z_TYPE(callback_name), Z_UNIVAL(callback_name));
 			zval_dtor(&callback_name);

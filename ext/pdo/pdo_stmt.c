@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.154 2006/03/19 19:05:28 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.155 2006/03/19 19:46:18 helly Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -787,6 +787,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 		RETVAL_FALSE;
 
 		switch (how) {
+			case PDO_FETCH_USE_DEFAULT:
 			case PDO_FETCH_ASSOC:
 			case PDO_FETCH_BOTH:
 			case PDO_FETCH_NUM:
@@ -916,6 +917,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					add_assoc_zval(return_value, stmt->columns[i].name, val);
 					break;
 
+				case PDO_FETCH_USE_DEFAULT:
 				case PDO_FETCH_BOTH:
 					add_assoc_zval(return_value, stmt->columns[i].name, val);
 					ZVAL_ADDREF(val);

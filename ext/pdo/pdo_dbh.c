@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.122 2006/03/19 20:53:58 helly Exp $ */
+/* $Id: pdo_dbh.c,v 1.123 2006/03/19 20:57:53 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -35,6 +35,8 @@
 #include "zend_exceptions.h"
 #include "zend_object_handlers.h"
 #include "zend_hash.h"
+
+static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_DC);
 
 void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate, const char *supp TSRMLS_DC) /* {{{ */
 {
@@ -387,10 +389,9 @@ static PHP_METHOD(PDO, dbh_constructor)
 
 		dbh->driver = driver;
 
-#if 0
 		if (options) {
 			zval **attr_value;
-			char *str_key;
+			zstr str_key;
 			long long_key;
 			
 			zend_hash_internal_pointer_reset(Z_ARRVAL_P(options));
@@ -401,7 +402,7 @@ static PHP_METHOD(PDO, dbh_constructor)
 				zend_hash_move_forward(Z_ARRVAL_P(options));
 			}
 		}
-#endif
+
 		return;	
 	}
 

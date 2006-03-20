@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.9 2004/06/01 18:59:49 iliaa Exp $
+  $Id: enchant.c,v 1.10 2006/03/20 00:07:08 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -231,7 +231,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -535,7 +535,7 @@ PHP_FUNCTION(enchant_dict_quick_check)
 
 		array_init(sugg);
 
-		suggs = enchant_dict_suggest(pdict->pdict, word, wordlen, &n_sugg);
+		suggs = enchant_dict_suggest(pdict->pdict, word, wordlen, (size_t *) &n_sugg);
 		if (suggs && n_sugg) {
 			int i;
 			for (i = 0; i < n_sugg; i++) {
@@ -587,7 +587,7 @@ PHP_FUNCTION(enchant_dict_suggest)
 
 	PHP_ENCHANT_GET_DICT;
 
-	suggs = enchant_dict_suggest(pdict->pdict, word, wordlen, &n_sugg);
+	suggs = enchant_dict_suggest(pdict->pdict, word, wordlen, (size_t *)&n_sugg);
 	if (suggs && n_sugg) {
 		int i;
 

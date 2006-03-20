@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.78 2006/03/18 23:35:34 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.79 2006/03/20 20:54:34 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -130,6 +130,7 @@ enum pdo_attribute_type {
 	PDO_ATTR_DRIVER_NAME,		  /* name of the driver (as used in the constructor) */
 	PDO_ATTR_STRINGIFY_FETCHES,	/* converts integer/float types to strings during fetch */
 	PDO_ATTR_MAX_COLUMN_LEN,	/* make database calculate maximum length of data found in a column */
+	PDO_ATTR_DEFAULT_FETCH_MODE, /* Set the default fetch mode */
 
 	/* this defines the start of the range for driver specific options.
 	 * Drivers should define their own attribute constants beginning with this

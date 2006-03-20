@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.87 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: php_http.c,v 1.88 2006/03/20 10:37:09 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -811,7 +811,22 @@ try_again:
 		efree(cookie);
 	}
 
-	if (!get_http_body(stream, !http_1_1, http_headers, &http_body, &http_body_size TSRMLS_CC)) {
+	if (http_1_1) {
+		http_close = FALSE;
+		if (use_proxy && !use_ssl) {
+			connection = get_http_header_value(http_headers,"Proxy-Connection: ");
+			if (connection) {
+				if (strncasecmp(connection, "close", sizeof("close")-1) == 0) {
+					http_close = TRUE;
+				}
+				efree(connection);
+			}
+		}
+	} else {
+		http_close = TRUE;
+	}	
+
+	if (!get_http_body(stream, http_close, http_headers, &http_body, &http_body_size TSRMLS_CC)) {
 		if (request != buf) {efree(request);}
 		php_stream_close(stream);
 		efree(http_headers);

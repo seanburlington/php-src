@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.763 2006/03/17 14:53:57 derick Exp $ */
+/* $Id: basic_functions.c,v 1.764 2006/03/20 23:07:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1113,6 +1113,9 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(file)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(standard_filters)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef HAVE_SYSLOG_H
+	PHP_MSHUTDOWN(syslog)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MSHUTDOWN(localeconv)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ext_syslog.h,v 1.13 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: php_ext_syslog.h,v 1.14 2006/03/20 23:07:31 tony2001 Exp $ */
 
 #ifndef PHP_EXT_SYSLOG_H
 #define PHP_EXT_SYSLOG_H
@@ -28,6 +28,7 @@
 PHP_MINIT_FUNCTION(syslog);
 PHP_RINIT_FUNCTION(syslog);
 PHP_RSHUTDOWN_FUNCTION(syslog);
+PHP_MSHUTDOWN_FUNCTION(syslog);
 
 PHP_FUNCTION(openlog);
 PHP_FUNCTION(syslog);

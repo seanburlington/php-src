@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.125 2006/03/20 20:54:34 helly Exp $ */
+/* $Id: pdo_dbh.c,v 1.126 2006/03/20 22:18:15 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -409,22 +409,6 @@ static PHP_METHOD(PDO, dbh_constructor)
 	/* the connection failed; things will tidy up in free_storage */
 	/* XXX raise exception */
 	ZVAL_NULL(object);
-}
-/* }}} */
-
-/* {{{ proto object PDO::setDefaultFetchMode(PDOStatement::setFetchMode())
-   Set the default fetch mode for this connection */
-static PHP_METHOD(PDO, setDefaultFetchMode)
-{
-	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
-	long mode;
-
-	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &mode)) {
-		RETURN_FALSE;
-	}
-
-	PDO_CONSTRUCT_CHECK;
-	dbh->default_fetch_type = mode;
 }
 /* }}} */
 
@@ -1131,7 +1115,6 @@ static PHP_METHOD(PDO, getAvailableDrivers)
 zend_function_entry pdo_dbh_functions[] = {
 	ZEND_MALIAS(PDO, __construct, dbh_constructor,	NULL, 			ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, prepare, 				NULL,			ZEND_ACC_PUBLIC)
-	PHP_ME(PDO, setDefaultFetchMode, 	NULL, 			ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, beginTransaction,		NULL,			ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, commit,			NULL,					ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, rollBack,		NULL,					ZEND_ACC_PUBLIC)

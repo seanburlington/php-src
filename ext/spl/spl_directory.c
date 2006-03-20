@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.24 2006/03/08 21:54:48 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.25 2006/03/20 13:54:16 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1368,7 +1368,7 @@ static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TS
 
 static int spl_filesystem_file_read_line(zval * this_ptr, spl_filesystem_object *intern, int silent TSRMLS_DC) /* {{{ */
 {
-	zval *retval;
+	zval *retval = NULL;
 
 	/* if overloaded call the function, otherwise do it directly */
 	if (intern->u.file.func_getCurr->common.scope != spl_ce_SplFileObject) {

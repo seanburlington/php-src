@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.79 2006/03/20 20:54:34 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.80 2006/03/20 22:17:41 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -491,7 +491,7 @@ struct _pdo_dbh_t {
 	zend_class_entry *def_stmt_ce;
 	
 	zval *def_stmt_ctor_args;
-    
+
 	/* when calling PDO::query(), we need to keep the error
 	 * context from the statement around until we next clear it.
 	 * This will allow us to report the correct error message

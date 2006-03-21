@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_soap.h,v 1.38.2.3 2006/02/07 12:49:09 dmitry Exp $ */
+/* $Id: php_soap.h,v 1.38.2.4 2006/03/21 12:04:55 dmitry Exp $ */
 
 #ifndef PHP_SOAP_H
 #define PHP_SOAP_H
@@ -97,6 +97,8 @@ struct _soapMapping {
 	} map_class;
 };
 
+struct _soapHeader;
+
 struct _soapService {
 	sdlPtr sdl;
 
@@ -120,6 +122,7 @@ struct _soapService {
 	xmlCharEncodingHandlerPtr encoding;
 	HashTable *class_map;
 	int        features;
+	struct _soapHeader **soap_headers_ptr;
 };
 
 #define SOAP_CLASS 1

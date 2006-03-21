@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.19 2006/03/21 02:10:55 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.224.2.20 2006/03/21 02:20:15 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3429,7 +3429,7 @@ PHP_FUNCTION(mb_get_info)
 		if (lang != NULL && (name = (char *)mbfl_no_encoding2name(lang->mail_body_encoding)) != NULL) {
 			RETVAL_STRING(name, 1);
 		}
-	} else if (!strcasecmp("illegalchars", typ)) {
+	} else if (!strcasecmp("illegal_chars", typ)) {
 		RETVAL_LONG(MBSTRG(illegalchars));
 	} else {
 		RETURN_FALSE;

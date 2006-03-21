@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.107 2006/03/18 19:44:51 helly Exp $ */
+/* $Id: streams.c,v 1.108 2006/03/21 18:28:42 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1112,7 +1112,8 @@ PHPAPI void *_php_stream_get_line(php_stream *stream, int buf_type, zstr buf, si
 	}
 
 	if (total_copied == 0) {
-		assert(bufstart.v != NULL || !grow_mode || stream->eof);
+		assert(stream->eof || !grow_mode ||
+				(grow_mode && bufstart.v == NULL));
 		return NULL;
 	}
 
@@ -1120,10 +1121,6 @@ PHPAPI void *_php_stream_get_line(php_stream *stream, int buf_type, zstr buf, si
 		buf.u[0] = 0;
 	} else {
 		buf.s[0] = 0;
-	}
-
-	if (returned_len) {
-		*returned_len = total_copied;
 	}
 
 	return bufstart.s;

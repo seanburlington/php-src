@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.66.2.2 2006/01/01 12:50:08 sniper Exp $ */
+/* $Id: mbstring.h,v 1.66.2.3 2006/03/21 01:58:27 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -181,6 +181,7 @@ ZEND_BEGIN_MODULE_GLOBALS(mbstring)
 	long func_overload;
 	zend_bool encoding_translation;
 	long strict_detection;
+	long illegalchars;
 	mbfl_buffer_converter *outconv;
 #if HAVE_MBREGEX && defined(PHP_MBREGEX_GLOBALS)
 	PHP_MBREGEX_GLOBALS	

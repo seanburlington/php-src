@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.12 2006/03/21 17:18:57 pajoye Exp $
+  $Id: enchant.c,v 1.13 2006/03/21 17:25:41 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -234,7 +234,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@package_version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.12 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.13 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -284,7 +284,7 @@ PHP_FUNCTION(enchant_broker_init)
 }
 /* }}} */
 
-/* {{{ proto boolean enchant_free(resource broker)
+/* {{{ proto boolean enchant_broker_free(resource broker)
    Destroys the broker object and its dictionnaries */
 PHP_FUNCTION(enchant_broker_free)
 {

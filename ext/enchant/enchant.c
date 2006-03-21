@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.10 2006/03/20 00:07:08 pajoye Exp $
+  $Id: enchant.c,v 1.11 2006/03/21 11:13:12 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -116,7 +116,7 @@ static void
 enumerate_providers_fn (const char * const name,
                         const char * const desc,
                         const char * const file,
-                        void * ud)
+                        void * ud) /* {{{ */
 {
 	zval *zdesc = (zval *) ud;
 	zval *tmp_array;
@@ -134,13 +134,14 @@ enumerate_providers_fn (const char * const name,
 
 	add_next_index_zval(zdesc, tmp_array);
 }
+/* }}} */
 
 static void
 describe_dict_fn (const char * const lang,
                   const char * const name,
                   const char * const desc,
                   const char * const file,
-                  void * ud)
+                  void * ud) /* {{{ */
 {
 	zval *zdesc = (zval *) ud;
 	array_init(zdesc);
@@ -149,8 +150,9 @@ describe_dict_fn (const char * const lang,
 	add_assoc_string(zdesc, "desc", (char *)desc, 1);
 	add_assoc_string(zdesc, "file", (char *)file, 1);
 }
+/* }}} */
 
-static void php_enchant_broker_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+static void php_enchant_broker_free(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
 {
 	if (rsrc->ptr) {
 		enchant_broker *broker = (enchant_broker *)rsrc->ptr;
@@ -175,8 +177,10 @@ static void php_enchant_broker_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		}
 	}
 }
+/* }}} */
 
-static void php_enchant_dict_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+static void php_enchant_dict_free(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
+
 {
 	if (rsrc->ptr) {
 		enchant_dict *pdict = (enchant_dict *)rsrc->ptr;
@@ -190,6 +194,7 @@ static void php_enchant_dict_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		}
 	}
 }
+/* }}} */
 
 /* {{{ PHP_MINIT_FUNCTION
  */
@@ -231,7 +236,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.11 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();

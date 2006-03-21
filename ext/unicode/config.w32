@@ -1,8 +1,5 @@
-// $Id: config.w32,v 1.4 2006/02/02 14:45:54 tony2001 Exp $
+// $Id: config.w32,v 1.5 2006/03/21 13:57:16 derick Exp $
 // vim:ft=javascript
 
-ARG_ENABLE('unicode' , 'ICU API extension', 'yes');
-if (PHP_UNICODE != 'no') {
-  EXTENSION("unicode", "unicode.c unicode_filter.c unicode_iterators.c locale.c");
-  AC_DEFINE('HAVE_UNICODE', 1, 'ICU API extension');
-}
+EXTENSION("unicode", "unicode.c unicode_filter.c unicode_iterators.c locale.c");
+AC_DEFINE('HAVE_UNICODE', 1, 'ICU API extension');

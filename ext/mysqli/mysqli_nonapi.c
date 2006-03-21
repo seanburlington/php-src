@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.59 2006/01/01 13:09:52 sniper Exp $ 
+  $Id: mysqli_nonapi.c,v 1.60 2006/03/21 15:35:48 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -326,7 +326,7 @@ PHP_FUNCTION(mysqli_set_charset)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL*, &mysql_link, "mysqli_link");
 
-	if (mysql_set_character_set(mysql->mysql, cs_name)) {
+	if (!mysql->mysql->thread_id || mysql_set_character_set(mysql->mysql, cs_name)) {
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;

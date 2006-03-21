@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.680 2006/03/21 08:49:58 dmitry Exp $ */
+/* $Id: main.c,v 1.681 2006/03/21 13:46:51 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -1583,7 +1583,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 
 		while (*p) {
 			if (cfg_get_long((char*)*p, &val) == SUCCESS && val) {
-				zend_error(E_CORE_ERROR, "Directive '%s' is not longer supported in PHP-6 and above", *p);
+				zend_error(E_CORE_ERROR, "Directive '%s' is no longer supported in PHP6 and greater", *p);
 			}
 			++p;
 		}

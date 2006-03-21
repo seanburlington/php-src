@@ -15,7 +15,7 @@
   | Author: Pierre-Alain Joye <paj@pearfr.org>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_enchant.h,v 1.2 2004/03/09 00:31:17 iliaa Exp $
+  $Id: php_enchant.h,v 1.3 2006/03/21 18:10:45 pajoye Exp $
 */
 
 #ifndef PHP_ENCHANT_H
@@ -44,6 +44,7 @@ PHP_MINFO_FUNCTION(enchant);
 PHP_FUNCTION(enchant_broker_init);
 PHP_FUNCTION(enchant_broker_free);
 PHP_FUNCTION(enchant_broker_get_error);
+PHP_FUNCTION(enchant_broker_list_dicts);
 PHP_FUNCTION(enchant_broker_request_dict);
 PHP_FUNCTION(enchant_broker_request_pwl_dict);
 PHP_FUNCTION(enchant_broker_free_dict);

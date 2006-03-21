@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.13 2006/03/21 17:25:41 pajoye Exp $
+  $Id: enchant.c,v 1.14 2006/03/21 18:10:45 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -68,6 +68,7 @@ function_entry enchant_functions[] = {
 	PHP_FE(enchant_broker_init, NULL)
 	PHP_FE(enchant_broker_free, NULL)
 	PHP_FE(enchant_broker_get_error, NULL)
+	PHP_FE(enchant_broker_list_dicts, NULL)
 	PHP_FE(enchant_broker_request_dict,	NULL)
 	PHP_FE(enchant_broker_request_pwl_dict, NULL)
 	PHP_FE(enchant_broker_free_dict, NULL)
@@ -149,6 +150,28 @@ describe_dict_fn (const char * const lang,
 	add_assoc_string(zdesc, "name", (char *)name, 1);
 	add_assoc_string(zdesc, "desc", (char *)desc, 1);
 	add_assoc_string(zdesc, "file", (char *)file, 1);
+}
+/* }}} */
+
+static void php_enchant_list_dicts_fn( const char * const lang_tag,
+	   	const char * const provider_name, const char * const provider_desc,
+		const char * const provider_file, void * ud) /* {{{ */
+{
+	zval *zdesc = (zval *) ud;
+	zval *tmp_array;
+
+	MAKE_STD_ZVAL(tmp_array);
+	array_init(tmp_array);
+	add_assoc_string(tmp_array, "lang_tag", (char *)lang_tag, 1);
+	add_assoc_string(tmp_array, "provider_name", (char *)provider_name, 1);
+	add_assoc_string(tmp_array, "provider_desc", (char *)provider_desc, 1);
+	add_assoc_string(tmp_array, "provider_file", (char *)provider_file, 1);
+
+	if (Z_TYPE_P(zdesc) != IS_ARRAY) {
+		array_init(zdesc);
+	}
+	add_next_index_zval(zdesc, tmp_array);
+
 }
 /* }}} */
 
@@ -234,7 +257,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@package_version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.13 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.14 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -320,6 +343,26 @@ PHP_FUNCTION(enchant_broker_get_error)
 		RETURN_STRING((char *)msg, 1);
 	}
 	RETURN_FALSE;
+}
+/* }}} */
+
+/* {{{ proto string enchant_broker_list_dicts(resource broker)
+   Returns the last error of the broker */
+PHP_FUNCTION(enchant_broker_list_dicts)
+{
+	zval *broker;
+	enchant_broker *pbroker;
+	EnchantDictDescribeFn describetozval = php_enchant_list_dicts_fn;
+
+	char *msg;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &broker) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	PHP_ENCHANT_GET_BROKER;
+
+	enchant_broker_list_dicts(pbroker->pbroker, php_enchant_list_dicts_fn, (void *)return_value);
 }
 /* }}} */
 

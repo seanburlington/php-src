@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.20 2006/03/14 15:16:07 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.21 2006/03/21 08:49:42 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1696,6 +1696,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 			if (expand_filepath(primary_file->filename, realfile TSRMLS_CC)) {
 				realfile_len =  strlen(realfile);
 				zend_hash_add(&EG(included_files), realfile, realfile_len+1, (void *)&dummy, sizeof(int), NULL);
+				primary_file->opened_path = estrndup(realfile, realfile_len);
 			}
 		}
 

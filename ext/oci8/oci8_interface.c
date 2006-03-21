@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.5 2006/01/31 18:38:52 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.6 2006/03/21 15:47:31 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1191,7 +1191,7 @@ PHP_FUNCTION(oci_field_type)
 			RETVAL_STRING("LONG RAW",1);
 			break;
 		case SQLT_CHR:
-			RETVAL_STRING("VARCHAR",1);
+			RETVAL_STRING("VARCHAR2",1);
 			break;
 		case SQLT_RSET:
 			RETVAL_STRING("REFCURSOR",1);

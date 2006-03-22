@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.293 2006/03/07 07:45:59 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.294 2006/03/22 09:46:13 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -645,7 +645,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.293 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.294 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1286,7 +1286,11 @@ open:
 			case OCI_SYSDBA:
 			case OCI_SYSOPER:
 			default:
-				OCI_G(errcode) = PHP_OCI_CALL(OCISessionBegin, (connection->svc, OCI_G(err), connection->session, (ub4) OCI_CRED_EXT, (ub4) session_mode));
+				if (username_len == 1 && username[0] == '/' && password_len == 0) {
+					OCI_G(errcode) = PHP_OCI_CALL(OCISessionBegin, (connection->svc, OCI_G(err), connection->session, (ub4) OCI_CRED_EXT, (ub4) session_mode));
+				} else {
+					OCI_G(errcode) = PHP_OCI_CALL(OCISessionBegin, (connection->svc, OCI_G(err), connection->session, (ub4) OCI_CRED_RDBMS, (ub4) session_mode));
+				}
 				break;
 		}
 

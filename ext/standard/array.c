@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.19 2006/03/19 22:11:36 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.20 2006/03/22 22:05:51 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -312,8 +312,10 @@ PHP_FUNCTION(count)
 
 			if (Z_OBJ_HT_P(array)->get_class_entry && instanceof_function(Z_OBJCE_P(array), spl_ce_Countable TSRMLS_CC)) {
 				zend_call_method_with_0_params(&array, NULL, NULL, "count", &retval);
-				RETVAL_LONG(Z_LVAL_P(retval));
-				zval_ptr_dtor(&retval);
+				if (retval) {
+					RETVAL_LONG(Z_LVAL_P(retval));
+					zval_ptr_dtor(&retval);
+				}
 				return;
 			}
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.100 2006/03/04 16:45:45 helly Exp $ */
+/* $Id: spl_array.c,v 1.101 2006/03/22 21:57:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -291,7 +291,11 @@ static zval *spl_array_read_dimension_ex(int check_inherited, zval *object, zval
 			zend_call_method_with_1_params(&object, Z_OBJCE_P(object), &intern->fptr_offset_get, "offsetGet", &rv, offset);	
 			zval_ptr_dtor(&intern->retval);
 			MAKE_STD_ZVAL(intern->retval);
-			ZVAL_ZVAL(intern->retval, rv, 1, 1);
+			if (rv) {
+				ZVAL_ZVAL(intern->retval, rv, 1, 1);
+			} else {
+				ZVAL_NULL(intern->retval);
+			}
 			return intern->retval;
 		}
 	}
@@ -422,11 +426,13 @@ static int spl_array_has_dimension_ex(int check_inherited, zval *object, zval *o
 
 	if (check_inherited && intern->fptr_offset_has) {
 		zend_call_method_with_1_params(&object, Z_OBJCE_P(object), &intern->fptr_offset_has, "offsetExists", &rv, offset);
-		if (zend_is_true(rv)) {
+		if (rv && zend_is_true(rv)) {
 			zval_ptr_dtor(&rv);
 			return 1;
 		}
-		zval_ptr_dtor(&rv);
+		if (rv) {
+			zval_ptr_dtor(&rv);
+		}
 		return 0;
 	}
 	
@@ -1337,43 +1343,43 @@ SPL_METHOD(Array, getChildren)
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array___construct, 0)
 	ZEND_ARG_INFO(0, array)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetGet, 0, 0, 1)
 	ZEND_ARG_INFO(0, index)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetSet, 0, 0, 2)
 	ZEND_ARG_INFO(0, index)
 	ZEND_ARG_INFO(0, newval)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_append, 0)
 	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_seek, 0)
 	ZEND_ARG_INFO(0, position)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_exchangeArray, 0)
 	ZEND_ARG_INFO(0, array)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_setFlags, 0)
 	ZEND_ARG_INFO(0, flags)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_setIteratorClass, 0)
 	ZEND_ARG_INFO(0, iteratorClass)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array_uXsort, 0)

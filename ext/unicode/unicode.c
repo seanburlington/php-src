@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.11 2006/03/02 13:12:45 dmitry Exp $ */ 
+/* $Id: unicode.c,v 1.12 2006/03/22 10:20:20 derick Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -119,7 +119,6 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(unicode_decode, NULL)
 	PHP_FE(unicode_semantics, NULL)
 	PHP_FE(unicode_encode, NULL)
-	PHP_FE(i18n_strtotitle, NULL)
 	{ NULL, NULL, NULL }
 };
 /* }}} */

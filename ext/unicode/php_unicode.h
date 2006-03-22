@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.4 2006/01/01 13:09:56 sniper Exp $ */ 
+/* $Id: php_unicode.h,v 1.5 2006/03/22 10:20:20 derick Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -57,7 +57,6 @@ PHP_MINFO_FUNCTION(unicode);
 
 PHP_FUNCTION(i18n_loc_get_default);
 PHP_FUNCTION(i18n_loc_set_default);
-PHP_FUNCTION(i18n_strtotitle);
 
 extern php_stream_filter_factory php_unicode_filter_factory;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.765 2006/03/20 23:33:07 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.766 2006/03/22 10:20:20 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -214,6 +214,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(strtok,															NULL)
 	PHP_FE(strtoupper,														NULL)
 	PHP_FE(strtolower,														NULL)
+	PHP_FE(strtotitle,														NULL)
 	PHP_FE(strpos,															NULL)
 	PHP_FE(stripos,															NULL)
 	PHP_FE(strrpos,															NULL)

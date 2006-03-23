@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.9 2006/03/17 09:32:30 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.10 2006/03/23 10:15:01 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -921,6 +921,17 @@ void fastcgi_cleanup(int signal)
 }
 #endif
 
+static int is_port_number(const char *bindpath)
+{
+	while (*bindpath) {
+		if (*bindpath < '0' || *bindpath > '9') {
+			return 0;
+		}
+		bindpath++;
+	}
+	return 1;
+}
+
 /* {{{ main
  */
 int main(int argc, char *argv[])
@@ -1147,7 +1158,7 @@ consult the installation file that came with this distribution, or visit \n\
 		 * path (it's what the fastcgi library expects)
 		 */
 		
-		if (strchr(bindpath, ':') == NULL) {
+		if (strchr(bindpath, ':') == NULL && is_port_number(bindpath)) {
 			char *tmp;
 
 			tmp = malloc(strlen(bindpath) + 2);

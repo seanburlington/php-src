@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.40 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: credits.c,v 1.41 2006/03/23 18:39:12 iliaa Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -69,7 +69,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski, Wez Furlong");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
 		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong, Sara Golemon");
-		CREDIT_LINE("PHP Data Objects Layer", "Wez Furlong, Marcus Boerger, Sterling Hughes, George Schlossnagle");
+		CREDIT_LINE("PHP Data Objects Layer", "Wez Furlong, Marcus Boerger, Sterling Hughes, George Schlossnagle, Ilia Alshanetsky");
 		php_info_print_table_end();
 
 		/* Unicode support */
@@ -114,7 +114,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 	if (flag & PHP_CREDITS_QA) {
 		php_info_print_table_start();
 		php_info_print_table_header(1, "PHP Quality Assurance Team");
-		php_info_print_table_row(1, "Ilia Alshanetsky, Joerg Behrens, Stefan Esser, Moriyoshi Koizumi, Magnus Maatta, Sebastian Nohn, Derick Rethans, Melvyn Sopacua, Jani Taskinen");
+		php_info_print_table_row(1, "Ilia Alshanetsky, Joerg Behrens, Antony Dovgal, Stefan Esser, Moriyoshi Koizumi, Magnus Maatta, Sebastian Nohn, Derick Rethans, Melvyn Sopacua, Jani Taskinen");
 		php_info_print_table_end();
 	}
 

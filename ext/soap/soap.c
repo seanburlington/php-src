@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.21 2006/03/21 12:26:57 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.22 2006/03/23 10:44:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3550,7 +3550,7 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 
 			head = xmlNewChild(envelope, ns, "Header", NULL);
 			if (Z_TYPE_P(hdr_ret) == IS_OBJECT &&
-			    instanceof_function(Z_OBJCE_P(hdr_ret), soap_header_class_entry)) {
+			    instanceof_function(Z_OBJCE_P(hdr_ret), soap_header_class_entry TSRMLS_CC)) {
 				HashTable* ht = Z_OBJPROP_P(hdr_ret);
 				zval **tmp;
 				sdlSoapBindingFunctionHeaderPtr *hdr;

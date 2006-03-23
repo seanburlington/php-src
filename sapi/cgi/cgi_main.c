@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.10 2006/03/23 10:15:01 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.11 2006/03/23 10:19:30 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -921,6 +921,8 @@ void fastcgi_cleanup(int signal)
 }
 #endif
 
+#if PHP_FASTCGI
+#ifndef PHP_WIN32
 static int is_port_number(const char *bindpath)
 {
 	while (*bindpath) {
@@ -931,6 +933,8 @@ static int is_port_number(const char *bindpath)
 	}
 	return 1;
 }
+#endif
+#endif
 
 /* {{{ main
  */

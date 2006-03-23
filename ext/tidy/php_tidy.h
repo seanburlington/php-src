@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.27 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_tidy.h,v 1.28 2006/03/23 14:22:40 john Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -89,6 +89,7 @@ TIDY_NODE_METHOD(isText);
 TIDY_NODE_METHOD(isJste);
 TIDY_NODE_METHOD(isAsp);
 TIDY_NODE_METHOD(isPhp);
+TIDY_NODE_METHOD(getParent);
 
 ZEND_BEGIN_MODULE_GLOBALS(tidy)
 	char *default_config;

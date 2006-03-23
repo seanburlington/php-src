@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.126 2006/03/20 22:18:15 helly Exp $ */
+/* $Id: pdo_dbh.c,v 1.127 2006/03/23 19:03:30 tony2001 Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1076,6 +1076,7 @@ static PHP_METHOD(PDO, quote)
 		RETURN_STRINGL(qstr, qlen, 0);
 	}
 	PDO_HANDLE_DBH_ERR();
+	RETURN_FALSE;
 }
 /* }}} */
 

@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.23 2006/02/26 11:57:14 dmitry Exp $ */
+/* $Id: unicode_iterators.c,v 1.24 2006/03/24 21:06:36 andrei Exp $ */
 
 /*
  * TODO
@@ -538,9 +538,9 @@ PHP_METHOD(TextIterator, __construct)
 		intern->flags |= ITER_REVERSE;
 	}
 
-	if (ti_type >= ITER_CHARACTER && ti_type < ITER_TYPE_LAST) {
+	if (intern->type >= ITER_CHARACTER && intern->type < ITER_TYPE_LAST) {
 		UErrorCode status = U_ZERO_ERROR;
-		intern->u.brk.iter = ubrk_open(brk_type_map[ti_type - ITER_CHARACTER], UG(default_locale), text, text_len, &status);
+		intern->u.brk.iter = ubrk_open(brk_type_map[intern->type - ITER_CHARACTER], UG(default_locale), text, text_len, &status);
 		if (!U_SUCCESS(status)) {
 			php_error(E_RECOVERABLE_ERROR, "Could not create UBreakIterator: %s", u_errorName(status));
 			return;

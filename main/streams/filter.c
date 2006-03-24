@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.24 2006/03/24 20:21:48 pollita Exp $ */
+/* $Id: filter.c,v 1.25 2006/03/24 21:25:44 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -738,8 +738,8 @@ PHPAPI int _php_stream_bucket_convert(php_stream_bucket *bucket, unsigned char t
 				if (bucket->own_buf) {
 					pefree(bucket->buf.s, bucket->is_persistent);
 				}
-				bucket->buf_type == IS_UNICODE;
-				bucket->buf.u = (UChar*)"\x00\x00";
+				bucket->buf_type = IS_UNICODE;
+				bucket->buf.u = EMPTY_STR;
 				bucket->own_buf = 0;
 				bucket->buflen = 0;
 				return SUCCESS;

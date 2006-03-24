@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.11 2006/03/24 09:32:24 georg Exp $ 
+  $Id: mysqli.c,v 1.72.2.12 2006/03/24 12:10:38 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -976,6 +976,7 @@ int php_local_infile_init(void **ptr, const char *filename, void *userdata)
 	mysql->li_stream = php_stream_open_wrapper_ex((char *)filename, "r", 0, NULL, context);
 
 	if (mysql->li_stream == NULL) {
+		sprintf((char *)data->error_msg, "Can't find file '%-.64s'.", filename);	
 		return 1;
 	}
 

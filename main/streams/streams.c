@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.109 2006/03/24 00:19:39 pollita Exp $ */
+/* $Id: streams.c,v 1.110 2006/03/24 19:22:24 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1164,6 +1164,73 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 			stream->position += delim_len;
 		}
 		buf[*returned_len] = '\0';
+		return buf;
+	} else {
+		efree(buf);
+		return NULL;
+	}
+}
+
+PHPAPI UChar *php_stream_get_record_unicode(php_stream *stream, size_t maxlen, size_t maxchars, size_t *returned_len, UChar *delim, size_t delim_len TSRMLS_DC)
+{
+	UChar *e, *buf;
+	size_t toread;
+	int skip = 0;
+
+	if (!php_stream_reads_unicode(stream)) {
+		return NULL;
+	}
+
+	php_stream_fill_read_buffer(stream, maxlen TSRMLS_CC);
+
+	if (delim_len == 0 || !delim) {
+		toread = maxlen;
+	} else {
+		if (delim_len == 1) {
+			e = u_memchr(stream->readbuf.u + stream->readpos, *delim, stream->writepos - stream->readpos);
+		} else {
+			e = u_strFindFirst(stream->readbuf.u + stream->readpos, stream->writepos - stream->readpos, delim, delim_len);
+		}
+
+		if (!e) {
+			toread = maxlen;
+		} else {
+			toread = e - (stream->readbuf.u + stream->readpos);
+			skip = 1;
+		}
+	}
+
+	if (toread > maxlen && maxlen > 0) {
+		toread = maxlen;
+	}
+
+	if (U16_IS_SURROGATE(stream->readbuf.u[stream->readpos + toread - 1]) &&
+		U16_IS_SURROGATE_LEAD(stream->readbuf.u[stream->readpos + toread - 1])) {
+		/* Don't orphan */
+		toread--;
+	}
+
+	if (maxchars > 0) {
+		size_t ulen = u_countChar32(stream->readbuf.u + stream->readpos, toread);
+
+		if (maxchars > ulen) {
+			int i = 0;
+			UChar *s = stream->readbuf.u + stream->readpos;
+
+			U16_FWD_N(s, i, toread, maxchars);
+			toread = i;
+		}
+	}
+
+	buf = eumalloc(toread + 1);
+	*returned_len = php_stream_read_unicode(stream, buf, toread);
+
+	if (*returned_len >= 0) {
+		if (skip) {
+			stream->readpos += delim_len;
+			stream->position += delim_len;
+		}
+		buf[*returned_len] = 0;
 		return buf;
 	} else {
 		efree(buf);

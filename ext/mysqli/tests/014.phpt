@@ -1,22 +1,23 @@
 --TEST--
 mysqli autocommit/commit/rollback 
 --SKIPIF--
-<?php	
+<?php
 	include "connect.inc";
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 	$result = mysqli_query($link, "SHOW VARIABLES LIKE 'have_innodb'");
 	$row = mysqli_fetch_row($result);
 	mysqli_free_result($result);
 	mysqli_close($link);
-	
 	if ($row[1] == "DISABLED" || $row[1] == "NO") {
 		printf ("skip innodb support is not installed or enabled.");
+		exit;
 	}
+	require_once('skipif.inc');
 ?>
 --FILE--
 <?php
 	include "connect.inc";
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 
 	mysqli_select_db($link, "test");
 
@@ -34,6 +35,7 @@ mysqli autocommit/commit/rollback
 	mysqli_rollback($link);
 
 	$result = mysqli_query($link, "SELECT * FROM ac_01");
+	printf("Num_of_rows=%d\n", mysqli_num_rows($result));
 	$row = mysqli_fetch_row($result);
 	mysqli_free_result($result);
 
@@ -52,6 +54,7 @@ mysqli autocommit/commit/rollback
 	mysqli_close($link);
 ?>
 --EXPECT--
+Num_of_rows=1
 array(2) {
   [0]=>
   string(1) "1"

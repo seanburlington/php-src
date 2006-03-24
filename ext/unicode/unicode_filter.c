@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_filter.c,v 1.5 2006/03/13 04:40:11 pollita Exp $ */
+/* $Id: unicode_filter.c,v 1.6 2006/03/24 10:21:56 tony2001 Exp $ */
 
 
 #include "php.h"
@@ -186,13 +186,14 @@ static php_stream_filter_status_t php_unicode_tidy_filter(
 	TSRMLS_DC)
 {
 	php_unicode_filter_data *data;
-	int prefer_unicode = php_stream_filter_output_prefer_unicode(thisfilter);
+	int prefer_unicode;
 
 	if (!thisfilter || !thisfilter->abstract) {
 		/* Should never happen */
 		return PSFS_ERR_FATAL;
 	}
 
+	prefer_unicode = php_stream_filter_output_prefer_unicode(thisfilter);
 	data = (php_unicode_filter_data *)(thisfilter->abstract);
 
 	if (prefer_unicode) {

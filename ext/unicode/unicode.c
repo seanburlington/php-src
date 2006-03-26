@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.15 2006/03/26 06:19:24 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.16 2006/03/26 11:06:24 derick Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -184,6 +184,8 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(unicode_encode, NULL)
 	PHP_FE(unicode_set_error_mode, NULL)
 	PHP_FE(unicode_set_subst_char, NULL)
+	PHP_FE(collator_create, NULL)
+	PHP_FE(collator_compare, NULL)
 	{ NULL, NULL, NULL }
 };
 /* }}} */
@@ -217,7 +219,8 @@ PHP_MINIT_FUNCTION(unicode)
 	}
 
 	php_register_unicode_iterators(TSRMLS_C);
-
+	php_init_collation(TSRMLS_C);
+	
 	return SUCCESS;
 }
 /* }}} */

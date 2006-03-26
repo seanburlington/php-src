@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.248 2006/03/23 20:14:41 masugata Exp $ */
+/* $Id: mbstring.c,v 1.249 2006/03/26 02:23:25 masugata Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3528,10 +3528,8 @@ PHP_FUNCTION(mb_check_encoding)
 	int var_len;
 	char *enc = NULL;
 	int enc_len;
-	char *name;
 	mbfl_buffer_converter *convd;
 	enum mbfl_no_encoding no_encoding = MBSTRG(current_internal_encoding);
-	zval *row;
 	mbfl_string string, result, *ret = NULL;
 	long illegalchars = 0;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.25 2006/03/24 21:25:44 andrei Exp $ */
+/* $Id: filter.c,v 1.26 2006/03/26 01:48:33 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -712,7 +712,7 @@ PHPAPI int _php_stream_bucket_convert(php_stream_bucket *bucket, unsigned char t
 			if (U_FAILURE(status)) {
 				int32_t offset = u_countChar32(bucket->buf.u, num_conv)-1;
 
-				zend_raise_conversion_error_ex("Could not convert Unicode string to binary string", conv, offset, (UG(from_u_error_mode) & ZEND_CONV_ERROR_EXCEPTION) TSRMLS_CC);
+				zend_raise_conversion_error_ex("Could not convert Unicode string to binary string", conv, offset, (UG(from_error_mode) & ZEND_CONV_ERROR_EXCEPTION) TSRMLS_CC);
 			}
 
 			if (bucket->own_buf) {

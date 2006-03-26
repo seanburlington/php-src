@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.681 2006/03/21 13:46:51 tony2001 Exp $ */
+/* $Id: main.c,v 1.682 2006/03/26 01:48:33 andrei Exp $ */
 
 /* {{{ includes
  */
@@ -220,8 +220,8 @@ static ZEND_INI_MH(OnUpdateOutputEncoding)
 		UG(output_encoding_conv) = NULL;
 	}
 	if (UG(output_encoding_conv)) {
-		zend_set_converter_error_mode(UG(output_encoding_conv), UG(from_u_error_mode));
-		zend_set_converter_subst_char(UG(output_encoding_conv), UG(subst_char), UG(subst_char_len));
+		zend_set_converter_error_mode(UG(output_encoding_conv), UG(from_error_mode));
+		zend_set_converter_subst_char(UG(output_encoding_conv), UG(from_subst_char));
 		if (stage == ZEND_INI_STAGE_RUNTIME) {
 			sapi_update_default_charset(TSRMLS_C);
 		}

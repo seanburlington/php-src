@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.111 2006/03/02 13:12:45 dmitry Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.112 2006/03/26 17:12:26 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -493,6 +493,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			}
 			switch(response_code) {
 				case 200:
+				case 206: /* partial content */
 				case 302:
 				case 303:
 				case 301:

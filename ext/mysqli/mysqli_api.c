@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.19 2006/03/24 09:32:24 georg Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.20 2006/03/26 21:08:41 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -691,8 +691,7 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 						};
 						break;
 					case IS_DOUBLE:
-						memcpy(&dval, stmt->result.buf[i].val, sizeof(dval));
-						ZVAL_DOUBLE(stmt->result.vars[i], dval);
+						ZVAL_DOUBLE(stmt->result.vars[i], *(double *)stmt->result.buf[i].val);
 						break;
 					case IS_STRING:
 						if (stmt->stmt->bind[i].buffer_type == MYSQL_TYPE_LONGLONG) {

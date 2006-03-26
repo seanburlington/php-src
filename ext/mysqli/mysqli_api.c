@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.20 2006/03/26 21:08:41 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.21 2006/03/26 21:10:13 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -632,7 +632,6 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 	unsigned int 	i;
 	ulong 			ret;
 	unsigned int    uval;
-	double			dval;
 	my_ulonglong	llval;
 	
 

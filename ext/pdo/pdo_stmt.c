@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.156 2006/03/27 10:25:35 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.157 2006/03/27 16:43:02 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -611,6 +611,7 @@ static int do_fetch_class_prepare(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 
 	if (!ce) {
 		stmt->fetch.cls.ce = ZEND_STANDARD_CLASS_DEF_PTR;
+		ce = ZEND_STANDARD_CLASS_DEF_PTR;
 	}
 	
 	if (ce->constructor) {

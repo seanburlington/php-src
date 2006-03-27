@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.5 2004/05/25 17:44:36 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.9.2.1 2006/03/27 21:04:12 wez Exp $ */
+
+#ifdef PHP_WIN32
+# define PDO_ODBC_TYPE	"Win32"
+#endif
+
+#ifndef PDO_ODBC_TYPE
+# warning Please fix configure to give your ODBC libraries a name
+# define PDO_ODBC_TYPE	"Unknown"
+#endif
 
 /* {{{ Roll a dice, pick a header at random... */
 #if HAVE_SQLCLI1_H
@@ -86,6 +95,10 @@
 # include <cli0env.h>
 #endif
 
+#if HAVE_ODBCSDK_H
+# include <odbcsdk.h>
+#endif
+
 /* }}} */
 
 /* {{{ Figure out the type for handles */
@@ -123,7 +136,7 @@ typedef struct {
 	unsigned long datalen;
 	long fetched_len;
 	SWORD	coltype;
-	char colname[32];
+	char colname[128];
 } pdo_odbc_column;
 
 typedef struct {
@@ -131,7 +144,15 @@ typedef struct {
 	pdo_odbc_column *cols;
 	pdo_odbc_db_handle *H;
 	pdo_odbc_errinfo einfo;
+	unsigned going_long:1;
+	unsigned _spare:31;
 } pdo_odbc_stmt;
+
+typedef struct {
+	SQLINTEGER len;
+	SQLSMALLINT paramtype;
+	char *outbuf;
+} pdo_odbc_param;
 	
 extern pdo_driver_t pdo_odbc_driver;
 extern struct pdo_stmt_methods odbc_stmt_methods;

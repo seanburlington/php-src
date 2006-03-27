@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.10 2006/03/13 22:56:20 helly Exp $ */
+/* $Id: pgsql.c,v 1.331.2.11 2006/03/27 02:59:55 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1520,7 +1520,6 @@ PHP_FUNCTION(pg_execute)
 		case PGRES_BAD_RESPONSE:
 		case PGRES_NONFATAL_ERROR:
 		case PGRES_FATAL_ERROR:
-			PHP_PQ_ERROR("Query failed: %s", pgsql);
 			PQclear(pgsql_result);
 			RETURN_FALSE;
 			break;

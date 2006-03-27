@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.58 2006/03/27 13:37:46 dmitry Exp $ */
+/* $Id: var_unserializer.re,v 1.59 2006/03/27 14:19:18 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -507,7 +507,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	*p = YYCURSOR;
 
 	INIT_PZVAL(*rval);
-	ZVAL_STRINGL(*rval, str, len, 1);
+	ZVAL_RT_STRINGL(*rval, str, len, 1);
 	return 1;
 }
 

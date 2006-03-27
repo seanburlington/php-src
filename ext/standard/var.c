@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.227 2006/03/27 19:24:18 andrei Exp $ */
+/* $Id: var.c,v 1.228 2006/03/27 21:19:12 andrei Exp $ */
 
 
 
@@ -605,6 +605,12 @@ PHP_FUNCTION(var_export)
 		php_start_ob_buffer (NULL, 0, 1 TSRMLS_CC);
 	}
 	
+	/* UTODO
+	 * We need to escape non-ASCII chars with \uXXXX format. php_var_export()
+	 * currently uses output_encoding to export Unicode strings. Support it's
+	 * set to utf-8. If you use the result of var_export() in non-utf-8 context,
+	 * there may be trouble.
+	 */
 	php_var_export(&var, 1 TSRMLS_CC);
 
 	if (return_output) {

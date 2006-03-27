@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.20 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: php_incomplete_class.h,v 1.21 2006/03/27 13:37:46 dmitry Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -56,7 +56,7 @@ extern "C" {
 zend_class_entry *php_create_incomplete_class(TSRMLS_D);
 
 PHPAPI zstr php_lookup_class_name(zval *object, zend_uint *nlen);
-PHPAPI void  php_store_class_name(zval *object, const char *name, zend_uint len);
+PHPAPI void  php_store_class_name(zval *object, zstr name, zend_uint len);
 
 #ifdef __cplusplus
 };

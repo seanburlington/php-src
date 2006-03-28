@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.1 2006/03/26 11:06:24 derick Exp $ */
+/* $Id: collator.c,v 1.2 2006/03/28 03:28:08 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -153,7 +153,7 @@ static void collator_object_free_storage(void *object TSRMLS_DC)
 	efree(object);
 }
 
-static zval* collator_instanciate(zend_class_entry *pce, zval *object TSRMLS_DC)
+static zval* collator_instantiate(zend_class_entry *pce, zval *object TSRMLS_DC)
 {
 	if (!object) {
 		ALLOC_ZVAL(object);
@@ -182,7 +182,7 @@ PHP_FUNCTION(collator_create)
 		RETURN_FALSE;
 	}
 
-	collator_instanciate(unicode_ce_collator, return_value TSRMLS_CC);
+	collator_instantiate(unicode_ce_collator, return_value TSRMLS_CC);
 	collatorobj = (php_collator_obj *) zend_object_store_get_object(return_value TSRMLS_CC);
 	error = U_ZERO_ERROR;
 	collatorobj->col = ucol_open(collator_name, &error);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.536 2006/03/27 23:05:38 andrei Exp $ */
+/* $Id: string.c,v 1.537 2006/03/29 05:56:06 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -702,6 +702,10 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 	UChar	ch,wh;
 	int32_t	start = 0, end = len;
 
+	/*
+	 * UTODO
+	 * fix trim("a") results in ""
+	 */
 	if ( what ) {
 		what = eustrndup(what, what_len);
 		php_expand_u_trim_range(&what, &what_len TSRMLS_CC);

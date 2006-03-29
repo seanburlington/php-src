@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.6 2006/03/26 11:06:24 derick Exp $ */ 
+/* $Id: php_unicode.h,v 1.7 2006/03/29 01:20:43 pollita Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -67,7 +67,6 @@ PHP_FUNCTION(collator_get_attribute);
 PHP_METHOD(collator, __construct);
 
 void php_init_collation(TSRMLS_D);
-extern php_stream_filter_factory php_unicode_filter_factory;
 
 #ifdef  __cplusplus
 } // extern "C" 

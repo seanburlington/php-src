@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.766 2006/03/22 10:20:20 derick Exp $ */
+/* $Id: basic_functions.c,v 1.767 2006/03/29 01:20:42 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -589,6 +589,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(stream_filter_prepend,											NULL)
 	PHP_FE(stream_filter_append,											NULL)
 	PHP_FE(stream_filter_remove,											NULL)
+	PHP_FE(stream_encoding,													NULL)
 	PHP_FE(stream_socket_client,				 second_and_third_args_force_ref)
 	PHP_FE(stream_socket_server,				 second_and_third_args_force_ref)
 	PHP_FE(stream_socket_accept,				 		   third_arg_force_ref)

@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.18 2006/03/27 03:19:30 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.19 2006/03/29 01:20:43 pollita Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -273,10 +273,6 @@ ZEND_GET_MODULE(unicode)
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(unicode)
 {
-	if (php_stream_filter_register_factory("unicode.*", &php_unicode_filter_factory TSRMLS_CC) == FAILURE) {
-		return FAILURE;
-	}
-
 	php_register_unicode_iterators(TSRMLS_C);
 	php_init_collation(TSRMLS_C);
 	
@@ -287,9 +283,6 @@ PHP_MINIT_FUNCTION(unicode)
 /* {{{ PHP_MSHUTDOWN_FUNCTION */
 PHP_MSHUTDOWN_FUNCTION(unicode)
 {
-	if (php_stream_filter_unregister_factory("unicode.*" TSRMLS_CC) == FAILURE) {
-		return FAILURE;
-	}
 	/* add your stuff here */
 
   

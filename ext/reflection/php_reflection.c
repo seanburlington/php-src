@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.32 2006/03/12 17:22:34 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33 2006/03/29 14:28:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -240,9 +240,7 @@ static void reflection_objects_clone(void *object, void **object_clone TSRMLS_DC
 	reflection_object **intern_clone = (reflection_object **) object_clone;
 
 	*intern_clone = emalloc(sizeof(reflection_object));
-	(*intern_clone)->zo.ce = intern->zo.ce;
-	(*intern_clone)->zo.guards = NULL;
-	ALLOC_HASHTABLE((*intern_clone)->zo.properties);
+	zend_object_std_init(&(*intern_clone)->zo, intern->zo.ce TSRMLS_CC);
 	(*intern_clone)->ptr = intern->ptr;
 	(*intern_clone)->free_ptr = intern->free_ptr;
 	(*intern_clone)->obj = intern->obj;
@@ -264,8 +262,7 @@ static zend_object_value reflection_objects_new(zend_class_entry *class_type TSR
 	intern->obj = NULL;
 	intern->free_ptr = 0;
 
-	ALLOC_HASHTABLE(intern->zo.properties);
-	zend_hash_init(intern->zo.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
+	zend_object_std_init(&intern->zo, class_type TSRMLS_CC);
 	zend_hash_copy(intern->zo.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 	retval.handle = zend_objects_store_put(intern, NULL, reflection_free_objects_storage, reflection_objects_clone TSRMLS_CC);
 	retval.handlers = &reflection_object_handlers;
@@ -4488,7 +4485,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.32 2006/03/12 17:22:34 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33 2006/03/29 14:28:42 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

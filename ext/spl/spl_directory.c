@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.25 2006/03/20 13:54:16 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.26 2006/03/29 14:28:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -73,9 +73,9 @@ static void spl_filesystem_object_free_storage(void *object TSRMLS_DC) /* {{{ */
 	if (intern->oth_handler && intern->oth_handler->dtor) {
 		intern->oth_handler->dtor(intern TSRMLS_CC);
 	}
-	zend_hash_destroy(intern->std.properties);
-	FREE_HASHTABLE(intern->std.properties);
-
+	
+	zend_object_std_dtor(&intern->std TSRMLS_CC);
+	
 	if (intern->path) {
 		efree(intern->path);
 	}
@@ -132,14 +132,12 @@ static zend_object_value spl_filesystem_object_new_ex(zend_class_entry *class_ty
 
 	intern = emalloc(sizeof(spl_filesystem_object));
 	memset(intern, 0, sizeof(spl_filesystem_object));
-	intern->std.ce = class_type;
 	/* intern->type = SPL_FS_INFO; done by set 0 */
 	intern->file_class = spl_ce_SplFileObject;
 	intern->info_class = spl_ce_SplFileInfo;
 	if (obj) *obj = intern;
 
-	ALLOC_HASHTABLE(intern->std.properties);
-	zend_hash_init(intern->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
+	zend_object_std_init(&intern->std, class_type TSRMLS_CC);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 
 	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t) zend_objects_destroy_object, (zend_objects_free_object_storage_t) spl_filesystem_object_free_storage, NULL TSRMLS_CC);

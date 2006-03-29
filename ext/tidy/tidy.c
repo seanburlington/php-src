@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.5 2006/01/01 12:50:16 sniper Exp $ */
+/* $Id: tidy.c,v 1.66.2.6 2006/03/29 14:28:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -530,8 +530,7 @@ static void tidy_object_free_storage(void *object TSRMLS_DC)
 {
 	PHPTidyObj *intern = (PHPTidyObj *)object;
 
-	zend_hash_destroy(intern->std.properties);
-	FREE_HASHTABLE(intern->std.properties);
+	zend_object_std_dtor(&intern->std TSRMLS_CC);
 
 	if (intern->ptdoc) {
 		intern->ptdoc->ref_count--;
@@ -555,10 +554,8 @@ static void tidy_object_new(zend_class_entry *class_type, zend_object_handlers *
 
 	intern = emalloc(sizeof(PHPTidyObj));
 	memset(intern, 0, sizeof(PHPTidyObj));
-	intern->std.ce = class_type;
 
-	ALLOC_HASHTABLE(intern->std.properties);
-	zend_hash_init(intern->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
+	zend_object_std_init(&intern->std, class_type TSRMLS_CC);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 
 	switch(objtype) {
@@ -983,7 +980,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.5 2006/01/01 12:50:16 sniper Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.6 2006/03/29 14:28:42 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

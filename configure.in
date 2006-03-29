@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.600 2006/03/08 14:41:45 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.601 2006/03/29 01:52:28 pollita Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1229,7 +1229,8 @@ PHP_ADD_SOURCES(main, main.c snprintf.c spprintf.c php_sprintf.c \
        output.c )
 
 PHP_ADD_SOURCES(main/streams, streams.c cast.c memory.c filter.c \
-       plain_wrapper.c userspace.c transports.c xp_socket.c mmap.c)
+       plain_wrapper.c userspace.c transports.c xp_socket.c mmap.c \
+       unicode_filter.c )
 
 PHP_ADD_SOURCES(/main, internal_functions.c,, sapi)
 

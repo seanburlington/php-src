@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.3 2006/03/28 16:01:04 iliaa Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4 2006/03/30 21:10:23 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -66,7 +66,7 @@ static zend_class_entry user_filter_class_entry;
 
 static ZEND_RSRC_DTOR_FUNC(php_bucket_dtor)
 {
-	php_stream_bucket *bucket = (struct php_stream_bucket *)rsrc->ptr;
+	php_stream_bucket *bucket = (php_stream_bucket *)rsrc->ptr;
 	if (bucket) {
 		php_stream_bucket_delref(bucket TSRMLS_CC);
 		bucket = NULL;

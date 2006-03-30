@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.130 2006/02/22 07:25:09 tony2001 Exp $ */
+/* $Id: wddx.c,v 1.131 2006/03/30 23:03:53 helly Exp $ */
 
 #include "php.h"
 
@@ -983,7 +983,7 @@ static void php_wddx_pop_element(void *user_data, const XML_Char *name)
 										(void *) &tmp, sizeof(zval *), 0);
 
 						if (incomplete_class) {
-							php_store_class_name(obj, Z_STRVAL_P(ent1->data), Z_STRLEN_P(ent1->data));
+							php_store_class_name(obj, Z_UNIVAL_P(ent1->data), Z_STRLEN_P(ent1->data));
 						}
 
 						/* Clean up old array entry */

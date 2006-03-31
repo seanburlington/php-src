@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.262 2006/03/30 19:59:51 tony2001 Exp $ */
+/* $Id: info.c,v 1.263 2006/03/31 11:11:26 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -63,10 +63,12 @@ PHPAPI extern char *php_ini_scanned_files;
 	
 static int php_info_write_wrapper(const char *str, uint str_length)
 {
+	int new_len, written;
+	char *elem_esc;
+	
 	TSRMLS_FETCH();
 
-	int new_len, written;
-	char *elem_esc = php_escape_html_entities((char *)str, str_length, &new_len, 0, ENT_QUOTES, NULL TSRMLS_CC);
+	elem_esc = php_escape_html_entities((char *)str, str_length, &new_len, 0, ENT_QUOTES, NULL TSRMLS_CC);
 
 	written = php_body_write(elem_esc, new_len TSRMLS_CC);
 

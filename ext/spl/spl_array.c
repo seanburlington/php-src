@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.14 2006/03/29 14:28:42 tony2001 Exp $ */
+/* $Id: spl_array.c,v 1.71.2.15 2006/04/01 19:13:04 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -219,6 +219,10 @@ static zval **spl_array_get_dimension_ptr_ptr(int check_inherited, zval *object,
 	if (check_inherited && intern->fptr_offset_get) {
 		return zend_call_method_with_1_params(&object, Z_OBJCE_P(object), &intern->fptr_offset_get, "offsetGet", NULL, offset);
 	}*/
+
+	if (!offset) {
+		return &EG(uninitialized_zval_ptr);
+	}
 	
 	switch(Z_TYPE_P(offset)) {
 	case IS_STRING:

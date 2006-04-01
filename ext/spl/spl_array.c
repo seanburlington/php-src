@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.105 2006/04/01 19:14:01 tony2001 Exp $ */
+/* $Id: spl_array.c,v 1.106 2006/04/01 22:39:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -228,6 +228,7 @@ static zend_object_value spl_array_object_clone(zval *zobject TSRMLS_DC)
 	spl_array_object *intern;
 
 	old_object = zend_objects_get_address(zobject TSRMLS_CC);
+	SEPARATE_ZVAL(&zobject);
 	new_obj_val = spl_array_object_new_ex(old_object->ce, &intern, zobject TSRMLS_CC);
 	new_object = &intern->std;
 

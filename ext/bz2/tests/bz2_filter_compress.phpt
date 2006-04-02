@@ -3,8 +3,8 @@ bzip2.compress (with convert.base64-encode)
 --SKIPIF--
 <?php if (!extension_loaded("bz2")) print "skip"; ?>
 --FILE--
-<?php /* $Id: bz2_filter_compress.phpt,v 1.1 2004/07/20 05:26:33 pollita Exp $ */
-$text = 'I am the very model of a modern major general, I\'ve information vegetable, animal, and mineral.';
+<?php /* $Id: bz2_filter_compress.phpt,v 1.2 2006/04/02 17:41:04 pollita Exp $ */
+$text = b'I am the very model of a modern major general, I\'ve information vegetable, animal, and mineral.';
 
 $fp = fopen('php://stdout', 'w');
 stream_filter_append($fp, 'bzip2.compress', STREAM_FILTER_WRITE);

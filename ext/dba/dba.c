@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.117 2006/03/08 00:43:27 pajoye Exp $ */
+/* $Id: dba.c,v 1.118 2006/04/02 12:48:37 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -468,8 +468,6 @@ PHP_MINFO_FUNCTION(dba)
  */
 static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 {
-	char *v;
-	int len;
 	DBA_ID_GET3;
 
 	DBA_WRITE_CHECK;

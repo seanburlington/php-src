@@ -16,9 +16,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logos.h,v 1.16 2006/03/07 16:47:19 cmv Exp $ */
+/* $Id: logos.h,v 1.17 2006/04/02 17:58:07 iliaa Exp $ */
 
-#define CONTEXT_TYPE_IMAGE_GIF "Content-Type:  image/gif"
+#define CONTEXT_TYPE_IMAGE_GIF "Content-Type: image/gif"
 
 unsigned char zend_logo[] = {
 	 71,  73,  70,  56,  57,  97, 113,   0,  72,   0, 

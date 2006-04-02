@@ -1,11 +1,11 @@
 --TEST--
 gzfile(), gzreadfile()
 --SKIPIF--
-<?php /* $Id: gzfilegzreadfile.phpt,v 1.2 2004/05/19 08:45:23 helly Exp $ */
+<?php /* $Id: gzfilegzreadfile.phpt,v 1.3 2006/04/02 17:49:10 pollita Exp $ */
 if (!extension_loaded("zlib")) print "skip"; ?>
 --FILE--
 <?php
-$original = <<<EOD
+$original = b<<<EOD
 blah blah blah blah blah blah blah
 blah blah blah blah blah blah blah
 blah blah blah blah blah blah blah

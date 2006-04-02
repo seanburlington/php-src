@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.6 2006/02/15 11:09:05 tony2001 Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7 2006/04/02 17:58:17 iliaa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -307,8 +307,7 @@ static void php_apache_log_message(char *message)
 		log_error(message, ((request_rec *) SG(server_context))->server);
 #endif
 	} else {
-		fprintf(stderr, "%s", message);
-		fprintf(stderr, "\n");
+		fprintf(stderr, "%s\n", message);
 	}
 }
 /* }}} */

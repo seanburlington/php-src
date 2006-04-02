@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.15 2006/03/30 11:21:51 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.72.2.16 2006/04/02 09:40:19 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -626,7 +626,8 @@ PHP_MINFO_FUNCTION(mysqli)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "MysqlI Support", "enabled");
-	php_info_print_table_row(2, "Client API version", mysql_get_client_info());
+	php_info_print_table_row(2, "Client API library version", mysql_get_client_info());
+	php_info_print_table_row(2, "Client API header version", MYSQL_SERVER_VERSION);
 	php_info_print_table_row(2, "MYSQLI_SOCKET", MYSQL_UNIX_ADDR);
 	
 	

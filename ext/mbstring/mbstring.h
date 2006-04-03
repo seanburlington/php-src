@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.40.2.12.4.4 2006/03/23 02:17:42 masugata Exp $ */
+/* $Id: mbstring.h,v 1.40.2.12.4.5 2006/04/03 13:04:13 masugata Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -117,6 +117,7 @@ PHP_FUNCTION(mb_encode_numericentity);
 PHP_FUNCTION(mb_decode_numericentity);
 PHP_FUNCTION(mb_send_mail);
 PHP_FUNCTION(mb_get_info);
+PHP_FUNCTION(mb_check_encoding);
 
 MBSTRING_API int php_mb_encoding_translation(TSRMLS_D);
 

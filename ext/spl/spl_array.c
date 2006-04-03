@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.107 2006/04/02 15:04:04 helly Exp $ */
+/* $Id: spl_array.c,v 1.108 2006/04/03 19:52:02 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -73,7 +73,9 @@ typedef struct _spl_array_object {
 } spl_array_object;
 
 static inline HashTable *spl_array_get_hash_table(spl_array_object* intern, int check_std_props TSRMLS_DC) {
-	if ((intern->ar_flags & SPL_ARRAY_USE_OTHER) && (check_std_props == 0 || (intern->ar_flags & SPL_ARRAY_STD_PROP_LIST) == 0)) {
+	if ((intern->ar_flags & SPL_ARRAY_IS_SELF) != 0) {
+		return intern->std.properties;
+	} else if ((intern->ar_flags & SPL_ARRAY_USE_OTHER) && (check_std_props == 0 || (intern->ar_flags & SPL_ARRAY_STD_PROP_LIST) == 0)) {
 		spl_array_object *other  = (spl_array_object*)zend_object_store_get_object(intern->array TSRMLS_CC);
 		return spl_array_get_hash_table(other, check_std_props TSRMLS_CC);
 	} else if ((intern->ar_flags & ((check_std_props ? SPL_ARRAY_STD_PROP_LIST : 0) | SPL_ARRAY_IS_SELF)) != 0) {

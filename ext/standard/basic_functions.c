@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.30 2006/04/03 09:14:33 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31 2006/04/03 13:46:11 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2397,6 +2397,7 @@ PHP_FUNCTION(register_shutdown_function)
 	shutdown_function_entry.arguments = (zval **) safe_emalloc(sizeof(zval *), shutdown_function_entry.arg_count, 0);
 
 	if (zend_get_parameters_array(ht, shutdown_function_entry.arg_count, shutdown_function_entry.arguments) == FAILURE) {
+		efree(shutdown_function_entry.arguments);
 		RETURN_FALSE;
 	}
 	
@@ -2980,6 +2981,7 @@ PHP_FUNCTION(register_tick_function)
 	tick_fe.arguments = (zval **) safe_emalloc(sizeof(zval *), tick_fe.arg_count, 0);
 
 	if (zend_get_parameters_array(ht, tick_fe.arg_count, tick_fe.arguments) == FAILURE) {
+		efree(tick_fe.arguments);
 		RETURN_FALSE;
 	}
 

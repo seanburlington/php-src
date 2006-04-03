@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.537 2006/03/29 05:56:06 andrei Exp $ */
+/* $Id: string.c,v 1.538 2006/04/03 09:14:50 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6310,7 +6310,7 @@ PHP_FUNCTION(substr_count)
 
 	if (ac > 2) {
 		if (offset < 0) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset should be greater then or equal to 0.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset should be greater than or equal to 0.");
 			RETURN_FALSE;
 		}
 		if (haystack_type == IS_UNICODE) {

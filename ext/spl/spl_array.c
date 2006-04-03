@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.108 2006/04/03 19:52:02 helly Exp $ */
+/* $Id: spl_array.c,v 1.109 2006/04/03 19:58:03 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -56,7 +56,6 @@ PHPAPI zend_class_entry  *spl_ce_Countable;
 #define SPL_ARRAY_USE_OTHER          0x04000000
 #define SPL_ARRAY_INT_MASK           0xFFFF0000
 #define SPL_ARRAY_CLONE_MASK         0x03000007
-
 
 typedef struct _spl_array_object {
 	zend_object       std;

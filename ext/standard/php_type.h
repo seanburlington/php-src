@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_type.h,v 1.9 2006/03/17 14:53:57 derick Exp $ */
+/* $Id: php_type.h,v 1.10 2006/04/04 06:04:49 derick Exp $ */
 
 #ifndef PHP_TYPE_H
 #define PHP_TYPE_H
@@ -35,7 +35,6 @@ PHP_FUNCTION(is_numeric);
 PHP_FUNCTION(is_binary);
 PHP_FUNCTION(is_string);
 PHP_FUNCTION(is_unicode);
-PHP_FUNCTION(is_binary);
 PHP_FUNCTION(is_buffer);
 PHP_FUNCTION(is_array);
 PHP_FUNCTION(is_object);

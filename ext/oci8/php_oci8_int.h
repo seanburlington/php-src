@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.14 2006/01/31 18:36:59 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.15 2006/04/05 14:07:16 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -78,7 +78,7 @@ extern zend_class_entry *oci_coll_class_entry_ptr;
 #define PHP_OCI_MAX_NAME_LEN  64
 #define PHP_OCI_MAX_DATA_SIZE INT_MAX
 #define PHP_OCI_PIECE_SIZE    (64*1024)-1
-#define PHP_OCI_LOB_BUFFER_SIZE 1048576l 
+#define PHP_OCI_LOB_BUFFER_SIZE 32768 
 
 #define PHP_OCI_ASSOC               1<<0
 #define PHP_OCI_NUM                 1<<1

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.54.2.6 2006/03/24 09:32:24 georg Exp $ 
+  $Id: php_mysqli.h,v 1.54.2.7 2006/04/05 12:17:08 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -118,8 +118,12 @@ typedef struct {
 
 #ifdef PHP_WIN32
 #define PHP_MYSQLI_API __declspec(dllexport)
+#define MYSQLI_LLU_SPEC "%I64u"
+#define MYSQLI_LL_SPEC "%I64d"
 #else
 #define PHP_MYSQLI_API
+#define MYSQLI_LLU_SPEC "%llu"
+#define MYSQLI_LL_SPEC "%lld"
 #endif
 
 #ifdef ZTS

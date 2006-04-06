@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.26 2006/03/29 14:28:42 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27 2006/04/06 19:01:56 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1327,7 +1327,7 @@ static zend_function_entry spl_RecursiveDirectoryIterator_functions[] = {
 static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TSRMLS_DC) /* {{{ */
 {
 	char *buf;
-	size_t line_len;
+	size_t line_len = 0;
 	int len;
 	long line_add = (intern->u.file.current_line || intern->u.file.current_zval) ? 1 : 0;
 
@@ -1340,7 +1340,17 @@ static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TS
 		return FAILURE;
 	}
 
-	buf = php_stream_get_line(intern->u.file.stream, NULL, intern->u.file.max_line_len, &line_len);
+	if (intern->u.file.max_line_len > 0) {
+		buf = emalloc((intern->u.file.max_line_len + 1) * sizeof(char));
+		if (php_stream_get_line(intern->u.file.stream, buf, intern->u.file.max_line_len, &line_len) == NULL) {
+			efree(buf);
+			buf = NULL;
+		} else {
+			buf[line_len] = '\0';
+		}
+	} else {
+		buf = php_stream_get_line(intern->u.file.stream, NULL, 0, &line_len);
+	}
 
 	if (!buf) {
 		intern->u.file.current_line = estrdup("");

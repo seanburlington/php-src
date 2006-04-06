@@ -16,14 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.7 2006/02/17 21:18:09 andrei Exp $ */
-
-/*
- * TODO
- *
- * - Allow NULL for $matches argument (helps when using preg_match only for
- *   match condition)
- */
+/* $Id: php_pcre.c,v 1.168.2.8 2006/04/06 21:10:45 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1622,8 +1615,8 @@ PHP_FUNCTION(preg_grep)
 zend_function_entry pcre_functions[] = {
 	PHP_FE(preg_match,				third_arg_force_ref)
 	PHP_FE(preg_match_all,			third_arg_force_ref)
-	PHP_FE(preg_replace,			NULL)
-	PHP_FE(preg_replace_callback,	NULL)
+	PHP_FE(preg_replace,			fifth_arg_force_ref)
+	PHP_FE(preg_replace_callback,	fifth_arg_force_ref)
 	PHP_FE(preg_split,				NULL)
 	PHP_FE(preg_quote,				NULL)
 	PHP_FE(preg_grep,				NULL)

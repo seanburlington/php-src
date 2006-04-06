@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.178 2006/02/21 20:12:42 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.179 2006/04/06 21:16:28 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1626,8 +1626,8 @@ PHP_FUNCTION(preg_grep)
 zend_function_entry pcre_functions[] = {
 	PHP_FE(preg_match,				third_arg_force_ref)
 	PHP_FE(preg_match_all,			third_arg_force_ref)
-	PHP_FE(preg_replace,			NULL)
-	PHP_FE(preg_replace_callback,	NULL)
+	PHP_FE(preg_replace,			fifth_arg_force_ref)
+	PHP_FE(preg_replace_callback,	fifth_arg_force_ref)
 	PHP_FE(preg_split,				NULL)
 	PHP_FE(preg_quote,				NULL)
 	PHP_FE(preg_grep,				NULL)

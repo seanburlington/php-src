@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.7 2006/01/01 12:50:13 sniper Exp $ */
+/* $Id: sockets.c,v 1.171.2.8 2006/04/07 13:33:55 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -871,6 +871,7 @@ PHP_FUNCTION(socket_read)
 			php_sock->error = errno;
 			SOCKETS_G(last_error) = errno;
 		} else {
+			efree(tmpbuf);
 			PHP_SOCKET_ERROR(php_sock, "unable to read from socket", errno);
 		}
 

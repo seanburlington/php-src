@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.18 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: timelib_structs.h,v 1.19 2006/04/08 14:57:42 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -146,6 +146,19 @@ typedef struct timelib_time {
 	                              *  3 TimeZone identifier,
 	                              *  2 TimeZone abbreviation */
 } timelib_time;
+
+typedef struct timelib_error_message {
+	int         position;
+	char        character;
+	char       *message;
+} timelib_error_message;
+
+typedef struct timelib_error_container {
+	int                           warning_count;
+	struct timelib_error_message *warning_messages;
+	int                           error_count;
+	struct timelib_error_message *error_messages;
+} timelib_error_container;
 
 typedef struct _timelib_tz_lookup_table {
 	char       *name;

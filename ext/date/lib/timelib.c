@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.10 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: timelib.c,v 1.11 2006/04/08 14:57:42 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -120,6 +120,21 @@ char *timelib_get_tz_abbr_ptr(timelib_time *t)
 		timelib_update_ts(t, NULL);
 	};
 	return t->tz_abbr;
+}
+
+void timelib_error_container_dtor(timelib_error_container *errors)
+{
+	int i;
+
+	for (i = 0; i < errors->warning_count; i++) {
+		free(errors->warning_messages[i].message);
+	}
+	free(errors->warning_messages);
+	for (i = 0; i < errors->error_count; i++) {
+		free(errors->error_messages[i].message);
+	}
+	free(errors->error_messages);
+	free(errors);
 }
 
 signed long timelib_date_to_int(timelib_time *d, int *error)

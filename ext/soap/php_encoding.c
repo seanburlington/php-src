@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.123 2006/04/03 09:14:50 tony2001 Exp $ */
+/* $Id: php_encoding.c,v 1.124 2006/04/09 23:38:30 andrei Exp $ */
 
 #include <time.h>
 
@@ -3300,4 +3300,18 @@ void delete_encoder(void *encode)
 		delete_mapping(t->details.map);
 	}
 	efree(t);
+}
+
+void delete_encoder_persistent(void *encode)
+{
+	encodePtr t = *((encodePtr*)encode);
+	if (t->details.ns) {
+		free(t->details.ns);
+	}
+	if (t->details.type_str) {
+		free(t->details.type_str);
+	}
+	/* we should never have mapping in persistent encoder */
+	assert(t->details.map == NULL);
+	free(t);
 }

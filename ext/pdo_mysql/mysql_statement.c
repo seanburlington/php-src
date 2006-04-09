@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.48.2.12 2006/04/09 06:41:42 wez Exp $ */
+/* $Id: mysql_statement.c,v 1.48.2.13 2006/04/09 06:49:07 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,6 +65,16 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		efree(S->bound_result);
 		efree(S->out_null);
 		efree(S->out_length);
+	}
+#endif
+#if HAVE_MYSQL_NEXT_RESULT
+	while (mysql_more_results(S->H->server)) {
+		if (mysql_next_result(S->H->server) == 0) {
+			MYSQL_RES *res = mysql_store_result(S->H->server);
+			if (res) {
+				mysql_free_result(res);
+			}
+		}
 	}
 #endif
 	efree(S);

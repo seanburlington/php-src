@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.54 2006/04/08 14:57:42 derick Exp $ */
+/* $Id: parse_date.re,v 1.55 2006/04/09 12:58:56 derick Exp $ */
 
 #include "timelib.h"
 
@@ -768,7 +768,7 @@ minute = [0-5]?[0-9];
 minutelz = [0-5][0-9];
 second = minute | "60";
 secondlz = minutelz | "60";
-meridian = [AP] "."? "M" "."? | [ap] "."? "m" "."?;
+meridian = ([AaPp] "."? [Mm] "."?) [\000\t ];
 tz = "("? [A-Za-z]{1,6} ")"? | [A-Z][a-z]+([_/][A-Z][a-z]+)+;
 tzcorrection = [+-] hour24 ":"? minute?;
 

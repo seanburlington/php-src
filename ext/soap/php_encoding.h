@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.38.2.1 2006/01/01 12:50:13 sniper Exp $ */
+/* $Id: php_encoding.h,v 1.38.2.2 2006/04/09 23:35:51 andrei Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -219,6 +219,7 @@ xmlNsPtr encode_add_ns(xmlNodePtr node, const char* ns);
 encodePtr get_conversion(int encode);
 
 void delete_encoder(void *handle);
+void delete_encoder_persistent(void *handle);
 
 extern encode defaultEncoding[];
 

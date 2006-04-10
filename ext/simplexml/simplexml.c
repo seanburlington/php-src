@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.20 2006/04/03 14:59:30 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.151.2.21 2006/04/10 23:23:09 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2107,6 +2107,9 @@ static int php_sxe_iterator_current_key(zend_object_iterator *iter, char **str_k
 	if (intern != NULL && intern->node != NULL) {
 		curnode = (xmlNodePtr)((php_libxml_node_ptr *)intern->node)->node;
 	}
+	if (!curnode) {
+		return HASH_KEY_NON_EXISTANT;
+	}
 
 	namelen = xmlStrlen(curnode->name);
 	*str_key = estrndup(curnode->name, namelen);
@@ -2307,7 +2310,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.20 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.21 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

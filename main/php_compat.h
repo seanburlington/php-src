@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.27 2006/02/01 13:10:04 jorton Exp $ */
+/* $Id: php_compat.h,v 1.28 2006/04/10 11:54:54 sniper Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -38,6 +38,8 @@
 #define pcre_study				php_pcre_study
 #define pcre_version			php_pcre_version
 #define pcre_fullinfo			php_pcre_fullinfo
+#define pcre_free				php_pcre_free
+#define pcre_malloc				php_pcre_malloc
 #endif
 
 #define lookup				php_lookup

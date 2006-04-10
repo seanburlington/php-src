@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.145 2006/04/09 17:58:02 iliaa Exp $ */
+/* $Id: filestat.c,v 1.146 2006/04/10 11:56:04 sniper Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -353,7 +353,9 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp)
 	}
 
 	if (do_lchgrp) {
+#if HAVE_LCHOWN
 		ret = VCWD_LCHOWN(Z_STRVAL_PP(filename), -1, gid);
+#endif
 	} else {
 		ret = VCWD_CHOWN(Z_STRVAL_PP(filename), -1, gid);
 	}
@@ -423,7 +425,9 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 	}
 
 	if (do_lchown) {
+#if HAVE_LCHOWN
 		ret = VCWD_LCHOWN(Z_STRVAL_PP(filename), uid, -1);
+#endif
 	} else {
 		ret = VCWD_CHOWN(Z_STRVAL_PP(filename), uid, -1);
 	}

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.19 2006/04/09 23:35:51 andrei Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.20 2006/04/10 13:29:48 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1128,11 +1128,13 @@ static void model_to_zval_object(zval *ret, sdlContentModelPtr model, xmlNodePtr
 {
 	switch (model->kind) {
 		case XSD_CONTENT_ELEMENT:
-		  if (model->u.element->name) {
-		  	xmlNodePtr node = get_node(data->children, model->u.element->name);
-		  	if (node) {
-			  	zval *val;
+			if (model->u.element->name) {
+				xmlNodePtr node = get_node(data->children, model->u.element->name);
 
+				if (node) {
+					zval *val;
+
+					node = check_and_resolve_href(node);
 					if (node && node->children && node->children->content) {
 						if (model->u.element->fixed && strcmp(model->u.element->fixed,node->children->content) != 0) {
 							soap_error3(E_ERROR, "Encoding: Element '%s' has fixed value '%s' (value '%s' is not allowed)", model->u.element->name, model->u.element->fixed, node->children->content);

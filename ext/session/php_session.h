@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.105 2006/03/07 00:20:53 pajoye Exp $ */
+/* $Id: php_session.h,v 1.106 2006/04/10 15:06:51 sniper Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -111,8 +111,6 @@ typedef struct _php_ps_globals {
 	long gc_maxlifetime;
 	int module_number;
 	long cache_expire;
-	zend_bool bug_compat; /* Whether to behave like PHP 4.2 and earlier */
-	zend_bool bug_compat_warn; /* Whether to warn about it */
 	const struct ps_serializer_struct *serializer;
 	zval *http_session_vars;
 	zend_bool auto_start;

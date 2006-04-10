@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.95 2006/04/09 23:38:30 andrei Exp $ */
+/* $Id: php_sdl.c,v 1.96 2006/04/10 10:11:29 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -3156,7 +3156,7 @@ sdlPtr get_sdl(zval *this_ptr, char *uri, zend_bool persistent TSRMLS_DC)
 			} else {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to register persistent entry");
 				/* clean up persistent sdl */
-				delete_psdl(le_ptr);
+				delete_psdl(le_ptr TSRMLS_CC);
 				/* keep non-persistent sdl and return it */
 			}
 		}

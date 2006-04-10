@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.332.2.13 2006/04/10 12:16:17 sniper Exp $
+dnl $Id: acinclude.m4,v 1.332.2.14 2006/04/10 12:17:36 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -1877,7 +1877,7 @@ dnl Platform characteristics checks
 dnl -------------------------------------------------------------------------
 
 dnl
-dnl PHP_SHLIB_SUFFIX_NAME
+dnl PHP_SHLIB_SUFFIX_NAMES
 dnl
 dnl Determines link library suffix SHLIB_SUFFIX_NAME
 dnl which can be: .so, .sl or .dylib
@@ -1885,7 +1885,7 @@ dnl
 dnl Determines shared library suffix SHLIB_DL_SUFFIX_NAME
 dnl suffix can be: .so or .sl
 dnl
-AC_DEFUN([PHP_SHLIB_SUFFIX_NAME],[
+AC_DEFUN([PHP_SHLIB_SUFFIX_NAMES],[
  AC_REQUIRE([PHP_CANONICAL_HOST_TARGET])dnl
  PHP_SUBST_OLD(SHLIB_SUFFIX_NAME)
  PHP_SUBST_OLD(SHLIB_DL_SUFFIX_NAME)

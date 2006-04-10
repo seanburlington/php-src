@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.179 2006/03/08 00:43:27 pajoye Exp $ */
+/* $Id: exif.c,v 1.180 2006/04/10 18:23:15 helly Exp $ */
 
 /*  ToDos
  *
@@ -115,7 +115,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.179 2006/03/08 00:43:27 pajoye Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.180 2006/04/10 18:23:15 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1560,7 +1560,7 @@ static void exif_iif_add_value(image_info_type *image_info, int section_index, c
 	image_info_data  *info_data;
 	image_info_data  *list;
 
-	if (length >= LONG_MAX) {
+	if (length < 0) {
 		return;
 	}
 

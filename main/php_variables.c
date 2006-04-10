@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.124 2006/04/07 13:57:39 dmitry Exp $ */
+/* $Id: php_variables.c,v 1.125 2006/04/10 15:09:15 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -772,7 +772,7 @@ static void php_autoglobal_merge(HashTable *dest, HashTable *src TSRMLS_DC)
         ) {
 			(*src_entry)->refcount++;
 			if (key_type == HASH_KEY_IS_STRING) {
-				/* if register_globals is on and working with main symbol table, prevent overwriting of GLOBALS */
+				/* prevent overwriting of GLOBALS */
 				if (string_key_len != sizeof("GLOBALS") || memcmp(string_key.s, "GLOBALS", sizeof("GLOBALS") - 1)) {
 					zend_u_hash_update(dest, key_type, string_key, string_key_len, src_entry, sizeof(zval *), NULL);
 				} else {

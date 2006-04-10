@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.10 2006/03/14 14:19:19 dmitry Exp $
+	$Id: config.w32.h.in,v 1.11 2006/04/10 15:09:15 sniper Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -25,7 +25,6 @@
 
 /* PHP Runtime Configuration */
 #define PHP_URL_FOPEN 1
-#define PHP_SAFE_MODE 0
 #define MAGIC_QUOTES 0
 #define USE_CONFIG_FILE 1
 #define DEFAULT_SHORT_OPEN_TAG "1"

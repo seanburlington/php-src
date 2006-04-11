@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.77 2006/02/19 05:05:42 andi Exp $ */
+/* $Id: interface.c,v 1.78 2006/04/11 11:32:06 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1356,7 +1356,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 
 			break;
 		}
-		/* the following options deal with files, therefor safe_mode & open_basedir checks
+		/* the following options deal with files, therefore open_basedir checks
 		 * are required.
 		 */
 		case CURLOPT_COOKIEJAR:

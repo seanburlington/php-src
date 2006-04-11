@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.69 2006/03/05 19:20:11 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.70 2006/04/11 11:32:06 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -30,7 +30,7 @@
 
 #if HAVE_LIBGD
 
-/* open_basedir and safe_mode checks */
+/* open_basedir check */
 #define PHP_GD_CHECK_OPEN_BASEDIR(filename, errormsg)                                   \
 	if (!filename || php_check_open_basedir(filename TSRMLS_CC)) {			\
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, errormsg);                 	\

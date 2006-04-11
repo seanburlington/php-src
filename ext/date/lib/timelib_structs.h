@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.19 2006/04/08 14:57:42 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.20 2006/04/11 17:56:49 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -183,9 +183,10 @@ typedef struct _timelib_tzdb {
 #define TIMELIB_ZONETYPE_ABBR   2
 #define TIMELIB_ZONETYPE_ID     3
 
-#define SECS_PER_DAY   86400
-#define DAYS_PER_YEAR    365
-#define DAYS_PER_LYEAR   366
+#define SECS_PER_ERA 12622780800L
+#define SECS_PER_DAY       86400
+#define DAYS_PER_YEAR        365
+#define DAYS_PER_LYEAR       366
 
 #define timelib_is_leap(y) ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 

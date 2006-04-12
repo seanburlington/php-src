@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.295 2006/04/12 13:38:05 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.296 2006/04/12 17:59:57 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -645,7 +645,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.295 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.296 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1056,7 +1056,9 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 							/* okay, the connection is open and the server is still alive */
 							connection->used_this_request = 1;
 							smart_str_free_ex(&hashed_details, 0);
-							zend_list_addref(connection->rsrc_id);
+							if (zend_list_addref(connection->rsrc_id) == FAILURE) {
+								connection->rsrc_id = zend_list_insert(connection, le_pconnection);
+							}
 							return connection;
 						}
 					}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.28 2006/03/29 01:20:43 pollita Exp $ */
+/* $Id: filter.c,v 1.29 2006/04/12 22:40:56 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -548,6 +548,35 @@ PHPAPI int _php_stream_filter_output_prefer_unicode(php_stream_filter *filter TS
 	}
 
 	return preferred ^ inverted;
+}
+
+PHPAPI int _php_stream_filter_product(php_stream_filter_chain *chain, int type TSRMLS_DC)
+{
+	php_stream_filter *f;	
+
+	for (f = chain->head; f; f = f->next) {
+		if ((type == IS_STRING && (f->fops->flags & PSFO_FLAG_ACCEPTS_STRING) == 0) ||
+			(type == IS_UNICODE && (f->fops->flags & PSFO_FLAG_ACCEPTS_UNICODE) == 0)) {
+			/* At some point, the type produced conflicts with the type accepted */
+			return 0;
+		}
+
+		if (f->fops->flags & PSFO_FLAG_OUTPUTS_OPPOSITE) {
+			type = (type == IS_STRING) ? IS_UNICODE : IS_STRING;
+			continue;
+		}
+		if ((f->fops->flags & PSFO_FLAG_OUTPUTS_SAME) ||
+			(f->fops->flags & PSFO_FLAG_OUTPUTS_ANY)) {
+			continue;
+		}
+		if (f->fops->flags & PSFO_FLAG_OUTPUTS_UNICODE) {
+			type = IS_UNICODE;
+			continue;
+		}
+		type = IS_STRING;
+	}
+
+	return type;
 }
 
 PHPAPI int _php_stream_filter_flush(php_stream_filter *filter, int finish TSRMLS_DC)

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.13 2006/03/18 22:06:31 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14 2006/04/12 19:21:35 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -493,6 +493,9 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 				case SQLT_BIN:
 				default:
 					define_type = SQLT_CHR;
+					if (outcol->data_type == SQLT_BIN) {
+						define_type = SQLT_BIN;
+					}
 					if ((outcol->data_type == SQLT_DAT) || (outcol->data_type == SQLT_NUM)
 #ifdef SQLT_TIMESTAMP
 						|| (outcol->data_type == SQLT_TIMESTAMP)
@@ -813,6 +816,9 @@ int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len,
 			mode = OCI_DEFAULT;
 			break;
 			
+		case SQLT_LBI:
+		case SQLT_BIN:
+		case SQLT_LNG:
 		case SQLT_CHR:
 			/* this is the default case when type was not specified */
 			convert_to_string(var);

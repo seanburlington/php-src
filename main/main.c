@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.22 2006/04/07 11:44:03 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23 2006/04/12 12:49:39 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -509,7 +509,11 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 
 	/* no docref given but function is known (the default) */
 	if (!docref && is_function) {
-		spprintf(&docref_buf, 0, "function.%s", function);
+		if (space[0] == '\0') {
+			spprintf(&docref_buf, 0, "function.%s", function);
+		} else {
+			spprintf(&docref_buf, 0, "function.%s-%s", class_name, function);
+		}
 		while((p = strchr(docref_buf, '_')) != NULL) {
 			*p = '-';
 		}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.123 2006/03/29 15:08:52 tony2001 Exp $ */
+/* $Id: spl_iterators.c,v 1.124 2006/04/13 13:21:59 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -35,6 +35,10 @@
 #include "spl_directory.h"
 #include "spl_array.h"
 #include "spl_exceptions.h"
+
+#ifdef accept
+#undef accept
+#endif
 
 PHPAPI zend_class_entry *spl_ce_RecursiveIterator;
 PHPAPI zend_class_entry *spl_ce_RecursiveIteratorIterator;

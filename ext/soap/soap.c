@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.183 2006/04/09 23:38:30 andrei Exp $ */
+/* $Id: soap.c,v 1.184 2006/04/13 08:18:54 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2276,6 +2276,11 @@ PHP_METHOD(SoapClient, SoapClient)
 	
 		if (zend_hash_find(ht, "cache_wsdl", sizeof("cache_wsdl"), (void**)&tmp) == SUCCESS) {
 			persistent = zend_is_true(*tmp);
+		}
+
+		if (zend_hash_find(ht, "user_agent", sizeof("user_agent"), (void**)&tmp) == SUCCESS &&
+		    Z_TYPE_PP(tmp) == IS_STRING) {
+			add_property_stringl(this_ptr, "_user_agent", Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 1);
 		}
 
 	} else if (wsdl == NULL) {

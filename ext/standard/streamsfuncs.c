@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.74 2006/04/03 09:14:50 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.75 2006/04/13 04:41:08 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -470,7 +470,7 @@ PHP_FUNCTION(stream_get_meta_data)
 		array_init(newval);
 		
 		for (filter = stream->readfilters.head; filter != NULL; filter = filter->next) {
-			add_next_index_string(newval, (char *)filter->fops->label, 1);
+			add_next_index_string(newval, filter->name, 1);
 		}
 
 		add_assoc_zval(return_value, "read_filters", newval);
@@ -483,7 +483,7 @@ PHP_FUNCTION(stream_get_meta_data)
 		array_init(newval);
 		
 		for (filter = stream->writefilters.head; filter != NULL; filter = filter->next) {
-			add_next_index_string(newval, (char *)filter->fops->label, 1);
+			add_next_index_string(newval, filter->name, 1);
 		}
 
 		add_assoc_zval(return_value, "write_filters", newval);

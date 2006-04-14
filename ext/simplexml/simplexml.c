@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.21 2006/04/10 23:23:09 helly Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22 2006/04/14 15:19:45 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -989,7 +989,7 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 			ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node->children, 1), 0);
 			zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
 			node = NULL;
-		} else {
+		} else if (sxe->iter.type != SXE_ITER_CHILD) {
 			node = node->children;
 		}
 
@@ -2310,7 +2310,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.21 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

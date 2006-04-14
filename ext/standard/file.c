@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.435 2006/04/01 00:05:31 pollita Exp $ */
+/* $Id: file.c,v 1.436 2006/04/14 17:44:56 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1786,7 +1786,7 @@ no_stat:
 	}
 safe_to_copy:
 
-	srcstream = php_stream_open_wrapper(src, "rb", STREAM_DISABLE_OPEN_BASEDIR | REPORT_ERRORS, NULL);
+	srcstream = php_stream_open_wrapper(src, "rb", REPORT_ERRORS, NULL);
 	
 	if (!srcstream) {
 		return ret;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.75 2006/04/13 04:41:08 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.76 2006/04/14 10:01:34 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -207,6 +207,8 @@ PHP_FUNCTION(stream_socket_server)
 			/* no need to dup; we need to efree buf anyway */
 			zval_dtor(zerrstr);
 			ZVAL_STRING(zerrstr, errstr, 0);
+		} else if (errstr) {
+			efree(errstr);
 		}
 		RETURN_FALSE;
 	}

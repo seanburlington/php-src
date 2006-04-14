@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.70.2.6 2006/03/28 09:46:35 tony2001 Exp $ */
+/* $Id: file.c,v 1.279.2.70.2.7 2006/04/14 17:46:59 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2201,7 +2201,7 @@ no_stat:
 safe_to_copy:
 
 	srcstream = php_stream_open_wrapper(src, "rb",
-				STREAM_DISABLE_OPEN_BASEDIR | REPORT_ERRORS,
+				ENFORCE_SAFE_MODE | REPORT_ERRORS,
 				NULL);
 
 	if (!srcstream)

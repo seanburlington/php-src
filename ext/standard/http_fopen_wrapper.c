@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.114 2006/04/16 16:55:25 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.115 2006/04/16 17:41:26 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -691,7 +691,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	}	\
 }	\
 			/* check for control characters in login, password & path */
-			if (strncasecmp(newpath, "http://", sizeof("http://") - 1) || strncasecmp(newpath, "https://", sizeof("https://") - 1) {
+			if (strncasecmp(new_path, "http://", sizeof("http://") - 1) || strncasecmp(new_path, "https://", sizeof("https://") - 1)) {
 				CHECK_FOR_CNTRL_CHARS(resource->user)
 				CHECK_FOR_CNTRL_CHARS(resource->pass)
 				CHECK_FOR_CNTRL_CHARS(resource->path)

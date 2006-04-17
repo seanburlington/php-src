@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.20 2006/04/10 13:29:48 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21 2006/04/17 16:08:08 andrei Exp $ */
 
 #include <time.h>
 
@@ -210,6 +210,9 @@ encode defaultEncoding[] = {
 
 	{{END_KNOWN_TYPES, NULL, NULL, NULL}, guess_zval_convert, guess_xml_convert}
 };
+
+int numDefaultEncodings = sizeof(defaultEncoding)/sizeof(encode);
+
 
 void whiteSpace_replace(char* str)
 {

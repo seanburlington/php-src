@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.40 2006/04/09 23:38:30 andrei Exp $ */
+/* $Id: php_encoding.h,v 1.41 2006/04/17 16:09:42 andrei Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -222,5 +222,6 @@ void delete_encoder(void *handle);
 void delete_encoder_persistent(void *handle);
 
 extern encode defaultEncoding[];
+extern int numDefaultEncodings;
 
 #endif

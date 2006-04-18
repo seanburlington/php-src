@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.12 2006/03/29 14:28:42 tony2001 Exp $
+   $Id: sqlite.c,v 1.166.2.13 2006/04/18 14:30:15 iliaa Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1124,7 +1124,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.12 2006/03/29 14:28:42 tony2001 Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13 2006/04/18 14:30:15 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1705,7 +1705,9 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 			add_index_string(return_value, i, colnames[ncols + i] ? (char *)colnames[ncols + i] : "", 1);
 		}
 	}
-
+	if (res.vm) {
+		sqlite_finalize(res.vm, NULL);
+	}
 done:
 	sqlite_exec(db->db, "PRAGMA show_datatypes = OFF", NULL, NULL, NULL);
 }

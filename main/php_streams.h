@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.111 2006/03/31 22:51:37 pollita Exp $ */
+/* $Id: php_streams.h,v 1.112 2006/04/18 19:09:31 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -380,7 +380,7 @@ PHPAPI int _php_stream_path_encode(php_stream_wrapper *wrapper,
 		_php_stream_path_encode((wrapper), (pathenc), (pathenc_len), (path), (path_len), (options), (context) TSRMLS_CC)
 
 PHPAPI int _php_stream_path_decode(php_stream_wrapper *wrapper,
-				char **pathdec, int *pathdec_len, UChar *path, int path_len,
+				UChar **pathdec, int *pathdec_len, char *path, int path_len,
 				int options, php_stream_context *context TSRMLS_DC);
 #define  php_stream_path_decode(wrapper, pathdec, pathdec_len, path, path_len, options, context) \
 		_php_stream_path_decode((wrapper), (pathdec), (pathdec_len), (path), (path_len), (options), (context) TSRMLS_CC)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.284 2006/04/07 13:45:51 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.285 2006/04/18 06:58:10 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -412,12 +412,16 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 {
 	if (PG(http_globals)[TRACK_VARS_ENV] &&
 	    array_ptr != PG(http_globals)[TRACK_VARS_ENV]) {
+		zval_dtor(array_ptr);
 	    *array_ptr = *PG(http_globals)[TRACK_VARS_ENV];
+	    INIT_PZVAL(array_ptr);
 	    zval_copy_ctor(array_ptr);
 	    return;
 	} else if (PG(http_globals)[TRACK_VARS_SERVER] &&
 		array_ptr != PG(http_globals)[TRACK_VARS_SERVER]) {
+		zval_dtor(array_ptr);
 	    *array_ptr = *PG(http_globals)[TRACK_VARS_SERVER];
+	    INIT_PZVAL(array_ptr);
 	    zval_copy_ctor(array_ptr);
 	    return;
 	}

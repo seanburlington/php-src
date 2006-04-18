@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.6 2006/02/04 23:58:22 fmk Exp $ */
+/* $Id: fastcgi.c,v 1.7 2006/04/18 06:59:31 dmitry Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -301,9 +301,8 @@ int fcgi_listen(const char *path, int backlog)
 		memset(&sa.sa_unix, 0, sizeof(sa.sa_unix));
 		sa.sa_unix.sun_family = AF_UNIX;
 		memcpy(sa.sa_unix.sun_path, path, path_len + 1);
-		sa_len = sizeof(sa.sa_unix.sun_family) + path_len;
+		sa_len = (size_t)(((struct sockaddr_un *)0)->sun_path)  + path_len;
 #ifdef HAVE_SOCKADDR_UN_SUN_LEN
-		sa_len += sizeof(sa.sa_unix.sun_len) + 1;
 		sa.sa_unix.sun_len = sa_len;
 #endif
 		unlink(path);

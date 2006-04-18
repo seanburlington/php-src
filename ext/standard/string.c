@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.538 2006/04/03 09:14:50 tony2001 Exp $ */
+/* $Id: string.c,v 1.539 2006/04/18 02:40:29 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -724,9 +724,7 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 				if ( u_isWhitespace(ch) == FALSE ) break;
 			}
 		}
-		if ( i < end ) {
-			U16_BACK_1(c, 0, i); /* U16_NEXT() post-increments 'i' */
-		}
+		U16_BACK_1(c, 0, i); /* U16_NEXT() post-increments 'i' */
 		start = i;
 	}
 	if ( mode & 2 ) {

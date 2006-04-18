@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.285 2006/04/14 13:48:11 helly Exp $ */
+/* $Id: run-tests.php,v 1.286 2006/04/18 09:27:59 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -390,7 +390,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.285 $'."\n";
+					echo '$Revision: 1.286 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -423,7 +423,7 @@ Options:
 
     -u          Test with unicode_semantics set on.
 
-    -U          Test in unicode and non unicde mode.
+    -U          Test in unicode and non unicode mode.
 
     -m          Test for memory leaks with Valgrind.
     

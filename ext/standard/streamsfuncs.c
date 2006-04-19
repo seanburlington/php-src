@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.5 2006/04/14 10:00:55 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6 2006/04/19 08:43:29 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -754,7 +754,7 @@ PHP_FUNCTION(stream_select)
 	if (sec != NULL) {
 		convert_to_long(sec);
 
-		if (sec < 0) {
+		if (Z_LVAL_P(sec) < 0) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The seconds parameter must be greater than 0.");
 			RETURN_FALSE;
 		} else if (usec < 0) {

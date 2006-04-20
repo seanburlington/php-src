@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.7 2006/03/29 01:20:43 pollita Exp $ */ 
+/* $Id: php_unicode.h,v 1.8 2006/04/20 21:56:43 andrei Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -57,6 +57,7 @@ PHP_MINFO_FUNCTION(unicode);
 
 PHP_FUNCTION(i18n_loc_get_default);
 PHP_FUNCTION(i18n_loc_set_default);
+PHP_FUNCTION(i18n_coll_get_default);
 PHP_FUNCTION(collator_create);
 PHP_FUNCTION(collator_compare);
 PHP_FUNCTION(collator_sort);

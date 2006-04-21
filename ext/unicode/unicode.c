@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.22 2006/04/21 19:35:26 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.23 2006/04/21 21:10:01 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -245,6 +245,7 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(collator_create, NULL)
 	PHP_FE(collator_compare, NULL)
 	PHP_FE(collator_get_default, NULL)
+	PHP_FE(collator_set_default, NULL)
 	{ NULL, NULL, NULL }
 };
 /* }}} */

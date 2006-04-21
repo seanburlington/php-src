@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.9 2006/04/21 18:25:16 andrei Exp $ */ 
+/* $Id: php_unicode.h,v 1.10 2006/04/21 19:35:26 andrei Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -55,8 +55,8 @@ PHP_MINFO_FUNCTION(unicode);
 #include "TSRM.h"
 #endif
 
-PHP_FUNCTION(i18n_loc_get_default);
-PHP_FUNCTION(i18n_loc_set_default);
+PHP_FUNCTION(locale_get_default);
+PHP_FUNCTION(locale_set_default);
 PHP_FUNCTION(collator_get_default);
 PHP_FUNCTION(collator_create);
 PHP_FUNCTION(collator_compare);

@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.21 2006/04/21 18:25:16 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.22 2006/04/21 19:35:26 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -233,9 +233,8 @@ PHP_FUNCTION(unicode_get_subst_char)
 
 /* {{{ unicode_functions[] */
 zend_function_entry unicode_functions[] = {
-	PHP_FE(i18n_loc_get_default, NULL)
-	PHP_FE(i18n_loc_set_default, NULL)
-	PHP_FE(collator_get_default, NULL)
+	PHP_FE(locale_get_default, NULL)
+	PHP_FE(locale_set_default, NULL)
 	PHP_FE(unicode_decode, NULL)
 	PHP_FE(unicode_semantics, NULL)
 	PHP_FE(unicode_encode, NULL)
@@ -245,6 +244,7 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(unicode_get_subst_char, NULL)
 	PHP_FE(collator_create, NULL)
 	PHP_FE(collator_compare, NULL)
+	PHP_FE(collator_get_default, NULL)
 	{ NULL, NULL, NULL }
 };
 /* }}} */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.150 2006/03/17 22:52:55 andrei Exp $ */
+/* $Id: php_cli.c,v 1.151 2006/04/22 10:39:31 fmk Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1146,7 +1146,7 @@ int main(int argc, char *argv[])
 				Z_LVAL_P(argi) = index;
 				INIT_PZVAL(argi);
 				zend_hash_update(&EG(symbol_table), "argi", sizeof("argi"), &argi, sizeof(zval *), NULL);
-				while (exit_status == SUCCESS && (input=php_stream_gets(s_in_process, NULL_ZSTR, 0)) != NULL) {
+				while (exit_status == SUCCESS && (input=php_stream_gets(s_in_process, NULL, 0)) != NULL) {
 					len = strlen(input);
 					while (len-- && (input[len]=='\n' || input[len]=='\r')) {
 						input[len] = '\0';

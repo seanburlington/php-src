@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.89 2006/04/06 19:11:06 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.90 2006/04/22 10:39:30 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1356,7 +1356,7 @@ static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TS
 			buf[line_len] = '\0';
 		}
 	} else {
-		buf = php_stream_get_line(intern->u.file.stream, NULL_ZSTR, 0, &line_len);
+		buf = php_stream_get_line(intern->u.file.stream, NULL, 0, &line_len);
 	}
 
 	if (!buf) {

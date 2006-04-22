@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.157 2006/03/27 16:43:02 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.158 2006/04/22 19:10:40 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1055,7 +1055,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					if (return_all) {
 						zval_ptr_dtor(&return_value); /* we don't need that */
 						return_value = retval;
-					} else {
+					} else if (retval) {
 						*return_value = *retval;
 						zval_copy_ctor(return_value);
 						INIT_PZVAL(return_value);

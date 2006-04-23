@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.79 2006/04/19 22:10:44 nlopess Exp $ */
+/* $Id: tidy.c,v 1.80 2006/04/23 12:56:10 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -985,7 +985,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.79 2006/04/19 22:10:44 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.80 2006/04/23 12:56:10 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1191,7 +1191,7 @@ PHP_FUNCTION(tidy_diagnose)
 }
 /* }}} */
 
-/* {{{ proto string tidy_get_release()
+/* {{{ proto string tidy_get_release() U
    Get release date (version) for Tidy library */
 PHP_FUNCTION(tidy_get_release)
 {
@@ -1201,7 +1201,7 @@ PHP_FUNCTION(tidy_get_release)
 		WRONG_PARAM_COUNT;
 	}
 
-	RETURN_STRING((char *)tidyReleaseDate(), 1);
+	RETURN_ASCII_STRING((char *)tidyReleaseDate(), ZSTR_DUPLICATE);
 }
 /* }}} */
 

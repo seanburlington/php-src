@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.96.2.6.2.3 2006/01/01 13:46:59 sniper Exp $ */
+/* $Id: wddx.c,v 1.96.2.6.2.4 2006/04/23 16:02:37 iliaa Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_wddx.h"

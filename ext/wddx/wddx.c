@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.131 2006/03/30 23:03:53 helly Exp $ */
+/* $Id: wddx.c,v 1.132 2006/04/23 16:02:51 iliaa Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

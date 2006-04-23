@@ -14,7 +14,7 @@
 ./"    | Author: Marcus Boerger <helly@php.net>                               |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php.1.in,v 1.1.2.4 2005/04/30 04:12:24 sniper Exp $
+./" $Id: php.1.in,v 1.1.2.5 2006/04/23 19:57:15 andrei Exp $
 ./" 
 .TH PHP 1 "Feb 2003" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -44,7 +44,7 @@ PHP Command Line Interface 'CLI'
 .B PHP
 is a widely\-used general\-purpose scripting language that is especially suited for 
 Web development and can be embedded into HTML. This is the command line interface
-that enables you to the following:
+that enables you to do the following:
 .P
 You can parse and execute files by using parameter \-f followed by the name of the 
 .IR file 

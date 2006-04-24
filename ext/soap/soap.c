@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.186 2006/04/19 10:49:16 dmitry Exp $ */
+/* $Id: soap.c,v 1.187 2006/04/24 07:04:25 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -395,7 +395,7 @@ ZEND_GET_MODULE(soap)
 # define OnUpdateLong OnUpdateInt
 #endif
 
-ZEND_API ZEND_INI_MH(OnUpdateCacheEnabled)
+ZEND_INI_MH(OnUpdateCacheEnabled)
 {
 	long *p;
 #ifndef ZTS

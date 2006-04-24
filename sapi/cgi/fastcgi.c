@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.7 2006/04/18 06:59:31 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.8 2006/04/24 09:56:56 dmitry Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -70,6 +70,10 @@
 # include <arpa/inet.h>
 # include <netdb.h>
 # include <sys/signal.h>
+
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned long) -1)
+#endif
 
 # ifndef HAVE_SOCKLEN_T
 	typedef unsigned int socklen_t;

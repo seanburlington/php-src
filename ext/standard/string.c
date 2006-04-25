@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.540 2006/04/18 05:18:12 andrei Exp $ */
+/* $Id: string.c,v 1.541 2006/04/25 12:49:04 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6814,12 +6814,18 @@ PHP_FUNCTION(substr_compare)
 		RETURN_FALSE;
 	}
 
-	if (offset < 0) { /* negative offset, start comparison at the end of string */
+	if (ZEND_NUM_ARGS() >= 4 && len <= 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The length must be greater than zero");
+		RETURN_FALSE;
+	}
+
+	if (offset < 0) {
 		offset = s1_len + offset;
+		offset = (offset < 0) ? 0 : offset;
 	}
 
 	if ((offset + len) >= s1_len) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The start position cannot exceed initial string length.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The start position cannot exceed initial string length");
 		RETURN_FALSE;
 	}
 

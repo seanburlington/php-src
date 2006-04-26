@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.7 2006/04/24 09:53:57 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.8 2006/04/26 11:08:10 dmitry Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -618,7 +618,11 @@ static inline void fcgi_close(fcgi_request *req, int force, int destroy)
 			RevertToSelf();
 		}
 #else
+#if 1
+		shutdown(req->fd, 2);
+#else
 		close(req->fd);
+#endif
 #endif
 		req->fd = -1;
 	}
@@ -814,16 +818,30 @@ int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int l
 		memcpy(req->out_pos, str + limit, len - limit);
 		req->out_pos += len - limit;
 	} else {
-		int pad = ((len + 7) & ~7) - len;
-
-		rest = pad ? 8 - pad : 0;
+		int pos = 0;
+		int pad;
 
 		close_packet(req);
+		while ((len - pos) > 0xffff) {
+			open_packet(req, type);
+			fcgi_make_header(req->out_hdr, type, req->id, 0xfff8);
+			req->out_hdr = NULL;
+			fcgi_flush(req, 0);
+			if (safe_write(req, str + pos, 0xfff8) != 0xfff8) {
+				req->keep = 0;
+				return -1;
+			}
+			pos += 0xfff8;
+		}		
+		
+		pad = (((len - pos) + 7) & ~7) - (len - pos);
+		rest = pad ? 8 - pad : 0;
+
 		open_packet(req, type);
-		fcgi_make_header(req->out_hdr, type, req->id, len - rest);
+		fcgi_make_header(req->out_hdr, type, req->id, (len - pos) - rest);
 		req->out_hdr = NULL;
 		fcgi_flush(req, 0);
-		if (safe_write(req, str, len - rest) != len - rest) {
+		if (safe_write(req, str + pos, (len - pos) - rest) != (len - pos) - rest) {
 			req->keep = 0;
 			return -1;
 		}

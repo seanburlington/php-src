@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.52 2006/04/27 15:21:00 andrei Exp $ */
+/* $Id: pcntl.c,v 1.53 2006/04/27 15:28:21 andrei Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -516,7 +516,7 @@ PHP_FUNCTION(pcntl_exec)
 }
 /* }}} */
 
-/* {{{ proto bool pcntl_signal(int signo, callback handle [, bool restart_syscalls])
+/* {{{ proto bool pcntl_signal(int signo, callback handle [, bool restart_syscalls]) U
    Assigns a system signal handler to a PHP function */
 PHP_FUNCTION(pcntl_signal)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.133 2006/04/27 00:49:17 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.134 2006/04/27 03:53:01 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -797,7 +797,6 @@ static php_iconv_err_t _php_iconv_strpos(unsigned int *pretval,
 		}
 		if (offset >= 0) {
 			if (cnt >= (unsigned int)offset) {
-				fprintf(stderr, "%s %s\n", ndl_buf_p, buf);
 				if (_php_iconv_memequal(buf, ndl_buf_p, sizeof(buf))) {
 					if (match_ofs == (unsigned int)-1) {
 						match_ofs = cnt;

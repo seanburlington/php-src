@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.10 2006/04/26 17:48:45 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.11 2006/04/27 11:39:46 dmitry Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -441,6 +441,7 @@ static int fcgi_read_request(fcgi_request *req)
 	unsigned char buf[FCGI_MAX_LENGTH+8];
 
 	req->keep = 0;
+	req->has_in = 0;
 	req->in_len = 0;
 	req->out_hdr = NULL;
 	req->out_pos = req->out_buf;
@@ -509,6 +510,15 @@ static int fcgi_read_request(fcgi_request *req)
 			len = (hdr.contentLengthB1 << 8) | hdr.contentLengthB0;
 			padding = hdr.paddingLength;
 		}
+		if (safe_read(req, &hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||
+		    hdr.version < FCGI_VERSION_1 ||
+		    hdr.type != FCGI_STDIN) {
+			req->keep = 0;
+			return 0;
+		}
+		req->in_len = (hdr.contentLengthB1 << 8) | hdr.contentLengthB0;
+		req->in_pad = hdr.paddingLength;
+		req->has_in = (req->in_len != 0);
 	} else if (hdr.type == FCGI_GET_VALUES) {
 		int i, j;
 		int name_len;
@@ -551,6 +561,9 @@ int fcgi_read(fcgi_request *req, char *str, int len)
 	fcgi_header hdr;
 	unsigned char buf[8];
 
+	if (!req->has_in) {
+		return 0;
+	}
 	n = 0;
 	rest = len;
 	while (rest > 0) {

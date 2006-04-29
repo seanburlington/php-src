@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.89 2006/04/13 08:18:54 dmitry Exp $ */
+/* $Id: php_http.c,v 1.90 2006/04/29 18:29:14 fmk Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -1186,7 +1186,7 @@ static int get_http_body(php_stream *stream, int close, char *headers,  char **r
 		while (!done) {
 			int buf_size = 0;
 
-			php_stream_gets(stream, chunk_size, sizeof(chunk_size));
+			php_stream_gets(stream, ZSTR(chunk_size), sizeof(chunk_size));
 			if (sscanf(chunk_size, "%x", &buf_size) > 0 ) {
 				if (buf_size > 0) {
 					int len_size = 0;
@@ -1266,7 +1266,7 @@ static int get_http_headers(php_stream *stream, char **response, int *out_size T
 	char headerbuf[8192];
 
 	while (!done) {
-		if (!php_stream_gets(stream, headerbuf, sizeof(headerbuf))) {
+		if (!php_stream_gets(stream, ZSTR(headerbuf), sizeof(headerbuf))) {
 			break;
 		}
 

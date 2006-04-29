@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.6 2005/12/14 02:01:13 wez Exp $
+// $Id: config.w32,v 1.40.2.7 2006/04/29 06:24:38 fmk Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -300,6 +300,11 @@ ARG_ENABLE("zend-multibyte", "Enable Zend multibyte encoding support", "no");
 if (PHP_ZEND_MULTIBYTE == "yes") {
 	STDOUT.WriteLine("Enabling Zend multibyte encoding support");
 	AC_DEFINE('ZEND_MULTIBYTE', 1);
+}
+
+ARG_ENABLE("pdb-files", "Enable generation of .pdp files", "no");
+if (PHP_PDB_FILES == "yes") {
+	ADD_FLAG("LDFLAGS", "/debug /opt:ref");
 }
 
 AC_DEFINE('HAVE_USLEEP', 1);

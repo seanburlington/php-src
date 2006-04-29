@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_typeinfo.c,v 1.8 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: com_typeinfo.c,v 1.9 2006/04/29 18:45:29 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -185,17 +185,17 @@ PHPAPI int php_com_import_typelib(ITypeLib *TL, int mode, int codepage TSRMLS_DC
 				}
 
 				const_name = php_com_olestring_to_string(bstr_ids, &c.name_len, codepage TSRMLS_CC);
-				c.name = zend_strndup(const_name, c.name_len);
+				c.name.s = zend_strndup(const_name, c.name_len);
 				efree(const_name);
 				c.name_len++; /* include NUL */
 				SysFreeString(bstr_ids);
 
 				/* sanity check for the case where the constant is already defined */
-				if (zend_get_constant(c.name, c.name_len - 1, &exists TSRMLS_CC)) {
+				if (zend_get_constant(c.name.s, c.name_len - 1, &exists TSRMLS_CC)) {
 					if (COMG(autoreg_verbose) && !compare_function(&results, &c.value, &exists TSRMLS_CC)) {
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type library constant %s is already defined", c.name);
 					}
-					free(c.name);
+					free(c.name.s);
 					ITypeInfo_ReleaseVarDesc(TypeInfo, pVarDesc);
 					continue;
 				}

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.192 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: zlib.c,v 1.193 2006/04/29 14:38:35 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -305,7 +305,7 @@ PHP_FUNCTION(gzfile)
 	/* Now loop through the file and do the magic quotes thing if needed */
 	memset(buf,0,sizeof(buf));
 
-	while (php_stream_gets(stream, buf, sizeof(buf) - 1) != NULL) {
+	while (php_stream_gets(stream, ZSTR(buf), sizeof(buf) - 1) != NULL) {
 		add_index_string(return_value, i++, buf, 1);
 	}
 	php_stream_close(stream);

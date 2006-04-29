@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.127 2006/03/23 19:03:30 tony2001 Exp $ */
+/* $Id: pdo_dbh.c,v 1.128 2006/04/29 14:53:26 fmk Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -189,7 +189,7 @@ static char *dsn_from_uri(char *uri, char *buf, size_t buflen TSRMLS_DC) /* {{{ 
 
 	stream = php_stream_open_wrapper(uri, "rb", REPORT_ERRORS, NULL);
 	if (stream) {
-		dsn = php_stream_get_line(stream, buf, buflen, NULL);
+		dsn = php_stream_get_line(stream, ZSTR(buf), buflen, NULL);
 		php_stream_close(stream);
 	}
 	return dsn;

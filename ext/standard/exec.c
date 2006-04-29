@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.118 2006/03/08 00:43:28 pajoye Exp $ */
+/* $Id: exec.c,v 1.119 2006/04/29 14:53:26 fmk Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -92,7 +92,7 @@ int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 	if (type != 3) {
 		b = buf;
 		
-		while (php_stream_get_line(stream, b, EXEC_INPUT_BUF, &bufl)) {
+		while (php_stream_get_line(stream, ZSTR(b), EXEC_INPUT_BUF, &bufl)) {
 			/* no new line found, let's read some more */
 			if (b[bufl - 1] != '\n' && !php_stream_eof(stream)) {
 				if (buflen < (bufl + (b - buf) + EXEC_INPUT_BUF)) {

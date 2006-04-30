@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.27.2.3 2006/04/30 00:52:28 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.27.2.4 2006/04/30 01:27:33 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -233,6 +233,14 @@ static long odbc_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRML
 	}
 
 	rc = SQLExecDirect(stmt, (char *)sql, sql_len);
+
+	if (rc == SQL_NO_DATA) {
+		/* If SQLExecDirect executes a searched update or delete statement that
+		 * does not affect any rows at the data source, the call to
+		 * SQLExecDirect returns SQL_NO_DATA. */
+		row_count = 0;
+		goto out;
+	}
 
 	if (rc != SQL_SUCCESS && rc != SQL_SUCCESS_WITH_INFO) {
 		pdo_odbc_doer_error("SQLExecDirect");

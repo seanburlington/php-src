@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.36 2006/01/31 18:51:49 derick Exp $ */
+/* $Id: filter.c,v 1.37 2006/05/01 17:14:40 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -265,7 +265,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.36 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.37 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -374,6 +374,8 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 	if (orig_array_ptr) {
 		php_register_variable_ex(orig_var, &new_var, orig_array_ptr TSRMLS_CC);
+	}
+	if (array_ptr) {
 		efree(orig_var);
 	}
 

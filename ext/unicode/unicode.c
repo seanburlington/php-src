@@ -15,10 +15,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.23 2006/04/21 21:10:01 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.24 2006/05/02 21:39:15 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
+#include "php_property.h"
 
 void php_register_unicode_iterators(TSRMLS_D);
 
@@ -246,6 +247,21 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(collator_compare, NULL)
 	PHP_FE(collator_get_default, NULL)
 	PHP_FE(collator_set_default, NULL)
+
+	/* character property functions */
+	PHP_FE(unicode_is_lower,  NULL)
+	PHP_FE(unicode_is_upper,  NULL)
+	PHP_FE(unicode_is_digit,  NULL)
+	PHP_FE(unicode_is_alpha,  NULL)
+	PHP_FE(unicode_is_alnum,  NULL)
+	PHP_FE(unicode_is_xdigit, NULL)
+	PHP_FE(unicode_is_punct,  NULL)
+	PHP_FE(unicode_is_graph,  NULL)
+	PHP_FE(unicode_is_blank,  NULL)
+	PHP_FE(unicode_is_space,  NULL)
+	PHP_FE(unicode_is_cntrl,  NULL)
+	PHP_FE(unicode_is_print,  NULL)
+
 	{ NULL, NULL, NULL }
 };
 /* }}} */

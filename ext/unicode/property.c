@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: property.c,v 1.2 2006/05/02 21:39:15 andrei Exp $ */ 
+/* $Id: property.c,v 1.3 2006/05/02 21:49:16 andrei Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -32,6 +32,10 @@ static void check_property_impl(INTERNAL_FUNCTION_PARAMETERS, prop_check_func_t 
 		return;
 	}
 
+	if (str_len == 0) {
+		RETURN_FALSE;
+	}
+
 	while (offset < str_len && result) {
 		U16_NEXT(str, offset, str_len, ch);
 		result = checker(ch);
@@ -40,9 +44,8 @@ static void check_property_impl(INTERNAL_FUNCTION_PARAMETERS, prop_check_func_t 
 	RETURN_BOOL(result);
 }
 
-/*
- * C/POSIX migration functinos
- */
+
+/* {{{ C/POSIX migration functions */
 
 PHP_FUNCTION(unicode_is_lower)
 {
@@ -103,6 +106,8 @@ PHP_FUNCTION(unicode_is_print)
 {
 	check_property_impl(INTERNAL_FUNCTION_PARAM_PASSTHRU, u_isprint);
 }
+
+/* }}} */
 
 
 /*

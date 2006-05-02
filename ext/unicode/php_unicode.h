@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.11 2006/04/21 21:10:01 andrei Exp $ */ 
+/* $Id: php_unicode.h,v 1.12 2006/05/02 20:58:30 andrei Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -28,8 +28,6 @@ extern "C" {
 #endif
 
 #include <php.h>
-
-#ifdef HAVE_UNICODE
 
 #include <php_ini.h>
 #include <SAPI.h>
@@ -75,8 +73,6 @@ void php_init_collation(TSRMLS_D);
 #endif
 
 #include <zend_unicode.h>
-#include <unicode/uloc.h>
-#endif /* PHP_HAVE_UNICODE */
 
 #endif /* PHP_UNICODE_H */
 

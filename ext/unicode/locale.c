@@ -14,11 +14,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: locale.c,v 1.9 2006/04/21 19:35:26 andrei Exp $ */ 
+/* $Id: locale.c,v 1.10 2006/05/02 20:58:30 andrei Exp $ */ 
 
 #include "php_unicode.h"
-
-#if HAVE_UNICODE
 #include "unicode/ubrk.h"
 
 static void php_canonicalize_locale_id(char **target, int32_t *target_len, char *locale, UErrorCode *status)
@@ -86,8 +84,6 @@ PHP_FUNCTION(locale_set_default)
 	RETURN_TRUE;
 }
 /* }}} */
-
-#endif /* HAVE_UNICODE */
 
 
 /*

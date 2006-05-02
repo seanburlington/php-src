@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.24 2006/05/02 21:39:15 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.25 2006/05/02 22:43:52 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -261,6 +261,20 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(unicode_is_space,  NULL)
 	PHP_FE(unicode_is_cntrl,  NULL)
 	PHP_FE(unicode_is_print,  NULL)
+
+	PHP_FE(unicode_is_title, 		NULL)
+	PHP_FE(unicode_is_defined, 		NULL)
+	PHP_FE(unicode_is_id_start, 	NULL)
+	PHP_FE(unicode_is_id_part, 		NULL)
+	PHP_FE(unicode_is_id_ignorable, NULL)
+	PHP_FE(unicode_is_iso_control, 	NULL)
+	PHP_FE(unicode_is_mirrored, 	NULL)
+	PHP_FE(unicode_is_base, 		NULL)
+	PHP_FE(unicode_is_whitespace, 	NULL)
+	PHP_FE(unicode_is_u_whitespace, NULL)
+	PHP_FE(unicode_is_u_alphabetic, NULL)
+	PHP_FE(unicode_is_u_uppercase, 	NULL)
+	PHP_FE(unicode_is_u_lowercase, 	NULL)
 
 	{ NULL, NULL, NULL }
 };

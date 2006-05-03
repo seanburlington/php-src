@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.h,v 1.3 2006/04/27 11:39:46 dmitry Exp $ */
+/* $Id: fastcgi.h,v 1.4 2006/05/03 15:48:33 dmitry Exp $ */
 
 /* FastCGI protocol */
 
@@ -97,7 +97,6 @@ typedef struct _fcgi_request {
 	int            id;
 	int            keep;
 
-	int            has_in;
 	int            in_len;
 	int            in_pad;
 

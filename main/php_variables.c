@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.126 2006/04/18 06:58:54 dmitry Exp $ */
+/* $Id: php_variables.c,v 1.127 2006/05/03 11:24:51 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -177,7 +177,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 				is_array = 1;
 				*ip = 0;
 			} else {
-				is_array = 0;
+				goto plain_var;
 			}
 		}
 	} else {

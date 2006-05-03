@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.11 2006/03/29 14:28:41 tony2001 Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12 2006/05/03 08:43:04 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -443,7 +443,6 @@ zend_object_value dom_objects_store_clone_obj(zval *zobject TSRMLS_DC)
 	retval.handle = zend_objects_store_put(new_object, obj->dtor, obj->free_storage, obj->clone TSRMLS_CC);
 	intern = (dom_object *) new_object;
 	intern->handle = retval.handle;
-	intern->ptr = NULL;
 	retval.handlers = Z_OBJ_HT_P(zobject);
 	
 	old_object = (dom_object *) obj->object;

@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.25 2006/05/02 22:43:52 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.26 2006/05/03 22:03:10 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -275,6 +275,14 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(unicode_is_u_alphabetic, NULL)
 	PHP_FE(unicode_is_u_uppercase, 	NULL)
 	PHP_FE(unicode_is_u_lowercase, 	NULL)
+
+	PHP_FE(unicode_get_numeric_value, 	NULL)
+	PHP_FE(unicode_get_combining_class, NULL)
+	PHP_FE(unicode_get_digit_value, 	NULL)
+	PHP_FE(unicode_get_mirror, 			NULL)
+	PHP_FE(unicode_get_direction, 		NULL)
+	PHP_FE(unicode_get_char_type, 		NULL)
+	PHP_FE(unicode_is_char_valid, 		NULL)
 
 	{ NULL, NULL, NULL }
 };

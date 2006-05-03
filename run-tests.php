@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.36 2006/05/03 21:33:44 pajoye Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37 2006/05/03 21:37:16 pajoye Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.36 $'."\n";
+					echo '$Revision: 1.226.2.37 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1306,7 +1306,6 @@ TEST $file
 		$env['CONTENT_LENGTH'] = $content_length;
 
 		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
-		save_text('/home/pierre/cmd.txt', $cmd);
 	} else {
 
 		$env['REQUEST_METHOD'] = 'GET';

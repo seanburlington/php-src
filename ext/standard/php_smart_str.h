@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_smart_str.h,v 1.30.2.2 2006/05/02 13:52:24 iliaa Exp $ */
+/* $Id: php_smart_str.h,v 1.30.2.3 2006/05/03 13:32:10 iliaa Exp $ */
 
 #ifndef PHP_SMART_STR_H
 #define PHP_SMART_STR_H
@@ -35,11 +35,11 @@
 } while (0)
 
 #ifndef SMART_STR_PREALLOC
-#define SMART_STR_PREALLOC 4096
+#define SMART_STR_PREALLOC 128
 #endif
 
 #ifndef SMART_STR_START_SIZE
-#define SMART_STR_START_SIZE 1024
+#define SMART_STR_START_SIZE 78
 #endif
 
 #ifdef SMART_STR_USE_REALLOC

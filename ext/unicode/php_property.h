@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_property.h,v 1.3 2006/05/04 00:01:34 andrei Exp $ */ 
+/* $Id: php_property.h,v 1.4 2006/05/04 18:37:12 andrei Exp $ */ 
 
 #ifndef PHP_PROPERTY_H
 #define PHP_PROPERTY_H
@@ -61,6 +61,7 @@ PHP_FUNCTION(char_get_combining_class);
 PHP_FUNCTION(char_get_digit_value);
 PHP_FUNCTION(char_get_mirrored);
 PHP_FUNCTION(char_get_direction);
+PHP_FUNCTION(char_get_age);
 PHP_FUNCTION(char_get_type);
 PHP_FUNCTION(char_is_valid);
 

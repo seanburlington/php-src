@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.12 2006/05/02 20:58:30 andrei Exp $ */ 
+/* $Id: php_unicode.h,v 1.13 2006/05/04 16:49:33 andrei Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -52,6 +52,13 @@ PHP_MINFO_FUNCTION(unicode);
 #ifdef ZTS
 #include "TSRM.h"
 #endif
+
+/*
+ * Because of ICU they are expanded to have _<version> suffix
+ * We don't want that
+ */
+#undef locale_get_default
+#undef locale_set_default
 
 PHP_FUNCTION(locale_get_default);
 PHP_FUNCTION(locale_set_default);

@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.28 2006/05/04 18:37:12 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.29 2006/05/05 20:56:21 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -317,6 +317,7 @@ PHP_MINIT_FUNCTION(unicode)
 {
 	php_register_unicode_iterators(TSRMLS_C);
 	php_init_collation(TSRMLS_C);
+	php_register_unicode_constants(TSRMLS_C);
 	
 	return SUCCESS;
 }

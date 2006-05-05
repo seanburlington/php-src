@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.13 2006/05/04 16:49:33 andrei Exp $ */ 
+/* $Id: php_unicode.h,v 1.14 2006/05/05 20:56:21 andrei Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -32,7 +32,6 @@ extern "C" {
 #include <php_ini.h>
 #include <SAPI.h>
 #include <ext/standard/info.h>
-
 
 extern zend_module_entry unicode_module_entry;
 #define phpext_unicode_ptr &unicode_module_entry
@@ -55,7 +54,7 @@ PHP_MINFO_FUNCTION(unicode);
 
 /*
  * Because of ICU they are expanded to have _<version> suffix
- * We don't want that
+ * We don't want that.
  */
 #undef locale_get_default
 #undef locale_set_default
@@ -74,6 +73,9 @@ PHP_FUNCTION(collator_set_default);
 PHP_METHOD(collator, __construct);
 
 void php_init_collation(TSRMLS_D);
+void php_register_unicode_constants(TSRMLS_D);
+
+PHPAPI zend_class_entry *u_const_ce;
 
 #ifdef  __cplusplus
 } // extern "C" 

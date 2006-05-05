@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.12 2006/05/03 15:39:16 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13 2006/05/05 07:05:34 dmitry Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -69,7 +69,7 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <netdb.h>
-# include <sys/signal.h>
+# include <signal.h>
 
 #ifndef INADDR_NONE
 #define INADDR_NONE ((unsigned long) -1)

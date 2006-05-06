@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.769 2006/04/03 13:46:35 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.770 2006/05/06 09:59:02 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -845,6 +845,8 @@ zend_function_entry basic_functions[] = {
 
 	PHP_FE(output_add_rewrite_var,											NULL)
 	PHP_FE(output_reset_rewrite_vars,										NULL)
+
+	PHP_FE(php_get_tmpdir,						NULL)
 
 	{NULL, NULL, NULL}
 };

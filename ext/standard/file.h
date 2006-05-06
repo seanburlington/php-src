@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.97 2006/01/13 04:10:32 pajoye Exp $ */
+/* $Id: file.h,v 1.98 2006/05/06 09:59:02 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -66,6 +66,7 @@ PHP_FUNCTION(fnmatch);
 #endif
 PHP_NAMED_FUNCTION(php_if_ftruncate);
 PHP_NAMED_FUNCTION(php_if_fstat);
+PHP_FUNCTION(php_get_tmpdir);
 
 PHP_MINIT_FUNCTION(user_streams);
 

@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.57 2006/08/24 15:07:56 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.1 2006/05/06 21:58:03 iliaa Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -9,6 +9,8 @@ dnl ## options and check for the basic compile tools.
 
 dnl ## Diversion 2 is the initial checking of OS features, programs,
 dnl ## libraries and so on.
+
+
 
 dnl ## In diversion 3 we check for compile-time options to the PHP
 dnl ## core and how to deal with different system dependencies.  This
@@ -40,8 +42,8 @@ PHP_CANONICAL_HOST_TARGET
 AC_CONFIG_HEADER(main/php_config.h)
 
 MAJOR_VERSION=5
-MINOR_VERSION=1
-RELEASE_VERSION=7
+MINOR_VERSION=2
+RELEASE_VERSION=0
 EXTRA_VERSION="-dev"
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"
 

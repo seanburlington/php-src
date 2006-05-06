@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.83 2006/05/06 10:48:04 nlopess Exp $ */
+/* $Id: tidy.c,v 1.84 2006/05/06 13:19:10 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -900,7 +900,7 @@ static int _php_tidy_apply_config_array(TidyDoc doc, HashTable *ht_options TSRML
 			break;
 
 			case HASH_KEY_IS_UNICODE:
-			opt_name.s = zend_unicode_to_ascii(opt_name.u, opt_name_len);
+			opt_name.s = zend_unicode_to_ascii(opt_name.u, opt_name_len TSRMLS_CC);
 			if (!opt_name.s) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not convert key from the option array");
 				return FAILURE;
@@ -998,7 +998,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.83 2006/05/06 10:48:04 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.84 2006/05/06 13:19:10 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: base64.h,v 1.14.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: base64.h,v 1.14.2.1.2.1 2006/05/06 22:47:14 iliaa Exp $ */
 
 #ifndef BASE64_H
 #define BASE64_H
@@ -25,6 +25,7 @@ PHP_FUNCTION(base64_decode);
 PHP_FUNCTION(base64_encode);
 
 PHPAPI extern unsigned char *php_base64_encode(const unsigned char *, int, int *);
+PHPAPI extern unsigned char *php_base64_decode_ex(const unsigned char *, int, int *, zend_bool);
 PHPAPI extern unsigned char *php_base64_decode(const unsigned char *, int, int *);
 
 #endif /* BASE64_H */

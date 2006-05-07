@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.73.2.2 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_pgsql.h,v 1.73.2.1.2.1 2006/05/07 00:28:32 edink Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -125,6 +125,7 @@ PHP_FUNCTION(pg_field_type);
 PHP_FUNCTION(pg_field_type_oid);
 PHP_FUNCTION(pg_field_prtlen);
 PHP_FUNCTION(pg_field_is_null);
+PHP_FUNCTION(pg_field_table);
 /* async message functions */
 PHP_FUNCTION(pg_get_notify);
 PHP_FUNCTION(pg_get_pid);

@@ -78,7 +78,7 @@ static void ReadImage (gdImagePtr im, gdIOCtx *fd, int len, int height, unsigned
 
 int ZeroDataBlock;
 
-gdImagePtr gdImageCreateFromGifSource(gdSourcePtr inSource) /* {{{ */
+gdImagePtr gdImageCreateFromGifSource(gdSourcePtr inSource)
 {
         gdIOCtx         *in = gdNewSSCtx(inSource, NULL);
         gdImagePtr      im;
@@ -89,9 +89,9 @@ gdImagePtr gdImageCreateFromGifSource(gdSourcePtr inSource) /* {{{ */
 
         return im;
 }
-/* }}} */
 
-gdImagePtr gdImageCreateFromGif(FILE *fdFile) /* {{{ */
+gdImagePtr
+gdImageCreateFromGif(FILE *fdFile)
 {
         gdIOCtx		*fd = gdNewFileCtx(fdFile);
         gdImagePtr    	im = 0;
@@ -102,9 +102,9 @@ gdImagePtr gdImageCreateFromGif(FILE *fdFile) /* {{{ */
 
         return im;
 }
-/* }}} */
 
-gdImagePtr gdImageCreateFromGifCtx(gdIOCtxPtr fd) /* {{{ */
+gdImagePtr
+gdImageCreateFromGifCtx(gdIOCtxPtr fd)
 {
 /* 1.4       int imageNumber; */
        int BitPixel;
@@ -147,9 +147,6 @@ gdImagePtr gdImageCreateFromGifCtx(gdIOCtxPtr fd) /* {{{ */
        Background      = buf[5];
        AspectRatio     = buf[6];
 
-		imw = LM_to_uint(buf[0],buf[1]);
-		imh = LM_to_uint(buf[2],buf[3]);
-
        if (BitSet(buf[4], LOCALCOLORMAP)) {    /* Global Colormap */
                if (ReadColorMap(fd, BitPixel, ColorMap)) {
 			return 0;
@@ -185,15 +182,18 @@ gdImagePtr gdImageCreateFromGifCtx(gdIOCtxPtr fd) /* {{{ */
 
                bitPixel = 1<<((buf[8]&0x07)+1);
 
-		if (!useGlobalColormap) {
-			if (ReadColorMap(fd, bitPixel, localColorMap)) {
-				return 0;
-			}
-		}
+               imw = LM_to_uint(buf[4],buf[5]);
+               imh = LM_to_uint(buf[6],buf[7]);
 
-		if (!(im = gdImageCreate(imw, imh))) {
-			return 0;
-		}
+			   if (!useGlobalColormap) {
+				   if (ReadColorMap(fd, bitPixel, localColorMap)) {
+					   return 0;
+				   }
+			   }
+
+			   if (!(im = gdImageCreate(imw, imh))) {
+				   return 0;
+			   }
 
                im->interlace = BitSet(buf[8], INTERLACE);
                if (! useGlobalColormap) {
@@ -217,10 +217,6 @@ terminated:
        if (!im) {
 		return 0;
        }
-	if (!im->colorsTotal) {
-		gdImageDestroy(im);
-		return 0;
-	}
        /* Check for open colors at the end, so
           we can reduce colorsTotal and ultimately
           BitsPerPixel */
@@ -233,9 +229,9 @@ terminated:
        }
        return im;
 }
-/* }}} */
 
-static int ReadColorMap(gdIOCtx *fd, int number, unsigned char (*buffer)[256]) /* {{{ */
+static int
+ReadColorMap(gdIOCtx *fd, int number, unsigned char (*buffer)[256])
 {
        int             i;
        unsigned char   rgb[3];
@@ -253,9 +249,9 @@ static int ReadColorMap(gdIOCtx *fd, int number, unsigned char (*buffer)[256]) /
 
        return FALSE;
 }
-/* }}} */
 
-static int DoExtension(gdIOCtx *fd, int label, int *Transparent) /* {{{ */
+static int
+DoExtension(gdIOCtx *fd, int label, int *Transparent)
 {
        static unsigned char     buf[256];
 
@@ -279,9 +275,9 @@ static int DoExtension(gdIOCtx *fd, int label, int *Transparent) /* {{{ */
 
        return FALSE;
 }
-/* }}} */
 
-static int GetDataBlock_(gdIOCtx *fd, unsigned char *buf) /* {{{ */
+static int
+GetDataBlock_(gdIOCtx *fd, unsigned char *buf)
 {
        unsigned char   count;
 
@@ -297,9 +293,9 @@ static int GetDataBlock_(gdIOCtx *fd, unsigned char *buf) /* {{{ */
 
        return count;
 }
-/* }}} */
 
-static int GetDataBlock(gdIOCtx *fd, unsigned char *buf) /* {{{ */
+static int
+GetDataBlock(gdIOCtx *fd, unsigned char *buf)
 {
 	int rv;
 	int i;
@@ -320,9 +316,9 @@ static int GetDataBlock(gdIOCtx *fd, unsigned char *buf) /* {{{ */
 	}
 	return(rv);
 }
-/* }}} */
 
-static int GetCode_(gdIOCtx *fd, int code_size, int flag) /* {{{ */
+static int
+GetCode_(gdIOCtx *fd, int code_size, int flag)
 {
        static unsigned char    buf[280];
        static int              curbit, lastbit, done, last_byte;
@@ -362,7 +358,8 @@ static int GetCode_(gdIOCtx *fd, int code_size, int flag) /* {{{ */
        return ret;
 }
 
-static int GetCode(gdIOCtx *fd, int code_size, int flag) /* {{{ */
+static int
+GetCode(gdIOCtx *fd, int code_size, int flag)
 {
  int rv;
 
@@ -370,10 +367,10 @@ static int GetCode(gdIOCtx *fd, int code_size, int flag) /* {{{ */
  if (VERBOSE) php_gd_error_ex(E_NOTICE, "[GetCode(,%d,%d) returning %d]",code_size,flag,rv);
  return(rv);
 }
-/* }}} */
 
 #define STACK_SIZE ((1<<(MAX_LWZ_BITS))*2)
-static int LWZReadByte_(gdIOCtx *fd, int flag, int input_code_size) /* {{{ */
+static int
+LWZReadByte_(gdIOCtx *fd, int flag, int input_code_size)
 {
        static int      fresh = FALSE;
        int             code, incode;
@@ -492,9 +489,9 @@ static int LWZReadByte_(gdIOCtx *fd, int flag, int input_code_size) /* {{{ */
        }
        return code;
 }
-/* }}} */
 
-static int LWZReadByte(gdIOCtx *fd, int flag, int input_code_size) /* {{{ */
+static int
+LWZReadByte(gdIOCtx *fd, int flag, int input_code_size)
 {
  int rv;
 
@@ -502,26 +499,14 @@ static int LWZReadByte(gdIOCtx *fd, int flag, int input_code_size) /* {{{ */
  if (VERBOSE) php_gd_error_ex(E_NOTICE, "[LWZReadByte(,%d,%d) returning %d]",flag,input_code_size,rv);
  return(rv);
 }
-/* }}} */
 
-static void ReadImage(gdImagePtr im, gdIOCtx *fd, int len, int height, unsigned char (*cmap)[256], int interlace) /* {{{ */ /*1.4//, int ignore) */
+static void
+ReadImage(gdImagePtr im, gdIOCtx *fd, int len, int height, unsigned char (*cmap)[256], int interlace) /*1.4//, int ignore) */
 {
        unsigned char   c;
        int             v;
        int             xpos = 0, ypos = 0, pass = 0;
        int i;
-
-       /*
-       **  Initialize the Compression routines
-       */
-       if (! ReadOK(fd,&c,1)) {
-               return;
-       }
-
-	if (c > MAX_LWZ_BITS) {
-		return;
-	}
-
        /* Stash the color map into the image */
        for (i=0; (i<gdMaxColors); i++) {
                im->red[i] = cmap[CM_RED][i];
@@ -531,7 +516,12 @@ static void ReadImage(gdImagePtr im, gdIOCtx *fd, int len, int height, unsigned 
        }
        /* Many (perhaps most) of these colors will remain marked open. */
        im->colorsTotal = gdMaxColors;
-
+       /*
+       **  Initialize the Compression routines
+       */
+       if (! ReadOK(fd,&c,1)) {
+               return;
+       }
        if (LWZReadByte(fd, TRUE, c) < 0) {
                return;
        }
@@ -592,4 +582,4 @@ fini:
                /* Ignore extra */
        }
 }
-/* }}} */
+

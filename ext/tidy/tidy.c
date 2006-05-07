@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.84 2006/05/06 13:19:10 nlopess Exp $ */
+/* $Id: tidy.c,v 1.85 2006/05/07 18:11:40 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -998,7 +998,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.84 2006/05/06 13:19:10 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.85 2006/05/07 18:11:40 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1220,7 +1220,7 @@ PHP_FUNCTION(tidy_get_release)
 
 
 #if HAVE_TIDYOPTGETDOC
-/* {{{ proto string tidy_get_opt_doc(tidy resource, string optname)
+/* {{{ proto string tidy_get_opt_doc(tidy resource, string optname) U
    Returns the documentation for the given option name */
 PHP_FUNCTION(tidy_get_opt_doc)
 {
@@ -1251,7 +1251,7 @@ PHP_FUNCTION(tidy_get_opt_doc)
 	}
 
 	if ( (optval = (char *) tidyOptGetDoc(obj->ptdoc->doc, opt)) ) {
-		RETURN_STRING(optval, 1);
+		RETURN_ASCII_STRING(optval, 1);
 	}
 
 	RETURN_FALSE;
@@ -1260,8 +1260,8 @@ PHP_FUNCTION(tidy_get_opt_doc)
 #endif
 
 
-/* {{{ proto array tidy_get_config()
-   Get current Tidy configuarion */
+/* {{{ proto array tidy_get_config() U
+   Get current Tidy configuration */
 PHP_FUNCTION(tidy_get_config)
 {
 	TidyIterator itOpt;
@@ -1282,7 +1282,7 @@ PHP_FUNCTION(tidy_get_config)
 		opt_value = php_tidy_get_opt_val(obj->ptdoc, opt, &optt TSRMLS_CC);
 		switch (optt) {
 			case TidyString:
-				add_assoc_string(return_value, opt_name, (char*)opt_value, 0);
+				add_assoc_ascii_string(return_value, opt_name, (char*)opt_value, 0);
 				break;
 
 			case TidyInteger:
@@ -1414,7 +1414,7 @@ PHP_FUNCTION(tidy_getopt)
 	optval = php_tidy_get_opt_val(obj->ptdoc, opt, &optt TSRMLS_CC);
 	switch (optt) {
 		case TidyString:
-			RETURN_STRING((char *)optval, 0);
+			RETURN_ASCII_STRING((char *)optval, 0);
 			break;
 
 		case TidyInteger:

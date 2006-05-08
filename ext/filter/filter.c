@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.39 2006/05/08 16:24:11 pajoye Exp $ */
+/* $Id: filter.c,v 1.40 2006/05/08 16:34:12 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -276,7 +276,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.39 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.40 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -578,7 +578,7 @@ PHP_FUNCTION(input_get)
 					}
 				}
 			} else {
-				array_ptr = php_filter_get_storage(PARSE_GET);
+				array_ptr = php_filter_get_storage(PARSE_GET TSRMLS_CC);
 			}
 	}
 

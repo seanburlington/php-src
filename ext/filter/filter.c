@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.41 2006/05/08 20:57:59 pajoye Exp $ */
+/* $Id: filter.c,v 1.42 2006/05/08 21:26:09 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -144,7 +144,7 @@ static PHP_INI_MH(OnUpdateFlags)
 }
 
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("filter.default",   "string", PHP_INI_SYSTEM|PHP_INI_PERDIR, UpdateDefaultFilter, default_filter, zend_filter_globals, filter_globals)
+	STD_PHP_INI_ENTRY("filter.default",   "unsafe_raw", PHP_INI_SYSTEM|PHP_INI_PERDIR, UpdateDefaultFilter, default_filter, zend_filter_globals, filter_globals)
 	PHP_INI_ENTRY("filter.default_flags", NULL,     PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateFlags)
 PHP_INI_END()
 /* }}} */
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.41 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.42 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

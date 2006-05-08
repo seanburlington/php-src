@@ -1,5 +1,5 @@
-// $Id: config.w32,v 1.9 2006/05/05 21:37:08 fmk Exp $
+// $Id: config.w32,v 1.10 2006/05/08 21:06:34 edink Exp $
 // vim:ft=javascript
 
-EXTENSION("unicode", "unicode.c unicode_iterators.c collator.c locale.c property.c", false);
+EXTENSION("unicode", "unicode.c unicode_iterators.c collator.c locale.c property.c constants.c", false);
 AC_DEFINE('HAVE_UNICODE', 1, 'ICU API extension');

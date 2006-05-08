@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.17 2007/01/01 09:40:25 sebastian Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.1 2006/05/08 16:19:43 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -42,6 +42,13 @@ static HashTable mysqli_link_properties;
 static HashTable mysqli_result_properties;
 static HashTable mysqli_stmt_properties;
 static HashTable mysqli_warning_properties;
+
+zend_class_entry *mysqli_link_class_entry;
+zend_class_entry *mysqli_stmt_class_entry;
+zend_class_entry *mysqli_result_class_entry;
+zend_class_entry *mysqli_driver_class_entry;
+zend_class_entry *mysqli_warning_class_entry;
+zend_class_entry *mysqli_exception_class_entry;
 
 extern void php_mysqli_connect(INTERNAL_FUNCTION_PARAMETERS);
 

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.54.2.8 2007/01/01 09:40:25 sebastian Exp $ 
+  $Id: php_mysqli.h,v 1.54.2.7.2.1 2006/05/08 16:19:43 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -161,12 +161,12 @@ extern void php_local_infile_end(void *);
 extern int php_local_infile_error(void *, char *, uint);
 extern void php_set_local_infile_handler_default(MY_MYSQL *);
 extern void php_mysqli_throw_sql_exception(char *sqlstate, int errorno TSRMLS_DC, char *format, ...);
-zend_class_entry *mysqli_link_class_entry;
-zend_class_entry *mysqli_stmt_class_entry;
-zend_class_entry *mysqli_result_class_entry;
-zend_class_entry *mysqli_driver_class_entry;
-zend_class_entry *mysqli_warning_class_entry;
-zend_class_entry *mysqli_exception_class_entry;
+extern zend_class_entry *mysqli_link_class_entry;
+extern zend_class_entry *mysqli_stmt_class_entry;
+extern zend_class_entry *mysqli_result_class_entry;
+extern zend_class_entry *mysqli_driver_class_entry;
+extern zend_class_entry *mysqli_warning_class_entry;
+extern zend_class_entry *mysqli_exception_class_entry;
 
 #ifdef HAVE_SPL
 extern PHPAPI zend_class_entry *spl_ce_RuntimeException;

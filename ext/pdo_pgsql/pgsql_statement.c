@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.36 2006/03/17 22:17:15 tony2001 Exp $ */
+/* $Id: pgsql_statement.c,v 1.37 2006/05/08 14:33:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -241,6 +241,7 @@ static int pgsql_stmt_fetch(pdo_stmt_t *stmt,
 		
 		spprintf(&q, 0, "FETCH %s %ld FROM %s", ori_str, offset, S->cursor_name);
 		S->result = PQexec(S->H->server, q);
+		efree(q);
 		status = PQresultStatus(S->result);
 
 		if (status != PGRES_COMMAND_OK && status != PGRES_TUPLES_OK) {

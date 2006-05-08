@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.31 2006/05/08 22:23:57 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.32 2006/05/08 23:01:20 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -292,6 +292,8 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(char_get_property_max_value, NULL)
 	PHP_FE(char_get_property_name, 		NULL)
 	PHP_FE(char_get_property_from_name,	NULL)
+	PHP_FE(char_get_property_value_name, NULL)
+	PHP_FE(char_get_property_value_from_name, NULL)
 
 	{ NULL, NULL, NULL }
 };

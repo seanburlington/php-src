@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_property.h,v 1.6 2006/05/08 22:23:57 andrei Exp $ */ 
+/* $Id: php_property.h,v 1.7 2006/05/08 23:01:20 andrei Exp $ */ 
 
 #ifndef PHP_PROPERTY_H
 #define PHP_PROPERTY_H
@@ -80,6 +80,8 @@ PHP_FUNCTION(char_get_property_min_value);
 PHP_FUNCTION(char_get_property_max_value);
 PHP_FUNCTION(char_get_property_name);
 PHP_FUNCTION(char_get_property_from_name);
+PHP_FUNCTION(char_get_property_value_name);
+PHP_FUNCTION(char_get_property_value_from_name);
 
 #endif /* PHP_PROPERTY_H */
 

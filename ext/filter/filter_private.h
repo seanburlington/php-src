@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.11 2006/05/08 14:39:57 pajoye Exp $ */
+/* $Id: filter_private.h,v 1.12 2006/05/08 15:42:47 pajoye Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -62,7 +62,7 @@
 
 #define FILTER_VALIDATE_ALL           0x0100
 
-#define FILTER_DEFAULT                0x0201
+#define FILTER_DEFAULT                0x0204
 #define FILTER_UNSAFE_RAW             0x0204
 
 #define FILTER_SANITIZE_STRING        0x0201

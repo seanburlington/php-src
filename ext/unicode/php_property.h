@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_property.h,v 1.4 2006/05/04 18:37:12 andrei Exp $ */ 
+/* $Id: php_property.h,v 1.5 2006/05/08 21:54:44 andrei Exp $ */ 
 
 #ifndef PHP_PROPERTY_H
 #define PHP_PROPERTY_H
@@ -69,10 +69,15 @@ PHP_FUNCTION(char_is_valid);
  * Other functions
  */
 
-PHP_FUNCTION(char_to_digit);
 PHP_FUNCTION(char_from_digit);
 PHP_FUNCTION(char_from_name);
 PHP_FUNCTION(char_get_name);
+
+PHP_FUNCTION(char_has_binary_property);
+PHP_FUNCTION(char_get_property_value);
+PHP_FUNCTION(char_get_property_value);
+PHP_FUNCTION(char_get_property_min_value);
+PHP_FUNCTION(char_get_property_max_value);
 
 #endif /* PHP_PROPERTY_H */
 

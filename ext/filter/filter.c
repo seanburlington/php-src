@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.43 2006/05/09 00:29:30 pajoye Exp $ */
+/* $Id: filter.c,v 1.44 2006/05/09 00:46:31 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.43 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.44 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -740,9 +740,7 @@ PHP_FUNCTION(input_get_args)
 				}
 			}
 
-			if (filter_flags & FILTER_FLAG_SCALAR) {
-				php_zval_filter(*tmp, filter, filter_flags, options, charset TSRMLS_CC);
-			} else {
+			if (filter_flags & FILTER_FLAG_ARRAY) {
 				php_zval_filter_recursive(*tmp, filter, filter_flags, options, charset TSRMLS_CC);
 
 				/* ARRAY always returns an array */
@@ -752,6 +750,8 @@ PHP_FUNCTION(input_get_args)
 					add_next_index_zval(temparray, *tmp);
 					*tmp = temparray;
 				}
+			} else {
+				php_zval_filter(*tmp, filter, filter_flags, options, charset TSRMLS_CC);
 			}
 
 			if (Z_TYPE_PP(tmp) == IS_NULL) {

@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_property.h,v 1.8 2006/05/09 00:06:08 andrei Exp $ */ 
+/* $Id: php_property.h,v 1.9 2006/05/09 18:21:27 andrei Exp $ */ 
 
 #ifndef PHP_PROPERTY_H
 #define PHP_PROPERTY_H
@@ -84,6 +84,7 @@ PHP_FUNCTION(char_get_property_value_name);
 PHP_FUNCTION(char_get_property_value_from_name);
 
 PHP_FUNCTION(char_enum_names);
+PHP_FUNCTION(char_enum_types);
 
 #endif /* PHP_PROPERTY_H */
 

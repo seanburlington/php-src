@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.18 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.1 2006/05/09 23:54:48 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,7 +74,7 @@ PDO_API zend_class_entry *php_pdo_get_exception_base(int root TSRMLS_DC)
 		}
 	}
 #endif
-#if (PHP_MAJOR_VERSION < 6)
+#if (PHP_MAJOR_VERSION <= 5) && (PHP_MINOR_VERSION < 2)
 	return zend_exception_get_default();
 #else
 	return zend_exception_get_default(TSRMLS_C);

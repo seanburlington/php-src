@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.45 2006/05/09 10:24:09 pajoye Exp $ */
+/* $Id: filter.c,v 1.46 2006/05/09 11:14:43 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.45 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.46 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -495,7 +495,7 @@ PHP_FUNCTION(input_get)
 	zval       *array_ptr = NULL, *array_ptr2 = NULL, *array_ptr3 = NULL;
 	HashTable  *hash_ptr;
 	int         found = 0;
-	int         filter_flags = 0;
+	long         filter_flags = 0;
 	zval       *options = NULL;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls|lzs", &arg, &var, &var_len, &filter, &flags, &charset, &charset_len) == FAILURE) {
@@ -694,6 +694,14 @@ PHP_FUNCTION(input_get_args)
 			if (Z_TYPE_PP(element) != IS_ARRAY) {
 				convert_to_long(*element);
 				filter = Z_LVAL_PP(element);
+				filter_flags = FILTER_FLAG_SCALAR;
+
+				if ((filter_flags & FILTER_FLAG_SCALAR) && Z_TYPE_PP(tmp) == IS_ARRAY) {
+					/* asked for scalar and found an array do not test further */
+					add_assoc_bool(return_value, key, 0);
+					continue;
+				}
+
 			} else {
 				if (zend_hash_find(HASH_OF(*element), "filter", sizeof("filter"), (void **)&option) == SUCCESS) {
 					convert_to_long(*option);
@@ -722,7 +730,7 @@ PHP_FUNCTION(input_get_args)
 					filter_flags = FILTER_FLAG_SCALAR;
 				}
 
-				if (filter_flags & FILTER_FLAG_SCALAR && Z_TYPE_PP(tmp) == IS_ARRAY) {
+				if ((filter_flags & FILTER_FLAG_SCALAR) && Z_TYPE_PP(tmp) == IS_ARRAY) {
 					/* asked for scalar and found an array do not test further */
 					add_assoc_bool(return_value, key, 0);
 					continue;
@@ -756,7 +764,8 @@ PHP_FUNCTION(input_get_args)
 		} else {
 			add_assoc_null(return_value, key);
 		}
-		filter_flags = 0;
+		filter = FILTER_DEFAULT;
+		filter_flags = FILTER_FLAG_SCALAR;
 	}
 }
 /* }}} */

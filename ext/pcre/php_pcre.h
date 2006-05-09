@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.44 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pcre.h,v 1.45 2006/05/09 18:28:11 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -64,6 +64,9 @@ PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_le
 
 ZEND_BEGIN_MODULE_GLOBALS(pcre)
 	HashTable pcre_cache;
+	long backtrack_limit;
+	long recursion_limit;
+	int  error_code;
 ZEND_END_MODULE_GLOBALS(pcre)
 
 #ifdef ZTS

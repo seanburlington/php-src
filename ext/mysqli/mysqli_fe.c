@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.53 2006/01/01 13:09:52 sniper Exp $ 
+  $Id: mysqli_fe.c,v 1.54 2006/05/09 11:27:20 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -238,6 +238,7 @@ zend_function_entry mysqli_link_methods[] = {
  * Every user visible function must have an entry in mysqli_result_functions[].
  */
 zend_function_entry mysqli_result_methods[] = {
+	PHP_FALIAS(__construct, mysqli_result_construct, NULL)
 	PHP_FALIAS(close,mysqli_free_result,NULL)
 	PHP_FALIAS(free,mysqli_free_result,NULL)
 	PHP_FALIAS(data_seek,mysqli_data_seek,NULL)
@@ -260,6 +261,7 @@ zend_function_entry mysqli_result_methods[] = {
  * Every user visible function must have an entry in mysqli_stmt_functions[].
  */
 zend_function_entry mysqli_stmt_methods[] = {
+	PHP_FALIAS(__construct,mysqli_stmt_construct,NULL)
 	PHP_FALIAS(attr_get,mysqli_stmt_attr_get,NULL)
 	PHP_FALIAS(attr_set,mysqli_stmt_attr_set,NULL)
 	PHP_FALIAS(bind_param,mysqli_stmt_bind_param,second_arg_force_by_ref_rest)

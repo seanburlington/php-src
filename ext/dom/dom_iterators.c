@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.9.2.4 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: dom_iterators.c,v 1.9.2.3.2.1 2006/05/09 23:55:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -253,7 +253,7 @@ zend_object_iterator_funcs php_dom_iterator_funcs = {
 	NULL
 };
 
-zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC)
 {
 	dom_object *intern;
 	dom_nnodemap_object *objmap;
@@ -263,6 +263,9 @@ zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TS
 	HashTable *nodeht;
 	zval **entry;
 
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
 	php_dom_iterator *iterator = emalloc(sizeof(php_dom_iterator));
 
 	object->refcount++;

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.13 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.1 2006/05/09 23:55:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -464,11 +464,7 @@ static zend_function_entry dom_functions[] = {
 };
 
 static zend_object_handlers* dom_get_obj_handlers(TSRMLS_D) {
-	if (EG(ze1_compatibility_mode)) {
-		return &dom_ze1_object_handlers;
-	} else {
-		return &dom_object_handlers;
-	}
+	return &dom_object_handlers;
 }
 
 static zend_module_dep dom_deps[] = {
@@ -517,7 +513,7 @@ PHP_MINIT_FUNCTION(dom)
 	zend_hash_init(&classes, 0, NULL, NULL, 1);
 
 	INIT_CLASS_ENTRY(ce, "DOMException", php_dom_domexception_class_functions);
-	dom_domexception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
+	dom_domexception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 	dom_domexception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 	zend_declare_property_long(dom_domexception_class_entry, "code", sizeof("code")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
 

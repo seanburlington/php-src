@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -79,7 +79,7 @@ static int driver_report_write(mysqli_object *obj, zval *value TSRMLS_DC)
 {
 	MyG(report_mode) = Z_LVAL_P(value);
 	php_set_error_handling(MyG(report_mode) & MYSQLI_REPORT_STRICT ? EH_THROW : EH_NORMAL, 
-							zend_exception_get_default() TSRMLS_CC);
+							zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
 	return SUCCESS;
 }
 /* }}} */

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.34 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.1 2006/05/09 23:58:46 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4409,7 +4409,7 @@ PHP_MINIT_FUNCTION(reflection) /* {{{ */
 	reflection_object_handlers.write_property = _reflection_write_property;
 
 	INIT_CLASS_ENTRY(_reflection_entry, "ReflectionException", reflection_exception_functions);
-	reflection_exception_ptr = zend_register_internal_class_ex(&_reflection_entry, zend_exception_get_default(), NULL TSRMLS_CC);
+	reflection_exception_ptr = zend_register_internal_class_ex(&_reflection_entry, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 
 	INIT_CLASS_ENTRY(_reflection_entry, "Reflection", reflection_functions);
 	reflection_ptr = zend_register_internal_class(&_reflection_entry TSRMLS_CC);
@@ -4485,7 +4485,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.34 2007/01/01 09:40:27 sebastian Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.1 2006/05/09 23:58:46 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

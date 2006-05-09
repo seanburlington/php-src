@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.28.2.2 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: php_dom.h,v 1.28.2.1.2.1 2006/05/09 23:55:24 helly Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -109,7 +109,7 @@ void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xml
 xmlNodePtr create_notation(const xmlChar *name, const xmlChar *ExternalID, const xmlChar *SystemID);
 xmlNode *php_dom_libxml_hash_iter(xmlHashTable *ht, int index);
 xmlNode *php_dom_libxml_notation_iter(xmlHashTable *ht, int index);
-zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 
 #define REGISTER_DOM_CLASS(ce, name, parent_ce, funcs, entry) \
 INIT_CLASS_ENTRY(ce, name, funcs); \

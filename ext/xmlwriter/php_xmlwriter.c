@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.13 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.1 2006/05/09 23:54:31 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,51 +193,51 @@ static zend_function_entry xmlwriter_functions[] = {
 #ifdef ZEND_ENGINE_2
 /* {{{ xmlwriter_class_functions */
 static zend_function_entry xmlwriter_class_functions[] = {
-	PHP_ME_MAPPING(openUri,		xmlwriter_open_uri,		NULL)
-	PHP_ME_MAPPING(openMemory,	xmlwriter_open_memory, 	NULL)
+	PHP_ME_MAPPING(openUri,		xmlwriter_open_uri,		NULL, 0)
+	PHP_ME_MAPPING(openMemory,	xmlwriter_open_memory, 	NULL, 0)
 #if LIBXML_VERSION >= 20605
-	PHP_ME_MAPPING(setIndent,	xmlwriter_set_indent,	NULL)
-	PHP_ME_MAPPING(setIndentString,	xmlwriter_set_indent_string, NULL)
+	PHP_ME_MAPPING(setIndent,	xmlwriter_set_indent,	NULL, 0)
+	PHP_ME_MAPPING(setIndentString,	xmlwriter_set_indent_string, NULL, 0)
 #endif
 #if LIBXML_VERSION >= 20607
-	PHP_ME_MAPPING(startComment,	xmlwriter_start_comment,	NULL)
-	PHP_ME_MAPPING(endComment,		xmlwriter_end_comment,		NULL)
+	PHP_ME_MAPPING(startComment,	xmlwriter_start_comment,	NULL, 0)
+	PHP_ME_MAPPING(endComment,		xmlwriter_end_comment,		NULL, 0)
 #endif
-	PHP_ME_MAPPING(startAttribute,	xmlwriter_start_attribute,	NULL)
-	PHP_ME_MAPPING(endAttribute,	xmlwriter_end_attribute,	NULL)
-	PHP_ME_MAPPING(writeAttribute,	xmlwriter_write_attribute,	NULL)
+	PHP_ME_MAPPING(startAttribute,	xmlwriter_start_attribute,	NULL, 0)
+	PHP_ME_MAPPING(endAttribute,	xmlwriter_end_attribute,	NULL, 0)
+	PHP_ME_MAPPING(writeAttribute,	xmlwriter_write_attribute,	NULL, 0)
 #if LIBXML_VERSION > 20617
-	PHP_ME_MAPPING(startAttributeNs,	xmlwriter_start_attribute_ns,NULL)
-	PHP_ME_MAPPING(writeAttributeNs,	xmlwriter_write_attribute_ns,NULL)
+	PHP_ME_MAPPING(startAttributeNs,	xmlwriter_start_attribute_ns,NULL, 0)
+	PHP_ME_MAPPING(writeAttributeNs,	xmlwriter_write_attribute_ns,NULL, 0)
 #endif
-	PHP_ME_MAPPING(startElement,	xmlwriter_start_element,	NULL)
-	PHP_ME_MAPPING(endElement,		xmlwriter_end_element,		NULL)
-	PHP_ME_MAPPING(startElementNs,	xmlwriter_start_element_ns,	NULL)
-	PHP_ME_MAPPING(writeElement,	xmlwriter_write_element,	NULL)
-	PHP_ME_MAPPING(writeElementNs,	xmlwriter_write_element_ns,	NULL)
-	PHP_ME_MAPPING(startPi,			xmlwriter_start_pi,			NULL)
-	PHP_ME_MAPPING(endPi,			xmlwriter_end_pi,			NULL)
-	PHP_ME_MAPPING(writePi,			xmlwriter_write_pi,			NULL)
-	PHP_ME_MAPPING(startCdata,		xmlwriter_start_cdata,		NULL)
-	PHP_ME_MAPPING(endCdata,		xmlwriter_end_cdata,		NULL)
-	PHP_ME_MAPPING(writeCdata,		xmlwriter_write_cdata,		NULL)
-	PHP_ME_MAPPING(text,			xmlwriter_text,				NULL)
-	PHP_ME_MAPPING(startDocument,	xmlwriter_start_document,	NULL)
-	PHP_ME_MAPPING(endDocument,		xmlwriter_end_document,		NULL)
-	PHP_ME_MAPPING(writeComment,	xmlwriter_write_comment,	NULL)
-	PHP_ME_MAPPING(startDtd,		xmlwriter_start_dtd,		NULL)
-	PHP_ME_MAPPING(endDtd,			xmlwriter_end_dtd,			NULL)
-	PHP_ME_MAPPING(writeDtd,		xmlwriter_write_dtd,		NULL)
-	PHP_ME_MAPPING(startDtdElement,	xmlwriter_start_dtd_element,	NULL)
-	PHP_ME_MAPPING(endDtdElement,	xmlwriter_end_dtd_element,	NULL)
-	PHP_ME_MAPPING(writeDtdElement,	xmlwriter_write_dtd_element,	NULL)
+	PHP_ME_MAPPING(startElement,	xmlwriter_start_element,	NULL, 0)
+	PHP_ME_MAPPING(endElement,		xmlwriter_end_element,		NULL, 0)
+	PHP_ME_MAPPING(startElementNs,	xmlwriter_start_element_ns,	NULL, 0)
+	PHP_ME_MAPPING(writeElement,	xmlwriter_write_element,	NULL, 0)
+	PHP_ME_MAPPING(writeElementNs,	xmlwriter_write_element_ns,	NULL, 0)
+	PHP_ME_MAPPING(startPi,			xmlwriter_start_pi,			NULL, 0)
+	PHP_ME_MAPPING(endPi,			xmlwriter_end_pi,			NULL, 0)
+	PHP_ME_MAPPING(writePi,			xmlwriter_write_pi,			NULL, 0)
+	PHP_ME_MAPPING(startCdata,		xmlwriter_start_cdata,		NULL, 0)
+	PHP_ME_MAPPING(endCdata,		xmlwriter_end_cdata,		NULL, 0)
+	PHP_ME_MAPPING(writeCdata,		xmlwriter_write_cdata,		NULL, 0)
+	PHP_ME_MAPPING(text,			xmlwriter_text,				NULL, 0)
+	PHP_ME_MAPPING(startDocument,	xmlwriter_start_document,	NULL, 0)
+	PHP_ME_MAPPING(endDocument,		xmlwriter_end_document,		NULL, 0)
+	PHP_ME_MAPPING(writeComment,	xmlwriter_write_comment,	NULL, 0)
+	PHP_ME_MAPPING(startDtd,		xmlwriter_start_dtd,		NULL, 0)
+	PHP_ME_MAPPING(endDtd,			xmlwriter_end_dtd,			NULL, 0)
+	PHP_ME_MAPPING(writeDtd,		xmlwriter_write_dtd,		NULL, 0)
+	PHP_ME_MAPPING(startDtdElement,	xmlwriter_start_dtd_element,	NULL, 0)
+	PHP_ME_MAPPING(endDtdElement,	xmlwriter_end_dtd_element,	NULL, 0)
+	PHP_ME_MAPPING(writeDtdElement,	xmlwriter_write_dtd_element,	NULL, 0)
 #if LIBXML_VERSION > 20608
-	PHP_ME_MAPPING(startDtdAttlist,	xmlwriter_start_dtd_attlist,	NULL)
-	PHP_ME_MAPPING(endDtdAttlist,	xmlwriter_end_dtd_attlist,	NULL)
-	PHP_ME_MAPPING(writeDtdAttlist,	xmlwriter_write_dtd_attlist,	NULL)
+	PHP_ME_MAPPING(startDtdAttlist,	xmlwriter_start_dtd_attlist,	NULL, 0)
+	PHP_ME_MAPPING(endDtdAttlist,	xmlwriter_end_dtd_attlist,	NULL, 0)
+	PHP_ME_MAPPING(writeDtdAttlist,	xmlwriter_write_dtd_attlist,	NULL, 0)
 #endif
-	PHP_ME_MAPPING(outputMemory,	xmlwriter_output_memory,	NULL)
-	PHP_ME_MAPPING(flush,			xmlwriter_flush,			NULL)
+	PHP_ME_MAPPING(outputMemory,	xmlwriter_output_memory,	NULL, 0)
+	PHP_ME_MAPPING(flush,			xmlwriter_flush,			NULL, 0)
 	{NULL, NULL, NULL}
 };
 /* }}} */

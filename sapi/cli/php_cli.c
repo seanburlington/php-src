@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.15 2007/01/01 09:40:33 sebastian Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.1 2006/05/09 23:59:54 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -708,7 +708,6 @@ int main(int argc, char *argv[])
 		INI_HARDCODED("implicit_flush", "1");
 		INI_HARDCODED("output_buffering", "0");
 		INI_HARDCODED("max_execution_time", "0");
-		INI_HARDCODED("max_input_time", "-1");
 
 		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
 			switch (c) {
@@ -754,7 +753,7 @@ int main(int argc, char *argv[])
 					goto err;
 				}
 
-				php_printf("PHP %s (%s) (built: %s %s) %s\nCopyright (c) 1997-2007 The PHP Group\n%s",
+				php_printf("PHP %s (%s) (built: %s %s) %s\nCopyright (c) 1997-2006 The PHP Group\n%s",
 					PHP_VERSION, sapi_module.name, __DATE__, __TIME__,
 #if ZEND_DEBUG && defined(HAVE_GCOV)
 					"(DEBUG GCOV)",
@@ -1221,7 +1220,7 @@ int main(int argc, char *argv[])
 					zend_call_method_with_1_params(&ref, pce, &pce->constructor, "__construct", NULL, arg);
 
 					if (EG(exception)) {
-						zval *msg = zend_read_property(zend_exception_get_default(), EG(exception), "message", sizeof("message")-1, 0 TSRMLS_CC);
+						zval *msg = zend_read_property(zend_exception_get_default(TSRMLS_C), EG(exception), "message", sizeof("message")-1, 0 TSRMLS_CC);
 						zend_printf("Exception: %s\n", Z_STRVAL_P(msg));
 						zval_ptr_dtor(&EG(exception));
 						EG(exception) = NULL;

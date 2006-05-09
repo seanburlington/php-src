@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.41.2.2 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: php_pcre.h,v 1.41.2.1.2.1 2006/05/09 18:29:26 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -61,6 +61,9 @@ typedef struct {
 
 ZEND_BEGIN_MODULE_GLOBALS(pcre)
 	HashTable pcre_cache;
+	long backtrack_limit;
+	long recursion_limit;
+	int  error_code;
 ZEND_END_MODULE_GLOBALS(pcre)
 
 #ifdef ZTS

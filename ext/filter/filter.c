@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.42 2006/05/08 21:26:09 pajoye Exp $ */
+/* $Id: filter.c,v 1.43 2006/05/09 00:29:30 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.42 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.43 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -425,7 +425,6 @@ static void php_zval_filter_recursive(zval *value, long filter, long flags, zval
 static zval * php_filter_get_storage(long arg TSRMLS_DC) /* {{{ */
 {
 	zval * array_ptr = NULL;
-
 	switch (arg) {
 		case PARSE_GET:
 			array_ptr = IF_G(get_array);
@@ -630,7 +629,7 @@ PHP_FUNCTION(input_get)
  */
 PHP_FUNCTION(input_get_args)
 {
-	long        arg, filter = FILTER_DEFAULT;
+	long       filter = FILTER_DEFAULT;
 	char       *charset = NULL;
 	zval      **tmp, ** option;
 	int         filter_flags = FILTER_FLAG_SCALAR;
@@ -667,7 +666,7 @@ PHP_FUNCTION(input_get_args)
 		case PARSE_COOKIE:
 		case PARSE_SERVER:
 		case PARSE_ENV:
-			array_ptr = php_filter_get_storage(arg TSRMLS_CC);
+			array_ptr = php_filter_get_storage(args_from TSRMLS_CC);
 			break;
 
 		case PARSE_DATA:

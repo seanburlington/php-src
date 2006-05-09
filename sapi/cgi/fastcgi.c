@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.14 2006/05/05 07:05:59 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.15 2006/05/09 22:00:36 iliaa Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -669,12 +669,14 @@ int fcgi_accept_request(fcgi_request *req)
 				}
 				FCGI_UNLOCK(req->listen_socket);
 #else
-				sa_t sa;
-				socklen_t len = sizeof(sa);
+				{
+					sa_t sa;
+					socklen_t len = sizeof(sa);
 
-				FCGI_LOCK(req->listen_socket);
-				req->fd = accept(req->listen_socket, (struct sockaddr *)&sa, &len);
-				FCGI_UNLOCK(req->listen_socket);
+					FCGI_LOCK(req->listen_socket);
+					req->fd = accept(req->listen_socket, (struct sockaddr *)&sa, &len);
+					FCGI_UNLOCK(req->listen_socket);
+				}
 #endif
 
 				if (req->fd < 0 && (in_shutdown || errno != EINTR)) {

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.19 2007/01/01 09:40:33 sebastian Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.1 2006/05/09 22:00:08 iliaa Exp $ */
 
 #include "fastcgi.h"
 #include "php.h"
@@ -258,7 +258,7 @@ int fcgi_listen(const char *path, int backlog)
 	short     port = 0;
 	int       listen_socket;
 	sa_t      sa;
-	socklen_t sock_len;
+	socklen_t sa_len;
 
 	if ((s = strchr(path, ':'))) {
 		port = atoi(s+1);
@@ -274,7 +274,7 @@ int fcgi_listen(const char *path, int backlog)
 		memset(&sa.sa_inet, 0, sizeof(sa.sa_inet));
 		sa.sa_inet.sin_family = AF_INET;
 		sa.sa_inet.sin_port = htons(port);
-		sock_len = sizeof(sa.sa_inet);
+		sa_len = sizeof(sa.sa_inet);
 
 		if (!*host || !strncmp(host, "*", sizeof("*")-1)) {
 			sa.sa_inet.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -305,16 +305,16 @@ int fcgi_listen(const char *path, int backlog)
 		memset(&sa.sa_unix, 0, sizeof(sa.sa_unix));
 		sa.sa_unix.sun_family = AF_UNIX;
 		memcpy(sa.sa_unix.sun_path, path, path_len + 1);
-		sock_len = (size_t)(((struct sockaddr_un *)0)->sun_path)	+ path_len;
+		sa_len = (size_t)(((struct sockaddr_un *)0)->sun_path)	+ path_len;
 #ifdef HAVE_SOCKADDR_UN_SUN_LEN
-		sa.sa_unix.sun_len = sock_len;
+		sa.sa_unix.sun_len = sa_len;
 #endif
 		unlink(path);
 	}
 
 	/* Create, bind socket and start listen on it */
 	if ((listen_socket = socket(sa.sa.sa_family, SOCK_STREAM, 0)) < 0 ||
-	    bind(listen_socket, (struct sockaddr *) &sa, sock_len) < 0 ||
+	    bind(listen_socket, (struct sockaddr *) &sa, sa_len) < 0 ||
 	    listen(listen_socket, backlog) < 0) {
 
 		fprintf(stderr, "Cannot bind/listen socket - [%d] %s.\n",errno, strerror(errno));
@@ -401,7 +401,7 @@ static int fcgi_get_params(fcgi_request *req, unsigned char *p, unsigned char *e
 	int name_len, val_len;
 	char *s;
 
-	while (p < end && n < FCGI_MAX_ENV_VARS - 1) {
+	while (p < end) {
 		name_len = *p++;
 		if (name_len >= 128) {
 			name_len = ((name_len & 0x7f) << 24);
@@ -424,6 +424,10 @@ static int fcgi_get_params(fcgi_request *req, unsigned char *p, unsigned char *e
 		p += val_len;
 		s[name_len+1+val_len] = '\0';
 		n++;
+		if (n > sizeof(req->env)/sizeof(req->env[0])) {
+			/* TODO: to many environment variables */
+			return n;
+		}
 	}
 	return n;
 }
@@ -666,12 +670,12 @@ int fcgi_accept_request(fcgi_request *req)
 				FCGI_UNLOCK(req->listen_socket);
 #else
 				{
-				sa_t sa;
-				socklen_t len = sizeof(sa);
+					sa_t sa;
+					socklen_t len = sizeof(sa);
 
-				FCGI_LOCK(req->listen_socket);
-				req->fd = accept(req->listen_socket, (struct sockaddr *)&sa, &len);
-				FCGI_UNLOCK(req->listen_socket);
+					FCGI_LOCK(req->listen_socket);
+					req->fd = accept(req->listen_socket, (struct sockaddr *)&sa, &len);
+					FCGI_UNLOCK(req->listen_socket);
 				}
 #endif
 
@@ -767,17 +771,15 @@ int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int l
 	if (req->out_hdr && req->out_hdr->type != type) {
 		close_packet(req);
 	}
-#if 0
-	/* Unoptimized, but clear version */
 	rest = len;
+#if 0
+	/* Unoptinmzed, but clear version */
 	while (rest > 0) {
 		limit = sizeof(req->out_buf) - (req->out_pos - req->out_buf);
 
 		if (!req->out_hdr) {
 			if (limit < sizeof(fcgi_header)) {
-				if (!fcgi_flush(req, 0)) {
-					return -1;
-				}	
+				fcgi_flush(req, 0);
 			}
 			open_packet(req, type);
 		}
@@ -791,41 +793,32 @@ int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int l
 			req->out_pos += limit;
 			rest -= limit;
 			str += limit;
-			if (!fcgi_flush(req, 0)) {
-				return -1;
-			}
+			fcgi_flush(req, 0);
 		}
 	}
 #else
-	/* Optimized version */
-	limit = sizeof(req->out_buf) - (req->out_pos - req->out_buf);
+	/* Optinmzed version */
 	if (!req->out_hdr) {
-		limit -= sizeof(fcgi_header);
-		if (limit < 0) limit = 0;
+		rest += sizeof(fcgi_header);
 	}
+	limit = sizeof(req->out_buf) - (req->out_pos - req->out_buf);
 
-	if (len < limit) {
+	if (rest < limit) {
 		if (!req->out_hdr) {
 			open_packet(req, type);
 		}
 		memcpy(req->out_pos, str, len);
 		req->out_pos += len;
-	} else if (len - limit < sizeof(req->out_buf) - sizeof(fcgi_header)) {
+	} else if (rest - limit < sizeof(req->out_buf) - sizeof(fcgi_header)) {
 		if (!req->out_hdr) {
 			open_packet(req, type);
 		}
-		if (limit > 0) {
-			memcpy(req->out_pos, str, limit);
-			req->out_pos += limit;
-		}
-		if (!fcgi_flush(req, 0)) {
-			return -1;
-		}
-		if (len > limit) {
-			open_packet(req, type);
-			memcpy(req->out_pos, str + limit, len - limit);
-			req->out_pos += len - limit;
-		}
+		memcpy(req->out_pos, str, limit);
+		req->out_pos += limit;
+		fcgi_flush(req, 0);
+		open_packet(req, type);
+		memcpy(req->out_pos, str + limit, len - limit);
+		req->out_pos += len - limit;
 	} else {
 		int pos = 0;
 		int pad;
@@ -835,9 +828,7 @@ int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int l
 			open_packet(req, type);
 			fcgi_make_header(req->out_hdr, type, req->id, 0xfff8);
 			req->out_hdr = NULL;
-			if (!fcgi_flush(req, 0)) {
-				return -1;
-			}
+			fcgi_flush(req, 0);
 			if (safe_write(req, str + pos, 0xfff8) != 0xfff8) {
 				req->keep = 0;
 				return -1;
@@ -851,9 +842,7 @@ int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int l
 		open_packet(req, type);
 		fcgi_make_header(req->out_hdr, type, req->id, (len - pos) - rest);
 		req->out_hdr = NULL;
-		if (!fcgi_flush(req, 0)) {
-			return -1;
-		}
+		fcgi_flush(req, 0);
 		if (safe_write(req, str + pos, (len - pos) - rest) != (len - pos) - rest) {
 			req->keep = 0;
 			return -1;
@@ -913,9 +902,7 @@ void fcgi_putenv(fcgi_request *req, char* var, int var_len)
 			}
 			env++;
 		}
-		if (env != &req->env[FCGI_MAX_ENV_VARS - 1]) {
-			*env = fcgi_strndup(var, var_len);
-		}
+		*env = fcgi_strndup(var, var_len);
 	}
 }
 

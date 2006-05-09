@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.30 2006/03/03 21:35:16 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.31 2006/05/09 22:15:16 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -25,7 +25,6 @@
 #include "php_spl.h"
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 #include "ext/pcre/php_pcre.h"
-
 #endif
 
 #define spl_ce_Traversable   zend_ce_traversable

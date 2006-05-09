@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.41.2.1.2.1 2006/05/09 18:29:26 andrei Exp $ */
+/* $Id: php_pcre.h,v 1.41.2.1.2.2 2006/05/09 23:53:40 helly Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -57,7 +57,10 @@ typedef struct {
 	unsigned const char *tables;
 #endif
 	int compile_options;
+	int refcount;
 } pcre_cache_entry;
+
+PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_len, pcre_extra **extra, int *preg_options, int *compile_options  TSRMLS_DC);
 
 ZEND_BEGIN_MODULE_GLOBALS(pcre)
 	HashTable pcre_cache;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.26 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: php_variables.h,v 1.27 2006/05/10 21:23:46 rasmus Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -29,6 +29,9 @@
 #define PARSE_GET 1
 #define PARSE_COOKIE 2
 #define PARSE_STRING 3
+#define PARSE_ENV 4
+#define PARSE_SERVER 5
+#define PARSE_SESSION 6
 
 BEGIN_EXTERN_C()
 void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC);

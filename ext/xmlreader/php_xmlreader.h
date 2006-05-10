@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.h,v 1.6 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_xmlreader.h,v 1.7 2006/05/10 11:58:56 rrichards Exp $ */
 
 #ifndef PHP_XMLREADER_H
 #define PHP_XMLREADER_H
@@ -40,6 +40,8 @@ extern zend_module_entry xmlreader_module_entry;
 typedef struct _xmlreader_object {
 	zend_object  std;
 	xmlTextReaderPtr ptr;
+	/* strings must be set in input buffer as copy is required */
+	xmlParserInputBufferPtr input;
 	void *schema;
 	HashTable *prop_handler;
 	zend_object_handle handle;

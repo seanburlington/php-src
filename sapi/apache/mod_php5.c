@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.31 2006/04/02 17:58:06 iliaa Exp $ */
+/* $Id: mod_php5.c,v 1.32 2006/05/10 21:25:01 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -250,13 +250,17 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 
 	for (i = 0; i < arr->nelts; i++) {
 		char *val;
+		int val_len, new_val_len;
 
 		if (elts[i].val) {
 			val = elts[i].val;
 		} else {
 			val = "";
 		}
-		php_register_variable(elts[i].key, val, track_vars_array  TSRMLS_CC);
+		val_len = strlen(val);
+		if (sapi_module.input_filter(PARSE_SERVER, elts[i].key, &val, val_len, &new_val_len TSRMLS_CC)) {
+			php_register_variable_safe(elts[i].key, val, new_val_len, track_vars_array TSRMLS_CC);
+		}
 	}
 
 	/* If PATH_TRANSLATED doesn't exist, copy it from SCRIPT_FILENAME */

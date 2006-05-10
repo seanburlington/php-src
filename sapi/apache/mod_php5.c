@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.10 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.1 2006/05/10 21:19:32 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -127,7 +127,7 @@ static void sapi_apache_flush(void *server_context)
  */
 static int sapi_apache_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 {
-	int total_read_bytes=0, read_bytes;
+	uint total_read_bytes=0, read_bytes;
 	request_rec *r = (request_rec *) SG(server_context);
 	void (*handler)(int);
 
@@ -254,13 +254,17 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 
 	for (i = 0; i < arr->nelts; i++) {
 		char *val;
+		int val_len, new_val_len;
 
 		if (elts[i].val) {
 			val = elts[i].val;
 		} else {
 			val = "";
 		}
-		php_register_variable(elts[i].key, val, track_vars_array  TSRMLS_CC);
+		val_len = strlen(val);
+		if (sapi_module.input_filter(PARSE_SERVER, elts[i].key, &val, val_len, &new_val_len TSRMLS_CC)) {
+			php_register_variable_safe(elts[i].key, val, new_val_len, track_vars_array TSRMLS_CC);
+		}
 	}
 
 	/* If PATH_TRANSLATED doesn't exist, copy it from SCRIPT_FILENAME */

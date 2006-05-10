@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,13 +18,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.8 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.1 2006/05/10 21:19:32 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
 
 #include "php.h"
 #include "SAPI.h"
+#include "php_variables.h"
 #include "php_ini.h"
 #include "ext/standard/php_string.h"
 #include "ext/standard/pageinfo.h"
@@ -914,11 +915,15 @@ SAPI_API struct stat *sapi_get_stat(TSRMLS_D)
 
 SAPI_API char *sapi_getenv(char *name, size_t name_len TSRMLS_DC)
 {
-	if (sapi_module.getenv) {
-		return sapi_module.getenv(name, name_len TSRMLS_CC);
+	if (sapi_module.getenv) { 
+		char *value, *tmp = sapi_module.getenv(name, name_len TSRMLS_CC);
+		if(tmp) value = estrdup(tmp); 
+		else return NULL;
+		sapi_module.input_filter(PARSE_ENV, name, &value, strlen(value), NULL TSRMLS_CC);
+		return value;
 	} else {
-		return NULL;
-	}
+		return NULL; 
+	}   
 }
 
 SAPI_API int sapi_get_fd(int *fd TSRMLS_DC)

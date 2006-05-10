@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.22.2.4 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_variables.h,v 1.22.2.3.2.1 2006/05/10 21:10:45 rasmus Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -29,6 +29,9 @@
 #define PARSE_GET 1
 #define PARSE_COOKIE 2
 #define PARSE_STRING 3
+#define PARSE_ENV 4
+#define PARSE_SERVER 5
+#define PARSE_SESSION 6
 
 BEGIN_EXTERN_C()
 void php_startup_auto_globals(TSRMLS_D);

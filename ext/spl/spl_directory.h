@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.12.2.6 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: spl_directory.h,v 1.12.2.5.2.1 2006/05/10 00:31:04 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -87,6 +87,9 @@ struct _spl_filesystem_object {
 };
 
 #define SPL_FILE_OBJECT_DROP_NEW_LINE      0x00000001 /* drop new lines */
+#define SPL_FILE_OBJECT_READ_AHEAD         0x00000002 /* read on rewind/next */
+#define SPL_FILE_OBJECT_SKIP_EMPTY         0x00000006 /* skip empty lines */
+#define SPL_FILE_OBJECT_READ_CSV           0x00000008 /* read via fgetcsv */
 
 #define SPL_FILE_DIR_CURRENT_AS_FILEINFO   0x00000010 /* make RecursiveDirectoryTree::current() return SplFileInfo */
 #define SPL_FILE_DIR_CURRENT_AS_PATHNAME   0x00000020 /* make RecursiveDirectoryTree::current() return getPathname() */

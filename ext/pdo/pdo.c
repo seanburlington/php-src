@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.72 2006/02/21 00:55:38 helly Exp $ */
+/* $Id: pdo.c,v 1.73 2006/05/10 21:03:34 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -90,7 +90,7 @@ PDO_API zend_class_entry *php_pdo_get_exception_base(int root TSRMLS_DC)
 
 zend_class_entry *pdo_dbh_ce, *pdo_dbstmt_ce, *pdo_row_ce;
 
-/* proto array pdo_drivers()
+/* {{{ proto array pdo_drivers()
  Return array of available PDO drivers */
 PHP_FUNCTION(pdo_drivers)
 {

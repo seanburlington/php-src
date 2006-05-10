@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.14.2.4 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.14.2.3.2.1 2006/05/10 14:39:10 rrichards Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -82,7 +82,7 @@ zend_object_handlers php_com_object_handlers;
 void php_com_object_enable_event_sink(php_com_dotnet_object *obj, int enable TSRMLS_DC);
 
 /* com_saproxy.c */
-zend_object_iterator *php_com_saproxy_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *php_com_saproxy_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 int php_com_saproxy_create(zval *com_object, zval *proxy_out, zval *index TSRMLS_DC);
 
 /* com_olechar.c */
@@ -177,7 +177,7 @@ ITypeInfo *php_com_locate_typeinfo(char *typelibname, php_com_dotnet_object *obj
 int php_com_process_typeinfo(ITypeInfo *typeinfo, HashTable *id_to_name, int printdef, GUID *guid, int codepage TSRMLS_DC);
 
 /* com_iterator.c */
-zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 
 
 #endif

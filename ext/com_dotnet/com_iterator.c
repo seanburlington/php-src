@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_iterator.c,v 1.9.2.3 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: com_iterator.c,v 1.9.2.2.2.1 2006/05/10 14:39:10 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,7 +139,7 @@ static zend_object_iterator_funcs com_iter_funcs = {
 	NULL
 };
 
-zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC)
 {
 	php_com_dotnet_object *obj;
 	struct php_com_iterator *I;
@@ -148,6 +148,10 @@ zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object TSRMLS
 	VARIANT v;
 	unsigned long n_fetched;
 	zval *ptr;
+
+	if (by_ref) {
+		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+	}
 
 	obj = CDNO_FETCH(object);
 

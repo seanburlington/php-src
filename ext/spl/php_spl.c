@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.89 2006/03/23 19:34:20 helly Exp $ */
+/* $Id: php_spl.c,v 1.90 2006/05/10 21:09:31 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -178,8 +178,8 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(RecursiveFilterIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(RecursiveIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(RecursiveIteratorIterator, z_list, sub, allow, ce_flags); \
-	SPL_ADD_CLASS(RecursiveRegExIterator, z_list, sub, allow, ce_flags); \
-	SPL_ADD_CLASS(RegExIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(RecursiveRegexIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(RegexIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(RuntimeException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SeekableIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SimpleXMLIterator, z_list, sub, allow, ce_flags); \

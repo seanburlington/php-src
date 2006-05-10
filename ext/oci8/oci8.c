@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16 2006/04/12 19:21:35 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.17 2006/05/10 10:08:23 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -647,7 +647,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.17 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1718,7 +1718,9 @@ static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC)
 				connection->descriptors = NULL;
 			}
 			
-			php_oci_connection_rollback(connection TSRMLS_CC);
+			if (connection->needs_commit) {
+				php_oci_connection_rollback(connection TSRMLS_CC);
+			}
 			
 			if (OCI_G(persistent_timeout) > 0) {
 				connection->idle_expiry = timestamp + OCI_G(persistent_timeout);

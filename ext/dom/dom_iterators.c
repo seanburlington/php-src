@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.9.2.3.2.1 2006/05/09 23:55:24 helly Exp $ */
+/* $Id: dom_iterators.c,v 1.9.2.3.2.2 2006/05/10 18:32:50 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -262,12 +262,13 @@ zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object, i
 	int ret, curindex = 0;
 	HashTable *nodeht;
 	zval **entry;
+	php_dom_iterator *iterator;
 
 	if (by_ref) {
 		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
 	}
-	php_dom_iterator *iterator = emalloc(sizeof(php_dom_iterator));
-
+	iterator = emalloc(sizeof(php_dom_iterator));
+	
 	object->refcount++;
 	iterator->intern.data = (void*)object;
 	iterator->intern.funcs = &php_dom_iterator_funcs;

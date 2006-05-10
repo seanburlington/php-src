@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.h,v 1.3.2.3 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_xmlreader.h,v 1.3.2.2.2.1 2006/05/10 12:04:46 rrichards Exp $ */
 
 #ifndef PHP_XMLREADER_H
 #define PHP_XMLREADER_H
@@ -40,9 +40,7 @@ extern zend_module_entry xmlreader_module_entry;
 typedef struct _xmlreader_object {
 	zend_object  std;
 	xmlTextReaderPtr ptr;
-	/* input is used to allow strings to be loaded under libxml 2.5.x
-	must manually allocate and de-allocate these - can be refactored when
-	libxml 2.6.x becomes minimum version */
+	/* strings must be set in input buffer as copy is required */
 	xmlParserInputBufferPtr input;
 	void *schema;
 	HashTable *prop_handler;

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.26 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.1 2006/05/10 14:04:18 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -725,6 +725,9 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			case E_USER_ERROR:
 				error_type_str = "Fatal error";
 				break;
+			case E_RECOVERABLE_ERROR:
+				error_type_str = "Catchable fatal error";
+				break;
 			case E_WARNING:
 			case E_CORE_WARNING:
 			case E_COMPILE_WARNING:
@@ -814,6 +817,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			}
 		/* no break - intentionally */
 		case E_ERROR:
+		case E_RECOVERABLE_ERROR:
 		/* case E_PARSE: the parser would return 1 (failure), we can bail out nicely */
 		case E_COMPILE_ERROR:
 		case E_USER_ERROR:
@@ -1089,11 +1093,6 @@ int php_request_startup(TSRMLS_D)
 			zend_set_timeout(EG(timeout_seconds));
 		} else {
 			zend_set_timeout(PG(max_input_time));
-		}
-
-		/* Disable realpath cache if safe_mode or open_basedir are set */
-		if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
-			CWDG(realpath_cache_size_limit) = 0;
 		}
 
 		if (PG(expose_php)) {
@@ -1728,11 +1727,11 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 		} else {
 			append_file_p = NULL;
 		}
-		if (PG(max_input_time) != -1) {
+		if (PG(max_input_time) == -1) {
 #ifdef PHP_WIN32
 			zend_unset_timeout(TSRMLS_C);
 #endif
-			zend_set_timeout(INI_INT("max_execution_time"));
+			zend_set_timeout(EG(timeout_seconds));
 		}
 		retval = (zend_execute_scripts(ZEND_REQUIRE TSRMLS_CC, NULL, 3, prepend_file_p, primary_file, append_file_p) == SUCCESS);
 		

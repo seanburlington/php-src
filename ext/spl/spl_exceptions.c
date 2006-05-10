@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_exceptions.c,v 1.6.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: spl_exceptions.c,v 1.6.2.1.2.1 2006/05/10 00:03:38 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -47,7 +47,7 @@ PHPAPI zend_class_entry *spl_ce_RangeException;
 PHPAPI zend_class_entry *spl_ce_UnderflowException;
 PHPAPI zend_class_entry *spl_ce_UnexpectedValueException;
 
-#define spl_ce_Exception zend_exception_get_default()
+#define spl_ce_Exception zend_exception_get_default(TSRMLS_C)
 
 /* {{{ PHP_MINIT_FUNCTION(spl_exceptions) */
 PHP_MINIT_FUNCTION(spl_exceptions)

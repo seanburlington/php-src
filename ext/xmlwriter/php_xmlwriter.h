@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.10.2.6 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_xmlwriter.h,v 1.10.2.5.2.1 2006/05/10 19:38:35 rrichards Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -70,6 +70,7 @@ PHP_FUNCTION(xmlwriter_write_attribute_ns);
 #endif
 PHP_FUNCTION(xmlwriter_start_element);
 PHP_FUNCTION(xmlwriter_end_element);
+PHP_FUNCTION(xmlwriter_full_end_element);
 PHP_FUNCTION(xmlwriter_start_element_ns);
 PHP_FUNCTION(xmlwriter_write_element);
 PHP_FUNCTION(xmlwriter_write_element_ns);
@@ -80,6 +81,7 @@ PHP_FUNCTION(xmlwriter_start_cdata);
 PHP_FUNCTION(xmlwriter_end_cdata);
 PHP_FUNCTION(xmlwriter_write_cdata);
 PHP_FUNCTION(xmlwriter_text);
+PHP_FUNCTION(xmlwriter_write_raw);
 PHP_FUNCTION(xmlwriter_start_document);
 PHP_FUNCTION(xmlwriter_end_document);
 #if LIBXML_VERSION >= 20607

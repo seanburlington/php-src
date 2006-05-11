@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.24 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.1 2006/05/11 14:42:12 masugata Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"

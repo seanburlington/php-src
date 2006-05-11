@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.16 2006/02/19 18:20:51 iliaa Exp $ */
+/* $Id: inifile.c,v 1.17 2006/05/11 20:10:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.16 $";
+	return "1.0, $Revision: 1.17 $";
 }
 /* }}} */ 
 
@@ -169,7 +169,7 @@ static int inifile_read(inifile *dba, line_type *ln TSRMLS_DC) {
 	char *pos;
 
 	inifile_val_free(&ln->val);
-	while ((fline = php_stream_gets(dba->fp, NULL, 0)) != NULL) {
+	while ((fline = php_stream_gets(dba->fp, NULL_ZSTR, 0)) != NULL) {
 		if (fline) {
 			if (fline[0] == '[') {
 				/* A value name cannot start with '['

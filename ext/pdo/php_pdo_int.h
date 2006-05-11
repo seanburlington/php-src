@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.17.2.7 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: php_pdo_int.h,v 1.17.2.6.2.1 2006/05/11 22:43:44 helly Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
@@ -40,7 +40,7 @@ extern zend_object_value pdo_dbstmt_new(zend_class_entry *ce TSRMLS_DC);
 extern zend_function_entry pdo_dbstmt_functions[];
 extern zend_class_entry *pdo_dbstmt_ce;
 void pdo_dbstmt_free_storage(pdo_stmt_t *stmt TSRMLS_DC);
-zend_object_iterator *pdo_stmt_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC);
+zend_object_iterator *pdo_stmt_iter_get(zend_class_entry *ce, zval *object, int by_ref TSRMLS_DC);
 extern zend_object_handlers pdo_dbstmt_object_handlers;
 int pdo_stmt_describe_columns(pdo_stmt_t *stmt TSRMLS_DC);
 int pdo_stmt_setup_fetch_mode(INTERNAL_FUNCTION_PARAMETERS, pdo_stmt_t *stmt, int skip_first_arg);

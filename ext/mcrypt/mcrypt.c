@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.4 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.1 2006/05/11 08:06:22 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1097,7 +1097,8 @@ static void php_mcrypt_do_crypt (char* cipher, zval **key, zval **data, char *mo
 	}
 
 	if (mcrypt_generic_init(td, key_s, use_key_length, iv_s) < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Mcrypt initialisation failed");
+		php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "Mcrypt initialisation failed");
+		RETURN_FALSE;
 	}
 	if (dencrypt == MCRYPT_ENCRYPT) {
 		mcrypt_generic(td, data_s, data_size);

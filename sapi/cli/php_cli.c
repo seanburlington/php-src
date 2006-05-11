@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13 2006/02/21 21:15:13 johannes Exp $ */
+/* $Id: php_cli.c,v 1.129.2.14 2006/05/11 22:11:17 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -708,6 +708,7 @@ int main(int argc, char *argv[])
 		INI_HARDCODED("implicit_flush", "1");
 		INI_HARDCODED("output_buffering", "0");
 		INI_HARDCODED("max_execution_time", "0");
+		INI_HARDCODED("max_input_time", "-1");
 
 		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
 			switch (c) {

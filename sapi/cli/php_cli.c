@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.152 2006/04/29 14:53:26 fmk Exp $ */
+/* $Id: php_cli.c,v 1.153 2006/05/11 22:08:55 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -111,8 +111,8 @@
 	"register_argc_argv=1\n"	\
 	"implicit_flush=1\n"		\
 	"output_buffering=0\n"		\
-	"max_execution_time=0\n"
-
+	"max_execution_time=0\n"	\
+	"max_input_time=-1\n"
 
 static char *php_optarg = NULL;
 static int php_optind = 1;

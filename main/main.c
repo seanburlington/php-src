@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.686 2006/04/12 12:52:00 tony2001 Exp $ */
+/* $Id: main.c,v 1.687 2006/05/11 07:55:48 helly Exp $ */
 
 /* {{{ includes
  */
@@ -796,8 +796,10 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 	/* according to error handling mode, suppress error, throw exception or show it */
 	if (PG(error_handling) != EH_NORMAL) {
 		switch (type) {
+			case E_ERROR:
 			case E_CORE_ERROR:
 			case E_COMPILE_ERROR:
+			case E_USER_ERROR:
 			case E_PARSE:
 				/* fatal errors are real errors and cannot be made exceptions */
 				break;

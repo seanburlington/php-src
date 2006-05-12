@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.4 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.1 2006/05/12 18:53:40 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -231,7 +231,8 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 				}
 				break;
 			default:
-			ZVAL_STRING(args[i], xmlXPathCastToString(obj), 1);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php:function object type %d is not supported yet", obj->type);
+			ZVAL_STRING(args[i], "", 0);
 		}
 		xmlXPathFreeObject(obj);
 		fci.params[i] = &args[i];
@@ -395,7 +396,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	} else {
 		intern->hasKeys = clone_docu;
 	}
-	
+
 	if ((oldsheetp = (xsltStylesheetPtr)intern->ptr)) { 
 		/* free wrapper */
 		if (((xsltStylesheetPtr) intern->ptr)->_private != NULL) {
@@ -410,7 +411,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 /* }}} end xsl_xsltprocessor_import_stylesheet */
 
 
-static xmlDocPtr php_xsl_apply_stylesheet(xsl_object *intern, xsltStylesheetPtr style, zval *docp TSRMLS_DC)
+static xmlDocPtr php_xsl_apply_stylesheet(zval *id, xsl_object *intern, xsltStylesheetPtr style, zval *docp TSRMLS_DC)
 {
 	xmlDocPtr newdocp;
 	xmlDocPtr doc = NULL;
@@ -419,6 +420,8 @@ static xmlDocPtr php_xsl_apply_stylesheet(xsl_object *intern, xsltStylesheetPtr 
 	php_libxml_node_object *object;
 	char **params = NULL;
 	int clone;
+	zval *doXInclude, *member;
+	zend_object_handlers *std_hnd;
 
 	node = php_libxml_import_node(docp TSRMLS_CC);
 	
@@ -452,7 +455,18 @@ static xmlDocPtr php_xsl_apply_stylesheet(xsl_object *intern, xsltStylesheetPtr 
 
 	ctxt = xsltNewTransformContext(style, doc);
 	ctxt->_private = (void *) intern;
-	
+
+	std_hnd = zend_get_std_object_handlers();
+
+	MAKE_STD_ZVAL(member);
+	ZVAL_STRING(member, "doXInclude", 0);
+	doXInclude = std_hnd->read_property(id, member, BP_VAR_IS TSRMLS_CC);
+	if (Z_TYPE_P(doXInclude) != IS_NULL) {
+		convert_to_long(doXInclude);
+		ctxt->xinclude = Z_LVAL_P(doXInclude);
+	}
+	efree(member);
+
 	newdocp = xsltApplyStylesheetUser(style, doc, (const char**) params, NULL, NULL, ctxt);
 
 	xsltFreeTransformContext(ctxt);
@@ -500,7 +514,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_doc)
 		RETURN_FALSE;
 	}
 
-	newdocp = php_xsl_apply_stylesheet(intern, sheetp, docp TSRMLS_CC);
+	newdocp = php_xsl_apply_stylesheet(id, intern, sheetp, docp TSRMLS_CC);
 
 	if (newdocp) {
 		DOM_RET_OBJ(rv, (xmlNodePtr) newdocp, &ret, NULL);
@@ -531,7 +545,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_uri)
 		RETURN_FALSE;
 	}
 
-	newdocp = php_xsl_apply_stylesheet(intern, sheetp, docp TSRMLS_CC);
+	newdocp = php_xsl_apply_stylesheet(id, intern, sheetp, docp TSRMLS_CC);
 
 	ret = -1;
 	if (newdocp) {
@@ -564,7 +578,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_xml)
 		RETURN_FALSE;
 	}
 
-	newdocp = php_xsl_apply_stylesheet(intern, sheetp, docp TSRMLS_CC);
+	newdocp = php_xsl_apply_stylesheet(id, intern, sheetp, docp TSRMLS_CC);
 
 	ret = -1;
 	if (newdocp) {

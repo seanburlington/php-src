@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.125 2006/05/10 16:51:18 andrei Exp $ */
+/* $Id: spl_iterators.c,v 1.126 2006/05/12 09:42:19 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2400,11 +2400,20 @@ PHP_FUNCTION(iterator_to_array)
 	if (iter->funcs->rewind) {
 		iter->funcs->rewind(iter TSRMLS_CC);
 	}
+	if (EG(exception)) {
+		return;
+	}
 	while (iter->funcs->valid(iter TSRMLS_CC) == SUCCESS) {
 		iter->funcs->get_current_data(iter, &data TSRMLS_CC);
+		if (EG(exception)) {
+			return;
+		}
 		(*data)->refcount++;
 		if (iter->funcs->get_current_key) {
 			key_type = iter->funcs->get_current_key(iter, &str_key, &str_key_len, &int_key TSRMLS_CC);
+			if (EG(exception)) {
+				return;
+			}
 			switch(key_type) {
 				case HASH_KEY_IS_STRING:
 					add_assoc_zval_ex(return_value, str_key.s, str_key_len, *data);
@@ -2422,8 +2431,14 @@ PHP_FUNCTION(iterator_to_array)
 			add_next_index_zval(return_value, *data);
 		}
 		iter->funcs->move_forward(iter TSRMLS_CC);
+		if (EG(exception)) {
+			return;
+		}
 	}
 	iter->funcs->dtor(iter TSRMLS_CC);
+	if (EG(exception)) {
+		return;
+	}
 }
 /* }}} */
 
@@ -2444,11 +2459,23 @@ PHP_FUNCTION(iterator_count)
 	if (iter->funcs->rewind) {
 		iter->funcs->rewind(iter TSRMLS_CC);
 	}
+	if (EG(exception)) {
+		return;
+	}
 	while (iter->funcs->valid(iter TSRMLS_CC) == SUCCESS) {
+		if (EG(exception)) {
+			return;
+		}
 		count++;
 		iter->funcs->move_forward(iter TSRMLS_CC);
+		if (EG(exception)) {
+			return;
+		}
 	}
 	iter->funcs->dtor(iter TSRMLS_CC);
+	if (EG(exception)) {
+		return;
+	}
 	
 	RETURN_LONG(count);
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_memory_streams.h,v 1.14 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_memory_streams.h,v 1.15 2006/05/13 17:53:01 helly Exp $ */
 
 #ifndef PHP_MEMORY_STREAM_H
 #define PHP_MEMORY_STREAM_H
@@ -50,6 +50,8 @@ END_EXTERN_C()
 
 extern php_stream_ops php_stream_memory_ops;
 extern php_stream_ops php_stream_temp_ops;
+extern php_stream_ops php_stream_rfc2397_ops;
+extern php_stream_wrapper php_stream_rfc2397_wrapper;
 
 #define PHP_STREAM_IS_MEMORY &php_stream_memory_ops
 #define PHP_STREAM_IS_TEMP   &php_stream_temp_ops

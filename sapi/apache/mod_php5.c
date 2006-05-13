@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.32 2006/05/10 21:25:01 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.33 2006/05/13 21:48:14 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -123,7 +123,7 @@ static void sapi_apache_flush(void *server_context)
  */
 static int sapi_apache_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 {
-	uint total_read_bytes=0, read_bytes;
+	int total_read_bytes=0, read_bytes;
 	request_rec *r = (request_rec *) SG(server_context);
 	void (*handler)(int);
 

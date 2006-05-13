@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.48 2006/05/10 23:10:55 rasmus Exp $ */
+/* $Id: filter.c,v 1.49 2006/05/13 02:43:44 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,7 +51,7 @@ filter_list_entry filter_list[] = {
 	{ "stripped",        FILTER_SANITIZE_STRING,        php_filter_string          },
 	{ "encoded",         FILTER_SANITIZE_ENCODED,       php_filter_encoded         },
 	{ "special_chars",   FILTER_SANITIZE_SPECIAL_CHARS, php_filter_special_chars   },
-	{ "unsafe_raw",      FILTER_UNSAFE_RAW,    php_filter_unsafe_raw      },
+	{ "unsafe_raw",      FILTER_UNSAFE_RAW,    			php_filter_unsafe_raw      },
 	{ "email",           FILTER_SANITIZE_EMAIL,         php_filter_email           },
 	{ "url",             FILTER_SANITIZE_URL,           php_filter_url             },
 	{ "number_int",      FILTER_SANITIZE_NUMBER_INT,    php_filter_number_int      },
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.48 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.49 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

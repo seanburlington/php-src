@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.16 2006/05/14 00:40:53 helly Exp $ */
+/* $Id: memory.c,v 1.17 2006/05/14 00:45:27 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -656,6 +656,7 @@ static php_stream * php_stream_url_wrap_rfc2397(php_stream_wrapper *wrapper, cha
 		/* store data */
 		php_stream_temp_write(stream, comma, dlen TSRMLS_CC);
 		php_stream_temp_seek(stream, 0, SEEK_SET, &newoffs TSRMLS_CC);
+		stream->ops = &php_stream_rfc2397_ops;
 		ts = (php_stream_temp_data*)stream->abstract;
 		assert(ts != NULL);
 		ts->mode = mode && mode[0] == 'r' ? TEMP_STREAM_READONLY : 0;

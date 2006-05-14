@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.7.2.5 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: timelib.c,v 1.7.2.4.2.1 2006/05/14 17:36:04 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -204,6 +204,13 @@ void timelib_dump_date(timelib_time *d, int options)
 		}
 		if (d->have_weekday_relative) {
 			printf(" / %d.%d", d->relative.weekday, d->relative.weekday_behavior);
+		}
+		if (d->have_special_relative) {
+			switch (d->special.type) {
+				case TIMELIB_SPECIAL_WEEKDAY:
+					printf(" / %lld weekday", d->special.amount);
+					break;
+			}
 		}
 	}
 	printf("\n");

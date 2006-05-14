@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.7 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.6.2.1 2006/05/14 17:36:04 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -125,6 +125,11 @@ typedef struct timelib_time_offset {
 	timelib_sll  transistion_time;
 } timelib_time_offset;
 
+typedef struct timelib_special {
+	unsigned int type;
+	timelib_sll amount;
+} timelib_special;
+
 typedef struct timelib_time {
 	timelib_sll      y, m, d;     /* Year, Month, Day */
 	timelib_sll      h, i, s;     /* Hour, mInute, Second */
@@ -134,10 +139,11 @@ typedef struct timelib_time {
 	timelib_tzinfo  *tz_info;     /* Timezone structure */
 	signed int       dst;         /* Flag if we were parsing a DST zone */
 	timelib_rel_time relative;
+	timelib_special  special;
 
 	timelib_sll      sse;         /* Seconds since epoch */
 
-	unsigned int   have_time, have_date, have_zone, have_relative, have_weekday_relative, have_weeknr_day;
+	unsigned int   have_time, have_date, have_zone, have_relative, have_weekday_relative, have_special_relative, have_weeknr_day;
 
 	unsigned int   sse_uptodate; /* !0 if the sse member is up to date with the date/time members */
 	unsigned int   tim_uptodate; /* !0 if the date/time members are up to date with the sse member */
@@ -173,17 +179,17 @@ typedef struct _timelib_tzdb_index_entry {
 } timelib_tzdb_index_entry;
 
 typedef struct _timelib_tzdb {
-	char                     *version;
-	int                       index_size;
-	timelib_tzdb_index_entry *index;
-	char                     *data;
+	char                           *version;
+	int                             index_size;
+	const timelib_tzdb_index_entry *index;
+	const unsigned char            *data;
 } timelib_tzdb;
 
 #define TIMELIB_ZONETYPE_OFFSET 1
 #define TIMELIB_ZONETYPE_ABBR   2
 #define TIMELIB_ZONETYPE_ID     3
 
-#define SECS_PER_ERA 12622780800L
+#define SECS_PER_ERA 12622780800LL
 #define SECS_PER_DAY       86400
 #define DAYS_PER_YEAR        365
 #define DAYS_PER_LYEAR       366

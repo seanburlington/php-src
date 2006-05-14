@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10.2.12 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: timelib.h,v 1.10.2.11.2.1 2006/05/14 17:36:04 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -25,6 +25,8 @@
 
 #define TIMELIB_NONE             0x00
 #define TIMELIB_OVERRIDE_TIME    0x01
+
+#define TIMELIB_SPECIAL_WEEKDAY  0x01
 
 #ifndef LONG_MAX
 #define LONG_MAX 2147483647L
@@ -51,10 +53,10 @@ timelib_sll timelib_days_in_month(timelib_sll y, timelib_sll m);
 void timelib_isoweek_from_date(timelib_sll y, timelib_sll m, timelib_sll d, timelib_sll *iw, timelib_sll *iy);
 
 /* From parse_date.re */
-timelib_time *timelib_strtotime(char *s, int len, timelib_error_container **errors, timelib_tzdb *tzdb);
+timelib_time *timelib_strtotime(char *s, int len, timelib_error_container **errors, const timelib_tzdb *tzdb);
 void timelib_fill_holes(timelib_time *parsed, timelib_time *now, int options);
 char *timelib_timezone_id_from_abbr(const char *abbr, long gmtoffset, int isdst);
-timelib_tz_lookup_table *timelib_timezone_abbreviations_list(void);
+const timelib_tz_lookup_table *timelib_timezone_abbreviations_list(void);
 
 /* From tm2unixtime.c */
 void timelib_update_ts(timelib_time* time, timelib_tzinfo* tzi);
@@ -67,14 +69,14 @@ void timelib_update_from_sse(timelib_time *tm);
 void timelib_set_timezone(timelib_time *t, timelib_tzinfo *tz);
 
 /* From parse_tz.c */
-int timelib_timezone_id_is_valid(char *timezone, timelib_tzdb *tzdb);
-timelib_tzinfo *timelib_parse_tzfile(char *timezone, timelib_tzdb *tzdb);
+int timelib_timezone_id_is_valid(char *timezone, const timelib_tzdb *tzdb);
+timelib_tzinfo *timelib_parse_tzfile(char *timezone, const timelib_tzdb *tzdb);
 int timelib_timestamp_is_in_dst(timelib_sll ts, timelib_tzinfo *tz);
 timelib_time_offset *timelib_get_time_zone_info(timelib_sll ts, timelib_tzinfo *tz);
 timelib_sll timelib_get_current_offset(timelib_time *t);
 void timelib_dump_tzinfo(timelib_tzinfo *tz);
-timelib_tzdb *timelib_builtin_db(void);
-timelib_tzdb_index_entry *timelib_timezone_builtin_identifiers_list(int *count);
+const timelib_tzdb *timelib_builtin_db(void);
+const timelib_tzdb_index_entry *timelib_timezone_builtin_identifiers_list(int *count);
 
 /* From timelib.c */
 timelib_tzinfo* timelib_tzinfo_ctor();

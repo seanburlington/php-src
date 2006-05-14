@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.1 2006/05/13 17:58:58 helly Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.2 2006/05/14 16:06:48 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -944,6 +944,7 @@ static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 {
 	BG(rand_is_seeded) = 0;
 	BG(mt_rand_is_seeded) = 0;
+	BG(umask) = -1;
 	
 	BG(next) = NULL;
 	BG(left) = -1;
@@ -1216,6 +1217,10 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 #ifdef HAVE_PUTENV
 	zend_hash_destroy(&BG(putenv_ht));
 #endif
+
+	if (BG(umask) != -1) {
+		umask(BG(umask));
+	}
 
 	/* Check if locale was changed and change it back
 	   to the value in startup environment */

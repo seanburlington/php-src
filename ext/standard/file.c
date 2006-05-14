@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.7 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.1 2006/05/14 16:06:47 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1464,6 +1464,10 @@ PHP_FUNCTION(umask)
 
 	oldumask = umask(077);
 
+	if (BG(umask) != -1) {
+		BG(umask) = oldumask;
+	}
+
 	if (arg_count == 0) {
 		umask(oldumask);
 	} else {
@@ -1473,8 +1477,6 @@ PHP_FUNCTION(umask)
 		convert_to_long_ex(arg1);
 		umask(Z_LVAL_PP(arg1));
 	}
-
-	/* XXX we should maybe reset the umask after each request! */
 
 	RETURN_LONG(oldumask);
 }

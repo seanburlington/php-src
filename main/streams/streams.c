@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.7 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.1 2006/05/14 18:40:12 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1520,9 +1520,9 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 		n++;
 	}
 
-	if ((*p == ':') && (n > 1) && !strncmp("://", p, 3)) {
+	if ((*p == ':') && (n > 1) && (!strncmp("//", p+1, 2) || !memcmp("data", path, 4))) {
 		protocol = path;
-	} else if (strncasecmp(path, "zlib:", 5) == 0) {
+	} else if (n == 5 && strncasecmp(path, "zlib:", 5) == 0) {
 		/* BC with older php scripts and zlib wrapper */
 		protocol = "compress.zlib";
 		n = 13;

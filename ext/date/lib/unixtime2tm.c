@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.12.2.5 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: unixtime2tm.c,v 1.12.2.4.2.1 2006/05/15 08:54:16 derick Exp $ */
 
 #include "timelib.h"
 
@@ -30,12 +30,6 @@
 #include <string.h>
 #else
 #include <strings.h>
-#endif
-
-#if defined(_MSC_VER)
-#define TIMELIB_LL_CONST(n) n ## i64
-#else
-#define TIMELIB_LL_CONST(n) n ## ll
 #endif
 
 static int month_tab_leap[12] = { -1, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };

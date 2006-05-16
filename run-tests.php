@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.287 2006/05/13 14:01:19 helly Exp $ */
+/* $Id: run-tests.php,v 1.288 2006/05/16 23:04:52 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.287 $'."\n";
+					echo '$Revision: 1.288 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -989,7 +989,7 @@ TEST $file
 		$line = fgets($fp);
 
 		// Match the beginning of a section.
-		if (preg_match('/^--([A-Z]+)--/', $line, $r)) {
+		if (preg_match('/^--([_A-Z]+)--/', $line, $r)) {
 			$section = $r[1];
 			$section_text[$section] = '';
 			$secfile = $section == 'FILE' || $section == 'FILEEOF';

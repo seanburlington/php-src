@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.64 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.65 2006/05/16 13:05:23 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1081,7 +1081,7 @@ static int php_plain_files_mkdir(php_stream_wrapper *wrapper, char *dir, int mod
 		}
 		else {
 			/* find a top level directory we need to create */
-			while ( (p = strrchr(buf + offset, DEFAULT_SLASH)) || (p = strrchr(buf, DEFAULT_SLASH)) ) {
+			while ( (p = strrchr(buf + offset, DEFAULT_SLASH)) || (offset != 1 && (p = strrchr(buf, DEFAULT_SLASH))) ) {
 				*p = '\0';
 				if (VCWD_STAT(buf, &sb) == 0) {
 					*p = DEFAULT_SLASH;

@@ -29,7 +29,7 @@ array(1) {
     ["type"]=>
     string(10) "text/plain"
     ["tmp_name"]=>
-    string(%d) "%s"
+    string(14) "%s"
     ["error"]=>
     int(0)
     ["size"]=>

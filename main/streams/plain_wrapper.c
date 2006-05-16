@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.8 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.1 2006/05/16 13:05:02 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -194,9 +194,10 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 #elif defined(PHP_WIN32)
 	{
 		long handle = _get_osfhandle(self->fd);
+		DWORD in_buf_size, out_buf_size;
 
 		if (handle != 0xFFFFFFFF) {
-			self->is_pipe = GetFileType((HANDLE)handle) == FILE_TYPE_PIPE;
+			self->is_pipe = GetNamedPipeInfo((HANDLE)handle, NULL, &out_buf_size, &in_buf_size, NULL);
 		}
 	}
 #endif
@@ -1099,7 +1100,7 @@ static int php_plain_files_mkdir(php_stream_wrapper *wrapper, char *dir, int mod
 		}
 		else {
 			/* find a top level directory we need to create */
-			while ( (p = strrchr(buf + offset, DEFAULT_SLASH)) || (p = strrchr(buf, DEFAULT_SLASH)) ) {
+			while ( (p = strrchr(buf + offset, DEFAULT_SLASH)) || ( offset !=1 && (p = strrchr(buf, DEFAULT_SLASH))) ) {
 				*p = '\0';
 				if (VCWD_STAT(buf, &sb) == 0) {
 					*p = DEFAULT_SLASH;

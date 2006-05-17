@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.206 2006/04/14 15:15:21 helly Exp $ */
+/* $Id: simplexml.c,v 1.207 2006/05/17 00:07:05 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1055,7 +1055,7 @@ static int sxe_objects_compare(zval *object1, zval *object2 TSRMLS_DC) /* {{{ */
 }
 /* }}} */
 
-/* {{{ array SimpleXMLElement::xpath(string path)
+/* {{{ proto array SimpleXMLElement::xpath(string path)
    Runs XPath query on the XML data */
 SXE_METHOD(xpath)
 {
@@ -1142,6 +1142,8 @@ SXE_METHOD(xpath)
 	xmlXPathFreeObject(retval);
 }
 
+/* {{{ proto bool SimpleXMLElement::registerXPathNamespace(string prefix, string ns)
+   Creates a prefix/ns context for the next XPath query */
 SXE_METHOD(registerXPathNamespace)
 {
 	php_sxe_object    *sxe;
@@ -2277,7 +2279,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.206 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.207 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.12.2.2 2006/05/10 19:39:46 helly Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.3 2006/05/17 16:35:50 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -860,6 +860,8 @@ void node_list_unlink(xmlNodePtr node TSRMLS_DC)
 		if (wrapper != NULL ) {
 			xmlUnlinkNode(node);
 		} else {
+			if (node->type == XML_ENTITY_REF_NODE)
+				break;
 			node_list_unlink(node->children TSRMLS_CC);
 
 			switch (node->type) {

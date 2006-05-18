@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.63.2.10 2006/05/18 22:30:52 tony2001 Exp $ */
+/* $Id: main.c,v 1.512.2.63.2.11 2006/05/18 22:36:14 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -501,7 +501,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 				php_error(type, "%s(%s): %s", get_active_function_name(TSRMLS_C), params, buffer);
 			} else if (PG(html_errors)) {
 				int len;
-				char *replace = php_escape_html_entities(params, strlen(params), &len, 0, ENT_COMPAT, NULL TSRMLS_CC);
+				char *replace = php_escape_html_entities((unsigned char *)params, strlen(params), &len, 0, ENT_COMPAT, NULL TSRMLS_CC);
 				php_error(type, "%s(%s) [<a href='%s%s%s'>%s</a>]: %s", get_active_function_name(TSRMLS_C), replace, docref_root, docref, docref_target, docref, buffer);
 				efree(replace);
 			} else {

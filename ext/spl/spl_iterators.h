@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.2 2006/05/10 16:50:57 andrei Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.3 2006/05/18 21:42:58 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -78,9 +78,10 @@ typedef enum {
 enum {
 	/* public */
 	CIT_CALL_TOSTRING        = 0x00000001,
-	CIT_CATCH_GET_CHILD      = 0x00000002,
-	CIT_TOSTRING_USE_KEY     = 0x00000010,
-	CIT_TOSTRING_USE_CURRENT = 0x00000020,
+	CIT_TOSTRING_USE_KEY     = 0x00000002,
+	CIT_TOSTRING_USE_CURRENT = 0x00000004,
+	CIT_TOSTRING_USE_INNER   = 0x00000008,
+	CIT_CATCH_GET_CHILD      = 0x00000010,
 	CIT_FULL_CACHE           = 0x00000100,
 	CIT_PUBLIC               = 0x0000FFFF,
 	/* private */

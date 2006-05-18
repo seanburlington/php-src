@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.9 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.1 2006/05/18 22:12:26 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1475,6 +1475,11 @@ PHP_FUNCTION(session_regenerate_id)
 		WRONG_PARAM_COUNT;
 	}
 
+	if (SG(headers_sent)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot regenerate session id - headers already sent");
+		RETURN_FALSE;
+	}
+
 	if (PS(session_status) == php_session_active) {
 		if (PS(id)) {
 			if (del_ses && PS(mod)->s_destroy(&PS(mod_data), PS(id) TSRMLS_CC) == FAILURE) {
@@ -1930,6 +1935,6 @@ PHP_MINFO_FUNCTION(session)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 fdm=marker
+ * vim600: noet sw=4 ts=4 fdm=marker
  * vim<600: sw=4 ts=4
  */

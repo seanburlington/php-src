@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.100.2.2 2006/01/01 13:47:00 sniper Exp $ */
+/* $Id: streams.c,v 1.125.2.100.2.3 2006/05/19 10:24:42 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -445,7 +445,7 @@ PHPAPI int php_stream_filter_unregister_factory(const char *filterpattern TSRMLS
  * charsets (for example) but still be able to provide them all as filters */
 PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, const char *filterparams, int filterparamslen, int persistent TSRMLS_DC)
 {
-	php_stream_filter_factory *factory;
+	php_stream_filter_factory *factory = NULL;
 	php_stream_filter *filter = NULL;
 	int n;
 	char *period;

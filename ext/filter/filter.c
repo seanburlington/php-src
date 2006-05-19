@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.50 2006/05/14 13:54:10 pajoye Exp $ */
+/* $Id: filter.c,v 1.51 2006/05/19 01:45:22 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.50 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.51 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -636,6 +636,8 @@ PHP_FUNCTION(input_get_args)
 	HashTable *args_hash;
 	HashPosition pos;
 
+	HashTable * g_hash;
+
 	long args_from = 0;
 	long elm_count;
 	char *key;
@@ -678,11 +680,11 @@ PHP_FUNCTION(input_get_args)
 
 	if (!array_ptr) {
 		RETURN_FALSE;
+	} else {
+		g_hash = HASH_OF(array_ptr);
+		zend_hash_internal_pointer_reset_ex(g_hash, &pos);
+		array_init(return_value);
 	}
-
-	HashTable * g_hash = HASH_OF(array_ptr);
-	zend_hash_internal_pointer_reset_ex(g_hash, &pos);
-	array_init(return_value);
 
 	for (zend_hash_internal_pointer_reset_ex(args_hash, &pos);
 			zend_hash_get_current_data_ex(args_hash, (void **) &element, &pos) == SUCCESS;

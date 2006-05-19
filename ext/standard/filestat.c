@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.10 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.1 2006/05/19 02:51:00 iliaa Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -538,7 +538,6 @@ PHP_FUNCTION(touch)
 {
 	zval **filename, **filetime, **fileatime;
 	int ret;
-	struct stat sb;
 	FILE *file;
 	struct utimbuf newtimebuf;
 	struct utimbuf *newtime = NULL;
@@ -575,8 +574,7 @@ PHP_FUNCTION(touch)
 	}
 
 	/* create the file if it doesn't exist already */
-	ret = VCWD_STAT(Z_STRVAL_PP(filename), &sb);
-	if (ret == -1) {
+	if (VCWD_ACCESS(Z_STRVAL_PP(filename), F_OK) != 0) {
 		file = VCWD_FOPEN(Z_STRVAL_PP(filename), "w");
 		if (file == NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create file %s because %s", Z_STRVAL_PP(filename), strerror(errno));
@@ -634,7 +632,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 	}
 
 	if ((wrapper = php_stream_locate_url_wrapper(filename, &local, 0 TSRMLS_CC)) == &php_plain_files_wrapper) {
-		if (php_check_open_basedir(local TSRMLS_CC) || (PG(safe_mode) && !php_checkuid_ex(filename, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS, CHECKUID_NO_ERRORS))) {
+		if (php_check_open_basedir(local TSRMLS_CC)) {
 			RETURN_FALSE;
 		}
 	}

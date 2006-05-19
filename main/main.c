@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.689 2006/05/16 00:40:36 iliaa Exp $ */
+/* $Id: main.c,v 1.690 2006/05/19 06:11:02 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1540,7 +1540,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	ts_allocate_id(&core_globals_id, sizeof(php_core_globals), (ts_allocate_ctor) core_globals_ctor, NULL);
 	core_globals = ts_resource(core_globals_id);
 #endif
-	EG(bailout_set) = 0;
+	EG(bailout) = NULL;
 	EG(error_reporting) = E_ALL & ~E_NOTICE;
 
 	PG(header_is_being_sent) = 0;

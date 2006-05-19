@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.441 2006/05/06 09:59:02 hholzgra Exp $ */
+/* $Id: file.c,v 1.442 2006/05/19 10:44:34 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2555,9 +2555,9 @@ PHP_FUNCTION(fnmatch)
 /* }}} */
 #endif
 
-/* {{{ proto string php_get_tmpdir()
+/* {{{ proto string sys_get_temp_dir()
    Returns directory path used for temporary files */
-PHP_FUNCTION(php_get_tmpdir)
+PHP_FUNCTION(sys_get_temp_dir)
 {
 	RETURN_STRING((char *)php_get_temporary_directory(), 1);
 }

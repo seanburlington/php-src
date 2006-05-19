@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: sysvmsg.c,v 1.4.2.5.2.2 2006/01/01 13:46:58 sniper Exp $ */
+/* $Id: sysvmsg.c,v 1.4.2.5.2.3 2006/05/19 10:28:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.4.2.5.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.4.2.5.2.3 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -318,8 +318,9 @@ PHP_FUNCTION(msg_receive)
 			if (!php_var_unserialize(&tmp, &p, p + result, &var_hash TSRMLS_CC)) {
 				zend_error(E_WARNING, "%s(): message corrupted", get_active_function_name(TSRMLS_C));
 				RETVAL_FALSE;
+			} else {
+				REPLACE_ZVAL_VALUE(&out_message, tmp, 0);
 			}
-			REPLACE_ZVAL_VALUE(&out_message, tmp, 0);
 			FREE_ZVAL(tmp);
 			PHP_VAR_UNSERIALIZE_DESTROY(var_hash);
 		} else {

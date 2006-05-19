@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.17.2.3 2006/02/26 10:49:51 helly Exp $ */
+/* $Id: filter.c,v 1.17.2.4 2006/05/19 10:24:19 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -251,7 +251,7 @@ PHPAPI void php_stream_bucket_unlink(php_stream_bucket *bucket TSRMLS_DC)
 PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)
 {
 	HashTable *filter_hash = (FG(stream_filters) ? FG(stream_filters) : &stream_filters_hash);
-	php_stream_filter_factory *factory;
+	php_stream_filter_factory *factory = NULL;
 	php_stream_filter *filter = NULL;
 	int n;
 	char *period;

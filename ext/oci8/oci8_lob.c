@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.7.2.7 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: oci8_lob.c,v 1.7.2.6.2.1 2006/05/20 13:46:59 tony2001 Exp $ */
 
 
 
@@ -150,11 +150,16 @@ int php_oci_lob_read (php_oci_descriptor *descriptor, long read_length, long ini
 {
 	php_oci_connection *connection = descriptor->connection;
 	ub4 length = 0;
+#if defined(HAVE_OCI_LOB_READ2)
+	oraub8 bytes_read, bytes_total = 0, offset = 0;
+	oraub8 requested_len = read_length; /* this is by default */
+	oraub8 chars_read = 0;
+#else
 	int bytes_read, bytes_total = 0, offset = 0;
 	int requested_len = read_length; /* this is by default */
-#if defined(HAVE_OCI_LOB_READ2)
-	int chars_read = 0, is_clob = 0;
+	int chars_read = 0;
 #endif
+	int is_clob = 0;
 
 	*data_len = 0;
 	*data = NULL;

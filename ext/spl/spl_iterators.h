@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.3 2006/05/18 21:42:58 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.4 2006/05/20 21:01:42 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -134,6 +134,10 @@ typedef struct _spl_dual_it_object {
 #endif
 	} u;
 } spl_dual_it_object;
+
+typedef int (*spl_iterator_apply_func_t)(zend_object_iterator *iter, void *puser TSRMLS_DC);
+
+PHPAPI int spl_iterator_apply(zval *obj, spl_iterator_apply_func_t apply_func, void *puser TSRMLS_DC);
 
 #endif /* SPL_ITERATORS_H */
 

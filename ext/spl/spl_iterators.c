@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.133 2006/05/21 17:27:12 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.134 2006/05/21 17:36:52 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1317,8 +1317,10 @@ SPL_METHOD(RecursiveFilterIterator, getChildren)
 	intern = (spl_dual_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	zend_call_method_with_0_params(&intern->inner.zobject, intern->inner.ce, NULL, "getchildren", &retval);
-	if (!EG(exception)) {
+	if (!EG(exception) && retval) {
 		spl_instantiate_arg_ex1(Z_OBJCE_P(getThis()), &return_value, 0, retval TSRMLS_CC);
+	}
+	if (retval) {
 		zval_ptr_dtor(&retval);
 	}
 } /* }}} */
@@ -1357,8 +1359,10 @@ SPL_METHOD(ParentIterator, getChildren)
 	intern = (spl_dual_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	zend_call_method_with_0_params(&intern->inner.zobject, intern->inner.ce, NULL, "getchildren", &retval);
-	if (retval) {
+	if (!EG(exception) && retval) {
 		spl_instantiate_arg_ex1(Z_OBJCE_P(getThis()), &return_value, 0, retval TSRMLS_CC);
+	}
+	if (retval) {
 		zval_ptr_dtor(&retval);
 	}
 } /* }}} */

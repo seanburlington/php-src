@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.4 2006/05/20 21:01:42 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.5 2006/05/21 18:13:37 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -130,6 +130,7 @@ typedef struct _spl_dual_it_object {
 		struct {
 			int              flags;
 			pcre_cache_entry *pce;
+			char             *regex;
 		} regex;
 #endif
 	} u;

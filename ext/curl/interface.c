@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.17 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.1 2006/05/21 16:31:57 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1070,6 +1070,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_FTPLISTONLY:
 		case CURLOPT_FTPAPPEND:
 		case CURLOPT_NETRC:
+		case CURLOPT_FOLLOWLOCATION:
 		case CURLOPT_PUT:
 #if CURLOPT_MUTE != 0
 		 case CURLOPT_MUTE:
@@ -1118,16 +1119,6 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_AUTOREFERER:
 		case CURLOPT_COOKIESESSION:
 			convert_to_long_ex(zvalue);
-			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
-			break;
-		case CURLOPT_FOLLOWLOCATION:
-			convert_to_long_ex(zvalue);
-			if ((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) {
-				if (Z_LVAL_PP(zvalue) != 0) {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "CURLOPT_FOLLOWLOCATION cannot be activated when in safe_mode or an open_basedir is set");
-					RETURN_FALSE;
-				}
-			}
 			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
 			break;
 		case CURLOPT_URL:

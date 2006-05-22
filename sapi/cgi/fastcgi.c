@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.16 2006/05/15 14:30:50 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.17 2006/05/22 06:49:44 tony2001 Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -484,7 +484,7 @@ static int fcgi_read_request(fcgi_request *req)
 				break;
 			case FCGI_FILTER:
 				val = strdup("FILTER");
-				zend_hash_update(&req->env, "FCGI_ROLE", sizeof("FCGI_ROLE"), val, sizeof(char*), NULL);
+				zend_hash_update(&req->env, "FCGI_ROLE", sizeof("FCGI_ROLE"), &val, sizeof(char*), NULL);
 				break;
 			default:
 				return 0;

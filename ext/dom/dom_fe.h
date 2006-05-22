@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.14.2.2 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: dom_fe.h,v 1.14.2.1.2.1 2006/05/22 17:12:25 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -130,6 +130,7 @@ PHP_METHOD(domdocument, loadXML);
 PHP_FUNCTION(dom_document_savexml);
 PHP_FUNCTION(dom_document_validate);
 PHP_FUNCTION(dom_document_xinclude);
+PHP_METHOD(domdocument, registerNodeClass);
 
 #if defined(LIBXML_HTML_ENABLED)
 PHP_METHOD(domdocument, loadHTML);

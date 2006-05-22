@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,24 +17,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.23.2.2 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: xml_common.h,v 1.23.2.1.2.1 2006/05/22 17:12:25 rrichards Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
 
 #include "ext/libxml/php_libxml.h"
 
-typedef struct _dom_doc_props {
-	int formatoutput;
-	int validateonparse;
-	int resolveexternals;
-	int preservewhitespace;
-	int substituteentities;
-	int stricterror;
-	int recover;
-} dom_doc_props;
-
-typedef dom_doc_props *dom_doc_propsptr;
+typedef libxml_doc_props *dom_doc_propsptr;
 
 typedef struct _dom_object {
 	zend_object  std;

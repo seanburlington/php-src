@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.8 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.1 2006/05/22 17:09:05 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -942,6 +942,10 @@ int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC) {
 				xmlFreeDoc((xmlDoc *) object->document->ptr);
 			}
 			if (object->document->doc_props != NULL) {
+				if (object->document->doc_props->classmap) {
+					zend_hash_destroy(object->document->doc_props->classmap);
+					FREE_HASHTABLE(object->document->doc_props->classmap);
+				}
 				efree(object->document->doc_props);
 			}
 			efree(object->document);

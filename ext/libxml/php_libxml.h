@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15.2.3 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_libxml.h,v 1.15.2.2.2.1 2006/05/22 17:09:05 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -43,10 +43,21 @@ typedef struct {
 	zend_llist *error_list;
 } php_libxml_globals;
 
+typedef struct _libxml_doc_props {
+	int formatoutput;
+	int validateonparse;
+	int resolveexternals;
+	int preservewhitespace;
+	int substituteentities;
+	int stricterror;
+	int recover;
+	HashTable *classmap;
+} libxml_doc_props;
+
 typedef struct _php_libxml_ref_obj {
 	void *ptr;
 	int   refcount;
-	void *doc_props;
+	libxml_doc_props *doc_props;
 } php_libxml_ref_obj;
 
 typedef struct _php_libxml_node_ptr {

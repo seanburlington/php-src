@@ -16,7 +16,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: CLI.php,v 1.25.2.16.2.1 2005/11/02 16:57:24 cellog Exp $
+ * @version    CVS: $Id: CLI.php,v 1.25.2.16.2.2 2006/05/22 10:19:33 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -455,12 +455,17 @@ class PEAR_Frontend_CLI extends PEAR_Frontend
             } else {
                 $w = strlen($col);
             }
-            if ($w > @$this->params['widest'][$i]) {
+
+            if (isset($this->params['widest'][$i])) {
+                if ($w > $this->params['widest'][$i]) {
+                    $this->params['widest'][$i] = $w;
+                }
+            } else {
                 $this->params['widest'][$i] = $w;
             }
             $tmp = count_chars($columns[$i], 1);
             // handle unix, mac and windows formats
-            $lines = (isset($tmp[10]) ? $tmp[10] : @$tmp[13]) + 1;
+            $lines = (isset($tmp[10]) ? $tmp[10] : (isset($tmp[13]) ? $tmp[13] : 0)) + 1;
             if ($lines > $highest) {
                 $highest = $lines;
             }

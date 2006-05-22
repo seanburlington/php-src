@@ -1,10 +1,10 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.14.4.7 2006/01/07 17:51:54 cellog Exp $ */
+/* $Id: install-pear.php,v 1.6.2.14.4.8 2006/05/22 10:19:33 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);
-ini_set('include_path', $pear_dir);
+ini_set('include_path', '');
 if (function_exists('mb_internal_encoding')) {
     mb_internal_encoding('ASCII');
 }

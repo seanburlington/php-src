@@ -15,7 +15,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: 11.php,v 1.1.2.1 2005/11/02 16:57:27 cellog Exp $
+ * @version    CVS: $Id: 11.php,v 1.1.2.2 2006/05/22 10:19:34 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.3
  */
@@ -137,7 +137,8 @@ class PEAR_REST_11
                 }
                 if ($latest) {
                     if (isset($packageinfo['deps'])) {
-                        if (!isset($packageinfo['deps'][0])) {
+                        if (!is_array($packageinfo['deps']) ||
+                              !isset($packageinfo['deps'][0])) {
                             $packageinfo['deps'] = array($packageinfo['deps']);
                         }
                     }

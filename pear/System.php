@@ -15,7 +15,7 @@
  * @author     Tomas V.V.Cox <cox@idecnet.com>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: System.php,v 1.21.2.16.2.1 2005/11/02 16:57:19 cellog Exp $
+ * @version    CVS: $Id: System.php,v 1.21.2.16.2.2 2006/05/22 10:19:33 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -447,7 +447,12 @@ class System
     */
     function which($program, $fallback = false)
     {
-        // avaible since 4.3.0RC2
+        // enforce API
+        if (!is_string($program) || '' == $program) {
+            return $fallback;
+        }
+
+        // available since 4.3.0RC2
         if (defined('PATH_SEPARATOR')) {
             $path_delim = PATH_SEPARATOR;
         } else {
@@ -544,6 +549,8 @@ class System
                             // prepend drive
                             $args[$i+1] = addslashes(substr(getcwd(), 0, 2) . $args[$i + 1]);
                         }
+                        // escape path separators to avoid PCRE problems
+                        $args[$i+1] = str_replace('\\', '\\\\', $args[$i+1]);
                     }
                     $patterns[] = "(" . preg_replace(array('/\./', '/\*/'),
                                                      array('\.', '.*', ),

@@ -16,7 +16,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Remote.php,v 1.34.2.15.2.2 2005/11/02 16:57:21 cellog Exp $
+ * @version    CVS: $Id: Remote.php,v 1.34.2.15.2.3 2006/05/22 10:19:33 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -151,7 +151,7 @@ class PEAR_Remote extends PEAR
 
         $server_channel = $this->config->get('default_channel');
         $channel = $this->_registry->getChannel($server_channel);
-        if ($channel) {
+        if (!PEAR::isError($channel)) {
             $mirror = $this->config->get('preferred_mirror');
             if ($channel->getMirror($mirror)) {
                 if ($channel->supports('xmlrpc', $method, $mirror)) {
@@ -277,7 +277,7 @@ class PEAR_Remote extends PEAR
         } while (false);
         $server_channel = $this->config->get('default_channel');
         $channel = $this->_registry->getChannel($server_channel);
-        if ($channel) {
+        if (!PEAR::isError($channel)) {
             $mirror = $this->config->get('preferred_mirror');
             if ($channel->getMirror($mirror)) {
                 if ($channel->supports('xmlrpc', $method, $mirror)) {

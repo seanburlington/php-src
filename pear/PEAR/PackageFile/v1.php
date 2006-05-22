@@ -15,7 +15,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: v1.php,v 1.1.2.1 2005/11/02 16:57:27 cellog Exp $
+ * @version    CVS: $Id: v1.php,v 1.1.2.2 2006/05/22 10:19:33 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -1200,6 +1200,10 @@ class PEAR_PackageFile_v1
         }
         if (isset($this->_registry) && $this->_isValid) {
             $chan = $this->_registry->getChannel('pear.php.net');
+            if (PEAR::isError($chan)) {
+                $this->_validateError(PEAR_PACKAGEFILE_ERROR_CHANNELVAL, $chan->getMessage());
+                return $this->_isValid = 0;
+            }
             $validator = $chan->getValidationObject();
             $validator->setPackageFile($this);
             $validator->validate($state);

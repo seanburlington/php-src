@@ -1,10 +1,10 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.14.4.8 2006/05/22 10:19:33 cellog Exp $ */
+/* $Id: install-pear.php,v 1.6.2.14.4.9 2006/05/22 11:17:01 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);
-ini_set('include_path', '');
+ini_set('include_path', $pear_dir);
 if (function_exists('mb_internal_encoding')) {
     mb_internal_encoding('ASCII');
 }
@@ -126,6 +126,12 @@ $pkg = &new PEAR_PackageFile($config, $debug);
 foreach ($install_files as $package => $instfile) {
     $info = &$pkg->fromAnyFile($instfile, PEAR_VALIDATE_INSTALLING);
     if (PEAR::isError($info)) {
+        if (is_array($info->getUserInfo())) {
+	    foreach ($info->getUserInfo() as $err) {
+	        $ui->outputData(sprintf("[PEAR] %s: %s", $err['level'],
+		    $err['message']));
+	    }
+	}
         $ui->outputData(sprintf("[PEAR] %s: %s", $package,
             $info->getMessage()));
         continue;
@@ -134,6 +140,12 @@ foreach ($install_files as $package => $instfile) {
     $downloaderpackage = &new PEAR_Downloader_Package($installer);
     $err = $downloaderpackage->initialize($instfile);
     if (PEAR::isError($err)) {
+        if (is_array($err->getUserInfo())) {
+	    foreach ($err->getUserInfo() as $error) {
+	        $ui->outputData(sprintf("[PEAR] %s: %s", $error['level'],
+		    $error['message']));
+	    }
+	}
         $ui->outputData(sprintf("[PEAR] %s: %s", $package, $err->getMessage()));
         continue;
     }

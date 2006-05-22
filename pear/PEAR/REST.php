@@ -15,7 +15,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: REST.php,v 1.1.2.2 2006/05/22 10:19:33 cellog Exp $
+ * @version    CVS: $Id: REST.php,v 1.1.2.3 2006/05/22 11:17:01 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -323,7 +323,7 @@ class PEAR_REST
             $ifmodifiedsince = ($lastmodified ? "If-Modified-Since: $lastmodified\r\n" : '');
         }
         $request .= "Host: $host:$port\r\n" . $ifmodifiedsince .
-            "User-Agent: PEAR/@package_version@/PHP/" . PHP_VERSION . "\r\n";
+            "User-Agent: PEAR/1.4.9/PHP/" . PHP_VERSION . "\r\n";
         $username = $this->config->get('username');
         $password = $this->config->get('password');
         if ($username && $password) {

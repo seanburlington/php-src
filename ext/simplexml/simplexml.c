@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.207 2006/05/17 00:07:05 helly Exp $ */
+/* $Id: simplexml.c,v 1.208 2006/05/23 21:37:17 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1830,13 +1830,13 @@ PHP_FUNCTION(simplexml_load_file)
 	char           *filename;
 	int             filename_len;
 	xmlDocPtr       docp;
-	char           *classname = NULL, *ns = NULL;
-	int             classname_len = 0, ns_len = 0;
+	char           *ns = NULL;
+	int             ns_len = 0;
 	long            options = 0;
 	zend_class_entry *ce= sxe_class_entry;
 	zend_bool       isprefix = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slsb", &filename, &filename_len, &classname, &classname_len, &options, &ns, &ns_len, &isprefix) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|Clsb", &filename, &filename_len, &ce, &options, &ns, &ns_len, &isprefix) == FAILURE) {
 		return;
 	}
 
@@ -1844,14 +1844,6 @@ PHP_FUNCTION(simplexml_load_file)
 
 	if (! docp) {
 		RETURN_FALSE;
-	}
-
-	if (classname_len) {
-		zend_class_entry **pce;
-		if (zend_lookup_class(classname, classname_len, &pce TSRMLS_CC) == FAILURE) {
-			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Class %s does not exist", classname);
-		}
-		ce = *pce;
 	}
 
 	sxe = php_sxe_object_new(ce TSRMLS_CC);
@@ -1873,13 +1865,13 @@ PHP_FUNCTION(simplexml_load_string)
 	char           *data;
 	int             data_len;
 	xmlDocPtr       docp;
-	char           *classname = NULL, *ns = NULL;
-	int             classname_len = 0, ns_len = 0;
+	char           *ns = NULL;
+	int             ns_len = 0;
 	long            options = 0;
 	zend_class_entry *ce= sxe_class_entry;
 	zend_bool       isprefix = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slsb", &data, &data_len, &classname, &classname_len, &options, &ns, &ns_len, &isprefix) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|Clsb", &data, &data_len, &ce, &options, &ns, &ns_len, &isprefix) == FAILURE) {
 		return;
 	}
 
@@ -1887,14 +1879,6 @@ PHP_FUNCTION(simplexml_load_string)
 
 	if (! docp) {
 		RETURN_FALSE;
-	}
-
-	if (classname_len) {
-		zend_class_entry **pce;
-		if (zend_lookup_class(classname, classname_len, &pce TSRMLS_CC) == FAILURE) {
-			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Class %s does not exist", classname);
-		}
-		ce = *pce;
 	}
 
 	sxe = php_sxe_object_new(ce TSRMLS_CC);
@@ -2144,11 +2128,9 @@ PHP_FUNCTION(simplexml_import_dom)
 	zval *node;
 	php_libxml_node_object *object;
 	xmlNodePtr		nodep = NULL;
-	char           *classname = "";
-	int             classname_len = 0;
 	zend_class_entry *ce= sxe_class_entry;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|s", &node, &classname, &classname_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|C", &node, &ce) == FAILURE) {
 		return;
 	}
 
@@ -2167,14 +2149,6 @@ PHP_FUNCTION(simplexml_import_dom)
 	}
 
 	if (nodep && nodep->type == XML_ELEMENT_NODE) {
-		if (classname_len) {
-			zend_class_entry **pce;
-			if (zend_lookup_class(classname, classname_len, &pce TSRMLS_CC) == FAILURE) {
-				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Class %s does not exist", classname);
-			}
-			ce = *pce;
-		}
-
 		sxe = php_sxe_object_new(ce TSRMLS_CC);
 		sxe->document = object->document;
 		php_libxml_increment_doc_ref((php_libxml_node_object *)sxe, nodep->doc TSRMLS_CC);
@@ -2279,7 +2253,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.207 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.208 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

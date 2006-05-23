@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.20.2.3 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_simplexml.h,v 1.20.2.2.2.1 2006/05/23 22:24:43 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -67,9 +67,9 @@ typedef struct {
 	HashTable *properties;
 	xmlXPathContextPtr xpath;
 	struct {
-		int                   itertype;
 		char                  *name;
 		char                  *nsprefix;
+		int                   isprefix;
 		SXE_ITER              type;
 		zval                  *data;
 	} iter;

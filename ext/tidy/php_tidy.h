@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.26.2.2 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_tidy.h,v 1.26.2.1.2.1 2006/05/24 21:22:13 tony2001 Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -40,6 +40,7 @@ extern zend_module_entry tidy_module_entry;
 #define TIDY_ATTR_ME(name, param) TIDY_METHOD_MAP(name, tam_ ##name, param)
 
 PHP_MINIT_FUNCTION(tidy);
+PHP_MSHUTDOWN_FUNCTION(tidy);
 PHP_RINIT_FUNCTION(tidy);
 PHP_MINFO_FUNCTION(tidy);
 

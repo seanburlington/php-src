@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.288 2006/05/24 07:52:58 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.289 2006/05/24 09:41:55 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -273,7 +273,7 @@ static void sapi_cgibin_flush(void *server_context)
 #ifndef PHP_WIN32
 		!parent && 
 #endif
-		request && fcgi_flush(request, 0) == -1) {
+		request && !fcgi_flush(request, 0)) {
 			php_handle_aborted_connection();
 		}
 		return;

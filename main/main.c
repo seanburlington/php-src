@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.5 2006/05/19 06:09:15 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.6 2006/05/24 22:00:15 edink Exp $ */
 
 /* {{{ includes
  */
@@ -30,6 +30,7 @@
 #ifdef PHP_WIN32
 #include "win32/time.h"
 #include "win32/signal.h"
+#include "win32/php_win32_globals.h"
 #include <process.h>
 #elif defined(NETWARE)
 #include <sys/timeval.h>
@@ -1436,6 +1437,9 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	executor_globals = ts_resource(executor_globals_id);
 	ts_allocate_id(&core_globals_id, sizeof(php_core_globals), (ts_allocate_ctor) core_globals_ctor, NULL);
 	core_globals = ts_resource(core_globals_id);
+#ifdef PHP_WIN32
+	ts_allocate_id(&php_win32_core_globals_id, sizeof(php_win32_core_globals), (ts_allocate_ctor) php_win32_core_globals_ctor, NULL);
+#endif
 #endif
 	EG(bailout) = NULL;
 	EG(error_reporting) = E_ALL & ~E_NOTICE;

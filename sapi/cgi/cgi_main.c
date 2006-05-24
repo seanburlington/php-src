@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.1 2006/05/15 14:30:31 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.2 2006/05/24 07:55:19 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -434,14 +434,18 @@ static char *sapi_cgi_read_cookies(TSRMLS_D)
 void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 {
 	if (PG(http_globals)[TRACK_VARS_ENV] &&
-	    array_ptr != PG(http_globals)[TRACK_VARS_ENV]) {
+	    array_ptr != PG(http_globals)[TRACK_VARS_ENV] &&
+	    Z_TYPE_P(PG(http_globals)[TRACK_VARS_ENV]) == IS_ARRAY &&
+	    zend_hash_num_elements(Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_ENV])) > 0) {
 	    zval_dtor(array_ptr);
 	    *array_ptr = *PG(http_globals)[TRACK_VARS_ENV];
 	    INIT_PZVAL(array_ptr);
 	    zval_copy_ctor(array_ptr);
 	    return;
 	} else if (PG(http_globals)[TRACK_VARS_SERVER] &&
-		array_ptr != PG(http_globals)[TRACK_VARS_SERVER]) {
+		array_ptr != PG(http_globals)[TRACK_VARS_SERVER] &&
+	    Z_TYPE_P(PG(http_globals)[TRACK_VARS_SERVER]) == IS_ARRAY &&
+	    zend_hash_num_elements(Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_SERVER])) > 0) {
 	    zval_dtor(array_ptr);
 	    *array_ptr = *PG(http_globals)[TRACK_VARS_SERVER];
 	    INIT_PZVAL(array_ptr);

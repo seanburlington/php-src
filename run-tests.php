@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.288 2006/05/16 23:04:52 helly Exp $ */
+/* $Id: run-tests.php,v 1.289 2006/05/24 13:29:19 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.288 $'."\n";
+					echo '$Revision: 1.289 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1436,7 +1436,7 @@ COMMAND $cmd
 	/* when using CGI, strip the headers from the output */
 	$headers = "";
 	if (isset($old_php) && preg_match("/^(.*?)\r?\n\r?\n(.*)/s", $out, $match)) {
-		$output = $match[2];
+		$output = trim($match[2]);
 		$rh = preg_split("/[\n\r]+/",$match[1]);
 		$headers = array();
 		foreach ($rh as $line) {

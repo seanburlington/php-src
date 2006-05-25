@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.229 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: php.h,v 1.230 2006/05/25 18:48:30 edink Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -330,6 +330,7 @@ END_EXTERN_C()
 
 /* PHP-named Zend macro wrappers */
 #define PHP_FN					ZEND_FN
+#define PHP_MN					ZEND_MN
 #define PHP_NAMED_FUNCTION		ZEND_NAMED_FUNCTION
 #define PHP_FUNCTION			ZEND_FUNCTION
 #define PHP_METHOD  			ZEND_METHOD

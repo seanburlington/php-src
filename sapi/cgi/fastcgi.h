@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.h,v 1.2.2.5 2006/05/24 09:42:46 dmitry Exp $ */
+/* $Id: fastcgi.h,v 1.2.2.6 2006/05/25 07:06:04 dmitry Exp $ */
 
 /* FastCGI protocol */
 
@@ -25,6 +25,8 @@
 #define FCGI_MAX_LENGTH 0xffff
 
 #define FCGI_KEEP_CONN  1
+
+#define FCGI_MAX_ENV_VARS 256
 
 typedef enum _fcgi_role {
 	FCGI_RESPONDER	= 1,
@@ -105,7 +107,7 @@ typedef struct _fcgi_request {
 	unsigned char  out_buf[1024*8];
 	unsigned char  reserved[sizeof(fcgi_end_request_rec)];
 
-	char          *env[128];
+	char          *env[FCGI_MAX_ENV_VARS];
 } fcgi_request;
 
 int fcgi_init(void);

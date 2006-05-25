@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.5 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.1 2006/05/25 18:47:21 edink Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -334,6 +334,7 @@ END_EXTERN_C()
 
 /* PHP-named Zend macro wrappers */
 #define PHP_FN					ZEND_FN
+#define PHP_MN					ZEND_MN
 #define PHP_NAMED_FUNCTION		ZEND_NAMED_FUNCTION
 #define PHP_FUNCTION			ZEND_FUNCTION
 #define PHP_METHOD  			ZEND_METHOD

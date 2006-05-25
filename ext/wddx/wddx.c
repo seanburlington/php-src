@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.133 2006/05/25 09:51:58 helly Exp $ */
+/* $Id: wddx.c,v 1.134 2006/05/25 23:23:15 iliaa Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

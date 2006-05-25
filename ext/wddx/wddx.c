@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10 2006/04/23 16:02:05 iliaa Exp $ */
+/* $Id: wddx.c,v 1.119.2.11 2006/05/25 10:01:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -751,7 +751,7 @@ static void php_wddx_push_element(void *user_data, const XML_Char *name, const X
 	} else if (!strcmp(name, EL_CHAR)) {
 		int i;
 		
-		for (i = 0; atts[i]; i++) {
+		if (atts) for (i = 0; atts[i]; i++) {
 			if (!strcmp(atts[i], EL_CHAR_CODE) && atts[++i] && atts[i][0]) {
 				char tmp_buf[2];
 
@@ -771,7 +771,7 @@ static void php_wddx_push_element(void *user_data, const XML_Char *name, const X
 	} else if (!strcmp(name, EL_BOOLEAN)) {
 		int i;
 
-		for (i = 0; atts[i]; i++) {
+		if (atts) for (i = 0; atts[i]; i++) {
 			if (!strcmp(atts[i], EL_VALUE) && atts[++i] && atts[i][0]) {
 				ent.type = ST_BOOLEAN;
 				SET_STACK_VARNAME;
@@ -812,7 +812,7 @@ static void php_wddx_push_element(void *user_data, const XML_Char *name, const X
 	} else if (!strcmp(name, EL_VAR)) {
 		int i;
 		
-		for (i = 0; atts[i]; i++) {
+		if (atts) for (i = 0; atts[i]; i++) {
 			if (!strcmp(atts[i], EL_NAME) && atts[++i] && atts[i][0]) {
 				char *decoded;
 				int decoded_len;
@@ -829,7 +829,7 @@ static void php_wddx_push_element(void *user_data, const XML_Char *name, const X
 		MAKE_STD_ZVAL(ent.data);
 		array_init(ent.data);
 
-		for (i = 0; atts[i]; i++) {
+		if (atts) for (i = 0; atts[i]; i++) {
 			if (!strcmp(atts[i], "fieldNames") && atts[++i] && atts[i][0]) {
 				zval *tmp;
 				char *key;
@@ -869,7 +869,7 @@ static void php_wddx_push_element(void *user_data, const XML_Char *name, const X
 		ent.varname = NULL;
 		ent.data = NULL;
 
-		for (i = 0; atts[i]; i++) {
+		if (atts) for (i = 0; atts[i]; i++) {
 			if (!strcmp(atts[i], EL_NAME) && atts[++i] && atts[i][0]) {
 				char *decoded;
 				int decoded_len;

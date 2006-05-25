@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.1 2006/05/09 23:58:46 helly Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.2 2006/05/25 08:14:28 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2663,7 +2663,7 @@ PHP_METHOD(SoapClient, __call)
 
 			if (zend_hash_find(ht, "uri", sizeof("uri"), (void**)&tmp) == SUCCESS &&
 			    Z_TYPE_PP(tmp) == IS_STRING) {
-				soap_action = Z_STRVAL_PP(tmp);
+				uri = Z_STRVAL_PP(tmp);
 			}
 		} else if (Z_TYPE_P(options) != IS_NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_ERROR, "first parameter must be string or null");

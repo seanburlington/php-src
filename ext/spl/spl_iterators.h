@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.35 2006/05/21 17:27:12 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.36 2006/05/26 00:37:33 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -55,6 +55,7 @@ PHP_MINIT_FUNCTION(spl_iterators);
 
 PHP_FUNCTION(iterator_to_array);
 PHP_FUNCTION(iterator_count);
+PHP_FUNCTION(iterator_apply);
 
 typedef enum {
 	DIT_Default = 0,

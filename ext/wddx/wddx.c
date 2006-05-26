@@ -16,11 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.96.2.6.2.6 2006/05/25 23:21:01 iliaa Exp $ */
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+/* $Id: wddx.c,v 1.96.2.6.2.7 2006/05/26 01:55:26 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -408,9 +404,9 @@ static void php_wddx_serialize_string(wddx_packet *packet, zval *var)
 					break;
 
 				default:
-					if (iscntrl((int)*(unsigned char *)p)) {
+					if (iscntrl((int)*(unsigned char *)p) || (int)*(unsigned char *)p >= 127) {
 						FLUSH_BUF();
-						sprintf(control_buf, WDDX_CHAR, *p);
+						sprintf(control_buf, WDDX_CHAR, (int)*(unsigned char *)p);
 						php_wddx_add_chunk(packet, control_buf);
 					} else
 						buf[l++] = *p;

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22.2.4 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: xp_ssl.c,v 1.22.2.3.2.1 2006/05/26 00:32:07 pajoye Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -432,6 +432,7 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 								"ssl", "peer_certificate",
 								zcert);
 						peer_cert = NULL;
+						efree(zcert);
 					}
 
 					if (SUCCESS == php_stream_context_get_option(
@@ -445,7 +446,7 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 						chain = SSL_get_peer_cert_chain(
 									sslsock->ssl_handle);
 
-						if (chain) {
+						if (chain && sk_X509_num(chain) > 0) {
 							int i;
 							array_init(arr);
 
@@ -458,6 +459,8 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 											php_openssl_get_x509_list_id()));
 								add_next_index_zval(arr, zcert);
 							}
+								efree(zcert);
+
 						} else {
 							ZVAL_NULL(arr);
 						}
@@ -465,6 +468,8 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 						php_stream_context_set_option(stream->context,
 								"ssl", "peer_certificate_chain",
 								arr);
+						zval_dtor(arr);
+						efree(arr);
 					}
 				}
 			}

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.2 2006/05/25 08:14:28 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.3 2006/05/26 09:02:33 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3910,7 +3910,6 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 
 	if (use == SOAP_ENCODED) {
 		xmlNewNs(envelope, XSD_NAMESPACE, XSD_NS_PREFIX);
-		xmlNewNs(envelope, XSI_NAMESPACE, XSI_NS_PREFIX);
 		if (version == SOAP_1_1) {
 			xmlNewNs(envelope, SOAP_1_1_ENC_NAMESPACE, SOAP_1_1_ENC_NS_PREFIX);
 			xmlSetNsProp(envelope, envelope->ns, "encodingStyle", SOAP_1_1_ENC_NAMESPACE);
@@ -4122,7 +4121,6 @@ static xmlDocPtr serialize_function_call(zval *this_ptr, sdlFunctionPtr function
 
 	if (use == SOAP_ENCODED) {
 		xmlNewNs(envelope, XSD_NAMESPACE, XSD_NS_PREFIX);
-		xmlNewNs(envelope, XSI_NAMESPACE, XSI_NS_PREFIX);
 		if (version == SOAP_1_1) {
 			xmlNewNs(envelope, SOAP_1_1_ENC_NAMESPACE, SOAP_1_1_ENC_NS_PREFIX);
 			xmlSetNsProp(envelope, envelope->ns, "encodingStyle", SOAP_1_1_ENC_NAMESPACE);

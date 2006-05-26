@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.16 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: dom_fe.h,v 1.17 2006/05/26 18:22:06 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -165,6 +165,8 @@ PHP_FUNCTION(dom_node_is_equal_node);
 PHP_FUNCTION(dom_node_get_feature);
 PHP_FUNCTION(dom_node_set_user_data);
 PHP_FUNCTION(dom_node_get_user_data);
+PHP_METHOD(domnode, C14N);
+PHP_METHOD(domnode, C14NFile);
 
 /* domnodelist methods */
 PHP_FUNCTION(dom_nodelist_item);

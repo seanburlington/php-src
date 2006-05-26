@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.91 2006/05/26 00:37:32 helly Exp $ */
+/* $Id: php_spl.c,v 1.92 2006/05/26 00:49:02 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -621,12 +621,12 @@ PHP_MINFO_FUNCTION(spl)
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_iterator, 0)
-	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
+	ZEND_ARG_OBJ_INFO(0, iterator, Traversable, 0)
 ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_iterator_apply, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
+	ZEND_ARG_OBJ_INFO(0, iterator, Traversable, 0)
 	ZEND_ARG_INFO(0, function)
 	ZEND_ARG_ARRAY_INFO(0, args, 0)
 ZEND_END_ARG_INFO();

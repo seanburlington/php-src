@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.9 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_apache.h,v 1.10 2006/05/28 20:31:15 mike Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -44,6 +44,8 @@ typedef struct php_struct {
 #endif
 	/* Whether or not we've processed PHP in the output filters yet. */
 	int request_processed;
+	/* final content type */
+	char *content_type;
 } php_struct;
 
 void *merge_php_config(apr_pool_t *p, void *base_conf, void *new_conf);

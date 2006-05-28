@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.38.2.3 2006/03/06 21:45:57 andrei Exp $
+dnl $Id: config0.m4,v 1.38.2.3.2.1 2006/05/28 15:33:56 iliaa Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -43,8 +43,8 @@ if test "$PHP_PCRE_REGEX" != "no"; then
       pcre_minor="$pcre_minor"0
     fi
     pcre_version=$pcre_major$pcre_minor
-    if test "$pcre_version" -lt 208; then
-      AC_MSG_ERROR([The PCRE extension requires PCRE library version >= 2.08])
+    if test "$pcre_version" -lt 660; then
+      AC_MSG_ERROR([The PCRE extension requires PCRE library version >= 6.6])
     fi
 
     PHP_ADD_LIBRARY_WITH_PATH(pcre, $PCRE_LIBDIR, PCRE_SHARED_LIBADD)

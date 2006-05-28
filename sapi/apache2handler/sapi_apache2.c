@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.12 2007/01/01 09:40:33 sebastian Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.1 2006/05/28 20:32:00 mike Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -105,8 +105,10 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header,sapi_headers_stru
 	} while (*val == ' ');
 
 	if (!strcasecmp(sapi_header->header, "content-type")) {
-		val = apr_pstrdup(ctx->r->pool, val);
-		ap_set_content_type(ctx->r, val);
+		if (ctx->content_type) {
+			efree(ctx->content_type);
+		}
+		ctx->content_type = estrdup(val);
 	} else if (sapi_header->replace) {
 		apr_table_set(ctx->r->headers_out, sapi_header->header, val);
 	} else {
@@ -131,6 +133,15 @@ php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		&& sline[8] == ' ') {
 		ctx->r->status_line = apr_pstrdup(ctx->r->pool, sline + 9);
 	}
+	
+	/*	call ap_set_content_type only once, else each time we call it, 
+		configured output filters for that content type will be added */
+	if (!ctx->content_type) {
+		ctx->content_type = sapi_get_default_content_type(TSRMLS_C);
+	}
+	ap_set_content_type(ctx->r, apr_pstrdup(ctx->r->pool, ctx->content_type));
+	efree(ctx->content_type);
+	ctx->content_type = NULL;
 
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }
@@ -418,10 +429,6 @@ static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	SG(request_info).path_translated = apr_pstrdup(r->pool, r->filename);
 	r->no_local_copy = 1;
 
-	content_type = sapi_get_default_content_type(TSRMLS_C);
-	ap_set_content_type(r, apr_pstrdup(r->pool, content_type));
-	efree(content_type);
-
 	content_length = (char *) apr_table_get(r->headers_in, "Content-Length");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 
@@ -459,12 +466,12 @@ static void php_apache_ini_dtor(request_rec *r, request_rec *p TSRMLS_DC)
 
 static int php_handler(request_rec *r)
 {
-	php_struct * volatile ctx;
+	php_struct *ctx;
 	void *conf;
-	apr_bucket_brigade * volatile brigade;
+	apr_bucket_brigade *brigade;
 	apr_bucket *bucket;
 	apr_status_t rv;
-	request_rec * volatile parent_req = NULL;
+	request_rec *parent_req = NULL;
 	TSRMLS_FETCH();
 
 #define PHPAP_INI_OFF php_apache_ini_dtor(r, parent_req TSRMLS_CC);

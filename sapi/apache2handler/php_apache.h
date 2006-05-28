@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.8.2.2 2007/01/01 09:40:33 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.8.2.1.2.1 2006/05/28 20:32:00 mike Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -44,6 +44,8 @@ typedef struct php_struct {
 #endif
 	/* Whether or not we've processed PHP in the output filters yet. */
 	int request_processed;
+	/* final content type */
+	char *content_type;
 } php_struct;
 
 void *merge_php_config(apr_pool_t *p, void *base_conf, void *new_conf);

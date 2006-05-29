@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.1 2006/05/14 16:06:47 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.2 2006/05/29 10:24:49 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -571,10 +571,15 @@ PHP_FUNCTION(file_put_contents)
 	long flags = 0;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
+	php_stream *srcstream;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz/|lr!", &filename, &filename_len, 
 				&data, &flags, &zcontext) == FAILURE) {
 		return;
+	}
+
+	if (Z_TYPE_P(data) == IS_RESOURCE) {
+		php_stream_from_zval(srcstream, &data);
 	}
 
 	context = php_stream_context_from_zval(zcontext, flags & PHP_FILE_NO_DEFAULT_CONTEXT);
@@ -591,14 +596,8 @@ PHP_FUNCTION(file_put_contents)
 
 	switch (Z_TYPE_P(data)) {
 		case IS_RESOURCE:
-		{
-			php_stream *srcstream;
-			php_stream_from_zval(srcstream, &data);
-
 			numbytes = php_stream_copy_to_stream(srcstream, stream, PHP_STREAM_COPY_ALL);
-
 			break;
-		}
 		case IS_NULL:
 		case IS_LONG:
 		case IS_DOUBLE:

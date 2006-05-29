@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.443 2006/05/29 10:23:53 tony2001 Exp $ */
+/* $Id: file.c,v 1.444 2006/05/29 10:42:10 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -588,7 +588,7 @@ PHP_FUNCTION(file_put_contents)
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
 	char mode[3] = { 'w', 0, 0 };
-	php_stream *srcstream;
+	php_stream *srcstream = NULL;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "tz/|lr!", &filename, &filename_len, &filename_type,
 				&data, &flags, &zcontext) == FAILURE) {
@@ -701,9 +701,9 @@ PHP_FUNCTION(file_put_contents)
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to write %d characters to %s", ustrlen, filename);
 					numchars = -1;
 				} else if (numchars != ustrlen) {
-					int numchars = u_countChar32(Z_USTRVAL_P(data), numchars);
+					int written_numchars = u_countChar32(Z_USTRVAL_P(data), numchars);
 
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only %d of %d characters written, possibly out of free disk space", numchars, ustrlen);
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only %d of %d characters written, possibly out of free disk space", written_numchars, ustrlen);
 					numchars = -1;
 				}
 			}

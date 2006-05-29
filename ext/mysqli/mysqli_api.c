@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.2 2006/05/10 11:53:13 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.3 2006/05/29 05:38:50 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1759,7 +1759,7 @@ PHP_FUNCTION(mysqli_ssl_set)
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Osssss", &mysql_link, mysqli_link_class_entry, &ssl_parm[0], &ssl_parm_len[0], &ssl_parm[1], &ssl_parm_len[1], &ssl_parm[2], &ssl_parm_len[2], &ssl_parm[3], &ssl_parm_len[3], &ssl_parm[4], &ssl_parm_len[4])   == FAILURE) {
 		return;
 	}
-	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);
+	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
 	for (i=0; i < 5; i++) {
 		if (!ssl_parm_len[i]) {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.59 2006/04/05 14:07:16 tony2001 Exp $
+dnl $Id: config.m4,v 1.60 2006/05/29 18:12:39 tony2001 Exp $
 dnl
 
 if test -z "$SED"; then
@@ -316,13 +316,13 @@ dnl version in /usr/lib
   AC_MSG_CHECKING([Oracle Instant Client SDK header directory])
 
 dnl Header directory for Instant Client SDK RPM install
-  OCISDKRPMINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!^/usr/lib/oracle/\(.*\)/client/lib[[/]]*$!/usr/include/oracle/\1/client!'`
+  OCISDKRPMINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!^/usr/lib/oracle/\(.*\)/client/lib[/]*$!/usr/include/oracle/\1/client!'`
 
 dnl Header directory for Instant Client SDK zip file install
   OCISDKZIPINC=$PHP_OCI8_INSTANT_CLIENT/sdk/include
 
 dnl Header directory for manual installation
-  OCISDKMANINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!\(.*\)/lib[[/]]*$!\1/include!'`
+  OCISDKMANINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!\(.*\)/lib[/]*$!\1/include!'`
   
   if test -f "$OCISDKRPMINC/oci.h"; then
     AC_MSG_RESULT($OCISDKRPMINC)

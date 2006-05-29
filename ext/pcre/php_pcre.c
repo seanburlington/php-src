@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.182 2006/05/29 20:26:12 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.183 2006/05/29 21:31:30 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1115,10 +1115,8 @@ PHPAPI char *php_pcre_replace(char *regex,   int regex_len,
 			}
 		} else {
 			pcre_handle_exec_error(count TSRMLS_CC);
-			if (result) {
-				efree(result);
-				result = NULL;
-			}
+			efree(result);
+			result = NULL;
 			break;
 		}
 			

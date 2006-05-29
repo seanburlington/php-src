@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.2 2006/05/29 10:24:49 tony2001 Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.3 2006/05/29 10:39:59 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -571,7 +571,7 @@ PHP_FUNCTION(file_put_contents)
 	long flags = 0;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
-	php_stream *srcstream;
+	php_stream *srcstream = NULL;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz/|lr!", &filename, &filename_len, 
 				&data, &flags, &zcontext) == FAILURE) {

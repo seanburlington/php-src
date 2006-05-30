@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_collection.c,v 1.6 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: oci8_collection.c,v 1.7 2006/05/30 21:38:00 tony2001 Exp $ */
 
 
 
@@ -37,7 +37,7 @@
 #include "ext/standard/info.h"
 #include "php_ini.h"
 
-#if HAVE_OCI8
+#if HAVE_OCI8 && PHP_OCI8_HAVE_COLLECTIONS
 
 #include "php_oci8.h"
 #include "php_oci8_int.h"

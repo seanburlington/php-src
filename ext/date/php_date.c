@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.5 2006/05/30 14:46:45 bjori Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.6 2006/05/30 15:14:22 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -341,10 +341,10 @@ PHP_MINIT_FUNCTION(date)
 #endif
 /*
  * RFC4287, Section 3.3: http://www.ietf.org/rfc/rfc4287.txt
- *  A Date construct is an element whose content MUST conform to the
- *  "date-time" production in [RFC3339].  In addition, an uppercase "T"
- *  character MUST be used to separate date and time, and an uppercase
- *  "Z" character MUST be present in the absence of a numeric time zone offset.
+ *   A Date construct is an element whose content MUST conform to the
+ *   "date-time" production in [RFC3339].  In addition, an uppercase "T"
+ *   character MUST be used to separate date and time, and an uppercase
+ *   "Z" character MUST be present in the absence of a numeric time zone offset.
  */
 	REGISTER_STRING_CONSTANT("DATE_ATOM",    DATE_FORMAT_RFC3339, CONST_CS | CONST_PERSISTENT);
 /*
@@ -363,9 +363,10 @@ PHP_MINIT_FUNCTION(date)
  	REGISTER_STRING_CONSTANT("DATE_RFC3339", DATE_FORMAT_RFC3339, CONST_CS | CONST_PERSISTENT);
 /*
  * RSS 2.0 Specification: http://blogs.law.harvard.edu/tech/rss
- * "All date-times in RSS conform to the Date and Time Specification of RFC 822"
+ *   "All date-times in RSS conform to the Date and Time Specification of RFC 822,
+ *   with the exception that the year may be expressed with two characters or four characters (four preferred)"
  */
-	REGISTER_STRING_CONSTANT("DATE_RSS",     DATE_FORMAT_RFC822,  CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("DATE_RSS",     DATE_FORMAT_RFC1123, CONST_CS | CONST_PERSISTENT);
 	REGISTER_STRING_CONSTANT("DATE_W3C",     DATE_FORMAT_RFC3339, CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("SUNFUNCS_RET_TIMESTAMP", SUNFUNCS_RET_TIMESTAMP, CONST_CS | CONST_PERSISTENT);

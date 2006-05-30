@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.1 2006/05/29 18:12:55 tony2001 Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.2 2006/05/30 13:16:48 tony2001 Exp $
 dnl
 
 if test -z "$SED"; then
@@ -50,7 +50,7 @@ AC_DEFUN([AC_OCI8_CHECK_LIB_DIR],[
 
 AC_DEFUN([AC_OCI8IC_VERSION],[
   AC_MSG_CHECKING([Oracle Instant Client version])
-  if test -f $PHP_OCI8_INSTANT_CLIENT/libociei.$SHLIB_SUFFIX_NAME; then
+  if test -f $PHP_OCI8_INSTANT_CLIENT/libnnz10.$SHLIB_SUFFIX_NAME; then
     if test -f $PHP_OCI8_INSTANT_CLIENT/libclntsh.$SHLIB_SUFFIX_NAME.10.1; then
       if test ! -f $PHP_OCI8_INSTANT_CLIENT/libclntsh.$SHLIB_SUFFIX_NAME; then
         AC_MSG_ERROR([Link from $PHP_OCI8_INSTANT_CLIENT/libclntsh.$SHLIB_SUFFIX_NAME to libclntsh.$SHLIB_SUFFIX_NAME.10.1 not found])

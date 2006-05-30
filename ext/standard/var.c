@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.8 2007/01/01 09:40:30 sebastian Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.1 2006/05/30 14:51:20 iliaa Exp $ */
 
 
 
@@ -916,6 +916,12 @@ PHP_FUNCTION(unserialize)
     Returns the allocated by PHP memory */
 PHP_FUNCTION(memory_get_usage) {
 	RETURN_LONG(AG(allocated_memory));
+}
+/* }}} */
+/* {{{ proto int memory_get_peak_usage()
+    Returns the peak allocated by PHP memory */
+PHP_FUNCTION(memory_get_peak_usage) {
+	RETURN_LONG(AG(allocated_memory_peak));
 }
 /* }}} */
 #endif

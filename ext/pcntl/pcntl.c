@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.3 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.1 2006/05/30 17:40:52 mike Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -693,16 +693,19 @@ void pcntl_tick_handler()
 	PCNTL_G(head) = NULL; /* simple stores are atomic */
 	
 	/* Allocate */
-	MAKE_STD_ZVAL(param);
-	MAKE_STD_ZVAL(retval);
 
 	while (queue) {
 		if (zend_hash_index_find(&PCNTL_G(php_signal_table), queue->signo, (void **) &handle)==SUCCESS) {
+			MAKE_STD_ZVAL(retval);
+			MAKE_STD_ZVAL(param);
+			ZVAL_NULL(retval);
 			ZVAL_LONG(param, queue->signo);
 
 			/* Call php signal handler - Note that we do not report errors, and we ignore the return value */
 			/* FIXME: this is probably broken when multiple signals are handled in this while loop (retval) */
 			call_user_function(EG(function_table), NULL, *handle, retval, 1, &param TSRMLS_CC);
+			zval_ptr_dtor(&param);
+			zval_ptr_dtor(&retval);
 		}
 
 		next = queue->next;
@@ -713,10 +716,6 @@ void pcntl_tick_handler()
 
 	/* Re-enable queue */
 	PCNTL_G(processing_signal_queue) = 0;
-
-	/* Clean up */
-	efree(param);
-	efree(retval);
 }
 
 

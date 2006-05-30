@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.230 2006/04/05 02:28:39 iliaa Exp $ */
+/* $Id: var.c,v 1.231 2006/05/30 14:51:54 iliaa Exp $ */
 
 
 
@@ -1152,6 +1152,12 @@ PHP_FUNCTION(unserialize)
     Returns the allocated by PHP memory */
 PHP_FUNCTION(memory_get_usage) {
 	RETURN_LONG(AG(allocated_memory));
+}
+/* }}} */
+/* {{{ proto int memory_get_peak_usage()
+    Returns the peak allocated by PHP memory */
+PHP_FUNCTION(memory_get_peak_usage) {
+	RETURN_LONG(AG(allocated_memory_peak));
 }
 /* }}} */
 #endif

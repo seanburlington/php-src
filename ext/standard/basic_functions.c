@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.774 2006/05/24 23:14:36 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.775 2006/05/30 14:51:54 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -464,6 +464,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(print_r,															NULL)
 #if MEMORY_LIMIT 
 	PHP_FE(memory_get_usage,												NULL)
+	PHP_FE(memory_get_peak_usage,												NULL)
 #endif
 
 	PHP_FE(register_shutdown_function,										NULL)

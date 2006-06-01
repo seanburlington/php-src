@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.44.2.7 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: filters.c,v 1.44.2.6.2.1 2006/06/01 13:45:26 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -470,7 +470,6 @@ static php_conv_err_t php_conv_base64_encode_convert(php_conv_base64_encode *ins
 	register size_t ocnt, icnt;
 	register unsigned char *ps, *pd;
 	register unsigned int line_ccnt;
-	size_t nbytes_written;
 
 	if (in_pp == NULL || in_left_p == NULL) { 
 		return php_conv_base64_encode_flush(inst, in_pp, in_left_p, out_pp, out_left_p);
@@ -481,7 +480,6 @@ static php_conv_err_t php_conv_base64_encode_convert(php_conv_base64_encode *ins
 	ps = (unsigned char *)(*in_pp);
 	icnt = *in_left_p;
 	line_ccnt = inst->line_ccnt;
-	nbytes_written = 0;
 
 	/* consume the remainder first */
 	switch (inst->erem_len) {

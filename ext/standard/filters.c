@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.56 2006/06/01 13:45:16 tony2001 Exp $ */
+/* $Id: filters.c,v 1.57 2006/06/01 22:42:53 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1961,7 +1961,7 @@ static php_stream_filter *consumed_filter_create(const char *filtername, zval *f
 	/* Create this filter */
 	data = pecalloc(1, sizeof(php_consumed_filter_data), persistent);
 	if (!data) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed allocating %d bytes.", sizeof(php_consumed_filter_data));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed allocating %ld bytes.", sizeof(php_consumed_filter_data));
 		return NULL;
 	}
 	data->persistent = persistent;

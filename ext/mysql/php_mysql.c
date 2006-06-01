@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.1 2006/05/09 23:58:46 helly Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.2 2006/06/01 19:14:48 mike Exp $ */
 
 /* TODO:
  *
@@ -392,13 +392,6 @@ ZEND_MODULE_STARTUP_D(mysql)
 	REGISTER_LONG_CONSTANT("MYSQL_CLIENT_INTERACTIVE", CLIENT_INTERACTIVE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQL_CLIENT_IGNORE_SPACE", CLIENT_IGNORE_SPACE, CONST_CS | CONST_PERSISTENT); 
 
-
-#ifdef ZTS
-# if MYSQL_VERSION_ID >= 40000
-	mysql_thread_init();
-# endif
-#endif
-
 	return SUCCESS;
 }
 /* }}} */
@@ -407,12 +400,6 @@ ZEND_MODULE_STARTUP_D(mysql)
  */
 PHP_MSHUTDOWN_FUNCTION(mysql)
 {
-#ifdef ZTS
-# if MYSQL_VERSION_ID >= 40000
-	mysql_thread_end();
-# endif
-#endif
-
 	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }

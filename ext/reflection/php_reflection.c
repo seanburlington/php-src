@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.1 2006/05/09 23:58:46 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.2 2006/06/01 12:25:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2934,7 +2934,6 @@ static int _addmethod(zend_function *mptr, int num_args, va_list args, zend_hash
 	long filter = va_arg(args, long);
 
 	if (mptr->common.fn_flags & filter) {
-		TSRMLS_FETCH();
 		ALLOC_ZVAL(method);
 		reflection_method_factory(ce, mptr, method TSRMLS_CC);
 		add_next_index_zval(retval, method);
@@ -3068,7 +3067,6 @@ static int _addproperty(zend_property_info *pptr, int num_args, va_list args, ze
 	}
 	
 	if (pptr->flags	& filter) {
-		TSRMLS_FETCH();
 		ALLOC_ZVAL(property);
 		reflection_property_factory(ce, pptr, property TSRMLS_CC);
 		add_next_index_zval(retval, property);
@@ -4485,7 +4483,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.1 2006/05/09 23:58:46 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.2 2006/06/01 12:25:38 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

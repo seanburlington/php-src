@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.1 2006/06/01 14:06:23 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -153,8 +153,6 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
  		} else if (PG(safe_mode_gid) && dgid == php_getgid()) {
  			return 1;
 		} else {
-			TSRMLS_FETCH();
-
 			if (SG(rfc1867_uploaded_files)) {
 				if (zend_hash_exists(SG(rfc1867_uploaded_files), (char *) filename, strlen(filename)+1)) {
 					return 1;

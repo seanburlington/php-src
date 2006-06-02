@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.43 2006/05/03 08:40:52 rrichards Exp $ */
+/* $Id: element.c,v 1.44 2006/06/02 16:15:58 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -954,7 +954,7 @@ PHP_FUNCTION(dom_element_set_id_attribute)
 	}
 
 	attrp = xmlHasNsProp(nodep, name, NULL);
-	if (attrp == NULL) {
+	if (attrp == NULL || attrp->type == XML_ATTRIBUTE_DECL) {
 		php_dom_throw_error(NOT_FOUND_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 	} else {
 		php_set_attribute_id(attrp, is_id);
@@ -991,7 +991,7 @@ PHP_FUNCTION(dom_element_set_id_attribute_ns)
 	}
 
 	attrp = xmlHasNsProp(elemp, name, uri);
-	if (attrp == NULL) {
+	if (attrp == NULL || attrp->type == XML_ATTRIBUTE_DECL) {
 		php_dom_throw_error(NOT_FOUND_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 	} else {
 		php_set_attribute_id(attrp, is_id);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.24 2006/01/03 20:13:31 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.25 2006/06/02 19:51:42 mike Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -93,7 +93,7 @@ PHP_FUNCTION(virtual)
 	}
 
 	/* Flush everything. */
-	php_end_ob_buffers(1 TSRMLS_CC);
+	php_output_end_all();
 	php_header(TSRMLS_C);
 
 	/* Ensure that the ap_r* layer for the main request is flushed, to

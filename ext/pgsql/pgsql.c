@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.350 2006/04/10 19:50:56 helly Exp $ */
+/* $Id: pgsql.c,v 1.351 2006/06/02 19:51:42 mike Exp $ */
 
 #include <stdlib.h>
 
@@ -2858,7 +2858,7 @@ PHP_FUNCTION(pg_lo_read_all)
 
 	tbytes = 0;
 	while ((nbytes = lo_read((PGconn *)pgsql->conn, pgsql->lofd, buf, PGSQL_LO_READ_BUF_SIZE))>0) {
-		php_body_write(buf, nbytes TSRMLS_CC);
+		PHPWRITE(buf, nbytes);
 		tbytes += nbytes;
 	}
 	RETURN_LONG(tbytes);

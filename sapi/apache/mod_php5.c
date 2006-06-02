@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.33 2006/05/13 21:48:14 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.34 2006/06/02 19:51:42 mike Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -315,7 +315,7 @@ static void php_apache_request_shutdown(void *dummy)
 {
 	TSRMLS_FETCH();
 
-	php_output_set_status(0 TSRMLS_CC);
+	php_output_set_status(PHP_OUTPUT_DISABLED);
 	if (AP(in_request)) {
 		AP(in_request) = 0;
 		php_request_shutdown(dummy);

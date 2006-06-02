@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.86 2006/02/19 18:19:33 iliaa Exp $ */
+/* $Id: head.c,v 1.87 2006/06/02 19:51:42 mike Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -200,8 +200,8 @@ PHP_FUNCTION(headers_sent)
 		return;
 
 	if (SG(headers_sent)) {
-		line = php_get_output_start_lineno(TSRMLS_C);
-		file = php_get_output_start_filename(TSRMLS_C);
+		line = php_output_get_start_lineno();
+		file = php_output_get_start_filename();
 	}
 
 	switch(ZEND_NUM_ARGS()) {

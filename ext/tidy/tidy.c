@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.86 2006/05/24 21:22:27 tony2001 Exp $ */
+/* $Id: tidy.c,v 1.87 2006/06/02 19:51:42 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -985,9 +985,13 @@ PHP_MINIT_FUNCTION(tidy)
 PHP_RINIT_FUNCTION(tidy)
 {
 	if (INI_BOOL("tidy.clean_output") == TRUE) {
-		if (php_start_ob_buffer_named("ob_tidyhandler", 0, 1 TSRMLS_CC) == FAILURE) {
+		zval *name;
+		MAKE_STD_ZVAL(name);
+		ZVAL_ASCII_STRINGL(name, "ob_tidyhandler", sizeof("ob_tidyhandler"), ZSTR_DUPLICATE);
+		if (php_output_start_user(name, 0, PHP_OUTPUT_HANDLER_STDFLAGS) == FAILURE) {
 			zend_error(E_NOTICE, "Failure installing Tidy output buffering.");
 		}
+		zval_ptr_dtor(&name);
 	}
 
 	return SUCCESS;
@@ -1009,7 +1013,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.86 2006/05/24 21:22:27 tony2001 Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.87 2006/06/02 19:51:42 mike Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

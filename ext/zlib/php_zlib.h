@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
-   |          Stefan Rï¿½rich <sr@linux.de>                                |
+   |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.44 2006/06/02 19:51:42 mike Exp $ */
+/* $Id: php_zlib.h,v 1.45 2006/06/02 20:09:22 mike Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H

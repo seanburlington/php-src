@@ -12,13 +12,13 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jani Lehtimï¿½i <jkl@njet.net>                               |
+   | Authors: Jani Lehtimäki <jkl@njet.net>                               |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    |          Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.232 2006/06/02 19:51:42 mike Exp $ */
+/* $Id: var.c,v 1.233 2006/06/02 20:09:22 mike Exp $ */
 
 
 

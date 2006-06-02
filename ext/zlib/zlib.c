@@ -13,13 +13,13 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
-   |          Stefan Rï¿½rich <sr@linux.de>                                |
+   |          Stefan Röhrich <sr@linux.de>                                |
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.194 2006/06/02 19:51:42 mike Exp $ */
+/* $Id: zlib.c,v 1.195 2006/06/02 20:09:22 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

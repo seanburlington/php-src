@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.95 2006/05/17 16:32:04 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.96 2006/06/02 21:55:26 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -307,7 +307,7 @@ zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	if (obj->prop_handler != NULL) {
 		ret = zend_u_hash_find(obj->prop_handler, Z_TYPE_P(member), Z_UNIVAL_P(member), Z_UNILEN_P(member)+1, (void **) &hnd);
 	} else if (instanceof_function(obj->std.ce, dom_node_class_entry TSRMLS_CC)) {
-		php_error(E_WARNING, "Couldn't fetch %s. Node no longer exists", obj->std.ce->name);
+		php_error(E_WARNING, "Couldn't fetch %v. Node no longer exists", obj->std.ce->name);
 	}
 	if (ret == SUCCESS) {
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);

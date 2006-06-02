@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.25 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: xml_common.h,v 1.26 2006/06/02 21:55:26 tony2001 Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
@@ -58,7 +58,7 @@ PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj);
 #define NODE_GET_OBJ(__ptr, __id, __prtype, __intern) { \
 	__intern = (php_libxml_node_object *)zend_object_store_get_object(__id TSRMLS_CC); \
 	if (__intern->node == NULL || !(__ptr = (__prtype)__intern->node->node)) { \
-  		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", __intern->std.ce->name);\
+  		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %v", __intern->std.ce->name);\
   		RETURN_NULL();\
   	} \
 }
@@ -67,7 +67,7 @@ PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj);
 	__intern = (php_libxml_node_object *)zend_object_store_get_object(__id TSRMLS_CC); \
 	if (__intern->document != NULL) { \
 		if (!(__ptr = (__prtype)__intern->document->ptr)) { \
-  			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", __intern->std.ce->name);\
+  			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %v", __intern->std.ce->name);\
   			RETURN_NULL();\
   		} \
 	} \

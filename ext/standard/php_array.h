@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.50.2.2 2006/02/07 17:54:24 andrei Exp $ */
+/* $Id: php_array.h,v 1.50.2.3 2006/06/03 18:59:55 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -107,8 +107,6 @@ ZEND_BEGIN_MODULE_GLOBALS(array)
 	int *multisort_flags[2];
 	int (*compare_func)(zval *result, zval *op1, zval *op2 TSRMLS_DC);
 ZEND_END_MODULE_GLOBALS(array) 
-
-ZEND_DECLARE_MODULE_GLOBALS(array)
 
 #ifdef ZTS
 #define ARRAYG(v) TSRMG(array_globals_id, zend_array_globals *, v)

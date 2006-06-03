@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.57 2006/06/03 11:19:44 mike Exp $ */
+/* $Id: php_output.h,v 1.58 2006/06/03 11:51:35 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -70,11 +70,6 @@
 )
 #define PHP_OUTPUT_HANDLER_ALIGNTO_SIZE		0x1000
 #define PHP_OUTPUT_HANDLER_DEFAULT_SIZE		0x4000
-#define PHP_OUTPUT_HANDLER_DEFAULT_NAME		"default output handler"
-#define PHP_OUTPUT_HANDLER_DEVNULL_NAME		"null output handler"
-
-PHPAPI zval php_output_handler_default;
-PHPAPI zval php_output_handler_devnull;
 
 typedef struct _php_output_buffer {
 	char *data;

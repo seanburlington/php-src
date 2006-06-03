@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.348 2006/04/12 19:29:52 johannes Exp $ */
+/* $Id: array.c,v 1.349 2006/06/03 18:58:40 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -86,6 +86,8 @@
 #define INTERSECT_COMP_KEY_USER      1
 
 #define DOUBLE_DRIFT_FIX	0.000000000000001
+
+ZEND_DECLARE_MODULE_GLOBALS(array)
 
 /* {{{ php_array_init_globals
  */

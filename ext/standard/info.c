@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.264 2006/06/02 19:51:42 mike Exp $ */
+/* $Id: info.c,v 1.265 2006/06/03 11:19:43 mike Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -999,9 +999,9 @@ PHP_FUNCTION(phpinfo)
 	}
 
 	/* Andale!  Andale!  Yee-Hah! */
-	php_output_start_default();
+	php_output_start_default(TSRMLS_C);
 	php_print_info(flag TSRMLS_CC);
-	php_output_end();
+	php_output_end(TSRMLS_C);
 
 	RETURN_TRUE;
 }

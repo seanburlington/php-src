@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.215 2006/06/02 19:51:42 mike Exp $ */
+/* $Id: SAPI.c,v 1.216 2006/06/03 11:19:44 mike Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -553,8 +553,8 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 	int http_response_code;
 	
 	if (SG(headers_sent) && !SG(request_info).no_headers) {
-		char *output_start_filename = php_output_get_start_filename();
-		int output_start_lineno = php_output_get_start_lineno();
+		char *output_start_filename = php_output_get_start_filename(TSRMLS_C);
+		int output_start_lineno = php_output_get_start_lineno(TSRMLS_C);
 
 		if (output_start_filename) {
 			sapi_module.sapi_error(E_WARNING, "Cannot modify header information - headers already sent by (output started at %s:%d)",

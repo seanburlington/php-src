@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.17 2006/06/02 19:51:43 mike Exp $ */
+/* $Id: mod_php5.c,v 1.18 2006/06/03 11:19:44 mike Exp $ */
 
 #include "php_apache_http.h"
 
@@ -434,7 +434,7 @@ static void php_apache_request_shutdown(void *dummy)
 {
 	TSRMLS_FETCH();
 	AP(current_hook) = AP_CLEANUP;
-	php_output_set_status(PHP_OUTPUT_DISABLED);
+	php_output_set_status(PHP_OUTPUT_DISABLED TSRMLS_CC);
 	SG(server_context) = NULL; /* The server context (request) is invalid by the time run_cleanups() is called */
 	if(SG(sapi_started)) {
 		php_request_shutdown(dummy);

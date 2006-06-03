@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.154 2006/06/02 19:51:43 mike Exp $ */
+/* $Id: php_cli.c,v 1.155 2006/06/03 11:19:44 mike Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -719,7 +719,7 @@ int main(int argc, char *argv[])
 					goto err;
 				}
 				php_cli_usage(argv[0]);
-				php_output_end_all();
+				php_output_end_all(TSRMLS_C);
 				exit_status=0;
 				goto out;
 
@@ -728,7 +728,7 @@ int main(int argc, char *argv[])
 					goto err;
 				}
 				php_print_info(0xFFFFFFFF TSRMLS_CC);
-				php_output_end_all();
+				php_output_end_all(TSRMLS_C);
 				exit_status=0;
 				goto out;
 
@@ -741,7 +741,7 @@ int main(int argc, char *argv[])
 				php_printf("\n[Zend Modules]\n");
 				print_extensions(TSRMLS_C);
 				php_printf("\n");
-				php_output_end_all();
+				php_output_end_all(TSRMLS_C);
 				exit_status=0;
 				goto out;
 
@@ -763,7 +763,7 @@ int main(int argc, char *argv[])
 #endif
 					get_zend_version()
 				);
-				php_output_end_all();
+				php_output_end_all(TSRMLS_C);
 				exit_status=0;
 				goto out;
 

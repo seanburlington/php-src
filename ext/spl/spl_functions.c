@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.35 2006/03/09 11:44:05 sebastian Exp $ */
+/* $Id: spl_functions.c,v 1.36 2006/06/04 10:31:58 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -42,10 +42,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 	
 	INIT_CLASS_ENTRY(ce, class_name, functions);
 	ce.name_length = strlen(class_name);
-	*ppce = zend_register_internal_class(&ce TSRMLS_CC);
-
-	/* entries changed by initialize */
-	(*ppce)->ce_flags = ZEND_ACC_INTERFACE;
+	*ppce = zend_register_internal_interface(&ce TSRMLS_CC);
 }
 /* }}} */
 

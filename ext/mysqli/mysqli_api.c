@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.127 2006/05/10 12:29:09 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.128 2006/06/04 14:57:06 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -294,6 +294,9 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 			case MYSQL_TYPE_LONG:
 			case MYSQL_TYPE_INT24:
 			case MYSQL_TYPE_YEAR:
+#if MYSQL_VERSION_ID > 50002
+			case MYSQL_TYPE_BIT:
+#endif
 				convert_to_long_ex(args[i]);
 				stmt->result.buf[ofs].type = IS_LONG;
 				/* don't set stmt->result.buf[ofs].buflen to 0, we used ecalloc */

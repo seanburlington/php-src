@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.179 2006/06/03 11:19:44 mike Exp $ */
+/* $Id: output.c,v 1.180 2006/06/04 10:01:57 mike Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -1181,6 +1181,7 @@ static inline int php_output_stack_pop(int discard, int shutdown TSRMLS_DC)
 			/* signal that we're cleaning up */
 			if (discard) {
 				context.op |= PHP_OUTPUT_HANDLER_CLEAN;
+				orphan->buffer.used = 0;
 			}
 			php_output_handler_op(orphan, &context);
 		}

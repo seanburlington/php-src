@@ -764,6 +764,231 @@ SOURCE=..\ext\ftp\php_ftp.h
 # End Source File
 # End Group
 # End Group
+# Begin Group "Calendar"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 7"
+
+# PROP Default_Filter ".c"
+# Begin Source File
+
+SOURCE=..\ext\calendar\cal_unix.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\calendar.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\dow.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\easter.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\french.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\gregor.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\jewish.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\julian.c
+# PROP Intermediate_Dir "calendar"
+# End Source File
+# End Group
+# Begin Group "Header Files No. 7"
+
+# PROP Default_Filter ".h"
+# Begin Source File
+
+SOURCE=..\ext\calendar\php_calendar.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\calendar\sdncal.h
+# End Source File
+# End Group
+# End Group
+# Begin Group "SPL"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 11"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\spl\php_spl.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_array.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_directory.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_engine.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_exceptions.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_functions.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_iterators.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_observer.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_sxe.c
+# End Source File
+# End Group
+# Begin Group "Header Files No. 12"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\spl\php_spl.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_array.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_directory.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_engine.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_exceptions.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_functions.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_iterators.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_observer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\ext\spl\spl_sxe.h
+# End Source File
+# End Group
+# End Group
+# Begin Group "Reflection"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 12"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\reflection\php_reflection.c
+# End Source File
+# End Group
+# Begin Group "Header Files No. 13"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\reflection\php_reflection.h
+# End Source File
+# End Group
+# End Group
+# Begin Group "XMLReader"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 13"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\xmlreader\php_xmlreader.c
+# End Source File
+# End Group
+# Begin Group "Header Files No. 14"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\xmlreader\php_xmlreader.h
+# End Source File
+# End Group
+# End Group
+# Begin Group "XMLwriter"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 14"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\xmlwriter\php_xmlwriter.c
+# End Source File
+# End Group
+# Begin Group "Header Files No. 15"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\xmlwriter\php_xmlwriter.h
+# End Source File
+# End Group
+# End Group
+# Begin Group "IConv"
+
+# PROP Default_Filter ""
+# Begin Group "Source Files No. 15"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\iconv\iconv.c
+# ADD CPP /D "PHP_ICONV_EXPORTS"
+# End Source File
+# End Group
+# Begin Group "Header Files No. 16"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\ext\iconv\php_iconv.h
+# End Source File
+# End Group
+# End Group
 # Begin Group "bcmath"
 
 # PROP Default_Filter ""
@@ -2065,7 +2290,7 @@ SOURCE=..\ext\date\lib\tm2unixtime.c
 SOURCE=..\ext\date\lib\unixtime2tm.c
 # End Source File
 # End Group
-# Begin Group "Header Files No. 7"
+# Begin Group "Header Files No. 11"
 
 # PROP Default_Filter ""
 # Begin Source File
@@ -2082,11 +2307,7 @@ SOURCE=..\ext\date\php_date.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\ext\date\lib\timelib_config.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\date\lib\timelib_structs.h
+SOURCE=..\ext\date\lib\timelib.h
 # End Source File
 # Begin Source File
 
@@ -2095,230 +2316,6 @@ SOURCE=..\ext\date\lib\timezonedb.h
 # Begin Source File
 
 SOURCE=..\ext\date\lib\timezonemap.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "Calendar"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 7"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\calendar\cal_unix.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\calendar.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\dow.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\easter.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\french.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\gregor.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\jewish.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\julian.c
-# PROP Intermediate_Dir "calendar"
-# End Source File
-# End Group
-# Begin Group "Header Files No. 11"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\calendar\php_calendar.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\calendar\sdncal.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "SPL"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 11"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\spl\php_spl.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_array.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_directory.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_engine.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_exceptions.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_functions.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_iterators.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_observer.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_sxe.c
-# End Source File
-# End Group
-# Begin Group "Header Files No. 12"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\spl\php_spl.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_array.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_directory.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_engine.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_exceptions.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_functions.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_iterators.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_observer.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\ext\spl\spl_sxe.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "Reflection"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 12"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\reflection\php_reflection.c
-# End Source File
-# End Group
-# Begin Group "Header Files No. 13"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\reflection\php_reflection.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "XMLReader"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 13"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\xmlreader\php_xmlreader.c
-# End Source File
-# End Group
-# Begin Group "Header Files No. 14"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\xmlreader\php_xmlreader.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "XMLwriter"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 14"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\xmlwriter\php_xmlwriter.c
-# End Source File
-# End Group
-# Begin Group "Header Files No. 15"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\xmlwriter\php_xmlwriter.h
-# End Source File
-# End Group
-# End Group
-# Begin Group "IConv"
-
-# PROP Default_Filter ""
-# Begin Group "Source Files No. 15"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\iconv\iconv.c
-# ADD CPP /D "PHP_ICONV_EXPORTS"
-# End Source File
-# End Group
-# Begin Group "Header Files No. 16"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\ext\iconv\php_iconv.h
 # End Source File
 # End Group
 # End Group

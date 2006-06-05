@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.65 2006/05/16 13:05:23 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.66 2006/06/05 22:23:39 edink Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -706,7 +706,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 							delta = range->offset - loffs;
 						}
 
-						data->last_mapped_addr = MapViewOfFile(data->file_mapping, acc, 0, loffs, range->length);
+						data->last_mapped_addr = MapViewOfFile(data->file_mapping, acc, 0, loffs, range->length + delta);
 
 						if (data->last_mapped_addr) {
 							/* give them back the address of the start offset they requested */

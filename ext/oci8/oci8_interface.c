@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.8 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.1 2006/06/05 07:35:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1689,11 +1689,37 @@ PHP_FUNCTION(oci_password_change)
 	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "rsss", &z_connection, &user, &user_len, &pass_old, &pass_old_len, &pass_new, &pass_new_len) == SUCCESS) {
 		PHP_OCI_ZVAL_TO_CONNECTION(z_connection, connection);
 
+		if (!user_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "username cannot be empty");
+			RETURN_FALSE;
+		}
+		if (!pass_old_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "old password cannot be empty");
+			RETURN_FALSE;
+		}
+		if (!pass_new_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "new password cannot be empty");
+			RETURN_FALSE;
+		}
+
 		if (php_oci_password_change(connection, user, user_len, pass_old, pass_old_len, pass_new, pass_new_len TSRMLS_CC)) {
 			RETURN_FALSE;
 		}
 		RETURN_TRUE;
 	} else if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "ssss", &dbname, &dbname_len, &user, &user_len, &pass_old, &pass_old_len, &pass_new, &pass_new_len) == SUCCESS) {
+
+		if (!user_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "username cannot be empty");
+			RETURN_FALSE;
+		}
+		if (!pass_old_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "old password cannot be empty");
+			RETURN_FALSE;
+		}
+		if (!pass_new_len) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "new password cannot be empty");
+			RETURN_FALSE;
+		}
 
 		connection = php_oci_do_connect_ex(user, user_len, pass_old, pass_old_len, pass_new, pass_new_len, dbname, dbname_len, NULL, OCI_DEFAULT, 0, 0 TSRMLS_CC);
 		if (!connection) {

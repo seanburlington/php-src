@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.17.2.2 2006/05/11 22:43:44 helly Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.3 2006/06/05 22:08:16 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -391,6 +391,8 @@ PHP_MINFO_FUNCTION(pdo)
 
 	if (drivers) {
 		efree(drivers);
+	} else {
+		efree(ldrivers);
 	}
 
 	php_info_print_table_end();

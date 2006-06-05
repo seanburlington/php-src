@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.87.2.2 2006/06/05 08:30:54 stas Exp $ */
+/* $Id: internal_functions_win32.c,v 1.87.2.3 2006/06/05 08:45:50 stas Exp $ */
 
 /* {{{ includes
  */
@@ -108,10 +108,10 @@
 #ifdef HAVE_SPL
 #include "ext/spl/php_spl.h"
 #endif
-#ifdef HAVE_XML && HAVE_XMLREADER
+#if HAVE_XML && HAVE_XMLREADER
 #include "ext/xmlreader/php_xmlreader.h"
 #endif
-#ifdef HAVE_XML && HAVE_XMLWRITER
+#if HAVE_XML && HAVE_XMLWRITER
 #include "ext/xmlwriter/php_xmlwriter.h"
 #endif
 /* }}} */

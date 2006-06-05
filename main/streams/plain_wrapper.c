@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.66 2006/06/05 22:23:39 edink Exp $ */
+/* $Id: plain_wrapper.c,v 1.67 2006/06/05 22:39:10 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1227,11 +1227,6 @@ not_relative_path:
 #endif
 
 	if (!path || (path && !*path)) {
-
-		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir(path TSRMLS_CC)) {
-			return NULL;
-		}
-
 		return php_stream_fopen_rel(filename, mode, opened_path, options);
 	}
 

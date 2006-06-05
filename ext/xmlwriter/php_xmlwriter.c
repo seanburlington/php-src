@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.34 2006/05/10 19:34:47 rrichards Exp $ */
+/* $Id: php_xmlwriter.c,v 1.35 2006/06/05 12:20:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -174,6 +174,10 @@ static zend_function_entry xmlwriter_functions[] = {
 /* }}} */
 
 #ifdef ZEND_ENGINE_2
+#if (PHP_MINOR_VERSION < 2) && (PHP_MAJOR_VERSION == 5)
+#undef  PHP_ME_MAPPING
+#define PHP_ME_MAPPING(name, func_name, arg_types, flags) ZEND_ME_MAPPING(name, func_name, arg_types)
+#endif
 /* {{{ xmlwriter_class_functions */
 static zend_function_entry xmlwriter_class_functions[] = {
 	PHP_ME_MAPPING(openUri,		xmlwriter_open_uri,		NULL, 0)

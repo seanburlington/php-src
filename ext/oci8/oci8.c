@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.300 2006/05/29 10:59:15 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.301 2006/06/05 07:34:00 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -647,7 +647,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.300 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.301 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1264,7 +1264,7 @@ open:
 
 	if (new_password) {
 		/* try to change password if new one was provided {{{ */
-		OCI_G(errcode) = PHP_OCI_CALL(OCIPasswordChange, (connection->svc, OCI_G(err), (text *)username, username_len+1, (text *)password, password_len+1, (text *)new_password, new_password_len+1, OCI_AUTH));
+		OCI_G(errcode) = PHP_OCI_CALL(OCIPasswordChange, (connection->svc, OCI_G(err), (text *)username, username_len, (text *)password, password_len, (text *)new_password, new_password_len, OCI_AUTH));
 
 		if (OCI_G(errcode) != OCI_SUCCESS) {
 			php_oci_error(OCI_G(err), OCI_G(errcode) TSRMLS_CC);
@@ -1496,7 +1496,7 @@ static int php_oci_connection_close(php_oci_connection *connection TSRMLS_DC)
  Change password for the user with the username given */
 int php_oci_password_change(php_oci_connection *connection, char *user, int user_len, char *pass_old, int pass_old_len, char *pass_new, int pass_new_len TSRMLS_DC)
 {
-	connection->errcode = PHP_OCI_CALL(OCIPasswordChange, (connection->svc, connection->err, (text *)user, user_len+1, (text *)pass_old, pass_old_len+1, (text *)pass_new, pass_new_len+1, OCI_DEFAULT));
+	connection->errcode = PHP_OCI_CALL(OCIPasswordChange, (connection->svc, connection->err, (text *)user, user_len, (text *)pass_old, pass_old_len, (text *)pass_new, pass_new_len, OCI_DEFAULT));
 
 	if (connection->errcode != OCI_SUCCESS) {
 		php_oci_error(connection->err, connection->errcode TSRMLS_CC);

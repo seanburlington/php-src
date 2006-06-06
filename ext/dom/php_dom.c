@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.12.2.5 2006/06/05 16:53:21 zeev Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.6 2006/06/06 12:08:11 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -510,7 +510,6 @@ static zend_object_handlers* dom_get_obj_handlers(TSRMLS_D) {
 	} else {
 		return &dom_object_handlers;
 	}
-	return &dom_object_handlers;
 }
 
 static zend_module_dep dom_deps[] = {

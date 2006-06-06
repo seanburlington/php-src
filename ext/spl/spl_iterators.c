@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.136 2006/05/26 01:40:57 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.137 2006/06/06 20:12:46 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1785,6 +1785,7 @@ static inline void spl_caching_it_next(spl_dual_it_object *intern TSRMLS_DC)
 						if (intern->u.caching.flags & CIT_CATCH_GET_CHILD) {
 							zend_clear_exception(TSRMLS_C);
 						} else {
+							zval_ptr_dtor(&retval);
 							return;
 						}
 					} else {

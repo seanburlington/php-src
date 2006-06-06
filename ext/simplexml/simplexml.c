@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.6 2006/06/05 16:53:21 zeev Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.7 2006/06/06 12:05:30 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1848,7 +1848,11 @@ php_sxe_register_object(php_sxe_object *intern TSRMLS_DC)
 	zend_object_value rv;
 
 	rv.handle = zend_objects_store_put(intern, sxe_object_dtor, (zend_objects_free_object_storage_t)sxe_object_free_storage, sxe_object_clone TSRMLS_CC);
-	rv.handlers = (zend_object_handlers *) &sxe_object_handlers;
+	if (EG(ze1_compatibility_mode)) {
+		rv.handlers = (zend_object_handlers *) &sxe_ze1_object_handlers;
+	} else {
+		rv.handlers = (zend_object_handlers *) &sxe_object_handlers;
+	}
 
 	return rv;
 }
@@ -2303,7 +2307,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.7 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

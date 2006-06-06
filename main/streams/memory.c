@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.8.2.6.2.6 2006/05/23 22:31:25 helly Exp $ */
+/* $Id: memory.c,v 1.8.2.6.2.7 2006/06/06 14:09:12 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -661,6 +661,7 @@ static php_stream * php_stream_url_wrap_rfc2397(php_stream_wrapper *wrapper, cha
 	if (base64) {
 		comma = (char*)php_base64_decode((const unsigned char *)comma, dlen, &ilen);
 		if (!comma) {
+			zval_ptr_dtor(&meta);
 			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "rfc2397: unable to decode");
 			return NULL;
 		}

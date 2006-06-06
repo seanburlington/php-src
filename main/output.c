@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.180 2006/06/04 10:01:57 mike Exp $ */
+/* $Id: output.c,v 1.181 2006/06/06 11:08:45 mike Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -1258,7 +1258,7 @@ PHP_FUNCTION(ob_start)
 	long chunk_size = 0;
 	long flags = PHP_OUTPUT_HANDLER_CLEANABLE|PHP_OUTPUT_HANDLER_REMOVABLE;
 	
-	if (SUCCESS != zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|zlb", &output_handler, &chunk_size, &flags)) {
+	if (SUCCESS != zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|z/lb", &output_handler, &chunk_size, &flags)) {
 		RETURN_FALSE;
 	}
 	if (chunk_size < 0) {

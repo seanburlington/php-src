@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.73 2006/05/10 21:03:34 helly Exp $ */
+/* $Id: pdo.c,v 1.74 2006/06/07 21:13:32 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,13 +137,16 @@ zend_module_entry pdo_module_entry = {
 	pdo_functions,
 	PHP_MINIT(pdo),
 	PHP_MSHUTDOWN(pdo),
-	PHP_RINIT(pdo),
-	PHP_RSHUTDOWN(pdo),
+	NULL,
+	NULL,
 	PHP_MINFO(pdo),
 	"1.1dev",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
+
+/* TODO: visit persistent handles: for each persistent statement handle,
+ * remove bound parameter associations in RSHUTDOWN */
 
 #ifdef COMPILE_DL_PDO
 ZEND_GET_MODULE(pdo)
@@ -344,22 +347,6 @@ PHP_MSHUTDOWN_FUNCTION(pdo)
 	UNREGISTER_INI_ENTRIES();
 	zend_hash_destroy(&pdo_driver_hash);
 	pdo_sqlstate_fini_error_table();
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_RINIT_FUNCTION */
-PHP_RINIT_FUNCTION(pdo)
-{
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_RSHUTDOWN_FUNCTION */
-PHP_RSHUTDOWN_FUNCTION(pdo)
-{
-	/* TODO: visit persistent handles: for each persistent statement handle,
-	 * remove bound parameter associations */
 	return SUCCESS;
 }
 /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.12 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_pdo.h,v 1.13 2006/06/07 21:13:33 rasmus Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
@@ -48,8 +48,6 @@ extern zend_module_entry pdo_module_entry;
 
 PHP_MINIT_FUNCTION(pdo);
 PHP_MSHUTDOWN_FUNCTION(pdo);
-PHP_RINIT_FUNCTION(pdo);
-PHP_RSHUTDOWN_FUNCTION(pdo);
 PHP_MINFO_FUNCTION(pdo);
 
 ZEND_BEGIN_MODULE_GLOBALS(pdo)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.4 2006/06/04 10:26:55 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.5 2006/06/07 09:26:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3416,6 +3416,26 @@ ZEND_METHOD(reflection_class, getInterfaces)
 }
 /* }}} */
 
+/* {{{ proto public String[] ReflectionClass::getInterfaceNames()
+   Returns an array of names of interfaces this class implements */
+ZEND_METHOD(reflection_class, getInterfaceNames)
+{
+	reflection_object *intern;
+	zend_class_entry *ce;
+	zend_uint i;
+
+	METHOD_NOTSTATIC_NUMPARAMS(reflection_class_ptr, 0);
+	GET_REFLECTION_OBJECT_PTR(ce);
+
+	/* Return an empty array if this class implements no interfaces */
+	array_init(return_value);
+
+   	for (i=0; i < ce->num_interfaces; i++) {
+		add_next_index_stringl(return_value, ce->interfaces[i]->name, ce->interfaces[i]->name_length, 1);
+	}
+}
+/* }}} */
+
 /* {{{ proto public ReflectionClass ReflectionClass::getParentClass()
    Returns the class' parent class, or, if none exists, FALSE */
 ZEND_METHOD(reflection_class, getParentClass)
@@ -4290,6 +4310,7 @@ static zend_function_entry reflection_class_functions[] = {
 	ZEND_ME(reflection_class, getConstants, NULL, 0)
 	ZEND_ME(reflection_class, getConstant, NULL, 0)
 	ZEND_ME(reflection_class, getInterfaces, NULL, 0)
+	ZEND_ME(reflection_class, getInterfaceNames, NULL, 0)
 	ZEND_ME(reflection_class, isInterface, NULL, 0)
 	ZEND_ME(reflection_class, isAbstract, NULL, 0)
 	ZEND_ME(reflection_class, isFinal, NULL, 0)
@@ -4484,7 +4505,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.4 2006/06/04 10:26:55 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.5 2006/06/07 09:26:11 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

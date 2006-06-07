@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.17.2.4 2006/06/07 21:09:51 rasmus Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.5 2006/06/07 21:14:04 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -149,6 +149,9 @@ zend_module_entry pdo_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
+
+/* TODO: visit persistent handles: for each persistent statement handle,
+ * remove bound parameter associations */
 
 #ifdef COMPILE_DL_PDO
 ZEND_GET_MODULE(pdo)

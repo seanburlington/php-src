@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.57 2006/05/19 14:53:07 derick Exp $ */
+/* $Id: parse_date.re,v 1.58 2006/06/08 16:30:37 derick Exp $ */
 
 #include "timelib.h"
 
@@ -873,7 +873,7 @@ reltextunit = (('sec'|'second'|'min'|'minute'|'hour'|'day'|'week'|'fortnight'|'f
 
 relnumber = ([+-]?[ \t]*[0-9]+);
 relative = relnumber space? reltextunit;
-relativetext = reltextnumber space? reltextunit;
+relativetext = reltextnumber space reltextunit;
 
 */
 

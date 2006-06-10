@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.h,v 1.10 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: php_reflection.h,v 1.11 2006/06/10 00:28:28 bjori Exp $ */
 
 #ifndef PHP_REFLECTION_H
 #define PHP_REFLECTION_H
@@ -32,6 +32,7 @@ BEGIN_EXTERN_C()
 extern PHPAPI zend_class_entry *reflector_ptr;
 extern PHPAPI zend_class_entry *reflection_exception_ptr;
 extern PHPAPI zend_class_entry *reflection_ptr;
+extern PHPAPI zend_class_entry *reflection_function_abstract_ptr;
 extern PHPAPI zend_class_entry *reflection_function_ptr;
 extern PHPAPI zend_class_entry *reflection_parameter_ptr;
 extern PHPAPI zend_class_entry *reflection_class_ptr;

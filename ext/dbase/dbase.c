@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.74.2.3 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: dbase.c,v 1.74.2.2.2.1 2006/06/11 01:42:17 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -728,21 +728,92 @@ PHP_FUNCTION(dbase_create)
 }
 /* }}} */
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_open, 0)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, mode)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_close, 0)
+	ZEND_ARG_INFO(0, identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_numrecords, 0)
+	ZEND_ARG_INFO(0, identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_numfields, 0)
+	ZEND_ARG_INFO(0, identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_pack, 0)
+	ZEND_ARG_INFO(0, identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_add_record, 0)
+	ZEND_ARG_INFO(0, identifier)
+	ZEND_ARG_ARRAY_INFO(0, data, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_replace_record, 0)
+	ZEND_ARG_INFO(0, identifier)
+	ZEND_ARG_ARRAY_INFO(0, data, 0)
+	ZEND_ARG_INFO(0, recnum)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_delete_record, 0)
+	ZEND_ARG_INFO(0, identifier)
+	ZEND_ARG_INFO(0, record)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_get_record, 0)
+	ZEND_ARG_INFO(0, identifier)
+	ZEND_ARG_INFO(0, record)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_get_record_with_names, 0)
+	ZEND_ARG_INFO(0, identifier)
+	ZEND_ARG_INFO(0, record)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_create, 0)
+	ZEND_ARG_INFO(0, filename)
+	ZEND_ARG_ARRAY_INFO(0, fields, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_dbase_get_header_info, 0)
+	ZEND_ARG_INFO(0, database_handle)
+ZEND_END_ARG_INFO()
+
+/* }}} */
+
 /* {{{ dbase_functions[]
  */
 zend_function_entry dbase_functions[] = {
-	PHP_FE(dbase_open,								NULL)
-	PHP_FE(dbase_create,							NULL)
-	PHP_FE(dbase_close,								NULL)
-	PHP_FE(dbase_numrecords,						NULL)
-	PHP_FE(dbase_numfields,							NULL)
-	PHP_FE(dbase_add_record,						NULL)
-	PHP_FE(dbase_replace_record,					NULL)
-	PHP_FE(dbase_get_record,						NULL)
-	PHP_FE(dbase_get_record_with_names,				NULL)
-	PHP_FE(dbase_delete_record,						NULL)
-	PHP_FE(dbase_pack,								NULL)
-	PHP_FE(dbase_get_header_info,					NULL)
+	PHP_FE(dbase_open,								arginfo_dbase_open)
+	PHP_FE(dbase_create,							arginfo_dbase_create)
+	PHP_FE(dbase_close,								arginfo_dbase_close)
+	PHP_FE(dbase_numrecords,						arginfo_dbase_numrecords)
+	PHP_FE(dbase_numfields,							arginfo_dbase_numfields)
+	PHP_FE(dbase_add_record,						arginfo_dbase_add_record)
+	PHP_FE(dbase_replace_record,					arginfo_dbase_replace_record)
+	PHP_FE(dbase_get_record,						arginfo_dbase_get_record)
+	PHP_FE(dbase_get_record_with_names,				arginfo_dbase_get_record_with_names)
+	PHP_FE(dbase_delete_record,						arginfo_dbase_delete_record)
+	PHP_FE(dbase_pack,								arginfo_dbase_pack)
+	PHP_FE(dbase_get_header_info,					arginfo_dbase_get_header_info)
 	{NULL, NULL, NULL}
 };
 /* }}} */

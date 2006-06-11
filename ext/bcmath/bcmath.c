@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.62.2.3 2007/01/01 09:40:12 sebastian Exp $ */
+/* $Id: bcmath.c,v 1.62.2.2.2.1 2006/06/11 01:42:16 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,17 +33,87 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(bcmath);
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcadd, 0, 0, 2)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcsub, 0, 0, 2)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcmul, 0, 0, 2)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcdiv, 0, 0, 2)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_bcmod, 0)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcpowmod, 0, 0, 3)
+	ZEND_ARG_INFO(0, x)
+	ZEND_ARG_INFO(0, y)
+	ZEND_ARG_INFO(0, mod)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcpow, 0, 0, 2)
+	ZEND_ARG_INFO(0, x)
+	ZEND_ARG_INFO(0, y)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bcsqrt, 0, 0, 1)
+	ZEND_ARG_INFO(0, operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_bccomp, 0, 0, 2)
+	ZEND_ARG_INFO(0, left_operand)
+	ZEND_ARG_INFO(0, right_operand)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_bcscale, 0)
+	ZEND_ARG_INFO(0, scale)
+ZEND_END_ARG_INFO()
+
+/* }}} */
+
 zend_function_entry bcmath_functions[] = {
-	PHP_FE(bcadd,									NULL)
-	PHP_FE(bcsub,									NULL)
-	PHP_FE(bcmul,									NULL)
-	PHP_FE(bcdiv,									NULL)
-	PHP_FE(bcmod,									NULL)
-	PHP_FE(bcpow,									NULL)
-	PHP_FE(bcsqrt,									NULL)
-	PHP_FE(bcscale,									NULL)
-	PHP_FE(bccomp,									NULL)
-	PHP_FE(bcpowmod,								NULL)
+	PHP_FE(bcadd,									arginfo_bcadd)
+	PHP_FE(bcsub,									arginfo_bcsub)
+	PHP_FE(bcmul,									arginfo_bcmul)
+	PHP_FE(bcdiv,									arginfo_bcdiv)
+	PHP_FE(bcmod,									arginfo_bcmod)
+	PHP_FE(bcpow,									arginfo_bcpow)
+	PHP_FE(bcsqrt,									arginfo_bcsqrt)
+	PHP_FE(bcscale,									arginfo_bcscale)
+	PHP_FE(bccomp,									arginfo_bccomp)
+	PHP_FE(bcpowmod,								arginfo_bcpowmod)
 	{NULL, NULL, NULL}
 };
 

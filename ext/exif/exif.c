@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.6 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.1 2006/06/11 01:42:17 bjori Exp $ */
 
 /*  ToDos
  *
@@ -98,24 +98,48 @@ typedef unsigned char uchar;
 
 #define MAX_IFD_NESTING_LEVEL 100
 
+/* {{{ arginfo */
 static
-ZEND_BEGIN_ARG_INFO(exif_thumbnail_force_ref, 1)
-	ZEND_ARG_PASS_INFO(0)
-ZEND_END_ARG_INFO();
+ZEND_BEGIN_ARG_INFO(arginfo_exif_tagname, 0)
+	ZEND_ARG_INFO(0, index)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_exif_read_data, 0, 0, 1)
+	ZEND_ARG_INFO(0, filename)
+	ZEND_ARG_INFO(0, sections_needed)
+	ZEND_ARG_INFO(0, sub_arrays)
+	ZEND_ARG_INFO(0, read_thumbnail)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_exif_thumbnail, 0, 0, 1)
+	ZEND_ARG_INFO(0, filename)
+	ZEND_ARG_INFO(1, width)
+	ZEND_ARG_INFO(1, height)
+	ZEND_ARG_INFO(1, imagetype)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_exif_imagetype, 0)
+	ZEND_ARG_INFO(0, imagefile)
+ZEND_END_ARG_INFO()
+
+/* }}} */
 
 /* {{{ exif_functions[]
  */
 zend_function_entry exif_functions[] = {
-	PHP_FE(exif_read_data, NULL)
-	PHP_FALIAS(read_exif_data, exif_read_data, NULL)
-	PHP_FE(exif_tagname, NULL)
-	PHP_FE(exif_thumbnail, exif_thumbnail_force_ref)
-	PHP_FE(exif_imagetype, NULL)
+	PHP_FE(exif_read_data, arginfo_exif_read_data)
+	PHP_FALIAS(read_exif_data, exif_read_data, arginfo_exif_read_data)
+	PHP_FE(exif_tagname, arginfo_exif_tagname)
+	PHP_FE(exif_thumbnail, arginfo_exif_thumbnail)
+	PHP_FE(exif_imagetype, arginfo_exif_imagetype)
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.6 2007/01/01 09:40:23 sebastian Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.1 2006/06/11 01:42:17 bjori Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

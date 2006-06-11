@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.7 2006/06/11 01:42:16 bjori Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.8 2006/06/11 20:12:17 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -157,7 +157,7 @@ zend_function_entry date_functions[] = {
 	PHP_FE(checkdate, arginfo_checkdate)
 
 #ifdef HAVE_STRFTIME
-	PHP_FE(strftime, arginfo_strtotime)
+	PHP_FE(strftime, arginfo_strftime)
 	PHP_FE(gmstrftime, arginfo_gmstrftime)
 #endif
 

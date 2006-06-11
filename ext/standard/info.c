@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.11 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.1 2006/06/11 16:27:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -154,7 +154,7 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 			if (Z_TYPE_PP(tmp) == IS_ARRAY) {
 				if (!sapi_module.phpinfo_as_text) {
 					PUTS("<pre>");
-					zend_print_zval_ex((zend_write_func_t) php_info_write_wrapper, *tmp, 0);
+					zend_print_zval_r_ex((zend_write_func_t) php_info_write_wrapper, *tmp, 0);
 					PUTS("</pre>");
 				} else {
 					zend_print_zval_r(*tmp, 0 TSRMLS_CC);

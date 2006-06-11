@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.77 2006/04/19 08:43:05 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.78 2006/06/11 20:33:29 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -387,7 +387,7 @@ PHP_FUNCTION(stream_get_contents)
 	php_stream *stream;
 	zval *zsrc;
 	long maxlen = PHP_STREAM_COPY_ALL, pos = 0;
-	int len, newlen;
+	int len;
 	char *contents = NULL;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|ll", &zsrc, &maxlen, &pos) == FAILURE) {

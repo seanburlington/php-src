@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.196 2006/06/03 11:19:44 mike Exp $ */
+/* $Id: zlib.c,v 1.197 2006/06/11 20:33:29 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,7 +285,7 @@ PHP_FUNCTION(gzfile)
 	char *filename;
 	int filename_len;
 	long flags = 0;
-	char *slashed, buf[8192];
+	char buf[8192];
 	register int i = 0;
 	int use_include_path = 0;
 	php_stream *stream;

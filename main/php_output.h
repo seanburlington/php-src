@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.58 2006/06/03 11:51:35 mike Exp $ */
+/* $Id: php_output.h,v 1.59 2006/06/12 18:18:39 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -110,7 +110,7 @@ typedef struct _php_output_handler {
 	union {
 		zval *user;
 		php_output_handler_context_func_t internal;
-	};
+	} func;
 } php_output_handler;
 
 ZEND_BEGIN_MODULE_GLOBALS(output)

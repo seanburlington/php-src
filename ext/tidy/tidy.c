@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.88 2006/06/03 11:19:44 mike Exp $ */
+/* $Id: tidy.c,v 1.89 2006/06/13 13:12:20 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -335,7 +335,11 @@ zend_module_entry tidy_module_entry = {
 	NULL,
 	PHP_MINFO(tidy),
 	PHP_TIDY_MODULE_VERSION,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(tidy),
+	NULL,
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 
 #ifdef COMPILE_DL_TIDY
@@ -950,20 +954,8 @@ static int php_tidy_parse_string(PHPTidyObj *obj, char *string, int len, char *e
 	return SUCCESS;
 }
 
-static void tidy_globals_ctor(void *global TSRMLS_DC)
-{
-
-}
-
-static void tidy_globals_dtor(void *global TSRMLS_DC)
-{
-
-}
-
 PHP_MINIT_FUNCTION(tidy)
 {
-	ZEND_INIT_MODULE_GLOBALS(tidy, tidy_globals_ctor, tidy_globals_dtor);
-
 	REGISTER_INI_ENTRIES();
 	REGISTER_TIDY_CLASS(tidy, doc,	NULL, 0);
 	REGISTER_TIDY_CLASS(tidyNode, node,	NULL, ZEND_ACC_FINAL_CLASS);
@@ -999,11 +991,6 @@ PHP_RINIT_FUNCTION(tidy)
 
 PHP_MSHUTDOWN_FUNCTION(tidy)
 {
-#ifdef ZTS
-	ts_free_id(tidy_globals_id);
-#else
-	tidy_globals_dtor(&tidy_globals TSRMLS_CC);
-#endif
 	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
@@ -1013,7 +1000,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.88 2006/06/03 11:19:44 mike Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.89 2006/06/13 13:12:20 dmitry Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

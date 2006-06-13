@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.179 2006/04/07 14:05:21 pajoye Exp $ */
+/* $Id: sockets.c,v 1.180 2006/06/13 13:12:19 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,6 +57,7 @@
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(sockets)
+static PHP_GINIT_FUNCTION(sockets);
 
 #ifndef MSG_WAITALL
 #ifdef LINUX
@@ -157,7 +158,11 @@ zend_module_entry sockets_module_entry = {
 	PHP_RSHUTDOWN(sockets),
 	PHP_MINFO(sockets),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(sockets),
+	PHP_GINIT(sockets),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 
 
@@ -430,7 +435,7 @@ static int php_set_inet_addr(struct sockaddr_in *sin, char *string, php_socket *
 	return 1;
 }
 
-static void php_sockets_init_globals(zend_sockets_globals *sockets_globals TSRMLS_DC)
+static PHP_GINIT_FUNCTION(sockets)
 {
 	sockets_globals->last_error = 0;
 	sockets_globals->strerror_buf = NULL;
@@ -441,8 +446,6 @@ static void php_sockets_init_globals(zend_sockets_globals *sockets_globals TSRML
 PHP_MINIT_FUNCTION(sockets)
 {
 	struct protoent *pe;
-
-	ZEND_INIT_MODULE_GLOBALS(sockets, php_sockets_init_globals, NULL);
 
 	le_socket = zend_register_list_destructors_ex(php_destroy_socket, NULL, le_socket_name, module_number);
 

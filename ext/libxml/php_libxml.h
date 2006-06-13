@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.18 2006/01/01 13:09:51 sniper Exp $ */
+/* $Id: php_libxml.h,v 1.19 2006/06/13 13:12:18 dmitry Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -37,11 +37,11 @@ extern zend_module_entry libxml_module_entry;
 
 #define LIBXML_SAVE_NOEMPTYTAG 1<<2
 
-typedef struct {
+ZEND_BEGIN_MODULE_GLOBALS(libxml)
 	zval *stream_context;
 	smart_str error_buffer;
 	zend_llist *error_list;
-} php_libxml_globals;
+ZEND_END_MODULE_GLOBALS(libxml)
 
 typedef struct _libxml_doc_props {
 	int formatoutput;
@@ -103,7 +103,7 @@ PHP_LIBXML_API void php_libxml_initialize();
 PHP_LIBXML_API void php_libxml_shutdown();
 
 #ifdef ZTS
-#define LIBXML(v) TSRMG(libxml_globals_id, php_libxml_globals *, v)
+#define LIBXML(v) TSRMG(libxml_globals_id, zend_libxml_globals *, v)
 #else
 #define LIBXML(v) (libxml_globals.v)
 #endif

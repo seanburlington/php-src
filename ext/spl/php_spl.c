@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.93 2006/05/26 01:40:57 helly Exp $ */
+/* $Id: php_spl.c,v 1.94 2006/06/13 13:12:19 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -50,9 +50,9 @@ zend_function_entry spl_functions_none[] = {
 };
 /* }}} */
 
-/* {{{ spl_init_globals
+/* {{{ PHP_GINIT_FUNCTION
  */
-static void spl_init_globals(zend_spl_globals *spl_globals)
+static PHP_GINIT_FUNCTION(spl)
 {
 	spl_globals->autoload_extensions = NULL;
 	spl_globals->autoload_functions  = NULL;
@@ -656,8 +656,6 @@ zend_function_entry spl_functions[] = {
  */
 PHP_MINIT_FUNCTION(spl)
 {
-	ZEND_INIT_MODULE_GLOBALS(spl, spl_init_globals, NULL);
-
 	PHP_MINIT(spl_iterators)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_array)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_directory)(INIT_FUNC_ARGS_PASSTHRU);
@@ -715,7 +713,11 @@ zend_module_entry spl_module_entry = {
 	PHP_RSHUTDOWN(spl),
 	PHP_MINFO(spl),
 	"0.2",
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(spl),
+	PHP_GINIT(spl),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
 

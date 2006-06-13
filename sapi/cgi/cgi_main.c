@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.4 2006/06/03 22:02:02 johannes Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.5 2006/06/13 14:22:46 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -323,14 +323,14 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		PHPWRITE_H(buf, len);
 	}
 
-	h = zend_llist_get_first_ex(&sapi_headers->headers, &pos);
+	h = (sapi_header_struct*)zend_llist_get_first_ex(&sapi_headers->headers, &pos);
 	while (h) {
 		/* prevent CRLFCRLF */
 		if (h->header_len) {
 			PHPWRITE_H(h->header, h->header_len);
 			PHPWRITE_H("\r\n", 2);
 		}
-		h = zend_llist_get_next_ex(&sapi_headers->headers, &pos);
+		h = (sapi_header_struct*)zend_llist_get_next_ex(&sapi_headers->headers, &pos);
 	}
 	PHPWRITE_H("\r\n", 2);
 

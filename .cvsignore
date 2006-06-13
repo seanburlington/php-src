@@ -64,3 +64,8 @@ configure.js
 config.nice.bat
 ZendEngine1
 php_test_results_*.txt
+*.gcda
+*.gcno
+lcov_data
+lcov_html
+php_lcov.info

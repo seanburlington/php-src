@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.19 2006/05/25 06:40:47 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.20 2006/06/13 13:55:32 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -719,7 +719,7 @@ static inline void close_packet(fcgi_request *req)
 	if (req->out_hdr) {
 		int len = req->out_pos - ((unsigned char*)req->out_hdr + sizeof(fcgi_header));
 
-		req->out_pos += fcgi_make_header(req->out_hdr, req->out_hdr->type, req->id, len);
+		req->out_pos += fcgi_make_header(req->out_hdr, (fcgi_request_type)req->out_hdr->type, req->id, len);
 		req->out_hdr = NULL;
 	}
 }

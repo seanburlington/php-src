@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.184 2006/06/13 13:12:19 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.185 2006/06/14 18:04:01 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -335,6 +335,9 @@ PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_le
 	if (re == NULL) {
 		php_error_docref(NULL TSRMLS_CC,E_WARNING, "Compilation failed: %s at offset %d", error, erroffset);
 		efree(pattern);
+		if (tables) {
+			pefree((void*)tables, 1);
+		}
 		return NULL;
 	}
 

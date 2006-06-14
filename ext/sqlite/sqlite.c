@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.1 2006/05/09 23:54:15 helly Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.2 2006/06/14 16:04:13 iliaa Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1005,7 +1005,7 @@ zend_object_iterator *sqlite_get_iterator(zend_class_entry *ce, zval *object, in
 	sqlite_object *obj = (sqlite_object*) zend_object_store_get_object(object TSRMLS_CC);
 
 	if (by_ref) {
-		zend_error(E_ERROR, "An iterator cannot be used with foreach by reference");
+		zend_error(E_RECOVERABLE_ERROR, "An iterator cannot be used with foreach by reference");
 	}
 	object->refcount++;
 	iterator->it.data = (void*)object;
@@ -1127,7 +1127,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.1 2006/05/09 23:54:15 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.2 2006/06/14 16:04:13 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

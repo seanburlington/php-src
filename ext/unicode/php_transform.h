@@ -14,12 +14,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_transform.h,v 1.1 2006/06/13 23:46:04 andrei Exp $ */ 
+/* $Id: php_transform.h,v 1.2 2006/06/15 17:37:48 andrei Exp $ */ 
 
 #ifndef PHP_TRANSFORM_H
 #define PHP_TRANSFORM_H
 
-PHP_FUNCTION(transliterate);
+PHP_FUNCTION(str_transliterate);
 
 #endif /* PHP_TRANSFORM_H */
 

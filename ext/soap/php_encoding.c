@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.1 2006/05/26 09:02:33 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.2 2006/06/15 20:49:05 rasmus Exp $ */
 
 #include <time.h>
 
@@ -727,7 +727,7 @@ static zval *to_zval_hexbin(encodeTypePtr type, xmlNodePtr data)
 
 static xmlNodePtr to_xml_string(encodeTypePtr type, zval *data, int style, xmlNodePtr parent)
 {
-	xmlNodePtr ret;
+	xmlNodePtr ret, text;
 	char *str;
 	int new_len;
 	TSRMLS_FETCH();
@@ -737,13 +737,15 @@ static xmlNodePtr to_xml_string(encodeTypePtr type, zval *data, int style, xmlNo
 	FIND_ZVAL_NULL(data, ret, style);
 
 	if (Z_TYPE_P(data) == IS_STRING) {
-		str = php_escape_html_entities(Z_STRVAL_P(data), Z_STRLEN_P(data), &new_len, 0, 0, NULL TSRMLS_CC);
+		str = estrndup(Z_STRVAL_P(data), Z_STRLEN_P(data));
+		new_len = Z_STRLEN_P(data);
 	} else {
 		zval tmp = *data;
 
 		zval_copy_ctor(&tmp);
 		convert_to_string(&tmp);
-		str = php_escape_html_entities(Z_STRVAL(tmp), Z_STRLEN(tmp), &new_len, 0, 0, NULL TSRMLS_CC);
+		str = estrndup(Z_STRVAL(tmp), Z_STRLEN(tmp));
+		new_len = Z_STRLEN(tmp);
 		zval_dtor(&tmp);
 	}
 
@@ -765,7 +767,8 @@ static xmlNodePtr to_xml_string(encodeTypePtr type, zval *data, int style, xmlNo
 		soap_error1(E_ERROR,  "Encoding: string '%s' is not a valid utf-8 string", str);
 	}
 
-	xmlNodeSetContentLen(ret, str, new_len);
+	text = xmlNewTextLen(str, new_len);
+	xmlAddChild(ret, text);
 	efree(str);
 
 	if (style == SOAP_ENCODED) {

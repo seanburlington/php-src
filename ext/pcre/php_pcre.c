@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.5 2006/06/14 17:52:56 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.6 2006/06/15 15:33:25 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1091,7 +1091,7 @@ PHPAPI char *php_pcre_replace(char *regex,   int regex_len,
 			if (limit != -1)
 				limit--;
 
-		} else if (count == PCRE_ERROR_NOMATCH) {
+		} else if (count == PCRE_ERROR_NOMATCH || limit == 0) {
 			/* If we previously set PCRE_NOTEMPTY after a null match,
 			   this is not necessarily the end. We need to advance
 			   the start offset, and continue. Fudge the offset values

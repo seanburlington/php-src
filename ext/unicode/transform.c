@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: transform.c,v 1.1 2006/06/13 23:46:04 andrei Exp $ */ 
+/* $Id: transform.c,v 1.2 2006/06/15 10:03:52 dmitry Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -63,7 +63,7 @@ PHP_FUNCTION(transliterate)
 	}
 
 	if (id_len < 0) {
-		php_error_docref("", E_WARNING, "Transliterator ID too long");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Transliterator ID too long");
 		return;
 	}
 
@@ -71,7 +71,7 @@ PHP_FUNCTION(transliterate)
 
 	trans = utrans_openU(id, id_len, UTRANS_FORWARD, NULL, 0, NULL, &status);
 	if (U_FAILURE(status)) {
-		php_error_docref("", E_WARNING, "Failed to create transliterator");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to create transliterator");
 		return;
 	}
 

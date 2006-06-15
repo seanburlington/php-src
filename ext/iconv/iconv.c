@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.9 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.1 2006/06/15 18:33:07 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -80,6 +80,9 @@ zend_function_entry iconv_functions[] = {
 };
 /* }}} */
 
+ZEND_DECLARE_MODULE_GLOBALS(iconv)
+static PHP_GINIT_FUNCTION(iconv);
+
 /* {{{ iconv_module_entry
  */
 zend_module_entry iconv_module_entry = {
@@ -92,15 +95,26 @@ zend_module_entry iconv_module_entry = {
 	NULL,
 	PHP_MINFO(miconv),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(iconv),
+	PHP_GINIT(iconv),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
-
-ZEND_DECLARE_MODULE_GLOBALS(iconv)
 
 #ifdef COMPILE_DL_ICONV
 ZEND_GET_MODULE(iconv)
 #endif
+
+/* {{{ PHP_GINIT_FUNCTION */
+static PHP_GINIT_FUNCTION(iconv)
+{
+	iconv_globals->input_encoding = NULL;
+	iconv_globals->output_encoding = NULL;
+	iconv_globals->internal_encoding = NULL;
+}
+/* }}} */
 
 #ifdef HAVE_LIBICONV
 #define iconv libiconv
@@ -151,21 +165,11 @@ PHP_INI_BEGIN()
 PHP_INI_END()
 /* }}} */
 
-/* {{{ php_iconv_init_globals */
-static void php_iconv_init_globals(zend_iconv_globals *iconv_globals)
-{
-	iconv_globals->input_encoding = NULL;
-	iconv_globals->output_encoding = NULL;
-	iconv_globals->internal_encoding = NULL;
-}
-/* }}} */
-
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(miconv)
 {
 	char *version = "unknown";
 
-	ZEND_INIT_MODULE_GLOBALS(iconv, php_iconv_init_globals, NULL);
 	REGISTER_INI_ENTRIES();
 
 #if HAVE_LIBICONV

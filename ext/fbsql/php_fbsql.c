@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.114.2.3.2.1 2006/06/14 21:36:10 bjori Exp $ */
+/* $Id: php_fbsql.c,v 1.114.2.3.2.2 2006/06/15 18:33:07 dmitry Exp $ */
 
 /* TODO:
  *
@@ -164,6 +164,9 @@ struct PHPFBLink
 #define FBSQL_LOB_HANDLE 1				/* default */
 
 #define DIGEST_BUFFER_SIZE 17			/* fbcDigestPassword() expects a preallocated buffer for 16 bytes plus termination */
+
+ZEND_DECLARE_MODULE_GLOBALS(fbsql)
+static PHP_GINIT_FUNCTION(fbsql);
 
 int mdOk(PHPFBLink* link, FBCMetaData* md, char* sql);
 char *DigestPassword(char *user, char *password)
@@ -620,10 +623,12 @@ zend_module_entry fbsql_module_entry = {
 	PHP_RSHUTDOWN(fbsql),
 	PHP_MINFO(fbsql),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(fbsql),
+	PHP_GINIT(fbsql),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
-
-ZEND_DECLARE_MODULE_GLOBALS(fbsql)
 
 #ifdef COMPILE_DL_FBSQL
 ZEND_GET_MODULE(fbsql)
@@ -745,7 +750,7 @@ PHP_INI_BEGIN()
 PHP_INI_END()
 /* }}} */    
 
-static void php_fbsql_init_globals(zend_fbsql_globals *fbsql_globals)
+static PHP_GINIT_FUNCTION(fbsql)
 {
 	fbsql_globals->persistentCount = 0;
 
@@ -763,8 +768,6 @@ static void php_fbsql_init_globals(zend_fbsql_globals *fbsql_globals)
 
 PHP_MINIT_FUNCTION(fbsql)
 {
-	ZEND_INIT_MODULE_GLOBALS(fbsql, php_fbsql_init_globals, NULL);
-
 	REGISTER_INI_ENTRIES();
 
 	fbcInitialize();

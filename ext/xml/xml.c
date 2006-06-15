@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157.2.5 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: xml.c,v 1.157.2.4.2.1 2006/06/15 18:33:09 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -57,11 +57,7 @@
  * - Weird things happen with <![CDATA[]]> sections.
  */
 
-#ifdef ZTS
-int xml_globals_id;
-#else
-PHP_XML_API php_xml_globals xml_globals;
-#endif
+ZEND_DECLARE_MODULE_GLOBALS(xml)
 
 /* {{{ dynamically loadable module stuff */
 #ifdef COMPILE_DL_XML
@@ -75,6 +71,7 @@ ZEND_GET_MODULE(xml)
 /* {{{ function prototypes */
 PHP_MINIT_FUNCTION(xml);
 PHP_MINFO_FUNCTION(xml);
+static PHP_GINIT_FUNCTION(xml);
 
 static void xml_parser_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 static void xml_set_handler(zval **, zval **);
@@ -161,7 +158,11 @@ zend_module_entry xml_module_entry = {
 	NULL,                 /* per-request shutdown function */
 	PHP_MINFO(xml),       /* information function */
     NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+    PHP_MODULE_GLOBALS(xml), /* globals descriptor */
+    PHP_GINIT(xml),          /* globals ctor */
+    NULL,                    /* globals dtor */
+    NULL,                    /* post deactivate */
+	STANDARD_MODULE_PROPERTIES_EX
 };
 
 /* All the encoding functions are set to NULL right now, since all
@@ -182,12 +183,10 @@ static int le_xml_parser;
 /* }}} */
 
 /* {{{ startup, shutdown and info functions */
-#ifdef ZTS
-static void php_xml_init_globals(php_xml_globals *xml_globals_p TSRMLS_DC)
+static PHP_GINIT_FUNCTION(xml)
 {
-	XML(default_encoding) = "UTF-8";
+	xml_globals->default_encoding = "UTF-8";
 }
-#endif
 
 static void *php_xml_malloc_wrapper(size_t sz)
 {
@@ -209,12 +208,6 @@ static void php_xml_free_wrapper(void *ptr)
 PHP_MINIT_FUNCTION(xml)
 {
 	le_xml_parser =	zend_register_list_destructors_ex(xml_parser_dtor, NULL, "xml", module_number);
-
-#ifdef ZTS
-	ts_allocate_id(&xml_globals_id, sizeof(php_xml_globals), (ts_allocate_ctor) php_xml_init_globals, NULL);
-#else
-	XML(default_encoding) = "UTF-8";
-#endif
 
 	REGISTER_LONG_CONSTANT("XML_ERROR_NONE", XML_ERROR_NONE, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XML_ERROR_NO_MEMORY", XML_ERROR_NO_MEMORY, CONST_CS|CONST_PERSISTENT);

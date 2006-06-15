@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.28.2.3 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_xml.h,v 1.28.2.2.2.1 2006/06/15 18:33:09 dmitry Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -45,9 +45,9 @@ extern zend_module_entry xml_module_entry;
 #error "UTF-16 Unicode support not implemented!"
 #endif
 
-typedef struct {
+ZEND_BEGIN_MODULE_GLOBALS(xml)
 	XML_Char *default_encoding;
-} php_xml_globals;
+ZEND_END_MODULE_GLOBALS(xml)
 
 typedef struct {
 	int index;
@@ -147,7 +147,7 @@ PHPAPI char *xml_utf8_decode(const XML_Char *, int, int *, const XML_Char *);
 #define phpext_xml_ptr xml_module_ptr
 
 #ifdef ZTS
-#define XML(v) TSRMG(xml_globals_id, php_xml_globals *, v)
+#define XML(v) TSRMG(xml_globals_id, zend_xml_globals *, v)
 #else
 #define XML(v) (xml_globals.v)
 #endif

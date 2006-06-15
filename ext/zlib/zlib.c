@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.7 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: zlib.c,v 1.183.2.6.2.1 2006/06/15 18:33:09 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -113,6 +113,8 @@ zend_function_entry php_zlib_functions[] = {
 };
 /* }}} */
 
+ZEND_DECLARE_MODULE_GLOBALS(zlib)
+
 /* {{{ php_zlib_module_entry
  */
 zend_module_entry php_zlib_module_entry = {
@@ -125,11 +127,13 @@ zend_module_entry php_zlib_module_entry = {
 	NULL,
 	PHP_MINFO(zlib),
 	"1.1",
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(zlib),
+	NULL,
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
-
-ZEND_DECLARE_MODULE_GLOBALS(zlib)
 
 #ifdef COMPILE_DL_ZLIB
 ZEND_GET_MODULE(php_zlib)
@@ -199,22 +203,10 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("zlib.output_handler",             "", PHP_INI_ALL, OnUpdate_zlib_output_handler,           output_handler,           zend_zlib_globals, zlib_globals)
 PHP_INI_END()
 
-#ifdef ZTS
-/* {{{ php_zlib_init_globals
- */
-static void php_zlib_init_globals(zend_zlib_globals *zlib_globals_p TSRMLS_DC)
-{
-}
-/* }}} */
-#endif
-
 /* {{{ PHP_MINIT_FUNCTION
  */
 PHP_MINIT_FUNCTION(zlib)
 {
-#ifdef ZTS
-	ts_allocate_id(&zlib_globals_id, sizeof(zend_zlib_globals), (ts_allocate_ctor) php_zlib_init_globals, NULL);
-#endif
 	php_register_url_stream_wrapper("compress.zlib", &php_stream_gzip_wrapper TSRMLS_CC);
 	php_stream_filter_register_factory("zlib.*", &php_zlib_filter_factory TSRMLS_CC);
 

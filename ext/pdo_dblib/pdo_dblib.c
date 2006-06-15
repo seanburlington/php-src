@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.9.2.7 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: pdo_dblib.c,v 1.9.2.6.2.1 2006/06/15 18:33:08 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -33,6 +33,7 @@
 #include "zend_exceptions.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(dblib)
+static PHP_GINIT_FUNCTION(dblib)
 
 zend_function_entry pdo_dblib_functions[] = {
 	{NULL, NULL, NULL}
@@ -66,7 +67,11 @@ zend_module_entry pdo_dblib_module_entry = {
 	PHP_RSHUTDOWN(pdo_dblib),
 	PHP_MINFO(pdo_dblib),
 	"1.0.1",
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBASLS(dblib),
+	PHP_GINIT(dblib),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 
 #if defined(COMPILE_DL_PDO_DBLIB) || defined(COMPILE_DL_PDO_MSSQL)
@@ -146,11 +151,10 @@ int msg_handler(DBPROCESS *dbproc, DBINT msgno, int msgstate,
 	return 0;
 }
 
-static int init_dblib_globals(zend_dblib_globals *g)
+static PHP_GINIT_FUNCTION(dblib)
 {
-	memset(g, 0, sizeof(*g));
-	g->err.sqlstate = g->sqlstate;
-	return SUCCESS;
+	memset(dblib_globals, 0, sizeof(*dblib_globals));
+	dblib_globals->err.sqlstate = dblib_globals->sqlstate;
 }
 
 PHP_RSHUTDOWN_FUNCTION(pdo_dblib)
@@ -180,8 +184,6 @@ PHP_MINIT_FUNCTION(pdo_dblib)
 		return FAILURE;
 	}
 	
-	ZEND_INIT_MODULE_GLOBALS(dblib, init_dblib_globals, NULL);
-
 	/* TODO: 
 	
 	dbsetifile()

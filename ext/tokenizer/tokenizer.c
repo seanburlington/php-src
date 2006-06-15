@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.6 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.1 2006/06/15 18:33:09 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -144,10 +144,10 @@ PHP_INI_END()
 */
 /* }}} */
 
-/* {{{ php_tokenizer_init_globals
+/* {{{ PHP_GINIT_FUNCTION
  */
 /* Uncomment this function if you have INI entries
-static void php_tokenizer_init_globals(zend_tokenizer_globals *tokenizer_globals)
+static PHP_GINIT_FUNCTION(tokenizer)
 {
 	tokenizer_globals->global_value = 0;
 	tokenizer_globals->global_string = NULL;
@@ -160,7 +160,6 @@ static void php_tokenizer_init_globals(zend_tokenizer_globals *tokenizer_globals
 PHP_MINIT_FUNCTION(tokenizer)
 {
 	/* If you have INI entries, uncomment these lines 
-	ZEND_INIT_MODULE_GLOBALS(tokenizer, php_tokenizer_init_globals, NULL);
 	REGISTER_INI_ENTRIES();
 	*/
 

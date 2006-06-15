@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.10 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.1 2006/06/15 18:33:07 dmitry Exp $ */
 
 #define IMAP41
 
@@ -80,6 +80,8 @@ unsigned long find_rightmost_bit(unsigned long *valptr);
 void fs_give(void **block);
 void *fs_get(size_t size);
 
+ZEND_DECLARE_MODULE_GLOBALS(imap)
+static PHP_GINIT_FUNCTION(imap);
 
 /* {{{ imap_functions[]
  */
@@ -175,11 +177,13 @@ zend_module_entry imap_module_entry = {
 	PHP_RSHUTDOWN(imap),
 	PHP_MINFO(imap),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(imap),
+	PHP_GINIT(imap),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
-
-ZEND_DECLARE_MODULE_GLOBALS(imap)
 
 #ifdef COMPILE_DL_IMAP
 ZEND_GET_MODULE(imap)
@@ -397,9 +401,9 @@ void mail_getacl(MAILSTREAM *stream, char *mailbox, ACLLIST *alist)
 #endif
 
 
-/* {{{ php_imap_init_globals
+/* {{{ PHP_GINIT_FUNCTION
  */
-static void php_imap_init_globals(zend_imap_globals *imap_globals)
+static PHP_GINIT_FUNCTION(imap)
 {
 	imap_globals->imap_user = NIL;
 	imap_globals->imap_password = NIL;
@@ -432,8 +436,6 @@ static void php_imap_init_globals(zend_imap_globals *imap_globals)
 PHP_MINIT_FUNCTION(imap)
 {
 	unsigned long sa_all =	SA_MESSAGES | SA_RECENT | SA_UNSEEN | SA_UIDNEXT | SA_UIDVALIDITY;
-
-	ZEND_INIT_MODULE_GLOBALS(imap, php_imap_init_globals, NULL)
 
 #ifndef PHP_WIN32
 	mail_link(&unixdriver);		/* link in the unix driver */
@@ -761,13 +763,6 @@ static void php_imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		efree(IMAPG(imap_password));
 	}
 
-	/* local filename, need to perform open_basedir and safe_mode checks */
-	if (Z_STRVAL_PP(mailbox)[0] != '{' && 
-			(php_check_open_basedir(Z_STRVAL_PP(mailbox) TSRMLS_CC) || 
-			(PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(mailbox), NULL, CHECKUID_CHECK_FILE_AND_DIR)))) {
-		RETURN_FALSE;
-	}
-
 	IMAPG(imap_user)     = estrndup(Z_STRVAL_PP(user), Z_STRLEN_PP(user));
 	IMAPG(imap_password) = estrndup(Z_STRVAL_PP(passwd), Z_STRLEN_PP(passwd));
 
@@ -824,14 +819,6 @@ PHP_FUNCTION(imap_reopen)
 		}
 		imap_le_struct->flags = cl_flags;	
 	}
-
-	/* local filename, need to perform open_basedir and safe_mode checks */
-	if (Z_STRVAL_PP(mailbox)[0] != '{' && 
-			(php_check_open_basedir(Z_STRVAL_PP(mailbox) TSRMLS_CC) || 
-			(PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(mailbox), NULL, CHECKUID_CHECK_FILE_AND_DIR)))) {
-		RETURN_FALSE;
-	}
-
 	imap_stream = mail_open(imap_le_struct->imap_stream, Z_STRVAL_PP(mailbox), flags);
 	if (imap_stream == NIL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't re-open stream");

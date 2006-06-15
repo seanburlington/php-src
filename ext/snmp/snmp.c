@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.106.2.3 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: snmp.c,v 1.106.2.2.2.1 2006/06/15 18:33:08 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,6 +107,7 @@
 #define SNMP_VALUE_OBJECT	2
 
 ZEND_DECLARE_MODULE_GLOBALS(snmp)
+static PHP_GINIT_FUNCTION(snmp);
 
 /* constant - can be shared among threads */
 static oid objid_mib[] = {1, 3, 6, 1, 2, 1};
@@ -164,7 +165,11 @@ zend_module_entry snmp_module_entry = {
 	NULL,
 	PHP_MINFO(snmp),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(snmp),
+	PHP_GINIT(snmp),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
 
@@ -174,9 +179,9 @@ ZEND_GET_MODULE(snmp)
 
 /* THREAD_LS snmp_module php_snmp_module; - may need one of these at some point */
 
-/* {{{ php_snmp_init_globals
+/* {{{ PHP_GINIT_FUNCTION
  */
-static void php_snmp_init_globals(zend_snmp_globals *snmp_globals)
+static PHP_GINIT_FUNCTION(snmp)
 {
 	snmp_globals->valueretrieval = 0;
 }
@@ -192,8 +197,6 @@ PHP_MINIT_FUNCTION(snmp)
 	/* Prevent update of the snmpapp.conf file */
 	netsnmp_ds_set_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_DONT_PERSIST_STATE, 1);
 #endif
-
-	ZEND_INIT_MODULE_GLOBALS(snmp, php_snmp_init_globals, NULL);
 
 	REGISTER_LONG_CONSTANT("SNMP_VALUE_LIBRARY", SNMP_VALUE_LIBRARY, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SNMP_VALUE_PLAIN", SNMP_VALUE_PLAIN, CONST_CS | CONST_PERSISTENT);

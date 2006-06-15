@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.1 2006/05/30 17:40:52 mike Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.2 2006/06/15 18:33:08 dmitry Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -42,6 +42,7 @@
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(pcntl)
+static PHP_GINIT_FUNCTION(pcntl);
 
 zend_function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_fork,			NULL)
@@ -75,7 +76,11 @@ zend_module_entry pcntl_module_entry = {
 	PHP_RSHUTDOWN(pcntl),
 	PHP_MINFO(pcntl),
 	NO_VERSION_YET,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(pcntl),
+	PHP_GINIT(pcntl),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 
 #ifdef COMPILE_DL_PCNTL
@@ -160,7 +165,7 @@ void php_register_signal_constants(INIT_FUNC_ARGS)
 #endif
 }
 
-static void php_pcntl_init_globals(zend_pcntl_globals *pcntl_globals)
+static PHP_GINIT_FUNCTION(pcntl)
 { 
 	memset(pcntl_globals, 0, sizeof(*pcntl_globals));
 }
@@ -175,7 +180,6 @@ PHP_RINIT_FUNCTION(pcntl)
 PHP_MINIT_FUNCTION(pcntl)
 {
 	php_register_signal_constants(INIT_FUNC_ARGS_PASSTHRU);
-	ZEND_INIT_MODULE_GLOBALS(pcntl, php_pcntl_init_globals, NULL);
 	php_add_tick_function(pcntl_tick_handler);
 
 	return SUCCESS;

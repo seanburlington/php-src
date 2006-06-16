@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.346 2006/05/11 22:05:16 iliaa Exp $
+dnl $Id: acinclude.m4,v 1.347 2006/06/16 08:00:23 sesser Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -2048,7 +2048,8 @@ AC_DEFUN([PHP_PROG_LEX], [
   case $php_cv_flex_version in
     ""|invalid[)]
       flex_msg="flex versions supported for regeneration of the Zend/PHP parsers: $flex_version_list  (found: $flex_version)."
-      AC_MSG_ERROR([$flex_msg])
+      AC_MSG_WARN([$flex_msg])
+      LEX="echo \"error: $flex_msg\" 1>&2 ; exit 1;"
       ;;
   esac
   PHP_SUBST(LEX)

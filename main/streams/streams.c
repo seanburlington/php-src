@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.1 2006/05/14 18:40:12 helly Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.2 2006/06/16 14:09:01 rasmus Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1605,7 +1605,7 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 		return &php_plain_files_wrapper;
 	}
 
-	if (wrapperpp && (*wrapperpp)->is_url && !PG(allow_url_fopen)) {
+	if ((wrapperpp && (*wrapperpp)->is_url) && (!PG(allow_url_fopen) || ((options & STREAM_OPEN_FOR_INCLUDE) && !PG(allow_url_include))) ) {
 		if (options & REPORT_ERRORS) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "URL file-access is disabled in the server configuration");
 		}

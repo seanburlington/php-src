@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.47 2006/06/17 13:00:21 bjori Exp $ */
+/* $Id: libxml.c,v 1.48 2006/06/17 13:15:37 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -628,12 +628,6 @@ PHP_MINIT_FUNCTION(libxml)
 
 	INIT_CLASS_ENTRY(ce, "LibXMLError", NULL);
 	libxmlerror_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
-    zend_declare_property_long(libxmlerror_class_entry, "code", sizeof("code")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
-    zend_declare_property_long(libxmlerror_class_entry, "level", sizeof("level")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
-    zend_declare_property_long(libxmlerror_class_entry, "column", sizeof("column")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
-    zend_declare_property_string(libxmlerror_class_entry, "message", sizeof("message")-1, "", ZEND_ACC_PUBLIC TSRMLS_CC);
-    zend_declare_property_string(libxmlerror_class_entry, "file", sizeof("file")-1, "", ZEND_ACC_PUBLIC TSRMLS_CC);
-    zend_declare_property_long(libxmlerror_class_entry, "line", sizeof("line")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
 
 	return SUCCESS;
 }

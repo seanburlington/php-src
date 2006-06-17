@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.1 2006/05/06 21:58:03 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.2 2006/06/17 11:08:05 nlopess Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -505,6 +505,7 @@ scandir \
 setitimer \
 setlocale \
 localeconv \
+setenv \
 setpgid \
 setsockopt \
 setvbuf \

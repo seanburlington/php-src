@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.5 2006/06/13 14:22:46 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.6 2006/06/17 11:08:05 nlopess Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -405,6 +405,18 @@ static char *_sapi_cgibin_putenv(char *name, char *value TSRMLS_DC)
 		return fcgi_putenv(request, name, name_len, value);
 	}
 #endif
+#if HAVE_SETENV
+	if (value) {
+		setenv(name, value, 1);
+	}
+#endif
+#if HAVE_UNSETENV
+	if (!value) {
+		unsetenv(name);
+	}
+#endif
+
+#if !HAVE_SETENV || !HAVE_UNSETENV
 	/*  if cgi, or fastcgi and not found in fcgi env
 		check the regular environment 
 		this leaks, but it's only cgi anyway, we'll fix
@@ -415,12 +427,19 @@ static char *_sapi_cgibin_putenv(char *name, char *value TSRMLS_DC)
 	if (buf == NULL) {
 		return getenv(name);
 	}
+#endif
+#if !HAVE_SETENV
 	if (value) {
 		len = snprintf(buf, len - 1, "%s=%s", name, value);
-	} else {
-		len = snprintf(buf, len - 1, "%s=", name);
+		putenv(buf);
 	}
-	putenv(buf);
+#endif
+#if !HAVE_UNSETENV
+	if (!value) {
+		len = snprintf(buf, len - 1, "%s=", name);
+		putenv(buf);
+	}
+#endif
 	return getenv(name);
 }
 

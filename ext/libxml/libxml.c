@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.2 2006/06/15 18:33:07 dmitry Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.3 2006/06/17 13:06:06 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -83,13 +83,38 @@ PHP_MINFO_FUNCTION(libxml);
 
 /* }}} */
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO(arginfo_libxml_set_streams_context, 0)
+	ZEND_ARG_INFO(0, context)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_libxml_use_internal_errors, 0)
+	ZEND_ARG_INFO(0, use_errors)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_libxml_get_last_error, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_libxml_get_errors, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_libxml_clear_errors, 0)
+ZEND_END_ARG_INFO()
+
+/* }}} */
+
 /* {{{ extension definition structures */
 zend_function_entry libxml_functions[] = {
-	PHP_FE(libxml_set_streams_context, NULL)
-	PHP_FE(libxml_use_internal_errors, NULL)
-	PHP_FE(libxml_get_last_error, NULL)
-	PHP_FE(libxml_clear_errors, NULL)
-	PHP_FE(libxml_get_errors, NULL)
+	PHP_FE(libxml_set_streams_context, arginfo_libxml_set_streams_context)
+	PHP_FE(libxml_use_internal_errors, arginfo_libxml_use_internal_errors)
+	PHP_FE(libxml_get_last_error, arginfo_libxml_get_last_error)
+	PHP_FE(libxml_clear_errors, arginfo_libxml_clear_errors)
+	PHP_FE(libxml_get_errors, arginfo_libxml_get_errors)
 	{NULL, NULL, NULL}
 };
 
@@ -674,7 +699,7 @@ PHP_FUNCTION(libxml_set_streams_context)
 }
 /* }}} */
 
-/* {{{ proto void libxml_use_internal_errors(boolean use_errors) 
+/* {{{ proto void libxml_use_internal_errors([boolean use_errors]) 
    Disable libxml errors and allow user to fetch error information as needed */
 PHP_FUNCTION(libxml_use_internal_errors)
 {

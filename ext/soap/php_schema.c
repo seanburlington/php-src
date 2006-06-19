@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.64 2006/04/09 23:38:30 andrei Exp $ */
+/* $Id: php_schema.c,v 1.65 2006/06/19 11:43:36 tony2001 Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -115,7 +115,7 @@ static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlA
 		if (import) {
 			if (ns != NULL && (new_tns == NULL || strcmp(ns->children->content,new_tns->children->content) != 0)) {
 				xmlFreeDoc(doc);
-				soap_error2(E_ERROR, "Parsing Schema: can't import schema from '%s', unexpected 'targetNamespace'='%s'", location, new_tns->children->content);
+				soap_error2(E_ERROR, "Parsing Schema: can't import schema from '%s', unexpected 'targetNamespace'='%s'", location, ns->children->content);
 			}
 			if (ns == NULL && new_tns != NULL) {
 				xmlFreeDoc(doc);

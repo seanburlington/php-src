@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70.2.3.2.1 2006/06/15 18:33:08 dmitry Exp $ */
+/* $Id: posix.c,v 1.70.2.3.2.2 2006/06/19 02:19:13 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,6 +134,9 @@ zend_function_entry posix_functions[] = {
 	PHP_FE(posix_get_last_error,					NULL)
 	PHP_FALIAS(posix_errno, posix_get_last_error,	NULL)
 	PHP_FE(posix_strerror,							NULL)
+#ifdef HAVE_INITGROUPS
+	PHP_FE(posix_initgroups,	NULL)
+#endif
 
 	{NULL, NULL, NULL}
 };
@@ -144,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.2 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -1055,6 +1058,22 @@ PHP_FUNCTION(posix_strerror)
 /* }}} */
 
 #endif
+
+/* {{{ proto bool initgroups(string name, int base_group_id)
+   Calculate the group access list for the user specified in name. */
+PHP_FUNCTION(posix_initgroups)
+{
+	long basegid;
+	char *name;
+	int name_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sl", &name, &name_len, &basegid) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	RETURN_BOOL(!initgroups((const char *)name, basegid));
+}
+/* }}} */
 
 /*
  * Local variables:

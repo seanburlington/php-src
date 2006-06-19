@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.76 2006/06/19 02:19:45 iliaa Exp $ */
+/* $Id: posix.c,v 1.77 2006/06/19 23:55:11 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.76 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.77 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -1053,6 +1053,7 @@ PHP_FUNCTION(posix_strerror)
 
 #endif
 
+#ifdef HAVE_INITGROUPS
 /* {{{ proto bool initgroups(string name, int base_group_id)
    Calculate the group access list for the user specified in name. */
 PHP_FUNCTION(posix_initgroups)
@@ -1068,6 +1069,7 @@ PHP_FUNCTION(posix_initgroups)
 	RETURN_BOOL(!initgroups((const char *)name, basegid));
 }
 /* }}} */
+#endif
 
 /*
  * Local variables:

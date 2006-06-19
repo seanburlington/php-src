@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.293 2006/06/17 11:14:21 nlopess Exp $ */
+/* $Id: cgi_main.c,v 1.294 2006/06/19 11:38:51 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -368,8 +368,10 @@ static char *sapi_cgibin_getenv(char *name, size_t name_len TSRMLS_DC)
 static char *_sapi_cgibin_putenv(char *name, char *value TSRMLS_DC)
 {
 	int name_len;
+#if !HAVE_SETENV || !HAVE_UNSETENV
 	int len;
 	char *buf;
+#endif
 
 	if (!name) {
 		return NULL;

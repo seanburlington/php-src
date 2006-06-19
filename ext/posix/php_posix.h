@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_posix.h,v 1.19 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: php_posix.h,v 1.20 2006/06/19 02:19:45 iliaa Exp $ */
 
 #ifndef PHP_POSIX_H
 #define PHP_POSIX_H
@@ -108,6 +108,10 @@ PHP_FUNCTION(posix_getpwuid);
 
 #ifdef HAVE_GETRLIMIT
 PHP_FUNCTION(posix_getrlimit);
+#endif
+
+#ifdef HAVE_INITGROUPS
+PHP_FUNCTION(posix_initgroups);
 #endif
 
 PHP_FUNCTION(posix_get_last_error);

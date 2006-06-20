@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.2 2006/05/30 09:46:59 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.3 2006/06/20 13:26:01 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -836,9 +836,9 @@ static int do_fetch_opt_finish(pdo_stmt_t *stmt, int free_ctor_agrs TSRMLS_DC) /
 static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 	enum pdo_fetch_type how, enum pdo_fetch_orientation ori, long offset, zval *return_all TSRMLS_DC) /* {{{ */
 {
-	int flags = how & PDO_FETCH_FLAGS, idx, old_arg_count;
-	zend_class_entry * ce, * old_ce;
-	zval grp_val, *grp, **pgrp, *retval, *old_ctor_args;
+	int flags = how & PDO_FETCH_FLAGS, idx, old_arg_count = 0;
+	zend_class_entry *ce = NULL, *old_ce = NULL;
+	zval grp_val, *grp, **pgrp, *retval, *old_ctor_args = NULL;
 
 	how = how & ~PDO_FETCH_FLAGS;
 	if (how == PDO_FETCH_USE_DEFAULT) {

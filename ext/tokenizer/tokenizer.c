@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.5.2.1 2006/06/15 18:33:09 dmitry Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.2 2006/06/20 22:39:15 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -119,9 +119,9 @@ zend_module_entry tokenizer_module_entry = {
 	"tokenizer",
 	tokenizer_functions,
 	PHP_MINIT(tokenizer),
-	PHP_MSHUTDOWN(tokenizer),
-	PHP_RINIT(tokenizer),		/* Replace with NULL if there's nothing to do at request start */
-	PHP_RSHUTDOWN(tokenizer),	/* Replace with NULL if there's nothing to do at request end */
+	NULL,
+	NULL,
+	NULL,
 	PHP_MINFO(tokenizer),
 #if ZEND_MODULE_API_NO >= 20010901
 	"0.1", /* Replace with version number for your extension */
@@ -283,35 +283,6 @@ PHP_MINIT_FUNCTION(tokenizer)
 	REGISTER_LONG_CONSTANT("T_CLONE", T_CLONE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("T_HALT_COMPILER", T_HALT_COMPILER, CONST_CS | CONST_PERSISTENT);
 
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(tokenizer)
-{
-	/* uncomment this line if you have INI entries
-	UNREGISTER_INI_ENTRIES();
-	*/
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request start */
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(tokenizer)
-{
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request end */
-/* {{{ PHP_RSHUTDOWN_FUNCTION
- */
-PHP_RSHUTDOWN_FUNCTION(tokenizer)
-{
 	return SUCCESS;
 }
 /* }}} */

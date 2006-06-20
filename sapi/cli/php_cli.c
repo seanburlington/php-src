@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.157 2006/06/19 14:53:03 mike Exp $ */
+/* $Id: php_cli.c,v 1.158 2006/06/20 13:01:08 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -563,7 +563,7 @@ int main(int argc, char *argv[])
 /* temporary locals */
 	int behavior=PHP_MODE_STANDARD;
 #ifdef HAVE_REFLECTION
-	char *reflection_what;
+	char *reflection_what = NULL;
 #endif
 	int orig_optind=php_optind;
 	char *orig_optarg=php_optarg;
@@ -1189,7 +1189,7 @@ int main(int argc, char *argv[])
 			case PHP_MODE_REFLECTION_CLASS:
 			case PHP_MODE_REFLECTION_EXTENSION:
 				{
-					zend_class_entry *pce;
+					zend_class_entry *pce = NULL;
 					zval *arg, *ref;
 					zend_execute_data execute_data;
 

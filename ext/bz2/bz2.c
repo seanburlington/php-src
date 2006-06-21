@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.1 2006/06/11 01:42:16 bjori Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.2 2006/06/21 12:43:27 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -359,7 +359,7 @@ PHP_FUNCTION(bzopen)
 	}
 	convert_to_string_ex(mode);
 
-	if (Z_STRVAL_PP(mode)[0] != 'r' && Z_STRVAL_PP(mode)[0] != 'w' && Z_STRVAL_PP(mode)[1] != '\0') {
+	if (Z_STRLEN_PP(mode) != 1 || (Z_STRVAL_PP(mode)[0] != 'r' && Z_STRVAL_PP(mode)[0] != 'w')) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "'%s' is not a valid mode for bzopen(). Only 'w' and 'r' are supported.", Z_STRVAL_PP(mode));
 		RETURN_FALSE;
 	}
@@ -367,6 +367,12 @@ PHP_FUNCTION(bzopen)
 	/* If it's not a resource its a string containing the filename to open */
 	if (Z_TYPE_PP(file) != IS_RESOURCE) {
 		convert_to_string_ex(file);
+
+		if (Z_STRLEN_PP(file) == 0) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "filename cannot be empty");
+			RETURN_FALSE;
+		}
+
 		stream = php_stream_bz2open(NULL,
 									Z_STRVAL_PP(file), 
 									Z_STRVAL_PP(mode), 

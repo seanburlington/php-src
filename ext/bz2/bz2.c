@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.21 2006/06/21 12:42:50 tony2001 Exp $ */
+/* $Id: bz2.c,v 1.22 2006/06/21 13:12:00 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -377,6 +377,18 @@ PHP_FUNCTION(bzopen)
 		int fd;
 
 		php_stream_from_zval(stream, file);
+
+		if (!memchr(stream->mode, Z_STRVAL_PP(mode)[0], strlen(stream->mode))) {
+			switch (Z_STRVAL_PP(mode)[0]) {
+				case 'r':
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot read from a stream opened in write only mode");
+					break;
+				case 'w':
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot write to a stream opened in read only mode");
+					break;
+			}
+			RETURN_FALSE;
+		}
 
 		if (FAILURE == php_stream_cast(stream, PHP_STREAM_AS_FD, (void *) &fd, REPORT_ERRORS)) {
 			RETURN_FALSE;

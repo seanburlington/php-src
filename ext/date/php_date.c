@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.99 2006/06/13 13:12:18 dmitry Exp $ */
+/* $Id: php_date.c,v 1.100 2006/06/22 18:44:18 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1182,6 +1182,10 @@ PHP_FUNCTION(strtotime)
 		now->zone_type = TIMELIB_ZONETYPE_ID;
 		timelib_unixtime2local(now, (timelib_sll) time(NULL));
 	} else {
+		RETURN_FALSE;
+	}
+
+	if (!time_len) {
 		RETURN_FALSE;
 	}
 

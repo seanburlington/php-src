@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.51 2006/05/19 01:45:22 pajoye Exp $ */
+/* $Id: filter.c,v 1.52 2006/06/22 10:58:13 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.51 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -632,7 +632,7 @@ PHP_FUNCTION(input_get_args)
 	int         filter_flags = FILTER_FLAG_SCALAR;
 	zval       *options = NULL, *temparray = NULL;
 
-	zval *args_array, *values;
+	zval *args_array, *values = NULL;
 	HashTable *args_hash;
 	HashPosition pos;
 
@@ -675,6 +675,17 @@ PHP_FUNCTION(input_get_args)
 		case PARSE_SESSION:
 			/* FIXME: Implement session source */
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "INPUT_SESSION not implemented");
+			break;
+
+		case PARSE_REQUEST:
+			/* FIXME: Implement session source */
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "INPUT_REQUEST not implemented");
+			return;
+			break;
+
+		default:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown INPUT method");
+			return;
 			break;
 	}
 

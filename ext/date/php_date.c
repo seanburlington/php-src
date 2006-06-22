@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.9 2006/06/15 18:33:06 dmitry Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.10 2006/06/22 18:44:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1063,6 +1063,10 @@ PHP_FUNCTION(strtotime)
 		RETURN_FALSE;
 	}
 
+	if (!time_len) {
+		RETURN_FALSE;
+	}
+	
 	t = timelib_strtotime(times, time_len, &error, DATE_TIMEZONEDB);
 	error1 = error->error_count;
 	timelib_error_container_dtor(error);
@@ -1078,7 +1082,7 @@ PHP_FUNCTION(strtotime)
 		timelib_tzinfo_dtor(t->tz_info);
 	}
 
-	timelib_time_dtor(now);	
+	timelib_time_dtor(now);
 	timelib_time_dtor(t);
 
 	if (error1 || error2) {

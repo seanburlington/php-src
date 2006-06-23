@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.11 2006/06/22 21:04:32 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.12 2006/06/23 13:53:43 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1084,6 +1084,7 @@ PHP_FUNCTION(strtotime)
 	}
 
 	if (!time_len) {
+		timelib_time_dtor(now);	
 		RETURN_FALSE;
 	}
 	

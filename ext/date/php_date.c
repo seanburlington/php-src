@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.101 2006/06/22 21:03:48 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.102 2006/06/23 13:52:53 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1206,6 +1206,7 @@ PHP_FUNCTION(strtotime)
 	}
 
 	if (!time_len) {
+		timelib_time_dtor(now);	
 		RETURN_FALSE;
 	}
 

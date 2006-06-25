@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.545 2006/06/11 20:33:29 bjori Exp $ */
+/* $Id: string.c,v 1.546 2006/06/25 19:19:31 bjori Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1893,7 +1893,7 @@ PHP_FUNCTION(dirname)
 }
 /* }}} */
 
-/* {{{ proto array pathinfo(string path)
+/* {{{ proto array pathinfo(string path[, int options])
    Returns information about a certain string */
 PHP_FUNCTION(pathinfo)
 {
@@ -2303,7 +2303,7 @@ PHP_FUNCTION(strstr)
 }
 /* }}} */
 
-/* {{{ proto string strchr(string haystack, string needle)
+/* {{{ proto string strchr(string haystack, string needle[, bool part])
    An alias for strstr */
 /* }}} */
 
@@ -3821,7 +3821,7 @@ static void php_strtr_array(zval *return_value, char *str, int slen, HashTable *
 }
 /* }}} */
 
-/* {{{ proto string strtr(string str, string from, string to)
+/* {{{ proto string strtr(string str, string from[, string to])
    Translates characters in str using given translation tables */
 PHP_FUNCTION(strtr)
 {								

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.92 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: url.c,v 1.93 2006/06/25 19:19:31 bjori Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -653,7 +653,7 @@ PHPAPI int php_raw_url_decode(char *str, int len)
 }
 /* }}} */
 
-/* {{{ proto array get_headers(string url)
+/* {{{ proto array get_headers(string url[, int format])
    fetches all the headers sent by the server in response to a HTTP request */
 PHP_FUNCTION(get_headers)
 {

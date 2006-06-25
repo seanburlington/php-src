@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.29 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: metaphone.c,v 1.30 2006/06/25 19:19:31 bjori Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -29,7 +29,7 @@ static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_w
 
 PHP_FUNCTION(metaphone);
 
-/* {{{ proto string metaphone(string text, int phones)
+/* {{{ proto string metaphone(string text[, int phones])
    Break english phrases down into their phonemes */
 PHP_FUNCTION(metaphone)
 {

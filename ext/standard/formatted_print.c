@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.83 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: formatted_print.c,v 1.84 2006/06/25 19:19:31 bjori Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -853,6 +853,7 @@ PHP_FUNCTION(fprintf)
 
 	RETURN_LONG(len);
 }
+/* }}} */
 
 /* {{{ proto int vfprintf(resource stream, string format, array args)
    Output a formatted string into a stream */
@@ -883,7 +884,7 @@ PHP_FUNCTION(vfprintf)
 
 	RETURN_LONG(len);
 }
-
+/* }}} */
 
 
 /*

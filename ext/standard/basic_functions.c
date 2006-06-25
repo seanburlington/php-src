@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.5 2006/05/30 14:51:20 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.6 2006/06/25 21:06:39 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -196,6 +196,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(iptcembed,														NULL)
 	PHP_FE(getimagesize,			second_arg_force_ref)
 	PHP_FE(image_type_to_mime_type,											NULL)
+	PHP_FE(image_type_to_extension,											NULL)
 
 	PHP_FE(phpinfo,															NULL)
 	PHP_FE(phpversion,														NULL)

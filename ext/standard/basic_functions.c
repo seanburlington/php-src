@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.778 2006/06/25 19:17:19 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.779 2006/06/25 20:52:34 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1681,6 +1681,12 @@ ZEND_BEGIN_ARG_INFO(arginfo_image_type_to_mime_type, 0)
 ZEND_END_ARG_INFO()
 
 static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_image_type_to_extension, 0, 0, 1)
+	ZEND_ARG_INFO(0, imagetype)
+	ZEND_ARG_INFO(0, include_dot)
+ZEND_END_ARG_INFO()
+
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_getimagesize, 0, 0, 1)
 	ZEND_ARG_INFO(0, imagefile)
 	ZEND_ARG_INFO(1, info) /* ARRAY_INFO(1, info, 1) */
@@ -3112,6 +3118,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(iptcembed,														arginfo_iptcembed)
 	PHP_FE(getimagesize,													arginfo_getimagesize)
 	PHP_FE(image_type_to_mime_type,											arginfo_image_type_to_mime_type)
+	PHP_FE(image_type_to_extension, 										arginfo_image_type_to_extension)
 
 	PHP_FE(phpinfo,															arginfo_phpinfo)
 	PHP_FE(phpversion,														arginfo_phpversion)

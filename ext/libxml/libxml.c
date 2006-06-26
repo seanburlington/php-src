@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.48 2006/06/17 13:15:37 bjori Exp $ */
+/* $Id: libxml.c,v 1.49 2006/06/26 14:10:57 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -68,9 +68,6 @@ zend_class_entry *libxmlerror_class_entry;
 /* {{{ dynamically loadable module stuff */
 #ifdef COMPILE_DL_LIBXML
 ZEND_GET_MODULE(libxml)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif /* COMPILE_DL_LIBXML */
 /* }}} */
 

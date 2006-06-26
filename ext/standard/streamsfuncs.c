@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.1 2006/06/26 16:33:39 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.2 2006/06/26 18:48:56 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1117,6 +1117,7 @@ static void apply_filter_to_stream(int append, INTERNAL_FUNCTION_PARAMETERS)
 		RETURN_FALSE;
 	}
 }
+/* }}} */
 
 /* {{{ proto resource stream_filter_prepend(resource stream, string filtername[, int read_write[, string filterparams]])
    Prepend a filter to a stream */

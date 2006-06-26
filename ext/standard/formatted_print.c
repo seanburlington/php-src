@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.82.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.82.2.1.2.1 2006/06/26 18:48:56 bjori Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -853,6 +853,7 @@ PHP_FUNCTION(fprintf)
 
 	RETURN_LONG(len);
 }
+/* }}} */
 
 /* {{{ proto int vfprintf(resource stream, string format, array args)
    Output a formatted string into a stream */
@@ -883,7 +884,7 @@ PHP_FUNCTION(vfprintf)
 
 	RETURN_LONG(len);
 }
-
+/* }}} */
 
 
 /*

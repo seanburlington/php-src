@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.28.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.28.2.1.2.1 2006/06/26 18:48:56 bjori Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -29,7 +29,7 @@ static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_w
 
 PHP_FUNCTION(metaphone);
 
-/* {{{ proto string metaphone(string text, int phones)
+/* {{{ proto string metaphone(string text[, int phones])
    Break english phrases down into their phonemes */
 PHP_FUNCTION(metaphone)
 {

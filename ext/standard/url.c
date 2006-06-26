@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.86.2.6 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: url.c,v 1.86.2.5.2.1 2006/06/26 18:48:56 bjori Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -653,7 +653,7 @@ PHPAPI int php_raw_url_decode(char *str, int len)
 }
 /* }}} */
 
-/* {{{ proto array get_headers(string url)
+/* {{{ proto array get_headers(string url[, int format])
    fetches all the headers sent by the server in response to a HTTP request */
 PHP_FUNCTION(get_headers)
 {

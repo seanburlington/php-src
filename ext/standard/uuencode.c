@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uuencode.c,v 1.5.2.2 2007/01/01 09:40:30 sebastian Exp $ */
+/* $Id: uuencode.c,v 1.5.2.1.2.1 2006/06/26 18:48:56 bjori Exp $ */
 
 /*
  * Portions of this code are based on Berkeley's uuencode/uudecode
@@ -183,7 +183,7 @@ err:
 	return -1;
 }
 
-/* {{{ proto string uuencode(string data) 
+/* {{{ proto string convert_uuencode(string data) 
    uuencode a string */
 PHP_FUNCTION(convert_uuencode)
 {
@@ -200,7 +200,7 @@ PHP_FUNCTION(convert_uuencode)
 }
 /* }}} */
 
-/* {{{ proto string uudecode(string data)
+/* {{{ proto string convert_uudecode(string data)
    decode a uuencoded string */
 PHP_FUNCTION(convert_uudecode)
 {

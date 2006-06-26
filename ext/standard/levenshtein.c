@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.34.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: levenshtein.c,v 1.34.2.1.2.1 2006/06/26 18:48:56 bjori Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -79,7 +79,7 @@ static int custom_levdist(char *str1, char *str2, char *callback_name TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ proto int levenshtein(string str1, string str2)
+/* {{{ proto int levenshtein(string str1, string str2[, int cost_ins, int cost_rep, int cost_del])
    Calculate Levenshtein distance between two strings */
 PHP_FUNCTION(levenshtein)
 {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.79 2006/06/25 19:19:31 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.80 2006/06/26 11:31:19 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1341,15 +1341,6 @@ PHP_FUNCTION(stream_set_blocking)
 	RETURN_TRUE;
 }
 
-/* }}} */
-
-/* {{{ proto bool set_socket_blocking(resource socket, int mode)
-   Set blocking/non-blocking mode on a socket */
-PHP_FUNCTION(set_socket_blocking)
-{
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated, use stream_set_blocking() instead");
-	PHP_FN(stream_set_blocking)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-}
 /* }}} */
 
 /* {{{ proto bool stream_set_timeout(resource stream, int seconds, int microseconds)

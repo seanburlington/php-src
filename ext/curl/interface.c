@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.3 2006/06/15 15:31:54 bjori Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.4 2006/06/26 14:11:17 bjori Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -325,9 +325,6 @@ zend_module_entry curl_module_entry = {
 
 #ifdef COMPILE_DL_CURL
 ZEND_GET_MODULE (curl)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif
 
 /* {{{ PHP_MINFO_FUNCTION

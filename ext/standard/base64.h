@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: base64.h,v 1.15 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: base64.h,v 1.16 2006/06/26 22:17:43 bjori Exp $ */
 
 #ifndef BASE64_H
 #define BASE64_H
@@ -25,6 +25,7 @@ PHP_FUNCTION(base64_decode);
 PHP_FUNCTION(base64_encode);
 
 PHPAPI extern unsigned char *php_base64_encode(const unsigned char *, int, int *);
+PHPAPI extern unsigned char *php_base64_decode_ex(const unsigned char *, int, int *, zend_bool);
 PHPAPI extern unsigned char *php_base64_decode(const unsigned char *, int, int *);
 
 #endif /* BASE64_H */

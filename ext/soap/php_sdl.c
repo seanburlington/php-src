@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.13 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.1 2006/06/26 13:23:46 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -2193,7 +2193,7 @@ static void add_sdl_to_cache(const char *fn, const char *uri, time_t t, sdlPtr s
 			    zend_hash_find(&tmp_bindings,(char*)&(*tmp)->binding,sizeof((*tmp)->binding), (void**)&binding_num) != SUCCESS) {
 			}
 			WSDL_CACHE_PUT_INT(*binding_num, out);
-			if (binding_num >= 0) {
+			if (*binding_num >= 0) {
 				if ((*tmp)->binding->bindingType == BINDING_SOAP && (*tmp)->bindingAttributes != NULL) {
 					sdlSoapBindingFunctionPtr binding = (sdlSoapBindingFunctionPtr)(*tmp)->bindingAttributes;
 					WSDL_CACHE_PUT_1(binding->style, out);

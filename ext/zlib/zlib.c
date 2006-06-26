@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.6.2.1 2006/06/15 18:33:09 dmitry Exp $ */
+/* $Id: zlib.c,v 1.183.2.6.2.2 2006/06/26 22:53:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -529,6 +529,10 @@ PHP_FUNCTION(gzinflate)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &data, &data_len, &limit) == FAILURE) {
 		return;
+	}
+
+	if (!data_len) {
+		RETURN_FALSE;
 	}
 
 	if (limit < 0) {

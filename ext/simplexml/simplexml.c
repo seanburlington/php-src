@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.7 2006/06/06 12:05:30 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.8 2006/06/26 13:41:52 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,6 +48,7 @@ ZEND_API zend_class_entry *sxe_get_element_class_entry()
 }
 
 #define SXE_ME(func, arg_info, flags) PHP_ME(simplexml_element, func, arg_info, flags)
+#define SXE_MALIAS(func, alias, arg_info, flags) PHP_MALIAS(simplexml_element, func, alias, arg_info, flags)
 
 #define SXE_METHOD(func) PHP_METHOD(simplexml_element, func)
 
@@ -2246,6 +2247,7 @@ ZEND_GET_MODULE(simplexml)
 static zend_function_entry sxe_functions[] = {
 	SXE_ME(__construct,            NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL) /* must be called */
 	SXE_ME(asXML,                  NULL, ZEND_ACC_PUBLIC)
+	SXE_MALIAS(saveXML, asXML,	   NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(xpath,                  NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(registerXPathNamespace, NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(attributes,             NULL, ZEND_ACC_PUBLIC)
@@ -2307,7 +2309,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.7 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.8 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

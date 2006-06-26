@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.199 2006/06/26 22:53:42 tony2001 Exp $ */
+/* $Id: zlib.c,v 1.200 2006/06/26 23:22:45 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -817,6 +817,8 @@ PHP_FUNCTION(gzencode)
 			trailer[6] = (char) (stream.total_in >> 16) & 0xFF;
 			trailer[7] = (char) (stream.total_in >> 24) & 0xFF;
 			trailer[8] = '\0';
+		} else {
+			s2[stream.total_out + GZIP_HEADER_LENGTH + (coding == CODING_GZIP ? GZIP_FOOTER_LENGTH : 0)] = '\0';
 		}
 		RETURN_STRINGL(s2, stream.total_out + GZIP_HEADER_LENGTH + (coding == CODING_GZIP ? GZIP_FOOTER_LENGTH : 0), 0);
 	} else {

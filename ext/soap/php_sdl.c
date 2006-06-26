@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.100 2006/04/19 10:49:16 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.101 2006/06/26 13:31:37 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -2193,7 +2193,7 @@ static void add_sdl_to_cache(const char *fn, const char *uri, time_t t, sdlPtr s
 			    zend_hash_find(&tmp_bindings,(char*)&(*tmp)->binding,sizeof((*tmp)->binding), (void**)&binding_num) != SUCCESS) {
 			}
 			WSDL_CACHE_PUT_INT(*binding_num, out);
-			if (binding_num >= 0) {
+			if (*binding_num >= 0) {
 				if ((*tmp)->binding->bindingType == BINDING_SOAP && (*tmp)->bindingAttributes != NULL) {
 					sdlSoapBindingFunctionPtr binding = (sdlSoapBindingFunctionPtr)(*tmp)->bindingAttributes;
 					WSDL_CACHE_PUT_1(binding->style, out);

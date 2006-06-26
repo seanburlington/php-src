@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.9 2006/06/26 22:41:22 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.10 2006/06/26 22:47:31 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -108,45 +108,6 @@ PHPAPI php_basic_globals basic_globals;
 #include "streamsfuncs.h"
 
 static zend_class_entry *incomplete_class_entry = NULL;
-
-static
-	ZEND_BEGIN_ARG_INFO(first_and_second__args_force_ref, 0)
-		ZEND_ARG_PASS_INFO(1)
-		ZEND_ARG_PASS_INFO(1)
-	ZEND_END_ARG_INFO()
-
-static
-	ZEND_BEGIN_ARG_INFO(second_and_third_args_force_ref, 0)
-		ZEND_ARG_PASS_INFO(0)
-		ZEND_ARG_PASS_INFO(1)
-		ZEND_ARG_PASS_INFO(1)
-	ZEND_END_ARG_INFO()
-
-static 
-	ZEND_BEGIN_ARG_INFO(third_and_fourth_args_force_ref, 0)
-		ZEND_ARG_PASS_INFO(0)
-		ZEND_ARG_PASS_INFO(0)
-		ZEND_ARG_PASS_INFO(1)
-		ZEND_ARG_PASS_INFO(1)
-	ZEND_END_ARG_INFO()
-
-static
-	ZEND_BEGIN_ARG_INFO(third_and_rest_force_ref, 1)
-		ZEND_ARG_PASS_INFO(0)
-		ZEND_ARG_PASS_INFO(0)
-		ZEND_ARG_PASS_INFO(1)
-	ZEND_END_ARG_INFO()
-
-static
-	ZEND_BEGIN_ARG_INFO(first_through_third_args_force_ref, 0)
-		ZEND_ARG_PASS_INFO(1)
-		ZEND_ARG_PASS_INFO(1)
-		ZEND_ARG_PASS_INFO(1)
-	ZEND_END_ARG_INFO()
-
-static
-	ZEND_BEGIN_ARG_INFO(all_args_prefer_ref, ZEND_SEND_PREFER_REF)
-	ZEND_END_ARG_INFO()
 
 typedef struct _php_shutdown_function_entry {
 	zval **arguments;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.145 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.146 2006/06/26 20:28:30 bjori Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -116,6 +116,9 @@ PHP_NAMED_FUNCTION(php_if_crc32);
 
 PHP_FUNCTION(register_tick_function);
 PHP_FUNCTION(unregister_tick_function);
+#ifdef HAVE_GETLOADAVG
+PHP_FUNCTION(sys_getloadavg);
+#endif
 
 PHP_FUNCTION(is_uploaded_file);
 PHP_FUNCTION(move_uploaded_file);

@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.604 2006/06/17 11:14:21 nlopess Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.605 2006/06/26 20:28:30 bjori Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -466,6 +466,7 @@ ftok \
 funopen \
 gai_strerror \
 gcvt \
+getloadavg \
 getlogin \
 getprotobyname \
 getprotobynumber \

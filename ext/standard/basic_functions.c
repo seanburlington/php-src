@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.6 2006/06/25 21:06:39 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.7 2006/06/26 13:15:20 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1427,12 +1427,9 @@ PHP_FUNCTION(getenv)
 		RETURN_FALSE;
 	}
 	ptr = sapi_getenv(str, str_len TSRMLS_CC);
-	if (! ptr) {
-		ptr = getenv(str);
-	}
-	if (ptr) {
-		RETURN_STRING(ptr, 1);
-	}
+	if(ptr) RETURN_STRING(ptr, 0);
+	ptr = getenv(str);
+	if(ptr) RETURN_STRING(ptr, 1);
 	RETURN_FALSE;
 }
 /* }}} */

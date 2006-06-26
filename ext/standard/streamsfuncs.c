@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.7 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.1 2006/06/26 16:33:39 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1223,15 +1223,6 @@ PHP_FUNCTION(stream_set_blocking)
 	RETURN_TRUE;
 }
 
-/* }}} */
-
-/* {{{ proto bool set_socket_blocking(resource socket, int mode)
-   Set blocking/non-blocking mode on a socket */
-PHP_FUNCTION(set_socket_blocking)
-{
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated, use stream_set_blocking() instead");
-	PHP_FN(stream_set_blocking)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-}
 /* }}} */
 
 /* {{{ proto bool stream_set_timeout(resource stream, int seconds, int microseconds)

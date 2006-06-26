@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.3.2.4 2006/06/15 18:33:07 dmitry Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.5 2006/06/26 16:33:38 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,7 +63,7 @@ zend_function_entry mcrypt_functions[] = {
 	PHP_FE(mcrypt_generic_init, NULL)
 	PHP_FE(mcrypt_generic, NULL)
 	PHP_FE(mdecrypt_generic, NULL)
-	PHP_FE(mcrypt_generic_end, NULL)
+	PHP_DEP_FALIAS(mcrypt_generic_end, mcrypt_generic_deinit, NULL)
 	PHP_FE(mcrypt_generic_deinit, NULL)
 
 	PHP_FE(mcrypt_enc_self_test, NULL)
@@ -600,16 +600,6 @@ PHP_FUNCTION(mcrypt_module_close)
 	MCRYPT_GET_TD_ARG
 	zend_list_delete(Z_LVAL_PP(mcryptind));
 	RETURN_TRUE;
-}
-/* }}} */
-
-
-/* {{{ proto bool mcrypt_generic_end(resource td)
-   This function terminates encrypt specified by the descriptor td */
-PHP_FUNCTION(mcrypt_generic_end)
-{
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "This function is deprecated, please use mcrypt_generic_deinit()");
-	zif_mcrypt_generic_deinit(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 }
 /* }}} */
 

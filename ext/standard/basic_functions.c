@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.10 2006/06/26 22:47:31 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.11 2006/06/27 21:42:16 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2368,7 +2368,6 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_context_create, 0, 0, 0)
 	ZEND_ARG_INFO(0, options) /* ARRAY_INFO(0, options, 1) */
-	ZEND_ARG_INFO(0, params) /* ARRAY_INFO(0, params, 1) */
 ZEND_END_ARG_INFO()
 
 static
@@ -2541,13 +2540,11 @@ static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_stristr, 0, 0, 1)
 	ZEND_ARG_INFO(0, haystack)
 	ZEND_ARG_INFO(0, needle)
-	ZEND_ARG_INFO(0, part)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_strstr, 0, 0, 1)
 	ZEND_ARG_INFO(0, haystack)
 	ZEND_ARG_INFO(0, needle)
-	ZEND_ARG_INFO(0, part)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_strpos, 0, 0, 2)

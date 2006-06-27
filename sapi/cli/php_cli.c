@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.5 2006/06/20 12:55:26 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.6 2006/06/27 08:27:10 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -545,12 +545,12 @@ static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file,
 	/* #!php support */
 	c = fgetc(file_handle->handle.fp);
 	if (c == '#') {
-		while (c != 10 && c != 13) {
+		while (c != '\n' && c != '\r') {
 			c = fgetc(file_handle->handle.fp);	/* skip to end of line */
 		}
 		/* handle situations where line is terminated by \r\n */
-		if (c == 13) {
-			if (fgetc(file_handle->handle.fp) != 10) {
+		if (c == '\r') {
+			if (fgetc(file_handle->handle.fp) != '\n') {
 				long pos = ftell(file_handle->handle.fp);
 				fseek(file_handle->handle.fp, pos - 1, SEEK_SET);
 			}

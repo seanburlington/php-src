@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.8 2006/06/19 17:49:26 tony2001 Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.9 2006/06/27 08:27:10 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1588,12 +1588,12 @@ consult the installation file that came with this distribution, or visit \n\
 			/* #!php support */
 			c = fgetc(file_handle.handle.fp);
 			if (c == '#') {
-				while (c != 10 && c != 13) {
+				while (c != '\n' && c != '\r') {
 					c = fgetc(file_handle.handle.fp);	/* skip to end of line */
 				}
 				/* handle situations where line is terminated by \r\n */
-				if (c == 13) {
-					if (fgetc(file_handle.handle.fp) != 10) {
+				if (c == '\r') {
+					if (fgetc(file_handle.handle.fp) != '\n') {
 						long pos = ftell(file_handle.handle.fp);
 						fseek(file_handle.handle.fp, pos - 1, SEEK_SET);
 					}

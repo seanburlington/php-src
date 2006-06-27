@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.102 2006/06/23 13:52:53 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.103 2006/06/27 15:06:18 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -873,7 +873,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 					retval += 1000;
 				}
 				retval = retval % 1000;
-				date_spprintf(&buffer, 32 TSRMLS_CC, "%03d", retval);
+				length = date_spprintf(&buffer, 32 TSRMLS_CC, "%03d", retval);
 				break;
 			}
 			case 'g': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%d", (t->h % 12) ? (int) t->h % 12 : 12); break;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.20.2.6.2.1 2006/05/14 17:36:04 derick Exp $ */
+/* $Id: parse_tz.c,v 1.20.2.6.2.2 2006/06/27 19:48:01 nlopess Exp $ */
 
 #include "timelib.h"
 
@@ -240,8 +240,8 @@ const timelib_tzdb_index_entry *timelib_timezone_builtin_identifiers_list(int *c
 
 int timelib_timezone_id_is_valid(char *timezone, const timelib_tzdb *tzdb)
 {
-	unsigned char *tzf;
-	return (seek_to_tz_position((unsigned char**) &tzf, timezone, tzdb));
+	const unsigned char *tzf;
+	return (seek_to_tz_position(&tzf, timezone, tzdb));
 }
 
 timelib_tzinfo *timelib_parse_tzfile(char *timezone, const timelib_tzdb *tzdb)
@@ -249,7 +249,7 @@ timelib_tzinfo *timelib_parse_tzfile(char *timezone, const timelib_tzdb *tzdb)
 	const unsigned char *tzf;
 	timelib_tzinfo *tmp;
 
-	if (seek_to_tz_position((unsigned char**) &tzf, timezone, tzdb)) {
+	if (seek_to_tz_position(&tzf, timezone, tzdb)) {
 		tmp = timelib_tzinfo_ctor(timezone);
 
 		read_header((char**) &tzf, tmp);

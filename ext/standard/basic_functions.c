@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.12 2006/06/27 22:14:18 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.13 2006/06/28 22:08:42 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4936,7 +4936,7 @@ PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers T
 			break;
 
 		case 3:		/*save to a file */
-			stream = php_stream_open_wrapper(opt, "a", IGNORE_URL | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
+			stream = php_stream_open_wrapper(opt, "a", IGNORE_URL_WIN | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 			if (!stream)
 				return FAILURE;
 			php_stream_write(stream, message, strlen(message));

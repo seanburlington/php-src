@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.27 2006/06/28 14:12:14 andrei Exp $ */
+/* $Id: unicode_iterators.c,v 1.28 2006/06/28 14:44:36 andrei Exp $ */
 
 /*
  * TODO
@@ -563,8 +563,8 @@ PHP_METHOD(TextIterator, __construct)
 		UErrorCode status = U_ZERO_ERROR;
 		UErrorCode status2 = U_ZERO_ERROR;
 		locale = locale ? locale : UG(default_locale);
-		intern->u.brk.iter = ubrk_open(brk_type_map[intern->type - ITER_CHARACTER], locale, text, text_len, &status);
-		intern->u.brk.n_iter = ubrk_open(brk_type_map[intern->type - ITER_CHARACTER], locale, text, text_len, &status);
+		intern->u.brk.iter = ubrk_open(brk_type_map[intern->type - ITER_CHARACTER], locale, intern->text, intern->text_len, &status);
+		intern->u.brk.n_iter = ubrk_open(brk_type_map[intern->type - ITER_CHARACTER], locale, intern->text, intern->text_len, &status);
 		if (!U_SUCCESS(status) || !U_SUCCESS(status2)) {
 			php_error(E_RECOVERABLE_ERROR, "Could not create UBreakIterator for '%s' locale: %s", locale, u_errorName(status));
 			return;

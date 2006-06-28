@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.38 2006/06/21 20:17:21 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.39 2006/06/28 14:12:14 andrei Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -362,7 +362,6 @@ zend_function_entry unicode_functions[] = {
 	PHP_FE(char_enum_types, NULL)
 
 	/* text transformation functions */
-
 	PHP_FE(str_transliterate, NULL)
 
 	{ NULL, NULL, NULL }

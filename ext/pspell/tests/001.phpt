@@ -2,13 +2,13 @@
 pspell basic tests (warning: may fail with pspell/aspell < GNU Aspell 0.50.3)
 --SKIPIF--
 <?php 
-	if (!extension_loaded("pspell")) print "skip"; 
-	if (!@pspell_new ("en", "", "", "", (PSPELL_FAST|PSPELL_RUN_TOGETHER))) {
-		die("skip English dictionary is not available");
-	}
+if (!extension_loaded("pspell")) die("skip");
+if (!@pspell_new ("en", "", "", "", (PSPELL_FAST|PSPELL_RUN_TOGETHER))) {
+	die("skip English dictionary is not available");
+}
 ?>
 --FILE--
-<?php // $Id: 01pspell_basic.phpt,v 1.7 2005/07/25 18:27:41 helly Exp $
+<?php // $Id: 001.phpt,v 1.2 2006/06/28 14:42:32 nlopess Exp $
 
 error_reporting(E_ALL);
 $string = "";

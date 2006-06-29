@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70.2.3 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: sysvshm.c,v 1.70.2.2.2.1 2006/06/29 09:03:27 tony2001 Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -408,6 +408,10 @@ static long php_check_shm_data(sysvshm_chunk_head *ptr, long key)
 			return pos;
 		}	
 		pos += shm_var->next;
+
+		if (shm_var->next <= 0 || pos < ptr->start) {
+			return -1;
+		}
 	}
 	return -1;
 }

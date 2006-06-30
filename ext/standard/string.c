@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.546 2006/06/25 19:19:31 bjori Exp $ */
+/* $Id: string.c,v 1.547 2006/06/30 09:35:21 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4448,7 +4448,7 @@ PHPAPI UChar *php_u_addslashes_ex(UChar *str, int length, int *new_length, int s
 		return str;
 	}
 
-	buf = eumalloc(length * 2);
+	buf = eumalloc(length * 2 + 1);
 
 	while (i < length) {
 		U16_NEXT(str, i, length, ch);

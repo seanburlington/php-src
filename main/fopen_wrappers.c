@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.182 2006/03/17 10:46:02 dmitry Exp $ */
+/* $Id: fopen_wrappers.c,v 1.183 2006/07/01 11:50:52 nlopess Exp $ */
 
 /* {{{ includes
  */
@@ -189,7 +189,7 @@ PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC)
 
 /* {{{ php_fopen_and_set_opened_path
  */
-static FILE *php_fopen_and_set_opened_path(const char *path, char *mode, char **opened_path TSRMLS_DC)
+static FILE *php_fopen_and_set_opened_path(const char *path, const char *mode, char **opened_path TSRMLS_DC)
 {
 	FILE *fp;
 
@@ -306,7 +306,7 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
  * Tries to open a file with a PATH-style list of directories.
  * If the filename starts with "." or "/", the path is ignored.
  */
-PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **opened_path TSRMLS_DC)
+PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const char *path, char **opened_path TSRMLS_DC)
 {
 	char *pathbuf, *ptr, *end;
 	char *exec_fname;

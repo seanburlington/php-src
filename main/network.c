@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.121 2006/03/19 22:34:26 tony2001 Exp $ */
+/* $Id: network.c,v 1.122 2006/07/01 11:50:52 nlopess Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -103,7 +103,7 @@ int inet_aton(const char *, struct in_addr *);
 #  define PHP_GAI_STRERROR(x) (php_gai_strerror(x))
 /* {{{ php_gai_strerror
  */
-static char *php_gai_strerror(int code)
+static const char *php_gai_strerror(int code)
 {
         static struct {
                 int code;

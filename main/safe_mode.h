@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: safe_mode.h,v 1.13.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: safe_mode.h,v 1.13.2.1.2.1 2006/07/01 11:35:34 nlopess Exp $ */
 
 #ifndef SAFE_MODE_H
 #define SAFE_MODE_H
@@ -33,8 +33,8 @@
 #define CHECKUID_NO_ERRORS	0x01
 
 BEGIN_EXTERN_C()
-PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode);
-PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int flags);
+PHPAPI int php_checkuid(const char *filename, const char *fopen_mode, int mode);
+PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mode, int flags);
 PHPAPI char *php_get_current_user(void);
 END_EXTERN_C()
 

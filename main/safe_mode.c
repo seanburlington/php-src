@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.1 2006/06/01 14:06:23 tony2001 Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.2 2006/07/01 11:35:34 nlopess Exp $ */
 
 #include "php.h"
 
@@ -45,7 +45,7 @@
  * 5 - only check file
  */
 
-PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int flags)
+PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mode, int flags)
 {
 	struct stat sb;
 	int ret, nofile=0;
@@ -186,7 +186,7 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 	return 0;
 }
 
-PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode) {
+PHPAPI int php_checkuid(const char *filename, const char *fopen_mode, int mode) {
 #ifdef NETWARE
 /* NetWare don't have uid*/
 	return 1;

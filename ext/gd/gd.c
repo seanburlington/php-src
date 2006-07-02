@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.352 2006/06/15 16:25:12 bjori Exp $ */
+/* $Id: gd.c,v 1.353 2006/07/02 00:10:36 bjori Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -756,8 +756,8 @@ ZEND_END_ARG_INFO()
 #if HAVE_LIBFREETYPE && HAVE_GD_STRINGFTEX
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_imageftbbox, 0, 0, 4)
-	ZEND_ARG_INFO(0, float size)
-	ZEND_ARG_INFO(0, float angle)
+	ZEND_ARG_INFO(0, size)
+	ZEND_ARG_INFO(0, angle)
 	ZEND_ARG_INFO(0, font_file)
 	ZEND_ARG_INFO(0, text)
 	ZEND_ARG_ARRAY_INFO(0, extrainfo, 0)
@@ -766,8 +766,8 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_imagefttext, 0, 0, 8)
 	ZEND_ARG_INFO(0, im)
-	ZEND_ARG_INFO(0, float size)
-	ZEND_ARG_INFO(0, float angle)
+	ZEND_ARG_INFO(0, size)
+	ZEND_ARG_INFO(0, angle)
 	ZEND_ARG_INFO(0, x)
 	ZEND_ARG_INFO(0, y)
 	ZEND_ARG_INFO(0, col)
@@ -788,8 +788,8 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO(arginfo_imagettftext, 0)
 	ZEND_ARG_INFO(0, im)
-	ZEND_ARG_INFO(0, float size)
-	ZEND_ARG_INFO(0, float angle)
+	ZEND_ARG_INFO(0, size)
+	ZEND_ARG_INFO(0, angle)
 	ZEND_ARG_INFO(0, x)
 	ZEND_ARG_INFO(0, y)
 	ZEND_ARG_INFO(0, col)

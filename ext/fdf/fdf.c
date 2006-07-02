@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.95 2006/06/14 21:29:22 bjori Exp $ */
+/* $Id: fdf.c,v 1.96 2006/07/02 00:10:36 bjori Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -186,7 +186,7 @@ ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_fdf_set_submit_form_action, 0)
-	ZEND_ARG_INFO(0, resource fdfdoc)
+	ZEND_ARG_INFO(0, fdfdoc)
 	ZEND_ARG_INFO(0, fieldname)
 	ZEND_ARG_INFO(0, whichtrigger)
 	ZEND_ARG_INFO(0, url)

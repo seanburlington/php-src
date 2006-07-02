@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.103 2006/06/27 15:06:18 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.104 2006/07/02 00:10:36 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -120,7 +120,7 @@ ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_date_sunrise, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixed time)
+	ZEND_ARG_INFO(0, time)
 	ZEND_ARG_INFO(0, format)
 	ZEND_ARG_INFO(0, latitude)
 	ZEND_ARG_INFO(0, longitude)
@@ -130,7 +130,7 @@ ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_date_sunset, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixed time)
+	ZEND_ARG_INFO(0, time)
 	ZEND_ARG_INFO(0, format)
 	ZEND_ARG_INFO(0, latitude)
 	ZEND_ARG_INFO(0, longitude)

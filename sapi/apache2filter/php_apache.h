@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.25.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.25.2.1.2.1 2006/07/03 16:51:38 john Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -48,11 +48,20 @@ typedef struct php_struct {
 	int request_processed;
 } php_struct;
 
+typedef struct _php_apr_bucket_brigade {
+	unsigned int total_len;
+	apr_bucket_brigade *bb;
+} php_apr_bucket_brigade;
+
 void *merge_php_config(apr_pool_t *p, void *base_conf, void *new_conf);
 void *create_php_config(apr_pool_t *p, char *dummy);
 char *get_php_config(void *conf, char *name, size_t name_len);
 void apply_config(void *);
 extern const command_rec php_dir_cmds[];
+
+static size_t php_apache_read_stream(void *, char *, size_t TSRMLS_DC);
+static void php_apache_close_stream(void * TSRMLS_DC);
+static long php_apache_fteller_stream(void * TSRMLS_DC);
 
 #define APR_ARRAY_FOREACH_OPEN(arr, key, val) 		\
 {													\

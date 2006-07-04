@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.142 2006/03/08 14:41:45 iliaa Exp $ */
+/* $Id: php_ini.c,v 1.143 2006/07/04 06:38:32 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -308,6 +308,14 @@ int php_init_config(TSRMLS_D)
 		free_ini_search_path = 1;
 		php_ini_search_path[0] = 0;
 
+		/* Add environment location */
+		if (env_location[0]) {
+			if (*php_ini_search_path) {
+				strcat(php_ini_search_path, paths_separator);
+			}
+			strcat(php_ini_search_path, env_location);
+		}
+
 #ifdef PHP_WIN32
 		/* Add registry location */
 		reg_location = GetIniPathFromRegistry();
@@ -319,14 +327,6 @@ int php_init_config(TSRMLS_D)
 			efree(reg_location);
 		}
 #endif
-
-		/* Add environment location */
-		if (env_location[0]) {
-			if (*php_ini_search_path) {
-				strcat(php_ini_search_path, paths_separator);
-			}
-			strcat(php_ini_search_path, env_location);
-		}
 
 		/* Add cwd (only with CLI) */
 		if (strcmp(sapi_module.name, "cli") == 0) {

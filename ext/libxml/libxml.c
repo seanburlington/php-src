@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.49 2006/06/26 14:10:57 bjori Exp $ */
+/* $Id: libxml.c,v 1.50 2006/07/04 07:34:32 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -657,6 +657,10 @@ PHP_RSHUTDOWN_FUNCTION(libxml)
 	xmlParserInputBufferCreateFilenameDefault(NULL);
 	xmlOutputBufferCreateFilenameDefault(NULL);
 
+	if (LIBXML(stream_context)) {
+		zval_ptr_dtor(&LIBXML(stream_context));
+		LIBXML(stream_context) = NULL;
+	}
 	smart_str_free(&LIBXML(error_buffer));
 	if (LIBXML(error_list)) {
 		zend_llist_destroy(LIBXML(error_list));

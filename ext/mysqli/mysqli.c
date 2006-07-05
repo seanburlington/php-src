@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.90 2006/06/13 13:12:19 dmitry Exp $ 
+  $Id: mysqli.c,v 1.91 2006/07/05 11:48:17 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -293,11 +293,12 @@ void mysqli_add_property(HashTable *h, char *pname, mysqli_read_t r_func, mysqli
 static union _zend_function *php_mysqli_constructor_get(zval *object TSRMLS_DC)
 {
 	mysqli_object *obj = (mysqli_object *)zend_objects_get_address(object TSRMLS_CC);
+	zend_class_entry * ce = Z_OBJCE_P(object);
 
-	if (obj->zo.ce != mysqli_link_class_entry && obj->zo.ce != mysqli_stmt_class_entry &&
-		obj->zo.ce != mysqli_result_class_entry && obj->zo.ce != mysqli_driver_class_entry && 
-		obj->zo.ce != mysqli_warning_class_entry) {
-		return obj->zo.ce->constructor;
+	if (ce != mysqli_link_class_entry && ce != mysqli_stmt_class_entry &&
+		ce != mysqli_result_class_entry && ce != mysqli_driver_class_entry && 
+		ce != mysqli_warning_class_entry) {
+		return zend_std_get_constructor(object TSRMLS_CC);
 	} else {
 		static zend_internal_function f;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.111.2.4.2.2 2006/06/15 18:33:07 dmitry Exp $ */
+/* $Id: dba.c,v 1.111.2.4.2.3 2006/07/06 23:13:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -227,7 +227,7 @@ static size_t php_dba_make_key(zval **key, char **key_str, char **key_free TSRML
 		size_t len;
 	
 		if (zend_hash_num_elements(Z_ARRVAL_PP(key)) != 2) {
-			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Key does not have exactly two elements: (key, name)");
+			php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "Key does not have exactly two elements: (key, name)");
 			return -1;
 		}
 		zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(key), &pos);

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.14.2.2 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: inifile.c,v 1.14.2.1.2.1 2006/07/06 23:13:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.14.2.2 $";
+	return "1.0, $Revision: 1.14.2.1.2.1 $";
 }
 /* }}} */ 
 
@@ -538,7 +538,7 @@ static int inifile_delete_replace_append(inifile *dba, const key_type *key, cons
 			php_stream_seek(fp_tmp, 0, SEEK_SET);
 			php_stream_seek(dba->fp, 0, SEEK_END);
 			if (!php_stream_copy_to_stream(fp_tmp, dba->fp, PHP_STREAM_COPY_ALL)) {
-				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Could not copy from temporary stream - ini file truncated");
+				php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "Could not copy from temporary stream - ini file truncated");
 				ret = FAILURE;
 			}
 		}

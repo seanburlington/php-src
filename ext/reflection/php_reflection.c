@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.10 2006/07/04 15:37:34 bjori Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.11 2006/07/07 11:55:23 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1411,6 +1411,19 @@ ZEND_METHOD(reflection_function, isUserDefined)
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_function_abstract_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(fptr);
 	RETURN_BOOL(fptr->type == ZEND_USER_FUNCTION);
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionFunction::isDisabled()
+   Returns whether this function has been disabled or not */
+ZEND_METHOD(reflection_function, isDisabled)
+{
+	reflection_object *intern;
+	zend_function *fptr;
+
+	METHOD_NOTSTATIC(reflection_function_ptr);
+	GET_REFLECTION_OBJECT_PTR(fptr);
+	RETURN_BOOL(fptr->type == ZEND_INTERNAL_FUNCTION && fptr->internal_function.handler == zif_display_disabled_function);
 }
 /* }}} */
 
@@ -4328,6 +4341,7 @@ static zend_function_entry reflection_function_abstract_functions[] = {
 
 static zend_function_entry reflection_function_functions[] = {
 	ZEND_ME(reflection_function, export, arginfo_reflection_function_export, ZEND_ACC_STATIC|ZEND_ACC_PUBLIC)
+	ZEND_ME(reflection_function, isDisabled, NULL, 0)
 	ZEND_ME(reflection_function, invoke, arginfo_reflection_function_invoke, 0)
 	ZEND_ME(reflection_function, invokeArgs, arginfo_reflection_function_invokeArgs, 0)
 	{NULL, NULL, NULL}
@@ -4750,7 +4764,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.10 2006/07/04 15:37:34 bjori Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.11 2006/07/07 11:55:23 bjori Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

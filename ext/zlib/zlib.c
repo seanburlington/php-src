@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.201 2006/07/07 23:30:30 nlopess Exp $ */
+/* $Id: zlib.c,v 1.202 2006/07/08 21:54:49 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(zlib)
    Read and uncompress entire .gz-file into an array */
 PHP_FUNCTION(gzfile)
 {
-	char *filename;
+	void *filename;
 	int filename_len;
 	zend_uchar filename_type;
 	long flags = 0;
@@ -291,7 +291,7 @@ PHP_FUNCTION(gzfile)
 	use_include_path = flags ? USE_PATH : 0;
 
 	if (filename_type == IS_UNICODE) {
-		if (php_stream_path_encode(NULL, &filename, &filename_len, (UChar*)filename, filename_len, REPORT_ERRORS, NULL) == FAILURE) {
+		if (php_stream_path_encode(NULL, (char**)&filename, &filename_len, (UChar*)filename, filename_len, REPORT_ERRORS, NULL) == FAILURE) {
 			RETURN_FALSE;
 		}
 	}
@@ -323,7 +323,8 @@ PHP_FUNCTION(gzfile)
    Open a .gz-file and return a .gz-file pointer */
 PHP_FUNCTION(gzopen)
 {
-	char *filename, *mode;
+	void *filename;
+	char *mode;
 	int filename_len, mode_len;
 	zend_uchar filename_type;
 	long flags = 0;
@@ -337,7 +338,7 @@ PHP_FUNCTION(gzopen)
 	use_include_path = flags ? USE_PATH : 0;
 
 	if (filename_type == IS_UNICODE) {
-		if (php_stream_path_encode(NULL, &filename, &filename_len, (UChar*)filename, filename_len, REPORT_ERRORS, NULL) == FAILURE) {
+		if (php_stream_path_encode(NULL, (char**)&filename, &filename_len, (UChar*)filename, filename_len, REPORT_ERRORS, NULL) == FAILURE) {
 			RETURN_FALSE;
 		}
 	}

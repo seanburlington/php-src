@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.240 2006/07/07 11:53:54 bjori Exp $ */
+/* $Id: php_reflection.c,v 1.241 2006/07/09 23:28:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3960,7 +3960,7 @@ ZEND_METHOD(reflection_property, setValue)
 	METHOD_NOTSTATIC(reflection_property_ptr);
 	GET_REFLECTION_OBJECT_PTR(ref);
 
-	if (ref->prop->flags & ~(ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)) {
+	if (!(ref->prop->flags & ZEND_ACC_PUBLIC)) {
 		_DO_THROW("Cannot access non-public member");
 		/* Returns from this function */
 	}
@@ -4832,7 +4832,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.240 2006/07/07 11:53:54 bjori Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.241 2006/07/09 23:28:59 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

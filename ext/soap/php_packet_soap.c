@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.42.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_packet_soap.c,v 1.42.2.1.2.1 2006/07/10 07:41:32 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -191,12 +191,16 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 
 			tmp = get_node(fault->children,"faultstring");
 			if (tmp != NULL && tmp->children != NULL) {
-				faultstring = tmp->children->content;
+				zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
+				faultstring = Z_STRVAL_P(zv);
+				FREE_ZVAL(zv);
 			}
 
 			tmp = get_node(fault->children,"faultactor");
 			if (tmp != NULL && tmp->children != NULL) {
-				faultactor = tmp->children->content;
+				zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
+				faultactor = Z_STRVAL_P(zv);
+				FREE_ZVAL(zv);
 			}
 
 			tmp = get_node(fault->children,"detail");
@@ -217,7 +221,9 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 				/* TODO: lang attribute */
 				tmp = get_node(tmp->children,"Text");
 				if (tmp != NULL && tmp->children != NULL) {
-					faultstring = tmp->children->content;
+					zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
+					faultstring = Z_STRVAL_P(zv);
+					FREE_ZVAL(zv);
 				}
 			}
 
@@ -227,6 +233,12 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			}
 		}
 		add_soap_fault(this_ptr, faultcode, faultstring, faultactor, details TSRMLS_CC);
+		if (faultstring) {
+			efree(faultstring);
+		}
+		if (faultactor) {
+			efree(faultactor);
+		}
 #ifdef ZEND_ENGINE_2
 		if (details) {
 			details->refcount--;

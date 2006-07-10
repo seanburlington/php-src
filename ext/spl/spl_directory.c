@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.1 2006/05/10 00:31:04 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.2 2006/07/10 15:47:58 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -254,8 +254,8 @@ static zend_object_value spl_filesystem_object_clone(zval *zobject TSRMLS_DC)
 
 	switch (source->type) {
 	case SPL_FS_INFO:
-		source->path_len = source->path_len;
-		source->path = estrndup(source->path, source->path_len);
+		intern->path_len = source->path_len;
+		intern->path = estrndup(source->path, source->path_len);
 		intern->file_name_len = source->file_name_len;
 		intern->file_name = estrndup(source->file_name, intern->file_name_len);
 		break;

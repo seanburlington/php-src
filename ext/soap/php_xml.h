@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.h,v 1.17.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_xml.h,v 1.17.2.1.2.1 2006/07/11 14:24:18 dmitry Exp $ */
 
 #ifndef PHP_SOAP_XML_H
 #define PHP_SOAP_XML_H
@@ -42,7 +42,7 @@ xmlNodePtr get_node_ex(xmlNodePtr node,char *name, char *ns);
 xmlNodePtr get_node_recursive_ex(xmlNodePtr node,char *name, char *ns);
 xmlNodePtr get_node_with_attribute_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
 xmlNodePtr get_node_with_attribute_recursive_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
-int parse_namespace(const char *inval,char **value,char **namespace);
+int parse_namespace(const xmlChar *inval,char **value,char **namespace);
 
 #ifndef ZEND_ENGINE_2
 int php_stream_xmlIO_match_wrapper(const char *filename);

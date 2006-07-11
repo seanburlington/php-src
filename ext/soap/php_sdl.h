@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.37.2.4 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_sdl.h,v 1.37.2.3.2.1 2006/07/11 14:24:18 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -254,7 +254,7 @@ struct _sdlAttribute {
 
 sdlPtr get_sdl(zval *this_ptr, char *uri, long cache_wsdl TSRMLS_DC);
 
-encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr data, const char *type);
+encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr data, const xmlChar *type);
 encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type);
 encodePtr get_encoder_ex(sdlPtr sdl, const char *nscat, int len);
 

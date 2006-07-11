@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.38.2.4 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_encoding.h,v 1.38.2.3.2.1 2006/07/11 14:24:18 dmitry Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -207,8 +207,8 @@ zval *to_zval_user(encodeTypePtr type, xmlNodePtr node);
 zval *to_zval_after_user(encodeTypePtr type, zval *data);
 #endif
 
-void whiteSpace_replace(char* str);
-void whiteSpace_collapse(char* str);
+void whiteSpace_replace(xmlChar* str);
+void whiteSpace_collapse(xmlChar* str);
 
 xmlNodePtr sdl_guess_convert_xml(encodeTypePtr enc, zval* data, int style, xmlNodePtr parent);
 zval *sdl_guess_convert_zval(encodeTypePtr enc, xmlNodePtr data);

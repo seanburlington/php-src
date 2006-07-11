@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.2 2006/05/10 19:38:35 rrichards Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.3 2006/07/11 16:33:25 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -116,7 +116,7 @@ PHP_XMLWRITER_API zend_object_value xmlwriter_object_new(zend_class_entry *class
 
 #define XMLW_NAME_CHK(__err) \
 	if (xmlValidateName((xmlChar *) name, 0) != 0) {	\
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, #__err);	\
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, __err);	\
 		RETURN_FALSE;	\
 	}	\
 

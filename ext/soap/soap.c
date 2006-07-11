@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.5 2006/07/11 14:24:18 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.6 2006/07/11 14:35:50 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3539,8 +3539,8 @@ static int serialize_response_call2(xmlNodePtr body, sdlFunctionPtr function, ch
 		zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(ret), &pos);
 		while (zend_hash_get_current_data_ex(Z_ARRVAL_P(ret), (void **)&data, &pos) != FAILURE) {
 			char *param_name = NULL;
-			int   param_name_len;
-			long  param_index = i;
+			unsigned int param_name_len;
+			ulong param_index = i;
 
 			zend_hash_get_current_key_ex(Z_ARRVAL_P(ret), &param_name, &param_name_len, &param_index, 0, &pos);
 			parameter = get_param(function, param_name, param_index, TRUE);

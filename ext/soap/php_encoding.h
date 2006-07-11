@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.41 2006/04/17 16:09:42 andrei Exp $ */
+/* $Id: php_encoding.h,v 1.42 2006/07/11 14:24:39 dmitry Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -207,8 +207,8 @@ zval *to_zval_user(encodeTypePtr type, xmlNodePtr node);
 zval *to_zval_after_user(encodeTypePtr type, zval *data);
 #endif
 
-void whiteSpace_replace(char* str);
-void whiteSpace_collapse(char* str);
+void whiteSpace_replace(xmlChar* str);
+void whiteSpace_collapse(xmlChar* str);
 
 xmlNodePtr sdl_guess_convert_xml(encodeTypePtr enc, zval* data, int style, xmlNodePtr parent);
 zval *sdl_guess_convert_zval(encodeTypePtr enc, xmlNodePtr data);

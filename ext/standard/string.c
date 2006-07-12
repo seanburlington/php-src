@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.547 2006/06/30 09:35:21 tony2001 Exp $ */
+/* $Id: string.c,v 1.548 2006/07/12 12:33:04 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2429,8 +2429,13 @@ PHP_FUNCTION(stripos)
 	}
 
 	haystack_len = Z_UNILEN_P(haystack);
+
+	if (haystack_len == 0) {
+		RETURN_FALSE;
+	}
+
 	if (Z_TYPE_P(needle) == IS_UNICODE || Z_TYPE_P(needle) == IS_STRING) {
-		if (!Z_UNILEN_P(needle)) {
+		if (!Z_UNILEN_P(needle) || Z_UNILEN_P(needle) > haystack_len) {
 			RETURN_FALSE;
 		}
 		if (Z_TYPE_P(haystack) != Z_TYPE_P(needle)) {

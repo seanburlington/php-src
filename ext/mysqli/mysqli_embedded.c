@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -75,14 +75,14 @@ PHP_FUNCTION(mysqli_embedded_server_start)
 	/* get groups */
 	if ((zend_hash_num_elements(HASH_OF(*grps)))) {
 		groups = safe_emalloc(sizeof(char *), zend_hash_num_elements(HASH_OF(*grps)) + 1, 0);
-		arguments[0] = NULL; 
+		groups[0] = NULL; 
 
-		zend_hash_internal_pointer_reset_ex(HASH_OF(*args), &pos);
+		zend_hash_internal_pointer_reset_ex(HASH_OF(*grps), &pos);
 
-		for (index = 0;; zend_hash_move_forward_ex(HASH_OF(*args), &pos))	{
+		for (index = 0;; zend_hash_move_forward_ex(HASH_OF(*grps), &pos))	{
 			zval ** item;
 
-			if (zend_hash_get_current_data_ex(HASH_OF(*args), (void **) &item, &pos) == FAILURE) {
+			if (zend_hash_get_current_data_ex(HASH_OF(*grps), (void **) &item, &pos) == FAILURE) {
 				break;
 			}
 
@@ -96,7 +96,7 @@ PHP_FUNCTION(mysqli_embedded_server_start)
 		groups[0] = NULL;
 	}
 
-	rc = mysql_server_init(argc, arguments, NULL);
+	rc = mysql_server_init(argc, arguments, groups);
 
 	if (argc) {
 		efree(arguments);

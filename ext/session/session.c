@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.437 2006/06/13 13:12:19 dmitry Exp $ */
+/* $Id: session.c,v 1.438 2006/07/12 15:28:18 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -942,6 +942,8 @@ static void php_session_send_cookie(TSRMLS_D)
 
 	smart_str_0(&ncookie);
 	
+	/*	'replace' must be 0 here, else a previous Set-Cookie
+		header, probably sent with setcookie() will be replaced! */
 	sapi_add_header_ex(ncookie.c, ncookie.len, 0, 0 TSRMLS_CC);
 }
 

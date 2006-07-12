@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.4 2006/06/26 18:48:56 bjori Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.5 2006/07/12 12:33:48 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1627,10 +1627,19 @@ PHP_FUNCTION(stripos)
 		RETURN_FALSE;
 	}
 
+	if (haystack_len == 0) {
+		RETURN_FALSE;
+	}
+
 	haystack_dup = estrndup(haystack, haystack_len);
 	php_strtolower(haystack_dup, haystack_len);
 
 	if (Z_TYPE_P(needle) == IS_STRING) {
+		if (Z_STRLEN_P(needle) == 0 || Z_STRLEN_P(needle) > haystack_len) {
+			efree(haystack_dup);
+			RETURN_FALSE;
+		}
+
 		needle_dup = estrndup(Z_STRVAL_P(needle), Z_STRLEN_P(needle));
 		php_strtolower(needle_dup, Z_STRLEN_P(needle));
 		found = php_memnstr(haystack_dup + offset, needle_dup, Z_STRLEN_P(needle), haystack_dup + haystack_len);

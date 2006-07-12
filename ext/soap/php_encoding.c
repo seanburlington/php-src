@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.133 2006/07/11 14:36:05 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.134 2006/07/12 09:00:15 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1349,12 +1349,12 @@ static zval *to_zval_object_ex(encodeTypePtr type, xmlNodePtr data, zend_class_e
 						str_val = (*attr)->def;
 					}
 					if (str_val) {
-						zval zstr;
-						xmlNodePtr dummy;
+						xmlNodePtr dummy, text;
 						zval *data;
 
-						ZVAL_STRING(&zstr, str_val, 0);
-						dummy = master_to_xml(get_conversion(IS_STRING), &zstr, SOAP_LITERAL, NULL);
+						dummy = xmlNewNode(NULL, BAD_CAST("BOGUS"));
+						text = xmlNewText(BAD_CAST(str_val));
+						xmlAddChild(dummy, text);
 						data = master_to_zval((*attr)->encode, dummy);
 						xmlFreeNode(dummy);
 						set_zval_property(ret, (*attr)->name, data TSRMLS_CC);

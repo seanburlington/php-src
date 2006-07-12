@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.2 2006/06/26 18:48:56 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.3 2006/07/12 12:38:49 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1172,7 +1172,7 @@ PHP_FUNCTION(stream_filter_remove)
 PHP_FUNCTION(stream_get_line)
 {
 	char *str = NULL;
-	int str_len;
+	int str_len = 0;
 	long max_length;
 	zval *zstream;
 	char *buf;

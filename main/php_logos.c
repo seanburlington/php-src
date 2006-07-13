@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_logos.c,v 1.19.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_logos.c,v 1.19.2.1.2.1 2006/07/13 15:05:30 iliaa Exp $ */
 
 #include "php.h"
 #include "logos.h"
@@ -27,13 +27,13 @@
 typedef struct _php_info_logo { 
 	char *mimetype;
 	int mimelen;
-	unsigned char *data; 
+	const unsigned char *data; 
 	int size; 
 } php_info_logo;
 
 HashTable phpinfo_logo_hash;
 
-PHPAPI int php_register_info_logo(char *logo_string, char *mimetype, unsigned char *data, int size)
+PHPAPI int php_register_info_logo(char *logo_string, char *mimetype, const unsigned char *data, int size)
 {
 	php_info_logo info_logo;
 

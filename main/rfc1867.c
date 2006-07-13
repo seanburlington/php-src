@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.185 2006/03/08 00:43:29 pajoye Exp $ */
+/* $Id: rfc1867.c,v 1.186 2006/07/13 12:17:25 tony2001 Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1145,7 +1145,7 @@ static SAPI_POST_HANDLER_FUNC(rfc1867_post_handler_unicode)
 				UErrorCode status = U_ZERO_ERROR;
 
 				char *value = multipart_buffer_read_body(mbuff TSRMLS_CC);
-				unsigned int new_val_len; /* Dummy variable */
+				/* unsigned int new_val_len;  Dummy variable */
 
 				if (value) {
 					/* UTODO use 'charset' parameter for conversion */
@@ -1159,9 +1159,9 @@ static SAPI_POST_HANDLER_FUNC(rfc1867_post_handler_unicode)
 				}
 
 				/* UTODO use input filtering */
-				//if (sapi_module.input_filter(PARSE_POST, param, &value, strlen(value), &new_val_len TSRMLS_CC)) {
+				/* if (sapi_module.input_filter(PARSE_POST, param, &value, strlen(value), &new_val_len TSRMLS_CC)) { */
 					safe_u_php_register_variable(param, u_val, u_val_len, array_ptr, 0 TSRMLS_CC);
-				//}
+				/* } */
 				if (!u_strcasecmp(param, maxfilesize_key, 0)) {
 					max_file_size = zend_u_strtol(u_val, NULL, 10);
 				}

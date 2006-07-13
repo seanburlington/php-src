@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.45 2006/07/11 14:24:39 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.46 2006/07/13 16:47:25 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -192,15 +192,25 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			tmp = get_node(fault->children, "faultstring");
 			if (tmp != NULL && tmp->children != NULL) {
 				zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
-				faultstring = Z_STRVAL_P(zv);
-				FREE_ZVAL(zv);
+				if (Z_TYPE_P(zv) == IS_STRING) {
+					faultstring = Z_STRVAL_P(zv);
+					FREE_ZVAL(zv);
+				} else {
+					faultstring = soap_unicode_to_string(Z_USTRVAL_P(zv), Z_USTRLEN_P(zv) TSRMLS_CC);
+					zval_ptr_dtor(&zv);
+				}
 			}
 
 			tmp = get_node(fault->children, "faultactor");
 			if (tmp != NULL && tmp->children != NULL) {
 				zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
-				faultactor = Z_STRVAL_P(zv);
-				FREE_ZVAL(zv);
+				if (Z_TYPE_P(zv) == IS_STRING) {
+					faultactor = Z_STRVAL_P(zv);
+					FREE_ZVAL(zv);
+				} else {
+					faultactor = soap_unicode_to_string(Z_USTRVAL_P(zv), Z_USTRLEN_P(zv) TSRMLS_CC);
+					zval_ptr_dtor(&zv);
+				}
 			}
 
 			tmp = get_node(fault->children, "detail");
@@ -222,8 +232,13 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 				tmp = get_node(tmp->children,"Text");
 				if (tmp != NULL && tmp->children != NULL) {
 					zval *zv = master_to_zval(get_conversion(IS_STRING), tmp);
-					faultstring = Z_STRVAL_P(zv);
-					FREE_ZVAL(zv);
+					if (Z_TYPE_P(zv) == IS_STRING) {
+						faultstring = Z_STRVAL_P(zv);
+						FREE_ZVAL(zv);
+					} else {
+						faultstring = soap_unicode_to_string(Z_USTRVAL_P(zv), Z_USTRLEN_P(zv) TSRMLS_CC);
+						zval_ptr_dtor(&zv);
+					}
 				}
 			}
 

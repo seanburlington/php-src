@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.127 2006/06/21 20:17:21 andrei Exp $ */
+/* $Id: streams.c,v 1.128 2006/07/13 11:58:42 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1810,11 +1810,7 @@ PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size
 				writeptr += didwrite;
 			}
 		} else {
-			if (maxlen == 0) {
-				return haveread;
-			} else {
-				return 0; /* error */
-			}
+			return haveread;
 		}
 
 		if (maxlen - haveread == 0) {

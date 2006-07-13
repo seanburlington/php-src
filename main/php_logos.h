@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,14 +16,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_logos.h,v 1.9.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_logos.h,v 1.9.2.1.2.1 2006/07/13 17:03:35 tony2001 Exp $ */
 
 
 #ifndef _PHP_LOGOS_H
 #define _PHP_LOGOS_H
 
 BEGIN_EXTERN_C()
-PHPAPI int php_register_info_logo(char *logo_string, char *mimetype, unsigned char *data, int size);
+PHPAPI int php_register_info_logo(char *logo_string, char *mimetype, const unsigned char *data, int size);
 PHPAPI int php_unregister_info_logo(char *logo_string);
 END_EXTERN_C()
 

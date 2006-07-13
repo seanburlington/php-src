@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.695 2006/07/12 17:04:13 andrei Exp $ */
+/* $Id: main.c,v 1.696 2006/07/13 17:55:50 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -534,7 +534,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	zstr function = NULL_ZSTR;
 	char *origin;
 	char *message;
-	char *stage;
+	char *stage = "Unknown";
 	int function_name_is_string = 1;
 
 	/* get error text into buffer and escape for html if necessary */

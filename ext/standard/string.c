@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.550 2006/07/13 21:27:48 andrei Exp $ */
+/* $Id: string.c,v 1.551 2006/07/13 22:26:50 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4065,6 +4065,7 @@ static int php_u_similar_char(const UChar *txt1, int len1, const UChar *txt2, in
 			sum += php_u_similar_char(txt1, pos1, txt2, pos2);
 		}
 		if ((pos1 + end1 < len1) && (pos2 + end2 < len2)) {
+			/* FIXME should this be calling php_u_similar_char? */
 			sum += php_similar_char((UChar *)txt1+pos1+end1, len1-pos1-end1,
 									(UChar *)txt2+pos2+end2, len2-pos2-end2);
 		}

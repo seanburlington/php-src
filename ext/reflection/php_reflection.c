@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.242 2006/07/10 00:13:50 helly Exp $ */
+/* $Id: php_reflection.c,v 1.243 2006/07/13 12:34:30 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1866,10 +1866,12 @@ ZEND_METHOD(reflection_parameter, __construct)
 		zend_uint i;
 
 		position= -1;
-		convert_to_string_ex(&parameter);
+		convert_to_text_ex(&parameter);
 		for (i = 0; i < fptr->common.num_args; i++) {
-			/* FIXME: Unicode support??? */
-			if (arg_info[i].name.s && strcmp(arg_info[i].name.s, Z_STRVAL_P(parameter)) == 0) {
+			if (Z_TYPE_P(parameter) == IS_STRING && arg_info[i].name.s && strcmp(arg_info[i].name.s, Z_STRVAL_P(parameter)) == 0) {
+				position= i;
+				break;
+			} else if (Z_TYPE_P(parameter) == IS_UNICODE && arg_info[i].name.u && u_strcmp(arg_info[i].name.u, Z_USTRVAL_P(parameter)) == 0) {
 				position= i;
 				break;
 			}
@@ -4836,7 +4838,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.242 2006/07/10 00:13:50 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.243 2006/07/13 12:34:30 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

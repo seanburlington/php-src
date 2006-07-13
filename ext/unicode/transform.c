@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: transform.c,v 1.3 2006/06/15 17:37:48 andrei Exp $ */ 
+/* $Id: transform.c,v 1.4 2006/07/13 12:15:01 tony2001 Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -28,7 +28,7 @@ PHP_FUNCTION(str_transliterate)
 	int			result_len = 0;
 	UTransliterator *trans = NULL;
 	UErrorCode	status = U_ZERO_ERROR;
-	int32_t		capacity, start, limit;
+	int32_t		capacity, limit;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "uuu|u", &str,
 							  &str_len, &from, &from_len, &to, &to_len,

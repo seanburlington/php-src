@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.444 2006/05/29 10:42:10 tony2001 Exp $ */
+/* $Id: file.c,v 1.445 2006/07/14 19:16:23 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -578,19 +578,20 @@ PHP_FUNCTION(file_get_contents)
    Write/Create a file with contents data and return the number of bytes written */
 PHP_FUNCTION(file_put_contents)
 {
+	int argc = ZEND_NUM_ARGS();
 	php_stream *stream;
 	char *filename;
 	int filename_len;
 	zend_uchar filename_type;
 	zval *data;
 	int numchars = 0;
-	long flags = 0;
+	long flags = ((argc < 3) && UG(unicode)) ? PHP_FILE_TEXT : 0;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
 	char mode[3] = { 'w', 0, 0 };
 	php_stream *srcstream = NULL;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "tz/|lr!", &filename, &filename_len, &filename_type,
+	if (zend_parse_parameters(argc TSRMLS_CC, "tz/|lr!", &filename, &filename_len, &filename_type,
 				&data, &flags, &zcontext) == FAILURE) {
 		return;
 	}

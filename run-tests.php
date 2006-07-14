@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.291 2006/07/14 23:04:32 andrei Exp $ */
+/* $Id: run-tests.php,v 1.292 2006/07/14 23:09:12 andrei Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.291 $'."\n";
+					echo '$Revision: 1.292 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1517,8 +1517,10 @@ COMMAND $cmd
 		}
 	} else {
 		$wanted = trim($section_text['EXPECT']);
-		/* workaround until preg_replace() or str_replace() are upgraded */
-		$wanted = unicode_encode($wanted, ini_get('unicode.output_encoding'));
+		if ($unicode_semantics) {
+			/* workaround until preg_replace() or str_replace() are upgraded */
+			$wanted = unicode_encode($wanted, ini_get('unicode.output_encoding'));
+		}
 		$wanted = preg_replace('/\r\n/',"\n",$wanted);
 		// compare and leave on success
 		if (!strcmp($output, $wanted)) {

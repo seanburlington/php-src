@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_filter.c,v 1.1 2006/03/29 01:20:43 pollita Exp $ */
+/* $Id: unicode_filter.c,v 1.2 2006/07/14 19:15:31 pollita Exp $ */
 
 
 #include "php.h"
@@ -79,7 +79,7 @@ static php_stream_filter_status_t php_unicode_to_string_filter(
 			php_stream_bucket_append(buckets_out, new_bucket TSRMLS_CC);
 			exit_status = PSFS_PASS_ON;
 		}
-		consumed += UBYTES(bucket->buflen);
+		consumed += bucket->buflen;
 		php_stream_bucket_delref(bucket TSRMLS_CC);
 	}
 
@@ -131,7 +131,7 @@ static php_stream_filter_status_t php_unicode_from_string_filter(
 		php_stream_bucket_unlink(bucket TSRMLS_CC);
 		if (bucket->buf_type == IS_UNICODE) {
 			/* already in unicode, nothing to do */
-			consumed += UBYTES(bucket->buflen);
+			consumed += bucket->buflen;
 			php_stream_bucket_append(buckets_out, bucket TSRMLS_CC);
 			exit_status = PSFS_PASS_ON;
 			continue;

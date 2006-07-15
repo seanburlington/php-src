@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.787 2006/07/02 00:10:36 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.788 2006/07/15 10:10:46 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -376,6 +376,12 @@ static
 ZEND_BEGIN_ARG_INFO(arginfo_array_fill, 0)
 	ZEND_ARG_INFO(0, start_key)
 	ZEND_ARG_INFO(0, num)
+	ZEND_ARG_INFO(0, val)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_array_fill_keys, 0)
+	ZEND_ARG_INFO(0, keys) /* ARRAY_INFO(0, keys, 0) */
 	ZEND_ARG_INFO(0, val)
 ZEND_END_ARG_INFO()
 
@@ -3708,6 +3714,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(extract,															arginfo_extract)
 	PHP_FE(compact,															arginfo_compact)
 	PHP_FE(array_fill,														arginfo_array_fill)
+	PHP_FE(array_fill_keys,													arginfo_array_fill_keys)
 	PHP_FE(range,															arginfo_range)
 	PHP_FE(array_multisort,													arginfo_array_multisort)
 	PHP_FE(array_push,														arginfo_array_push)

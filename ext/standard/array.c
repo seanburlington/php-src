@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.362 2006/07/14 22:41:22 andrei Exp $ */
+/* $Id: array.c,v 1.363 2006/07/15 10:10:46 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1641,6 +1641,58 @@ PHP_FUNCTION(array_fill)
 	while (num--) {
 		zval_add_ref(&val);
 		zend_hash_next_index_insert(Z_ARRVAL_P(return_value), &val, sizeof(zval *), NULL);
+	}
+}
+/* }}} */
+
+
+/* {{{ proto array array_fill_keys(array keys, mixed val)
+   Create an array using the elements of the first parameter as keys each initialized to val */
+PHP_FUNCTION(array_fill_keys)
+{
+	zval **keys, **val, **entry;
+	HashPosition pos;
+
+	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &keys, &val) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	if (Z_TYPE_PP(keys) != IS_ARRAY) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First parameter must be an array");
+ 		RETURN_FALSE;
+ 	}
+
+	/* Initialize return array */
+	array_init(return_value);
+
+	if (!zend_hash_num_elements(Z_ARRVAL_PP(keys))) {
+		return;
+	}
+
+	if (PZVAL_IS_REF(*val)) {
+		SEPARATE_ZVAL(val);
+	}
+
+	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(keys), &pos);
+	while (zend_hash_get_current_data_ex(Z_ARRVAL_PP(keys), (void **)&entry, &pos) == SUCCESS) {
+		zval_add_ref(val);
+
+		if (Z_TYPE_PP(entry) == IS_STRING || Z_TYPE_PP(entry) == IS_UNICODE) {
+			zend_u_symtable_update(Z_ARRVAL_P(return_value), Z_TYPE_PP(entry), Z_UNIVAL_PP(entry), Z_UNILEN_PP(entry) + 1, val, sizeof(zval *), NULL);
+		} else if (Z_TYPE_PP(entry) == IS_LONG) {
+			zend_hash_index_update(Z_ARRVAL_P(return_value), Z_LVAL_PP(entry), val, sizeof(zval *), NULL);
+		} else {
+			zval tmpkey;
+
+			tmpkey = **entry;
+			zval_copy_ctor(&tmpkey);
+			convert_to_string(&tmpkey);
+
+			zend_symtable_update(Z_ARRVAL_P(return_value), Z_STRVAL(tmpkey), Z_STRLEN(tmpkey) + 1, val, sizeof(zval *), NULL);
+
+			zval_dtor(&tmpkey);
+		}
+		zend_hash_move_forward_ex(Z_ARRVAL_PP(keys), &pos);
 	}
 }
 /* }}} */

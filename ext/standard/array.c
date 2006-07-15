@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.364 2006/07/15 12:06:10 helly Exp $ */
+/* $Id: array.c,v 1.365 2006/07/15 12:09:13 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1646,6 +1646,8 @@ PHP_FUNCTION(array_fill)
 /* }}} */
 
 
+/* {{{ proto array array_fill_keys(array keys, mixed val) U
+   Create an array using the elements of the first parameter as keys each initialized to val */
 PHP_FUNCTION(array_fill_keys)
 {
 	zval *keys, *val, **entry;

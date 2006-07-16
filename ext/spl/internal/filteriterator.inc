@@ -1,24 +1,36 @@
 <?php
 
-/**
- * @brief   Regular expression filter for string iterators
+/** @file filteriterator.inc
+ * @ingroup SPL
+ * @brief class FilterIterator
  * @author  Marcus Boerger
- * @version 1.0
+ * @date    2003 - 2006
+ *
+ * SPL - Standard PHP Library
+ */
+
+/**
+ * @brief   Abstract filter for iterators
+ * @author  Marcus Boerger
+ * @version 1.1
+ * @since PHP 5.0
  *
  * Instances of this class act as a filter around iterators. In other words 
  * you can put an iterator into the constructor and the instance will only 
  * return selected (accepted) elements.
+ *
+ * The only thing that needs to be done to make this work is implementing 
+ * method accept(). Typically this invloves reading the current element or 
+ * key of the inner Iterator and checking whether it is acceptable.
  */
-abstract class FilterIterator implements Iterator
+abstract class FilterIterator implements OuterIterator
 {
-	protected $it;
+	private $it;
 
 	/**
-	 * Constructs a filter around an iterator whose elemnts are strings.
-	 * If the given iterator is of type spl_sequence then its rewind()
-	 * method is called.
+	 * Constructs a filter around another iterator.
 	 *
-	 * @param it     Object that implements at least spl_forward
+	 * @param it     Iterator to filter
 	 */
 	function __construct(Iterator $it) {
 		$this->it = $it;
@@ -91,6 +103,24 @@ abstract class FilterIterator implements Iterator
 	 */
 	protected function __clone() {
 		// disallow clone 
+	}
+
+	/**
+	 * @return The inner iterator
+	 */	
+	function getInnerIterator()
+	{
+		return $this->it;
+	}
+
+	/** Aggregate the inner iterator
+	 *
+	 * @param func    Name of method to invoke
+	 * @param params  Array of parameters to pass to method
+	 */
+	function __call($func, $params)
+	{
+		return call_user_func_array(array($this->it, $func), $params);
 	}
 }
 

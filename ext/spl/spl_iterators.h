@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.6 2006/06/07 09:44:41 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.7 2006/07/16 21:12:32 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -95,6 +95,14 @@ enum {
 	REGIT_USE_KEY            = 0x00000001,
 };
 
+typedef enum {
+	REGIT_MODE_MATCH,
+	REGIT_MODE_GET_MATCH,
+	REGIT_MODE_ALL_MATCHES,
+	REGIT_MODE_SPLIT,
+	REGIT_MODE_MAX,
+} regex_mode;
+
 typedef struct _spl_dual_it_object {
 	zend_object              std;
 	struct {
@@ -130,6 +138,8 @@ typedef struct _spl_dual_it_object {
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 		struct {
 			int              flags;
+			regex_mode       mode;
+			long             preg_flags;
 			pcre_cache_entry *pce;
 			char             *regex;
 		} regex;

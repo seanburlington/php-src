@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.37.2.3.2.2 2006/07/16 15:03:53 chregu Exp $ */
+/* $Id: node.c,v 1.37.2.3.2.3 2006/07/16 16:04:09 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1870,15 +1870,12 @@ PHP_METHOD(domnode, getNodePath)
 	char *value;
 	
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &id, dom_node_class_entry) == FAILURE) {
-		return;
-	}
-
-	DOM_GET_OBJ(nodep, id, xmlNodePtr, intern);
+	
+	DOM_GET_THIS_OBJ(nodep, id, xmlNodePtr, intern);
 
 	value = xmlGetNodePath(nodep);
 	if (value == NULL) {
-		RETURN_EMPTY_STRING();
+		RETURN_NULL();
 	} else {
 		RETVAL_STRING(value, 1);
 		xmlFree(value);

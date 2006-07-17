@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.554 2006/07/17 06:44:45 tony2001 Exp $ */
+/* $Id: string.c,v 1.555 2006/07/17 20:43:07 mike Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1730,7 +1730,12 @@ PHPAPI void php_basename(char *s, size_t len, char *suffix, size_t sufflen, char
 						state = 1;
 					}
 				}
+				break;
 			default:
+				if (state == 0) {
+					comp = c;
+					state = 1;
+				}
 				break;
 		}
 		c += inc_len;

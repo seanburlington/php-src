@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.5 2006/07/17 03:57:31 iliaa Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.6 2006/07/17 10:48:11 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.5 $'."\n";
+					echo '$Revision: 1.226.2.37.2.6 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -768,7 +768,7 @@ function mail_qa_team($data, $compression, $status = FALSE)
 	$url_bits = parse_url(QA_SUBMISSION_PAGE);
 	if (empty($url_bits['port'])) $url_bits['port'] = 80;
 	
-	$data = "php_test_data=" . urlencode(base64_encode(str_replace("[\\x00]", "[0x0]", $data)));
+	$data = "php_test_data=" . urlencode(base64_encode(str_replace("\00", '[0x0]', $data)));
 	$data_length = strlen($data);
 	
 	$fs = fsockopen($url_bits['host'], $url_bits['port'], $errno, $errstr, 10);

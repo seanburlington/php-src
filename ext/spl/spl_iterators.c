@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.12 2006/07/16 21:12:32 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.13 2006/07/17 21:11:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1477,7 +1477,7 @@ SPL_METHOD(RecursiveRegexIterator, getChildren)
 #endif
 
 /* {{{ spl_dual_it_free_storage */
-static inline void spl_dual_it_free_storage(void *_object TSRMLS_DC)
+static void spl_dual_it_free_storage(void *_object TSRMLS_DC)
 {
 	spl_dual_it_object        *object = (spl_dual_it_object *)_object;
 

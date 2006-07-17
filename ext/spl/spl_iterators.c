@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.32 2006/07/17 21:12:23 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.33 2006/07/17 21:13:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1253,7 +1253,7 @@ SPL_METHOD(ParentIterator, getChildren)
 } /* }}} */
 
 /* {{{ spl_dual_it_free_storage */
-static inline void spl_dual_it_free_storage(void *_object TSRMLS_DC)
+static void spl_dual_it_free_storage(void *_object TSRMLS_DC)
 {
 	spl_dual_it_object        *object = (spl_dual_it_object *)_object;
 

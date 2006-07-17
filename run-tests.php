@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.296 2006/07/17 10:49:34 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.297 2006/07/17 11:46:12 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.296 $'."\n";
+					echo '$Revision: 1.297 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1380,7 +1380,7 @@ TEST $file
 	}
 
 	if ($leak_check) {
-		$cmd = "valgrind -q --tool=memcheck --log-file-exactly=$memcheck_filename $cmd";
+		$cmd = "valgrind -q --tool=memcheck --trace-children=yes --log-file-exactly=$memcheck_filename $cmd";
 	}
 
 	if ($DETAILED) echo "

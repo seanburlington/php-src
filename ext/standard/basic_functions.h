@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.146 2006/06/26 20:28:30 bjori Exp $ */
+/* $Id: basic_functions.h,v 1.147 2006/07/17 20:52:12 andrei Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -165,6 +165,7 @@ typedef struct _php_basic_globals {
 	char str_ebuf[40];
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;
+	zend_fcall_info user_compare_fci;
 	zend_fcall_info_cache user_compare_fci_cache;
 	zend_llist *user_tick_functions;
 

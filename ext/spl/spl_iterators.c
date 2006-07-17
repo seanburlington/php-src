@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.138 2006/07/16 20:52:20 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.139 2006/07/17 06:46:19 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1401,7 +1401,7 @@ SPL_METHOD(RegexIterator, accept)
 			use_copy = 0;
 		} else if (intern->current.key_type == HASH_KEY_IS_UNICODE) {
 			subject_len = intern->current.str_key_len - 1;
-			subject = zend_unicode_to_ascii(intern->current.str_key.u, subject_len TSRMLS_DC);
+			subject = zend_unicode_to_ascii(intern->current.str_key.u, subject_len TSRMLS_CC);
 			if (!subject) {
 				/* FIXME: Unicode support??? : how to handle this error, with that exception? */
 				if (intern->u.regex.mode != REGIT_MODE_MATCH) {

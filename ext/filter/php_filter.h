@@ -17,18 +17,18 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.10 2006/05/08 14:39:57 pajoye Exp $ */
+/* $Id: php_filter.h,v 1.11 2006/07/18 23:52:09 helly Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
 
-#include "SAPI.h"
-#include "zend_API.h"
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
 #include "php_variables.h"
+#include "SAPI.h"
+#include "zend_API.h"
 
 extern zend_module_entry filter_module_entry;
 #define phpext_filter_ptr &filter_module_entry

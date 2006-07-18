@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52 2006/06/22 10:58:13 pajoye Exp $ */
+/* $Id: filter.c,v 1.53 2006/07/18 23:52:09 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.53 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -425,7 +425,11 @@ static void php_zval_filter_recursive(zval *value, long filter, long flags, zval
 static zval * php_filter_get_storage(long arg TSRMLS_DC) /* {{{ */
 {
 	zval * array_ptr = NULL;
-	zend_bool jit_initialization = (PG(auto_globals_jit) && !PG(register_globals) && !PG(register_long_arrays));
+	zend_bool jit_initialization = (PG(auto_globals_jit)
+#if PHP_MAJOR_VERSION < 6
+		&& !PG(register_globals) && !PG(register_long_arrays)
+#endif
+		);
 	switch (arg) {
 		case PARSE_GET:
 			array_ptr = IF_G(get_array);

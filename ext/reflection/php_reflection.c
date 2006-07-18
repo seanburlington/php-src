@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.243 2006/07/13 12:34:30 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.244 2006/07/18 17:52:45 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1972,7 +1972,7 @@ ZEND_METHOD(reflection_parameter, getClass)
 	GET_REFLECTION_OBJECT_PTR(param);
 
 	if (param->arg_info->class_name.v) {
-		if (zend_u_lookup_class_ex(UG(unicode)?IS_UNICODE:IS_STRING, param->arg_info->class_name, param->arg_info->class_name_len, 1, &pce TSRMLS_CC) == FAILURE) {
+		if (zend_u_lookup_class_ex(UG(unicode)?IS_UNICODE:IS_STRING, param->arg_info->class_name, param->arg_info->class_name_len, 1, 1, &pce TSRMLS_CC) == FAILURE) {
 			zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 				"Class %v does not exist", param->arg_info->class_name);
 			return;
@@ -4838,7 +4838,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.243 2006/07/13 12:34:30 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.244 2006/07/18 17:52:45 andrei Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.12 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: php_date.h,v 1.17.2.11.2.1 2006/07/18 12:38:05 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -46,7 +46,6 @@ PHP_FUNCTION(time);
 PHP_FUNCTION(localtime);
 PHP_FUNCTION(getdate);
 
-#ifdef EXPERIMENTAL_DATE_SUPPORT
 /* Advanced Interface */
 PHP_FUNCTION(date_create);
 PHP_FUNCTION(date_parse);
@@ -67,7 +66,6 @@ PHP_FUNCTION(timezone_offset_get);
 PHP_FUNCTION(timezone_transistions_get);
 PHP_FUNCTION(timezone_identifiers_list);
 PHP_FUNCTION(timezone_abbreviations_list);
-#endif
 
 /* Options and Configuration */
 PHP_FUNCTION(date_default_timezone_set);

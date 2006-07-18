@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.69 2006/05/28 20:31:15 mike Exp $ */
+/* $Id: sapi_apache2.c,v 1.70 2006/07/18 09:08:06 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -593,7 +593,7 @@ zend_first_try {
 		{
 			char *mem_usage;
 
-			mem_usage = apr_psprintf(ctx->r->pool, "%u", AG(allocated_memory_peak));
+			mem_usage = apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(TSRMLS_C));
 			apr_table_set(r->notes, "mod_php_memory_usage", mem_usage);
 		}
 #endif

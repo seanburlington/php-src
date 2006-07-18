@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.139 2006/03/19 14:58:06 mike Exp $ */
+/* $Id: sapi_apache2.c,v 1.140 2006/07/18 09:08:06 dmitry Exp $ */
 
 #include <fcntl.h>
 
@@ -521,8 +521,7 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 				{
 					char *mem_usage;
  
-					mem_usage = apr_psprintf(ctx->r->pool, "%u", AG(allocated_memory_peak));
-					AG(allocated_memory_peak) = 0;
+					mem_usage = apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(TSRMLS_C));
 					apr_table_set(ctx->r->notes, "mod_php_memory_usage", mem_usage);
 				}
 #endif

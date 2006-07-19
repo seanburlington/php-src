@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.19 2006/06/13 13:12:18 dmitry Exp $ */
+/* $Id: php_libxml.h,v 1.20 2006/07/19 18:28:30 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -101,6 +101,16 @@ PHP_LIBXML_API void php_libxml_issue_error(int level, const char *msg TSRMLS_DC)
 /* Init/shutdown functions*/
 PHP_LIBXML_API void php_libxml_initialize();
 PHP_LIBXML_API void php_libxml_shutdown();
+
+#define ZVAL_XML_STRING(z, s, flags) {								\
+	UConverter *libxml_utf_conv = NULL;								\
+	if (UG(unicode)) {												\
+		libxml_utf_conv = UG(utf8_conv);							\
+	}																\
+	ZVAL_U_STRING(libxml_utf_conv, z, s, flags);					\
+}
+
+#define RETVAL_XML_STRING(s, flags)			ZVAL_XML_STRING(return_value, s, flags)
 
 #ifdef ZTS
 #define LIBXML(v) TSRMG(libxml_globals_id, zend_libxml_globals *, v)

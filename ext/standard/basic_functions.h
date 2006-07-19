@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.139.2.4.2.1 2006/05/14 16:06:48 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.139.2.4.2.2 2006/07/19 12:25:46 mike Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -79,6 +79,7 @@ PHP_FUNCTION(get_magic_quotes_gpc);
 PHP_FUNCTION(import_request_variables);
 
 PHP_FUNCTION(error_log);
+PHP_FUNCTION(error_get_last);
 
 PHP_FUNCTION(call_user_func);
 PHP_FUNCTION(call_user_func_array);

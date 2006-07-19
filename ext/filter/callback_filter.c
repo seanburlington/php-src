@@ -16,27 +16,22 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: callback_filter.c,v 1.9 2006/01/14 15:10:54 sniper Exp $ */
+/* $Id: callback_filter.c,v 1.10 2006/07/19 08:35:25 tony2001 Exp $ */
 
 #include "php_filter.h"
 
 void php_filter_callback(PHP_INPUT_FILTER_PARAM_DECL)
 {
-	char *name = NULL;
 	zval *retval_ptr;
 	zval ***args;
 	int status;
 
-	if (!option_array || !zend_is_callable(option_array, IS_CALLABLE_CHECK_NO_ACCESS, &name)) {
+	if (!option_array || !zend_is_callable(option_array, IS_CALLABLE_CHECK_NO_ACCESS, NULL)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First argument is expected to be a valid callback");
-		if (name) {
-			efree(name);
-		}
 		zval_dtor(value);
 		Z_TYPE_P(value) = IS_NULL;
 		return;
 	}
-	efree(name);
 
 	args = safe_emalloc(sizeof(zval **), 1, 0);
 	args[0] = &value;

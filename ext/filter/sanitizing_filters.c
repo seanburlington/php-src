@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.11 2006/01/29 16:37:42 derick Exp $ */
+/* $Id: sanitizing_filters.c,v 1.12 2006/07/19 06:56:28 tony2001 Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -67,7 +67,7 @@ static void php_filter_encode_html_high_low(zval *value, long flags)
 	for (x = 0, y = 0; len--; x++, y++) {
 		if (((flags & FILTER_FLAG_ENCODE_LOW) && (s[x] < 32)) || ((flags & FILTER_FLAG_ENCODE_HIGH) && (s[x] > 127))) {
 			smart_str_appendl(&str, "&#", 2);
-			smart_str_append_long(&str, s[x]);
+			smart_str_append_unsigned(&str, s[x]);
 			smart_str_appendc(&str, ';');
 		} else {
 			smart_str_appendc(&str, s[x]);

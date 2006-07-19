@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.106 2006/03/16 16:53:09 dmitry Exp $ */
+/* $Id: php_globals.h,v 1.107 2006/07/19 12:25:02 mike Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -128,6 +128,7 @@ struct _php_core_globals {
 	zend_bool always_populate_raw_post_data;
 	zend_bool report_zend_debug;
 
+	int last_error_type;
 	char *last_error_message;
 	char *last_error_file;
 	int  last_error_lineno;

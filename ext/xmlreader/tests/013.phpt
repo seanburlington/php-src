@@ -5,7 +5,7 @@ XMLReader: Schema validation
 <?php if (!method_exists('XMLReader','setSchema')) die('skip XMLReader::setSchema() not supported');?>
 --FILE--
 <?php 
-/* $Id: 013.phpt,v 1.1 2006/03/31 20:50:29 helly Exp $ */
+/* $Id: 013.phpt,v 1.2 2006/07/19 18:32:19 rrichards Exp $ */
 
 $xml =<<<EOF
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -46,6 +46,13 @@ $reader->close();
 --EXPECTF--
 string(3) "123"
 string(3) "456"
+===FAIL===
+
+Warning: XMLReader::read(): Element 'foo': %s
+===DONE===
+--UEXPECTF--
+unicode(3) "123"
+unicode(3) "456"
 ===FAIL===
 
 Warning: XMLReader::read(): Element 'foo': %s

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.47 2006/07/16 20:57:40 helly Exp $ */
+/* $Id: php_pcre.h,v 1.48 2006/07/19 20:30:52 helly Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -41,7 +41,7 @@ PHP_FUNCTION(preg_split);
 PHP_FUNCTION(preg_quote);
 PHP_FUNCTION(preg_grep);
 
-PHPAPI char *php_pcre_replace(char *regex,   int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);
+PHPAPI char *php_pcre_replace(char *regex, int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *options TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex_ex(char *regex, pcre_extra **extra, int *preg_options, int *coptions TSRMLS_DC);
 PHPAPI void  php_pcre_split(pcre *re, pcre_extra *extra, char *subject, int subject_len, zval *return_value,

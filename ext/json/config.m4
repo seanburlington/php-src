@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2006/01/31 08:59:06 omar Exp $
+dnl $Id: config.m4,v 1.4 2006/07/19 16:17:56 iliaa Exp $
 dnl
 
 AC_DEFUN([PHP_JSON_ADD_SOURCES], [
@@ -70,8 +70,8 @@ dnl
 dnl Main config
 dnl
 
-PHP_ARG_WITH(json, whether to enable JavaScript Object Serialization support,
-[  --with-json       Enable JavaScript Object Serialization support])
+PHP_ARG_ENABLE(json, whether to enable JavaScript Object Serialization support,
+[  --disable-json       Disable JavaScript Object Serialization support], yes)
 
 if test "$PHP_JSON" != "no"; then  
   AC_DEFINE([HAVE_JSON],1,[whether to have JavaScript Object Serialization support])

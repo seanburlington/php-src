@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.190 2006/07/20 22:07:09 helly Exp $ */
+/* $Id: php_pcre.c,v 1.191 2006/07/20 22:40:44 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -463,7 +463,7 @@ static void php_do_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global) /* {{{ *
 }
 
 PHPAPI void php_pcre_match_impl(pcre_cache_entry *pce, char *subject, int subject_len, zval *return_value,
-	zval *subpats, int global, int use_flags, long flags, long start_offset TSRMLS_CC)
+	zval *subpats, int global, int use_flags, long flags, long start_offset TSRMLS_DC)
 {
 	zval			*result_set,		/* Holds a set of subpatterns after
 										   a global match */

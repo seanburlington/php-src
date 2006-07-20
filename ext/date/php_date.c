@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.106 2006/07/18 12:37:49 derick Exp $ */
+/* $Id: php_date.c,v 1.107 2006/07/20 15:48:36 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1558,7 +1558,7 @@ static void date_register_classes(TSRMLS_D)
 {
 	zend_class_entry ce_date, ce_timezone;
 
-	INIT_CLASS_ENTRY(ce_date, "date", date_funcs_date);
+	INIT_CLASS_ENTRY(ce_date, "DateTime", date_funcs_date);
 	ce_date.create_object = date_object_new_date;
 	date_ce_date = zend_register_internal_class_ex(&ce_date, NULL, NULL TSRMLS_CC);
 	memcpy(&date_object_handlers_date, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
@@ -1580,7 +1580,7 @@ static void date_register_classes(TSRMLS_D)
 	REGISTER_DATE_CLASS_CONST_STRING("W3C",     DATE_FORMAT_RFC3339);
 
 
-	INIT_CLASS_ENTRY(ce_timezone, "timezone", date_funcs_timezone);
+	INIT_CLASS_ENTRY(ce_timezone, "DateTimeZone", date_funcs_timezone);
 	ce_timezone.create_object = date_object_new_timezone;
 	date_ce_timezone = zend_register_internal_class_ex(&ce_timezone, NULL, NULL TSRMLS_CC);
 	memcpy(&date_object_handlers_timezone, zend_get_std_object_handlers(), sizeof(zend_object_handlers));

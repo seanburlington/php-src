@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.2 2006/07/19 06:56:28 tony2001 Exp $ */
+/* $Id: logical_filters.c,v 1.3 2006/07/20 13:03:02 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -217,20 +217,29 @@ stateE:
 
 void php_filter_boolean(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 {
+	char *str = Z_STRVAL_P(value);
+
+	if (str) {
+		/* fast(er) trim */
+		while (*str == ' ') {
+			str++;
+		}
+	}
+
 	/* returns true for "1", "true", "on" and "yes"
 	 * returns false for "0", "false", "off", "no", and ""
 	 * null otherwise. */
-	if ((strncasecmp(Z_STRVAL_P(value), "true", sizeof("true")) == 0) ||
-		(strncasecmp(Z_STRVAL_P(value), "yes", sizeof("yes")) == 0) ||
-		(strncasecmp(Z_STRVAL_P(value), "on", sizeof("on")) == 0) ||
-		(strncmp(Z_STRVAL_P(value), "1", sizeof("1")) == 0))
+	if ((strncasecmp(str, "true", sizeof("true")) == 0) ||
+		(strncasecmp(str, "yes", sizeof("yes")) == 0) ||
+		(strncasecmp(str, "on", sizeof("on")) == 0) ||
+		(strncmp(str, "1", sizeof("1")) == 0))
 	{
 		zval_dtor(value);
 		ZVAL_BOOL(value, 1);
-	} else if ((strncasecmp(Z_STRVAL_P(value), "false", sizeof("false")) == 0) ||
-		(strncasecmp(Z_STRVAL_P(value), "off", sizeof("off")) == 0) ||
-		(strncasecmp(Z_STRVAL_P(value), "no", sizeof("no")) == 0) ||
-		(strncmp(Z_STRVAL_P(value), "0", sizeof("0")) == 0) ||
+	} else if ((strncasecmp(str, "false", sizeof("false")) == 0) ||
+		(strncasecmp(str, "off", sizeof("off")) == 0) ||
+		(strncasecmp(str, "no", sizeof("no")) == 0) ||
+		(strncmp(str, "0", sizeof("0")) == 0) ||
 		Z_STRLEN_P(value) == 0)
 	{
 		zval_dtor(value);

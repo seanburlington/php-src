@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.17 2006/07/18 12:38:05 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.18 2006/07/20 07:20:23 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -757,7 +757,7 @@ static char *date_format(char *format, int format_len, timelib_time *t, int loca
 					retval += 1000;
 				}
 				retval = retval % 1000;
-				snprintf(buffer, 32, "%03d", retval); break;
+				snprintf(buffer, 32, "%03d", retval);
 				break;
 			}
 			case 'g': snprintf(buffer, 32, "%d", (t->h % 12) ? (int) t->h % 12 : 12); break;

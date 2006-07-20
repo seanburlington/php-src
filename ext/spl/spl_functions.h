@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.h,v 1.19.2.4 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: spl_functions.h,v 1.19.2.3.2.1 2006/07/20 22:54:21 helly Exp $ */
 
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
@@ -49,8 +49,8 @@ typedef zend_object_value (*create_object_func_t)(zend_class_entry *class_type T
 #define REGISTER_SPL_FUNCTIONS(class_name, function_list) \
 	spl_register_functions(spl_ce_ ## class_name, function_list TSRMLS_CC);
 
-#define REGISTER_SPL_PROPERTY(class_name, prop_name) \
-	spl_register_property(spl_ce_ ## class_name, prop_name, prop_val, prop_flags TSRMLS_CC);
+#define REGISTER_SPL_PROPERTY(class_name, prop_name, prop_flags) \
+	spl_register_property(spl_ce_ ## class_name, prop_name, sizeof(prop_name)-1, prop_flags TSRMLS_CC);
 
 #define REGISTER_SPL_CLASS_CONST_LONG(class_name, const_name, value) \
 	zend_declare_class_constant_long(spl_ce_ ## class_name, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);
@@ -64,7 +64,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 
 void spl_register_parent_ce(zend_class_entry * class_entry, zend_class_entry * parent_class TSRMLS_DC);
 void spl_register_functions(zend_class_entry * class_entry, zend_function_entry * function_list TSRMLS_DC);
-void spl_register_property( zend_class_entry * class_entry, char *prop_name, zval *prop_val, int prop_flags TSRMLS_DC);
+void spl_register_property( zend_class_entry * class_entry, char *prop_name, int prop_name_len, int prop_flags TSRMLS_DC);
 
 /* sub: whether to allow subclasses/interfaces
    allow = 0: allow all classes and interfaces

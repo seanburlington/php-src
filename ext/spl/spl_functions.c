@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.36 2006/06/04 10:31:58 helly Exp $ */
+/* $Id: spl_functions.c,v 1.37 2006/07/20 21:21:19 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -95,14 +95,9 @@ void spl_register_functions(zend_class_entry * class_entry, zend_function_entry 
 /* }}} */
 
 /* {{{ spl_register_property */
-void spl_register_property( zend_class_entry * class_entry, char *prop_name, zval *prop_val, int prop_flags TSRMLS_DC)
+void spl_register_property( zend_class_entry * class_entry, char *prop_name, int prop_name_len, int prop_flags TSRMLS_DC)
 {
-	if (!prop_val) {
-		INIT_PZVAL(prop_val);
-		prop_val->type = IS_NULL;
-	}
-
-	zend_declare_property(class_entry, prop_name, strlen(prop_name), prop_val, prop_flags TSRMLS_CC);
+	zend_declare_property_null(class_entry, prop_name, prop_name_len, prop_flags TSRMLS_CC);
 }
 /* }}} */
 

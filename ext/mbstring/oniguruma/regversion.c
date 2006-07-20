@@ -1,10 +1,6 @@
-Oniguruma LICENSE
------------------
-
-When this software is partly used or it is distributed with Ruby, 
-this of Ruby follows the license of Ruby.
-It follows the BSD license in the case of the one except for it.
-
+/**********************************************************************
+  regversion.c -  Oniguruma (regular expression library)
+**********************************************************************/
 /*-
  * Copyright (c) 2002-2006  K.Kosako  <sndgk393 AT ybb DOT ne DOT jp>
  * All rights reserved.
@@ -30,3 +26,30 @@ It follows the BSD license in the case of the one except for it.
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+
+#include "oniguruma.h"
+#include <stdio.h>
+
+extern const char*
+onig_version(void)
+{
+  static char s[12];
+
+  sprintf(s, "%d.%d.%d",
+          ONIGURUMA_VERSION_MAJOR,
+          ONIGURUMA_VERSION_MINOR,
+          ONIGURUMA_VERSION_TEENY);
+  return s;
+}
+
+extern const char*
+onig_copyright(void)
+{
+  static char s[58];
+
+  sprintf(s, "Oniguruma %d.%d.%d : Copyright (C) 2002-2006 K.Kosako",
+          ONIGURUMA_VERSION_MAJOR,
+          ONIGURUMA_VERSION_MINOR,
+          ONIGURUMA_VERSION_TEENY);
+  return s;
+}

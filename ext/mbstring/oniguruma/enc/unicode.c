@@ -1,8 +1,8 @@
 /**********************************************************************
-  utf8.c -  Oniguruma (regular expression library)
+  unicode.c -  Oniguruma (regular expression library)
 **********************************************************************/
 /*-
- * Copyright (c) 2002-2006  K.Kosako  <sndgk393 AT ybb DOT ne DOT jp>
+ * Copyright (c) 2002-2004  K.Kosako  <sndgk393 AT ybb DOT ne DOT jp>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,322 +29,51 @@
 
 #include "regenc.h"
 
-#define USE_INVALID_CODE_SCHEME
 
-#ifdef USE_INVALID_CODE_SCHEME
-/* virtual codepoint values for invalid encoding byte 0xfe and 0xff */
-#define INVALID_CODE_FE   0xfffffffe
-#define INVALID_CODE_FF   0xffffffff
-#define VALID_CODE_LIMIT  0x7fffffff
-#endif
-
-#define utf8_islead(c)     ((UChar )((c) & 0xc0) != 0x80)
-
-static const int EncLen_UTF8[] = {
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-  3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-  4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 1, 1
+const unsigned short OnigEnc_Unicode_ISO_8859_1_CtypeTable[256] = {
+  0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008,
+  0x2008, 0x228c, 0x2289, 0x2288, 0x2288, 0x2288, 0x2008, 0x2008,
+  0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008,
+  0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008, 0x2008,
+  0x2284, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0,
+  0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0,
+  0x38b0, 0x38b0, 0x38b0, 0x38b0, 0x38b0, 0x38b0, 0x38b0, 0x38b0,
+  0x38b0, 0x38b0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x21a0,
+  0x21a0, 0x3ca2, 0x3ca2, 0x3ca2, 0x3ca2, 0x3ca2, 0x3ca2, 0x34a2,
+  0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2,
+  0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2, 0x34a2,
+  0x34a2, 0x34a2, 0x34a2, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x31a0,
+  0x21a0, 0x38e2, 0x38e2, 0x38e2, 0x38e2, 0x38e2, 0x38e2, 0x30e2,
+  0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2,
+  0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2, 0x30e2,
+  0x30e2, 0x30e2, 0x30e2, 0x21a0, 0x21a0, 0x21a0, 0x21a0, 0x2008,
+  0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0288, 0x0008, 0x0008,
+  0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008,
+  0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008,
+  0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008,
+  0x0284, 0x01a0, 0x00a0, 0x00a0, 0x00a0, 0x00a0, 0x00a0, 0x00a0,
+  0x00a0, 0x00a0, 0x10e2, 0x01a0, 0x00a0, 0x00a8, 0x00a0, 0x00a0,
+  0x00a0, 0x00a0, 0x10a0, 0x10a0, 0x00a0, 0x10e2, 0x00a0, 0x01a0,
+  0x00a0, 0x10a0, 0x10e2, 0x01a0, 0x10a0, 0x10a0, 0x10a0, 0x01a0,
+  0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2,
+  0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2,
+  0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x00a0,
+  0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x14a2, 0x10e2,
+  0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2,
+  0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2,
+  0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x00a0,
+  0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2, 0x10e2
 };
 
-static int
-utf8_mbc_enc_len(const UChar* p)
-{
-  return EncLen_UTF8[*p];
-}
-
-static int
-utf8_is_mbc_newline(const UChar* p, const UChar* end)
-{
-  if (p < end) {
-    if (*p == 0x0a) return 1;
-
-#ifdef USE_UNICODE_ALL_LINE_TERMINATORS
-    if (*p == 0x0d) return 1;
-    if (p + 1 < end) {
-      if (*(p+1) == 0x85 && *p == 0xc2) /* U+0085 */
-	return 1;
-      if (p + 2 < end) {
-	if ((*(p+2) == 0xa8 || *(p+2) == 0xa9)
-	    && *(p+1) == 0x80 && *p == 0xe2)  /* U+2028, U+2029 */
-	  return 1;
-      }
-    }
+static const OnigCodePoint CRAlnum[] = {
+#ifdef USE_UNICODE_FULL_RANGE_CTYPE
+  414,
+#else
+  9,
 #endif
-  }
-
-  return 0;
-}
-
-static OnigCodePoint
-utf8_mbc_to_code(const UChar* p, const UChar* end)
-{
-  int c, len;
-  OnigCodePoint n;
-
-  len = enc_len(ONIG_ENCODING_UTF8, p);
-  c = *p++;
-  if (len > 1) {
-    len--;
-    n = c & ((1 << (6 - len)) - 1);
-    while (len--) {
-      c = *p++;
-      n = (n << 6) | (c & ((1 << 6) - 1));
-    }
-    return n;
-  }
-  else {
-#ifdef USE_INVALID_CODE_SCHEME
-    if (c > 0xfd) {
-      return ((c == 0xfe) ? INVALID_CODE_FE : INVALID_CODE_FF);
-    }
-#endif
-    return (OnigCodePoint )c;
-  }
-}
-
-static int
-utf8_code_to_mbclen(OnigCodePoint code)
-{
-  if      ((code & 0xffffff80) == 0) return 1;
-  else if ((code & 0xfffff800) == 0) {
-    if (code <= 0xff && code >= 0xfe)
-      return 1;
-    return 2;
-  }
-  else if ((code & 0xffff0000) == 0) return 3;
-  else if ((code & 0xffe00000) == 0) return 4;
-  else if ((code & 0xfc000000) == 0) return 5;
-  else if ((code & 0x80000000) == 0) return 6;
-#ifdef USE_INVALID_CODE_SCHEME
-  else if (code == INVALID_CODE_FE) return 1;
-  else if (code == INVALID_CODE_FF) return 1;
-#endif
-  else
-    return ONIGENCERR_TOO_BIG_WIDE_CHAR_VALUE;
-}
-
-#if 0
-static int
-utf8_code_to_mbc_first(OnigCodePoint code)
-{
-  if ((code & 0xffffff80) == 0)
-    return code;
-  else {
-    if ((code & 0xfffff800) == 0)
-      return ((code>>6)& 0x1f) | 0xc0;
-    else if ((code & 0xffff0000) == 0)
-      return ((code>>12) & 0x0f) | 0xe0;
-    else if ((code & 0xffe00000) == 0)
-      return ((code>>18) & 0x07) | 0xf0;
-    else if ((code & 0xfc000000) == 0)
-      return ((code>>24) & 0x03) | 0xf8;
-    else if ((code & 0x80000000) == 0)
-      return ((code>>30) & 0x01) | 0xfc;
-    else {
-      return ONIGENCERR_TOO_BIG_WIDE_CHAR_VALUE;
-    }
-  }
-}
-#endif
-
-static int
-utf8_code_to_mbc(OnigCodePoint code, UChar *buf)
-{
-#define UTF8_TRAILS(code, shift) (UChar )((((code) >> (shift)) & 0x3f) | 0x80)
-#define UTF8_TRAIL0(code)        (UChar )(((code) & 0x3f) | 0x80)
-
-  if ((code & 0xffffff80) == 0) {
-    *buf = (UChar )code;
-    return 1;
-  }
-  else {
-    UChar *p = buf;
-
-    if ((code & 0xfffff800) == 0) {
-      *p++ = (UChar )(((code>>6)& 0x1f) | 0xc0);
-    }
-    else if ((code & 0xffff0000) == 0) {
-      *p++ = (UChar )(((code>>12) & 0x0f) | 0xe0);
-      *p++ = UTF8_TRAILS(code, 6);
-    }
-    else if ((code & 0xffe00000) == 0) {
-      *p++ = (UChar )(((code>>18) & 0x07) | 0xf0);
-      *p++ = UTF8_TRAILS(code, 12);
-      *p++ = UTF8_TRAILS(code,  6);
-    }
-    else if ((code & 0xfc000000) == 0) {
-      *p++ = (UChar )(((code>>24) & 0x03) | 0xf8);
-      *p++ = UTF8_TRAILS(code, 18);
-      *p++ = UTF8_TRAILS(code, 12);
-      *p++ = UTF8_TRAILS(code,  6);
-    }
-    else if ((code & 0x80000000) == 0) {
-      *p++ = (UChar )(((code>>30) & 0x01) | 0xfc);
-      *p++ = UTF8_TRAILS(code, 24);
-      *p++ = UTF8_TRAILS(code, 18);
-      *p++ = UTF8_TRAILS(code, 12);
-      *p++ = UTF8_TRAILS(code,  6);
-    }
-#ifdef USE_INVALID_CODE_SCHEME
-    else if (code == INVALID_CODE_FE) {
-      *p = 0xfe;
-      return 1;
-    }
-    else if (code == INVALID_CODE_FF) {
-      *p = 0xff;
-      return 1;
-    }
-#endif
-    else {
-      return ONIGENCERR_TOO_BIG_WIDE_CHAR_VALUE;
-    }
-
-    *p++ = UTF8_TRAIL0(code);
-    return p - buf;
-  }
-}
-
-static int
-utf8_mbc_to_normalize(OnigAmbigType flag, const UChar** pp, const UChar* end, UChar* lower)
-{
-  const UChar* p = *pp;
-
-  if (ONIGENC_IS_MBC_ASCII(p)) {
-    if (end > p + 1 &&
-        (flag & ONIGENC_AMBIGUOUS_MATCH_COMPOUND) != 0 &&
-	((*p == 's' && *(p+1) == 's') ||
-	 ((flag & ONIGENC_AMBIGUOUS_MATCH_ASCII_CASE) != 0 &&
-	  (*p == 'S' && *(p+1) == 'S')))) {
-      *lower++ = '\303';
-      *lower   = '\237';
-      (*pp) += 2;
-      return 2;
-    }
-
-    if ((flag & ONIGENC_AMBIGUOUS_MATCH_ASCII_CASE) != 0) {
-      *lower = ONIGENC_ASCII_CODE_TO_LOWER_CASE(*p);
-    }
-    else {
-      *lower = *p;
-    }
-    (*pp)++;
-    return 1; /* return byte length of converted char to lower */
-  }
-  else {
-    int len;
-
-    if (*p == 195) { /* 195 == '\303' */
-      int c = *(p + 1);
-      if (c >= 128) {
-        if (c <= (UChar )'\236' &&  /* upper */
-            (flag & ONIGENC_AMBIGUOUS_MATCH_NONASCII_CASE) != 0) {
-          if (c != (UChar )'\227') {
-            *lower++ = *p;
-            *lower   = (UChar )(c + 32);
-            (*pp) += 2;
-            return 2;
-          }
-        }
-#if 0
-        else if (c == (UChar )'\237' &&
-                 (flag & ONIGENC_AMBIGUOUS_MATCH_COMPOUND) != 0) {
-          *lower++ = '\303';
-          *lower   = '\237';
-          (*pp) += 2;
-          return 2;
-        }
-#endif
-      }
-    }
-
-    len = enc_len(ONIG_ENCODING_UTF8, p);
-    if (lower != p) {
-      int i;
-      for (i = 0; i < len; i++) {
-	*lower++ = *p++;
-      }
-    }
-    (*pp) += len;
-    return len; /* return byte length of converted char to lower */
-  }
-}
-
-static int
-utf8_is_mbc_ambiguous(OnigAmbigType flag, const UChar** pp, const UChar* end)
-{
-  const UChar* p = *pp;
-
-  if (ONIGENC_IS_MBC_ASCII(p)) {
-    if (end > p + 1 &&
-        (flag & ONIGENC_AMBIGUOUS_MATCH_COMPOUND) != 0 &&
-	((*p == 's' && *(p+1) == 's') ||
-	 ((flag & ONIGENC_AMBIGUOUS_MATCH_ASCII_CASE) != 0 &&
-	  (*p == 'S' && *(p+1) == 'S')))) {
-      (*pp) += 2;
-      return TRUE;
-    }
-
-    (*pp)++;
-    if ((flag & ONIGENC_AMBIGUOUS_MATCH_ASCII_CASE) != 0) {
-      return ONIGENC_IS_ASCII_CODE_CASE_AMBIG(*p);
-    }
-  }
-  else {
-    (*pp) += enc_len(ONIG_ENCODING_UTF8, p);
-
-    if (*p == 195) { /* 195 == '\303' */
-      int c = *(p + 1);
-      if (c >= 128) {
-        if ((flag & ONIGENC_AMBIGUOUS_MATCH_NONASCII_CASE) != 0) {
-          if (c <= (UChar )'\236') { /* upper */
-            if (c == (UChar )'\227') return FALSE;
-            return TRUE;
-          }
-          else if (c >= (UChar )'\240' && c <= (UChar )'\276') { /* lower */
-            if (c == (UChar )'\267') return FALSE;
-            return TRUE;
-          }
-        }
-        else if (c == (UChar )'\237' &&
-                 (flag & ONIGENC_AMBIGUOUS_MATCH_COMPOUND) != 0) {
-	  return TRUE;
-        }
-      }
-    }
-  }
-
-  return FALSE;
-}
-
-
-static const OnigCodePoint EmptyRange[] = { 0 };
-
-static const OnigCodePoint SBAlnum[] = {
-  3,
   0x0030, 0x0039,
   0x0041, 0x005a,
-  0x0061, 0x007a
-};
-
-static const OnigCodePoint MBAlnum[] = {
-#ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  411,
-#else
-  6,
-#endif
+  0x0061, 0x007a,
   0x00aa, 0x00aa,
   0x00b5, 0x00b5,
   0x00ba, 0x00ba,
@@ -759,20 +488,16 @@ static const OnigCodePoint MBAlnum[] = {
   0x2f800, 0x2fa1d,
   0xe0100, 0xe01ef
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBAlnum */
+}; /* end of CRAlnum */
 
-static const OnigCodePoint SBAlpha[] = {
-  2,
-  0x0041, 0x005a,
-  0x0061, 0x007a
-};
-
-static const OnigCodePoint MBAlpha[] = {
+static const OnigCodePoint CRAlpha[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  394,
+  396,
 #else
-  6,
+  8,
 #endif
+  0x0041, 0x005a,
+  0x0061, 0x007a,
   0x00aa, 0x00aa,
   0x00b5, 0x00b5,
   0x00ba, 0x00ba,
@@ -1170,20 +895,16 @@ static const OnigCodePoint MBAlpha[] = {
   0x2f800, 0x2fa1d,
   0xe0100, 0xe01ef
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBAlpha */
+}; /* end of CRAlpha */
 
-static const OnigCodePoint SBBlank[] = {
-  2,
-  0x0009, 0x0009,
-  0x0020, 0x0020
-};
-
-static const OnigCodePoint MBBlank[] = {
+static const OnigCodePoint CRBlank[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  7,
+  9,
 #else
-  1,
+  3,
 #endif
+  0x0009, 0x0009,
+  0x0020, 0x0020,
   0x00a0, 0x00a0
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
   ,
@@ -1194,21 +915,16 @@ static const OnigCodePoint MBBlank[] = {
   0x205f, 0x205f,
   0x3000, 0x3000
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBBlank */
+}; /* end of CRBlank */
 
-static const OnigCodePoint SBCntrl[] = {
-  2,
-  0x0000, 0x001f,
-  0x007f, 0x007f
-};
-
-static const OnigCodePoint MBCntrl[] = {
+static const OnigCodePoint CRCntrl[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  18,
+  19,
 #else
-  2,
+  3,
 #endif
-  0x0080, 0x009f,
+  0x0000, 0x001f,
+  0x007f, 0x009f,
   0x00ad, 0x00ad
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
   ,
@@ -1229,20 +945,17 @@ static const OnigCodePoint MBCntrl[] = {
   0xf0000, 0xffffd,
   0x100000, 0x10fffd
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBCntrl */
+}; /* end of CRCntrl */
 
-static const OnigCodePoint SBDigit[] = {
-  1,
-  0x0030, 0x0039
-};
-
-static const OnigCodePoint MBDigit[] = {
+static const OnigCodePoint CRDigit[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  22,
+  23,
 #else
-  0
+  1,
 #endif
+  0x0030, 0x0039
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
+  ,
   0x0660, 0x0669,
   0x06f0, 0x06f9,
   0x0966, 0x096f,
@@ -1266,19 +979,15 @@ static const OnigCodePoint MBDigit[] = {
   0x104a0, 0x104a9,
   0x1d7ce, 0x1d7ff
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBDigit */
+}; /* end of CRDigit */
 
-static const OnigCodePoint SBGraph[] = {
-  1,
-  0x0021, 0x007e
-};
-
-static const OnigCodePoint MBGraph[] = {
+static const OnigCodePoint CRGraph[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  404,
+  405,
 #else
-  1,
+  2,
 #endif
+  0x0021, 0x007e,
   0x00a1, 0x0236
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
   ,
@@ -1686,19 +1395,15 @@ static const OnigCodePoint MBGraph[] = {
   0xf0000, 0xffffd,
   0x100000, 0x10fffd
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBGraph */
+}; /* end of CRGraph */
 
-static const OnigCodePoint SBLower[] = {
-  1,
-  0x0061, 0x007a
-};
-
-static const OnigCodePoint MBLower[] = {
+static const OnigCodePoint CRLower[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  423,
+  424,
 #else
-  5,
+  6,
 #endif
+  0x0061, 0x007a,
   0x00aa, 0x00aa,
   0x00b5, 0x00b5,
   0x00ba, 0x00ba,
@@ -2125,20 +1830,16 @@ static const OnigCodePoint MBLower[] = {
   0x1d7aa, 0x1d7c2,
   0x1d7c4, 0x1d7c9
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBLower */
+}; /* end of CRLower */
 
-static const OnigCodePoint SBPrint[] = {
-  2,
-  0x0009, 0x000d,
-  0x0020, 0x007e
-};
-
-static const OnigCodePoint MBPrint[] = {
+static const OnigCodePoint CRPrint[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  403,
+  405,
 #else
-  2,
+  4,
 #endif
+  0x0009, 0x000d,
+  0x0020, 0x007e,
   0x0085, 0x0085,
   0x00a0, 0x0236
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
@@ -2545,10 +2246,14 @@ static const OnigCodePoint MBPrint[] = {
   0xf0000, 0xffffd,
   0x100000, 0x10fffd
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBPrint */
+}; /* end of CRPrint */
 
-static const OnigCodePoint SBPunct[] = {
-  9,
+static const OnigCodePoint CRPunct[] = {
+#ifdef USE_UNICODE_FULL_RANGE_CTYPE
+  86,
+#else
+  14,
+#endif
   0x0021, 0x0023,
   0x0025, 0x002a,
   0x002c, 0x002f,
@@ -2557,15 +2262,7 @@ static const OnigCodePoint SBPunct[] = {
   0x005b, 0x005d,
   0x005f, 0x005f,
   0x007b, 0x007b,
-  0x007d, 0x007d
-}; /* end of SBPunct */
-
-static const OnigCodePoint MBPunct[] = {
-#ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  77,
-#else
-  5,
-#endif
+  0x007d, 0x007d,
   0x00a1, 0x00a1,
   0x00ab, 0x00ab,
   0x00b7, 0x00b7,
@@ -2646,20 +2343,16 @@ static const OnigCodePoint MBPunct[] = {
   0x10100, 0x10101,
   0x1039f, 0x1039f
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBPunct */
+}; /* end of CRPunct */
 
-static const OnigCodePoint SBSpace[] = {
-  2,
-  0x0009, 0x000d,
-  0x0020, 0x0020
-};
-
-static const OnigCodePoint MBSpace[] = {
+static const OnigCodePoint CRSpace[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  9,
+  11,
 #else
-  2,
+  4,
 #endif
+  0x0009, 0x000d,
+  0x0020, 0x0020,
   0x0085, 0x0085,
   0x00a0, 0x00a0
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
@@ -2672,19 +2365,15 @@ static const OnigCodePoint MBSpace[] = {
   0x205f, 0x205f,
   0x3000, 0x3000
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBSpace */
+}; /* end of CRSpace */
 
-static const OnigCodePoint SBUpper[] = {
-  1,
-  0x0041, 0x005a
-};
-
-static const OnigCodePoint MBUpper[] = {
+static const OnigCodePoint CRUpper[] = {
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  420,
+  421,
 #else
-  2,
+  3,
 #endif
+  0x0041, 0x005a,
   0x00c0, 0x00d6,
   0x00d8, 0x00de
 #ifdef USE_UNICODE_FULL_RANGE_CTYPE
@@ -3108,34 +2797,38 @@ static const OnigCodePoint MBUpper[] = {
   0x1d756, 0x1d76e,
   0x1d790, 0x1d7a8
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBUpper */
+}; /* end of CRUpper */
 
-static const OnigCodePoint SBXDigit[] = {
+static const OnigCodePoint CRXDigit[] = {
+#ifdef USE_UNICODE_FULL_RANGE_CTYPE
   3,
+#else
+  3,
+#endif
   0x0030, 0x0039,
   0x0041, 0x0046,
   0x0061, 0x0066
 };
 
-static const OnigCodePoint SBASCII[] = {
+static const OnigCodePoint CRASCII[] = {
+#ifdef USE_UNICODE_FULL_RANGE_CTYPE
   1,
+#else
+  1,
+#endif
   0x0000, 0x007f
 };
 
-static const OnigCodePoint SBWord[] = {
-  4,
+static const OnigCodePoint CRWord[] = {
+#ifdef USE_UNICODE_FULL_RANGE_CTYPE
+  436,
+#else
+  12,
+#endif
   0x0030, 0x0039,
   0x0041, 0x005a,
   0x005f, 0x005f,
-  0x0061, 0x007a
-};
-
-static const OnigCodePoint MBWord[] = {
-#ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  432,
-#else
-  8,
-#endif
+  0x0061, 0x007a,
   0x00aa, 0x00aa,
   0x00b2, 0x00b3,
   0x00b5, 0x00b5,
@@ -3572,82 +3265,12 @@ static const OnigCodePoint MBWord[] = {
   0x2f800, 0x2fa1d,
   0xe0100, 0xe01ef
 #endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-}; /* end of MBWord */
+}; /* end of CRWord */
 
 
-static int
-utf8_get_ctype_code_range(int ctype,
-                          const OnigCodePoint* sbr[], const OnigCodePoint* mbr[])
+extern int
+onigenc_unicode_is_code_ctype(OnigCodePoint code, unsigned int ctype)
 {
-#define CR_SET(sbl,mbl) do { \
-  *sbr = sbl; \
-  *mbr = mbl; \
-} while (0)
-
-#define CR_SB_SET(sbl) do { \
-  *sbr = sbl; \
-  *mbr = EmptyRange; \
-} while (0)
-
-  switch (ctype) {
-  case ONIGENC_CTYPE_ALPHA:
-    CR_SET(SBAlpha, MBAlpha);
-    break;
-  case ONIGENC_CTYPE_BLANK:
-    CR_SET(SBBlank, MBBlank);
-    break;
-  case ONIGENC_CTYPE_CNTRL:
-    CR_SET(SBCntrl, MBCntrl);
-    break;
-  case ONIGENC_CTYPE_DIGIT:
-    CR_SET(SBDigit, MBDigit);
-    break;
-  case ONIGENC_CTYPE_GRAPH:
-    CR_SET(SBGraph, MBGraph);
-    break;
-  case ONIGENC_CTYPE_LOWER:
-    CR_SET(SBLower, MBLower);
-    break;
-  case ONIGENC_CTYPE_PRINT:
-    CR_SET(SBPrint, MBPrint);
-    break;
-  case ONIGENC_CTYPE_PUNCT:
-    CR_SET(SBPunct, MBPunct);
-    break;
-  case ONIGENC_CTYPE_SPACE:
-    CR_SET(SBSpace, MBSpace);
-    break;
-  case ONIGENC_CTYPE_UPPER:
-    CR_SET(SBUpper, MBUpper);
-    break;
-  case ONIGENC_CTYPE_XDIGIT:
-    CR_SB_SET(SBXDigit);
-    break;
-  case ONIGENC_CTYPE_WORD:
-    CR_SET(SBWord, MBWord);
-    break;
-  case ONIGENC_CTYPE_ASCII:
-    CR_SB_SET(SBASCII);
-    break;
-  case ONIGENC_CTYPE_ALNUM:
-    CR_SET(SBAlnum, MBAlnum);
-    break;
-
-  default:
-    return ONIGENCERR_TYPE_BUG;
-    break;
-  }
-
-  return 0;
-}
-
-static int
-utf8_is_code_ctype(OnigCodePoint code, unsigned int ctype)
-{
-#ifdef USE_UNICODE_FULL_RANGE_CTYPE
-  const OnigCodePoint *range;
-#endif
-
   if (code < 256) {
     return ONIGENC_IS_UNICODE_ISO_8859_1_CTYPE(code, ctype);
   }
@@ -3656,46 +3279,46 @@ utf8_is_code_ctype(OnigCodePoint code, unsigned int ctype)
 
   switch (ctype) {
   case ONIGENC_CTYPE_ALPHA:
-    range = MBAlpha;
+    return onig_is_in_code_range((UChar* )CRAlpha, code);
     break;
   case ONIGENC_CTYPE_BLANK:
-    range = MBBlank;
+    return onig_is_in_code_range((UChar* )CRBlank, code);
     break;
   case ONIGENC_CTYPE_CNTRL:
-    range = MBCntrl;
+    return onig_is_in_code_range((UChar* )CRCntrl, code);
     break;
   case ONIGENC_CTYPE_DIGIT:
-    range = MBDigit;
+    return onig_is_in_code_range((UChar* )CRDigit, code);
     break;
   case ONIGENC_CTYPE_GRAPH:
-    range = MBGraph;
+    return onig_is_in_code_range((UChar* )CRGraph, code);
     break;
   case ONIGENC_CTYPE_LOWER:
-    range = MBLower;
+    return onig_is_in_code_range((UChar* )CRLower, code);
     break;
   case ONIGENC_CTYPE_PRINT:
-    range = MBPrint;
+    return onig_is_in_code_range((UChar* )CRPrint, code);
     break;
   case ONIGENC_CTYPE_PUNCT:
-    range = MBPunct;
+    return onig_is_in_code_range((UChar* )CRPunct, code);
     break;
   case ONIGENC_CTYPE_SPACE:
-    range = MBSpace;
+    return onig_is_in_code_range((UChar* )CRSpace, code);
     break;
   case ONIGENC_CTYPE_UPPER:
-    range = MBUpper;
+    return onig_is_in_code_range((UChar* )CRUpper, code);
     break;
   case ONIGENC_CTYPE_XDIGIT:
     return FALSE;
     break;
   case ONIGENC_CTYPE_WORD:
-    range = MBWord;
+    return onig_is_in_code_range((UChar* )CRWord, code);
     break;
   case ONIGENC_CTYPE_ASCII:
     return FALSE;
     break;
   case ONIGENC_CTYPE_ALNUM:
-    range = MBAlnum;
+    return onig_is_in_code_range((UChar* )CRAlnum, code);
     break;
   case ONIGENC_CTYPE_NEWLINE:
     return FALSE;
@@ -3706,59 +3329,75 @@ utf8_is_code_ctype(OnigCodePoint code, unsigned int ctype)
     break;
   }
 
-  return onig_is_in_code_range((UChar* )range, code);
-
 #else
 
   if ((ctype & ONIGENC_CTYPE_WORD) != 0) {
-#ifdef USE_INVALID_CODE_SCHEME
-    if (code <= VALID_CODE_LIMIT)
-#endif
-      return TRUE;
+    return TRUE;
   }
-#endif /* USE_UNICODE_FULL_RANGE_CTYPE */
-
   return FALSE;
+#endif /* USE_UNICODE_FULL_RANGE_CTYPE */
 }
 
-static UChar*
-utf8_left_adjust_char_head(const UChar* start, const UChar* s)
+extern int
+onigenc_unicode_get_ctype_code_range(int ctype,
+		  const OnigCodePoint* sbr[], const OnigCodePoint* mbr[])
 {
-  const UChar *p;
+  static const OnigCodePoint EmptyRange[] = { 0 };
 
-  if (s <= start) return (UChar* )s;
-  p = s;
+#define CR_SET(list) do { \
+  *mbr = list; \
+} while (0)
 
-  while (!utf8_islead(*p) && p > start) p--;
-  return (UChar* )p;
+  *sbr = EmptyRange;
+
+  switch (ctype) {
+  case ONIGENC_CTYPE_ALPHA:
+    CR_SET(CRAlpha);
+    break;
+  case ONIGENC_CTYPE_BLANK:
+    CR_SET(CRBlank);
+    break;
+  case ONIGENC_CTYPE_CNTRL:
+    CR_SET(CRCntrl);
+    break;
+  case ONIGENC_CTYPE_DIGIT:
+    CR_SET(CRDigit);
+    break;
+  case ONIGENC_CTYPE_GRAPH:
+    CR_SET(CRGraph);
+    break;
+  case ONIGENC_CTYPE_LOWER:
+    CR_SET(CRLower);
+    break;
+  case ONIGENC_CTYPE_PRINT:
+    CR_SET(CRPrint);
+    break;
+  case ONIGENC_CTYPE_PUNCT:
+    CR_SET(CRPunct);
+    break;
+  case ONIGENC_CTYPE_SPACE:
+    CR_SET(CRSpace);
+    break;
+  case ONIGENC_CTYPE_UPPER:
+    CR_SET(CRUpper);
+    break;
+  case ONIGENC_CTYPE_XDIGIT:
+    CR_SET(CRXDigit);
+    break;
+  case ONIGENC_CTYPE_WORD:
+    CR_SET(CRWord);
+    break;
+  case ONIGENC_CTYPE_ASCII:
+    CR_SET(CRASCII);
+    break;
+  case ONIGENC_CTYPE_ALNUM:
+    CR_SET(CRAlnum);
+    break;
+
+  default:
+    return ONIGENCERR_TYPE_BUG;
+    break;
+  }
+
+  return 0;
 }
-
-OnigEncodingType OnigEncodingUTF8 = {
-  utf8_mbc_enc_len,
-  "UTF-8",     /* name */
-  6,           /* max byte length */
-  1,           /* min byte length */
-  (ONIGENC_AMBIGUOUS_MATCH_ASCII_CASE | 
-   ONIGENC_AMBIGUOUS_MATCH_NONASCII_CASE | 
-   ONIGENC_AMBIGUOUS_MATCH_COMPOUND),
-  {
-      (OnigCodePoint )'\\'                       /* esc */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar '.'  */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anytime '*'  */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* zero or one time '?' */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* one or more time '+' */
-    , (OnigCodePoint )ONIG_INEFFECTIVE_META_CHAR /* anychar anytime */
-  },
-  utf8_is_mbc_newline,
-  utf8_mbc_to_code,
-  utf8_code_to_mbclen,
-  utf8_code_to_mbc,
-  utf8_mbc_to_normalize,
-  utf8_is_mbc_ambiguous,
-  onigenc_iso_8859_1_get_all_pair_ambig_codes,
-  onigenc_ess_tsett_get_all_comp_ambig_codes,
-  utf8_is_code_ctype,
-  utf8_get_ctype_code_range,
-  utf8_left_adjust_char_head,
-  onigenc_always_true_is_allowed_reverse_match
-};

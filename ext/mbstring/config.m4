@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.58.2.4.2.1 2006/05/07 16:56:07 rasmus Exp $
+dnl $Id: config.m4,v 1.58.2.4.2.2 2006/07/20 15:45:06 masugata Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -149,6 +149,7 @@ esac
       oniguruma/enc/utf16_le.c
       oniguruma/enc/utf32_be.c
       oniguruma/enc/utf32_le.c
+      oniguruma/enc/gb18030.c
     ])
   fi
 ])

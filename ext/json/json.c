@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.3 2006/07/20 08:56:57 tony2001 Exp $ */
+/* $Id: json.c,v 1.9.2.4 2006/07/20 09:33:28 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,7 +136,8 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) {
     }
 
     if (myht && myht->nApplyCount > 1) {
-        php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "recursion detected");
+        php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");
+        smart_str_appendl(buf, "null", 4);
         return;
     }
 

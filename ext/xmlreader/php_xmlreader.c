@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.35 2006/07/21 00:57:14 rrichards Exp $ */
+/* $Id: php_xmlreader.c,v 1.36 2006/07/21 02:09:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -492,7 +492,7 @@ static void php_xmlreader_no_arg_string(INTERNAL_FUNCTION_PARAMETERS, xmlreader_
 		xmlFree(retchar);
 		return;
 	} else {
-		RETVAL_EMPTY_STRING();
+		RETURN_EMPTY_TEXT();
 	}
 }
 /* }}} */

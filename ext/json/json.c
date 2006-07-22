@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.13 2006/07/20 09:33:15 tony2001 Exp $ */
+/* $Id: json.c,v 1.14 2006/07/22 15:23:23 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 /* If you declare any globals in php_json.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(json)
 */
-static char digits[] = "0123456789abcdef";
+static const char digits[] = "0123456789abcdef";
 
 /* {{{ json_functions[]
  *

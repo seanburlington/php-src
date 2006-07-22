@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.14 2006/07/22 12:54:05 nlopess Exp $ */
+/* $Id: sanitizing_filters.c,v 1.15 2006/07/22 13:01:03 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -303,13 +303,13 @@ void php_filter_number_float(PHP_INPUT_FILTER_PARAM_DECL)
 
 	/* depending on flags, strip '.', 'e', ",", "'" */
 	if (flags & FILTER_FLAG_ALLOW_FRACTION) {
-		filter_map_update(&map, 2, (unsigned char *) ".");
+		filter_map_update(&map, 2, (const unsigned char *) ".");
 	}
 	if (flags & FILTER_FLAG_ALLOW_THOUSAND) {
-		filter_map_update(&map, 3,  (unsigned char *) ",");
+		filter_map_update(&map, 3,  (const unsigned char *) ",");
 	}
 	if (flags & FILTER_FLAG_ALLOW_SCIENTIFIC) {
-		filter_map_update(&map, 4,  (unsigned char *) "eE");
+		filter_map_update(&map, 4,  (const unsigned char *) "eE");
 	}
 	filter_map_apply(value, &map);
 }

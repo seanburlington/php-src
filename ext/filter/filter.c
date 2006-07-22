@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.56 2006/07/19 07:18:25 tony2001 Exp $ */
+/* $Id: filter.c,v 1.57 2006/07/22 09:51:50 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.56 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.57 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -629,8 +629,8 @@ PHP_FUNCTION(input_get)
 }
 /* }}} */
 
-/* {{{ proto mixed input_get_args(array definition, constant type [, array data])
- * Returns an array with all arguments defined in 'definition'.
+/* {{{ proto mixed input_get_args(constant type, array definition, [, array data])
+ * Returns an array with all arguments defined in 'definition'. INPUT_DATA will use the data given as last argument. 
  */
 PHP_FUNCTION(input_get_args)
 {
@@ -656,7 +656,7 @@ PHP_FUNCTION(input_get_args)
 	zval       *array_ptr = NULL;
 	zval **element;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|a", &args_array, &args_from, &values) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la|a", &args_from, &args_array, &values) == FAILURE) {
 		RETURN_FALSE;
 	}
 

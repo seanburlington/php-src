@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.2 2006/01/31 08:59:06 omar Exp $
+// $Id: config.w32,v 1.3 2006/07/22 15:32:17 rrichards Exp $
 // vim:ft=javascript
 
-ARG_WITH("json", "JavaScript Object Serialization support", "no");
+ARG_ENABLE("json", "JavaScript Object Serialization support", "yes");
 
 if (PHP_JSON != "no") {
 	EXTENSION('json', 'json.c', PHP_JSON_SHARED, "");

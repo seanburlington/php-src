@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.4 2006/07/22 09:09:06 pajoye Exp $ */
+/* $Id: filter.c,v 1.52.2.5 2006/07/22 09:39:24 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.4 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.5 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -648,7 +648,7 @@ PHP_FUNCTION(input_get_args)
 	zval       *array_ptr = NULL;
 	zval **element;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la|a", &args_array, &args_from, &values) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la|a",  &args_from, &args_array, &values) == FAILURE) {
 		RETURN_FALSE;
 	}
 

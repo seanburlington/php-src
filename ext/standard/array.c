@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.6 2006/07/22 16:58:06 andrei Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.7 2006/07/22 16:58:39 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4522,7 +4522,7 @@ PHP_FUNCTION(array_chunk)
 /* }}} */
 
 /* {{{ proto array array_combine(array keys, array values)
-   Creates an array by using the elements of the first parameter as keys and the elements of the second as the corresponding keys */
+   Creates an array by using the elements of the first parameter as keys and the elements of the second as the corresponding values */
 PHP_FUNCTION(array_combine)
 {
 	zval *values, *keys;

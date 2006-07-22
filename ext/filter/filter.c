@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.2 2006/07/19 07:18:34 tony2001 Exp $ */
+/* $Id: filter.c,v 1.52.2.3 2006/07/22 08:58:03 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.2 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.3 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -621,8 +621,8 @@ PHP_FUNCTION(input_get)
 }
 /* }}} */
 
-/* {{{ proto mixed input_get_args(array definition, constant type [, array data])
- * Returns an array with all arguments defined in 'definition'.
+/* {{{ proto mixed input_get_args(constant type, array definition, [, array data])
+ * Returns an array with all arguments defined in 'definition'. INPUT_DATA will use the data given as last argument.
  */
 PHP_FUNCTION(input_get_args)
 {

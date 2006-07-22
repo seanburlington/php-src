@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.57 2006/07/22 09:51:50 pajoye Exp $ */
+/* $Id: filter.c,v 1.58 2006/07/22 12:54:05 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@ ZEND_DECLARE_MODULE_GLOBALS(filter)
 #include "filter_private.h"
 
 typedef struct filter_list_entry {
-	char  *name;
+	const char *name;
 	int    id;
 	void (*function)(PHP_INPUT_FILTER_PARAM_DECL);
 } filter_list_entry;
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.57 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.58 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

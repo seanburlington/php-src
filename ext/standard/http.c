@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.20 2006/03/08 22:04:48 mike Exp $ */
+/* $Id: http.c,v 1.21 2006/07/23 06:05:23 helly Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -59,7 +59,8 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 		(key_type = zend_hash_get_current_key_ex(ht, &key, &key_len, &idx, 0, NULL)) != HASH_KEY_NON_EXISTANT;
 		zend_hash_move_forward(ht)
 	) {
-		if (key_type == HASH_KEY_IS_STRING && key_len && key.s[key_len-1] == '\0') {
+		if ((key_type == HASH_KEY_IS_STRING || key_type == HASH_KEY_IS_UNICODE)
+		&& key_len && key.s[key_len-1] == '\0') {
 			/* We don't want that trailing NULL */
 			key_len -= 1;
 		}

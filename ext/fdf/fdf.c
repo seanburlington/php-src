@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.89.2.2.2.3 2006/07/02 00:11:06 bjori Exp $ */
+/* $Id: fdf.c,v 1.89.2.2.2.4 2006/07/23 23:55:46 sniper Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -269,7 +269,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_fdf_enum_values, 0, 0, 2)
 ZEND_END_ARG_INFO()
 
 static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_fdf_header, 0)
+ZEND_BEGIN_ARG_INFO(arginfo_fdf_header, 0)
 ZEND_END_ARG_INFO()
 
 /* }}} */

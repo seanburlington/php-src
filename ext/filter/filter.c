@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.6 2006/07/22 12:49:36 nlopess Exp $ */
+/* $Id: filter.c,v 1.52.2.7 2006/07/24 03:58:41 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.6 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.7 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -790,7 +790,7 @@ PHP_FUNCTION(input_filters_list)
 
 	array_init(return_value);
 	for (i = 0; i < size; ++i) {
-		add_next_index_string(return_value, filter_list[i].name, 1);
+		add_next_index_string(return_value, (char *)filter_list[i].name, 1);
 	}
 }
 /* }}} */

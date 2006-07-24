@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.7 2006/07/22 16:58:39 andrei Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.8 2006/07/24 18:18:33 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4551,7 +4551,7 @@ PHP_FUNCTION(array_combine)
 		 zend_hash_get_current_data_ex(Z_ARRVAL_P(values), (void **)&entry_values, &pos_values) == SUCCESS) {
 		if (Z_TYPE_PP(entry_keys) == IS_STRING) {
 			zval_add_ref(entry_values);
-			add_assoc_zval_ex(return_value, Z_STRVAL_PP(entry_keys), Z_STRLEN_PP(entry_keys), *entry_values);
+			add_assoc_zval_ex(return_value, Z_STRVAL_PP(entry_keys), Z_STRLEN_PP(entry_keys)+1, *entry_values);
 		} else if (Z_TYPE_PP(entry_keys) == IS_LONG) {
 			zval_add_ref(entry_values);
 			add_index_zval(return_value, Z_LVAL_PP(entry_keys), *entry_values);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.8 2006/07/12 08:59:40 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.9 2006/07/24 18:03:44 helly Exp $ */
 
 #include <time.h>
 
@@ -1769,7 +1769,7 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 					if (Z_TYPE_P(data) == IS_OBJECT) {
 						char *class_name;
 
-						zend_unmangle_property_name_ex(str_key, str_key_len, &class_name, &prop_name);
+						zend_unmangle_property_name(str_key, str_key_len-1, &class_name, &prop_name);
 					} else {
 						prop_name = str_key;
 					}

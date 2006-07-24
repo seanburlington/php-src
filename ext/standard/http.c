@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.14.2.5 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: http.c,v 1.14.2.4.2.1 2006/07/24 18:03:45 helly Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -67,11 +67,11 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 			char *tmp;
 
 			zend_object *zobj = zend_objects_get_address(type TSRMLS_CC);
-			if (zend_check_property_access(zobj, key TSRMLS_CC) != SUCCESS) {
+			if (zend_check_property_access(zobj, key, key_len-1 TSRMLS_CC) != SUCCESS) {
 				/* private or protected property access outside of the class */
 				continue;
 			}
-			zend_unmangle_property_name_ex(key, key_len, &tmp, &key);
+			zend_unmangle_property_name(key, key_len-1, &tmp, &key);
 			key_len = strlen(key);		
 		}
 

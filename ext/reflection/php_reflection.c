@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.16 2006/07/25 14:06:52 iliaa Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.17 2006/07/25 14:44:53 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2625,8 +2625,8 @@ ZEND_METHOD(reflection_class, getStaticProperties)
 {
 	reflection_object *intern;
 	zend_class_entry *ce;
-        HashPosition pos;
-        zval **value;
+	HashPosition pos;
+	zval **value;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_class_ptr, 0);	
 	GET_REFLECTION_OBJECT_PTR(ce);
@@ -2656,7 +2656,7 @@ ZEND_METHOD(reflection_class, getStaticProperties)
 			}
 
 			zend_hash_update(Z_ARRVAL_P(return_value), key, key_len, value, sizeof(zval *), NULL);
-                }
+		}
 		zend_hash_move_forward_ex(CE_STATIC_MEMBERS(ce), &pos);
 	}
 }
@@ -4792,7 +4792,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.16 2006/07/25 14:06:52 iliaa Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.17 2006/07/25 14:44:53 mike Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

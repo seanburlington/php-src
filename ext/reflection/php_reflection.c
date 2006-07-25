@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.14 2006/07/24 18:03:44 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.15 2006/07/25 12:34:38 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3536,8 +3536,7 @@ ZEND_METHOD(reflection_class, isSubclassOf)
 			return;
 	}
 
-
-	RETURN_BOOL(instanceof_function(ce, class_ce TSRMLS_CC));
+	RETURN_BOOL((ce != class_ce && instanceof_function(ce, class_ce TSRMLS_CC)));
 }
 /* }}} */
 
@@ -4768,7 +4767,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.14 2006/07/24 18:03:44 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.15 2006/07/25 12:34:38 iliaa Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

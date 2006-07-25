@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.36 2006/07/18 09:08:06 dmitry Exp $ */
+/* $Id: mod_php5.c,v 1.37 2006/07/25 13:41:08 dmitry Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -669,7 +669,7 @@ static int send_parsed_php(request_rec * r)
 		char *mem_usage;
 		TSRMLS_FETCH();
  
-		mem_usage = ap_psprintf(r->pool, "%u", zend_memory_peak_usage(TSRMLS_C));
+		mem_usage = ap_psprintf(r->pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC));
 		ap_table_setn(r->notes, "mod_php_memory_usage", mem_usage);
 	}
 #endif

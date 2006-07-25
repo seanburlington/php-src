@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.241 2006/07/24 23:28:00 helly Exp $ */
+/* $Id: var.c,v 1.242 2006/07/25 13:41:08 dmitry Exp $ */
 
 
 
@@ -1152,14 +1152,25 @@ PHP_FUNCTION(unserialize)
 /* {{{ proto int memory_get_usage()
     Returns the allocated by PHP memory */
 PHP_FUNCTION(memory_get_usage) {
+	zend_bool real_usage = 0;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &real_usage) == FAILURE) {
+		RETURN_FALSE;
+	}
 	
-	RETURN_LONG(zend_memory_usage(TSRMLS_C));
+	RETURN_LONG(zend_memory_usage(real_usage TSRMLS_CC));
 }
 /* }}} */
 /* {{{ proto int memory_get_peak_usage()
     Returns the peak allocated by PHP memory */
 PHP_FUNCTION(memory_get_peak_usage) {
-	RETURN_LONG(zend_memory_peak_usage(TSRMLS_C));
+	zend_bool real_usage = 0;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &real_usage) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	RETURN_LONG(zend_memory_peak_usage(real_usage TSRMLS_CC));
 }
 /* }}} */
 #endif

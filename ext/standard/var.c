@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.6 2006/07/25 13:40:05 dmitry Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.7 2006/07/25 16:41:04 bjori Exp $ */
 
 
 
@@ -909,7 +909,7 @@ PHP_FUNCTION(unserialize)
 /* }}} */
 
 #if MEMORY_LIMIT
-/* {{{ proto int memory_get_usage()
+/* {{{ proto int memory_get_usage([real_usage])
     Returns the allocated by PHP memory */
 PHP_FUNCTION(memory_get_usage) {
 	zend_bool real_usage = 0;
@@ -921,7 +921,7 @@ PHP_FUNCTION(memory_get_usage) {
 	RETURN_LONG(zend_memory_usage(real_usage TSRMLS_CC));
 }
 /* }}} */
-/* {{{ proto int memory_get_peak_usage()
+/* {{{ proto int memory_get_peak_usage([real_usage])
     Returns the peak allocated by PHP memory */
 PHP_FUNCTION(memory_get_peak_usage) {
 	zend_bool real_usage = 0;

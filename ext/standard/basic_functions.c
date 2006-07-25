@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.17 2006/07/19 12:25:46 mike Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.18 2006/07/25 16:41:04 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3054,11 +3054,13 @@ ZEND_END_ARG_INFO()
 
 #if MEMORY_LIMIT
 static
-ZEND_BEGIN_ARG_INFO(arginfo_memory_get_usage, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_memory_get_usage, 0, 0, 0)
+	ZEND_ARG_INFO(0, real_usage)
 ZEND_END_ARG_INFO()
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_memory_get_peak_usage, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_memory_get_peak_usage, 0, 0, 0)
+	ZEND_ARG_INFO(0, real_usage)
 ZEND_END_ARG_INFO()
 #endif
 /* }}} */

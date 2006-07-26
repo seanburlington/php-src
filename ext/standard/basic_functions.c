@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.18 2006/07/25 16:41:04 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.19 2006/07/26 08:57:44 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -76,6 +76,10 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
 #if HAVE_SYS_MMAN_H
 # include <sys/mman.h>
+#endif
+
+#if HAVE_SYS_LOADAVG_H
+# include <sys/loadavg.h>
 #endif
 
 #ifdef HARTMUT_0

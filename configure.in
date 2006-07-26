@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.4 2006/07/24 18:53:01 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.5 2006/07/26 08:57:44 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -374,6 +374,7 @@ sys/vfs.h \
 sys/sysexits.h \
 sys/varargs.h \
 sys/wait.h \
+sys/loadavg.h \
 termios.h \
 unistd.h \
 unix.h \

@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.306 2006/06/28 15:03:16 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.307 2006/07/26 07:00:42 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -667,7 +667,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.306 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.307 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1071,7 +1071,7 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 						 * 1) next_ping > 0, which means that ping_interval is not -1 (aka "Off")
 						 * 2) current_timestamp > next_ping, which means "it's time to check if it's still alive"
 						 * */
-						if ( (connection->next_ping > 0) && (timestamp > connection->next_ping) && !php_oci_connection_ping(connection TSRMLS_CC)) {
+						if ( (connection->next_ping > 0) && (timestamp >= connection->next_ping) && !php_oci_connection_ping(connection TSRMLS_CC)) {
 							/* server died */
 						}
 						else {

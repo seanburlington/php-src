@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: rfc1867.h,v 1.13.2.1.2.1 2006/07/22 16:38:29 sesser Exp $ */
+/* $Id: rfc1867.h,v 1.13.2.1.2.2 2006/07/26 13:22:06 tony2001 Exp $ */
 
 #ifndef RFC1867_H
 #define RFC1867_H
@@ -71,6 +71,6 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler);
 
 void destroy_uploaded_files_hash(TSRMLS_D);
 void php_rfc1867_register_constants(TSRMLS_D);
-PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC);
+extern PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC);
 
 #endif /* RFC1867_H */

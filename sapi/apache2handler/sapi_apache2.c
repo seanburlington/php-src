@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.3 2006/07/25 13:40:05 dmitry Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.4 2006/07/26 10:31:08 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -416,7 +416,6 @@ static apr_status_t php_server_context_cleanup(void *data_)
 
 static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 {
-	char *content_type;
 	char *content_length;
 	const char *auth;
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.109 2006/06/13 13:12:19 dmitry Exp $ */
+/* $Id: snmp.c,v 1.110 2006/07/26 23:56:09 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -834,10 +834,14 @@ static int netsnmp_session_set_sec_protocol(struct snmp_session *s, char *prot T
 * 
 * As we want this extension to compile on both versions, we use the latter
 * symbol on purpose, as it's defined to be the same as the former.
+*
+* However, in 5.2 the type of usmAES128PrivProtocol is a pointer, not an
+* array, so we cannot use the OIDSIZE macro because it uses sizeof().
+*
 */
 			|| !strcasecmp(prot, "AES")) {
 			s->securityPrivProto = usmAES128PrivProtocol;
-			s->securityPrivProtoLen = OIDSIZE(usmAES128PrivProtocol);
+			s->securityPrivProtoLen = USM_PRIV_PROTO_AES128_LEN;
 			return (0);
 #else			
 		) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.5 2006/07/27 14:00:13 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.6 2006/07/27 14:05:03 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -768,7 +768,6 @@ static void php_session_initialize(TSRMLS_D)
 	if (!PS(id)) {
 new_session:
 		PS(id) = PS(mod)->s_create_sid(&PS(mod_data), NULL TSRMLS_CC);
-php_error_docref(NULL TSRMLS_CC, E_WARNING, "Making a new session %s.", PS(id));
 		if (PS(use_cookies)) {
 			PS(send_cookie) = 1;
 		}

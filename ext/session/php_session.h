@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.101.2.3 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_session.h,v 1.101.2.2.2.1 2006/07/27 15:33:16 iliaa Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -125,6 +125,7 @@ typedef struct _php_ps_globals {
 	long hash_bits_per_character;
 	int send_cookie;
 	int define_sid;
+	zend_bool invalid_session_id;	/* allows the driver to report about an invalid session id and request id regeneration */
 } php_ps_globals;
 
 typedef php_ps_globals zend_ps_globals;

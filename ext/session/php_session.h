@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.106 2006/04/10 15:06:51 sniper Exp $ */
+/* $Id: php_session.h,v 1.107 2006/07/27 15:36:43 iliaa Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -123,6 +123,7 @@ typedef struct _php_ps_globals {
 	long hash_bits_per_character;
 	int send_cookie;
 	int define_sid;
+	zend_bool invalid_session_id;	/* allows the driver to report about an invalid session id and request id regeneration */
 } php_ps_globals;
 
 typedef php_ps_globals zend_ps_globals;

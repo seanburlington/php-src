@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.10 2006/07/12 09:33:37 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.11 2006/07/27 10:53:15 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1149,11 +1149,15 @@ void php_local_infile_end(void *ptr)
 
 	data= (mysqli_local_infile *)ptr;
 
-	if (!(mysql = data->userdata)) {
+	if (!data || !(mysql = data->userdata)) {
+		if (data) {
+			free(data);
+		}
 		return;
 	}
 
 	php_stream_close(mysql->li_stream);
+	free(data);
 	return;	
 }
 /* }}} */

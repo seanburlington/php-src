@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.h,v 1.19 2006/07/11 14:24:39 dmitry Exp $ */
+/* $Id: php_xml.h,v 1.20 2006/07/27 15:23:04 dmitry Exp $ */
 
 #ifndef PHP_SOAP_XML_H
 #define PHP_SOAP_XML_H
@@ -43,13 +43,6 @@ xmlNodePtr get_node_recursive_ex(xmlNodePtr node,char *name, char *ns);
 xmlNodePtr get_node_with_attribute_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
 xmlNodePtr get_node_with_attribute_recursive_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
 int parse_namespace(const xmlChar *inval,char **value,char **namespace);
-
-#ifndef ZEND_ENGINE_2
-int php_stream_xmlIO_match_wrapper(const char *filename);
-void *php_stream_xmlIO_open_wrapper(const char *filename);
-int php_stream_xmlIO_read(void *context, char *buffer, int len);
-int php_stream_xmlIO_close(void *context);
-#endif
 
 #define FOREACHATTRNODE(n,c,i)      FOREACHATTRNODEEX(n,c,NULL,i)
 #define FOREACHATTRNODEEX(n,c,ns,i) \

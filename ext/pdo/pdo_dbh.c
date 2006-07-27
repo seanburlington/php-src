@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.3 2006/06/07 03:33:15 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.4 2006/07/27 08:00:54 tony2001 Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -274,7 +274,7 @@ static PHP_METHOD(PDO, dbh_constructor)
 	/* is this supposed to be a persistent connection ? */
 	if (options) {
 		zval **v;
-		int plen;
+		int plen = 0;
 		char *hashkey = NULL;
 		zend_rsrc_list_entry *le;
 		pdo_dbh_t *pdbh = NULL;

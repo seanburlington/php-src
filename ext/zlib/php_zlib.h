@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.45 2006/06/02 20:09:22 mike Exp $ */
+/* $Id: php_zlib.h,v 1.46 2006/07/27 16:31:07 nlopess Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -53,9 +53,6 @@ PHP_FUNCTION(gzinflate);
 PHP_FUNCTION(gzencode);
 PHP_FUNCTION(ob_gzhandler);
 PHP_FUNCTION(zlib_get_coding_type);
-
-int php_enable_output_compression(int buffer_size TSRMLS_DC);
-int php_ob_gzhandler_check(zval *handler_name TSRMLS_DC);
 
 php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 extern php_stream_ops php_stream_gzio_ops;

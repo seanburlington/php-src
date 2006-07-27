@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.6 2006/07/27 14:05:03 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.7 2006/07/27 14:13:30 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -745,7 +745,7 @@ static void php_session_initialize(TSRMLS_D)
 {
 	char *val;
 	int vallen;
-	zend_bool new = 0;
+	zend_bool make_new = 0;
 
 	/* check session name for invalid characters */
 	if (PS(id) && strpbrk(PS(id), "\r\n\t <>'\"\\")) {
@@ -771,7 +771,7 @@ new_session:
 		if (PS(use_cookies)) {
 			PS(send_cookie) = 1;
 		}
-		new = 1;
+		make_new = 1;
 	}
 	
 	/* Read data */
@@ -784,7 +784,7 @@ new_session:
 	if (PS(mod)->s_read(&PS(mod_data), PS(id), &val, &vallen TSRMLS_CC) == SUCCESS) {
 		php_session_decode(val, vallen TSRMLS_CC);
 		efree(val);
-	} else if (!new) {
+	} else if (!make_new) {
 		goto new_session;
 	}
 }

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.5.2.2 2006/06/17 13:06:06 bjori Exp $ */
+/* $Id: hash.c,v 1.18.2.5.2.3 2006/07/28 14:27:03 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -590,8 +590,8 @@ PHP_MINFO_FUNCTION(hash)
 	*s = 0;
 
 	php_info_print_table_start();
-	php_info_print_table_header(2, "hash support", "enabled");
-	php_info_print_table_header(2, "Hashing Engines", buffer);
+	php_info_print_table_row(2, "hash support", "enabled");
+	php_info_print_table_row(2, "Hashing Engines", buffer);
 	php_info_print_table_end();
 }
 /* }}} */

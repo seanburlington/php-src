@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.38.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: info.h,v 1.38.2.1.2.1 2006/07/28 14:23:35 iliaa Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -67,6 +67,7 @@ PHP_FUNCTION(php_sapi_name);
 PHP_FUNCTION(php_uname);
 PHP_FUNCTION(php_ini_scanned_files);
 PHPAPI char *php_info_html_esc(char *string TSRMLS_DC);
+PHPAPI void php_info_html_esc_write(char *string, int str_len TSRMLS_DC);
 PHPAPI void php_print_info_htmlhead(TSRMLS_D);
 PHPAPI void php_print_info(int flag TSRMLS_DC);
 PHPAPI void php_print_style(void);

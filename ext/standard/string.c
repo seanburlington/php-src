@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.555 2006/07/17 20:43:07 mike Exp $ */
+/* $Id: string.c,v 1.556 2006/07/28 12:21:34 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -872,7 +872,7 @@ PHP_FUNCTION(wordwrap)
 				lastspace = current;
 			} else if (current - laststart >= linelength && laststart != lastspace) {
 				newtext[lastspace] = breakchar[0];
-				laststart = lastspace;
+				laststart = lastspace + 1;
 			}
 		}
 

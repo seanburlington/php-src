@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.4 2006/07/22 12:54:05 nlopess Exp $ */
+/* $Id: logical_filters.c,v 1.5 2006/07/29 01:27:47 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -119,6 +119,7 @@ void php_filter_int(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 		}
 		i++;
 		p[i] = '\0';
+		end = p + i - 1;
 	}
 
 	/* state 0 */
@@ -189,7 +190,7 @@ stateH1: /* state "hex 1" */
 	}
 
 stateT: /* state "tail" */
-	if (*p != '\0') {
+	if (*p != '\0' || (p-1) != end) {
 		goto stateE;
 	} else {
 		goto stateR;

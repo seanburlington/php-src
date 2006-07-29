@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.5 2006/07/29 01:27:47 pajoye Exp $ */
+/* $Id: logical_filters.c,v 1.6 2006/07/29 12:46:16 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -330,6 +330,7 @@ void php_filter_float(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 		}
 		i++;
 		str[i] = '\0';
+		end = str + i - 1;
 	}
 
 	if (*str == '-') {
@@ -423,6 +424,9 @@ stateExp:
 	}
 
 stateT:
+	if ((str -1) != end) {
+		goto stateError;
+	}
 	if (exp_value) {
 		exp_value *= exp_multiply;
 		ret_val *= pow(10, exp_value);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.3 2006/07/29 22:52:48 pajoye Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.4 2006/07/29 23:03:55 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1847,8 +1847,10 @@ static EVP_PKEY * php_openssl_evp_from_zval(zval ** val, int public_key, char * 
 		return NULL;
 	} else {
 		/* force it to be a string and check if it refers to a file */
-		if (Z_TYPE_PP(val) == IS_LONG || Z_TYPE_PP(val) == IS_BOOL
-				|| Z_TYPE_PP(val) == IS_ARRAY) {
+		/* passing non string values leaks, object uses toString, it returns NULL 
+		 * See bug38255.phpt 
+		 */
+		if (!(Z_TYPE_PP(val) == IS_STRING || Z_TYPE_PP(val) == IS_OBJECT)) {
 			return NULL;
 		}
 		convert_to_string_ex(val);

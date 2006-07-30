@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.5 2006/07/30 09:18:06 pajoye Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.6 2006/07/30 16:26:19 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -784,6 +784,11 @@ static X509 * php_openssl_x509_from_zval(zval ** val, int makeresource, long * r
 
 		return NULL;
 	}
+
+	if (!(Z_TYPE_PP(val) == IS_STRING || Z_TYPE_PP(val) == IS_OBJECT)) {
+		return NULL;
+	}
+
 	/* force it to be a string and check if it refers to a file */
 	convert_to_string_ex(val);
 

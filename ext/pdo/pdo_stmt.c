@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.3 2006/06/20 13:26:01 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.4 2006/07/30 11:19:56 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -919,6 +919,10 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					zval_dtor(&val);
 				}
 				ce = stmt->fetch.cls.ce;
+				if (!ce) {
+					pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "No fetch class specified" TSRMLS_CC);
+					return 0;
+				}
 				if ((flags & PDO_FETCH_SERIALIZE) == 0) {
 					object_init_ex(return_value, ce);
 					if (!stmt->fetch.cls.fci.size) {
@@ -960,6 +964,10 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 				break;
 
 			case PDO_FETCH_FUNC:
+				if (!stmt->fetch.func.function) {
+					pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "No fetch function specified" TSRMLS_CC);
+					return 0;
+				}
 				if (!stmt->fetch.func.fci.size) {
 					if (!do_fetch_func_prepare(stmt TSRMLS_CC))
 					{

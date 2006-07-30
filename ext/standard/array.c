@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.8 2006/07/24 18:18:33 andrei Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.9 2006/07/30 03:31:18 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2328,7 +2328,7 @@ PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS
 				} else {
 					(*src_entry)->refcount++;
 
-					zend_hash_update(dest, string_key, strlen(string_key)+1,
+					zend_hash_update(dest, string_key, string_key_len,
 									 src_entry, sizeof(zval *), NULL);
 				}
 				break;

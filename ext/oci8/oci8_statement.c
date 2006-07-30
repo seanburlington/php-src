@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.15 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.1 2006/07/30 20:51:24 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -94,6 +94,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 
 	statement->connection = connection;
 	statement->has_data = 0;
+	statement->nested = 0;
 
 	if (OCI_G(default_prefetch) > 0) {
 		php_oci_statement_set_prefetch(statement, OCI_G(default_prefetch) TSRMLS_CC);
@@ -443,6 +444,7 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 				case SQLT_RSET:
 					outcol->statement = php_oci_statement_create(statement->connection, NULL, 0, 0 TSRMLS_CC);
 					outcol->stmtid = outcol->statement->id;
+					outcol->statement->nested = 1;
 
 					define_type = SQLT_RSET;
 					outcol->is_cursor = 1;

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.16 2006/06/07 13:36:19 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.17 2006/07/30 20:50:53 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -166,6 +166,7 @@ typedef struct { /* php_oci_statement {{{ */
 	int ncolumns;					/* number of columns in the result */
 	unsigned executed:1;			/* statement executed flag */
 	unsigned has_data:1;			/* statement has more data flag */
+	unsigned nested:1;			/* statement handle is valid */
 	ub2 stmttype;					/* statement type */
 } php_oci_statement; /* }}} */
 

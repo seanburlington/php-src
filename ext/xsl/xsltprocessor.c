@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.47 2006/07/31 12:51:08 chregu Exp $ */
+/* $Id: xsltprocessor.c,v 1.48 2006/07/31 13:07:44 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -351,7 +351,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	}
 	if (doc == NULL) {
 		php_error(E_WARNING, "Invalid Document");
-		RETURN_NULL();
+		RETURN_FALSE;
 	}
 
 	/* libxslt uses _private, so we must copy the imported 
@@ -406,7 +406,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	}
 
 	php_xsl_set_object(id, sheetp TSRMLS_CC);
-	RETURN_TRUE;
+	RETVAL_TRUE;
 }
 /* }}} end xsl_xsltprocessor_import_stylesheet */
 

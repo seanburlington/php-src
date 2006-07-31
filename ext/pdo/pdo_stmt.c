@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.161 2006/07/30 11:20:40 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.162 2006/07/31 20:19:18 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2154,6 +2154,7 @@ static void free_statement(pdo_stmt_t *stmt TSRMLS_DC)
 	do_fetch_opt_finish(stmt, 1 TSRMLS_CC);
 
 	zend_objects_store_del_ref(&stmt->database_object_handle TSRMLS_CC);
+	php_pdo_dbh_delref(stmt->dbh TSRMLS_CC);
 	efree(stmt);
 }
 

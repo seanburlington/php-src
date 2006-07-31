@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.46 2006/06/14 09:41:28 chregu Exp $ */
+/* $Id: xsltprocessor.c,v 1.47 2006/07/31 12:51:08 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -406,6 +406,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	}
 
 	php_xsl_set_object(id, sheetp TSRMLS_CC);
+	RETURN_TRUE;
 }
 /* }}} end xsl_xsltprocessor_import_stylesheet */
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.132 2006/07/31 20:19:18 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.133 2006/08/01 16:37:11 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1390,6 +1390,16 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 	}
 
 	pefree(dbh, dbh->is_persistent);
+}
+
+PDO_API void php_pdo_dbh_addref(pdo_dbh_t *dbh TSRMLS_DC)
+{
+        dbh->refcount++;
+}
+
+PDO_API void php_pdo_dbh_delref(pdo_dbh_t *dbh TSRMLS_DC)
+{
+        dbh_free(dbh TSRMLS_CC);
 }
 
 static void pdo_dbh_free_storage(pdo_dbh_t *dbh TSRMLS_DC)

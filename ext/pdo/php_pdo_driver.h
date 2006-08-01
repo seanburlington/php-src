@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.80 2006/03/20 22:17:41 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.81 2006/08/01 16:37:11 iliaa Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -650,6 +650,9 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 
 PDO_API void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt,
 	const char *sqlstate, const char *supp TSRMLS_DC);
+
+PDO_API void php_pdo_dbh_addref(pdo_dbh_t *dbh TSRMLS_DC);
+PDO_API void php_pdo_dbh_delref(pdo_dbh_t *dbh TSRMLS_DC);
 
 #endif /* PHP_PDO_DRIVER_H */
 /*

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.353 2006/07/02 00:10:36 bjori Exp $ */
+/* $Id: gd.c,v 1.354 2006/08/01 22:41:33 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2167,7 +2167,9 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 	php_stream *stream;
 	FILE * fp = NULL;
 	int argc=ZEND_NUM_ARGS();
+#ifdef HAVE_GD_JPG
 	long ignore_warning;
+#endif
 	
 	if ((image_type == PHP_GDIMG_TYPE_GD2PART && argc != 5) ||
 		(image_type != PHP_GDIMG_TYPE_GD2PART && argc != 1) ||
@@ -4375,7 +4377,9 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 	int int_threshold;
 	int x, y;
 	float x_ratio, y_ratio;
+#ifdef HAVE_GD_JPG
 	long ignore_warning;
+#endif
 
 	if (argc != 5 || zend_get_parameters_ex(argc, &f_org, &f_dest, &height, &width, &threshold) == FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();

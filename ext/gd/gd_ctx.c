@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd_ctx.c,v 1.29 2006/01/27 01:59:26 pajoye Exp $ */
+/* $Id: gd_ctx.c,v 1.30 2006/08/01 22:41:33 tony2001 Exp $ */
 
 #include "php_gd.h"
 
@@ -92,7 +92,7 @@ static void _php_image_output_ctx(INTERNAL_FUNCTION_PARAMETERS, int image_type, 
 
 		fp = VCWD_FOPEN(fn, "wb");
 		if (!fp) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' for writing", fn);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' for writing: %s", fn, strerror(errno));
 			RETURN_FALSE;
 		}
 

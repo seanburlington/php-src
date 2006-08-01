@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.6 2006/05/18 22:16:27 helly Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.7 2006/08/01 08:33:13 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1405,8 +1405,8 @@ PHP_FUNCTION(session_cache_expire)
 		WRONG_PARAM_COUNT;
 
 	if (ac == 1) {
-		convert_to_long_ex(p_cache_expire);
-		PS(cache_expire) = Z_LVAL_PP(p_cache_expire);
+		convert_to_string_ex(p_cache_expire);
+		zend_alter_ini_entry("session.cache_expire", sizeof("session.cache_expire"), Z_STRVAL_PP(p_cache_expire), Z_STRLEN_PP(p_cache_expire), ZEND_INI_USER, ZEND_INI_STAGE_RUNTIME);
 	}
 
 	RETVAL_LONG(old);

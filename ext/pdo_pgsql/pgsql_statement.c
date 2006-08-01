@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.1 2006/05/08 14:33:00 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.2 2006/08/01 16:31:29 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -247,16 +247,16 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 			case PDO_PARAM_EVT_EXEC_PRE:
 				if (!S->param_values) {
 					S->param_values = ecalloc(
-							zend_hash_num_elements(stmt->bound_params),
+							zend_hash_num_elements(stmt->bound_param_map),
 							sizeof(char*));
 					S->param_lengths = ecalloc(
-							zend_hash_num_elements(stmt->bound_params),
+							zend_hash_num_elements(stmt->bound_param_map),
 							sizeof(int));
 					S->param_formats = ecalloc(
-							zend_hash_num_elements(stmt->bound_params),
+							zend_hash_num_elements(stmt->bound_param_map),
 							sizeof(int));
 					S->param_types = ecalloc(
-							zend_hash_num_elements(stmt->bound_params),
+							zend_hash_num_elements(stmt->bound_param_map),
 							sizeof(Oid));
 				}
 				if (param->paramno >= 0) {

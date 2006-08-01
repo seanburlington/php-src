@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd_ctx.c,v 1.22.2.6 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: gd_ctx.c,v 1.22.2.5.2.1 2006/08/01 22:42:11 tony2001 Exp $ */
 
 #include "php_gd.h"
 
@@ -93,7 +93,7 @@ static void _php_image_output_ctx(INTERNAL_FUNCTION_PARAMETERS, int image_type, 
 
 		fp = VCWD_FOPEN(fn, "wb");
 		if (!fp) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' for writing", fn);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' for writing: %s", fn, strerror(errno));
 			RETURN_FALSE;
 		}
 

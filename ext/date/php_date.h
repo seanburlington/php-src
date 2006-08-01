@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.11.2.1 2006/07/18 12:38:05 derick Exp $ */
+/* $Id: php_date.h,v 1.17.2.11.2.2 2006/08/01 13:28:28 mike Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -47,6 +47,7 @@ PHP_FUNCTION(localtime);
 PHP_FUNCTION(getdate);
 
 /* Advanced Interface */
+PHP_METHOD(DateTime, __construct);
 PHP_FUNCTION(date_create);
 PHP_FUNCTION(date_parse);
 PHP_FUNCTION(date_format);
@@ -59,11 +60,12 @@ PHP_FUNCTION(date_time_set);
 PHP_FUNCTION(date_date_set);
 PHP_FUNCTION(date_isodate_set);
 
+PHP_METHOD(DateTimeZone, __construct);
 PHP_FUNCTION(timezone_open);
 PHP_FUNCTION(timezone_name_get);
 PHP_FUNCTION(timezone_name_from_abbr);
 PHP_FUNCTION(timezone_offset_get);
-PHP_FUNCTION(timezone_transistions_get);
+PHP_FUNCTION(timezone_transitions_get);
 PHP_FUNCTION(timezone_identifiers_list);
 PHP_FUNCTION(timezone_abbreviations_list);
 

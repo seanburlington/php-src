@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.31 2006/06/13 13:12:20 dmitry Exp $ */
+/* $Id: php_xml.h,v 1.32 2006/08/02 15:22:56 iliaa Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -141,6 +141,7 @@ PHP_FUNCTION(xml_parse_into_struct);
 
 PHPAPI char *_xml_zval_strdup(zval *val);
 PHPAPI char *xml_utf8_decode(const XML_Char *, int, int *, const XML_Char *);
+PHPAPI char *xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding);
 
 #endif /* HAVE_LIBEXPAT */
 

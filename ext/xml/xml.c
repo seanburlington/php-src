@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157.2.4.2.1 2006/06/15 18:33:09 dmitry Exp $ */
+/* $Id: xml.c,v 1.157.2.4.2.2 2006/08/02 15:21:54 iliaa Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -79,7 +79,6 @@ inline static unsigned short xml_encode_iso_8859_1(unsigned char);
 inline static char xml_decode_iso_8859_1(unsigned short);
 inline static unsigned short xml_encode_us_ascii(unsigned char);
 inline static char xml_decode_us_ascii(unsigned short);
-static XML_Char *xml_utf8_encode(const char *, int, int *, const XML_Char *);
 static zval *xml_call_handler(xml_parser *, zval *, zend_function *, int, zval **);
 static zval *_xml_xmlchar_zval(const XML_Char *, int, const XML_Char *);
 static int _xml_xmlcharlen(const XML_Char *);
@@ -497,7 +496,7 @@ static xml_encoding *xml_get_encoding(const XML_Char *name)
 /* }}} */
 
 /* {{{ xml_utf8_encode */
-static XML_Char *xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding)
+PHPAPI char *xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding)
 {
 	int pos = len;
 	char *newbuf;

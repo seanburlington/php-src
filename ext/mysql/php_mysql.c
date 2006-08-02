@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.224 2006/06/26 11:31:19 bjori Exp $ */
+/* $Id: php_mysql.c,v 1.225 2006/08/02 10:04:02 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -1882,7 +1882,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 	mysql_row_length_type *mysql_row_lengths;
 	int i;
 	zval            *res, *ctor_params = NULL;
-	zend_class_entry *ce;
+	zend_class_entry *ce = NULL;
 
 	if (into_object) {
 		char *class_name;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.9 2006/08/01 08:32:07 tony2001 Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.10 2006/08/02 09:16:52 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,9 +285,13 @@ typedef struct {
 PHPAPI void php_add_session_var(char *name, size_t namelen TSRMLS_DC)
 {
 	zval **sym_track = NULL;
-	
-	zend_hash_find(Z_ARRVAL_P(PS(http_session_vars)), name, namelen + 1, 
-			(void *) &sym_track);
+
+	IF_SESSION_VARS() {
+		zend_hash_find(Z_ARRVAL_P(PS(http_session_vars)), name, namelen + 1, 
+				(void *) &sym_track);
+	} else {
+		return;
+	}
 
 	/*
 	 * Set up a proper reference between $_SESSION["x"] and $x.

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.444 2006/08/01 08:31:37 tony2001 Exp $ */
+/* $Id: session.c,v 1.445 2006/08/02 09:15:13 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -279,8 +279,13 @@ PHPAPI void php_add_session_var(char *name, size_t namelen TSRMLS_DC)
 {
 	zval **sym_track = NULL;
 	
-	zend_hash_find(Z_ARRVAL_P(PS(http_session_vars)), name, namelen + 1, 
-			(void *) &sym_track);
+	IF_SESSION_VARS() {
+		zend_hash_find(Z_ARRVAL_P(PS(http_session_vars)), name, namelen + 1,
+				(void *) &sym_track);
+	} else {
+		return;
+	}
+
 	if (sym_track == NULL) {
 		zval *empty_var;
 

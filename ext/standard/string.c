@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.556 2006/07/28 12:21:34 tony2001 Exp $ */
+/* $Id: string.c,v 1.557 2006/08/02 20:38:39 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -195,7 +195,7 @@ PHP_FUNCTION(bin2hex)
 	char *result;
 	size_t newlen;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &data, &data_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "S", &data, &data_len) == FAILURE) {
 		return;
 	}
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.9 2006/07/27 18:14:55 iliaa Exp $ */
+/* $Id: filter.c,v 1.52.2.10 2006/08/03 19:35:23 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.9 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.10 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -401,10 +401,10 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		efree(*val);
 		if (Z_STRLEN(new_var)) {
 			*val = estrndup(Z_STRVAL(new_var), Z_STRLEN(new_var) + 1);
-			zval_dtor(&new_var);
 		} else {
 			*val = estrdup("");
 		}
+		zval_dtor(&new_var);
 	}
 
 	return retval;

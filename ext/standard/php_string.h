@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.97 2006/03/22 10:20:20 derick Exp $ */
+/* $Id: php_string.h,v 1.98 2006/08/03 23:09:29 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -118,8 +118,8 @@ PHPAPI struct lconv *localeconv_r(struct lconv *out);
 
 PHPAPI char *php_strtoupper(char *s, size_t len);
 PHPAPI char *php_strtolower(char *s, size_t len);
-PHPAPI UChar *php_u_strtoupper(UChar **s, int *len, const char *locale);
-PHPAPI UChar *php_u_strtolower(UChar **s, int *len, const char *locale);
+PHPAPI UChar *php_u_strtoupper(UChar *s, int *len, const char *locale);
+PHPAPI UChar *php_u_strtolower(UChar *s, int *len, const char *locale);
 PHPAPI char *php_strtr(char *str, int len, char *str_from, char *str_to, int trlen);
 PHPAPI UChar *php_u_addslashes(UChar *str, int length, int *new_length, int freeit TSRMLS_DC);
 PHPAPI UChar *php_u_addslashes_ex(UChar *str, int length, int *new_length, int freeit, int ignore_sybase TSRMLS_DC);

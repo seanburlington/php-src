@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.15 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: entityreference.c,v 1.16 2006/08/04 18:11:27 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,11 +51,10 @@ PHP_METHOD(domentityreference, __construct)
 	int name_len, name_valid;
 
 	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &id, dom_entityreference_class_entry, &name, &name_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os&", &id, dom_entityreference_class_entry, &name, &name_len, UG(utf8_conv)) == FAILURE) {
 		php_std_error_handling();
 		return;
 	}
-
 	php_std_error_handling();
 
 	name_valid = xmlValidateName((xmlChar *) name, 0);

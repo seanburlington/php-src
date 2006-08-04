@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.18 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: documentfragment.c,v 1.19 2006/08/04 18:11:27 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -117,7 +117,7 @@ PHP_METHOD(domdocumentfragment, appendXML) {
 	int err;
 	xmlNodePtr lst;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &id, dom_documentfragment_class_entry, &data, &data_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os&", &id, dom_documentfragment_class_entry, &data, &data_len, UG(utf8_conv)) == FAILURE) {
 		return;
 	}
 

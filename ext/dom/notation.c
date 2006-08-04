@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: notation.c,v 1.11 2006/03/03 20:13:12 rrichards Exp $ */
+/* $Id: notation.c,v 1.12 2006/08/04 18:11:27 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -59,9 +59,9 @@ int dom_notation_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	ALLOC_ZVAL(*retval);
 	if (nodep->ExternalID) {
-		ZVAL_STRING(*retval, (char *) (nodep->ExternalID), 1);
+		ZVAL_XML_STRING(*retval, (char *) (nodep->ExternalID), ZSTR_DUPLICATE);
 	} else {
-		ZVAL_EMPTY_STRING(*retval);
+		ZVAL_EMPTY_TEXT(*retval);
 	}
 
 	return SUCCESS;
@@ -89,9 +89,9 @@ int dom_notation_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	ALLOC_ZVAL(*retval);
 	if (nodep->SystemID) {
-		ZVAL_STRING(*retval, (char *) (nodep->SystemID), 1);
+		ZVAL_XML_STRING(*retval, (char *) (nodep->SystemID), ZSTR_DUPLICATE);
 	} else {
-		ZVAL_EMPTY_STRING(*retval);
+		ZVAL_EMPTY_TEXT(*retval);
 	}
 
 	return SUCCESS;

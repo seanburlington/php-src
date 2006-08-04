@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.1 2006/06/15 18:33:07 dmitry Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.2 2006/08/04 20:31:19 iliaa Exp $ */
 
 #define IMAP41
 
@@ -761,6 +761,13 @@ static void php_imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 
 	if (IMAPG(imap_password)) { 
 		efree(IMAPG(imap_password));
+	}
+
+	/* local filename, need to perform open_basedir and safe_mode checks */
+	if (Z_STRVAL_PP(mailbox)[0] != '{' && 
+			(php_check_open_basedir(Z_STRVAL_PP(mailbox) TSRMLS_CC) || 
+			(PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(mailbox), NULL, CHECKUID_CHECK_FILE_AND_DIR)))) {
+		RETURN_FALSE;
 	}
 
 	IMAPG(imap_user)     = estrndup(Z_STRVAL_PP(user), Z_STRLEN_PP(user));

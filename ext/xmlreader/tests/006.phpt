@@ -4,9 +4,9 @@ XMLReader: libxml2 XML Reader, moveToElement
 <?php if (!extension_loaded("xmlreader")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: 006.phpt,v 1.1 2005/12/21 03:46:02 pajoye Exp $ */
+/* $Id: 006.phpt,v 1.2 2006/08/05 12:32:54 rrichards Exp $ */
 
-$xmlstring = '<?xml version="1.0" encoding="UTF-8"?>
+$xmlstring = b'<?xml version="1.0" encoding="UTF-8"?>
 <books><book num="1"></book><test /></books>';
 
 $reader = new XMLReader();

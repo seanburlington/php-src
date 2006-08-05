@@ -7,9 +7,9 @@ if (!method_exists($reader, 'readInnerXml')) print "skip";
 ?>
 --FILE--
 <?php 
-/* $Id: 011.phpt,v 1.2 2005/12/21 13:34:44 pajoye Exp $ */
+/* $Id: 011.phpt,v 1.3 2006/08/05 12:32:54 rrichards Exp $ */
 
-$xmlstring = '<?xml version="1.0" encoding="UTF-8"?>
+$xmlstring = b'<?xml version="1.0" encoding="UTF-8"?>
 <books><book>test</book></books>';
 
 $reader = new XMLReader();

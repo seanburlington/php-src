@@ -4,9 +4,9 @@ XMLReader: libxml2 XML Reader, string data
 <?php if (!extension_loaded("xmlreader")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: 001.phpt,v 1.1 2005/12/21 03:46:02 pajoye Exp $ */
+/* $Id: 001.phpt,v 1.2 2006/08/05 12:32:54 rrichards Exp $ */
 
-$xmlstring = '<?xml version="1.0" encoding="UTF-8"?>
+$xmlstring = b'<?xml version="1.0" encoding="UTF-8"?>
 <books></books>';
 
 $reader = new XMLReader();
@@ -16,7 +16,7 @@ $reader->XML($xmlstring);
 while ($reader->read()) {
 	echo $reader->name."\n";
 }
-$xmlstring = '';
+$xmlstring = b'';
 $reader = new XMLReader();
 $reader->XML($xmlstring);
 ?>

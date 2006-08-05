@@ -7,9 +7,9 @@ if (!method_exists($reader, 'setRelaxNGSchema')) print "skip";
 ?>
 --FILE--
 <?php 
-/* $Id: 007.phpt,v 1.2 2005/12/21 13:34:44 pajoye Exp $ */
+/* $Id: 007.phpt,v 1.3 2006/08/05 12:32:54 rrichards Exp $ */
 
-$xmlstring = '<TEI.2>hello</TEI.2>';
+$xmlstring = b'<TEI.2>hello</TEI.2>';
 $relaxngfile = dirname(__FILE__) . '/relaxNG.rng'; 
 $file = dirname(__FILE__) . '/__007.xml';
 file_put_contents($file, $xmlstring);

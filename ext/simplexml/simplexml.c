@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.9 2006/08/06 13:27:46 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.10 2006/08/06 17:41:51 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -195,6 +195,9 @@ static xmlNodePtr sxe_get_element_by_name(php_sxe_object *sxe, xmlNodePtr node, 
 
 	if (sxe->iter.type == SXE_ITER_ELEMENT) {
 		orgnode = sxe_find_element_by_name(sxe, node, sxe->iter.name TSRMLS_CC);
+		if (!orgnode) {
+			return NULL;
+		}
 		node = orgnode->children;
 	}
 
@@ -2310,7 +2313,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.10 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

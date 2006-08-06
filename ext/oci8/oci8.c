@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.12 2006/08/05 20:56:43 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.13 2006/08/06 14:09:58 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -653,7 +653,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.12 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.13 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1042,11 +1042,10 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 		else if (!persistent && zend_hash_find(&EG(regular_list), hashed_details.c, hashed_details.len+1, (void **) &le) == SUCCESS) {
 			found = 1;
 			if (le->type == le_index_ptr) {
-				int type;
-				long link;
+				int type, link;
 				void *ptr;
 
-				link = (long) le->ptr;
+				link = (int) le->ptr;
 				ptr = zend_list_find(link,&type);
 				if (ptr && (type == le_connection)) {
 					connection = (php_oci_connection *)ptr;

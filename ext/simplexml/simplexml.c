@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.212 2006/08/06 17:41:39 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.213 2006/08/06 19:39:38 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1206,7 +1206,7 @@ SXE_METHOD(asXML)
 					RETURN_FALSE;
 				}
 
-				xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 1, NULL);
+				xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 0, NULL);
 				xmlOutputBufferClose(outbuf);
 				RETURN_TRUE;
 			}
@@ -1230,7 +1230,7 @@ SXE_METHOD(asXML)
 				RETURN_FALSE;
 			}
 
-			xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 1, ((xmlDocPtr) sxe->document->ptr)->encoding);
+			xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 0, ((xmlDocPtr) sxe->document->ptr)->encoding);
 			xmlOutputBufferFlush(outbuf);
 			strval = xmlStrndup(outbuf->buffer->content, outbuf->buffer->use);
 			strval_len = outbuf->buffer->use;
@@ -2268,7 +2268,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.212 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.213 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

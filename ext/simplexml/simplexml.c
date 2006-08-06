@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.8 2006/06/26 13:41:52 bjori Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.9 2006/08/06 13:27:46 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1229,10 +1229,11 @@ SXE_METHOD(asXML)
 			xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 1, ((xmlDocPtr) sxe->document->ptr)->encoding);
 			xmlOutputBufferFlush(outbuf);
 			strval = xmlStrndup(outbuf->buffer->content, outbuf->buffer->use);
+			strval_len = outbuf->buffer->use;
 			xmlOutputBufferClose(outbuf);
 		}
 
-		RETVAL_STRINGL(strval, strlen(strval), 1);
+		RETVAL_STRINGL(strval, strval_len, 1);
 		xmlFree(strval);
 	} else {
 		RETVAL_FALSE;
@@ -2309,7 +2310,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.8 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.9 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

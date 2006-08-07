@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.5 2006/08/03 14:49:11 iliaa Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.6 2006/08/07 09:49:53 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -275,7 +275,6 @@ PHP_FUNCTION(spl_autoload)
 	zend_op **original_opline_ptr = EG(opline_ptr);
 	zend_op_array *original_active_op_array = EG(active_op_array);
 	zend_function_state *original_function_state_ptr = EG(function_state_ptr);
-	zval err_mode;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &class_name, &class_name_len, &file_exts, &file_exts_len) == FAILURE) {
 		RETURN_FALSE;

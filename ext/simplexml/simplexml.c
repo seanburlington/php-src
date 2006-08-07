@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.12 2006/08/07 10:09:52 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.13 2006/08/07 10:15:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1200,9 +1200,9 @@ SXE_METHOD(asXML)
 				int bytes;
 				bytes = xmlSaveFile(filename, (xmlDocPtr) sxe->document->ptr);
 				if (bytes == -1) {
-					RETVAL_FALSE;
+					RETURN_FALSE;
 				} else {
-					RETVAL_TRUE;
+					RETURN_TRUE;
 				}
 			} else {
 				outbuf = xmlOutputBufferCreateFilename(filename, NULL, 0);
@@ -2316,7 +2316,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.12 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.13 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

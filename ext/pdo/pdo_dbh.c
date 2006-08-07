@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.5 2006/07/31 20:18:11 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.6 2006/08/07 17:32:13 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -342,7 +342,9 @@ static PHP_METHOD(PDO, dbh_constructor)
 			/* switch over to the persistent one */
 			dbh = pdbh;
 			zend_object_store_set_object(object, dbh TSRMLS_CC);
-			dbh->refcount++;
+			if (!call_factory) {
+				dbh->refcount++;
+			}
 		}
 
 		if (hashkey) {
@@ -1399,6 +1401,10 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 		pefree(dbh->password, dbh->is_persistent);
 	}
 	
+	if (dbh->persistent_id) {
+		pefree((char *)dbh->persistent_id, dbh->is_persistent);
+	}
+
 	if (dbh->def_stmt_ctor_args) {
 		zval_ptr_dtor(&dbh->def_stmt_ctor_args);
 	}

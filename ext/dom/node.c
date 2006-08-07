@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.37.2.3.2.3 2006/07/16 16:04:09 chregu Exp $ */
+/* $Id: node.c,v 1.37.2.3.2.4 2006/08/07 20:23:35 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1682,11 +1682,11 @@ static void dom_canonicalization(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	xmlDocPtr docp;
 	xmlNodeSetPtr nodeset = NULL;
 	dom_object *intern;
-	long exclusive=0, with_comments=0, file_len=0;
+	zend_bool exclusive=0, with_comments=0;
 	xmlChar **inclusive_ns_prefixes = NULL;
 	char *file = NULL;
-    int ret = -1;
-    xmlOutputBufferPtr buf;
+	int ret = -1, file_len = 0;
+	xmlOutputBufferPtr buf;
 	xmlXPathContextPtr ctxp=NULL;
 	xmlXPathObjectPtr xpathobjp=NULL;
 

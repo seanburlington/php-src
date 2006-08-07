@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.63 2006/08/03 19:35:14 tony2001 Exp $ */
+/* $Id: filter.c,v 1.64 2006/08/07 16:54:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.63 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.64 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -362,7 +362,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		/* FIXME: Should not use php_register_variable_ex as that also registers
 		 * globals when register_globals is turned on */
 		Z_STRLEN(raw_var) = val_len;
-		Z_STRVAL(raw_var) = estrndup(*val, val_len + 1);
+		Z_STRVAL(raw_var) = estrndup(*val, val_len);
 		Z_TYPE(raw_var) = IS_STRING;
 
 		php_register_variable_ex(var, &raw_var, array_ptr TSRMLS_CC);
@@ -376,7 +376,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		Z_TYPE(new_var) = IS_STRING;
 
 		if (!(IF_G(default_filter) == FILTER_UNSAFE_RAW)) {
-			Z_STRVAL(new_var) = estrndup(*val, val_len + 1);
+			Z_STRVAL(new_var) = estrndup(*val, val_len);
 			php_zval_filter(&new_var, IF_G(default_filter), IF_G(default_filter_flags), NULL, NULL/*charset*/ TSRMLS_CC);
 		}
 #if PHP_VERSION_ID<60000
@@ -385,7 +385,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		}
 #endif
 	   	else {
-			Z_STRVAL(new_var) = estrndup(*val, val_len + 1);
+			Z_STRVAL(new_var) = estrndup(*val, val_len);
 		}
 	} else { /* empty string */
 		ZVAL_EMPTY_STRING(&new_var);
@@ -404,7 +404,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		}
 		efree(*val);
 		if (Z_STRLEN(new_var)) {
-			*val = estrndup(Z_STRVAL(new_var), Z_STRLEN(new_var) + 1);
+			*val = estrndup(Z_STRVAL(new_var), Z_STRLEN(new_var));
 		} else {
 			*val = estrdup("");
 		}

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.9 2006/07/28 12:58:59 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.10 2006/08/07 21:27:40 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -239,7 +239,7 @@ $pass_option_n = false;
 $pass_options = '';
 
 $compression = 0;
-$output_file = $CUR_DIR . '/php_test_results_' . date('Ymd_Hi') . '.txt';
+$output_file = $CUR_DIR . '/php_test_results_' . @date('Ymd_Hi') . '.txt';
 if ($compression) {
 	$output_file = 'compress.zlib://' . $output_file . '.gz';
 }
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.9 $'."\n";
+					echo '$Revision: 1.226.2.37.2.10 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -710,7 +710,9 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 
 			/* Use shtool to find out if there is glibtool present (MacOSX) */
 			$sys_libtool_path = shell_exec(dirname(__FILE__) . '/build/shtool path glibtool libtool');
-			$sys_libtool = shell_exec(str_replace("\n", "", $sys_libtool_path) . ' --version');
+			if ($sys_libtool_path) {
+				$sys_libtool = shell_exec(str_replace("\n", "", $sys_libtool_path) . ' --version');
+			}
 
 			/* Try the most common flags for 'version' */
 			$flags = array('-v', '-V', '--version');
@@ -1802,10 +1804,10 @@ function show_start($start_time)
 
 	if ($html_output)
 	{
-		fwrite($html_file, "<h2>Time Start: " . date('Y-m-d H:i:s', $start_time) . "</h2>\n");
+		fwrite($html_file, "<h2>Time Start: " . @date('Y-m-d H:i:s', $start_time) . "</h2>\n");
 		fwrite($html_file, "<table>\n");
 	}
-	echo "TIME START " . date('Y-m-d H:i:s', $start_time) . "\n=====================================================================\n";
+	echo "TIME START " . @date('Y-m-d H:i:s', $start_time) . "\n=====================================================================\n";
 }
 
 function show_end($end_time)
@@ -1815,9 +1817,9 @@ function show_end($end_time)
 	if ($html_output)
 	{
 		fwrite($html_file, "</table>\n");
-		fwrite($html_file, "<h2>Time End: " . date('Y-m-d H:i:s', $end_time) . "</h2>\n");
+		fwrite($html_file, "<h2>Time End: " . @date('Y-m-d H:i:s', $end_time) . "</h2>\n");
 	}
-	echo "=====================================================================\nTIME END " . date('Y-m-d H:i:s', $end_time) . "\n";
+	echo "=====================================================================\nTIME END " . @date('Y-m-d H:i:s', $end_time) . "\n";
 }
 
 function show_summary()

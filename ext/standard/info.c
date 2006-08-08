@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.4 2006/08/08 10:36:58 pajoye Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.5 2006/08/08 13:12:00 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -133,9 +133,9 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 			switch (zend_hash_get_current_key_ex(Z_ARRVAL_PP(data), &string_key, &string_len, &num_key, 0, NULL)) {
 				case HASH_KEY_IS_STRING:
 					if (!sapi_module.phpinfo_as_text) {
-						php_info_html_esc_write(string_key, string_len TSRMLS_CC);
+						php_info_html_esc_write(string_key, string_len - 1 TSRMLS_CC);
 					} else {
-						PHPWRITE(string_key, string_len);
+						PHPWRITE(string_key, string_len - 1);
 					}	
 					break;
 				case HASH_KEY_IS_LONG:

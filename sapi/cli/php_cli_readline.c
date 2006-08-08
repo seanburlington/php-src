@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli_readline.c,v 1.10 2006/03/01 16:27:47 dmitry Exp $ */
+/* $Id: php_cli_readline.c,v 1.11 2006/08/08 16:59:11 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -312,7 +312,7 @@ static char *cli_completion_generator_var(const char *text, int textlen, int *st
 			UErrorCode status = U_ZERO_ERROR;
 
 			len = u_strlen((UChar *)retval);
-			zend_convert_from_unicode(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
+			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
 									  (UChar *)retval, len, &status);
 
 			retval = malloc(tmp_len + 2);
@@ -345,7 +345,7 @@ static char *cli_completion_generator_func(const char *text, int textlen, int *s
 			UErrorCode status = U_ZERO_ERROR;
 
 			len = u_strlen((UChar *)func->common.function_name.u);
-			zend_convert_from_unicode(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len,
+			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len,
 									  (UChar *)func->common.function_name.u, len, &status);
 
 			retval = strdup(tmp);
@@ -371,7 +371,7 @@ static char *cli_completion_generator_class(const char *text, int textlen, int *
 			UErrorCode status = U_ZERO_ERROR;
 
 			len = u_strlen((UChar *)(*pce)->name.u);
-			zend_convert_from_unicode(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
+			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
 									  (UChar *)(*pce)->name.u, len, &status);
 
 			retval = strdup(tmp);
@@ -397,7 +397,7 @@ static char *cli_completion_generator_define(const char *text, int textlen, int 
 			UErrorCode status = U_ZERO_ERROR;
 
 			len = u_strlen((UChar *)retval);
-			zend_convert_from_unicode(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
+			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(output_encoding_conv)), &tmp, &tmp_len, 
 									  (UChar *)retval, len, &status);
 
 			retval = strdup(tmp);

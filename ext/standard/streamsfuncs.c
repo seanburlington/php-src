@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.81 2006/07/14 20:45:37 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.82 2006/08/08 16:59:11 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -870,7 +870,7 @@ static int parse_context_options(php_stream_context *context, zval *options TSRM
 				char *tmp;
 				int tmp_len;
 
-				zend_convert_from_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &tmp, &tmp_len, wkey.u, wkey_len, &errCode);
+				zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &tmp, &tmp_len, wkey.u, wkey_len, &errCode);
 				wkey.s = tmp;
 				wkey_len = tmp_len;
 			}
@@ -884,7 +884,7 @@ static int parse_context_options(php_stream_context *context, zval *options TSRM
 					char *tmp;
 					int tmp_len;
 	
-					zend_convert_from_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &tmp, &tmp_len, okey.u, okey_len, &errCode);
+					zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &tmp, &tmp_len, okey.u, okey_len, &errCode);
 					okey.s = tmp;
 					okey_len = tmp_len;
 					php_stream_context_set_option(context, wkey.s, okey.s, *oval);

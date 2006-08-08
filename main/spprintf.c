@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.36 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: spprintf.c,v 1.37 2006/08/08 16:59:11 tony2001 Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -589,7 +589,7 @@ fmt_unicode:
 						s = (char*)u;
 						s_unicode = 1;
 					} else {
-						zend_convert_from_unicode(conv, &res, &s_len, u, u_len, &status);
+						zend_unicode_to_string_ex(conv, &res, &s_len, u, u_len, &status);
 						if (U_FAILURE(status)) {
 							php_error(E_WARNING, "Could not convert Unicode to printable form in s[np]printf call");
 							return;

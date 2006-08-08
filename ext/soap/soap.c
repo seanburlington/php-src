@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.203 2006/08/04 13:40:12 rrichards Exp $ */
+/* $Id: soap.c,v 1.204 2006/08/08 16:59:11 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -308,7 +308,7 @@ char* soap_unicode_to_string(UChar *ustr, int ustr_len TSRMLS_DC)
 	char *tmp;
 	int tmp_len;
 
-	zend_convert_from_unicode(UG(utf8_conv), &tmp, &tmp_len, ustr, ustr_len, &errCode);
+	zend_unicode_to_string_ex(UG(utf8_conv), &tmp, &tmp_len, ustr, ustr_len, &errCode);
 	return tmp;
 }
 

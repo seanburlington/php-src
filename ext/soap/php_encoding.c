@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.140 2006/08/01 16:10:25 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.141 2006/08/08 16:59:11 tony2001 Exp $ */
 
 #include <time.h>
 
@@ -3170,7 +3170,7 @@ static encodePtr get_array_type(xmlNodePtr node, zval *array, smart_str *type TS
 
 				ALLOC_INIT_ZVAL(tmp);
 				Z_TYPE_P(tmp) = IS_STRING;
-				zend_convert_from_unicode(UG(utf8_conv), &Z_STRVAL_P(tmp), &Z_STRLEN_P(tmp), Z_USTRVAL_P(cur_stype), Z_USTRLEN_P(cur_stype), &status);
+				zend_unicode_to_string_ex(UG(utf8_conv), &Z_STRVAL_P(tmp), &Z_STRLEN_P(tmp), Z_USTRVAL_P(cur_stype), Z_USTRLEN_P(cur_stype), &status);
 				cur_stype = tmp;
 			} else {
 				cur_stype->refcount++;
@@ -3183,7 +3183,7 @@ static encodePtr get_array_type(xmlNodePtr node, zval *array, smart_str *type TS
 
 				ALLOC_INIT_ZVAL(tmp);
 				Z_TYPE_P(tmp) = IS_STRING;
-				zend_convert_from_unicode(UG(utf8_conv), &Z_STRVAL_P(tmp), &Z_STRLEN_P(tmp), Z_USTRVAL_P(cur_ns), Z_USTRLEN_P(cur_ns), &status);
+				zend_unicode_to_string_ex(UG(utf8_conv), &Z_STRVAL_P(tmp), &Z_STRLEN_P(tmp), Z_USTRVAL_P(cur_ns), Z_USTRLEN_P(cur_ns), &status);
 				cur_ns = tmp;
 			} else {
 				cur_ns->refcount++;

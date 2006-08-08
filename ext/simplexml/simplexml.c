@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.214 2006/08/07 10:11:04 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.215 2006/08/08 16:59:11 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2080,7 +2080,7 @@ static int php_sxe_iterator_current_key(zend_object_iterator *iter, zstr *str_ke
 		int u_len;
 
 		namelen = xmlStrlen(curnode->name);
-		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &str_key->u, &u_len, (char*)curnode->name, namelen, &status);
+		zend_string_to_unicode_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &str_key->u, &u_len, (char*)curnode->name, namelen, &status);
 		*str_key_len = u_len + 1;
 		return HASH_KEY_IS_UNICODE;
 	} else {
@@ -2271,7 +2271,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.214 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.215 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

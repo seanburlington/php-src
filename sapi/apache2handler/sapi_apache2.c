@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.40.2.15 2005/11/29 13:30:11 dmitry Exp $ */
+/* $Id: sapi_apache2.c,v 1.40.2.16 2006/08/08 13:10:46 stas Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -438,12 +438,12 @@ static void php_apache_request_dtor(request_rec *r TSRMLS_DC)
 
 static int php_handler(request_rec *r)
 {
-	php_struct *ctx;
+	php_struct * volatile ctx;
 	void *conf;
-	apr_bucket_brigade *brigade;
+	apr_bucket_brigade * volatile brigade;
 	apr_bucket *bucket;
 	apr_status_t rv;
-	request_rec *parent_req = NULL;
+	request_rec * volatile parent_req = NULL;
 	TSRMLS_FETCH();
 
 #define PHPAP_INI_OFF \

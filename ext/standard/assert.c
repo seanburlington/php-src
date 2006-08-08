@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.67 2006/07/12 22:19:12 tony2001 Exp $ */
+/* $Id: assert.c,v 1.68 2006/08/08 17:32:19 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -161,6 +161,9 @@ PHP_FUNCTION(assert)
 		if (zend_eval_string(myeval, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 			efree(compiled_string_description);
 			php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "Failure evaluating code: %s%s", PHP_EOL, myeval);
+			if (free_tmp) {
+				zval_dtor(&tmp);
+			}
 			if (ASSERTG(bail)) {
 				zend_bailout();
 			}
@@ -180,6 +183,9 @@ PHP_FUNCTION(assert)
 	}
 
 	if (val) {
+		if (free_tmp) {
+			zval_dtor(&tmp);
+		}
 		RETURN_TRUE;
 	}
 

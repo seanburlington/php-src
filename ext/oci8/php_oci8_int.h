@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.3 2006/07/31 10:30:22 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.4 2006/08/09 12:15:42 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -186,7 +186,7 @@ typedef struct { /* php_oci_bind {{{ */
 		long max_length;
 		long type;
 	} array;
-	sb2 indicator;			/*  */
+	sb2 indicator;			/* -1 means NULL */
 	ub2 retcode;			/*  */
 } php_oci_bind; /* }}} */
 

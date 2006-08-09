@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.21 2006/07/31 10:28:46 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.22 2006/08/09 11:48:50 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1364,6 +1364,7 @@ php_oci_bind *php_oci_bind_array_helper_date(zval* var, long max_table_length, p
 
 			if (connection->errcode != OCI_SUCCESS) {
 				/* failed to convert string to date */
+				efree(bind->array.element_lengths);
 				efree(bind->array.elements);
 				efree(bind);
 				php_oci_error(connection->err, connection->errcode TSRMLS_CC);
@@ -1378,6 +1379,7 @@ php_oci_bind *php_oci_bind_array_helper_date(zval* var, long max_table_length, p
 
 			if (connection->errcode != OCI_SUCCESS) {
 				/* failed to convert string to date */
+				efree(bind->array.element_lengths);
 				efree(bind->array.elements);
 				efree(bind);
 				php_oci_error(connection->err, connection->errcode TSRMLS_CC);

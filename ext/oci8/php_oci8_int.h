@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.19 2006/08/09 12:13:30 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.20 2006/08/09 15:23:50 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -127,6 +127,8 @@ typedef struct { /* php_oci_descriptor {{{ */
 	int lob_size;					/* cached LOB size. -1 = Lob wasn't initialized yet */
 	int buffering;					/* cached buffering flag. 0 - off, 1 - on, 2 - on and buffer was used */
 	ub4 chunk_size;					/* chunk size of the LOB. 0 - unknown */
+	ub1 charset_form;				/* charset form, required for NCLOBs */
+	ub2 charset_id;					/* charset ID */
 } php_oci_descriptor; /* }}} */
 
 typedef struct { /* php_oci_lob_ctx {{{ */
@@ -212,6 +214,8 @@ typedef struct { /* php_oci_out_column {{{ */
 	ub4 cb_retlen;					/* */
 	ub2 scale;						/* column scale */
 	ub2 precision;					/* column precision */
+	ub1 charset_form;				/* charset form, required for NCLOBs */
+	ub2 charset_id;					/* charset ID */
 } php_oci_out_column; /* }}} */
 
 /* {{{ macros */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.572 2006/08/09 20:19:06 andrei Exp $ */
+/* $Id: string.c,v 1.573 2006/08/09 20:31:06 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6812,7 +6812,7 @@ PHP_FUNCTION(str_rot13)
 
 	if (str_type == IS_UNICODE) {
 		RETVAL_UNICODEL(str.u, str_len, 0);
-		Z_USTRVAL_P(return_value) = php_u_strtr(Z_USTRVAL_P(return_value), Z_USTRLEN_P(return_value), u_rot13_from, 52, u_rot13_to, 52, 52, &Z_USTRLEN_P(return_value));
+		Z_USTRVAL_P(return_value) = php_u_strtr(Z_USTRVAL_P(return_value), Z_USTRLEN_P(return_value), u_rot13_from, 52, u_rot13_to, 52, 52, &Z_USTRLEN_P(return_value) TSRMLS_CC);
 	} else {
 		RETVAL_STRINGL(str.s, str_len, 1);
 		php_strtr(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), rot13_from, rot13_to, 52);

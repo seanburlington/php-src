@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.164 2006/08/08 16:59:10 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.165 2006/08/09 14:46:35 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -357,6 +357,12 @@ static PHP_METHOD(PDOStatement, execute)
 		zval **tmp;
 		uint str_length;
 		ulong num_index;
+	
+		if (stmt->bound_params) {	
+			zend_hash_destroy(stmt->bound_params);
+			FREE_HASHTABLE(stmt->bound_params);
+			stmt->bound_params = NULL;
+		}
 
 		zend_hash_internal_pointer_reset(Z_ARRVAL_P(input_params));
 		while (SUCCESS == zend_hash_get_current_data(Z_ARRVAL_P(input_params), (void*)&tmp)) {

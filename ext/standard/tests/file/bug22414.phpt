@@ -1,5 +1,7 @@
 --TEST--
 Bug #22414: passthru() does not read data correctly
+--SKIPIF--
+<?php if (strtolower(@getenv('TEST_PHP_EXECUTABLE'))=='auto') die('skip: TEST_PHP_EXECUTABLE = auto'); ?>
 --INI--
 safe_mode=
 output_handler=
@@ -15,7 +17,6 @@ output_handler=
 	echo "\n";
 
 	/* Binary Data Test */
-	@unlink($pwd . '/passthru_test');
 	
 	$cmd = $php . ' -n -r \"readfile(@getenv(\'TEST_PHP_EXECUTABLE\')); \"';
 	$cmd = $php . ' -n -r \' passthru("'.$cmd.'"); \' > '.$tmpfile ;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.14.2.2.2.4 2006/08/10 14:40:13 iliaa Exp $ */
+/* $Id: streams.c,v 1.14.2.2.2.5 2006/08/10 15:02:41 iliaa Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -350,17 +350,17 @@ php_stream *php_curl_stream_opener(php_stream_wrapper *wrapper, char *filename, 
 			}
 			if (mr > 1) {
 				if ((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) {
-					curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 1);
-				} else {
 					curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 0);
+				} else {
+					curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 1);
 				}
 				curl_easy_setopt(curlstream->curl, CURLOPT_MAXREDIRS, mr);
 			}
 		} else {
 			if ((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) {
-				curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 1);
-			} else {
 				curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 0);
+			} else {
+				curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 1);
 			}
 			curl_easy_setopt(curlstream->curl, CURLOPT_MAXREDIRS, 20L);
 		}

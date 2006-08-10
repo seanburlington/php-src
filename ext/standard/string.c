@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.573 2006/08/09 20:31:06 tony2001 Exp $ */
+/* $Id: string.c,v 1.574 2006/08/10 09:31:24 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2101,7 +2101,7 @@ PHP_FUNCTION(pathinfo)
 
 	if (have_ext) {
 		zstr ext;
-		int ext_len;
+		int ext_len = 0;
 
 		if (path_type == IS_UNICODE) {
 			ext.u = u_memrchr32(ret.u, (UChar) 0x2e /*'.'*/, ret_len);

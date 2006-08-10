@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.11 2006/08/10 13:50:56 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.12 2006/08/10 21:10:03 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1298,7 +1298,7 @@ static zend_bool php_session_destroy(TSRMLS_D)
 }
 
 
-/* {{{ proto void session_set_cookie_params(int lifetime [, string path [, string domain [, bool secure]]])
+/* {{{ proto void session_set_cookie_params(int lifetime [, string path [, string domain [, bool secure[, bool httponly]]]])
    Set session cookie parameters */
 PHP_FUNCTION(session_set_cookie_params)
 {

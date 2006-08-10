@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.15 2006/08/10 17:16:35 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.16 2006/08/10 17:46:43 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1621,7 +1621,7 @@ PHP_FUNCTION(stripos)
 	php_strtolower(haystack_dup, haystack_len);
 
 	if (Z_TYPE_P(needle) == IS_STRING) {
-		if ((Z_STRLEN_P(needle) == 0 || Z_STRLEN_P(needle) > haystack_len) { 
+		if (Z_STRLEN_P(needle) == 0 || Z_STRLEN_P(needle) > haystack_len) {
 			efree(haystack_dup); 
 			RETURN_FALSE; 
 		} 

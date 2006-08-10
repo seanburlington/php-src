@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.84.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: head.c,v 1.84.2.1.2.1 2006/08/10 13:50:56 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -60,7 +60,7 @@ PHPAPI int php_header(TSRMLS_D)
 }
 
 
-PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode TSRMLS_DC)
+PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode, int httponly TSRMLS_DC)
 {
 	char *cookie, *encoded_value = NULL;
 	int len=sizeof("Set-Cookie: ");
@@ -131,6 +131,9 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 	if (secure) {
 		strcat(cookie, "; secure");
 	}
+	if (httponly) {
+		strcat(cookie, "; httponly");
+	}
 
 	ctr.line = cookie;
 	ctr.line_len = strlen(cookie);
@@ -142,22 +145,22 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 
 
 /* php_set_cookie(name, value, expires, path, domain, secure) */
-/* {{{ proto bool setcookie(string name [, string value [, int expires [, string path [, string domain [, bool secure]]]]])
+/* {{{ proto bool setcookie(string name [, string value [, int expires [, string path [, string domain [, bool secure[, bool httponly]]]]]])
    Send a cookie */
 PHP_FUNCTION(setcookie)
 {
 	char *name, *value = NULL, *path = NULL, *domain = NULL;
 	long expires = 0;
-	zend_bool secure = 0;
+	zend_bool secure = 0, httponly = 0;
 	int name_len, value_len, path_len, domain_len;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssb", &name,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssbb", &name,
 							  &name_len, &value, &value_len, &expires, &path,
-							  &path_len, &domain, &domain_len, &secure) == FAILURE) {
+							  &path_len, &domain, &domain_len, &secure, &httponly) == FAILURE) {
 		return;
 	}
 
-	if (php_setcookie(name, name_len, value, value_len, expires, path, path_len, domain, domain_len, secure, 1 TSRMLS_CC) == SUCCESS) {
+	if (php_setcookie(name, name_len, value, value_len, expires, path, path_len, domain, domain_len, secure, 1, httponly TSRMLS_CC) == SUCCESS) {
 		RETVAL_TRUE;
 	} else {
 		RETVAL_FALSE;
@@ -165,22 +168,22 @@ PHP_FUNCTION(setcookie)
 }
 /* }}} */
 
-/* {{{ proto bool setrawcookie(string name [, string value [, int expires [, string path [, string domain [, bool secure]]]]])
+/* {{{ proto bool setrawcookie(string name [, string value [, int expires [, string path [, string domain [, bool secure[, bool httponly]]]]]])
    Send a cookie with no url encoding of the value */
 PHP_FUNCTION(setrawcookie)
 {
 	char *name, *value = NULL, *path = NULL, *domain = NULL;
 	long expires = 0;
-	zend_bool secure = 0;
+	zend_bool secure = 0, httponly = 0;
 	int name_len, value_len, path_len, domain_len;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssb", &name,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssbb", &name,
 							  &name_len, &value, &value_len, &expires, &path,
-							  &path_len, &domain, &domain_len, &secure) == FAILURE) {
+							  &path_len, &domain, &domain_len, &secure, &httponly) == FAILURE) {
 		return;
 	}
 
-	if (php_setcookie(name, name_len, value, value_len, expires, path, path_len, domain, domain_len, secure, 0 TSRMLS_CC) == SUCCESS) {
+	if (php_setcookie(name, name_len, value, value_len, expires, path, path_len, domain, domain_len, secure, 0, httponly TSRMLS_CC) == SUCCESS) {
 		RETVAL_TRUE;
 	} else {
 		RETVAL_FALSE;

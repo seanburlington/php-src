@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: head.h,v 1.28.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: head.h,v 1.28.2.1.2.1 2006/08/10 13:50:56 iliaa Exp $ */
 
 #ifndef HEAD_H
 #define HEAD_H
@@ -29,6 +29,6 @@ PHP_FUNCTION(headers_sent);
 PHP_FUNCTION(headers_list);
 
 PHPAPI int php_header(TSRMLS_D);
-PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode TSRMLS_DC);
+PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode, int httponly TSRMLS_DC);
 
 #endif

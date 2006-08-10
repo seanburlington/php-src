@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.24 2006/05/11 22:11:17 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.25 2006/08/10 21:49:56 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1089,6 +1089,11 @@ int php_request_startup(TSRMLS_D)
 			zend_set_timeout(EG(timeout_seconds));
 		} else {
 			zend_set_timeout(PG(max_input_time));
+		}
+
+		/* Disable realpath cache if safe_mode or open_basedir are set */
+		if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
+			CWDG(realpath_cache_size_limit) = 0;
 		}
 
 		if (PG(expose_php)) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8 2006/04/25 08:41:02 tony2001 Exp $ */
+/* $Id: filestat.c,v 1.136.2.9 2006/08/10 21:30:23 iliaa Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -634,7 +634,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 	}
 
 	if ((wrapper = php_stream_locate_url_wrapper(filename, &local, 0 TSRMLS_CC)) == &php_plain_files_wrapper) {
-		if (php_check_open_basedir(local TSRMLS_CC)) {
+		if (php_check_open_basedir(local TSRMLS_CC) || (PG(safe_mode) && !php_checkuid_ex(filename, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS, CHECKUID_NO_ERRORS))) {
 			RETURN_FALSE;
 		}
 	}

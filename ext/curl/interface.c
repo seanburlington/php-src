@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.86 2006/07/04 20:13:40 iliaa Exp $ */
+/* $Id: interface.c,v 1.87 2006/08/10 19:02:32 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1166,7 +1166,6 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_FTPLISTONLY:
 		case CURLOPT_FTPAPPEND:
 		case CURLOPT_NETRC:
-		case CURLOPT_FOLLOWLOCATION:
 		case CURLOPT_PUT:
 #if CURLOPT_MUTE != 0
 		 case CURLOPT_MUTE:
@@ -1215,6 +1214,16 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_AUTOREFERER:
 		case CURLOPT_COOKIESESSION:
 			convert_to_long_ex(zvalue);
+			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
+			break;
+		case CURLOPT_FOLLOWLOCATION:
+			convert_to_long_ex(zvalue);
+			if (PG(open_basedir) && *PG(open_basedir)) {
+				if (Z_LVAL_PP(zvalue) != 0) {
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "CURLOPT_FOLLOWLOCATION cannot be activated when open_basedir is set");
+					RETURN_FALSE;
+				}
+			}
 			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
 			break;
 		case CURLOPT_URL:

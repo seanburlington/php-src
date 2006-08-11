@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.44 2006/04/12 15:14:43 tony2001 Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.45 2006/08/11 17:41:49 tony2001 Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -1467,7 +1467,7 @@ PHP_FUNCTION(xmlrpc_get_type)
 
 	type = get_zval_xmlrpc_type(*arg, 0);
 	if (type == xmlrpc_vector) {
-		vtype = determine_vector_type(Z_ARRVAL_PP(arg));
+		vtype = determine_vector_type((Z_TYPE_PP(arg) == IS_OBJECT) ? Z_OBJPROP_PP(arg) : Z_ARRVAL_PP(arg));
 	}
    
 	RETURN_STRING((char*) xmlrpc_type_as_str(type, vtype), 1);

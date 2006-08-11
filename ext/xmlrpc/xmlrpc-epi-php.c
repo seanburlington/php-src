@@ -37,7 +37,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.8 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.1 2006/08/11 17:43:04 tony2001 Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -1468,7 +1468,7 @@ PHP_FUNCTION(xmlrpc_get_type)
 
 	type = get_zval_xmlrpc_type(*arg, 0);
 	if (type == xmlrpc_vector) {
-		vtype = determine_vector_type(Z_ARRVAL_PP(arg));
+		vtype = determine_vector_type((Z_TYPE_PP(arg) == IS_OBJECT) ? Z_OBJPROP_PP(arg) : Z_ARRVAL_PP(arg));
 	}
    
 	RETURN_STRING((char*) xmlrpc_type_as_str(type, vtype), 1);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.83.2.9.2.4 2006/08/08 14:57:04 iliaa Exp $ */
+/* $Id: mod_files.c,v 1.83.2.9.2.5 2006/08/11 15:04:28 iliaa Exp $ */
 
 #include "php.h"
 
@@ -371,9 +371,10 @@ PS_DESTROY_FUNC(files)
 			/* This is a little safety check for instances when we are dealing with a regenerated session
 			 * that was not yet written to disk
 			 */
-			if (!VCWD_ACCESS(buf, F_OK)) {
+#ifndef PHP_WIN32
+			if (!VCWD_ACCESS(buf, F_OK))
+#endif
 				return FAILURE;
-			}
 		}
 	}
 

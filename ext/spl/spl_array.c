@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.2 2006/05/11 08:06:22 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.3 2006/08/11 17:05:23 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -485,8 +485,8 @@ SPL_METHOD(Array, offsetExists)
 	RETURN_BOOL(spl_array_has_dimension_ex(0, getThis(), index, 1 TSRMLS_CC));
 } /* }}} */
 
-/* {{{ proto bool ArrayObject::offsetGet(mixed $index)
-       proto bool ArrayIterator::offsetGet(mixed $index)
+/* {{{ proto mixed ArrayObject::offsetGet(mixed $index)
+       proto mixed ArrayIterator::offsetGet(mixed $index)
  Returns the value at the specified $index. */
 SPL_METHOD(Array, offsetGet)
 {

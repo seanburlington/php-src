@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.88 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: internal_functions_win32.c,v 1.89 2006/08/12 19:41:28 nlopess Exp $ */
 
 /* {{{ includes
  */
@@ -102,7 +102,7 @@
 
 /* {{{ php_builtin_extensions[]
  */
-zend_module_entry *php_builtin_extensions[] = {
+static zend_module_entry *php_builtin_extensions[] = {
 	phpext_standard_ptr
 #if HAVE_BCMATH
 	,phpext_bcmath_ptr

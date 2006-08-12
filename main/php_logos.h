@@ -16,14 +16,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_logos.h,v 1.11 2006/07/13 17:02:43 tony2001 Exp $ */
+/* $Id: php_logos.h,v 1.12 2006/08/12 19:41:28 nlopess Exp $ */
 
 
 #ifndef _PHP_LOGOS_H
 #define _PHP_LOGOS_H
 
 BEGIN_EXTERN_C()
-PHPAPI int php_register_info_logo(char *logo_string, char *mimetype, const unsigned char *data, int size);
+PHPAPI int php_register_info_logo(char *logo_string, const char *mimetype, const unsigned char *data, int size);
 PHPAPI int php_unregister_info_logo(char *logo_string);
 END_EXTERN_C()
 

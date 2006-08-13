@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.21 2006/02/13 10:23:57 dmitry Exp $ */
+/* $Id: nodelist.c,v 1.22 2006/08/13 15:03:19 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,7 +134,7 @@ PHP_FUNCTION(dom_nodelist_item)
 						zval_copy_ctor(return_value);
 						return;
 					}
-				} else {
+				} else if (objmap->baseobj) {
 					nodep = dom_object_get_node(objmap->baseobj);
 					if (nodep) {
 						if (objmap->nodetype == XML_ATTRIBUTE_NODE || objmap->nodetype == XML_ELEMENT_NODE) {

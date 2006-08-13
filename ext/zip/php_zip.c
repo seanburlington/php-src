@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.3 2006/08/13 21:09:59 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.1.2.4 2006/08/13 23:43:11 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1153,6 +1153,7 @@ ZIPARCHIVE_METHOD(locateName)
 	char *name;
 	int name_len;
 	long flags = 0;
+	long idx = -1;
 
 	if (!this) {
 		RETURN_FALSE;
@@ -1169,7 +1170,18 @@ ZIPARCHIVE_METHOD(locateName)
 		RETURN_FALSE;
 	}
 
-	RETURN_LONG((long)zip_name_locate(intern, (const char *)name, flags))
+	idx = (long)zip_name_locate(intern, (const char *)name, flags);
+
+	if (idx<0) {
+		/* reset the error */
+		if (intern->error.str) {
+			_zip_error_fini(&intern->error);
+		}
+		_zip_error_init(&intern->error);
+		RETURN_FALSE;
+	} else {
+		RETURN_LONG(idx);
+	}
 }
 /* }}} */
 
@@ -1961,7 +1973,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.3 2006/08/13 21:09:59 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.4 2006/08/13 23:43:11 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "1.4.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.301 2006/08/07 21:27:32 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.302 2006/08/13 15:22:18 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -400,7 +400,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.301 $'."\n";
+					echo '$Revision: 1.302 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1072,7 +1072,7 @@ TEST $file
 		}
 	}
 
-	show_test($test_idx, $shortname);
+	show_test($test_idx, $shortname, $unicode_semantics);
 
 	if (is_array($IN_REDIRECT)) {
 		$temp_dir = $test_dir = $IN_REDIRECT['dir'];
@@ -1913,11 +1913,12 @@ function show_redirect_ends($tests, $tested, $tested_file)
 	echo "---> $tests ($tested [$tested_file]) done\n";
 }
 
-function show_test($test_idx, $shortname)
+function show_test($test_idx, $shortname, $unicode_semantics)
 {
 	global $test_cnt;
 
-	echo "TEST $test_idx/$test_cnt [$shortname]\r";
+	$kind = $unicode_semantics ? ':U' : ':N';
+	echo "TEST$kind $test_idx/$test_cnt [$shortname]\r";
 	flush();
 }
 
@@ -1925,7 +1926,7 @@ function show_result($result, $tested, $tested_file, $unicode_semantics, $extra 
 {
 	global $html_output, $html_file, $temp_target, $temp_urlbase, $unicode_and_native;
 
-	$kind = $unicode_and_native ? ($unicode_semantics ? ':U' : ':N') : '';
+	$kind = $unicode_semantics ? ':U' : ':N';
 
 	echo "$result$kind $tested [$tested_file] $extra\n";
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.5 2006/08/13 23:39:57 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.6 2006/08/14 15:39:28 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -588,23 +588,22 @@ zend_module_entry zip_module_entry = {
 ZEND_GET_MODULE(zip)
 #endif
 
-/* {{{ proto resource zip_open(string filename [,flags])
+/* {{{ proto resource zip_open(string filename)
 Create new zip using source uri for output */
 PHP_FUNCTION(zip_open)
 {
 	char     *filename;
 	int       filename_len;
 	zip_rsrc *rsrc_int;
-	long mode = 0;
 	int err = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &filename, &filename_len, &mode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &filename, &filename_len) == FAILURE) {
 		return;
 	}
 
 	rsrc_int = (zip_rsrc *)emalloc(sizeof(zip_rsrc));
 
-	rsrc_int->za = zip_open(filename, mode, &err);
+	rsrc_int->za = zip_open(filename, 0, &err);
 	if (rsrc_int->za == NULL) {
 		efree(rsrc_int);
 		RETURN_LONG((long)err);
@@ -727,12 +726,12 @@ PHP_FUNCTION(zip_entry_close)
 PHP_FUNCTION(zip_entry_read)
 {
 	zval * zip_entry;
-	long len = 0, mode = 0;
+	long len = 0;
 	zip_read_rsrc * zr_rsrc;
 	char *buffer;
 	int n = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|ll", &zip_entry, &len, &mode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zip_entry, &len) == FAILURE) {
 		return;
 	}
 
@@ -1946,7 +1945,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.5 2006/08/13 23:39:57 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.6 2006/08/14 15:39:28 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "1.4.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.10 2006/08/07 21:27:40 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.11 2006/08/14 10:29:20 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.10 $'."\n";
+					echo '$Revision: 1.226.2.37.2.11 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1307,7 +1307,7 @@ TEST $file
 			return 'BORKED';
 		}
 		save_text($tmp_post, $request);
-		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
+		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
 	} elseif (array_key_exists('POST', $section_text) && !empty($section_text['POST'])) {
 
 		$post = trim($section_text['POST']);
@@ -1318,7 +1318,7 @@ TEST $file
 		$env['CONTENT_TYPE']   = 'application/x-www-form-urlencoded';
 		$env['CONTENT_LENGTH'] = $content_length;
 
-		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
+		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
 
 	} else {
 
@@ -1326,7 +1326,7 @@ TEST $file
 		$env['CONTENT_TYPE']   = '';
 		$env['CONTENT_LENGTH'] = '';
 
-		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" $args 2>&1";
+		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" $args 2>&1";
 	}
 
 	if ($leak_check) {

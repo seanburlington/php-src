@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.303 2006/08/14 10:29:10 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.304 2006/08/14 21:08:02 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -400,7 +400,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.303 $'."\n";
+					echo '$Revision: 1.304 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1360,7 +1360,7 @@ TEST $file
 			return 'BORKED';
 		}
 		save_text($tmp_post, $request);
-		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
+		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
 	} elseif (array_key_exists('POST', $section_text) && !empty($section_text['POST'])) {
 
 		$post = trim($section_text['POST']);
@@ -1371,7 +1371,7 @@ TEST $file
 		$env['CONTENT_TYPE']   = 'application/x-www-form-urlencoded';
 		$env['CONTENT_LENGTH'] = $content_length;
 
-		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
+		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" 2>&1 < $tmp_post";
 
 	} else {
 
@@ -1379,11 +1379,13 @@ TEST $file
 		$env['CONTENT_TYPE']   = '';
 		$env['CONTENT_LENGTH'] = '';
 
-		$cmd = "USE_ZEND_ALLOC=1 $php$pass_options$ini_settings -f \"$test_file\" $args 2>&1";
+		$cmd = "$php$pass_options$ini_settings -f \"$test_file\" $args 2>&1";
 	}
 
 	if ($leak_check) {
 		$cmd = "USE_ZEND_ALLOC=0 valgrind -q --tool=memcheck --trace-children=yes --log-file-exactly=$memcheck_filename $cmd";
+	} else {
+		$cmd = "USE_ZEND_ALLOC=1 ".$cmd;
 	}
 
 	if ($DETAILED) echo "

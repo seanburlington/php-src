@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.1 2006/08/11 17:43:04 tony2001 Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.2 2006/08/14 08:18:01 tony2001 Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -671,6 +671,7 @@ PHP_FUNCTION(xmlrpc_encode_request)
 			if (Z_TYPE_PP(method) == IS_NULL) {
 				XMLRPC_RequestSetRequestType(xRequest, xmlrpc_request_response);
 			} else {
+				convert_to_string_ex(method);
 				XMLRPC_RequestSetMethodName(xRequest, Z_STRVAL_PP(method));
 				XMLRPC_RequestSetRequestType(xRequest, xmlrpc_request_call);
 			}
@@ -740,7 +741,7 @@ zval* decode_request_worker (zval* xml_in, zval* encoding_in, zval* method_name_
 
       if(XMLRPC_RequestGetRequestType(response) == xmlrpc_request_call) {
          if(method_name_out) {
-            convert_to_string(method_name_out);
+            zval_dtor(method_name_out);
             Z_TYPE_P(method_name_out) = IS_STRING;
             Z_STRVAL_P(method_name_out) = estrdup(XMLRPC_RequestGetMethodName(response));
             Z_STRLEN_P(method_name_out) = strlen(Z_STRVAL_P(method_name_out));

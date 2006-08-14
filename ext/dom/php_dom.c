@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.96 2006/06/02 21:55:26 tony2001 Exp $ */
+/* $Id: php_dom.c,v 1.97 2006/08/14 11:29:49 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -205,7 +205,7 @@ int dom_get_strict_error(php_libxml_ref_obj *document) {
 /* {{{ xmlNodePtr dom_object_get_node(dom_object *obj) */
 PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj)
 {
-	if (obj->ptr != NULL) {
+	if (obj && obj->ptr != NULL) {
 		return ((php_libxml_node_ptr *)obj->ptr)->node;
 	} else {
 		return NULL;
@@ -216,7 +216,7 @@ PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj)
 /* {{{ dom_object *php_dom_object_get_data(xmlNodePtr obj) */
 PHP_DOM_EXPORT dom_object *php_dom_object_get_data(xmlNodePtr obj)
 {
-	if (obj->_private != NULL) {
+	if (obj && obj->_private != NULL) {
 		return (dom_object *) ((php_libxml_node_ptr *) obj->_private)->_private;
 	} else {
 		return NULL;

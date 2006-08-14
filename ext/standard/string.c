@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.575 2006/08/10 19:02:32 iliaa Exp $ */
+/* $Id: string.c,v 1.576 2006/08/14 11:59:07 edink Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6777,8 +6777,9 @@ PHP_FUNCTION(sscanf)
 
 static char rot13_from[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char rot13_to[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
-U_STRING_DECL(u_rot13_from, rot13_from, sizeof(rot13_from)-1);
-U_STRING_DECL(u_rot13_to, rot13_to, sizeof(rot13_to)-1);
+U_STRING_DECL(u_rot13_from, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", sizeof(rot13_from)-1);
+U_STRING_DECL(u_rot13_to, "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM", sizeof(rot13_to)-1);
+
 
 /* {{{ proto string str_rot13(string str) U
    Perform the rot13 transform on a string */

@@ -12,45 +12,37 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: John Coggeshall <john@php.net>                               |
+  | Author: Omar Kilani <omar@php.net>                                   |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.26.2.1.2.3 2006/08/14 20:08:18 nlopess Exp $ */
+/* $Id: php_json.h,v 1.8.2.1 2006/08/14 20:08:17 nlopess Exp $ */
 
-#ifndef PHP_TIDY_H
-#define PHP_TIDY_H
+#ifndef PHP_JSON_H
+#define PHP_JSON_H
 
-extern zend_module_entry tidy_module_entry;
-#define phpext_tidy_ptr &tidy_module_entry
+#define PHP_JSON_VERSION "1.2.1"
+
+extern zend_module_entry json_module_entry;
+#define phpext_json_ptr &json_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_TIDY_API __declspec(dllexport)
+#define PHP_JSON_API __declspec(dllexport)
 #else
-#define PHP_TIDY_API
+#define PHP_JSON_API
 #endif
-
-#define TIDY_METHOD_MAP(name, func_name, arg_types) \
-	ZEND_NAMED_FE(name, ZEND_FN(func_name), arg_types)
-#define TIDY_NODE_METHOD(name)    PHP_FUNCTION(tnm_ ##name)
-#define TIDY_NODE_ME(name, param) TIDY_METHOD_MAP(name, tnm_ ##name, param)
-#define TIDY_DOC_METHOD(name)     PHP_FUNCTION(tdm_ ##name)
-#define TIDY_DOC_ME(name, param)  TIDY_METHOD_MAP(name, tdm_ ##name, param)
-#define TIDY_ATTR_METHOD(name)    PHP_FUNCTION(tam_ ##name)
-#define TIDY_ATTR_ME(name, param) TIDY_METHOD_MAP(name, tam_ ##name, param)
-
-ZEND_BEGIN_MODULE_GLOBALS(tidy)
-	char *default_config;
-    zval *inst;
-ZEND_END_MODULE_GLOBALS(tidy)
 
 #ifdef ZTS
-#define TG(v) TSRMG(tidy_globals_id, zend_tidy_globals *, v)
-#else
-#define TG(v) (tidy_globals.v)
+#include "TSRM.h"
 #endif
 
+#ifdef ZTS
+#define JSON_G(v) TSRMG(json_globals_id, zend_json_globals *, v)
+#else
+#define JSON_G(v) (json_globals.v)
 #endif
+
+#endif  /* PHP_JSON_H */
 
 
 /*

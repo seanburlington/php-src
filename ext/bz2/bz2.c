@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.6 2006/08/14 14:53:23 nlopess Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.7 2006/08/14 20:08:17 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,6 +39,17 @@
 #define PHP_BZ_ERRNO   0
 #define PHP_BZ_ERRSTR  1
 #define PHP_BZ_ERRBOTH 2
+
+static PHP_MINIT_FUNCTION(bz2);
+static PHP_MSHUTDOWN_FUNCTION(bz2);
+static PHP_MINFO_FUNCTION(bz2);
+static PHP_FUNCTION(bzopen);
+static PHP_FUNCTION(bzread);
+static PHP_FUNCTION(bzerrno);
+static PHP_FUNCTION(bzerrstr);
+static PHP_FUNCTION(bzerror);
+static PHP_FUNCTION(bzcompress);
+static PHP_FUNCTION(bzdecompress);
 
 /* {{{ arginfo */
 static

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.42.2.2 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_zlib.h,v 1.42.2.1.2.1 2006/08/14 20:08:18 nlopess Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -39,26 +39,9 @@ extern php_stream_filter_factory php_zlib_filter_factory;
 extern zend_module_entry php_zlib_module_entry;
 #define zlib_module_ptr &php_zlib_module_entry
 
-PHP_MINIT_FUNCTION(zlib);
-PHP_MSHUTDOWN_FUNCTION(zlib);
-PHP_RINIT_FUNCTION(zlib);
-PHP_MINFO_FUNCTION(zlib);
-PHP_FUNCTION(gzopen);
-PHP_FUNCTION(readgzfile);
-PHP_FUNCTION(gzfile);
-PHP_FUNCTION(gzcompress);
-PHP_FUNCTION(gzuncompress);
-PHP_FUNCTION(gzdeflate);
-PHP_FUNCTION(gzinflate);
-PHP_FUNCTION(gzencode);
-PHP_FUNCTION(ob_gzhandler);
-PHP_FUNCTION(zlib_get_coding_type);
-
-int php_enable_output_compression(int buffer_size TSRMLS_DC);
 int php_ob_gzhandler_check(TSRMLS_D);
 
 php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
-extern php_stream_ops php_stream_gzio_ops;
 extern php_stream_wrapper php_stream_gzip_wrapper;
 
 #ifdef ZTS

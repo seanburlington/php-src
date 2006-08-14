@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bz2.h,v 1.7.2.2 2007/01/01 09:40:12 sebastian Exp $ */
+/* $Id: php_bz2.h,v 1.7.2.1.2.1 2006/08/14 14:53:23 nlopess Exp $ */
 
 #ifndef PHP_BZ2_H
 #define PHP_BZ2_H
@@ -29,16 +29,16 @@ extern zend_module_entry bz2_module_entry;
 /* Bzip2 includes */
 #include <bzlib.h>
 
-PHP_MINIT_FUNCTION(bz2);
-PHP_MSHUTDOWN_FUNCTION(bz2);
-PHP_MINFO_FUNCTION(bz2);
-PHP_FUNCTION(bzopen);
-PHP_FUNCTION(bzread);
-PHP_FUNCTION(bzerrno);
-PHP_FUNCTION(bzerrstr);
-PHP_FUNCTION(bzerror);
-PHP_FUNCTION(bzcompress);
-PHP_FUNCTION(bzdecompress);
+static PHP_MINIT_FUNCTION(bz2);
+static PHP_MSHUTDOWN_FUNCTION(bz2);
+static PHP_MINFO_FUNCTION(bz2);
+static PHP_FUNCTION(bzopen);
+static PHP_FUNCTION(bzread);
+static PHP_FUNCTION(bzerrno);
+static PHP_FUNCTION(bzerrstr);
+static PHP_FUNCTION(bzerror);
+static PHP_FUNCTION(bzcompress);
+static PHP_FUNCTION(bzdecompress);
 
 #else
 #define phpext_bz2_ptr NULL

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pspell.h,v 1.15.2.2 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_pspell.h,v 1.15.2.1.2.1 2006/08/14 14:53:23 nlopess Exp $ */
 
 #ifndef _PSPELL_H
 #define _PSPELL_H
@@ -24,27 +24,27 @@
 extern zend_module_entry pspell_module_entry;
 #define pspell_module_ptr &pspell_module_entry
 
-PHP_MINIT_FUNCTION(pspell);
-PHP_MINFO_FUNCTION(pspell);
-PHP_FUNCTION(pspell_new);
-PHP_FUNCTION(pspell_new_personal);
-PHP_FUNCTION(pspell_new_config);
-PHP_FUNCTION(pspell_check);
-PHP_FUNCTION(pspell_suggest);
-PHP_FUNCTION(pspell_store_replacement);
-PHP_FUNCTION(pspell_add_to_personal);
-PHP_FUNCTION(pspell_add_to_session);
-PHP_FUNCTION(pspell_clear_session);
-PHP_FUNCTION(pspell_save_wordlist);
-PHP_FUNCTION(pspell_config_create);
-PHP_FUNCTION(pspell_config_runtogether);
-PHP_FUNCTION(pspell_config_mode);
-PHP_FUNCTION(pspell_config_ignore);
-PHP_FUNCTION(pspell_config_personal);
-PHP_FUNCTION(pspell_config_dict_dir);
-PHP_FUNCTION(pspell_config_data_dir);
-PHP_FUNCTION(pspell_config_repl);
-PHP_FUNCTION(pspell_config_save_repl);
+static PHP_MINIT_FUNCTION(pspell);
+static PHP_MINFO_FUNCTION(pspell);
+static PHP_FUNCTION(pspell_new);
+static PHP_FUNCTION(pspell_new_personal);
+static PHP_FUNCTION(pspell_new_config);
+static PHP_FUNCTION(pspell_check);
+static PHP_FUNCTION(pspell_suggest);
+static PHP_FUNCTION(pspell_store_replacement);
+static PHP_FUNCTION(pspell_add_to_personal);
+static PHP_FUNCTION(pspell_add_to_session);
+static PHP_FUNCTION(pspell_clear_session);
+static PHP_FUNCTION(pspell_save_wordlist);
+static PHP_FUNCTION(pspell_config_create);
+static PHP_FUNCTION(pspell_config_runtogether);
+static PHP_FUNCTION(pspell_config_mode);
+static PHP_FUNCTION(pspell_config_ignore);
+static PHP_FUNCTION(pspell_config_personal);
+static PHP_FUNCTION(pspell_config_dict_dir);
+static PHP_FUNCTION(pspell_config_data_dir);
+static PHP_FUNCTION(pspell_config_repl);
+static PHP_FUNCTION(pspell_config_save_repl);
 #else
 #define pspell_module_ptr NULL
 #endif

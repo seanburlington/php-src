@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.314 2006/08/15 12:19:39 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.315 2006/08/15 12:27:04 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -432,7 +432,7 @@ oci_error:
 	if (error_code) {
 		int tmp_buf_len = strlen(tmp_buf);
 
-		if (tmp_buf[tmp_buf_len - 1] == '\n') {
+		if (tmp_buf_len > 0 && tmp_buf[tmp_buf_len - 1] == '\n') {
 			tmp_buf[tmp_buf_len - 1] = '\0';
 		}
 			
@@ -668,7 +668,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.314 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.315 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -860,8 +860,12 @@ sb4 php_oci_error(OCIError *err_p, sword status TSRMLS_DC)
 			break;
 		case OCI_SUCCESS_WITH_INFO:
 			errcode = php_oci_fetch_errmsg(err_p, &errbuf TSRMLS_CC);
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI_SUCCESS_WITH_INFO: %s", errbuf);
-			efree(errbuf);
+			if (errbuf) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI_SUCCESS_WITH_INFO: %s", errbuf);
+				efree(errbuf);
+			} else {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI_SUCCESS_WITH_INFO: failed to fetch error message");
+			}
 			break;
 		case OCI_NEED_DATA:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI_NEED_DATA");
@@ -871,8 +875,12 @@ sb4 php_oci_error(OCIError *err_p, sword status TSRMLS_DC)
 			break;
 		case OCI_ERROR: 
 			errcode = php_oci_fetch_errmsg(err_p, &errbuf TSRMLS_CC);
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", errbuf);
-			efree(errbuf);
+			if (errbuf) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", errbuf);
+				efree(errbuf);
+			} else {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to fetch error message");
+			}
 			break;
 		case OCI_INVALID_HANDLE:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI_INVALID_HANDLE");

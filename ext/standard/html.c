@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.114 2006/03/02 13:12:45 dmitry Exp $ */
+/* $Id: html.c,v 1.115 2006/08/15 15:09:21 tony2001 Exp $ */
 
 /*
  * HTML entity resources:
@@ -756,6 +756,15 @@ static enum entity_charset determine_charset(char *charset_hint TSRMLS_DC)
 			charset_hint = Z_STRVAL_P(uf_result);
 			len = Z_STRLEN_P(uf_result);
 			
+			if (len == 4) { /* sizeof(none|auto|pass)-1 */
+				if (!memcmp("pass", charset_hint, sizeof("pass") - 1) || 
+				    !memcmp("auto", charset_hint, sizeof("auto") - 1) || 
+				    !memcmp("none", charset_hint, sizeof("none") - 1)) {
+					
+					charset_hint = NULL;
+					len = 0;
+				}
+			}
 			goto det_charset;
 		}
 	}

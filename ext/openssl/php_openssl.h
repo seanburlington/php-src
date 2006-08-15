@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.16.2.1.2.1 2006/08/15 00:38:04 pajoye Exp $ */
+/* $Id: php_openssl.h,v 1.16.2.1.2.2 2006/08/15 20:27:20 pajoye Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -67,7 +67,8 @@ PHP_FUNCTION(openssl_csr_new);
 PHP_FUNCTION(openssl_csr_export);
 PHP_FUNCTION(openssl_csr_export_to_file);
 PHP_FUNCTION(openssl_csr_sign);
-
+PHP_FUNCTION(openssl_csr_get_subject);
+PHP_FUNCTION(openssl_csr_get_public_key);
 #else
 
 #define phpext_openssl_ptr NULL

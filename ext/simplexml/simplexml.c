@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.217 2006/08/14 11:58:49 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.218 2006/08/16 08:51:34 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -453,7 +453,7 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 			trim_zv = *member;
 			zval_copy_ctor(&trim_zv);
 			convert_to_string_with_converter(&trim_zv, UG(utf8_conv));
-			php_trim(Z_STRVAL(trim_zv), Z_STRLEN(trim_zv), NULL, 0, IS_STRING, &tmp_zv, 3 TSRMLS_CC);
+			php_trim(Z_STRVAL(trim_zv), Z_STRLEN(trim_zv), NULL, 0, &tmp_zv, 3 TSRMLS_CC);
 			zval_dtor(&trim_zv);
 			member = &tmp_zv;
 		}
@@ -2339,7 +2339,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.217 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.218 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

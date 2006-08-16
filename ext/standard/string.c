@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.580 2006/08/15 20:38:12 andrei Exp $ */
+/* $Id: string.c,v 1.581 2006/08/16 18:07:22 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -709,10 +709,6 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 	UChar	ch = 0, wh = 0;
 	int32_t	start = 0, end = len;
 
-	/*
-	 * UTODO
-	 * fix trim("a") results in ""
-	 */
 	if ( what ) {
 		what = eustrndup(what, what_len);
 		php_expand_u_trim_range(&what, &what_len TSRMLS_CC);
@@ -722,11 +718,9 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 		for ( i = k = 0 ; i < end ; ) {
 			U16_NEXT(c, k, end, ch);
 			if ( what ) {
-				for ( j = 0 ; j < what_len ;  ) {
-					U16_NEXT(what, j, what_len, wh);
-					if ( wh == ch ) break;
+				if (u_memchr32(what, ch, what_len) == NULL) {
+					break;
 				}
-				if ( wh != ch ) break;
 			} else {
 				if ( u_isWhitespace(ch) == FALSE ) {
 					break;
@@ -740,11 +734,9 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 		for ( i = k = end ; i > start ; ) {
 			U16_PREV(c, 0, k, ch);
 			if ( what ) {
-				for ( j = 0 ; j < what_len ; ) {
-					U16_NEXT(what, j, what_len, wh);
-					if ( wh == ch ) break;
+				if (u_memchr32(what, ch, what_len) == NULL) {
+					break;
 				}
-				if ( wh != ch ) break;
 			} else {
 				if ( u_isWhitespace(ch) == FALSE ) {
 					break;

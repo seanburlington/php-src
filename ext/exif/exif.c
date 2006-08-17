@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.2 2006/06/15 18:33:07 dmitry Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.3 2006/08/17 14:32:35 tony2001 Exp $ */
 
 /*  ToDos
  *
@@ -139,7 +139,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.2 2006/06/15 18:33:07 dmitry Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.3 2006/08/17 14:32:35 tony2001 Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -2806,6 +2806,7 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 				// pointers read without the need to free them
 				// explicitley before returning.
 				*/
+				memset(&cbuf, 0, sizeof(cbuf));
 				value_ptr = cbuf;
 			}
 

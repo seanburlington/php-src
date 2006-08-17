@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.7 2006/08/14 20:08:17 nlopess Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.8 2006/08/17 20:46:51 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -178,7 +178,7 @@ static int php_bz2iop_flush(php_stream *stream TSRMLS_DC)
 }
 /* }}} */
 
-static php_stream_ops php_stream_bz2io_ops = {
+php_stream_ops php_stream_bz2io_ops = {
 	php_bz2iop_write, php_bz2iop_read,
 	php_bz2iop_close, php_bz2iop_flush,
 	"BZip2",

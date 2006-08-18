@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.5 2006/07/15 15:08:41 helly Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.6 2006/08/18 12:50:57 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2003,6 +2003,8 @@ PHP_FUNCTION(fgetcsv)
 			if (delimiter_str_len < 1) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "delimiter must be a character");
 				RETURN_FALSE;
+			} else if (delimiter_str_len > 1) {
+				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "delimiter must be a single character");
 			}
 
 			/* use first character from string */
@@ -2013,7 +2015,10 @@ PHP_FUNCTION(fgetcsv)
 			if (enclosure_str_len < 1) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "enclosure must be a character");
 				RETURN_FALSE;
+			} else if (enclosure_str_len > 1) {
+				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "enclosure must be a single character");
 			}
+
 			/* use first character from string */
 			enclosure = enclosure_str[0];
 		}

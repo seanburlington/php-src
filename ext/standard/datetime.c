@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.137 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: datetime.c,v 1.138 2006/08/20 18:20:59 iliaa Exp $ */
 
 #if HAVE_STRPTIME
 #define _XOPEN_SOURCE
@@ -100,6 +100,8 @@ PHP_FUNCTION(strptime)
 		&ts, &ts_length, &format, &format_length) == FAILURE) {
 		return;
 	}
+
+	memset(&parsed_time, 0, sizeof(parsed_time));
 
 	unparsed_part = strptime(ts, format, &parsed_time);
 	if (unparsed_part == NULL) {

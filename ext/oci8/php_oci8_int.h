@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.20 2006/08/09 15:23:50 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.21 2006/08/21 16:40:46 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -221,7 +221,17 @@ typedef struct { /* php_oci_out_column {{{ */
 /* {{{ macros */
 
 #define PHP_OCI_CALL(func, params) \
+	OCI_G(in_call) = 1; \
 	func params; \
+	OCI_G(in_call) = 0; \
+	if (OCI_G(debug_mode)) { \
+		php_printf ("OCI8 DEBUG: " #func " at (%s:%d) \n", __FILE__, __LINE__); \
+	}
+
+#define PHP_OCI_CALL_RETURN(__retval, func, params) \
+	OCI_G(in_call) = 1; \
+	__retval = func params; \
+	OCI_G(in_call) = 0; \
 	if (OCI_G(debug_mode)) { \
 		php_printf ("OCI8 DEBUG: " #func " at (%s:%d) \n", __FILE__, __LINE__); \
 	}
@@ -411,6 +421,8 @@ ZEND_BEGIN_MODULE_GLOBALS(oci) /* {{{ */
 	int shutdown;				/* in shutdown flag */
 
 	OCIEnv *env;				/* global environment handle */
+
+	zend_bool in_call;
 
 ZEND_END_MODULE_GLOBALS(oci) /* }}} */ 
 

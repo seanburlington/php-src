@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.134 2006/08/07 17:33:20 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.135 2006/08/21 16:54:05 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1043,9 +1043,6 @@ static PHP_METHOD(PDO, query)
 		}
 		/* something broke */
 	}
-
-	/* kill the object handle for the stmt here */
-	zval_dtor(return_value);
 
 	RETURN_FALSE;
 }

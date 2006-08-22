@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.67 2006/06/05 22:39:10 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.68 2006/08/22 06:15:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -194,10 +194,9 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 #elif defined(PHP_WIN32)
 	{
 		long handle = _get_osfhandle(self->fd);
-		DWORD in_buf_size, out_buf_size;
 
 		if (handle != 0xFFFFFFFF) {
-			self->is_pipe = GetNamedPipeInfo((HANDLE)handle, NULL, &out_buf_size, &in_buf_size, NULL);
+			self->is_pipe = GetFileType((HANDLE)handle) == FILE_TYPE_PIPE;
 		}
 	}
 #endif

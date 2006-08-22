@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.2 2006/07/30 20:51:24 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.3 2006/08/22 11:09:12 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1636,15 +1636,14 @@ PHP_FUNCTION(oci_parse)
 	php_oci_statement *statement;
 	char *query;
 	int query_len;
-	zend_bool cached = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|b", &z_connection, &query, &query_len, &cached) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs", &z_connection, &query, &query_len) == FAILURE) {
 		return;
 	}
 
 	PHP_OCI_ZVAL_TO_CONNECTION(z_connection, connection);
 
-	statement = php_oci_statement_create(connection, query, query_len, cached TSRMLS_CC);
+	statement = php_oci_statement_create(connection, query, query_len TSRMLS_CC);
 
 	if (statement) {
 		RETURN_RESOURCE(statement->id);
@@ -1748,7 +1747,7 @@ PHP_FUNCTION(oci_new_cursor)
 
 	PHP_OCI_ZVAL_TO_CONNECTION(z_connection, connection);
 
-	statement = php_oci_statement_create(connection, NULL, 0, 0 TSRMLS_CC);
+	statement = php_oci_statement_create(connection, NULL, 0 TSRMLS_CC);
 	
 	if (statement) {
 		RETURN_RESOURCE(statement->id);

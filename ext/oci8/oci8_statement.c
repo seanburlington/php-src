@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.7 2006/08/21 16:41:13 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.8 2006/08/22 11:09:12 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -43,7 +43,7 @@
 
 /* {{{ php_oci_statement_create() 
  Create statemend handle and allocate necessary resources */
-php_oci_statement *php_oci_statement_create (php_oci_connection *connection, char *query, long query_len, zend_bool cached TSRMLS_DC)
+php_oci_statement *php_oci_statement_create (php_oci_connection *connection, char *query, int query_len TSRMLS_DC)
 {
 	php_oci_statement *statement;
 	
@@ -258,7 +258,7 @@ int php_oci_statement_fetch(php_oci_statement *statement, ub4 nrows TSRMLS_DC)
 
 /* {{{ php_oci_statement_get_column() 
  Get column from the result set */
-php_oci_out_column *php_oci_statement_get_column(php_oci_statement *statement, long column_index, char *column_name, long column_name_len TSRMLS_DC)
+php_oci_out_column *php_oci_statement_get_column(php_oci_statement *statement, long column_index, char *column_name, int column_name_len TSRMLS_DC)
 {
 	php_oci_out_column *column = NULL;
 	int i;
@@ -485,7 +485,7 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 			buf = 0;
 			switch (outcol->data_type) {
 				case SQLT_RSET:
-					outcol->statement = php_oci_statement_create(statement->connection, NULL, 0, 0 TSRMLS_CC);
+					outcol->statement = php_oci_statement_create(statement->connection, NULL, 0 TSRMLS_CC);
 					outcol->stmtid = outcol->statement->id;
 					outcol->statement->nested = 1;
 

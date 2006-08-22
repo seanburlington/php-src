@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.19 2006/08/21 16:41:12 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.20 2006/08/22 11:09:12 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -652,7 +652,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.19 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.20 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -897,12 +897,12 @@ sb4 php_oci_fetch_errmsg(OCIError *error_handle, text **error_buf TSRMLS_DC)
 	if (error_code) {
 		int tmp_buf_len = strlen(tmp_buf);
 		
-		if (tmp_buf[tmp_buf_len - 1] == '\n') {
+		if (tmp_buf_len && tmp_buf[tmp_buf_len - 1] == '\n') {
 			tmp_buf[tmp_buf_len - 1] = '\0';
 		}
-		if (error_buf) {
+		if (tmp_buf_len && error_buf) {
 			*error_buf = NULL;
-			*error_buf = estrndup(tmp_buf, tmp_buf_len + 1);
+			*error_buf = estrndup(tmp_buf, tmp_buf_len);
 		}
 	}
 	return error_code;
@@ -1142,7 +1142,7 @@ open:
 		
 		if (alloc_non_persistent) {
 			connection = (php_oci_connection *) ecalloc(1, sizeof(php_oci_connection));
-			connection->hash_key = estrndup(hashed_details.c, hashed_details.len+1);
+			connection->hash_key = estrndup(hashed_details.c, hashed_details.len);
 			connection->is_persistent = 0;
 		} else {
 			connection = (php_oci_connection *) calloc(1, sizeof(php_oci_connection));
@@ -1151,7 +1151,7 @@ open:
 		}
 	} else {
 		connection = (php_oci_connection *) ecalloc(1, sizeof(php_oci_connection));
-		connection->hash_key = estrndup(hashed_details.c, hashed_details.len+1);
+		connection->hash_key = estrndup(hashed_details.c, hashed_details.len);
 		connection->is_persistent = 0;
 	}
 

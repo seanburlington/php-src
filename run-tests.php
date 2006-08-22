@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.12 2006/08/14 21:08:16 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.13 2006/08/22 05:00:51 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.12 $'."\n";
+					echo '$Revision: 1.226.2.37.2.13 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1330,9 +1330,10 @@ TEST $file
 	}
 
 	if ($leak_check) {
-		$cmd = "USE_ZEND_ALLOC=0 valgrind -q --tool=memcheck --trace-children=yes --log-file-exactly=$memcheck_filename $cmd";
+		$env['USE_ZEND_ALLOC'] = '0';
+		$cmd = "valgrind -q --tool=memcheck --trace-children=yes --log-file-exactly=$memcheck_filename $cmd";
 	} else {
-		$cmd = "USE_ZEND_ALLOC=1 ".$cmd;
+		$env['USE_ZEND_ALLOC'] = '1';
 	}
 
 	if ($DETAILED) echo "

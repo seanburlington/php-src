@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.12 2006/08/17 14:04:09 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.13 2006/08/22 13:01:44 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -211,6 +211,7 @@ dnl Include Zend and TSRM configurations.
 dnl -------------------------------------------------------------------------
 
 sinclude(Zend/Zend.m4)
+sinclude(TSRM/threads.m4)
 sinclude(TSRM/tsrm.m4)
 
 

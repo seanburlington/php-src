@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.60 2006/08/09 13:56:45 mike Exp $ */
+/* $Id: php_output.h,v 1.61 2006/08/22 07:53:58 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -117,7 +117,7 @@ typedef struct _php_output_handler {
 
 ZEND_BEGIN_MODULE_GLOBALS(output)
 	int flags;
-	zend_stack handlers;
+	zend_stack *handlers;
 	php_output_handler *active;
 	php_output_handler *running;
 	char *output_start_filename;

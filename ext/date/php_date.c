@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.112 2006/08/15 06:53:02 mike Exp $ */
+/* $Id: php_date.c,v 1.113 2006/08/22 16:47:43 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -302,9 +302,17 @@ static zend_object_value date_object_new_timezone(zend_class_entry *class_type T
 static zend_object_value date_object_clone_date(zval *this_ptr TSRMLS_DC);
 static zend_object_value date_object_clone_timezone(zval *this_ptr TSRMLS_DC);
 
+/* This is need to ensure that session extension request shutdown occurs 1st, because it uses the date extension */ 
+static zend_module_dep date_deps[] = {
+        ZEND_MOD_OPTIONAL("session")
+        {NULL, NULL, NULL}
+};
+
 /* {{{ Module struct */
 zend_module_entry date_module_entry = {
-	STANDARD_MODULE_HEADER,
+	STANDARD_MODULE_HEADER_EX,
+	NULL,
+	date_deps,
 	"date",                     /* extension name */
 	date_functions,             /* function list */
 	PHP_MINIT(date),            /* process startup */

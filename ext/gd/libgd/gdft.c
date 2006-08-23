@@ -207,12 +207,28 @@ static int gdTcl_UtfToUniChar (char *str, Tcl_UniChar * chPtr)
 
 		byte = *((unsigned char *) (str + 1));
 		if (byte == '#') {
-			for (i = 2; i < 8; i++) {
-				byte = *((unsigned char *) (str + i));
-				if (byte >= '0' && byte <= '9') {
-					n = (n * 10) + (byte - '0');
-				} else {
-					break;
+			byte = *((unsigned char *) (str + 2));
+			if (byte == 'x' || byte == 'X') {
+				for (i = 3; i < 8; i++) {
+					byte = *((unsigned char *) (str + i));
+					if (byte >= 'A' && byte <= 'F')
+						byte = byte - 'A' + 10;
+					else if (byte >= 'a' && byte <= 'f')
+						byte = byte - 'a' + 10;
+					else if (byte >= '0' && byte <= '9')
+						byte = byte - '0';
+					else
+						break;
+					n = (n * 16) + byte;
+				}
+			} else {
+				for (i = 2; i < 8; i++) {
+					byte = *((unsigned char *) (str + i));
+					if (byte >= '0' && byte <= '9') {
+						n = (n * 10) + (byte - '0');
+					} else {
+						break;
+					}
 				}
 			}
 			if (byte == ';') {
@@ -915,10 +931,12 @@ gdImageStringFTEx (gdImage * im, int *brect, int fg, char *fontlist, double ptsi
 
 /* EAM DEBUG */
 #if (defined(FREETYPE_MAJOR) && ((FREETYPE_MAJOR == 2 && ((FREETYPE_MINOR == 1 && FREETYPE_PATCH >= 3) || FREETYPE_MINOR > 1) || FREETYPE_MAJOR > 2)))
-		if (font->face->charmap->encoding == FT_ENCODING_MS_SYMBOL) {
+		if (font->face->charmap->encoding == FT_ENCODING_MS_SYMBOL && strcmp(font->face->family_name, "Symbol") == 0) {
 			/* I do not know the significance of the constant 0xf000.
 			 * It was determined by inspection of the character codes
 			 * stored in Microsoft font symbol.
+			 * Added by Pierre (pajoye@php.net):
+			 * Convert to the Symbol glyph range only for a Symbol family member
 			 */
 			len = gdTcl_UtfToUniChar (next, &ch);
 			ch |= 0xf000;

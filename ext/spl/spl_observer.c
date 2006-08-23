@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is SplSubject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.2.2.7 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: spl_observer.c,v 1.2.2.6.2.1 2006/08/23 09:32:24 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -261,7 +261,7 @@ SPL_METHOD(SplObjectStorage, next)
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_Object, 0)
-	ZEND_ARG_INFO(0, object 0)
+	ZEND_ARG_INFO(0, object)
 ZEND_END_ARG_INFO();
 
 static zend_function_entry spl_funcs_SplObjectStorage[] = {

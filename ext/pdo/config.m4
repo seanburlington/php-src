@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.16 2005/10/04 07:48:43 helly Exp $
+dnl $Id: config.m4,v 1.17 2006/08/24 16:00:35 tony2001 Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -37,7 +37,6 @@ if test "$PHP_PDO" != "no"; then
   if test "$ext_shared" = "yes" ; then
     case $host_alias in
       *darwin*)
-        if test "$pdo_running_under_pear" = "1"; then
           AC_MSG_ERROR([
 Due to the way that loadable modules work on OSX/Darwin, you need to
 compile the PDO package statically into the PHP core.
@@ -45,7 +44,6 @@ compile the PDO package statically into the PHP core.
 Please follow the instructions at: http://netevil.org/node.php?nid=202
 for more detail on this issue.
           ])
-        fi
         ext_shared=no
         ;;
     esac

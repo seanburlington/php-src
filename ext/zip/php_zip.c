@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.7 2006/08/24 17:31:20 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.8 2006/08/24 17:54:36 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -898,7 +898,7 @@ ZIPARCHIVE_METHOD(open)
 	if (!intern || err) {
 		RETURN_LONG((long)err);
 	}
-	ze_obj->filename = estrndup(filename, filename_len);
+	ze_obj->filename = estrndup(resolved_path, strlen(resolved_path));
 	ze_obj->filename_len = filename_len;
 	ze_obj->za = intern;
 	RETURN_TRUE;
@@ -1956,7 +1956,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.7 2006/08/24 17:31:20 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.8 2006/08/24 17:54:36 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "1.4.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

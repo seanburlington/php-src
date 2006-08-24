@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_soap.h,v 1.38.2.7 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: php_soap.h,v 1.38.2.6.2.1 2006/08/24 06:18:30 dmitry Exp $ */
 
 #ifndef PHP_SOAP_H
 #define PHP_SOAP_H
@@ -114,6 +114,8 @@ struct _soapService {
 		int persistance;
 	} soap_class;
 
+	zval *soap_object;
+
 	HashTable *mapping;
 	int        version;
 	int        type;
@@ -127,6 +129,7 @@ struct _soapService {
 
 #define SOAP_CLASS 1
 #define SOAP_FUNCTIONS 2
+#define SOAP_OBJECT 3
 #define SOAP_FUNCTIONS_ALL 999
 
 #define SOAP_MAP_FUNCTION 1

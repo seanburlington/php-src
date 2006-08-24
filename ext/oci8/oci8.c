@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.20 2006/08/22 11:09:12 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.21 2006/08/24 12:05:19 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -51,7 +51,9 @@
 #include "zend_hash.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(oci)
+#if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
 static PHP_GINIT_FUNCTION(oci);
+#endif
 
 /* True globals, no need for thread safety */
 int le_connection;
@@ -373,11 +375,15 @@ zend_module_entry oci8_module_entry = {
 	PHP_RSHUTDOWN(oci),   /* per-request shutdown function */
 	PHP_MINFO(oci),       /* information function */
 	"1.2.1",
+#if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
 	PHP_MODULE_GLOBALS(oci),  /* globals descriptor */
 	PHP_GINIT(oci),           /* globals ctor */
 	NULL,                     /* globals dtor */
 	NULL,                     /* post deactivate */
 	STANDARD_MODULE_PROPERTIES_EX
+#else
+	STANDARD_MODULE_PROPERTIES
+#endif
 };
 /* }}} */
 
@@ -462,7 +468,11 @@ static void php_oci_cleanup_global_handles(TSRMLS_D)
 /* {{{ PHP_GINIT_FUNCTION
  Zerofill globals during module init
 */
+#if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
 static PHP_GINIT_FUNCTION(oci)
+#else
+static void php_oci_init_globals(zend_oci_globals *oci_globals TSRMLS_DC)
+#endif
 {
 	memset(oci_globals, 0, sizeof(zend_oci_globals));
 }
@@ -491,6 +501,11 @@ PHP_MINIT_FUNCTION(oci)
 	OCIInitialize(PHP_OCI_INIT_MODE, NULL, NULL, NULL, NULL);
 #endif
 
+#if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
+	/* this is handled by new globals management code */
+#else
+	ZEND_INIT_MODULE_GLOBALS(oci, php_oci_init_globals, NULL);
+#endif
 	REGISTER_INI_ENTRIES();
 
 	le_statement = zend_register_list_destructors_ex(php_oci_statement_list_dtor, NULL, "oci8 statement", module_number);
@@ -652,7 +667,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.20 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.21 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

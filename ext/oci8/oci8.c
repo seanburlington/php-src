@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.318 2006/08/22 11:08:28 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.319 2006/08/24 12:46:52 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -374,7 +374,7 @@ zend_module_entry oci8_module_entry = {
 	PHP_RINIT(oci),       /* per-request startup function */
 	PHP_RSHUTDOWN(oci),   /* per-request shutdown function */
 	PHP_MINFO(oci),       /* information function */
-	"1.2.1",
+	"1.2.2",
 #if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
 	PHP_MODULE_GLOBALS(oci),  /* globals descriptor */
 	PHP_GINIT(oci),           /* globals ctor */
@@ -667,7 +667,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.1");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.318 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.319 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

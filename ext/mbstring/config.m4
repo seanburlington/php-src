@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.58.2.4.2.2 2006/07/20 15:45:06 masugata Exp $
+dnl $Id: config.m4,v 1.58.2.4.2.3 2006/08/25 16:26:50 masugata Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -100,6 +100,11 @@ esac
       AC_DEFINE([HAVE_STDARG_PROTOTYPES], 1, [Define if stdarg.h is available])
     fi
     AC_DEFINE([HAVE_MBREGEX], 1, [whether to have multibyte regex support])
+
+
+    if test "$PHP_MBREGEX_BACKTRACK" != "no"; then
+      AC_DEFINE([HAVE_MBREGEX_BACKTRACK],1,[whether to check multibyte regex backtrack])
+    fi
 
     PHP_MBSTRING_ADD_CFLAG([-DNOT_RUBY])
     PHP_MBSTRING_ADD_BUILD_DIR([oniguruma])
@@ -277,6 +282,9 @@ PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
 
 PHP_ARG_ENABLE([mbregex], [whether to enable multibyte regex support],
 [  --disable-mbregex         MBSTRING: Disable multibyte regex support], yes, no)
+
+PHP_ARG_ENABLE([mbregex_backtrack], [whether to check multibyte regex backtrack],
+[  --disable-mbregex-backtrack         MBSTRING: Disable multibyte regex backtrack check], yes, no)
 
 PHP_ARG_WITH(libmbfl, [for external libmbfl],
 [  --with-libmbfl[=DIR]      MBSTRING: Use external libmbfl. DIR is the libmbfl install prefix.

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_typeinfo.c,v 1.9 2006/04/29 18:45:29 fmk Exp $ */
+/* $Id: com_typeinfo.c,v 1.10 2006/08/25 12:03:31 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -220,7 +220,7 @@ PHPAPI int php_com_import_typelib(ITypeLib *TL, int mode, int codepage TSRMLS_DC
 /* Type-library stuff */
 void php_com_typelibrary_dtor(void *pDest)
 {
-	ITypeLib *Lib = *(ITypeLib**)pDest;
+	ITypeLib *Lib = (ITypeLib*)pDest;
 	ITypeLib_Release(Lib);
 }
 

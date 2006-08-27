@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.1 2006/07/16 10:50:58 helly Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.2 2006/08/27 19:14:43 bjori Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -28,10 +28,6 @@
 #include <math.h>
 #include <float.h>
 #include <stdlib.h>
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 
 #ifndef PHP_ROUND_FUZZ
 # ifndef PHP_WIN32

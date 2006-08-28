@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.20 2006/08/27 19:14:43 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.21 2006/08/28 18:58:47 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4150,6 +4150,7 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 		setlocale(LC_CTYPE, "");
 	}
 	STR_FREE(BG(locale_string));
+	BG(locale_string) = NULL;
 
 	/*
 	 FG(stream_wrappers) and FG(stream_filters) are destroyed

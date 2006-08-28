@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.87.2.3 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: php_string.h,v 1.87.2.2.2.1 2006/08/28 23:33:37 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -134,7 +134,7 @@ PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_v
 PHPAPI size_t php_strip_tags(char *rbuf, int len, int *state, char *allow, int allow_len);
 PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_len, zval *result, int case_sensitivity, int *replace_count);
 PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, zval *result);
-PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value);
+PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC);
 PHPAPI void php_explode(zval *delim, zval *str, zval *return_value, int limit);
 
 PHPAPI size_t php_strspn(char *s1, char *s2, char *s1_end, char *s2_end); 

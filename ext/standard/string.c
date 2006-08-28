@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.13 2006/08/27 19:06:09 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.14 2006/08/28 09:56:28 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -888,6 +888,7 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value)
 	int            numelems, i = 0;
 	zval tmp_val;
 	int str_len;
+	TSRMLS_FETCH();
 
 	numelems = zend_hash_num_elements(Z_ARRVAL_P(arr));
 

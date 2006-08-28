@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.21 2006/08/28 18:58:47 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.22 2006/08/28 19:57:57 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3800,9 +3800,15 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY_EX("safe_mode_allowed_env_vars",   SAFE_MODE_ALLOWED_ENV_VARS,   PHP_INI_SYSTEM, OnUpdateSafeModeAllowedEnvVars,   NULL)
 PHP_INI_END()
 
+static zend_module_dep standard_deps[] = {
+	ZEND_MOD_OPTIONAL("session")
+	{NULL, NULL, NULL}
+};
 
 zend_module_entry basic_functions_module = {
-    STANDARD_MODULE_HEADER,
+    STANDARD_MODULE_HEADER_EX,
+	NULL,
+	standard_deps,
 	"standard",					/* extension name */
 	basic_functions,			/* function list */
 	PHP_MINIT(basic),			/* process startup */

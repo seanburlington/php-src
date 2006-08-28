@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.68 2006/08/22 06:15:45 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.69 2006/08/28 17:14:13 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -373,7 +373,7 @@ static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)
 				data->file = NULL;
 			}
 		} else if (data->fd != -1) {
-#ifdef PHP_DEBUG
+#if PHP_DEBUG
 			if ((data->fd == 1 || data->fd == 2) && 0 == strcmp(sapi_module.name, "cli")) {
 				/* don't close stdout or stderr in CLI in DEBUG mode, as we want to see any leaks */
 				ret = 0;

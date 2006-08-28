@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.799 2006/08/28 18:58:22 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.800 2006/08/28 19:56:06 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3803,8 +3803,15 @@ zend_function_entry basic_functions[] = {
 	{NULL, NULL, NULL}
 };
 
+static zend_module_dep standard_deps[] = {
+	ZEND_MOD_OPTIONAL("session")
+	{NULL, NULL, NULL}
+};
+
 zend_module_entry basic_functions_module = {
-    STANDARD_MODULE_HEADER,
+    STANDARD_MODULE_HEADER_EX,
+	NULL,
+	standard_deps,
 	"standard",					/* extension name */
 	basic_functions,			/* function list */
 	PHP_MINIT(basic),			/* process startup */

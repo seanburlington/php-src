@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.147 2006/07/21 21:09:49 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.148 2006/08/28 20:36:50 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1444,7 +1444,7 @@ SPL_METHOD(RegexIterator, accept)
 		zval_ptr_dtor(&intern->current.data);
 		ALLOC_INIT_ZVAL(intern->current.data);
 		php_pcre_match_impl(intern->u.regex.pce, subject, subject_len, &zcount, 
-			intern->current.data, intern->u.regex.mode == REGIT_MODE_ALL_MATCHES, intern->u.regex.use_flags, intern->u.regex.preg_flags, 0 TSRMLS_CC);
+			intern->current.data, intern->u.regex.mode == REGIT_MODE_ALL_MATCHES, intern->u.regex.use_flags, intern->u.regex.preg_flags, 0, 0 TSRMLS_CC);
 		count = zend_hash_num_elements(Z_ARRVAL_P(intern->current.data));
 		RETVAL_BOOL(count > 0);
 		break;

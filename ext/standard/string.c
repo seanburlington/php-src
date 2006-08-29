@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.15 2006/08/28 23:33:37 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.16 2006/08/29 12:20:18 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -920,9 +920,11 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC)
 				break;
 
 			case IS_DOUBLE: {
-				char stmp[MAX_LENGTH_OF_DOUBLE + EG(precision) + 1];
+				char *stmp;
+				stmp = emalloc(MAX_LENGTH_OF_DOUBLE + EG(precision) + 1);
 				str_len = sprintf(stmp, "%.*G", (int) EG(precision), Z_DVAL_PP(tmp));
 				smart_str_appendl(&implstr, stmp, str_len);
+				efree(stmp);
 			}
 				break;
 

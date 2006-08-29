@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.194 2006/08/29 22:52:37 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.195 2006/08/29 22:55:44 tony2001 Exp $ */
 
 /* UTODO
  *  - PCRE_NO_UTF8_CHECK option for Unicode strings
@@ -839,6 +839,7 @@ PHPAPI void php_pcre_match_impl(pcre_cache_entry *pce, char *subject, int subjec
 				} else {
 					zend_hash_update(Z_ARRVAL_P(subpats), subpat_names[i],
 									 strlen(subpat_names[i])+1, &match_sets[i], sizeof(zval *), NULL);
+					ZVAL_ADDREF(match_sets[i]);
 				}
 			}
 			zend_hash_next_index_insert(Z_ARRVAL_P(subpats), &match_sets[i], sizeof(zval *), NULL);

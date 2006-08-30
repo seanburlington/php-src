@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.584 2006/08/30 18:40:26 iliaa Exp $ */
+/* $Id: string.c,v 1.585 2006/08/30 20:24:32 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1294,7 +1294,7 @@ PHP_FUNCTION(implode)
 		}
 	}
 
-	php_implode(delim, arr, return_value TSRMLS_DC);
+	php_implode(delim, arr, return_value TSRMLS_CC);
 
 	if (argc == 1) {
 		FREE_ZVAL(delim);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.2 2006/06/17 13:06:06 bjori Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.3 2006/08/30 16:12:43 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2278,7 +2278,7 @@ PHP_FUNCTION(ob_iconv_handler)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zl", &zv_string, &status) == FAILURE)
 		return;
 
-	convert_to_string_ex(&zv_string);
+	convert_to_string(zv_string);
 
 	if (SG(sapi_headers).mimetype && 
 		strncasecmp(SG(sapi_headers).mimetype, "text/", 5) == 0) {

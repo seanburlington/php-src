@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.47 2006/08/30 07:42:02 mike Exp $ */
+/* $Id: php_zlib.h,v 1.48 2006/08/30 12:26:38 mike Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -54,6 +54,7 @@ typedef struct _php_zlib_context {
 	php_zlib_buffer buffer;
 } php_zlib_context;
 
+int php_zlib_output_encoding(TSRMLS_D);
 int php_zlib_encode(const char *in_buf, size_t in_len, char **out_buf, size_t *out_len, int encoding, int level TSRMLS_DC);
 int php_zlib_decode(const char *in_buf, size_t in_len, char **out_buf, size_t *out_len, int encoding, size_t max_len TSRMLS_DC);
 php_output_handler *php_zlib_output_handler_init(zval *handler_name TSRMLS_DC);

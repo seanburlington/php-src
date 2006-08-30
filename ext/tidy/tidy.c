@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.93 2006/08/14 15:17:03 nlopess Exp $ */
+/* $Id: tidy.c,v 1.94 2006/08/30 22:32:35 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -89,7 +89,7 @@
         if(Z_TYPE_P(_val) == IS_ARRAY) { \
             _php_tidy_apply_config_array(_doc, HASH_OF(_val) TSRMLS_CC); \
         } else { \
-            convert_to_string_ex(&_val); \
+            convert_to_string(_val); \
             TIDY_OPEN_BASEDIR_CHECK(Z_STRVAL_P(_val)); \
             switch (tidyLoadConfig(_doc, Z_STRVAL_P(_val))) { \
               case -1: \
@@ -987,7 +987,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.93 2006/08/14 15:17:03 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.94 2006/08/30 22:32:35 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1398,7 +1398,7 @@ static PHP_FUNCTION(tidy_getopt)
 	optval = php_tidy_get_opt_val(obj->ptdoc, opt, &optt TSRMLS_CC);
 	switch (optt) {
 		case TidyString:
-			RETURN_ASCII_STRING((char *)optval, 0);
+			RETURN_ASCII_STRING((char *)optval, ZSTR_AUTOFREE);
 			break;
 
 		case TidyInteger:

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.30 2006/08/14 15:17:03 nlopess Exp $ */
+/* $Id: php_tidy.h,v 1.31 2006/08/30 22:53:42 tony2001 Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -54,7 +54,6 @@ static PHP_FUNCTION(tidy_diagnose);
 static PHP_FUNCTION(tidy_get_output);
 static PHP_FUNCTION(tidy_get_error_buffer);
 static PHP_FUNCTION(tidy_get_release);
-static PHP_FUNCTION(tidy_reset_config);
 static PHP_FUNCTION(tidy_get_config);
 static PHP_FUNCTION(tidy_get_status);
 static PHP_FUNCTION(tidy_get_html_ver);

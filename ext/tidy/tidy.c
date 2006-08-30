@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.8.2.7 2006/08/30 22:34:48 tony2001 Exp $ */
+/* $Id: tidy.c,v 1.66.2.8.2.8 2006/08/30 22:53:51 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -253,7 +253,6 @@ static PHP_FUNCTION(tidy_diagnose);
 static PHP_FUNCTION(tidy_get_output);
 static PHP_FUNCTION(tidy_get_error_buffer);
 static PHP_FUNCTION(tidy_get_release);
-static PHP_FUNCTION(tidy_reset_config);
 static PHP_FUNCTION(tidy_get_config);
 static PHP_FUNCTION(tidy_get_status);
 static PHP_FUNCTION(tidy_get_html_ver);
@@ -1044,7 +1043,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.7 2006/08/30 22:34:48 tony2001 Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.8 2006/08/30 22:53:51 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

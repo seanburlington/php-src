@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.14.2.2.2.5 2006/08/10 15:02:41 iliaa Exp $ */
+/* $Id: streams.c,v 1.14.2.2.2.6 2006/08/30 17:49:10 iliaa Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -301,6 +301,17 @@ php_stream *php_curl_stream_opener(php_stream_wrapper *wrapper, char *filename, 
 	
 	/* TODO: read cookies and options from context */
 	if (context && !strncasecmp(filename, "http", sizeof("http")-1)) {
+		if (SUCCESS == php_stream_context_get_option(context, "http", "curl_verify_ssl_host", &ctx_opt) && Z_TYPE_PP(ctx_opt) == IS_BOOL && Z_LVAL_PP(ctx_opt) == 1) {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYHOST, 1);
+		} else {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYHOST, 0);
+		}
+		if (SUCCESS == php_stream_context_get_option(context, "http", "curl_verify_ssl_peer", &ctx_opt) && Z_TYPE_PP(ctx_opt) == IS_BOOL && Z_LVAL_PP(ctx_opt) == 1) {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYPEER, 1);
+		} else {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYPEER, 0);
+		}
+
 		/* HTTP(S) */
 		if (SUCCESS == php_stream_context_get_option(context, "http", "user_agent", &ctx_opt) && Z_TYPE_PP(ctx_opt) == IS_STRING) {
 			curl_easy_setopt(curlstream->curl, CURLOPT_USERAGENT, Z_STRVAL_PP(ctx_opt));
@@ -363,6 +374,17 @@ php_stream *php_curl_stream_opener(php_stream_wrapper *wrapper, char *filename, 
 				curl_easy_setopt(curlstream->curl, CURLOPT_FOLLOWLOCATION, 1);
 			}
 			curl_easy_setopt(curlstream->curl, CURLOPT_MAXREDIRS, 20L);
+		}
+	} else if (context && !strncasecmp(filename, "ftps", sizeof("ftps")-1)) {
+		if (SUCCESS == php_stream_context_get_option(context, "ftp", "curl_verify_ssl_host", &ctx_opt) && Z_TYPE_PP(ctx_opt) == IS_BOOL && Z_LVAL_PP(ctx_opt) == 1) {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYHOST, 1);
+		} else {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYHOST, 0);
+		}
+		if (SUCCESS == php_stream_context_get_option(context, "ftp", "curl_verify_ssl_peer", &ctx_opt) && Z_TYPE_PP(ctx_opt) == IS_BOOL && Z_LVAL_PP(ctx_opt) == 1) {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYPEER, 1);
+		} else {
+			curl_easy_setopt(curlstream->curl, CURLOPT_SSL_VERIFYPEER, 0);
 		}
 	}
 

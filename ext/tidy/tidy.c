@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.8.2.6 2006/08/14 20:08:18 nlopess Exp $ */
+/* $Id: tidy.c,v 1.66.2.8.2.7 2006/08/30 22:34:48 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -89,7 +89,7 @@
         if(Z_TYPE_P(_val) == IS_ARRAY) { \
             _php_tidy_apply_config_array(_doc, HASH_OF(_val) TSRMLS_CC); \
         } else { \
-            convert_to_string_ex(&_val); \
+            convert_to_string(_val); \
             TIDY_SAFE_MODE_CHECK(Z_STRVAL_P(_val)); \
             switch (tidyLoadConfig(_doc, Z_STRVAL_P(_val))) { \
               case -1: \
@@ -1044,7 +1044,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.6 2006/08/14 20:08:18 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.7 2006/08/30 22:34:48 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

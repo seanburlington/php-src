@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.195 2006/08/29 22:55:44 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.196 2006/08/30 16:46:23 tony2001 Exp $ */
 
 /* UTODO
  *  - PCRE_NO_UTF8_CHECK option for Unicode strings
@@ -1392,6 +1392,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 			zval_dtor(&callback_name);
 			*return_value = **subject;
 			zval_copy_ctor(return_value);
+			INIT_PZVAL(return_value);
 			return;
 		}
 		zval_dtor(&callback_name);

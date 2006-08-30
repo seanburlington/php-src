@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.63 2006/08/30 14:42:01 mike Exp $ */
+/* $Id: php_output.h,v 1.64 2006/08/30 22:34:32 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -242,15 +242,16 @@ PHPAPI int php_output_handler_reverse_conflict_register(zval *handler_name, php_
 
 #define PHP_OUTPUT_CONFLICT(check_name, action) \
 { \
-	char *tmp_s = (check_name); \
+	int tmp_i; \
 	zval tmp_z; \
+	char *tmp_s = (check_name); \
 	INIT_PZVAL(&tmp_z); \
 	ZVAL_ASCII_STRING(&tmp_z, tmp_s, ZSTR_DUPLICATE); \
-	if (php_output_handler_conflict(handler_name, &tmp_z TSRMLS_CC)) { \
-		zval_dtor(&tmp_z); \
+	tmp_i = php_output_handler_conflict(handler_name, &tmp_z TSRMLS_CC); \
+	zval_dtor(&tmp_z); \
+	if (tmp_i) { \
 		action; \
 	} \
-	zval_dtor(&tmp_z); \
 }
 
 PHPAPI php_output_handler_alias_ctor_t *php_output_handler_alias(zval *handler_name TSRMLS_DC);

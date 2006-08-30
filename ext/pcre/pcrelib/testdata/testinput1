@@ -1357,7 +1357,7 @@
 
 /^[W-c]+$/
     WXY_^abc
-    ***Failers
+    *** Failers
     wxy
 
 /^[W-c]+$/i
@@ -1473,11 +1473,11 @@
 /(abc)\323/
     abc\xd3
 
-/(abc)\500/
+/(abc)\100/
     abc\x40
     abc\100
 
-/(abc)\5000/
+/(abc)\1000/
     abc\x400
     abc\x40\x30
     abc\1000
@@ -3559,7 +3559,7 @@
     the.quick.brown.fox
     a100.b200.300c  
     12-ab.1245 
-    ***Failers
+    *** Failers
     \
     .a
     -a
@@ -3803,5 +3803,84 @@
     abcd:fee0:123::   
     :1
     1:  
+
+/[z\Qa-d]\E]/
+    z
+    a
+    -
+    d
+    ] 
+    *** Failers
+    b     
+
+/[\z\C]/
+    z
+    C 
+    
+/\M/
+    M 
+    
+/(a+)*b/
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 
+    
+/(?i)reg(?:ul(?:[aд]|ae)r|ex)/
+    REGular
+    regulaer
+    Regex  
+    regulдr 
+
+/≈жед[а-€ј-я]+/
+    ≈жеда
+    ≈жед€
+    ≈жедј
+    ≈жедя
+
+/(?<=Z)X./
+  \x84XAZXB
+
+/ab cd (?x) de fg/
+    ab cd defg
+
+/ab cd(?x) de fg/
+    ab cddefg
+    ** Failers 
+    abcddefg
+
+/(?<![^f]oo)(bar)/
+    foobarX 
+    ** Failers 
+    boobarX
+
+/(?<![^f])X/
+    offX
+    ** Failers
+    onyX  
+
+/(?<=[^f])X/
+    onyX
+    ** Failers
+    offX 
+
+/^/mg
+    a\nb\nc\n
+    \ 
+    
+/(?<=C\n)^/mg
+    A\nC\nC\n 
+
+/(?:(?(1)a|b)(X))+/
+    bXaX
+
+/(?:(?(1)\1a|b)(X|Y))+/
+    bXXaYYaY
+    bXYaXXaX  
+
+/()()()()()()()()()(?:(?(10)\10a|b)(X|Y))+/
+    bXXaYYaY
+
+/[[,abc,]+]/
+    abc]
+    a,b]
+    [a,b,c]  
 
 / End of testinput1 /

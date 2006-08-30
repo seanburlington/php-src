@@ -6,7 +6,7 @@
 and semantics are as close as possible to those of the Perl 5 language.
 
                        Written by Philip Hazel
-           Copyright (c) 1997-2007 University of Cambridge
+           Copyright (c) 1997-2006 University of Cambridge
 
 -----------------------------------------------------------------------------
 Redistribution and use in source and binary forms, with or without
@@ -79,7 +79,7 @@ Returns:      the character type category
 */
 
 int
-_pcre_ucp_findprop(const int c, int *type_ptr, int *script_ptr)
+_pcre_ucp_findprop(const unsigned int c, int *type_ptr, int *script_ptr)
 {
 int bot = 0;
 int top = sizeof(ucp_table)/sizeof(cnode);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.449 2006/08/30 16:24:31 tony2001 Exp $ */
+/* $Id: session.c,v 1.450 2006/08/30 17:57:25 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -104,7 +104,7 @@ static PHP_INI_MH(OnUpdateSaveHandler)
 		} else {
 			err_type = E_ERROR;
 		}
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Cannot find save handler %s", new_value);
+		php_error_docref(NULL TSRMLS_CC, err_type, "Cannot find save handler %s", new_value);
 		return FAILURE;
 	}
 	PS(mod) = tmp;

@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    |          Stefan Röhrich <sr@linux.de>                                |
+   |          Michael Wallner <mike@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.48 2006/08/30 12:26:38 mike Exp $ */
+/* $Id: php_zlib.h,v 1.49 2006/08/30 22:35:57 mike Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -78,8 +79,6 @@ PHP_MINFO_FUNCTION(zlib);
 PHP_FUNCTION(gzfile);
 PHP_FUNCTION(gzopen);
 PHP_FUNCTION(readgzfile);
-
-PHP_FUNCTION(ob_gzhandler);
 
 PHP_FUNCTION(gzcompress);
 PHP_FUNCTION(gzuncompress);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.9 2006/07/20 22:53:07 helly Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.10 2006/08/30 16:46:59 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1272,6 +1272,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 			efree(callback_name);
 			*return_value = **subject;
 			zval_copy_ctor(return_value);
+			INIT_PZVAL(return_value);
 			return;
 		}
 		efree(callback_name);

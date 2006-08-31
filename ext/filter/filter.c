@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.64 2006/08/07 16:54:16 iliaa Exp $ */
+/* $Id: filter.c,v 1.65 2006/08/31 15:17:08 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.64 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.65 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -511,7 +511,7 @@ PHP_FUNCTION(input_get)
 	long        arg, filter = FILTER_DEFAULT;
 	char       *var, *charset = NULL;
 	int         var_len, charset_len;
-	zval       *flags = NULL;
+	zval      **flags = NULL;
 	zval      **tmp;
 	zval       *array_ptr = NULL, *array_ptr2 = NULL, *array_ptr3 = NULL;
 	HashTable  *hash_ptr;
@@ -519,21 +519,21 @@ PHP_FUNCTION(input_get)
 	long         filter_flags = 0;
 	zval       *options = NULL;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls|lzs", &arg, &var, &var_len, &filter, &flags, &charset, &charset_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls|lZs", &arg, &var, &var_len, &filter, &flags, &charset, &charset_len) == FAILURE) {
 		return;
 	}
 
 	if (flags) {
-		switch (Z_TYPE_P(flags)) {
+		switch (Z_TYPE_PP(flags)) {
 			case IS_ARRAY:
-				options = flags;
+				options = *flags;
 				break;
 
 			case IS_STRING:
 			case IS_BOOL:
 			case IS_LONG:
-				convert_to_long(flags);
-				filter_flags = Z_LVAL_P(flags);
+				convert_to_long_ex(flags);
+				filter_flags = Z_LVAL_PP(flags);
 				options = NULL;
 				break;
 		}
@@ -844,41 +844,41 @@ PHP_FUNCTION(filter_data)
 	long        filter = FILTER_DEFAULT;
 	char       *charset = NULL;
 	int         charset_len;
-	zval       *var, *flags = NULL;
+	zval       *var, **flags = NULL;
 	int         filter_flags = 0;
 	zval       *options = NULL;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/l|zs", &var, &filter, &flags, &charset, &charset_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/l|Zs", &var, &filter, &flags, &charset, &charset_len) == FAILURE) {
 		return;
 	}
 
 	if (filter != FILTER_CALLBACK) {
 		if (flags) {
-			switch (Z_TYPE_P(flags)) {
+			switch (Z_TYPE_PP(flags)) {
 				case IS_ARRAY:
-					options = flags;
+					options = *flags;
 					break;
 
 				case IS_STRING:
 				case IS_BOOL:
 				case IS_LONG:
-					convert_to_long(flags);
-					filter_flags = Z_LVAL_P(flags);
+					convert_to_long_ex(flags);
+					filter_flags = Z_LVAL_PP(flags);
 					options = NULL;
 					break;
 			}
 		}
 	} else {
 		if (flags) {
-			switch (Z_TYPE_P(flags)) {
+			switch (Z_TYPE_PP(flags)) {
 				case IS_ARRAY:
 				case IS_STRING:
-					options = flags;
+					options = *flags;
 					break;
 
 				default:
-					convert_to_string(flags);
-					options = flags;
+					convert_to_string_ex(flags);
+					options = *flags;
 					break;
 			}
 		}

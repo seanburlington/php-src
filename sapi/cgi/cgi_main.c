@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.9 2006/06/27 08:27:10 tony2001 Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.10 2006/08/31 13:11:58 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -472,6 +472,10 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 	    zval_copy_ctor(array_ptr);
 	    return;
 	}
+	
+	/* call php's original import as a catch-all */
+	php_php_import_environment_variables(array_ptr TSRMLS_CC);
+
 	if (fcgi_is_fastcgi()) {
 		fcgi_request *request = (fcgi_request*) SG(server_context);
 		HashPosition pos;
@@ -490,8 +494,6 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 		}
 		PG(magic_quotes_gpc) = magic_quotes_gpc;
 	}
-	/* call php's original import as a catch-all */
-	php_php_import_environment_variables(array_ptr TSRMLS_CC);
 }
 #endif
 

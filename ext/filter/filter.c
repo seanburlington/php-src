@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.66 2006/08/31 22:11:35 tony2001 Exp $ */
+/* $Id: filter.c,v 1.67 2006/08/31 22:32:54 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.66 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.67 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -634,7 +634,29 @@ PHP_FUNCTION(input_get)
 	}
 
 	if (found) {
+		zval **option;
+
+		if (options && filter_flags==0 &&
+				zend_hash_find(HASH_OF(options), "flags", sizeof("flags"), (void **)&option) == SUCCESS) {
+			switch (Z_TYPE_PP(option)) {
+				case IS_ARRAY:
+				break;
+				default:
+				convert_to_long(*option);
+				filter_flags = Z_LVAL_PP(option);
+				break;
+			}
+		} else {
+			filter_flags = FILTER_FLAG_SCALAR;
+		}
+
 		zval_copy_ctor(return_value);  /* Watch out for empty strings */
+
+		if (Z_TYPE_P(return_value) == IS_ARRAY && !(filter_flags & FILTER_FLAG_ARRAY)) {
+			zval_dtor(return_value);
+			ZVAL_BOOL(return_value, 0);
+		}
+
 		php_zval_filter_recursive(&return_value, filter, filter_flags, options, charset TSRMLS_CC);
 	} else {
 		RETURN_NULL();

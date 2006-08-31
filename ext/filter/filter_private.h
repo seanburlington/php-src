@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.12 2006/05/08 15:42:47 pajoye Exp $ */
+/* $Id: filter_private.h,v 1.13 2006/08/31 16:12:33 pajoye Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -77,6 +77,28 @@
 #define FILTER_SANITIZE_ALL           0x0200
 
 #define FILTER_CALLBACK               0x0400
+
+#define PHP_FILTER_TRIM_DEFAULT(p, len, end) { \
+	while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\v') { \
+		p++; \
+		len--; \
+	} \
+	start = p; \
+	end = p + len - 1; \
+	if (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\v') { \
+		unsigned int i; \
+		for (i = len - 1; i >= 0; i--) { \
+			if (!(p[i] == ' ' || p[i] == '\t' || p[i] == '\r' || p[i] == '\v')) { \
+				break; \
+			} \
+		} \
+		i++; \
+		p[i] = '\0'; \
+		end = p + i - 1; \
+		len = (int) (end - p) + 1; \
+	} \
+}
+
 
 #endif /* FILTER_PRIVATE_H */
 

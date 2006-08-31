@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.64 2006/08/30 22:34:32 mike Exp $ */
+/* $Id: php_output.h,v 1.65 2006/08/31 13:51:35 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -109,7 +109,7 @@ typedef void (*php_output_handler_context_dtor_t)(void *opaq TSRMLS_DC);
 /* conflict check callback */
 typedef int (*php_output_handler_conflict_check_t)(zval *handler_name TSRMLS_DC);
 /* ctor for aliases */
-typedef struct _php_output_handler *(*php_output_handler_alias_ctor_t)(zval *handler_name TSRMLS_DC);
+typedef struct _php_output_handler *(*php_output_handler_alias_ctor_t)(zval *handler_name, size_t chunk_size, int flags TSRMLS_DC);
 
 typedef struct _php_output_handler {
 	zval *name;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.194 2006/08/30 14:42:01 mike Exp $ */
+/* $Id: output.c,v 1.195 2006/08/31 13:51:35 mike Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -495,7 +495,7 @@ PHPAPI php_output_handler *php_output_handler_create_user(zval *output_handler, 
 		case IS_STRING:
 		case IS_UNICODE:
 			if (Z_UNILEN_P(output_handler) && (alias = php_output_handler_alias(output_handler TSRMLS_CC))) {
-				handler = (*alias)(output_handler TSRMLS_CC);
+				handler = (*alias)(output_handler, chunk_size, flags TSRMLS_CC);
 				break;
 			}
 		default:

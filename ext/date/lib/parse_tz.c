@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.28 2006/07/11 12:37:26 tony2001 Exp $ */
+/* $Id: parse_tz.c,v 1.29 2006/09/01 23:19:56 nlopess Exp $ */
 
 #include "timelib.h"
 
@@ -196,7 +196,7 @@ static int tz_search(char *timezone, int left, int right, const timelib_tzdb *tz
 {
 	int mid, cmp;
 
-	if (left > right) {
+	if (left >= right) {
 		return -1; /* not found */
 	}
  

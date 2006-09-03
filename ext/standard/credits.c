@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.36.2.5 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: credits.c,v 1.36.2.4.2.1 2006/09/03 11:27:50 johannes Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -105,7 +105,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 
 	if (flag & PHP_CREDITS_QA) {
 		php_info_print_table_start();
-		php_info_print_table_header(1, "PHP 5.1 Quality Assurance Team");
+		php_info_print_table_header(1, "PHP Quality Assurance Team");
 		php_info_print_table_row(1, "Ilia Alshanetsky, Joerg Behrens, Antony Dovgal, Stefan Esser, Moriyoshi Koizumi, Magnus Maatta, Sebastian Nohn, Derick Rethans, Melvyn Sopacua, Jani Taskinen");
 		php_info_print_table_end();
 	}

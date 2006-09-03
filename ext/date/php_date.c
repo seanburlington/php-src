@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.113 2006/08/22 16:47:43 iliaa Exp $ */
+/* $Id: php_date.c,v 1.114 2006/09/03 09:09:38 mike Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1605,7 +1605,7 @@ static void date_register_classes(TSRMLS_D)
 	date_object_handlers_timezone.clone_obj = date_object_clone_timezone;
 }
 
-inline zend_object_value date_object_new_date_ex(zend_class_entry *class_type, php_date_obj **ptr TSRMLS_DC)
+static inline zend_object_value date_object_new_date_ex(zend_class_entry *class_type, php_date_obj **ptr TSRMLS_DC)
 {
 	php_date_obj *intern;
 	zend_object_value retval;
@@ -1652,7 +1652,7 @@ static zend_object_value date_object_clone_date(zval *this_ptr TSRMLS_DC)
 	return new_ov;
 }
 
-inline zend_object_value date_object_new_timezone_ex(zend_class_entry *class_type, php_timezone_obj **ptr TSRMLS_DC)
+static inline zend_object_value date_object_new_timezone_ex(zend_class_entry *class_type, php_timezone_obj **ptr TSRMLS_DC)
 {
 	php_timezone_obj *intern;
 	zend_object_value retval;

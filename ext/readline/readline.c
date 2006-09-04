@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.46 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: readline.c,v 1.47 2006/09/04 19:00:12 nlopess Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -363,7 +363,7 @@ PHP_FUNCTION(readline_write_history)
 /* {{{ proto bool readline_completion_function(string funcname) 
    Readline completion function? */
 
-static char *_readline_command_generator(char *text,int state)
+static char *_readline_command_generator(const char *text, int state)
 {
 	HashTable  *myht = Z_ARRVAL(_readline_array);
 	zval **entry;

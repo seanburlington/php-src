@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.4 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: readline.c,v 1.42.2.3.2.1 2006/09/04 18:59:01 nlopess Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -363,7 +363,7 @@ PHP_FUNCTION(readline_write_history)
 /* {{{ proto bool readline_completion_function(string funcname) 
    Readline completion function? */
 
-static char *_readline_command_generator(char *text,int state)
+static char *_readline_command_generator(const char *text, int state)
 {
 	HashTable  *myht = Z_ARRVAL(_readline_array);
 	zval **entry;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.7 2006/08/20 18:24:11 iliaa Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.8 2006/09/04 07:26:48 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -394,7 +394,7 @@ static void fcgi_get_params(fcgi_request *req, unsigned char *p, unsigned char *
 {
 	char buf[128];
 	char *tmp = buf;
-	size_t buf_size = sizeof(buf);
+	int buf_size = sizeof(buf);
 	int name_len, val_len;
 	char *s;
 

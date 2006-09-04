@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.205 2006/08/24 06:18:45 dmitry Exp $ */
+/* $Id: soap.c,v 1.206 2006/09/04 10:52:44 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -5034,6 +5034,7 @@ static void type_to_string(sdlTypePtr type, smart_str *buf, int level)
 				     type->kind == XSD_TYPEKIND_EXTENSION) && type->encode) {
 					encodePtr enc = type->encode;
 					while (enc && enc->details.sdl_type &&
+					       enc != enc->details.sdl_type->encode &&
 					       enc->details.sdl_type->kind != XSD_TYPEKIND_SIMPLE &&
 					       enc->details.sdl_type->kind != XSD_TYPEKIND_LIST &&
 					       enc->details.sdl_type->kind != XSD_TYPEKIND_UNION) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.232 2006/06/13 13:12:18 dmitry Exp $ */
+/* $Id: php.h,v 1.233 2006/09/04 08:18:35 dmitry Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -379,10 +379,6 @@ END_EXTERN_C()
 /* Output support */
 #include "main/php_output.h"
 
-
-#ifdef ZTS
-#define VIRTUAL_DIR
-#endif
 
 #include "php_streams.h"
 #include "php_memory_streams.h"

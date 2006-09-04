@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.2 2006/06/15 14:06:35 dmitry Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.3 2006/09/04 08:18:15 dmitry Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -397,10 +397,6 @@ END_EXTERN_C()
 } while (0)
 
 #define PUTC_H(c)					(php_header_write(&(c), 1 TSRMLS_CC), (c))
-
-#ifdef ZTS
-#define VIRTUAL_DIR
-#endif
 
 #include "php_streams.h"
 #include "php_memory_streams.h"

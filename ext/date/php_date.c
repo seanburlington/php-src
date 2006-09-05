@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.114 2006/09/03 09:09:38 mike Exp $ */
+/* $Id: php_date.c,v 1.115 2006/09/05 12:42:25 nlopess Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1494,7 +1494,7 @@ PHP_FUNCTION(time)
 PHP_FUNCTION(localtime)
 {
 	long timestamp = (long)time(NULL);
-	int associative = 0;
+	zend_bool associative = 0;
 	timelib_tzinfo *tzi;
 	timelib_time   *ts;
 

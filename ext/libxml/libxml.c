@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.51 2006/08/06 17:41:39 tony2001 Exp $ */
+/* $Id: libxml.c,v 1.52 2006/09/05 12:42:25 nlopess Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -705,7 +705,7 @@ PHP_FUNCTION(libxml_set_streams_context)
 PHP_FUNCTION(libxml_use_internal_errors)
 {
 	xmlStructuredErrorFunc current_handler;
-	int use_errors=0, retval;
+	zend_bool use_errors=0, retval;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &use_errors) == FAILURE) {
 		return;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.8.2.10 2006/09/05 13:50:22 nlopess Exp $ */
+/* $Id: tidy.c,v 1.66.2.8.2.11 2006/09/05 14:55:56 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,9 +30,6 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "safe_mode.h"
-
-#include "Zend/zend_exceptions.h"
-#include "Zend/zend_object_handlers.h"
 
 #include "tidy.h"
 #include "buffio.h"
@@ -276,13 +273,10 @@ static TIDY_DOC_METHOD(__construct);
 static TIDY_DOC_METHOD(parseFile);
 static TIDY_DOC_METHOD(parseString);
 
-static TIDY_NODE_METHOD(__construct);
 static TIDY_NODE_METHOD(hasChildren);
 static TIDY_NODE_METHOD(hasSiblings);
 static TIDY_NODE_METHOD(isComment);
 static TIDY_NODE_METHOD(isHtml);
-static TIDY_NODE_METHOD(isXhtml);
-static TIDY_NODE_METHOD(isXml);
 static TIDY_NODE_METHOD(isText);
 static TIDY_NODE_METHOD(isJste);
 static TIDY_NODE_METHOD(isAsp);
@@ -353,7 +347,6 @@ static zend_function_entry tidy_funcs_doc[] = {
 };
 
 static zend_function_entry tidy_funcs_node[] = {
-	TIDY_NODE_ME(__construct, NULL)
 	TIDY_NODE_ME(hasChildren, NULL)
 	TIDY_NODE_ME(hasSiblings, NULL)
 	TIDY_NODE_ME(isComment, NULL)
@@ -1034,7 +1027,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.10 2006/09/05 13:50:22 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.11 2006/09/05 14:55:56 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1598,13 +1591,6 @@ static PHP_FUNCTION(tidy_get_body)
 {
 	TIDY_SET_CONTEXT;
 	php_tidy_create_node(INTERNAL_FUNCTION_PARAM_PASSTHRU, is_body_node);
-}
-/* }}} */
-
-/* {{{ proto tidyNode::tidyNode()
-   Constructor. */
-static TIDY_NODE_METHOD(__construct)
-{	
 }
 /* }}} */
 

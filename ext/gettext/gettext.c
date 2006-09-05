@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.49 2006/06/14 21:29:22 bjori Exp $ */
+/* $Id: gettext.c,v 1.50 2006/09/05 10:35:53 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -327,7 +327,7 @@ PHP_NAMED_FUNCTION(zif_dcngettext)
 
 	RETVAL_FALSE;
 
-	if (ZEND_NUM_ARGS() != 5 || zend_get_parameters_ex(4, &domain, &msgid1, &msgid2, &count, &category) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 5 || zend_get_parameters_ex(5, &domain, &msgid1, &msgid2, &count, &category) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	} else {
 		char* msgstr = NULL;

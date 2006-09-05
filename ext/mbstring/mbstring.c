@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.260 2006/08/24 16:51:00 masugata Exp $ */
+/* $Id: mbstring.c,v 1.261 2006/09/05 12:32:13 nlopess Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2775,7 +2775,7 @@ PHP_FUNCTION(mb_encode_mimeheader)
 	int trans_enc_name_len;
 	char *linefeed = "\r\n";
 	int linefeed_len;
-	int indent = 0;
+	long indent = 0;
 
 	mbfl_string_init(&string);
 	string.no_language = MBSTRG(current_language);

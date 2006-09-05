@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.144 2006/08/03 11:05:09 dmitry Exp $ */
+/* $Id: php_ini.c,v 1.145 2006/09/05 11:55:08 edink Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -331,8 +331,8 @@ int php_init_config(TSRMLS_D)
 		}
 #endif
 
-		/* Add cwd (only with CLI) */
-		if (strcmp(sapi_module.name, "cli") == 0) {
+		/* Add cwd (not with CLI) */
+		if (strcmp(sapi_module.name, "cli") != 0) {
 			if (*php_ini_search_path) {
 				strcat(php_ini_search_path, paths_separator);
 			}

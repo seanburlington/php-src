@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.8.2.11 2006/09/05 14:55:56 nlopess Exp $ */
+/* $Id: tidy.c,v 1.66.2.8.2.12 2006/09/05 15:23:26 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -358,7 +358,7 @@ static zend_function_entry tidy_funcs_node[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_class_entry *tidy_ce_doc, *tidy_ce_node, *tidy_ce_exception;
+static zend_class_entry *tidy_ce_doc, *tidy_ce_node;
 
 static zend_object_handlers tidy_object_handlers_doc;
 static zend_object_handlers tidy_object_handlers_node;
@@ -1027,7 +1027,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.11 2006/09/05 14:55:56 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.12 2006/09/05 15:23:26 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

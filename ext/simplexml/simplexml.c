@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.14 2006/08/14 11:57:50 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.15 2006/09/06 15:31:48 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1976,7 +1976,7 @@ SXE_METHOD(__construct)
 {
 	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
 	char           *data, *ns = NULL;
-	int             data_len, *ns_len = 0;
+	int             data_len, ns_len = 0;
 	xmlDocPtr       docp;
 	long            options = 0;
 	zend_bool       is_url = 0, isprefix = 0;
@@ -2331,7 +2331,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.14 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.15 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

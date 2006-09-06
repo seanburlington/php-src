@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.32 2006/09/05 15:25:44 nlopess Exp $ */
+/* $Id: php_tidy.h,v 1.33 2006/09/06 17:55:09 mike Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -41,7 +41,8 @@ extern zend_module_entry tidy_module_entry;
 
 ZEND_BEGIN_MODULE_GLOBALS(tidy)
 	char *default_config;
-    zval *inst;
+	zval *inst;
+	zend_bool clean_output;
 ZEND_END_MODULE_GLOBALS(tidy)
 
 #ifdef ZTS

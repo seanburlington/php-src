@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.10 2006/09/06 15:19:41 nlopess Exp $ */
+/* $Id: php_zip.c,v 1.1.2.11 2006/09/06 17:24:41 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1273,7 +1273,7 @@ ZIPARCHIVE_METHOD(getArchiveComment)
 	}
 
 	comment = zip_get_archive_comment(intern, &comment_len, (int)flags);
-	RETURN_STRINGL((char *)comment, (long)comment_len, 1);
+	RETURN_STRINGL((char *)comment, comment_len, 1);
 }
 /* }}} */
 
@@ -1360,7 +1360,7 @@ ZIPARCHIVE_METHOD(getCommentName)
 
 	PHP_ZIP_STAT_PATH(intern, name, name_len, 0, sb);
 	comment = zip_get_file_comment(intern, sb.index, &comment_len, (int)flags);
-	RETURN_STRINGL((char *)comment, (long)comment_len, 1);
+	RETURN_STRINGL((char *)comment, comment_len, 1);
 }
 /* }}} */
 
@@ -1389,7 +1389,7 @@ ZIPARCHIVE_METHOD(getCommentIndex)
 
 	PHP_ZIP_STAT_INDEX(intern, index, 0, sb);
 	comment = zip_get_file_comment(intern, index, &comment_len, (int)flags);
-	RETURN_STRINGL((char *)comment, (long)comment_len, 1);
+	RETURN_STRINGL((char *)comment, comment_len, 1);
 }
 /* }}} */
 
@@ -1983,7 +1983,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.10 2006/09/06 15:19:41 nlopess Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.11 2006/09/06 17:24:41 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "1.7.1");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

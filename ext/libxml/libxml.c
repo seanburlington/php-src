@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.7 2006/09/05 12:39:20 nlopess Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.8 2006/09/06 21:44:45 edink Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1032,6 +1032,13 @@ void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC
 	}
 }
 /* }}} */
+
+#ifdef PHP_WIN32
+PHP_LIBXML_API BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+{
+	return xmlDllMain(hinstDLL, fdwReason, lpvReserved);
+}
+#endif
 
 #endif
 

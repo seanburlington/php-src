@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.24.2.3 2006/02/17 21:18:51 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.24.2.4 2006/09/06 17:03:05 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -52,6 +52,7 @@ static void php_free_pcre_cache(void *data)
 	pcre_cache_entry *pce = (pcre_cache_entry *) data;
 	if (!pce) return;
 	pefree(pce->re, 1);
+	if (pce->extra) pefree(pce->extra, 1);
 #if HAVE_SETLOCALE
 	if ((void*)pce->tables) pefree((void*)pce->tables, 1);
 	pefree(pce->locale, 1);

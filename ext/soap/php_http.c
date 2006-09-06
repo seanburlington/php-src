@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.96 2006/08/08 16:59:11 tony2001 Exp $ */
+/* $Id: php_http.c,v 1.97 2006/09/06 11:03:59 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -398,6 +398,8 @@ try_again:
 		}
 		if (phpurl->path) {
 			smart_str_appends(&soap_headers, phpurl->path);
+		} else {
+			smart_str_appendc(&soap_headers, '/');
 		}
 		if (phpurl->query) {
 			smart_str_appendc(&soap_headers, '?');
@@ -499,6 +501,8 @@ try_again:
 					PHP_MD5Update(&md5ctx, (unsigned char*)"POST:", sizeof("POST:")-1);
 					if (phpurl->path) {
 						PHP_MD5Update(&md5ctx, (unsigned char*)phpurl->path, strlen(phpurl->path));
+					} else {
+						PHP_MD5Update(&md5ctx, (unsigned char*)"/", 1);
 					}
 					if (phpurl->query) {
 						PHP_MD5Update(&md5ctx, (unsigned char*)"?", 1);
@@ -548,6 +552,8 @@ try_again:
 					smart_str_append_const(&soap_headers, "\", uri=\"");
 					if (phpurl->path) {
 						smart_str_appends(&soap_headers, phpurl->path);
+					} else {
+						smart_str_appendc(&soap_headers, '/');
 					}
 					if (phpurl->query) {
 						smart_str_appendc(&soap_headers, '?');

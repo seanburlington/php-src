@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.4 2006/08/31 11:17:47 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.5 2006/09/06 12:07:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1946,6 +1946,10 @@ PHP_FUNCTION(iconv_strpos)
 		RETURN_FALSE;
 	}
 
+	if (ndl_len < 1) {
+		RETURN_FALSE;
+	}
+
 	err = _php_iconv_strpos(&retval, haystk, haystk_len, ndl, ndl_len,
 	                        offset, charset); 
 	_php_iconv_show_error(err, GENERIC_SUPERSET_NAME, charset TSRMLS_CC);
@@ -1978,6 +1982,10 @@ PHP_FUNCTION(iconv_strrpos)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|s",
 		&haystk, &haystk_len, &ndl, &ndl_len,
 		&charset, &charset_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	if (ndl_len < 1) {
 		RETURN_FALSE;
 	}
 

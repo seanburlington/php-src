@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.10 2006/08/26 12:29:59 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.11 2006/09/06 15:13:16 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -597,7 +597,7 @@ PHP_FUNCTION(zip_open)
 	zip_rsrc *rsrc_int;
 	int err = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &filename, &filename_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &filename, &filename_len) == FAILURE) {
 		return;
 	}
 
@@ -643,7 +643,7 @@ PHP_FUNCTION(zip_read)
 	long flags = 0;
 	zip_rsrc *rsrc_int;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zip_dp, flags) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zip_dp, &flags) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(rsrc_int, zip_rsrc *, &zip_dp, -1, le_zip_dir_name, le_zip_dir);
@@ -1205,7 +1205,7 @@ ZIPARCHIVE_METHOD(setArchiveComment)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long comment_len = 0;
+	int comment_len;
 	char * comment;
 
 	if (!this) {
@@ -1258,7 +1258,7 @@ ZIPARCHIVE_METHOD(setCommentName)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long comment_len = 0, name_len = 0;
+	int comment_len, name_len;
 	char * comment, *name;
 	struct zip_stat sb;
 
@@ -1286,7 +1286,8 @@ ZIPARCHIVE_METHOD(setCommentIndex)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long index, comment_len = 0;
+	long index
+	int comment_len;
 	char * comment;
 	struct zip_stat sb;
 
@@ -1313,7 +1314,8 @@ ZIPARCHIVE_METHOD(getCommentName)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long name_len = 0, flags = 0;
+	int name_len;
+	long flags = 0;
 	int comment_len = 0;
 	const char * comment;
 	char *name;
@@ -1403,8 +1405,8 @@ ZIPARCHIVE_METHOD(deleteName)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long name_len = 0;
-   char *name;
+	int name_len;
+	char *name;
 	struct zip_stat sb;
 
 	if (!this) {
@@ -1956,7 +1958,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.10 2006/08/26 12:29:59 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.11 2006/09/06 15:13:16 nlopess Exp $");
 	php_info_print_table_row(2, "Zip version", "1.7.1");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

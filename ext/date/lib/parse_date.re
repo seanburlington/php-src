@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.4 2006/07/27 13:00:00 iliaa Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.5 2006/09/06 07:34:51 derick Exp $ */
 
 #include "timelib.h"
 
@@ -849,8 +849,8 @@ wddx             = year4 "-" month "-" day "T" hour24 ":" minute ":" second;
 pgydotd          = year4 "."? dayofyear;
 pgtextshort      = monthabbr "-" daylz "-" year;
 pgtextreverse    = year "-" monthabbr "-" daylz;
-isoweekday       = year4 "W" weekofyear [0-7];
-isoweek          = year4 "W" weekofyear;
+isoweekday       = year4 "-"? "W" weekofyear "-"? [0-7];
+isoweek          = year4 "-"? "W" weekofyear;
 exif             = year4 ":" monthlz ":" daylz " " hour24lz ":" minutelz ":" secondlz;
 
 /* Common Log Format: 10/Oct/2000:13:55:36 -0700 */

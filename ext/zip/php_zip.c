@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.12 2006/09/06 17:39:33 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.13 2006/09/06 19:50:22 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1286,7 +1286,7 @@ ZIPARCHIVE_METHOD(setCommentIndex)
 {
 	struct zip *intern;
 	zval *this = getThis();
-	long index
+	long index;
 	int comment_len;
 	char * comment;
 	struct zip_stat sb;
@@ -1958,7 +1958,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.12 2006/09/06 17:39:33 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.13 2006/09/06 19:50:22 bjori Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

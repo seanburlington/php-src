@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.5 2006/09/06 12:07:32 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.6 2006/09/07 14:24:42 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1159,7 +1159,7 @@ static php_iconv_err_t _php_iconv_mime_encode(smart_str *pretval, const char *fn
 
 				prev_in_left = in_left;
 
-				encoded = php_base64_encode(buf, (int)(out_size - out_left), &dummy);
+				encoded = (char *) php_base64_encode((unsigned char *) buf, (int)(out_size - out_left), &dummy);
 				encoded_len = (size_t)dummy;
 
 				if (char_cnt < encoded_len) {

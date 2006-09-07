@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.206 2006/09/04 10:52:44 dmitry Exp $ */
+/* $Id: soap.c,v 1.207 2006/09/07 13:25:46 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4155,7 +4155,8 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 		body = xmlNewChild(envelope, ns, BAD_CAST("Body"), NULL);
 		param = xmlNewChild(body, ns, BAD_CAST("Fault"), NULL);
 
-		if (zend_hash_find(prop, "faultcodens", sizeof("faultcodens"), (void**)&tmp) == SUCCESS && Z_TYPE_PP(tmp) == IS_STRING) {
+		if (zend_hash_find(prop, "faultcodens", sizeof("faultcodens"), (void**)&tmp) == SUCCESS &&
+			(Z_TYPE_PP(tmp) == IS_STRING || Z_TYPE_PP(tmp) == IS_UNICODE)) {
 			fault_ns = soap_encode_string(*tmp, NULL TSRMLS_CC);
 		}
 		use = SOAP_LITERAL;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.98 2006/09/06 17:55:09 mike Exp $ */
+/* $Id: tidy.c,v 1.99 2006/09/07 14:54:28 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1028,7 +1028,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.98 2006/09/06 17:55:09 mike Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.99 2006/09/07 14:54:28 mike Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1077,6 +1077,10 @@ static PHP_INI_MH(php_tidy_set_clean_output)
 	
 	return status;
 }
+
+/*
+ * NOTE: tidy does not support iterative/cumulative parsing, so chunk-sized output handler is not possible
+ */
 
 static void php_tidy_clean_output_start(zval *name TSRMLS_DC)
 {

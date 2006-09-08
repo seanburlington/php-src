@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.21 2006/06/13 13:12:18 dmitry Exp $ */
+/* $Id: com_extension.c,v 1.22 2006/09/08 05:52:15 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -115,7 +115,7 @@ static PHP_INI_MH(OnTypeLibFileUpdate)
 	char *strtok_buf = NULL;
 	int cached;
 
-	if (!new_value || (typelib_file = VCWD_FOPEN(new_value, "r"))==NULL) {
+	if (!new_value || !new_value[0] || (typelib_file = VCWD_FOPEN(new_value, "r"))==NULL) {
 		return FAILURE;
 	}
 

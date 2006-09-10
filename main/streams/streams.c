@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.131 2006/09/03 16:33:02 iliaa Exp $ */
+/* $Id: streams.c,v 1.132 2006/09/10 13:01:28 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1610,10 +1610,6 @@ PHPAPI size_t _php_stream_copy_to_mem_ex(php_stream *src, zend_uchar rettype, vo
 	int step = CHUNK_SIZE;
 	int min_room = CHUNK_SIZE / 4;
 	php_stream_statbuf ssbuf;
-
-	if (buf) {
-		*buf = NULL;
-	}
 
 	if (rettype != src->readbuf_type) {
 		/* UTODO: Introduce sloppy buffer conversion */

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.5 2006/09/03 16:32:27 iliaa Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.6 2006/09/10 13:01:37 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1197,10 +1197,6 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 	int step = CHUNK_SIZE;
 	int min_room = CHUNK_SIZE / 4;
 	php_stream_statbuf ssbuf;
-
-	if (buf) { 
-		*buf = NULL;
-	}
 
 	if (maxlen == 0) { 
 		return 0;

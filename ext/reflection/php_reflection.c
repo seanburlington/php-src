@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.22 2006/09/10 13:25:47 bjori Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.23 2006/09/11 17:08:42 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -537,10 +537,23 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 /* {{{ _const_string */
 static void _const_string(string *str, char *name, zval *value, char *indent TSRMLS_DC)
 {
-	string_printf(str, "%s    Constant [ %s %s ] { }\n",
+	zval value_copy;
+	int use_copy;
+
+	zend_make_printable_zval(value, &value_copy, &use_copy);
+	if (use_copy) {
+		value = &value_copy;
+	}
+
+	string_printf(str, "%s    Constant [ %s %s ] { %s }\n",
 			   indent,
 			   zend_zval_type_name(value),
-			   name);
+			   name,
+			   Z_STRVAL_P(value));
+
+	if (use_copy) {
+		zval_dtor(value);
+	}
 }
 /* }}} */
 
@@ -4799,7 +4812,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.22 2006/09/10 13:25:47 bjori Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.23 2006/09/11 17:08:42 johannes Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

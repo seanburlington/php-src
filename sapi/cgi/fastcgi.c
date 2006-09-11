@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.8 2006/09/04 07:26:48 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.9 2006/09/11 07:22:40 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -611,10 +611,12 @@ static inline void fcgi_close(fcgi_request *req, int force, int destroy)
 			RevertToSelf();
 		}
 #else
-		char buf[8];
+		if (!force) {
+			char buf[8];
 
-		shutdown(req->fd, 1);
-		while (recv(req->fd, buf, sizeof(buf), 0) > 0) {}
+			shutdown(req->fd, 1);
+			while (recv(req->fd, buf, sizeof(buf), 0) > 0) {}
+		}
 		close(req->fd);
 #endif
 		req->fd = -1;

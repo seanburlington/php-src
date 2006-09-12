@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.28 2006/08/31 16:14:43 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.29 2006/09/12 11:42:25 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -800,7 +800,7 @@ int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len,
 	/* dvoid *php_oci_collection           = NULL; */
 	OCIStmt *oci_stmt               = NULL;
 	dvoid *bind_data                = NULL;
-	php_oci_bind bind, *bindp;
+	php_oci_bind bind, *old_bind, *bindp;
 	int mode = OCI_DATA_AT_EXEC;
 	sb4 value_sz = -1;
 
@@ -900,7 +900,14 @@ int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len,
 	}
 
 	memset((void*)&bind,0,sizeof(php_oci_bind));
-	zend_hash_update(statement->binds, name, name_len + 1, &bind, sizeof(php_oci_bind), (void **)&bindp);
+	if (zend_hash_find(statement->binds, name, name_len + 1, (void **)&old_bind) == SUCCESS) {
+		bindp = old_bind;
+		if (bindp->zval) {
+			zval_ptr_dtor(&bindp->zval);
+		}
+	} else {
+		zend_hash_update(statement->binds, name, name_len + 1, &bind, sizeof(php_oci_bind), (void **)&bindp);
+	}
 	
 	bindp->descriptor = oci_desc;
 	bindp->statement = oci_stmt;

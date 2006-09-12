@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.14 2006/08/31 22:34:32 pajoye Exp $ */
+/* $Id: filter.c,v 1.52.2.15 2006/09/12 16:10:33 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.14 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.15 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -312,7 +312,7 @@ static void php_zval_filter(zval **value, long filter, long flags, zval *options
 		filter_func = php_find_filter(FILTER_DEFAULT);
 	}
 
-	SEPARATE_ZVAL(value);
+	/* Comment this out until there is a better solution: SEPARATE_ZVAL(value); */
 	/* Here be strings */
 	convert_to_string(*value);
 
@@ -634,7 +634,7 @@ PHP_FUNCTION(input_get)
 				break;
 			}
 		} else {
-			filter_flags = FILTER_FLAG_SCALAR;
+			filter_flags = filter_flags | FILTER_FLAG_SCALAR;
 		}
 
 		zval_copy_ctor(return_value);  /* Watch out for empty strings */

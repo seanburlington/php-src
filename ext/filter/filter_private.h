@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.12.2.2 2006/08/31 22:34:32 pajoye Exp $ */
+/* $Id: filter_private.h,v 1.12.2.3 2006/09/12 16:10:33 derick Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -24,7 +24,7 @@
 #define FILTER_FLAG_NONE                    0x0000
 
 #define FILTER_FLAG_ARRAY                   0x1000000
-#define FILTER_FLAG_SCALAR		              0x2000000
+#define FILTER_FLAG_SCALAR                  0x2000000
 
 #define FILTER_FLAG_ALLOW_OCTAL             0x0001
 #define FILTER_FLAG_ALLOW_HEX               0x0002

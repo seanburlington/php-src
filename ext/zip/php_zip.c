@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.12 2006/09/06 17:38:36 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.1.2.13 2006/09/12 12:02:49 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -996,7 +996,7 @@ ZIPARCHIVE_METHOD(addFile)
 		RETURN_FALSE;
 	}
 
-	if (!VCWD_REALPATH(filename, resolved_path)) {
+	if (!expand_filepath(filename, resolved_path TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 
@@ -1983,7 +1983,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.12 2006/09/06 17:38:36 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.13 2006/09/12 12:02:49 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

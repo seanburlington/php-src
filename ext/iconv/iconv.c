@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.144 2006/09/09 12:10:28 mike Exp $ */
+/* $Id: iconv.c,v 1.145 2006/09/12 17:26:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1894,7 +1894,7 @@ static void _php_iconv_show_error(php_iconv_err_t err, const char *out_charset, 
 
 		case PHP_ICONV_ERR_TOO_BIG:
 			/* should not happen */
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Run out of buffer");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Buffer length exceeded");
 			break;
 
 		case PHP_ICONV_ERR_MALFORMED:

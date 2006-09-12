@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.69 2006/08/28 17:14:13 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.70 2006/09/12 15:49:02 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1262,11 +1262,13 @@ not_relative_path:
 			*end = '\0';
 			end++;
 		}
+		if (*ptr == '\0') {
+			goto stream_skip;
+		}
 		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
 
 		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir_ex(trypath, 0 TSRMLS_CC)) {
-			ptr = end;
-			continue;
+			goto stream_skip;
 		}
 		
 		stream = php_stream_fopen_rel(trypath, mode, opened_path, options);
@@ -1275,6 +1277,7 @@ stream_done:
 			efree(pathbuf);
 			return stream;
 		}
+stream_skip:
 		ptr = end;
 	} /* end provided path */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.9 2006/09/11 07:22:40 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.10 2006/09/13 13:03:01 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -682,7 +682,7 @@ int fcgi_accept_request(fcgi_request *req)
 				break;
 #else
 				if (req->fd >= 0) {
-					struct timeval tv = {1,0};
+					struct timeval tv = {5,0};
 					fd_set set;
 
 					FD_ZERO(&set);

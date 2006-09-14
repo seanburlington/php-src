@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.8 2006/08/31 18:28:38 pajoye Exp $ */
+/* $Id: logical_filters.c,v 1.9 2006/09/14 17:48:11 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -332,9 +332,8 @@ void php_filter_float(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 
 	ret_val = 0.0;
 
-	if (*str == '0') {
-		/* leading zeros */
-		while (*(str++) == '0');
+	while (*str == '0') {
+		str++;
 	}
 
 	if (*str == dec_sep) {

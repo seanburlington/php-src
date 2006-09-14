@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.267 2006/06/11 20:47:55 iliaa Exp $ */
+/* $Id: info.c,v 1.268 2006/09/14 08:56:11 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -488,11 +488,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Thread Safety", "disabled" );
 #endif
 
-#if USE_ZEND_ALLOC
-		php_info_print_table_row(2, "Zend Memory Manager", "enabled" );
-#else
-		php_info_print_table_row(2, "Zend Memory Manager", "disabled" );
-#endif
+		php_info_print_table_row(2, "Zend Memory Manager", is_zend_mm(TSRMLS_C) ? "enabled" : "disabled" );
 
 		{
 			char buf[1024];

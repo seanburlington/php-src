@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.7 2006/08/22 12:04:53 dmitry Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.8 2006/09/15 08:18:36 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -634,6 +634,7 @@ int main(int argc, char *argv[])
 	tsrm_startup(1, 1, 0, NULL);
 #endif
 
+	cli_sapi_module.php_ini_path_override = NULL;
 	cli_sapi_module.ini_defaults = sapi_cli_ini_defaults;
 	cli_sapi_module.phpinfo_as_text = 1;
 	sapi_startup(&cli_sapi_module);
@@ -1246,9 +1247,6 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		if (cli_sapi_module.php_ini_path_override) {
-			free(cli_sapi_module.php_ini_path_override);
-		}
 	} zend_end_try();
 
 out:
@@ -1259,6 +1257,9 @@ out:
 		exit_status = EG(exit_status);
 	}
 out_err:	
+	if (cli_sapi_module.php_ini_path_override) {
+		free(cli_sapi_module.php_ini_path_override);
+	}
 	if (module_started) {
 		php_module_shutdown(TSRMLS_C);
 	}

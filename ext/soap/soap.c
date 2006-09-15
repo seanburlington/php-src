@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.10 2006/09/04 10:52:34 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.11 2006/09/15 07:11:35 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3764,7 +3764,9 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 				xmlAddChild(param, node);
 				if (fault_ns) {
 					xmlNsPtr nsptr = encode_add_ns(node, fault_ns);
-					xmlNodeSetContent(node, xmlBuildQName(BAD_CAST(str), nsptr->prefix, NULL, 0));
+					xmlChar *code = xmlBuildQName(BAD_CAST(str), nsptr->prefix, NULL, 0);
+					xmlNodeSetContent(node, code);
+					xmlFree(code);
 				} else {	
 					xmlNodeSetContentLen(node, BAD_CAST(str), new_len);
 				}
@@ -3787,7 +3789,9 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 				node = xmlNewChild(node, ns, BAD_CAST("Value"), NULL);
 				if (fault_ns) {
 					xmlNsPtr nsptr = encode_add_ns(node, fault_ns);
-					xmlNodeSetContent(node, xmlBuildQName(BAD_CAST(str), nsptr->prefix, NULL, 0));
+					xmlChar *code = xmlBuildQName(BAD_CAST(str), nsptr->prefix, NULL, 0);
+					xmlNodeSetContent(node, code);
+					xmlFree(code);
 				} else {	
 					xmlNodeSetContentLen(node, BAD_CAST(str), new_len);
 				}

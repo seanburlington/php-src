@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.3.2.2 2006/09/15 13:44:50 tony2001 Exp $ 
+dnl $Id: config.m4,v 1.28.2.3.2.3 2006/09/15 15:42:53 tony2001 Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for cURL support,
@@ -108,6 +108,12 @@ if test "$PHP_CURL" != "no"; then
     $CURL_LIBS -L$CURL_DIR/$PHP_LIBDIR
   ])
 
+  PHP_CHECK_LIBRARY(curl,curl_multi_strerror,
+  [
+    AC_DEFINE(HAVE_CURL_MULTI_STRERROR,1,[ ])
+  ],[],[
+    $CURL_LIBS -L$CURL_DIR/$PHP_LIBDIR
+  ])
 
   if test "$PHP_CURLWRAPPERS" != "no" ; then
     AC_DEFINE(PHP_CURL_URL_WRAPPERS,1,[ ])

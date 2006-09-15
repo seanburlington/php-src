@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.6 2006/09/10 13:01:37 tony2001 Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.7 2006/09/15 07:27:21 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1528,7 +1528,6 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 			if (FAILURE == zend_hash_find(wrapper_hash, (char*)tmp, n, (void**)&wrapperpp)) {
 				char wrapper_name[32];
 
-				efree(tmp);
 				if (n >= sizeof(wrapper_name)) {
 					n = sizeof(wrapper_name) - 1;
 				}

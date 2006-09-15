@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.22 2006/08/30 18:21:27 iliaa Exp $ */
+/* $Id: streams.c,v 1.23 2006/09/15 13:43:55 tony2001 Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -445,7 +445,9 @@ php_stream *php_curl_stream_opener(php_stream_wrapper *wrapper, char *filename, 
 			if (msg->data.result == CURLE_OK) {
 				continue;
 			} else {
+#if HAVE_CURL_EASY_STRERROR
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", curl_easy_strerror(msg->data.result));
+#endif
 				msg_found++;
 			}
 		}

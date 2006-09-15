@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.36.2.4.2.3 2006/08/28 23:36:23 rrichards Exp $ */
+/* $Id: element.c,v 1.36.2.4.2.4 2006/09/15 07:44:20 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,7 +100,7 @@ PHP_METHOD(domelement, __construct)
 		}
 		if (errorcode != 0) {
 			if (nodep != NULL) {
-				xmlFree(nodep);
+				xmlFreeNode(nodep);
 			}
 			php_dom_throw_error(errorcode, 1 TSRMLS_CC);
 			RETURN_FALSE;

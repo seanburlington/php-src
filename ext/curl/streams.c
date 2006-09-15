@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.24 2006/09/15 15:33:30 tony2001 Exp $ */
+/* $Id: streams.c,v 1.25 2006/09/15 15:42:39 tony2001 Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -434,7 +434,11 @@ php_stream *php_curl_stream_opener(php_stream_wrapper *wrapper, char *filename, 
 		}
 
 		if (m != CURLM_OK) {
+#if HAVE_CURL_MULTI_STRERROR
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", curl_multi_strerror(m));
+#else 
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "There was an error mcode=%d", m);
+#endif
 			php_stream_close(stream);
 			return NULL;
 		}

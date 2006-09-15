@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.801 2006/08/31 14:41:15 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.802 2006/09/15 09:11:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5214,16 +5214,20 @@ static int user_shutdown_function_call(php_shutdown_function_entry *shutdown_fun
 
 	if (!zend_is_callable(shutdown_function_entry->arguments[0], 0, &function_name)) {
 		php_error(E_WARNING, "(Registered shutdown functions) Unable to call %R() - function does not exist", Z_TYPE(function_name), Z_UNIVAL(function_name));
-	} else if (call_user_function(EG(function_table), NULL,
-								shutdown_function_entry->arguments[0],
-								&retval, 
-								shutdown_function_entry->arg_count - 1,
-								shutdown_function_entry->arguments + 1 
-								TSRMLS_CC ) == SUCCESS)
+		zval_dtor(&function_name);
+		return 0;
+	} 
+	zval_dtor(&function_name);
+	
+	if (call_user_function(EG(function_table), NULL,
+				shutdown_function_entry->arguments[0],
+				&retval, 
+				shutdown_function_entry->arg_count - 1,
+				shutdown_function_entry->arguments + 1 
+				TSRMLS_CC ) == SUCCESS)
 	{
 		zval_dtor(&retval);
 	} 
-	zval_dtor(&function_name);
 	return 0;
 }
 

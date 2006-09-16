@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.2 2006/06/20 13:21:16 tony2001 Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.3 2006/09/16 19:07:35 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1395,8 +1395,9 @@ char *_dom_get_valid_file_path(char *source, char *resolved_path, int resolved_p
 
 	if ((uri->scheme == NULL || isFileUri)) {
 		/* XXX possible buffer overflow if VCWD_REALPATH does not know size of resolved_path */
-		if (! VCWD_REALPATH(source, resolved_path)) {
-			expand_filepath(source, resolved_path TSRMLS_CC);
+		if (!VCWD_REALPATH(source, resolved_path) && !expand_filepath(source, resolved_path TSRMLS_CC)) {
+			xmlFreeURI(uri);
+			return NULL;
 		}
 		file_dest = resolved_path;
 	}

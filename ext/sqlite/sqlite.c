@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.195 2006/08/08 16:59:11 tony2001 Exp $
+   $Id: sqlite.c,v 1.196 2006/09/16 18:23:05 iliaa Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1129,7 +1129,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.195 2006/08/08 16:59:11 tony2001 Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.196 2006/09/16 18:23:05 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1233,7 +1233,9 @@ PHP_FUNCTION(sqlite_popen)
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
 		/* resolve the fully-qualified path name to use as the hash key */
-		fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+		if (!(fullpath = expand_filepath(filename, NULL TSRMLS_CC))) {
+			RETURN_FALSE;
+		}
 
 		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
 			efree(fullpath);
@@ -1306,7 +1308,14 @@ PHP_FUNCTION(sqlite_open)
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
 		/* resolve the fully-qualified path name to use as the hash key */
-		fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+		if (!(fullpath = expand_filepath(filename, NULL TSRMLS_CC))) {
+			php_std_error_handling();
+			if (object) {
+				RETURN_NULL();
+			} else {
+				RETURN_FALSE;
+			}
+		}
 
 		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
 			php_std_error_handling();
@@ -1317,7 +1326,6 @@ PHP_FUNCTION(sqlite_open)
 				RETURN_FALSE;
 			}
 		}
-
 	}
 
 	php_sqlite_open(fullpath ? fullpath : filename, (int)mode, NULL, return_value, errmsg, object TSRMLS_CC);
@@ -1351,7 +1359,10 @@ PHP_FUNCTION(sqlite_factory)
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
 		/* resolve the fully-qualified path name to use as the hash key */
-		fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+		if (!(fullpath = expand_filepath(filename, NULL TSRMLS_CC))) {
+			php_std_error_handling();
+			RETURN_NULL();
+		}
 
 		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
 			efree(fullpath);

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.6.2.4 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.6.2.3.2.1 2006/09/16 18:10:32 iliaa Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -517,6 +517,10 @@ static char *make_filename_safe(const char *filename TSRMLS_DC)
 {
 	if (strncmp(filename, ":memory:", sizeof(":memory:")-1)) {
 		char *fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+
+		if (!fullpath) {
+			return NULL;
+		}
 
 		if (PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 			efree(fullpath);

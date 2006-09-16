@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_persist.c,v 1.5.2.4 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: com_persist.c,v 1.5.2.3.2.1 2006/09/16 18:10:32 iliaa Exp $ */
 
 /* Infrastructure for working with persistent COM objects.
  * Implements: IStream* wrapper for PHP streams.
@@ -390,15 +390,16 @@ CPH_METHOD(SaveToFile)
 
 		if (filename) {
 			fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+			if (!fullpath) {
+				RETURN_FALSE;
+			}
 	
-			if (PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+			if ((PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || 
+					php_check_open_basedir(fullpath TSRMLS_CC)) {
+				efree(fullpath);
 				RETURN_FALSE;
 			}
 
-			if (php_check_open_basedir(fullpath TSRMLS_CC)) {
-				RETURN_FALSE;
-			}
-			
 			olefilename = php_com_string_to_olestring(filename, strlen(fullpath), helper->codepage TSRMLS_CC);
 			efree(fullpath);
 		}
@@ -452,13 +453,13 @@ CPH_METHOD(LoadFromFile)
 			return;
 		}
 
-		fullpath = expand_filepath(filename, NULL TSRMLS_CC);
-
-		if (PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		if (!(fullpath = expand_filepath(filename, NULL TSRMLS_CC))) {
 			RETURN_FALSE;
 		}
 
-		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
+		if ((PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) ||
+				php_check_open_basedir(fullpath TSRMLS_CC)) {
+			efree(fullpath);
 			RETURN_FALSE;
 		}
 

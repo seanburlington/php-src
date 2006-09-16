@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.78 2006/08/31 16:14:43 tony2001 Exp $ */
+/* $Id: posix.c,v 1.79 2006/09/16 17:42:44 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.78 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.79 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -766,6 +766,10 @@ PHP_FUNCTION(posix_access)
 	}
 
 	path = expand_filepath(filename, NULL TSRMLS_CC);
+	if (!path) {
+		POSIX_G(last_error) = EIO;
+		RETURN_FALSE;
+	}
 
 	if (php_check_open_basedir_ex(path, 0 TSRMLS_CC)) {
 		efree(path);

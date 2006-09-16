@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.3 2006/07/11 16:33:25 tony2001 Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.4 2006/09/16 18:15:25 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -272,9 +272,8 @@ char *_xmlwriter_get_valid_file_path(char *source, char *resolved_path, int reso
 	file_dest = source;
 
 	if ((uri->scheme == NULL || isFileUri)) {
-		/* XXX possible buffer overflow if VCWD_REALPATH does not know size of resolved_path */
-		if (! VCWD_REALPATH(source, resolved_path)) {
-			expand_filepath(source, resolved_path TSRMLS_CC);
+		if (!VCWD_REALPATH(source, resolved_path) && !expand_filepath(source, resolved_path TSRMLS_CC)) {
+			return NULL;
 		}
 		file_dest = resolved_path;
 	}

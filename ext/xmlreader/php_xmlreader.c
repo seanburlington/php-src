@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.13.2.14.2.3 2006/09/16 18:15:25 nlopess Exp $ */
+/* $Id: php_xmlreader.c,v 1.13.2.14.2.4 2006/09/16 18:18:55 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -261,6 +261,7 @@ char *_xmlreader_get_valid_file_path(char *source, char *resolved_path, int reso
 
 	if ((uri->scheme == NULL || isFileUri)) {
 		if (!VCWD_REALPATH(source, resolved_path) && !expand_filepath(source, resolved_path TSRMLS_CC)) {
+			xmlFreeURI(uri);
 			return NULL;
 		}
 		file_dest = resolved_path;

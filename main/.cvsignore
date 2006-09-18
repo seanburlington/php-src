@@ -11,6 +11,7 @@ php_config.h.in
 *.lo
 *.la
 libs
+.libs
 .deps
 config.nice
 stamp-h
@@ -25,3 +26,5 @@ Release_TS
 Release_TSDbg
 Release_TS_inline
 Debug_TS
+*.gcda
+*.gcno

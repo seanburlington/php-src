@@ -1,0 +1,7 @@
+*.lo
+config.h
+*.gcda
+*.gcno
+parse.out
+sqlite3.h
+.libs

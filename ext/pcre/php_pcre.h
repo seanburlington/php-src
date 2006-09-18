@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.50 2006/08/28 20:36:50 andrei Exp $ */
+/* $Id: php_pcre.h,v 1.51 2006/09/18 17:59:10 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -58,13 +58,13 @@ typedef struct {
 #endif
 	int compile_options;
 	int refcount;
-	zend_bool from_unicode;
+	zend_bool unicode_mode;
 } pcre_cache_entry;
 
-PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_len, zend_bool regex_is_utf8 TSRMLS_DC);
+PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_len TSRMLS_DC);
 
 PHPAPI void  php_pcre_match_impl(  pcre_cache_entry *pce, char *subject, int subject_len, zval *return_value,
-	zval *subpats, int global, int use_flags, long flags, long start_offset, zend_bool is_utf8  TSRMLS_DC);
+	zval *subpats, int global, int use_flags, long flags, long start_offset TSRMLS_DC);
 
 PHPAPI char *php_pcre_replace_impl(pcre_cache_entry *pce, char *subject, int subject_len, zval *return_value, 
 	int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);

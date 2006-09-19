@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.1 2006/05/10 21:19:32 rasmus Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.2 2006/09/19 20:33:11 dmitry Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -76,6 +76,7 @@ SAPI_API sapi_module_struct sapi_module;
 
 SAPI_API void sapi_startup(sapi_module_struct *sf)
 {
+	sf->ini_entries = NULL;
 	sapi_module = *sf;
 
 #ifdef ZTS

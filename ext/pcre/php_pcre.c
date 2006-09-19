@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.199 2006/09/18 20:16:36 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.200 2006/09/19 11:48:59 tony2001 Exp $ */
 
 /* UTODO
  *  - PCRE_NO_UTF8_CHECK option for Unicode strings
@@ -1485,11 +1485,11 @@ PHP_FUNCTION(preg_split)
 
 	/* Compile regex or get it from cache. */
 	if ((pce = pcre_get_compiled_regex_cache(regex.s, regex_len TSRMLS_CC)) == NULL) {
-		RETURN_FALSE;
 		if (str_type == IS_UNICODE) {
 			efree(regex_utf8);
 			efree(subject_utf8);
 		}
+		RETURN_FALSE;
 	}
 
 	php_pcre_split_impl(pce, subject.s, subject_len, return_value, limit_val, flags TSRMLS_CC);

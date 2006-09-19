@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.85 2006/09/19 10:38:31 dmitry Exp $ */
+/* $Id: streamsfuncs.c,v 1.86 2006/09/19 20:36:48 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1457,6 +1457,24 @@ PHP_FUNCTION(stream_socket_enable_crypto)
 	}
 }
 /* }}} */
+
+
+/* {{{ proto bool stream_default_encoding(string encoding) U
+Convenience wrapper for ini_set('unicode.stream_encoding', $encoding) */
+PHP_FUNCTION(stream_default_encoding)
+{
+	char *encoding;
+	int encoding_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &encoding, &encoding_len) == FAILURE) {
+		return;
+	}
+
+	RETURN_BOOL(SUCCESS == zend_alter_ini_entry("unicode.stream_encoding", sizeof("unicode.stream_encoding"),
+							encoding, encoding_len, PHP_INI_ALL, PHP_INI_STAGE_RUNTIME));
+}
+/* }}} */
+
 
 /* {{{ proto void stream_encoding(resource stream[, string encoding])
 Set character set for stream encoding

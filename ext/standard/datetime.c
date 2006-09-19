@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.139 2006/08/24 11:05:38 tony2001 Exp $ */
+/* $Id: datetime.c,v 1.140 2006/09/19 10:38:31 dmitry Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -109,15 +109,15 @@ PHP_FUNCTION(strptime)
 	}
 
 	array_init(return_value);
-	add_assoc_long(return_value, "tm_sec",   parsed_time.tm_sec);
-	add_assoc_long(return_value, "tm_min",   parsed_time.tm_min);
-	add_assoc_long(return_value, "tm_hour",  parsed_time.tm_hour);
-	add_assoc_long(return_value, "tm_mday",  parsed_time.tm_mday);
-	add_assoc_long(return_value, "tm_mon",   parsed_time.tm_mon);
-	add_assoc_long(return_value, "tm_year",  parsed_time.tm_year);
-	add_assoc_long(return_value, "tm_wday",  parsed_time.tm_wday);
-	add_assoc_long(return_value, "tm_yday",  parsed_time.tm_yday);
-	add_assoc_string(return_value, "unparsed", unparsed_part, 1);
+	add_ascii_assoc_long(return_value, "tm_sec",   parsed_time.tm_sec);
+	add_ascii_assoc_long(return_value, "tm_min",   parsed_time.tm_min);
+	add_ascii_assoc_long(return_value, "tm_hour",  parsed_time.tm_hour);
+	add_ascii_assoc_long(return_value, "tm_mday",  parsed_time.tm_mday);
+	add_ascii_assoc_long(return_value, "tm_mon",   parsed_time.tm_mon);
+	add_ascii_assoc_long(return_value, "tm_year",  parsed_time.tm_year);
+	add_ascii_assoc_long(return_value, "tm_wday",  parsed_time.tm_wday);
+	add_ascii_assoc_long(return_value, "tm_yday",  parsed_time.tm_yday);
+	add_ascii_assoc_string(return_value, "unparsed", unparsed_part, 1);
 }
 /* }}} */
 #endif

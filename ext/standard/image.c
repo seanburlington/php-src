@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.124 2006/06/25 20:51:31 bjori Exp $ */
+/* $Id: image.c,v 1.125 2006/09/19 10:38:31 dmitry Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -456,9 +456,9 @@ static int php_read_APP(php_stream * stream, unsigned int marker, zval *info TSR
 
 	sprintf(markername, "APP%d", marker - M_APP0);
 
-	if (zend_hash_find(Z_ARRVAL_P(info), markername, strlen(markername)+1, (void **) &tmp) == FAILURE) {
+	if (zend_ascii_hash_find(Z_ARRVAL_P(info), markername, strlen(markername)+1, (void **) &tmp) == FAILURE) {
 		/* XXX we onyl catch the 1st tag of it's kind! */
-		add_assoc_stringl(info, markername, buffer, length, 1);
+		add_ascii_assoc_stringl(info, markername, buffer, length, 1);
 	}
 
 	efree(buffer);
@@ -1399,13 +1399,13 @@ PHP_FUNCTION(getimagesize)
 		}
 
 		if (result->bits != 0) {
-			add_assoc_long(return_value, "bits", result->bits);
+			add_ascii_assoc_long(return_value, "bits", result->bits);
 		}
 		if (result->channels != 0) {
-			add_assoc_long(return_value, "channels", result->channels);
+			add_ascii_assoc_long(return_value, "channels", result->channels);
 		}
 		temp = (char*)php_image_type_to_mime_type(itype);
-		add_assoc_ascii_string(return_value, "mime", temp, 1);
+		add_ascii_assoc_ascii_string(return_value, "mime", temp, 1);
 		efree(result);
 	} else {
 		RETURN_FALSE;

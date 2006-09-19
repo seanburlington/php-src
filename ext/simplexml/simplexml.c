@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.219 2006/09/06 15:32:19 nlopess Exp $ */
+/* $Id: simplexml.c,v 1.220 2006/09/19 10:38:30 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -996,7 +996,16 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 					array_init(zattr);
 					sxe_properties_add(rv, "@attributes", sizeof("@attributes"), zattr TSRMLS_CC);
 				}
-				add_assoc_zval_ex(zattr, (char*)attr->name, namelen, value);
+				if (UG(unicode)) {
+					UErrorCode status = U_ZERO_ERROR;
+					zstr u_name;
+					int u_name_len;
+					zend_string_to_unicode_ex(UG(utf8_conv), &u_name.u, &u_name_len, (char*)attr->name, namelen, &status);
+					add_u_assoc_zval_ex(zattr, IS_UNICODE, u_name, u_name_len, value);
+					efree(u_name.u);
+				} else {
+					add_assoc_zval_ex(zattr, (char*)attr->name, namelen, value);
+				}
 			}
 			attr = attr->next;
 		}
@@ -1288,14 +1297,17 @@ static inline void sxe_add_namespace_name(zval *return_value, xmlNsPtr ns TSRMLS
 
 	prefix_len = strlen(prefix) + 1;
 
-	if (zend_hash_exists(Z_ARRVAL_P(return_value), prefix, prefix_len) == 0) {
+	if (zend_ascii_hash_exists(Z_ARRVAL_P(return_value), prefix, prefix_len) == 0) {
 		if (UG(unicode)) {
 			UErrorCode status = U_ZERO_ERROR;
 			UChar *u_str;
-			int u_len;
+			zstr u_prefix;
+			int u_len, u_prefix_len;
 			int length = strlen((char*)ns->href);
 			zend_string_to_unicode_ex(UG(utf8_conv), &u_str, &u_len, (char*)ns->href, length, &status);
-			add_assoc_unicodel_ex(return_value, prefix, prefix_len, u_str, u_len, 0);
+			zend_string_to_unicode_ex(UG(utf8_conv), &u_prefix.u, &u_prefix_len, prefix, prefix_len, &status);
+			add_u_assoc_unicodel_ex(return_value, IS_UNICODE, u_prefix, u_prefix_len, u_str, u_len, 0);
+			efree(u_prefix.u);
 		} else {
 			add_assoc_string_ex(return_value, prefix, prefix_len, (char*)ns->href, 1);
 		}
@@ -2339,7 +2351,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.219 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.220 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.141 2006/08/08 16:59:11 tony2001 Exp $ */
+/* $Id: php_encoding.c,v 1.142 2006/09/19 10:38:30 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1018,7 +1018,7 @@ static zval* get_zval_property(zval* object, char* name TSRMLS_DC)
 	} else if (Z_TYPE_P(object) == IS_ARRAY) {
 		zval **data_ptr;
 
-		if (zend_hash_find(Z_ARRVAL_P(object), name, strlen(name)+1, (void**)&data_ptr) == SUCCESS) {
+		if (zend_rt_hash_find(Z_ARRVAL_P(object), name, strlen(name)+1, (void**)&data_ptr) == SUCCESS) {
 		  return *data_ptr;
 		}
 	}

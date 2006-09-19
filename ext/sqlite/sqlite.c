@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.196 2006/09/16 18:23:05 iliaa Exp $
+   $Id: sqlite.c,v 1.197 2006/09/19 10:38:31 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1129,7 +1129,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.196 2006/09/16 18:23:05 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.197 2006/09/19 10:38:31 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1702,7 +1702,7 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 
 			zend_string_to_unicode_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, tmp, strlen(tmp), &status);
 			if (result_type == PHPSQLITE_ASSOC) {
-				add_assoc_unicode(return_value, colname, u_str, 1);
+				add_rt_assoc_unicode(return_value, colname, u_str, 1);
 			}
 			if (result_type == PHPSQLITE_NUM) {
 				add_index_unicode(return_value, i, u_str, 1);
@@ -1885,12 +1885,12 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 			if (mode & PHPSQLITE_ASSOC) {
 				add_index_zval(return_value, j, decoded);
 				ZVAL_ADDREF(decoded);
-				add_assoc_zval(return_value, (char*)colnames[j], decoded);
+				add_rt_assoc_zval(return_value, (char*)colnames[j], decoded);
 			} else {
 				add_next_index_zval(return_value, decoded);
 			}
 		} else {
-			add_assoc_zval(return_value, (char*)colnames[j], decoded);
+			add_rt_assoc_zval(return_value, (char*)colnames[j], decoded);
 		}
 	}
 

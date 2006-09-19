@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.118 2006/08/16 08:51:34 sebastian Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.119 2006/09/19 10:38:31 dmitry Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -512,7 +512,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 
 	{
 		zval **rh;
-		zend_hash_find(EG(active_symbol_table), "http_response_header", sizeof("http_response_header"), (void **) &rh);
+		zend_ascii_hash_find(EG(active_symbol_table), "http_response_header", sizeof("http_response_header"), (void **) &rh);
 		response_header = *rh;
 	}
 

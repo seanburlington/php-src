@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.50 2006/09/16 13:56:25 rrichards Exp $ */
+/* $Id: node.c,v 1.51 2006/09/19 10:38:30 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1747,7 +1747,7 @@ static void dom_canonicalization(INTERNAL_FUNCTION_PARAMETERS, int mode)
 		char *xquery;
 		int xquery_len;
 
-		if (zend_hash_find(ht, "query", sizeof("query"), (void**)&tmp) == SUCCESS &&
+		if (zend_ascii_hash_find(ht, "query", sizeof("query"), (void**)&tmp) == SUCCESS &&
 		    (Z_TYPE_PP(tmp) == IS_STRING || Z_TYPE_PP(tmp) == IS_UNICODE)) {
 				zxquery = tmp;
 /*
@@ -1768,7 +1768,7 @@ static void dom_canonicalization(INTERNAL_FUNCTION_PARAMETERS, int mode)
 		ctxp = xmlXPathNewContext(docp);
 		ctxp->node = nodep;
 
-		if (zend_hash_find(ht, "namespaces", sizeof("namespaces"), (void**)&tmp) == SUCCESS &&
+		if (zend_ascii_hash_find(ht, "namespaces", sizeof("namespaces"), (void**)&tmp) == SUCCESS &&
 		    Z_TYPE_PP(tmp) == IS_ARRAY) {
 			zval **tmpns;
 			char *nschar;

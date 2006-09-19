@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.55 2006/08/30 16:30:03 tony2001 Exp $ */
+/* $Id: iptc.c,v 1.56 2006/09/19 10:38:31 dmitry Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -357,12 +357,12 @@ PHP_FUNCTION(iptcparse)
 			array_init(return_value);
 		}
 
-		if (zend_hash_find(Z_ARRVAL_P(return_value), key, strlen(key) + 1, (void **) &element) == FAILURE) {
+		if (zend_ascii_hash_find(Z_ARRVAL_P(return_value), key, strlen(key) + 1, (void **) &element) == FAILURE) {
 			ALLOC_ZVAL(values);
 			INIT_PZVAL(values);
 			array_init(values);
 			
-			zend_hash_update(Z_ARRVAL_P(return_value), key, strlen(key)+1, (void *) &values, sizeof(zval*), (void **) &element);
+			zend_ascii_hash_update(Z_ARRVAL_P(return_value), key, strlen(key)+1, (void *) &values, sizeof(zval*), (void **) &element);
 		} 
 			
 		add_next_index_stringl(*element, (char*)buffer+inx, len, 1);

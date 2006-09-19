@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.2 2006/08/01 16:31:29 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.3 2006/09/19 15:45:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,10 +60,14 @@ static int pgsql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		char *q = NULL;
 		PGresult *res;
 
-		spprintf(&q, 0, "DEALLOCATE %s", S->stmt_name);
-		res = PQexec(H->server, q);
-		efree(q);
-		if (res) PQclear(res);
+		if (S->is_prepared) {
+			spprintf(&q, 0, "DEALLOCATE %s", S->stmt_name);
+			res = PQexec(H->server, q);
+			efree(q);
+			if (res) {
+				PQclear(res);
+			}
+		}
 		efree(S->stmt_name);
 		S->stmt_name = NULL;
 	}

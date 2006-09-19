@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.44.2.11 2006/09/19 09:06:37 tony2001 Exp $ */
+/* $Id: array.c,v 1.199.2.44.2.12 2006/09/19 09:39:14 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1028,7 +1028,6 @@ static int php_array_walk(HashTable *target_hash, zval **userdata TSRMLS_DC)
    Apply a user function to every member of an array */
 PHP_FUNCTION(array_walk)
 {
-	int	argc;
 	zval *array,
 		 *userdata = NULL,
 		 *tmp,
@@ -1036,7 +1035,7 @@ PHP_FUNCTION(array_walk)
 	HashTable *target_hash;
 
 	old_walk_func_name = BG(array_walk_func_name);
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "az|z", &array, &tmp, &userdata) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|z", &array, &tmp, &userdata) == FAILURE) {
 		return;
 	}
 	target_hash = HASH_OF(array);

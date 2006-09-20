@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.19 2006/02/21 20:37:12 pollita Exp $ */
+/* $Id: php_hash.h,v 1.20 2006/09/20 01:48:06 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -61,6 +61,8 @@ extern php_hash_ops php_hash_sha384_ops;
 extern php_hash_ops php_hash_sha512_ops;
 extern php_hash_ops php_hash_ripemd128_ops;
 extern php_hash_ops php_hash_ripemd160_ops;
+extern php_hash_ops php_hash_ripemd256_ops;
+extern php_hash_ops php_hash_ripemd320_ops;
 extern php_hash_ops php_hash_whirlpool_ops;
 extern php_hash_ops php_hash_3tiger128_ops;
 extern php_hash_ops php_hash_3tiger160_ops;

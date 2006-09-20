@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.30 2006/09/20 00:32:54 pollita Exp $ */
+/* $Id: hash.c,v 1.31 2006/09/20 01:48:06 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -613,6 +613,8 @@ PHP_MINIT_FUNCTION(hash)
 	php_hash_register_algo("sha512",		&php_hash_sha512_ops);
 	php_hash_register_algo("ripemd128",		&php_hash_ripemd128_ops);
 	php_hash_register_algo("ripemd160",		&php_hash_ripemd160_ops);
+	php_hash_register_algo("ripemd256",		&php_hash_ripemd256_ops);
+	php_hash_register_algo("ripemd320",		&php_hash_ripemd320_ops);
 	php_hash_register_algo("whirlpool",		&php_hash_whirlpool_ops);
 	php_hash_register_algo("tiger128,3",	&php_hash_3tiger128_ops);
 	php_hash_register_algo("tiger160,3",	&php_hash_3tiger160_ops);

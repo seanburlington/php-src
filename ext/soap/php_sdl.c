@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.12.2.2 2006/07/11 14:24:18 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.3 2006/09/20 13:42:50 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -1326,10 +1326,6 @@ static void sdl_deserialize_encoder(encodePtr enc, sdlTypePtr *types, char **in)
 			if (real_enc) {
 				enc->to_zval = real_enc->to_zval;
 				enc->to_xml = real_enc->to_xml;
-				enc->to_zval_before = real_enc->to_zval_before;
-				enc->to_xml_before = real_enc->to_xml_before;
-				enc->to_zval_after = real_enc->to_zval_after;
-				enc->to_xml_after = real_enc->to_xml_after;
 			}
 		}
 	}	

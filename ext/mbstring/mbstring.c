@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.13 2006/09/05 12:30:35 nlopess Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.14 2006/09/21 16:37:20 masugata Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1050,11 +1050,11 @@ PHP_MINFO_FUNCTION(mbstring)
 		sprintf(buf, "%d.%d.%d",
 			ONIGURUMA_VERSION_MAJOR,ONIGURUMA_VERSION_MINOR,ONIGURUMA_VERSION_TEENY);
 		php_info_print_table_row(2, "Multibyte regex (oniguruma) version", buf);
-#ifdef HAVE_MBREGEX_BACKTRACK
+#ifdef USE_COMBINATION_EXPLOSION_CHECK
 		php_info_print_table_row(2, "Multibyte regex (oniguruma) backtrack check", "On");
-#else	/* HAVE_MBREGEX_BACKTRACK */
+#else	/* USE_COMBINATION_EXPLOSION_CHECK */
 		php_info_print_table_row(2, "Multibyte regex (oniguruma) backtrack check", "Off");
-#endif	/* HAVE_MBREGEX_BACKTRACK */
+#endif	/* USE_COMBINATION_EXPLOSION_CHECK */
 	}
 #endif
 	php_info_print_table_end();

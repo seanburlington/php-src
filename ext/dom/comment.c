@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: comment.c,v 1.15 2006/08/04 18:11:27 rrichards Exp $ */
+/* $Id: comment.c,v 1.16 2006/09/21 11:53:58 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,7 +40,7 @@ zend_function_entry php_dom_comment_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DOMComment::__construct([string value]); */
+/* {{{ proto void DOMComment::__construct([string value]) U */
 PHP_METHOD(domcomment, __construct)
 {
 

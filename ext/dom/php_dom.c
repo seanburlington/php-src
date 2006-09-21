@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.97 2006/08/14 11:29:49 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.98 2006/09/21 11:53:58 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -698,8 +698,8 @@ PHP_MINIT_FUNCTION(dom)
 
 	REGISTER_DOM_CLASS(ce, "DOMComment", dom_characterdata_class_entry, php_dom_comment_class_functions, dom_comment_class_entry);
 	zend_hash_init(&dom_comment_prop_handlers, 0, NULL, NULL, 1);
-	zend_hash_copy(&dom_comment_prop_handlers, &dom_node_prop_handlers, NULL, NULL, sizeof(dom_prop_handler));
-	zend_hash_add(&classes, ce.name.s, ce.name_length + 1, &dom_comment_prop_handlers, sizeof(dom_typeinfo_prop_handlers), NULL);
+	zend_hash_copy(&dom_comment_prop_handlers, &dom_characterdata_prop_handlers, NULL, NULL, sizeof(dom_prop_handler));
+	zend_hash_add(&classes, ce.name.s, ce.name_length + 1, &dom_comment_prop_handlers, sizeof(dom_comment_prop_handlers), NULL);
 
 	REGISTER_DOM_CLASS(ce, "DOMTypeinfo", NULL, php_dom_typeinfo_class_functions, dom_typeinfo_class_entry);
 	

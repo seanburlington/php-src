@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.67 2006/09/19 23:27:03 pollita Exp $ */
+/* $Id: bcmath.c,v 1.68 2006/09/21 06:46:00 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -319,7 +319,7 @@ PHP_FUNCTION(bcmul)
 	php_str2num(&first, left TSRMLS_CC);
 	php_str2num(&second, right TSRMLS_CC);
 
-	bc_multiply(first, second, &result, scale);
+	bc_multiply(first, second, &result, scale TSRMLS_CC);
 	if (result->n_scale > scale) {
 		result->n_scale = scale;
 	}

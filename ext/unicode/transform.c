@@ -14,12 +14,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: transform.c,v 1.5 2006/09/20 23:44:23 pollita Exp $ */ 
+/* $Id: transform.c,v 1.6 2006/09/21 19:30:33 andrei Exp $ */ 
 
 #include "php_unicode.h"
 
-/* {{{ proto string str_transliterate(string str, string from, string to[, string variant]) U
-Transliterate a string using the alphabet provided */
+/* {{{ proto string str_transliterate(string str, string from_script, string to_script[, string variant]) U
+   Transliterate a string from the source script to the target script */
 PHP_FUNCTION(str_transliterate)
 {
 	UChar	   *str, *from, *to, *variant = NULL;

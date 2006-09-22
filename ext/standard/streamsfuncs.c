@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.88 2006/09/22 18:42:33 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.89 2006/09/22 19:54:30 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -443,7 +443,7 @@ PHP_FUNCTION(stream_get_contents)
 }
 /* }}} */
 
-/* {{{ proto long stream_copy_to_stream(resource source, resource dest [, long maxlen [, long pos]])
+/* {{{ proto long stream_copy_to_stream(resource source, resource dest [, long maxlen [, long pos]]) U
    Reads up to maxlen bytes from source stream and writes them to dest stream. */
 PHP_FUNCTION(stream_copy_to_stream)
 {

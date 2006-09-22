@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.210 2006/09/20 13:43:04 dmitry Exp $ */
+/* $Id: soap.c,v 1.211 2006/09/22 13:39:17 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2046,9 +2046,11 @@ PHP_METHOD(SoapServer, handle)
 #if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 				if (service->soap_class.persistance != SOAP_PERSISTENCE_SESSION) {
 					zval_ptr_dtor(&soap_obj);
+					soap_obj = NULL;
 				}
 #else
 				zval_ptr_dtor(&soap_obj);
+				soap_obj = NULL;
 #endif
 			}
 		} else {

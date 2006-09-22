@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.98 2006/09/21 11:53:58 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.99 2006/09/22 10:13:27 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -414,7 +414,7 @@ void *php_dom_export_node(zval *object TSRMLS_DC)
 	return nodep;	
 }
 
-/* {{{ proto somNode dom_import_simplexml(sxeobject node)
+/* {{{ proto somNode dom_import_simplexml(sxeobject node) U
    Get a simplexml_element object from dom to allow for processing */
 PHP_FUNCTION(dom_import_simplexml)
 {

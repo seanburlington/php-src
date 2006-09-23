@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.12 2006/09/22 17:41:09 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.13 2006/09/23 12:27:40 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1070,19 +1070,19 @@ int main(int argc, char *argv[])
 				if ((val = strchr(php_optarg, '='))) {
 					val++;
 					if (!isalnum(*val) && *val != '"' && *val != '\'' && *val != '\0') {
-						cli_sapi_module.ini_entries = realloc(cli_sapi_module.ini_entries, ini_entries_len + len + sizeof("\"\"\n\0"));
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len, php_optarg, (val - php_optarg));
+						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\"\"\n\0"));
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, (val - php_optarg));
 						ini_entries_len += (val - php_optarg);
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len, "\"", 1);
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"", 1);
 						ini_entries_len++;
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len, val, len - (val - php_optarg));
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, val, len - (val - php_optarg));
 						ini_entries_len += len - (val - php_optarg);
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len, "\"\n\0", sizeof("\"\n\0"));
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"\n\0", sizeof("\"\n\0"));
 						ini_entries_len += sizeof("\n\0\"") - 2;
 					} else {
-						cli_sapi_module.ini_entries = realloc(cli_sapi_module.ini_entries, ini_entries_len + len + sizeof("\n\0"));
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len, php_optarg, len);
-						memcpy(cli_sapi_module.ini_entries + ini_entries_len + len, "\n\0", sizeof("\n\0"));
+						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\n\0"));
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, len);
+						memcpy(cgi_sapi_module.ini_entries + ini_entries_len + len, "\n\0", sizeof("\n\0"));
 						ini_entries_len += len + sizeof("\n\0") - 2;
 					}
 				} else {

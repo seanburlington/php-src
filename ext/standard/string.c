@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.591 2006/09/22 19:35:05 andrei Exp $ */
+/* $Id: string.c,v 1.592 2006/09/23 12:17:43 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -484,7 +484,7 @@ PHP_FUNCTION(nl_langinfo)
 	}
 
 	if (UG(unicode)) {
-		php_error_docref(NULL TSRMLS_DC, E_STRICT, "deprecated in Unicode mode, please use ICU locale functions");
+		php_error_docref(NULL TSRMLS_CC, E_STRICT, "deprecated in Unicode mode, please use ICU locale functions");
 	}
 
 	value = nl_langinfo(item);

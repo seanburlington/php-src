@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.86.2.5.2.2 2006/06/29 14:31:56 bjori Exp $ */
+/* $Id: url.c,v 1.86.2.5.2.3 2006/09/23 11:58:58 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -678,6 +678,10 @@ PHP_FUNCTION(get_headers)
 
 	zend_hash_internal_pointer_reset_ex(HASH_OF(stream->wrapperdata), &pos);
 	while (zend_hash_get_current_data_ex(HASH_OF(stream->wrapperdata), (void**)&hdr, &pos) != FAILURE) {
+		if (!hdr || Z_TYPE_PP(hdr) != IS_STRING) {
+			zend_hash_move_forward_ex(HASH_OF(stream->wrapperdata), &pos);
+			continue;
+		}
 		if (!format) {
 no_name_header:
 			add_next_index_stringl(return_value, Z_STRVAL_PP(hdr), Z_STRLEN_PP(hdr), 1);

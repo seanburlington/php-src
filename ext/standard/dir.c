@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.154 2006/09/22 23:57:38 pollita Exp $ */
+/* $Id: dir.c,v 1.155 2006/09/23 12:32:32 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -186,7 +186,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	php_stream_context *context = NULL;
 	php_stream *dirp;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t|r", &dir, &dir_len, &zcontext) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t|r", &dir, &dir_len, &dir_type, &zcontext) == FAILURE) {
 		return;
 	}
 

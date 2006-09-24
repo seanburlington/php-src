@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.123 2006/02/19 04:29:41 andi Exp $ */
+/* $Id: fsock.c,v 1.124 2006/09/24 21:43:41 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -98,7 +98,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		if (zerrstr && errstr) {
 			/* no need to dup; we need to efree buf anyway */
 			zval_dtor(zerrstr);
-			ZVAL_STRING(zerrstr, errstr, 0);
+			ZVAL_RT_STRING(zerrstr, errstr, ZSTR_AUTOFREE);
 		}
 		else if (!zerrstr && errstr) {
 			efree(errstr);
@@ -116,14 +116,14 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 
 /* }}} */
 
-/* {{{ proto resource fsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]])
+/* {{{ proto resource fsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]]) U
    Open Internet or Unix domain socket connection */
 PHP_FUNCTION(fsockopen)
 {
 	php_fsockopen_stream(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
-/* {{{ proto resource pfsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]])
+/* {{{ proto resource pfsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]]) U
    Open persistent Internet or Unix domain socket connection */
 PHP_FUNCTION(pfsockopen)
 {

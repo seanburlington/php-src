@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.70 2006/09/12 15:49:02 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.71 2006/09/24 20:33:14 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -216,6 +216,7 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 #endif
 		}
 	}
+	php_stream_fix_encoding(stream, mode, NULL TSRMLS_CC);
 
 	return stream;
 }
@@ -259,6 +260,7 @@ PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STRE
 			stream->position = ftell(file);
 		}
 	}
+	php_stream_fix_encoding(stream, mode, NULL TSRMLS_CC);
 
 	return stream;
 }
@@ -279,6 +281,8 @@ PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STRE
 
 	stream = php_stream_alloc_rel(&php_stream_stdio_ops, self, 0, mode);
 	stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
+	php_stream_fix_encoding(stream, mode, NULL TSRMLS_CC);
+
 	return stream;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.114 2006/09/22 19:54:30 pollita Exp $ */
+/* $Id: php_streams.h,v 1.115 2006/09/24 20:33:14 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -561,6 +561,7 @@ PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *w
 PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC);
 PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC);
 PHPAPI int php_unregister_url_stream_wrapper_volatile(char *protocol TSRMLS_DC);
+PHPAPI void php_stream_fix_encoding(php_stream *stream, const char *mode, php_stream_context *context TSRMLS_DC);
 PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char **path_for_open, int options TSRMLS_DC);
 PHPAPI void *php_stream_locate_eol(php_stream *stream, zstr zbuf, int buf_len TSRMLS_DC);

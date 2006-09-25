@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.15 2006/09/18 23:08:36 iliaa Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.16 2006/09/25 14:48:33 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1704,8 +1704,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 
 		PG(during_request_startup) = 0;
 
-		if (primary_file->type == ZEND_HANDLE_FILENAME 
-				&& primary_file->filename) {
+		if ((primary_file->type == ZEND_HANDLE_FILENAME || primary_file->type == ZEND_HANDLE_STREAM) && primary_file->filename) {
 #if HAVE_BROKEN_GETCWD
 			/* this looks nasty to me */
 			old_cwd_fd = open(".", 0);

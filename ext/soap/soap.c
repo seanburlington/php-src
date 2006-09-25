@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.211 2006/09/22 13:39:17 dmitry Exp $ */
+/* $Id: soap.c,v 1.212 2006/09/25 08:19:06 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2368,7 +2368,9 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 			char *buffer;
 			int buffer_len;
 			zval outbuf, outbuflen;
+#ifdef va_copy
 			va_list argcopy;
+#endif
 			int old = PG(display_errors);
 
 			INIT_ZVAL(outbuf);
@@ -2409,7 +2411,9 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 		int old = PG(display_errors);
 		int fault = 0;
 		zval fault_obj;
+#ifdef va_copy
 		va_list argcopy;
+#endif
 
 		if (error_num == E_USER_ERROR ||
 		    error_num == E_COMPILE_ERROR ||

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.43 2006/09/24 18:23:47 pollita Exp $ */
+/* $Id: type.c,v 1.44 2006/09/25 01:37:55 pollita Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -113,9 +113,15 @@ PHP_FUNCTION(settype)
 		convert_to_double(*var);
 	} else if (!strcasecmp(new_type, "double")) { /* deprecated */
 		convert_to_double(*var);
-	} else if (!strcasecmp(new_type, "string")) {
+	} else if (!strcasecmp(new_type, "binary")) { /* explicit binary cast */
 		convert_to_string(*var);
-	} else if (!strcasecmp(new_type, "unicode")) {
+	} else if (!strcasecmp(new_type, "string")) { /* runtime string type */
+		if (UG(unicode)) {
+			convert_to_unicode(*var);
+		} else {
+			convert_to_string(*var);
+		}
+	} else if (!strcasecmp(new_type, "unicode")) { /* explicit unicode cast */
 		convert_to_unicode(*var);
 	} else if (!strcasecmp(new_type, "array")) {
 		convert_to_array(*var);

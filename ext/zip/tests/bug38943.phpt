@@ -2,7 +2,7 @@
 #38943, properties in extended class cannot be set
 --SKIPIF--
 <?php
-/* $Id: 38943.phpt,v 1.1 2006/09/24 22:27:20 pajoye Exp $ */
+/* $Id: bug38943.phpt,v 1.1 2006/09/25 09:17:56 pajoye Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -28,11 +28,11 @@ array(1) {
   int(1)
 }
 object(myZip)#1 (%d) {
-  ["test:private"]=>
+  ["test":"myZip":private]=>
   int(0)
   ["testp"]=>
   string(6) "foobar"
-  ["testarray:private"]=>
+  ["testarray":"myZip":private]=>
   array(1) {
     [0]=>
     int(1)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqli_driver.c,v 1.7 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: mysqli_driver.c,v 1.8 2006/09/26 13:06:13 georg Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ static int driver_client_version_read(mysqli_object *obj, zval **retval TSRMLS_D
 static int driver_client_info_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 {
 	ALLOC_ZVAL(*retval);
-	ZVAL_STRING(*retval, MYSQL_SERVER_VERSION, 1);
+	ZVAL_RT_STRING(*retval, MYSQL_SERVER_VERSION, 1);
 	return SUCCESS;
 }
 /* }}} */

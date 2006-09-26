@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.26 2006/05/09 11:27:20 georg Exp $ 
+  $Id: mysqli_prop.c,v 1.27 2006/09/26 13:06:13 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -105,7 +105,14 @@ static int __func(mysqli_object *obj, zval **retval TSRMLS_DC)\
 		if (!c) {\
 			ZVAL_NULL(*retval);\
 		} else {\
-			ZVAL_STRING(*retval, c, 1);\
+			if (UG(unicode)) {\
+				UChar *ubuf = NULL;\
+				uint ulen;\
+				zend_string_to_unicode(MYSQLI_CONV_UTF8, &ubuf, &ulen, c, strlen(c));\
+				ZVAL_UNICODEL(*retval, ubuf, ulen, 0);\
+			} else {\
+				ZVAL_STRING(*retval, c, 1);\
+			}\
 		}\
 	}\
 	return SUCCESS;\

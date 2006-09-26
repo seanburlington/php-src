@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.255 2006/09/17 09:39:04 johannes Exp $ */
+/* $Id: php_reflection.c,v 1.256 2006/09/26 07:55:54 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -511,8 +511,22 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 
 			while (zend_hash_get_current_data_ex(&ce->function_table, (void **) &mptr, &pos) == SUCCESS) {
 				if (!(mptr->common.fn_flags & ZEND_ACC_STATIC)) {
-					string_printf(str, "\n");
-					_function_string(str, mptr, ce, sub_indent.string TSRMLS_CC);
+					zstr key;
+					uint key_len;
+					ulong num_index;
+					uint len = UG(unicode)?u_strlen(mptr->common.function_name.u):strlen(mptr->common.function_name.s);
+
+					/* Do not display old-style inherited constructors */
+					if ((mptr->common.fn_flags & ZEND_ACC_CTOR) == 0 ||
+					    mptr->common.scope == ce ||
+					    zend_hash_get_current_key_ex(&ce->function_table, &key, &key_len, &num_index, 0, &pos) != (UG(unicode)?HASH_KEY_IS_UNICODE:HASH_KEY_IS_STRING) ||
+					    (UG(unicode) ? 
+					     (zend_u_binary_strcasecmp(key.u, key_len-1, mptr->common.function_name.u, len) == 0) :
+					     (zend_binary_strcasecmp(key.s, key_len-1, mptr->common.function_name.s, len) == 0))) {
+
+						string_printf(str, "\n");
+						_function_string(str, mptr, ce, sub_indent.string TSRMLS_CC);
+					}
 				}
 				zend_hash_move_forward_ex(&ce->function_table, &pos);
 			}
@@ -4882,7 +4896,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.255 2006/09/17 09:39:04 johannes Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.256 2006/09/26 07:55:54 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

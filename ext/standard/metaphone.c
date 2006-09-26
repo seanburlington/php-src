@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.28.2.1.2.1 2006/06/26 18:48:56 bjori Exp $ */
+/* $Id: metaphone.c,v 1.28.2.1.2.2 2006/09/26 15:40:45 iliaa Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -25,9 +25,7 @@
 #include "php.h"
 #include "php_metaphone.h"
 
-static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_word, int traditional);
-
-PHP_FUNCTION(metaphone);
+static int metaphone(char *word, int word_len, long max_phonemes, char **phoned_word, int traditional);
 
 /* {{{ proto string metaphone(string text[, int phones])
    Break english phrases down into their phonemes */
@@ -161,7 +159,7 @@ static char Lookahead(char *word, int how_far)
 
 /* {{{ metaphone
  */
-static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_word, int traditional)
+static int metaphone(char *word, int word_len, long max_phonemes, char **phoned_word, int traditional)
 {
 	int w_idx = 0;				/* point in the phonization we're at. */
 	int p_idx = 0;				/* end of the phoned phrase */

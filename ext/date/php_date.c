@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.118 2006/09/19 10:38:30 dmitry Exp $ */
+/* $Id: php_date.c,v 1.119 2006/09/27 18:32:24 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2190,7 +2190,7 @@ PHP_FUNCTION(timezone_name_get)
 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);
 	DATE_CHECK_INITIALIZED(tzobj->tz, DateTimeZone);
 
-	RETURN_STRING(tzobj->tz->name, 1);
+	RETURN_ASCII_STRING(tzobj->tz->name, 1);
 }
 /* }}} */
 

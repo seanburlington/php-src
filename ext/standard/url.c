@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.97 2006/09/25 16:02:19 iliaa Exp $ */
+/* $Id: url.c,v 1.98 2006/09/28 12:55:02 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -672,6 +672,11 @@ PHP_FUNCTION(get_headers)
 	context = FG(default_context) ? FG(default_context) : (FG(default_context) = php_stream_context_alloc());
 
 	if (!(stream = php_stream_open_wrapper_ex(url, "r", REPORT_ERRORS | STREAM_USE_URL | STREAM_ONLY_GET_HEADERS, NULL, context))) {
+		RETURN_FALSE;
+	}
+
+	if (!stream->wrapperdata || Z_TYPE_P(stream->wrapperdata) != IS_ARRAY) {
+		php_stream_close(stream);
 		RETURN_FALSE;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.37 2006/09/27 23:44:34 iliaa Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.38 2006/09/28 08:26:19 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -206,7 +206,7 @@ PHPAPI const char* php_get_temporary_directory(void)
 PHPAPI int php_open_temporary_fd(const char *dir, const char *pfx, char **opened_path_p TSRMLS_DC)
 {
 	int fd;
-	char *temp_dir = php_get_temporary_directory();
+	const char *temp_dir = php_get_temporary_directory();
 
 	if (!pfx) {
 		pfx = "tmp.";

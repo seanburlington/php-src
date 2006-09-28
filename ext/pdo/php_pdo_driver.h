@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.66.2.11.2.1 2006/05/11 22:43:44 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.66.2.11.2.2 2006/09/28 23:03:56 tony2001 Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -521,7 +521,7 @@ struct pdo_column_data {
 struct pdo_bound_param_data {
 	long paramno; /* if -1, then it has a name, and we don't know the index *yet* */
 	char *name;
-	long namelen;
+	int namelen;
 
 	long max_value_len;	/* as a hint for pre-allocation */
 	

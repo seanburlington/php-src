@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.82 2006/09/28 23:03:45 tony2001 Exp $ */
+/* $Id: php_pdo_driver.h,v 1.83 2006/09/28 23:27:49 tony2001 Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -506,7 +506,7 @@ struct _pdo_dbh_t {
 /* describes a column */
 struct pdo_column_data {
 	char *name;
-	long namelen;
+	int namelen;
 	unsigned long maxlen;
 	enum pdo_param_type param_type;
 	unsigned long precision;

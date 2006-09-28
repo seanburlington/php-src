@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.8 2006/07/20 22:54:21 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.9 2006/09/28 22:33:06 tony2001 Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -127,7 +127,7 @@ typedef struct _spl_dual_it_object {
 			long             count;
 		} limit;
 		struct {
-			int              flags; /* CIT_* */
+			long             flags; /* CIT_* */
 			zval             *zstr;
 			zval             *zchildren;
 			zval             *zcache;
@@ -139,7 +139,7 @@ typedef struct _spl_dual_it_object {
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 		struct {
 			int              use_flags;
-			int              flags;
+			long             flags;
 			regex_mode       mode;
 			long             preg_flags;
 			pcre_cache_entry *pce;

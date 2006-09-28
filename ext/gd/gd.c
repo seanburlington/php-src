@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.5 2006/08/08 11:56:36 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.6 2006/09/28 23:17:31 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2406,6 +2406,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 
 		io_ctx = gdNewDynamicCtxEx(buff_size, buff, 0);
 		if (!io_ctx) {
+			pefree(buff, 1);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Cannot allocate GD IO context");
 			goto out_err;
 		}
@@ -2420,7 +2421,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 #else
 		io_ctx->free(io_ctx);
 #endif
-
+		pefree(buff, 1);
 #endif
 	}
 	else {

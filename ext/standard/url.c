@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.86.2.5.2.5 2006/09/28 12:55:15 tony2001 Exp $ */
+/* $Id: url.c,v 1.86.2.5.2.6 2006/09/28 14:52:30 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -211,7 +211,7 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 	}	
 		
 	/* check for login and password */
-	if ((p = memchr(s, '@', (e-s)))) {
+	if ((p = zend_memrchr(s, '@', (e-s)))) {
 		if ((pp = memchr(s, ':', (p-s)))) {
 			if ((pp-s) > 0) {
 				ret->user = estrndup(s, (pp-s));

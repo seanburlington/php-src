@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.98 2006/09/29 12:18:54 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.99 2006/09/29 12:28:57 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2169,7 +2169,7 @@ static zend_function_entry spl_SplFileObject_functions[] = {
 };
 
 static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_temp_file_object___construct, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_temp_file_object___construct, 0, 0, 0)
 	ZEND_ARG_INFO(0, max_memory)
 ZEND_END_ARG_INFO()
 

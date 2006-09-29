@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sha1.h,v 1.6 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: sha1.h,v 1.7 2006/09/29 22:36:00 iliaa Exp $ */
 
 #ifndef SHA1_H
 #define SHA1_H
@@ -33,6 +33,7 @@ typedef struct {
 PHPAPI void PHP_SHA1Init(PHP_SHA1_CTX *);
 PHPAPI void PHP_SHA1Update(PHP_SHA1_CTX *, const unsigned char *, unsigned int);
 PHPAPI void PHP_SHA1Final(unsigned char[20], PHP_SHA1_CTX *);
+PHPAPI void make_sha1_digest(char *sha1str, unsigned char *digest);
 
 PHP_FUNCTION(sha1);
 PHP_FUNCTION(sha1_file);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.132 2006/09/27 15:25:52 georg Exp $ 
+  $Id: mysqli_api.c,v 1.133 2006/09/29 08:35:19 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -999,7 +999,7 @@ PHP_FUNCTION(mysqli_field_seek)
 	MYSQLI_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, "mysqli_result", MYSQLI_STATUS_VALID);
 
 	if (fieldnr < 0 || fieldnr >= mysql_num_fields(result)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Function cannot be used with MYSQL_USE_RESULT");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid field offset");
 		RETURN_FALSE; 
 	}
 	

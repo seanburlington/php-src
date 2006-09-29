@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.38.2.1.2.1 2006/07/28 14:23:35 iliaa Exp $ */
+/* $Id: info.h,v 1.38.2.1.2.2 2006/09/29 21:40:16 iliaa Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -82,6 +82,7 @@ PHPAPI void php_info_print_box_start(int bg);
 PHPAPI void php_info_print_box_end(void);
 PHPAPI void php_info_print_hr(void);
 PHPAPI char *php_logo_guid(void);
+PHPAPI char *php_get_uname(char mode);
 
 void register_phpinfo_constants(INIT_FUNC_ARGS);
 END_EXTERN_C()

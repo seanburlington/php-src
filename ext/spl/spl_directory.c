@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.7 2006/09/29 12:29:21 bjori Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.8 2006/09/29 13:11:28 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1605,7 +1605,7 @@ SPL_METHOD(SplFileObject, __construct)
 	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 } /* }}} */
 
-/* {{{ proto void SplFileObject::__construct([int max_memory])
+/* {{{ proto void SplTempFileObject::__construct([int max_memory])
    Construct a new temp file object */
 SPL_METHOD(SplTempFileObject, __construct)
 {

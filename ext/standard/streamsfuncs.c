@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.6 2006/09/11 14:52:21 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.7 2006/09/29 13:11:27 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -450,7 +450,7 @@ PHP_FUNCTION(stream_copy_to_stream)
 }
 /* }}} */
 
-/* {{{ proto resource stream_get_meta_data(resource fp)
+/* {{{ proto array stream_get_meta_data(resource fp)
     Retrieves header/meta data from streams/file pointers */
 PHP_FUNCTION(stream_get_meta_data)
 {

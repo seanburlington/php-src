@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.805 2006/09/22 01:55:47 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.806 2006/10/01 21:00:00 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5660,7 +5660,6 @@ PHP_FUNCTION(ini_set)
 			_CHECK_PATH(varname, "java.class.path") ||
 			_CHECK_PATH(varname, "java.home") ||
 			_CHECK_PATH(varname, "java.library.path") ||
-			_CHECK_PATH(varname, "session.save_path") ||
 			_CHECK_PATH(varname, "vpopmail.directory")) {
 			
 			if (php_check_open_basedir(Z_STRVAL_PP(new_value) TSRMLS_CC)) {

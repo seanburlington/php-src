@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.99 2006/09/27 15:25:52 georg Exp $ 
+  $Id: mysqli.c,v 1.100 2006/10/01 21:01:31 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -901,7 +901,6 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 					int ulen;
 
 					zend_string_to_unicode(UG(utf8_conv), &ustr, &ulen, fields[i].name, strlen(fields[i].name) TSRMLS_CC);
-					/* maybe a bug in add_u_assoc_zval_ex: string is truncated when specifying ulen only */
 					add_u_assoc_zval_ex(return_value, IS_UNICODE, ZSTR(ustr), ulen + 1, res);
 					efree(ustr);
 				} else {

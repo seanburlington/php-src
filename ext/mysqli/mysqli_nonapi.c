@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.63 2006/09/27 15:25:52 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.64 2006/10/01 21:01:31 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -51,6 +51,17 @@ PHP_FUNCTION(mysqli_connect)
 							  &dbname, &dbname_len, UG(utf8_conv), &port, &socket, &socket_len, UG(utf8_conv)) == FAILURE) {
 		return;
 	}
+
+	if (!passwd) {
+		passwd = MyG(default_pw);
+		if (!username){
+			username = MyG(default_user);
+			if (!hostname) {
+				hostname = MyG(default_host);
+			}
+		}
+	}
+
 
 	mysql = (MY_MYSQL *) ecalloc(1, sizeof(MY_MYSQL));
 
@@ -121,7 +132,7 @@ PHP_FUNCTION(mysqli_connect_errno)
 PHP_FUNCTION(mysqli_connect_error) 
 {
 	if (MyG(error_msg)) {
-		ZVAL_UTF8_STRING(return_value, (char *)MyG(error_msg), ZSTR_DUPLICATE);
+		RETURN_UTF8_STRING((char *)MyG(error_msg), ZSTR_DUPLICATE);
 	} else {
 		RETURN_NULL();
 	}

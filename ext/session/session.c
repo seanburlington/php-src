@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.14 2006/08/30 16:24:40 tony2001 Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.15 2006/10/01 20:58:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -154,11 +154,19 @@ static PHP_INI_MH(OnUpdateSaveDir)
 {
 	/* Only do the safemode/open_basedir check at runtime */
 	if (stage == PHP_INI_STAGE_RUNTIME) {
-		if (PG(safe_mode) && (!php_checkuid(new_value, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
+		char *p;
+
+		if ((p = zend_memrchr(new_value, ';', new_value_length))) {
+			p++;
+		} else {
+			p = new_value;
+		}
+
+		if (PG(safe_mode) && (!php_checkuid(p, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
 			return FAILURE;
 		}
 
-		if (php_check_open_basedir(new_value TSRMLS_CC)) {
+		if (php_check_open_basedir(p TSRMLS_CC)) {
 			return FAILURE;
 		}
 	}

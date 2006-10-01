@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.25 2006/09/19 23:44:30 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.26 2006/10/01 20:58:02 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5622,7 +5622,6 @@ PHP_FUNCTION(ini_set)
 			_CHECK_PATH(varname, "java.class.path") ||
 			_CHECK_PATH(varname, "java.home") ||
 			_CHECK_PATH(varname, "java.library.path") ||
-			_CHECK_PATH(varname, "session.save_path") ||
 			_CHECK_PATH(varname, "vpopmail.directory")) {
 			if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(new_value), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 				zval_dtor(return_value);

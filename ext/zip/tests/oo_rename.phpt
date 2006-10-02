@@ -1,8 +1,8 @@
 --TEST--
-Locate entries by name
+Rename entries
 --SKIPIF--
 <?php
-/* $Id: oo_namelocate.phpt,v 1.1.2.2 2006/10/02 14:31:04 tony2001 Exp $ */
+/* $Id: oo_rename.phpt,v 1.1.2.1 2006/10/02 14:31:04 tony2001 Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -20,27 +20,39 @@ if (!$zip->open($file, ZIPARCHIVE::CREATE)) {
 
 $zip->addFromString('entry1.txt', 'entry #1');
 $zip->addFromString('entry2.txt', 'entry #2');
-$zip->addFromString('dir/entry2d.txt', 'entry #2');
+$zip->addFromString('dir/entry2.txt', 'entry #2');
 
 if (!$zip->status == ZIPARCHIVE::ER_OK) {
-	echo "failed to write zip\n";
+	var_dump($zip);
+	echo "failed\n";
 }
+
 $zip->close();
 
 if (!$zip->open($file)) {
 	exit('failed');
 }
 
+dump_entries_name($zip);
+echo "\n";
 
-var_dump($zip->locateName('entry1.txt'));
-var_dump($zip->locateName('eNtry2.txt'));
-var_dump($zip->locateName('eNtry2.txt', ZIPARCHIVE::FL_NOCASE));
-var_dump($zip->locateName('enTRy2d.txt', ZIPARCHIVE::FL_NOCASE|ZIPARCHIVE::FL_NODIR));
+if (!$zip->renameIndex(0, 'ren_entry1.txt')) {
+	echo "failed index 0\n";
+}
+
+if (!$zip->renameName('dir/entry2.txt', 'dir3/ren_entry2.txt')) {
+	echo "failed name dir/entry2.txt\n";
+}
+dump_entries_name($zip);
 $zip->close();
 
+@unlink($file);
 ?>
 --EXPECTF--
-int(0)
-bool(false)
-int(1)
-int(2)
+0 entry1.txt
+1 entry2.txt
+2 dir/entry2.txt
+
+0 ren_entry1.txt
+1 entry2.txt
+2 dir3/ren_entry2.txt

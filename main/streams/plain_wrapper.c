@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.72 2006/09/28 07:26:19 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.73 2006/10/02 18:13:56 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1276,7 +1276,6 @@ not_relative_path:
 		
 		stream = php_stream_fopen_rel(trypath, mode, opened_path, options);
 		if (stream) {
-stream_done:
 			efree(pathbuf);
 			return stream;
 		}

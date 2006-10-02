@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.115 2006/08/15 15:09:21 tony2001 Exp $ */
+/* $Id: html.c,v 1.116 2006/10/02 07:54:37 bjori Exp $ */
 
 /*
  * HTML entity resources:
@@ -1223,7 +1223,7 @@ PHP_FUNCTION(htmlspecialchars)
 }
 /* }}} */
 
-/* {{{ proto string htmlspecialchars(string string [, int quote_style])
+/* {{{ proto string htmlspecialchars_decode(string string [, int quote_style])
    Convert special HTML entities back to characters */
 PHP_FUNCTION(htmlspecialchars_decode)
 {

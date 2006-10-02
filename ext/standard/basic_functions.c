@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.806 2006/10/01 21:00:00 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.807 2006/10/02 07:54:37 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6317,6 +6317,8 @@ PHP_FUNCTION(import_request_variables)
 /* }}} */
 
 #ifdef HAVE_GETLOADAVG
+/* {{{ proto array sys_getloadavg()
+*/
 PHP_FUNCTION(sys_getloadavg)
 {
 	double load[3];
@@ -6330,6 +6332,7 @@ PHP_FUNCTION(sys_getloadavg)
 		add_index_double(return_value, 2, load[2]);
 	}
 }
+/* }}} */
 #endif
 
 

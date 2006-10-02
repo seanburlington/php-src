@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.119 2006/09/27 18:32:24 derick Exp $ */
+/* $Id: php_date.c,v 1.120 2006/10/02 07:32:16 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1932,7 +1932,10 @@ PHP_FUNCTION(date_format)
 		RETURN_STRINGL(str, length, 0);
 	}
 }
+/* }}} */
 
+/* {{{ proto string date_format_locale(DateTime object, string format)
+*/
 PHP_FUNCTION(date_format_locale)
 {
 	zval         *object;

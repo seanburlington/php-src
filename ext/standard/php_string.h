@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.101 2006/08/30 18:40:26 iliaa Exp $ */
+/* $Id: php_string.h,v 1.102 2006/10/02 01:11:04 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -133,7 +133,7 @@ PHPAPI void php_u_basename(UChar *s, int len, UChar *suffix, int sufflen, UChar 
 PHPAPI void php_basename(char *s, int len, char *suffix, int sufflen, char **p_ret, int *p_len TSRMLS_DC);
 PHPAPI int php_u_dirname(UChar *str, int len);
 PHPAPI int php_dirname(char *str, int len);
-PHPAPI UChar *php_u_stristr(UChar *s, UChar *t, int s_len, int t_len);
+PHPAPI UChar *php_u_stristr(UChar *s, UChar *t, int s_len, int t_len TSRMLS_DC);
 PHPAPI char *php_stristr(char *s, char *t, size_t s_len, size_t t_len);
 PHPAPI int php_u_strspn(UChar *s1, UChar *s2, UChar *s1_end, UChar *s2_end);
 PHPAPI size_t php_strspn(char *s1, char *s2, char *s1_end, char *s2_end);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.19 2006/08/31 14:21:21 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.20 2006/10/02 19:42:42 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1767,13 +1767,18 @@ PHP_FUNCTION(strrpos)
 	}
 
 	if (offset >= 0) {
+		if (offset > haystack_len) {
+			RETURN_FALSE;
+		}
 		p = haystack + offset;
 		e = haystack + haystack_len - needle_len;
 	} else {
-		p = haystack;
 		if (-offset > haystack_len) {
-			e = haystack - needle_len;
-		} else if (needle_len > -offset) {
+			RETURN_FALSE;
+		}
+
+		p = haystack;
+		if (needle_len > -offset) {
 			e = haystack + haystack_len - needle_len;
 		} else {
 			e = haystack + haystack_len + offset;

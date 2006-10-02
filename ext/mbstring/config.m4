@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.63 2006/10/02 15:32:48 hirokawa Exp $
+dnl $Id: config.m4,v 1.64 2006/10/02 23:27:43 hirokawa Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -271,7 +271,6 @@ PHP_ARG_WITH(libmbfl, [for external libmbfl],
 
 if test "$PHP_MBSTRING" != "no"; then  
   AC_DEFINE([HAVE_MBSTRING],1,[whether to have multibyte string support])
-  AC_DEFINE([HAVE_MBREGEX], 0,[whether to have multibyte regex support])
 
   PHP_MBSTRING_ADD_BASE_SOURCES([mbstring.c php_unicode.c mb_gpc.c])
 

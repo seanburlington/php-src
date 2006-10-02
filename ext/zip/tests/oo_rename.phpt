@@ -2,13 +2,13 @@
 Rename entries
 --SKIPIF--
 <?php
-/* $Id: oo_rename.phpt,v 1.1 2006/07/24 16:58:58 pajoye Exp $ */
+/* $Id: oo_rename.phpt,v 1.2 2006/10/02 14:31:32 tony2001 Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
 <?php
 $dirname = dirname(__FILE__) . '/';
-include $dirname . 'utils.php';
+include $dirname . 'utils.inc';
 $file = $dirname . '__tmp_oo_rename.zip';
 
 @unlink($file);

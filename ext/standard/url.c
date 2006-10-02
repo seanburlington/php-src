@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.21.2.4 2006/09/28 15:16:40 iliaa Exp $ */
+/* $Id: url.c,v 1.58.2.21.2.5 2006/10/02 20:52:46 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -204,7 +204,7 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 	}	
 
 	{
-		char *t = s;
+		const char *t = s;
 		p = NULL;
 		while (e > t && (t = memchr(t, '@', (e-t)))) {
 			p = t++;

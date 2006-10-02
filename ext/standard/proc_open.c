@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.43 2006/09/19 10:38:31 dmitry Exp $ */
+/* $Id: proc_open.c,v 1.44 2006/10/02 21:02:08 pollita Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -253,7 +253,7 @@ PHP_MINIT_FUNCTION(proc_open)
 }
 /* }}} */
 
-/* {{{ proto int proc_terminate(resource process [, long signal])
+/* {{{ proto int proc_terminate(resource process [, long signal]) U
    kill a process opened by proc_open */
 PHP_FUNCTION(proc_terminate)
 {
@@ -278,7 +278,7 @@ PHP_FUNCTION(proc_terminate)
 }
 /* }}} */
 
-/* {{{ proto int proc_close(resource process)
+/* {{{ proto int proc_close(resource process) U
    close a process opened by proc_open */
 PHP_FUNCTION(proc_close)
 {
@@ -296,7 +296,7 @@ PHP_FUNCTION(proc_close)
 }
 /* }}} */
 
-/* {{{ proto array proc_get_status(resource process)
+/* {{{ proto array proc_get_status(resource process) U
    get information about a process opened by proc_open */
 PHP_FUNCTION(proc_get_status)
 {
@@ -319,7 +319,19 @@ PHP_FUNCTION(proc_get_status)
 
 	array_init(return_value);
 
-	add_ascii_assoc_string(return_value, "command", proc->command, 1);
+	if (UG(unicode)) {
+		UChar *ucmd;
+		int ucmd_len;
+
+		if (SUCCESS == php_stream_path_decode(&php_plain_files_wrapper, &ucmd, &ucmd_len, proc->command, strlen(proc->command), REPORT_ERRORS, FG(default_context))) {
+			add_ascii_assoc_unicodel(return_value, "command", ucmd, ucmd_len, 0);
+		} else {
+			/* Fallback on original binary string */
+			add_ascii_assoc_string(return_value, "command", proc->command, 1);
+		}
+	} else {
+		add_ascii_assoc_string(return_value, "command", proc->command, 1);
+	}
 	add_ascii_assoc_long(return_value, "pid", (long) proc->child);
 	
 #ifdef PHP_WIN32

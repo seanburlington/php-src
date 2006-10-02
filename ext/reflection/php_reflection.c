@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.25 2006/09/26 07:55:20 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.26 2006/10/02 12:16:35 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4008,14 +4008,21 @@ ZEND_METHOD(reflection_property, getDeclaringClass)
 	property_reference *ref;
 	zend_class_entry *tmp_ce, *ce;
 	zend_property_info *tmp_info;
+	char *prop_name, *class_name;
+	int prop_name_len;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_property_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(ref);
 
+	if (zend_unmangle_property_name(ref->prop->name, ref->prop->name_length, &class_name, &prop_name) != SUCCESS) {
+		RETURN_FALSE;
+	}
+
+	prop_name_len = strlen(prop_name);
 	ce = tmp_ce = ref->ce;
-	while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, ref->prop->name, ref->prop->name_length + 1, (void **) &tmp_info) == SUCCESS) {
+	while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, prop_name, prop_name_len + 1, (void **) &tmp_info) == SUCCESS) {
 		ce = tmp_ce;
-                tmp_ce = tmp_ce->parent;
+		tmp_ce = tmp_ce->parent;
 	}
 
 	zend_reflection_class_factory(ce, return_value TSRMLS_CC);
@@ -4827,7 +4834,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.25 2006/09/26 07:55:20 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.26 2006/10/02 12:16:35 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

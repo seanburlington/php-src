@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.8 2007/01/01 09:40:25 sebastian Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.1 2006/10/02 07:44:34 bjori Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -289,7 +289,7 @@ PHP_FUNCTION(mysqli_get_warnings)
 }
 /* }}} */
 
-/* {{{ proto object mysqli_get_warnings(object link) */
+/* {{{ proto object mysqli_stmt_get_warnings(object link) */
 PHP_FUNCTION(mysqli_stmt_get_warnings)
 {
 	MY_STMT				*stmt;

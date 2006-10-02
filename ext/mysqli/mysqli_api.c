@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.7 2006/09/29 08:40:10 georg Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.8 2006/10/02 07:44:34 bjori Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1522,7 +1522,7 @@ PHP_FUNCTION(mysqli_rollback)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_send_long_data(object stmt, int param_nr, string data)
+/* {{{ proto bool mysqli_stmt_send_long_data(object stmt, int param_nr, string data)
 */
 PHP_FUNCTION(mysqli_stmt_send_long_data)
 {

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.50.2.7 2006/10/02 19:22:45 tony2001 Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.218.2.50.2.8 2006/10/02 20:53:05 tony2001 Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -569,6 +569,11 @@ EOF
   done
 
   echo "'[$]0' \\" >> $1
+  if test `expr -- [$]0 : "'.*"` = 0; then
+    CONFIGURE_COMMAND="$CONFIGURE_COMMAND '[$]0'"
+  else 
+    CONFIGURE_COMMAND="$CONFIGURE_COMMAND [$]0"
+  fi
   for arg in $ac_configure_args; do
      if test `expr -- $arg : "'.*"` = 0; then
         if test `expr -- $arg : "--.*"` = 0; then

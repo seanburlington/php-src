@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.66 2006/10/03 08:15:44 mike Exp $ */
+/* $Id: php_output.h,v 1.67 2006/10/03 22:20:28 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -114,6 +114,8 @@ typedef struct _php_output_handler *(*php_output_handler_alias_ctor_t)(zval *han
 typedef struct _php_output_handler_user_func_t {
 	zend_fcall_info fci;
 	zend_fcall_info_cache fcc;
+	zval **fcp[2];
+	zval *zoh;
 } php_output_handler_user_func_t;
 
 typedef struct _php_output_handler {

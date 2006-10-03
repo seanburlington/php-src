@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.460 2006/10/02 03:13:47 pollita Exp $ */
+/* $Id: file.c,v 1.461 2006/10/03 23:09:08 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -900,12 +900,11 @@ PHP_FUNCTION(tempnam)
 {
 	zval **ppdir, **ppprefix;
 	char *dir, *prefix;
-	int dir_len, prefix_len;
+	int dir_len, prefix_len, p_len;
 
 	char *opened_path;
 	char *p;
 	int fd;
-	size_t p_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ZZ", &ppdir, &ppprefix) == FAILURE) {
 		return;

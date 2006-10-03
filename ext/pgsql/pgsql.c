@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.5 2006/09/15 19:47:50 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.6 2006/10/03 15:21:47 bjori Exp $ */
 
 #include <stdlib.h>
 
@@ -3997,7 +3997,7 @@ PHP_FUNCTION(pg_send_query_params)
 	int leftover = 0;
 
 	if (zend_get_parameters_ex(3, &pgsql_link, &query, &pv_param_arr) == FAILURE) {
-		return;
+		WRONG_PARAM_COUNT;
 	}
 
 	if (pgsql_link == NULL && id == -1) {
@@ -4087,7 +4087,7 @@ PHP_FUNCTION(pg_send_prepare)
 	int leftover = 0;
 
 	if (zend_get_parameters_ex(3, &pgsql_link, &stmtname, &query) == FAILURE) {
-		return;
+		WRONG_PARAM_COUNT;
 	}
 	if (pgsql_link == NULL && id == -1) {
 		RETURN_FALSE;
@@ -4141,7 +4141,7 @@ PHP_FUNCTION(pg_send_execute)
 	int leftover = 0;
 
 	if (zend_get_parameters_ex(3, &pgsql_link, &stmtname, &pv_param_arr)==FAILURE) {
-		return;
+		WRONG_PARAM_COUNT;
 	}
 	if (pgsql_link == NULL && id == -1) {
 		RETURN_FALSE;

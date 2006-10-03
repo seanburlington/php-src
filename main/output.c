@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.198 2006/10/03 22:20:28 mike Exp $ */
+/* $Id: output.c,v 1.199 2006/10/03 22:28:33 mike Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -514,7 +514,7 @@ PHPAPI php_output_handler *php_output_handler_create_user(zval *output_handler, 
 				ZVAL_ADDREF(output_handler);
 				user->zoh = output_handler;
 				user->fci.param_count = 2;
-				user->fci.params = (zval ***) &user->fcp;
+				user->fci.params = (zval ***) user->fcp;
 				handler->func.user = user;
 			} else {
 				efree(user);

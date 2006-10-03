@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.26 2006/10/02 12:16:35 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.27 2006/10/03 09:59:07 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -509,11 +509,13 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 	/* Non static methods */
 	if (&ce->function_table) {
 		count = zend_hash_num_elements(&ce->function_table) - count_static_funcs;
-		string_printf(str, "\n%s  - Methods [%d] {", indent, count);
 		if (count > 0) {
 			HashPosition pos;
 			zend_function *mptr;
+			string dyn;
 
+			count = 0;
+			string_init(&dyn);
 			zend_hash_internal_pointer_reset_ex(&ce->function_table, &pos);
 
 			while (zend_hash_get_current_data_ex(&ce->function_table, (void **) &mptr, &pos) == SUCCESS) {
@@ -529,14 +531,18 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 					    zend_hash_get_current_key_ex(&ce->function_table, &key, &key_len, &num_index, 0, &pos) != HASH_KEY_IS_STRING ||
 					    zend_binary_strcasecmp(key, key_len-1, mptr->common.function_name, len) == 0) {
 
-						string_printf(str, "\n");
-						_function_string(str, mptr, ce, sub_indent.string TSRMLS_CC);
+						string_printf(&dyn, "\n");
+						_function_string(&dyn, mptr, ce, sub_indent.string TSRMLS_CC);
+						count++;
 					}
 				}
 				zend_hash_move_forward_ex(&ce->function_table, &pos);
 			}
+			string_printf(str, "\n%s  - Methods [%d] {", indent, count);
+			string_append(str, &dyn);
+			string_free(&dyn);
 		} else {
-			string_printf(str, "\n");
+			string_printf(str, "\n%s  - Methods [0] {\n", indent);
 		}
 		string_printf(str, "%s  }\n", indent);
 	}
@@ -4834,7 +4840,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.26 2006/10/02 12:16:35 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.27 2006/10/03 09:59:07 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

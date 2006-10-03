@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.205 2006/10/03 21:17:29 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.206 2006/10/03 21:37:02 tony2001 Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1768,7 +1768,7 @@ PHP_FUNCTION(preg_quote)
 	*q = '\0';
 	
 	/* Reallocate string and return it */
-	RETVAL_UTF8_STRINGL(erealloc(out_str, q - out_str + 1), q - out_str, 0);
+	RETVAL_UTF8_STRINGL(erealloc(out_str, q - out_str + 1), q - out_str, ZSTR_AUTOFREE);
 }
 /* }}} */
 

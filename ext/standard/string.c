@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.597 2006/10/02 19:18:14 andrei Exp $ */
+/* $Id: string.c,v 1.598 2006/10/03 13:44:14 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6379,7 +6379,7 @@ PHP_FUNCTION(count_chars)
 	char retstr[256];
 	int retlen=0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "t|l", &input, &input_len,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t|l", &input, &input_len,
 							  &type, &mode) == FAILURE) {
 		return;
 	}

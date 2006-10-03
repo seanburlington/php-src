@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.21 2006/10/03 15:34:50 iliaa Exp $ */
+/* $Id: filter.c,v 1.52.2.22 2006/10/03 22:18:08 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_header( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.21 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.22 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -533,6 +533,10 @@ static void php_filter_call(zval **filtered, long filter, zval **filter_args, co
 		if (zend_hash_find(HASH_OF(*filter_args), "flags", sizeof("flags"), (void **)&option) == SUCCESS) {
 			convert_to_long(*option);
 			filter_flags = Z_LVAL_PP(option);
+
+			if (!(filter_flags & FILTER_REQUIRE_ARRAY ||  filter_flags & FILTER_FORCE_ARRAY)) {
+				filter_flags |= FILTER_REQUIRE_SCALAR;
+			}
 		}
 
 		if (zend_hash_find(HASH_OF(*filter_args), "options", sizeof("options"), (void **)&option) == SUCCESS) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.22 2006/10/02 20:07:14 andrei Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.23 2006/10/03 17:41:47 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2496,7 +2496,7 @@ static void php_strtr_array(zval *return_value, char *str, int slen, HashTable *
 	smart_str result = {0};
 	HashTable tmp_hash;
 	
-	zend_hash_init(&tmp_hash, 0, NULL, NULL, 0);
+	zend_hash_init(&tmp_hash, zend_hash_num_elements(hash), NULL, NULL, 0);
 	zend_hash_internal_pointer_reset_ex(hash, &hpos);
 	while (zend_hash_get_current_data_ex(hash, (void **)&entry, &hpos) == SUCCESS) {
 		switch (zend_hash_get_current_key_ex(hash, &string_key, &string_key_len, &num_key, 0, &hpos)) {

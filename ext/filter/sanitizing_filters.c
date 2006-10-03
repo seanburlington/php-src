@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.11.2.4 2006/07/22 12:59:15 pajoye Exp $ */
+/* $Id: sanitizing_filters.c,v 1.11.2.5 2006/10/03 11:42:23 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -176,7 +176,6 @@ static void filter_map_apply(zval *value, filter_map *map)
 	Z_STRLEN_P(value) = c;
 }
 /* }}} */
-
 
 /* {{{ php_filter_string */
 void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL)

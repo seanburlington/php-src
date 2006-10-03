@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.386 2006/09/20 20:30:19 andrei Exp $ */
+/* $Id: array.c,v 1.387 2006/10/03 16:36:57 bjori Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1567,6 +1567,9 @@ PHP_FUNCTION(compact)
 	zval ***args;			/* function arguments array */
 	int i;
 	
+	if (ZEND_NUM_ARGS() < 1) {
+		WRONG_PARAM_COUNT;
+	}
 	args = (zval ***)safe_emalloc(ZEND_NUM_ARGS(), sizeof(zval **), 0);
 	
 	if (zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE) {

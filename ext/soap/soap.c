@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.213 2006/09/25 21:16:51 bjori Exp $ */
+/* $Id: soap.c,v 1.214 2006/10/03 19:52:34 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1366,7 +1366,7 @@ PHP_METHOD(SoapServer, SoapServer)
 			zval *ztmp;
 
 			ALLOC_HASHTABLE(service->class_map);
-			zend_u_hash_init(service->class_map, 0, NULL, ZVAL_PTR_DTOR, 0, UG(unicode));
+			zend_u_hash_init(service->class_map, zend_hash_num_elements((*tmp)->value.ht), NULL, ZVAL_PTR_DTOR, 0, UG(unicode));
 			zend_hash_copy(service->class_map, (*tmp)->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &ztmp, sizeof(zval *));
 		}
 

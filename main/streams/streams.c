@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.137 2006/09/24 20:33:14 pollita Exp $ */
+/* $Id: streams.c,v 1.138 2006/10/03 19:52:34 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2010,7 +2010,7 @@ static void clone_wrapper_hash(TSRMLS_D)
 	php_stream_wrapper *tmp;
 
 	ALLOC_HASHTABLE(FG(stream_wrappers));
-	zend_hash_init(FG(stream_wrappers), 0, NULL, NULL, 1);
+	zend_hash_init(FG(stream_wrappers), zend_hash_num_elements(&url_stream_wrappers_hash), NULL, NULL, 1);
 	zend_hash_copy(FG(stream_wrappers), &url_stream_wrappers_hash, NULL, &tmp, sizeof(tmp));
 }
 

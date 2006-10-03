@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.17.2.3.2.1 2006/05/19 10:24:05 tony2001 Exp $ */
+/* $Id: filter.c,v 1.17.2.3.2.2 2006/10/03 19:51:01 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -61,7 +61,7 @@ PHPAPI int php_stream_filter_register_factory_volatile(const char *filterpattern
 		php_stream_filter_factory tmpfactory;
 
 		ALLOC_HASHTABLE(FG(stream_filters));
-		zend_hash_init(FG(stream_filters), 0, NULL, NULL, 1);
+		zend_hash_init(FG(stream_filters), zend_hash_num_elements(&stream_filters_hash), NULL, NULL, 1);
 		zend_hash_copy(FG(stream_filters), &stream_filters_hash, NULL, &tmpfactory, sizeof(php_stream_filter_factory));
 	}
 

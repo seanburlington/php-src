@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.15 2006/09/28 11:32:30 bjori Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.16 2006/10/03 19:51:01 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1078,7 +1078,7 @@ PHP_METHOD(SoapServer, SoapServer)
 			zval *ztmp;
 
 			ALLOC_HASHTABLE(service->class_map);
-			zend_hash_init(service->class_map, 0, NULL, ZVAL_PTR_DTOR, 0);
+			zend_hash_init(service->class_map, zend_hash_num_elements((*tmp)->value.ht), NULL, ZVAL_PTR_DTOR, 0);
 			zend_hash_copy(service->class_map, (*tmp)->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &ztmp, sizeof(zval *));
 		}
 
@@ -1323,7 +1323,7 @@ PHP_METHOD(SoapServer, addFunction)
 			if (service->soap_functions.ft == NULL) {
 				service->soap_functions.functions_all = FALSE;
 				service->soap_functions.ft = emalloc(sizeof(HashTable));
-				zend_hash_init(service->soap_functions.ft, 0, NULL, ZVAL_PTR_DTOR, 0);
+				zend_hash_init(service->soap_functions.ft, zend_hash_num_elements(Z_ARRVAL_P(function_name)), NULL, ZVAL_PTR_DTOR, 0);
 			}
 
 			zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(function_name), &pos);

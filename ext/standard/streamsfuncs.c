@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.90 2006/09/29 13:22:43 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.91 2006/10/03 17:45:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -660,7 +660,7 @@ static int stream_array_from_fd_set(zval *stream_array, fd_set *fds TSRMLS_DC)
 		return 0;
 	}
 	ALLOC_HASHTABLE(new_hash);
-	zend_hash_init(new_hash, 0, NULL, ZVAL_PTR_DTOR, 0);
+	zend_hash_init(new_hash, zend_hash_num_elements(Z_ARRVAL_P(stream_array)), NULL, ZVAL_PTR_DTOR, 0);
 	
 	for (zend_hash_internal_pointer_reset(Z_ARRVAL_P(stream_array));
 		 zend_hash_get_current_data(Z_ARRVAL_P(stream_array), (void **) &elem) == SUCCESS;
@@ -708,7 +708,7 @@ static int stream_array_emulate_read_fd_set(zval *stream_array TSRMLS_DC)
 		return 0;
 	}
 	ALLOC_HASHTABLE(new_hash);
-	zend_hash_init(new_hash, 0, NULL, ZVAL_PTR_DTOR, 0);
+	zend_hash_init(new_hash, zend_hash_num_elements(Z_ARRVAL_P(stream_array)), NULL, ZVAL_PTR_DTOR, 0);
 	
 	for (zend_hash_internal_pointer_reset(Z_ARRVAL_P(stream_array));
 		 zend_hash_get_current_data(Z_ARRVAL_P(stream_array), (void **) &elem) == SUCCESS;

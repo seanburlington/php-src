@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.600 2006/10/03 18:13:36 andrei Exp $ */
+/* $Id: string.c,v 1.601 2006/10/04 10:52:32 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6465,6 +6465,7 @@ PHP_FUNCTION(count_chars)
 		}
 		if (UG(unicode) && mode != 1) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only mode=1 is supported with Unicode strings");
+			RETURN_FALSE;
 		}
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.23 2006/10/03 17:41:47 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.24 2006/10/04 11:14:32 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1500,7 +1500,7 @@ PHPAPI size_t php_strcspn(char *s1, char *s2, char *s1_end, char *s2_end)
 			if (*spanp == c || p == s1_end) {
 				return p - s1;
 			}
-		} while (spanp++ < s2_end);
+		} while (spanp++ < (s2_end - 1));
 		c = *++p;
 	}
 	/* NOTREACHED */

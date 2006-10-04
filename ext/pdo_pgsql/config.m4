@@ -1,14 +1,15 @@
 dnl
-dnl $Id: config.m4,v 1.1 2004/05/20 02:27:49 edink Exp $
+dnl $Id: config.m4,v 1.13.4.1 2006/10/04 23:53:36 iliaa Exp $
 dnl
 
-AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
+if test "$PHP_PDO" != "no"; then
+
+AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
 ])
 
 PHP_ARG_WITH(pdo-pgsql,for PostgreSQL support for PDO,
-[  --with-pdo-pgsql[=DIR]       Include PDO PostgreSQL support.  DIR
-                               is the PostgreSQL base install directory
-                               or the path to pg_config.])
+[  --with-pdo-pgsql[=DIR]    PDO: PostgreSQL support.  DIR is the PostgreSQL base
+                            install directory or the path to pg_config])
 
 if test "$PHP_PDO_PGSQL" != "no"; then
   PHP_EXPAND_PATH($PGSQL_INCLUDE, PGSQL_INCLUDE)
@@ -66,10 +67,22 @@ if test "$PHP_PDO_PGSQL" != "no"; then
   fi
 
   AC_DEFINE(HAVE_PDO_PGSQL,1,[Whether to build PostgreSQL for PDO support or not])
+
+  AC_MSG_CHECKING([for openssl dependencies])
+  if grep -q openssl $PGSQL_INCLUDE/libpq-fe.h ; then
+	 AC_MSG_RESULT([yes])
+	 if pkg-config openssl ; then
+      PDO_PGSQL_CFLAGS="`pkg-config openssl --cflags`"
+    fi
+  else
+	 AC_MSG_RESULT([no])
+  fi
+
   old_LIBS=$LIBS
   old_LDFLAGS=$LDFLAGS
   LDFLAGS="$LDFLAGS -L$PGSQL_LIBDIR"
   AC_CHECK_LIB(pq, PQescapeString,AC_DEFINE(HAVE_PQESCAPE,1,[PostgreSQL 7.2.0 or later]))
+  AC_CHECK_LIB(pq, PQescapeStringConn, AC_DEFINE(HAVE_PQESCAPE_CONN,1,[PostgreSQL 8.1.4 or later]))
   AC_CHECK_LIB(pq, PQsetnonblocking,AC_DEFINE(HAVE_PQSETNONBLOCKING,1,[PostgreSQL 7.0.x or later]))
   AC_CHECK_LIB(pq, PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES,1,[Broken libpq under windows]))
   AC_CHECK_LIB(pq, PQoidValue,AC_DEFINE(HAVE_PQOIDVALUE,1,[Older PostgreSQL]))
@@ -77,7 +90,13 @@ if test "$PHP_PDO_PGSQL" != "no"; then
   AC_CHECK_LIB(pq, PQparameterStatus,AC_DEFINE(HAVE_PQPARAMETERSTATUS,1,[PostgreSQL 7.4 or later]))
   AC_CHECK_LIB(pq, PQprotocolVersion,AC_DEFINE(HAVE_PQPROTOCOLVERSION,1,[PostgreSQL 7.4 or later]))
   AC_CHECK_LIB(pq, PQtransactionStatus,AC_DEFINE(HAVE_PGTRANSACTIONSTATUS,1,[PostgreSQL 7.4 or later]))
-  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibye]))
+  AC_CHECK_LIB(pq, PQunescapeBytea,AC_DEFINE(HAVE_PQUNESCAPEBYTEA,1,[PostgreSQL 7.4 or later]))
+  AC_CHECK_LIB(pq, PQExecParams,AC_DEFINE(HAVE_PQEXECPARAMS,1,[PostgreSQL 7.4 or later]))
+  AC_CHECK_LIB(pq, PQresultErrorField,AC_DEFINE(HAVE_PQRESULTERRORFIELD,1,[PostgreSQL 7.4 or later]))
+  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibyte]))
+  
+  AC_CHECK_LIB(pq, PQprepare,AC_DEFINE(HAVE_PQPREPARE,1,[prepared statements]))
+
   LIBS=$old_LIBS
   LDFLAGS=$old_LDFLAGS
 
@@ -86,16 +105,28 @@ if test "$PHP_PDO_PGSQL" != "no"; then
 
   PHP_ADD_INCLUDE($PGSQL_INCLUDE)
 
-dnl find PDO sources
-  if test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=$prefix/include/php/ext
-  elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=$abs_srcdir/ext
-  elif test -f ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=ext
-  else
-	AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
-  fi
+  ifdef([PHP_CHECK_PDO_INCLUDES],
+  [
+  	PHP_CHECK_PDO_INCLUDES
+  ],[
+    AC_MSG_CHECKING([for PDO includes])
+    if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$abs_srcdir/ext
+    elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$abs_srcdir/ext
+    elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$prefix/include/php/ext
+    else
+      AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
+    fi
+    AC_MSG_RESULT($pdo_inc_path)
+  ])
 
-  PHP_NEW_EXTENSION(pdo_pgsql, pdo_pgsql.c pgsql_driver.c pgsql_statement.c, $ext_shared,,-I$pdo_inc_path)
+  PHP_NEW_EXTENSION(pdo_pgsql, pdo_pgsql.c pgsql_driver.c pgsql_statement.c, $ext_shared,,-I$pdo_inc_path $PDO_PGSQL_CFLAGS)
+  ifdef([PHP_ADD_EXTENSION_DEP],
+  [
+    PHP_ADD_EXTENSION_DEP(pdo_pgsql, pdo) 
+  ])
+fi
+
 fi

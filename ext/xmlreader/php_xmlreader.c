@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.13.2.14.2.4 2006/09/16 18:18:55 nlopess Exp $ */
+/* $Id: php_xmlreader.c,v 1.13.2.14.2.5 2006/10/04 13:30:53 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -471,6 +471,7 @@ static void php_xmlreader_no_arg(INTERNAL_FUNCTION_PARAMETERS, xmlreader_read_in
 }
 /* }}} */
 
+#if LIBXML_VERSION >= 20620
 /* {{{ php_xmlreader_no_arg_string */
 static void php_xmlreader_no_arg_string(INTERNAL_FUNCTION_PARAMETERS, xmlreader_read_char_t internal_function) {
 	zval *id;
@@ -492,6 +493,7 @@ static void php_xmlreader_no_arg_string(INTERNAL_FUNCTION_PARAMETERS, xmlreader_
 	}
 }
 /* }}} */
+#endif
 
 /* {{{ php_xmlreader_set_relaxng_schema */
 static void php_xmlreader_set_relaxng_schema(INTERNAL_FUNCTION_PARAMETERS, int type) {

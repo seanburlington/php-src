@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.22 2006/10/03 22:18:08 iliaa Exp $ */
+/* $Id: filter.c,v 1.52.2.23 2006/10/04 11:48:04 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -175,7 +175,7 @@ PHP_MINIT_FUNCTION(filter)
 	REGISTER_LONG_CONSTANT("INPUT_ENV",	PARSE_ENV,	CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("INPUT_SERVER",	PARSE_SERVER, 	CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("INPUT_SESSION", PARSE_SESSION, 	CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("INPUT_REQUEST", PARSE_SESSION, 	CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("INPUT_REQUEST", PARSE_REQUEST, 	CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_NONE", FILTER_FLAG_NONE, CONST_CS | CONST_PERSISTENT);
 
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_header( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.22 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.23 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

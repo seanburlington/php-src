@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.12.2.7 2006/08/14 11:29:15 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.8 2006/10/04 12:02:49 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -551,7 +551,7 @@ PHP_MINIT_FUNCTION(dom)
 	memcpy(&dom_ze1_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
 	dom_ze1_object_handlers.read_property = dom_read_property;
 	dom_ze1_object_handlers.write_property = dom_write_property;
-	dom_object_handlers.get_property_ptr_ptr = dom_get_property_ptr_ptr;
+	dom_ze1_object_handlers.get_property_ptr_ptr = dom_get_property_ptr_ptr;
 	dom_ze1_object_handlers.clone_obj = dom_objects_ze1_clone_obj;
 	dom_ze1_object_handlers.has_property = dom_property_exists;
 

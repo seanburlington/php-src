@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.24 2006/10/04 11:14:32 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.25 2006/10/05 18:23:19 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3155,6 +3155,9 @@ PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_l
 			target += to_len;
 			p++;
 			s = p;
+			if (replace_count) {
+				*replace_count += 1;
+			}
 		}
 		if (s < e) {
 			memcpy(target, s, (e - s));

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.28 2006/10/06 17:35:32 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.29 2006/10/06 18:03:19 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4027,12 +4027,12 @@ ZEND_METHOD(reflection_property, getDeclaringClass)
 	prop_name_len = strlen(prop_name);
 	ce = tmp_ce = ref->ce;
 	while (tmp_ce && zend_hash_find(&tmp_ce->properties_info, prop_name, prop_name_len + 1, (void **) &tmp_info) == SUCCESS) {
-		ce = tmp_ce;
-		tmp_ce = tmp_ce->parent;
 		if (tmp_info->flags & ZEND_ACC_PRIVATE) {
 			/* it's a private property, so it can't be inherited */
 			break;
 		}
+		ce = tmp_ce;
+		tmp_ce = tmp_ce->parent;
 	}
 
 	zend_reflection_class_factory(ce, return_value TSRMLS_CC);
@@ -4844,7 +4844,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.28 2006/10/06 17:35:32 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.29 2006/10/06 18:03:19 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.101.2.2.2.2 2006/08/10 13:50:56 iliaa Exp $ */
+/* $Id: php_session.h,v 1.101.2.2.2.3 2006/10/06 21:11:36 iliaa Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -198,6 +198,9 @@ PHPAPI int php_session_register_serializer(const char *name,
 
 PHPAPI void php_session_set_id(char *id TSRMLS_DC);
 PHPAPI void php_session_start(TSRMLS_D);
+
+PHPAPI ps_module *_php_find_ps_module(char *name TSRMLS_DC);
+PHPAPI const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 
 #define PS_ADD_VARL(name,namelen) do {										\
 	php_add_session_var(name, namelen TSRMLS_CC);							\

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.37 2006/04/29 18:45:29 fmk Exp $ */
+/* $Id: com_handlers.c,v 1.38 2006/10/06 12:24:11 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -539,7 +539,7 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 		return SUCCESS;
 	}
 
-	return FAILURE;
+	return zend_std_cast_object_tostring(readobj, writeobj, type TSRMLS_CC);
 }
 
 static int com_object_count(zval *object, long *count TSRMLS_DC)

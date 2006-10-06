@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: multi.c,v 1.27 2006/10/05 15:06:11 tony2001 Exp $ */
+/* $Id: multi.c,v 1.28 2006/10/06 03:49:04 sebastian Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -102,6 +102,7 @@ void _php_curl_multi_cleanup_list(void *data) /* {{{ */
 {
 	zval *z_ch = (zval *)data;
 	php_curl *ch;
+	TSRMLS_FETCH();
 
 	if (!z_ch) {
 		return;

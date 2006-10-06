@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.92 2006/10/03 23:26:14 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.93 2006/10/06 17:41:30 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1298,7 +1298,7 @@ PHP_FUNCTION(stream_filter_remove)
 }
 /* }}} */
 
-/* {{{ proto string stream_get_line(resource stream, int maxlen [, string ending])
+/* {{{ proto string stream_get_line(resource stream, int maxlen [, string ending]) U
    Read up to maxlen bytes from a stream or until the ending string is found */
 PHP_FUNCTION(stream_get_line)
 {
@@ -1518,7 +1518,7 @@ PHP_FUNCTION(stream_default_encoding)
 /* }}} */
 
 
-/* {{{ proto void stream_encoding(resource stream[, string encoding])
+/* {{{ proto void stream_encoding(resource stream[, string encoding]) U
 Set character set for stream encoding
 UTODO: Return current encoding charset
 */

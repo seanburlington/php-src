@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: property.c,v 1.16 2006/09/21 18:26:31 andrei Exp $ */ 
+/* $Id: property.c,v 1.17 2006/10/06 17:14:14 andrei Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -253,7 +253,7 @@ PHP_FUNCTION(char_is_titlecase)
 
 /* {{{ Single character properties */
 
-/* {{{ poto float char_get_numeric_value(char text) U
+/* {{{ proto float char_get_numeric_value(char text) U
    Get the numeric value for the character, as defined in the Unicode Character Database */
 PHP_FUNCTION(char_get_numeric_value)
 {

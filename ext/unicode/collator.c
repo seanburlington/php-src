@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.10 2006/09/22 19:50:02 andrei Exp $ */
+/* $Id: collator.c,v 1.11 2006/10/06 17:14:14 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -247,7 +247,7 @@ PHP_FUNCTION(collator_sort)
 }
 /* }}} */
 
-/* {{{ proto void Collator::set_strength(int strength) U
+/* {{{ proto void Collator::setStrength(int strength) U
    Set the collation strength */
 /* {{{ proto void collator_set_strength(Collator coll, int strength) U
    Set the collation strength */
@@ -265,7 +265,7 @@ PHP_FUNCTION(collator_set_strength)
 }
 /* }}} */
 
-/* {{{ proto int Collator::get_strength() U
+/* {{{ proto int Collator::getStrength() U
    Returns the current collation strength */
 /* {{{ proto int collator_get_strength(Collator coll) U
    Returns the current collation strength */
@@ -282,7 +282,7 @@ PHP_FUNCTION(collator_get_strength)
 }
 /* }}} */
 
-/* {{{ proto bool Collator::set_attribute(int attribute, int value) U
+/* {{{ proto bool Collator::setAttribute(int attribute, int value) U
    Set a collation attribute */
 /* {{{ proto bool collator_set_attribute(Collator coll, int attribute, int value) U
    Set a collation attribute */
@@ -304,7 +304,7 @@ PHP_FUNCTION(collator_set_attribute)
 /* }}} */
 
 
-/* {{{ proto int Collator::get_attribute(int attribute) U
+/* {{{ proto int Collator::getAttribute(int attribute) U
    Returns a collation attribute */
 /* {{{ proto int collator_get_attribute(Collator coll, int attribute) U
    Returns a collation attribute */

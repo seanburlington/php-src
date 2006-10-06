@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.42 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: lcg.c,v 1.43 2006/10/06 18:02:04 andrei Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -114,7 +114,7 @@ PHP_RINIT_FUNCTION(lcg)
 	return SUCCESS;
 }
 
-/* {{{ proto float lcg_value()
+/* {{{ proto float lcg_value() U
    Returns a value from the combined linear congruential generator */
 PHP_FUNCTION(lcg_value)
 {

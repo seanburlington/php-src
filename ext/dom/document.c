@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.3 2006/09/16 19:07:35 iliaa Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.4 2006/10/07 19:40:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1355,7 +1355,9 @@ PHP_METHOD(domdocument, __construct)
 			}
 		}
 		intern->document = NULL;
-		php_libxml_increment_doc_ref((php_libxml_node_object *)intern, docp TSRMLS_CC);
+		if (php_libxml_increment_doc_ref((php_libxml_node_object *)intern, docp TSRMLS_CC) == -1) {
+			RETURN_FALSE;
+		}
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, (xmlNodePtr)docp, (void *)intern TSRMLS_CC);
 	}
 }
@@ -1568,7 +1570,9 @@ static void dom_parse_document(INTERNAL_FUNCTION_PARAMETERS, int mode) {
 				}
 			}
 			intern->document = NULL;
-			php_libxml_increment_doc_ref((php_libxml_node_object *)intern, newdoc TSRMLS_CC);
+			if (php_libxml_increment_doc_ref((php_libxml_node_object *)intern, newdoc TSRMLS_CC) == -1) {
+				RETURN_FALSE;
+			}
 			intern->document->doc_props = doc_prop;
 		}
 
@@ -2069,7 +2073,9 @@ static void dom_load_html(INTERNAL_FUNCTION_PARAMETERS, int mode)
 				}
 			}
 			intern->document = NULL;
-			php_libxml_increment_doc_ref((php_libxml_node_object *)intern, newdoc TSRMLS_CC);
+			if (php_libxml_increment_doc_ref((php_libxml_node_object *)intern, newdoc TSRMLS_CC) == -1) {
+				RETURN_FALSE;
+			}
 			intern->document->doc_props = doc_prop;
 		}
 

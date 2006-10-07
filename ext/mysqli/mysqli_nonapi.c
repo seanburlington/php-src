@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.65 2006/10/02 07:42:49 bjori Exp $ 
+  $Id: mysqli_nonapi.c,v 1.66 2006/10/07 18:24:51 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -93,11 +93,13 @@ PHP_FUNCTION(mysqli_connect)
 		RETURN_FALSE;
 	}
 
+#ifdef HAVE_MYSQLI_SET_CHARSET
 	/* when PHP runs in unicode, set default character set to utf8 */
 	if (UG(unicode)) {
 		mysql_set_character_set(mysql->mysql, "utf8");
 		mysql->conv = UG(utf8_conv);
 	}
+#endif
 
 	/* clear error */
 	php_mysqli_set_error(mysql_errno(mysql->mysql), (char *) mysql_error(mysql->mysql) TSRMLS_CC);

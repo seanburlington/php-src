@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.34 2006/10/07 18:45:43 iliaa Exp $ */
+/* $Id: shmop.c,v 1.35 2006/10/07 21:12:09 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -126,7 +126,7 @@ PHP_FUNCTION(shmop_open)
 	}
 
 	if (flag_type == IS_UNICODE) {
-		flags = zend_unicode_to_ascii((UChar*)flags, flags_len);
+		flags = zend_unicode_to_ascii((UChar*)flags, flags_len TSRMLS_CC);
 		if (!flags) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Binary or ASCII-Unicode string expected, non-ASCII-Unicode string received");
 			RETURN_FALSE;

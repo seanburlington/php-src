@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.45 2006/10/06 20:11:25 andrei Exp $ */
+/* $Id: type.c,v 1.46 2006/10/07 04:45:42 pollita Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -238,8 +238,8 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 				/* We can get away with this because INCOMPLETE_CLASS is ascii and has a 1:1 relationship with unicode */
 				RETURN_TRUE;
 			} else if (UG(unicode)) {
-				U_STRING_DECL(uIncompleteClass, INCOMPLETE_CLASS, sizeof(INCOMPLETE_CLASS) - 1);
-				U_STRING_INIT(uIncompleteClass, INCOMPLETE_CLASS, sizeof(INCOMPLETE_CLASS) - 1);
+				U_STRING_DECL(uIncompleteClass, (INCOMPLETE_CLASS), sizeof(INCOMPLETE_CLASS) - 1);
+				U_STRING_INIT(uIncompleteClass, (INCOMPLETE_CLASS), sizeof(INCOMPLETE_CLASS) - 1);
 
 				if (!memcmp(ce->name.u, uIncompleteClass, UBYTES(sizeof(INCOMPLETE_CLASS)))) {
 					RETURN_FALSE;

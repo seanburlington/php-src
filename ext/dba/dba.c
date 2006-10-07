@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.121 2006/07/06 23:13:41 iliaa Exp $ */
+/* $Id: dba.c,v 1.122 2006/10/07 22:55:18 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1160,7 +1160,6 @@ PHP_FUNCTION(dba_handlers)
 	zend_bool full_info = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &full_info) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
 		RETURN_FALSE;
 	}
 

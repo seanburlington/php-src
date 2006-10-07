@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.38 2006/09/16 18:21:53 nlopess Exp $ */
+/* $Id: php_xmlwriter.c,v 1.39 2006/10/07 22:55:18 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1365,7 +1365,6 @@ PHP_FUNCTION(xmlwriter_open_uri)
 #endif
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t", &source, &source_len, &source_type) == FAILURE) {
-		WRONG_PARAM_COUNT;
 		return;
 	}
 	

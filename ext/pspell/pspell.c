@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.51 2006/08/14 14:54:19 nlopess Exp $ */
+/* $Id: pspell.c,v 1.52 2006/10/08 00:05:17 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -49,6 +49,28 @@
  * and it takes 3 bytes to represent that (see pspell_config_ignore)
  */
 #define PSPELL_LARGEST_WORD 3
+
+static PHP_MINIT_FUNCTION(pspell);
+static PHP_MINFO_FUNCTION(pspell);
+static PHP_FUNCTION(pspell_new);
+static PHP_FUNCTION(pspell_new_personal);
+static PHP_FUNCTION(pspell_new_config);
+static PHP_FUNCTION(pspell_check);
+static PHP_FUNCTION(pspell_suggest);
+static PHP_FUNCTION(pspell_store_replacement);
+static PHP_FUNCTION(pspell_add_to_personal);
+static PHP_FUNCTION(pspell_add_to_session);
+static PHP_FUNCTION(pspell_clear_session);
+static PHP_FUNCTION(pspell_save_wordlist);
+static PHP_FUNCTION(pspell_config_create);
+static PHP_FUNCTION(pspell_config_runtogether);
+static PHP_FUNCTION(pspell_config_mode);
+static PHP_FUNCTION(pspell_config_ignore);
+static PHP_FUNCTION(pspell_config_personal);
+static PHP_FUNCTION(pspell_config_dict_dir);
+static PHP_FUNCTION(pspell_config_data_dir);
+static PHP_FUNCTION(pspell_config_repl);
+static PHP_FUNCTION(pspell_config_save_repl);
 
 /* {{{ pspell_functions[]
  */

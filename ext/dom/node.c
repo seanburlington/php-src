@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.51 2006/09/19 10:38:30 dmitry Exp $ */
+/* $Id: node.c,v 1.52 2006/10/08 13:34:21 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1736,7 +1736,7 @@ static void dom_canonicalization(INTERNAL_FUNCTION_PARAMETERS, int mode)
 				if (file_type == IS_UNICODE) {
 					efree(file);
 				}
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "XPath query did not return a nodeset.");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "XPath query did not return a nodeset");
 				RETURN_FALSE;
 			}
 		}
@@ -1835,7 +1835,7 @@ static void dom_canonicalization(INTERNAL_FUNCTION_PARAMETERS, int mode)
 				xmlXPathFreeObject(xpathobjp);
 			}
 			xmlXPathFreeContext(ctxp);
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "XPath query did not return a nodeset.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "XPath query did not return a nodeset");
 			RETURN_FALSE;
 		}
 	}

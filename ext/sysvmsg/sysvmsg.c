@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.25 2006/06/05 22:52:27 iliaa Exp $ */
+/* $Id: sysvmsg.c,v 1.26 2006/10/08 13:34:24 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -144,7 +144,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.26 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -411,7 +411,7 @@ PHP_FUNCTION(msg_send)
 				break;
 
 			default:
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Message parameter must be either a string or a number.");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Message parameter must be either a string or a number");
 				RETURN_FALSE;
 		}
 

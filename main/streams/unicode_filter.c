@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_filter.c,v 1.4 2006/09/19 10:38:31 dmitry Exp $ */
+/* $Id: unicode_filter.c,v 1.5 2006/10/08 13:34:24 bjori Exp $ */
 
 
 #include "php.h"
@@ -288,7 +288,7 @@ static php_stream_filter *php_unicode_filter_create(const char *filtername, zval
 	/* Create this filter */
 	data = (php_unicode_filter_data *)pecalloc(1, sizeof(php_unicode_filter_data), persistent);
 	if (!data) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed allocating %d bytes.", sizeof(php_unicode_filter_data));
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed allocating %d bytes", sizeof(php_unicode_filter_data));
 		return NULL;
 	}
 

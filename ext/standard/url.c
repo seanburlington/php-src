@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.99 2006/09/28 14:52:55 iliaa Exp $ */
+/* $Id: url.c,v 1.100 2006/10/08 13:34:24 bjori Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -375,7 +375,7 @@ PHP_FUNCTION(parse_url)
 				if (resource->fragment != NULL) RETVAL_STRING(resource->fragment, 1);
 				break;
 			default:
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid URL component identifier %ld.", key);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid URL component identifier %ld", key);
 				RETVAL_FALSE;
 		}
 		goto done;

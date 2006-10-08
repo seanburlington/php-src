@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.51 2006/09/21 10:31:35 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.52 2006/10/08 13:34:24 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -268,14 +268,14 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler %R()", Z_TYPE(callable), Z_UNIVAL(callable));
 		
 	} else if ( intern->registerPhpFunctions == 2 && zend_u_hash_exists(intern->registered_phpfunctions, Z_TYPE(callable), Z_UNIVAL(callable), Z_UNILEN(callable) + 1) == 0) { 
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not allowed to call handler '%R()'.", Z_TYPE(callable), Z_UNIVAL(callable));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not allowed to call handler '%R()'", Z_TYPE(callable), Z_UNIVAL(callable));
 		// Push an empty string, so that we at least have an xslt result...
 		valuePush(ctxt, xmlXPathNewString(""));
 	} else {
 		result = zend_call_function(&fci, NULL TSRMLS_CC);
 		if (result == FAILURE) {
 			if (Z_TYPE(callable) == IS_STRING || Z_TYPE(callable) == IS_UNICODE) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler '%R()'.", Z_TYPE(callable), Z_UNIVAL(callable));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler '%R()'", Z_TYPE(callable), Z_UNIVAL(callable));
 			}
 		/* retval is == NULL, when an exception occured, don't report anything, because PHP itself will handle that */
 		} else if (retval == NULL) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uuencode.c,v 1.8 2006/10/03 19:51:35 pollita Exp $ */
+/* $Id: uuencode.c,v 1.9 2006/10/08 13:34:24 bjori Exp $ */
 
 /*
  * Portions of this code are based on Berkeley's uuencode/uudecode
@@ -238,7 +238,7 @@ PHP_FUNCTION(convert_uudecode)
 	}
 
 	if (dst_len < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The given parameter is not a valid uuencoded string.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The given parameter is not a valid uuencoded string");
 		RETURN_FALSE;
 	}
 

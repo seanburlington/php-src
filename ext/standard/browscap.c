@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.87 2006/01/01 13:09:54 sniper Exp $ */
+/* $Id: browscap.c,v 1.88 2006/10/08 13:34:23 bjori Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -290,7 +290,7 @@ PHP_FUNCTION(get_browser)
 	char *browscap = INI_STR("browscap");
 
 	if (!browscap || !browscap[0]) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "browscap ini directive not set.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "browscap ini directive not set");
 		RETURN_FALSE;
 	}
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.72 2006/03/08 00:43:28 pajoye Exp $ */
+/* $Id: php_sybase_db.c,v 1.73 2006/10/08 13:34:24 bjori Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -935,7 +935,7 @@ PHP_FUNCTION(sybase_query)
 		/* Check assumption that dbnextrow returns NO_MORE_ROWS */
 		retvalue = dbnextrow(sybase_ptr->link);
 		if (retvalue != NO_MORE_ROWS) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Expected dbnextrow() to return NO_MORE_ROWS.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Expected dbnextrow() to return NO_MORE_ROWS");
 		}
 	}
 }

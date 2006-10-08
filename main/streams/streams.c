@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.139 2006/10/03 23:22:21 tony2001 Exp $ */
+/* $Id: streams.c,v 1.140 2006/10/08 13:34:24 bjori Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2066,7 +2066,7 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 		/* BC with older php scripts and zlib wrapper */
 		protocol = "compress.zlib";
 		n = 13;
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Use of \"zlib:\" wrapper is deprecated; please use \"compress.zlib://\" instead.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Use of \"zlib:\" wrapper is deprecated; please use \"compress.zlib://\" instead");
 	}
 
 	if (protocol)	{
@@ -2335,7 +2335,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 
 	wrapper = php_stream_locate_url_wrapper(path, &path_to_open, options TSRMLS_CC);
 	if (options & STREAM_USE_URL && (!wrapper || !wrapper->is_url)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This function may only be used against URLs.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This function may only be used against URLs");
 		return NULL;
 	}
 

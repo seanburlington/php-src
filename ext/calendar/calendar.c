@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.49 2006/06/10 22:59:39 bjori Exp $ */
+/* $Id: calendar.c,v 1.50 2006/10/08 13:34:21 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -328,7 +328,7 @@ PHP_FUNCTION(cal_info)
 
 
 	if (cal != -1 && (cal < 0 || cal >= CAL_NUM_CALS)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld.", cal);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld", cal);
 		RETURN_FALSE;
 	}
 
@@ -350,7 +350,7 @@ PHP_FUNCTION(cal_days_in_month)
 	}
 
 	if (cal < 0 || cal >= CAL_NUM_CALS) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld.", cal);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld", cal);
 		RETURN_FALSE;
 	}
 
@@ -359,7 +359,7 @@ PHP_FUNCTION(cal_days_in_month)
 	sdn_start = calendar->to_jd(year, month, 1);
 
 	if (sdn_start == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid date.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid date");
 		RETURN_FALSE;
 	}
 
@@ -385,7 +385,7 @@ PHP_FUNCTION(cal_to_jd)
 	}
 
 	if (cal < 0 || cal >= CAL_NUM_CALS) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld.", cal);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid calendar ID %ld", cal);
 		RETURN_FALSE;
 	}
 
@@ -615,7 +615,7 @@ PHP_FUNCTION(jdtojewish)
 		RETURN_STRING(date, 1);
 	} else {
 		if (year <= 0 || year > 9999) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Year out of range (0-9999).");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Year out of range (0-9999)");
 			RETURN_FALSE;
 		}
 

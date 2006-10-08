@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.39 2006/06/13 13:12:19 dmitry Exp $ */
+/* $Id: recode.c,v 1.40 2006/10/08 13:34:23 bjori Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -122,7 +122,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.39 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.40 $");
 	php_info_print_table_end();
 }
 
@@ -154,7 +154,7 @@ PHP_FUNCTION(recode_string)
 	
 	recode_buffer_to_buffer(request, str, str_len, &r, &r_len, &r_alen);
 	if (!r) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed");
 error_exit:
 		RETVAL_FALSE;
 	} else {
@@ -207,7 +207,7 @@ PHP_FUNCTION(recode_file)
 	}
 	
 	if (!recode_file_to_file(request, in_fp, out_fp)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed");
 		goto error_exit;
 	}
 

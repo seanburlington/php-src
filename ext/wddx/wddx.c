@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.139 2006/08/02 22:02:12 tony2001 Exp $ */
+/* $Id: wddx.c,v 1.140 2006/10/08 13:34:24 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -462,7 +462,7 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 				 zend_hash_get_current_data(HASH_OF(retval), (void **)&varname) == SUCCESS;
 				 zend_hash_move_forward(HASH_OF(retval))) {
 				if (Z_TYPE_PP(varname) != IS_STRING) {
-					php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only containing the names of instance-variables to serialize.");
+					php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only containing the names of instance-variables to serialize");
 					continue;
 				}
 

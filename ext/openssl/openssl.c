@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.124 2006/09/16 12:05:42 nlopess Exp $ */
+/* $Id: openssl.c,v 1.125 2006/10/08 13:34:23 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2988,7 +2988,7 @@ PHP_FUNCTION(openssl_sign)
 
 	mdtype = php_openssl_get_evp_md_from_algo(signature_algo);
 	if (!mdtype) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown signature algorithm.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown signature algorithm");
 		RETURN_FALSE;
 	}
 
@@ -3032,7 +3032,7 @@ PHP_FUNCTION(openssl_verify)
 
 	mdtype = php_openssl_get_evp_md_from_algo(signature_algo);
 	if (!mdtype) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown signature algorithm.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown signature algorithm");
 		RETURN_FALSE;
 	}
 

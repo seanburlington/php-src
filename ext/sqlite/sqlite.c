@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.198 2006/10/07 17:49:30 pollita Exp $
+   $Id: sqlite.c,v 1.199 2006/10/08 13:34:23 bjori Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -172,7 +172,7 @@ PHP_INI_END()
 
 #define PHP_SQLITE_EMPTY_QUERY \
 	if (!sql_len) { \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot execute empty query."); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot execute empty query"); \
 		RETURN_FALSE; \
 	}
 
@@ -1220,7 +1220,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.198 2006/10/07 17:49:30 pollita Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.199 2006/10/08 13:34:23 bjori Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

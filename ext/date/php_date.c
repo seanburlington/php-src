@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.122 2006/10/07 22:31:52 bjori Exp $ */
+/* $Id: php_date.c,v 1.123 2006/10/08 13:34:21 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1139,7 +1139,7 @@ PHP_FUNCTION(idate)
 
 	ret = php_idate(format[0], ts, 0);
 	if (ret == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unrecognized date format token.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unrecognized date format token");
 		RETURN_FALSE;
 	}
 	RETURN_LONG(ret);

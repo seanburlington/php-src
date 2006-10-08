@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.107 2006/06/11 19:59:53 bjori Exp $ */
+/* $Id: php_ftp.c,v 1.108 2006/10/08 13:34:22 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1024,7 +1024,7 @@ PHP_FUNCTION(ftp_nb_continue)
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 
 	if (!ftp->nb) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "no nbronous transfer to continue.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "no nbronous transfer to continue");
 		RETURN_LONG(PHP_FTP_FAILED);
 	}
 

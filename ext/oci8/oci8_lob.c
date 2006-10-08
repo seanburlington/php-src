@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.18 2006/08/22 11:08:28 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.19 2006/10/08 13:34:22 bjori Exp $ */
 
 
 
@@ -62,7 +62,7 @@ php_oci_descriptor *php_oci_lob_create (php_oci_connection *connection, long typ
 			/* these three are allowed */
 			break;
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown descriptor type %ld.", type);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown descriptor type %ld", type);
 			return NULL;
 			break;
 	}

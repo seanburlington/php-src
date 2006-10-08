@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.136 2006/10/02 16:08:11 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.137 2006/10/08 13:34:22 bjori Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -241,7 +241,7 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 	var_cnt = argc - start;
 
 	if (var_cnt != mysql_stmt_field_count(stmt->stmt)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of bind variables doesn't match number of fields in prepared statement.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of bind variables doesn't match number of fields in prepared statement");
 		efree(args);
 		RETURN_FALSE;
 	}

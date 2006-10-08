@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.145 2006/09/12 17:26:24 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.146 2006/10/08 13:34:22 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2007,7 +2007,7 @@ PHP_FUNCTION(iconv_strpos)
 	}
 
 	if (offset < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset not contained in string.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset not contained in string");
 		RETURN_FALSE;
 	}
 

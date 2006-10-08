@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.225 2006/10/05 14:28:33 tony2001 Exp $ */
+/* $Id: php_imap.c,v 1.226 2006/10/08 13:34:22 bjori Exp $ */
 
 #define IMAP41
 
@@ -3221,7 +3221,7 @@ PHP_FUNCTION(imap_mail_compose)
 	}
 
 	if (bod && bod->type == TYPEMULTIPART && (!bod->nested.part || !bod->nested.part->next)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot generate multipart e-mail without components.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot generate multipart e-mail without components");
 		RETVAL_FALSE;
 		goto done;
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.109 2006/03/16 16:53:09 dmitry Exp $ */
+/* $Id: dl.c,v 1.110 2006/10/08 13:34:23 bjori Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -141,7 +141,7 @@ void php_dl(zval *file, int type, zval *return_value, int start_now TSRMLS_DC)
 
 	if (!get_module) {
 		DL_UNLOAD(handle);
-		php_error_docref(NULL TSRMLS_CC, error_type, "Invalid library (maybe not a PHP library) '%s' ", Z_STRVAL_P(file));
+		php_error_docref(NULL TSRMLS_CC, error_type, "Invalid library (maybe not a PHP library) '%s'", Z_STRVAL_P(file));
 		RETURN_FALSE;
 	}
 	module_entry = get_module();

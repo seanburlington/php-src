@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.99 2006/06/26 11:31:19 bjori Exp $ */
+/* $Id: mcrypt.c,v 1.100 2006/10/08 13:34:22 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -226,7 +226,7 @@ ZEND_GET_MODULE(mcrypt)
 
 #define PHP_MCRYPT_INIT_CHECK	\
 	if (!pm->init) {	\
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Operation disallowed prior to mcrypt_generic_init().");	\
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Operation disallowed prior to mcrypt_generic_init()");	\
 		RETURN_FALSE;	\
 	}	\
 

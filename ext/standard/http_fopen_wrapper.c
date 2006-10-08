@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.119 2006/09/19 10:38:31 dmitry Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.120 2006/10/08 13:34:23 bjori Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -150,7 +150,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	tmp_line[0] = '\0';
 
 	if (redirect_max < 1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Redirection limit reached, aborting.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Redirection limit reached, aborting");
 		return NULL;
 	}
 

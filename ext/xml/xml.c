@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.166 2006/08/15 22:45:18 rrichards Exp $ */
+/* $Id: xml.c,v 1.167 2006/10/08 13:34:24 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1504,7 +1504,7 @@ PHP_FUNCTION(xml_parser_free)
 	ZEND_FETCH_RESOURCE(parser,xml_parser *, pind, -1, "XML Parser", le_xml_parser);
 
 	if (parser->isparsing == 1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parser cannot be freed while it is parsing.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parser cannot be freed while it is parsing");
 		RETURN_FALSE;
 	}
 

@@ -2,7 +2,7 @@
 gif in/out
 --SKIPIF--
 <?php 
-// $Id: gif.phpt,v 1.2 2005/12/26 21:41:37 pajoye Exp $
+// $Id: gif.phpt,v 1.3 2006/10/08 13:43:20 bjori Exp $
 	if (!extension_loaded('gd')) {
 		die("skip gd extension not available.");
 	}
@@ -133,6 +133,7 @@ if (check_box(255,255,255, 10)) {
 }
 
 @unlink($cwd . "/test_gif.gif");
+@unlink($cwd . "/test_gif_2.gif");
 ?>
 --EXPECT--
 <4 cols: ok

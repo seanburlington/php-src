@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.24 2006/06/01 19:15:31 mike Exp $
+dnl $Id: config.m4,v 1.25 2006/10/09 04:46:03 georg Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -49,9 +49,9 @@ dnl  fi
     PHP_EVAL_INCLINE($MYSQLI_INCLINE)
     PHP_EVAL_LIBLINE($MYSQLI_LIBLINE, MYSQLI_SHARED_LIBADD)
     AC_DEFINE(HAVE_MYSQLILIB,1,[ ])
-    PHP_CHECK_LIBRARY($MYSQL_LIB_NAME, mysql_stmt_field_count,
+    PHP_CHECK_LIBRARY($MYSQL_LIB_NAME, mysql_set_character_set,
     [ ],[
-		AC_MSG_ERROR([MySQLI doesn't support versions < 4.1.3 (for MySQL 4.1.x) and < 5.0.1 for (MySQL 5.0.x) anymore. Please update your libraries.])
+		AC_MSG_ERROR([MySQLI doesn't support versions < 4.1.13 (for MySQL 4.1.x) and < 5.0.7 for (MySQL 5.0.x) anymore. Please update your libraries.])
 	],[$MYSQLI_LIBLINE])
   ],[
     AC_MSG_ERROR([wrong mysql library version or lib not found. Check config.log for more information.])

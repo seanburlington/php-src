@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.17 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: php_openssl.h,v 1.18 2006/10/09 14:43:52 bjori Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -38,6 +38,7 @@ PHP_FUNCTION(openssl_pkey_free);
 PHP_FUNCTION(openssl_pkey_new);
 PHP_FUNCTION(openssl_pkey_export);
 PHP_FUNCTION(openssl_pkey_export_to_file);
+PHP_FUNCTION(openssl_pkey_get_details);
 
 PHP_FUNCTION(openssl_sign);
 PHP_FUNCTION(openssl_verify);
@@ -66,7 +67,8 @@ PHP_FUNCTION(openssl_csr_new);
 PHP_FUNCTION(openssl_csr_export);
 PHP_FUNCTION(openssl_csr_export_to_file);
 PHP_FUNCTION(openssl_csr_sign);
-
+PHP_FUNCTION(openssl_csr_get_subject);
+PHP_FUNCTION(openssl_csr_get_public_key);
 #else
 
 #define phpext_openssl_ptr NULL

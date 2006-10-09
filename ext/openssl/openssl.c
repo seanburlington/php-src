@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.125 2006/10/08 13:34:23 bjori Exp $ */
+/* $Id: openssl.c,v 1.126 2006/10/09 00:06:40 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1801,8 +1801,8 @@ static EVP_PKEY * php_openssl_evp_from_zval(zval ** val, int public_key, char * 
 #define TMP_CLEAN \
 	if (Z_TYPE(tmp) == IS_STRING) {\
 		zval_dtor(&tmp); \
-		return NULL; \
-	}
+	} \
+	return NULL;
 
 	if (resourceval) {
 		*resourceval = -1;

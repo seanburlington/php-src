@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.813 2006/10/09 20:17:12 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.814 2006/10/09 20:17:36 andrei Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5734,17 +5734,17 @@ PHP_FUNCTION(print_r)
 	zval *var;
 	zend_bool do_return = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|b", &var, &do_returni) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|b", &var, &do_return) == FAILURE) {
 		RETURN_FALSE;
 	}
 	
-	if (do_returni) {
+	if (do_return) {
 		php_output_start_default(TSRMLS_C);
 	}
 
 	zend_print_zval_r(var, 0 TSRMLS_CC);
 
-	if (do_returni) {
+	if (do_return) {
 		php_output_get_contents(return_value TSRMLS_CC);
 		php_output_discard(TSRMLS_C);
 	} else {

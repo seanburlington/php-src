@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.23 2006/10/04 11:48:04 pajoye Exp $ */
+/* $Id: filter.c,v 1.52.2.24 2006/10/09 19:48:13 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_header( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.23 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.24 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -644,16 +644,18 @@ static void php_filter_array_handler(zval *input, zval **op, zval *return_value 
 PHP_FUNCTION(filter_input)
 {
 	long   fetch_from, filter = FILTER_DEFAULT;
-	zval **filter_args = NULL, **data=NULL, **tmp;
+	zval **filter_args = NULL, **tmp;
 	zval  *input = NULL;
+	char *var;
+	int var_len;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lZ|lZ", &fetch_from, &data, &filter, &filter_args) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls|lZ", &fetch_from, &var, &var_len, &filter, &filter_args) == FAILURE) {
 		RETURN_FALSE;
 	}
 
 	input = php_filter_get_storage(fetch_from TSRMLS_CC);
 
-	if (!input || !HASH_OF(input) || zend_hash_find(HASH_OF(input), Z_STRVAL_PP(data), Z_STRLEN_PP(data) + 1, (void **)&tmp) != SUCCESS) {
+	if (!input || !HASH_OF(input) || zend_hash_find(HASH_OF(input), var, var_len + 1, (void **)&tmp) != SUCCESS) {
 		RETURN_FALSE;
 	}
 

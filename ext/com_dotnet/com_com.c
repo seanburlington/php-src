@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.18 2006/01/26 11:18:09 rrichards Exp $ */
+/* $Id: com_com.c,v 1.19 2006/10/10 17:33:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -340,7 +340,7 @@ HRESULT php_com_invoke_helper(php_com_dotnet_object *obj, DISPID id_member,
 {
 	HRESULT hr;
 	unsigned int arg_err;
-	EXCEPINFO e;
+	EXCEPINFO e = {0};
 
 	hr = IDispatch_Invoke(V_DISPATCH(&obj->v), id_member,
 		&IID_NULL, LOCALE_SYSTEM_DEFAULT, flags, disp_params, v, &e, &arg_err);

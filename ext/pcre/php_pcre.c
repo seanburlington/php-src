@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.11 2006/09/06 16:30:59 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.12 2006/10/10 12:44:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1260,7 +1260,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 		WRONG_PARAM_COUNT;
 	}
 	if (!is_callable_replace && Z_TYPE_PP(replace) == IS_ARRAY && Z_TYPE_PP(regex) != IS_ARRAY) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parameter mismatch, pattern is a string while replacement in an array.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parameter mismatch, pattern is a string while replacement is an array");
 		RETURN_FALSE;
 	}
 

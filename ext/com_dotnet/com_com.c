@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.16.2.3 2007/01/01 09:40:12 sebastian Exp $ */
+/* $Id: com_com.c,v 1.16.2.2.2.1 2006/10/10 17:32:50 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -340,7 +340,7 @@ HRESULT php_com_invoke_helper(php_com_dotnet_object *obj, DISPID id_member,
 {
 	HRESULT hr;
 	unsigned int arg_err;
-	EXCEPINFO e;
+	EXCEPINFO e = {0};
 
 	hr = IDispatch_Invoke(V_DISPATCH(&obj->v), id_member,
 		&IID_NULL, LOCALE_SYSTEM_DEFAULT, flags, disp_params, v, &e, &arg_err);

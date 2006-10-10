@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.92 2006/10/08 22:39:48 iliaa Exp $ */
+/* $Id: interface.c,v 1.93 2006/10/10 23:13:13 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1669,7 +1669,11 @@ PHP_FUNCTION(curl_exec)
 		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 1);
 	}
 	--ch->uses;
-	RETURN_TRUE;
+	if (ch->handlers->write->method == PHP_CURL_RETURN) {
+		RETURN_EMPTY_STRING();
+	} else {
+		RETURN_TRUE;
+	}
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.14 2005/12/20 19:17:00 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.15 2006/10/10 09:52:06 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -121,10 +121,17 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 /* {{{ finfo_class_functions
  */
 function_entry finfo_class_functions[] = {
-	ZEND_ME_MAPPING(finfo,		finfo_open,	NULL)
-	ZEND_ME_MAPPING(set_flags,	finfo_set_flags,NULL)
-	ZEND_ME_MAPPING(file,		finfo_file,	NULL)
-	ZEND_ME_MAPPING(buffer,		finfo_buffer,	NULL)
+#if PHP_VERSION_ID >= 50200
+	ZEND_ME_MAPPING(finfo,          finfo_open,     NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(set_flags,      finfo_set_flags,NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(file,           finfo_file,     NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(buffer,         finfo_buffer,   NULL, ZEND_ACC_PUBLIC)
+#else
+	ZEND_ME_MAPPING(finfo,          finfo_open,     NULL)
+	ZEND_ME_MAPPING(set_flags,      finfo_set_flags,NULL)
+	ZEND_ME_MAPPING(file,           finfo_file,     NULL)
+	ZEND_ME_MAPPING(buffer,         finfo_buffer,   NULL)
+#endif
 	{NULL, NULL, NULL}
 };
 /* }}} */

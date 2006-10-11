@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.260 2006/10/06 18:02:50 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.261 2006/10/11 15:51:17 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2180,6 +2180,7 @@ ZEND_METHOD(reflection_method, __construct)
 		}
 		/* FIXME: Unicode support??? */
 		if ((tmp = strstr(name_str.s, "::")) == NULL) {
+			zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Invalid method name %s", name_str);
 			return;
 		}
 		type = IS_STRING;
@@ -2203,6 +2204,9 @@ ZEND_METHOD(reflection_method, __construct)
 			if (zend_u_lookup_class(Z_TYPE_P(classname), Z_UNIVAL_P(classname), Z_UNILEN_P(classname), &pce TSRMLS_CC) == FAILURE) {
 				zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC,
 						"Class %v does not exist", Z_UNIVAL_P(classname)); 
+				if (classname == &ztmp) {
+					zval_dtor(&ztmp);
+				}
 				return;
 			}
 			ce = *pce;
@@ -2213,6 +2217,9 @@ ZEND_METHOD(reflection_method, __construct)
 			break;
 
 		default:
+			if (classname == &ztmp) {
+				zval_dtor(&ztmp);
+			}
 			_DO_THROW("The parameter class is expected to be either a string or an object");
 			/* returns out of this function */
 	}
@@ -4913,7 +4920,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.260 2006/10/06 18:02:50 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.261 2006/10/11 15:51:17 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

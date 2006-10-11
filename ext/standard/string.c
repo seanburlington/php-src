@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.608 2006/10/11 13:14:07 tony2001 Exp $ */
+/* $Id: string.c,v 1.609 2006/10/11 14:30:50 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7478,16 +7478,22 @@ PHP_FUNCTION(str_word_count)
 	}
 
 	switch (type) {
-		case 1:
-		case 2:
-			array_init(return_value);
-			break;
-		case 0:
-			/* nothing to be done */
-			break;
-		default:
+  		case 1:
+  		case 2:
+  			array_init(return_value);
+			if (!str_len) {
+				return;
+			}
+  			break;
+  		case 0:
+			if (!str_len) {
+				RETURN_LONG(0);
+			}
+  			break;
+  		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid format value %ld", type);
 			RETURN_FALSE;
+			break;
 	}
 
 	if (str_type == IS_UNICODE) {

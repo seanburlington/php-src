@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.38 2006/06/25 22:51:55 bjori Exp $ */
+/* $Id: user_filters.c,v 1.39 2006/10/11 14:46:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -564,6 +564,16 @@ PHP_FUNCTION(stream_filter_register)
 	}
 
 	RETVAL_FALSE;
+
+	if (!filtername_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Filter name cannot be empty");
+		return;
+	}
+
+	if (!classname_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Class name cannot be empty");
+		return;
+	}
 
 	if (!BG(user_filter_map)) {
 		BG(user_filter_map) = (HashTable*) emalloc(sizeof(HashTable));

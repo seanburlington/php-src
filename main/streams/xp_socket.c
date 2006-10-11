@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.33.2.3 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: xp_socket.c,v 1.33.2.2.2.1 2006/10/11 12:53:56 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -495,7 +495,7 @@ static inline char *parse_ip_address_ex(const char *str, int str_len, int *portn
 #ifdef HAVE_IPV6
 	char *p;
 
-	if (*(str) == '[') {
+	if (*(str) == '[' && str_len > 1) {
 		/* IPV6 notation to specify raw address with port (i.e. [fe80::1]:80) */
 		p = memchr(str + 1, ']', str_len - 2);
 		if (!p || *(p + 1) != ':') {
@@ -508,8 +508,11 @@ static inline char *parse_ip_address_ex(const char *str, int str_len, int *portn
 		return estrndup(str + 1, p - str - 1);
 	}
 #endif
-
-	colon = memchr(str, ':', str_len - 1);
+	if (str_len) {
+		colon = memchr(str, ':', str_len - 1);
+	} else {
+		colon = NULL;
+	}
 	if (colon) {
 		*portno = atoi(colon + 1);
 		host = estrndup(str, colon - str);

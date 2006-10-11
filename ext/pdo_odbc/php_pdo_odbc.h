@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -12,11 +12,11 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author:                                                              |
+  | Author: Wez Furlong <wez@php.net>                                    |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc.h,v 1.1 2004/05/17 15:43:01 wez Exp $ */
+/* $Id: php_pdo_odbc.h,v 1.2.4.1 2006/10/11 02:10:56 wez Exp $ */
 
 #ifndef PHP_PDO_ODBC_H
 #define PHP_PDO_ODBC_H

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.8 2006/10/03 17:41:47 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.9 2006/10/11 23:22:45 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -311,7 +311,7 @@ PHP_FUNCTION(stream_socket_sendto)
 	php_stream *stream;
 	zval *zstream;
 	long flags = 0;
-	char *data, *target_addr;
+	char *data, *target_addr = NULL;
 	int datalen, target_addr_len = 0;
 	php_sockaddr_storage sa;
 	socklen_t sl = 0;

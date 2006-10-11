@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.17.2.3.2.2 2006/10/03 19:51:01 iliaa Exp $ */
+/* $Id: filter.c,v 1.17.2.3.2.3 2006/10/11 23:11:26 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -224,12 +224,12 @@ PHPAPI void php_stream_bucket_unlink(php_stream_bucket *bucket TSRMLS_DC)
 {
 	if (bucket->prev) {
 		bucket->prev->next = bucket->next;
-	} else {
+	} else if (bucket->brigade) {
 		bucket->brigade->head = bucket->next;
 	}
 	if (bucket->next) {
 		bucket->next->prev = bucket->prev;
-	} else {
+	} else if (bucket->brigade) {
 		bucket->brigade->tail = bucket->prev;
 	}
 	bucket->brigade = NULL;

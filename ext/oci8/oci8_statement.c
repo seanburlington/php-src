@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.30 2006/10/06 12:46:08 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.31 2006/10/12 10:02:34 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -548,7 +548,7 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 					outcol->descid = descr->id;
 					buf = &(descr->descriptor);
 					descr->charset_form = outcol->charset_form;
-					descr->charset_id = outcol->charset_id;
+					/* descr->charset_id = outcol->charset_id; */
 					break;
 
 				case SQLT_LNG:

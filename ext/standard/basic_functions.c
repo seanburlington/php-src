@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.814 2006/10/09 20:17:36 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.815 2006/10/12 12:40:26 mike Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5017,7 +5017,7 @@ PHP_FUNCTION(call_user_func)
 		return;
 	}
 
-	if (zend_fcall_info_init(callback, &fci, &fci_cache TSRMLS_CC) == FAILURE) {
+	if (zend_fcall_info_init(callback, &fci, &fci_cache, NULL TSRMLS_CC) == FAILURE) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "first parameter is expected to be a valid callback");
 		return;
 	}
@@ -5060,7 +5060,7 @@ PHP_FUNCTION(call_user_func_array)
 		return;
 	}
 
-	if (zend_fcall_info_init(callback, &fci, &fci_cache TSRMLS_CC) == FAILURE) {
+	if (zend_fcall_info_init(callback, &fci, &fci_cache, NULL TSRMLS_CC) == FAILURE) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "first parameter is expected to be a valid callback");
 		return;
 	}

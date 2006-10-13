@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.12 2006/10/12 10:04:12 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.13 2006/10/13 14:26:34 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -219,7 +219,6 @@ int php_oci_statement_fetch(php_oci_statement *statement, ub4 nrows TSRMLS_DC)
 						column->data = (text *) ecalloc(1, PHP_OCI_PIECE_SIZE + 1);
 					} else {
 						column->data = erealloc(column->data, column->retlen4 + PHP_OCI_PIECE_SIZE + 1);
-						memset(column->data + column->retlen4, 0, PHP_OCI_PIECE_SIZE + 1);
 					}
 					column->cb_retlen = PHP_OCI_PIECE_SIZE;
 

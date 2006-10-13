@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.103 2006/10/08 13:34:24 bjori Exp $ */
+/* $Id: tidy.c,v 1.104 2006/10/13 14:52:19 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -210,8 +210,8 @@ static zend_object_value tidy_object_new_doc(zend_class_entry * TSRMLS_DC);
 static zend_class_entry *tidy_get_ce_node(zval * TSRMLS_DC);
 static zend_class_entry *tidy_get_ce_doc(zval * TSRMLS_DC);
 static zval * tidy_instanciate(zend_class_entry *, zval * TSRMLS_DC);
-static int tidy_doc_cast_handler(zval *, zval *, int TSRMLS_DC);
-static int tidy_node_cast_handler(zval *, zval *, int TSRMLS_DC);
+static int tidy_doc_cast_handler(zval *, zval *, int, void * TSRMLS_DC);
+static int tidy_node_cast_handler(zval *, zval *, int, void * TSRMLS_DC);
 static void tidy_doc_update_properties(PHPTidyObj * TSRMLS_DC);
 static void tidy_add_default_properties(PHPTidyObj *, tidy_obj_type TSRMLS_DC);
 static void *php_tidy_get_opt_val(PHPTidyDoc *, TidyOption, TidyOptionType * TSRMLS_DC);
@@ -659,7 +659,7 @@ static zval * tidy_instanciate(zend_class_entry *pce, zval *object TSRMLS_DC)
 	return object;
 }
 
-static int tidy_doc_cast_handler(zval *in, zval *out, int type TSRMLS_DC)
+static int tidy_doc_cast_handler(zval *in, zval *out, int type, void *extra TSRMLS_DC)
 {
 	TidyBuffer output = {0};
 	PHPTidyObj *obj;
@@ -691,7 +691,7 @@ static int tidy_doc_cast_handler(zval *in, zval *out, int type TSRMLS_DC)
 	return SUCCESS;
 }
 
-static int tidy_node_cast_handler(zval *in, zval *out, int type TSRMLS_DC)
+static int tidy_node_cast_handler(zval *in, zval *out, int type, void *extra TSRMLS_DC)
 {
 	TidyBuffer buf = {0};
 	PHPTidyObj *obj;
@@ -1012,7 +1012,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.103 2006/10/08 13:34:24 bjori Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.104 2006/10/13 14:52:19 andrei Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

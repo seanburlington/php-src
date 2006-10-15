@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.22 2006/10/09 00:04:10 pajoye Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.23 2006/10/15 21:09:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1059,7 +1059,7 @@ PHP_FUNCTION(openssl_x509_parse)
 	for (i = 0; i < X509_get_ext_count(cert); i++) {
 		extension = X509_get_ext(cert, i);
 		extdata = X509_EXTENSION_get_data(extension);
-		extname = OBJ_nid2sn(OBJ_obj2nid(X509_EXTENSION_get_object(extension)));
+		extname = (char *)OBJ_nid2sn(OBJ_obj2nid(X509_EXTENSION_get_object(extension)));
 		add_assoc_asn1_string(subitem, extname, extdata);
 	}
 	add_assoc_zval(return_value, "extensions", subitem);

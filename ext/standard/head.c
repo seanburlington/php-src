@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.84.2.1.2.1 2006/08/10 13:50:56 iliaa Exp $ */
+/* $Id: head.c,v 1.84.2.1.2.2 2006/10/16 19:27:57 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -152,7 +152,7 @@ PHP_FUNCTION(setcookie)
 	char *name, *value = NULL, *path = NULL, *domain = NULL;
 	long expires = 0;
 	zend_bool secure = 0, httponly = 0;
-	int name_len, value_len, path_len, domain_len;
+	int name_len, value_len = 0, path_len = 0, domain_len = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssbb", &name,
 							  &name_len, &value, &value_len, &expires, &path,
@@ -175,7 +175,7 @@ PHP_FUNCTION(setrawcookie)
 	char *name, *value = NULL, *path = NULL, *domain = NULL;
 	long expires = 0;
 	zend_bool secure = 0, httponly = 0;
-	int name_len, value_len, path_len, domain_len;
+	int name_len, value_len = 0, path_len = 0, domain_len = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|slssbb", &name,
 							  &name_len, &value, &value_len, &expires, &path,

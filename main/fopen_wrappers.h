@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.h,v 1.47 2006/07/01 11:50:52 nlopess Exp $ */
+/* $Id: fopen_wrappers.h,v 1.48 2006/10/17 21:54:16 pollita Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
 
 BEGIN_EXTERN_C()
 #include "php_globals.h"
+#include "php_ini.h"
 
 PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC);
 PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC);
@@ -35,6 +36,8 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 
 PHPAPI int php_is_url(char *path);
 PHPAPI char *php_strip_url_passwd(char *path);
+
+PHPAPI ZEND_INI_MH(OnUpdateBaseDir);
 END_EXTERN_C()
 
 #endif

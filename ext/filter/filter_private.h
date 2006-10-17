@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.15 2006/10/04 11:56:15 pajoye Exp $ */
+/* $Id: filter_private.h,v 1.16 2006/10/17 15:26:42 iliaa Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -27,6 +27,7 @@
 #define FILTER_REQUIRE_SCALAR			0x2000000
 
 #define FILTER_FORCE_ARRAY			0x4000000
+#define FILTER_NULL_ON_FAILURE			0x8000000
 
 #define FILTER_FLAG_ALLOW_OCTAL             0x0001
 #define FILTER_FLAG_ALLOW_HEX               0x0002

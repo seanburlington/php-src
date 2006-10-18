@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.321 2006/09/12 20:26:59 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.322 2006/10/18 14:22:04 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -668,7 +668,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.321 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.322 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1104,15 +1104,19 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 							/* server died */
 						} else {
 							int rsrc_type;
+							php_oci_connection *tmp;
 
 							/* okay, the connection is open and the server is still alive */
 							connection->used_this_request = 1;
-							smart_str_free_ex(&hashed_details, 0);
-							if (zend_list_find(connection->rsrc_id, &rsrc_type) && (rsrc_type == le_pconnection) && zend_list_addref(connection->rsrc_id) == SUCCESS) {
+							tmp = (php_oci_connection *)zend_list_find(connection->rsrc_id, &rsrc_type);
+
+							if (tmp != NULL && rsrc_type == le_pconnection && strlen(tmp->hash_key) == hashed_details.len &&
+								memcmp(tmp->hash_key, hashed_details.c, hashed_details.len) == 0 && zend_list_addref(connection->rsrc_id) == SUCCESS) {
 								/* do nothing */
 							} else {
 								connection->rsrc_id = zend_list_insert(connection, le_pconnection);
 							}
+							smart_str_free_ex(&hashed_details, 0);
 							return connection;
 						}
 					}

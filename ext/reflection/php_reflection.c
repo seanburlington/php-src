@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.30 2006/10/11 15:52:56 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.31 2006/10/18 16:35:15 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2132,7 +2132,7 @@ ZEND_METHOD(reflection_parameter, getDefaultValue)
 
 	zv_copy = precv->op2.u.constant;
 	zv = &zv_copy;
-	zval_update_constant(&zv, (void*)0 TSRMLS_CC);
+	zval_update_constant_ex(&zv, (void*)0, param->fptr->common.scope TSRMLS_CC);
 	RETURN_ZVAL(zv, 1, 1);
 }
 /* }}} */
@@ -4851,7 +4851,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.30 2006/10/11 15:52:56 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.31 2006/10/18 16:35:15 johannes Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

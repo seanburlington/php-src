@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.17.2.2.2.3 2006/09/08 05:52:00 dmitry Exp $ */
+/* $Id: com_extension.c,v 1.17.2.2.2.4 2006/10/18 23:47:33 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,8 +191,6 @@ PHP_MINIT_FUNCTION(com_dotnet)
 {
 	zend_class_entry ce, *tmp;
 
-	REGISTER_INI_ENTRIES();
-
 	php_com_wrapper_minit(INIT_FUNC_ARGS_PASSTHRU);
 	php_com_persist_minit(INIT_FUNC_ARGS_PASSTHRU);
 
@@ -225,6 +223,8 @@ PHP_MINIT_FUNCTION(com_dotnet)
 	tmp = zend_register_internal_class_ex(&ce, php_com_variant_class_entry, "variant" TSRMLS_CC);
 	tmp->get_iterator = php_com_iter_get;
 #endif
+
+	REGISTER_INI_ENTRIES();
 
 #define COM_CONST(x) REGISTER_LONG_CONSTANT(#x, x, CONST_CS|CONST_PERSISTENT)
 	

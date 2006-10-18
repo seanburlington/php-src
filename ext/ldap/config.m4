@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2005/12/22 11:02:51 tony2001 Exp $
+dnl $Id: config.m4,v 1.44 2006/10/18 20:57:06 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_LDAP_CHECKS], [
@@ -70,7 +70,7 @@ PHP_ARG_WITH(ldap-sasl,for LDAP Cyrus SASL support,
 
 if test "$PHP_LDAP" != "no"; then
 
-  PHP_NEW_EXTENSION(ldap, ldap.c, $ext_shared)
+  PHP_NEW_EXTENSION(ldap, ldap.c, $ext_shared,,-DLDAP_DEPRECATED=1)
 
   if test "$PHP_LDAP" = "yes"; then
     for i in /usr/local /usr; do

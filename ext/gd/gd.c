@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.7 2006/10/07 16:40:39 pollita Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.8 2006/10/18 16:04:37 bjori Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -439,16 +439,15 @@ ZEND_END_ARG_INFO()
 
 #ifdef HAVE_GD_PNG
 static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_imagepng, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_imagepng, 0, 0, 1)
 	ZEND_ARG_INFO(0, im)
 	ZEND_ARG_INFO(0, filename)
-	ZEND_ARG_INFO(0, quality)
 ZEND_END_ARG_INFO()
 #endif
 
 #ifdef HAVE_GD_JPG
 static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_imagejpeg, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_imagejpeg, 0, 0, 1)
 	ZEND_ARG_INFO(0, im)
 	ZEND_ARG_INFO(0, filename)
 	ZEND_ARG_INFO(0, quality)

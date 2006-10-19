@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: win95nt.h,v 1.20.2.3 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: win95nt.h,v 1.20.2.2.2.1 2006/10/19 09:49:44 dmitry Exp $ */
 
 /* Defines and types for Windows 95/NT */
 #define HAVE_DECLARED_TIMEZONE
@@ -41,7 +41,7 @@ typedef char * caddr_t;
 #ifndef S_ISREG 
 #define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
 #endif
-#define chdir(path) SetCurrentDirectory(path)
+#define chdir(path) _chdir(path)
 #define mkdir(a, b)	_mkdir(a)
 #define rmdir(a)	_rmdir(a)
 #define getpid		_getpid

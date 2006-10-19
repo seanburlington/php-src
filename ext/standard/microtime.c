@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.57 2006/10/19 22:11:04 andrei Exp $ */
+/* $Id: microtime.c,v 1.58 2006/10/19 22:14:04 andrei Exp $ */
 
 #include "php.h"
 
@@ -107,7 +107,7 @@ PHP_FUNCTION(gettimeofday)
 /* }}} */
 
 #ifdef HAVE_GETRUSAGE
-/* {{{ proto array getrusage([int who])
+/* {{{ proto array getrusage([int who]) U
    Returns an array of usage statistics */
 PHP_FUNCTION(getrusage)
 {
@@ -115,7 +115,11 @@ PHP_FUNCTION(getrusage)
 	long pwho = 0;
 	int who = RUSAGE_SELF;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &pwho) != FAILURE && pwho == 1) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &pwho) == FAILURE) {
+	   return;
+	}
+
+	if (pwho == 1) {
 		who = RUSAGE_CHILDREN;
 	}
 

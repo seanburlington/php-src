@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.18 2006/10/19 10:12:19 tony2001 Exp $ */
+/* $Id: json.c,v 1.19 2006/10/19 20:24:25 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -416,6 +416,10 @@ PHP_FUNCTION(json_encode)
 
     json_encode_r(&buf, parameter TSRMLS_CC);
 
+	/*
+	 * Return as binary string, since the result is 99% likely to be just
+	 * echo'ed out and we want to avoid overhead of double conversion.
+	 */
     ZVAL_STRINGL(return_value, buf.c, buf.len, 1);
 
     smart_str_free(&buf);

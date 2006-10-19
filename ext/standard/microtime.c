@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.56 2006/09/19 10:38:31 dmitry Exp $ */
+/* $Id: microtime.c,v 1.57 2006/10/19 22:11:04 andrei Exp $ */
 
 #include "php.h"
 
@@ -85,11 +85,11 @@ static void _php_gettimeofday(INTERNAL_FUNCTION_PARAMETERS, int mode)
 		char ret[100];
 
 		snprintf(ret, 100, "%.8f %ld", tp.tv_usec / MICRO_IN_SEC, tp.tv_sec);
-		RETURN_STRING(ret, 1);
+		RETURN_ASCII_STRING(ret, ZSTR_DUPLICATE);
 	}
 }
 
-/* {{{ proto mixed microtime([bool get_as_float])
+/* {{{ proto mixed microtime([bool get_as_float]) U
    Returns either a string or a float containing the current time in seconds and microseconds */
 PHP_FUNCTION(microtime)
 {
@@ -97,7 +97,7 @@ PHP_FUNCTION(microtime)
 }
 /* }}} */
 
-/* {{{ proto array gettimeofday([bool get_as_float])
+/* {{{ proto array gettimeofday([bool get_as_float]) U
    Returns the current time as array */
 PHP_FUNCTION(gettimeofday)
 {

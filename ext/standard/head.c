@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.91 2006/10/19 17:55:33 andrei Exp $ */
+/* $Id: head.c,v 1.92 2006/10/19 20:55:08 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -247,11 +247,11 @@ static void php_head_apply_header_list_to_hash(void *data, void *arg TSRMLS_DC)
 	sapi_header_struct *sapi_header = (sapi_header_struct *)data;
 
 	if (arg && sapi_header) {
-		add_next_index_string((zval *)arg, (char *)(sapi_header->header), 1);
+		add_next_index_ascii_string((zval *)arg, (char *)(sapi_header->header), 1);
 	}
 }
 
-/* {{{ proto array headers_list(void)
+/* {{{ proto array headers_list(void) U
    Return list of headers to be sent / already sent */
 PHP_FUNCTION(headers_list)
 {

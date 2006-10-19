@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.16 2006/10/17 17:56:54 andrei Exp $ */
+/* $Id: json.c,v 1.17 2006/10/19 10:01:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -439,6 +439,7 @@ PHP_FUNCTION(json_decode)
 
 	if (str_type == IS_UNICODE) {
 		utf16 = str.u;
+		utf16_len = str_len;
 	} else {
 		utf16 = (unsigned short *) emalloc((str_len+1) * sizeof(unsigned short));
 

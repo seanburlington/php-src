@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.8 2006/03/18 04:15:16 omar Exp $ */
+/* $Id: php_json.h,v 1.9 2006/10/19 10:12:19 tony2001 Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -41,14 +41,7 @@ PHP_MINFO_FUNCTION(json);
 PHP_FUNCTION(json_encode);
 PHP_FUNCTION(json_decode);
 
-#ifdef ZTS
-#define JSON_G(v) TSRMG(json_globals_id, zend_json_globals *, v)
-#else
-#define JSON_G(v) (json_globals.v)
-#endif
-
 #endif  /* PHP_JSON_H */
-
 
 /*
  * Local variables:

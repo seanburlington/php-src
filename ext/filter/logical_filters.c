@@ -17,12 +17,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.13 2006/10/17 15:26:42 iliaa Exp $ */
+/* $Id: logical_filters.c,v 1.14 2006/10/20 19:11:58 pajoye Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
 #include "ext/standard/url.h"
 #include "ext/pcre/php_pcre.h"
+
+#if PHP_MAJOR_VERSION <= 6
+#define zend_ascii_hash_find(hash, name, sizeof_name, val) zend_hash_find(hash, name, sizeof_name, val)
+#endif
 
 /* {{{ FETCH_LONG_OPTION(var_name, option_name) */
 #define FETCH_LONG_OPTION(var_name, option_name)                                                                         \

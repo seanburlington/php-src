@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.4 2006/09/16 18:10:32 iliaa Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.5 2006/10/20 21:28:31 tony2001 Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1038,7 +1038,7 @@ PHP_MINIT_FUNCTION(sqlite)
 #if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	REGISTER_SQLITE_CLASS(Exception,  exception, spl_ce_RuntimeException);
 #else
-	REGISTER_SQLITE_CLASS(Exception,  exception, zend_exception_get_default());
+	REGISTER_SQLITE_CLASS(Exception,  exception, zend_exception_get_default(TSRMLS_C));
 #endif
 
 	sqlite_ce_db->ce_flags &= ~ZEND_ACC_FINAL_CLASS;
@@ -1133,7 +1133,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.4 2006/09/16 18:10:32 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.5 2006/10/20 21:28:31 tony2001 Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

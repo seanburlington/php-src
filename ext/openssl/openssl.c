@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.130 2006/10/21 00:28:55 pajoye Exp $ */
+/* $Id: openssl.c,v 1.131 2006/10/21 00:42:59 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3146,7 +3146,7 @@ PHP_FUNCTION(openssl_sign)
 }
 /* }}} */
 
-/* {{{ proto int openssl_verify(string data, string signature, mixed key)
+/* {{{ proto int openssl_verify(string data, string signature, mixed key [, int signature_algo])
    Verifys data */
 PHP_FUNCTION(openssl_verify)
 {

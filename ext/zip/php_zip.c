@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.17 2006/10/07 22:55:18 bjori Exp $ */
+/* $Id: php_zip.c,v 1.18 2006/10/22 00:43:23 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -631,7 +631,7 @@ PHP_FUNCTION(zip_close)
 }
 /* }}} */
 
-/* {{{ proto resource zip_read(resource zip [, int flags])
+/* {{{ proto resource zip_read(resource zip)
    Returns the next file in the archive */
 PHP_FUNCTION(zip_read)
 {
@@ -641,7 +641,7 @@ PHP_FUNCTION(zip_read)
 	long flags = 0;
 	zip_rsrc *rsrc_int;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zip_dp, &flags) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zip_dp) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(rsrc_int, zip_rsrc *, &zip_dp, -1, le_zip_dir_name, le_zip_dir);
@@ -719,7 +719,7 @@ PHP_FUNCTION(zip_entry_close)
 }
 /* }}} */
 
-/* {{{ proto mixed zip_entry_read(resource zip_entry [, int len [, int mode]])
+/* {{{ proto mixed zip_entry_read(resource zip_entry [, int len])
    Read from an open directory entry */
 PHP_FUNCTION(zip_entry_read)
 {
@@ -1936,7 +1936,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.17 2006/10/07 22:55:18 bjori Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.18 2006/10/22 00:43:23 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

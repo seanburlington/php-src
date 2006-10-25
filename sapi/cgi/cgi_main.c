@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.301 2006/10/23 19:17:51 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.302 2006/10/25 14:04:48 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -485,7 +485,7 @@ static void sapi_cgi_register_variables(zval *track_vars_array TSRMLS_DC)
 	php_import_environment_variables(track_vars_array TSRMLS_CC);
 	/* Build the special-case PHP_SELF variable for the CGI version */
 	if (sapi_module.input_filter(PARSE_SERVER, "PHP_SELF", &val, strlen(val), &new_val_len TSRMLS_CC)) {
-		php_register_variable_safe("PHP_SELF", var, new_val_len, track_vars_array TSRMLS_CC);
+		php_register_variable_safe("PHP_SELF", val, new_val_len, track_vars_array TSRMLS_CC);
 	}
 }
 

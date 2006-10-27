@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.73 2006/10/17 15:26:42 iliaa Exp $ */
+/* $Id: filter.c,v 1.74 2006/10/27 12:13:28 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -123,7 +123,7 @@ static PHP_INI_MH(UpdateDefaultFilter) /* {{{ */
 			return SUCCESS;
 		}
 	}
-	/* Fallback to "string" filter */
+	/* Fallback to the default filter */
 	IF_G(default_filter) = FILTER_DEFAULT;
 	return SUCCESS;
 }
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.73 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.74 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

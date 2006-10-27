@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.18.4.24.2.7 2006/08/09 23:29:17 nlopess Exp $ */
+/* $Id: var_unserializer.c,v 1.18.4.24.2.8 2006/10/27 08:35:25 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -958,6 +958,10 @@ yy83:
 	
 	if (*rval == *rval_ref) return 0;
 
+	if ((*rval_ref)->refcount > 65500) {
+		return 0;
+	}
+
 	if (*rval != NULL) {
 	zval_ptr_dtor(rval);
 	}
@@ -999,6 +1003,10 @@ yy89:
 
 	id = parse_iv(start + 2) - 1;
 	if (id == -1 || var_access(var_hash, id, &rval_ref) != SUCCESS) {
+		return 0;
+	}
+
+	if ((*rval_ref)->refcount > 65500) {
 		return 0;
 	}
 

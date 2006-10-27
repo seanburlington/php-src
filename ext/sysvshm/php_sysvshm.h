@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvshm.h,v 1.18 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_sysvshm.h,v 1.19 2006/10/27 21:18:56 mike Exp $ */
 
 #ifndef PHP_SYSVSHM_H
 #define PHP_SYSVSHM_H
@@ -29,6 +29,8 @@ extern zend_module_entry sysvshm_module_entry;
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+
+#define PHP_SHM_RSRC_NAME "sysvshm"
 
 typedef struct {
 	int le_shm;
@@ -51,9 +53,9 @@ typedef struct {
 } sysvshm_chunk_head;
 
 typedef struct {
-	key_t key;               /* Key set by user */
-	long id;                 /* Returned by shmget. */
-	sysvshm_chunk_head *ptr; /* memoryaddress of shared memory */ 
+	key_t key;               /* key set by user */
+	long id;                 /* returned by shmget */
+	sysvshm_chunk_head *ptr; /* memory address of shared memory */
 } sysvshm_shm;
 
 PHP_MINIT_FUNCTION(sysvshm);
@@ -62,6 +64,7 @@ PHP_FUNCTION(shm_detach);
 PHP_FUNCTION(shm_remove);
 PHP_FUNCTION(shm_put_var);
 PHP_FUNCTION(shm_get_var);
+PHP_FUNCTION(shm_has_var);
 PHP_FUNCTION(shm_remove_var);
 
 extern sysvshm_module php_sysvshm;

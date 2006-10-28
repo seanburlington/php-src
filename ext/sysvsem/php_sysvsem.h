@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvsem.h,v 1.17 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_sysvsem.h,v 1.18 2006/10/28 08:48:00 mike Exp $ */
 
 #ifndef PHP_SYSVSEM_H
 #define PHP_SYSVSEM_H
@@ -25,6 +25,8 @@
 
 extern zend_module_entry sysvsem_module_entry;
 #define sysvsem_module_ptr &sysvsem_module_entry
+
+#define PHP_SEM_RSRC_NAME "sysvsem"
 
 PHP_MINIT_FUNCTION(sysvsem);
 PHP_FUNCTION(sem_get);

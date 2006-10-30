@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.21 2006/10/30 17:28:29 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.22 2006/10/30 23:00:54 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -639,7 +639,6 @@ PHP_FUNCTION(zip_read)
 	zval *zip_dp;
 	zip_read_rsrc *zr_rsrc;
 	int ret;
-	long flags = 0;
 	zip_rsrc *rsrc_int;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zip_dp) == FAILURE) {
@@ -654,7 +653,7 @@ PHP_FUNCTION(zip_read)
 
 		zr_rsrc = emalloc(sizeof(zip_read_rsrc));
 
-		ret = zip_stat_index(rsrc_int->za, rsrc_int->index_current, flags, &zr_rsrc->sb);
+		ret = zip_stat_index(rsrc_int->za, rsrc_int->index_current, 0, &zr_rsrc->sb);
 
 		if (ret != 0) {
 			efree(zr_rsrc);
@@ -1939,7 +1938,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.21 2006/10/30 17:28:29 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.22 2006/10/30 23:00:54 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

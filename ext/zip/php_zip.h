@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.11 2006/08/13 20:16:48 pajoye Exp $ */
+/* $Id: php_zip.h,v 1.12 2006/10/31 14:27:09 pajoye Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -40,6 +40,13 @@ extern zend_module_entry zip_module_entry;
 # if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 0) || PHP_MAJOR_VERSION == 6
 #  define ZEND_ENGINE_2_1
 # endif
+#endif
+
+#if PHP_MAJOR_VERSION < 6
+#define zend_ascii_hash_find(hash, name, sizeof_name, val) zend_hash_find(hash, name, sizeof_name, val)
+#define add_ascii_assoc_long(array, name, val) add_assoc_long(array, name, val)
+#define add_ascii_assoc_string(array, name, val, dup) add_assoc_long(array, name, val, dup)
+
 #endif
 
 typedef struct _ze_zip_rsrc {

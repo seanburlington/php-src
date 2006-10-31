@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.23 2006/10/31 14:27:09 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.24 2006/10/31 19:03:57 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -990,11 +990,18 @@ ZIPARCHIVE_METHOD(addFile)
 	}
 
 	if(!expand_filepath(filename, resolved_path TSRMLS_CC)) {
+		if (Z_TYPE_PP(filename_zval) == IS_UNICODE) {
+			efree(entry_name);
+		}
+
 		RETURN_FALSE;
 	}
 
 	zs = zip_source_file(intern, resolved_path, 0, 0);
 	if (!zs) {
+		if (Z_TYPE_PP(filename_zval) == IS_UNICODE) {
+			efree(entry_name);
+		}
 		RETURN_FALSE;
 	}
 
@@ -1817,7 +1824,7 @@ ZIPARCHIVE_METHOD(getFromIndex)
 }
 /* }}} */
 
-/* {{{ proto resource getStream(string entryname)
+/* {{{ proto resource getStream(string entryname) U
 get a stream for an entry using its name */
 ZIPARCHIVE_METHOD(getStream)
 {
@@ -1986,7 +1993,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.23 2006/10/31 14:27:09 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.24 2006/10/31 19:03:57 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

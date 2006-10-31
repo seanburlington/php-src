@@ -2,7 +2,7 @@
 getStream
 --SKIPIF--
 <?php
-/* $Id: oo_stream.phpt,v 1.1 2006/10/30 17:43:21 pajoye Exp $ */
+/* $Id: oo_stream.phpt,v 1.2 2006/10/31 19:03:57 pajoye Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -18,7 +18,7 @@ $fp = $zip->getStream('foo');
 
 var_dump($fp);
 if(!$fp) exit("\n");
-$contents = '';
+$contents = b'';
 while (!feof($fp)) {
 	$contents .= fread($fp, 255);
 }
@@ -32,7 +32,7 @@ $fp = fopen('zip://' . dirname(__FILE__) . '/test_with_comment.zip#foo', 'rb');
 if (!$fp) {
   exit("cannot open\n");
 }
-$contents = '';
+$contents = b'';
 while (!feof($fp)) {
   $contents .= fread($fp, 2);
 }

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.66 2006/10/07 18:24:51 iliaa Exp $ 
+  $Id: mysqli_nonapi.c,v 1.67 2006/10/31 15:23:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -50,6 +50,10 @@ PHP_FUNCTION(mysqli_connect)
 							  &username, &username_len, UG(utf8_conv), &passwd, &passwd_len, UG(utf8_conv), 
 							  &dbname, &dbname_len, UG(utf8_conv), &port, &socket, &socket_len, UG(utf8_conv)) == FAILURE) {
 		return;
+	}
+
+	if (!socket_len) {
+		socket = NULL;
 	}
 
 	if (!passwd) {
@@ -157,7 +161,7 @@ PHP_FUNCTION(mysqli_fetch_assoc)
 }
 /* }}} */
 
-/* {{{ proto mixed mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]]) 
+/* {{{ proto mixed mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]]) U
    Fetch a result row as an object */
 PHP_FUNCTION(mysqli_fetch_object) 
 {

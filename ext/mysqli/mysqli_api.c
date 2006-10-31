@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.137 2006/10/08 13:34:22 bjori Exp $ 
+  $Id: mysqli_api.c,v 1.138 2006/10/31 15:23:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1084,7 +1084,7 @@ PHP_FUNCTION(mysqli_get_server_version)
 }
 /* }}} */
 
-/* {{{ proto string mysqli_info(object link)
+/* {{{ proto string mysqli_info(object link) U
    Get information about the most recent query */
 PHP_FUNCTION(mysqli_info)
 {
@@ -1631,7 +1631,7 @@ PHP_FUNCTION(mysqli_stmt_data_seek)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_stmt_field_count(object stmt) { U
+/* {{{ proto int mysqli_stmt_field_count(object stmt) U
    Return the number of result columns for the given statement */
 PHP_FUNCTION(mysqli_stmt_field_count)
 {

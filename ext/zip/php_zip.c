@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.26 2006/10/31 23:25:41 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.27 2006/11/01 00:53:32 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -932,6 +932,35 @@ ZIPARCHIVE_METHOD(close)
 	ze_obj->za = NULL;
 
 	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto bool createEmptyDir(string dirname) U
+Returns the index of the entry named filename in the archive */
+ZIPARCHIVE_METHOD(addEmptyDir)
+{
+	struct zip *intern;
+	zval *this = getThis();
+	char *dirname;
+	int   dirname_len;
+
+	if (!this) {
+		RETURN_FALSE;
+	}
+
+	ZIP_FROM_OBJECT(intern, this);
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s&",
+			&dirname, &dirname_len, UG(ascii_conv)) == FAILURE) {
+		return;
+	}
+	if (dirname_len<1) {
+		RETURN_FALSE;
+	}
+
+	if (zip_add_dir(intern, (const char *)dirname) < 0) {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 
@@ -1904,6 +1933,7 @@ ZIPARCHIVE_METHOD(getStream)
 static zend_function_entry zip_class_functions[] = {
 	ZIPARCHIVE_ME(open,				NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(close,				NULL, ZEND_ACC_PUBLIC)
+	ZIPARCHIVE_ME(addEmptyDir,			NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(addFromString,		NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(addFile,			NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(renameIndex,		NULL, ZEND_ACC_PUBLIC)
@@ -2033,7 +2063,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.26 2006/10/31 23:25:41 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.27 2006/11/01 00:53:32 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

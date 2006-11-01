@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb.c,v 1.11 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: cdb.c,v 1.12 2006/11/01 00:11:49 helly Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -68,10 +68,11 @@ static int cdb_match(struct cdb *c, char *key, unsigned int len, uint32 pos TSRM
 uint32 cdb_hash(char *buf, unsigned int len)
 {
 	uint32 h;
+	const unsigned char * b = buf;
 
 	h = CDB_HASHSTART;
 	while (len--) {
-		h = ( h + (h << 5)) ^ (*buf++);
+		h = ( h + (h << 5)) ^ (*b++);
 	}
 	return h;
 }
@@ -188,6 +189,6 @@ int cdb_find(struct cdb *c, char *key, unsigned int len TSRMLS_DC)
 /* {{{ cdb_version */
 char *cdb_version() 
 {
-	return "0.75, $Revision: 1.11 $";
+	return "0.75, $Revision: 1.12 $";
 }
 /* }}} */

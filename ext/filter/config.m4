@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2006/01/14 15:04:12 sniper Exp $
+dnl $Id: config.m4,v 1.7 2006/11/03 20:08:54 iliaa Exp $
 dnl config.m4 for input filtering extension
 
 PHP_ARG_ENABLE(filter, whether to enable input filter support,
@@ -91,5 +91,5 @@ yes
   PHP_NEW_EXTENSION(filter, filter.c sanitizing_filters.c logical_filters.c callback_filter.c, $ext_shared)
   PHP_SUBST(FILTER_SHARED_LIBADD)
 
-  PHP_INSTALL_HEADERS([$ext_srcdir/php_filter.h])
+  PHP_INSTALL_HEADERS([ext/filter/php_filter.h])
 fi

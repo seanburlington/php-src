@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.86 2006/05/22 14:22:59 iliaa Exp $ */
+/* $Id: ming.c,v 1.87 2006/11/03 14:06:33 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,6 +36,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <ming.h>
+#include <ming/displaylist.h>
+#include <ming/movie.h>
 
 #define FLOAT_Z_DVAL_PP(x) ((float)Z_DVAL_PP(x))
 #define BYTE_Z_LVAL_PP(x)  ((byte)Z_LVAL_PP(x))

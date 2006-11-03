@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.27 2006/11/01 00:53:32 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.28 2006/11/03 16:23:12 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1877,7 +1877,7 @@ static void php_zip_get_from(INTERNAL_FUNCTION_PARAMETERS, int type) /* {{{ */
 }
 /* }}} */
 
-/* {{{ proto resource getFromName(string entryname[, int len [, int flags]]) U
+/* {{{ proto string getFromName(string entryname[, int len [, int flags]]) U
 get the contents of an entry using its name */
 ZIPARCHIVE_METHOD(getFromName)
 {
@@ -1885,7 +1885,7 @@ ZIPARCHIVE_METHOD(getFromName)
 }
 /* }}} */
 
-/* {{{ proto resource getFromIndex(string entryname[, int len [, int flags]]) U
+/* {{{ proto string getFromIndex(string entryname[, int len [, int flags]]) U
 get the contents of an entry using its index */
 ZIPARCHIVE_METHOD(getFromIndex)
 {
@@ -2063,7 +2063,7 @@ PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.27 2006/11/01 00:53:32 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.28 2006/11/03 16:23:12 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

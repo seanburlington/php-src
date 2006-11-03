@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.14 2006/11/03 13:51:48 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.15 2006/11/03 16:40:52 pajoye Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -491,8 +491,8 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 		     zend_hash_get_current_data_ex(&request->env, (void **) &val, &pos) == SUCCESS;
 		     zend_hash_move_forward_ex(&request->env, &pos)) {
 			int new_val_len;
-			if (sapi_module.input_filter(PARSE_SERVER, var.s, val, strlen(*val), &new_val_len TSRMLS_CC)) {
-				php_register_variable_safe(var.s, *val, new_val_len, array_ptr TSRMLS_CC);
+			if (sapi_module.input_filter(PARSE_SERVER, var, val, strlen(*val), &new_val_len TSRMLS_CC)) {
+				php_register_variable_safe(var, *val, new_val_len, array_ptr TSRMLS_CC);
 			}
 		}
 		PG(magic_quotes_gpc) = magic_quotes_gpc;

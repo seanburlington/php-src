@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.7.2.6 2006/10/12 20:02:58 bfrance Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.7 2006/11/03 13:51:47 iliaa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -246,10 +246,11 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 	table_entry *elts = (table_entry *) arr->elts;
 	zval **path_translated;
 	HashTable *symbol_table;
+	int new_val_len;
 
 	for (i = 0; i < arr->nelts; i++) {
 		char *val;
-		int val_len, new_val_len;
+		int val_len;
 
 		if (elts[i].val) {
 			val = elts[i].val;
@@ -277,7 +278,9 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 		php_register_variable("PATH_TRANSLATED", Z_STRVAL_PP(path_translated), track_vars_array TSRMLS_CC);
 	}
 
-	php_register_variable("PHP_SELF", ((request_rec *) SG(server_context))->uri, track_vars_array TSRMLS_CC);
+	if (sapi_module.input_filter(PARSE_SERVER, "PHP_SELF", &((request_rec *) SG(server_context))->uri, strlen(((request_rec *) SG(server_context))->uri), &new_val_len TSRMLS_CC)) {
+		php_register_variable("PHP_SELF", ((request_rec *) SG(server_context))->uri, track_vars_array TSRMLS_CC);
+	}
 }
 /* }}} */
 

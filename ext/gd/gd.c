@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.8 2006/10/18 16:04:37 bjori Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.9 2006/11/03 15:13:17 bjori Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -5057,8 +5057,10 @@ PHP_FUNCTION(imagefilter)
 		php_image_filter_smooth
 	};
 
-	if (ZEND_NUM_ARGS() < 2 || ZEND_NUM_ARGS() > 5 || zend_parse_parameters(2 TSRMLS_CC, "rl", &tmp, &filtertype) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (ZEND_NUM_ARGS() < 2 || ZEND_NUM_ARGS() > 5) {
+		WRONG_PARAM_COUNT;
+	} else if (zend_parse_parameters(2 TSRMLS_CC, "rl", &tmp, &filtertype) == FAILURE) {
+		return;
 	}
 
 	if (filtertype >= 0 && filtertype <= IMAGE_FILTER_MAX) {

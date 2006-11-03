@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.31.2.3 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: shmop.c,v 1.31.2.2.2.1 2006/11/03 14:46:48 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -121,7 +121,7 @@ PHP_FUNCTION(shmop_open)
 	int flags_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lsll", &key, &flags, &flags_len, &mode, &size) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	if (flags_len != 1) {
@@ -198,7 +198,7 @@ PHP_FUNCTION(shmop_read)
 	char *return_string;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll", &shmid, &start, &count) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	shmop = zend_list_find(shmid, &type);
@@ -238,7 +238,7 @@ PHP_FUNCTION(shmop_close)
 	int type;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &shmid) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	shmop = zend_list_find(shmid, &type);
@@ -261,7 +261,7 @@ PHP_FUNCTION(shmop_size)
 	int type;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &shmid) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	shmop = zend_list_find(shmid, &type);
@@ -287,7 +287,7 @@ PHP_FUNCTION(shmop_write)
 	int data_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lsl", &shmid, &data, &data_len, &offset) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	shmop = zend_list_find(shmid, &type);
@@ -323,7 +323,7 @@ PHP_FUNCTION(shmop_delete)
 	int type;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &shmid) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	shmop = zend_list_find(shmid, &type);

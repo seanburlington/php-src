@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.4 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.1 2006/11/03 14:46:48 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -111,7 +111,7 @@ PHP_FUNCTION(mhash_get_block_size)
 	long hash;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &hash) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	RETURN_LONG(mhash_get_block_size(hash));
@@ -127,7 +127,7 @@ PHP_FUNCTION(mhash_get_hash_name)
 	long hash;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &hash) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	name = mhash_get_hash_name(hash);
@@ -153,7 +153,7 @@ PHP_FUNCTION(mhash)
 	char *data, *key=NULL;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls|s", &hash, &data, &data_len, &key, &key_len) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 	
 	bsize = mhash_get_block_size(hash);
@@ -202,7 +202,7 @@ PHP_FUNCTION(mhash_keygen_s2k)
 	int password_len, salt_len;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lssl", &hash, &password, &password_len, &in_salt, &salt_len, &bytes) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 	if (bytes <= 0){
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "the byte parameter must be greater than 0");

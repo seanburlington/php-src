@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.16 2006/10/06 21:11:36 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.17 2006/11/03 14:46:48 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1528,7 +1528,7 @@ PHP_FUNCTION(session_regenerate_id)
 	zend_bool del_ses = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &del_ses) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	if (SG(headers_sent)) {

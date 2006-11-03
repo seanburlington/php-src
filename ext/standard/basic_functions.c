@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.28 2006/10/13 01:42:19 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.29 2006/11/03 14:46:48 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4725,7 +4725,7 @@ PHP_FUNCTION(time_nanosleep)
 	struct timespec php_req, php_rem;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &tv_sec, &tv_nsec)) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	php_req.tv_sec = (time_t) tv_sec;
@@ -4754,7 +4754,7 @@ PHP_FUNCTION(time_sleep_until)
 	struct timespec php_req, php_rem;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d", &d_ts)) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	if (gettimeofday((struct timeval *) &tm, NULL) != 0) {

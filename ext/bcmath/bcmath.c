@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.62.2.2.2.2 2006/06/15 18:33:06 dmitry Exp $ */
+/* $Id: bcmath.c,v 1.62.2.2.2.3 2006/11/03 14:46:48 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -461,7 +461,7 @@ PHP_FUNCTION(bcpowmod)
 	long scale = BCG(bc_precision);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|l", &left, &left_len, &right, &right_len, &modulous, &modulous_len, &scale) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	bc_init_num(&first TSRMLS_CC);

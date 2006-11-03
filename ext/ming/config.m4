@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.26 2005/12/21 21:43:25 sniper Exp $
+dnl $Id: config.m4,v 1.27 2006/11/03 18:57:36 helly Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -83,6 +83,9 @@ int main(void) { SWFMovie_output(NULL, NULL, NULL, 0); return 0; }
     AC_DEFINE(HAVE_MING_MOVIE_LEVEL, 1, [ ])
   ], [])
   CPPFLAGS=$old_CPPFLAGS
+
+  AC_CHECK_HEADERS([ming/displaylist.h])
+  AC_CHECK_HEADERS([ming/movie.h])
 
   PHP_NEW_EXTENSION(ming, ming.c, $ext_shared)
   PHP_SUBST(MING_SHARED_LIBADD)

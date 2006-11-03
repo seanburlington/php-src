@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_get_archive_comment.c,v 1.4 2006/04/23 16:11:33 wiz Exp $
+  $NiH: zip_add_dir.c,v 1.1 2006/10/03 12:23:13 dillo Exp $
 
-  zip_get_archive_comment.c -- get archive comment
-  Copyright (C) 2006 Dieter Baron and Thomas Klausner
+  zip_add_dir.c -- add directory
+  Copyright (C) 1999-2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,24 +35,49 @@
 
 
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "zip.h"
 #include "zipint.h"
 
 
 
-const char *
-zip_get_archive_comment(struct zip *za, int *lenp, int flags)
+int
+zip_add_dir(struct zip *za, const char *name)
 {
-    if ((flags & ZIP_FL_UNCHANGED)
-	|| (za->ch_comment_len == -1)) {
-		if (za->cdir) {
-			if (lenp != NULL)
-				*lenp = za->cdir->comment_len;
-			return za->cdir->comment;
-		}
+    int len, ret;
+    char *s;
+    struct zip_source *source;
+
+    if (name == NULL) {
+	_zip_error_set(&za->error, ZIP_ER_INVAL, 0);
+	return -1;
     }
-    
-    if (lenp != NULL)
-	*lenp = za->ch_comment_len;
-    return za->ch_comment;
+
+    s = NULL;
+    len = strlen(name);
+
+    if (name[len-1] != '/') {
+	if ((s=(char *)malloc(len+2)) == NULL) {
+	    _zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
+	    return -1;
+	}
+	strcpy(s, name);
+	s[len] = '/';
+	s[len+1] = '\0';
+    }
+
+    if ((source=zip_source_buffer(za, NULL, 0, 0)) == NULL) {
+	free(s);
+	return -1;
+    }
+	
+    ret = _zip_replace(za, -1, s ? s : name, source);
+
+    free(s);
+    if (ret < 0)
+	zip_source_free(source);
+
+    return ret;
 }

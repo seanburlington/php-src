@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_get_archive_comment.c,v 1.4 2006/04/23 16:11:33 wiz Exp $
+  $NiH: zip_stat_index.c,v 1.10 2006/04/24 14:04:19 dillo Exp $
 
-  zip_get_archive_comment.c -- get archive comment
-  Copyright (C) 2006 Dieter Baron and Thomas Klausner
+  zip_stat_index.c -- get information about file by index
+  Copyright (C) 1999, 2003, 2004 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -40,19 +40,54 @@
 
 
 
-const char *
-zip_get_archive_comment(struct zip *za, int *lenp, int flags)
+int
+zip_stat_index(struct zip *za, int index, int flags, struct zip_stat *st)
 {
-    if ((flags & ZIP_FL_UNCHANGED)
-	|| (za->ch_comment_len == -1)) {
-		if (za->cdir) {
-			if (lenp != NULL)
-				*lenp = za->cdir->comment_len;
-			return za->cdir->comment;
-		}
-    }
+    const char *name;
     
-    if (lenp != NULL)
-	*lenp = za->ch_comment_len;
-    return za->ch_comment;
+    if (index < 0 || index >= za->nentry) {
+	_zip_error_set(&za->error, ZIP_ER_INVAL, 0);
+	return -1;
+    }
+
+    if ((name=zip_get_name(za, index, flags)) == NULL)
+	return -1;
+    
+
+    if ((flags & ZIP_FL_UNCHANGED) == 0
+	&& ZIP_ENTRY_DATA_CHANGED(za->entry+index)) {
+	if (za->entry[index].source->f(za->entry[index].source->ud,
+				     st, sizeof(*st), ZIP_SOURCE_STAT) < 0) {
+	    _zip_error_set(&za->error, ZIP_ER_CHANGED, 0);
+	    return -1;
+	}
+    }
+    else {
+	if (za->cdir == NULL || index >= za->cdir->nentry) {
+	    _zip_error_set(&za->error, ZIP_ER_INVAL, 0);
+	    return -1;
+	}
+
+	st->crc = za->cdir->entry[index].crc;
+	st->size = za->cdir->entry[index].uncomp_size;
+	st->mtime = za->cdir->entry[index].last_mod;
+	st->comp_size = za->cdir->entry[index].comp_size;
+	st->comp_method = za->cdir->entry[index].comp_method;
+	if (za->cdir->entry[index].bitflags & ZIP_GPBF_ENCRYPTED) {
+	    if (za->cdir->entry[index].bitflags & ZIP_GPBF_STRONG_ENCRYPTION) {
+		/* XXX */
+		st->encryption_method = ZIP_EM_UNKNOWN;
+	    }
+	    else
+		st->encryption_method = ZIP_EM_TRAD_PKWARE;
+	}
+	else
+	    st->encryption_method = ZIP_EM_NONE;
+	/* st->bitflags = za->cdir->entry[index].bitflags; */
+    }
+
+    st->index = index;
+    st->name = name;
+    
+    return 0;
 }

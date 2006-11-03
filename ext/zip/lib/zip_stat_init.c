@@ -1,7 +1,7 @@
 /*
-  $NiH: zip_get_archive_comment.c,v 1.4 2006/04/23 16:11:33 wiz Exp $
+  $NiH: zip_stat_init.c,v 1.1 2006/10/31 12:03:04 dillo Exp $
 
-  zip_get_archive_comment.c -- get archive comment
+  zip_stat_init.c -- initialize struct zip_stat.
   Copyright (C) 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
@@ -35,24 +35,19 @@
 
 
 
-#include "zip.h"
 #include "zipint.h"
 
 
 
-const char *
-zip_get_archive_comment(struct zip *za, int *lenp, int flags)
+void
+zip_stat_init(struct zip_stat *st)
 {
-    if ((flags & ZIP_FL_UNCHANGED)
-	|| (za->ch_comment_len == -1)) {
-		if (za->cdir) {
-			if (lenp != NULL)
-				*lenp = za->cdir->comment_len;
-			return za->cdir->comment;
-		}
-    }
-    
-    if (lenp != NULL)
-	*lenp = za->ch_comment_len;
-    return za->ch_comment;
+    st->name = NULL;
+    st->index = -1;
+    st->crc = 0;
+    st->mtime = (time_t)-1;
+    st->size = -1;
+    st->comp_size = -1;
+    st->comp_method = ZIP_CM_STORE;
+    st->encryption_method = ZIP_EM_NONE;
 }

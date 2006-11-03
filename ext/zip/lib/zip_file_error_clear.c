@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_get_archive_comment.c,v 1.4 2006/04/23 16:11:33 wiz Exp $
+  $NiH: zip_file_error_clear.c,v 1.4 2006/10/04 18:37:54 wiz Exp $
 
-  zip_get_archive_comment.c -- get archive comment
-  Copyright (C) 2006 Dieter Baron and Thomas Klausner
+  zip_file_error_clear.c -- clear zip file error
+  Copyright (C) 1999-2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -40,19 +40,8 @@
 
 
 
-const char *
-zip_get_archive_comment(struct zip *za, int *lenp, int flags)
+void
+zip_file_error_clear(struct zip_file *zf)
 {
-    if ((flags & ZIP_FL_UNCHANGED)
-	|| (za->ch_comment_len == -1)) {
-		if (za->cdir) {
-			if (lenp != NULL)
-				*lenp = za->cdir->comment_len;
-			return za->cdir->comment;
-		}
-    }
-    
-    if (lenp != NULL)
-	*lenp = za->ch_comment_len;
-    return za->ch_comment;
+    _zip_error_clear(&zf->error);
 }

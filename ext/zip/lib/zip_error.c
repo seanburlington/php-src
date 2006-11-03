@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_get_archive_comment.c,v 1.4 2006/04/23 16:11:33 wiz Exp $
+  $NiH: zip_error.c,v 1.7 2005/06/09 19:57:09 dillo Exp $
 
-  zip_get_archive_comment.c -- get archive comment
-  Copyright (C) 2006 Dieter Baron and Thomas Klausner
+  zip_error.c -- struct zip_error helper functions
+  Copyright (C) 1999-2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,24 +35,70 @@
 
 
 
+#include <stdlib.h>
+
 #include "zip.h"
 #include "zipint.h"
 
 
 
-const char *
-zip_get_archive_comment(struct zip *za, int *lenp, int flags)
+void
+_zip_error_clear(struct zip_error *err)
 {
-    if ((flags & ZIP_FL_UNCHANGED)
-	|| (za->ch_comment_len == -1)) {
-		if (za->cdir) {
-			if (lenp != NULL)
-				*lenp = za->cdir->comment_len;
-			return za->cdir->comment;
-		}
+    err->zip_err = ZIP_ER_OK;
+    err->sys_err = 0;
+}
+
+
+
+void
+_zip_error_copy(struct zip_error *dst, struct zip_error *src)
+{
+    dst->zip_err = src->zip_err;
+    dst->sys_err = src->sys_err;
+}
+
+
+
+void
+_zip_error_fini(struct zip_error *err)
+{
+    free(err->str);
+    err->str = NULL;
+}
+
+
+
+void
+_zip_error_get(struct zip_error *err, int *zep, int *sep)
+{
+    if (zep)
+	*zep = err->zip_err;
+    if (sep) {
+	if (zip_error_get_sys_type(err->zip_err) != ZIP_ET_NONE)
+	    *sep = err->sys_err;
+	else
+	    *sep = 0;
     }
-    
-    if (lenp != NULL)
-	*lenp = za->ch_comment_len;
-    return za->ch_comment;
+}
+
+
+
+void
+_zip_error_init(struct zip_error *err)
+{
+    err->zip_err = ZIP_ER_OK;
+    err->sys_err = 0;
+    err->str = NULL;
+}
+
+
+
+void
+_zip_error_set(struct zip_error *err, int ze, int se)
+{
+    if (err) {
+	err->zip_err = ze;
+	err->sys_err = se;
+    }
 }

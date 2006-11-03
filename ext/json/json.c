@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.6 2006/08/14 20:08:17 nlopess Exp $ */
+/* $Id: json.c,v 1.9.2.7 2006/11/03 13:16:33 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -451,10 +451,37 @@ static PHP_FUNCTION(json_decode)
     }
     else
     {
+	double d;
+	int type;
+	long p;
+
         zval_dtor(z);
         FREE_ZVAL(z);
         efree(utf16);
-        RETURN_NULL();
+
+	if (parameter_len == 4) {
+		if (!strcasecmp(parameter, "null")) {
+			RETURN_NULL();
+		} else if (!strcasecmp(parameter, "true")) {
+			RETURN_BOOL(1);
+		}
+	} else if (parameter_len == 5 && !strcasecmp(parameter, "false")) {
+		RETURN_BOOL(0);
+	}
+	if ((type = is_numeric_string(parameter, parameter_len, &p, &d, 0)) != 0) {
+		if (type == IS_LONG) {
+			RETURN_LONG(p);
+		} else if (type == IS_DOUBLE) {
+			RETURN_DOUBLE(d);
+		}
+	}
+	if (*parameter == '"' && parameter[parameter_len-1] == '"') {
+	        RETURN_STRINGL(parameter+1, parameter_len-2, 1);
+	} else if (*parameter == '{' || *parameter == '[') { /* invalid JSON string */
+		RETURN_NULL();
+	} else {
+	        RETURN_STRINGL(parameter, parameter_len, 1);
+	}
     }
 }
 

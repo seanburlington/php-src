@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.17.2.3 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: mb_gpc.c,v 1.17.2.2.2.1 2006/11/03 02:26:50 hirokawa Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -153,6 +153,8 @@ MBSTRING_API SAPI_TREAT_DATA_FUNC(mbstr_treat_data)
 	info.from_encodings         = MBSTRG(http_input_list);
 	info.num_from_encodings     = MBSTRG(http_input_list_size); 
 	info.from_language          = MBSTRG(language);
+
+	MBSTRG(illegalchars) = 0;
 
 	detected = _php_mb_encoding_handler_ex(&info, array_ptr, res TSRMLS_CC);
 	MBSTRG(http_input_identify) = detected;
@@ -346,6 +348,7 @@ out:
 	}
 
 	if (convd != NULL) {
+		MBSTRG(illegalchars) += mbfl_buffer_illegalchars(convd);
 		mbfl_buffer_converter_delete(convd);
 	}
 	if (val_list != NULL) {

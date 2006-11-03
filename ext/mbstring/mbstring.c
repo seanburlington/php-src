@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.15 2006/09/24 07:10:54 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.16 2006/11/03 02:26:50 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -933,7 +933,10 @@ PHP_RINIT_FUNCTION(mbstring)
 	MBSTRG(current_http_output_encoding) = MBSTRG(http_output_encoding);
 	MBSTRG(current_filter_illegal_mode) = MBSTRG(filter_illegal_mode);
 	MBSTRG(current_filter_illegal_substchar) = MBSTRG(filter_illegal_substchar);
-	MBSTRG(illegalchars) = 0;
+
+	if (!MBSTRG(encoding_translation)) {
+		MBSTRG(illegalchars) = 0;
+	}
 
 	n = 0;
 	if (MBSTRG(detect_order_list)) {
@@ -4053,8 +4056,13 @@ PHP_FUNCTION(mb_check_encoding)
 
 	if (ret != NULL) {
 		MBSTRG(illegalchars) += illegalchars;
-		efree(ret->val);
-		RETURN_BOOL(illegalchars == 0);
+		if (illegalchars == 0 && strncmp(string.val, ret->val, string.len) == 0) {
+			efree(ret->val);
+			RETURN_TRUE;
+		} else {
+			efree(ret->val);
+			RETURN_FALSE;
+		}
 	} else {
 		RETURN_FALSE;
 	}

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.53.2.3 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: microtime.c,v 1.53.2.2.2.1 2006/11/03 15:48:39 bjori Exp $ */
 
 #include "php.h"
 
@@ -115,7 +115,11 @@ PHP_FUNCTION(getrusage)
 	long pwho = 0;
 	int who = RUSAGE_SELF;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &pwho) != FAILURE && pwho == 1) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &pwho) == FAILURE) {
+		return;
+	}
+	
+	if (pwho == 1) {
 		who = RUSAGE_CHILDREN;
 	}
 

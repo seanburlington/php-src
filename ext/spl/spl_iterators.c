@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.17 2006/07/21 21:26:11 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.18 2006/11/03 14:11:23 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1012,8 +1012,13 @@ static spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAMETERS, z
 			intern->u.regex.mode = mode;
 			intern->u.regex.regex = estrndup(regex, regex_len);
 			intern->u.regex.pce = pcre_get_compiled_regex_cache(regex, regex_len TSRMLS_CC);
+			if (intern->u.regex.pce == NULL) {
+				/* pcre_get_compiled_regex_cache has already sent error */
+				php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
+				return NULL;
+			}
 			intern->u.regex.pce->refcount++;
-			break;;
+			break;
 		}
 #endif
 		default:

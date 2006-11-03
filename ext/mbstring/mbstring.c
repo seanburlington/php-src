@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.16 2006/11/03 02:26:50 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.17 2006/11/03 19:55:50 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1809,10 +1809,6 @@ PHP_FUNCTION(mb_strstr)
 		}
 	}
 
-	if (haystack.len <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty haystack");
-		RETURN_FALSE;
-	}
 	if (needle.len <= 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty needle");
 		RETURN_FALSE;

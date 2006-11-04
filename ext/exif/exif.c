@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.4 2006/10/10 22:22:43 tony2001 Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.5 2006/11/04 20:46:32 helly Exp $ */
 
 /*  ToDos
  *
@@ -139,7 +139,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.4 2006/10/10 22:22:43 tony2001 Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.5 2006/11/04 20:46:32 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -4005,7 +4005,7 @@ PHP_FUNCTION(exif_read_data)
    Reads the embedded thumbnail */
 PHP_FUNCTION(exif_thumbnail)
 {
-	zval *p_width, *p_height, *p_imagetype;
+	zval *p_width = 0, *p_height = 0, *p_imagetype = 0;
 	char *p_name;
 	int p_name_len, ret, arg_c = ZEND_NUM_ARGS();
 	image_info_type ImageInfo;

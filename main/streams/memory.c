@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.8.2.6.2.8 2006/06/29 14:40:49 bjori Exp $ */
+/* $Id: memory.c,v 1.8.2.6.2.9 2006/11/04 20:43:28 rasmus Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -708,7 +708,7 @@ static php_stream_wrapper_ops php_stream_rfc2397_wops = {
 php_stream_wrapper php_stream_rfc2397_wrapper =	{
 	&php_stream_rfc2397_wops,
 	NULL,
-	0, /* is_url */
+	1, /* is_url */
 };
 
 /*

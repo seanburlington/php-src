@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.3 2006/11/03 13:34:18 iliaa Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.4 2006/11/05 20:08:58 rasmus Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -187,10 +187,22 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 	}
 	
 	if (!strcasecmp(path, "input")) {
+		if ((options & STREAM_OPEN_FOR_INCLUDE) && !PG(allow_url_include) ) {
+			if (options & REPORT_ERRORS) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "URL file-access is disabled in the server configuration");
+			}
+			return NULL;
+		}
 		return php_stream_alloc(&php_stream_input_ops, ecalloc(1, sizeof(off_t)), 0, "rb");
-	}  
+	}
 	
 	if (!strcasecmp(path, "stdin")) {
+		if ((options & STREAM_OPEN_FOR_INCLUDE) && !PG(allow_url_include) ) {
+			if (options & REPORT_ERRORS) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "URL file-access is disabled in the server configuration");
+			}
+			return NULL;
+		}
 		if (!strcmp(sapi_module.name, "cli")) {
 			static int cli_in = 0;
 			fd = STDIN_FILENO;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.27 2006/10/11 14:19:55 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.28 2006/11/06 17:21:05 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -955,7 +955,12 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC)
 	}
 	smart_str_0(&implstr);
 
-	RETURN_STRINGL(implstr.c, implstr.len, 0);
+	if (implstr.len) {
+		RETURN_STRINGL(implstr.c, implstr.len, 0);
+	} else {
+		smart_str_free(&implstr);
+		RETURN_EMPTY_STRING();
+	}
 }
 /* }}} */
 

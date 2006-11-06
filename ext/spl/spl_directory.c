@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.101 2006/10/13 14:52:19 andrei Exp $ */
+/* $Id: spl_directory.c,v 1.102 2006/11/06 15:20:23 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -406,6 +406,8 @@ static spl_filesystem_object * spl_filesystem_object_create_type(int ht, spl_fil
 		} else {
 			intern->file_name = source->file_name;
 			intern->file_name_len = source->file_name_len;
+			intern->path = estrndup(source->path, source->path_len);
+			intern->path_len = source->path_len;
 		
 			intern->u.file.open_mode = "r";
 			intern->u.file.open_mode_len = 1;

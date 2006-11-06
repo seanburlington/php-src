@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.8 2006/11/05 18:31:41 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.9 2006/11/06 16:44:03 iliaa Exp $ */
 
 #define IMAP41
 
@@ -743,7 +743,7 @@ static void php_imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	long cl_flags=NIL;
 	int myargc = ZEND_NUM_ARGS();
 	
-	if (myargc < 3 || myargc > 4 || zend_get_parameters_ex(myargc, &mailbox, &user, &passwd, &options, &retries) == FAILURE) {
+	if (myargc < 3 || myargc > 5 || zend_get_parameters_ex(myargc, &mailbox, &user, &passwd, &options, &retries) == FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
 	}
 

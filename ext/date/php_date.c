@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.124 2006/10/25 12:35:16 bjori Exp $ */
+/* $Id: php_date.c,v 1.125 2006/11/06 16:10:33 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1807,11 +1807,11 @@ PHP_METHOD(DateTime, __construct)
 	char *time_str = NULL;
 	int time_str_len = 0;
 	
+	php_set_error_handling(EH_THROW, NULL TSRMLS_CC);
 	if (SUCCESS == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|sO", &time_str, &time_str_len, &timezone_object, date_ce_timezone)) {
-		php_set_error_handling(EH_THROW, NULL TSRMLS_CC);
 		date_initialize(zend_object_store_get_object(getThis() TSRMLS_CC), time_str, time_str_len, timezone_object TSRMLS_CC);
-		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 	}
+	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 }
 /* }}} */
 

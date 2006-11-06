@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.150 2006/09/21 23:36:13 pollita Exp $ */
+/* $Id: filestat.c,v 1.151 2006/11/06 14:55:14 dmitry Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -489,6 +489,7 @@ PHP_FUNCTION(lchgrp)
 /* }}} */
 #endif /* !NETWARE */
 
+#if !defined(WINDOWS)
 static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 {
 	char *filename;
@@ -545,6 +546,7 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 		RETURN_FALSE;
 	}
 }
+#endif
 
 #ifndef NETWARE
 /* {{{ proto bool chown (string filename, mixed user) U

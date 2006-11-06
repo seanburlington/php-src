@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.3 2006/07/02 13:51:40 iliaa Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.4 2006/11/06 14:54:52 dmitry Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -428,6 +428,7 @@ PHP_FUNCTION(lchgrp)
 /* }}} */
 #endif
 
+#if !defined(WINDOWS)
 static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 {
 	zval **filename, **user;
@@ -473,6 +474,7 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 		RETURN_FALSE;
 	}
 }
+#endif
 
 #ifndef NETWARE
 /* {{{ proto bool chown (string filename, mixed user)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2005/06/29 15:57:16 iliaa Exp $
+dnl $Id: config.m4,v 1.8 2006/11/07 21:28:23 iliaa Exp $
 dnl config.m4 for extension fileinfo
 
 PHP_ARG_WITH(fileinfo, for fileinfo support,
@@ -47,13 +47,18 @@ if test "$PHP_FILEINFO" != "no"; then
     -L$FILEINFO_DIR/lib
   ])
 
-  MAGIC_MIME_LOCATIONS="/usr/local/share/file/magic /usr/share/file/magic /usr/share/misc/file/magic /etc/magic /usr/share/misc"
-  for i in $MAGIC_MIME_LOCATIONS; do
-    if test -f $i; then
-       PHP_DEFAULT_MAGIC_FILE=$i
-       break
-    fi
+  MAGIC_MIME_DIRS="/usr/local/share/file /usr/share/file /usr/share/misc/file /etc /usr/share/misc"
+  MAGIC_MIME_FILENAMES="magic magic.mime"
+  
+  for i in $MAGIC_MIME_DIRS; do
+    for j in $MAGIC_MIME_FILENAMES; do
+      if test -f "$i/$j"; then
+        PHP_DEFAULT_MAGIC_FILE="$i/$j"
+        break
+      fi
+    done
   done
+  
   AC_DEFINE_UNQUOTED(PHP_DEFAULT_MAGIC_FILE,"$PHP_DEFAULT_MAGIC_FILE",[magic file path])
 
   PHP_SUBST(FILEINFO_SHARED_LIBADD)

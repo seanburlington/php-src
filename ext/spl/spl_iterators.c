@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.153 2006/11/06 23:19:46 bjori Exp $ */
+/* $Id: spl_iterators.c,v 1.154 2006/11/07 15:17:42 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1512,7 +1512,7 @@ SPL_METHOD(RegexIterator, setMode)
 
 	if (mode < 0 || mode >= REGIT_MODE_MAX) {
 		zend_throw_exception_ex(spl_ce_InvalidArgumentException, 0 TSRMLS_CC, "Illegal mode %ld", mode);
-		return;// NULL
+		return;/* NULL */
 	}
 
 	intern->u.regex.mode = mode;

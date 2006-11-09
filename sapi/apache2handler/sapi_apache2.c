@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.40.2.10 2006/01/01 13:47:01 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.40.2.11 2006/11/09 19:10:55 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -551,7 +551,7 @@ normal:
 		}
 		
 		/* check if comming due to ErrorDocument */
-		if (parent_req && parent_req->status != HTTP_OK) {
+		if (parent_req && parent_req->status != HTTP_OK && strcmp(r->protocol, "INCLUDED")) {
 			parent_req = NULL;
 			goto normal;
 		}

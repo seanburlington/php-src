@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: callback_filter.c,v 1.9.2.2 2006/11/03 13:53:24 iliaa Exp $ */
+/* $Id: callback_filter.c,v 1.9.2.3 2006/11/09 16:33:07 nlopess Exp $ */
 
 #include "php_filter.h"
 
@@ -42,15 +42,14 @@ void php_filter_callback(PHP_INPUT_FILTER_PARAM_DECL)
 		if (retval_ptr != value) {
 			zval_dtor(value);
 			COPY_PZVAL_TO_ZVAL(*value, retval_ptr);
+		} else {
+			zval_ptr_dtor(&retval_ptr);
 		}
 	} else {
 		zval_dtor(value);
 		Z_TYPE_P(value) = IS_NULL;
 	}
 
-	if (retval_ptr) {
-		zval_ptr_dtor(&retval_ptr);
-	}
 	efree(args);
 }
 

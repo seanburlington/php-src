@@ -12,44 +12,57 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Rob Richards <rrichards@php.net>                             |
-  |         Pierre-A. Joye <pajoye@php.net>                              |
+  | Author: Pierre-Alain Joye <pajoye@php.net>                           |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.10.2.5.2.2 2006/11/09 16:04:34 nlopess Exp $ */
+/* $Id: php_zip.h,v 1.10.2.1 2006/11/09 16:04:34 nlopess Exp $ */
 
-#ifndef PHP_XMLWRITER_H
-#define PHP_XMLWRITER_H
+#ifndef PHP_ZIP_H
+#define PHP_ZIP_H
 
-extern zend_module_entry xmlwriter_module_entry;
-#define phpext_xmlwriter_ptr &xmlwriter_module_entry
+extern zend_module_entry zip_module_entry;
+#define phpext_zip_ptr &zip_module_entry
 
 #ifdef ZTS
 #include "TSRM.h"
 #endif
 
-#include <libxml/tree.h>
-#include <libxml/xmlwriter.h>
-#include <libxml/uri.h>
+#include "lib/zip.h"
 
-/* Resource struct, not the object :) */
-typedef struct _xmlwriter_object {
-	xmlTextWriterPtr ptr;
-	xmlBufferPtr output;
-#ifndef ZEND_ENGINE_2
-	xmlOutputBufferPtr uri_output;
-#endif
-} xmlwriter_object;
+typedef struct _ze_zip_rsrc {
+	struct zip *za;
+	int index_current;
+	int num_files;
+} zip_rsrc;
 
+typedef zip_rsrc * zip_rsrc_ptr;
+
+typedef struct _ze_zip_read_rsrc {
+	struct zip_file *zf;
+	struct zip_stat sb;
+} zip_read_rsrc;
+
+#define ZIPARCHIVE_ME(name, arg_info, flags)	ZEND_FENTRY(name, c_ziparchive_ ##name, arg_info, flags)
+#define ZIPARCHIVE_METHOD(name)	ZEND_NAMED_FUNCTION(c_ziparchive_##name)
 
 /* Extends zend object */
-typedef struct _ze_xmlwriter_object {
+typedef struct _ze_zip_object {
 	zend_object zo;
-	xmlwriter_object *xmlwriter_ptr;
-} ze_xmlwriter_object;
+	struct zip *za;
+	int buffers_cnt;
+	char **buffers;
+	HashTable *prop_handler;
+	char *filename;
+	int filename_len;
+} ze_zip_object;
 
-#endif	/* PHP_XMLWRITER_H */
+php_stream *php_stream_zip_opener(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
+php_stream *php_stream_zip_open(char *filename, char *path, char *mode STREAMS_DC TSRMLS_DC);
+
+extern php_stream_wrapper php_stream_zip_wrapper;
+
+#endif	/* PHP_ZIP_H */
 
 /*
  * Local variables:

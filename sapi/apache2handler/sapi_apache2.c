@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.8 2006/11/09 00:13:26 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.9 2006/11/09 19:10:12 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -574,7 +574,7 @@ zend_first_try {
 		}
 		
 		/* check if comming due to ErrorDocument */
-		if (parent_req && parent_req->status != HTTP_OK) {
+		if (parent_req && parent_req->status != HTTP_OK && strcmp(r->protocol, "INCLUDED")) {
 			parent_req = NULL;
 			goto normal;
 		}

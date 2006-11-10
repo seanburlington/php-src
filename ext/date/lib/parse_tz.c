@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.20.2.6.2.6 2006/09/01 23:25:29 nlopess Exp $ */
+/* $Id: parse_tz.c,v 1.20.2.6.2.7 2006/11/10 17:32:15 nlopess Exp $ */
 
 #include "timelib.h"
 
@@ -192,7 +192,7 @@ void timelib_dump_tzinfo(timelib_tzinfo *tz)
 	}
 }
 
-static int tz_search(char *timezone, int left, int right, const timelib_tzdb *tzdb)
+static int tz_search(char *timezone, unsigned int left, unsigned int right, const timelib_tzdb *tzdb)
 {
 	int mid, cmp;
 

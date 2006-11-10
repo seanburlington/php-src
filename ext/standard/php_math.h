@@ -17,13 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.28.2.2.2.1 2006/11/09 20:01:41 iliaa Exp $ */
+/* $Id: php_math.h,v 1.28.2.2.2.2 2006/11/10 01:28:59 iliaa Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
 
 PHPAPI char *_php_math_number_format(double, int, char , char);
 PHPAPI char * _php_math_longtobase(zval *arg, int base);
+PHPAPI long _php_math_basetolong(zval *arg, int base);
+PHPAPI int _php_math_basetozval(zval *arg, int base, zval *ret);
+PHPAPI char * _php_math_zvaltobase(zval *arg, int base TSRMLS_DC);
 
 PHP_FUNCTION(sin);
 PHP_FUNCTION(cos);

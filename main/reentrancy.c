@@ -16,17 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: reentrancy.c,v 1.44 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: reentrancy.c,v 1.45 2006/11/10 11:20:58 dmitry Exp $ */
 
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
 #ifdef HAVE_DIRENT_H
 #include <dirent.h>
-#endif
-
-#ifdef PHP_WIN32
-#include "win32/readdir.h"
 #endif
 
 #include "php_reentrancy.h"

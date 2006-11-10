@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.25 2006/11/10 21:55:05 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.26 2006/11/10 23:03:23 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -335,7 +335,7 @@ int php_oci_lob_get_length (php_oci_descriptor *, ub4 * TSRMLS_DC);
 int php_oci_lob_get_type(php_oci_descriptor *descriptor, php_oci_lob_type *lob_type TSRMLS_DC);
 int php_oci_lob_read (php_oci_descriptor *, long, long, zstr *, ub4 * TSRMLS_DC);
 int php_oci_lob_write (php_oci_descriptor *, ub4, zstr, int, ub4 * TSRMLS_DC);
-int php_oci_lob_flush (php_oci_descriptor *, int TSRMLS_DC);
+int php_oci_lob_flush (php_oci_descriptor *, long TSRMLS_DC);
 int php_oci_lob_set_buffering (php_oci_descriptor *, int TSRMLS_DC);
 int php_oci_lob_get_buffering (php_oci_descriptor *);
 int php_oci_lob_copy (php_oci_descriptor *, php_oci_descriptor *, long TSRMLS_DC);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.9 2006/11/10 10:55:26 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.10 2006/11/10 13:10:16 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -312,6 +312,9 @@ static size_t php_stdiop_read(php_stream *stream, char *buf, size_t count TSRMLS
 	assert(data != NULL);
 
 	if (data->fd >= 0) {
+		if (stream->eof && !data->is_pipe) {
+			return 0;
+		}
 		ret = read(data->fd, buf, count);
 		
 		stream->eof = (ret == 0 || (ret == (size_t)-1 && errno != EWOULDBLOCK));

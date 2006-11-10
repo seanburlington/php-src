@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.609 2006/10/11 14:30:50 iliaa Exp $ */
+/* $Id: string.c,v 1.610 2006/11/10 12:01:50 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1179,26 +1179,12 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *retval TSRMLS_DC)
 	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(arr), (void **)&tmp, &pos) == SUCCESS) {
 		if (Z_TYPE_PP(tmp) != return_type) {
 			if (return_type == IS_UNICODE) {
-				if (Z_TYPE_PP(tmp) == IS_STRING) {
-					/* ERROR */
-					php_error_docref(NULL TSRMLS_CC, E_WARNING,
-									 "Cannot mix binary strings with other string types");
-					efree(Z_USTRVAL_P(retval));
-					ZVAL_FALSE(retval);
-					return;
-				} else {
+				if (Z_TYPE_PP(tmp) != IS_UNICODE) {
 					SEPARATE_ZVAL(tmp);
 					convert_to_unicode_ex(tmp);
 				}
 			} else if (return_type == IS_STRING) {
-				if (Z_TYPE_PP(tmp) == IS_UNICODE) {
-					/* ERROR */
-					php_error_docref(NULL TSRMLS_CC, E_WARNING,
-									 "Cannot mix binary strings with other string types");
-					efree(Z_STRVAL_P(retval));
-					ZVAL_FALSE(retval);
-					return;
-				} else {
+				if (Z_TYPE_PP(tmp) != IS_STRING) {
 					SEPARATE_ZVAL(tmp);
 					convert_to_string_ex(tmp);
 				}

@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.38 2006/07/22 13:13:18 rrichards Exp $
+# $Id: Makefile,v 1.39 2006/11/10 10:30:56 dmitry Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -61,7 +61,7 @@ $(PHPDLL_RES): win32\build\template.rc
 		win32\build\template.rc 
 
 $(BUILD_DIR)\$(PHPDLL): generated_files $(PHPDEF) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(PHPDLL_RES) $(MCFILE)
-	@$(LD) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES)
+	@$(CC) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS) $(PHPDLL_RES) /link /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS)
 	
 $(BUILD_DIR)\$(PHPLIB): $(BUILD_DIR)\$(PHPDLL)
 	

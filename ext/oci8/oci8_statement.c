@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.32 2006/10/13 14:26:14 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.33 2006/11/10 16:33:28 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -113,6 +113,8 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 	}
 	
 	PHP_OCI_REGISTER_RESOURCE(statement, le_statement);
+
+	OCI_G(num_statements)++;
 	
 	return statement;
 }
@@ -520,6 +522,7 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 					outcol->retlen = -1;
 					dynamic = OCI_DEFAULT;
 					buf = &(outcol->statement->stmt);
+					zend_list_addref(statement->id);
 					break;
 
 			 	case SQLT_RDD:	 /* ROWID */
@@ -694,6 +697,8 @@ void php_oci_statement_free(php_oci_statement *statement TSRMLS_DC)
 	
 	zend_list_delete(statement->connection->rsrc_id);
 	efree(statement);
+	
+	OCI_G(num_statements)--;
 } /* }}} */
 
 /* {{{ php_oci_bind_pre_exec() 

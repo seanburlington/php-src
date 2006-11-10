@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.22 2006/08/22 11:08:28 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.23 2006/11/10 16:33:28 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -411,6 +411,7 @@ ZEND_BEGIN_MODULE_GLOBALS(oci) /* {{{ */
 	long max_persistent;	/* maximum number of persistent connections per process */
 	long num_persistent;	/* number of existing persistent connections */
 	long num_links;			/* non-persistent + persistent connections */
+	long num_statements;	/* number of statements open */
 	long ping_interval;		/* time interval between pings */
 	long persistent_timeout;	/* time period after which idle persistent connection is considered expired */
 	long statement_cache_size;	/* statement cache size. used with 9i+ clients only*/

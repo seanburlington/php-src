@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,14 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.4.2.2 2007/01/01 09:40:34 sebastian Exp $ */
+/* $Id: php_win32_globals.h,v 1.4.2.1.2.1 2006/11/10 09:56:16 dmitry Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H
 
 /* misc globals for thread-safety under win32 */
-
-#include "pwd.h"
 
 typedef struct _php_win32_core_globals php_win32_core_globals;
 
@@ -39,12 +37,6 @@ struct _php_win32_core_globals {
 	/* syslog */
 	char *log_header;
 	HANDLE log_source;
-
-	/* getpwuid */
-	struct passwd pwd;
-
-	/* getlogin */
-	char *login_name;
 
 	/* time */
 	struct timeval starttime;

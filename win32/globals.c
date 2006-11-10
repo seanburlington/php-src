@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: globals.c,v 1.5.2.2 2007/01/01 09:40:34 sebastian Exp $ */
+/* $Id: globals.c,v 1.5.2.1.2.1 2006/11/10 09:56:16 dmitry Exp $ */
 
 #include "php.h"
 #include "php_win32_globals.h"
@@ -43,8 +43,6 @@ PHP_RSHUTDOWN_FUNCTION(win32_core_globals)
 #endif
 		;
 
-	STR_FREE(wg->login_name);
-	
 	memset(wg, 0, sizeof(*wg));
 	return SUCCESS;
 }

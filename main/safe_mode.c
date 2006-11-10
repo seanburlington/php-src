@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.2 2006/07/01 11:35:34 nlopess Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.3 2006/11/10 09:56:16 dmitry Exp $ */
 
 #include "php.h"
 
@@ -197,7 +197,6 @@ PHPAPI int php_checkuid(const char *filename, const char *fopen_mode, int mode) 
 
 PHPAPI char *php_get_current_user()
 {
-	struct passwd *pwd;
 	struct stat *pstat;
 	TSRMLS_FETCH();
 
@@ -213,15 +212,29 @@ PHPAPI char *php_get_current_user()
 
 	if (!pstat) {
 		return "";
-	}
+	} else {
+#ifdef PHP_WIN32
+		char name[256];
+		DWORD len = sizeof(name)-1;
 
-	if ((pwd=getpwuid(pstat->st_uid))==NULL) {
-		return "";
-	}
-	SG(request_info).current_user_length = strlen(pwd->pw_name);
-	SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);
-	
-	return SG(request_info).current_user;		
+		if (!GetUserName(name, &len)) {
+			return "";
+		}
+		name[len] = '\0';
+		SG(request_info).current_user_length = len;
+		SG(request_info).current_user = estrndup(name, len);
+		return SG(request_info).current_user;		
+#else
+		struct passwd *pwd;
+
+		if ((pwd=getpwuid(pstat->st_uid))==NULL) {
+			return "";
+		}
+		SG(request_info).current_user_length = strlen(pwd->pw_name);
+		SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);
+		return SG(request_info).current_user;		
+#endif
+	}	
 }	
 
 /*

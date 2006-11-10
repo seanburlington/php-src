@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.821 2006/11/10 09:56:37 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.822 2006/11/10 11:42:40 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3950,7 +3950,7 @@ PHP_MINIT_FUNCTION(basic)
 #ifdef ZTS
 	ts_allocate_id(&basic_globals_id, sizeof(php_basic_globals), (ts_allocate_ctor) basic_globals_ctor, (ts_allocate_dtor) basic_globals_dtor);
 #ifdef PHP_WIN32
-	ts_allocate_id(&php_win32_core_globals_id, sizeof(php_win32_core_globals), (ts_allocate_ctor)php_win32_core_globals_ctor, NULL);
+	ts_allocate_id(&php_win32_core_globals_id, sizeof(php_win32_core_globals), (ts_allocate_ctor)php_win32_core_globals_ctor, (ts_allocate_dtor)php_win32_core_globals_dtor );
 #endif
 #else
 	basic_globals_ctor(&basic_globals TSRMLS_CC);
@@ -4073,6 +4073,9 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 #endif
 #else
 	basic_globals_dtor(&basic_globals TSRMLS_CC);
+#ifdef PHP_WIN32
+	php_win32_core_globals_dtor(&the_php_win32_core_globals TSRMLS_CC);
+#endif
 #endif
 
 	php_unregister_url_stream_wrapper("php" TSRMLS_CC);

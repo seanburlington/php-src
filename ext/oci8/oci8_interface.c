@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.3 2006/08/22 11:09:12 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.4 2006/11/10 23:03:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -674,7 +674,7 @@ PHP_FUNCTION(oci_lob_flush)
 {
 	zval **tmp, *z_descriptor = getThis();
 	php_oci_descriptor *descriptor;
-	ub4 flush_flag = 0;
+	long flush_flag = 0;
 	
 	if (getThis()) {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &flush_flag) == FAILURE) {

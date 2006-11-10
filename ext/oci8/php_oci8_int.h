@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.24 2006/11/10 16:56:19 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.25 2006/11/10 21:55:05 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -382,7 +382,7 @@ int php_oci_collection_append_string(php_oci_collection *, zstr, int TSRMLS_DC);
 /* statement related prototypes {{{ */
 
 php_oci_statement * php_oci_statement_create (php_oci_connection *, zstr, int, zend_uchar TSRMLS_DC);
-int php_oci_statement_set_prefetch (php_oci_statement *, ub4 TSRMLS_DC);
+int php_oci_statement_set_prefetch (php_oci_statement *, long TSRMLS_DC);
 int php_oci_statement_fetch (php_oci_statement *, ub4 TSRMLS_DC);
 php_oci_out_column * php_oci_statement_get_column (php_oci_statement *, long, zstr, int TSRMLS_DC);
 int php_oci_statement_execute (php_oci_statement *, ub4 TSRMLS_DC);

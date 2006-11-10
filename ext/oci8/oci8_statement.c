@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.14 2006/11/10 16:33:41 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.15 2006/11/10 20:13:36 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -122,7 +122,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 
 /* {{{ php_oci_statement_set_prefetch()
  Set prefetch buffer size for the statement (we're assuming that one row is ~1K sized) */
-int php_oci_statement_set_prefetch(php_oci_statement *statement, ub4 size TSRMLS_DC)
+int php_oci_statement_set_prefetch(php_oci_statement *statement, long size TSRMLS_DC)
 { 
 	ub4 prefetch = size * 1024;
 

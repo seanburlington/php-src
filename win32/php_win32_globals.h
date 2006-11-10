@@ -16,14 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.5 2006/01/01 13:09:59 sniper Exp $ */
+/* $Id: php_win32_globals.h,v 1.6 2006/11/10 09:56:37 dmitry Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H
 
 /* misc globals for thread-safety under win32 */
-
-#include "pwd.h"
 
 typedef struct _php_win32_core_globals php_win32_core_globals;
 
@@ -39,12 +37,6 @@ struct _php_win32_core_globals {
 	/* syslog */
 	char *log_header;
 	HANDLE log_source;
-
-	/* getpwuid */
-	struct passwd pwd;
-
-	/* getlogin */
-	char *login_name;
 
 	/* time */
 	struct timeval starttime;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.17 2006/11/09 16:04:34 nlopess Exp $ */
+/* $Id: php_zip.c,v 1.1.2.18 2006/11/11 23:43:00 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -551,6 +551,7 @@ static void php_zip_free_dir(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	if (zip_int) {
 		if (zip_int->za) {
 			zip_close(zip_int->za);
+			zip_int->za = NULL;
 		}
 
 		efree(rsrc->ptr);
@@ -565,8 +566,14 @@ static void php_zip_free_entry(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	zip_read_rsrc *zr_rsrc = (zip_read_rsrc *) rsrc->ptr;
 
-	efree(zr_rsrc);
-	rsrc->ptr = NULL;
+	if (zr_rsrc) {
+		if (zr_rsrc->zf) {
+			zip_fclose(zr_rsrc->zf);
+			zr_rsrc->zf = NULL;
+		}
+		efree(zr_rsrc);
+		rsrc->ptr = NULL;
+	}
 }
 /* }}} */
 
@@ -1992,7 +1999,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.17 2006/11/09 16:04:34 nlopess Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.18 2006/11/11 23:43:00 nlopess Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.14 2006/10/03 17:41:47 iliaa Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.15 2006/11/12 01:14:39 bjori Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2033,7 +2033,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 		if (should_rehash) {
 			zend_hash_rehash(Z_ARRVAL_PP(stack));
 		}
-	} else if (!key_len) {
+	} else if (!key_len && index >= Z_ARRVAL_PP(stack)->nNextFreeElement-1) {
 		Z_ARRVAL_PP(stack)->nNextFreeElement = Z_ARRVAL_PP(stack)->nNextFreeElement - 1;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.25 2006/07/15 14:31:51 helly Exp $ */
+/* $Id: spl_directory.h,v 1.26 2006/11/12 15:58:05 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -95,10 +95,10 @@ struct _spl_filesystem_object {
 
 #define SPL_FILE_DIR_CURRENT_AS_FILEINFO   0x00000010 /* make RecursiveDirectoryTree::current() return SplFileInfo */
 #define SPL_FILE_DIR_CURRENT_AS_PATHNAME   0x00000020 /* make RecursiveDirectoryTree::current() return getPathname() */
-#define SPL_FILE_DIR_CURRENT_MODE_MASK     0x000000F0 /* make RecursiveDirectoryTree::key() return getFilename() */
+#define SPL_FILE_DIR_CURRENT_MODE_MASK     0x000000F0 /* mask RecursiveDirectoryTree::current() */
 
 #define SPL_FILE_DIR_KEY_AS_FILENAME       0x00000100 /* make RecursiveDirectoryTree::key() return getFilename() */
-#define SPL_FILE_DIR_KEY_MODE_MASK         0x00000F00 /* make RecursiveDirectoryTree::key() return getFilename() */
+#define SPL_FILE_DIR_KEY_MODE_MASK         0x00000F00 /* mask RecursiveDirectoryTree::key() */
 
 #endif /* SPL_DIRECTORY_H */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.18 2006/11/11 23:43:00 nlopess Exp $ */
+/* $Id: php_zip.c,v 1.1.2.19 2006/11/12 00:31:03 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -490,7 +490,9 @@ static void php_zip_object_free_storage(void *object TSRMLS_DC) /* {{{ */
 		return;
 	}
 	if (intern->za) {
- 		zip_close(intern->za);
+		if (zip_close(intern->za) != 0) {
+			_zip_free(intern->za);
+		}
 		intern->za = NULL;
 	}
 
@@ -1999,7 +2001,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.18 2006/11/11 23:43:00 nlopess Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.19 2006/11/12 00:31:03 nlopess Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

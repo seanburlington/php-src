@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.16 2006/11/12 17:13:22 iliaa Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.17 2006/11/12 17:23:01 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2202,7 +2202,7 @@ PHP_FUNCTION(array_slice)
 	/* Get the arguments and do error-checking */	
 	argc = ZEND_NUM_ARGS();
 	if (argc < 2 || argc > 4 || zend_get_parameters_ex(argc, &input, &offset, &length, &z_preserve_keys)) {
-		WRONG_PARA¬M_COUNT;
+		WRONG_PARAM_COUNT;
 	}
 	
 	if (Z_TYPE_PP(input) != IS_ARRAY) {

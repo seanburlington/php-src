@@ -1,4 +1,4 @@
-/* $Id: zip_stream.c,v 1.2 2006/07/27 00:37:06 iliaa Exp $ */
+/* $Id: zip_stream.c,v 1.3 2006/11/12 00:41:41 nlopess Exp $ */
 #ifdef HAVE_CONFIG_H
 #   include "config.h"
 #endif
@@ -60,9 +60,15 @@ static size_t php_zip_ops_write(php_stream *stream, const char *buf, size_t coun
 static int php_zip_ops_close(php_stream *stream, int close_handle TSRMLS_DC)
 {
 	STREAM_DATA_FROM_STREAM();
-	if (close_handle && self->za) {
-		zip_close(self->za);
-		self->za = NULL;
+	if (close_handle) {
+		if (self->za) {
+			zip_close(self->za);
+			self->za = NULL;
+		}
+		if (self->zf) {
+			zip_fclose(self->zf);
+			self->zf = NULL;
+		}
 	}
 	efree(self);
 	stream->abstract = NULL;

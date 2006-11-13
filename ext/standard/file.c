@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.466 2006/11/13 20:17:05 tony2001 Exp $ */
+/* $Id: file.c,v 1.467 2006/11/13 20:31:15 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -649,6 +649,7 @@ PHP_FUNCTION(file_put_contents)
 	}
 
 	if (flags & LOCK_EX && php_stream_lock(stream, LOCK_EX)) {
+		php_stream_close(stream);
 		RETURN_FALSE;
 	}
 

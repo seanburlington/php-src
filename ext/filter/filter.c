@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.75 2006/11/10 01:08:52 iliaa Exp $ */
+/* $Id: filter.c,v 1.76 2006/11/13 14:59:47 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.75 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.76 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -617,10 +617,12 @@ static void php_filter_array_handler(zval *input, zval **op, zval *return_value 
 	if (!op) {
 		SEPARATE_ZVAL(&input);
 		*return_value = *input;
+		zval_copy_ctor(return_value);
 		php_filter_call(&return_value, FILTER_DEFAULT, NULL, 0, FILTER_REQUIRE_ARRAY TSRMLS_CC);
 	} else if (Z_TYPE_PP(op) == IS_LONG) {
 		SEPARATE_ZVAL(&input);
 		*return_value = *input;
+		zval_copy_ctor(return_value);
 		php_filter_call(&return_value, Z_LVAL_PP(op), NULL, 0, FILTER_REQUIRE_ARRAY TSRMLS_CC);
 	} else if (Z_TYPE_PP(op) == IS_ARRAY) {
 		array_init(return_value);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.68 2006/10/12 12:50:29 mike Exp $ */
+/* $Id: php_output.h,v 1.69 2006/11/13 14:05:03 mike Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -81,7 +81,7 @@ typedef enum _php_output_handler_hook_t {
 
 #define PHP_OUTPUT_HANDLER_INITBUF_SIZE(s) \
 ( (s) ? \
-	(s) + PHP_OUTPUT_HANDLER_ALIGNTO_SIZE - ((s) % (PHP_OUTPUT_HANDLER_ALIGNTO_SIZE >> 2)) : \
+	(s) + PHP_OUTPUT_HANDLER_ALIGNTO_SIZE - ((s) % (PHP_OUTPUT_HANDLER_ALIGNTO_SIZE)) : \
 	PHP_OUTPUT_HANDLER_DEFAULT_SIZE \
 )
 #define PHP_OUTPUT_HANDLER_ALIGNTO_SIZE		0x1000

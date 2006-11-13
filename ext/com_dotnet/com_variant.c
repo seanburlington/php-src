@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.16 2006/02/04 10:59:18 rrichards Exp $ */
+/* $Id: com_variant.c,v 1.17 2006/11/13 15:33:40 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -804,6 +804,11 @@ PHP_FUNCTION(variant_date_from_timestamp)
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l",
 			&timestamp)) {
 		return;
+	}
+
+	if (timestamp < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Timestamp value must be a positive value.");
+		RETURN_FALSE;
 	}
 
 	VariantInit(&res);

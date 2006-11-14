@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.2 2006/11/10 09:56:16 dmitry Exp $
+// $Id: config.w32,v 1.40.2.8.2.3 2006/11/14 14:10:53 dmitry Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -227,7 +227,11 @@ function add_extra_dirs()
 		for (i = 0; i < path.length; i++) {
 			f = FSO.GetAbsolutePathName(path[i]);
 			if (FSO.FolderExists(f)) {
-				ADD_FLAG("LDFLAGS", '/libpath:"' + f + '" ');
+				if (f.indexOf(" ") >= 0) {
+					ADD_FLAG("LDFLAGS", '/libpath:"\\"' + f + '\\"" ');
+				} else {
+					ADD_FLAG("LDFLAGS", '/libpath:"' + f + '" ');
+				}
 			}
 		}
 	}

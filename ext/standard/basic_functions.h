@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.150 2006/07/21 23:29:25 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.151 2006/11/14 14:41:09 derick Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -147,7 +147,7 @@ typedef signed int php_int32;
 #elif SIZEOF_LONG == 4
 /* 16-bit systems? */
 typedef unsigned long php_uint32;
-typedef signed int php_int32;
+typedef signed long php_int32;
 #else
 #error Need type which holds 32 bits
 #endif

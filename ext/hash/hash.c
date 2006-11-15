@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.5.2.3 2006/07/28 14:27:03 iliaa Exp $ */
+/* $Id: hash.c,v 1.18.2.5.2.4 2006/11/15 20:06:09 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -517,6 +517,7 @@ PHP_MINIT_FUNCTION(hash)
 
 	zend_hash_init(&php_hash_hashtable, 35, NULL, NULL, 1);
 
+	php_hash_register_algo("md2",			&php_hash_md2_ops);
 	php_hash_register_algo("md4",			&php_hash_md4_ops);
 	php_hash_register_algo("md5",			&php_hash_md5_ops);
 	php_hash_register_algo("sha1",			&php_hash_sha1_ops);
@@ -525,6 +526,8 @@ PHP_MINIT_FUNCTION(hash)
 	php_hash_register_algo("sha512",		&php_hash_sha512_ops);
 	php_hash_register_algo("ripemd128",		&php_hash_ripemd128_ops);
 	php_hash_register_algo("ripemd160",		&php_hash_ripemd160_ops);
+	php_hash_register_algo("ripemd256",		&php_hash_ripemd256_ops);
+	php_hash_register_algo("ripemd320",		&php_hash_ripemd320_ops);
 	php_hash_register_algo("whirlpool",		&php_hash_whirlpool_ops);
 	php_hash_register_algo("tiger128,3",	&php_hash_3tiger128_ops);
 	php_hash_register_algo("tiger160,3",	&php_hash_3tiger160_ops);

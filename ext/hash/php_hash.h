@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.8 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_hash.h,v 1.13.2.7.2.1 2006/11/15 20:06:09 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -52,6 +52,7 @@ typedef struct _php_hash_data {
 	unsigned char *key;
 } php_hash_data;
 
+extern php_hash_ops php_hash_md2_ops;
 extern php_hash_ops php_hash_md4_ops;
 extern php_hash_ops php_hash_md5_ops;
 extern php_hash_ops php_hash_sha1_ops;
@@ -60,6 +61,8 @@ extern php_hash_ops php_hash_sha384_ops;
 extern php_hash_ops php_hash_sha512_ops;
 extern php_hash_ops php_hash_ripemd128_ops;
 extern php_hash_ops php_hash_ripemd160_ops;
+extern php_hash_ops php_hash_ripemd256_ops;
+extern php_hash_ops php_hash_ripemd320_ops;
 extern php_hash_ops php_hash_whirlpool_ops;
 extern php_hash_ops php_hash_3tiger128_ops;
 extern php_hash_ops php_hash_3tiger160_ops;

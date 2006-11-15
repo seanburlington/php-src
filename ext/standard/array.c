@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.391 2006/11/13 15:34:49 iliaa Exp $ */
+/* $Id: array.c,v 1.392 2006/11/15 22:09:25 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2669,7 +2669,7 @@ PHP_FUNCTION(array_pad)
 	int	do_pad;			/* Whether we should do padding at all */
 	int	i;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a|lz", &input, &pad_size, &pad_value) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "alz", &input, &pad_size, &pad_value) == FAILURE) {
 		return;
 	}
 
@@ -2690,6 +2690,7 @@ PHP_FUNCTION(array_pad)
 	num_pads = pad_size_abs - input_size;
 	if (num_pads > 1048576) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You may only pad up to 1048576 elements at a time");
+		zval_dtor(return_value);
 		RETURN_FALSE;
 	}
 	pads = (zval ***)safe_emalloc(num_pads, sizeof(zval **), 0);

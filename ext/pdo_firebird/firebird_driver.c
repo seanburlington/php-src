@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.17.2.3 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: firebird_driver.c,v 1.17.2.2.2.1 2006/11/16 17:33:39 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,8 +38,10 @@ static int firebird_alloc_prepare_stmt(pdo_dbh_t*, const char*, long, XSQLDA*, i
 /* map driver specific error message to PDO error */
 void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long line TSRMLS_DC) /* {{{ */
 {
+#if 0
 	pdo_firebird_db_handle *H = stmt ? ((pdo_firebird_stmt *)stmt->driver_data)->H 
 		: (pdo_firebird_db_handle *)dbh->driver_data;
+#endif
 	pdo_error_type *const error_code = stmt ? &stmt->error_code : &dbh->error_code;
 	
 #if 0

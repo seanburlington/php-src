@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.77 2006/11/10 13:18:46 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.78 2006/11/16 16:08:09 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -765,7 +765,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 					return fd == -1 ? PHP_STREAM_OPTION_RETURN_ERR : PHP_STREAM_OPTION_RETURN_OK;
 
 				case PHP_STREAM_TRUNCATE_SET_SIZE:
-					return ftruncate(fd, *(size_t*)ptrparam) == 0 ? PHP_STREAM_OPTION_RETURN_OK : PHP_STREAM_OPTION_RETURN_ERR;
+					return ftruncate(fd, *(ptrdiff_t*)ptrparam) == 0 ? PHP_STREAM_OPTION_RETURN_OK : PHP_STREAM_OPTION_RETURN_ERR;
 			}
 			
 		default:

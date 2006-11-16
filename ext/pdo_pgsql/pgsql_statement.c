@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.40 2006/10/31 19:13:41 helly Exp $ */
+/* $Id: pgsql_statement.c,v 1.41 2006/11/16 17:34:42 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -158,8 +158,9 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *param,
 		enum pdo_param_event event_type TSRMLS_DC)
 {
-	pdo_pgsql_stmt *S = (pdo_pgsql_stmt*)stmt->driver_data;
 #if HAVE_PQPREPARE
+	pdo_pgsql_stmt *S = (pdo_pgsql_stmt*)stmt->driver_data;
+
 	if (S->stmt_name && param->is_param) {
 		switch (event_type) {
 			case PDO_PARAM_EVT_ALLOC:

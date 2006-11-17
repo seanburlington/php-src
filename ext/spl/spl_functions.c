@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.37 2006/07/20 21:21:19 helly Exp $ */
+/* $Id: spl_functions.c,v 1.38 2006/11/17 10:48:53 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -40,8 +40,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 {
 	zend_class_entry ce;
 	
-	INIT_CLASS_ENTRY(ce, class_name, functions);
-	ce.name_length = strlen(class_name);
+	INIT_CLASS_ENTRY_EX(ce, class_name, strlen(class_name), functions);
 	*ppce = zend_register_internal_interface(&ce TSRMLS_CC);
 }
 /* }}} */
@@ -51,8 +50,7 @@ PHPAPI void spl_register_std_class(zend_class_entry ** ppce, char * class_name, 
 {
 	zend_class_entry ce;
 	
-	INIT_CLASS_ENTRY(ce, class_name, function_list);
-	ce.name_length = strlen(class_name);
+	INIT_CLASS_ENTRY_EX(ce, class_name, strlen(class_name), function_list);
 	*ppce = zend_register_internal_class(&ce TSRMLS_CC);
 
 	/* entries changed by initialize */
@@ -67,8 +65,7 @@ PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * 
 {
 	zend_class_entry ce;
 	
-	INIT_CLASS_ENTRY(ce, class_name, function_list);
-	ce.name_length = strlen(class_name);
+	INIT_CLASS_ENTRY_EX(ce, class_name, strlen(class_name), function_list);
 	*ppce = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 
 	/* entries changed by initialize */

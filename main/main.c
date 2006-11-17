@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.706 2006/11/10 11:42:40 dmitry Exp $ */
+/* $Id: main.c,v 1.707 2006/11/17 10:48:53 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1512,7 +1512,6 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	zend_utility_values zuv;
 	int module_number=0;	/* for REGISTER_INI_ENTRIES() */
 	char *php_os;
-	zend_bool orig_unicode;
 #ifdef ZTS
 	zend_executor_globals *executor_globals;
 	void ***tsrm_ls;
@@ -1650,9 +1649,6 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	/* Register Zend ini entries */
 	zend_register_standard_ini_entries(TSRMLS_C);
 
-	orig_unicode = UG(unicode);
-	UG(unicode) = 0;
-
 	/* Disable realpath cache if open_basedir are set */
 	if ((PG(open_basedir) && *PG(open_basedir))) {
 		CWDG(realpath_cache_size_limit) = 0;
@@ -1752,7 +1748,6 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 		}
 	}
 
-	UG(unicode) = orig_unicode;
 	zend_post_startup(TSRMLS_C);
 
 	module_initialized = 1;

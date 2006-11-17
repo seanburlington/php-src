@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.17 2006/11/10 11:42:07 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.18 2006/11/17 11:40:52 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1073,7 +1073,7 @@ int php_request_startup(TSRMLS_D)
 	int retval = SUCCESS;
 
 #ifdef PHP_WIN32
-	CoInitialize(NULL);
+	PG(com_initialized) = 0;
 #endif
 
 #if PHP_SIGCHILD
@@ -1325,11 +1325,27 @@ void php_request_shutdown(void *dummy)
 	} zend_end_try();
 
 #ifdef PHP_WIN32
-	CoUninitialize();
+	if (PG(com_initialized)) {
+		CoUninitialize();
+		PG(com_initialized) = 0;
+	}
 #endif
 }
 /* }}} */
 
+
+/* {{{ php_com_initialize
+ */
+PHPAPI void php_com_initialize(TSRMLS_D)
+{
+#ifdef PHP_WIN32
+	if (!PG(com_initialized)) {
+		CoInitialize(NULL);
+		PG(com_initialized) = 1;
+	}
+#endif
+}
+/* }}} */
 
 /* {{{ php_body_write_wrapper
  */

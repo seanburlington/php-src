@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.11.2.2.2.1 2006/11/13 15:33:26 iliaa Exp $ */
+/* $Id: com_variant.c,v 1.11.2.2.2.2 2006/11/17 11:40:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -280,6 +280,7 @@ PHP_FUNCTION(com_variant_create_instance)
 			return;
 	}
 
+	php_com_initialize(TSRMLS_C);
 	if (ZEND_NUM_ARGS() == 3) {
 		obj->code_page = codepage;
 	}

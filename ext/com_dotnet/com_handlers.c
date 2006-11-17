@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.30.2.5.2.2 2006/10/06 12:23:30 edink Exp $ */
+/* $Id: com_handlers.c,v 1.30.2.5.2.3 2006/11/17 11:40:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -664,6 +664,7 @@ zend_object_value php_com_object_new(zend_class_entry *ce TSRMLS_DC)
 	php_com_dotnet_object *obj;
 	zend_object_value retval;
 
+	php_com_initialize(TSRMLS_C);
 	obj = emalloc(sizeof(*obj));
 	memset(obj, 0, sizeof(*obj));
 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.14.2.2 2007/01/01 09:40:12 sebastian Exp $ */
+/* $Id: com_dotnet.c,v 1.14.2.1.2.1 2006/11/17 11:40:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,6 +193,7 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	char *where = "";
 	IUnknown *unk = NULL;
 
+	php_com_initialize(TSRMLS_C);
 	if (COMG(dotnet_runtime_stuff) == NULL) {
 		hr = dotnet_init(&where TSRMLS_CC);
 		if (FAILED(hr)) {

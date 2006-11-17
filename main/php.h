@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.234 2006/11/10 09:56:37 dmitry Exp $ */
+/* $Id: php.h,v 1.235 2006/11/17 11:41:13 dmitry Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -325,6 +325,8 @@ PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userda
 PHPAPI int cfg_get_long(char *varname, long *result);
 PHPAPI int cfg_get_double(char *varname, double *result);
 PHPAPI int cfg_get_string(char *varname, char **result);
+
+PHPAPI void php_com_initialize(TSRMLS_D);
 END_EXTERN_C()
 
 /* PHP-named Zend macro wrappers */

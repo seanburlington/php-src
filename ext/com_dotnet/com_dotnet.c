@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.15 2006/01/01 13:09:48 sniper Exp $ */
+/* $Id: com_dotnet.c,v 1.16 2006/11/17 11:41:13 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,6 +193,7 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	char *where = "";
 	IUnknown *unk = NULL;
 
+	php_com_initialize(TSRMLS_C);
 	if (COMG(dotnet_runtime_stuff) == NULL) {
 		hr = dotnet_init(&where TSRMLS_CC);
 		if (FAILED(hr)) {

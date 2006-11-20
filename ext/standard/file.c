@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.467 2006/11/13 20:31:15 tony2001 Exp $ */
+/* $Id: file.c,v 1.468 2006/11/20 11:12:35 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -500,7 +500,7 @@ PHP_FUNCTION(get_meta_tags)
 				}
 
 				efree(name);
-				efree(value);
+				STR_FREE(value);
 			} else if (have_content) {
 				efree(value);
 			}

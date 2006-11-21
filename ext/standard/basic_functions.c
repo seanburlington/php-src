@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.822 2006/11/10 11:42:40 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.823 2006/11/21 18:40:58 andrei Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5477,7 +5477,7 @@ PHP_FUNCTION(php_strip_whitespace)
 }
 /* }}} */
 
-/* {{{ proto bool highlight_string(string string [, bool return] )
+/* {{{ proto bool highlight_string(string string [, bool return] ) U
    Syntax highlight a string or optionally return it */
 PHP_FUNCTION(highlight_string)
 {
@@ -5490,7 +5490,7 @@ PHP_FUNCTION(highlight_string)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|b", &expr, &i) == FAILURE) {
 		RETURN_FALSE;
 	}
-	convert_to_string_ex(expr);
+	convert_to_text_ex(expr);
 
 	if (i) {
 		php_output_start_default(TSRMLS_C);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.38 2006/10/11 23:07:30 pollita Exp $ */
+/* $Id: filter.c,v 1.39 2006/11/21 15:47:44 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -103,6 +103,7 @@ PHPAPI php_stream_bucket *php_stream_bucket_new(php_stream *stream, char *buf, s
 	bucket->buf_type = IS_STRING;
 	bucket->is_persistent = is_persistent;
 	bucket->refcount = 1;
+	bucket->brigade = NULL;
 
 	return bucket;
 }
@@ -140,6 +141,7 @@ PHPAPI php_stream_bucket *php_stream_bucket_new_unicode(php_stream *stream, UCha
 	bucket->buf_type = IS_UNICODE;
 	bucket->is_persistent = is_persistent;
 	bucket->refcount = 1;
+	bucket->brigade = NULL;
 
 	return bucket;
 }

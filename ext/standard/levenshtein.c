@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.40 2006/06/25 19:19:31 bjori Exp $ */
+/* $Id: levenshtein.c,v 1.41 2006/11/21 17:40:38 tony2001 Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -146,7 +146,7 @@ PHP_FUNCTION(levenshtein)
 		WRONG_PARAM_COUNT;
 	}	
 
-	if (distance < 0) {
+	if (distance < 0 && /* TODO */ ZEND_NUM_ARGS() != 3) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument string(s) too long");
 	}
 	

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.18 2006/11/15 22:10:19 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.19 2006/11/22 10:42:41 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1138,7 +1138,7 @@ PHP_FUNCTION(array_walk)
 	HashTable *target_hash;
 
 	old_walk_func_name = BG(array_walk_func_name);
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|z", &array, &tmp, &userdata) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz/|z/", &array, &tmp, &userdata) == FAILURE) {
 		return;
 	}
 	target_hash = HASH_OF(array);
@@ -1169,7 +1169,7 @@ PHP_FUNCTION(array_walk_recursive)
 	HashTable *target_hash;
 
 	old_walk_func_name = BG(array_walk_func_name);
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|z", &array, &tmp, &userdata) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz/|z/", &array, &tmp, &userdata) == FAILURE) {
 		return;
 	}
 	target_hash = HASH_OF(array);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.19 2006/11/22 21:22:14 andrei Exp $ */
+/* $Id: ftok.c,v 1.20 2006/11/22 21:22:27 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -28,7 +28,7 @@
 #endif
 
 #if HAVE_FTOK
-/* {{{ proto int ftok(string pathname, string proj)
+/* {{{ proto int ftok(string pathname, string proj) U
    Convert a pathname and a project identifier to a System V IPC key */
 PHP_FUNCTION(ftok)
 {

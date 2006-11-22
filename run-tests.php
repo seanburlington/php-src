@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.307 2006/09/14 17:07:41 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.308 2006/11/22 10:44:54 mike Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -400,7 +400,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.307 $'."\n";
+					echo '$Revision: 1.308 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1154,11 +1154,9 @@ TEST $file
 	$env['CONTENT_TYPE']='';
 	$env['CONTENT_LENGTH']='';
 	if (!empty($section_text['ENV'])) {
-		foreach(explode("\n", $section_text['ENV']) as $e) {
-			$e = explode('=',trim($e));
-			if (count($e) == 2) {
-				$env[$e[0]] = $e[1];
-			}
+		foreach(explode("\n", trim($section_text['ENV'])) as $e) {
+			$e = explode('=',trim($e),2);
+			$env[$e[0]] = $e[1];
 		}
 	}
 

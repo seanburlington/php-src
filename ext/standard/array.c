@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.394 2006/11/21 22:21:38 andrei Exp $ */
+/* $Id: array.c,v 1.395 2006/11/22 10:58:11 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1120,7 +1120,7 @@ PHP_FUNCTION(array_walk)
 	orig_array_walk_fci = BG(array_walk_fci);
 	orig_array_walk_fci_cache = BG(array_walk_fci_cache);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zf|z", &array,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zf|z/", &array,
 							  &BG(array_walk_fci), &BG(array_walk_fci_cache), &userdata) == FAILURE) {
 		BG(array_walk_fci) = orig_array_walk_fci;
 		BG(array_walk_fci_cache) = orig_array_walk_fci_cache;
@@ -1155,7 +1155,7 @@ PHP_FUNCTION(array_walk_recursive)
 	orig_array_walk_fci = BG(array_walk_fci);
 	orig_array_walk_fci_cache = BG(array_walk_fci_cache);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zf|z", &array,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zf|z/", &array,
 							  &BG(array_walk_fci), &BG(array_walk_fci_cache), &userdata) == FAILURE) {
 		BG(array_walk_fci) = orig_array_walk_fci;
 		BG(array_walk_fci_cache) = orig_array_walk_fci_cache;

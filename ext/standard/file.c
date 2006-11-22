@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.11 2006/11/20 11:12:42 tony2001 Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.12 2006/11/22 12:59:49 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2171,9 +2171,11 @@ PHPAPI void php_fgetcsv(php_stream *stream, /* {{{ */
 								size_t new_len;
 								char *new_temp;
 
-								memcpy(tptr, hunk_begin, bptr - hunk_begin);
-								tptr += (bptr - hunk_begin);
-								hunk_begin = bptr;
+								if (hunk_begin != line_end) {
+									memcpy(tptr, hunk_begin, bptr - hunk_begin);
+									tptr += (bptr - hunk_begin);
+									hunk_begin = bptr;
+								}
 
 								/* add the embedded line end to the field */
 								memcpy(tptr, line_end, line_end_len);

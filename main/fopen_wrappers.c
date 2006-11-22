@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.175.2.3.2.3 2006/11/10 10:55:26 dmitry Exp $ */
+/* $Id: fopen_wrappers.c,v 1.175.2.3.2.4 2006/11/22 11:55:36 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -531,7 +531,7 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC)
 	new_state.cwd = strdup(cwd);
 	new_state.cwd_length = strlen(cwd);
 
-	if(virtual_file_ex(&new_state, filepath, NULL, 1)) {
+	if(virtual_file_ex(&new_state, filepath, NULL, CWD_FILEPATH)) {
 		free(new_state.cwd);
 		return NULL;
 	}

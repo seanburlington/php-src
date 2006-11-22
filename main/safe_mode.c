@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.3 2006/11/10 09:56:16 dmitry Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.4 2006/11/22 11:55:36 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -55,6 +55,8 @@ PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mod
 	php_stream_wrapper *wrapper = NULL;
 	TSRMLS_FETCH();
 
+	path[0] = '\0';
+
 	if (!filename) {
 		return 0; /* path must be provided */
 	}
@@ -84,7 +86,7 @@ PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mod
 	 * If that fails, passthrough and check directory...
 	 */
 	if (mode != CHECKUID_ALLOW_ONLY_DIR) {
-		VCWD_REALPATH(filename, path);
+		expand_filepath(filename, path TSRMLS_CC);
 		ret = VCWD_STAT(path, &sb);
 		if (ret < 0) {
 			if (mode == CHECKUID_DISALLOW_FILE_NOT_EXISTS) {

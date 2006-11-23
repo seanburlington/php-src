@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.324 2006/11/10 16:56:19 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.325 2006/11/23 16:08:41 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -670,7 +670,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.324 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.325 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -906,29 +906,48 @@ sb4 php_oci_error(OCIError *err_p, sword status TSRMLS_DC)
 sb4 php_oci_fetch_errmsg(OCIError *error_handle, text **error_buf TSRMLS_DC)
 {
 	sb4 error_code = 0;
-	text tmp_buf[PHP_OCI_ERRBUF_LEN];
+	text err_buf[PHP_OCI_ERRBUF_LEN];
 
-	tmp_buf[0] = '\0';
+	err_buf[0] = '\0';
 
-	memset(tmp_buf, 0, sizeof(tmp_buf));
-	PHP_OCI_CALL(OCIErrorGet, (error_handle, (ub4)1, NULL, &error_code, tmp_buf, (ub4)PHP_OCI_ERRBUF_LEN, (ub4)OCI_HTYPE_ERROR));
-	
+	memset(err_buf, 0, sizeof(err_buf));
+	PHP_OCI_CALL(OCIErrorGet, (error_handle, (ub4)1, NULL, &error_code, err_buf, (ub4)PHP_OCI_ERRBUF_LEN, (ub4)OCI_HTYPE_ERROR));
+
 	if (error_code) {
-		int tmp_buf_len;
-		if (UG(unicode)) {
-			tmp_buf_len = u_strlen((UChar *)tmp_buf);
-			if (tmp_buf_len && tmp_buf[UBYTES(tmp_buf_len - 1)] == '\n') {
-				tmp_buf[UBYTES(tmp_buf_len - 1)] = '\0';
+		int err_buf_len;
+
+		if (UG(unicode) && error_handle == OCI_G(err)) {
+			/* global err handle is not Unicode aware */
+			UChar *tmp_buf;
+			int tmp_buf_len;
+
+			err_buf_len = strlen(err_buf);
+
+			if (err_buf_len && err_buf[err_buf_len - 1] == '\n') {
+				err_buf[err_buf_len - 1] = '\0';
+				err_buf_len--;
+			}
+
+			if (zend_string_to_unicode(UG(ascii_conv), &tmp_buf, &tmp_buf_len, err_buf, err_buf_len TSRMLS_CC) == SUCCESS) {
+				*error_buf = (text *)eustrndup(tmp_buf, tmp_buf_len);
+				efree(tmp_buf);
 			}
 		} else {
-			tmp_buf_len = strlen(tmp_buf);
-			if (tmp_buf_len && tmp_buf[tmp_buf_len - 1] == '\n') {
-				tmp_buf[tmp_buf_len - 1] = '\0';
+			if (UG(unicode)) {
+				err_buf_len = u_strlen((UChar *)err_buf);
+				if (err_buf_len && err_buf[UBYTES(err_buf_len - 1)] == '\n') { /* UTODO */
+					err_buf[UBYTES(err_buf_len - 1)] = '\0';
+				}
+			} else {
+				err_buf_len = strlen(err_buf);
+				if (err_buf_len && err_buf[err_buf_len - 1] == '\n') {
+					err_buf[err_buf_len - 1] = '\0';
+				}
 			}
-		}
-		
-		if (tmp_buf_len && error_buf) {
-			*error_buf = estrndup(tmp_buf, TEXT_BYTES(tmp_buf_len));
+			
+			if (err_buf_len && error_buf) {
+				*error_buf = estrndup(err_buf, TEXT_BYTES(err_buf_len));
+			}
 		}
 	}
 	return error_code;

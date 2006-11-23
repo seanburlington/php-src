@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.33 2006/11/12 17:49:52 iliaa Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.34 2006/11/23 14:41:51 iliaa Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -192,11 +192,14 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 							/* bork */
 							ret = -1;
 							strcpy(stmt->error_code, stmt->dbh->error_code);
-							efree(buf);
+							if (buf) {
+								efree(buf);
+							}
 							goto clean_up;
 						}
-						efree(buf);
-
+						if (buf) {
+							efree(buf);
+						}
 					} else {
 						pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource" TSRMLS_CC);
 						ret = -1;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.708 2006/11/17 11:41:13 dmitry Exp $ */
+/* $Id: main.c,v 1.709 2006/11/23 08:37:34 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1114,12 +1114,18 @@ static void php_message_handler_for_zend(long message, void *data)
 				struct tm *ta, tmbuf;
 				time_t curtime;
 				char *datetime_str, asctimebuf[52];
+				char memory_leak_buf[4096];
 
 				time(&curtime);
 				ta = php_localtime_r(&curtime, &tmbuf);
 				datetime_str = php_asctime_r(ta, asctimebuf);
 				datetime_str[strlen(datetime_str)-1]=0;	/* get rid of the trailing newline */
-				fprintf(stderr, "[%s]  Script:  '%s'\n", datetime_str, SAFE_FILENAME(SG(request_info).path_translated));
+				snprintf(memory_leak_buf, sizeof(memory_leak_buf), "[%s]  Script:  '%s'\n", datetime_str, SAFE_FILENAME(SG(request_info).path_translated));
+#	if defined(PHP_WIN32)
+				OutputDebugString(memory_leak_buf);
+#	else
+				fprintf(stderr, "%s", memory_leak_buf);
+#	endif
 			}
 			break;
 	}

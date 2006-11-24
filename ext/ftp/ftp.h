@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.30.2.3.4.1 2006/01/01 13:46:52 sniper Exp $ */
+/* $Id: ftp.h,v 1.30.2.3.4.2 2006/11/24 12:40:39 tony2001 Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -39,7 +39,7 @@
 #define	FTP_BUFSIZE	4096
 
 typedef enum ftptype {
-	FTPTYPE_ASCII,
+	FTPTYPE_ASCII=1,
 	FTPTYPE_IMAGE
 } ftptype_t;
 

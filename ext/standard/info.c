@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.270 2006/10/19 20:55:08 andrei Exp $ */
+/* $Id: info.c,v 1.271 2006/11/26 16:26:32 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -378,6 +378,7 @@ PHPAPI void php_print_info_htmlhead(TSRMLS_D)
 	PUTS("<head>\n");
 	php_info_print_style(TSRMLS_C);
 	PUTS("<title>phpinfo()</title>");
+	PUTS("<meta name=\"ROBOTS\" content=\"NOINDEX,NOFOLLOW,NOARCHIVE\" />");
 /*
 	php_printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />\n", charset);
 */

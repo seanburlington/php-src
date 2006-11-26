@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.50 2006/10/08 13:34:22 bjori Exp $ 
+  $Id: mime_magic.c,v 1.51 2006/11/26 17:03:15 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1388,6 +1388,7 @@ static int ascmagic(unsigned char *buf, int nbytes)
     char *token;
     register struct names *p;
     int small_nbytes;
+    char *strtok_buf = NULL;
 
     /* these are easy, do them first */
 
@@ -1420,8 +1421,7 @@ static int ascmagic(unsigned char *buf, int nbytes)
     s = (unsigned char *) memcpy(nbuf, buf, small_nbytes);
     s[small_nbytes] = '\0';
     has_escapes = (memchr(s, '\033', small_nbytes) != NULL);
-    /* XXX: not multithread safe */
-    while ((token = strtok((char *) s, " \t\n\r\f")) != NULL) {
+    while ((token = php_strtok_r((char *) s, " \t\n\r\f", &strtok_buf)) != NULL) {
 		s = NULL;		/* make strtok() keep on tokin' */
 		for (p = names; p < names + NNAMES; p++) {
 			if (STREQ(p->name, token)) {

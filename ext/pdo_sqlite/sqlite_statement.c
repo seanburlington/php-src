@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.20 2006/01/01 13:09:53 sniper Exp $ */
+/* $Id: sqlite_statement.c,v 1.21 2006/11/27 12:13:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,6 +66,7 @@ static int pdo_sqlite_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			return 1;
 
 		case SQLITE_ERROR:
+			sqlite3_reset(S->stmt);
 		case SQLITE_MISUSE:
 		case SQLITE_BUSY:
 		default:
@@ -156,6 +157,8 @@ static int pdo_sqlite_stmt_fetch(pdo_stmt_t *stmt,
 			sqlite3_reset(S->stmt);
 			return 0;
 
+		case SQLITE_ERROR:
+			sqlite3_reset(S->stmt);
 		default:
 			pdo_sqlite_error_stmt(stmt);
 			return 0;

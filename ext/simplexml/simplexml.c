@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.15 2006/09/06 15:31:48 nlopess Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.16 2006/11/28 18:59:52 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1762,6 +1762,7 @@ sxe_object_clone(void *object, void **clone_ptr TSRMLS_DC)
 	}
 	if (sxe->node) {
 		nodep = xmlDocCopyNode(sxe->node->node, docp, 1);
+		nodep->parent = sxe->node->node->parent;
 	}
 
 	php_libxml_increment_node_ptr((php_libxml_node_object *)clone, nodep, NULL TSRMLS_CC);
@@ -2331,7 +2332,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.15 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.16 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

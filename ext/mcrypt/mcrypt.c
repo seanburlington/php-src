@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.101 2006/11/15 22:51:45 mike Exp $ */
+/* $Id: mcrypt.c,v 1.102 2006/11/28 00:24:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1039,7 +1039,8 @@ int php_mcrypt_iv(php_mcrypt_iv_source source, int size, char **iv_str, int *iv_
 		case PHP_MCRYPT_IV_SOURCE_RAND:
 				*iv_len = size;
 				while (size) {
-					(*iv_str)[--size] = 255.0 * rand() / RAND_MAX;
+					unsigned int ctx;
+					(*iv_str)[--size] = 255.0 * php_rand_r(&ctx) / RAND_MAX;
 				}
 			break;
 	}

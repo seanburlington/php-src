@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.4 2006/11/16 17:33:39 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.5 2006/11/28 16:27:53 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,7 +197,7 @@ stmt_retry:
 		return 0;
 	}
 
-	if(!stmt->executed) {
+	if (!stmt->executed && !stmt->column_count) {
 		stmt->column_count = (int) PQnfields(S->result);
 		S->cols = ecalloc(stmt->column_count, sizeof(pdo_pgsql_column));
 	}

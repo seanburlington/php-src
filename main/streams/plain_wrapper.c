@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.78 2006/11/16 16:08:09 bjori Exp $ */
+/* $Id: plain_wrapper.c,v 1.79 2006/11/29 11:10:49 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -631,8 +631,15 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 
 					case PHP_STREAM_MMAP_MAP_RANGE:
 						do_fstat(data, 1);
+						if (range->length == 0 && range->offset > 0 && range->offset < data->sb.st_size) {
+							range->length = data->sb.st_size - range->offset;
+						}
 						if (range->length == 0 || range->length > data->sb.st_size) {
 							range->length = data->sb.st_size;
+						}
+						if (range->offset >= data->sb.st_size) {
+							range->offset = data->sb.st_size;
+							range->length = 0;
 						}
 						switch (range->mode) {
 							case PHP_STREAM_MAP_MODE_READONLY:

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.223 2006/11/29 08:52:08 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.224 2006/11/29 22:53:21 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1173,6 +1173,7 @@ SXE_METHOD(xpath)
 
 	xmlXPathFreeObject(retval);
 }
+/* }}} */
 
 /* {{{ proto bool SimpleXMLElement::registerXPathNamespace(string prefix, string ns) U
    Creates a prefix/ns context for the next XPath query */
@@ -2361,7 +2362,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.223 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.224 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

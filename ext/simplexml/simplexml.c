@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.16 2006/11/28 18:59:52 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.17 2006/11/29 08:51:36 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1211,7 +1211,7 @@ SXE_METHOD(asXML)
 		node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
 		if (node) {
-			if (XML_DOCUMENT_NODE == node->parent->type) {
+			if (node->parent && (XML_DOCUMENT_NODE == node->parent->type)) {
 				int bytes;
 				bytes = xmlSaveFile(filename, (xmlDocPtr) sxe->document->ptr);
 				if (bytes == -1) {
@@ -1240,7 +1240,7 @@ SXE_METHOD(asXML)
 	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
 	if (node) {
-		if (XML_DOCUMENT_NODE == node->parent->type) {
+		if (node->parent && (XML_DOCUMENT_NODE == node->parent->type)) {
 			xmlDocDumpMemory((xmlDocPtr) sxe->document->ptr, &strval, &strval_len);
 			RETVAL_STRINGL((char *)strval, strval_len, 1);
 			xmlFree(strval);
@@ -1762,7 +1762,6 @@ sxe_object_clone(void *object, void **clone_ptr TSRMLS_DC)
 	}
 	if (sxe->node) {
 		nodep = xmlDocCopyNode(sxe->node->node, docp, 1);
-		nodep->parent = sxe->node->node->parent;
 	}
 
 	php_libxml_increment_node_ptr((php_libxml_node_object *)clone, nodep, NULL TSRMLS_CC);
@@ -2332,7 +2331,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.17 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

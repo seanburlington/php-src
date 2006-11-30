@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.12.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_scandir.c,v 1.12.2.1.2.1 2006/11/30 16:10:38 iliaa Exp $ */
 
 #include "php_scandir.h"
 
@@ -62,6 +62,8 @@ int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector)
 	struct dirent *dp = NULL;
 	int vector_size = 0;
 	int nfiles = 0;
+	char entry[sizeof(struct dirent)+MAXPATHLEN];
+	struct dirent *result = (struct dirent *)&entry;
 
 	if (namelist == NULL) {
 		return -1;
@@ -71,7 +73,7 @@ int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector)
 		return -1;
 	}
 
-	while ((dp = readdir(dirp)) != NULL) {
+	while ((dp = php_readdir_r(dirp, (struct dirent *)entry, &result)) == 0 && result) {
 		int dsize = 0;
 		struct dirent *newdp = NULL;
 

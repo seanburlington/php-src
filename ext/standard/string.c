@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.615 2006/11/30 21:20:56 andrei Exp $ */
+/* $Id: string.c,v 1.616 2006/11/30 21:46:54 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6006,7 +6006,7 @@ PHP_FUNCTION(strip_tags)
 }
 /* }}} */
 
-/* {{{ proto string setlocale(mixed category, string locale [, string ...])
+/* {{{ proto string setlocale(mixed category, string locale [, string ...]) U
    Set locale information */
 PHP_FUNCTION(setlocale)
 {

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.50.2.8 2006/10/02 20:53:05 tony2001 Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.218.2.50.2.9 2006/11/30 22:13:56 tony2001 Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -591,6 +591,7 @@ EOF
   done
   echo '"[$]@"' >> $1
   chmod +x $1
+  PHP_SUBST_OLD(CONFIGURE_COMMAND)
 ])
 
 AC_DEFUN([PHP_TIME_R_TYPE],[

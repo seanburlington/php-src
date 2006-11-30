@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.62.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: crypt.c,v 1.62.2.1.2.1 2006/11/30 15:59:53 iliaa Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -145,8 +145,15 @@ PHP_FUNCTION(crypt)
 		salt[2] = '\0';
 #endif
 	}
-
-	RETVAL_STRING(crypt(str, salt), 1);
+#ifdef HAVE_CRYPT_R
+	{
+		struct crypt_data buffer;
+		memset(&buffer, 0, sizeof(buffer));
+		RETURN_STRING(crypt_r(str, salt, &buffer));
+	}
+#else
+	RETURN_STRING(crypt(str, salt), 1);
+#endif
 }
 /* }}} */
 #endif

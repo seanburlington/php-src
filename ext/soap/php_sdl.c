@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.12.2.3 2006/09/20 13:42:50 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.4 2006/11/30 23:51:24 iliaa Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -1863,7 +1863,7 @@ static void sdl_serialize_type(sdlTypePtr type, HashTable *tmp_encoders, HashTab
 		sdlTypePtr *tmp;
 
 	  tmp_elements = emalloc(sizeof(HashTable));
-	  zend_hash_init(tmp_elements, 0, NULL, NULL, 0);
+	  zend_hash_init(tmp_elements, zend_hash_num_elements(type->elements), NULL, NULL, 0);
 
 		zend_hash_internal_pointer_reset(type->elements);
 		while (zend_hash_get_current_data(type->elements, (void**)&tmp) == SUCCESS) {

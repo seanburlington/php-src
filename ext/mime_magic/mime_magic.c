@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.51 2006/11/26 17:03:15 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.52 2006/11/30 15:13:33 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1755,12 +1755,15 @@ static void mprint(union VALUETYPE *p, struct magic *m)
     case DATE:
     case BEDATE:
     case LEDATE:
-		/* XXX: not multithread safe */
-		pp = ctime((time_t *) & p->l);
-		if ((rt = strchr(pp, '\n')) != NULL)
-			*rt = '\0';
-		(void) magic_rsl_printf(m->desc, pp);
-		return;
+		{
+			char ctimebuf[52];
+			pp = php_ctime_r((time_t *) &p->l, ctimebuf);
+			if ((rt = strchr(pp, '\n')) != NULL) {
+				*rt = '\0';
+			}
+			(void) magic_rsl_printf(m->desc, pp);
+			return;
+		}
     default:
     	{
     		TSRMLS_FETCH();

@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.614 2006/09/25 11:05:29 tony2001 Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.615 2006/11/30 17:10:55 iliaa Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -464,6 +464,7 @@ chroot \
 ctime_r \
 cuserid \
 crypt \
+crypt_r \
 flock \
 ftok \
 funopen \
@@ -478,6 +479,8 @@ getservbyport \
 getrusage \
 gettimeofday \
 gmtime_r \
+getpwnam_r \
+getgrnam_r \
 grantpt \
 inet_ntoa \
 inet_ntop \

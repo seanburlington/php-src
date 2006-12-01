@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.117 2006/10/08 13:34:22 bjori Exp $ */
+/* $Id: ftp.c,v 1.118 2006/12/01 16:42:48 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1614,8 +1614,13 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 	if (!ftp_putcmd(ftp, cmd, path)) {
 		goto bail;
 	}
-	if (!ftp_getresp(ftp) || (ftp->resp != 150 && ftp->resp != 125)) {
+	if (!ftp_getresp(ftp) || (ftp->resp != 150 && ftp->resp != 125 && ftp->resp != 226)) {
 		goto bail;
+	}
+
+	/* some servers don't open a ftp-data connection if the directory is empty */
+	if (ftp->resp == 226) {
+		return ecalloc(1, sizeof(char**));
 	}
 
 	/* pull data buffer into tmpfile */

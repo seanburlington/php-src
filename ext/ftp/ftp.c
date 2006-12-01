@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.112.2.5 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: ftp.c,v 1.112.2.4.2.1 2006/12/01 16:34:43 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1614,8 +1614,13 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 	if (!ftp_putcmd(ftp, cmd, path)) {
 		goto bail;
 	}
-	if (!ftp_getresp(ftp) || (ftp->resp != 150 && ftp->resp != 125)) {
+	if (!ftp_getresp(ftp) || (ftp->resp != 150 && ftp->resp != 125 && ftp->resp != 226)) {
 		goto bail;
+	}
+
+	/* some servers don't open a ftp-data connection if the directory is empty */
+	if (ftp->resp == 226) {
+		return ecalloc(1, sizeof(char**));
 	}
 
 	/* pull data buffer into tmpfile */

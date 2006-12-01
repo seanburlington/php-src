@@ -16,7 +16,7 @@
 ** sqliteRegisterDateTimeFunctions() found at the bottom of the file.
 ** All other code has file scope.
 **
-** $Id: date.c,v 1.3.4.1.2.1 2006/11/30 16:38:37 iliaa Exp $
+** $Id: date.c,v 1.3.4.1.2.2 2006/12/01 20:24:58 fmk Exp $
 **
 ** NOTES:
 **
@@ -53,7 +53,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <time.h>
+#ifndef PHP_WIN32
 #include "main/php_reentrancy.h"
+#endif
 
 #ifndef SQLITE_OMIT_DATETIME_FUNCS
 

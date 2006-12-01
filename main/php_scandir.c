@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.12.2.1.2.1 2006/11/30 16:10:38 iliaa Exp $ */
+/* $Id: php_scandir.c,v 1.12.2.1.2.2 2006/12/01 20:17:50 fmk Exp $ */
 
 #include "php_scandir.h"
 
@@ -32,6 +32,7 @@
 #ifndef HAVE_SCANDIR
 
 #ifdef PHP_WIN32
+#include "win32/param.h"
 #include "win32/readdir.h"
 #endif  
 

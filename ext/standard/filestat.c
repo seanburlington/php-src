@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.152 2006/11/29 23:46:25 iliaa Exp $ */
+/* $Id: filestat.c,v 1.153 2006/12/01 18:42:24 andrei Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -424,8 +424,8 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp)
 		char *grbuf = emalloc(grbuflen);
 
 		convert_to_string(group);
-		if (getgrnam_r(Z_STRVAL_PP(group), &gr, grbuf, grbuflen, &retgrptr) != 0 || retgrptr == NULL) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to find gid for %s", Z_STRVAL_PP(group));
+		if (getgrnam_r(Z_STRVAL_P(group), &gr, grbuf, grbuflen, &retgrptr) != 0 || retgrptr == NULL) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to find gid for %s", Z_STRVAL_P(group));
 			efree(grbuf);
 			RETURN_FALSE;
 		}
@@ -528,8 +528,8 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 		char *pwbuf = emalloc(pwbuflen);
 
 		convert_to_string(user);
-		if (getpwnam_r(Z_STRVAL_PP(user), &pw, pwbuf, pwbuflen, &retpwptr) != 0 || retpwptr == NULL) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to find uid for %s", Z_STRVAL_PP(user));
+		if (getpwnam_r(Z_STRVAL_P(user), &pw, pwbuf, pwbuflen, &retpwptr) != 0 || retpwptr == NULL) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to find uid for %s", Z_STRVAL_P(user));
 			efree(pwbuf);
 			RETURN_FALSE;
 		}

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.56 2006/02/14 14:26:27 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.57 2006/12/02 17:55:05 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -540,7 +540,13 @@ static int pdo_mysql_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
 	pdo_mysql_stmt *S = (pdo_mysql_stmt*)stmt->driver_data;
 #if HAVE_MYSQL_STMT_PREPARE
 	if (S->stmt) {
-		int retval = mysql_stmt_free_result(S->stmt);
+		int retval;
+		if (!S->H->buffered) {
+			retval = mysql_stmt_close(S->stmt);
+			S->stmt = NULL;
+		} else {
+			retval = mysql_stmt_free_result(S->stmt);
+		}
 		S->stmt = NULL;
 		return retval ? 0 : 1;
 	}

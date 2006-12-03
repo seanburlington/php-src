@@ -17,8 +17,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.12.2.1.2.2 2006/12/01 20:17:50 fmk Exp $ */
+/* $Id: php_scandir.c,v 1.12.2.1.2.3 2006/12/03 14:37:32 tony2001 Exp $ */
 
+#include "php.h"
 #include "php_scandir.h"
 
 #ifdef HAVE_SYS_TYPES_H

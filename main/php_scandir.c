@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.12.2.1.2.3 2006/12/03 14:37:32 tony2001 Exp $ */
+/* $Id: php_scandir.c,v 1.12.2.1.2.4 2006/12/03 15:52:17 iliaa Exp $ */
 
 #include "php.h"
 #include "php_scandir.h"
@@ -61,11 +61,10 @@ int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector)
 {
 	DIR *dirp = NULL;
 	struct dirent **vector = NULL;
-	struct dirent *dp = NULL;
 	int vector_size = 0;
 	int nfiles = 0;
 	char entry[sizeof(struct dirent)+MAXPATHLEN];
-	struct dirent *result = (struct dirent *)&entry;
+	struct dirent *dp = (struct dirent *)&entry;
 
 	if (namelist == NULL) {
 		return -1;
@@ -75,7 +74,7 @@ int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector)
 		return -1;
 	}
 
-	while ((dp = php_readdir_r(dirp, (struct dirent *)entry, &result)) == 0 && result) {
+	while (!php_readdir_r(dirp, (struct dirent *)entry, &dp) && dp) {
 		int dsize = 0;
 		struct dirent *newdp = NULL;
 

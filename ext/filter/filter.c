@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.77 2006/11/13 19:32:43 tony2001 Exp $ */
+/* $Id: filter.c,v 1.78 2006/12/03 21:27:51 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.77 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.78 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -319,6 +319,19 @@ static void php_zval_filter(zval **value, long filter, long flags, zval *options
 	convert_to_string(*value);
 
 	filter_func.function(*value, flags, options, charset TSRMLS_CC);
+
+	if (
+		options &&
+		((flags & FILTER_NULL_ON_FAILURE && Z_TYPE_PP(value) == IS_NULL) || 
+		(!(flags & FILTER_NULL_ON_FAILURE) && Z_TYPE_PP(value) == IS_BOOL && Z_LVAL_PP(value) == 0)) &&
+		zend_hash_exists(HASH_OF(options), "default", sizeof("default"))
+	) {
+		zval **tmp; 
+		if (zend_hash_find(HASH_OF(options), "default", sizeof("default"), (void **)&tmp) == SUCCESS) {
+			**value = **tmp;
+			zval_copy_ctor(*value);
+		}
+	}
 }
 /* }}} */
 
@@ -678,13 +691,20 @@ PHP_FUNCTION(filter_input)
 
 	if (!input || !HASH_OF(input) || zend_hash_find(HASH_OF(input), var, var_len + 1, (void **)&tmp) != SUCCESS) {
 		long filter_flags = 0;
-		zval **option;
+		zval **option, **opt, **def;
 		if (filter_args) {
 			if (Z_TYPE_PP(filter_args) == IS_LONG) {
 				filter_flags = Z_LVAL_PP(filter_args);
 			} else if (Z_TYPE_PP(filter_args) == IS_ARRAY && zend_hash_find(HASH_OF(*filter_args), "flags", sizeof("flags"), (void **)&option) == SUCCESS) {
 				convert_to_long(*option);
 				filter_flags = Z_LVAL_PP(option);
+			} else if (Z_TYPE_PP(filter_args) == IS_ARRAY && 
+				zend_hash_find(HASH_OF(*filter_args), "options", sizeof("options"), (void **)&opt) == SUCCESS &&
+				zend_hash_find(HASH_OF(*opt), "default", sizeof("default"), (void **)&def) == SUCCESS
+			) {
+				*return_value = **def;
+				zval_copy_ctor(return_value);
+				return;
 			}
 		}
 		if (filter_flags & FILTER_NULL_ON_FAILURE) {

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.65 2006/11/30 16:00:05 iliaa Exp $ */
+/* $Id: crypt.c,v 1.66 2006/12/03 13:46:09 tony2001 Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -149,7 +149,7 @@ PHP_FUNCTION(crypt)
 	{
 		struct crypt_data buffer;
 		memset(&buffer, 0, sizeof(buffer));
-		RETURN_STRING(crypt_r(str, salt, &buffer));
+		RETURN_STRING(crypt_r(str, salt, &buffer), 1);
 	}
 #else
 	RETURN_STRING(crypt(str, salt), 1);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.20 2006/12/04 15:58:48 tony2001 Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.21 2006/12/04 18:37:15 stas Exp $ */
 
 /* {{{ includes
  */
@@ -1502,6 +1502,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 
 #if HAVE_SETLOCALE
 	setlocale(LC_CTYPE, "");
+	zend_update_current_locale();
 #endif
 
 #if HAVE_TZSET

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.17 2006/11/23 20:06:10 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.18 2006/12/04 13:07:26 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.17 $'."\n";
+					echo '$Revision: 1.226.2.37.2.18 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -533,7 +533,7 @@ $exts_skipped = 0;
 $ignored_by_ext = 0;
 sort($exts_to_test);
 $test_dirs = array();
-$optionals = array('tests', 'ext', 'Zend', 'ZendEngine2');
+$optionals = array('tests', 'ext', 'Zend', 'ZendEngine2', 'sapi/cli');
 foreach($optionals as $dir) {
 	if (@filetype($dir) == 'dir') {
 		$test_dirs[] = $dir;

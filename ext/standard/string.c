@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.616 2006/11/30 21:46:54 andrei Exp $ */
+/* $Id: string.c,v 1.617 2006/12/04 18:55:40 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4799,7 +4799,7 @@ PHPAPI UChar *php_u_addslashes_ex(UChar *str, int length, int *new_length, int s
 				*(buf+buf_len) = (UChar)0x30; buf_len++; /* 0 */
 				break;
 			case '\'':
-				case '\"':
+			case '\"':
 			case '\\':
 					*(buf+buf_len) = (UChar)0x5C; buf_len++; /* \ */
 					/* break is missing *intentionally* */

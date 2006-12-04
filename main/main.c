@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.709 2006/11/23 08:37:34 dmitry Exp $ */
+/* $Id: main.c,v 1.710 2006/12/04 15:58:35 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -2052,7 +2052,7 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 PHPAPI int php_lint_script(zend_file_handle *file TSRMLS_DC)
 {
 	zend_op_array *op_array;
-	zend_bool retval = FAILURE;
+	int retval = FAILURE;
 
 	zend_try {
 		op_array = zend_compile_file(file, ZEND_INCLUDE TSRMLS_CC);

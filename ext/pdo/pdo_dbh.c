@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.7 2006/08/21 16:53:50 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.8 2006/12/04 02:40:08 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -706,6 +706,15 @@ static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_D
 			return SUCCESS;
 
 		case PDO_ATTR_DEFAULT_FETCH_MODE:
+			if (Z_TYPE_P(value) == IS_ARRAY) {
+				zval **tmp;
+				if (zend_hash_index_find(Z_ARRVAL_P(value), 0, (void**)&tmp) == SUCCESS && Z_TYPE_PP(tmp) == IS_LONG) {
+					if (Z_LVAL_PP(tmp) == PDO_FETCH_INTO || Z_LVAL_PP(tmp) == PDO_FETCH_CLASS) {
+						pdo_raise_impl_error(dbh, NULL, "HY000", "FETCH_INTO and FETCH_CLASS are not yet supported as default fetch modes" TSRMLS_CC);
+						return FAILURE;
+					}
+				}
+			}
 			convert_to_long(value);
 			if (Z_LVAL_P(value) == PDO_FETCH_USE_DEFAULT) {
 				pdo_raise_impl_error(dbh, NULL, "HY000", "invalid fetch mode type" TSRMLS_CC);

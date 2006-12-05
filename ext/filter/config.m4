@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2006/12/05 23:38:10 iliaa Exp $
+dnl $Id: config.m4,v 1.9 2006/12/05 23:51:18 tony2001 Exp $
 dnl config.m4 for input filtering extension
 
 PHP_ARG_ENABLE(filter, whether to enable input filter support,
@@ -39,13 +39,9 @@ yes
     CPPFLAGS=$old_CPPFLAGS
   fi
 
-  if test "$PHP_PCRE_REGEX" != "yes"; then
-    AC_MSG_ERROR([Could not compile filter extension against PHP without pcre support])
-  fi
-
   PHP_NEW_EXTENSION(filter, filter.c sanitizing_filters.c logical_filters.c callback_filter.c, $ext_shared)
   PHP_SUBST(FILTER_SHARED_LIBADD)
 
   PHP_INSTALL_HEADERS([ext/filter/php_filter.h])
-  PHP_ADD_EXTENSION_DEP(filter, pcre, true)
+  PHP_ADD_EXTENSION_DEP(filter, pcre)
 fi

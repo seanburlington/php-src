@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.617 2006/12/04 18:55:40 andrei Exp $ */
+/* $Id: string.c,v 1.618 2006/12/05 02:54:07 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6083,6 +6083,7 @@ PHP_FUNCTION(setlocale)
 		}
 
 		retval = setlocale (cat, loc);
+		zend_update_current_locale();
 		if (retval) {
 			/* Remember if locale was changed */
 			if (loc) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.827 2006/11/30 21:23:07 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.828 2006/12/05 02:54:07 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4164,6 +4164,7 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	if (BG(locale_string) != NULL) {
 		setlocale(LC_ALL, "C");
 		setlocale(LC_CTYPE, "");
+		zend_update_current_locale();
 	}
 	STR_FREE(BG(locale_string));
 	BG(locale_string) = NULL;

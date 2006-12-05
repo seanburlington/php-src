@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.12.2.5 2006/10/17 15:26:14 iliaa Exp $ */
+/* $Id: filter_private.h,v 1.12.2.6 2006/12/05 01:24:18 pajoye Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -62,6 +62,7 @@
 #define FILTER_VALIDATE_URL           0x0111
 #define FILTER_VALIDATE_EMAIL         0x0112
 #define FILTER_VALIDATE_IP            0x0113
+#define FILTER_VALIDATE_LAST          0x0113
 
 #define FILTER_VALIDATE_ALL           0x0100
 
@@ -76,10 +77,16 @@
 #define FILTER_SANITIZE_NUMBER_INT    0x0207
 #define FILTER_SANITIZE_NUMBER_FLOAT  0x0208
 #define FILTER_SANITIZE_MAGIC_QUOTES  0x0209
+#define FILTER_SANITIZE_LAST          0x0209
 
 #define FILTER_SANITIZE_ALL           0x0200
 
 #define FILTER_CALLBACK               0x0400
+
+#define PHP_FILTER_ID_EXISTS(id) \
+((id >= FILTER_SANITIZE_ALL && id <= FILTER_SANITIZE_LAST) \
+|| (id >= FILTER_VALIDATE_ALL && id <= FILTER_VALIDATE_LAST) \
+|| id == FILTER_CALLBACK)
 
 #define PHP_FILTER_TRIM_DEFAULT(p, len, end) { \
 	while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\v') { \

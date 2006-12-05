@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.1 2006/06/29 14:40:49 bjori Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.2 2006/12/05 18:42:38 tony2001 Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -247,7 +247,6 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		SEPARATE_ZVAL(tmpzval);
 		convert_to_double_ex(tmpzval);
 		protocol_version_len = spprintf(&protocol_version, 0, "%.1f", Z_DVAL_PP(tmpzval));
-		zval_ptr_dtor(tmpzval);
 	}
 
 	if (!scratch) {

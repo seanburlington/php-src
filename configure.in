@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.616 2006/12/04 18:28:34 tony2001 Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.617 2006/12/05 08:08:33 dmitry Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1284,7 +1284,7 @@ PHP_ADD_SOURCES(Zend, \
     zend_iterators.c zend_interfaces.c zend_exceptions.c zend_strtod.c zend_strtol.c)
 
 if test -r "$abs_srcdir/Zend/zend_objects.c"; then
-  PHP_ADD_SOURCES(Zend, zend_objects.c zend_object_handlers.c zend_objects_API.c zend_mm.c \
+  PHP_ADD_SOURCES(Zend, zend_objects.c zend_object_handlers.c zend_objects_API.c \
     zend_default_classes.c)
 fi
 

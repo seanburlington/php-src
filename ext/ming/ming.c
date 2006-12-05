@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.79.2.4.2.5 2006/12/05 21:02:45 fmk Exp $ */
+/* $Id: ming.c,v 1.79.2.4.2.6 2006/12/05 21:46:21 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4134,25 +4134,6 @@ PHP_MINFO_FUNCTION(ming)
 
 /* {{{ todo PHP_MINIT_FUNCTION(ming)
 */
-
-#if PHP_API_VERSION == 20020918
-static php4_fix_funcnames(char *class_name, zend_function_entry *funcs)
-{
-	zend_function_entry *pf = funcs;
-	char *pname;
-
-	while(funcs->fname) {
-		if( strcmp(funcs->fname,"__construct") == 0 ) {
-			pname=strdup(class_name);
-		} else {
-			pname=strdup(funcs->fname);
-		}
-		funcs->fname=pname;
-		while(*pname) { *pname=tolower(*pname);pname++;}
-		funcs++;
-	}
-}
-#endif
 
 /* custom error handler propagates ming errors up to php */
 static void php_ming_error(const char *msg, ...)

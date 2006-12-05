@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.471 2006/12/05 04:52:44 pollita Exp $ */
+/* $Id: file.c,v 1.472 2006/12/05 13:45:49 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2153,7 +2153,7 @@ PHP_FUNCTION(fgetcsv)
 		}
 	}
 
-	buf.v = php_stream_get_line_ex(stream, stream->readbuf_type, NULL_ZSTR, 0, len, &buf_len);
+	buf.v = php_stream_get_line_ex(stream, stream->readbuf_type, NULL_ZSTR, 0, (len < 0) ? 0 : len, &buf_len);
 	if (!buf.v) {
 		/* No data */
 		RETVAL_FALSE;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.52 2006/10/08 13:34:24 bjori Exp $ */
+/* $Id: xsltprocessor.c,v 1.53 2006/12/05 12:05:03 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -385,13 +385,15 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	efree(member);
 	if (clone_docu == 0) {
 		/* check if the stylesheet is using xsl:key, if yes, we have to clone the document _always_ before a transformation */
-		nodep = xmlDocGetRootElement(sheetp->doc)->children;
-		while (nodep) {
-			if (nodep->type == XML_ELEMENT_NODE && xmlStrEqual(nodep->name, "key") && xmlStrEqual(nodep->ns->href, XSLT_NAMESPACE)) {
-				intern->hasKeys = 1;
-				break;
+		nodep = xmlDocGetRootElement(sheetp->doc);
+		if (nodep && (nodep = nodep->children)) {
+			while (nodep) {
+				if (nodep->type == XML_ELEMENT_NODE && xmlStrEqual(nodep->name, "key") && xmlStrEqual(nodep->ns->href, XSLT_NAMESPACE)) {
+					intern->hasKeys = 1;
+					break;
+				}
+				nodep = nodep->next;
 			}
-			nodep = nodep->next;
 		}
 	} else {
 		intern->hasKeys = clone_docu;

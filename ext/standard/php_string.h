@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.103 2006/10/03 18:38:57 tony2001 Exp $ */
+/* $Id: php_string.h,v 1.104 2006/12/05 04:52:44 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -76,6 +76,7 @@ PHP_FUNCTION(nl_langinfo);
 PHP_FUNCTION(stristr);
 PHP_FUNCTION(chunk_split);
 PHP_FUNCTION(parse_str);
+PHP_FUNCTION(str_getcsv);
 PHP_FUNCTION(bin2hex);
 PHP_FUNCTION(similar_text);
 PHP_FUNCTION(strip_tags);

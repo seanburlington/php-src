@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.470 2006/12/05 04:13:46 pollita Exp $ */
+/* $Id: file.c,v 1.471 2006/12/05 04:52:44 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2423,11 +2423,21 @@ post_enc:
 
 				/* Simple character */
 				p++;
+
+				if (p == e) {
+					add_next_index_stringl(return_value, field_start, p - field_start, 1);
+					/* Reset scanner even though we're dying */
+					state = PHP_FGETCSV_READY;
+					field_start = field_end = NULL;
+					p += delimiter_len;
+				}
 				break;
 		}
 	}
 
-	efree(buffer);
+	if (stream) {
+		efree(buffer);
+	}
 }
 /* }}} */
 
@@ -2617,11 +2627,21 @@ post_enc:
 
 				/* Simple character */
 				p++;
+
+				if (p == e) {
+					add_next_index_unicodel(return_value, field_start, p - field_start, 1);
+					/* Reset scanner even though we're dying */
+					state = PHP_FGETCSV_READY;
+					field_start = field_end = NULL;
+					p += delimiter_len;
+				}
 				break;
 		}
 	}
 
-	efree(buffer);
+	if (stream) {
+		efree(buffer);
+	}
 }
 /* }}} */
 

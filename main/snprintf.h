@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.32.2.4 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: snprintf.h,v 1.32.2.3.2.1 2006/12/06 09:52:51 tony2001 Exp $ */
 
 /*
 
@@ -106,11 +106,6 @@ typedef enum {
 	LM_LONG_DOUBLE
 } length_modifier_e;
 
-extern char * ap_php_cvt(double arg, int ndigits, int *decpt, int *sign, int eflag, char *buf);
-extern char * ap_php_ecvt(double arg, int ndigits, int *decpt, int *sign, char *buf);
-extern char * ap_php_fcvt(double arg, int ndigits, int *decpt, int *sign, char *buf);
-extern char * ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform);
-
 #ifdef PHP_WIN32
 # define WIDE_INT		__int64
 #elif SIZEOF_LONG_LONG_INT
@@ -134,6 +129,9 @@ extern char * ap_php_conv_fp(register char format, register double num,
 extern char * ap_php_conv_p2(register u_wide_int num, register int nbits,
 		 char format, char *buf_end, register int *len);
 
+extern char * bsd_ecvt(double value, int ndigit, int *decpt, int *sign);
+extern char * bsd_fcvt(double value, int ndigit, int *decpt, int *sign);
+extern char * bsd_gcvt(double value, int ndigit, char *buf);
 
 #endif /* SNPRINTF_H */
 

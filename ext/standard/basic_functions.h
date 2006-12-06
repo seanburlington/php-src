@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.152 2006/11/21 22:21:38 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.153 2006/12/06 17:42:47 tony2001 Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -139,7 +139,7 @@ PHP_RSHUTDOWN_FUNCTION(user_filters);
 
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC);
 PHPAPI char *php_get_current_user();
-PHPAPI int php_prefix_varname(zval *result, zval *prefix, zstr var_name, int var_name_len, int var_name_type TSRMLS_DC);
+PHPAPI int php_prefix_varname(zval *result, zval *prefix, zstr var_name, int var_name_len, int var_name_type, zend_bool add_underscore TSRMLS_DC);
 
 #if SIZEOF_INT == 4
 /* Most 32-bit and 64-bit systems have 32-bit ints */

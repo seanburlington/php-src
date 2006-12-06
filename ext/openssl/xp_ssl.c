@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22.2.3.2.3 2006/12/05 01:39:07 iliaa Exp $ */
+/* $Id: xp_ssl.c,v 1.22.2.3.2.4 2006/12/06 13:18:36 rrichards Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -26,6 +26,10 @@
 #include <openssl/ssl.h>
 #include <openssl/x509.h>
 #include <openssl/err.h>
+
+#ifdef PHP_WIN32
+#include "win32/time.h"
+#endif
 
 #ifdef NETWARE
 #include <sys/select.h>

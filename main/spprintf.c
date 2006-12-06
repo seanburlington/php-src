@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.37 2006/08/08 16:59:11 tony2001 Exp $ */
+/* $Id: spprintf.c,v 1.38 2006/12/06 09:50:28 tony2001 Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -685,8 +685,7 @@ fmt_string:
 					/*
 					 * * We use &num_buf[ 1 ], so that we have room for the sign
 					 */
-					s = ap_php_gcvt(fp_num, precision, &num_buf[1],
-							alternate_form);
+					s = bsd_gcvt(fp_num, precision, &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

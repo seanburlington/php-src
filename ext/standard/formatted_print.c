@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.87 2006/12/06 16:28:27 tony2001 Exp $ */
+/* $Id: formatted_print.c,v 1.88 2006/12/07 20:45:21 tony2001 Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -196,9 +196,8 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 						 TSRMLS_DC)
 {
 	char num_buf[NUM_BUF_SIZE];
-	char *s, *q;
-	int s_len;
-	int is_negative;
+	char *s = NULL, *q;
+	int s_len = 0, is_negative = 0;
 
 	PRINTF_DEBUG(("sprintf: appenddouble(%x, %x, %x, %f, %d, '%c', %d, %c)\n",
 				  *buffer, pos, size, number, width, padding, alignment, fmt));

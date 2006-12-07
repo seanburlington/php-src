@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.472 2006/12/05 13:45:49 tony2001 Exp $ */
+/* $Id: file.c,v 1.473 2006/12/07 09:51:36 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1114,7 +1114,7 @@ PHPAPI PHP_FUNCTION(feof)
 }
 /* }}} */
 
-/* {{{ proto string fgets(resource fp[, int length]) U
+/* {{{ proto string fgets(resource fp[, int lengthish]) U
    Get a line from file pointer */
 PHPAPI PHP_FUNCTION(fgets)
 {
@@ -1130,6 +1130,11 @@ PHPAPI PHP_FUNCTION(fgets)
 	}
 
 	php_stream_from_zval(stream, &zstream);
+
+	if (length > 0) {
+		/* For BC reasons, fgets() should only return length-1 bytes. */
+		length--;
+	}
 
 	buf.v = php_stream_get_line_ex(stream, stream->readbuf_type, NULL_ZSTR, 0, length, &retlen);
 	if (!buf.v) {

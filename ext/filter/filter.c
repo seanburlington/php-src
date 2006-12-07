@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.80 2006/12/05 01:23:42 pajoye Exp $ */
+/* $Id: filter.c,v 1.81 2006/12/07 10:59:35 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.80 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.81 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -397,13 +397,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 			Z_STRVAL(new_var) = estrndup(*val, val_len);
 			INIT_PZVAL(tmp_new_var);
  			php_zval_filter(&tmp_new_var, IF_G(default_filter), IF_G(default_filter_flags), NULL, NULL/*charset*/, 0 TSRMLS_CC);
-		}
-#if PHP_VERSION_ID<60000
-	   	else if (PG(magic_quotes_gpc)) {
-			Z_STRVAL(new_var) = php_addslashes(*val, Z_STRLEN(new_var), &Z_STRLEN(new_var), 0 TSRMLS_CC);
-		}
-#endif
-	   	else {
+		} else {
 			Z_STRVAL(new_var) = estrndup(*val, val_len);
 		}
 	} else { /* empty string */

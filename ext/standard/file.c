@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.473 2006/12/07 09:51:36 pollita Exp $ */
+/* $Id: file.c,v 1.474 2006/12/07 23:00:45 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1195,6 +1195,11 @@ PHPAPI PHP_FUNCTION(fgetss)
 	}
 
 	php_stream_from_zval(stream, &zstream);
+
+	if (length > 0) {
+		/* For BC reasons, fgetss() should only return length-1 bytes. */
+		length--;
+	}
 
 	if (stream->readbuf_type == IS_UNICODE) {
 		UChar *buf = php_stream_get_line_ex(stream, IS_UNICODE, NULL_ZSTR, 0, length, &retlen);

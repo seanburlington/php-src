@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.711 2006/12/05 02:55:27 stas Exp $ */
+/* $Id: main.c,v 1.712 2006/12/08 19:13:31 andrei Exp $ */
 
 /* {{{ includes
  */
@@ -1764,7 +1764,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	if (sapi_module.additional_functions) {
 		zend_module_entry *module;
 
-		if (zend_ascii_hash_find(&module_registry, "standard", sizeof("standard"), (void**)&module)==SUCCESS) {
+		if (zend_hash_find(&module_registry, "standard", sizeof("standard"), (void**)&module)==SUCCESS) {
 			EG(current_module) = module;
 			zend_register_functions(NULL, sapi_module.additional_functions, NULL, MODULE_PERSISTENT TSRMLS_CC);
 			EG(current_module) = NULL;

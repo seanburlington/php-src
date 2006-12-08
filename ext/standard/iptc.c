@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.57 2006/12/07 21:11:54 andrei Exp $ */
+/* $Id: iptc.c,v 1.58 2006/12/08 20:17:31 tony2001 Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -187,7 +187,7 @@ PHP_FUNCTION(iptcembed)
 	unsigned char *spoolbuf=0, *poi=0;
 	struct stat sb;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "SZ|l", &iptcdata, iptcdata_len, &pp_jpeg_file, &spool) == FAILURE ||
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "SZ|l", &iptcdata, &iptcdata_len, &pp_jpeg_file, &spool) == FAILURE ||
 		php_stream_path_param_encode(pp_jpeg_file, &jpeg_file, &jpeg_file_len, REPORT_ERRORS, FG(default_context)) == FAILURE) {
 		return;
 	}

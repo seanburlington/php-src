@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.9 2006/12/08 20:59:31 tony2001 Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.10 2006/12/08 21:18:43 tony2001 Exp $ */
 
 
 
@@ -840,9 +840,9 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 	} 
 }
 
-PHPAPI void php_var_serialize(smart_str *buf, zval *struc, HashTable *var_hash TSRMLS_DC)
+PHPAPI void php_var_serialize(smart_str *buf, zval **struc, HashTable *var_hash TSRMLS_DC)
 {
-	php_var_serialize_intern(buf, struc, var_hash TSRMLS_CC);
+	php_var_serialize_intern(buf, *struc, var_hash TSRMLS_CC);
 	smart_str_0(buf);
 }
 	
@@ -865,7 +865,7 @@ PHP_FUNCTION(serialize)
 	Z_STRLEN_P(return_value) = 0;
 
 	PHP_VAR_SERIALIZE_INIT(var_hash);
-	php_var_serialize(&buf, *struc, &var_hash TSRMLS_CC);
+	php_var_serialize(&buf, struc, &var_hash TSRMLS_CC);
 	PHP_VAR_SERIALIZE_DESTROY(var_hash);
 
 	if (buf.c) {

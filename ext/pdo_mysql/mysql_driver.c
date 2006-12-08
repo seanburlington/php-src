@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59.2.13.2.2 2006/12/03 23:29:03 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.59.2.13.2.3 2006/12/08 19:50:40 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -471,7 +471,7 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	
 	dbh->driver_data = H;
 	H->max_buffer_size = 1024*1024;
-	H->emulate_prepare = 1;
+	H->buffered = H->emulate_prepare = 1;
 
 	/* handle MySQL options */
 	if (driver_options) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.31 2006/12/08 16:28:33 rrichards Exp $ */
+/* $Id: xpath.c,v 1.32 2006/12/08 16:49:25 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,7 +102,7 @@ int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 	return SUCCESS;
 }
 
-/* {{{ proto boolean dom_xpath_register_ns(string prefix, string uri); */
+/* {{{ proto boolean dom_xpath_register_ns(string prefix, string uri) U */
 PHP_FUNCTION(dom_xpath_register_ns)
 {
 	zval *id;

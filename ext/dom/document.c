@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.83 2006/10/08 13:34:21 bjori Exp $ */
+/* $Id: document.c,v 1.84 2006/12/08 16:49:25 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2277,7 +2277,7 @@ PHP_FUNCTION(dom_document_save_html)
 
 #endif  /* defined(LIBXML_HTML_ENABLED) */
 
-/* {{{ proto boolean DOMDocument::registerNodeClass(string baseclass, string extendedclass)
+/* {{{ proto boolean DOMDocument::registerNodeClass(string baseclass, string extendedclass) U
    Register extended class used to create base node type */
 PHP_METHOD(domdocument, registerNodeClass)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.19 2006/08/04 18:11:27 rrichards Exp $ */
+/* $Id: documentfragment.c,v 1.20 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,7 @@ zend_function_entry php_dom_documentfragment_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DOMDocumentFragment::__construct(); */
+/* {{{ proto void DOMDocumentFragment::__construct() U */
 PHP_METHOD(domdocumentfragment, __construct)
 {
 
@@ -107,7 +107,7 @@ static void php_dom_xmlSetTreeDoc(xmlNodePtr tree, xmlDocPtr doc) {
     }
 }
 
-/* {{{ proto void DOMDocumentFragment::appendXML(string data); */
+/* {{{ proto void DOMDocumentFragment::appendXML(string data) U */
 PHP_METHOD(domdocumentfragment, appendXML) {
 	zval *id;
 	xmlNode *nodep;

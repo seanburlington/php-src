@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domerrorhandler.c,v 1.6 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: domerrorhandler.c,v 1.7 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@ zend_function_entry php_dom_domerrorhandler_class_functions[] = {
 /* {{{ attribute protos, not implemented yet */
 
 
-/* {{{ proto dom_boolean dom_domerrorhandler_handle_error(domerror error);
+/* {{{ proto dom_boolean dom_domerrorhandler_handle_error(domerror error) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-ERRORS-DOMErrorHandler-handleError
 Since: 
 */

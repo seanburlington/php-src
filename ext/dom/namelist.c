@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.8 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: namelist.c,v 1.9 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -58,7 +58,7 @@ int dom_namelist_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto string dom_namelist_get_name(int index);
+/* {{{ proto string dom_namelist_get_name(int index) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getName
 Since: 
 */
@@ -69,7 +69,7 @@ PHP_FUNCTION(dom_namelist_get_name)
 /* }}} end dom_namelist_get_name */
 
 
-/* {{{ proto string dom_namelist_get_namespace_uri(int index);
+/* {{{ proto string dom_namelist_get_namespace_uri(int index) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getNamespaceURI
 Since: 
 */

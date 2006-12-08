@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.17 2006/09/14 13:35:49 rrichards Exp $ */
+/* $Id: entityreference.c,v 1.18 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,7 +40,7 @@ zend_function_entry php_dom_entityreference_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DOMEntityReference::__construct(string name); */
+/* {{{ proto void DOMEntityReference::__construct(string name) U */
 PHP_METHOD(domentityreference, __construct)
 {
 	zval *id;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domstringlist.c,v 1.7 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: domstringlist.c,v 1.8 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -59,7 +59,7 @@ int dom_domstringlist_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto domstring dom_domstringlist_item(int index);
+/* {{{ proto domstring dom_domstringlist_item(int index) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMStringList-item
 Since: 
 */

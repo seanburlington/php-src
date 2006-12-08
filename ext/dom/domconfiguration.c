@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.6 2006/01/01 13:09:49 sniper Exp $ */
+/* $Id: domconfiguration.c,v 1.7 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,7 +45,7 @@ zend_function_entry php_dom_domconfiguration_class_functions[] = {
 /* {{{ attribute protos, not implemented yet */
 
 
-/* {{{ proto dom_void dom_domconfiguration_set_parameter(string name, domuserdata value);
+/* {{{ proto dom_void dom_domconfiguration_set_parameter(string name, domuserdata value) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMConfiguration-property
 Since: 
 */
@@ -56,7 +56,7 @@ PHP_FUNCTION(dom_domconfiguration_set_parameter)
 /* }}} end dom_domconfiguration_set_parameter */
 
 
-/* {{{ proto domdomuserdata dom_domconfiguration_get_parameter(string name);
+/* {{{ proto domdomuserdata dom_domconfiguration_get_parameter(string name) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMConfiguration-getParameter
 Since: 
 */
@@ -67,7 +67,7 @@ PHP_FUNCTION(dom_domconfiguration_get_parameter)
 /* }}} end dom_domconfiguration_get_parameter */
 
 
-/* {{{ proto boolean dom_domconfiguration_can_set_parameter(string name, domuserdata value);
+/* {{{ proto boolean dom_domconfiguration_can_set_parameter(string name, domuserdata value) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMConfiguration-canSetParameter
 Since: 
 */

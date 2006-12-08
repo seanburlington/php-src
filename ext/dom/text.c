@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.28 2006/09/21 11:53:58 rrichards Exp $ */
+/* $Id: text.c,v 1.29 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,7 +191,7 @@ PHP_FUNCTION(dom_text_is_whitespace_in_element_content)
 /* }}} end dom_text_is_whitespace_in_element_content */
 
 
-/* {{{ proto DOMText dom_text_replace_whole_text(string content)
+/* {{{ proto DOMText dom_text_replace_whole_text(string content) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-Text3-replaceWholeText
 Since: DOM Level 3
 */

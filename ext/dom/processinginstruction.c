@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.21 2006/08/04 18:11:27 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.22 2006/12/08 16:28:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,7 +40,7 @@ zend_function_entry php_dom_processinginstruction_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DOMProcessingInstruction::__construct(string name, [string value]); */
+/* {{{ proto void DOMProcessingInstruction::__construct(string name, [string value]) U */
 PHP_METHOD(domprocessinginstruction, __construct)
 {
 

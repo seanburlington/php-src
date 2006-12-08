@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.57 2006/12/02 17:55:05 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.58 2006/12/08 19:51:29 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -239,15 +239,15 @@ static int pdo_mysql_stmt_next_rowset(pdo_stmt_t *stmt TSRMLS_DC)
 		/* No more results */
 		return 0;
 	} else {
-		if ((my_ulonglong)-1 == (row_count = mysql_affected_rows(H->server))) {
-			pdo_mysql_error_stmt(stmt);
-			return 0;
-		}
-		
 		if (!H->buffered) {
 			S->result = mysql_use_result(H->server);
+			row_count = 0;
 		} else {
 			S->result = mysql_store_result(H->server);
+			if ((my_ulonglong)-1 == (row_count = mysql_affected_rows(H->server))) {
+				pdo_mysql_error_stmt(stmt);
+				return 0;
+			}
 		}
 
 		if (NULL == S->result) {

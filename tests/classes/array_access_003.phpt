@@ -1,9 +1,7 @@
 --TEST--
 ZE2 ArrayAccess::offsetGet ambiguties
---SKIPIF--
-<?php
-	if (!class_exists('ArrayAccess')) die('skip ArrayAccess not present');
-?>
+--INI--
+error_reporting=4095
 --FILE--
 <?php
 class object implements ArrayAccess {
@@ -14,7 +12,7 @@ class object implements ArrayAccess {
 		echo __METHOD__ . "($index)\n";
 		return array_key_exists($index, $this->a);
 	}
-	function &offsetGet($index) {
+	function offsetGet($index) {
 		echo __METHOD__ . "($index)\n";
 		switch($index) {
 		case 1:
@@ -50,12 +48,12 @@ var_dump($obj[2]);
 ===DONE===
 --EXPECTF--
 object::offsetGet(1)
-
-Strict Standards: Only variable references should be returned by reference in %sarray_access_003.php on line %d
 string(6) "fooBar"
 object::offsetGet(2)
 int(1)
 object::offsetGet(2)
+
+Notice: Indirect modification of overloaded element of object has no effect in %sarray_access_003.php on line 39
 object::offsetGet(2)
-int(2)
+int(1)
 ===DONE===

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.133 2006/12/09 13:14:06 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.134 2006/12/09 14:17:17 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -511,7 +511,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 				var++;
 			}
 			if (var == val || *var == '\0') {
-				goto next_cookie;
+				goto next_var;
 			}
 		}
 

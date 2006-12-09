@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.82 2006/12/08 17:03:26 tony2001 Exp $ */
+/* $Id: filter.c,v 1.83 2006/12/09 14:17:17 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.82 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.83 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -368,6 +368,16 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 		case PARSE_STRING: /* PARSE_STRING is used by parse_str() function */
 			retval = 1;
 			break;
+	}
+
+	/* 
+	 * According to rfc2965, more specific paths are listed above the less specific ones.
+	 * If we encounter a duplicate cookie name, we should skip it, since it is not possible
+	 * to have the same (plain text) cookie name for the same path and we should not overwrite
+	 * more specific cookies with the less specific ones.
+	*/
+	if (arg == PARSE_COOKIE && orig_array_ptr && zend_symtable_exists(Z_ARRVAL_P(orig_array_ptr), var, strlen(var)+1)) {
+		return 0;
 	}
 
 	if (array_ptr) {

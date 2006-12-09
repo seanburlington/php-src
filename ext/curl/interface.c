@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.101 2006/12/08 03:13:41 iliaa Exp $ */
+/* $Id: interface.c,v 1.102 2006/12/09 14:07:13 bjori Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -959,7 +959,7 @@ static size_t curl_passwd(void *ctx, char *prompt, char *buf, int buflen)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not call the CURLOPT_PASSWDFUNCTION");
 	} else if (Z_TYPE_P(retval) == IS_STRING || Z_TYPE_P(retval) == IS_UNICODE) {
 		if (Z_TYPE_P(retval) == IS_UNICODE) {
-			convert_to_string_ex(retval);
+			convert_to_string_ex(&retval);
 		}
 		if (Z_STRLEN_P(retval) > buflen) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Returned password is too long for libcurl to handle");

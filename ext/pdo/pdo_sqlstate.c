@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlstate.c,v 1.8 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: pdo_sqlstate.c,v 1.9 2006/12/09 22:18:42 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.18 2006/12/04 13:07:26 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.19 2006/12/09 14:14:29 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -397,7 +397,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.18 $'."\n";
+					echo '$Revision: 1.226.2.37.2.19 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -950,13 +950,14 @@ TEST $file
 		'TEST'   => '',
 		'SKIPIF' => '',
 		'GET'    => '',
+		'COOKIE' => '',
 		'POST_RAW' => '',
 		'POST'   => '',
 		'UPLOAD' => '',
 		'ARGS'   => '',
 	);
 
-	$fp = @fopen($file, "rt") or error("Cannot open test file: $file");
+	$fp = fopen($file, "rt") or error("Cannot open test file: $file");
 
 	$borked = false;
 	$bork_info = '';
@@ -1039,7 +1040,7 @@ TEST $file
 	$tested = trim($section_text['TEST']);
 
 	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
-	if (!empty($section_text['GET']) || !empty($section_text['POST']) || !empty($section_text['POST_RAW'])) {
+	if (!empty($section_text['GET']) || !empty($section_text['POST']) || !empty($section_text['POST_RAW']) || !empty($section_text['COOKIE'])) {
 		if (isset($php_cgi)) {
 			$old_php = $php;
 			$php = $php_cgi .' -C ';
@@ -1288,6 +1289,12 @@ TEST $file
 	$env['PATH_TRANSLATED'] = $test_file;
 	$env['SCRIPT_FILENAME'] = $test_file;
 
+	if (array_key_exists('COOKIE', $section_text)) {
+		$env['HTTP_COOKIE'] = trim($section_text['COOKIE']);
+	} else {
+		$env['HTTP_COOKIE'] = '';
+	}
+
 	$args = $section_text['ARGS'] ? ' -- '.$section_text['ARGS'] : '';
 
 	if (array_key_exists('POST_RAW', $section_text) && !empty($section_text['POST_RAW'])) {
@@ -1347,6 +1354,7 @@ QUERY_STRING    = " . $env['QUERY_STRING'] . "
 REDIRECT_STATUS = " . $env['REDIRECT_STATUS'] . "
 REQUEST_METHOD  = " . $env['REQUEST_METHOD'] . "
 SCRIPT_FILENAME = " . $env['SCRIPT_FILENAME'] . "
+HTTP_COOKIE     = " . $env['HTTP_COOKIE'] . "
 COMMAND $cmd
 ";
 

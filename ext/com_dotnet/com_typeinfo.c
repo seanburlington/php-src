@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_typeinfo.c,v 1.7.2.1.2.1 2006/08/25 12:01:57 edink Exp $ */
+/* $Id: com_typeinfo.c,v 1.7.2.1.2.2 2006/12/09 10:52:09 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -220,8 +220,8 @@ PHPAPI int php_com_import_typelib(ITypeLib *TL, int mode, int codepage TSRMLS_DC
 /* Type-library stuff */
 void php_com_typelibrary_dtor(void *pDest)
 {
-	ITypeLib *Lib = (ITypeLib*)pDest;
-	ITypeLib_Release(Lib);
+	ITypeLib **Lib = (ITypeLib**)pDest;
+	ITypeLib_Release(*Lib);
 }
 
 PHPAPI ITypeLib *php_com_load_typelib_via_cache(char *search_string,
@@ -249,7 +249,7 @@ PHPAPI ITypeLib *php_com_load_typelib_via_cache(char *search_string,
 
 	if (TL) {
 		if (SUCCESS == zend_ts_hash_update(&php_com_typelibraries,
-				search_string, l+1, (void*)TL, sizeof(ITypeLib*), NULL)) {
+				search_string, l+1, (void*)&TL, sizeof(ITypeLib*), NULL)) {
 			/* add a reference for the hash table */
 			ITypeLib_AddRef(TL);
 		}

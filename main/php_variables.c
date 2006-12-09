@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.132 2006/10/21 10:01:39 johannes Exp $ */
+/* $Id: php_variables.c,v 1.133 2006/12/09 13:14:06 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -504,6 +504,17 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 		int var_len;
 
 		val = strchr(var, '=');
+
+		if (arg == PARSE_COOKIE) {
+			/* Remove leading spaces from cookie names, needed for multi-cookie header where ; can be followed by a space */
+			while (isspace(*var)) {
+				var++;
+			}
+			if (var == val || *var == '\0') {
+				goto next_cookie;
+			}
+		}
+
 		if (val) {
 			*val++ = '\0';
 		}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.1 2006/07/27 15:37:56 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.2 2006/12/09 13:01:23 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -342,6 +342,17 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 	
 	while (var) {
 		val = strchr(var, '=');
+
+		if (arg == PARSE_COOKIE) {
+			/* Remove leading spaces from cookie names, needed for multi-cookie header where ; can be followed by a space */
+			while (isspace(*var)) {
+				var++;
+			}
+			if (var == val || *var == '\0') {
+				goto next_cookie;
+			}
+		}
+
 		if (val) { /* have a value */
 			int val_len;
 			unsigned int new_val_len;
@@ -366,6 +377,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 			}
 			efree(val);
 		}
+next_cookie:
 		var = php_strtok_r(NULL, separator, &strtok_buf);
 	}
 

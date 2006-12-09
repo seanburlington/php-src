@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.5 2006/11/29 23:34:49 iliaa Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.6 2006/12/09 16:01:29 iliaa Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -684,14 +684,27 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 			      "size", "atime", "mtime", "ctime", "blksize", "blocks"};
 	char *local;
 	php_stream_wrapper *wrapper;
+	char safe_mode_buf[MAXPATHLEN];
 
 	if (!filename_length) {
 		RETURN_FALSE;
 	}
 
 	if ((wrapper = php_stream_locate_url_wrapper(filename, &local, 0 TSRMLS_CC)) == &php_plain_files_wrapper) {
-		if (php_check_open_basedir(local TSRMLS_CC) || (PG(safe_mode) && !php_checkuid_ex(filename, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS, CHECKUID_NO_ERRORS))) {
+		if (php_check_open_basedir(local TSRMLS_CC)) {
 			RETURN_FALSE;
+		} else if (PG(safe_mode)) {
+			if (type == FS_IS_X) {
+				if (strstr(local, "..")) {
+					RETURN_FALSE;
+				} else {
+					char *b = strrchr(local, PHP_DIR_SEPARATOR);
+					snprintf(safe_mode_buf, MAXPATHLEN, "%s%s%s", PG(safe_mode_exec_dir), (b ? "" : "/"), (b ? b : local));
+					local = (char *)&safe_mode_buf;
+				}
+			} else if (!php_checkuid_ex(local, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS, CHECKUID_NO_ERRORS)) {
+				RETURN_FALSE;
+			}
 		}
 	}
 

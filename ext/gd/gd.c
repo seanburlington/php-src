@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.362 2006/12/10 01:28:01 pajoye Exp $ */
+/* $Id: gd.c,v 1.363 2006/12/10 03:03:48 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2124,6 +2124,10 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 	if (image_type == PHP_GDIMG_TYPE_GD2PART) {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Zllll", &ppfilename, &srcx, &srcy, &width, &height) == FAILURE) {
 			return;
+		}
+		if (width < 1 || height < 1) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Zero width or height not allowed");
+			RETURN_FALSE;
 		}
 	} else {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z", &ppfilename) == FAILURE) {

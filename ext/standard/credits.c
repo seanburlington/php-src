@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.41 2006/03/23 18:39:12 iliaa Exp $ */
+/* $Id: credits.c,v 1.42 2006/12/10 15:02:50 mike Exp $ */
 
 #include "php.h"
 #include "info.h"
 #include "SAPI.h"
 
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
+#define CREDIT_PUTS(s) php_output_write_western((s), strlen(s) TSRMLS_CC)
 
 /* {{{ php_print_credits
  */
@@ -34,9 +35,9 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 	}
 
 	if (!sapi_module.phpinfo_as_text) {
-		PUTS("<h1>PHP Credits</h1>\n");
+		CREDIT_PUTS("<h1>PHP Credits</h1>\n");
 	} else {
-		PUTS("PHP Credits\n");
+		CREDIT_PUTS("PHP Credits\n");
 	}
 
 	if (flag & PHP_CREDITS_GROUP) {
@@ -127,7 +128,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 	}
 
 	if (!sapi_module.phpinfo_as_text && flag & PHP_CREDITS_FULLPAGE) {
-		PUTS("</div></body></html>\n");
+		CREDIT_PUTS("</div></body></html>\n");
 	}
 }
 /* }}} */

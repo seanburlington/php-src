@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.361 2006/10/31 22:13:09 nlopess Exp $ */
+/* $Id: gd.c,v 1.362 2006/12/10 01:28:01 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2016,6 +2016,7 @@ gdImagePtr _php_image_create_from_string(zval **data, char *tn, gdImagePtr (*ioc
 	im = (*ioctx_func_p)(io_ctx);
 	if (!im) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Passed data is not in '%s' format", tn);
+		io_ctx->gd_free(io_ctx);
 		return NULL;
 	}
 

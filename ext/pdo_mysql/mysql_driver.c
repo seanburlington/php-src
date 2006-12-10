@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.75 2006/12/03 23:30:24 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.76 2006/12/10 03:12:11 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -97,8 +97,13 @@ int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int lin
 #endif
 
 	if (!dbh->methods) {
+#if PHP_VERSION_ID > 50200
+		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
+				*pdo_err, einfo->errcode, einfo->errmsg);
+#else
 		zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
 				*pdo_err, einfo->errcode, einfo->errmsg);
+#endif
 	}
 /* printf("** [%s:%d] %s %s\n", file, line, *pdo_err, einfo->errmsg); */
 

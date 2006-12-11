@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.44.2.3 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.44.2.2.2.1 2006/12/11 14:54:14 iliaa Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
@@ -289,7 +289,11 @@ PHP_FUNCTION(apache_getenv)
 
 static char *php_apache_get_version()
 {
+#if MODULE_MAGIC_NUMBER_MAJOR >= 20060905
+	return (char *) ap_get_server_banner();
+#else
 	return (char *) ap_get_server_version();
+#endif
 }
 
 /* {{{ proto string apache_get_version(void)

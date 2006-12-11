@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.61 2006/09/09 12:25:54 derick Exp $ */
+/* $Id: parse_date.re,v 1.62 2006/12/11 05:04:58 iliaa Exp $ */
 
 #include "timelib.h"
 
@@ -590,7 +590,10 @@ static void timelib_set_relative(char **ptr, timelib_sll amount, int behavior, S
 {
 	const timelib_relunit* relunit;
 
-	relunit = timelib_lookup_relunit(ptr);
+	if (!(relunit = timelib_lookup_relunit(ptr))) {
+		return;
+	}
+
 	switch (relunit->unit) {
 		case TIMELIB_SECOND: s->time->relative.s += amount * relunit->multiplier; break;
 		case TIMELIB_MINUTE: s->time->relative.i += amount * relunit->multiplier; break;

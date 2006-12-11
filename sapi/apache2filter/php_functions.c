@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.46 2006/01/01 13:09:57 sniper Exp $ */
+/* $Id: php_functions.c,v 1.47 2006/12/11 14:54:29 iliaa Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
@@ -289,7 +289,11 @@ PHP_FUNCTION(apache_getenv)
 
 static char *php_apache_get_version()
 {
+#if MODULE_MAGIC_NUMBER_MAJOR >= 20060905
+	return (char *) ap_get_server_banner();
+#else
 	return (char *) ap_get_server_version();
+#endif
 }
 
 /* {{{ proto string apache_get_version(void)

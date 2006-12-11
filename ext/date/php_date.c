@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.34 2006/11/06 16:11:26 bjori Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.35 2006/12/11 21:04:40 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1642,6 +1642,8 @@ static void date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int
 
 	timelib_fill_holes(dateobj->time, now, 0);
 	timelib_update_ts(dateobj->time, tzi);
+
+	dateobj->time->have_weekday_relative = dateobj->time->have_relative = 0;
 
 	if (now->tz_info != tzi) {
 		timelib_tzinfo_dtor(now->tz_info);

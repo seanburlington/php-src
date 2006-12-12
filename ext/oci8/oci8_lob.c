@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.7.2.6.2.8 2006/12/08 20:56:29 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.7.2.6.2.9 2006/12/12 09:28:18 tony2001 Exp $ */
 
 
 
@@ -190,7 +190,11 @@ static inline int php_oci_lob_calculate_buffer(php_oci_descriptor *descriptor, l
 {
 	php_oci_connection *connection = descriptor->connection;
 	ub4 chunk_size;
-		
+
+	if (descriptor->type == OCI_DTYPE_FILE) {
+		return read_length;
+	}
+
 	if (!descriptor->chunk_size) {
 		PHP_OCI_CALL_RETURN(connection->errcode, OCILobGetChunkSize, (connection->svc, connection->err, descriptor->descriptor, &chunk_size));
 

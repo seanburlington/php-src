@@ -17,14 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.42 2006/12/10 15:02:50 mike Exp $ */
+/* $Id: credits.c,v 1.43 2006/12/12 19:25:47 mike Exp $ */
 
 #include "php.h"
 #include "info.h"
 #include "SAPI.h"
 
+/* NOTE: keep utf8 */
+
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
-#define CREDIT_PUTS(s) php_output_write_western((s), strlen(s) TSRMLS_CC)
+#define CREDIT_PUTS(s) php_output_write_utf8((s), strlen(s) TSRMLS_CC)
 
 /* {{{ php_print_credits
  */

@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.617 2006/12/05 08:08:33 dmitry Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.618 2006/12/12 07:36:37 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -465,7 +465,6 @@ chroot \
 ctime_r \
 cuserid \
 crypt \
-crypt_r \
 flock \
 ftok \
 funopen \
@@ -597,6 +596,11 @@ PHP_DECLARED_TIMEZONE
 PHP_TIME_R_TYPE
 PHP_READDIR_R_TYPE
 PHP_CHECK_IN_ADDR_T
+
+AC_CHECK_FUNCS(crypt_r, [ php_crypt_r="1" ], [ php_crypt_r="0" ])
+if test "x$php_crypt_r" = "x1"; then
+  PHP_CRYPT_R_STYLE
+fi
 
 divert(4)
 

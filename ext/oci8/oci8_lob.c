@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.24 2006/12/12 09:28:07 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.25 2006/12/12 10:31:22 tony2001 Exp $ */
 
 
 
@@ -345,11 +345,7 @@ int php_oci_lob_read (php_oci_descriptor *descriptor, long read_length, long ini
 	);
 	
 	efree(bufp);
-	if (lob_type == OCI_IS_BLOB) {
-		offset = descriptor->lob_current_position + TEXT_BYTES(bytes_read);
-	} else {
-		offset = descriptor->lob_current_position + bytes_read;
-	}
+	offset = descriptor->lob_current_position + bytes_read;
 
 #endif
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.134 2006/12/09 14:17:17 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.135 2006/12/12 18:05:07 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -654,7 +654,8 @@ static void php_build_argv(char *s, zval *track_vars_array TSRMLS_DC)
 		int i;
 		for (i = 0; i < SG(request_info).argc; i++) {
 			ALLOC_ZVAL(tmp);
-			ZVAL_RT_STRING(tmp, SG(request_info).argv[i], 1);
+			/* leave args as binary, since the encoding is not known */
+			ZVAL_STRING(tmp, SG(request_info).argv[i], 1);
 			INIT_PZVAL(tmp);
 			if (zend_hash_next_index_insert(Z_ARRVAL_P(arr), &tmp, sizeof(zval *), NULL) == FAILURE) {
 				if (Z_TYPE_P(tmp) == IS_STRING) {

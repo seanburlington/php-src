@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.62.2.1.2.3 2006/12/12 07:38:04 tony2001 Exp $ */
+/* $Id: crypt.c,v 1.62.2.1.2.4 2006/12/12 12:06:37 tony2001 Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -148,7 +148,7 @@ PHP_FUNCTION(crypt)
 		salt[2] = '\0';
 #endif
 	}
-#ifdef HAVE_CRYPT_R
+#if defined(HAVE_CRYPT_R) && defined(_REENTRANT)
 	{
 #if defined(CRYPT_R_STRUCT_CRYPT_DATA)
 		struct crypt_data buffer;

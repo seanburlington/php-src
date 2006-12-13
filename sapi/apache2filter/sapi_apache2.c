@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.136.2.2.2.5 2006/11/04 13:03:56 bjori Exp $ */
+/* $Id: sapi_apache2.c,v 1.136.2.2.2.6 2006/12/13 15:45:20 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -511,6 +511,7 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 		return ap_pass_brigade(f->next, bb);
 	}
 
+	apply_config(conf);
 	php_apache_request_ctor(f, ctx TSRMLS_CC);
 	
 	// It'd be nice if we could highlight based of a zend_file_handle here....

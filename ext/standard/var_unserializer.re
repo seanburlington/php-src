@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.60 2006/12/01 19:25:11 andrei Exp $ */
+/* $Id: var_unserializer.re,v 1.61 2006/12/14 23:41:57 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -516,6 +516,34 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 }
 
 "s:" uiv ":" ["] 	{
+	size_t len, maxlen;
+	char *str;
+
+	len = parse_uiv(start + 2);
+	maxlen = max - YYCURSOR;
+	if (maxlen < len) {
+		*p = start + 2;
+		return 0;
+	}
+
+	str = (char*)YYCURSOR;
+
+	YYCURSOR += len;
+
+	if (*(YYCURSOR) != '"') {
+		*p = YYCURSOR;
+		return 0;
+	}
+
+	YYCURSOR += 2;
+	*p = YYCURSOR;
+
+	INIT_PZVAL(*rval);
+	ZVAL_STRINGL(*rval, str, len, 1);
+	return 1;
+}
+
+"S:" uiv ":" ["] 	{
 	size_t len, maxlen;
 	char *str;
 

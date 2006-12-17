@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.1.2.12 2006/12/16 21:48:05 iliaa Exp $ */
+/* $Id: logical_filters.c,v 1.1.2.13 2006/12/17 03:26:04 bjori Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -27,6 +27,11 @@
 #if HAVE_ARPA_INET_H
 # include <arpa/inet.h>
 #endif
+
+#ifndef INADDR_NONE
+# define INADDR_NONE ((unsigned long int) -1)
+#endif
+
 
 /* {{{ FETCH_LONG_OPTION(var_name, option_name) */
 #define FETCH_LONG_OPTION(var_name, option_name)                                                                         \
@@ -609,7 +614,7 @@ static int _php_filter_validate_ipv6_(char *str, int str_len TSRMLS_DC) /* {{{ *
 		}
 		ipv4++;
 
-		if (!_php_filter_validate_ipv4(ipv4, (str + str_len - ipv4), ip4elm TSRMLS_CC)) {
+		if (!_php_filter_validate_ipv4(ipv4, (str + str_len - ipv4), ip4elm)) {
 			return 0;
 		}
 

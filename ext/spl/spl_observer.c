@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.11 2006/12/16 13:55:14 helly Exp $ */
+/* $Id: spl_observer.c,v 1.12 2006/12/17 23:23:33 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -304,7 +304,7 @@ SPL_METHOD(SplObjectStorage, serialize)
 	PHP_VAR_SERIALIZE_DESTROY(var_hash);
 
 	if (buf.c) {
-		RETURN_STRINGL(buf.c, buf.len, 0);
+		RETURN_ASCII_STRINGL(buf.c, buf.len, 0);
 	} else {
 		RETURN_NULL();
 	}

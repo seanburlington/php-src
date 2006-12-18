@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.82.2.1.2.5 2006/12/07 20:45:58 tony2001 Exp $ */
+/* $Id: formatted_print.c,v 1.82.2.1.2.6 2006/12/18 09:26:54 bjori Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -222,15 +222,13 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 	}
 
 	switch (fmt) {			
-		case 'F':
-			fmt = 'f';
-			/* break is missing */
 		case 'e':
 			if (precision) {
 				precision--;
 			}
 		case 'E':
 		case 'f':
+		case 'F':
 			s = ap_php_conv_fp(fmt, number, 0, precision,
 						&is_negative, &num_buf[1], &s_len);
 			if (is_negative) {

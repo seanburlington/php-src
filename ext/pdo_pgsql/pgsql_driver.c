@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.14.2.5 2006/11/29 15:45:58 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.14.2.6 2006/12/18 17:56:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -633,6 +633,11 @@ static zend_function_entry *pdo_pgsql_get_driver_methods(pdo_dbh_t *dbh, int kin
 	}
 }
 
+static int pdo_pgsql_set_attr(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_DC)
+{
+	return 0;
+}
+
 static struct pdo_dbh_methods pgsql_methods = {
 	pgsql_handle_closer,
 	pgsql_handle_preparer,
@@ -641,7 +646,7 @@ static struct pdo_dbh_methods pgsql_methods = {
 	pgsql_handle_begin,
 	pgsql_handle_commit,
 	pgsql_handle_rollback,
-	NULL, /* set_attr */
+	pdo_pgsql_set_attr,
 	pdo_pgsql_last_insert_id,
 	pdo_pgsql_fetch_error_func,
 	pdo_pgsql_get_attribute,

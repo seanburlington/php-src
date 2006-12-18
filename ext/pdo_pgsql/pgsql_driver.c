@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.64 2006/12/16 18:27:43 bjori Exp $ */
+/* $Id: pgsql_driver.c,v 1.65 2006/12/18 17:56:51 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -450,6 +450,11 @@ static int pgsql_handle_rollback(pdo_dbh_t *dbh TSRMLS_DC)
 	return pdo_pgsql_transaction_cmd("ROLLBACK", dbh TSRMLS_CC);
 }
 
+static int pdo_pgsql_set_attr(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_DC)
+{
+	return 0;
+}
+
 static struct pdo_dbh_methods pgsql_methods = {
 	pgsql_handle_closer,
 	pgsql_handle_preparer,
@@ -458,7 +463,7 @@ static struct pdo_dbh_methods pgsql_methods = {
 	pgsql_handle_begin,
 	pgsql_handle_commit,
 	pgsql_handle_rollback,
-	NULL, /* set_attr */
+	pdo_pgsql_set_attr,
 	pdo_pgsql_last_insert_id,
 	pdo_pgsql_fetch_error_func,
 	pdo_pgsql_get_attribute,

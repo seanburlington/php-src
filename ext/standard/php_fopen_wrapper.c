@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.4 2006/11/05 20:08:58 rasmus Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.5 2006/12/18 14:56:20 tony2001 Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -276,6 +276,7 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 		return stream;
  	} else {
 		/* invalid php://thingy */
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid php:// URL specified");
 		return NULL;
 	}
 	

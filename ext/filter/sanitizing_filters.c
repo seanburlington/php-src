@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.11.2.6 2006/12/18 04:22:04 iliaa Exp $ */
+/* $Id: sanitizing_filters.c,v 1.11.2.7 2006/12/18 15:02:16 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -179,7 +179,7 @@ void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL)
 	php_filter_encode_html(value, enc);
 
 	/* strip tags, implicitly also removes \0 chars */
-	new_len = php_strip_tags(Z_STRVAL_P(value), Z_STRLEN_P(value), NULL, NULL, -1);
+	new_len = php_strip_tags_ex(Z_STRVAL_P(value), Z_STRLEN_P(value), NULL, NULL, 0, 1);
 	Z_STRLEN_P(value) = new_len;
 
 	if (new_len == 0) {

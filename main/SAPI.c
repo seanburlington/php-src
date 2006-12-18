@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.3 2006/12/18 12:32:08 zeev Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.4 2006/12/18 13:16:54 tony2001 Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -565,7 +565,7 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 	header_line = estrndup(header_line, header_line_len);
 
 	/* cut of trailing spaces, linefeeds and carriage-returns */
-	while(isspace(header_line[header_line_len-1])) 
+	while(header_line_len && isspace(header_line[header_line_len-1])) 
 		  header_line[--header_line_len]='\0';
 	
 	/* new line safety check */

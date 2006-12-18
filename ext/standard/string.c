@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.621 2006/12/12 18:17:56 andrei Exp $ */
+/* $Id: string.c,v 1.622 2006/12/18 04:24:38 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6532,7 +6532,7 @@ PHPAPI size_t php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, in
 			case '\0':
 				break;
 			case '<':
-				if (isspace(*(p + 1))) {
+				if (isspace(*(p + 1)) && allow_len >=- 0) {
 					goto reg_char;
 				}
 				if (state == 0) {

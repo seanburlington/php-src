@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.89 2006/02/19 18:19:33 iliaa Exp $ */
+/* $Id: mail.c,v 1.90 2006/12/19 22:54:24 andrei Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -54,7 +54,7 @@
 		continue;											\
 	}													\
 
-/* {{{ proto int ezmlm_hash(string addr)
+/* {{{ proto int ezmlm_hash(string addr) U
    Calculate EZMLM list hash value. */
 PHP_FUNCTION(ezmlm_hash)
 {
@@ -62,8 +62,7 @@ PHP_FUNCTION(ezmlm_hash)
 	unsigned long h = 5381L;
 	int j, str_len;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
-							  &str, &str_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s&", &str, &str_len, UG(ascii_conv)) == FAILURE) {
 		return;
 	}
 

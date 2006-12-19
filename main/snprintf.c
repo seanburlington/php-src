@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.47 2006/12/19 13:15:30 tony2001 Exp $ */
+/* $Id: snprintf.c,v 1.48 2006/12/19 13:26:39 tony2001 Exp $ */
 
 
 #include "php.h"
@@ -139,7 +139,7 @@ PHPAPI char *php_gcvt(double value, int ndigit, char dec_point, char exponent, c
 		 * Infinity or NaN, convert to inf or nan with sign.
 		 * We assume the buffer is at least ndigit long.
 		 */
-		snprintf(buf, ndigit + 1, "%s%s", sign ? "-" : "",
+		snprintf(buf, ndigit + 1, "%s%s", (sign && *digits == 'I') ? "-" : "",
 				*digits == 'I' ? "INF" : "NAN");
 		zend_freedtoa(digits);
 		return (buf);

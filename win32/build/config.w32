@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.5 2006/12/05 08:07:57 dmitry Exp $
+// $Id: config.w32,v 1.40.2.8.2.6 2006/12/19 10:26:01 edink Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -48,6 +48,9 @@ PATH_PROG('lemon');
 
 // avoid picking up midnight commander from cygwin
 PATH_PROG('mc', WshShell.Environment("Process").Item("PATH"));
+
+// Try locating manifest tool
+PATH_PROG('mt', WshShell.Environment("Process").Item("PATH"));
 
 // stick objects somewhere outside of the source tree
 ARG_ENABLE('object-out-dir', 'Alternate location for binary objects during build', '');

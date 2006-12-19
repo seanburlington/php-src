@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.252 2006/12/14 23:41:57 andrei Exp $ */
+/* $Id: var.c,v 1.253 2006/12/19 12:44:26 tony2001 Exp $ */
 
 
 
@@ -942,10 +942,12 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 
 		case IS_DOUBLE: {
 				char *s;
-				ulong slen;
 
-				slen = spprintf(&s, 0, "d:%.*G;", (int) PG(serialize_precision), Z_DVAL_P(struc));
-				smart_str_appendl(buf, s, slen);
+				smart_str_appendl(buf, "d:", 2);
+				s = (char *) emalloc(MAX_LENGTH_OF_DOUBLE + PG(serialize_precision) + 1);
+				php_gcvt(Z_DVAL_P(struc), PG(serialize_precision), '.', 'E', s);
+				smart_str_appends(buf, s);
+				smart_str_appendc(buf, ';');
 				efree(s);
 				return;
 			}

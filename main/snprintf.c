@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.37.2.4.2.4 2006/12/19 11:54:38 dmitry Exp $ */
+/* $Id: snprintf.c,v 1.37.2.4.2.6 2006/12/19 13:15:39 tony2001 Exp $ */
 
 
 #include "php.h"
@@ -38,6 +38,9 @@
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
+#define LCONV_DECIMAL_POINT (*lconv->decimal_point)
+#else
+#define LCONV_DECIMAL_POINT '.'
 #endif
 
 /*
@@ -90,7 +93,7 @@ static char * __cvt(double value, int ndigit, int *decpt, int *sign, int fmode, 
 			*decpt = 0;
 			c = *p;
 			zend_freedtoa(p);
-			return(c == 'I' ? "inf" : "nan");
+			return(c == 'I' ? "INF" : "NAN");
 		}
 		/* Make a local copy and adjust rve to be in terms of s */
 		if (pad && fmode)
@@ -137,7 +140,7 @@ PHPAPI char *php_gcvt(double value, int ndigit, char dec_point, char exponent, c
 		 * We assume the buffer is at least ndigit long.
 		 */
 		snprintf(buf, ndigit + 1, "%s%s", sign ? "-" : "",
-				*digits == 'I' ? "inf" : "nan");
+				*digits == 'I' ? "INF" : "NAN");
 		zend_freedtoa(digits);
 		return (buf);
 	}
@@ -584,7 +587,9 @@ static int format_converter(register buffy * odp, const char *fmt,
 	char num_buf[NUM_BUF_SIZE];
 	char char_buf[2];			/* for printing %% and %<unknown> */
 
+#ifdef HAVE_LOCALE_H
 	struct lconv *lconv = NULL;
+#endif
 
 	/*
 	 * Flag variables
@@ -936,18 +941,20 @@ static int format_converter(register buffy * odp, const char *fmt,
 					}
 
 					if (zend_isnan(fp_num)) {
-						s = "nan";
+						s = "NAN";
 						s_len = 3;
 					} else if (zend_isinf(fp_num)) {
-						s = "inf";
+						s = "INF";
 						s_len = 3;
 					} else {
+#ifdef HAVE_LOCALE_H
 						if (!lconv) {
 							lconv = localeconv();
 						}
+#endif
 						s = php_conv_fp((*fmt == 'f')?'F':*fmt, fp_num, alternate_form,
 						 (adjust_precision == NO) ? FLOAT_DIGITS : precision,
-						 (*fmt == 'f')?(*lconv->decimal_point):'.',
+						 (*fmt == 'f')?LCONV_DECIMAL_POINT:'.',
 									&is_negative, &num_buf[1], &s_len);
 						if (is_negative)
 							prefix_char = '-';
@@ -994,10 +1001,12 @@ static int format_converter(register buffy * odp, const char *fmt,
 					/*
 					 * * We use &num_buf[ 1 ], so that we have room for the sign
 					 */
+#ifdef HAVE_LOCALE_H
 					if (!lconv) {
 						lconv = localeconv();
 					}
-					s = php_gcvt(fp_num, precision, *lconv->decimal_point, (*fmt == 'G')?'E':'e', &num_buf[1]);
+#endif
+					s = php_gcvt(fp_num, precision, LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

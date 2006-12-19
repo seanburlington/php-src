@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.37.2.4.2.5 2006/12/19 13:13:28 dmitry Exp $ */
+/* $Id: snprintf.c,v 1.37.2.4.2.7 2006/12/19 13:27:09 tony2001 Exp $ */
 
 
 #include "php.h"
@@ -93,7 +93,7 @@ static char * __cvt(double value, int ndigit, int *decpt, int *sign, int fmode, 
 			*decpt = 0;
 			c = *p;
 			zend_freedtoa(p);
-			return(c == 'I' ? "inf" : "nan");
+			return(c == 'I' ? "INF" : "NAN");
 		}
 		/* Make a local copy and adjust rve to be in terms of s */
 		if (pad && fmode)
@@ -139,8 +139,8 @@ PHPAPI char *php_gcvt(double value, int ndigit, char dec_point, char exponent, c
 		 * Infinity or NaN, convert to inf or nan with sign.
 		 * We assume the buffer is at least ndigit long.
 		 */
-		snprintf(buf, ndigit + 1, "%s%s", sign ? "-" : "",
-				*digits == 'I' ? "inf" : "nan");
+		snprintf(buf, ndigit + 1, "%s%s", (sign && *digits == 'I') ? "-" : "",
+				*digits == 'I' ? "INF" : "NAN");
 		zend_freedtoa(digits);
 		return (buf);
 	}
@@ -941,10 +941,10 @@ static int format_converter(register buffy * odp, const char *fmt,
 					}
 
 					if (zend_isnan(fp_num)) {
-						s = "nan";
+						s = "NAN";
 						s_len = 3;
 					} else if (zend_isinf(fp_num)) {
-						s = "inf";
+						s = "INF";
 						s_len = 3;
 					} else {
 #ifdef HAVE_LOCALE_H

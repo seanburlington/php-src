@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.h,v 1.17 2006/10/09 02:48:06 pollita Exp $ */
+/* $Id: streamsfuncs.h,v 1.18 2006/12/19 08:59:26 dmitry Exp $ */
 
 /* Flags for stream_socket_client */
 #define PHP_STREAM_CLIENT_PERSISTENT	1
@@ -54,6 +54,7 @@ PHP_FUNCTION(stream_filter_append);
 PHP_FUNCTION(stream_filter_remove);
 PHP_FUNCTION(stream_encoding);
 PHP_FUNCTION(stream_socket_enable_crypto);
+PHP_FUNCTION(stream_socket_shutdown);
 PHP_FUNCTION(stream_socket_pair);
 PHP_FUNCTION(stream_resolve_include_path);
 

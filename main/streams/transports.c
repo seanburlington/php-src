@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.16.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: transports.c,v 1.16.2.1.2.1 2006/12/19 08:58:58 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -486,6 +486,25 @@ PHPAPI int php_stream_xport_sendto(php_stream *stream, const char *buf, size_t b
 	return -1;
 }
 
+/* Similar to shutdown() system call; shut down part of a full-duplex
+ * connection */
+PHPAPI int php_stream_xport_shutdown(php_stream *stream, stream_shutdown_t how TSRMLS_DC)
+{
+	php_stream_xport_param param;
+	int ret = 0;
+
+	memset(&param, 0, sizeof(param));
+
+	param.op = STREAM_XPORT_OP_SHUTDOWN;
+	param.how = how;
+	
+	ret = php_stream_set_option(stream, PHP_STREAM_OPTION_XPORT_API, 0, &param);
+
+	if (ret == PHP_STREAM_OPTION_RETURN_OK) {
+		return param.outputs.returncode;
+	}
+	return -1;
+}
 
 /*
  * Local variables:

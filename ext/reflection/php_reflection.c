@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.266 2006/10/27 21:22:05 andrei Exp $ */
+/* $Id: php_reflection.c,v 1.267 2006/12/19 21:13:21 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2190,7 +2190,7 @@ ZEND_METHOD(reflection_method, __construct)
 		} else {
 			tmp_len = tmp.s - name_str.s;
 		}
-		ZVAL_ZSTRL(classname, name_str, tmp_len, type, 1);
+		ZVAL_ZSTRL(classname, name_str, type, tmp_len, 1);
 		name_len = name_len - (tmp_len + 2);
 		if (type == IS_UNICODE) {
 			name_str.u = tmp.u + 2;
@@ -4948,7 +4948,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.266 2006/10/27 21:22:05 andrei Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.267 2006/12/19 21:13:21 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

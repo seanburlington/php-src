@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.17 2006/12/18 14:39:23 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.18 2006/12/19 11:54:38 dmitry Exp $ */
 
 #include <time.h>
 
@@ -961,19 +961,23 @@ static xmlNodePtr to_xml_double(encodeTypePtr type, zval *data, int style, xmlNo
 {
 	xmlNodePtr ret;
 	zval tmp;
+	char *str;
+	TSRMLS_FETCH();
 
 	ret = xmlNewNode(NULL, BAD_CAST("BOGUS"));
 	xmlAddChild(parent, ret);
 	FIND_ZVAL_NULL(data, ret, style);
 
 	tmp = *data;
-	zval_copy_ctor(&tmp);
 	if (Z_TYPE(tmp) != IS_DOUBLE) {
+		zval_copy_ctor(&tmp);
 		convert_to_double(&tmp);
 	}
-	convert_to_string(&tmp);
-	xmlNodeSetContentLen(ret, BAD_CAST(Z_STRVAL(tmp)), Z_STRLEN(tmp));
-	zval_dtor(&tmp);
+	
+	str = (char *) emalloc(MAX_LENGTH_OF_DOUBLE + EG(precision) + 1);
+	php_gcvt(Z_DVAL(tmp), EG(precision), '.', 'E', str);
+	xmlNodeSetContentLen(ret, BAD_CAST(str), strlen(str));
+	efree(str);
 
 	if (style == SOAP_ENCODED) {
 		set_ns_and_type(ret, type);

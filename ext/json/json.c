@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.19 2006/10/19 20:24:25 andrei Exp $ */
+/* $Id: json.c,v 1.20 2006/12/19 15:01:57 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,14 +84,7 @@ static void json_escape_string(smart_str *buf, zstr s, int len, zend_uchar type)
 static int json_determine_array_type(zval **val TSRMLS_DC) /* {{{ */
 {
     int i;
-    HashTable *myht;
-
-    if (Z_TYPE_PP(val) == IS_ARRAY) {
-        myht = HASH_OF(*val);
-    } else {
-        myht = Z_OBJPROP_PP(val);
-        return 1;
-    }
+    HashTable *myht = HASH_OF(*val);
 
     i = myht ? zend_hash_num_elements(myht) : 0;
     if (i > 0) {

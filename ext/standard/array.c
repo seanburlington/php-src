@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.397 2006/12/06 17:42:47 tony2001 Exp $ */
+/* $Id: array.c,v 1.398 2006/12/19 08:02:48 shire Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1492,7 +1492,7 @@ PHP_FUNCTION(extract)
 
 					*orig_var = *entry;
 				} else {
-					if (var_array->refcount > 1) {
+					if (var_array->refcount > 1 || *entry == EG(uninitialized_zval_ptr)) {
 						SEPARATE_ZVAL_TO_MAKE_IS_REF(entry);
 					} else {
 						(*entry)->is_ref = 1;

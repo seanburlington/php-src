@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.11 2006/12/13 00:41:33 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.12 2006/12/20 10:49:33 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -624,14 +624,9 @@ zend_first_try {
 		} else {
 			zend_execute_scripts(ZEND_INCLUDE TSRMLS_CC, NULL, 1, &zfd);
 		}
-#if MEMORY_LIMIT
-		{
-			char *mem_usage;
 
-			mem_usage = apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC));
-			apr_table_set(r->notes, "mod_php_memory_usage", mem_usage);
-		}
-#endif
+		apr_table_set(r->notes, "mod_php_memory_usage",
+			apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC)));
 	}
 
 } zend_end_try();

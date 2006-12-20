@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.11 2006/12/19 12:36:44 tony2001 Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.12 2006/12/20 10:49:32 dmitry Exp $ */
 
 
 
@@ -910,7 +910,6 @@ PHP_FUNCTION(unserialize)
 
 /* }}} */
 
-#if MEMORY_LIMIT
 /* {{{ proto int memory_get_usage([real_usage])
     Returns the allocated by PHP memory */
 PHP_FUNCTION(memory_get_usage) {
@@ -923,6 +922,7 @@ PHP_FUNCTION(memory_get_usage) {
 	RETURN_LONG(zend_memory_usage(real_usage TSRMLS_CC));
 }
 /* }}} */
+
 /* {{{ proto int memory_get_peak_usage([real_usage])
     Returns the peak allocated by PHP memory */
 PHP_FUNCTION(memory_get_peak_usage) {
@@ -935,7 +935,6 @@ PHP_FUNCTION(memory_get_peak_usage) {
 	RETURN_LONG(zend_memory_peak_usage(real_usage TSRMLS_CC));
 }
 /* }}} */
-#endif
 
 /*
  * Local variables:

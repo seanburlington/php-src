@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.30.2.1.2.3 2006/12/08 21:18:43 tony2001 Exp $ */
+/* $Id: php_var.h,v 1.30.2.1.2.4 2006/12/20 10:49:32 dmitry Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
@@ -28,10 +28,8 @@ PHP_FUNCTION(var_export);
 PHP_FUNCTION(debug_zval_dump);
 PHP_FUNCTION(serialize);
 PHP_FUNCTION(unserialize);
-#if MEMORY_LIMIT 
 PHP_FUNCTION(memory_get_usage);
 PHP_FUNCTION(memory_get_peak_usage);
-#endif
 
 PHPAPI void php_var_dump(zval **struc, int level TSRMLS_DC);
 PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC);

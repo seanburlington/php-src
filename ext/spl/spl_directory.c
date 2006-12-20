@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.105 2006/11/12 17:56:14 helly Exp $ */
+/* $Id: spl_directory.c,v 1.106 2006/12/20 23:30:23 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1225,16 +1225,28 @@ static int spl_filesystem_object_cast(zval *readobj, zval *writeobj, int type, v
 {
 	spl_filesystem_object *intern = (spl_filesystem_object*)zend_object_store_get_object(readobj TSRMLS_CC);
 
-	if (type == IS_STRING) {
-		switch (intern->type) {
-		case SPL_FS_INFO:
-		case SPL_FS_FILE:
+	switch (intern->type) {
+	case SPL_FS_INFO:
+	case SPL_FS_FILE:
+		if (type == IS_STRING) {
 			ZVAL_STRINGL(writeobj, intern->file_name, intern->file_name_len, 1);
 			return SUCCESS;
-		case SPL_FS_DIR:
+		}
+		if (type == IS_UNICODE && UG(unicode)) {
+			ZVAL_ASCII_STRINGL(writeobj, intern->file_name, intern->file_name_len, 1);
+			return SUCCESS;
+		}
+		break;
+	case SPL_FS_DIR:
+		if (type == IS_STRING) {
 			ZVAL_STRING(writeobj, intern->u.dir.entry.d_name, 1);
 			return SUCCESS;
 		}
+		if (type == IS_UNICODE && UG(unicode)) {
+			ZVAL_ASCII_STRING(writeobj, intern->u.dir.entry.d_name, 1);
+			return SUCCESS;
+		}
+		break;
 	}
 	ZVAL_NULL(writeobj);
 	return FAILURE;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.34 2006/12/20 23:30:30 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.35 2006/12/20 23:36:56 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4045,7 +4045,13 @@ PHP_FUNCTION(parse_str)
 int php_tag_find(char *tag, int len, char *set) {
 	char c, *n, *t;
 	int state=0, done=0;
-	char *norm = emalloc(len+1);
+	char *norm;
+
+	if (len <= 0) {
+		return 0;
+	}
+	
+	norm = emalloc(len+1);
 
 	n = norm;
 	t = tag;
@@ -4055,9 +4061,6 @@ int php_tag_find(char *tag, int len, char *set) {
 	   and turn any <a whatever...> into just <a> and any </tag>
 	   into <tag>
 	*/
-	if (!len) {
-		return 0;
-	}
 	while (!done) {
 		switch (c) {
 			case '<':

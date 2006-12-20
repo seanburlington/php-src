@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.1.2.15 2006/12/20 14:39:01 derick Exp $ */
+/* $Id: logical_filters.c,v 1.1.2.16 2006/12/20 19:20:01 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -477,6 +477,13 @@ void php_filter_validate_regexp(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 void php_filter_validate_url(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 {
 	php_url *url;
+	int old_len = Z_STRLEN_P(value);
+	
+	php_filter_url(value, flags, option_array, charset TSRMLS_DC);
+
+	if (Z_TYPE_P(value) != IS_STRING || old_len != Z_STRLEN_P(value)) {
+		RETURN_VALIDATION_FAILED
+	}
 
 	/* Use parse_url - if it returns false, we return NULL */
 	url = php_url_parse_ex(Z_STRVAL_P(value), Z_STRLEN_P(value));
@@ -486,10 +493,10 @@ void php_filter_validate_url(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 	}
 
 	if (
-		((flags & FILTER_FLAG_SCHEME_REQUIRED) && url->scheme == NULL) ||
-		((flags & FILTER_FLAG_HOST_REQUIRED) && url->host == NULL) ||
-		((flags & FILTER_FLAG_PATH_REQUIRED) && url->path == NULL) ||
-		((flags & FILTER_FLAG_QUERY_REQUIRED) && url->query == NULL)
+		url->scheme == NULL || 
+		/* some schemas allow the host to be empty */
+		(url->host == NULL && (strcmp(url->scheme, "mailto") && strcmp(url->scheme, "news") && strcmp(url->scheme, "file"))) ||
+		((flags & FILTER_FLAG_PATH_REQUIRED) && url->path == NULL) || ((flags & FILTER_FLAG_QUERY_REQUIRED) && url->query == NULL)
 	) {
 		php_url_free(url);
 		RETURN_VALIDATION_FAILED

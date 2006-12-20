@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.477 2006/12/19 08:59:26 dmitry Exp $ */
+/* $Id: file.c,v 1.478 2006/12/20 22:42:59 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1062,7 +1062,6 @@ PHP_FUNCTION(popen)
 	fp = VCWD_POPEN(command, posix_mode);
 	if (!fp) {
 		php_error_docref2(NULL TSRMLS_CC, command, mode, E_WARNING, "%s", strerror(errno));
-		efree(posix_mode);
 		RETVAL_FALSE;
 	} else {
 		php_stream *stream = php_stream_fopen_from_pipe(fp, mode);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.33 2006/12/18 15:02:16 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.34 2006/12/20 23:30:30 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1235,11 +1235,11 @@ quit_loop:
 	}
 
 	len = cend - comp;
-	ret = emalloc(len + 1);
-	memcpy(ret, comp, len);
-	ret[len] = '\0';
 
 	if (p_ret) {
+		ret = emalloc(len + 1);
+		memcpy(ret, comp, len);
+		ret[len] = '\0';
 		*p_ret = ret;
 	}
 	if (p_len) {

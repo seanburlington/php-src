@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.14.2.2.2.9 2006/09/15 15:42:53 tony2001 Exp $ */
+/* $Id: streams.c,v 1.14.2.2.2.10 2006/12/20 13:09:02 tony2001 Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -86,6 +86,11 @@ static size_t on_header_available(char *data, size_t size, size_t nmemb, void *c
 	php_stream *stream = (php_stream *) ctx;
 	php_curl_stream *curlstream = (php_curl_stream *) stream->abstract;
 	TSRMLS_FETCH();
+
+	if (length < 2) {
+		/* invalid header ? */
+		return length;
+	}
 
 	if (!(length == 2 && data[0] == '\r' && data[1] == '\n')) {
 		MAKE_STD_ZVAL(header);

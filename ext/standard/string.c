@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.625 2006/12/20 23:30:11 tony2001 Exp $ */
+/* $Id: string.c,v 1.626 2006/12/20 23:36:43 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6154,7 +6154,7 @@ int php_u_tag_find(UChar *tag, int len, UChar *set, int set_len)
 	UChar *norm, *n;
 	int state = 0, done = 0;
 
-	if (!len) {
+	if (len <= 0) {
 		return 0;
 	}
 
@@ -6205,7 +6205,13 @@ int php_u_tag_find(UChar *tag, int len, UChar *set, int set_len)
 int php_tag_find(char *tag, int len, char *set) {
 	char c, *n, *t;
 	int state=0, done=0;
-	char *norm = emalloc(len+1);
+	char *norm;
+
+	if (len <= 0) {
+		return 0;
+	}
+	
+	norm = emalloc(len+1);
 
 	n = norm;
 	t = tag;
@@ -6215,9 +6221,6 @@ int php_tag_find(char *tag, int len, char *set) {
 	   and turn any <a whatever...> into just <a> and any </tag>
 	   into <tag>
 	*/
-	if (!len) {
-		return 0;
-	}
 	while (!done) {
 		switch (c) {
 			case '<':

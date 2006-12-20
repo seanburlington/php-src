@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.143 2006/10/23 20:10:14 bjori Exp $ */
+/* $Id: sapi_apache2.c,v 1.144 2006/12/20 10:50:46 dmitry Exp $ */
 
 #include <fcntl.h>
 
@@ -525,14 +525,9 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 				zfd.opened_path = NULL;
 
 				php_execute_script(&zfd TSRMLS_CC);
-#if MEMORY_LIMIT
-				{
-					char *mem_usage;
- 
-					mem_usage = apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC));
-					apr_table_set(ctx->r->notes, "mod_php_memory_usage", mem_usage);
-				}
-#endif
+
+				apr_table_set(ctx->r->notes, "mod_php_memory_usage",
+					apr_psprintf(ctx->r->pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC)));
 			} else { 
 				zend_syntax_highlighter_ini syntax_highlighter_ini;
 				

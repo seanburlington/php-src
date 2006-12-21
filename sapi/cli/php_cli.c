@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.10 2006/09/22 17:41:09 iliaa Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.11 2006/12/21 00:43:16 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -474,6 +474,12 @@ static void cli_register_file_handles(TSRMLS_D)
 	s_err = php_stream_open_wrapper_ex("php://stderr", "wb", 0, NULL, sc_err);
 
 	if (s_in==NULL || s_out==NULL || s_err==NULL) {
+		FREE_ZVAL(zin);
+		FREE_ZVAL(zout);
+		FREE_ZVAL(zerr);
+		if (s_in) php_stream_close(s_in);
+		if (s_out) php_stream_close(s_out);
+		if (s_err) php_stream_close(s_err);
 		return;
 	}
 	

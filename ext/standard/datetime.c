@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.141 2006/12/07 22:00:55 andrei Exp $ */
+/* $Id: datetime.c,v 1.142 2006/12/21 00:25:58 tony2001 Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -106,11 +106,16 @@ PHP_FUNCTION(strptime)
 		char *temp;
 		int temp_len;
 
-		zend_unicode_to_string(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &temp, &temp_len, ts.u, ts_length TSRMLS_CC);
+		if (zend_unicode_to_string(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &temp, &temp_len, ts.u, ts_length TSRMLS_CC) == FAILURE) {
+			RETURN_FALSE;
+		}
 		ts.s = temp;
 		ts_length = temp_len;
 
-		zend_unicode_to_string(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &temp, &temp_len, format.u, format_length TSRMLS_CC);
+		if (zend_unicode_to_string(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &temp, &temp_len, format.u, format_length TSRMLS_CC) == FAILURE) {
+			efree(ts.s);
+			RETURN_FALSE;
+		}
 		format.s = temp;
 		format_length = temp_len;
 	}

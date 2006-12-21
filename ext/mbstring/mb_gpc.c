@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.21 2006/03/13 15:04:03 masugata Exp $ */
+/* $Id: mb_gpc.c,v 1.22 2006/12/21 17:37:52 masugata Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -152,6 +152,8 @@ MBSTRING_API SAPI_TREAT_DATA_FUNC(mbstr_treat_data)
 	info.from_encodings         = MBSTRG(http_input_list);
 	info.num_from_encodings     = MBSTRG(http_input_list_size); 
 	info.from_language          = MBSTRG(language);
+
+	MBSTRG(illegalchars) = 0;
 
 	detected = _php_mb_encoding_handler_ex(&info, array_ptr, res TSRMLS_CC);
 	MBSTRG(http_input_identify) = detected;
@@ -331,6 +333,7 @@ enum mbfl_no_encoding _php_mb_encoding_handler_ex(const php_mb_encoding_handler_
 
 out:
 	if (convd != NULL) {
+		MBSTRG(illegalchars) += mbfl_buffer_illegalchars(convd);
 		mbfl_buffer_converter_delete(convd);
 	}
 	if (val_list != NULL) {

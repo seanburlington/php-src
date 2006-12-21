@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.478 2006/12/20 22:42:59 tony2001 Exp $ */
+/* $Id: file.c,v 1.479 2006/12/21 00:00:11 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2237,7 +2237,6 @@ PHPAPI void php_fgetcsv(php_stream *stream, /* {{{ */
 		/* Types converted, free storage */
 		efree(delim);
 		efree(enc);
-		efree(buffer);
 	} else {
 		/* Binary stream with binary delimiter/enclosures/prefetch */
 		php_fgetcsv_ex(stream, delim, delim_len, enc, enc_len, "\\", 1, buffer, buffer_len, return_value TSRMLS_CC);

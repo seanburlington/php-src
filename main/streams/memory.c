@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.26 2006/11/04 20:44:02 rasmus Exp $ */
+/* $Id: memory.c,v 1.27 2006/12/21 00:46:51 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -688,6 +688,7 @@ static php_stream * php_stream_url_wrap_rfc2397(php_stream_wrapper *wrapper, cha
 		ts->mode = mode && mode[0] == 'r' ? TEMP_STREAM_READONLY : 0;
 		ts->meta = meta;
 	}
+	efree(comma);
 
 	return stream;
 }

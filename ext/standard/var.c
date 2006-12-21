@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.255 2006/12/21 22:55:07 helly Exp $ */
+/* $Id: var.c,v 1.256 2006/12/21 23:19:48 helly Exp $ */
 
 
 
@@ -990,7 +990,7 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 					
 						smart_str_append_long(buf, serialized_length);
 						smart_str_appendl(buf, ":{", 2);
-						/* we need non binary or ascii at least not unicode */
+						/* we need binary or ascii at least not unicode */
 						smart_str_appendl(buf, serialized_data, serialized_length);
 						smart_str_appendc(buf, '}'); 
 					} else {

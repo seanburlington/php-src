@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.42 2006/11/24 21:54:41 tony2001 Exp $ */
+/* $Id: levenshtein.c,v 1.43 2006/12/21 23:52:22 andrei Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -98,7 +98,7 @@ static int custom_levdist(void *str1, void *str2, char *callback_name TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ proto int levenshtein(string str1, string str2[, int cost_ins, int cost_rep, int cost_del])
+/* {{{ proto int levenshtein(string str1, string str2[, int cost_ins, int cost_rep, int cost_del]) U
    Calculate Levenshtein distance between two strings */
 PHP_FUNCTION(levenshtein)
 {

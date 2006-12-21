@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.18 2006/11/03 02:24:50 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.19 2006/12/21 17:28:57 masugata Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2197,11 +2197,11 @@ PHP_FUNCTION(mb_strpos)
 	convert_to_string_ex(arg2);
 
 	if (offset < 0 || offset > Z_STRLEN_PP(arg1)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset is out of range");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset not contained in string.");
 		RETURN_FALSE;
 	}
 	if (Z_STRLEN_PP(arg2) == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty needle");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter.");
 		RETURN_FALSE;
 	}
 	haystack.val = (unsigned char *)Z_STRVAL_PP(arg1);
@@ -2272,11 +2272,9 @@ PHP_FUNCTION(mb_strrpos)
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
 	if (Z_STRLEN_PP(arg1) <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty haystack");
 		RETURN_FALSE;
 	}
 	if (Z_STRLEN_PP(arg2) <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty needle");
 		RETURN_FALSE;
 	}
 	haystack.val = (unsigned char *)Z_STRVAL_PP(arg1);
@@ -2331,7 +2329,7 @@ PHP_FUNCTION(mb_substr_count)
 	convert_to_string_ex(arg2);
 
 	if (Z_STRLEN_PP(arg2) <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty needle");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty substring.");
 		RETURN_FALSE;
 	}
 	haystack.val = (unsigned char *)Z_STRVAL_PP(arg1);

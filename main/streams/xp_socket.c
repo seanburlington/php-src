@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.38 2006/12/19 08:59:26 dmitry Exp $ */
+/* $Id: xp_socket.c,v 1.39 2006/12/21 01:07:52 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -642,6 +642,7 @@ static inline int php_tcp_sockop_connect(php_stream *stream, php_netstream_data_
 			if (xparam->want_errortext) {
 				spprintf(&xparam->outputs.error_text, 0, "local_addr context option is not a string.");
 			}
+			efree(host);
 			return -1;
 		}
 		bindto = parse_ip_address_ex(Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval), &bindport, xparam->want_errortext, &xparam->outputs.error_text TSRMLS_CC);

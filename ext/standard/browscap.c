@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.89 2006/12/20 20:45:40 andrei Exp $ */
+/* $Id: browscap.c,v 1.90 2006/12/21 21:37:09 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -347,9 +347,7 @@ PHP_FUNCTION(get_browser)
 		}
 	}
 
-	if (lookup_browser_name) {
-		efree(lookup_browser_name);
-	}
+	efree(lookup_browser_name);
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.21 2006/12/08 16:28:33 rrichards Exp $ */
+/* $Id: domimplementation.c,v 1.22 2006/12/21 12:52:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -114,6 +114,11 @@ PHP_METHOD(domimplementation, createDocumentType)
 
 	doctype = xmlCreateIntSubset(NULL, localname, pch1, pch2);
 	xmlFree(localname);
+
+	if (doctype == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create DocumentType");
+		RETURN_FALSE;
+	}
 
 	DOM_RET_OBJ(rv, (xmlNodePtr) doctype, &ret, NULL);
 }

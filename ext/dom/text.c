@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.29 2006/12/08 16:28:33 rrichards Exp $ */
+/* $Id: text.c,v 1.30 2006/12/21 12:52:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -155,6 +155,10 @@ PHP_FUNCTION(dom_text_split_text)
 	
 	xmlFree(first);
 	xmlFree(second);
+
+	if (nnode == NULL) {
+		RETURN_FALSE;
+	}
 
 	if (node->parent != NULL) {
 		nnode->type = XML_ELEMENT_NODE;

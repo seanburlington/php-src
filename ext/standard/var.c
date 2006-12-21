@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.254 2006/12/20 10:50:45 dmitry Exp $ */
+/* $Id: var.c,v 1.255 2006/12/21 22:55:07 helly Exp $ */
 
 
 
@@ -990,11 +990,8 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 					
 						smart_str_append_long(buf, serialized_length);
 						smart_str_appendl(buf, ":{", 2);
-						if (UG(unicode)) {
-							php_var_serialize_ustr(buf, (UChar*)serialized_data, serialized_length);
-						} else {
-							smart_str_appendl(buf, serialized_data, serialized_length);
-						}
+						/* we need non binary or ascii at least not unicode */
+						smart_str_appendl(buf, serialized_data, serialized_length);
 						smart_str_appendc(buf, '}'); 
 					} else {
 						smart_str_appendl(buf, "N;", 2);

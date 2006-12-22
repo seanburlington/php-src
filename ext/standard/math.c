@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.138 2006/09/25 06:59:02 dmitry Exp $ */
+/* $Id: math.c,v 1.139 2006/12/22 04:03:35 iliaa Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -929,7 +929,11 @@ PHPAPI char *_php_math_number_format(double d, int dec, char dec_point, char tho
 	}
 
 	/* find decimal point, if expected */
-	dp = dec ? strchr(tmpbuf, '.') : NULL;
+	if (dec) {
+		dp = strpbrk(tmpbuf, ".,");
+	} else {
+		dp = NULL;
+	}
 
 	/* calculate the length of the return buffer */
 	if (dp) {

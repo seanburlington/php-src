@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.104 2006/12/20 22:11:14 helly Exp $ */
+/* $Id: php_spl.c,v 1.105 2006/12/22 00:57:51 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -282,7 +282,7 @@ PHP_FUNCTION(spl_autoload)
 		RETURN_FALSE;
 	}
 
-	copy = pos1 = zend_zstrndup(ZEND_STR_TYPE, file_exts, file_exts_len);
+	copy = pos1 = ezstrndup(ZEND_STR_TYPE, file_exts, file_exts_len);
 	lc_name = zend_u_str_tolower_dup(ZEND_STR_TYPE, class_name, class_name_len);
 	while(pos1.v && (unicode ? *pos1.u : *pos1.s) && !EG(exception)) {
 		EG(return_value_ptr_ptr) = original_return_value;
@@ -310,12 +310,9 @@ PHP_FUNCTION(spl_autoload)
 	}
 	efree(lc_name.v);
 
-#if MBO_0
-	/* UTODO: This is actually correct but sometimesfails in tests, no idea why */
 	if (copy.v) {
 		efree(copy.v);
 	}
-#endif
 
 	EG(return_value_ptr_ptr) = original_return_value;
 	EG(opline_ptr) = original_opline_ptr;

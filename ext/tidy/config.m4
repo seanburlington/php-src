@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.3 2003/12/18 19:59:58 sniper Exp $
+dnl $Id: config.m4,v 1.5.4.1 2006/12/23 17:58:47 derick Exp $
 dnl
 
 PHP_ARG_WITH(tidy,for TIDY support,
-[  --with-tidy[=DIR]      Include TIDY support])
+[  --with-tidy[=DIR]       Include TIDY support])
 
 if test "$PHP_TIDY" != "no"; then
 
@@ -27,10 +27,16 @@ if test "$PHP_TIDY" != "no"; then
     AC_MSG_ERROR(Cannot find libtidy)
   fi
 
-  TIDY_LIBDIR=$TIDY_DIR/lib
+  TIDY_LIBDIR=$TIDY_DIR/$PHP_LIBDIR
 
   PHP_ADD_LIBRARY_WITH_PATH(tidy, $TIDY_LIBDIR, TIDY_SHARED_LIBADD)
   PHP_ADD_INCLUDE($TIDY_INCDIR)
+
+  PHP_CHECK_LIBRARY(tidy,tidyOptGetDoc,
+  [
+  AC_DEFINE(HAVE_TIDYOPTGETDOC,1,[ ])
+  ],[],[])
+
 
   PHP_NEW_EXTENSION(tidy, tidy.c, $ext_shared)
   PHP_SUBST(TIDY_SHARED_LIBADD)

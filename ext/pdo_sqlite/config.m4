@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.31 2006/08/14 16:35:22 iliaa Exp $
+dnl $Id: config.m4,v 1.32 2006/12/23 18:00:49 derick Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -54,12 +54,12 @@ if test "$PHP_PDO_SQLITE" != "no"; then
 
     PHP_CHECK_LIBRARY($LIBNAME,$LIBSYMBOL,
     [
-      PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $PDO_SQLITE_DIR/lib, PDO_SQLITE_SHARED_LIBADD)
+      PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $PDO_SQLITE_DIR/$PHP_LIBDIR, PDO_SQLITE_SHARED_LIBADD)
       AC_DEFINE(HAVE_PDO_SQLITELIB,1,[ ])
     ],[
       AC_MSG_ERROR([wrong sqlite lib version or lib not found])
     ],[
-      -L$PDO_SQLITE_DIR/lib -lm
+      -L$PDO_SQLITE_DIR/$PHP_LIBDIR -lm
     ])
     PHP_CHECK_LIBRARY(sqlite3,sqlite3_key,[
       AC_DEFINE(HAVE_SQLITE3_KEY,1, [have commercial sqlite3 with crypto support])

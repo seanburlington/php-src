@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.9.2.2 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: com_wrapper.c,v 1.9.2.1.2.1 2006/12/24 10:00:59 rrichards Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -477,6 +477,7 @@ static void generate_dispids(php_dispatchex *disp TSRMLS_DC)
 			/* add the mappings */
 			MAKE_STD_ZVAL(tmp);
 			ZVAL_STRINGL(tmp, name, namelen-1, 1);
+			pid = zend_hash_next_free_element(disp->dispid_to_name);
 			zend_hash_index_update(disp->dispid_to_name, pid, (void*)&tmp, sizeof(zval *), NULL);
 
 			MAKE_STD_ZVAL(tmp);
@@ -508,6 +509,7 @@ static void generate_dispids(php_dispatchex *disp TSRMLS_DC)
 			/* add the mappings */
 			MAKE_STD_ZVAL(tmp);
 			ZVAL_STRINGL(tmp, name, namelen-1, 1);
+			pid = zend_hash_next_free_element(disp->dispid_to_name);
 			zend_hash_index_update(disp->dispid_to_name, pid, (void*)&tmp, sizeof(zval *), NULL);
 
 			MAKE_STD_ZVAL(tmp);

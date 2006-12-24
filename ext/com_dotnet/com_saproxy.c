@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.20 2006/12/24 12:32:35 rrichards Exp $ */
+/* $Id: com_saproxy.c,v 1.21 2006/12/24 12:42:47 rrichards Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -357,7 +357,7 @@ static int saproxy_objects_compare(zval *object1, zval *object2 TSRMLS_DC)
 	return -1;
 }
 
-static int saproxy_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
+static int saproxy_object_cast(zval *readobj, zval *writeobj, int type, void *extra TSRMLS_DC)
 {
 	return FAILURE;
 }

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.21 2006/12/23 23:28:39 iliaa Exp $ */
+/* $Id: php_zip.c,v 1.1.2.22 2006/12/24 01:29:20 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1720,7 +1720,7 @@ static ZIPARCHIVE_METHOD(extractTo)
 								break;
 							case IS_STRING:
 								file = Z_STRVAL_PP(zval_file);
-								if (!php_zip_extract_file(intern, pathto, file, Z_STRLEN_P(zval_files) TSRMLS_CC)) {
+								if (!php_zip_extract_file(intern, pathto, file, Z_STRLEN_PP(zval_file) TSRMLS_CC)) {
 									RETURN_FALSE;
 								}
 								break;
@@ -2000,7 +2000,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.21 2006/12/23 23:28:39 iliaa Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.22 2006/12/24 01:29:20 bjori Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

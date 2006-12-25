@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.25 2006/12/25 22:36:57 iliaa Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.26 2006/12/25 23:55:59 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -284,7 +284,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_BOOLEAN("y2k_compliance",		"1",		PHP_INI_ALL,		OnUpdateBool,			y2k_compliance,			php_core_globals,	core_globals)
 
 	STD_PHP_INI_ENTRY("unserialize_callback_func",	NULL,	PHP_INI_ALL,		OnUpdateString,			unserialize_callback_func,	php_core_globals,	core_globals)
-	STD_PHP_INI_ENTRY("serialize_precision",	"100",	PHP_INI_ALL,		OnUpdateLong,			serialize_precision,	php_core_globals,	core_globals)
+	STD_PHP_INI_ENTRY("serialize_precision",	"100",	PHP_INI_ALL,		OnUpdateLongGEZero,			serialize_precision,	php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("arg_separator.output",	"&",		PHP_INI_ALL,		OnUpdateStringUnempty,	arg_separator.output,	php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("arg_separator.input",	"&",		PHP_INI_SYSTEM|PHP_INI_PERDIR,	OnUpdateStringUnempty,	arg_separator.input,	php_core_globals,	core_globals)
 

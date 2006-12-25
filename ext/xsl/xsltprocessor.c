@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.5 2006/12/05 12:04:34 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.6 2006/12/25 22:27:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -87,7 +87,7 @@ static char **php_xsl_xslt_make_params(HashTable *parht, int xpath_params TSRMLS
 	int i = 0;
 
 	parsize = (2 * zend_hash_num_elements(parht) + 1) * sizeof(char *);
-	params = (char **)emalloc(parsize);
+	params = (char **)safe_emalloc((2 * zend_hash_num_elements(parht) + 1), sizeof(char *), 0);
 	memset((char *)params, 0, parsize);
 
 	for (zend_hash_internal_pointer_reset(parht);

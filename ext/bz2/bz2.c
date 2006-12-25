@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.30 2006/10/31 22:13:09 nlopess Exp $ */
+/* $Id: bz2.c,v 1.31 2006/12/25 20:03:20 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -330,7 +330,7 @@ static PHP_FUNCTION(bzread)
 	
 	php_stream_from_zval(stream, &bz);
 
-	if (len < 0) {
+	if ((len + 1) < 1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "length may not be negative");
 		RETURN_FALSE;
 	}

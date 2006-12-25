@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.34 2006/12/23 23:29:41 iliaa Exp $ */
+/* $Id: php_zip.c,v 1.35 2006/12/25 22:40:13 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1115,8 +1115,8 @@ static ZIPARCHIVE_METHOD(addFromString)
 		ze_obj->buffers_cnt++;
 		pos = 0;
 	}
-	ze_obj->buffers[pos] = (char *)emalloc(buffer_len);
-	memcpy(ze_obj->buffers[pos], buffer, buffer_len);
+	ze_obj->buffers[pos] = (char *)emalloc(buffer_len + 1);
+	memcpy(ze_obj->buffers[pos], buffer, buffer_len + 1);
 
 	zs = zip_source_buffer(intern, ze_obj->buffers[pos], buffer_len, 0);
 
@@ -2070,7 +2070,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.34 2006/12/23 23:29:41 iliaa Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.35 2006/12/25 22:40:13 tony2001 Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

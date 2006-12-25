@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.55 2006/12/25 19:08:33 tony2001 Exp $ */
+/* $Id: mhash.c,v 1.56 2006/12/25 21:07:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -151,7 +151,7 @@ int php_mhash_keygen(keygenid type, hashid hash1, hashid hash2, const char *pass
 		*len = 128;
 	}
 	
-	*key = emalloc(*len + 1);
+	*key = safe_emalloc(1, *len, 1);
 	
 	if (mhash_keygen_ext(type, keygen, *key, *len, (void *) pass_str, pass_len) < 0) {
 		efree(*key);

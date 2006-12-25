@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.17.2.3.2.4 2006/11/21 20:58:17 tony2001 Exp $ */
+/* $Id: filter.c,v 1.17.2.3.2.5 2006/12/25 13:11:23 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -265,7 +265,8 @@ PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval 
 		/* try a wildcard */
 		char *wildname;
 
-		wildname = estrdup(filtername);
+		wildname = emalloc(n+3);
+		memcpy(wildname, filtername, n+1);
 		period = wildname + (period - filtername);
 		while (period && !filter) {
 			*period = '\0';

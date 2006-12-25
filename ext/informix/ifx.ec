@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.116 2006/05/04 22:47:53 tony2001 Exp $ */
+/* $Id: ifx.ec,v 1.117 2006/12/25 16:49:04 iliaa Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -449,7 +449,7 @@ PHP_MINFO_FUNCTION(ifx)
 	php_info_print_table_row(2, "Active Persistent links", buf);
 	sprintf(buf, "%ld", IFXG(num_links)); 
 	php_info_print_table_row(2, "Active links", buf);
-	sprintf(buf, "%02.2f", (double)(IFX_VERSION/100.0));
+	sprintf(buf, "%02.2F", (double)(IFX_VERSION/100.0));
 	php_info_print_table_row(2, "ESQL/C Version", buf);
 	php_info_print_table_end();
 

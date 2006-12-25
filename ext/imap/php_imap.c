@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.44.2.8 2006/12/25 14:23:32 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.142.2.44.2.9 2006/12/25 15:29:10 tony2001 Exp $ */
 
 #define IMAP41
 
@@ -61,7 +61,7 @@ MAILSTREAM DEFAULTPROTO;
 #define CRLF_LEN sizeof("\015\012") - 1
 #define PHP_EXPUNGE 32768
 #define PHP_IMAP_ADDRESS_SIZE_BUF 10
-#ifdef SENDBUFLEN
+#ifndef SENDBUFLEN
 #define SENDBUFLEN 16385
 #endif
 

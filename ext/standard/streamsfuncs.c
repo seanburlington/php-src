@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.98 2006/12/25 19:19:08 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.99 2006/12/25 22:12:36 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -369,7 +369,7 @@ PHP_FUNCTION(stream_socket_recvfrom)
 		RETURN_FALSE;
 	}
 	
-	read_buf = emalloc(to_read + 1);
+	read_buf = safe_emalloc(1, to_read, 1);
 	
 	recvd = php_stream_xport_recvfrom(stream, read_buf, to_read, flags, NULL, NULL,
 			zremote ? &remote_addr : NULL,

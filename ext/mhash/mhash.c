@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.3.2.1 2006/11/03 14:46:48 bjori Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.2 2006/12/25 21:08:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -229,7 +229,7 @@ PHP_FUNCTION(mhash_keygen_s2k)
 	keystruct.salt = salt;
 	keystruct.salt_size = salt_len;
 
-	ret = emalloc(bytes + 1);
+	ret = safe_emalloc(1, bytes, 1);
 
 	if (mhash_keygen_ext(KEYGEN_S2K_SALTED, keystruct, ret, bytes, password, password_len) >= 0) {
 		ret[bytes] = '\0';

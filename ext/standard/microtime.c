@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.53.2.2.2.1 2006/11/03 15:48:39 bjori Exp $ */
+/* $Id: microtime.c,v 1.53.2.2.2.2 2006/12/25 16:48:17 iliaa Exp $ */
 
 #include "php.h"
 
@@ -84,7 +84,7 @@ static void _php_gettimeofday(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	} else {
 		char ret[100];
 
-		snprintf(ret, 100, "%.8f %ld", tp.tv_usec / MICRO_IN_SEC, tp.tv_sec);
+		snprintf(ret, 100, "%.8F %ld", tp.tv_usec / MICRO_IN_SEC, tp.tv_sec);
 		RETURN_STRING(ret, 1);
 	}
 }

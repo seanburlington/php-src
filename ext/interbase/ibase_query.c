@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.1 2006/11/30 16:21:24 iliaa Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.2 2006/12/25 21:41:04 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1146,7 +1146,7 @@ PHP_FUNCTION(ibase_query)
 				break;
 			}
 		} else if (bind_n > 0) {
-			bind_args = (zval ***) emalloc(sizeof(zval **) * ZEND_NUM_ARGS());
+			bind_args = (zval ***) safe_emalloc(sizeof(zval **), ZEND_NUM_ARGS(), 0);
 
 			if (FAILURE == zend_get_parameters_array_ex(ZEND_NUM_ARGS(), bind_args)) {
 				break;

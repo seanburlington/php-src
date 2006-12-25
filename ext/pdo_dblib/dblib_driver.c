@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.9.2.3 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: dblib_driver.c,v 1.9.2.2.2.1 2006/12/25 21:41:04 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -144,7 +144,7 @@ static int dblib_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 	char *q;
 	int l = 1;
 
-	*quoted = q = emalloc(2 * unquotedlen + 3);
+	*quoted = q = safe_emalloc(2, unquotedlen, 3);
 	*q++ = '\'';
 
 	while (unquotedlen--) {

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_stmt.c,v 1.6.2.3 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: dblib_stmt.c,v 1.6.2.2.2.1 2006/12/25 21:41:04 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -131,7 +131,7 @@ static int pdo_dblib_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	arows = 100;
 	size = S->ncols * sizeof(pdo_dblib_colval);
-	S->rows = emalloc(arows * size);
+	S->rows = safe_emalloc(arows, size, 0);
 
 	/* let's fetch all the data */
 	do {

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.164.2.31 2006/11/30 22:13:57 tony2001 Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.164.2.32 2006/12/25 15:42:35 tony2001 Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1045,6 +1045,15 @@ if test -z "$EXTENSION_DIR"; then
   fi
 fi
 
+case $PHP_LAYOUT in
+  GNU)
+    datarootdir=$prefix/share
+    ;;
+  *)
+    datarootdir=$prefix/php
+    ;;
+esac
+
 dnl Expand all directory names for use in macros/constants
 EXPANDED_PEAR_INSTALLDIR=`eval echo $PEAR_INSTALLDIR`
 EXPANDED_EXTENSION_DIR=`eval echo $EXTENSION_DIR`
@@ -1135,6 +1144,7 @@ PHP_SUBST(phptempdir)
 PHP_SUBST(prefix)
 PHP_SUBST(localstatedir)
 PHP_SUBST(datadir)
+PHP_SUBST(datarootdir)
 PHP_SUBST(sysconfdir)
 
 PHP_SUBST(AWK)

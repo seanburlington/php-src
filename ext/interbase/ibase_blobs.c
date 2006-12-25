@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_blobs.c,v 1.9.2.2 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: ibase_blobs.c,v 1.9.2.1.2.1 2006/12/25 20:53:50 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -105,7 +105,7 @@ int _php_ibase_blob_get(zval *return_value, ibase_blob *ib_blob, unsigned long m
 		unsigned long cur_len;
 		unsigned short seg_len;
 
-		bl_data = emalloc(max_len + 1);
+		bl_data = safe_emalloc(1, max_len, 1);
 
 		for (cur_len = stat = 0; (stat == 0 || stat == isc_segment) && cur_len < max_len; cur_len += seg_len) {
 

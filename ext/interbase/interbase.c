@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.34.2.1 2006/01/01 13:46:53 sniper Exp $ */
+/* $Id: interbase.c,v 1.91.2.34.2.2 2006/12/25 20:54:58 tony2001 Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -643,7 +643,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.34.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.34.2.2 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1994,7 +1994,7 @@ static int _php_ibase_blob_get(zval *return_value, ibase_blob_handle *ib_blob, u
 		unsigned long cur_len;
 		unsigned short seg_len;
 	
-		bl_data = emalloc(max_len + 1);
+		bl_data = safe_emalloc(1, max_len, 1);
 	
 		for (cur_len = stat = 0; (stat == 0 || stat == isc_segment) && cur_len < max_len; cur_len += seg_len) {
 	

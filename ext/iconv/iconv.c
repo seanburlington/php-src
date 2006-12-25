@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.148 2006/12/20 10:38:24 bjori Exp $ */
+/* $Id: iconv.c,v 1.149 2006/12/25 20:44:28 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1105,7 +1105,7 @@ static php_iconv_err_t _php_iconv_mime_encode(smart_str *pretval, const char *fn
 		goto out;
 	}
 
-	buf = emalloc(max_line_len + 5);
+	buf = safe_emalloc(1, max_line_len, 5);
 
 	char_cnt = max_line_len;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_blobs.c,v 1.10 2006/01/01 13:09:50 sniper Exp $ */
+/* $Id: ibase_blobs.c,v 1.11 2006/12/25 20:53:43 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -105,7 +105,7 @@ int _php_ibase_blob_get(zval *return_value, ibase_blob *ib_blob, unsigned long m
 		unsigned long cur_len;
 		unsigned short seg_len;
 
-		bl_data = emalloc(max_len + 1);
+		bl_data = safe_emalloc(1, max_len, 1);
 
 		for (cur_len = stat = 0; (stat == 0 || stat == isc_segment) && cur_len < max_len; cur_len += seg_len) {
 

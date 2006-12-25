@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.215 2006/10/08 13:34:23 bjori Exp $ */
+/* $Id: soap.c,v 1.216 2006/12/25 19:12:39 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2470,7 +2470,7 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 	}
 }
 
-/* {{{ proto use_soap_error_handler ( [bool on] ) U
+/* {{{ proto bool use_soap_error_handler ( [bool on] ) U
    Enable or disable SOAP's error handler, that translates PHP errors into 
    SOAP faults */
 PHP_FUNCTION(use_soap_error_handler)

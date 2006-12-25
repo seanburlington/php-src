@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.3 2006/12/22 04:03:15 iliaa Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.4 2006/12/25 22:36:57 iliaa Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -976,7 +976,7 @@ PHPAPI char *_php_math_number_format(double d, int dec, char dec_point, char tho
 	dec = MAX(0, dec);
 	PHP_ROUND_WITH_FUZZ(d, dec);
 
-	tmplen = spprintf(&tmpbuf, 0, "%.*f", dec, d);
+	tmplen = spprintf(&tmpbuf, 0, "%.*F", dec, d);
 
 	if (tmpbuf == NULL || !isdigit((int)tmpbuf[0])) {
 		return tmpbuf;

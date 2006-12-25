@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.11 2006/11/29 15:45:58 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.12 2006/12/25 22:36:57 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -2102,7 +2102,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, long result_type,
 					Bucket *p;
 	
 					fci.param_count = 0;
-					fci.params = emalloc(sizeof(zval*) * ht->nNumOfElements);
+					fci.params = safe_emalloc(sizeof(zval*), ht->nNumOfElements, 0);
 					p = ht->pListHead;
 					while (p != NULL) {
 						fci.params[fci.param_count++] = (zval**)p->pData;

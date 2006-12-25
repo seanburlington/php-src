@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.24 2006/12/21 09:12:42 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.25 2006/12/25 22:36:57 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -100,8 +100,13 @@ PHPAPI int core_globals_id;
  */
 static PHP_INI_MH(OnSetPrecision)
 {
-	EG(precision) = atoi(new_value);
-	return SUCCESS;
+	int i = atoi(new_value);
+	if (i >= 0) {
+		EG(precision) = i;
+		return SUCCESS;
+	} else {
+		return FAILURE;
+	}
 }
 /* }}} */
 

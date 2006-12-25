@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.18 2006/12/19 11:54:38 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.19 2006/12/25 22:36:57 iliaa Exp $ */
 
 #include <time.h>
 
@@ -974,7 +974,7 @@ static xmlNodePtr to_xml_double(encodeTypePtr type, zval *data, int style, xmlNo
 		convert_to_double(&tmp);
 	}
 	
-	str = (char *) emalloc(MAX_LENGTH_OF_DOUBLE + EG(precision) + 1);
+	str = (char *) safe_emalloc(EG(precision), 1, MAX_LENGTH_OF_DOUBLE + 1);
 	php_gcvt(Z_DVAL(tmp), EG(precision), '.', 'E', str);
 	xmlNodeSetContentLen(ret, BAD_CAST(str), strlen(str));
 	efree(str);

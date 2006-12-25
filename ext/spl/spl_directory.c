@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.11 2006/11/12 17:16:13 bjori Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.12 2006/12/25 22:36:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1367,7 +1367,7 @@ static int spl_filesystem_file_read(spl_filesystem_object *intern, int silent TS
 	}
 
 	if (intern->u.file.max_line_len > 0) {
-		buf = emalloc((intern->u.file.max_line_len + 1) * sizeof(char));
+		buf = safe_emalloc((intern->u.file.max_line_len + 1), sizeof(char), 0);
 		if (php_stream_get_line(intern->u.file.stream, buf, intern->u.file.max_line_len, &line_len) == NULL) {
 			efree(buf);
 			buf = NULL;

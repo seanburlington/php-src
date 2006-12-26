@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.12 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: dblib_driver.c,v 1.13 2006/12/26 17:40:20 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -144,7 +144,7 @@ static int dblib_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 	char *q;
 	int l = 1;
 
-	*quoted = q = emalloc(2 * unquotedlen + 3);
+	*quoted = q = safe_emalloc(2, unquotedlen, 3);
 	*q++ = '\'';
 
 	while (unquotedlen--) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uuencode.c,v 1.9 2006/10/08 13:34:24 bjori Exp $ */
+/* $Id: uuencode.c,v 1.10 2006/12/26 17:40:20 iliaa Exp $ */
 
 /*
  * Portions of this code are based on Berkeley's uuencode/uudecode
@@ -71,7 +71,7 @@ PHPAPI int php_uuencode(char *src, int src_len, char **dest)
 	char *p, *s, *e, *ee;
 
 	/* encoded length is ~ 38% greater then the original */
-	p = *dest = emalloc((ceil(src_len * 1.38) + 45 + 1));
+	p = *dest = safe_emalloc(ceil(src_len * 1.38), 1, 46);
 	s = src;
 	e = src + src_len;
 
@@ -128,7 +128,7 @@ PHPAPI int php_uudecode(char *src, int src_len, char **dest)
 	int len, total_len=0;
 	char *s, *e, *p, *ee;
 
-	p = *dest = emalloc(ceil(src_len * 0.75) + 1);
+	p = *dest = safe_emalloc(ceil(src_len * 0.75), 1, 1);
 	s = src;
 	e = src + src_len;
 

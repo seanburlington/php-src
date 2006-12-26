@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_stmt.c,v 1.8 2006/01/01 13:09:52 sniper Exp $ */
+/* $Id: dblib_stmt.c,v 1.9 2006/12/26 17:40:20 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -131,7 +131,7 @@ static int pdo_dblib_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	arows = 100;
 	size = S->ncols * sizeof(pdo_dblib_colval);
-	S->rows = emalloc(arows * size);
+	S->rows = safe_emalloc(arows, size, 0);
 
 	/* let's fetch all the data */
 	do {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.257 2006/12/22 00:47:27 helly Exp $ */
+/* $Id: var.c,v 1.258 2006/12/26 17:40:20 iliaa Exp $ */
 
 
 
@@ -944,7 +944,7 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 				char *s;
 
 				smart_str_appendl(buf, "d:", 2);
-				s = (char *) emalloc(MAX_LENGTH_OF_DOUBLE + PG(serialize_precision) + 1);
+				s = (char *) safe_emalloc(PG(serialize_precision), 1, MAX_LENGTH_OF_DOUBLE + 1);
 				php_gcvt(Z_DVAL_P(struc), PG(serialize_precision), '.', 'E', s);
 				smart_str_appends(buf, s);
 				smart_str_appendc(buf, ';');

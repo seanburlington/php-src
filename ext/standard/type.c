@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.30.2.3 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: type.c,v 1.30.2.2.2.1 2006/12/26 16:45:39 iliaa Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -305,7 +305,6 @@ PHP_FUNCTION(is_object)
 PHP_FUNCTION(is_numeric)
 {
 	zval **arg;
-	int result;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -318,8 +317,7 @@ PHP_FUNCTION(is_numeric)
 			break;
 
 		case IS_STRING:
-			result = is_numeric_string(Z_STRVAL_PP(arg), Z_STRLEN_PP(arg), NULL, NULL, 0);
-			if (result == IS_LONG || result == IS_DOUBLE) {
+			if (is_numeric_string(Z_STRVAL_PP(arg), Z_STRLEN_PP(arg), NULL, NULL, 0)) {
 				RETURN_TRUE;
 			} else {
 				RETURN_FALSE;

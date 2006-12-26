@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.627 2006/12/21 21:47:56 andrei Exp $ */
+/* $Id: string.c,v 1.628 2006/12/26 22:34:05 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7328,7 +7328,7 @@ PHP_FUNCTION(str_pad)
 }
 /* }}} */
 
-/* {{{ proto mixed sscanf(string str, string format [, string ...])
+/* {{{ proto mixed sscanf(string str, string format [, string ...]) U
    Implements an ANSI C compatible sscanf */
 PHP_FUNCTION(sscanf)
 {
@@ -7346,13 +7346,25 @@ PHP_FUNCTION(sscanf)
 		WRONG_PARAM_COUNT;
 	}
 
-	convert_to_string_ex(args[0]);
-	convert_to_string_ex(args[1]);
+	if (Z_TYPE_PP(args[0]) != IS_STRING && Z_TYPE_PP(args[0]) != IS_UNICODE) {
+		convert_to_text_ex(args[0]);
+	}
 
-	result = php_sscanf_internal(Z_STRVAL_PP(args[0]),
-	                             Z_STRVAL_PP(args[1]),
-	                             argc, args,
-	                             2, &return_value TSRMLS_CC);
+	if (Z_TYPE_PP(args[0]) == IS_UNICODE) {
+		convert_to_unicode_ex(args[1]);
+
+		result = php_u_sscanf_internal(Z_USTRVAL_PP(args[0]),
+									 Z_USTRVAL_PP(args[1]),
+									 argc, args,
+									 2, &return_value TSRMLS_CC);
+	} else {
+		convert_to_string_ex(args[1]);
+
+		result = php_sscanf_internal(Z_STRVAL_PP(args[0]),
+									 Z_STRVAL_PP(args[1]),
+									 argc, args,
+									 2, &return_value TSRMLS_CC);
+	}
 	efree(args);
 
 	if (SCAN_ERROR_WRONG_PARAM_COUNT == result) {

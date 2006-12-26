@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.37.2.4 2006/01/01 13:46:52 sniper Exp $ */
+/* $Id: exif.c,v 1.118.2.37.2.5 2006/12/26 17:33:12 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -107,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.4 2006/01/01 13:46:52 sniper Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.5 2006/12/26 17:33:12 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3536,7 +3536,7 @@ static int exif_process_IFD_in_TIFF(image_info_type *ImageInfo, size_t dir_offse
 								exif_error_docref(NULL TSRMLS_CC, ImageInfo, E_NOTICE, "%s THUMBNAIL @0x%04X + 0x%04X", ImageInfo->Thumbnail.data ? "ignore" : "read", ImageInfo->Thumbnail.offset, ImageInfo->Thumbnail.size);
 #endif
 								if (!ImageInfo->Thumbnail.data) {
-									ImageInfo->Thumbnail.data = emalloc(ImageInfo->Thumbnail.size);
+									ImageInfo->Thumbnail.data = safe_emalloc(ImageInfo->Thumbnail.size, 1, 0);
 									php_stream_seek(ImageInfo->infile, ImageInfo->Thumbnail.offset, SEEK_SET);
 									fgot = php_stream_read(ImageInfo->infile, ImageInfo->Thumbnail.data, ImageInfo->Thumbnail.size);
 									if (fgot < ImageInfo->Thumbnail.size) {
@@ -3569,7 +3569,7 @@ static int exif_process_IFD_in_TIFF(image_info_type *ImageInfo, size_t dir_offse
 					exif_error_docref(NULL TSRMLS_CC, ImageInfo, E_NOTICE, "%s THUMBNAIL @0x%04X + 0x%04X", ImageInfo->Thumbnail.data ? "ignore" : "read", ImageInfo->Thumbnail.offset, ImageInfo->Thumbnail.size);
 #endif
 					if (!ImageInfo->Thumbnail.data && ImageInfo->Thumbnail.offset && ImageInfo->Thumbnail.size && ImageInfo->read_thumbnail) {
-						ImageInfo->Thumbnail.data = emalloc(ImageInfo->Thumbnail.size);
+						ImageInfo->Thumbnail.data = safe_emalloc(ImageInfo->Thumbnail.size, 1, 0);
 						php_stream_seek(ImageInfo->infile, ImageInfo->Thumbnail.offset, SEEK_SET);
 						fgot = php_stream_read(ImageInfo->infile, ImageInfo->Thumbnail.data, ImageInfo->Thumbnail.size);
 						if (fgot < ImageInfo->Thumbnail.size) {

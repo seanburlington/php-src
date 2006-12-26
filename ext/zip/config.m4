@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2006/11/01 00:53:32 pajoye Exp $
+dnl $Id: config.m4,v 1.10 2006/12/26 09:52:32 pajoye Exp $
 dnl
 
 PHP_ARG_ENABLE(zip, for zip archive read/writesupport,
@@ -40,7 +40,7 @@ if test "$PHP_ZIP" != "no"; then
 		AC_MSG_ERROR([zip support requires ZLIB. Use --with-zlib-dir=<DIR> to specify prefix where ZLIB include and library are located])
 	else
 		AC_MSG_RESULT([$PHP_ZLIB_DIR])
-		PHP_ADD_LIBRARY_WITH_PATH(z, $PHP_ZLIB_DIR/lib, ZIP_SHARED_LIBADD)
+		PHP_ADD_LIBRARY_WITH_PATH(z, $PHP_ZLIB_DIR/$PHP_LIBDIR, ZIP_SHARED_LIBADD)
 		PHP_ADD_INCLUDE($PHP_ZLIB_INCDIR)
 	fi
 

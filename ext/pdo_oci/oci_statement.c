@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.11 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.10.2.1 2006/12/27 10:31:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -222,7 +222,7 @@ static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, d
 	zval_dtor(param->parameter);
 
 	Z_STRLEN_P(param->parameter) = param->max_value_len;
-	Z_STRVAL_P(param->parameter) = emalloc(Z_STRLEN_P(param->parameter)+1);
+	Z_STRVAL_P(param->parameter) = ecalloc(1, Z_STRLEN_P(param->parameter)+1);
 	P->used_for_output = 1;
 
 	P->actual_len = Z_STRLEN_P(param->parameter);	

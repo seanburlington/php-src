@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.89.2.2.2.4 2006/07/23 23:55:46 sniper Exp $ */
+/* $Id: fdf.c,v 1.89.2.2.2.5 2006/12/28 20:41:17 tony2001 Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -1726,8 +1726,7 @@ PHP_FUNCTION(fdf_get_attachment) {
 		RETURN_FALSE;
 	}
 
-	strncpy(pathbuf	, savepath, MAXPATHLEN-1);
-	pathbuf[MAXPATHLEN-1] = '\0';
+	strlcpy(pathbuf, savepath, sizeof(pathbuf));
 
 	if(0 == stat(pathbuf, &statBuf)) {
 		is_dir = S_ISDIR(statBuf.st_mode);

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2006 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.82.2.4 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: reg.c,v 1.82.2.3.2.1 2006/12/28 14:17:38 tony2001 Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -425,7 +425,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 				buf = nbuf;
 			}
 			/* stick that last bit of string on our output */
-			strcat(buf, &string[pos]);
+			strlcat(buf, &string[pos], buf_len);
 		}
 	}
 

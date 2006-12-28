@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.26 2006/12/25 23:55:59 iliaa Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.27 2006/12/28 12:01:50 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -961,7 +961,7 @@ static void php_message_handler_for_zend(long message, void *data)
 		case ZMSG_MEMORY_LEAK_REPEATED:
 #if ZEND_DEBUG
 			if (EG(error_reporting) & E_WARNING) {
-				char memory_leak_buf[512];
+				char memory_leak_buf[1024];
 
 				if (message==ZMSG_MEMORY_LEAK_DETECTED) {
 					zend_leak_info *t = (zend_leak_info *) data;
@@ -971,7 +971,7 @@ static void php_message_handler_for_zend(long message, void *data)
 						char relay_buf[512];
 
 						snprintf(relay_buf, 512, "%s(%d) : Actual location (location was relayed)\n", t->orig_filename, t->orig_lineno);
-						strcat(memory_leak_buf, relay_buf);
+						strlcat(memory_leak_buf, relay_buf, sizeof(memory_leak_buf));
 					}
 				} else {
 					unsigned long leak_count = (unsigned long) data;

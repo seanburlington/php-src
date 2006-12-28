@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.52 2006/11/30 15:13:33 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.53 2006/12/28 20:45:20 tony2001 Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -730,9 +730,7 @@ static int parse(char *l, int lineno)
 		return -1;
 	}
 	
-	strncpy(m->desc, l, sizeof(m->desc) - 1);
-	m->desc[sizeof(m->desc) - 1] = '\0';
-
+	strlcpy(m->desc, l, sizeof(m->desc));
     return 0;
 }
 

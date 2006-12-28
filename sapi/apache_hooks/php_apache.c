@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.26 2006/09/06 11:55:12 nlopess Exp $ */
+/* $Id: php_apache.c,v 1.27 2006/12/28 13:30:18 tony2001 Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1637,9 +1637,9 @@ PHP_MINFO_FUNCTION(apache)
 		if ((p = strrchr(name, '.'))) {
 			*p='\0'; /* Cut off ugly .c extensions on module names */
 		}
-		strcat(modulenames, name);
+		strlcat(modulenames, name, sizeof(modulenames));
 		if (modp->next) {
-			strcat(modulenames, ", ");
+			strlcat(modulenames, ", ", sizeof(modulenames));
 		}
 	}
 	php_info_print_table_row(2, "Loaded Modules", modulenames);

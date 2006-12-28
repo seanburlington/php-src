@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.228 2006/11/22 10:11:58 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.229 2006/12/28 15:44:50 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -33,6 +33,7 @@
 #include "php_globals.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
+#include "ext/standard/basic_functions.h"
 #include "zend_exceptions.h"
 
 #if HAVE_MYSQL

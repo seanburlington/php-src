@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.480 2006/12/26 22:34:05 andrei Exp $ */
+/* $Id: file.c,v 1.481 2006/12/28 15:03:19 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1288,7 +1288,7 @@ PHP_FUNCTION(fscanf)
 	}
 
 	if (((php_stream *)what)->readbuf_type == IS_UNICODE) {
-		u_buf = php_stream_u_get_line((php_stream *) what, NULL_ZSTR, 0, 0, NULL TSRMLS_CC);
+		u_buf = php_stream_u_get_line((php_stream *) what, NULL_ZSTR, 0, 0, NULL);
 		if (u_buf == NULL) {
 			efree(args);
 			RETURN_FALSE;

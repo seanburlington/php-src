@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.311 2006/12/09 14:17:17 iliaa Exp $ */
+/* $Id: run-tests.php,v 1.312 2006/12/28 15:06:58 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -190,6 +190,7 @@ More .INIs  : " , (function_exists(\'php_ini_scanned_files\') ? str_replace("\n"
 	// check for extensions that need special handling and regenerate
 	$info_params_ex = array(
 		'session' => array('session.auto_start=0'),
+		'tidy' => array('tidy.clean_output=0'),
 		'zlib' => array('zlib.output_compression=Off'),
 		'xdebug' => array('xdebug.default_enable=0'),
 	);
@@ -400,7 +401,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.311 $'."\n";
+					echo '$Revision: 1.312 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";

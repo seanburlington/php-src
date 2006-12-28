@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.361 2006/12/26 17:40:20 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.362 2006/12/28 15:21:32 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -5472,7 +5472,7 @@ static inline int build_assignment_string(smart_str *querystr, HashTable *ht, co
 				smart_str_append_long(querystr, Z_LVAL_PP(val));
 				break;
 			case IS_DOUBLE:
-				smart_str_appendl(querystr, buf, sprintf(buf, "%f", Z_DVAL_PP(val)));
+				smart_str_appendl(querystr, buf, MIN(snprintf(buf, sizeof(buf), "%f", Z_DVAL_PP(val)), sizeof(buf)-1));
 				break;
 			default:
 				/* should not happen */

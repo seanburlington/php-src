@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.68.2.5 2006/02/22 15:11:53 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.68.2.6 2006/12/28 22:36:59 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -811,7 +811,7 @@ static void init_request_info(TSRMLS_D)
 							int l = strlen(env_document_root);
 							int path_translated_len = 0;
 							char *path_translated = NULL;
-							if (env_document_root[l-1]=='/') {
+							if (l && env_document_root[l-1]=='/') {
 								--l;
 							}
 

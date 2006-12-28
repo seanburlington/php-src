@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.196 2006/06/14 05:51:16 dmitry Exp $ */
+/* $Id: php_odbc.c,v 1.197 2006/12/28 14:26:30 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2083,23 +2083,23 @@ int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int 
 			 if (strstr(db, "pwd") || strstr(db, "PWD")) {
 				 pwd = NULL;
 			 }
-			 strncpy( lpszConnStr, db, CONNSTRSIZE);
+			 strlcpy( lpszConnStr, db, CONNSTRSIZE);
 		 }
 		 else {
 			 strcpy(lpszConnStr, "DSN=");
-			 strcat(lpszConnStr, db);
+			 strlcat(lpszConnStr, db, CONNSTRSIZE);
 		 }
 		 if (uid) {
 			 if (uid[0]) {
-				 strcat(lpszConnStr, ";UID=");
-				 strcat(lpszConnStr, uid);
-				 strcat(lpszConnStr, ";");
+				 strlcat(lpszConnStr, ";UID=", CONNSTRSIZE);
+				 strlcat(lpszConnStr, uid, CONNSTRSIZE);
+				 strlcat(lpszConnStr, ";", CONNSTRSIZE);
 			 }
 			 if (pwd) {
 				 if (pwd[0]) {
-					 strcat(lpszConnStr, "PWD=");
-					 strcat(lpszConnStr, pwd);
-					 strcat(lpszConnStr, ";");
+					 strlcat(lpszConnStr, "PWD=", CONNSTRSIZE);
+					 strlcat(lpszConnStr, pwd, CONNSTRSIZE);
+					 strlcat(lpszConnStr, ";", CONNSTRSIZE);
 				 }
 			 }
 		 }

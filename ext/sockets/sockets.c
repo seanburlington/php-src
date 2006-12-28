@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.185 2006/12/25 19:34:00 tony2001 Exp $ */
+/* $Id: sockets.c,v 1.186 2006/12/28 14:17:09 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1627,11 +1627,12 @@ PHP_FUNCTION(socket_set_option)
 {
 	zval			*arg1, **arg4;
 	struct linger	lv;
-	struct timeval tv;
 	php_socket		*php_sock;
 	int				ov, optlen, retval; 
 #ifdef PHP_WIN32
 	int				timeout;
+#else 
+	struct timeval tv;
 #endif
 	long				level, optname;
 	void 			*opt_ptr;

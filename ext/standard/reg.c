@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.84 2006/01/01 13:09:55 sniper Exp $ */
+/* $Id: reg.c,v 1.85 2006/12/28 14:17:09 tony2001 Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -425,7 +425,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 				buf = nbuf;
 			}
 			/* stick that last bit of string on our output */
-			strcat(buf, &string[pos]);
+			strlcat(buf, &string[pos], buf_len);
 		}
 	}
 

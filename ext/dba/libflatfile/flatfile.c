@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.c,v 1.17 2006/05/11 20:08:45 helly Exp $ */
+/* $Id: flatfile.c,v 1.18 2006/12/28 15:24:00 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@
 
 #include "flatfile.h"
 
-#define _php_stream_gets(stream, buf, len) php_stream_gets(stream, (zstr)((char*)buf), len)
+#define _php_stream_gets(stream, buf, len) php_stream_gets(stream, ZSTR(((char*)buf)), len)
 
 #define FLATFILE_BLOCK_SIZE 1024
 
@@ -308,7 +308,7 @@ datum flatfile_nextkey(flatfile *dba TSRMLS_DC) {
 /* {{{ flatfile_version */
 char *flatfile_version() 
 {
-	return "1.0, $Revision: 1.17 $";
+	return "1.0, $Revision: 1.18 $";
 }
 /* }}} */ 
 

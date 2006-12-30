@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.1.2.18 2006/12/26 09:16:24 dmitry Exp $ */
+/* $Id: logical_filters.c,v 1.1.2.19 2006/12/30 01:56:18 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -382,6 +382,9 @@ void php_filter_float(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 			Z_DVAL_P(value) = lval;
 			break;
 		case IS_DOUBLE:
+			if ((!dval && p - num > 1 && strpbrk(num, "123456789")) || !zend_finite(dval)) {
+				goto error;
+			}
 			zval_dtor(value);
 			Z_TYPE_P(value) = IS_DOUBLE;
 			Z_DVAL_P(value) = dval;

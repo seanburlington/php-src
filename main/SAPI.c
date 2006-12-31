@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.5 2006/12/21 21:49:22 tony2001 Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.6 2006/12/31 19:22:01 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -631,7 +631,9 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 					SG(sapi_headers).http_response_code > 307) &&
 					SG(sapi_headers).http_response_code != 201) {
 					/* Return a Found Redirect if one is not already specified */
-					if(SG(request_info).proto_num > 1000 && 
+					if (http_response_code) { /* user specified redirect code */
+						sapi_update_response_code(http_response_code TSRMLS_CC);
+					} else if (SG(request_info).proto_num > 1000 && 
 					   SG(request_info).request_method && 
 					   strcmp(SG(request_info).request_method, "HEAD") &&
 					   strcmp(SG(request_info).request_method, "GET")) {

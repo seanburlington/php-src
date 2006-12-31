@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.46 2006/12/31 14:49:06 nlopess Exp $ */
+/* $Id: proc_open.c,v 1.47 2006/12/31 15:28:56 nlopess Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -652,7 +652,8 @@ PHP_FUNCTION(proc_open)
 				}
 
 #ifdef PHP_WIN32
-				descriptors[ndesc].childend = (HANDLE)_get_osfhandle(fd);
+				descriptors[ndesc].childend = dup_fd_as_handle(fd);
+				_close(fd);
 #else
 				descriptors[ndesc].childend = fd;
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.10 2006/12/26 17:23:33 iliaa Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.11 2006/12/31 22:26:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -424,6 +424,11 @@ PS_SERIALIZER_DECODE_FUNC(php_binary)
 	for (p = val; p < endptr; ) {
 		zval **tmp;
 		namelen = *p & (~PS_BIN_UNDEF);
+
+		if (namelen > PS_BIN_MAX || (p + namelen) >= endptr) {
+			return FAILURE;
+		}
+
 		has_value = *p & PS_BIN_UNDEF ? 0 : 1;
 
 		name = estrndup(p + 1, namelen);

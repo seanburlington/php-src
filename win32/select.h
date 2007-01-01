@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: select.h,v 1.4.2.2 2007/01/01 09:40:34 sebastian Exp $ */
+/* $Id: select.h,v 1.4.2.1.2.1 2007/01/01 09:36:13 sebastian Exp $ */
 
 PHPAPI int php_select(int max_fd, fd_set *rfds, fd_set *wfds, fd_set *efds, struct timeval *tv);
 

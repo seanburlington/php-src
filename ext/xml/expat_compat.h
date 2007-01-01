@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.19.2.2 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: expat_compat.h,v 1.19.2.1.2.1 2007/01/01 09:36:09 sebastian Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H

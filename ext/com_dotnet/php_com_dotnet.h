@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet.h,v 1.5.2.2 2007/01/01 09:40:13 sebastian Exp $ */
+/* $Id: php_com_dotnet.h,v 1.5.2.1.2.1 2007/01/01 09:35:48 sebastian Exp $ */
 
 #ifndef PHP_COM_DOTNET_H
 #define PHP_COM_DOTNET_H

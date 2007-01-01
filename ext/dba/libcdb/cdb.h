@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb.h,v 1.7.2.2 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: cdb.h,v 1.7.2.1.2.1 2007/01/01 09:36:00 sebastian Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 

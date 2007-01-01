@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.29.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: php_image.h,v 1.29.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H

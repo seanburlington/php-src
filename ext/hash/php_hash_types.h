@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_types.h,v 1.2.2.5 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_hash_types.h,v 1.2.2.4.2.1 2007/01/01 09:36:01 sebastian Exp $ */
 
 #ifndef PHP_HASH_TYPES_H
 #define PHP_HASH_TYPES_H

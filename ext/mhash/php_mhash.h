@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mhash.h,v 1.12.2.2 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: php_mhash.h,v 1.12.2.1.2.1 2007/01/01 09:36:03 sebastian Exp $ */
 
 #ifndef PHP_MHASH_H
 #define PHP_MHASH_H

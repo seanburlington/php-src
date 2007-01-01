@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.h,v 1.11.2.2 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: credits.h,v 1.11.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #ifndef CREDITS_H
 #define CREDITS_H

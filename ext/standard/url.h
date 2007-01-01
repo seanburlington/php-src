@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.h,v 1.20.2.3 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: url.h,v 1.20.2.2.2.1 2007/01/01 09:36:09 sebastian Exp $ */
 
 #ifndef URL_H
 #define URL_H

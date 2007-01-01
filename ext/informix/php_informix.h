@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix.h,v 1.23.2.2 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_informix.h,v 1.23.2.1.2.1 2007/01/01 09:36:02 sebastian Exp $ */
 
 #ifndef PHP_INFORMIX_H
 #define PHP_INFORMIX_H

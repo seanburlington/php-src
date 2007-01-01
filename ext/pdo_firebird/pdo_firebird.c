@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_firebird.c,v 1.4.2.4 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: pdo_firebird.c,v 1.4.2.3.2.1 2007/01/01 09:36:04 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cdatasection.c,v 1.11.2.2 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: cdatasection.c,v 1.11.2.1.2.1 2007/01/01 09:36:00 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

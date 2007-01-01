@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: notation.c,v 1.9.2.3 2007/01/01 09:40:23 sebastian Exp $ */
+/* $Id: notation.c,v 1.9.2.2.2.1 2007/01/01 09:36:00 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.40.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: pageinfo.c,v 1.40.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"

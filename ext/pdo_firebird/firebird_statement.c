@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.18.2.2 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: firebird_statement.c,v 1.18.2.1.2.1 2007/01/01 09:36:04 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix_includes.h,v 1.7.2.2 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: php_informix_includes.h,v 1.7.2.1.2.1 2007/01/01 09:36:02 sebastian Exp $ */
 
 #ifndef PHP_INFORMIX_INCLUDES_H
 #define PHP_INFORMIX_INCLUDES_H

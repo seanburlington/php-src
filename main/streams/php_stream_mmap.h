@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_mmap.h,v 1.5.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_stream_mmap.h,v 1.5.2.1.2.1 2007/01/01 09:36:12 sebastian Exp $ */
 
 /* Memory Mapping interface for streams.
  * The intention is to provide a uniform interface over the most common

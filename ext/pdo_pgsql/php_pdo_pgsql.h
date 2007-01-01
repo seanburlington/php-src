@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql.h,v 1.3.2.2 2007/01/01 09:40:27 sebastian Exp $ */
+/* $Id: php_pdo_pgsql.h,v 1.3.2.1.2.1 2007/01/01 09:36:05 sebastian Exp $ */
 
 #ifndef PHP_PDO_PGSQL_H
 #define PHP_PDO_PGSQL_H

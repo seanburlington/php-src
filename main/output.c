@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.4 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.1 2007/01/01 09:36:11 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"

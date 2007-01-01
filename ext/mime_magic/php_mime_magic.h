@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_mime_magic.h,v 1.11.2.2 2007/01/01 09:40:25 sebastian Exp $ 
+  $Id: php_mime_magic.h,v 1.11.2.1.2.1 2007/01/01 09:36:03 sebastian Exp $ 
 */
 
 #ifndef PHP_MIME_MAGIC_H

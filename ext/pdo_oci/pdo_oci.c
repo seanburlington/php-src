@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_oci.c,v 1.5.2.7 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: pdo_oci.c,v 1.5.2.6.2.1 2007/01/01 09:36:05 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

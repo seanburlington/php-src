@@ -16,7 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5isapi.c,v 1.8.2.3 2007/01/01 09:40:33 sebastian Exp $ */
+/* $Id: php5isapi.c,v 1.8.2.2.2.1 2007/01/01 09:36:12 sebastian Exp $ */
 
 #include "php.h"
 #include <httpext.h>

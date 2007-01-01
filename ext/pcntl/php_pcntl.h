@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.20.2.2 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: php_pcntl.h,v 1.20.2.1.2.1 2007/01/01 09:36:04 sebastian Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H

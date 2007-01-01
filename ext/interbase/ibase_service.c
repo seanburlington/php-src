@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.11.2.3 2007/01/01 09:40:24 sebastian Exp $ */
+/* $Id: ibase_service.c,v 1.11.2.2.2.1 2007/01/01 09:36:02 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

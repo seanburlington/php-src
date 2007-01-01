@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.23.2.2 2007/01/01 09:40:22 sebastian Exp $ */
+/* $Id: dba_gdbm.c,v 1.23.2.1.2.1 2007/01/01 09:35:59 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

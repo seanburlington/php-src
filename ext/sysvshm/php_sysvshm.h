@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvshm.h,v 1.17.2.2 2007/01/01 09:40:31 sebastian Exp $ */
+/* $Id: php_sysvshm.h,v 1.17.2.1.2.1 2007/01/01 09:36:09 sebastian Exp $ */
 
 #ifndef PHP_SYSVSHM_H
 #define PHP_SYSVSHM_H

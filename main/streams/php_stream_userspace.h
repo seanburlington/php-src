@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_userspace.h,v 1.5.2.2 2007/01/01 09:40:32 sebastian Exp $ */
+/* $Id: php_stream_userspace.h,v 1.5.2.1.2.1 2007/01/01 09:36:12 sebastian Exp $ */
 
 
 /* for user-space streams */

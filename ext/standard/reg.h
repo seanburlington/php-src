@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: reg.h,v 1.21.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: reg.h,v 1.21.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #ifndef REG_H
 #define REG_H

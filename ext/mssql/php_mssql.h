@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.42.2.4 2007/01/01 09:40:25 sebastian Exp $ */
+/* $Id: php_mssql.h,v 1.42.2.3.2.1 2007/01/01 09:36:03 sebastian Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: php_sqlite.h,v 1.32.2.3 2007/01/01 09:40:28 sebastian Exp $ 
+   $Id: php_sqlite.h,v 1.32.2.2.2.1 2007/01/01 09:36:07 sebastian Exp $ 
 */
 
 #ifndef PHP_SQLITE_H

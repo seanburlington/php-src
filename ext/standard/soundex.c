@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.25.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: soundex.c,v 1.25.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #include "php.h"
 #include <stdlib.h>

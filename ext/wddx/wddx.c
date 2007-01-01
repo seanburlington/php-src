@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.7 2006/12/13 15:31:47 iliaa Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.8 2007/01/01 09:36:09 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

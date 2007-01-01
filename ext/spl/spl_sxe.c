@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.8.2.6 2007/01/01 09:40:28 sebastian Exp $ */
+/* $Id: spl_sxe.c,v 1.8.2.5.2.1 2007/01/01 09:36:07 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"

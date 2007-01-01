@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.29.2.2 2007/01/01 09:40:29 sebastian Exp $ */
+/* $Id: flock_compat.c,v 1.29.2.1.2.1 2007/01/01 09:36:08 sebastian Exp $ */
 
 #include "php.h"
 #include <errno.h>

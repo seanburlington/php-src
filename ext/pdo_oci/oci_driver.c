@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.24.2.5 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.4.2.1 2007/01/01 09:36:05 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

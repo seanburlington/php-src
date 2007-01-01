@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.16.2.5 2007/01/01 09:40:26 sebastian Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.16.2.4.2.1 2007/01/01 09:36:05 sebastian Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H

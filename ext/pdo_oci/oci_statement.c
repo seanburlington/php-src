@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.10.2.2 2007/01/01 09:36:05 sebastian Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.10.2.3 2007/01/01 19:24:50 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -642,12 +642,14 @@ static int oci_blob_flush(php_stream *stream TSRMLS_DC)
 	return 0;
 }
 
+/* TODO: implement
 static int oci_blob_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC)
 {
 	struct oci_lob_self *self = (struct oci_lob_self*)stream->abstract;
-	/* TODO: implement */
+
 	return -1;	
 }
+*/
 
 static php_stream_ops oci_blob_stream_ops = {
 	oci_blob_write,

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.17.2.6 2006/01/01 12:50:11 sniper Exp $ */
+/* $Id: php_pdo_int.h,v 1.17.2.7 2007/01/01 09:40:26 sebastian Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.11 2006/04/11 18:03:46 derick Exp $ */
+/* $Id: php_date.h,v 1.17.2.12 2007/01/01 09:40:13 sebastian Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H

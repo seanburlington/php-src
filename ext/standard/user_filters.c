@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4 2006/03/30 21:10:23 tony2001 Exp $ */
+/* $Id: user_filters.c,v 1.31.2.5 2007/01/01 09:40:30 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

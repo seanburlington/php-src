@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.h,v 1.5.2.1 2006/01/01 12:50:15 sniper Exp $ */
+/* $Id: proc_open.h,v 1.5.2.2 2007/01/01 09:40:29 sebastian Exp $ */
 
 #ifdef PHP_WIN32
 typedef HANDLE php_file_descriptor_t;

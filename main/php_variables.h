@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.22.2.3 2006/03/08 08:43:25 mike Exp $ */
+/* $Id: php_variables.h,v 1.22.2.4 2007/01/01 09:40:32 sebastian Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H

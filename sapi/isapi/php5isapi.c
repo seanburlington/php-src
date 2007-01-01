@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5isapi.c,v 1.8.2.2 2006/02/15 11:15:32 tony2001 Exp $ */
+/* $Id: php5isapi.c,v 1.8.2.3 2007/01/01 09:40:33 sebastian Exp $ */
 
 #include "php.h"
 #include <httpext.h>

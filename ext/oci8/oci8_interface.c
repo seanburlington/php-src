@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7 2006/03/28 09:12:18 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.8 2007/01/01 09:40:25 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

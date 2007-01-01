@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.40.2.5 2006/12/29 00:35:25 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.244.2.40.2.6 2007/01/01 09:46:46 sebastian Exp $ */
 
 #include <stdlib.h>
 

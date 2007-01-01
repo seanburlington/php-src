@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.11.4.7.4.2 2006/08/26 14:15:06 bjori Exp $ */
+/* $Id: aggregation.c,v 1.11.4.7.4.3 2007/01/01 09:46:47 sebastian Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"

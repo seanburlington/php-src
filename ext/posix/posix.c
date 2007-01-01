@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.51.2.4.2.2 2006/12/21 01:03:54 tony2001 Exp $ */
+/* $Id: posix.c,v 1.51.2.4.2.3 2007/01/01 09:46:46 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,7 +134,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.51.2.4.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.51.2.4.2.3 $");
 	php_info_print_table_end();
 }
 /* }}} */

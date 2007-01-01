@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.51.2.11 2006/08/28 19:03:32 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.51.2.12 2007/01/01 09:46:47 sebastian Exp $ */
 
 #include "php.h"
 #include "php_streams.h"

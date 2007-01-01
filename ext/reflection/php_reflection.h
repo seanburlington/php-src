@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.h,v 1.11 2006/06/10 00:28:28 bjori Exp $ */
+/* $Id: php_reflection.h,v 1.12 2007/01/01 09:29:29 sebastian Exp $ */
 
 #ifndef PHP_REFLECTION_H
 #define PHP_REFLECTION_H

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_phpvers_compat.h,v 1.4 2006/12/09 22:18:43 wez Exp $ */
+/* $Id: php_pdo_phpvers_compat.h,v 1.5 2007/01/01 09:29:27 sebastian Exp $ */
 
 /* macros for backwards compatibility with PHP 5, so that HEAD of PDO and its
  * drivers may still build against PHP 5 */

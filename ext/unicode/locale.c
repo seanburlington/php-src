@@ -14,7 +14,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: locale.c,v 1.10 2006/05/02 20:58:30 andrei Exp $ */ 
+/* $Id: locale.c,v 1.11 2007/01/01 09:29:33 sebastian Exp $ */ 
 
 #include "php_unicode.h"
 #include "unicode/ubrk.h"

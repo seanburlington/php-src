@@ -1,5 +1,5 @@
 /*
-** 2006 June 10
+** 2007 June 10
 **
 ** The author disclaims copyright to this source code.  In place of
 ** a legal notice, here is a blessing:
@@ -11,7 +11,7 @@
 *************************************************************************
 ** This file contains code used to help implement virtual tables.
 **
-** $Id: vtab.c,v 1.2 2006/08/14 16:35:23 iliaa Exp $
+** $Id: vtab.c,v 1.3 2007/01/01 09:29:28 sebastian Exp $
 */
 #ifndef SQLITE_OMIT_VIRTUALTABLE
 #include "sqliteInt.h"

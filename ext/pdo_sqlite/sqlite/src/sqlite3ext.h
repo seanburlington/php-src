@@ -1,5 +1,5 @@
 /*
-** 2006 June 7
+** 2007 June 7
 **
 ** The author disclaims copyright to this source code.  In place of
 ** a legal notice, here is a blessing:
@@ -15,7 +15,7 @@
 ** as extensions by SQLite should #include this file instead of 
 ** sqlite3.h.
 **
-** @(#) $Id: sqlite3ext.h,v 1.2 2006/08/14 16:35:23 iliaa Exp $
+** @(#) $Id: sqlite3ext.h,v 1.3 2007/01/01 09:29:28 sebastian Exp $
 */
 #ifndef _SQLITE3EXT_H_
 #define _SQLITE3EXT_H_

@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.11 2006/10/06 17:14:14 andrei Exp $ */
+/* $Id: collator.c,v 1.12 2007/01/01 09:29:33 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"

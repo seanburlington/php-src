@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.29 2006/12/06 13:20:17 rrichards Exp $ */
+/* $Id: xp_ssl.c,v 1.30 2007/01/01 09:29:26 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"

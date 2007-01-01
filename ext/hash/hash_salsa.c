@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_salsa.c,v 1.4 2006/01/01 13:09:50 sniper Exp $ */
+/* $Id: hash_salsa.c,v 1.5 2007/01/01 09:29:24 sebastian Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_salsa.h"

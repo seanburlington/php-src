@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.47 2006/10/05 15:06:11 tony2001 Exp $ */
+/* $Id: php_curl.h,v 1.48 2007/01/01 09:29:22 sebastian Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H

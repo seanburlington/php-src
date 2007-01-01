@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.14 2006/05/05 20:56:21 andrei Exp $ */ 
+/* $Id: php_unicode.h,v 1.15 2007/01/01 09:29:33 sebastian Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H

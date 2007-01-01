@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.19 2006/04/13 04:41:08 pollita Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.20 2007/01/01 09:29:35 sebastian Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although

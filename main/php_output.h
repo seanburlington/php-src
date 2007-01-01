@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.70 2006/12/10 15:02:50 mike Exp $ */
+/* $Id: php_output.h,v 1.71 2007/01/01 09:29:35 sebastian Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H

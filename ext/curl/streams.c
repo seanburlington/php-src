@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.26 2006/12/20 13:08:54 tony2001 Exp $ */
+/* $Id: streams.c,v 1.27 2007/01/01 09:29:22 sebastian Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to

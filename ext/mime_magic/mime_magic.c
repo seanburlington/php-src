@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.53 2006/12/28 20:45:20 tony2001 Exp $ 
+  $Id: mime_magic.c,v 1.54 2007/01/01 09:29:25 sebastian Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -240,7 +240,7 @@ zend_module_entry mime_magic_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
 	"0.1", 
 #endif
-#if ZEND_MODULE_API_NO >= 20060613
+#if ZEND_MODULE_API_NO >= 20070613
 	PHP_MODULE_GLOBALS(mime_magic),
 	PHP_GINIT(mime_magic),
 	NULL,

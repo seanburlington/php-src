@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_property.h,v 1.9 2006/05/09 18:21:27 andrei Exp $ */ 
+/* $Id: php_property.h,v 1.10 2007/01/01 09:29:33 sebastian Exp $ */ 
 
 #ifndef PHP_PROPERTY_H
 #define PHP_PROPERTY_H

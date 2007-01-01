@@ -37,7 +37,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_xmlrpc.h,v 1.12 2006/01/01 13:09:56 sniper Exp $ */
+/* $Id: php_xmlrpc.h,v 1.13 2007/01/01 09:29:33 sebastian Exp $ */
 
 #ifndef _PHP_XMLRPC_H
 #define _PHP_XMLRPC_H

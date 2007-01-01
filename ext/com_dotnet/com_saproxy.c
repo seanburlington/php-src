@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.21 2006/12/24 12:42:47 rrichards Exp $ */
+/* $Id: com_saproxy.c,v 1.22 2007/01/01 09:29:21 sebastian Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on

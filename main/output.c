@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.203 2006/12/20 10:50:45 dmitry Exp $ */
+/* $Id: output.c,v 1.204 2007/01/01 09:29:35 sebastian Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0

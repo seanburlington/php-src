@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.9 2006/11/30 16:38:53 iliaa Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.10 2007/01/01 09:29:33 sebastian Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -43,7 +43,10 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.9 2006/11/30 16:38:53 iliaa 
  *   9/1999 - 10/2000
  * HISTORY
  *   $Log: xmlrpc.c,v $
- *   Revision 1.9  2006/11/30 16:38:53  iliaa
+ *   Revision 1.10  2007/01/01 09:29:33  sebastian
+ *   Bump year.
+ *
+ *   Revision 1.9  2007/11/30 16:38:53  iliaa
  *   zts fixes
  *
  *   Revision 1.8  2005/03/28 00:07:24  edink

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_ripemd.c,v 1.7 2006/09/20 01:48:06 pollita Exp $ */
+/* $Id: hash_ripemd.c,v 1.8 2007/01/01 09:29:24 sebastian Exp $ */
 
 /* Heavily borrowed from md5.c & sha1.c of PHP archival fame
    Note that ripemd laughs in the face of logic and uses

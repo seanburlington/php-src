@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.29 2006/12/10 03:12:11 pajoye Exp $ */
+/* $Id: odbc_driver.c,v 1.30 2007/01/01 09:29:28 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

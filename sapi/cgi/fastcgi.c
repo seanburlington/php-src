@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.27 2006/12/19 09:17:28 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.28 2007/01/01 09:29:36 sebastian Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"

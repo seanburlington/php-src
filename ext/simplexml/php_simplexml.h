@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.26 2006/08/07 10:11:04 rrichards Exp $ */
+/* $Id: php_simplexml.h,v 1.27 2007/01/01 09:29:29 sebastian Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H

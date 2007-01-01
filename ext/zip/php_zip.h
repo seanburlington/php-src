@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.13 2006/11/09 16:18:28 nlopess Exp $ */
+/* $Id: php_zip.h,v 1.14 2007/01/01 09:29:34 sebastian Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H

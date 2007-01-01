@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.20 2006/12/24 12:32:35 rrichards Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.21 2007/01/01 09:29:22 sebastian Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H

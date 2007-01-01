@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: glob.c,v 1.7 2006/11/10 09:56:37 dmitry Exp $ */
+/* $Id: glob.c,v 1.8 2007/01/01 09:29:37 sebastian Exp $ */
 
 /*
  * glob(3) -- a superset of the one defined in POSIX 1003.2.

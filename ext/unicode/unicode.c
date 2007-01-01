@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.42 2006/09/21 19:30:33 andrei Exp $ */ 
+/* $Id: unicode.c,v 1.43 2007/01/01 09:29:33 sebastian Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"

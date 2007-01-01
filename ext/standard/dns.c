@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.82 2006/09/25 06:59:02 dmitry Exp $ */
+/* $Id: dns.c,v 1.83 2007/01/01 09:29:31 sebastian Exp $ */
 
 /* {{{ includes */
 #include "php.h"

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_tiger.c,v 1.6 2006/02/19 23:43:23 mike Exp $ */
+/* $Id: hash_tiger.c,v 1.7 2007/01/01 09:29:24 sebastian Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_tiger.h"

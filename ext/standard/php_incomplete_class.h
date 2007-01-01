@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2006 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.21 2006/03/27 13:37:46 dmitry Exp $ */
+/* $Id: php_incomplete_class.h,v 1.22 2007/01/01 09:29:32 sebastian Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H

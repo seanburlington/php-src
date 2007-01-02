@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.78 2007/01/02 18:15:16 cellog Exp $ */
+/* $Id: phar.c,v 1.79 2007/01/02 19:54:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -675,7 +675,7 @@ static int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alia
 /**
  * Create or open a phar for writing
  */
-static int phar_create_or_open_filename(char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar TSRMLS_CC) /* {{{ */
+static int phar_create_or_open_filename(char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar TSRMLS_DC) /* {{{ */
 {
 	phar_archive_data *mydata;
 	int register_alias;
@@ -1549,7 +1549,7 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 			for (loc = 0;loc < copy; loc++) {
 				CRC32(newcrc32, *(buffer + loc));
 			}
-			php_stream_filter_remove(filter, 1);
+			php_stream_filter_remove(filter, 1 TSRMLS_CC);
 			php_stream_rewind(compressedfile);
 			php_stream_write(compressedfile, buffer, copy); 
 			file = compressedfile;
@@ -1569,7 +1569,7 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 			for (loc = 0;loc < copy; loc++) {
 				CRC32(newcrc32, *(buffer + loc));
 			}
-			php_stream_filter_remove(filter, 1);
+			php_stream_filter_remove(filter, 1 TSRMLS_CC);
 			php_stream_rewind(compressedfile);
 			php_stream_write(compressedfile, buffer, copy); 
 			file = compressedfile;
@@ -2426,7 +2426,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.78 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.79 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

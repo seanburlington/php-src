@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.5 2007/01/01 09:36:08 sebastian Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.6 2007/01/02 15:29:09 nlopess Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -625,8 +625,6 @@ PHP_FUNCTION(proc_open)
 					descriptors[ndesc].mode_flags |= O_BINARY;
 #endif
 
-				
-
 			} else if (strcmp(Z_STRVAL_PP(ztype), "file") == 0) {
 				zval **zfile, **zmode;
 				int fd;
@@ -788,7 +786,8 @@ PHP_FUNCTION(proc_open)
 		/* clean up all the descriptors */
 		for (i = 0; i < ndesc; i++) {
 			close(descriptors[i].childend);
-			close(descriptors[i].parentend);
+			if (descriptors[i].parentend)
+				close(descriptors[i].parentend);
 		}
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "procve failed - %s", strerror(errno));
 		goto exit_fail;
@@ -855,7 +854,8 @@ PHP_FUNCTION(proc_open)
 		/* clean up all the descriptors */
 		for (i = 0; i < ndesc; i++) {
 			close(descriptors[i].childend);
-			close(descriptors[i].parentend);
+			if (descriptors[i].parentend)
+				close(descriptors[i].parentend);
 		}
 
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "fork failed - %s", strerror(errno));

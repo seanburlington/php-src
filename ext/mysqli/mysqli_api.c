@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.140 2007/01/01 09:29:25 sebastian Exp $ 
+  $Id: mysqli_api.c,v 1.141 2007/01/02 05:49:05 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -403,7 +403,6 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 }
 /* }}} */
 
-
 /* {{{ proto bool mysqli_change_user(object link, string user, string password, string database) U
    Change logged-in user of the active connection */
 PHP_FUNCTION(mysqli_change_user)
@@ -414,7 +413,7 @@ PHP_FUNCTION(mysqli_change_user)
 	int				user_len, password_len, dbname_len;
 	ulong		rc;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os&&ss&", &mysql_link, mysqli_link_class_entry, 
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os&s&s&", &mysql_link, mysqli_link_class_entry, 
 									&user, &user_len, UG(utf8_conv), &password, &password_len, UG(utf8_conv),
 									&dbname, &dbname_len, UG(utf8_conv)) == FAILURE) {
 		return;
@@ -431,7 +430,6 @@ PHP_FUNCTION(mysqli_change_user)
 	RETURN_TRUE;
 }
 /* }}} */
-
 
 /* {{{ proto string mysqli_character_set_name(object link) U
    Returns the name of the character set used for this connection */

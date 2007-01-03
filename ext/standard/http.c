@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.25 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: http.c,v 1.26 2007/01/03 23:17:17 iliaa Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -247,7 +247,7 @@ PHP_FUNCTION(http_build_query)
 	}
 
 	if (!formstr.c) {
-		RETURN_NULL();
+		RETURN_EMPTY_STRING();
 	}
 
 	smart_str_0(&formstr);

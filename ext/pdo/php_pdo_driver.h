@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.85 2007/01/01 09:29:27 sebastian Exp $ */
+/* $Id: php_pdo_driver.h,v 1.86 2007/01/03 20:33:09 nlopess Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -45,7 +45,7 @@ PDO_API char *php_pdo_int64_to_str(pdo_int64_t i64 TSRMLS_DC);
 # define FALSE 0
 #endif
 
-#define PDO_DRIVER_API	20071209
+#define PDO_DRIVER_API	20061209
 
 enum pdo_param_type {
 	PDO_PARAM_NULL,

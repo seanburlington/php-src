@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.22.2.4 2007/01/01 09:46:42 sebastian Exp $ */
+/* $Id: ftp.c,v 1.68.2.22.2.5 2007/01/03 20:04:57 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1503,6 +1503,8 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 
 	/* some servers don't open a ftp-data connection if the directory is empty */
 	if (ftp->resp == 226) {
+		ftp->data = data_close(ftp, data);
+		php_stream_close(tmpstream);
 		return ecalloc(1, sizeof(char**));
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.188 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: exif.c,v 1.189 2007/01/03 20:49:27 tony2001 Exp $ */
 
 /*  ToDos
  *
@@ -139,7 +139,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.188 2007/01/01 09:29:23 sebastian Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.189 2007/01/03 20:49:27 tony2001 Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -253,7 +253,7 @@ zend_module_entry exif_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
 	EXIF_VERSION,
 #endif
-#if ZEND_MODULE_API_NO >= 20070613
+#if ZEND_MODULE_API_NO >= 20060613
 	PHP_MODULE_GLOBALS(exif),
 	PHP_GINIT(exif),
 	NULL,

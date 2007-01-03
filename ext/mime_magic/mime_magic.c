@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.54 2007/01/01 09:29:25 sebastian Exp $ 
+  $Id: mime_magic.c,v 1.55 2007/01/03 20:49:27 tony2001 Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -240,7 +240,7 @@ zend_module_entry mime_magic_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
 	"0.1", 
 #endif
-#if ZEND_MODULE_API_NO >= 20070613
+#if ZEND_MODULE_API_NO >= 20060613
 	PHP_MODULE_GLOBALS(mime_magic),
 	PHP_GINIT(mime_magic),
 	NULL,

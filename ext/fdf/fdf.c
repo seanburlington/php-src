@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.89.2.2.2.6 2007/01/01 09:36:00 sebastian Exp $ */
+/* $Id: fdf.c,v 1.89.2.2.2.7 2007/01/03 03:55:07 iliaa Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -1442,22 +1442,26 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler)
 			if(nBytes>0) {
 				err = FDFGetValue(theFDF, name, value, value_len-1, &nBytes);
 				if(err == FDFErcOK && nBytes != 0) {
+					unsigned int new_val_len;
+
 					for(p=value;*p;p++) if(*p=='\r') *p='\n';
 					if(lastfieldname) efree(lastfieldname);
-					lastfieldname = estrdup(name);		
-					php_register_variable(name, value, array_ptr TSRMLS_CC);
+					lastfieldname = estrdup(name);
+
+					if (sapi_module.input_filter(PARSE_POST, name, &value, value_len - 1, &new_val_len TSRMLS_CC)) {
+						php_register_variable_safe(name, value, new_val_len, array_ptr TSRMLS_CC);
+					}
 				} 
 			}
 		}   
-		
 		FDFClose(theFDF);
-		VCWD_UNLINK((const char *)filename);
-		efree(filename);
 
 		if(name)          efree(name);
 		if(value)         efree(value);
 		if(lastfieldname) efree(lastfieldname);
 	} 
+	VCWD_UNLINK((const char *)filename);
+	efree(filename);
 }
 /* }}} */
 

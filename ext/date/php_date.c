@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.127 2007/01/01 09:29:22 sebastian Exp $ */
+/* $Id: php_date.c,v 1.128 2007/01/03 14:46:52 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -627,6 +627,14 @@ php_win_std_time:
 				break;
 		}
 		return tzid;
+	}
+#elif defined(NETWARE)
+	/* Try to guess timezone from system information */
+	{
+		char *tzid = timelib_timezone_id_from_abbr("", ((_timezone * -1) + (daylightOffset * daylightOnOff)), daylightOnOff);
+		if (tzid) {
+			return tzid;
+		}
 	}
 #endif
 	/* Fallback to UTC */
@@ -2218,7 +2226,7 @@ PHP_FUNCTION(timezone_name_get)
 PHP_FUNCTION(timezone_name_from_abbr)
 {
 	char    *abbr;
-	char    *tzname;
+	char    *tzid;
 	int      abbr_len;
 	long     gmtoffset = -1;
 	long     isdst = -1;
@@ -2226,10 +2234,10 @@ PHP_FUNCTION(timezone_name_from_abbr)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|ll", &abbr, &abbr_len, &gmtoffset, &isdst) == FAILURE) {
 		RETURN_FALSE;
 	}
-	tzname = timelib_timezone_id_from_abbr(abbr, gmtoffset, isdst);
+	tzid = timelib_timezone_id_from_abbr(abbr, gmtoffset, isdst);
 
-	if (tzname) {
-		RETURN_STRING(tzname, 1);
+	if (tzid) {
+		RETURN_STRING(tzid, 1);
 	} else {
 		RETURN_FALSE;
 	}

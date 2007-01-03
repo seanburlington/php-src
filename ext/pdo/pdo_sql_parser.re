@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.5 2006/12/05 18:04:59 iliaa Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.6 2007/01/03 22:05:24 nlopess Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -29,14 +29,14 @@
 
 #define RET(i) {s->cur = cursor; return i; }
 
-#define YYCTYPE         char
+#define YYCTYPE         unsigned char
 #define YYCURSOR        cursor
-#define YYLIMIT         s->lim
+#define YYLIMIT         cursor
 #define YYMARKER        s->ptr
 #define YYFILL(n)
 
 typedef struct Scanner {
-	char 	*lim, *ptr, *cur, *tok;
+	char 	*ptr, *cur, *tok;
 } Scanner;
 
 static int scan(Scanner *s) 
@@ -90,7 +90,6 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 
 	ptr = *outquery;
 	s.cur = inquery;
-	s.lim = inquery + inquery_len;
 
 	/* phase 1: look for args */
 	while((t = scan(&s)) != PDO_PARSER_EOI) {
@@ -405,7 +404,6 @@ int old_pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char 
 
 	ptr = *outquery;
 	s.cur = inquery;
-	s.lim = inquery + inquery_len;
 	while((t = scan(&s)) != PDO_PARSER_EOI) {
 		if(t == PDO_PARSER_TEXT) {
 			memcpy(ptr, s.tok, s.cur - s.tok);

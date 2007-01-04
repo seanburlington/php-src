@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.110 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: php_session.h,v 1.111 2007/01/04 22:04:38 pollita Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -131,23 +131,6 @@ typedef php_ps_globals zend_ps_globals;
 
 extern zend_module_entry session_module_entry;
 #define phpext_session_ptr &session_module_entry
-
-PHP_FUNCTION(session_name);
-PHP_FUNCTION(session_module_name);
-PHP_FUNCTION(session_save_path);
-PHP_FUNCTION(session_id);
-PHP_FUNCTION(session_regenerate_id);
-PHP_FUNCTION(session_decode);
-PHP_FUNCTION(session_encode);
-PHP_FUNCTION(session_start);
-PHP_FUNCTION(session_destroy);
-PHP_FUNCTION(session_unset);
-PHP_FUNCTION(session_set_save_handler);
-PHP_FUNCTION(session_cache_expire);
-PHP_FUNCTION(session_cache_limiter);
-PHP_FUNCTION(session_set_cookie_params);
-PHP_FUNCTION(session_get_cookie_params);
-PHP_FUNCTION(session_write_close);
 
 #ifdef ZTS
 #define PS(v) TSRMG(ps_globals_id, php_ps_globals *, v)

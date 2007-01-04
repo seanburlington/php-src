@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.33 2006/12/25 15:41:56 tony2001 Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.34 2007/01/04 23:52:29 iliaa Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -44,7 +44,7 @@ AC_CONFIG_HEADER(main/php_config.h)
 MAJOR_VERSION=5
 MINOR_VERSION=2
 RELEASE_VERSION=1
-EXTRA_VERSION="RC2-dev"
+EXTRA_VERSION="RC2"
 PHP_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"
 PHP_VERSION_ID=`expr [$]MAJOR_VERSION \* 10000 + [$]MINOR_VERSION \* 100 + [$]RELEASE_VERSION`
 

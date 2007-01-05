@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.89 2007/01/05 01:50:25 cellog Exp $ */
+/* $Id: phar.c,v 1.90 2007/01/05 02:04:06 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -320,6 +320,10 @@ static phar_entry_info *phar_get_entry_info(phar_archive_data *phar, char *path,
 		return NULL;
 	}
 	if (SUCCESS == zend_hash_find(&phar->manifest, path, path_len, (void**)&entry)) {
+		if (entry->flags & PHAR_ENT_DELETED) {
+			/* entry is deleted, but has not been flushed to disk yet */
+			return NULL;
+		}
 		return entry;
 	}
 	return NULL;
@@ -2608,7 +2612,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.89 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.90 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

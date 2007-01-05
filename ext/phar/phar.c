@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.88 2007/01/05 01:13:12 cellog Exp $ */
+/* $Id: phar.c,v 1.89 2007/01/05 01:50:25 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -374,10 +374,11 @@ static phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len
 		ret->internal_file->crc32 = 0;
 		return ret;
 	}
-	/* create an entry, this is a new file */
-	if ((entry = phar_get_entry_info(phar, path, path_len TSRMLS_CC)) != NULL) {
-		ret = (phar_entry_data *) emalloc(sizeof(phar_entry_data));
-		entry = (phar_entry_info *) emalloc(sizeof(phar_entry_info));
+	/* create a new phar data holder */
+	ret = (phar_entry_data *) emalloc(sizeof(phar_entry_data));
+	if ((entry = phar_get_entry_info(phar, path, path_len TSRMLS_CC)) == NULL) {
+		/* create an entry, this is a new file */
+		etemp.flags = 0;
 		etemp.filename_len = path_len;
 		etemp.filename = estrndup(path, path_len);
 		etemp.uncompressed_filesize = 0;
@@ -388,8 +389,9 @@ static phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len
 		etemp.crc_checked = TRUE;
 		etemp.fp = NULL;
 		etemp.temp_file = 0;
-		memcpy((void *) entry, (void *) &etemp, sizeof(phar_entry_info));
-		zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)entry, sizeof(phar_entry_info), NULL);
+		zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), NULL);
+		/* retrieve the phar manifest copy */
+		entry = phar_get_entry_info(phar, path, path_len TSRMLS_CC);
 	}
 	ret->phar = phar;
 	ret->internal_file = entry;
@@ -2606,7 +2608,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.88 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.89 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

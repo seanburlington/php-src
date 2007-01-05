@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.85 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: posix.c,v 1.86 2007/01/05 20:01:44 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.85 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.86 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -575,7 +575,12 @@ PHP_FUNCTION(posix_ttyname)
 			fd = Z_LVAL_PP(z_fd);
 	}
 #if HAVE_TTYNAME_R
+#ifdef _SC_TTY_NAME_MAX
 	buflen = sysconf(_SC_TTY_NAME_MAX);
+#else
+	/* Arbitrary buffer size for systems which don't extrospect their tty name lengths, way overkill */
+	buflen = 64;
+#endif
 	p = emalloc(buflen);
 
 	if (ttyname_r(fd, p, buflen)) {

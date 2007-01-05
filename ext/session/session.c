@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.464 2007/01/05 03:57:57 pollita Exp $ */
+/* $Id: session.c,v 1.465 2007/01/05 14:53:30 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1546,7 +1546,7 @@ static PHP_FUNCTION(session_id)
 			int id_len;
 			UErrorCode status = U_ZERO_ERROR;
 
-			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &id, &id_len, name.u, name_len, &status TSRMLS_CC);
+			zend_unicode_to_string_ex(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &id, &id_len, name.u, name_len, &status);
 
 			if (U_SUCCESS(status) && id) {
 				PS(id) = id;

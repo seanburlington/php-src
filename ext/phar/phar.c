@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.87 2007/01/04 05:32:44 cellog Exp $ */
+/* $Id: phar.c,v 1.88 2007/01/05 01:13:12 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1470,7 +1470,8 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 	char *manifest;
 	off_t manifest_ftell, bufsize;
 	long offset;
-	php_uint32 copy, loc, new_manifest_count, newcrc32;
+	php_uint32 copy, loc, new_manifest_count;
+	unsigned int newcrc32;
 	php_stream *file, *newfile, *compressedfile;
 	php_stream_filter *filter;
 
@@ -1531,11 +1532,11 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 				}
 				php_stream_read(entry->temp_file, buffer, copy);
 				php_stream_rewind(entry->temp_file);
-				newcrc32 = 0;
+				newcrc32 = ~0;
 				for (loc = 0;loc < copy; loc++) {
 					CRC32(newcrc32, *(buffer + loc));
 				}
-				entry->crc32 = newcrc32;
+				entry->crc32 = ~newcrc32;
 			}
 		} else {
 			if (-1 == php_stream_seek(data->fp, entry->offset_within_phar + data->phar->internal_file_start, SEEK_SET)) {
@@ -1574,14 +1575,14 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 			}
 			copy = php_stream_read(data->fp, buffer, entry->uncompressed_filesize);
 			entry->compressed_filesize = copy;
-			newcrc32 = 0;
+			newcrc32 = ~0;
 			for (loc = 0;loc < copy; loc++) {
 				CRC32(newcrc32, *(buffer + loc));
 			}
 			php_stream_filter_remove(filter, 1 TSRMLS_CC);
 			php_stream_rewind(compressedfile);
 			php_stream_write(compressedfile, buffer, copy); 
-			entry->crc32 = newcrc32;
+			entry->crc32 = ~newcrc32;
 			/* use temp_file to store the newly compressed data */
 			if (entry->temp_file) {
 				/* no longer need the uncompressed contents */
@@ -2605,7 +2606,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.87 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.88 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

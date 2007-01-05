@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.110 2007/01/05 14:53:30 sebastian Exp $ */
+/* $Id: mod_files.c,v 1.111 2007/01/05 17:29:30 pollita Exp $ */
 
 #include "php.h"
 
@@ -121,8 +121,8 @@ static char *ps_files_path_create(char *buf, size_t buflen, ps_files *data, cons
 	n += key_len;
 	buf[n] = '\0';
 
-	if (UG(unicode) && UG(filesystem_encoding_conv)) {
-		/* If there's a cheap way to see if filesystem_encoding_conv happens to be utf8, we should skip this reconversion */
+	if (UG(unicode) && UG(filesystem_encoding_conv) &&
+		ucnv_getType(UG(filesystem_encoding_conv)) != UCNV_UTF8) {
 		char *newbuf = NULL;
 		int newlen;
 		UErrorCode status = U_ZERO_ERROR;

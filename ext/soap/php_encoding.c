@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.20 2007/01/01 09:36:06 sebastian Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.21 2007/01/05 15:06:55 iliaa Exp $ */
 
 #include <time.h>
 
@@ -937,7 +937,7 @@ static xmlNodePtr to_xml_long(encodeTypePtr type, zval *data, int style, xmlNode
 	if (Z_TYPE_P(data) == IS_DOUBLE) {
 		char s[256];
 
-		sprintf(s, "%0.0f",floor(Z_DVAL_P(data)));
+		sprintf(s, "%0.0F",floor(Z_DVAL_P(data)));
 		xmlNodeSetContent(ret, BAD_CAST(s));
 	} else {
 		zval tmp = *data;

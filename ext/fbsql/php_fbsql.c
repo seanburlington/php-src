@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.114.2.3.2.4 2007/01/01 09:36:00 sebastian Exp $ */
+/* $Id: php_fbsql.c,v 1.114.2.3.2.5 2007/01/05 15:06:55 iliaa Exp $ */
 
 /* TODO:
  *
@@ -2893,7 +2893,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 		{
 			double v = *((double*)data);
 			char b[128];
-			snprintf(b, sizeof(b), "%f", v);
+			snprintf(b, sizeof(b), "%F", v);
 			phpfbestrdup(b, length, value);
 		}
 		break;
@@ -2905,7 +2905,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
  			unsigned scale = fbcdmdScale(dtmd);
   			double v = *((double*)data);
   			char b[128];
- 			snprintf(b, sizeof(b), "%.*f", scale, v);
+ 			snprintf(b, sizeof(b), "%.*F", scale, v);
   			phpfbestrdup(b, length, value);
 		}
 		break;
@@ -3021,7 +3021,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 		{
 			char b[128];
 			double seconds = *((double*)data);
-			snprintf(b, sizeof(b), "%f", seconds);
+			snprintf(b, sizeof(b), "%F", seconds);
 			phpfbestrdup(b, length, value);
 		}
 		break;

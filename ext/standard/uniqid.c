@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.41.2.2.2.1 2007/01/01 09:36:09 sebastian Exp $ */
+/* $Id: uniqid.c,v 1.41.2.2.2.2 2007/01/05 15:06:55 iliaa Exp $ */
 
 #include "php.h"
 
@@ -76,7 +76,7 @@ PHP_FUNCTION(uniqid)
 	 * digits for usecs.
 	 */
 	if (more_entropy) {
-		spprintf(&uniqid, 0, "%s%08x%05x%.8f", prefix, sec, usec, php_combined_lcg(TSRMLS_C) * 10);
+		spprintf(&uniqid, 0, "%s%08x%05x%.8F", prefix, sec, usec, php_combined_lcg(TSRMLS_C) * 10);
 	} else {
 		spprintf(&uniqid, 0, "%s%08x%05x", prefix, sec, usec);
 	}

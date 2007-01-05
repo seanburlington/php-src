@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.15 2007/01/01 09:36:05 sebastian Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.16 2007/01/05 15:06:55 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -5383,7 +5383,7 @@ PHP_PGSQL_API int php_pgsql_insert(PGconn *pg_link, const char *table, zval *var
 				smart_str_append_long(&querystr, Z_LVAL_PP(val));
 				break;
 			case IS_DOUBLE:
-				smart_str_appendl(&querystr, buf, snprintf(buf, sizeof(buf), "%f", Z_DVAL_PP(val)));
+				smart_str_appendl(&querystr, buf, snprintf(buf, sizeof(buf), "%F", Z_DVAL_PP(val)));
 				break;
 			default:
 				/* should not happen */
@@ -5485,7 +5485,7 @@ static inline int build_assignment_string(smart_str *querystr, HashTable *ht, co
 				smart_str_append_long(querystr, Z_LVAL_PP(val));
 				break;
 			case IS_DOUBLE:
-				smart_str_appendl(querystr, buf, MIN(snprintf(buf, sizeof(buf), "%f", Z_DVAL_PP(val)), sizeof(buf)-1));
+				smart_str_appendl(querystr, buf, MIN(snprintf(buf, sizeof(buf), "%F", Z_DVAL_PP(val)), sizeof(buf)-1));
 				break;
 			default:
 				/* should not happen */

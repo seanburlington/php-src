@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.20.2.3.2.3 2007/01/01 09:36:09 sebastian Exp $ */
+/* $Id: sysvmsg.c,v 1.20.2.3.2.4 2007/01/05 15:06:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -144,7 +144,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.3 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.4 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -412,7 +412,7 @@ PHP_FUNCTION(msg_send)
 				break;
 
 			case IS_DOUBLE:
-				message_len = spprintf(&p, 0, "%f", Z_DVAL_P(message));
+				message_len = spprintf(&p, 0, "%F", Z_DVAL_P(message));
 				break;
 
 			default:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.111 2007/01/04 22:04:38 pollita Exp $ */
+/* $Id: php_session.h,v 1.112 2007/01/05 02:07:59 pollita Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -199,6 +199,7 @@ PHPAPI const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 	ulong num_key;												\
 	zval **struc;
 
+/* (Possibly) needed for BC (e.g. by external modules using the session registry) */
 #define PS_ENCODE_LOOP(code) do {									\
 		HashTable *_ht = Z_ARRVAL_P(PS(http_session_vars)); \
 																	\
@@ -211,6 +212,24 @@ PHPAPI const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 			} 														\
 		}															\
 	} while(0)
+
+#define PS_UENCODE_LOOP(code) do { \
+		int key_type;	\
+		HashTable *_ht = Z_ARRVAL_P(PS(http_session_vars)); \
+		HashPosition _pos;	\
+																	\
+		for (zend_hash_internal_pointer_reset_ex(_ht, &_pos);			\
+				(key_type = zend_hash_get_current_key_ex(_ht, &key, &key_length, &num_key, 0, &_pos)) != HASH_KEY_NON_EXISTANT; \
+				zend_hash_move_forward_ex(_ht, &_pos)) {				\
+			if (key_type != HASH_KEY_IS_STRING && key_type != HASH_KEY_IS_UNICODE) { break; }	\
+			key_length--;										\
+			struc = NULL; \
+			zend_hash_get_current_data_ex(_ht, (void**)&struc, &_pos);	\
+\
+			code;		 										\
+		}															\
+	} while(0)
+
 
 PHPAPI ZEND_EXTERN_MODULE_GLOBALS(ps)
 

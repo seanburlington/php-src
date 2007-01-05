@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2006/12/07 01:41:29 iliaa Exp $
+dnl $Id: config.m4,v 1.16 2007/01/05 21:30:06 pollita Exp $
 dnl
 
 PHP_ARG_ENABLE(posix,whether to enable POSIX-like functions,
@@ -11,5 +11,22 @@ if test "$PHP_POSIX" = "yes"; then
 
   AC_CHECK_HEADERS(sys/mkdev.h)
 
-  AC_CHECK_FUNCS(seteuid setegid setsid getsid setpgid getpgid ctermid mkfifo mknod getrlimit getlogin getgroups makedev initgroups getpwuid_r getgrgid_r ttyname_r)
+  AC_CHECK_FUNCS(seteuid setegid setsid getsid setpgid getpgid ctermid mkfifo mknod getrlimit getlogin getgroups makedev initgroups getpwuid_r getgrgid_r)
+
+  AC_MSG_CHECKING([for working ttyname_r() implementation])
+  AC_TRY_RUN([
+#include <unistd.h>
+
+int main(int argc, char *argv[])
+{
+	char buf[64];
+
+	return ttyname_r(0, buf, 64) ? 1 : 0;
+}
+  ],[
+    AC_MSG_RESULT([yes])
+    AC_DEFINE(HAVE_TTYNAME_R, 1, [Whether you have a working ttyname_r])
+  ],[
+    AC_MSG_RESULT([no, posix_ttyname() will be thread-unsafe])
+  ])
 fi

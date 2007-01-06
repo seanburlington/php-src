@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.93 2007/01/05 04:45:50 cellog Exp $ */
+/* $Id: phar.c,v 1.94 2007/01/06 18:58:33 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2396,9 +2396,9 @@ PHP_METHOD(Phar, offsetSet)
 	int fname_len;
 	char *contents;
 	int contents_len;
-	PHAR_ARCHIVE_OBJECT();
 	phar_entry_data *data;
 	php_stream *fp;
+	PHAR_ARCHIVE_OBJECT();
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &fname, &fname_len, &contents, &contents_len) == FAILURE) {
 		return;
@@ -2690,7 +2690,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.93 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.94 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

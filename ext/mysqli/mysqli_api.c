@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.141 2007/01/02 05:49:05 georg Exp $ 
+  $Id: mysqli_api.c,v 1.142 2007/01/06 05:50:36 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1099,7 +1099,7 @@ PHP_FUNCTION(mysqli_info)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);
 
-	RETURN_UTF8_STRING(mysql->mysql->info, ZSTR_DUPLICATE);
+	RETURN_UTF8_STRING((mysql->mysql->info) ? mysql->mysql->info : "", ZSTR_DUPLICATE);
 }
 /* }}} */
 

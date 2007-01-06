@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.11 2007/01/06 15:53:32 bjori Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.12 2007/01/06 18:03:43 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1347,13 +1347,14 @@ static PHP_FUNCTION(xmlwriter_write_dtd_entity)
 	int name_len, content_len, retval;
 	/* Optional parameters */
 	char *pubid = NULL, *sysid = NULL, *ndataid = NULL;
-	int pe = 0, pubid_len, sysid_len, ndataid_len;
+	zend_bool pe = 0;
+	int pubid_len, sysid_len, ndataid_len;
 
 #ifdef ZEND_ENGINE_2
 	zval *this = getThis();
 
 	if (this) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|lsss",
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|bsss",
 			&name, &name_len, &content, &content_len, &pe, &pubid, &pubid_len,
 			&sysid, &sysid_len, &ndataid, &ndataid_len) == FAILURE) {
 			return;
@@ -1362,7 +1363,7 @@ static PHP_FUNCTION(xmlwriter_write_dtd_entity)
 	} else
 #endif
 	{
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rss|lsss", &pind, 
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rss|bsss", &pind, 
 			&name, &name_len, &content, &content_len, &pe, &pubid, &pubid_len,
 			&sysid, &sysid_len, &ndataid, &ndataid_len) == FAILURE) {
 			return;

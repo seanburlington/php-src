@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ming.h,v 1.17.2.1.2.2 2007/01/01 09:36:03 sebastian Exp $ */
+/* $Id: php_ming.h,v 1.17.2.1.2.3 2007/01/06 19:25:31 nlopess Exp $ */
 
 #ifndef _PHP_MING_H
 #define _PHP_MING_H
@@ -79,7 +79,9 @@ PHP_METHOD(swfmovie, add);
 PHP_METHOD(swfmovie, remove);
 PHP_METHOD(swfmovie, nextFrame);
 PHP_METHOD(swfmovie, labelFrame);
+#ifdef HAVE_SWFMOVIE_NAMEDANCHOR
 PHP_METHOD(swfmovie, namedAnchor);
+#endif
 PHP_METHOD(swfmovie, setBackground);
 PHP_METHOD(swfmovie, setRate);
 PHP_METHOD(swfmovie, setDimension);
@@ -266,6 +268,8 @@ PHP_FUNCTION(ming_useSWFVersion);
 
 #ifdef HAVE_NEW_MING
 PHP_FUNCTION(ming_useConstants);
+#endif
+#ifdef HAVE_MING_SETSWFCOMPRESSION
 PHP_FUNCTION(ming_setSWFCompression);
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_logos.c,v 1.19.2.1.2.4 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: php_logos.c,v 1.19.2.1.2.5 2007/01/06 20:44:51 nlopess Exp $ */
 
 #include "php.h"
 #include "logos.h"
@@ -31,7 +31,7 @@ typedef struct _php_info_logo {
 	int size; 
 } php_info_logo;
 
-HashTable phpinfo_logo_hash;
+static HashTable phpinfo_logo_hash;
 
 PHPAPI int php_register_info_logo(char *logo_string, const char *mimetype, const unsigned char *data, int size)
 {

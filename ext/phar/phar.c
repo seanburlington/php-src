@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.96 2007/01/07 18:35:47 helly Exp $ */
+/* $Id: phar.c,v 1.97 2007/01/07 19:05:11 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1095,7 +1095,7 @@ php_stream_wrapper php_stream_phar_wrapper =  {
  */
 static int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_data *idata, php_uint32 crc32 TSRMLS_DC) /* {{{ */
 {
-	unsigned int crc = ~0;
+	php_uint32 crc = ~0;
 	int len = idata->internal_file->uncompressed_filesize;
 	char c;
 
@@ -1517,7 +1517,7 @@ static int phar_flush(php_stream *stream TSRMLS_DC) /* {{{ */
 	off_t manifest_ftell, bufsize;
 	long offset;
 	php_uint32 copy, loc, new_manifest_count;
-	unsigned int newcrc32;
+	php_uint32 newcrc32;
 	php_stream *file, *newfile, *compressedfile;
 	php_stream_filter *filter;
 
@@ -2198,6 +2198,7 @@ static int phar_unlink(php_stream_wrapper *wrapper, char *url, int options, php_
 	php_url *resource;
 	char *internal_file;
 	phar_entry_data *idata;
+	php_stream *fpf;
 	
 	resource = php_url_parse(url);
 
@@ -2240,6 +2241,10 @@ static int phar_unlink(php_stream_wrapper *wrapper, char *url, int options, php_
 		}
 	}
 	idata->internal_file->flags |= PHAR_ENT_DELETED;
+	/* we need to "flush" the stream to save the newly deleted file on disk */
+	fpf = php_stream_alloc(&phar_ops, idata, NULL, "wb");
+	phar_flush(fpf TSRMLS_CC);
+	php_stream_close(fpf);
 	efree(idata);
 	efree(internal_file);
 	php_url_free(resource);
@@ -2784,7 +2789,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.96 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.97 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

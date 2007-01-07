@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.98 2007/01/07 19:45:30 cellog Exp $ */
+/* $Id: phar.c,v 1.99 2007/01/07 19:57:25 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2248,10 +2248,14 @@ static int phar_unlink(php_stream_wrapper *wrapper, char *url, int options, php_
 	}
 	idata->internal_file->flags |= PHAR_ENT_DELETED;
 	efree(internal_file);
-	php_url_free(resource);
 	idata->internal_file = 0;
+	efree(idata);
 	/* we need to "flush" the stream to save the newly deleted file on disk */
+	idata = (phar_entry_data *) emalloc(sizeof(phar_entry_data));
+	idata->fp = 0;
+	idata->phar = phar_get_archive(resource->host, strlen(resource->host), 0, 0 TSRMLS_CC);
 	do_phar_flush(idata TSRMLS_CC);
+	php_url_free(resource);
 	efree(idata);
 	return SUCCESS;
 }
@@ -2803,7 +2807,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.98 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.99 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

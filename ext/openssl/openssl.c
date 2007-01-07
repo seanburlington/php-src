@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.25 2007/01/01 09:36:04 sebastian Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.26 2007/01/07 18:38:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2056,7 +2056,7 @@ static EVP_PKEY * php_openssl_generate_private_key(struct php_x509_request * req
 					return_val = req->priv_key;
 				}
 				break;
-#ifndef NO_DSA
+#if !defined(NO_DSA) && defined(HAVE_DSA_DEFAULT_METHOD)
 			case OPENSSL_KEYTYPE_DSA:
 				{
 					DSA *dsapar = DSA_generate_parameters(req->priv_key_bits, NULL, 0, NULL, NULL, NULL, NULL);

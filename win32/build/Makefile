@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.35.2.1.2.3 2007/01/01 19:32:09 iliaa Exp $
+# $Id: Makefile,v 1.35.2.1.2.4 2007/01/08 00:27:06 edink Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -55,8 +55,8 @@ $(MCFILE): win32\build\wsyslog.mc
 
 #	$(RC) /fo $(MCFILE) $(BUILD_DIR)\wsyslog.rc
 
-_VC_MANIFEST_EMBED_EXE= $(MT) -manifest $@.manifest -outputresource:$@;1
-_VC_MANIFEST_EMBED_DLL= $(MT) -manifest $@.manifest -outputresource:$@;2
+_VC_MANIFEST_EMBED_EXE= $(MT) -nologo -manifest $@.manifest -outputresource:$@;1
+_VC_MANIFEST_EMBED_DLL= $(MT) -nologo -manifest $@.manifest -outputresource:$@;2
 
 $(PHPDLL_RES): win32\build\template.rc
 	$(RC) /fo $(PHPDLL_RES) /d FILE_DESCRIPTION="\"PHP Script Interpreter\"" \

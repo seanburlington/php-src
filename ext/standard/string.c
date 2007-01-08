@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.52.2.8 2007/01/01 09:46:48 sebastian Exp $ */
+/* $Id: string.c,v 1.333.2.52.2.9 2007/01/08 14:25:22 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2531,7 +2531,7 @@ PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len,
 	}
 	
 	Z_STRLEN_P(result) = len + (char_count * (to_len - 1));
-	Z_STRVAL_P(result) = target = emalloc(Z_STRLEN_P(result) + 1);
+	Z_STRVAL_P(result) = target = safe_emalloc(char_count, to_len, len);
 	Z_TYPE_P(result) = IS_STRING;
 	
 	for (source = str; source < source_end; source++) {

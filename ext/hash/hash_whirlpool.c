@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_whirlpool.c,v 1.3.2.3.2.1 2007/01/01 09:36:01 sebastian Exp $ */
+/* $Id: hash_whirlpool.c,v 1.3.2.3.2.2 2007/01/08 22:29:25 nlopess Exp $ */
 
 #include "php_hash.h"
 
@@ -433,7 +433,7 @@ PHP_HASH_API void PHP_WHIRLPOOLFinal(unsigned char digest[64], PHP_WHIRLPOOL_CTX
     memset(context, 0, sizeof(*context));
 }
 
-php_hash_ops php_hash_whirlpool_ops = {
+const php_hash_ops php_hash_whirlpool_ops = {
 	(php_hash_init_func_t) PHP_WHIRLPOOLInit,
 	(php_hash_update_func_t) PHP_WHIRLPOOLUpdate,
 	(php_hash_final_func_t) PHP_WHIRLPOOLFinal,

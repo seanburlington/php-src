@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.12 2007/01/08 03:39:09 iliaa Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.13 2007/01/08 04:27:29 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -297,7 +297,15 @@ PHP_FUNCTION(spl_autoload)
 	EG(function_state_ptr) = original_function_state_ptr;
 
 	if (!found && !SPL_G(autoload_running)) {
-		zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Class %s could not be loaded", class_name);
+		/* For internal errors, we generate E_ERROR, for direct calls an exception is thrown.
+		 * The "scope" is determined by an opcode, if it is ZEND_FETCH_CLASS we know function was called indirectly by
+		 * the Zend engine.
+		 */
+		if (active_opline->opcode != ZEND_FETCH_CLASS) {
+			zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Class %s could not be loaded", class_name);
+		} else {
+			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Class %s could not be loaded", class_name);
+		}
 	}
 } /* }}} */
 

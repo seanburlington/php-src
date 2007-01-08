@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.364 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: gd.c,v 1.365 2007/01/08 22:56:25 nlopess Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1078,7 +1078,11 @@ zend_module_entry gd_module_entry = {
 	"gd",
 	gd_functions,
 	PHP_MINIT(gd),
+#if HAVE_LIBT1
 	PHP_MSHUTDOWN(gd),
+#else
+	NULL,
+#endif
 	NULL,
 #if HAVE_GD_STRINGFT && (HAVE_GD_FONTCACHESHUTDOWN || HAVE_GD_FREEFONTCACHE)
 	PHP_RSHUTDOWN(gd),
@@ -1122,16 +1126,16 @@ static void php_free_gd_font(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 }
 /* }}} */
 
+#if HAVE_LIBT1
 /* {{{ PHP_MSHUTDOWN_FUNCTION
  */
 PHP_MSHUTDOWN_FUNCTION(gd)
 {
-#if HAVE_LIBT1
 	T1_CloseLib();
-#endif
 	return SUCCESS;
 }
 /* }}} */
+#endif
 
 
 /* {{{ PHP_MINIT_FUNCTION

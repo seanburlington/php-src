@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.106 2007/01/01 09:29:22 sebastian Exp $ */
+/* $Id: interface.c,v 1.107 2007/01/08 20:04:56 pollita Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -450,6 +450,7 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLOPT_PROXYPORT);
 	REGISTER_CURL_CONSTANT(CURLOPT_UNRESTRICTED_AUTH);
 	REGISTER_CURL_CONSTANT(CURLOPT_FTP_USE_EPRT);
+	REGISTER_CURL_CONSTANT(CURLOPT_TCP_NODELAY);
 	REGISTER_CURL_CONSTANT(CURLOPT_HTTP200ALIASES);
 	REGISTER_CURL_CONSTANT(CURL_TIMECOND_IFMODSINCE);
 	REGISTER_CURL_CONSTANT(CURL_TIMECOND_IFUNMODSINCE);
@@ -1268,6 +1269,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_PORT:
 		case CURLOPT_AUTOREFERER:
 		case CURLOPT_COOKIESESSION:
+		case CURLOPT_TCP_NODELAY:
 			convert_to_long_ex(zvalue);
 			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
 			break;

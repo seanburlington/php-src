@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_snefru.c,v 1.5 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: hash_snefru.c,v 1.6 2007/01/08 22:29:52 nlopess Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_snefru.h"
@@ -193,7 +193,7 @@ PHP_HASH_API void PHP_SNEFRUFinal(unsigned char digest[32], PHP_SNEFRU_CTX *cont
 	memset(context, 0, sizeof(*context));
 }
 
-php_hash_ops php_hash_snefru_ops = {
+const php_hash_ops php_hash_snefru_ops = {
 	(php_hash_init_func_t) PHP_SNEFRUInit,
 	(php_hash_update_func_t) PHP_SNEFRUUpdate,
 	(php_hash_final_func_t) PHP_SNEFRUFinal,

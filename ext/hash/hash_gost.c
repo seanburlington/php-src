@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_gost.c,v 1.4 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: hash_gost.c,v 1.5 2007/01/08 22:29:52 nlopess Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_gost.h"
@@ -302,7 +302,7 @@ PHP_HASH_API void PHP_GOSTFinal(unsigned char digest[32], PHP_GOST_CTX *context)
 	memset(context, 0, sizeof(*context));
 }
 
-php_hash_ops php_hash_gost_ops = {
+const php_hash_ops php_hash_gost_ops = {
 	(php_hash_init_func_t) PHP_GOSTInit,
 	(php_hash_update_func_t) PHP_GOSTUpdate,
 	(php_hash_final_func_t) PHP_GOSTFinal,

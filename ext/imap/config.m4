@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.70 2006/09/24 18:06:53 iliaa Exp $
+dnl $Id: config.m4,v 1.71 2007/01/08 18:23:23 andrei Exp $
 dnl
 
 AC_DEFUN([IMAP_INC_CHK],[if test -r "$i$1/c-client.h"; then
@@ -65,6 +65,9 @@ AC_DEFUN([PHP_IMAP_KRB_CHK], [
 
 AC_DEFUN([PHP_IMAP_SSL_CHK], [
   if test "$PHP_IMAP_SSL" != "no"; then
+    if test "$PHP_OPENSSL" == ""; then
+      PHP_OPENSSL='no'
+    fi
     PHP_SETUP_OPENSSL(IMAP_SHARED_LIBADD,
     [
       AC_DEFINE(HAVE_IMAP_SSL,1,[ ])

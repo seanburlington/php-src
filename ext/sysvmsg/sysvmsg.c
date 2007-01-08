@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.20.2.3.2.4 2007/01/05 15:06:55 iliaa Exp $ */
+/* $Id: sysvmsg.c,v 1.20.2.3.2.5 2007/01/08 22:34:07 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,7 +84,7 @@ zend_module_entry sysvmsg_module_entry = {
 	"sysvmsg",
 	sysvmsg_functions,
 	PHP_MINIT(sysvmsg),
-	PHP_MSHUTDOWN(sysvmsg),
+	NULL,
 	NULL,
 	NULL,
 	PHP_MINFO(sysvmsg),
@@ -130,21 +130,13 @@ PHP_MINIT_FUNCTION(sysvmsg)
 }
 /* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(sysvmsg)
-{
-	return SUCCESS;
-}
-/* }}} */
-
 /* {{{ PHP_MINFO_FUNCTION
  */
 PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.4 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.5 $");
 	php_info_print_table_end();
 }
 /* }}} */

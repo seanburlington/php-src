@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvmsg.h,v 1.6.2.1.2.1 2007/01/01 09:36:09 sebastian Exp $ */
+/* $Id: php_sysvmsg.h,v 1.6.2.1.2.2 2007/01/08 22:34:07 nlopess Exp $ */
 
 #ifndef PHP_SYSVMSG_H
 #define PHP_SYSVMSG_H
@@ -40,9 +40,6 @@ extern zend_module_entry sysvmsg_module_entry;
 #endif
 
 PHP_MINIT_FUNCTION(sysvmsg);
-PHP_MSHUTDOWN_FUNCTION(sysvmsg);
-PHP_RINIT_FUNCTION(sysvmsg);
-PHP_RSHUTDOWN_FUNCTION(sysvmsg);
 PHP_MINFO_FUNCTION(sysvmsg);
 
 PHP_FUNCTION(msg_get_queue);

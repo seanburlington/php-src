@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.56 2007/01/01 09:29:25 sebastian Exp $ */
+/* $Id: libxml.c,v 1.57 2007/01/08 20:01:23 pollita Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -947,7 +947,9 @@ int php_libxml_increment_doc_ref(php_libxml_node_object *object, xmlDocPtr docp 
 		ret_refcount = object->document->refcount;
 	} else if (docp != NULL) {
 		ret_refcount = 1;
-		object->document = emalloc(sizeof(php_libxml_ref_obj));
+		object->document = pemalloc(sizeof(php_libxml_ref_obj), 0);
+		object->document->persistent = 0;
+		object->document->external_owner = 0;
 		object->document->ptr = docp;
 		object->document->refcount = ret_refcount;
 		object->document->doc_props = NULL;
@@ -972,9 +974,23 @@ int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC) {
 				}
 				efree(object->document->doc_props);
 			}
-			efree(object->document);
+			pefree(object->document, object->document->persistent);
 			object->document = NULL;
-		}
+		} else if (ret_refcount == 1 && object->document->external_owner) {
+			/* PHP is done with this object, but someone else owns the DomNodes,
+			 * Kill the non-persistent bits, but leave the persistable php_libxml_ref_obj around */
+			if (object->document->doc_props != NULL) {
+				if (object->document->doc_props->classmap) {
+					zend_hash_destroy(object->document->doc_props->classmap);
+					FREE_HASHTABLE(object->document->doc_props->classmap);
+				}
+				efree(object->document->doc_props);
+				object->document->doc_props = NULL;
+			}
+			/* Don't worry about the fact that this memory is left unfreed,
+			 * Whoever else owns it has the pointer stored somewhere */
+			object->document = NULL;
+		}			
 	}
 
 	return ret_refcount;

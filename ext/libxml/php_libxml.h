@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.23 2007/01/01 09:29:25 sebastian Exp $ */
+/* $Id: php_libxml.h,v 1.24 2007/01/08 20:01:23 pollita Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -58,6 +58,8 @@ typedef struct _php_libxml_ref_obj {
 	void *ptr;
 	int   refcount;
 	libxml_doc_props *doc_props;
+	zend_bool persistent;
+	zend_bool external_owner;
 } php_libxml_ref_obj;
 
 typedef struct _php_libxml_node_ptr {

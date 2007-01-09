@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.105 2007/01/09 22:30:55 helly Exp $ */
+/* $Id: phar.c,v 1.106 2007/01/09 23:23:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,7 +225,7 @@ static void phar_destroy_phar_data(phar_archive_data *data TSRMLS_DC) /* {{{ */
 	if (data->fp) {
 		php_stream_close(data->fp);
 	}
-	data->fp = 0;
+
 	efree(data);
 }
 /* }}}*/
@@ -1923,11 +1923,7 @@ static int phar_flush(phar_entry_data *data TSRMLS_DC) /* {{{ */
 			/* remove this from the new phar */
 			continue;
 		}
-		if (entry->flags & PHAR_ENT_MODIFIED) {
-			if (!entry->temp_file) {
-				/* nothing to do here */
-				continue;
-			}
+		if ((entry->flags & PHAR_ENT_MODIFIED) && entry->temp_file) {
 			php_stream_rewind(entry->temp_file);
 			file = entry->temp_file;
 		} else {
@@ -3055,7 +3051,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.105 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.106 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

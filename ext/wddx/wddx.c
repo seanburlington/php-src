@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.8 2007/01/01 09:36:09 sebastian Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.9 2007/01/09 15:20:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -284,7 +284,7 @@ PS_SERIALIZER_DECODE_FUNC(wddx)
 
 			switch (hash_type) {
 				case HASH_KEY_IS_LONG:
-					sprintf(tmp, "%ld", idx);
+					key_length = sprintf(tmp, "%ld", idx) + 1;
 					key = tmp;
 					/* fallthru */
 				case HASH_KEY_IS_STRING:

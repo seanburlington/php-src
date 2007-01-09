@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.37.2.6 2007/01/01 09:46:41 sebastian Exp $ */
+/* $Id: exif.c,v 1.118.2.37.2.7 2007/01/09 11:38:04 tony2001 Exp $ */
 
 /*  ToDos
  *
@@ -107,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.6 2007/01/01 09:46:41 sebastian Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.7 2007/01/09 11:38:04 tony2001 Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1550,6 +1550,7 @@ static void exif_iif_add_value(image_info_type *image_info, int section_index, c
 	image_info->info_list[section_index].list = list;
 
 	info_data  = &image_info->info_list[section_index].list[image_info->info_list[section_index].count];
+	memset(info_data, 0, sizeof(image_info_data));
 	info_data->tag    = tag;
 	info_data->format = format;
 	info_data->length = length;

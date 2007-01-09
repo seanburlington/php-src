@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.5 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.6 2007/01/09 23:27:22 iliaa Exp $ */
 
 #include "php.h"
 
@@ -228,12 +228,27 @@ PHPAPI char *php_get_current_user()
 		return SG(request_info).current_user;		
 #else
 		struct passwd *pwd;
+#ifdef HAVE_GETPWUID_R
+		struct passwd _pw;
+		struct passwd *retpwptr = NULL;
+		int pwbuflen = sysconf(_SC_GETPW_R_SIZE_MAX);
+		char *pwbuf = emalloc(pwbuflen);
 
+		if (getpwuid_r(pstat->st_uid, &_pw, pwbuf, pwbuflen, &retpwptr) != 0) {
+			efree(pwbuf);
+			return "";
+		}
+		pwd = &_pw;
+#else
 		if ((pwd=getpwuid(pstat->st_uid))==NULL) {
 			return "";
 		}
+#endif
 		SG(request_info).current_user_length = strlen(pwd->pw_name);
 		SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);
+#ifdef HAVE_GETPWUID_R
+		efree(pwbuf);
+#endif
 		return SG(request_info).current_user;		
 #endif
 	}	

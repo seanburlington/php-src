@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.482 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: file.c,v 1.483 2007/01/10 20:12:14 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2425,6 +2425,7 @@ post_enc:
 					state = PHP_FGETCSV_READY;
 					field_start = field_end = NULL;
 					p += delimiter_len;
+					if (p >= e) break;
 					goto ready_state;
 				}
 
@@ -2446,6 +2447,7 @@ post_enc:
 					state = PHP_FGETCSV_READY;
 					field_start = field_end = NULL;
 					p += delimiter_len;
+					if (p >= e) break;
 					goto ready_state;
 				}
 
@@ -2546,6 +2548,7 @@ with_enc:
 						memmove(p, p + enclosure_len, (e - p) - enclosure_len);
 						e -= enclosure_len;
 						p += enclosure_len;
+						if (p >= e) break;
 						goto with_enc;
 					} else {
 						/* Genuine end enclosure, switch state */
@@ -2561,6 +2564,7 @@ with_enc:
 					p += escape_len + 1;
 
 					/* Reprocess for ending enclosures */
+					if (p >= e) break;
 					goto with_enc;
 				}
 

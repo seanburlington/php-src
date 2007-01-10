@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.108 2007/01/10 00:07:44 helly Exp $ */
+/* $Id: phar.c,v 1.109 2007/01/10 00:38:16 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -230,6 +230,23 @@ static void phar_destroy_phar_data(phar_archive_data *data TSRMLS_DC) /* {{{ */
 }
 /* }}}*/
 
+/**
+ * Destroy phar's in shutdown, here we don't care about aliases
+ */
+static void destroy_phar_data_only(void *pDest) /* {{{ */
+{
+	phar_archive_data *phar_data = *(phar_archive_data **) pDest;
+	TSRMLS_FETCH();
+
+	if (--phar_data->refcount < 0) {
+		phar_destroy_phar_data(phar_data TSRMLS_CC);
+	}
+}
+/* }}}*/
+
+/**
+ * Delete aliases to phar's that got kicked out of the global table
+ */
 static int phar_unalias_apply(void *pDest, void *argument TSRMLS_DC) /* {{{ */
 {
 	return *(void**)pDest == argument ? ZEND_HASH_APPLY_REMOVE : ZEND_HASH_APPLY_KEEP;
@@ -3003,6 +3020,7 @@ PHP_RINIT_FUNCTION(phar) /* {{{ */
 PHP_RSHUTDOWN_FUNCTION(phar) /* {{{ */
 {
 	zend_hash_destroy(&(PHAR_GLOBALS->phar_alias_map));
+	PHAR_GLOBALS->phar_fname_map. pDestructor = destroy_phar_data_only;
 	zend_hash_destroy(&(PHAR_GLOBALS->phar_fname_map));
 	return SUCCESS;
 }
@@ -3013,7 +3031,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.108 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.109 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

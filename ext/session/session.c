@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.25 2007/01/09 15:31:12 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.26 2007/01/10 07:04:49 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -328,11 +328,10 @@ PHPAPI void php_add_session_var(char *name, size_t namelen TSRMLS_DC)
 	if (PG(register_globals)) {
 		zval **sym_global = NULL;
 		
-		zend_hash_find(&EG(symbol_table), name, namelen + 1, 
-				(void *) &sym_global);
-				
-		if ((Z_TYPE_PP(sym_global) == IS_ARRAY && Z_ARRVAL_PP(sym_global) == &EG(symbol_table)) || *sym_global == PS(http_session_vars)) {
-			return;
+		if (zend_hash_find(&EG(symbol_table), name, namelen + 1, (void *) &sym_global) == SUCCESS) {				
+			if ((Z_TYPE_PP(sym_global) == IS_ARRAY && Z_ARRVAL_PP(sym_global) == &EG(symbol_table)) || *sym_global == PS(http_session_vars)) {
+				return;
+			}
 		}
 
 		if (sym_global == NULL && sym_track == NULL) {

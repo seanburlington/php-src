@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_apache_http.h,v 1.15 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: php_apache_http.h,v 1.16 2007/01/10 23:46:09 andrei Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -67,4 +67,4 @@
 #include "php_ini.h"
 #include "ext/standard/php_standard.h"
 
-#include "mod_php5.h"
+#include "mod_php.h"

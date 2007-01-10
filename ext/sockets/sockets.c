@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.6 2007/01/01 09:36:07 sebastian Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.7 2007/01/10 15:25:07 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -138,7 +138,9 @@ zend_function_entry sockets_functions[] = {
 	PHP_FE(socket_sendto,			NULL)
 	PHP_FE(socket_get_option,		NULL)
 	PHP_FE(socket_set_option,		NULL)
+#ifdef HAVE_SHUTDOWN
 	PHP_FE(socket_shutdown,			NULL)
+#endif
 	PHP_FE(socket_last_error,		NULL)
 	PHP_FE(socket_clear_error,		NULL)
 	
@@ -1759,6 +1761,7 @@ PHP_FUNCTION(socket_create_pair)
 /* }}} */
 #endif
 
+#ifdef HAVE_SHUTDOWN
 /* {{{ proto bool socket_shutdown(resource socket[, int how])
    Shuts down a socket for receiving, sending, or both. */
 PHP_FUNCTION(socket_shutdown)
@@ -1780,6 +1783,7 @@ PHP_FUNCTION(socket_shutdown)
 	RETURN_TRUE;
 }
 /* }}} */
+#endif
 
 /* {{{ proto int socket_last_error([resource socket])
    Returns the last socket error (either the last used or the provided socket resource) */

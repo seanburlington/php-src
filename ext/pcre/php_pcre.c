@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.14 2007/01/01 09:36:04 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.15 2007/01/10 14:37:31 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -214,8 +214,8 @@ PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_le
 				return pce;
 #if HAVE_SETLOCALE
 			}
-		}
 #endif
+		}
 	}
 	
 	p = regex;

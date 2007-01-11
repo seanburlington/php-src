@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.3 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.4 2007/01/11 15:51:37 tony2001 Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -441,7 +441,7 @@ php_socket_t php_network_bind_socket_to_local_addr(const char *host, unsigned po
 			err = php_socket_errno();
 		}
 
-		close(sock);
+		closesocket(sock);
 	}
 	sock = -1;
 
@@ -870,7 +870,7 @@ skip_bind:
 #endif
 		}
 
-		close(sock);
+		closesocket(sock);
 	}
 	sock = -1;
 

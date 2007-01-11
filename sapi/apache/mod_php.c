@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php.c,v 1.1 2007/01/10 23:46:09 andrei Exp $ */
+/* $Id: mod_php.c,v 1.2 2007/01/11 23:18:11 andrei Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -963,7 +963,13 @@ command_rec php_commands[] =
  */
 module MODULE_VAR_EXPORT php6_module =
 {
-	STANDARD_MODULE_STUFF,
+	MODULE_MAGIC_NUMBER_MAJOR,
+	MODULE_MAGIC_NUMBER_MINOR,
+	-1,
+	"mod_php6.c",
+	NULL,
+	NULL,
+	MODULE_MAGIC_COOKIE,
 	php_init_handler,			/* initializer */
 	php_create_dir,				/* per-directory config creator */
 	php_merge_dir,				/* dir merger */

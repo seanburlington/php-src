@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.88 2007/01/11 01:52:24 pollita Exp $ */
+/* $Id: posix.c,v 1.89 2007/01/11 02:31:50 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.88 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.89 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -932,7 +932,7 @@ PHP_FUNCTION(posix_getpwnam)
 	struct passwd *pw;
 	char *name;
 	int name_len;
-#ifdef HAVE_GETPWNAM_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWNAM_R)
 	struct passwd pwbuf;
 	int buflen;
 	char *buf;
@@ -965,7 +965,7 @@ PHP_FUNCTION(posix_getpwnam)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to convert posix passwd struct to array");
 		RETVAL_FALSE;
 	}
-#ifdef HAVE_GETPWNAM_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWNAM_R)
 	efree(buf);
 #endif
 }
@@ -976,7 +976,7 @@ PHP_FUNCTION(posix_getpwnam)
 PHP_FUNCTION(posix_getpwuid)
 {
 	long uid;
-#ifdef HAVE_GETPWUID_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWUID_R)
 	struct passwd _pw;
 	struct passwd *retpwptr = NULL;
 	int pwbuflen;
@@ -1012,7 +1012,7 @@ PHP_FUNCTION(posix_getpwuid)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to convert posix passwd struct to array");
 		RETVAL_FALSE;
 	}
-#ifdef HAVE_GETPWUID_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWUID_R)
 	efree(pwbuf);
 #endif
 }

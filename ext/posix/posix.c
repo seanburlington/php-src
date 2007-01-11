@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.87 2007/01/05 21:30:06 pollita Exp $ */
+/* $Id: posix.c,v 1.88 2007/01/11 01:52:24 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.87 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.88 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -942,7 +942,7 @@ PHP_FUNCTION(posix_getpwnam)
 		RETURN_FALSE;
 	}
 
-#ifdef HAVE_GETPWNAM_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWNAM_R)
 	buflen = sysconf(_SC_GETPW_R_SIZE_MAX);
 	buf = emalloc(buflen);
 	pw = &pwbuf;
@@ -988,7 +988,7 @@ PHP_FUNCTION(posix_getpwuid)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &uid) == FAILURE) {
 		RETURN_FALSE;
 	}
-#ifdef HAVE_GETPWUID_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWUID_R)
 	pwbuflen = sysconf(_SC_GETPW_R_SIZE_MAX);
 	pwbuf = emalloc(pwbuflen);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.154 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: filestat.c,v 1.155 2007/01/11 01:52:24 pollita Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -521,7 +521,7 @@ static void php_do_chown(INTERNAL_FUNCTION_PARAMETERS, int do_lchown)
 	if (Z_TYPE_P(user) == IS_LONG) {
 		uid = (uid_t)Z_LVAL_P(user);
 	} else {
-#ifdef HAVE_GETPWNAM_R
+#if defined(_SC_GETPW_R_SIZE_MAX) && defined(HAVE_GETPWNAM_R)
 		struct passwd pw;
 		struct passwd *retpwptr = NULL;
 		int pwbuflen = sysconf(_SC_GETPW_R_SIZE_MAX);

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.8 2007/01/03 20:45:22 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.9 2007/01/11 12:01:08 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -52,7 +52,7 @@ PHP_FUNCTION(oci_define_by_name)
 	zval *stmt, *var;
 	char *name;
 	int name_len;
-	long type = SQLT_CHR;
+	long type = 0;
 	php_oci_statement *statement;
 	php_oci_define *define, *tmp_define;
 

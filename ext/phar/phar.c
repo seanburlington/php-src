@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.110 2007/01/11 01:04:46 helly Exp $ */
+/* $Id: phar.c,v 1.111 2007/01/11 22:57:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,6 +26,14 @@
 #include <time.h>
 #include "php.h"
 #include "php_ini.h"
+#include "zend_constants.h"
+#include "zend_execute.h"
+#include "zend_exceptions.h"
+#include "zend_hash.h"
+#include "zend_interfaces.h"
+#include "zend_operators.h"
+#include "zend_qsort.h"
+#include "main/php_streams.h"
 #include "ext/standard/info.h"
 #include "ext/standard/url.h"
 #include "ext/standard/crc32.h"
@@ -35,15 +43,7 @@
 #include "ext/spl/spl_directory.h"
 #include "ext/spl/spl_engine.h"
 #include "ext/spl/spl_exceptions.h"
-#include "zend_constants.h"
-#include "zend_execute.h"
-#include "zend_exceptions.h"
-#include "zend_hash.h"
-#include "zend_interfaces.h"
-#include "zend_operators.h"
-#include "zend_qsort.h"
 #include "php_phar.h"
-#include "main/php_streams.h"
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
 #endif
@@ -3046,7 +3046,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.110 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.111 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

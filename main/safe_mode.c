@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.7 2007/01/12 01:46:11 iliaa Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.8 2007/01/12 12:11:18 bjori Exp $ */
 
 #include "php.h"
 
@@ -235,7 +235,7 @@ PHPAPI char *php_get_current_user()
 		char *pwbuf;
 
 		if (pwbuflen < 1) {
-			return ""
+			return "";
 		}
 		pwbuf = emalloc(pwbuflen);
 		if (getpwuid_r(pstat->st_uid, &_pw, pwbuf, pwbuflen, &retpwptr) != 0) {

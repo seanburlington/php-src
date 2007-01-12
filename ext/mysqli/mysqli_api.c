@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.142 2007/01/06 05:50:36 georg Exp $ 
+  $Id: mysqli_api.c,v 1.143 2007/01/12 20:26:35 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -686,6 +686,11 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 	if (!ret) {
 #endif
 		for (i = 0; i < stmt->result.var_cnt; i++) {
+			/*
+			  QQ: Isn't it quite better to call zval_dtor(). What if the user has
+			  assigned a resource, or an array to the bound variable? We are going
+			  to leak probably. zval_dtor() will handle also Unicode/Non-unicode mode.
+			*/
 			/* Even if the string is of length zero there is one byte alloced so efree() in all cases */
 			if (Z_TYPE_P(stmt->result.vars[i]) == IS_STRING) {
 				efree(stmt->result.vars[i]->value.str.val);

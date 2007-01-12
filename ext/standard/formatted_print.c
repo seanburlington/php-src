@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.59.2.15.2.2 2007/01/01 09:46:48 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.59.2.15.2.3 2007/01/12 02:04:37 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -486,9 +486,10 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 {
 	zval ***args, **z_format, **array;
 	int argc, size = 240, inpos = 0, outpos = 0, temppos;
-	int alignment, width, precision, currarg, adjusting, argnum;
+	int alignment, currarg, adjusting;
 	char *format, *result, padding;
 	int always_sign;
+	long argnum, width, precision;
 
 	argc = ZEND_NUM_ARGS();
 

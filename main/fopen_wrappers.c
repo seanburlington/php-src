@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.188 2007/01/12 01:50:43 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.189 2007/01/12 09:10:05 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -312,6 +312,9 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 					SG(request_info).path_translated = filename;
 				}
 			}
+#if defined(ZTS) && defined(HAVE_GETPWNAM_R) && defined(_SC_GETPW_R_SIZE_MAX)
+			efree(pwbuf);
+#endif
 		}
 	} else
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.107 2007/01/09 18:38:38 helly Exp $ */
+/* $Id: php_spl.c,v 1.108 2007/01/12 22:28:05 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -215,7 +215,7 @@ int spl_autoload(const zstr class_name, const zstr lc_name, int class_name_len, 
 	zval *result = NULL;
 	int ret;
 
-	/* UTODO: Wewant the stream toacept a zstrfor opening */
+	/* UTODO: We want the stream to acept a zstr for opening */
 	class_file_len = spprintf(&class_file, 0, "%v%v", lc_name, file_extension);
 
 	ret = php_stream_open_for_zend_ex(class_file, &file_handle, ENFORCE_SAFE_MODE|USE_PATH|STREAM_OPEN_FOR_INCLUDE TSRMLS_CC);

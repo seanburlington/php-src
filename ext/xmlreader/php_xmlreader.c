@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.44 2007/01/01 09:29:33 sebastian Exp $ */
+/* $Id: php_xmlreader.c,v 1.45 2007/01/12 12:16:36 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1304,7 +1304,6 @@ PHP_MINIT_FUNCTION(xmlreader)
 }
 /* }}} */
 
-
 /* {{{ PHP_MSHUTDOWN_FUNCTION
  */
 PHP_MSHUTDOWN_FUNCTION(xmlreader)
@@ -1323,10 +1322,6 @@ PHP_MINFO_FUNCTION(xmlreader)
 		php_info_print_table_row(2, "XMLReader", "enabled");
 	}
 	php_info_print_table_end();
-
-	/* Remove comments if you have entries in php.ini
-	DISPLAY_INI_ENTRIES();
-	*/
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.32.2.6.2.1 2007/01/01 09:36:10 sebastian Exp $ */
+/* $Id: php_xsl.c,v 1.32.2.6.2.2 2007/01/12 12:17:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,9 +28,6 @@
 #include "php_xsl.h"
 
 
-/* If you declare any globals in php_xsl.h uncomment this:
-ZEND_DECLARE_MODULE_GLOBALS(xsl)
-*/
 zend_class_entry *xsl_xsltprocessor_class_entry;
 static zend_object_handlers xsl_object_handlers;
 
@@ -253,10 +250,6 @@ zval *php_xsl_create_object(xsltStylesheetPtr obj, int *found, zval *wrapper_in,
  */
 PHP_MSHUTDOWN_FUNCTION(xsl)
 {
-	/* uncomment this line if you have INI entries
-	UNREGISTER_INI_ENTRIES();
-	*/
-
 	xsltUnregisterExtModuleFunction ((const xmlChar *) "functionString",
 				   (const xmlChar *) "http://php.net/xsl");
 	xsltUnregisterExtModuleFunction ((const xmlChar *) "function",
@@ -268,7 +261,6 @@ PHP_MSHUTDOWN_FUNCTION(xsl)
 }
 /* }}} */
 
-/* Remove if there's nothing to do at request start */
 /* {{{ PHP_RINIT_FUNCTION
  */
 PHP_RINIT_FUNCTION(xsl)
@@ -278,7 +270,6 @@ PHP_RINIT_FUNCTION(xsl)
 }
 /* }}} */
 
-/* Remove if there's nothing to do at request end */
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
 PHP_RSHUTDOWN_FUNCTION(xsl)
@@ -310,14 +301,10 @@ PHP_MINFO_FUNCTION(xsl)
 		php_info_print_table_row(2, "libxslt compiled against libxml Version", buffer);
 	}
 #if HAVE_XSL_EXSLT
-		php_info_print_table_row(2, "EXSLT", "enabled");
-		php_info_print_table_row(2, "libexslt Version", LIBEXSLT_DOTTED_VERSION);
+	php_info_print_table_row(2, "EXSLT", "enabled");
+	php_info_print_table_row(2, "libexslt Version", LIBEXSLT_DOTTED_VERSION);
 #endif
 	php_info_print_table_end();
-
-	/* Remove comments if you have entries in php.ini
-	DISPLAY_INI_ENTRIES();
-	*/
 }
 /* }}} */
 

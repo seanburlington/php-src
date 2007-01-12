@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.10 2007/01/01 09:36:02 sebastian Exp $ */
+/* $Id: json.c,v 1.9.2.11 2007/01/12 12:17:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,9 +35,6 @@ static PHP_MINFO_FUNCTION(json);
 static PHP_FUNCTION(json_encode);
 static PHP_FUNCTION(json_decode);
 
-/* If you declare any globals in php_json.h uncomment this:
-ZEND_DECLARE_MODULE_GLOBALS(json)
-*/
 static const char digits[] = "0123456789abcdef";
 
 /* {{{ json_functions[]

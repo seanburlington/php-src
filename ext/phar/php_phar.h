@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_phar.h,v 1.8 2006/01/10 06:46:16 cellog Exp $ */
+/* $Id: php_phar.h,v 1.9 2007/01/13 17:10:17 helly Exp $ */
 
 #ifndef PHP_PHAR_H
 #define PHP_PHAR_H
@@ -30,25 +30,6 @@ extern zend_module_entry phar_module_entry;
 #define PHP_PHAR_API __declspec(dllexport)
 #else
 #define PHP_PHAR_API
-#endif
-
-/* In every utility function you add that needs to use variables 
-   in php_phar_globals, call TSRMLS_FETCH(); after declaring other 
-   variables used by that function, or better yet, pass in TSRMLS_CC
-   after the last function argument and declare your utility function
-   with TSRMLS_DC after the last declared argument.  Always refer to
-   the globals in your function as PHAR_G(variable).  You are 
-   encouraged to rename these macros something shorter, see
-   examples in any other php module directory.
-*/
-
-#ifdef ZTS
-#	include "TSRM.h"
-#	define PHAR_G(v) TSRMG(phar_globals_id, zend_phar_globals *, v)
-#	define PHAR_GLOBALS ((zend_phar_globals *) (*((void ***) tsrm_ls))[TSRM_UNSHUFFLE_RSRC_ID(phar_globals_id)])
-#else
-#	define PHAR_G(v) (phar_globals.v)
-#	define PHAR_GLOBALS (&phar_globals)
 #endif
 
 #endif	/* PHP_PHAR_H */

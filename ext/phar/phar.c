@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.112 2007/01/13 16:17:02 helly Exp $ */
+/* $Id: phar.c,v 1.113 2007/01/13 16:44:53 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -59,7 +59,8 @@
 
 #define PHAR_VERSION_STR          "0.9.0"
 /* x.y.z maps to 0xyz0 */
-#define PHAR_API_VERSION          0x0800
+#define PHAR_API_VERSION          0x0900
+#define PHAR_API_MIN_READ         0x0900
 #define PHAR_API_MAJORVERSION     0x0000
 #define PHAR_API_MAJORVER_MASK    0xF000
 #define PHAR_API_VER_MASK         0xFFF0
@@ -644,9 +645,7 @@ static int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alia
 	manifest_ver = (((unsigned char)buffer[0]) <<  8)
 	             + ((unsigned char)buffer[1]);
 	buffer += 2;
-	if ((manifest_ver & PHAR_API_VER_MASK) < PHAR_API_VERSION ||
-		    (manifest_ver & PHAR_API_MAJORVER_MASK) != PHAR_API_MAJORVERSION)
-	{
+	if ((manifest_ver & PHAR_API_VER_MASK) < PHAR_API_MIN_READ) {
 		efree(savebuf);
 		php_stream_close(fp);
 		php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "phar \"%s\" is API version %1.u.%1.u.%1.u, and cannot be processed", fname, manifest_ver >> 12, (manifest_ver >> 8) & 0xF, (manifest_ver >> 4) & 0x0F);
@@ -3045,7 +3044,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.112 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.113 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.16 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: cast.c,v 1.17 2007/01/15 22:19:33 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -326,6 +326,11 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
 
 	if (*newstream == NULL)
 		return PHP_STREAM_FAILED;
+
+#if ZEND_DEBUG
+	(*newstream)->open_filename = origstream->open_filename;
+	(*newstream)->open_lineno = origstream->open_lineno;
+#endif
 
 	if (php_stream_copy_to_stream(origstream, *newstream, PHP_STREAM_COPY_ALL) == 0) {
 		php_stream_close(*newstream);

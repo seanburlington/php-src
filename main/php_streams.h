@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.121 2007/01/10 22:43:17 pollita Exp $ */
+/* $Id: php_streams.h,v 1.122 2007/01/15 22:19:33 helly Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -225,7 +225,12 @@ struct _php_stream  {
 
 	int eof;
 
+#if ZEND_DEBUG
+	char *open_filename;
+	uint open_lineno;
+#endif
 }; /* php_stream */
+
 /* state definitions when closing down; these are private to streams.c */
 #define PHP_STREAM_FCLOSE_NONE 0
 #define PHP_STREAM_FCLOSE_FDOPEN	1

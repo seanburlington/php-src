@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.38 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: userspace.c,v 1.39 2007/01/15 17:06:52 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -511,7 +511,7 @@ PHP_FUNCTION(stream_wrapper_restore)
 		RETURN_TRUE;
 	}
 
-	if ((zend_hash_find(global_wrapper_hash, protocol, protocol_len, (void**)&wrapperpp) == FAILURE) || !wrapperpp) {
+	if ((zend_hash_find(global_wrapper_hash, protocol, protocol_len + 1, (void**)&wrapperpp) == FAILURE) || !wrapperpp) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s:// never existed, nothing to restore", protocol);
 		RETURN_FALSE;
 	}

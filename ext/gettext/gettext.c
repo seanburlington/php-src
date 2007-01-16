@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.46.2.2.2.3 2007/01/01 09:36:01 sebastian Exp $ */
+/* $Id: gettext.c,v 1.46.2.2.2.4 2007/01/16 14:42:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -253,9 +253,11 @@ PHP_NAMED_FUNCTION(zif_bindtextdomain)
 	}
 	
 	if (Z_STRVAL_PP(dir)[0] != '\0' && strcmp(Z_STRVAL_PP(dir), "0")) {
-		VCWD_REALPATH(Z_STRVAL_PP(dir), dir_name);
-	} else {
-		VCWD_GETCWD(dir_name, MAXPATHLEN);
+		if (!VCWD_REALPATH(Z_STRVAL_PP(dir), dir_name)) {
+			RETURN_FALSE;
+		}
+	} else if (!VCWD_GETCWD(dir_name, MAXPATHLEN)) {
+		RETURN_FALSE;
 	}
 
 	retval = bindtextdomain(Z_STRVAL_PP(domain_name), dir_name);

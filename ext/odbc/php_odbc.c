@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.198 2007/01/01 09:29:26 sebastian Exp $ */
+/* $Id: php_odbc.c,v 1.199 2007/01/16 18:56:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1977,12 +1977,12 @@ PHP_FUNCTION(odbc_result_all)
 						RETURN_FALSE;
 					}
 					if (rc == SQL_SUCCESS_WITH_INFO)
-						php_printf(buf,result->longreadlen);
+						PHPWRITE(buf, result->longreadlen);
 					else if (result->values[i].vallen == SQL_NULL_DATA) {
 						php_printf("<td>NULL</td>");
 						break;
 					} else {
-						php_printf(buf, result->values[i].vallen);
+						PHPWRITE(buf, result->values[i].vallen);
 					}
 					php_printf("</td>");
 					break;

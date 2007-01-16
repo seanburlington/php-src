@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.28 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: spl_directory.h,v 1.29 2007/01/16 23:52:14 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -58,10 +58,12 @@ struct _spl_filesystem_object {
 	zend_object        std;
 	void               *oth;
 	spl_other_handler  *oth_handler;
-	char               *path;
+	zend_uchar         path_type;
+	zstr               path;
 	int                path_len;
-	char               *file_name;
-	int                file_name_len; 
+	zend_uchar         file_name_type;
+	zstr               file_name;
+	int                file_name_len;
 	SPL_FS_OBJ_TYPE    type;
 	long               flags;
 	zend_class_entry   *file_class;
@@ -70,7 +72,8 @@ struct _spl_filesystem_object {
 		struct {
 			php_stream         *dirp;
 			php_stream_dirent  entry;
-			char               *sub_path;
+			zend_uchar         sub_path_type;
+			zstr               sub_path;
 			int                sub_path_len;
 			int                index;
 			int                is_recursive;

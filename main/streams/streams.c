@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.145 2007/01/15 22:19:33 helly Exp $ */
+/* $Id: streams.c,v 1.146 2007/01/16 20:36:04 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2274,6 +2274,27 @@ PHPAPI php_stream *_php_stream_opendir(char *path, int options,
 	}
 	php_stream_tidy_wrapper_error_log(wrapper TSRMLS_CC);
 
+	return stream;
+}
+/* }}} */
+
+PHPAPI php_stream *_php_stream_u_opendir(zend_uchar type, zstr path, int path_len, int options, php_stream_context *context STREAMS_DC TSRMLS_DC) /* {{{ */
+{
+	char *filename;
+	int filename_len;
+	php_stream *stream;
+
+	if (type == IS_STRING) {
+		return php_stream_opendir(path.s, options, context);
+	}
+
+	/* type == IS_UNICODE */
+	if (FAILURE == php_stream_path_encode(NULL, &filename, &filename_len, path.u, path_len, options, context)) {
+		return NULL;
+	}
+
+	stream = php_stream_opendir(filename, options, context);
+	efree(filename);
 	return stream;
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.155 2007/01/11 01:52:24 pollita Exp $ */
+/* $Id: filestat.c,v 1.156 2007/01/16 22:10:25 helly Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -751,6 +751,22 @@ PHP_FUNCTION(clearstatcache)
 #define IS_EXISTS_CHECK(__t) ((__t) == FS_EXISTS  || (__t) == FS_IS_W || (__t) == FS_IS_R || (__t) == FS_IS_X || (__t) == FS_IS_FILE || (__t) == FS_IS_DIR || (__t) == FS_IS_LINK)
 #define IS_ABLE_CHECK(__t) ((__t) == FS_IS_R || (__t) == FS_IS_W || (__t) == FS_IS_X)
 #define IS_ACCESS_CHECK(__t) (IS_ABLE_CHECK(type) || (__t) == FS_EXISTS)
+
+PHPAPI void php_u_stat(zend_uchar filename_type, const zstr filename, php_stat_len filename_length, int type, php_stream_context *context, zval *return_value TSRMLS_DC) /* {{{ */
+{
+	char *fn;
+
+	if (filename_type == IS_STRING) {
+		php_stat(filename.s, filename_length, type, return_value TSRMLS_CC);
+	} else {
+		if (FAILURE == php_stream_path_encode(NULL, &fn, &filename_length, filename.u, filename_length, REPORT_ERRORS, context)) {
+			RETURN_FALSE;
+		}
+		php_stat(filename.s, filename_length, type, return_value TSRMLS_CC);
+		efree(fn);
+	}
+}
+/* }}} */
 
 /* {{{ php_stat
  */

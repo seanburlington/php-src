@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.53 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: gettext.c,v 1.54 2007/01/16 14:42:14 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -236,9 +236,11 @@ PHP_NAMED_FUNCTION(zif_bindtextdomain)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "the first parameter must not be empty");
 	}
 	if (!dir_len || (dir_len == 1 && *dir_str == '0')) {
-		VCWD_GETCWD(dir_tmp, sizeof(dir_tmp));
-	} else {
-		VCWD_REALPATH(dir_str, dir_tmp);
+		if (!VCWD_GETCWD(dir_tmp, sizeof(dir_tmp))) {
+			RETURN_FALSE;
+		}
+	} else if (!VCWD_REALPATH(dir_str, dir_tmp)) {
+		RETURN_FALSE;
 	}
 	RETURN_FS_STRING(bindtextdomain(domain_str, dir_tmp), ZSTR_DUPLICATE);
 }

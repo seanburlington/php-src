@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.115 2007/01/14 00:32:37 helly Exp $ */
+/* $Id: phar.c,v 1.116 2007/01/16 00:00:25 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -496,7 +496,7 @@ PHP_METHOD(Phar, apiVersion)
 /* }}}*/
 
 /* {{{ proto bool canCompress()
- * Returns whether phar extension supports compression using zlib */
+ * Returns whether phar extension supports compression using zlib/bzip2 */
 PHP_METHOD(Phar, canCompress)
 {
 #if HAVE_ZLIB || HAVE_BZ2
@@ -3102,7 +3102,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.115 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.116 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

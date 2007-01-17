@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.20.2.3.2.5 2007/01/08 22:34:07 nlopess Exp $ */
+/* $Id: sysvmsg.c,v 1.20.2.3.2.6 2007/01/17 08:25:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -24,7 +24,6 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_sysvmsg.h"
 #include "ext/standard/php_var.h"
@@ -100,16 +99,6 @@ ZEND_GET_MODULE(sysvmsg)
 # endif
 #endif
 
-/* {{{ PHP_INI
- */
-/* Remove comments and fill if you need to have entries in php.ini
-PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("sysvmsg.value",  "42",     PHP_INI_ALL, OnUpdateLong,    global_value,  zend_sysvmsg_globals, sysvmsg_globals)
-	STD_PHP_INI_ENTRY("sysvmsg.string", "foobar", PHP_INI_ALL, OnUpdateString, global_string, zend_sysvmsg_globals, sysvmsg_globals)
-PHP_INI_END()
-*/
-/* }}} */
-
 static void sysvmsg_release(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	sysvmsg_queue_t * mq = (sysvmsg_queue_t *) rsrc->ptr;
@@ -136,7 +125,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.5 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.6 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -288,7 +277,7 @@ PHP_FUNCTION(msg_receive)
 	}
 
 	if (maxsize <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "maximum size of the message has to be greater then zero");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "maximum size of the message has to be greater than zero");
 		return;
 	}
 

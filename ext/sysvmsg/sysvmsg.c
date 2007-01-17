@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.30 2007/01/08 22:35:25 nlopess Exp $ */
+/* $Id: sysvmsg.c,v 1.31 2007/01/17 08:25:25 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,7 +136,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.30 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.31 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -288,7 +288,7 @@ PHP_FUNCTION(msg_receive)
 	}
 
 	if (maxsize <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "maximum size of the message has to be greater then zero");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "maximum size of the message has to be greater than zero");
 		return;
 	}
 

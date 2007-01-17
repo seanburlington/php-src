@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.98 2007/01/13 16:32:29 iliaa Exp $ */
+/* $Id: formatted_print.c,v 1.99 2007/01/17 08:25:25 tony2001 Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -735,7 +735,7 @@ static char * php_formatted_print(int ht, int *len, int use_array, int format_of
 					if (argnum <= 0) {
 						efree(result);
 						efree(args);
-						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument number must be greater then zero.");
+						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument number must be greater than zero.");
 						return NULL;
 					}
 
@@ -777,7 +777,7 @@ static char * php_formatted_print(int ht, int *len, int use_array, int format_of
 					if ((width = php_sprintf_getnumber(format, &inpos)) < 0) {
 						efree(result);
 						efree(args);
-						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Width must be greater then zero and less then %d.", INT_MAX);
+						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Width must be greater than zero and less than %d.", INT_MAX);
 						return NULL;
 					}
 					adjusting |= ADJ_WIDTH;
@@ -794,7 +794,7 @@ static char * php_formatted_print(int ht, int *len, int use_array, int format_of
 						if ((precision = php_sprintf_getnumber(format, &inpos)) < 0) {
 							efree(result);
 							efree(args);
-							php_error_docref(NULL TSRMLS_CC, E_WARNING, "Precision must be greater then zero and less then %d.", INT_MAX);
+							php_error_docref(NULL TSRMLS_CC, E_WARNING, "Precision must be greater than zero and less than %d.", INT_MAX);
 							return NULL;
 						}
 						adjusting |= ADJ_PRECISION;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.30 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: php_xml.c,v 1.31 2007/01/17 00:22:48 pollita Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -87,9 +87,9 @@ xmlDocPtr soap_xmlParseFile(const char *filename TSRMLS_DC)
 */
 
 	old_allow_url_fopen = PG(allow_url_fopen);
-	PG(allow_url_fopen) = 1;
+	zend_alter_ini_entry("allow_url_fopen", sizeof("allow_url_fopen"), "1", 1, PHP_INI_SYSTEM, PHP_INI_STAGE_RUNTIME);
 	ctxt = xmlCreateFileParserCtxt(filename);
-	PG(allow_url_fopen) = old_allow_url_fopen;
+	zend_alter_ini_entry("allow_url_fopen", sizeof("allow_url_fopen"), old_allow_url_fopen ? "1" : "0", 1, PHP_INI_SYSTEM, PHP_INI_STAGE_RUNTIME);
 	if (ctxt) {
 		ctxt->keepBlanks = 0;
 		ctxt->sax->ignorableWhitespace = soap_ignorableWhitespace;

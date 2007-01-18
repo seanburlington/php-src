@@ -16,11 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.20.2.6.2.9 2007/01/01 09:35:59 sebastian Exp $ */
+/* $Id: parse_tz.c,v 1.20.2.6.2.10 2007/01/18 23:20:24 iliaa Exp $ */
 
 #include "timelib.h"
 
 #include <stdio.h>
+#include <locale.h>
 
 #ifdef HAVE_STRING_H
 #include <string.h>
@@ -195,6 +196,7 @@ void timelib_dump_tzinfo(timelib_tzinfo *tz)
 static int seek_to_tz_position(const unsigned char **tzf, char *timezone, const timelib_tzdb *tzdb)
 {
 	int left = 0, right = tzdb->index_size - 1;
+	char *cur_locale = setlocale(LC_CTYPE, "C");
 
 	do {
 		int mid = ((unsigned)left + right) >> 1;
@@ -206,11 +208,13 @@ static int seek_to_tz_position(const unsigned char **tzf, char *timezone, const 
 			left = mid + 1;
 		} else { /* (cmp == 0) */
 			(*tzf) = &(tzdb->data[tzdb->index[mid].pos + 20]);
+			setlocale(LC_CTYPE, cur_locale);
 			return 1;
 		}
 
 	} while (left <= right);
 
+	setlocale(LC_CTYPE, cur_locale);
 	return 0;
 }
 

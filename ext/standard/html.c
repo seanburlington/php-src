@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.5 2007/01/01 09:36:08 sebastian Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.6 2007/01/18 16:21:32 tony2001 Exp $ */
 
 /*
  * HTML entity resources:
@@ -1354,7 +1354,7 @@ PHP_FUNCTION(get_html_translation_table)
 						continue;
 					/* what about wide chars here ?? */
 					ind[0] = i + entity_map[j].basechar;
-					sprintf(buffer, "&%s;", entity_map[j].table[i]);
+					snprintf(buffer, sizeof(buffer), "&%s;", entity_map[j].table[i]);
 					add_assoc_string(return_value, ind, buffer, 1);
 
 				}

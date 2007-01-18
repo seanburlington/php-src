@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.9 2007/01/09 15:20:45 iliaa Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.10 2007/01/18 16:21:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -448,7 +448,7 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 			PHP_SET_CLASS_ATTRIBUTES(obj);
 
 			php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);
-			sprintf(tmp_buf, WDDX_VAR_S, PHP_CLASS_NAME_VAR);
+			snprintf(tmp_buf, WDDX_BUF_LEN, WDDX_VAR_S, PHP_CLASS_NAME_VAR);
 			php_wddx_add_chunk(packet, tmp_buf);
 			php_wddx_add_chunk_static(packet, WDDX_STRING_S);
 			php_wddx_add_chunk_ex(packet, class_name, name_len);
@@ -480,7 +480,7 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 		PHP_SET_CLASS_ATTRIBUTES(obj);
 
 		php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);
-		sprintf(tmp_buf, WDDX_VAR_S, PHP_CLASS_NAME_VAR);
+		snprintf(tmp_buf, WDDX_BUF_LEN, WDDX_VAR_S, PHP_CLASS_NAME_VAR);
 		php_wddx_add_chunk(packet, tmp_buf);
 		php_wddx_add_chunk_static(packet, WDDX_STRING_S);
 		php_wddx_add_chunk_ex(packet, class_name, name_len);

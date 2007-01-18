@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.113 2007/01/18 21:40:18 helly Exp $ */
+/* $Id: spl_directory.c,v 1.114 2007/01/18 22:52:32 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1628,7 +1628,7 @@ SPL_METHOD(SplFileObject, __construct)
 			p1.s = strrchr(intern->file_name.s, '/');
 		}
 #if defined(PHP_WIN32) || defined(NETWARE)
-		if (type == IS_UNICODE) {
+		if (intern->file_name_type == IS_UNICODE) {
 			p2.u = u_strrchr(intern->file_name.u, '\\');
 		} else {
 			p2.s = strrchr(intern->file_name.s, '\\');

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.156 2007/01/16 22:10:25 helly Exp $ */
+/* $Id: filestat.c,v 1.157 2007/01/18 22:57:03 helly Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -762,7 +762,7 @@ PHPAPI void php_u_stat(zend_uchar filename_type, const zstr filename, php_stat_l
 		if (FAILURE == php_stream_path_encode(NULL, &fn, &filename_length, filename.u, filename_length, REPORT_ERRORS, context)) {
 			RETURN_FALSE;
 		}
-		php_stat(filename.s, filename_length, type, return_value TSRMLS_CC);
+		php_stat(fn, filename_length, type, return_value TSRMLS_CC);
 		efree(fn);
 	}
 }

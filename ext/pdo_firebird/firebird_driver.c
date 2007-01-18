@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.17.2.2.2.2 2007/01/01 09:36:04 sebastian Exp $ */
+/* $Id: firebird_driver.c,v 1.17.2.2.2.3 2007/01/18 15:55:09 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -602,6 +602,8 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 		{ "role", NULL,	0 }
 	};
 	int i, ret = 0;
+	short buf_len = 256, dpb_len;
+
 	pdo_firebird_db_handle *H = dbh->driver_data = pecalloc(1,sizeof(*H),dbh->is_persistent);
 
 	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 3);
@@ -616,9 +618,11 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 		
 		/* loop through all the provided arguments and set dpb fields accordingly */
 		for (i = 0; i < sizeof(dpb_flags); ++i) {
-			if (dpb_values[i]) {
-				dpb += sprintf(dpb, "%c%c%s", dpb_flags[i], (unsigned char)strlen(dpb_values[i]),
+			if (dpb_values[i] && buf_len > 0) {
+				dpb_len = snprintf(dpb, buf_len, "%c%c%s", dpb_flags[i], (unsigned char)strlen(dpb_values[i]),
 					dpb_values[i]);
+				dpb += dpb_len;
+				buf_len -= dpb_len;
 			}
 		}
 		

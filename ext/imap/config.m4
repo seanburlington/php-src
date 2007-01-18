@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.69.4.2 2007/01/08 22:24:11 andrei Exp $
+dnl $Id: config.m4,v 1.69.4.3 2007/01/18 14:05:21 tony2001 Exp $
 dnl
 
 AC_DEFUN([IMAP_INC_CHK],[if test -r "$i$1/c-client.h"; then
@@ -117,11 +117,26 @@ if test "$PHP_IMAP" != "no"; then
     AC_EGREP_HEADER(mail_fetch_overview_sequence, $IMAP_INC_DIR/mail.h, [
       AC_DEFINE(HAVE_IMAP2004,1,[ ])
     ])
-    
+  
     dnl Check for new version of the utf8_mime2text() function
-    AC_EGREP_HEADER(mail_append_set, $IMAP_INC_DIR/mail.h, [
-      AC_DEFINE(HAVE_NEW_MIME2TEXT,1,[ ])
-    ])
+    old_CFLAGS=$CFLAGS
+    CFLAGS="-I$IMAP_INC_DIR"
+	AC_CACHE_CHECK(for utf8_mime2text signature, ac_cv_utf8_mime2text,
+	  AC_TRY_COMPILE([
+#include <c-client.h>
+	  ],[
+		SIZEDTEXT *src, *dst;
+		utf8_mime2text(src, dst);
+	  ],[
+		ac_cv_utf8_mime2text=old
+	  ],[
+		ac_cv_utf8_mime2text=new
+	  ])
+    )
+    if test "$ac_cv_utf8_mime2text" = "new"; then
+      AC_DEFINE(HAVE_NEW_MIME2TEXT, 1, [Whether utf8_mime2text() has new signature])
+    fi
+    CFLAGS=$old_CPPFLAGS
 
     dnl Check for c-client version 2001
     old_CPPFLAGS=$CPPFLAGS

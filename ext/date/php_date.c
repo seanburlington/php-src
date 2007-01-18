@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.128 2007/01/03 14:46:52 derick Exp $ */
+/* $Id: php_date.c,v 1.129 2007/01/18 23:17:49 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -794,7 +794,7 @@ static inline int date_spprintf(char **str, size_t size TSRMLS_DC, const char *f
 	va_start(ap, format);
 
 	if (UG(unicode)) {
-		c = vuspprintf(str, size, format, ap);
+		c = vuspprintf(str, size, format, ap) * 2;
 	} else {
 		c = vspprintf(str, size, format, ap);
 	}

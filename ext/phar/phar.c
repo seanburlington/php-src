@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.117 2007/01/16 03:41:50 cellog Exp $ */
+/* $Id: phar.c,v 1.118 2007/01/18 00:13:17 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1224,7 +1224,7 @@ PHP_METHOD(Phar, mapPhar)
 	RETURN_BOOL(phar_open_compiled_file(alias, alias_len TSRMLS_CC) == SUCCESS);
 } /* }}} */
 
-/* {{{ proto mixed Phar::loadPhar(string url [, string alias])
+/* {{{ proto mixed Phar::loadPhar(string filename [, string alias])
  * Loads any phar archive with an alias */
 PHP_METHOD(Phar, loadPhar)
 {
@@ -3059,6 +3059,8 @@ static void php_phar_init_globals_module(zend_phar_globals *phar_globals)
 	phar_globals->readonly = 1;
 }
 /* }}} */
+#define REGISTER_PHAR_CLASS_CONST_LONG(class_name, const_name, value) \
+	zend_declare_class_constant_long(class_name, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);
 
 PHP_MINIT_FUNCTION(phar) /* {{{ */
 {
@@ -3071,6 +3073,10 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 	phar_ce_archive = zend_register_internal_class_ex(&ce, spl_ce_RecursiveDirectoryIterator, NULL  TSRMLS_CC);
 
 	zend_class_implements(phar_ce_archive TSRMLS_CC, 2, spl_ce_Countable, zend_ce_arrayaccess);
+
+	REGISTER_PHAR_CLASS_CONST_LONG(phar_ce_archive, "COMPRESSED", PHAR_ENT_COMPRESSION_MASK)
+	REGISTER_PHAR_CLASS_CONST_LONG(phar_ce_archive, "GZ", PHAR_ENT_COMPRESSED_GZ)
+	REGISTER_PHAR_CLASS_CONST_LONG(phar_ce_archive, "BZ2", PHAR_ENT_COMPRESSED_BZ2)
 
 	INIT_CLASS_ENTRY(ce, "PharFileInfo", php_entry_methods);
 	phar_ce_entry = zend_register_internal_class_ex(&ce, spl_ce_SplFileInfo, NULL  TSRMLS_CC);
@@ -3107,7 +3113,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.117 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.118 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

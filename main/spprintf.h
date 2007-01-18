@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spprintf.h,v 1.16 2007/01/18 21:39:50 helly Exp $ */
+/* $Id: spprintf.h,v 1.17 2007/01/18 23:11:42 helly Exp $ */
 
 /* 
 
@@ -26,6 +26,9 @@ The buffer will allways be terminated by a zero character. When pbuf is NULL
 the function can be used to calculate the required size of the buffer but for
 that purpose snprintf is faster. When both pbuf and the return value are 0
 than you are out of memory.
+
+All functions return the number of character printed (e.g. length), not the 
+number of bytes.
 
 There is also snprintf: See difference explained in snprintf.h
 

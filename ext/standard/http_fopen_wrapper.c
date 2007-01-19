@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.6 2007/01/19 00:02:13 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.7 2007/01/19 00:17:43 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -164,7 +164,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		SEPARATE_ZVAL(tmpzval);
 		convert_to_double_ex(tmpzval);
 		timeout.tv_sec = (time_t) Z_DVAL_PP(tmpzval);
-		timeout.tv_usec = (suseconds_t) ((Z_DVAL_PP(tmpzval) - timeout.tv_sec) * 1000000);
+		timeout.tv_usec = (size_t) ((Z_DVAL_PP(tmpzval) - timeout.tv_sec) * 1000000);
 	} else {
 		timeout.tv_sec = FG(default_socket_timeout);
 		timeout.tv_usec = 0;

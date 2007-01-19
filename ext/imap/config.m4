@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.69.4.4 2007/01/19 20:45:09 tony2001 Exp $
+dnl $Id: config.m4,v 1.69.4.5 2007/01/19 22:33:25 tony2001 Exp $
 dnl
 
 AC_DEFUN([IMAP_INC_CHK],[if test -r "$i$1/c-client.h"; then
@@ -123,6 +123,7 @@ if test "$PHP_IMAP" != "no"; then
     CFLAGS="-I$IMAP_INC_DIR"
     AC_CACHE_CHECK(for utf8_mime2text signature, ac_cv_utf8_mime2text,
       AC_TRY_COMPILE([
+#include <stdio.h>
 #include <c-client.h>
       ],[
         SIZEDTEXT *src, *dst;

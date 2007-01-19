@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.4 2007/01/15 17:07:08 tony2001 Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.5 2007/01/19 14:50:11 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -527,8 +527,9 @@ PHP_FUNCTION(stream_get_filters)
 		for(zend_hash_internal_pointer_reset(filters_hash);
 			(key_flags = zend_hash_get_current_key_ex(filters_hash, &filter_name, &filter_name_len, &num_key, 0, NULL)) != HASH_KEY_NON_EXISTANT;
 			zend_hash_move_forward(filters_hash))
-				if (key_flags == HASH_KEY_IS_STRING)
-					add_next_index_stringl(return_value, filter_name, filter_name_len, 1);
+				if (key_flags == HASH_KEY_IS_STRING) {
+					add_next_index_stringl(return_value, filter_name, filter_name_len - 1, 1);
+				}
 	}
 	/* It's okay to return an empty array if no filters are registered */
 }

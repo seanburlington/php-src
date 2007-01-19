@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.69.4.3 2007/01/18 14:05:21 tony2001 Exp $
+dnl $Id: config.m4,v 1.69.4.4 2007/01/19 20:45:09 tony2001 Exp $
 dnl
 
 AC_DEFUN([IMAP_INC_CHK],[if test -r "$i$1/c-client.h"; then
@@ -117,26 +117,48 @@ if test "$PHP_IMAP" != "no"; then
     AC_EGREP_HEADER(mail_fetch_overview_sequence, $IMAP_INC_DIR/mail.h, [
       AC_DEFINE(HAVE_IMAP2004,1,[ ])
     ])
-  
+
     dnl Check for new version of the utf8_mime2text() function
     old_CFLAGS=$CFLAGS
     CFLAGS="-I$IMAP_INC_DIR"
-	AC_CACHE_CHECK(for utf8_mime2text signature, ac_cv_utf8_mime2text,
-	  AC_TRY_COMPILE([
+    AC_CACHE_CHECK(for utf8_mime2text signature, ac_cv_utf8_mime2text,
+      AC_TRY_COMPILE([
 #include <c-client.h>
-	  ],[
-		SIZEDTEXT *src, *dst;
-		utf8_mime2text(src, dst);
-	  ],[
-		ac_cv_utf8_mime2text=old
-	  ],[
-		ac_cv_utf8_mime2text=new
-	  ])
+      ],[
+        SIZEDTEXT *src, *dst;
+        utf8_mime2text(src, dst);
+      ],[
+        ac_cv_utf8_mime2text=old
+      ],[
+        ac_cv_utf8_mime2text=new
+      ])
     )
     if test "$ac_cv_utf8_mime2text" = "new"; then
       AC_DEFINE(HAVE_NEW_MIME2TEXT, 1, [Whether utf8_mime2text() has new signature])
     fi
     CFLAGS=$old_CPPFLAGS
+
+    old_CFLAGS=$CFLAGS
+    CFLAGS="-I$IMAP_INC_DIR"
+    AC_CACHE_CHECK(for U8T_CANONICAL, ac_cv_u8t_canonical,
+      AC_TRY_COMPILE([
+#include <c-client.h>
+      ],[
+         int i = U8T_CANONICAL;
+      ],[
+         ac_cv_u8t_canonical=yes
+      ],[
+         ac_cv_u8t_canonical=no
+      ])
+    )
+    CFLAGS=$old_CPPFLAGS
+
+    if test "$ac_cv_u8t_canonical" = "no" && test "$ac_cv_utf8_mime2text" = "new"; then
+		AC_MSG_ERROR([utf8_mime2text() has new signature, but U8T_CANONICAL is missing. This should not happen. Check config.log for additional information.])
+    fi
+    if test "$ac_cv_u8t_canonical" = "yes" && test "$ac_cv_utf8_mime2text" = "old"; then
+		AC_MSG_ERROR([utf8_mime2text() has old signature, but U8T_CANONICAL is present. This should not happen. Check config.log for additional information.])
+    fi
 
     dnl Check for c-client version 2001
     old_CPPFLAGS=$CPPFLAGS

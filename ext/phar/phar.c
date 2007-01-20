@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.119 2007/01/20 05:28:47 cellog Exp $ */
+/* $Id: phar.c,v 1.120 2007/01/20 16:43:44 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,11 +60,11 @@
 #define PHAR_API_MAJORVER_MASK    0xF000
 #define PHAR_API_VER_MASK         0xFFF0
 
-#define PHAR_HDR_COMPRESSION_MASK 0x000F
-#define PHAR_HDR_COMPRESSED_NONE  0x000F
-#define PHAR_HDR_COMPRESSED_GZ    0x0001
-#define PHAR_HDR_COMPRESSED_BZ2   0x0002
-#define PHAR_HDR_SIGNATURE        0x0010
+#define PHAR_HDR_COMPRESSION_MASK 0x0000F000
+#define PHAR_HDR_COMPRESSED_NONE  0x00000000
+#define PHAR_HDR_COMPRESSED_GZ    0x00001000
+#define PHAR_HDR_COMPRESSED_BZ2   0x00002000
+#define PHAR_HDR_SIGNATURE        0x00010000
 
 #define PHAR_SIG_MD5              0x0001
 #define PHAR_SIG_SHA1             0x0002
@@ -82,10 +82,10 @@
 
 /* flags byte for each file adheres to these bitmasks.
    All unused values are reserved */
-#define PHAR_ENT_COMPRESSION_MASK 0x00001C00
+#define PHAR_ENT_COMPRESSION_MASK 0x0000F000
 #define PHAR_ENT_COMPRESSED_NONE  0x00000000
-#define PHAR_ENT_COMPRESSED_GZ    0x00000200
-#define PHAR_ENT_COMPRESSED_BZ2   0x00000400
+#define PHAR_ENT_COMPRESSED_GZ    0x00001000
+#define PHAR_ENT_COMPRESSED_BZ2   0x00002000
 
 #define PHAR_ENT_PERM_MASK        0x000001FF
 #define PHAR_ENT_PERM_MASK_USR    0x000001C0
@@ -3120,7 +3120,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.119 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.120 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

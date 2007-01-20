@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.3 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.4 2007/01/20 22:16:24 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -621,8 +621,6 @@ int php_hash_environment(TSRMLS_D)
 {
 	char *p;
 	unsigned char _gpc_flags[5] = {0, 0, 0, 0, 0};
-	zval *dummy_track_vars_array = NULL;
-	zend_bool initialized_dummy_track_vars_array=0;
 	zend_bool jit_initialization = (PG(auto_globals_jit) && !PG(register_globals) && !PG(register_long_arrays));
 	struct auto_global_record {
 		char *name;
@@ -713,15 +711,9 @@ int php_hash_environment(TSRMLS_D)
 			continue;
 		}
 		if (!PG(http_globals)[i]) {
-			if (!initialized_dummy_track_vars_array) {
-				ALLOC_ZVAL(dummy_track_vars_array);
-				array_init(dummy_track_vars_array);
-				INIT_PZVAL(dummy_track_vars_array);
-				initialized_dummy_track_vars_array = 1;
-			} else {
-				dummy_track_vars_array->refcount++;
-			}
-			PG(http_globals)[i] = dummy_track_vars_array;
+			ALLOC_ZVAL(PG(http_globals)[i]);
+			array_init(PG(http_globals)[i]);
+			INIT_PZVAL(PG(http_globals)[i]);
 		}
 
 		PG(http_globals)[i]->refcount++;

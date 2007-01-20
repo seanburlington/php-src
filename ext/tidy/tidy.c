@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.108 2007/01/19 18:57:06 nlopess Exp $ */
+/* $Id: tidy.c,v 1.109 2007/01/20 12:27:55 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1040,7 +1040,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.108 2007/01/19 18:57:06 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.109 2007/01/20 12:27:55 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1712,7 +1712,7 @@ static TIDY_NODE_METHOD(hasSiblings)
 {
 	TIDY_FETCH_ONLY_OBJECT;
 
-	if (tidyGetNext(obj->node)) {
+	if (obj->node && tidyGetNext(obj->node)) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;

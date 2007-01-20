@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.h,v 1.25 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: spl_functions.h,v 1.26 2007/01/20 16:19:20 helly Exp $ */
 
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
@@ -87,6 +87,9 @@ int spl_add_classes(zend_class_entry *pce, zval *list, int sub, int allow, int c
 #define SPL_MA(class_name, function_name, alias_class, alias_function, arg_info, flags) \
 	PHP_MALIAS(spl_ ## alias_class, function_name, alias_function, arg_info, flags)
 #endif /* PHP_FUNCTIONS_H */
+
+/* caller must efree(return.v) */
+zstr spl_gen_private_prop_name(zend_class_entry *ce, char *prop_name, int prop_len, int *name_len TSRMLS_DC);
 
 /*
  * Local Variables:

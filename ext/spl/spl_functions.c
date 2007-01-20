@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.39 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: spl_functions.c,v 1.40 2007/01/20 16:19:20 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -141,6 +141,22 @@ int spl_add_classes(zend_class_entry *pce, zval *list, int sub, int allow, int c
 		}
 	}
 	return 0;
+}
+/* }}} */
+
+zstr spl_gen_private_prop_name(zend_class_entry *ce, char *prop_name, int prop_len, int *name_len TSRMLS_DC) /* {{{ */
+{
+	zstr rv;
+	zstr zprop;
+
+	if (UG(unicode)) {
+		zprop.u = zend_ascii_to_unicode(prop_name, prop_len + 1 ZEND_FILE_LINE_CC);
+		zend_u_mangle_property_name(&rv, name_len, IS_UNICODE, ce->name, ce->name_length, zprop, prop_len, 0);
+		efree(zprop.v);
+	} else {
+		zend_mangle_property_name(&rv.s, name_len, ce->name.s, ce->name_length, prop_name, prop_len, 0);
+	}
+	return rv;
 }
 /* }}} */
 

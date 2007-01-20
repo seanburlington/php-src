@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.109 2007/01/20 12:27:55 nlopess Exp $ */
+/* $Id: tidy.c,v 1.110 2007/01/20 12:58:20 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -729,14 +729,22 @@ static int tidy_node_cast_handler(zval *in, zval *out, int type, void *extra TSR
 		case IS_STRING:
 			obj = (PHPTidyObj *)zend_object_store_get_object(in TSRMLS_CC);
 			tidyBufInit(&buf);
-			tidyNodeGetText(obj->ptdoc->doc, obj->node, &buf);
-			ZVAL_STRINGL(out, (char *) buf.bp, buf.size, 0);
+			if (obj->ptdoc) {
+				tidyNodeGetText(obj->ptdoc->doc, obj->node, &buf);
+				ZVAL_STRINGL(out, (char *) buf.bp, buf.size-1, 0);
+			} else {
+				ZVAL_EMPTY_STRING(out);
+			}
 			break;
 
 		case IS_UNICODE:
 			obj = (PHPTidyObj *)zend_object_store_get_object(in TSRMLS_CC);
-			tidyNodeGetText(obj->ptdoc->doc, obj->node, &buf);
-			ZVAL_U_STRINGL(obj->converter->conv, out, (char *) buf.bp, buf.size, 0);
+			if (obj->ptdoc) {
+				tidyNodeGetText(obj->ptdoc->doc, obj->node, &buf);
+				ZVAL_U_STRINGL(obj->converter->conv, out, (char *) buf.bp, buf.size-1, 0);
+			} else {
+				ZVAL_EMPTY_UNICODE(out);
+			}
 			break;
 
 		default:
@@ -1040,7 +1048,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.109 2007/01/20 12:27:55 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.110 2007/01/20 12:58:20 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

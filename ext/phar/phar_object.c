@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.1 2007/01/21 15:25:49 helly Exp $ */
+/* $Id: phar_object.c,v 1.2 2007/01/21 17:40:26 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -285,7 +285,7 @@ PHP_METHOD(Phar, offsetGet)
 		fname_len = spprintf(&fname, 0, "phar://%s/%s", phar_obj->arc.archive->fname, fname);
 		MAKE_STD_ZVAL(zfname);
 		ZVAL_STRINGL(zfname, fname, fname_len, 0);
-		spl_instantiate_arg_ex1(phar_obj->spl.file_class, &return_value, 0, zfname TSRMLS_CC);
+		spl_instantiate_arg_ex1(phar_obj->spl.info_class, &return_value, 0, zfname TSRMLS_CC);
 		zval_ptr_dtor(&zfname);
 	}
 

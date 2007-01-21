@@ -1,4 +1,5 @@
 phpt.*
+*.mem
 *.diff
 *.log
 *.exp
@@ -7,3 +8,5 @@ phpt.*
 ibase_test.tmp
 blob.*
 CREATED*
+*.gcda
+*.gcno

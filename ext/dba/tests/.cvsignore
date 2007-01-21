@@ -1,4 +1,5 @@
 phpt.*
+*.mem
 *.diff
 *.log
 *.exp
@@ -9,3 +10,5 @@ phpt.*
 test0.*
 test1.*
 test2.*
+*.gcda
+*.gcno

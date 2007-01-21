@@ -1,12 +1,9 @@
-phpsql*
-*.mem
 phpt.*
+*.mem
 *.diff
+*.php
 *.log
 *.exp
 *.out
-*.php
-*.db
-*.tmp
 *.gcda
 *.gcno

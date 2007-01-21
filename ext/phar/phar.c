@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.122 2007/01/21 06:30:54 cellog Exp $ */
+/* $Id: phar.c,v 1.123 2007/01/21 06:39:31 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -395,6 +395,7 @@ static void destroy_phar_manifest(void *pDest) /* {{{ */
 	}
 	if (entry->metadata) {
 		zval_dtor(entry->metadata);
+		efree(entry->metadata);
 		entry->metadata = 0;
 	}
 	efree(entry->filename);
@@ -3239,7 +3240,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.122 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.123 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

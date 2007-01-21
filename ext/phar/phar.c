@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.123 2007/01/21 06:39:31 cellog Exp $ */
+/* $Id: phar.c,v 1.124 2007/01/21 06:54:03 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -663,8 +663,11 @@ static int phar_parse_metadata(php_stream *fp, char **buffer, char *endbuffer, z
 		PHAR_GET_32(*buffer, datatype);
 		PHAR_GET_16(*buffer, len);
 		data = (char *) emalloc(len);
-		if (len != php_stream_read(fp, data, (size_t) len) TSRMLS_CC) {
+		if (endbuffer - *buffer < len) {
+			efree(data);
 			return FAILURE;
+		} else {
+			memcpy(data, *buffer, len);
 		}
 		if (SUCCESS == zend_hash_index_find(metadata->value.ht, datatype, (void**)&found)) {
 			if (Z_TYPE_P(found) == IS_ARRAY) {
@@ -676,10 +679,8 @@ static int phar_parse_metadata(php_stream *fp, char **buffer, char *endbuffer, z
 				add_next_index_stringl(dataarray, data, len, 0); 
 			}
 		} else {
-			MAKE_STD_ZVAL(dataarray);
 			add_index_stringl(metadata, datatype, data, len, 0);
 		}
-		
 	} while (*(php_uint32 *) *buffer && *buffer < endbuffer);
 	*buffer += 4;
 	return SUCCESS;
@@ -3240,7 +3241,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.123 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.124 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

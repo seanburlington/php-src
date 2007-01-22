@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.9 2007/01/12 01:46:11 iliaa Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.10 2007/01/22 09:31:46 dmitry Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -673,6 +673,7 @@ PHP_FUNCTION(clearstatcache)
 		efree(BG(CurrentLStatFile));
 		BG(CurrentLStatFile) = NULL;
 	}
+	realpath_cache_clean(TSRMLS_C);
 }
 /* }}} */
 

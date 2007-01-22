@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.2 2007/01/01 09:36:08 sebastian Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.3 2007/01/22 09:31:46 dmitry Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -257,12 +257,13 @@ PHP_FUNCTION(chroot)
 	}
 	
 	ret = chroot(str);
-	
 	if (ret != 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s (errno %d)", strerror(errno), errno);
 		RETURN_FALSE;
 	}
 
+	realpath_cache_clean(TSRMLS_C);
+	
 	ret = chdir("/");
 	
 	if (ret != 0) {

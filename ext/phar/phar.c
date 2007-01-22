@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.134 2007/01/22 02:04:50 helly Exp $ */
+/* $Id: phar.c,v 1.135 2007/01/22 02:07:44 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1621,9 +1621,7 @@ int phar_flush(phar_entry_data *data, char *user_stub, long len TSRMLS_DC) /* {{
 	} else {
 		if (data->phar->halt_offset && oldfile) {
 			if (data->phar->halt_offset != php_stream_copy_to_stream(oldfile, newfile, data->phar->halt_offset)) {
-				if (oldfile) {
-					php_stream_close(oldfile);
-				}
+				php_stream_close(oldfile);
 				php_stream_close(newfile);
 				php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "unable to copy stub of old phar to new phar \"%s\"", data->phar->fname);
 				return EOF;
@@ -2522,7 +2520,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.134 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.135 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

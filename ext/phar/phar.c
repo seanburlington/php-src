@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.131 2007/01/22 00:59:01 helly Exp $ */
+/* $Id: phar.c,v 1.132 2007/01/22 01:01:49 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1301,7 +1301,7 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 
 		idata->fp = php_stream_temp_new();
 		if (php_stream_copy_to_stream(fp, idata->fp, idata->internal_file->uncompressed_filesize) != idata->internal_file->uncompressed_filesize) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch 1 on file \"%s\")", idata->phar->fname, internal_file);
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", idata->phar->fname, internal_file);
 			php_stream_close(idata->fp);
 			efree(idata);
 			efree(internal_file);
@@ -1312,7 +1312,7 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 		php_stream_filter_flush(consumed, 1);
 		php_stream_filter_remove(consumed, 1 TSRMLS_CC);
 		if (offset + idata->internal_file->compressed_filesize != php_stream_tell(fp)) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch 2 on file \"%s\")", idata->phar->fname, internal_file);
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", idata->phar->fname, internal_file);
 			php_stream_close(idata->fp);
 			efree(idata);
 			efree(internal_file);
@@ -1324,7 +1324,7 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 		/* bypass to temp stream */
 		idata->fp = php_stream_temp_new();
 		if (php_stream_copy_to_stream(fp, idata->fp, idata->internal_file->uncompressed_filesize) != idata->internal_file->uncompressed_filesize) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch 3 on file \"%s\")", idata->phar->fname, internal_file);
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", idata->phar->fname, internal_file);
 			php_stream_close(idata->fp);
 			efree(idata);
 			efree(internal_file);
@@ -2522,7 +2522,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.131 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.132 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -1,11 +1,11 @@
-dnl $Id: config.m4,v 1.47.2.14 2004/05/10 07:25:11 helly Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.47.2.16.2.1 2007/01/22 19:59:21 derick Exp $ -*- sh -*-
 
 divert(3)dnl
 
 dnl
 dnl Check if flush should be called explicitly after buffered io
 dnl
-AC_DEFUN(AC_FLUSH_IO,[
+AC_DEFUN([AC_FLUSH_IO],[
   AC_CACHE_CHECK([whether flush should be called explicitly after a buffered io], ac_cv_flush_io,[
   AC_TRY_RUN( [
 #include <stdio.h>
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 dnl
 dnl Check for crypt() capabilities
 dnl
-AC_DEFUN(AC_CRYPT_CAP,[
+AC_DEFUN([AC_CRYPT_CAP],[
 
   if test "$ac_cv_func_crypt" = "no"; then
   AC_CHECK_LIB(crypt, crypt, [
@@ -65,8 +65,12 @@ AC_DEFUN(AC_CRYPT_CAP,[
   ])
   fi
   
-  AC_CACHE_CHECK(for standard DES crypt, ac_cv_crypt_des,[
+  AC_CACHE_CHECK([for standard DES crypt], ac_cv_crypt_des,[
   AC_TRY_RUN([
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 #if HAVE_CRYPT_H
 #include <crypt.h>
 #endif
@@ -94,6 +98,10 @@ main() {
 
   AC_CACHE_CHECK(for extended DES crypt, ac_cv_crypt_ext_des,[
   AC_TRY_RUN([
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 #if HAVE_CRYPT_H
 #include <crypt.h>
 #endif
@@ -121,6 +129,10 @@ main() {
 
   AC_CACHE_CHECK(for MD5 crypt, ac_cv_crypt_md5,[
   AC_TRY_RUN([
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 #if HAVE_CRYPT_H
 #include <crypt.h>
 #endif
@@ -160,6 +172,10 @@ main() {
 
   AC_CACHE_CHECK(for Blowfish crypt, ac_cv_crypt_blowfish,[
   AC_TRY_RUN([
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 #if HAVE_CRYPT_H
 #include <crypt.h>
 #endif
@@ -234,8 +250,12 @@ dnl
 AC_MSG_CHECKING([whether rounding works as expected])
 AC_TRY_RUN([
 #include <math.h>
+  /* keep this out-of-line to prevent use of gcc inline floor() */
+  double somefn(double n) {
+    return floor(n*pow(10,2) + 0.5);
+  }
   int main() {
-    return floor(0.045*pow(10,2) + 0.5)/10.0 != 0.5;
+    return somefn(0.045)/10.0 != 0.5;
   }
 ],[
   PHP_ROUND_FUZZ=0.5

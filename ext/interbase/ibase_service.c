@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.11.2.2.2.1 2007/01/01 09:36:02 sebastian Exp $ */
+/* $Id: ibase_service.c,v 1.11.2.2.2.2 2007/01/22 09:05:27 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -425,7 +425,8 @@ static void _php_ibase_backup_restore(INTERNAL_FUNCTION_PARAMETERS, char operati
 	 */
 	zval *res;
 	char *db, *bk, buf[200];
-	long dblen, bklen, spb_len, opts = 0;
+	int dblen, bklen, spb_len;
+	long opts = 0;
 	zend_bool verbose = 0;
 	ibase_service *svm;
 
@@ -489,7 +490,8 @@ static void _php_ibase_service_action(INTERNAL_FUNCTION_PARAMETERS, char svc_act
 {
 	zval *res;
 	char buf[128], *db;
-	long action, spb_len, dblen, argument = 0;
+	int dblen, spb_len;
+	long action, argument = 0;
 	ibase_service *svm;
 
 	RESET_ERRMSG;

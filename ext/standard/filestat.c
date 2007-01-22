@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.157 2007/01/18 22:57:03 helly Exp $ */
+/* $Id: filestat.c,v 1.158 2007/01/22 09:32:55 dmitry Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -744,6 +744,7 @@ PHP_FUNCTION(clearstatcache)
 		efree(BG(CurrentLStatFile));
 		BG(CurrentLStatFile) = NULL;
 	}
+	realpath_cache_clean(TSRMLS_C);
 }
 /* }}} */
 

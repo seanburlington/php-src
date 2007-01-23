@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.8.2.20 2007/01/20 12:49:35 nlopess Exp $ */
+/* $Id: tidy.c,v 1.66.2.8.2.21 2007/01/23 19:23:29 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -515,7 +515,7 @@ static void php_tidy_quick_repair(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_fil
 				tidyBufInit(&output);
 
 				tidySaveBuffer (doc, &output);
-				RETVAL_STRINGL(output.bp, output.size-1, 1);
+				RETVAL_STRINGL(output.bp, output.size ? output.size-1 : 0, 1);
 				tidyBufFree(&output);
 			} else {
 				RETVAL_FALSE;
@@ -683,7 +683,7 @@ static int tidy_doc_cast_handler(zval *in, zval *out, int type TSRMLS_DC)
 			obj = (PHPTidyObj *)zend_object_store_get_object(in TSRMLS_CC);
 			tidyBufInit(&output);
 			tidySaveBuffer (obj->ptdoc->doc, &output);
-			ZVAL_STRINGL(out, output.bp, output.size-1, TRUE);
+			ZVAL_STRINGL(out, output.bp, output.size ? output.size-1 : 0, TRUE);
 			tidyBufFree(&output);
 			break;
 
@@ -990,7 +990,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.20 2007/01/20 12:49:35 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.8.2.21 2007/01/23 19:23:29 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1037,7 +1037,7 @@ static PHP_FUNCTION(ob_tidyhandler)
 			tidyBufInit(&output);
 
 			tidySaveBuffer(doc, &output);
-			RETVAL_STRINGL(output.bp, output.size-1, 1);
+			RETVAL_STRINGL(output.bp, output.size ? output.size-1 : 0, 1);
 
 			tidyBufFree(&output);
 		}
@@ -1103,7 +1103,7 @@ static PHP_FUNCTION(tidy_get_output)
 	tidyBufInit(&output);
 	tidySaveBuffer(obj->ptdoc->doc, &output);
 
-	RETVAL_STRINGL(output.bp, output.size-1, 1);
+	RETVAL_STRINGL(output.bp, output.size ? output.size-1 : 0, 1);
 
 	tidyBufFree(&output);
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.42 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: info.h,v 1.43 2007/01/23 19:58:45 helly Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -81,6 +81,7 @@ PHPAPI void php_info_print_table_end(void);
 PHPAPI void php_info_print_box_start(int bg);
 PHPAPI void php_info_print_box_end(void);
 PHPAPI void php_info_print_hr(void);
+PHPAPI void php_info_print_module(zend_module_entry *module TSRMLS_DC);
 PHPAPI char *php_logo_guid(void);
 PHPAPI char *php_get_uname(char mode);
 

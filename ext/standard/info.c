@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.274 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: info.c,v 1.275 2007/01/23 15:47:28 johannes Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -67,7 +67,7 @@ static int php_info_print_html_esc(const char *str, int len)
 	char *new_str;
 	TSRMLS_FETCH();
 	
-	new_str = php_escape_html_entities((char *) str, len, &new_len, 0, ENT_QUOTES, "utf8" TSRMLS_CC);
+	new_str = php_escape_html_entities((char *) str, len, &new_len, 0, ENT_QUOTES, "utf-8" TSRMLS_CC);
 	written = php_output_write_utf8(new_str, new_len TSRMLS_CC);
 	efree(new_str);
 	return written;

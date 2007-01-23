@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.10 2007/01/09 17:55:29 helly Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.11 2007/01/23 00:23:17 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -139,7 +139,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.10 2007/01/09 17:55:29 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.11 2007/01/23 00:23:17 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1606,7 +1606,7 @@ static int exif_file_sections_add(image_info_type *ImageInfo, int type, size_t s
 	if (!size) {
 		data = NULL;
 	} else if (data == NULL) {
-		data = emalloc(size);
+		data = safe_emalloc(size, 1, 0);
 	}
 	ImageInfo->file.list[count].type = type;
 	ImageInfo->file.list[count].data = data;
@@ -2383,7 +2383,7 @@ static void* exif_ifd_make_value(image_info_data *info_data, int motorola_intel 
 	image_info_value  *info_value;
 
 	byte_count = php_tiff_bytes_per_format[info_data->format] * info_data->length;
-	value_ptr = emalloc(max(byte_count, 4));
+	value_ptr = safe_emalloc(max(byte_count, 4), 1, 0);
 	memset(value_ptr, 0, 4);
 	if (!info_data->length) {
 		return value_ptr;
@@ -2875,7 +2875,7 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 			}
 			if (byte_count>sizeof(cbuf)) {
 				/* mark as outside range and get buffer */
-				value_ptr = emalloc(byte_count);
+				value_ptr = safe_emalloc(byte_count, 1, 0);
 				outside = value_ptr;
 			} else {
 				/*

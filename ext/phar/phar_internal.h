@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.4 2007/01/22 00:13:19 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.5 2007/01/24 04:38:18 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -75,15 +75,6 @@
 #define PHAR_SIG_PGP              0x0010
 
 #define PHAR_SIG_USE  PHAR_SIG_SHA1
-
-/* metadata type constants */
-
-#define PHAR_METADATA_FINISHED 0x00000000
-
-/* basic meta-data types */
-#define PHAR_METADATA_STRING   0x00000001
-#define PHAR_METADATA_INT      0x00000002
-#define PHAR_METADATA_BOOL     0x00000003
 
 /* flags byte for each file adheres to these bitmasks.
    All unused values are reserved */

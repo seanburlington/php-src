@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.39 2007/01/15 17:06:52 tony2001 Exp $ */
+/* $Id: userspace.c,v 1.40 2007/01/24 21:43:47 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -53,7 +53,7 @@ static php_stream_wrapper_ops user_stream_wops = {
 	user_wrapper_mkdir,
 	user_wrapper_rmdir
 };
-
+php_stream_wrapper_ops *php_stream_user_wrapper_ops = &user_stream_wops;
 
 static void stream_wrapper_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {

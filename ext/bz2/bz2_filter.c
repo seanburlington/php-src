@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.11 2007/01/01 09:29:21 sebastian Exp $ */
+/* $Id: bz2_filter.c,v 1.12 2007/01/25 12:21:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,6 +107,11 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 			data->strm.avail_in = 0;
 			consumed += desired;
 			bin += desired;
+
+			if (!desired) {
+				flags |= PSFS_FLAG_FLUSH_CLOSE;
+				break;
+			}
 
 			if (data->strm.avail_out < data->outbuf_len) {
 				php_stream_bucket *out_bucket;

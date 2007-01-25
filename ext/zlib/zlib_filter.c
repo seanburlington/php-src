@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zlib_filter.c,v 1.6.2.2.2.3 2007/01/01 09:36:10 sebastian Exp $ */
+/* $Id: zlib_filter.c,v 1.6.2.2.2.4 2007/01/25 12:22:21 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_zlib.h"
@@ -99,6 +99,11 @@ static php_stream_filter_status_t php_zlib_inflate_filter(
 			data->strm.avail_in = 0;
 			consumed += desired;
 			bin += desired;
+
+			if (!desired) {
+				flags |= PSFS_FLAG_FLUSH_CLOSE;
+				break;
+			}
 
 			if (data->strm.avail_out < data->outbuf_len) {
 				php_stream_bucket *out_bucket;
@@ -207,6 +212,11 @@ static php_stream_filter_status_t php_zlib_deflate_filter(
 			data->strm.avail_in = 0;
 			consumed += desired;
 			bin += desired;
+
+			if (!desired) {
+				flags |= PSFS_FLAG_FLUSH_CLOSE;
+				break;
+			}
 
 			if (data->strm.avail_out < data->outbuf_len) {
 				php_stream_bucket *out_bucket;

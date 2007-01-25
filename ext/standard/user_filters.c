@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.6 2007/01/25 00:27:19 iliaa Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.7 2007/01/25 06:12:58 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -280,7 +280,7 @@ static php_stream_filter *user_filter_factory_create(const char *filtername,
 			char *wildcard = emalloc(len + 3);
 
 			/* Search for wildcard matches instead */
-			memcpy(wildname, filtername, len + 1); /* copy \0 */
+			memcpy(wildcard, filtername, len + 1); /* copy \0 */
 			period = wildcard + (period - filtername);
 			while (period) {
 				*period = '\0';

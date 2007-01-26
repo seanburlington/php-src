@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.138 2007/01/26 14:52:09 cellog Exp $ */
+/* $Id: phar.c,v 1.139 2007/01/26 19:43:03 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1434,7 +1434,9 @@ static int phar_stream_close(php_stream *stream, int close_handle TSRMLS_DC) /* 
 	/* data->fp is the temporary memory stream containing this file's data */
 	phar_free_entry_data(data TSRMLS_CC);
 	if (--phar->refcount < 0) {
-		phar_destroy_phar_data(phar TSRMLS_CC);
+		if (zend_hash_del(&(PHAR_GLOBALS->phar_fname_map), phar->fname, phar->fname_len) != SUCCESS) {
+			phar_destroy_phar_data(phar TSRMLS_CC);
+		}
 	}
 
 	return 0;
@@ -2615,7 +2617,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.138 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.139 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.9 2007/01/26 14:52:09 cellog Exp $ */
+/* $Id: phar_object.c,v 1.10 2007/01/26 19:58:21 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -87,11 +87,8 @@ PHP_METHOD(Phar, canWrite)
  */
 static void phar_spl_foreign_dtor(spl_filesystem_object *object TSRMLS_DC) /* {{{ */
 {
-	phar_archive_data *phar_data = (phar_archive_data *) object->oth;
-
-	if (--phar_data->refcount < 0) {
-		phar_destroy_phar_data(phar_data TSRMLS_CC);
-	}
+	phar_archive_delref((phar_archive_data *) object->oth TSRMLS_CC);
+	object->oth = NULL;
 }
 /* }}} */
 

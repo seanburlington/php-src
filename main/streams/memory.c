@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.8.2.6.2.13 2007/01/27 20:25:11 helly Exp $ */
+/* $Id: memory.c,v 1.8.2.6.2.14 2007/01/27 20:31:51 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -279,7 +279,7 @@ php_stream_ops	php_stream_memory_ops = {
 	php_stream_memory_seek,
 	php_stream_memory_cast,
 	php_stream_memory_stat,
-	php_stream_memory_set_option
+	NULL /* php_stream_memory_set_option */
 };
 
 

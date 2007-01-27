@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.13 2007/01/01 09:36:04 sebastian Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.14 2007/01/27 21:53:26 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -370,6 +370,8 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 			} else {
 				zend_hash_index_del(hash, pparam->paramno);
 			}
+			/* param->parameter is freed by hash dtor */
+			param->parameter = NULL;
 			return 0;
 		}
 	}
@@ -428,7 +430,9 @@ static PHP_METHOD(PDOStatement, execute)
 			INIT_PZVAL(param.parameter);
 
 			if (!really_register_bound_param(&param, stmt, 1 TSRMLS_CC)) {
-				zval_ptr_dtor(&param.parameter);
+				if (param.parameter) {
+					zval_ptr_dtor(&param.parameter);
+				}
 				RETURN_FALSE;
 			}
 

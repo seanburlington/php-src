@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.152 2007/01/27 22:23:51 helly Exp $ */
+/* $Id: phar.c,v 1.153 2007/01/27 23:02:41 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1710,6 +1710,18 @@ static inline void phar_set_16(char *buffer, int var) /* {{{ */
 #endif
 } /* }}} */
 
+static int phar_flush_clean_deleted_apply(void *data TSRMLS_DC) /* {{{ */
+{
+	phar_entry_info *entry = (phar_entry_info *)data;
+
+	if (entry->fp_refcount <= 0 && entry->is_deleted) {
+		return ZEND_HASH_APPLY_REMOVE;
+	} else {
+		return ZEND_HASH_APPLY_KEEP;
+	}
+}
+/* }}} */
+
 /**
  * Save phar contents to disk
  *
@@ -1805,7 +1817,12 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len TSRMLS_DC) 
 	}
 	manifest_ftell = php_stream_tell(newfile);
 	halt_offset = manifest_ftell;
-	
+
+	/* Check whether we can get rid of some of the deleted entries which are
+	 * unused. However some might still be in use so even after this clean-up
+	 * we need to skip entries marked is_deleted. */
+	zend_hash_apply(&archive->manifest, phar_flush_clean_deleted_apply TSRMLS_CC);
+
 	/* compress as necessary, calculate crcs, manifest size, and file sizes */
 	new_manifest_count = 0;
 	offset = 0;
@@ -2681,7 +2698,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.152 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.153 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

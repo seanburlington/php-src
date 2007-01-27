@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.146 2007/01/27 18:57:11 cellog Exp $ */
+/* $Id: phar.c,v 1.147 2007/01/27 19:42:36 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -294,8 +294,7 @@ static int phar_get_entry_data(phar_entry_data **ret, char *fname, int fname_len
 			if (entry->fp) {
 				/* make a copy */
 				if (for_trunc) {
-					php_stream_close(entry->fp);
-					entry->fp = php_stream_fopen_tmpfile();
+					php_stream_truncate_set_size(entry->fp, 0);
 					entry->is_modified = 1;
 					phar->is_modified = 1;
 					/* reset file size */
@@ -2644,7 +2643,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.146 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.147 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

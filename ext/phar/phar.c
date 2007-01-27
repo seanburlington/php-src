@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.142 2007/01/27 17:27:47 helly Exp $ */
+/* $Id: phar.c,v 1.143 2007/01/27 18:03:39 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -2457,6 +2457,8 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 		php_url_free(resource);
 		return FAILURE;
 	}
+	/* faulty increment of phar refcount - nothing persists beyond this function */
+	idata->phar->refcount--;
 	if (idata->internal_file->fp_refcount > 1) {
 		/* more than just our fp resource is open for this file */ 
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: \"%s\" in phar \"%s\", has open file pointers, cannot unlink", internal_file, resource->host);
@@ -2615,7 +2617,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.142 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.143 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

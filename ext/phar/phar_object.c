@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.16 2007/01/27 21:37:21 helly Exp $ */
+/* $Id: phar_object.c,v 1.17 2007/01/28 03:25:51 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -499,7 +499,9 @@ PHP_METHOD(Phar, offsetSet)
 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Entry %s does not exist and cannot be created", fname);
 		}
 	} else {
-		efree(error);
+		if (error) {
+			efree(error);
+		}
 		if (Z_TYPE_P(contents) == IS_STRING) {
 			contents_len = php_stream_write(data->fp, Z_STRVAL_P(contents), Z_STRLEN_P(contents));
 			if (contents_len != Z_STRLEN_P(contents)) {

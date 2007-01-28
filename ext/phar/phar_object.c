@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.17 2007/01/28 03:25:51 cellog Exp $ */
+/* $Id: phar_object.c,v 1.18 2007/01/28 05:40:16 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -135,7 +135,7 @@ PHP_METHOD(Phar, __construct)
 		return;
 	}
 
-	if (phar_open_filename(fname, fname_len, alias, alias_len, REPORT_ERRORS, &phar_data TSRMLS_CC) == FAILURE) {
+	if (phar_open_or_create_filename(fname, fname_len, alias, alias_len, REPORT_ERRORS, &phar_data TSRMLS_CC) == FAILURE) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 			"Cannot open phar file '%s' with alias '%s'", fname, alias);
 		return;

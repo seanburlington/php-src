@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.20 2007/01/28 19:09:11 cellog Exp $ */
+/* $Id: phar_object.c,v 1.21 2007/01/28 19:56:08 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -229,6 +229,8 @@ PHP_METHOD(Phar, commit)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|zl", &stub, &len) == FAILURE) {
 		return;
 	}
+
+	phar_obj->arc.archive->donotflush = 0;
 
 	if (stub && Z_TYPE_P(stub) == IS_STRING) {
 		phar_flush(phar_obj->arc.archive, Z_STRVAL_P(stub), Z_STRLEN_P(stub) TSRMLS_CC);

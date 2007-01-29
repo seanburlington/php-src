@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.37 2007/01/06 20:30:23 nlopess Exp $ */
+/* $Id: php_zip.c,v 1.38 2007/01/29 16:01:55 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,23 +101,28 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 
 	char *file_basename;
 	size_t file_basename_len;
+	int is_dir_only = 0;
 
 	if (file_len >= MAXPATHLEN || zip_stat(za, file, 0, &sb)) {
 		return 0;
 	}
 
-	memcpy(file_dirname, file, file_len);
-
-	dir_len = php_dirname(file_dirname, file_len);
-
-	if (dir_len > 0) {
-		len = spprintf(&file_dirname_fullpath, 0, "%s/%s", dest, file_dirname);
+	if (file_len > 1 && file[file_len - 1] == '/') {
+		len = spprintf(&file_dirname_fullpath, 0, "%s/%s", dest, file);
+		is_dir_only = 1;
 	} else {
-		len = spprintf(&file_dirname_fullpath, 0, "%s", dest);
+		memcpy(file_dirname, file, file_len);
+
+		dir_len = php_dirname(file_dirname, file_len);
+
+		if (dir_len > 0) {
+			len = spprintf(&file_dirname_fullpath, 0, "%s/%s", dest, file_dirname);
+		} else {
+			len = spprintf(&file_dirname_fullpath, 0, "%s", dest);
+		}
+
+		php_basename(file, file_len, NULL, 0, &file_basename, (unsigned int *)&file_basename_len TSRMLS_CC);
 	}
-
-	php_basename(file, file_len, NULL, 0, &file_basename, &file_basename_len TSRMLS_CC);
-
 	/* let see if the path already exists */
 	if (php_stream_stat_path(file_dirname_fullpath, &ssb) < 0) {
 		ret = php_stream_mkdir(file_dirname_fullpath, 0777,  PHP_STREAM_MKDIR_RECURSIVE, NULL);
@@ -131,7 +136,9 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 	/* it is a standalone directory, job done */
 	if (file[file_len - 1] == '/') {
 		efree(file_dirname_fullpath);
-		efree(file_basename);
+		if (!is_dir_only) {
+			efree(file_basename);
+		}
 		return 1;
 	}
 
@@ -2076,7 +2083,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.37 2007/01/06 20:30:23 nlopess Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.38 2007/01/29 16:01:55 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

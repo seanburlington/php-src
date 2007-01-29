@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.312 2006/12/28 15:06:58 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.313 2007/01/29 22:55:22 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -401,7 +401,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.312 $'."\n";
+					echo '$Revision: 1.313 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1568,11 +1568,13 @@ COMMAND $cmd
 	}
 
 	if ($leaked) {
-		$restype = 'LEAK';
-	} else if ($warn) {
-		$restype = 'WARN';
-	} else {
-		$restype = 'FAIL';
+		$restype[] = 'LEAK';
+	}
+	if ($warn) {
+		$restype[] = 'WARN';
+	}
+	if (!$passed) {
+		$restype[] = 'FAIL';
 	}
 
 	if (!$passed) {
@@ -1604,9 +1606,10 @@ $output
 		}
 	}
 
-	show_result($restype, $tested, $tested_file, $unicode_semantics, $info, $temp_filenames);
+	show_result(implode('&', $restype), $tested, $tested_file, $unicode_semantics, $info, $temp_filenames);
 
-	$PHP_FAILED_TESTS[$restype.'ED'][] = array (
+	foreach ($restype as $type) {
+		$PHP_FAILED_TESTS[$type.'ED'][] = array (
 						'name' => $file,
 						'test_name' => (is_array($IN_REDIRECT) ? $IN_REDIRECT['via'] : '') . $tested . " [$tested_file]",
 						'output' => $output_filename,
@@ -1614,12 +1617,13 @@ $output
 						'info'   => $info,
 						'unicode'=> $unicode_semantics,
 						);
+	}
 
 	if (isset($old_php)) {
 		$php = $old_php;
 	}
 
-	return $restype.'ED';
+	return $restype[0].'ED';
 }
 
 function comp_line($l1,$l2,$is_reg)

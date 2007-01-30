@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.313 2007/01/29 22:55:22 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.314 2007/01/30 17:41:11 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -401,7 +401,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.313 $'."\n";
+					echo '$Revision: 1.314 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -704,8 +704,8 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 
 		if (substr(PHP_OS, 0, 3) != "WIN") {
 			/* If PHP_AUTOCONF is set, use it; otherwise, use 'autoconf'. */
-			if (!empty($_ENV['PHP_AUTOCONF'])) {
-				$autoconf = shell_exec($_ENV['PHP_AUTOCONF'] . ' --version');
+			if (getenv('PHP_AUTOCONF')) {
+				$autoconf = shell_exec(getenv('PHP_AUTOCONF') . ' --version');
 			} else {
 				$autoconf = shell_exec('autoconf --version');
 			}

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.13 2007/01/11 11:27:52 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.14 2007/01/31 13:55:43 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -190,6 +190,7 @@ typedef struct { /* php_oci_bind {{{ */
 	} array;
 	sb2 indicator;			/* -1 means NULL */
 	ub2 retcode;			/*  */
+	ub4 dummy_len;          /* a dummy var to store alenpp value in bind OUT callback */
 } php_oci_bind; /* }}} */
 
 typedef struct { /* php_oci_out_column {{{ */

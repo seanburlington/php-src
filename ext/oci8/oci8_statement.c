@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.42 2007/01/31 10:36:20 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.43 2007/01/31 12:45:56 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -863,7 +863,9 @@ int php_oci_bind_post_exec(void *data TSRMLS_DC)
  Bind zval to the given placeholder */
 int php_oci_bind_by_name(php_oci_statement *statement, zstr name, int name_len, zval* var, long maxlength, long type, zend_uchar uni_type TSRMLS_DC)
 {
+#ifdef PHP_OCI8_HAVE_COLLECTIONS
 	php_oci_collection *bind_collection = NULL;
+#endif
 	php_oci_descriptor *bind_descriptor = NULL;
 	php_oci_statement  *bind_statement  = NULL;
 	dvoid *oci_desc                 = NULL;

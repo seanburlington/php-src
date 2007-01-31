@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.327 2007/01/11 11:26:36 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.328 2007/01/31 12:45:55 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -89,7 +89,9 @@ static void php_oci_connection_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_pconnection_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_statement_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_descriptor_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
+#ifdef PHP_OCI8_HAVE_COLLECTIONS
 static void php_oci_collection_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
+#endif
 
 static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC);
 #ifdef ZTS
@@ -646,7 +648,9 @@ PHP_RSHUTDOWN_FUNCTION(oci)
 {
 #ifdef ZTS
 	zend_hash_apply_with_argument(&EG(regular_list), (apply_func_arg_t) php_oci_list_helper, (void *)le_descriptor TSRMLS_CC);
+#ifdef PHP_OCI8_HAVE_COLLECTIONS
 	zend_hash_apply_with_argument(&EG(regular_list), (apply_func_arg_t) php_oci_list_helper, (void *)le_collection TSRMLS_CC);
+#endif
 	while (OCI_G(num_statements)) { 
 		zend_hash_apply_with_argument(&EG(regular_list), (apply_func_arg_t) php_oci_list_helper, (void *)le_statement TSRMLS_CC);
 	}
@@ -670,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.327 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.328 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -742,6 +746,7 @@ static void php_oci_descriptor_list_dtor(zend_rsrc_list_entry *entry TSRMLS_DC)
 	php_oci_lob_free(descriptor TSRMLS_CC);
 } /* }}} */
 
+#ifdef PHP_OCI8_HAVE_COLLECTIONS
 /* {{{ php_oci_collection_list_dtor()
  Collection destructor */
 static void php_oci_collection_list_dtor(zend_rsrc_list_entry *entry TSRMLS_DC)
@@ -749,6 +754,7 @@ static void php_oci_collection_list_dtor(zend_rsrc_list_entry *entry TSRMLS_DC)
 	php_oci_collection *collection = (php_oci_collection *)entry->ptr;
 	php_oci_collection_close(collection TSRMLS_CC);
 } /* }}} */
+#endif
 
 /* }}} */
 

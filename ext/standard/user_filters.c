@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.7 2007/01/25 06:12:58 rasmus Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.8 2007/02/01 14:21:01 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -496,6 +496,10 @@ PHP_FUNCTION(stream_bucket_new)
 	memcpy(pbuffer, buffer, buffer_len);
 
 	bucket = php_stream_bucket_new(stream, pbuffer, buffer_len, 1, php_stream_is_persistent(stream) TSRMLS_CC);
+	
+	if (bucket == NULL) {
+		RETURN_FALSE;
+	}
 
 	ALLOC_INIT_ZVAL(zbucket);
 	ZEND_REGISTER_RESOURCE(zbucket, bucket, le_bucket);

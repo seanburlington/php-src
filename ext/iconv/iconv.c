@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.13 2007/01/24 00:33:51 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.14 2007/02/01 14:02:35 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2311,6 +2311,9 @@ PHP_FUNCTION(ob_iconv_handler)
 			spprintf(&content_type, 0, "Content-Type:%s; charset=%s", mimetype, ICONVG(output_encoding));
 			if (content_type && sapi_add_header(content_type, strlen(content_type), 0) != FAILURE) {
 				SG(sapi_headers).send_default_content_type = 0;
+			}
+			if (mimetype_alloced) {
+				efree(mimetype);
 			}
 			RETURN_STRINGL(out_buffer, out_len, 0);
 		}

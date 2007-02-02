@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.12 2007/01/01 09:29:22 sebastian Exp $ */
+/* $Id: com_wrapper.c,v 1.13 2007/02/02 08:42:32 wharmby Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -298,6 +298,17 @@ static HRESULT STDMETHODCALLTYPE disp_invokeex(
 							&retval, pdp->cArgs, params, 1, NULL TSRMLS_CC)) {
 					ret = S_OK;
 					trace("function called ok\n");
+
+					/* Copy any modified values to callers copy of variant*/
+					for (i = 0; i < pdp->cArgs; i++) {
+						php_com_dotnet_object *obj = CDNO_FETCH(*params[i]);
+						VARIANT *srcvar = &obj->v;
+						VARIANT *dstvar = &pdp->rgvarg[ pdp->cArgs - 1 - i];
+						if ((V_VT(dstvar) & VT_BYREF) && obj->modified ) {
+							trace("percolate modified value for arg %d VT=%08x\n", i, V_VT(dstvar));
+							php_com_copy_variant(dstvar, srcvar TSRMLS_CC);   
+						}
+					}
 				} else {
 					trace("failed to call func\n");
 					ret = DISP_E_EXCEPTION;

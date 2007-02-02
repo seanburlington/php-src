@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_misc.c,v 1.13 2007/02/01 18:05:10 wharmby Exp $ */
+/* $Id: com_misc.c,v 1.14 2007/02/02 08:42:32 wharmby Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,6 +78,7 @@ PHPAPI void php_com_wrap_variant(zval *z, VARIANT *v,
 
 	VariantInit(&obj->v);
 	VariantCopyInd(&obj->v, v);
+	obj->modified = 0;
 
 	if ((V_VT(&obj->v) == VT_DISPATCH) && (V_DISPATCH(&obj->v) != NULL)) {
 		IDispatch_GetTypeInfo(V_DISPATCH(&obj->v), 0, LANG_NEUTRAL, &obj->typeinfo);

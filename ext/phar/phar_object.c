@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.28 2007/02/03 04:04:16 cellog Exp $ */
+/* $Id: phar_object.c,v 1.29 2007/02/03 13:20:11 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -66,7 +66,7 @@ PHP_METHOD(Phar, loadPhar)
  * Returns the api version */
 PHP_METHOD(Phar, apiVersion)
 {
-	RETURN_STRINGL(PHAR_VERSION_STR, sizeof(PHAR_VERSION_STR)-1, 1);
+	RETURN_STRINGL(PHAR_API_VERSION_STR, sizeof(PHAR_API_VERSION_STR)-1, 1);
 }
 /* }}}*/
 

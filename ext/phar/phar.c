@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.164 2007/02/03 04:04:16 cellog Exp $ */
+/* $Id: phar.c,v 1.165 2007/02/03 13:20:11 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1022,7 +1022,7 @@ int phar_open_or_create_filename(char *fname, int fname_len, char *alias, int al
 	mydata->fname_len = fname_len;
 	mydata->alias = alias ? estrndup(alias, alias_len) : mydata->fname;
 	mydata->alias_len = alias ? alias_len : fname_len;
-	snprintf(mydata->version, sizeof(mydata->version), "%s", PHAR_VERSION_STR);
+	snprintf(mydata->version, sizeof(mydata->version), "%s", PHAR_API_VERSION_STR);
 	mydata->is_explicit_alias = alias ? 1 : 0;
 	mydata->internal_file_start = -1;
 	mydata->fp = fp;
@@ -3088,8 +3088,9 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
-	php_info_print_table_row(2, "Phar API version", PHAR_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.164 $");
+	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
+	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.165 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");
@@ -3134,7 +3135,7 @@ zend_module_entry phar_module_entry = {
 	PHP_RINIT(phar),
 	PHP_RSHUTDOWN(phar),
 	PHP_MINFO(phar),
-	PHAR_VERSION_STR,
+	PHAR_EXT_VERSION_STR,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

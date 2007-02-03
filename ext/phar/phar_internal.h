@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.16 2007/01/29 06:02:17 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.17 2007/02/03 13:20:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,7 +56,8 @@
 #define E_RECOVERABLE_ERROR E_ERROR
 #endif
 
-#define PHAR_VERSION_STR          "1.0.0"
+#define PHAR_EXT_VERSION_STR      "1.0.0"
+#define PHAR_API_VERSION_STR      "1.0.0"
 /* x.y.z maps to 0xyz0 */
 #define PHAR_API_VERSION          0x1000
 #define PHAR_API_MIN_READ         0x1000

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.721 2007/01/24 21:43:47 pollita Exp $ */
+/* $Id: main.c,v 1.722 2007/02/03 14:57:24 helly Exp $ */
 
 /* {{{ includes
  */
@@ -83,6 +83,7 @@
 #include "php_ticks.h"
 #include "php_logos.h"
 #include "php_streams.h"
+#include "php_open_temporary_file.h"
 
 #include "SAPI.h"
 #include "rfc1867.h"
@@ -1852,6 +1853,7 @@ void php_module_shutdown(TSRMLS_D)
 #endif
 
 	php_output_shutdown();
+	php_shutdown_temporary_directory();
 
 	module_initialized = 0;
 

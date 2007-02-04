@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.26 2007/01/03 23:17:17 iliaa Exp $ */
+/* $Id: http.c,v 1.27 2007/02/04 17:02:01 iliaa Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -184,8 +184,13 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 					char *temp;
 					int temp_len;
 					zend_unicode_to_string(UG(utf8_conv), &temp, &temp_len, Z_USTRVAL_PP(zdata), Z_USTRLEN_PP(zdata) TSRMLS_CC);
-					ekey = php_url_encode(temp, temp_len, &ekey_len);
-					efree(temp);
+					if (temp) {
+						ekey = php_url_encode(temp, temp_len, &ekey_len);
+						efree(temp);
+					} else {
+						smart_str_free(formstr);
+						return FAILURE;
+					}
 					break;
 				}
 				case IS_STRING:

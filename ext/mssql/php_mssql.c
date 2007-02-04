@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.2 2007/01/01 09:36:03 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.3 2007/02/04 21:19:37 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -821,7 +821,7 @@ PHP_FUNCTION(mssql_select_db)
 
 static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int offset,zval *result, int column_type  TSRMLS_DC)
 {
-	if (dbdatlen(mssql_ptr->link,offset) == 0) {
+	if (dbdata(mssql_ptr->link,offset) == NULL && dbdatlen(mssql_ptr->link,offset) == 0) {
 		ZVAL_NULL(result);
 		return;
 	}

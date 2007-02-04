@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_path_check.re,v 1.1 2007/02/04 13:21:39 helly Exp $ */
+/* $Id: phar_path_check.re,v 1.2 2007/02/04 16:25:24 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -54,6 +54,10 @@ ANY = .;
 "/" END {
 			*error = "empty entry";
 			return pcr_err_empty_entry;
+		}
+"*" {
+			*error = "star";
+			return pcr_err_star;
 		}
 "?"	{
 			if (*s == '/') {

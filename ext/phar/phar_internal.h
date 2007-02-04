@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.18 2007/02/04 13:21:39 helly Exp $ */
+/* $Id: phar_internal.h,v 1.19 2007/02/04 16:25:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -264,6 +264,7 @@ typedef enum {
 	pcr_err_up_dir,
 	pcr_err_curr_dir,
 	pcr_err_back_slash,
+	pcr_err_star,
 	pcr_err_empty_entry
 } phar_path_check_result;
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.167 2007/02/04 20:10:01 helly Exp $ */
+/* $Id: phar.c,v 1.168 2007/02/04 20:35:58 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -481,7 +481,7 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 	entry = phar_get_entry_info(phar, path, path_len, error TSRMLS_CC);
 	
 	if (!entry) {
-		//return NULL;
+		return NULL;
 	}
 
 	phar->refcount++;
@@ -2657,7 +2657,7 @@ static php_stream *phar_make_dirstream(char *dir, HashTable *manifest TSRMLS_DC)
 	zend_hash_init(data, 64, zend_get_hash_value, NULL, 0);
 
 	if (*dir == '/' && dirlen == 1 && (manifest->nNumOfElements == 0)) {
-		// make empty root directory for empty phar
+		/* make empty root directory for empty phar */
 		efree(dir);
 		return php_stream_alloc(&phar_dir_ops, data, NULL, "r");
 	}
@@ -3110,7 +3110,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.167 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.168 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

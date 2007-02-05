@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_path_check.re,v 1.5 2007/02/05 07:58:28 helly Exp $ */
+/* $Id: phar_path_check.re,v 1.6 2007/02/05 19:16:06 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -85,6 +85,11 @@ END {
 			if (**s == '/') {
 				(*s)++;
 				(*len)--;
+			}
+			if ((p - (const unsigned char*)*s) - 1 != *len)
+			{
+				*error ="illegal character";
+				return pcr_err_illegal_char;
 			}
 			*error = NULL;
 			return pcr_is_ok;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.169 2007/02/05 20:34:22 helly Exp $ */
+/* $Id: phar.c,v 1.170 2007/02/05 20:47:19 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1876,7 +1876,7 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 	static const char newstub[] = "<?php __HALT_COMPILER();";
 	phar_entry_info *entry;
 	int halt_offset, restore_alias_len, global_flags = 0, closeoldfile;
-	char *buf;
+	char *buf, *pos;
 	char manifest[18], entry_buffer[24];
 	off_t manifest_ftell;
 	long offset;
@@ -1936,6 +1936,13 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			}
 			archive->halt_offset = offset;
 		} else {
+			if ((pos = strstr(user_stub, "__HALT_COMPILER();")) == NULL)
+			{
+				if (error) {
+					spprintf(error, 0, "illegal stub for phar \"%s\"", archive->fname);
+				}
+				return EOF;
+			}
 			if ((size_t)len != php_stream_write(newfile, user_stub, len)) {
 				if (closeoldfile) {
 					php_stream_close(oldfile);
@@ -3110,7 +3117,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.169 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.170 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

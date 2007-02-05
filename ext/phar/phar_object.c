@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.32 2007/02/04 20:10:01 helly Exp $ */
+/* $Id: phar_object.c,v 1.33 2007/02/05 20:34:22 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -651,7 +651,7 @@ PHP_METHOD(Phar, offsetUnset)
 PHP_METHOD(Phar, getStub)
 {
 	char *buf;
-	int len;
+	size_t len;
 	php_stream *fp;
 	PHAR_ARCHIVE_OBJECT();
 
@@ -669,7 +669,7 @@ PHP_METHOD(Phar, getStub)
 		return;
 	}
 
-	buf = emalloc(len+1);
+	buf = safe_emalloc(len, 1, 1);
 	php_stream_rewind(fp);
 	if (len != php_stream_read(fp, buf, len)) {
 		if (fp != phar_obj->arc.archive->fp) {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.171 2007/02/05 21:38:49 cellog Exp $ */
+/* $Id: phar.c,v 1.172 2007/02/05 22:11:26 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -381,6 +381,12 @@ static int phar_get_entry_data(phar_entry_data **ret, char *fname, int fname_len
 		if (for_write) {
 			/* open a new temp file for writing */
 			entry->fp = php_stream_fopen_tmpfile();
+			if (!entry->fp) {
+				if (error) {
+					spprintf(error, 0, "phar error: unable to create temprary file");
+				}
+				return FAILURE;
+			}
 			(*ret)->fp = entry->fp;
 			entry->is_modified = 1;
 			phar->is_modified = 1;
@@ -468,6 +474,12 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 	memset(&etemp, 0, sizeof(phar_entry_info));
 	etemp.filename_len = path_len;
 	etemp.fp = php_stream_fopen_tmpfile();
+	if (!etemp.fp) {
+		if (error) {
+			spprintf(error, 0, "phar error: unable to create temorary file");
+		}
+		return NULL;
+	}
 	etemp.fp_refcount = 1;
 	etemp.is_modified = 1;
 	etemp.filename = estrndup(path, path_len);
@@ -1904,6 +1916,15 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 		closeoldfile = oldfile != NULL;
 	}
 	newfile = php_stream_fopen_tmpfile();
+	if (!newfile) {
+		if (error) {
+			spprintf(error, 0, "unable to create temporary file");
+		}
+		if (closeoldfile) {
+			php_stream_close(oldfile);
+		}
+		return EOF;
+	}
 
 	if (user_stub) {
 		if (len < 0) {
@@ -2068,6 +2089,17 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 		in read count */
 		entry->compressed_filesize = 0;
 		entry->cfp = php_stream_fopen_tmpfile();
+		if (!entry->cfp) {
+			if (error) {
+				spprintf(error, 0, "unable to create temporary file");
+			}
+			if (closeoldfile) {
+				php_stream_close(oldfile);
+			}
+			php_stream_close(newfile);
+			efree(buf);
+			return EOF;
+		}
 		do {
 			read = php_stream_read(file, buf, 8192);
 			if (read) {
@@ -3117,7 +3149,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.171 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.172 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

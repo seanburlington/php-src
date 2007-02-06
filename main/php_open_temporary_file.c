@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.41 2007/02/03 14:57:24 helly Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.42 2007/02/06 17:35:42 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -194,12 +194,12 @@ PHPAPI const char* php_get_temporary_directory(void)
 #ifdef P_tmpdir
 	/* Use the standard default temporary directory. */
 	if (P_tmpdir) {
-		temporary_directory = P_tmpdir;
+		temporary_directory = strdup(P_tmpdir);
 		return temporary_directory;
 	}
 #endif
 	/* Shouldn't ever(!) end up here ... last ditch default. */
-	temporary_directory = "/tmp";
+	temporary_directory = strdup("/tmp");
 	return temporary_directory;
 #endif
 }

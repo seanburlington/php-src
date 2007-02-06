@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.22 2007/02/05 21:38:49 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.23 2007/02/06 17:09:36 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,6 +35,7 @@
 #include "zend_qsort.h"
 #include "main/php_streams.h"
 #include "ext/standard/info.h"
+#include "ext/standard/basic_functions.h"
 #include "ext/standard/url.h"
 #include "ext/standard/crc32.h"
 #include "ext/standard/md5.h"

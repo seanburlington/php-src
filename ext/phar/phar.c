@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.175 2007/02/06 20:30:32 helly Exp $ */
+/* $Id: phar.c,v 1.176 2007/02/06 21:04:21 tony2001 Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -417,6 +417,7 @@ int phar_entry_delref(phar_entry_data *idata TSRMLS_DC) /* {{{ */
 	efree(idata);
 	return ret;
 }
+/* }}} */
 
 /**
  * Removes an entry, either by actually removingit or by marking it.
@@ -3164,7 +3165,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.175 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.176 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

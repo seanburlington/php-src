@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.178 2007/02/06 22:12:20 helly Exp $ */
+/* $Id: phar.c,v 1.179 2007/02/06 22:41:38 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -28,49 +28,43 @@ ZEND_DECLARE_MODULE_GLOBALS(phar)
    otherwise, only allow 1 (enabled), and error on disabling */
 ZEND_INI_MH(phar_ini_modify_handler) /* {{{ */
 {
-	zend_bool *p, test;
-#ifndef ZTS
-	char *base = (char *) mh_arg2;
-#else
-	char *base;
+	zend_bool old, ini;
 
-	base = (char *) ts_resource(*((int *) mh_arg2));
-#endif
+	if (entry->name_length == 14) {
+		old = PHAR_G(readonly_orig);
+	} else {
+		old = PHAR_G(require_hash_orig);
+	} 
 
-	p = (zend_bool *) (base+(size_t) mh_arg1);
-
-	if (new_value_length==2 && strcasecmp("on", new_value)==0) {
-		*p = (zend_bool) 1;
+	if (new_value_length == 2 && !strcasecmp("on", new_value)) {
+		ini = (zend_bool) 1;
 	}
-	else if (new_value_length==3 && strcasecmp("yes", new_value)==0) {
-		*p = (zend_bool) 1;
+	else if (new_value_length == 3 && !strcasecmp("yes", new_value)) {
+		ini = (zend_bool) 1;
 	}
-	else if (new_value_length==4 && strcasecmp("true", new_value)==0) {
-		*p = (zend_bool) 1;
+	else if (new_value_length == 4 && !strcasecmp("true", new_value)) {
+		ini = (zend_bool) 1;
 	}
 	else {
-		*p = (zend_bool) atoi(new_value);
+		ini = (zend_bool) atoi(new_value);
 	}
-	if (stage == ZEND_INI_STAGE_STARTUP && !entry->modified) {
-		/* this is more efficient than processing orig_value every time */
-		if (entry->name_length == 14) { /* phar.readonly */
-			PHAR_G(readonly_orig) = *p; 
-		} else { /* phar.require_hash */
-			PHAR_G(require_hash_orig) = *p;
+
+	/* do not allow unsetting in runtime */
+	if (stage == ZEND_INI_STAGE_STARTUP) {
+		if (entry->name_length == 14) {
+			PHAR_G(readonly_orig) = ini; 
+		} else {
+			PHAR_G(require_hash_orig) = ini;
 		} 
+	} else if (old && !ini) {
+		return FAILURE;
 	}
-	if (stage != ZEND_INI_STAGE_STARTUP) {
-		if (entry->name_length == 14) { /* phar.readonly */
-			test = PHAR_G(readonly_orig); 
-		} else { /* phar.require_hash */
-			test = PHAR_G(require_hash_orig);
-		} 
-		if (test && !*p) {
-			/* do not allow unsetting in runtime */
-			*p = (zend_bool) 1;
-			return FAILURE;
-		}
-	}
+
+	if (entry->name_length == 14) {
+		PHAR_G(readonly) = ini; 
+	} else {
+		PHAR_G(require_hash) = ini;
+	} 
 	return SUCCESS;
 }
 /* }}}*/
@@ -3166,7 +3160,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.178 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.179 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

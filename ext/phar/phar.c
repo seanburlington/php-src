@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.173 2007/02/06 17:09:36 cellog Exp $ */
+/* $Id: phar.c,v 1.174 2007/02/06 20:15:11 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -2414,7 +2414,6 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 	} else {
 		archive->fp = php_stream_open_wrapper(archive->fname, "w+b", IGNORE_URL|STREAM_MUST_SEEK|REPORT_ERRORS, NULL);
 		if (!archive->fp) {
-			php_stream_close(newfile);
 			archive->fp = newfile;
 			if (error) {
 				spprintf(error, 0, "unable to open new phar \"%s\" for writing", archive->fname);
@@ -3166,7 +3165,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.173 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.174 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

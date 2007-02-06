@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.176 2007/02/06 21:04:21 tony2001 Exp $ */
+/* $Id: phar.c,v 1.177 2007/02/06 21:43:45 tony2001 Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -525,14 +525,14 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 
 #ifdef WORDS_BIGENDIAN
 # define PHAR_GET_32(buffer, var) \
-	var = ((unsigned char)(buffer)[3]) << 24 \
-		+ ((unsigned char)(buffer)[2]) << 16 \
-		+ ((unsigned char)(buffer)[1]) <<  8 \
-		+ ((unsigned char)(buffer)[0]); \
+	var = ((((unsigned char*)(buffer))[3]) << 24) \
+		| ((((unsigned char*)(buffer))[2]) << 16) \
+		| ((((unsigned char*)(buffer))[1]) <<  8) \
+		| (((unsigned char*)(buffer))[0]); \
 	(buffer) += 4
 # define PHAR_GET_16(buffer, var) \
-	var = ((unsigned char)(buffer)[1]) <<  8 \
-		+ ((unsigned char)(buffer)[0]); \
+	var = ((((unsigned char*)(buffer))[1]) <<  8) \
+		| (((unsigned char*)(buffer))[0]); \
 	(buffer) += 2
 #else
 # define PHAR_GET_32(buffer, var) \
@@ -3165,7 +3165,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.176 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.177 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

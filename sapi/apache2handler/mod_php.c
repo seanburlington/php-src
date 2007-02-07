@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_php.c,v 1.1 2007/02/07 09:35:09 tony2001 Exp $ */
+/* $Id: mod_php.c,v 1.2 2007/02/07 18:22:38 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -26,7 +26,14 @@
 #include "php_apache.h"
 
 AP_MODULE_DECLARE_DATA module php6_module = {
-	STANDARD20_MODULE_STUFF,
+	MODULE_MAGIC_NUMBER_MAJOR, 
+	MODULE_MAGIC_NUMBER_MINOR, 
+	-1, 
+	"mod_php6.c", 
+	NULL, 
+	NULL, 
+	MODULE_MAGIC_COOKIE, 
+	NULL,
 	create_php_config,		/* create per-directory config structure */
 	merge_php_config,		/* merge per-directory config structures */
 	NULL,					/* create per-server config structure */

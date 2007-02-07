@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.21 2007/01/01 19:32:09 iliaa Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.22 2007/02/07 11:31:22 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -398,7 +398,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.21 $'."\n";
+					echo '$Revision: 1.226.2.37.2.22 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -700,8 +700,8 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 
 		if (substr(PHP_OS, 0, 3) != "WIN") {
 			/* If PHP_AUTOCONF is set, use it; otherwise, use 'autoconf'. */
-			if (!empty($_ENV['PHP_AUTOCONF'])) {
-				$autoconf = shell_exec($_ENV['PHP_AUTOCONF'] . ' --version');
+			if (getenv('PHP_AUTOCONF')) {
+				$autoconf = shell_exec(getenv('PHP_AUTOCONF') . ' --version');
 			} else {
 				$autoconf = shell_exec('autoconf --version');
 			}
@@ -1511,11 +1511,13 @@ COMMAND $cmd
 	}
 
 	if ($leaked) {
-		$restype = 'LEAK';
-	} else if ($warn) {
-		$restype = 'WARN';
-	} else {
-		$restype = 'FAIL';
+		$restype[] = 'LEAK';
+	}
+	if ($warn) {
+		$restype[] = 'WARN';
+	}
+	if (!$passed) {
+		$restype[] = 'FAIL';
 	}
 
 	if (!$passed) {
@@ -1547,21 +1549,23 @@ $output
 		}
 	}
 
-	show_result($restype, $tested, $tested_file, $info, $temp_filenames);
+	show_result(implode('&', $restype), $tested, $tested_file, $info, $temp_filenames);
 
-	$PHP_FAILED_TESTS[$restype.'ED'][] = array (
+	foreach ($restype as $type) {
+		$PHP_FAILED_TESTS[$type.'ED'][] = array (
 						'name' => $file,
 						'test_name' => (is_array($IN_REDIRECT) ? $IN_REDIRECT['via'] : '') . $tested . " [$tested_file]",
 						'output' => $output_filename,
 						'diff'   => $diff_filename,
 						'info'   => $info,
 						);
+	}
 
 	if (isset($old_php)) {
 		$php = $old_php;
 	}
 
-	return $restype.'ED';
+	return $restype[0].'ED';
 }
 
 function comp_line($l1,$l2,$is_reg)

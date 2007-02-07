@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.27 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.28 2007/02/07 09:37:34 tony2001 Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -26,7 +26,7 @@
 #include "http_core.h"
 
 /* Declare this so we can get to it from outside the sapi_apache2.c file */
-extern module AP_MODULE_DECLARE_DATA php5_module;
+extern module AP_MODULE_DECLARE_DATA php6_module;
 
 /* A way to specify the location of the php.ini dir in an apache directive */
 extern char *apache2_php_ini_path_override;

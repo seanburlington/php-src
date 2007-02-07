@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.42 2007/02/07 01:01:37 iliaa Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.43 2007/02/07 11:16:52 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -168,7 +168,12 @@ case $host_alias in
 *dgux*)
     CPPFLAGS="$CPPFLAGS -D_BSD_TIMEOFDAY_FLAVOR";;
 *darwin*|*rhapsody*)
-    CPPFLAGS="$CPPFLAGS -no-cpp-precomp"
+    if test -n "$GCC"; then
+      PHP_CHECK_GCC_ARG(-no-cpp-precomp, gcc_no_cpp_precomp=yes)
+      if test "$gcc_no_cpp_precomp" = "yes"; then
+        CPPFLAGS="$CPPFLAGS -no-cpp-precomp"
+      fi
+    fi
     AC_DEFINE(BIND_8_COMPAT, 1, [Enabling BIND8 compatibility for Panther])
     php_multiple_shlib_versions_ok=yes;;
 *beos*)

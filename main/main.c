@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.29 2007/01/08 03:39:09 iliaa Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.30 2007/02/07 21:01:06 helly Exp $ */
 
 /* {{{ includes
  */
@@ -83,6 +83,7 @@
 #include "php_ticks.h"
 #include "php_logos.h"
 #include "php_streams.h"
+#include "php_open_temporary_file.h"
 
 #include "SAPI.h"
 #include "rfc1867.h"
@@ -1691,6 +1692,8 @@ void php_module_shutdown(TSRMLS_D)
 	zend_ini_global_shutdown(TSRMLS_C);
 	ts_free_id(core_globals_id);	
 #endif
+
+	php_shutdown_temporary_directory();
 
 	module_initialized = 0;
 }

@@ -18,14 +18,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_php5.c,v 1.7 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: mod_php.c,v 1.1 2007/02/07 09:35:09 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "php_apache.h"
 
-AP_MODULE_DECLARE_DATA module php5_module = {
+AP_MODULE_DECLARE_DATA module php6_module = {
 	STANDARD20_MODULE_STUFF,
 	create_php_config,		/* create per-directory config structure */
 	merge_php_config,		/* merge per-directory config structures */

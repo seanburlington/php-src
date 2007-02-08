@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.40 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: spl_iterators.h,v 1.41 2007/02/08 20:13:49 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -50,6 +50,7 @@ extern PHPAPI zend_class_entry *spl_ce_EmptyIterator;
 extern PHPAPI zend_class_entry *spl_ce_AppendIterator;
 extern PHPAPI zend_class_entry *spl_ce_RegexIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveRegexIterator;
+extern PHPAPI zend_class_entry *spl_ce_Countable;
 
 PHP_MINIT_FUNCTION(spl_iterators);
 

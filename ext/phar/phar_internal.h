@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.23 2007/02/06 17:09:36 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.24 2007/02/08 22:50:14 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,6 +47,7 @@
 #include "ext/spl/spl_directory.h"
 #include "ext/spl/spl_engine.h"
 #include "ext/spl/spl_exceptions.h"
+#include "ext/spl/spl_iterators.h"
 #endif
 #include "php_phar.h"
 #ifdef HAVE_STDINT_H

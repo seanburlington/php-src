@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.h,v 1.18 2007/02/08 20:13:49 helly Exp $ */
+/* $Id: spl_array.h,v 1.19 2007/02/08 22:53:47 helly Exp $ */
 
 #ifndef SPL_ARRAY_H
 #define SPL_ARRAY_H
 
 #include "php.h"
 #include "php_spl.h"
+#include "spl_iterators.h"
 
 extern PHPAPI zend_class_entry *spl_ce_ArrayObject;
 extern PHPAPI zend_class_entry *spl_ce_ArrayIterator;

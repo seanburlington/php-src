@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.22 2007/02/07 11:31:22 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.23 2007/02/08 15:22:03 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -398,7 +398,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.22 $'."\n";
+					echo '$Revision: 1.226.2.37.2.23 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -518,7 +518,7 @@ HELP;
 		if ($html_output) {
 			fclose($html_file);
 		}
-		if (getenv('REPORT_EXIT_STATUS') == 1 and ereg('FAILED( |$)', implode(' ', $test_results))) {
+		if (getenv('REPORT_EXIT_STATUS') == 1 and preg_match('/FAILED(?: |$)/', implode(' ', $test_results))) {
 			exit(1);
 		}
 		exit(0);
@@ -968,7 +968,7 @@ TEST $file
 		$bork_info = "empty test [$file]";
 		$borked = true;
 	}
-	if (!ereg('^--TEST--',$line,$r)) {
+	if (strncmp('--TEST--', $line, 8)) {
 		$bork_info = "tests must start with --TEST-- [$file]";
 		$borked = true;
 	}
@@ -993,7 +993,7 @@ TEST $file
 		}
 
 		// End of actual test?
-		if ($secfile && preg_match('/^===DONE===/', $line, $r)) {
+		if ($secfile && preg_match('/^===DONE===$/', $line)) {
 			$secdone = true;
 		}
 	}
@@ -1177,10 +1177,9 @@ TEST $file
 			if (!$cfg['keep']['skip']) {
 				@unlink($test_skipif);
 			}
-			if (!strncasecmp('skip', trim($output), 4)) {
-				$reason = (eregi("^skip[[:space:]]*(.+)\$", trim($output))) ? eregi_replace("^skip[[:space:]]*(.+)\$", "\\1", trim($output)) : FALSE;
-				if ($reason) {
-					show_result("SKIP", $tested, $tested_file, "reason: $reason", $temp_filenames);
+			if (!strncasecmp('skip', ltrim($output), 4)) {
+				if (preg_match('/^\s*skip\s*(.+)\s*/i', $output, $m)) {
+					show_result("SKIP", $tested, $tested_file, "reason: $m[1]", $temp_filenames);
 				} else {
 					show_result("SKIP", $tested, $tested_file, '', $temp_filenames);
 				}
@@ -1192,17 +1191,15 @@ TEST $file
 				}
 				return 'SKIPPED';
 			}
-			if (!strncasecmp('info', trim($output), 4)) {
-				$reason = (ereg("^info[[:space:]]*(.+)\$", trim($output))) ? ereg_replace("^info[[:space:]]*(.+)\$", "\\1", trim($output)) : FALSE;
-				if ($reason) {
-					$info = " (info: $reason)";
+			if (!strncasecmp('info', ltrim($output), 4)) {
+				if (preg_match('/^\s*info\s*(.+)\s*/i', $output, $m)) {
+					$info = " (info: $m[1])";
 				}
 			}
-			if (!strncasecmp('warn', trim($output), 4)) {
-				$reason = (ereg("^warn[[:space:]]*(.+)\$", trim($output))) ? ereg_replace("^warn[[:space:]]*(.+)\$", "\\1", trim($output)) : FALSE;
-				if ($reason) {
+			if (!strncasecmp('warn', ltrim($output), 4)) {
+				if (preg_match('/^\s*warn\s*(.+)\s*/i', $output, $m)) {
 					$warn = true; /* only if there is a reason */
-					$info = " (warn: $reason)";
+					$info = " (warn: $m[1])";
 				}
 			}
 		}
@@ -1304,8 +1301,8 @@ TEST $file
 
 		$request = '';
 		foreach ($raw_lines as $line) {
-			if (empty($env['CONTENT_TYPE']) && eregi('^(Content-Type:)(.*)', $line, $res)) {
-				$env['CONTENT_TYPE'] = trim(str_replace("\r", '', $res[2]));
+			if (empty($env['CONTENT_TYPE']) && preg_match('/^Content-Type:(.*)/i', $line, $res)) {
+				$env['CONTENT_TYPE'] = trim(str_replace("\r", '', $res[1]));
 				continue;
 			}
 			$request .= $line . "\n";

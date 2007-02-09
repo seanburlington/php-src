@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.90 2007/01/12 01:50:43 iliaa Exp $ */
+/* $Id: posix.c,v 1.91 2007/02/09 10:15:03 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.90 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -882,7 +882,7 @@ PHP_FUNCTION(posix_getgrgid)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &gid) == FAILURE) {
 		RETURN_FALSE;
 	}
-#ifdef HAVE_GETGRGID_R
+#if defined(ZTS) && defined(HAVE_GETGRGID_R) && defined(_SC_GETGR_R_SIZE_MAX)
 	
 	grbuflen = sysconf(_SC_GETGR_R_SIZE_MAX);
 	grbuf = emalloc(grbuflen);
@@ -907,7 +907,7 @@ PHP_FUNCTION(posix_getgrgid)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to convert posix group struct to array");
 		RETVAL_FALSE;
 	}
-#ifdef HAVE_GETGRGID_R
+#if defined(ZTS) && defined(HAVE_GETGRGID_R) && defined(_SC_GETGR_R_SIZE_MAX)
 	efree(grbuf);
 #endif
 }

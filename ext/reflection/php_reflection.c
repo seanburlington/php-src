@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.270 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.271 2007/02/10 20:51:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1155,14 +1155,19 @@ static void reflection_property_factory(zend_class_entry *ce, zend_property_info
 	
 	if (!(prop->flags & ZEND_ACC_PRIVATE)) {
 		/* we have to search the class hierarchy for this (implicit) public or protected property */
-		zend_class_entry *tmp_ce = ce;
-		zend_property_info *tmp_info;
+		zend_class_entry *tmp_ce = ce, *store_ce = ce;
+		zend_property_info *tmp_info = NULL;
 		int prop_name_len = UG(unicode) ? u_strlen(prop_name.u) : strlen(prop_name.s);
 		
 		while (tmp_ce && zend_u_hash_find(&tmp_ce->properties_info, utype, prop_name, prop_name_len + 1, (void **) &tmp_info) != SUCCESS) {
 			ce = tmp_ce;
-			prop = tmp_info;
 			tmp_ce = tmp_ce->parent;
+		}
+
+		if (tmp_info && !(tmp_info->flags & ZEND_ACC_SHADOW)) { /* found something and it's not a parent's private */
+			prop = tmp_info;
+		} else { /* not found, use initial value */
+			ce = store_ce;
 		}
 	}
 
@@ -4982,7 +4987,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.270 2007/01/01 09:29:28 sebastian Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.271 2007/02/10 20:51:42 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.91 2007/02/09 10:15:03 tony2001 Exp $ */
+/* $Id: posix.c,v 1.92 2007/02/10 00:50:29 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.92 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -870,7 +870,7 @@ PHP_FUNCTION(posix_getgrnam)
 PHP_FUNCTION(posix_getgrgid)
 {
 	long gid;
-#ifdef HAVE_GETGRGID_R
+#if defined(ZTS) && defined(HAVE_GETGRGID_R) && defined(_SC_GETGR_R_SIZE_MAX)
 	int ret;
 	struct group _g;
 	struct group *retgrptr;

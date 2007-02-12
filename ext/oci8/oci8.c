@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.30 2007/01/31 13:55:43 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.31 2007/02/12 09:36:23 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -674,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.3");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.30 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.31 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1054,7 +1054,7 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 		size_t rsize = 0;
 		sword result;
 
-		PHP_OCI_CALL_RETURN(result, OCINlsEnvironmentVariableGet, (&charsetid_nls_lang, 0, OCI_NLS_CHARSET_ID, 0, &rsize))
+		PHP_OCI_CALL_RETURN(result, OCINlsEnvironmentVariableGet, (&charsetid_nls_lang, 0, OCI_NLS_CHARSET_ID, 0, &rsize));
 		if (result != OCI_SUCCESS) {
 			charsetid_nls_lang = 0;
 		}

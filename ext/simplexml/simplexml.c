@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.227 2007/01/18 23:23:50 helly Exp $ */
+/* $Id: simplexml.c,v 1.228 2007/02/12 21:13:01 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1586,7 +1586,7 @@ SXE_METHOD(addAttribute)
 
 	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
-	if (node->type != XML_ELEMENT_NODE) {
+	if (node && node->type != XML_ELEMENT_NODE) {
 		node = node->parent;
 	}
 
@@ -2396,7 +2396,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.227 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.228 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

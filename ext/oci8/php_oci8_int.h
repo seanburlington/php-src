@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.15 2007/02/12 09:36:23 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.16 2007/02/13 20:19:56 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -223,22 +223,22 @@ typedef struct { /* php_oci_out_column {{{ */
 
 #define PHP_OCI_CALL(func, params) \
 	do { \
-		OCI_G(in_call) = 1; \
-		func params; \
-		OCI_G(in_call) = 0; \
 		if (OCI_G(debug_mode)) { \
 			php_printf ("OCI8 DEBUG: " #func " at (%s:%d) \n", __FILE__, __LINE__); \
 		} \
+		OCI_G(in_call) = 1; \
+		func params; \
+		OCI_G(in_call) = 0; \
 	} while (0)
 
 #define PHP_OCI_CALL_RETURN(__retval, func, params) \
 	do { \
-		OCI_G(in_call) = 1; \
-		__retval = func params; \
-		OCI_G(in_call) = 0; \
 		if (OCI_G(debug_mode)) { \
 			php_printf ("OCI8 DEBUG: " #func " at (%s:%d) \n", __FILE__, __LINE__); \
 		} \
+		OCI_G(in_call) = 1; \
+		__retval = func params; \
+		OCI_G(in_call) = 0; \
 	} while (0)
 
 #define PHP_OCI_HANDLE_ERROR(connection, errcode) \

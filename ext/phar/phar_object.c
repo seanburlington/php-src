@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.37 2007/02/06 23:56:38 johannes Exp $ */
+/* $Id: phar_object.c,v 1.38 2007/02/13 01:19:57 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -617,6 +617,7 @@ PHP_METHOD(Phar, offsetSet)
 				zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Entry %s could not be written to", fname);
 			}
 		}
+		data->internal_file->compressed_filesize = data->internal_file->uncompressed_filesize = contents_len;
 		phar_flush(phar_obj->arc.archive, 0, 0, &error TSRMLS_CC);
 		phar_entry_delref(data TSRMLS_CC);
 		if (error) {

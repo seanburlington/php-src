@@ -30,3 +30,5 @@ mkinstalldirs
 modules
 conftest*
 sqlite3.h
+*.gcda
+*.gcno

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.14 2007/01/01 09:36:12 sebastian Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.15 2007/02/13 23:39:14 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -889,12 +889,12 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 					*opened_path = realpath;
 					realpath = NULL;
 				}
-				if (realpath) {
-					efree(realpath);
-				}
 				/* fall through */
 
 			case PHP_STREAM_PERSISTENT_FAILURE:
+				if (realpath) {
+					efree(realpath);
+				}
 				efree(persistent_id);;
 				return ret;
 		}
@@ -933,6 +933,10 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 
 				r = do_fstat(self, 0);
 				if ((r == 0 && !S_ISREG(self->sb.st_mode))) {
+					if (opened_path) {
+						efree(*opened_path);
+						*opened_path = NULL;
+					}
 					php_stream_close(ret);
 					return NULL;
 				}

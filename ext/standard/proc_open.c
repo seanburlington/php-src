@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.8 2007/01/09 16:27:17 dmitry Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.9 2007/02/13 15:55:45 tony2001 Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -276,7 +276,7 @@ static int php_make_safe_mode_command(char *cmd, char **safecmd, int is_persiste
 
 	sep = zend_memrchr(arg0, PHP_DIR_SEPARATOR, larg0);
 
-	spprintf(safecmd, 0, "%s%c%s%s", PG(safe_mode_exec_dir), (sep ? *sep : '/'), (sep ? "" : arg0), (space ? cmd + larg0 : ""));
+	spprintf(safecmd, 0, "%s%s%s%s", PG(safe_mode_exec_dir), (sep ? sep : "/"), (sep ? "" : arg0), (space ? cmd + larg0 : ""));
 
 	efree(arg0);
 	arg0 = php_escape_shell_cmd(*safecmd);

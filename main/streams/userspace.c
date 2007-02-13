@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.31.2.3.2.3 2007/01/15 17:07:07 tony2001 Exp $ */
+/* $Id: userspace.c,v 1.31.2.3.2.4 2007/02/13 19:50:59 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -759,6 +759,10 @@ static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, o
 		retval = NULL;
 	}
 
+	if (ret) {
+		return ret;
+	}
+
 	/* now determine where we are */
 	ZVAL_STRINGL(&func_name, USERSTREAM_TELL, sizeof(USERSTREAM_TELL)-1, 0);
 
@@ -768,16 +772,20 @@ static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, o
 		&retval,
 		0, NULL, 0, NULL TSRMLS_CC);
 
-	if (call_result == SUCCESS && retval != NULL && Z_TYPE_P(retval) == IS_LONG)
+	if (call_result == SUCCESS && retval != NULL && Z_TYPE_P(retval) == IS_LONG) {
 		*newoffs = Z_LVAL_P(retval);
-	else
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_TELL " is not implemented!",
-				us->wrapper->classname);
+		ret = 0;
+	} else if (call_result == FAILURE) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_TELL " is not implemented!", us->wrapper->classname);
+		ret = -1;
+	} else {
+		ret = -1;
+	}
 
-	if (retval)
+	if (retval) {
 		zval_ptr_dtor(&retval);
-	
-	return 0;
+	}
+	return ret;
 }
 
 /* parse the return value from one of the stat functions and store the

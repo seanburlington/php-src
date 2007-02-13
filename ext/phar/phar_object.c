@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.38 2007/02/13 01:19:57 helly Exp $ */
+/* $Id: phar_object.c,v 1.39 2007/02/13 17:39:45 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -585,7 +585,7 @@ PHP_METHOD(Phar, offsetSet)
 		return;
 	}
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz|l", &fname, &fname_len, &contents, &contents_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz", &fname, &fname_len, &contents) == FAILURE) {
 		return;
 	}
 

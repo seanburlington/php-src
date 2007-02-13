@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.9 2007/02/13 15:55:45 tony2001 Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.10 2007/02/13 19:53:42 nlopess Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -943,6 +943,10 @@ PHP_FUNCTION(proc_open)
 							descriptors[i].mode_flags), mode_string, NULL);
 #else
 				stream = php_stream_fopen_from_fd(descriptors[i].parentend, mode_string, NULL);
+# if defined(F_SETFD) && defined(FD_CLOEXEC)
+				/* mark the descriptor close-on-exec, so that it won't be inherited by potential other children */
+				fcntl(descriptors[i].parentend, F_SETFD, FD_CLOEXEC);
+# endif
 #endif
 				if (stream) {
 					zval *retfp;

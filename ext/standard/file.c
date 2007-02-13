@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.483 2007/01/10 20:12:14 helly Exp $ */
+/* $Id: file.c,v 1.484 2007/02/13 12:56:10 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -568,6 +568,7 @@ PHP_FUNCTION(file_get_contents)
 
 	if (offset > 0 && php_stream_seek(stream, offset, SEEK_SET) < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to seek to position %ld in the stream", offset);
+		php_stream_close(stream);
 		RETURN_FALSE;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.38 2007/01/03 14:46:23 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.39 2007/02/14 19:35:09 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -527,7 +527,7 @@ PHP_MINFO_FUNCTION(date)
 	
 	php_info_print_table_start();
 	php_info_print_table_row(2, "date/time support", "enabled");
-	php_info_print_table_row(2, "Timezone Database Version", tzdb->version);
+	php_info_print_table_row(2, "\"Olson\" Timezone Database Version", tzdb->version);
 	php_info_print_table_row(2, "Timezone Database", php_date_global_timezone_db_enabled ? "external" : "internal");
 	php_info_print_table_row(2, "Default timezone", guess_timezone(tzdb TSRMLS_CC));
 	php_info_print_table_end();

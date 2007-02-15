@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.308 2007/01/29 19:38:21 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.309 2007/02/15 12:33:54 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1336,6 +1336,10 @@ consult the installation file that came with this distribution, or visit \n\
 		    sigaction(SIGQUIT, &act, &old_quit)) {
 			perror("Can't set signals");
 			exit(1);
+		}
+
+		if (fcgi_in_shutdown()) {
+			exit(0);
 		}
 
 		while (parent) {

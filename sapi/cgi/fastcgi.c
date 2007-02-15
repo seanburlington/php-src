@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.14 2007/01/01 09:36:12 sebastian Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.15 2007/02/15 12:04:59 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -152,6 +152,8 @@ static DWORD WINAPI fcgi_shutdown_thread(LPVOID arg)
 }
 
 #else
+
+static in_addr_t *allowed_clients = NULL;
 
 static void fcgi_signal_handler(int signo)
 {
@@ -317,6 +319,38 @@ int fcgi_listen(const char *path, int backlog)
 
 	if (!tcp) {
 		chmod(path, 0777);
+	} else {
+	    char *ip = getenv("FCGI_WEB_SERVER_ADDRS");
+	    char *cur, *end;
+	    int n;
+	    
+	    if (ip) {
+	    	ip = strdup(ip);
+	    	cur = ip;
+	    	n = 0;
+	    	while (*cur) {
+	    		if (*cur == ',') n++;
+	    		cur++;
+	    	}
+	    	allowed_clients = malloc(sizeof(in_addr_t) * (n+2));
+	    	n = 0;
+	    	cur = ip;
+	    	while (cur) {
+		    	end = strchr(cur, ',');
+		    	if (end) {
+	    			*end = 0;
+	    			end++;
+	    		}
+	    		allowed_clients[n] = inet_addr(cur);
+	    		if (allowed_clients[n] == INADDR_NONE) {
+					fprintf(stderr, "Wrong IP address '%s' in FCGI_WEB_SERVER_ADDRS\n", cur);
+	    		}
+	    		n++;
+	    		cur = end;
+	    	}
+	    	allowed_clients[n] = INADDR_NONE;
+			free(ip);
+		}
 	}
 
 	if (!is_initialized) {
@@ -689,6 +723,24 @@ int fcgi_accept_request(fcgi_request *req)
 					FCGI_LOCK(req->listen_socket);
 					req->fd = accept(req->listen_socket, (struct sockaddr *)&sa, &len);
 					FCGI_UNLOCK(req->listen_socket);
+					if (req->fd >= 0 && allowed_clients) {
+						int n = 0;
+						int allowed = 0;
+
+			    		while (allowed_clients[n] != INADDR_NONE) {
+			    			if (allowed_clients[n] == sa.sa_inet.sin_addr.s_addr) {
+			    				allowed = 1;
+			    				break;
+			    			}
+			    			n++;
+			    		}
+						if (!allowed) {
+							fprintf(stderr, "Connection from disallowed IP address '%s' is dropped.\n", inet_ntoa(sa.sa_inet.sin_addr));
+							close(req->fd);
+							req->fd = -1;
+							continue;
+						}
+					}
 				}
 #endif
 

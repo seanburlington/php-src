@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.3.2.8 2007/02/15 01:15:45 iliaa Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.9 2007/02/15 01:40:36 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1242,7 +1242,7 @@ PHP_FUNCTION(mcrypt_create_iv)
 		return;
 	}
 
-	if (size <= 0 || size >= 2147483647) {
+	if (size <= 0 || size >= INT_MAX) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can not create an IV with a size of less then 1 or greater then %d", INT_MAX);
 		RETURN_FALSE;
 	}

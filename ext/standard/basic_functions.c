@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.847 2007/02/16 13:12:55 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.848 2007/02/16 16:33:37 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4147,7 +4147,6 @@ PHP_RINIT_FUNCTION(basic)
 #ifdef HAVE_SYSLOG_H
 	PHP_RINIT(syslog)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
-	PHP_RINIT(assert) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(dir)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(url_scanner_ex)(INIT_FUNC_ARGS_PASSTHRU);
 

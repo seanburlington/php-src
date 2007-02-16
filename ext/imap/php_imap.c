@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.18 2007/02/16 03:32:06 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.19 2007/02/16 13:28:03 tony2001 Exp $ */
 
 #define IMAP41
 
@@ -2215,7 +2215,7 @@ PHP_FUNCTION(imap_utf8)
 	if (dest.data) {
 		free(dest.data);
 	}
-	if (src.data) {
+	if (src.data && src.data != dest.data) {
 		free(src.data);
 	}
 }

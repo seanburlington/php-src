@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.16 2007/02/15 12:33:16 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.17 2007/02/19 13:21:14 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -975,14 +975,15 @@ char* fcgi_getenv(fcgi_request *req, const char* var, int var_len)
 char* fcgi_putenv(fcgi_request *req, char* var, int var_len, char* val)
 {
 	if (var && req) {
-		char **ret;
-
 		if (val == NULL) {
-			val = "";
-		}
-		val = strdup(val);
-		if (zend_hash_update(&req->env, var, var_len+1, &val, sizeof(char*), (void**)&ret) == SUCCESS) {
-			return *ret;
+			zend_hash_del(&req->env, var, var_len+1);
+		} else {
+			char **ret;
+
+			val = strdup(val);
+			if (zend_hash_update(&req->env, var, var_len+1, &val, sizeof(char*), (void**)&ret) == SUCCESS) {
+				return *ret;
+			}
 		}
 	}
 	return NULL;

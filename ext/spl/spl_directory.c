@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.117 2007/01/20 16:19:20 helly Exp $ */
+/* $Id: spl_directory.c,v 1.118 2007/02/19 20:32:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -334,11 +334,21 @@ static spl_filesystem_object * spl_filesystem_object_create_info(spl_filesystem_
 	zval *arg1;
 	
 	if (!file_path.v || !file_path_len) {
+#if defined(PHP_WIN32)
 		zend_throw_exception_ex(spl_ce_RuntimeException, 0 TSRMLS_CC, "Cannot create SplFileInfo for empty path");
 		if (file_path.v && !use_copy)
 		{
 			efree(file_path.v);
 		}
+#else
+		if (file_path.v && !use_copy) {
+			efree(file_path.v);
+		}
+		use_copy = 1;
+		file_path_len = 1;
+		file_path.s = "/";
+		file_type = IS_STRING;
+#endif
 		return NULL;
 	}
 

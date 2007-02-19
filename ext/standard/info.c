@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.276 2007/01/23 19:58:45 helly Exp $ */
+/* $Id: info.c,v 1.277 2007/02/19 16:20:43 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -173,7 +173,7 @@ static void php_info_print_stream_hash(const char *name, HashTable *ht TSRMLS_DC
 		php_info_print_table_row(2, name, "disabled");
 	}
 }
- 
+
 PHPAPI void php_info_print_module(zend_module_entry *module TSRMLS_DC) /* {{{ */
 {
 	if (module->info_func) {
@@ -197,7 +197,7 @@ PHPAPI void php_info_print_module(zend_module_entry *module TSRMLS_DC) /* {{{ */
 		}	
 	}
 }
-/* }}}*/
+/* }}} */
 
 static int _display_module_info_func(zend_module_entry *module TSRMLS_DC) /* {{{ */
 {

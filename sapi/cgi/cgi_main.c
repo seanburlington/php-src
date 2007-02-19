@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.24 2007/02/18 18:08:22 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.25 2007/02/19 14:13:02 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1694,6 +1694,7 @@ consult the installation file that came with this distribution, or visit \n\
 			1. we are running from shell and got filename was there
 			2. we are running as cgi or fastcgi
 		*/
+		retval = FAILURE;
 		if (cgi || SG(request_info).path_translated) {
 			retval = php_fopen_primary_script(&file_handle TSRMLS_CC);
 		}

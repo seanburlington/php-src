@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.25 2007/02/19 14:13:02 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.26 2007/02/19 23:52:13 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1636,7 +1636,8 @@ consult the installation file that came with this distribution, or visit \n\
 					}
 				}
 
-				s = malloc(++len + 1);
+				len += 2;
+				s = malloc(len);
 				*s = '\0';			/* we are pretending it came from the environment  */
 				for (i = php_optind; i < argc; i++) {
 					strlcat(s, argv[i], len);

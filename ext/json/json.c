@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.22 2007/01/01 09:29:25 sebastian Exp $ */
+/* $Id: json.c,v 1.23 2007/02/19 19:44:44 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -362,17 +362,17 @@ static void json_encode_r(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
                 int len;
                 double dbl = Z_DVAL_P(val);
 
-                if (!zend_isinf(dbl) && !zend_isnan(dbl))
-                {
+                if (!zend_isinf(dbl) && !zend_isnan(dbl)) {
                     len = spprintf(&d, 0, "%.9g", dbl);
-                    if (d)
-                    {
-                        smart_str_appendl(buf, d, len);
+                    if (d) {
+                        if (dbl > LONG_MAX && !memchr(d, '.', len)) {
+                            smart_str_append_unsigned(buf, (unsigned long)Z_DVAL_P(val));
+                        } else {
+                            smart_str_appendl(buf, d, len);
+                        }
                         efree(d);
                     }
-                }
-                else
-                {
+                } else {
                     zend_error(E_WARNING, "[json] (json_encode_r) double %.9g does not conform to the JSON spec, encoded as 0.", dbl);
                     smart_str_appendc(buf, '0');
                 }

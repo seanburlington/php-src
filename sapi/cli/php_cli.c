@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.13 2007/02/08 16:55:34 helly Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.14 2007/02/20 19:20:41 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -698,7 +698,7 @@ int main(int argc, char *argv[])
 #endif
 
 	/* startup after we get the above ini override se we get things right */
-	if (php_module_startup(&cli_sapi_module, NULL, 0)==FAILURE) {
+	if (cli_sapi_module.startup(&cli_sapi_module)==FAILURE) {
 		/* there is no way to see if we must call zend_ini_deactivate()
 		 * since we cannot check if EG(ini_directives) has been initialised
 		 * because the executor's constructor does not set initialize it.

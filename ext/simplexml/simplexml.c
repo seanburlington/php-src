@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.228 2007/02/12 21:13:01 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.229 2007/02/20 13:21:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,6 +56,7 @@ static php_sxe_object* php_sxe_object_new(zend_class_entry *ce TSRMLS_DC);
 static zend_object_value php_sxe_register_object(php_sxe_object * TSRMLS_DC);
 static xmlNodePtr php_sxe_reset_iterator(php_sxe_object *sxe, int use_data TSRMLS_DC);
 static xmlNodePtr php_sxe_iterator_fetch(php_sxe_object *sxe, xmlNodePtr node, int use_data TSRMLS_DC);
+static zval *sxe_get_value(zval *z TSRMLS_DC);
 
 /* {{{ _node_as_zval()
  */
@@ -428,6 +429,7 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 	int             is_attr = 0;
 	int				nodendx = 0;
 	int             test = 0;
+	int				new_value = 0;
 	long            cnt;
 	zval            tmp_zv, trim_zv, value_copy;
 
@@ -506,8 +508,17 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 				break;
 			case IS_STRING:
 				break;
+			case IS_OBJECT:
+				if (Z_OBJCE_P(value) == sxe_class_entry) {
+					value = sxe_get_value(value TSRMLS_CC);
+					INIT_PZVAL(value);
+					new_value = 1;
+					break;
+				}
+				/* break is missing intentionally */
 			default:
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "It is not yet possible to assign complex types to %s", attribs ? "attributes" : "properties");
+				return;
 		}
 	}
 
@@ -595,6 +606,9 @@ next_iter:
 	}
 	if (value && value == &value_copy) {
 		zval_dtor(value);
+	}
+	if (new_value) {
+		zval_ptr_dtor(&value);
 	}
 }
 /* }}} */
@@ -2396,7 +2410,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.228 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.229 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

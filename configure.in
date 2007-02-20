@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.622 2007/01/26 11:13:50 tony2001 Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.623 2007/02/20 20:10:53 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -285,6 +285,9 @@ PHP_EBCDIC
 
 dnl Check whether the system byte ordering is bigendian
 PHP_C_BIGENDIAN
+
+dnl Check whether writing to stdout works
+PHP_TEST_WRITE_STDOUT
 
 dnl Check for /usr/pkg/{lib,include} which is where NetBSD puts binary
 dnl and source packages.  This should be harmless on other OSs.

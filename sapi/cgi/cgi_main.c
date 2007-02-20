@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.313 2007/02/20 09:09:47 tony2001 Exp $ */
+/* $Id: cgi_main.c,v 1.314 2007/02/20 19:19:14 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -116,6 +116,7 @@ static pid_t pgroup;
 
 static char *php_optarg = NULL;
 static int php_optind = 1;
+static zend_module_entry cgi_module_entry;
 
 static const opt_struct OPTIONS[] = {
 	{'a', 0, "interactive"},
@@ -542,7 +543,7 @@ static int sapi_cgi_deactivate(TSRMLS_D)
 
 static int php_cgi_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module, NULL, 0) == FAILURE) {
+	if (php_module_startup(sapi_module, &cgi_module_entry, 1) == FAILURE) {
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -1211,7 +1212,7 @@ int main(int argc, char *argv[])
 	cgi_sapi_module.additional_functions = additional_functions;
 
 	/* startup after we get the above ini override se we get things right */
-	if (php_module_startup(&cgi_sapi_module, &cgi_module_entry, 1) == FAILURE) {
+	if (cgi_sapi_module.startup(&cgi_sapi_module) == FAILURE) {
 #ifdef ZTS
 		tsrm_shutdown();
 #endif

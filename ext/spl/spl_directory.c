@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.14 2007/02/19 20:34:29 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.15 2007/02/20 13:08:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -679,8 +679,10 @@ SPL_METHOD(SplFileInfo, func_name) \
 { \
 	spl_filesystem_object *intern = (spl_filesystem_object*)zend_object_store_get_object(getThis() TSRMLS_CC); \
  \
+	php_set_error_handling(EH_THROW, spl_ce_RuntimeException TSRMLS_CC);\
 	spl_filesystem_object_get_file_name(intern TSRMLS_CC); \
 	php_stat(intern->file_name, intern->file_name_len, func_num, return_value TSRMLS_CC); \
+	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);\
 }
 /* }}} */
 

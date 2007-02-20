@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.14.2.1.2.2 2007/01/01 09:35:48 sebastian Exp $ */
+/* $Id: com_dotnet.c,v 1.14.2.1.2.3 2007/02/20 20:30:36 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,8 +275,9 @@ PHP_FUNCTION(com_dotnet_create_instance)
 		char buf[1024];
 		char *err = php_win_err(hr);
 		snprintf(buf, sizeof(buf), "Failed to instantiate .Net object [%s] [0x%08x] %s", where, hr, err);
-		if (err)
+		if (err && err[0]) {
 			LocalFree(err);
+		}
 		php_com_throw_exception(hr, buf TSRMLS_CC);
 		ZVAL_NULL(object);
 		return;

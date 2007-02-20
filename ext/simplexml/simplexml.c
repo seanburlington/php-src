@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.229 2007/02/20 13:21:54 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.230 2007/02/20 14:04:59 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -513,11 +513,17 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 					value = sxe_get_value(value TSRMLS_CC);
 					INIT_PZVAL(value);
 					new_value = 1;
+					if (UG(unicode)) {
+						convert_to_string_with_converter(value, UG(utf8_conv));
+					}
 					break;
 				}
 				/* break is missing intentionally */
 			default:
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "It is not yet possible to assign complex types to %s", attribs ? "attributes" : "properties");
+				if (member == &tmp_zv) {
+					zval_dtor(&tmp_zv);
+				}
+				zend_error(E_WARNING, "It is not yet possible to assign complex types to %s", attribs ? "attributes" : "properties");
 				return;
 		}
 	}
@@ -2410,7 +2416,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.229 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.230 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.124 2007/01/24 21:43:47 pollita Exp $ */
+/* $Id: php_streams.h,v 1.125 2007/02/21 21:56:45 tony2001 Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -186,6 +186,8 @@ struct _php_stream_wrapper	{
  * might otherwise cause the read to block for much longer than
  * is strictly required. */
 #define PHP_STREAM_FLAG_AVOID_BLOCKING				16
+
+#define PHP_STREAM_FLAG_NO_CLOSE					32
 	
 struct _php_stream  {
 	php_stream_ops *ops;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.14 2007/02/20 19:20:41 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.15 2007/02/21 21:57:21 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -475,6 +475,12 @@ static void cli_register_file_handles(TSRMLS_D)
 	s_in  = php_stream_open_wrapper_ex("php://stdin",  "rb", 0, NULL, sc_in);
 	s_out = php_stream_open_wrapper_ex("php://stdout", "wb", 0, NULL, sc_out);
 	s_err = php_stream_open_wrapper_ex("php://stderr", "wb", 0, NULL, sc_err);
+
+#if PHP_DEBUG
+	/* do not close stdout and stderr */
+	s_out->flags |= PHP_STREAM_FLAG_NO_CLOSE;
+	s_err->flags |= PHP_STREAM_FLAG_NO_CLOSE;
+#endif
 
 	if (s_in==NULL || s_out==NULL || s_err==NULL) {
 		FREE_ZVAL(zin);

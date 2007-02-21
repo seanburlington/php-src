@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.10 2007/01/15 17:07:07 tony2001 Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.11 2007/02/21 21:57:21 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -278,6 +278,10 @@ PHPAPI int _php_stream_free(php_stream *stream, int close_options TSRMLS_DC) /* 
 	int remove_rsrc = 1;
 	int preserve_handle = close_options & PHP_STREAM_FREE_PRESERVE_HANDLE ? 1 : 0;
 	int release_cast = 1;
+
+	if (stream->flags & PHP_STREAM_FLAG_NO_CLOSE) {
+		preserve_handle = 1;
+	}
 
 #if STREAM_DEBUG
 fprintf(stderr, "stream_free: %s:%p[%s] in_free=%d opts=%08x\n", stream->ops->label, stream, stream->orig_path, stream->in_free, close_options);

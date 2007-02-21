@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.6 2007/01/18 16:21:32 tony2001 Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.7 2007/02/21 03:59:05 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -1138,7 +1138,7 @@ PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newle
 				}
 
 				replaced[len++] = '&';
-				strcpy(replaced + len, rep);
+				strlcpy(replaced + len, rep, maxlen);
 				len += l;
 				replaced[len++] = ';';
 			}

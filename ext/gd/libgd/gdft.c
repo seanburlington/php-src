@@ -196,6 +196,16 @@ tweencolorkey_t;
 #include "jisx0208.h"
 #endif
 
+extern int any2eucjp (char *, char *, unsigned int);
+
+/* Persistent font cache until explicitly cleared */
+/* Fonts can be used across multiple images */
+
+/* 2.0.16: thread safety (the font cache is shared) */
+gdMutexDeclare(gdFontCacheMutex);
+static gdCache_head_t *fontCache = NULL;
+static FT_Library library;
+
 #define Tcl_UniChar int
 #define TCL_UTF_MAX 3
 static int
@@ -740,9 +750,10 @@ gdft_draw_bitmap (gdCache_head_t *tc_cache, gdImage * im, int fg, FT_Bitmap bitm
 		  /* find antialised color */
 	
 		  tc_key.bgcolor = *pixel;
-		  tc_elem = (tweencolor_t *) gdCacheGet (
-							  tc_cache, &tc_key);
+		  gdMutexLock(gdFontCacheMutex);
+		  tc_elem = (tweencolor_t *) gdCacheGet (tc_cache, &tc_key);
 		  *pixel = tc_elem->tweencolor;
+		  gdMutexUnlock(gdFontCacheMutex);
 		}
 	    }
 	}
@@ -757,16 +768,6 @@ gdroundupdown (FT_F26Dot6 v1, int updown)
     ? (v1 < 0 ? ((v1 - 63) >> 6) : v1 >> 6)
     : (v1 > 0 ? ((v1 + 63) >> 6) : v1 >> 6);
 }
-
-extern int any2eucjp (char *, char *, unsigned int);
-
-/* Persistent font cache until explicitly cleared */
-/* Fonts can be used across multiple images */
- 
-/* 2.0.16: thread safety (the font cache is shared) */
-gdMutexDeclare(gdFontCacheMutex);
-static gdCache_head_t *fontCache = NULL;
-static FT_Library library;
 
 void gdFontCacheShutdown()
 {
@@ -958,7 +959,6 @@ gdImageStringFTEx (gdImage * im, int *brect, int fg, char *fontlist, double ptsi
 
 	while (*next) {
 		ch = *next;
-
 		/* carriage returns */
 		if (ch == '\r') {
 			penf.x = 0;
@@ -985,11 +985,12 @@ gdImageStringFTEx (gdImage * im, int *brect, int fg, char *fontlist, double ptsi
 
 /* EAM DEBUG */
 #if (defined(FREETYPE_MAJOR) && ((FREETYPE_MAJOR == 2 && ((FREETYPE_MINOR == 1 && FREETYPE_PATCH >= 3) || FREETYPE_MINOR > 1) || FREETYPE_MAJOR > 2)))
-		if (font->face->charmap->encoding == FT_ENCODING_MS_SYMBOL) {
+		if (font->face->charmap->encoding == FT_ENCODING_MS_SYMBOL && strcmp(font->face->family_name, "Symbol") == 0) {
 			/* I do not know the significance of the constant 0xf000.
 			 * It was determined by inspection of the character codes
 			 * stored in Microsoft font symbol.
 			 */
+			/* Convert to the Symbol glyph range only for a Symbol family member */ 
 			len = gdTcl_UtfToUniChar (next, &ch);
 			ch |= 0xf000;
 			next += len;
@@ -1060,7 +1061,7 @@ gdImageStringFTEx (gdImage * im, int *brect, int fg, char *fontlist, double ptsi
 		FT_Set_Transform(face, &matrix, NULL);
 		/* Convert character code to glyph index */
 		glyph_index = FT_Get_Char_Index(face, ch);
-
+		
 		/* retrieve kerning distance and move pen position */
 		if (use_kerning && previous && glyph_index) {
 			FT_Get_Kerning(face, previous, glyph_index, ft_kerning_default, &delta);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.41 2007/02/16 16:35:04 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.42 2007/02/21 03:03:37 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3851,6 +3851,10 @@ static void php_putenv_destructor(putenv_entry *pe)
 # if HAVE_UNSETENV
 		unsetenv(pe->key);
 # elif defined(PHP_WIN32)
+		char *del_string = emalloc(pe->key_len+2);
+		snprintf(del_string, pe->key_len+2, "%s=", pe->key);
+		putenv(del_string);
+		efree(del_string);
 		SetEnvironmentVariable(pe->key, NULL);
 # else
 		char **env;

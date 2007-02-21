@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.101 2007/01/24 21:43:47 pollita Exp $ */
+/* $Id: php_http.c,v 1.102 2007/02/21 21:11:32 stas Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -474,7 +474,7 @@ try_again:
 					make_digest(cnonce, hash);
 
 					client->digest_nc++;
-					sprintf(nc, "%08ld", client->digest_nc);
+					snprintf(nc, sizeof(nc), "%08ld", client->digest_nc);
 
 					PHP_MD5Init(&md5ctx);
 					PHP_MD5Update(&md5ctx, (unsigned char*)client->login, strlen(client->login));

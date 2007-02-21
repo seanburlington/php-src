@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.11.2.6 2007/02/21 04:29:15 iliaa Exp $ */
+/* $Id: php_http.c,v 1.77.2.11.2.7 2007/02/21 21:08:58 stas Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -480,7 +480,7 @@ try_again:
 					if (zend_hash_find(Z_ARRVAL_PP(digest), "nc", sizeof("nc"), (void **)&tmp) == SUCCESS &&
 					    Z_TYPE_PP(tmp) == IS_LONG) {
 						Z_LVAL_PP(tmp)++;
-						sprintf(nc, "%08ld", Z_LVAL_PP(tmp));
+						snprintf(nc, sizeof(nc), "%08ld", Z_LVAL_PP(tmp));
 					} else {
 						add_assoc_long(*digest, "nc", 1);
 						strcpy(nc, "00000001");

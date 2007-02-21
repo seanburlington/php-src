@@ -31,11 +31,13 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xml_to_xmlrpc.c,v 1.5 2004/04/27 17:33:59 iliaa Exp $";
+static const char rcsid[] = "#(@) $Id: xml_to_xmlrpc.c,v 1.5.6.1 2007/02/21 14:25:27 tony2001 Exp $";
 
 #ifdef _WIN32
 #include "xmlrpc_win32.h"
 #endif
+#include "php.h"
+#include "main/snprintf.h"
 #include <string.h>
 #include <stdlib.h>
 #include "xml_to_xmlrpc.h"
@@ -225,9 +227,12 @@ xml_element* XMLRPC_to_xml_element_worker(XMLRPC_VALUE current_vector, XMLRPC_VA
             simplestring_add(&elem_val->text, buf);
             break;
          case xmlrpc_double:
-            elem_val->name = strdup(ELEM_DOUBLE);
-            snprintf(buf, BUF_SIZE, "%f", XMLRPC_GetValueDouble(node));
-            simplestring_add(&elem_val->text, buf);
+            {
+                TSRMLS_FETCH();
+                elem_val->name = strdup(ELEM_DOUBLE);
+                ap_php_snprintf(buf, BUF_SIZE, "%.*G", (int) EG(precision), XMLRPC_GetValueDouble(node));
+                simplestring_add(&elem_val->text, buf);
+            }
             break;
          case xmlrpc_datetime:
             elem_val->name = strdup(ELEM_DATETIME);

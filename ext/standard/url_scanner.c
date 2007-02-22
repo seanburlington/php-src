@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.44.2.1.2.2 2007/02/22 00:25:38 iliaa Exp $ */
+/* $Id: url_scanner.c,v 1.44.2.1.2.3 2007/02/22 00:44:08 iliaa Exp $ */
 
 #include "php.h"
 
@@ -203,7 +203,7 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 							maxl+=l;
 							out=realloc(out,maxl);
 							outp=out+*newlen;
-							strcpy(outp,p);
+							strlcpy(outp,p,maxl);
 							outp+=l;
 							*newlen+=l;
 							efree(p);

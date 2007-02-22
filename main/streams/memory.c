@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.33 2007/02/03 14:45:54 helly Exp $ */
+/* $Id: memory.c,v 1.34 2007/02/22 23:25:36 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -260,14 +260,14 @@ static int php_stream_memory_set_option(php_stream *stream, int option, int valu
 					if (newsize <= ms->fsize) {
 						if (newsize < ms->fpos) {
 							ms->fpos = newsize;
-						} else {
-							ms->data = erealloc(ms->data, newsize);
-							memset(ms->data+ms->fsize, 0, newsize - ms->fsize);
-							ms->fsize = newsize;
 						}
+					} else {
+						ms->data = erealloc(ms->data, newsize);
+						memset(ms->data+ms->fsize, 0, newsize - ms->fsize);
 						ms->fsize = newsize;
-						return PHP_STREAM_OPTION_RETURN_OK;
 					}
+					ms->fsize = newsize;
+					return PHP_STREAM_OPTION_RETURN_OK;
 			}
 		default:
 			return PHP_STREAM_OPTION_RETURN_NOTIMPL;

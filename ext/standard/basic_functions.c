@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.42 2007/02/21 03:03:37 stas Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.43 2007/02/22 08:23:17 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4446,7 +4446,7 @@ PHP_FUNCTION(putenv)
 			if (!strncmp(*env, pe.key, pe.key_len) && (*env)[pe.key_len] == '=') {	/* found it */
 #if defined(PHP_WIN32)
 				/* must copy previous value because MSVCRT's putenv can free the string without notice */
-				pe.previous_value = estrndup(*env, 1024);
+				pe.previous_value = estrdup(*env);
 #else
 				pe.previous_value = *env;
 #endif

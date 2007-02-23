@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.16 2007/02/13 12:56:36 tony2001 Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.17 2007/02/23 16:22:20 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1488,7 +1488,7 @@ PHP_FUNCTION(umask)
 
 	oldumask = umask(077);
 
-	if (BG(umask) != -1) {
+	if (BG(umask) == -1) {
 		BG(umask) = oldumask;
 	}
 

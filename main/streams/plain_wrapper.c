@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.81 2007/02/21 21:56:45 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.82 2007/02/23 23:08:40 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -337,8 +337,15 @@ static size_t php_stdiop_read(php_stream *stream, char *buf, size_t count TSRMLS
 			return 0;
 		}
 		ret = read(data->fd, buf, count);
+
+		if (ret == (size_t)-1 && errno == EINTR) {
+			/* Read was interrupted, retry once,
+			   If read still fails, giveup with feof==0
+			   so script can retry if desired */
+			ret = read(data->fd, buf, count);
+		}
 		
-		stream->eof = (ret == 0 || (ret == (size_t)-1 && errno != EWOULDBLOCK));
+		stream->eof = (ret == 0 || (ret == (size_t)-1 && errno != EWOULDBLOCK && errno != EINTR));
 				
 	} else {
 #if HAVE_FLUSHIO

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.10 2007/01/01 09:36:02 sebastian Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.11 2007/02/23 11:12:49 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -246,6 +246,7 @@ static void php_libxml_node_free_list(xmlNodePtr node TSRMLS_DC)
 				case XML_ENTITY_DECL:
 				case XML_ATTRIBUTE_NODE:
 				case XML_NAMESPACE_DECL:
+				case XML_TEXT_NODE:
 					php_libxml_node_free_list(node->children TSRMLS_CC);
 					break;
 				default:
@@ -1000,6 +1001,7 @@ void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC)
 					case XML_ENTITY_DECL:
 					case XML_ATTRIBUTE_NODE:
 					case XML_NAMESPACE_DECL:
+					case XML_TEXT_NODE:
 						break;
 					default:
 						php_libxml_node_free_list((xmlNodePtr) node->properties TSRMLS_CC);

@@ -16,7 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5isapi.c,v 1.8.2.2.2.2 2007/02/23 22:05:46 stas Exp $ */
+/* $Id: php5isapi.c,v 1.8.2.2.2.3 2007/02/23 22:08:31 stas Exp $ */
 
 #include "php.h"
 #include <httpext.h>
@@ -391,7 +391,7 @@ static void sapi_isapi_register_zeus_ssl_variables(LPEXTENSION_CONTROL_BLOCK lpE
 	if( lpECB->GetServerVariable( lpECB->ConnID, "SSL_CLIENT_C", static_variable_buf, &variable_len ) && static_variable_buf[0] ) {
 		strlcat( static_cons_buf, static_variable_buf,  ISAPI_SERVER_VAR_BUF_SIZE);
 	}
-	strcat( static_cons_buf, "/ST=" );
+	strlcat( static_cons_buf, "/ST=",  ISAPI_SERVER_VAR_BUF_SIZE);
 	variable_len = ISAPI_SERVER_VAR_BUF_SIZE;
 	if( lpECB->GetServerVariable( lpECB->ConnID, "SSL_CLIENT_ST", static_variable_buf, &variable_len ) && static_variable_buf[0] ) {
 		strlcat( static_cons_buf, static_variable_buf, ISAPI_SERVER_VAR_BUF_SIZE );
@@ -403,7 +403,7 @@ static void sapi_isapi_register_zeus_ssl_variables(LPEXTENSION_CONTROL_BLOCK lpE
 	if( lpECB->GetServerVariable( lpECB->ConnID, "SSL_CLIENT_I_C", static_variable_buf, &variable_len ) && static_variable_buf[0] ) {
 		strlcat( static_cons_buf, static_variable_buf, ISAPI_SERVER_VAR_BUF_SIZE );
 	}
-	strcat( static_cons_buf, "/ST=" );
+	strlcat( static_cons_buf, "/ST=", ISAPI_SERVER_VAR_BUF_SIZE);
 	variable_len = ISAPI_SERVER_VAR_BUF_SIZE;
 	if( lpECB->GetServerVariable( lpECB->ConnID, "SSL_CLIENT_I_ST", static_variable_buf, &variable_len ) && static_variable_buf[0] ) {
 		strlcat( static_cons_buf, static_variable_buf, ISAPI_SERVER_VAR_BUF_SIZE );

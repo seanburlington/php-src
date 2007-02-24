@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.16 2007/02/24 17:57:57 iliaa Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.17 2007/02/24 18:02:11 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.16 2007/02/24 17:57:57 iliaa Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.17 2007/02/24 18:02:11 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1005,7 +1005,7 @@ static char * exif_get_tagname(int tag_num, char *ret, int len, tag_table_type t
 				strlcpy(ret, tag_table[i].Desc, abs(len));
 				if (len < 0) {
 					memset(ret + strlen(ret), ' ', -len - strlen(ret) - 1);
-					ret[-len] = '\0';
+					ret[-len - 1] = '\0';
 				}
 				return ret;
 			}
@@ -1018,7 +1018,7 @@ static char * exif_get_tagname(int tag_num, char *ret, int len, tag_table_type t
 		strlcpy(ret, tmp, abs(len));
 		if (len < 0) {
 			memset(ret + strlen(ret), ' ', -len - strlen(ret) - 1);
-			ret[-len] = '\0';
+			ret[-len - 1] = '\0';
 		}
 		return ret;
 	}

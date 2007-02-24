@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.112.2.4.2.5 2007/02/24 02:17:24 helly Exp $ */
+/* $Id: ftp.c,v 1.112.2.4.2.6 2007/02/24 02:45:24 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1434,7 +1434,7 @@ ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)
 		char eprtarg[INET6_ADDRSTRLEN + sizeof("|x||xxxxx|")];
 		char out[INET6_ADDRSTRLEN];
 		inet_ntop(AF_INET6, &((struct sockaddr_in6*) sa)->sin6_addr, out, sizeof(out));
-		snprintf(eprtarg, sizeof(eprtag), "|2|%s|%hu|", out, ntohs(((struct sockaddr_in6 *) &addr)->sin6_port));
+		snprintf(eprtarg, sizeof(eprtarg), "|2|%s|%hu|", out, ntohs(((struct sockaddr_in6 *) &addr)->sin6_port));
 
 		if (!ftp_putcmd(ftp, "EPRT", eprtarg)) {
 			goto bail;

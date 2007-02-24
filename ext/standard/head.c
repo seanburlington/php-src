@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.94 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: head.c,v 1.95 2007/02/24 16:25:55 helly Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -94,8 +94,6 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 	if (domain) {
 		len += domain_len;
 	}
-	cookie = emalloc(len + 100);
-
 	if (value && value_len == 0) {
 		/* 
 		 * MSIE doesn't delete a cookie when you set it to a null value
@@ -104,10 +102,10 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 		 */
 		time_t t = time(NULL) - 31536001;
 		dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0 TSRMLS_CC);
-		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s", name, dt);
+		spprintf(&cookie, 0, "Set-Cookie: %s=deleted; expires=%s", name, dt);
 		efree(dt);
 	} else {
-		sprintf(cookie, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
+		spprintf(&cookie, 0, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");
 			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, expires, 0 TSRMLS_CC);

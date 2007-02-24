@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.190 2007/01/12 14:34:46 bjori Exp $ */
+/* $Id: fopen_wrappers.c,v 1.191 2007/02/24 16:25:55 helly Exp $ */
 
 /* {{{ includes
  */
@@ -305,13 +305,10 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 			pw = getpwnam(user);
 #endif
 			if (pw && pw->pw_dir) {
-				filename = emalloc(strlen(PG(user_dir)) + strlen(path_info) + strlen(pw->pw_dir) + 4);
-				if (filename) {
-					sprintf(filename, "%s%c%s%c%s", pw->pw_dir, PHP_DIR_SEPARATOR,
+				spprintf(&filename, 0, "%s%c%s%c%s", pw->pw_dir, PHP_DIR_SEPARATOR,
 								PG(user_dir), PHP_DIR_SEPARATOR, s+1); /* Safe */
-					STR_FREE(SG(request_info).path_translated);
-					SG(request_info).path_translated = filename;
-				}
+				STR_FREE(SG(request_info).path_translated);
+				SG(request_info).path_translated = filename;
 			}
 #if defined(ZTS) && defined(HAVE_GETPWNAM_R) && defined(_SC_GETPW_R_SIZE_MAX)
 			efree(pwbuf);

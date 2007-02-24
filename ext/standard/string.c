@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.631 2007/02/10 00:48:17 tony2001 Exp $ */
+/* $Id: string.c,v 1.632 2007/02/24 16:25:55 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4641,7 +4641,7 @@ char *php_strerror(int errnum)
 		return(sys_errlist[errnum]);
 	}
 
-	(void) sprintf(BG(str_ebuf), "Unknown error: %d", errnum);
+	(void) snprintf(BG(str_ebuf), sizeof(php_basic_globals.str_ebuf), "Unknown error: %d", errnum);
 	return(BG(str_ebuf));
 }
 /* }}} */

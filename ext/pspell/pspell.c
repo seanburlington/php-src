@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.57 2007/02/17 01:47:26 stas Exp $ */
+/* $Id: pspell.c,v 1.58 2007/02/24 16:25:55 helly Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -778,7 +778,7 @@ static PHP_FUNCTION(pspell_config_ignore)
 	convert_to_long_ex(pignore);
 	ignore = Z_LVAL_PP(pignore);
 
-	sprintf(ignore_str, "%ld", ignore);
+	snprintf(ignore_str, sizeof(ignore_str), "%ld", ignore);
 
 	pspell_config_replace(config, "ignore", ignore_str);
 	RETURN_TRUE;

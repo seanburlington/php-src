@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.329 2007/02/12 09:36:11 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.330 2007/02/24 16:25:54 helly Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -674,11 +674,11 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.329 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.330 $");
 
-	sprintf(buf, "%ld", OCI_G(num_persistent));
+	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
-	sprintf(buf, "%ld", OCI_G(num_links));
+	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_links));
 	php_info_print_table_row(2, "Active Connections", buf);
 
 #if !defined(PHP_WIN32) && !defined(HAVE_OCI_INSTANT_CLIENT)
@@ -687,7 +687,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_row(2, "Libraries Used", PHP_OCI8_SHARED_LIBADD );
 #else 
 #	if defined(HAVE_OCI_INSTANT_CLIENT) && defined(OCI_MAJOR_VERSION) && defined(OCI_MINOR_VERSION) 
-	sprintf(buf, "%d.%d", OCI_MAJOR_VERSION, OCI_MINOR_VERSION);
+	snprintf(buf, sizeof(buf), "%d.%d", OCI_MAJOR_VERSION, OCI_MINOR_VERSION);
 	php_info_print_table_row(2, "Oracle Instant Client Version", buf);
 #	endif
 #endif

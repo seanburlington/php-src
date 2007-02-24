@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.266 2007/01/12 12:06:33 tony2001 Exp $ */
+/* $Id: mbstring.c,v 1.267 2007/02/24 16:25:54 helly Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1052,7 +1052,7 @@ PHP_MINFO_FUNCTION(mbstring)
 	{
 		char buf[32];
 		php_info_print_table_row(2, "Multibyte (japanese) regex support", "enabled");
-		sprintf(buf, "%d.%d.%d",
+		snprintf(buf, sizeof(buf), "%d.%d.%d",
 			ONIGURUMA_VERSION_MAJOR,ONIGURUMA_VERSION_MINOR,ONIGURUMA_VERSION_TEENY);
 		php_info_print_table_row(2, "Multibyte regex (oniguruma) version", buf);
 	}

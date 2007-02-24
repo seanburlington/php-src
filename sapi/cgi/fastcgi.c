@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.18 2007/02/21 15:46:13 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.19 2007/02/24 11:20:43 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -70,6 +70,13 @@
 # include <arpa/inet.h>
 # include <netdb.h>
 # include <signal.h>
+
+# if defined(HAVE_SYS_POLL_H) && defined(HAVE_POLL)
+#  include <sys/poll.h>
+# endif
+# if defined(HAVE_SYS_SELECT_H)
+#  include <sys/select.h>
+# endif
 
 #ifndef INADDR_NONE
 #define INADDR_NONE ((unsigned long) -1)
@@ -758,17 +765,35 @@ int fcgi_accept_request(fcgi_request *req)
 #else
 				if (req->fd >= 0) {
 					if (req->fd < FD_SETSIZE) {
+#if defined(HAVE_SYS_POLL_H) && defined(HAVE_POLL)
+						struct pollfd fds;
+						int ret;
+
+						fds.fd = req->fd;
+						fds.events = POLLIN;
+						fds.revents = 0;
+						do {
+							errno = 0;
+							ret = poll(&fds, 1, 5000);
+						} while (ret < 0 && errno == EINTR);
+						if (ret > 0 && (fds.revents & POLLIN)) {
+							break;
+						}
+#else
 						struct timeval tv = {5,0};
 						fd_set set;
+						int ret;
 
 						FD_ZERO(&set);
 						FD_SET(req->fd, &set);
-try_again:
-						errno = 0;
-						if (select(req->fd + 1, &set, NULL, NULL, &tv) >= 0 && FD_ISSET(req->fd, &set)) {
+						do {
+							errno = 0;
+							ret = select(req->fd + 1, &set, NULL, NULL, &tv) >= 0;
+						} while (ret < 0 && errno == EINTR);
+						if (ret > 0 && FD_ISSET(req->fd, &set)) {
 							break;
 						}
-						if (errno == EINTR) goto try_again;
+#endif
 						fcgi_close(req, 1, 0);
 					} else {
 						fprintf(stderr, "Too many open file descriptors. FD_SETSIZE limit exceeded.");

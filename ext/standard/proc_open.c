@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.12 2007/02/24 02:17:27 helly Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.13 2007/02/24 03:24:40 iliaa Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -784,6 +784,9 @@ PHP_FUNCTION(proc_open)
 	channel.errfd = -1;
 	/* Duplicate the command as processing downwards will modify it*/
 	command_dup = strdup(command);
+	if (!command_dup) {
+		goto exit_fail;
+	}
 	/* get a number of args */
 	construct_argc_argv(command_dup, NULL, &command_num_args, NULL);
 	child_argv = (char**) malloc((command_num_args + 1) * sizeof(char*));

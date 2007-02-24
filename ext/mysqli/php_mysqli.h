@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.54.2.7.2.4 2007/02/24 02:17:25 helly Exp $ 
+  $Id: php_mysqli.h,v 1.54.2.7.2.5 2007/02/24 14:33:50 helly Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -244,7 +244,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry * TSRML
 		RETURN_LONG((__val));		\
 	} else {				\
 		char *ret;			\
-		int l = spprintf(ret, "%llu", (__val));	\
+		int l = spprintf(&ret, 0, "%llu", (__val));	\
 		RETURN_STRINGL(ret, l, 0);		\
 	}					\
 }

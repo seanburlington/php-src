@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.3 2007/01/22 09:31:46 dmitry Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.4 2007/02/24 17:16:23 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -422,7 +422,7 @@ PHP_FUNCTION(glob)
 
 	/* we assume that any glob pattern will match files from one directory only
 	   so checking the dirname of the first match should be sufficient */
-	strncpy(cwd, globbuf.gl_pathv[0], MAXPATHLEN);
+	strlcpy(cwd, globbuf.gl_pathv[0], MAXPATHLEN);
 	if (PG(safe_mode) && (!php_checkuid(cwd, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
 	}

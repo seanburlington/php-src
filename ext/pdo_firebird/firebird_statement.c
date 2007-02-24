@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.18.2.1.2.3 2007/02/24 02:17:25 helly Exp $ */
+/* $Id: firebird_statement.c,v 1.18.2.1.2.4 2007/02/24 17:59:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -655,8 +655,7 @@ static int firebird_stmt_set_attribute(pdo_stmt_t *stmt, long attr, zval *val TS
 				RECORD_ERROR(stmt);
 				return 0;
 			}
-			strncpy(S->name, Z_STRVAL_P(val), sizeof(S->name));
-			S->name[sizeof(S->name)] = 0;
+			strlcpy(S->name, Z_STRVAL_P(val), sizeof(S->name));
 			break;
 	}
 	return 1;

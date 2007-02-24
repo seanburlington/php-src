@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.6 2007/02/24 02:17:24 helly Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.7 2007/02/24 18:00:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -603,9 +603,8 @@ static int _php_ibase_bind_array(zval *val, char *buf, unsigned long buf_size, /
 					break;
 				default:
 					convert_to_string(val);
-					strncpy(buf, Z_STRVAL_P(val), array->el_size);
-					buf[array->el_size-1] = '\0';
-			}	
+					strlcpy(buf, Z_STRVAL_P(val), buf_size);
+			}
 		}
 	}
 	return SUCCESS;

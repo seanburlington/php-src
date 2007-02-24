@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.49 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: snprintf.c,v 1.50 2007/02/24 18:24:06 helly Exp $ */
 
 
 #include "php.h"
@@ -1159,6 +1159,34 @@ static void strx_printv(int *ccp, char *buf, size_t len, const char *format,
 		*ccp = cc;
 }
 
+
+PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...)
+{
+	int cc;
+	va_list ap;
+
+	va_start(ap, format);
+	strx_printv(&cc, buf, len, format, ap);
+	va_end(ap);
+	if (cc >= len) {
+		cc = len -1;
+		buf[cc] = '\0';
+	}
+	return cc;
+}
+
+
+PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap)
+{
+	int cc;
+
+	strx_printv(&cc, buf, len, format, ap);
+	if (cc >= len) {
+		cc = len -1;
+		buf[cc] = '\0';
+	}
+	return cc;
+}
 
 PHPAPI int ap_php_snprintf(char *buf, size_t len, const char *format,...)
 {

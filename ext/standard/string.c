@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.41 2007/02/13 23:55:20 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.42 2007/02/24 02:17:27 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -905,7 +905,7 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC)
 
 			case IS_LONG: {
 				char stmp[MAX_LENGTH_OF_LONG + 1];
-				str_len = sprintf(stmp, "%ld", Z_LVAL_PP(tmp));
+				str_len = snprintf(stmp, sizeof(stmp), "%ld", Z_LVAL_PP(tmp));
 				smart_str_appendl(&implstr, stmp, str_len);
 			}
 				break;
@@ -2915,7 +2915,7 @@ char *php_strerror(int errnum)
 		return(sys_errlist[errnum]);
 	}
 
-	(void) sprintf(BG(str_ebuf), "Unknown error: %d", errnum);
+	(void) snprintf(BG(str_ebuf), sizeof(php_basic_globals.str_ebuf), "Unknown error: %d", errnum);
 	return(BG(str_ebuf));
 }
 /* }}} */

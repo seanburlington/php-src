@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.9 2007/01/01 09:36:03 sebastian Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.10 2007/02/24 02:17:25 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -710,7 +710,7 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 								 * may be negative. Therefor we cannot use MYSQLI_LLU_SPEC and must
 								 * use MYSQLI_LL_SPEC.
 								 */
-								sprintf((char *)&tmp, (stmt->stmt->fields[i].flags & UNSIGNED_FLAG)? MYSQLI_LLU_SPEC : MYSQLI_LL_SPEC, llval);
+								snprintf(tmp, sizeof(tmp), (stmt->stmt->fields[i].flags & UNSIGNED_FLAG)? MYSQLI_LLU_SPEC : MYSQLI_LL_SPEC, llval);
 								ZVAL_STRING(stmt->result.vars[i], tmp, 1);
 							} else {
 								ZVAL_LONG(stmt->result.vars[i], llval);

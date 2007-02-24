@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.136.2.4.2.6 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: php_ini.c,v 1.136.2.4.2.7 2007/02/24 02:17:28 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -441,8 +441,8 @@ int php_init_config(TSRMLS_D)
 		/* Search php-%sapi-module-name%.ini file in search path */
 		if (!fh.handle.fp) {
 			const char *fmt = "php-%s.ini";
-			char *ini_fname = emalloc(strlen(fmt) + strlen(sapi_module.name));
-			sprintf(ini_fname, fmt, sapi_module.name);
+			char *ini_fname;
+			spprintf(&ini_fname, 0, fmt, sapi_module.name);
 			fh.handle.fp = php_fopen_with_path(ini_fname, "r", php_ini_search_path, &php_ini_opened_path TSRMLS_CC);
 			efree(ini_fname);
 			if (fh.handle.fp) {

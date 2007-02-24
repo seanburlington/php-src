@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.27 2007/02/20 19:20:41 tony2001 Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.28 2007/02/24 02:17:28 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -333,7 +333,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 			}
 
 		} else {
-			len = sprintf(buf, "Status: %d\r\n", SG(sapi_headers).http_response_code);
+			len = snprintf(buf, sizeof(buf), "Status: %d\r\n", SG(sapi_headers).http_response_code);
 		}
 
 		PHPWRITE_H(buf, len);

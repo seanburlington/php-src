@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.46.2.1.2.2 2007/02/19 23:53:00 iliaa Exp $ */
+/* $Id: mod_mm.c,v 1.46.2.1.2.3 2007/02/24 02:17:25 helly Exp $ */
 
 #include "php.h"
 
@@ -262,7 +262,7 @@ PHP_MINIT_FUNCTION(ps_mm)
 		return FAILURE;
 	}
 
-	if (!(euid_len = sprintf(euid,"%d", geteuid()))) {
+	if (!(euid_len = snprintf(euid, sizeof(euid), "%d", geteuid()))) {
 		return FAILURE;
 	}
 		

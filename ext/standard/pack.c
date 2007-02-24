@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57.2.5.2.2 2007/01/01 09:36:08 sebastian Exp $ */
+/* $Id: pack.c,v 1.57.2.5.2.3 2007/02/24 02:17:27 helly Exp $ */
 
 #include "php.h"
 
@@ -644,10 +644,10 @@ PHP_FUNCTION(unpack)
 
 			if (arg != 1 || namelen == 0) {
 				/* Need to add element number to name */
-				sprintf(n, "%.*s%d", namelen, name, i + 1);
+				snprintf(n, sizeof(n), "%.*s%d", namelen, name, i + 1);
 			} else {
 				/* Truncate name to next format code or end of string */
-				sprintf(n, "%.*s", namelen, name);
+				snprintf(n, sizeof(n), "%.*s", namelen, name);
 			}
 
 			if (size != 0 && size != -1 && INT_MAX - size + 1 < inputpos) {

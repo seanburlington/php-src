@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.31.2.2.2.2 2007/01/01 09:36:08 sebastian Exp $ */
+/* $Id: scanf.c,v 1.31.2.2.2.3 2007/02/24 02:17:27 helly Exp $ */
 
 /*
    scanf.c --
@@ -1094,7 +1094,7 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 					*end = '\0';
 					value = (int) (*fn)(buf, NULL, base);
 					if ((flags & SCAN_UNSIGNED) && (value < 0)) {
-						sprintf(buf, "%u", value); /* INTL: ISO digit */
+						snprintf(buf, sizeof(buf), "%u", value); /* INTL: ISO digit */
 						if (numVars && objIndex >= argCount) {
 							break;
 						} else if (numVars) {

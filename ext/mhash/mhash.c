@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.3.2.3 2007/01/01 09:36:03 sebastian Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.4 2007/02/24 02:17:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -83,7 +83,7 @@ PHP_MINFO_FUNCTION(mhash)
 {
 	char version[32];
 	
-	sprintf(version,"%d", MHASH_API_VERSION);
+	snprintf(version, sizeof(version), "%d", MHASH_API_VERSION);
 	
 	php_info_print_table_start();
 	php_info_print_table_row(2, "MHASH support", "Enabled");

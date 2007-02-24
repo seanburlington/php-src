@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.18 2007/01/18 16:21:32 tony2001 Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.19 2007/02/24 02:17:26 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -444,8 +444,7 @@ static void php_soap_prepare_globals()
 		if (defaultEncoding[i].details.type_str) {
 			if (defaultEncoding[i].details.ns != NULL) {
 				char *ns_type;
-				ns_type = emalloc(strlen(defaultEncoding[i].details.ns) + strlen(defaultEncoding[i].details.type_str) + 2);
-				sprintf(ns_type, "%s:%s", defaultEncoding[i].details.ns, defaultEncoding[i].details.type_str);
+				spprintf(&ns_type, 0, "%s:%s", defaultEncoding[i].details.ns, defaultEncoding[i].details.type_str);
 				zend_hash_add(&defEnc, ns_type, strlen(ns_type) + 1, &enc, sizeof(encodePtr), NULL);
 				efree(ns_type);
 			} else {

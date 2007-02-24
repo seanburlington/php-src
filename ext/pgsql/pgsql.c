@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.19 2007/02/23 00:37:36 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.20 2007/02/24 02:17:25 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -599,9 +599,9 @@ PHP_MINFO_FUNCTION(pgsql)
 	php_info_print_table_row(2, "SSL support", "disabled");
 #endif
 #endif /* HAVE_PG_CONFIG_H */	
-	sprintf(buf, "%ld", PGG(num_persistent));
+	snprintf(buf, sizeof(buf), "%ld", PGG(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Links", buf);
-	sprintf(buf, "%ld", PGG(num_links));
+	snprintf(buf, sizeof(buf), "%ld", PGG(num_links));
 	php_info_print_table_row(2, "Active Links", buf);
 	php_info_print_table_end();
 

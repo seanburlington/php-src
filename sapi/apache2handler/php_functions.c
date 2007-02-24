@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.18.2.6.2.4 2007/02/23 21:38:25 stas Exp $ */
+/* $Id: php_functions.c,v 1.18.2.6.2.5 2007/02/24 02:17:28 helly Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -403,7 +403,7 @@ PHP_MINFO_FUNCTION(apache)
 	if (apv && *apv) {
 		php_info_print_table_row(2, "Apache Version", apv);
 	}
-	sprintf(tmp, "%d", MODULE_MAGIC_NUMBER);
+	snprintf(tmp, sizeof(tmp), "%d", MODULE_MAGIC_NUMBER);
 	php_info_print_table_row(2, "Apache API Version", tmp);
 	
 	if (serv->server_admin && *(serv->server_admin)) {
@@ -419,7 +419,7 @@ PHP_MINFO_FUNCTION(apache)
 #endif
 
 	ap_mpm_query(AP_MPMQ_MAX_REQUESTS_DAEMON, &max_requests);
-	sprintf(tmp, "Per Child: %d - Keep Alive: %s - Max Per Connection: %d", max_requests, (serv->keep_alive ? "on":"off"), serv->keep_alive_max);
+	snprintf(tmp, sizeof(tmp), "Per Child: %d - Keep Alive: %s - Max Per Connection: %d", max_requests, (serv->keep_alive ? "on":"off"), serv->keep_alive_max);
 	php_info_print_table_row(2, "Max Requests", tmp);
 
 	apr_snprintf(tmp, sizeof tmp,

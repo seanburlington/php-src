@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.173.2.1.2.7 2007/02/24 02:17:28 helly Exp $ */
+/* $Id: rfc1867.c,v 1.173.2.1.2.8 2007/02/24 14:53:50 helly Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1338,9 +1338,6 @@ filedone:
 		}
 	}
 fileupload_done:
-	if (lbuf) {
-		efree(lbuf);
-	}
 	if (php_rfc1867_callback != NULL) {
 		multipart_event_end event_end;
 		

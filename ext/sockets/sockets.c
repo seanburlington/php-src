@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.188 2007/01/10 21:26:09 bjori Exp $ */
+/* $Id: sockets.c,v 1.189 2007/02/25 22:58:57 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1138,6 +1138,8 @@ PHP_FUNCTION(socket_connect)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Socket of type AF_INET6 requires 3 arguments");
 				RETURN_FALSE;
 			}
+			
+			memset(&sin6, 0, sizeof(struct sockaddr_in6));
 
 			sin6.sin6_family = AF_INET6;
 			sin6.sin6_port   = htons((unsigned short int)port);
@@ -1154,6 +1156,8 @@ PHP_FUNCTION(socket_connect)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Socket of type AF_INET requires 3 arguments");
 				RETURN_FALSE;
 			}
+			
+			memset(&sin, 0, sizeof(struct sockaddr_in));
 
 			sin.sin_family = AF_INET;
 			sin.sin_port   = htons((unsigned short int)port);
@@ -1166,6 +1170,8 @@ PHP_FUNCTION(socket_connect)
 			break;
 
 		case AF_UNIX:
+			memset(&s_un, 0, sizeof(struct sockaddr_un));
+			
 			s_un.sun_family = AF_UNIX;
 			snprintf(s_un.sun_path, 108, "%s", addr);
 			retval = connect(php_sock->bsd_socket, (struct sockaddr *) &s_un, SUN_LEN(&s_un));

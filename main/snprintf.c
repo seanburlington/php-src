@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.51 2007/02/24 18:33:03 helly Exp $ */
+/* $Id: snprintf.c,v 1.52 2007/02/26 10:22:44 dmitry Exp $ */
 
 
 #include "php.h"
@@ -592,6 +592,8 @@ static int format_converter(register buffy * odp, const char *fmt,
 #ifdef HAVE_LOCALE_H
 	struct lconv *lconv = NULL;
 #endif
+
+	TSRMLS_FETCH();
 
 	/*
 	 * Flag variables

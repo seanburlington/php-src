@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.17 2007/02/23 20:53:24 tony2001 Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.18 2007/02/26 09:14:41 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1266,8 +1266,9 @@ cleanup_handle(php_curl *ch)
 		return;
 	}
 
-	if (ch->handlers->write->buf.len) {
-		memset(&ch->handlers->write->buf, 0, sizeof(smart_str));
+	if (ch->handlers->write->buf.len > 0) {
+		smart_str_free(&ch->handlers->write->buf);
+		ch->handlers->write->buf.len = 0;
 	}
 
 	memset(ch->err.str, 0, CURL_ERROR_SIZE + 1);
@@ -1297,6 +1298,7 @@ PHP_FUNCTION(curl_exec)
 	if (error != CURLE_OK && error != CURLE_PARTIAL_FILE) {
 		if (ch->handlers->write->buf.len > 0) {
 			smart_str_free(&ch->handlers->write->buf);
+			ch->handlers->write->buf.len = 0;
 		}
 
 		RETURN_FALSE;
@@ -1306,9 +1308,10 @@ PHP_FUNCTION(curl_exec)
 
 	if (ch->handlers->write->method == PHP_CURL_RETURN && ch->handlers->write->buf.len > 0) {
 		--ch->uses;
-		if (ch->handlers->write->type != PHP_CURL_BINARY) 
+		if (ch->handlers->write->type != PHP_CURL_BINARY) { 
 			smart_str_0(&ch->handlers->write->buf);
-		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 0);
+		}
+		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 1);
 	}
 	--ch->uses;
 	if (ch->handlers->write->method == PHP_CURL_RETURN) {
@@ -1533,6 +1536,10 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	zend_llist_clean(&ch->to_free.slist);
 	zend_llist_clean(&ch->to_free.post);
 
+	if (ch->handlers->write->buf.len > 0) {
+		smart_str_free(&ch->handlers->write->buf);
+		ch->handlers->write->buf.len = 0;
+	}
 	if (ch->handlers->write->func) {
 		FREE_ZVAL(ch->handlers->write->func);
 		ch->handlers->read->func = NULL;

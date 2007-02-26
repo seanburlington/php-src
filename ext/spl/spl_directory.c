@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.120 2007/02/26 22:32:57 helly Exp $ */
+/* $Id: spl_directory.c,v 1.121 2007/02/26 22:46:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -900,6 +900,11 @@ SPL_METHOD(SplFileInfo, getRealPath)
 	}
 
 	if (VCWD_REALPATH(filename, buff)) {
+#ifdef ZTS
+		if (VCWD_ACCESS(buff, F_OK)) {
+			RETVAL_FALSE;
+		} else
+#endif
 		if (UG(unicode)) {
 			if (php_stream_path_decode(NULL, &path, &path_len, buff, strlen(buff), REPORT_ERRORS, FG(default_context)) == SUCCESS) {
 				RETVAL_UNICODEL(path, path_len, 0);

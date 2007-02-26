@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.33 2007/02/24 11:21:10 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.34 2007/02/26 09:39:08 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -764,22 +764,23 @@ int fcgi_accept_request(fcgi_request *req)
 				break;
 #else
 				if (req->fd >= 0) {
-					if (req->fd < FD_SETSIZE) {
 #if defined(HAVE_SYS_POLL_H) && defined(HAVE_POLL)
-						struct pollfd fds;
-						int ret;
+					struct pollfd fds;
+					int ret;
 
-						fds.fd = req->fd;
-						fds.events = POLLIN;
-						fds.revents = 0;
-						do {
-							errno = 0;
-							ret = poll(&fds, 1, 5000);
-						} while (ret < 0 && errno == EINTR);
-						if (ret > 0 && (fds.revents & POLLIN)) {
-							break;
-						}
+					fds.fd = req->fd;
+					fds.events = POLLIN;
+					fds.revents = 0;
+					do {
+						errno = 0;
+						ret = poll(&fds, 1, 5000);
+					} while (ret < 0 && errno == EINTR);
+					if (ret > 0 && (fds.revents & POLLIN)) {
+						break;
+					}
+					fcgi_close(req, 1, 0);
 #else
+					if (req->fd < FD_SETSIZE) {
 						struct timeval tv = {5,0};
 						fd_set set;
 						int ret;
@@ -793,12 +794,12 @@ int fcgi_accept_request(fcgi_request *req)
 						if (ret > 0 && FD_ISSET(req->fd, &set)) {
 							break;
 						}
-#endif
 						fcgi_close(req, 1, 0);
 					} else {
 						fprintf(stderr, "Too many open file descriptors. FD_SETSIZE limit exceeded.");
 						fcgi_close(req, 1, 0);
 					}
+#endif
 				}
 #endif
 			}

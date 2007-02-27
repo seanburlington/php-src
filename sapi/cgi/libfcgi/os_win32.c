@@ -17,7 +17,7 @@
  *  significantly more enjoyable.)
  */
 #ifndef lint
-static const char rcsid[] = "$Id: os_win32.c,v 1.6.2.1 2003/09/21 22:08:16 sas Exp $";
+static const char rcsid[] = "$Id: os_win32.c,v 1.6.2.1.4.1 2007/02/27 11:05:56 dmitry Exp $";
 #endif /* not lint */
 
 #define WIN32_LEAN_AND_MEAN 
@@ -304,6 +304,18 @@ int OS_SetImpersonate(void)
 		return 1;
 	}
 	return 0;
+}
+
+int OS_StartImpersonation(void)
+{
+	return (!bImpersonate ||
+	        ((hListen != INVALID_HANDLE_VALUE) && 
+	         !ImpersonateNamedPipeClient(hListen)));
+}
+
+void OS_StopImpersonation(void)
+{
+	if (bImpersonate) RevertToSelf();
 }
 
 /*
@@ -596,7 +608,7 @@ void OS_LibShutdown()
     if (stdioHandles[0] != INVALID_HANDLE_VALUE) {
 		DisconnectNamedPipe(hListen);
 		CancelIo(hListen);
-		if (bImpersonate) RevertToSelf();
+		OS_StopImpersonation();
 	}
 
     WSACleanup();
@@ -1763,14 +1775,14 @@ static int acceptNamedPipe()
     //
     // impersonate the client
     //
-    if(bImpersonate && !ImpersonateNamedPipeClient(hListen)) {
+    if(bImpersonate && OS_StartImpersonation()) {
         DisconnectNamedPipe(hListen);
     } else {
 		ipcFd = Win32NewDescriptor(FD_PIPE_SYNC, (int) hListen, -1);
 		if (ipcFd == -1) 
 		{
 			DisconnectNamedPipe(hListen);
-			if (bImpersonate) RevertToSelf();
+			OS_StopImpersonation();
 		}
 	}
 
@@ -1975,7 +1987,7 @@ int OS_IpcClose(int ipcFd, int shutdown)
 
         if (! DisconnectNamedPipe(fdTable[ipcFd].fid.fileHandle)) return -1;
 
-        if (bImpersonate) RevertToSelf();
+		OS_StopImpersonation();
 
         /* fall through */
     case FD_SOCKET_SYNC:
@@ -2049,4 +2061,3 @@ void OS_SetFlags(int fd, int flags)
     }
     return;
 }
-

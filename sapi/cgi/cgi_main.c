@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.28 2007/02/24 02:17:28 helly Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.29 2007/02/27 03:28:17 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -325,7 +325,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		int len;
 
 		if (CGIG(rfc2616_headers) && SG(sapi_headers).http_status_line) {
-			len = snprintf(buf, SAPI_CGI_MAX_HEADER_LENGTH,
+			len = slprintf(buf, SAPI_CGI_MAX_HEADER_LENGTH,
 						   "%s\r\n", SG(sapi_headers).http_status_line);
 
 			if (len > SAPI_CGI_MAX_HEADER_LENGTH) {
@@ -333,7 +333,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 			}
 
 		} else {
-			len = snprintf(buf, sizeof(buf), "Status: %d\r\n", SG(sapi_headers).http_response_code);
+			len = slprintf(buf, sizeof(buf), "Status: %d\r\n", SG(sapi_headers).http_response_code);
 		}
 
 		PHPWRITE_H(buf, len);
@@ -444,13 +444,13 @@ static char *_sapi_cgibin_putenv(char *name, char *value TSRMLS_DC)
 #endif
 #if !HAVE_SETENV
 	if (value) {
-		len = snprintf(buf, len - 1, "%s=%s", name, value);
+		len = slprintf(buf, len - 1, "%s=%s", name, value);
 		putenv(buf);
 	}
 #endif
 #if !HAVE_UNSETENV
 	if (!value) {
-		len = snprintf(buf, len - 1, "%s=", name);
+		len = slprintf(buf, len - 1, "%s=", name);
 		putenv(buf);
 	}
 #endif

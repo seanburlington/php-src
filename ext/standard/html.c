@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.8 2007/02/24 17:18:24 iliaa Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.9 2007/02/27 03:28:16 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -912,7 +912,7 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 				if (entity_map[j].table[k - entity_map[j].basechar] == NULL)
 					continue;
 
-				entity_length = snprintf(entity, sizeof(entity), "&%s;", entity_map[j].table[k - entity_map[j].basechar]);
+				entity_length = slprintf(entity, sizeof(entity), "&%s;", entity_map[j].table[k - entity_map[j].basechar]);
 				if (entity_length >= sizeof(entity)) {
 					continue;
 				}

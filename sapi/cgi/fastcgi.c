@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.20 2007/02/26 09:38:44 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.21 2007/02/27 03:28:17 iliaa Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -588,8 +588,8 @@ static int fcgi_read_request(fcgi_request *req)
 
 		for (j = 0; j < sizeof(fcgi_mgmt_vars)/sizeof(fcgi_mgmt_vars[0]); j++) {
 			if (zend_hash_exists(&req->env, fcgi_mgmt_vars[j].name, fcgi_mgmt_vars[j].name_len+1) == 0) {
-                sprintf((char*)p, "%c%c%s%c", fcgi_mgmt_vars[j].name_len, 1, fcgi_mgmt_vars[j].name, fcgi_mgmt_vars[j].val);
-                p += fcgi_mgmt_vars[j].name_len + 3;
+		                sprintf((char*)p, "%c%c%s%c", fcgi_mgmt_vars[j].name_len, 1, fcgi_mgmt_vars[j].name, fcgi_mgmt_vars[j].val);
+		                p += fcgi_mgmt_vars[j].name_len + 3;
 			}
 		}
 		len = p - buf - sizeof(fcgi_header);

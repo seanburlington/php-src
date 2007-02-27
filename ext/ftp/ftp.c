@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.112.2.4.2.6 2007/02/24 02:45:24 stas Exp $ */
+/* $Id: ftp.c,v 1.112.2.4.2.7 2007/02/27 03:28:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1102,13 +1102,13 @@ ftp_putcmd(ftpbuf_t *ftp, const char *cmd, const char *args)
 		if (strlen(cmd) + strlen(args) + 4 > FTP_BUFSIZE) {
 			return 0;
 		}
-		size = snprintf(ftp->outbuf, sizeof(ftp->outbuf), "%s %s\r\n", cmd, args);
+		size = slprintf(ftp->outbuf, sizeof(ftp->outbuf), "%s %s\r\n", cmd, args);
 	} else {
 		/* "cmd\r\n\0" */
 		if (strlen(cmd) + 3 > FTP_BUFSIZE) {
 			return 0;
 		}
-		size = snprintf(ftp->outbuf, sizeof(ftp->outbuf), "%s\r\n", cmd);
+		size = slprintf(ftp->outbuf, sizeof(ftp->outbuf), "%s\r\n", cmd);
 	}
 
 	data = ftp->outbuf;

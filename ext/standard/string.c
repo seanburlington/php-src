@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.43 2007/02/27 00:15:21 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.44 2007/02/27 03:28:16 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -905,7 +905,7 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC)
 
 			case IS_LONG: {
 				char stmp[MAX_LENGTH_OF_LONG + 1];
-				str_len = snprintf(stmp, sizeof(stmp), "%ld", Z_LVAL_PP(tmp));
+				str_len = slprintf(stmp, sizeof(stmp), "%ld", Z_LVAL_PP(tmp));
 				smart_str_appendl(&implstr, stmp, str_len);
 			}
 				break;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.24 2007/02/19 16:18:24 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.25 2007/02/27 03:28:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1390,7 +1390,7 @@ SPL_METHOD(RegexIterator, accept)
 
 	if (intern->u.regex.flags & REGIT_USE_KEY) {
 		if (intern->current.key_type == HASH_KEY_IS_LONG) {
-			subject_len = snprintf(tmp, sizeof(tmp), "%ld", intern->current.int_key);
+			subject_len = slprintf(tmp, sizeof(tmp), "%ld", intern->current.int_key);
 			subject = &tmp[0];
 			use_copy = 0;
 		} else {

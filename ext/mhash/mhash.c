@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.3.2.4 2007/02/24 02:17:24 helly Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.5 2007/02/27 03:28:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,7 +70,7 @@ PHP_MINIT_FUNCTION(mhash)
 
 	for (i=0; i<n; i++) {
 		if ((name = mhash_get_hash_name(i))) {
-			l = snprintf(buf, 127, "MHASH_%s", name);
+			l = slprintf(buf, 127, "MHASH_%s", name);
 			zend_register_long_constant(buf, l + 1, i, CONST_PERSISTENT, module_number TSRMLS_CC);
 			free(name);
 		}

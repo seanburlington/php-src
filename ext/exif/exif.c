@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.18 2007/02/25 13:09:13 helly Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.19 2007/02/27 03:04:40 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.18 2007/02/25 13:09:13 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.19 2007/02/27 03:04:40 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1032,22 +1032,22 @@ static unsigned char* exif_char_dump(unsigned char * addr, int len, int offset)
 	static unsigned char tmp[20];
 	int c, i, p=0, n = 5+31;
 
-	p += snprintf(buf+p, sizeof(buf)-p, "\nDump Len: %08X (%d)", len, len);
+	p += slprintf(buf+p, sizeof(buf)-p, "\nDump Len: %08X (%d)", len, len);
 	if (len) {
 		for(i=0; i<len+15 && p+n<=sizeof(buf); i++) {
 			if (i%16==0) {
-				p += snprintf(buf+p, sizeof(buf)-p, "\n%08X: ", i+offset);
+				p += slprintf(buf+p, sizeof(buf)-p, "\n%08X: ", i+offset);
 			}
 			if (i<len) {
 				c = *addr++;
-				p += snprintf(buf+p, sizeof(buf)-p, "%02X ", c);
+				p += slprintf(buf+p, sizeof(buf)-p, "%02X ", c);
 				tmp[i%16] = c>=32 ? c : '.';
 				tmp[(i%16)+1] = '\0';
 			} else {
-				p += snprintf(buf+p, sizeof(buf)-p, "   ");
+				p += slprintf(buf+p, sizeof(buf)-p, "   ");
 			}
 			if (i%16==15) {
-				p += snprintf(buf+p, sizeof(buf)-p, "    %s", tmp);
+				p += slprintf(buf+p, sizeof(buf)-p, "    %s", tmp);
 				if (i>=len) {
 					break;
 				}

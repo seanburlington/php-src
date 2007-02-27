@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.42 2007/02/24 02:17:27 helly Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.43 2007/02/27 00:15:21 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4263,8 +4263,12 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 					tp = ((tp-tbuf) >= PHP_TAG_BUF_SIZE ? tbuf: tp);
 					*(tp++) = c;
 				}
-				if (p != buf && *(p-1) != '\\') {
-					in_q = !in_q;
+				if (p != buf && *(p-1) != '\\' && (!in_q || *p == in_q)) {
+					if (in_q) {
+						in_q = 0;
+					} else {
+						in_q = *p;
+					}
 				}
 				break;
 			

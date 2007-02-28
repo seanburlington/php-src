@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.225.2.4.2.6 2007/02/27 03:04:40 iliaa Exp $ */
+/* $Id: interbase.c,v 1.225.2.4.2.7 2007/02/28 10:37:07 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1193,7 +1193,7 @@ PHP_FUNCTION(ibase_gen_id)
 #if SIZEOF_LONG < 8
 	if (result < LONG_MIN || result > LONG_MAX) {
 		char *res;
-		int l
+		int l;
 
 		l = spprintf(&res, 0, "%" LL_MASK "d", result);
 		RETURN_STRINGL(res, l, 0);

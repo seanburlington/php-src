@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.32 2007/02/13 20:19:50 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.33 2007/03/01 23:28:13 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -203,7 +203,8 @@ typedef struct { /* php_oci_bind {{{ */
 } php_oci_bind; /* }}} */
 
 typedef struct { /* php_oci_out_column {{{ */
-	php_oci_statement *statement;	/* statement handle. used when fetching REFCURSORS */
+	php_oci_statement *statement;			/* statement handle. used when fetching REFCURSORS */
+	php_oci_statement *nested_statement;	/* statement handle. used when fetching REFCURSORS */
 	OCIDefine *oci_define;			/* define handle */
 	zstr name;						/* column name */
 	ub4 name_len;					/* column name length */

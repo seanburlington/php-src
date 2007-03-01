@@ -11,7 +11,7 @@
  *
  */
 #ifndef lint
-static const char rcsid[] = "$Id: fcgiapp.c,v 1.1.4.3.2.2 2007/02/27 15:15:56 dmitry Exp $";
+static const char rcsid[] = "$Id: fcgiapp.c,v 1.1.4.3.2.3 2007/03/01 07:51:07 dmitry Exp $";
 #endif /* not lint */
 
 #include <assert.h>
@@ -2061,6 +2061,10 @@ void FCGX_Free(FCGX_Request * request, int close)
         OS_IpcClose(request->ipcFd, ! request->detached);
         request->ipcFd = -1;
         request->detached = 0;
+#ifdef _WIN32
+    } else {
+        OS_StopImpersonation();
+#endif
     }
 }
 
@@ -2225,6 +2229,10 @@ int FCGX_Accept_r(FCGX_Request *reqDataPtr)
             if (reqDataPtr->ipcFd < 0) {
                 return (errno > 0) ? (0 - errno) : -9999;
             }
+#ifdef _WIN32
+		} else if (!OS_StartImpersonation()) {
+			FCGX_Free(reqDataPtr, 1);
+#endif
         }
         /*
          * A connection is open.  Read from the connection in order to

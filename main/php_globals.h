@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.110 2007/01/24 21:43:47 pollita Exp $ */
+/* $Id: php_globals.h,v 1.111 2007/03/02 22:04:46 stas Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -141,6 +141,7 @@ struct _php_core_globals {
 #ifdef PHP_WIN32
 	zend_bool com_initialized;
 #endif
+	long max_input_nesting_level;
 };
 
 

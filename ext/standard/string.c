@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.44 2007/02/27 03:28:16 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.45 2007/03/03 15:46:29 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4211,7 +4211,7 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 				switch (state) {
 					case 1: /* HTML/XML */
 						lc = '>';
-						state = 0;
+						in_q = state = 0;
 						if (allow) {
 							tp = ((tp-tbuf) >= PHP_TAG_BUF_SIZE ? tbuf: tp);
 							*(tp++) = '>';
@@ -4226,19 +4226,19 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 						
 					case 2: /* PHP */
 						if (!br && lc != '\"' && *(p-1) == '?') {
-							state = 0;
+							in_q = state = 0;
 							tp = tbuf;
 						}
 						break;
 						
 					case 3:
-						state = 0;
+						in_q = state = 0;
 						tp = tbuf;
 						break;
 
 					case 4: /* JavaScript/CSS/etc... */
 						if (p >= buf + 2 && *(p-1) == '-' && *(p-2) == '-') {
-							state = 0;
+							in_q = state = 0;
 							tp = tbuf;
 						}
 						break;
@@ -4263,7 +4263,7 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 					tp = ((tp-tbuf) >= PHP_TAG_BUF_SIZE ? tbuf: tp);
 					*(tp++) = c;
 				}
-				if (p != buf && *(p-1) != '\\' && (!in_q || *p == in_q)) {
+				if (state && p != buf && *(p-1) != '\\' && (!in_q || *p == in_q)) {
 					if (in_q) {
 						in_q = 0;
 					} else {

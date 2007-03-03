@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.148 2007/02/21 21:56:45 tony2001 Exp $ */
+/* $Id: streams.c,v 1.149 2007/03/03 18:59:53 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2388,10 +2388,14 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 
 	if (wrapper) {
-
-		stream = wrapper->wops->stream_opener(wrapper,
+		if (!wrapper->wops->stream_opener) {
+			php_stream_wrapper_log_error(wrapper, options ^ REPORT_ERRORS TSRMLS_CC,
+					"wrapper does not support stream open");
+		} else {
+			stream = wrapper->wops->stream_opener(wrapper,
 				path_to_open, implicit_mode, options ^ REPORT_ERRORS,
 				opened_path, context STREAMS_REL_CC TSRMLS_CC);
+		}
 
 		/* if the caller asked for a persistent stream but the wrapper did not
 		 * return one, force an error here */

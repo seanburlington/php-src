@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: glob_wrapper.c,v 1.1 2007/03/03 20:41:12 helly Exp $ */
+/* $Id: glob_wrapper.c,v 1.2 2007/03/03 20:56:45 helly Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -147,7 +147,7 @@ static int php_glob_stream_rewind(php_stream *stream, off_t offset, int whence, 
 }
 /* }}} */
 
-static php_stream_ops	php_glob_stream_ops = {
+php_stream_ops  php_glob_stream_ops = {
 	NULL, php_glob_stream_read,
 	php_glob_stream_close, NULL,
 	"glob",
@@ -203,7 +203,7 @@ static php_stream *php_glob_stream_opener(php_stream_wrapper *wrapper, char *pat
 }
 /* }}} */
 
-static php_stream_wrapper_ops php_glob_stream_wrapper_ops = {
+static php_stream_wrapper_ops  php_glob_stream_wrapper_ops = {
 	NULL,
 	NULL,
 	NULL,
@@ -216,7 +216,7 @@ static php_stream_wrapper_ops php_glob_stream_wrapper_ops = {
 	NULL
 };
 
-php_stream_wrapper php_glob_stream_wrapper = {
+php_stream_wrapper  php_glob_stream_wrapper = {
 	&php_glob_stream_wrapper_ops,
 	NULL,
 	0

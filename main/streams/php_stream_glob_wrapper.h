@@ -16,9 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_glob_wrapper.h,v 1.1 2007/03/03 20:41:12 helly Exp $ */
+/* $Id: php_stream_glob_wrapper.h,v 1.2 2007/03/03 20:56:45 helly Exp $ */
 
-PHPAPI extern php_stream_wrapper php_glob_stream_wrapper;
+PHPAPI extern php_stream_wrapper  php_glob_stream_wrapper;
+PHPAPI extern php_stream_ops      php_glob_stream_ops;
 
 BEGIN_EXTERN_C()
 

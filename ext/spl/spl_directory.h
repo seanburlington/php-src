@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.30 2007/03/03 21:41:56 helly Exp $ */
+/* $Id: spl_directory.h,v 1.31 2007/03/03 23:41:43 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -121,6 +121,7 @@ static inline spl_filesystem_object* spl_filesystem_iterator_to_object(spl_files
 #define SPL_FILE_DIR_KEY_MODE_MASK         0x00000F00 /* mask RecursiveDirectoryTree::key() */
 
 #define SPL_FILE_DIR_USE_GLOB              0x00001000 /* use glob for open dir*/
+#define SPL_FILE_DIR_GLOB_REFETCH_PATH     0x00002000 /* whether we need to refetch the path in glob mode */
 
 #endif /* SPL_DIRECTORY_H */
 

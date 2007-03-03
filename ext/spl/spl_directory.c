@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.122 2007/03/03 14:37:17 helly Exp $ */
+/* $Id: spl_directory.c,v 1.123 2007/03/03 14:46:44 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -673,6 +673,18 @@ SPL_METHOD(SplFileInfo, getBasename)
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &suffix.s, &slen) == FAILURE) {
 			return;
 		}
+	}
+
+	if (intern->path_len && intern->path_len < intern->file_name_len) {
+		if (intern->file_name_type == IS_UNICODE) {
+			fname.u = intern->file_name.u + intern->path_len + 1;
+		} else {
+			fname.s = intern->file_name.s + intern->path_len + 1;
+		}
+		flen = intern->file_name_len - (intern->path_len + 1);
+	} else {
+		fname = intern->file_name;
+		flen = intern->file_name_len;
 	}
 
 	if (intern->file_name_type == IS_UNICODE) {	

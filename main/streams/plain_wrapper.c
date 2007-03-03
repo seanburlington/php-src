@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.82 2007/02/23 23:08:40 pollita Exp $ */
+/* $Id: plain_wrapper.c,v 1.83 2007/03/03 20:41:12 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -835,6 +835,10 @@ static php_stream *php_plain_files_dir_opener(php_stream_wrapper *wrapper, char 
 {
 	DIR *dir = NULL;
 	php_stream *stream = NULL;
+
+	if (options & STREAM_USE_GLOB_DIR_OPEN) {
+		return php_glob_stream_wrapper.wops->dir_opener(&php_glob_stream_wrapper, path, mode, options, opened_path, context STREAMS_REL_CC TSRMLS_CC);
+	}
 
 	if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir(path TSRMLS_CC)) {
 		return NULL;

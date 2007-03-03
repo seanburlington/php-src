@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_glob_wrapper.h,v 1.2 2007/03/03 20:56:45 helly Exp $ */
+/* $Id: php_stream_glob_wrapper.h,v 1.3 2007/03/03 21:38:25 helly Exp $ */
 
 PHPAPI extern php_stream_wrapper  php_glob_stream_wrapper;
 PHPAPI extern php_stream_ops      php_glob_stream_ops;
@@ -25,6 +25,9 @@ BEGIN_EXTERN_C()
 
 PHPAPI char* _php_glob_stream_get_path(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC);
 #define php_glob_stream_get_path(stream, copy, plen)	_php_glob_stream_get_path((stream), (copy), (plen) STREAMS_CC TSRMLS_CC)
+
+PHPAPI char* _php_glob_stream_get_pattern(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC);
+#define php_glob_stream_get_pattern(stream, copy, plen)	_php_glob_stream_get_pattern((stream), (copy), (plen) STREAMS_CC TSRMLS_CC)
 
 END_EXTERN_C()
 

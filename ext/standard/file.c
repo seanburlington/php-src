@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.485 2007/02/23 16:21:31 tony2001 Exp $ */
+/* $Id: file.c,v 1.486 2007/03/03 19:07:51 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2697,7 +2697,7 @@ PHP_FUNCTION(realpath)
 #ifdef ZTS
 		if (VCWD_ACCESS(resolved_path_buff, F_OK)) {
 			RETVAL_FALSE;
-		}
+		} else
 #endif
 
 		if (UG(unicode)) {

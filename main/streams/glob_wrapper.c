@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: glob_wrapper.c,v 1.3 2007/03/03 21:38:25 helly Exp $ */
+/* $Id: glob_wrapper.c,v 1.4 2007/03/03 23:04:57 helly Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -87,6 +87,14 @@ PHPAPI char* _php_glob_stream_get_pattern(php_stream *stream, int copy, int *ple
 		}
 		return NULL;
 	}
+}
+/* }}} */
+
+PHPAPI int _php_glob_stream_get_count(php_stream *stream STREAMS_DC TSRMLS_DC) /* {{{ */
+{
+	glob_s_t *pglob = (glob_s_t *)stream->abstract;
+	
+	return pglob ? pglob->glob.gl_pathc : 0;
 }
 /* }}} */
 

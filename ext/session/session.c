@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.30 2007/03/02 00:49:47 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.31 2007/03/03 15:07:31 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -163,7 +163,7 @@ static PHP_INI_MH(OnUpdateSaveDir)
 			p = new_value;
 		}
 
-		if (PG(safe_mode) && (!php_checkuid(p, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
+		if (PG(safe_mode) && (!php_checkuid(p, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 			return FAILURE;
 		}
 

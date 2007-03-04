@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.14 2007/03/04 02:23:47 stas Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.15 2007/03/04 04:38:43 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1035,7 +1035,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 					Z_STRLEN_P(ent->data) = decoded_len;
 				} else {
 					Z_STRVAL_P(ent->data) = erealloc(Z_STRVAL_P(ent->data), Z_STRLEN_P(ent->data) + decoded_len + 1);
-					strlcpy(Z_STRVAL_P(ent->data) + Z_STRLEN_P(ent->data), decoded, decoded_len);
+					memcpy(Z_STRVAL_P(ent->data) + Z_STRLEN_P(ent->data), decoded, decoded_len);
 					Z_STRLEN_P(ent->data) += decoded_len;
 					Z_STRVAL_P(ent->data)[Z_STRLEN_P(ent->data)] = '\0';
 				}

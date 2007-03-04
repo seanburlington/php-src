@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.31 2007/03/03 23:41:43 helly Exp $ */
+/* $Id: spl_directory.h,v 1.32 2007/03/04 00:23:07 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -122,6 +122,7 @@ static inline spl_filesystem_object* spl_filesystem_iterator_to_object(spl_files
 
 #define SPL_FILE_DIR_USE_GLOB              0x00001000 /* use glob for open dir*/
 #define SPL_FILE_DIR_GLOB_REFETCH_PATH     0x00002000 /* whether we need to refetch the path in glob mode */
+#define SPL_FILE_DIR_NO_GLOB_CHILD         0x00004000 /* do not use glob on childs */
 
 #endif /* SPL_DIRECTORY_H */
 

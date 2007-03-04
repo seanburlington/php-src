@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.23 2007/01/22 08:17:26 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.24 2007/03/04 17:21:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4077,10 +4077,8 @@ PHP_FUNCTION(array_reduce)
 	while (zend_hash_get_current_data_ex(htbl, (void **)&operand, &pos) == SUCCESS) {
 		if (result) {
 			zend_fcall_info fci;
-
 			args[0] = &result;
 			args[1] = operand;
-
 			fci.size = sizeof(fci);
 			fci.function_table = EG(function_table);
 			fci.function_name = *callback;
@@ -4106,7 +4104,7 @@ PHP_FUNCTION(array_reduce)
 		zend_hash_move_forward_ex(htbl, &pos);
 	}
 	
-	RETVAL_ZVAL(result, 0, 1);
+	RETVAL_ZVAL(result, 1, 1);
 }
 /* }}} */
 

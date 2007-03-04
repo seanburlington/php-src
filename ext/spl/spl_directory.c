@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.131 2007/03/04 12:02:16 helly Exp $ */
+/* $Id: spl_directory.c,v 1.132 2007/03/04 12:13:20 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -839,7 +839,7 @@ SPL_METHOD(DirectoryIterator, isDot)
 {
 	spl_filesystem_object *intern = (spl_filesystem_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
-	RETURN_BOOL(!strcmp(intern->u.dir.entry.d_name, ".") || !strcmp(intern->u.dir.entry.d_name, ".."));
+	RETURN_BOOL(spl_filesystem_is_dot(intern->u.dir.entry.d_name));
 }
 /* }}} */
 

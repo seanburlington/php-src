@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.69.2.5.4.3 2007/01/01 09:46:51 sebastian Exp $ */
+/* $Id: php_apache.c,v 1.69.2.5.4.4 2007/03/05 21:59:02 stas Exp $ */
 
 #include "php_apache_http.h"
 
@@ -201,10 +201,10 @@ PHP_MINFO_FUNCTION(apache)
 #endif
 	sprintf(output_buf, "%d", MODULE_MAGIC_NUMBER);
 	php_info_print_table_row(2, "Apache API Version", output_buf);
-	sprintf(output_buf, "%s:%u", serv->server_hostname, serv->port);
+	snprintf(output_buf, sizeof(output_buf), "%s:%u", serv->server_hostname, serv->port);
 	php_info_print_table_row(2, "Hostname:Port", output_buf);
 #if !defined(WIN32) && !defined(WINNT)
-	sprintf(output_buf, "%s(%d)/%d", user_name, (int)user_id, (int)group_id);
+	snprintf(output_buf, sizeof(output_buf), "%s(%d)/%d", user_name, (int)user_id, (int)group_id);
 	php_info_print_table_row(2, "User/Group", output_buf);
 	sprintf(output_buf, "Per Child: %d - Keep Alive: %s - Max Per Connection: %d", max_requests_per_child, serv->keep_alive ? "on":"off", serv->keep_alive_max);
 	php_info_print_table_row(2, "Max Requests", output_buf);

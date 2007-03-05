@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet.h,v 1.7 2007/01/01 09:29:22 sebastian Exp $ */
+/* $Id: php_com_dotnet.h,v 1.8 2007/03/05 12:56:26 wharmby Exp $ */
 
 #ifndef PHP_COM_DOTNET_H
 #define PHP_COM_DOTNET_H
@@ -47,6 +47,7 @@ ZEND_BEGIN_MODULE_GLOBALS(com_dotnet)
 	zend_bool autoreg_case_sensitive;
 	void *dotnet_runtime_stuff; /* opaque to avoid cluttering up other modules */
 	int code_page; /* default code_page if left unspecified */
+	zend_bool rshutdown_started;
 ZEND_END_MODULE_GLOBALS(com_dotnet)
 
 #ifdef ZTS

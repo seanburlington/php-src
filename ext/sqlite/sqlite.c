@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.6 2007/01/01 09:36:07 sebastian Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.7 2007/03/06 02:17:13 stas Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1133,7 +1133,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.6 2007/01/01 09:36:07 sebastian Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.7 2007/03/06 02:17:13 stas Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1465,7 +1465,7 @@ next_row:
 				/* add the row to our collection */
 				if (rres->nrows + 1 >= rres->alloc_rows) {
 					rres->alloc_rows = rres->alloc_rows ? rres->alloc_rows * 2 : 16;
-					rres->table = erealloc(rres->table, rres->alloc_rows * rres->ncolumns * sizeof(char *));
+					rres->table = safe_erealloc(rres->table, rres->alloc_rows, rres->ncolumns*sizeof(char *), 0);
 				}
 				base = rres->nrows * rres->ncolumns;
 				for (i = 0; i < rres->ncolumns; i++) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.262 2007/02/19 17:28:11 helly Exp $ */
+/* $Id: var.c,v 1.263 2007/03/06 19:45:02 tony2001 Exp $ */
 
 
 
@@ -375,7 +375,7 @@ PHPAPI void php_debug_zval_dump(zval **struc, int level, int verbose TSRMLS_DC)
 	zend_uint class_name_len;
 	zend_class_entry *ce;
 	int (*zval_element_dump_func)(zval**, int, va_list, zend_hash_key*);
-	int is_temp;
+	int is_temp = 0;
 
 	if (level > 1) {
 		php_printf("%*c", level - 1, ' ');

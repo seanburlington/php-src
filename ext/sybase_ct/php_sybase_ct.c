@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.103.2.5.2.9 2007/02/24 02:17:27 helly Exp $ */
+/* $Id: php_sybase_ct.c,v 1.103.2.5.2.10 2007/03/06 02:07:10 stas Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1138,7 +1138,7 @@ static int php_sybase_fetch_result_row (sybase_result *result, int numrows)
 		result->num_rows++;
 		i= result->store ? result->num_rows- 1 : 0;
 		if (i >= result->blocks_initialized*SYBASE_ROWS_BLOCK) {
-			result->data = (zval **) erealloc(result->data, sizeof(zval *)*SYBASE_ROWS_BLOCK*(++result->blocks_initialized));
+			result->data = (zval **) safe_erealloc(result->data, SYBASE_ROWS_BLOCK*(++result->blocks_initialized), sizeof(zval *), 0);
 		}
 		if (result->store || 1 == result->num_rows) {
 			result->data[i] = (zval *) safe_emalloc(sizeof(zval), result->num_fields, 0);

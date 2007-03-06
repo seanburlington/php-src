@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.10 2007/01/01 09:35:48 sebastian Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.11 2007/03/06 02:10:25 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -562,13 +562,13 @@ static PHP_FUNCTION(bzdecompress)
 		/* compression is better then 2:1, need to allocate more memory */
 		bzs.avail_out = source_len;
 		size = (bzs.total_out_hi32 * (unsigned int) -1) + bzs.total_out_lo32;
-		dest = erealloc(dest, size + bzs.avail_out + 1);
+		dest = safe_erealloc(dest, 1, bzs.avail_out+1, size );
 		bzs.next_out = dest + size;
 	}
 
 	if (error == BZ_STREAM_END || error == BZ_OK) {
 		size = (bzs.total_out_hi32 * (unsigned int) -1) + bzs.total_out_lo32;
-		dest = erealloc(dest, size + 1);
+		dest = safe_erealloc(dest, 1, size, 1);
 		dest[size] = '\0';
 		RETVAL_STRINGL(dest, size, 0);
 	} else { /* real error */

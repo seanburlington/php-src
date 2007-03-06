@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.66.2.5.2.3 2007/02/24 02:59:57 iliaa Exp $ */
+/* $Id: php_sybase_db.c,v 1.66.2.5.2.4 2007/03/06 02:03:27 stas Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -839,7 +839,7 @@ PHP_FUNCTION(sybase_query)
 	while (retvalue!=FAIL && retvalue!=NO_MORE_ROWS) {
 		result->num_rows++;
 		if (result->num_rows > blocks_initialized*SYBASE_ROWS_BLOCK) {
-			result->data = (zval ***) erealloc(result->data,sizeof(zval **)*SYBASE_ROWS_BLOCK*(++blocks_initialized));
+			result->data = (zval ***) safe_erealloc(result->data, SYBASE_ROWS_BLOCK*(++blocks_initialized), sizeof(zval **), 0);
 		}
 		result->data[i] = (zval **) safe_emalloc(sizeof(zval *), num_fields, 0);
 		for (j=1; j<=num_fields; j++) {

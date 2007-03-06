@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.263 2007/03/06 19:45:02 tony2001 Exp $ */
+/* $Id: var.c,v 1.264 2007/03/06 20:35:49 tony2001 Exp $ */
 
 
 
@@ -539,7 +539,7 @@ static void php_unicode_export(UChar *ustr, int ustr_len TSRMLS_DC)
 		U16_NEXT(ustr, i, ustr_len, cp);
 		switch (cp) {
 			case 0x0: /* '\0' */
-				PHPWRITE("\\0", 2);
+				PHPWRITE("\\000", 4);
 				break;
 
 			case 0x27: /* '\'' */

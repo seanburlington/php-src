@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.48 2007/03/08 00:18:10 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.49 2007/03/08 00:47:04 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4655,7 +4655,7 @@ PHP_FUNCTION(substr_count)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length should be greater than 0.");
 				RETURN_FALSE;		
 			}
-			if ((p + Z_LVAL_PP(length)) <= p || (p + Z_LVAL_PP(length)) > endp) {
+			if (Z_LVAL_PP(length) > (Z_STRLEN_PP(haystack) - Z_LVAL_PP(offset))) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length value %ld exceeds string length.", Z_LVAL_PP(length));
 				RETURN_FALSE;
 			}
@@ -5076,8 +5076,13 @@ PHP_FUNCTION(substr_compare)
 		offset = (offset < 0) ? 0 : offset;
 	}
 
-	if ((offset + len) > s1_len || (offset+len) < 0) {
+	if(offset > s1_len) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The start position cannot exceed initial string length");
+		RETURN_FALSE;
+	}
+
+	if(len > s1_len - offset) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The length cannot exceed initial string length");
 		RETURN_FALSE;
 	}
 

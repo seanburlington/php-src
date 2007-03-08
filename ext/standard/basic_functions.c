@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.43 2007/02/22 08:23:17 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.44 2007/03/08 00:44:23 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6128,6 +6128,12 @@ static void php_simple_ini_parser_cb(zval *arg1, zval *arg2, int callback_type, 
 				} else {
 					hash = *find_hash;
 				}
+			}
+
+			if (Z_TYPE_P(hash) != IS_ARRAY) {
+				zval_dtor(hash);
+				INIT_PZVAL(hash);
+				array_init(hash);
 			}
 
 			ALLOC_ZVAL(element);

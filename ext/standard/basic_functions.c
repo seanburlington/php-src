@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.45 2007/03/09 01:42:20 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.46 2007/03/09 01:48:56 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6252,6 +6252,7 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 					!strcmp(hash_key->arKey, "_COOKIE") || 
 					!strcmp(hash_key->arKey, "_ENV") || 
 					!strcmp(hash_key->arKey, "_SERVER") || 
+					!strcmp(hash_key->arKey, "_SESSION") || 
 					!strcmp(hash_key->arKey, "_FILES") || 
 					!strcmp(hash_key->arKey, "_REQUEST")
 				)

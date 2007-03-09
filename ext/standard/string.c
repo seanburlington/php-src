@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.50 2007/03/09 01:58:34 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.51 2007/03/09 10:04:59 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2063,7 +2063,7 @@ PHP_FUNCTION(substr)
 	if (argc > 2) {
 		convert_to_long_ex(len);
 		l = Z_LVAL_PP(len);
-		if (l > Z_STRLEN_PP(str) || (l < 0 && -l > Z_STRLEN_PP(str))) {
+		if ((l < 0 && -l > Z_STRLEN_PP(str))) {
 			RETURN_FALSE;
 		}
 	} else {

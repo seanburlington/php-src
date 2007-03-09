@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.110 2007/02/23 20:50:17 tony2001 Exp $ */
+/* $Id: interface.c,v 1.111 2007/03/09 01:22:47 rasmus Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -173,7 +173,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 			php_curl_ret(__ret);											\
 		} 																						\
 															\
-		if (php_memnstr(str, tmp_url->path, strlen(tmp_url->path), str + len)) {				\
+		if (!php_memnstr(str, tmp_url->path, strlen(tmp_url->path), str + len)) {				\
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "URL '%s' contains unencoded control characters", str);	\
 			php_url_free(tmp_url); 																\
 			php_curl_ret(__ret);											\

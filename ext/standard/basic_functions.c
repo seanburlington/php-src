@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.46 2007/03/09 01:48:56 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.47 2007/03/10 19:20:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6258,6 +6258,19 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 				)
 			) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attempted super-global (%s) variable overwrite.", hash_key->arKey);
+			return 0; 	
+		} else if (*hash_key->arKey == 'H' && 
+				(
+					!strcmp(hash_key->arKey, "HTTP_POST_VARS") || 
+					!strcmp(hash_key->arKey, "HTTP_GET_VARS") || 
+					!strcmp(hash_key->arKey, "HTTP_COOKIE_VARS") || 
+					!strcmp(hash_key->arKey, "HTTP_ENV_VARS") || 
+					!strcmp(hash_key->arKey, "HTTP_SERVER_VARS") || 
+					!strcmp(hash_key->arKey, "HTTP_RAW_POST_DATA") || 
+					!strcmp(hash_key->arKey, "HTTP_POST_FILES")
+				)
+			) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attempted long input array (%s) overwrite.", hash_key->arKey);
 			return 0; 	
 		}
 	}

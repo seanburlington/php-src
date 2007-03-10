@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.51 2007/03/09 10:04:59 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.52 2007/03/10 20:07:50 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2065,6 +2065,8 @@ PHP_FUNCTION(substr)
 		l = Z_LVAL_PP(len);
 		if ((l < 0 && -l > Z_STRLEN_PP(str))) {
 			RETURN_FALSE;
+		} else if (l > Z_STRLEN_PP(str)) {
+			l = Z_STRLEN_PP(str);
 		}
 	} else {
 		l = Z_STRLEN_PP(str);

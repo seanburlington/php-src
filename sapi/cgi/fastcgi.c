@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.21 2007/02/27 03:28:17 iliaa Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.22 2007/03/12 07:39:01 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -133,7 +133,7 @@ typedef union _sa_t {
 
 typedef struct _fcgi_mgmt_rec {
 	char*  name;
-	size_t name_len;
+	char   name_len;
 	char   val;
 } fcgi_mgmt_rec;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.31 2007/03/03 15:07:31 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.32 2007/03/14 19:37:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -846,6 +846,7 @@ new_session:
 	} else if (PS(invalid_session_id)) { /* address instances where the session read fails due to an invalid id */
 		PS(invalid_session_id) = 0;
 		efree(PS(id));
+		PS(id) = NULL;
 		goto new_session;
 	}
 }
@@ -1575,6 +1576,7 @@ PHP_FUNCTION(session_regenerate_id)
 				RETURN_FALSE;
 			}
 			efree(PS(id));
+			PS(id) = NULL;
 		}
 	
 		PS(id) = PS(mod)->s_create_sid(&PS(mod_data), NULL TSRMLS_CC);

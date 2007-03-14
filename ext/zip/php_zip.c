@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.42 2007/03/14 12:02:40 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.43 2007/03/14 16:34:56 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -155,10 +155,11 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 	}
 
 	/* check again the full path, not sure if it
-	 * is required, does a file can have a different
+	 * is required, can a file have a different
 	 * safemode status as its parent folder?
 	 */
 	if (OPENBASEDIR_CHECKPATH(fullpath)) {
+		efree(fullpath);
 		efree(file_dirname_fullpath);
 		efree(file_basename);
 		return 0;
@@ -2111,7 +2112,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.42 2007/03/14 12:02:40 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.43 2007/03/14 16:34:56 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

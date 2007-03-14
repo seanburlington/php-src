@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.11 2007/03/06 02:10:25 stas Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.12 2007/03/14 03:50:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,6 +225,10 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 #else
 	path_copy = path;
 #endif  
+
+	if ((PG(safe_mode) && (!php_checkuid(path_copy, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(path_copy TSRMLS_CC)) {
+		return NULL;
+	}
 	
 	/* try and open it directly first */
 	bz_file = BZ2_bzopen(path_copy, mode);
@@ -236,7 +240,7 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 	
 	if (bz_file == NULL) {
 		/* that didn't work, so try and get something from the network/wrapper */
-		stream = php_stream_open_wrapper(path, mode, options | STREAM_WILL_CAST, opened_path);
+		stream = php_stream_open_wrapper(path, mode, options | STREAM_WILL_CAST | ENFORCE_SAFE_MODE, opened_path);
 	
 		if (stream) {
 			int fd;

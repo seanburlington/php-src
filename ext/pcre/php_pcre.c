@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.15 2007/01/10 14:37:31 bjori Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.16 2007/03/14 23:47:44 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -811,7 +811,9 @@ static int preg_do_repl_func(zval *function, char *subject, int *offsets, int co
 		result_len = Z_STRLEN_P(retval_ptr);
 		zval_ptr_dtor(&retval_ptr);
 	} else {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call custom replacement function");
+		if (!EG(exception)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call custom replacement function");
+		}
 		result_len = offsets[1] - offsets[0];
 		*result = estrndup(&subject[offsets[0]], result_len);
 	}

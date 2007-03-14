@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.30 2007/03/14 12:06:20 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.1.2.31 2007/03/14 15:02:20 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,6 +160,7 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 	 * safemode status as its parent folder?
 	 */
 	if (OPENBASEDIR_CHECKPATH(fullpath)) {
+		efree(fullpath);
 		efree(file_dirname_fullpath);
 		efree(file_basename);
 		return 0;
@@ -2026,7 +2027,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.30 2007/03/14 12:06:20 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.31 2007/03/14 15:02:20 iliaa Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

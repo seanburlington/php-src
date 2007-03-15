@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.18 2007/02/26 09:14:41 tony2001 Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.19 2007/03/15 23:19:21 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1262,10 +1262,6 @@ PHP_FUNCTION(curl_setopt)
 static void 
 cleanup_handle(php_curl *ch)
 {
-	if (ch->uses < 1) {
-		return;
-	}
-
 	if (ch->handlers->write->buf.len > 0) {
 		smart_str_free(&ch->handlers->write->buf);
 		ch->handlers->write->buf.len = 0;

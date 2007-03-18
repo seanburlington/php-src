@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.25 2007/03/16 19:38:58 stas Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.26 2007/03/18 20:20:23 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -596,7 +596,7 @@ static int array_user_compare(const void *a, const void *b TSRMLS_DC)
 		convert_to_long_ex(&retval_ptr);
 		retval = Z_LVAL_P(retval_ptr);
 		zval_ptr_dtor(&retval_ptr);
-		return retval;
+		return retval < 0 ? -1 : retval > 0 ? 1 : 0;;
 	} else {
 		return 0;
 	}

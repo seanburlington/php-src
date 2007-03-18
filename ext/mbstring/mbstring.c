@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.19 2006/12/21 17:28:57 masugata Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.20 2007/03/18 17:19:30 iliaa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1954,9 +1954,9 @@ PHP_FUNCTION(mb_parse_str)
 	string.no_encoding = from_encoding;
 	old_rg = PG(register_globals);
 	if (argc == 1) {
-		PG(register_globals) = 1;
+		zend_alter_ini_entry("register_globals", sizeof("register_globals"), "1", sizeof("1")-1, PHP_INI_PERDIR, PHP_INI_STAGE_RUNTIME);
 	} else {
-		PG(register_globals) = 0;
+		zend_alter_ini_entry("register_globals", sizeof("register_globals"), "0", sizeof("0")-1, PHP_INI_PERDIR, PHP_INI_STAGE_RUNTIME);
 	}
 	n = 0;
 	while (n < num) {
@@ -1985,7 +1985,11 @@ PHP_FUNCTION(mb_parse_str)
 		mbfl_string_clear(&resvar);
 		mbfl_string_clear(&resval);
 	}
-	PG(register_globals) = old_rg;
+	if (old_rg) {
+		zend_alter_ini_entry("register_globals", sizeof("register_globals"), "1", sizeof("1")-1, PHP_INI_PERDIR, PHP_INI_STAGE_RUNTIME);
+	} else {
+		zend_alter_ini_entry("register_globals", sizeof("register_globals"), "0", sizeof("0")-1, PHP_INI_PERDIR, PHP_INI_STAGE_RUNTIME);
+	}
 
 	if (convd != NULL) {
 		MBSTRG(illegalchars) += mbfl_buffer_illegalchars(convd);

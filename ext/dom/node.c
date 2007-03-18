@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.37.2.3.2.6 2007/01/01 09:36:00 sebastian Exp $ */
+/* $Id: node.c,v 1.37.2.3.2.7 2007/03/18 21:31:04 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1012,7 +1012,7 @@ PHP_FUNCTION(dom_node_insert_before)
 			new_child = xmlAddPrevSibling(refp, child);
 		}
 	} else {
-		if (child->parent == parentp){
+		if (child->parent != NULL){
 			xmlUnlinkNode(child);
 		}
 		if (child->type == XML_TEXT_NODE && parentp->last != NULL && parentp->last->type == XML_TEXT_NODE) {

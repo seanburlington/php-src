@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.23 2007/03/11 18:42:19 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.24 2007/03/19 22:56:57 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3188,7 +3188,7 @@ PHP_FUNCTION(imap_mail_compose)
 						disp_param->next = tmp_param;
 						tmp_param = disp_param;
 					}
-				bod->parameter = disp_param;
+					bod->parameter = disp_param;
 				}
 			}
 			if (zend_hash_find(Z_ARRVAL_PP(data), "subtype", sizeof("subtype"), (void **) &pvalue)== SUCCESS) {
@@ -3337,7 +3337,7 @@ PHP_FUNCTION(imap_mail_compose)
 			} while ((part = part->next)); /* until done */
 
 			/* output trailing cookie */
-			spprintf(&tempstring, 0, "%s--%s--%s", mystring, tmp, CRLF);
+			spprintf(&tempstring, 0, "%s--%s--%s", mystring, cookie, CRLF);
 			efree(mystring);
 			mystring=tempstring;
 	} else if (bod) {

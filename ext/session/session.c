@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.466 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: session.c,v 1.467 2007/03/19 08:24:17 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -437,6 +437,7 @@ new_session:
 	} else if (PS(invalid_session_id)) { /* address instances where the session read fails due to an invalid id */
 		PS(invalid_session_id) = 0;
 		efree(PS(id));
+		PS(id) = NULL;
 		goto new_session;
 	}
 }
@@ -1592,6 +1593,7 @@ static PHP_FUNCTION(session_regenerate_id)
 				RETURN_FALSE;
 			}
 			efree(PS(id));
+			PS(id) = NULL;
 		}
 	
 		PS(id) = PS(mod)->s_create_sid(&PS(mod_data), NULL TSRMLS_CC);

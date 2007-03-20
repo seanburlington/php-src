@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.24 2007/02/25 13:19:29 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.25 2007/03/20 07:51:31 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1221,7 +1221,8 @@ static void model_to_zval_object(zval *ret, sdlContentModelPtr model, xmlNodePtr
 							add_next_index_zval(array, val);
 						} while ((node = get_node(node->next, model->u.element->name)) != NULL);
 						val = array;
-					} else if ((SOAP_GLOBAL(features) & SOAP_SINGLE_ELEMENT_ARRAYS) &&
+					} else if ((Z_TYPE_P(val) != IS_NULL || !model->u.element->nillable) &&
+					           (SOAP_GLOBAL(features) & SOAP_SINGLE_ELEMENT_ARRAYS) &&
 					           (model->max_occurs == -1 || model->max_occurs > 1)) {
 						zval *array;
 

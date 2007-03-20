@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.103 2007/02/24 16:25:54 helly Exp $ 
+  $Id: mysqli.c,v 1.104 2007/03/20 20:00:07 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -425,7 +425,20 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry *class_
 	
 /* {{{ mysqli_module_entry
  */
+static zend_module_dep mysqli_deps[] = {
+#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
+	ZEND_MOD_REQUIRED("spl")
+#endif
+	{NULL, NULL, NULL}
+};
+
 zend_module_entry mysqli_module_entry = {
+#if ZEND_MODULE_API_NO >= 20050922
+	STANDARD_MODULE_HEADER_EX, NULL,
+	mysqli_deps,
+#elif ZEND_MODULE_API_NO >= 20010901
+	STANDARD_MODULE_HEADER,
+#endif
 	STANDARD_MODULE_HEADER,
 	"mysqli",
 	mysqli_functions,

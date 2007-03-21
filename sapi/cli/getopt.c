@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: getopt.c,v 1.8.2.1.2.1 2007/01/01 09:36:12 sebastian Exp $ */
+/* $Id: getopt.c,v 1.8.2.1.2.2 2007/03/21 23:20:21 helly Exp $ */
 
 #include <stdio.h>
 #include <string.h>
@@ -89,19 +89,19 @@ int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **opta
 			}
 		}
 		optchr = 0;
-		dash = 1;
-		arg_start = 2 + strlen(opts[opts_idx].opt_name);
-	}
-	if (!dash) {
-		dash = 1;
-		optchr = 1;
-	}
-
-	/* Check if the guy tries to do a -: kind of flag */
-	if (argv[*optind][optchr] == ':') {
 		dash = 0;
-		(*optind)++;
-		return (php_opt_error(argc, argv, *optind-1, optchr, OPTERRCOLON, show_err));
+		arg_start = 2 + strlen(opts[opts_idx].opt_name);
+	} else {
+		if (!dash) {
+			dash = 1;
+			optchr = 1;
+		}
+		/* Check if the guy tries to do a -: kind of flag */
+		if (argv[*optind][optchr] == ':') {
+			dash = 0;
+			(*optind)++;
+			return (php_opt_error(argc, argv, *optind-1, optchr, OPTERRCOLON, show_err));
+		}
 	}
 	if (opts_idx < 0) {
 		while (1) {

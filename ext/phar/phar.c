@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.181 2007/02/24 02:08:07 helly Exp $ */
+/* $Id: phar.c,v 1.182 2007/03/21 17:14:45 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -877,7 +877,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 
 	mydata = ecalloc(sizeof(phar_archive_data), 1);
 
-	/* check whetehr we have meta data, zero check works regardless of byte order */
+	/* check whether we have meta data, zero check works regardless of byte order */
 	if (phar_parse_metadata(fp, &buffer, endbuffer, &mydata->metadata TSRMLS_CC) == FAILURE) {
 		MAPPHAR_FAIL("unable to read phar metadata in .phar file \"%s\"");
 	}
@@ -3148,7 +3148,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.181 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.182 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

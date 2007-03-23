@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.104 2007/03/20 20:00:07 helly Exp $ 
+  $Id: mysqli.c,v 1.105 2007/03/23 08:21:08 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -439,7 +439,6 @@ zend_module_entry mysqli_module_entry = {
 #elif ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
 #endif
-	STANDARD_MODULE_HEADER,
 	"mysqli",
 	mysqli_functions,
 	PHP_MINIT(mysqli),

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.9 2007/03/20 20:28:08 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.10 2007/03/24 16:28:53 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -492,7 +492,6 @@ static int spl_array_has_dimension_ex(int check_inherited, zval *object, zval *o
 			index = Z_LVAL_P(offset);
 		}
 		if (check_empty) {
-			zval **tmp;
 			HashTable *ht = spl_array_get_hash_table(intern, 0 TSRMLS_CC);
 			if (zend_hash_index_find(ht, index, (void **)&tmp) != FAILURE && zend_is_true(*tmp)) {
 				return 1;

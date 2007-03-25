@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.50.2.10 2007/01/01 20:11:00 nlopess Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.218.2.50.2.11 2007/03/25 10:22:37 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -13,7 +13,7 @@ AC_DEFUN([PHP_ADD_MAKEFILE_FRAGMENT],[
   ifelse($1,,src=$ext_srcdir/Makefile.frag,src=$1)
   ifelse($2,,ac_srcdir=$ext_srcdir,ac_srcdir=$2)
   ifelse($3,,ac_builddir=$ext_builddir,ac_builddir=$3)
-  sed -e "s#\$(srcdir)#$ac_srcdir#g" -e "s#\$(builddir)#$ac_builddir#g" $src  >> Makefile.fragments
+  test -f "$src" && sed -e "s#\$(srcdir)#$ac_srcdir#g" -e "s#\$(builddir)#$ac_builddir#g" $src  >> Makefile.fragments
 ])
 
 AC_DEFUN([PHP_PROG_RE2C],[

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.15 2007/03/14 19:42:59 iliaa Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.16 2007/03/25 14:33:53 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -535,7 +535,6 @@ PS_SERIALIZER_DECODE_FUNC(php)
 
 		if (zend_hash_find(&EG(symbol_table), name, namelen + 1, (void **) &tmp) == SUCCESS) {
 			if ((Z_TYPE_PP(tmp) == IS_ARRAY && Z_ARRVAL_PP(tmp) == &EG(symbol_table)) || *tmp == PS(http_session_vars)) {
-				efree(name);
 				goto skip;
 			}
 		}

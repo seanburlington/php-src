@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.24 2007/02/08 22:50:14 helly Exp $ */
+/* $Id: phar_internal.h,v 1.25 2007/03/25 19:03:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,10 +98,12 @@
 ZEND_BEGIN_MODULE_GLOBALS(phar)
 	HashTable   phar_fname_map;
 	HashTable   phar_alias_map;
+	HashTable   phar_plain_map;
+	char*       extract_list;
 	int         readonly;
-	int         require_hash;
 	zend_bool   readonly_orig;
 	zend_bool   require_hash_orig;
+	int         require_hash;
 	int         request_done;
 ZEND_END_MODULE_GLOBALS(phar)
 

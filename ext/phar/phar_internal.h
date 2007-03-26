@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.26 2007/03/25 21:43:48 helly Exp $ */
+/* $Id: phar_internal.h,v 1.27 2007/03/26 00:00:55 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,8 +82,6 @@
 #define PHAR_SIG_SHA256           0x0003
 #define PHAR_SIG_SHA512           0x0004
 #define PHAR_SIG_PGP              0x0010
-
-#define PHAR_SIG_USE  PHAR_SIG_SHA1
 
 /* flags byte for each file adheres to these bitmasks.
    All unused values are reserved */

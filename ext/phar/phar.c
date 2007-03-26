@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.185 2007/03/25 23:42:48 cellog Exp $ */
+/* $Id: phar.c,v 1.186 2007/03/26 00:00:55 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -2522,9 +2522,7 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			efree(archive->signature);
 		}
 		
-		switch(PHAR_SIG_USE) {
-		case PHAR_SIG_PGP:
-			/* TODO: currently fall back to sha1,later do both */
+		switch(archive->sig_flags) {
 #if HAVE_HASH_EXT
 		case PHAR_SIG_SHA512: {
 			unsigned char digest[64];
@@ -2566,6 +2564,8 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			}
 			return EOF;
 #endif
+		case PHAR_SIG_PGP:
+			/* TODO: currently fall back to sha1,later do both */
 		default:
 		case PHAR_SIG_SHA1: {
 			unsigned char digest[20];
@@ -3376,7 +3376,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.185 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.186 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

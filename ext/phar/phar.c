@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.186 2007/03/26 00:00:55 cellog Exp $ */
+/* $Id: phar.c,v 1.187 2007/03/26 16:42:46 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1653,6 +1653,7 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 		if (!fp) {
 			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: file \"%s\" extracted from \"%s\" could not be opened", internal_file, resource->host);
 		}
+		php_url_free(resource);
 		efree(internal_file);
 		return fp;
 	}
@@ -3376,7 +3377,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.186 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.187 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.122 2007/02/24 16:25:53 helly Exp $ */
+/* $Id: ftp.c,v 1.123 2007/03/26 08:02:36 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1096,10 +1096,16 @@ ftp_putcmd(ftpbuf_t *ftp, const char *cmd, const char *args)
 	int		size;
 	char		*data;
 
+	if (strpbrk(cmd, "\r\n")) {
+		return 0;
+	}
 	/* build the output buffer */
 	if (args && args[0]) {
 		/* "cmd args\r\n\0" */
 		if (strlen(cmd) + strlen(args) + 4 > FTP_BUFSIZE) {
+			return 0;
+		}
+		if (strpbrk(args, "\r\n")) {
 			return 0;
 		}
 		size = snprintf(ftp->outbuf, sizeof(ftp->outbuf), "%s %s\r\n", cmd, args);

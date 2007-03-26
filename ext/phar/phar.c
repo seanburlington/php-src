@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.188 2007/03/26 19:19:59 helly Exp $ */
+/* $Id: phar.c,v 1.189 2007/03/26 19:51:21 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3125,9 +3125,9 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char *url_to, int options, php_stream_context *context TSRMLS_DC) /* {{{ */
 {
 	php_url *resource_from, *resource_to;
-	char *from_file, *to_file;
-	char *error;
+	char *from_file, *to_file, *error, *plain_map;
 	phar_entry_data *fromdata, *todata;
+	uint host_len;
 
 	if (PHAR_G(readonly)) {
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: write operations disabled by INI setting");
@@ -3175,11 +3175,17 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		return 0;
 	}
 
-	/*TODO: handle extract_list */
 	if (strcmp(resource_from->host, resource_to->host)) {
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot rename \"%s\" to \"%s\", not within the same phar archive", url_from, url_to);
+		return 0;
+	}
+
+	host_len = strlen(resource_from->host);
+	if (zend_hash_find(&(PHAR_GLOBALS->phar_plain_map), resource_from->host, host_len+1, (void **)&plain_map) == SUCCESS) {
+		/*TODO:use php_stream_rename() once available*/
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot rename \"%s\" to \"%s\" from extracted phar archive", url_from, url_to);
 		return 0;
 	}
 
@@ -3439,7 +3445,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.188 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.189 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.45 2007/03/26 00:03:52 cellog Exp $ */
+/* $Id: phar_object.c,v 1.46 2007/03/26 00:29:21 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -389,6 +389,7 @@ PHP_METHOD(Phar, setSignatureAlgorithm)
 				zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, error);
 				efree(error);
 			}
+			break;
 		default :
 			zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 				"Unknown signature algorithm specified");

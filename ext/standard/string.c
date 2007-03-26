@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.53 2007/03/12 23:42:26 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.54 2007/03/26 10:25:41 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2858,11 +2858,8 @@ PHP_FUNCTION(addcslashes)
 		RETURN_STRINGL(Z_STRVAL_PP(str), Z_STRLEN_PP(str), 1);
 	}
 
-	RETURN_STRING(php_addcslashes(Z_STRVAL_PP(str), 
-	                              Z_STRLEN_PP(str), 
-	                              &Z_STRLEN_P(return_value), 0, 
-	                              Z_STRVAL_PP(what),
-	                              Z_STRLEN_PP(what) TSRMLS_CC), 0);
+	Z_STRVAL_P(return_value) = php_addcslashes(Z_STRVAL_PP(str), Z_STRLEN_PP(str), &Z_STRLEN_P(return_value), 0, Z_STRVAL_PP(what), Z_STRLEN_PP(what) TSRMLS_CC);
+	RETURN_STRINGL(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), 0);
 }
 /* }}} */
 

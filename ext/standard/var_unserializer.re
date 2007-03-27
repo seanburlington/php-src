@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.52.2.2.2.2 2007/03/23 20:15:21 stas Exp $ */
+/* $Id: var_unserializer.re,v 1.52.2.2.2.3 2007/03/27 09:29:10 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -142,7 +142,7 @@ static char *unserialize_str(const unsigned char **p, size_t *len)
 {
 	size_t i, j;
 	char *str = safe_emalloc(*len, 1, 1);
-	unsigned char *end = *p+*len;
+	unsigned char *end = *(unsigned char **)p+*len;
 
 	if(end < *p) {
 		efree(str);

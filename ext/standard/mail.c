@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.87.2.1.2.3 2007/03/27 00:13:09 iliaa Exp $ */
+/* $Id: mail.c,v 1.87.2.1.2.4 2007/03/27 09:20:27 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -58,7 +58,7 @@
 #define MAIL_ASCIIZ_CHECK(str, len)			\
 	p = str;					\
 	e = p + len;					\
-	while (p = memchr(p, '\0', (e - p))) {		\
+	while ((p = memchr(p, '\0', (e - p)))) {	\
 		*p = ' ';				\
 	}						\
 

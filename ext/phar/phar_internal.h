@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.28 2007/03/26 16:42:46 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.24.2.1 2007/03/27 19:05:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,19 +53,15 @@
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
 #endif
-#if HAVE_HASH_EXT
-#include "ext/hash/php_hash.h"
-#include "ext/hash/php_hash_sha.h"
-#endif
 
 #ifndef E_RECOVERABLE_ERROR
 #define E_RECOVERABLE_ERROR E_ERROR
 #endif
 
-#define PHAR_EXT_VERSION_STR      "1.1.0RC1"
-#define PHAR_API_VERSION_STR      "1.1.0"
+#define PHAR_EXT_VERSION_STR      "1.0.1"
+#define PHAR_API_VERSION_STR      "1.0.0"
 /* x.y.z maps to 0xyz0 */
-#define PHAR_API_VERSION          0x1100
+#define PHAR_API_VERSION          0x1000
 #define PHAR_API_MIN_READ         0x1000
 #define PHAR_API_MAJORVERSION     0x1000
 #define PHAR_API_MAJORVER_MASK    0xF000
@@ -79,9 +75,9 @@
 
 #define PHAR_SIG_MD5              0x0001
 #define PHAR_SIG_SHA1             0x0002
-#define PHAR_SIG_SHA256           0x0003
-#define PHAR_SIG_SHA512           0x0004
 #define PHAR_SIG_PGP              0x0010
+
+#define PHAR_SIG_USE  PHAR_SIG_SHA1
 
 /* flags byte for each file adheres to these bitmasks.
    All unused values are reserved */
@@ -102,12 +98,10 @@
 ZEND_BEGIN_MODULE_GLOBALS(phar)
 	HashTable   phar_fname_map;
 	HashTable   phar_alias_map;
-	HashTable   phar_plain_map;
-	char*       extract_list;
 	int         readonly;
+	int         require_hash;
 	zend_bool   readonly_orig;
 	zend_bool   require_hash_orig;
-	int         require_hash;
 	int         request_done;
 ZEND_END_MODULE_GLOBALS(phar)
 

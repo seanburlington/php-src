@@ -17,11 +17,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.187 2007/03/26 16:42:46 cellog Exp $ */
+/* $Id: phar.c,v 1.182.2.1 2007/03/27 19:05:59 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
-#include "SAPI.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(phar)
 
@@ -70,98 +69,9 @@ ZEND_INI_MH(phar_ini_modify_handler) /* {{{ */
 }
 /* }}}*/
 
-static void phar_split_extract_list(TSRMLS_D)
-{
-	char *tmp = estrdup(PHAR_GLOBALS->extract_list);
-	char *key;
-	char *lasts;
-	char *q;
-	int keylen;
-
-	zend_hash_clean(&(PHAR_GLOBALS->phar_plain_map));
-
-	for (key = php_strtok_r(tmp, ",", &lasts);
-			key;
-			key = php_strtok_r(NULL, ",", &lasts))
-	{
-		char *val = strchr(key, '=');
-
-		if (val) {	
-			*val++ = '\0';
-			for (q = key; *q; q++) {
-				*q = tolower(*q);
-			}
-			keylen = q - key + 1;
-			zend_hash_add(&(PHAR_GLOBALS->phar_plain_map), key, keylen, val, strlen(val)+1, NULL);
-		}
-	}
-	efree(tmp);
-}
-/* }}} */
-
-ZEND_INI_MH(phar_ini_extract_list) /* {{{ */
-{
-	PHAR_G(extract_list) = new_value;
-
-	if (stage == ZEND_INI_STAGE_RUNTIME) {
-		phar_split_extract_list(TSRMLS_C);
-	}
-
-	return SUCCESS;
-}
-/* }}} */
-
-ZEND_INI_DISP(phar_ini_extract_list_disp) /*void name(zend_ini_entry *ini_entry, int type) {{{ */
-{
-	char *value;
-
-	if (type==ZEND_INI_DISPLAY_ORIG && ini_entry->modified) {
-		value = ini_entry->orig_value;
-	} else if (ini_entry->value) {
-		value = ini_entry->value;
-	} else {
-		value = NULL;
-	}
-
-	if (value) {
-		char *tmp = strdup(value);
-		char *key;
-		char *lasts;
-		char *q;
-	
-		if (!sapi_module.phpinfo_as_text) {
-			php_printf("<ul>");
-		}
-		for (key = php_strtok_r(tmp, ",", &lasts);
-				key;
-				key = php_strtok_r(NULL, ",", &lasts))
-		{
-			char *val = strchr(key, '=');
-	
-			if (val) {	
-				*val++ = '\0';
-				for (q = key; *q; q++) {
-					*q = tolower(*q);
-				}
-				if (sapi_module.phpinfo_as_text) {
-					php_printf("%s => %s", key, val);
-				} else {
-					php_printf("<li>%s => %s</li>", key, val);
-				}
-			}
-		}
-		if (!sapi_module.phpinfo_as_text) {
-			php_printf("</ul>");
-		}
-		free(tmp);
-	}
-}
-/* }}} */
-
 PHP_INI_BEGIN()
-	STD_PHP_INI_BOOLEAN( "phar.readonly",     "1", PHP_INI_ALL, phar_ini_modify_handler, readonly,     zend_phar_globals, phar_globals)
-	STD_PHP_INI_BOOLEAN( "phar.require_hash", "1", PHP_INI_ALL, phar_ini_modify_handler, require_hash, zend_phar_globals, phar_globals)
-	STD_PHP_INI_ENTRY_EX("phar.extract_list", "",  PHP_INI_ALL, phar_ini_extract_list,   extract_list, zend_phar_globals, phar_globals, phar_ini_extract_list_disp)
+	STD_PHP_INI_BOOLEAN("phar.readonly",     "1", PHP_INI_ALL, phar_ini_modify_handler, readonly,     zend_phar_globals, phar_globals)
+	STD_PHP_INI_BOOLEAN("phar.require_hash", "1", PHP_INI_ALL, phar_ini_modify_handler, require_hash, zend_phar_globals, phar_globals)
 PHP_INI_END()
 
 /**
@@ -832,87 +742,6 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 		}
 		PHAR_GET_32(sig_ptr, sig_flags);
 		switch(sig_flags) {
-#if HAVE_HASH_EXT
-		case PHAR_SIG_SHA512: {
-			unsigned char digest[64], saved[64];
-			PHP_SHA512_CTX  context;
-
-			php_stream_rewind(fp);
-			PHP_SHA512Init(&context);
-			read_len -= sizeof(digest);
-			if (read_len > sizeof(buf)) {
-				read_size = sizeof(buf);
-			} else {
-				read_size = (int)read_len;
-			}
-			while ((len = php_stream_read(fp, (char*)buf, read_size)) > 0) {
-				PHP_SHA512Update(&context, buf, len);
-				read_len -= (off_t)len;
-				if (read_len < read_size) {
-					read_size = (int)read_len;
-				}
-			}
-			PHP_SHA512Final(digest, &context);
-
-			if (read_len > 0
-			|| php_stream_read(fp, (char*)saved, sizeof(saved)) != sizeof(saved)
-			|| memcmp(digest, saved, sizeof(digest))) {
-				efree(savebuf);
-				php_stream_close(fp);
-				if (error) {
-					spprintf(error, 0, "phar \"%s\" has a broken signature", fname);
-				}
-				return FAILURE;
-			}
-
-			sig_len = phar_hex_str((const char*)digest, sizeof(digest), &signature);
-			break;
-		}
-		case PHAR_SIG_SHA256: {
-			unsigned char digest[32], saved[32];
-			PHP_SHA256_CTX  context;
-
-			php_stream_rewind(fp);
-			PHP_SHA256Init(&context);
-			read_len -= sizeof(digest);
-			if (read_len > sizeof(buf)) {
-				read_size = sizeof(buf);
-			} else {
-				read_size = (int)read_len;
-			}
-			while ((len = php_stream_read(fp, (char*)buf, read_size)) > 0) {
-				PHP_SHA256Update(&context, buf, len);
-				read_len -= (off_t)len;
-				if (read_len < read_size) {
-					read_size = (int)read_len;
-				}
-			}
-			PHP_SHA256Final(digest, &context);
-
-			if (read_len > 0
-			|| php_stream_read(fp, (char*)saved, sizeof(saved)) != sizeof(saved)
-			|| memcmp(digest, saved, sizeof(digest))) {
-				efree(savebuf);
-				php_stream_close(fp);
-				if (error) {
-					spprintf(error, 0, "phar \"%s\" has a broken signature", fname);
-				}
-				return FAILURE;
-			}
-
-			sig_len = phar_hex_str((const char*)digest, sizeof(digest), &signature);
-			break;
-		}
-#else
-		case PHAR_SIG_SHA512:
-		case PHAR_SIG_SHA256:
-			efree(savebuf);
-			php_stream_close(fp);
-			if (error) {
-				spprintf(error, 0, "phar \"%s\" has a unsupported signature", fname);
-			}
-			return FAILURE;
-#endif
 		case PHAR_SIG_SHA1: {
 			unsigned char digest[20], saved[20];
 			PHP_SHA1_CTX  context;
@@ -987,7 +816,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 			efree(savebuf);
 			php_stream_close(fp);
 			if (error) {
-				spprintf(error, 0, "phar \"%s\" has a broken or unsupported signature", fname);
+				spprintf(error, 0, "phar \"%s\" has a broken signature", fname);
 			}
 			return FAILURE;
 		}
@@ -1617,7 +1446,6 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 	char *buffer;
 	char *error;
 	char *filter_name;
-	char *plain_map;
 	char tmpbuf[8];
 	HashTable *pharcontext;
 	php_url *resource = NULL;
@@ -1625,7 +1453,6 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 	php_stream_filter *filter/*,  *consumed */;
 	php_uint32 offset, read, total, toread;
 	zval **pzoption, *metadata;
-	uint host_len;
 
 	resource = php_url_parse(path);
 
@@ -1646,22 +1473,10 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 		return NULL;
 	}
 
-	host_len = strlen(resource->host);
-	if (zend_hash_find(&(PHAR_GLOBALS->phar_plain_map), resource->host, host_len+1, (void **)&plain_map) == SUCCESS) {
-		spprintf(&internal_file, 0, "%s%s", plain_map, resource->path);
-		fp = php_stream_open_wrapper_ex(internal_file, mode, options, opened_path, context);
-		if (!fp) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: file \"%s\" extracted from \"%s\" could not be opened", internal_file, resource->host);
-		}
-		php_url_free(resource);
-		efree(internal_file);
-		return fp;
-	}
-
 	/* strip leading "/" */
 	internal_file = estrdup(resource->path + 1);
 	if (mode[0] == 'w' || (mode[0] == 'r' && mode[1] == '+')) {
-		if (NULL == (idata = phar_get_or_create_entry_data(resource->host, host_len, internal_file, strlen(internal_file), mode, &error TSRMLS_CC))) {
+		if (NULL == (idata = phar_get_or_create_entry_data(resource->host, strlen(resource->host), internal_file, strlen(internal_file), mode, &error TSRMLS_CC))) {
 			if (error) {
 				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, error);
 				efree(error);
@@ -1703,7 +1518,7 @@ static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, char *pat
 		}
 		return fpf;
 	} else {
-		if ((FAILURE == phar_get_entry_data(&idata, resource->host, host_len, internal_file, strlen(internal_file), "r", &error TSRMLS_CC)) || !idata) {
+		if ((FAILURE == phar_get_entry_data(&idata, resource->host, strlen(resource->host), internal_file, strlen(internal_file), "r", &error TSRMLS_CC)) || !idata) {
 			if (error) {
 				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, error);
 				efree(error);
@@ -2523,48 +2338,7 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			efree(archive->signature);
 		}
 		
-		switch(archive->sig_flags) {
-#if HAVE_HASH_EXT
-		case PHAR_SIG_SHA512: {
-			unsigned char digest[64];
-			PHP_SHA512_CTX  context;
-
-			PHP_SHA512Init(&context);
-			while ((sig_len = php_stream_read(newfile, (char*)buf, sizeof(buf))) > 0) {
-				PHP_SHA512Update(&context, buf, sig_len);
-			}
-			PHP_SHA512Final(digest, &context);
-			php_stream_write(newfile, (char *) digest, sizeof(digest));
-			sig_flags |= PHAR_SIG_SHA512;
-			archive->sig_len = phar_hex_str((const char*)digest, sizeof(digest), &archive->signature);
-			break;
-		}
-		case PHAR_SIG_SHA256: {
-			unsigned char digest[32];
-			PHP_SHA256_CTX  context;
-
-			PHP_SHA256Init(&context);
-			while ((sig_len = php_stream_read(newfile, (char*)buf, sizeof(buf))) > 0) {
-				PHP_SHA256Update(&context, buf, sig_len);
-			}
-			PHP_SHA256Final(digest, &context);
-			php_stream_write(newfile, (char *) digest, sizeof(digest));
-			sig_flags |= PHAR_SIG_SHA256;
-			archive->sig_len = phar_hex_str((const char*)digest, sizeof(digest), &archive->signature);
-			break;
-		}
-#else
-		case PHAR_SIG_SHA512:
-		case PHAR_SIG_SHA256:
-			if (closeoldfile) {
-				php_stream_close(oldfile);
-			}
-			php_stream_close(newfile);
-			if (error) {
-				spprintf(error, 0, "unable to write contents of file \"%s\" to new phar \"%s\" with requested hash type", entry->filename, archive->fname);
-			}
-			return EOF;
-#endif
+		switch(PHAR_SIG_USE) {
 		case PHAR_SIG_PGP:
 			/* TODO: currently fall back to sha1,later do both */
 		default:
@@ -3012,26 +2786,26 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 	resource = php_url_parse(url);
 
 	if (!resource && (resource = phar_open_url(wrapper, url, "rb", options TSRMLS_CC)) == NULL) {
-		return FAILURE;
+		return 0;
 	}
 
 	/* we must have at the very least phar://alias.phar/internalfile.php */
 	if (!resource->scheme || !resource->host || !resource->path) {
 		php_url_free(resource);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\"", url);
-		return FAILURE;
+		return 0;
 	}
 
 	if (strcasecmp("phar", resource->scheme)) {
 		php_url_free(resource);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: not a phar stream url \"%s\"", url);
-		return FAILURE;
+		return 0;
 	}
 
 	if (PHAR_G(readonly)) {
 		php_url_free(resource);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: write operations disabled by INI setting");
-		return FAILURE;
+		return 0;
 	}
 
 	/* need to copy to strip leading "/", will get touched again */
@@ -3044,7 +2818,7 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 		}
 		efree(internal_file);
 		php_url_free(resource);
-		return FAILURE;
+		return 0;
 	}
 	if (error) {
 		efree(error);
@@ -3053,7 +2827,7 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: \"%s\" is not a file in phar \"%s\", cannot unlink", internal_file, resource->host);
 		efree(internal_file);
 		php_url_free(resource);
-		return FAILURE;
+		return 0;
 	}
 	if (idata->internal_file->fp_refcount > 1) {
 		/* more than just our fp resource is open for this file */ 
@@ -3061,7 +2835,7 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 		efree(internal_file);
 		php_url_free(resource);
 		phar_entry_delref(idata TSRMLS_CC);
-		return FAILURE;
+		return 0;
 	}
 	php_url_free(resource);
 	efree(internal_file);
@@ -3070,7 +2844,7 @@ static int phar_wrapper_unlink(php_stream_wrapper *wrapper, char *url, int optio
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, error);
 		efree(error);
 	}
-	return SUCCESS;
+	return 1;
 }
 /* }}} */
 
@@ -3083,19 +2857,19 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 
 	if (PHAR_G(readonly)) {
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: write operations disabled by INI setting");
-		return FAILURE;
+		return 0;
 	}
 
 	resource_from = php_url_parse(url_from);
 	resource_to = php_url_parse(url_from);
 
 	if (!resource_from && (resource_from = phar_open_url(wrapper, url_from, "r+b", options TSRMLS_CC)) == NULL) {
-		return FAILURE;
+		return 0;
 	}
 	
 	if (!resource_to && (resource_to = phar_open_url(wrapper, url_to, "wb", options TSRMLS_CC)) == NULL) {
 		php_url_free(resource_from);
-		return FAILURE;
+		return 0;
 	}
 
 	/* we must have at the very least phar://alias.phar/internalfile.php */
@@ -3103,35 +2877,35 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\"", url_from);
-		return FAILURE;
+		return 0;
 	}
 	
 	if (!resource_to->scheme || !resource_to->host || !resource_to->path) {
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: invalid url \"%s\"", url_to);
-		return FAILURE;
+		return 0;
 	}
 
 	if (strcasecmp("phar", resource_from->scheme)) {
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: not a phar stream url \"%s\"", url_from);
-		return FAILURE;
+		return 0;
 	}
 
 	if (strcasecmp("phar", resource_to->scheme)) {
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: not a phar stream url \"%s\"", url_to);
-		return FAILURE;
+		return 0;
 	}
 
 	if (strcmp(resource_from->host, resource_to->host)) {
 		php_url_free(resource_from);
 		php_url_free(resource_to);
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot rename \"%s\" to \"%s\", not within the same phar archive", url_from, url_to);
-		return FAILURE;
+		return 0;
 	}
 
 	/* need to copy to strip leading "/", will get touched again */
@@ -3147,7 +2921,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		efree(to_file);
 		php_url_free(resource_from);
 		php_url_free(resource_to);
-		return FAILURE;
+		return 0;
 	}
 	if (error) {
 		efree(error);
@@ -3158,7 +2932,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		efree(to_file);
 		php_url_free(resource_from);
 		php_url_free(resource_to);
-		return FAILURE;
+		return 0;
 	}
 	if (!(todata = phar_get_or_create_entry_data(resource_to->host, strlen(resource_to->host), to_file, strlen(to_file), "w", &error TSRMLS_CC))) {
 		/* constraints of fp refcount were not met */
@@ -3170,7 +2944,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		efree(to_file);
 		php_url_free(resource_from);
 		php_url_free(resource_to);
-		return FAILURE;
+		return 0;
 	}
 	if (error) {
 		efree(error);
@@ -3184,7 +2958,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		php_url_free(resource_to);
 		phar_entry_delref(fromdata TSRMLS_CC);
 		phar_entry_delref(todata TSRMLS_CC);
-		return FAILURE;
+		return 0;
 	}
 	if (todata->internal_file->fp_refcount > 1) {
 		/* more than just our fp resource is open for this file */ 
@@ -3195,7 +2969,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		php_url_free(resource_to);
 		phar_entry_delref(fromdata TSRMLS_CC);
 		phar_entry_delref(todata TSRMLS_CC);
-		return FAILURE;
+		return 0;
 	}
 
 	php_stream_seek(fromdata->internal_file->fp, 0, SEEK_SET);
@@ -3207,7 +2981,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 		php_url_free(resource_to);
 		phar_entry_delref(fromdata TSRMLS_CC);
 		phar_entry_delref(todata TSRMLS_CC);
-		return FAILURE;
+		return 0;
 	}
 	phar_entry_delref(fromdata TSRMLS_CC);
 	phar_entry_delref(todata TSRMLS_CC);
@@ -3216,7 +2990,7 @@ static int phar_wrapper_rename(php_stream_wrapper *wrapper, char *url_from, char
 	php_url_free(resource_from);
 	php_url_free(resource_to);
 	phar_wrapper_unlink(wrapper, url_from, 0, 0 TSRMLS_CC);
-	return SUCCESS;
+	return 1;
 }
 /* }}} */
 
@@ -3354,8 +3128,6 @@ PHP_RINIT_FUNCTION(phar) /* {{{ */
 	PHAR_GLOBALS->request_done = 0;
 	zend_hash_init(&(PHAR_GLOBALS->phar_fname_map), sizeof(phar_archive_data*), zend_get_hash_value, destroy_phar_data, 0);
 	zend_hash_init(&(PHAR_GLOBALS->phar_alias_map), sizeof(phar_archive_data*), zend_get_hash_value, NULL, 0);
-	zend_hash_init(&(PHAR_GLOBALS->phar_plain_map), sizeof(const char *), zend_get_hash_value, NULL, 0);
-	phar_split_extract_list(TSRMLS_C);
 	return SUCCESS;
 }
 /* }}} */
@@ -3363,9 +3135,8 @@ PHP_RINIT_FUNCTION(phar) /* {{{ */
 PHP_RSHUTDOWN_FUNCTION(phar) /* {{{ */
 {
 	zend_hash_destroy(&(PHAR_GLOBALS->phar_alias_map));
-	PHAR_GLOBALS->phar_fname_map.pDestructor = destroy_phar_data_only;
+	PHAR_GLOBALS->phar_fname_map. pDestructor = destroy_phar_data_only;
 	zend_hash_destroy(&(PHAR_GLOBALS->phar_fname_map));
-	zend_hash_destroy(&(PHAR_GLOBALS->phar_plain_map));
 	PHAR_GLOBALS->request_done = 1;
 	return SUCCESS;
 }
@@ -3377,7 +3148,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.187 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.182.2.1 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");
@@ -3390,14 +3161,9 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 #else
 		"disabled");
 #endif
+	php_info_print_table_row(1, "Phar based on pear/PHP_Archive, original concept by Davey Shafik");
+	php_info_print_table_row(1, "Phar fully realized by Gregory Beaver and Marcus Boerger");
 	php_info_print_table_end();
-
-	php_info_print_box_start(0);
-	PUTS("Phar based on pear/PHP_Archive, original concept by Davey Shafik.");
-	PUTS(!sapi_module.phpinfo_as_text?"<br />":"\n");	
-	PUTS("Phar fully realized by Gregory Beaver and Marcus Boerger.");
-	php_info_print_box_end();
-
 	DISPLAY_INI_ENTRIES();
 }
 /* }}} */

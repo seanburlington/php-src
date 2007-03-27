@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.23 2007/02/08 15:22:03 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.24 2007/03/27 20:28:06 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -398,7 +398,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.23 $'."\n";
+					echo '$Revision: 1.226.2.37.2.24 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1690,7 +1690,14 @@ function settings2array($settings, &$ini_settings)
 			$setting = explode("=", $setting, 2);
 			$name = trim(strtolower($setting[0]));
 			$value = trim($setting[1]);
-			$ini_settings[$name] = $value;
+			if ($name == 'extension') {
+				if (!isset($ini_settings[$name])) {
+					$ini_settings[$name] = array();
+				}
+				$ini_settings[$name][] = $value;
+			} else {
+				$ini_settings[$name] = $value;
+			}
 		}
 	}
 }
@@ -1699,8 +1706,15 @@ function settings2params(&$ini_settings)
 {
 	$settings = '';
 	foreach($ini_settings as $name => $value) {
-		$value = addslashes($value);
-		$settings .= " -d \"$name=$value\"";
+		if (is_array($value)) {
+			foreach($value as $val) {
+				$val = addslashes($val);
+				$settings .= " -d \"$name=$val\"";
+			}
+		} else {
+			$value = addslashes($value);
+			$settings .= " -d \"$name=$value\"";
+		}
 	}
 	$ini_settings = $settings;
 }

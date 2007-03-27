@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.24.2.1 2007/03/27 19:05:59 helly Exp $ */
+/* $Id: phar_internal.h,v 1.24.2.2 2007/03/27 21:29:14 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,6 +103,7 @@ ZEND_BEGIN_MODULE_GLOBALS(phar)
 	zend_bool   readonly_orig;
 	zend_bool   require_hash_orig;
 	int         request_done;
+	int         request_ends;
 ZEND_END_MODULE_GLOBALS(phar)
 
 ZEND_EXTERN_MODULE_GLOBALS(phar)

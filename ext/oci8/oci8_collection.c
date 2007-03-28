@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_collection.c,v 1.12 2007/01/01 09:29:26 sebastian Exp $ */
+/* $Id: oci8_collection.c,v 1.13 2007/03/28 23:05:36 tony2001 Exp $ */
 
 
 
@@ -503,14 +503,17 @@ int php_oci_collection_element_get(php_oci_collection *collection, long index, z
 		{
 			OCIString *oci_string = *(OCIString **)element;
 			text *str;
+			ub4 str_len;
 			
 			PHP_OCI_CALL_RETURN(str, OCIStringPtr, (connection->env, oci_string));
 			
 			if (str) {
+				PHP_OCI_CALL_RETURN(str_len, OCIStringSize, (connection->env, oci_string));
+
 				if (UG(unicode)) {
-					ZVAL_UNICODE(*result_element, (UChar *)str, 1);
+					ZVAL_UNICODEL(*result_element, (UChar *)str, TEXT_CHARS(str_len), 1);
 				} else { 
-					ZVAL_STRING(*result_element, str, 1);
+					ZVAL_STRINGL(*result_element, str, str_len, 1);
 				}
 			}
 			return 0;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.31 2007/03/28 15:39:22 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.32 2007/03/29 18:47:04 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1214,6 +1214,7 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
+#if PHP_FASTCGI
 			/* if we're started on command line, check to see if
 			   we are being started as an 'external' fastcgi
 			   server by accepting a bindpath parameter. */
@@ -1222,6 +1223,7 @@ int main(int argc, char *argv[])
 					bindpath = strdup(php_optarg);
 				}
 				break;
+#endif
 		}
 
 	}

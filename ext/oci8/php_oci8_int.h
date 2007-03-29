@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.17 2007/03/01 22:27:44 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.18 2007/03/29 09:33:03 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -134,6 +134,7 @@ typedef struct { /* php_oci_descriptor {{{ */
 typedef struct { /* php_oci_lob_ctx {{{ */
 	char **lob_data;            /* address of pointer to LOB data */
 	ub4 *lob_len;               /* address of LOB length variable (bytes) */
+	ub4 alloc_len;
 } php_oci_lob_ctx; /* }}} */
 
 typedef struct { /* php_oci_collection {{{ */

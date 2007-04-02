@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_soap.h,v 1.51 2007/03/20 09:52:33 dmitry Exp $ */
+/* $Id: php_soap.h,v 1.52 2007/04/02 13:43:29 dmitry Exp $ */
 
 #ifndef PHP_SOAP_H
 #define PHP_SOAP_H
@@ -220,6 +220,8 @@ ZEND_BEGIN_MODULE_GLOBALS(soap)
 	HashTable *class_map;
 	int        features;
 	HashTable  wsdl_cache;
+	int        cur_uniq_ref;
+	HashTable *ref_map;
 ZEND_END_MODULE_GLOBALS(soap)
 
 #ifdef PHP_WIN32

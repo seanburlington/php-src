@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57.2.5.2.3 2007/02/24 02:17:27 helly Exp $ */
+/* $Id: pack.c,v 1.57.2.5.2.4 2007/04/03 19:50:40 shire Exp $ */
 
 #include "php.h"
 
@@ -760,7 +760,7 @@ PHP_FUNCTION(unpack)
 							issigned = input[inputpos + (machine_little_endian ? (sizeof(int) - 1) : 0)] & 0x80;
 						} else if (sizeof(long) > 4 && (input[inputpos + machine_endian_long_map[3]] & 0x80) == 0x80) {
 							v = ~INT_MAX;
-                                                }
+						}
 
 						v |= php_unpack(&input[inputpos], sizeof(int), issigned, int_map);
 						add_assoc_long(return_value, n, v);
@@ -775,15 +775,17 @@ PHP_FUNCTION(unpack)
 						int *map = machine_endian_long_map;
 						long v = 0;
 
-						if (type == 'l') {
+						if (type == 'l' || type == 'L') {
 							issigned = input[inputpos + (machine_little_endian ? 3 : 0)] & 0x80;
 						} else if (type == 'N') {
+							issigned = input[inputpos] & 0x80;
 							map = big_endian_long_map;
 						} else if (type == 'V') {
+							issigned = input[inputpos + 3] & 0x80;
 							map = little_endian_long_map;
 						}
 
-						if (sizeof(long) > 4 && (input[inputpos + machine_endian_long_map[3]] & 0x80) == 0x80) {
+						if (sizeof(long) > 4 && issigned) {
 							v = ~INT_MAX;
 						}
 

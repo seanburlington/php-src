@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22.2.3.2.6 2007/03/14 19:22:14 tony2001 Exp $ */
+/* $Id: xp_ssl.c,v 1.22.2.3.2.7 2007/04/04 10:44:55 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -169,6 +169,9 @@ static int handle_ssl_error(php_stream *stream, int nr_bytes TSRMLS_DC)
 							err,
 							ebuf ? "OpenSSL Error messages:\n" : "",
 							ebuf ? ebuf : "");
+					if (ebuf) {
+						efree(ebuf);
+					}
 			}
 				
 			retry = 0;

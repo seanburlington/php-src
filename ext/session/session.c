@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.467 2007/03/19 08:24:17 tony2001 Exp $ */
+/* $Id: session.c,v 1.468 2007/04/04 19:46:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -753,7 +753,7 @@ PS_SERIALIZER_ENCODE_FUNC(php)
 				smart_str_free(&buf);				
 				return FAILURE;
 			}
-			smart_str_appendl(&buf, key.s, (unsigned char) key_length);
+			smart_str_appendl(&buf, key.s, key_length);
 		} else {
 			/* HASH_KEY_IS_UNICODE */
 			char *str = NULL;

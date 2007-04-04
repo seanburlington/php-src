@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.16 2007/03/25 14:33:53 iliaa Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.17 2007/04/04 19:52:26 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -480,7 +480,7 @@ PS_SERIALIZER_ENCODE_FUNC(php)
 	PHP_VAR_SERIALIZE_INIT(var_hash);
 
 	PS_ENCODE_LOOP(
-			smart_str_appendl(&buf, key, (unsigned char) key_length);
+			smart_str_appendl(&buf, key, key_length);
 			if (memchr(key, PS_DELIMITER, key_length)) {
 				PHP_VAR_SERIALIZE_DESTROY(var_hash);
 				smart_str_free(&buf);				

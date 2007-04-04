@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.72 2007/01/08 22:56:26 nlopess Exp $ */
+/* $Id: php_gd.h,v 1.73 2007/04/04 01:54:34 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -64,7 +64,7 @@ extern zend_module_entry gd_module_entry;
 /* gd.c functions */
 PHP_MINFO_FUNCTION(gd);
 PHP_MINIT_FUNCTION(gd);
-#if HAVE_LIBT1
+#if HAVE_LIBT1 || HAVE_GD_FONTMUTEX
 PHP_MSHUTDOWN_FUNCTION(gd);
 #endif
 #if HAVE_GD_STRINGFT

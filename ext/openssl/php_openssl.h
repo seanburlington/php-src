@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.19 2007/01/01 09:29:26 sebastian Exp $ */
+/* $Id: php_openssl.h,v 1.20 2007/04/05 07:24:21 tony2001 Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -63,6 +63,11 @@ PHP_FUNCTION(openssl_x509_checkpurpose);
 PHP_FUNCTION(openssl_x509_export);
 PHP_FUNCTION(openssl_x509_export_to_file);
 PHP_FUNCTION(openssl_x509_check_private_key);
+
+PHP_FUNCTION(openssl_pkcs12_export);
+PHP_FUNCTION(openssl_pkcs12_export_to_file);
+PHP_FUNCTION(openssl_pkcs12_read);
+
 PHP_FUNCTION(openssl_csr_new);
 PHP_FUNCTION(openssl_csr_export);
 PHP_FUNCTION(openssl_csr_export_to_file);

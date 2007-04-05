@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.31 2007/04/05 07:10:07 tony2001 Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.32 2007/04/05 18:08:42 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1567,11 +1567,10 @@ PHP_FUNCTION(openssl_pkcs12_read)
 	
 	if(d2i_PKCS12_bio(bio_in, &p12)) {
 		if(PKCS12_parse(p12, pass, &pkey, &cert, &ca)) {
-			
+			BIO * bio_out;
+
 			zval_dtor(zout);
 			array_init(zout);
-		
-			BIO * bio_out;
 
 			bio_out = BIO_new(BIO_s_mem());
 			if (PEM_write_bio_X509(bio_out, cert)) {

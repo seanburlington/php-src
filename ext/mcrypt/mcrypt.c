@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.3.2.9 2007/02/15 01:40:36 iliaa Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.10 2007/04/05 01:48:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,6 +35,7 @@
 #include "php_ini.h"
 #include "php_globals.h"
 #include "ext/standard/info.h"
+#include "ext/standard/php_rand.h"
 
 static int le_mcrypt;
 
@@ -1274,10 +1275,9 @@ PHP_FUNCTION(mcrypt_create_iv)
 			RETURN_FALSE;
 		}
 	} else {
-		unsigned int ctx;
 		n = size;
 		while (size) {
-			iv[--size] = 255.0 * php_rand_r(&ctx) / RAND_MAX;
+			iv[--size] = 255.0 * php_rand(TSRMLS_C) / RAND_MAX;
 		}
 	}
 	RETURN_STRINGL(iv, n, 0);

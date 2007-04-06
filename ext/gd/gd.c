@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.19 2007/04/05 11:57:57 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.20 2007/04/06 15:38:35 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1219,6 +1219,7 @@ PHP_MINIT_FUNCTION(gd)
 {
 	le_gd = zend_register_list_destructors_ex(php_free_gd_image, NULL, "gd", module_number);
 	le_gd_font = zend_register_list_destructors_ex(php_free_gd_font, NULL, "gd font", module_number);
+
 #if HAVE_GD_FONTMUTEX && HAVE_LIBFREETYPE
 	gdFontCacheMutexSetup();
 #endif

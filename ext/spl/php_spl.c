@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.110 2007/04/06 18:50:07 helly Exp $ */
+/* $Id: php_spl.c,v 1.111 2007/04/06 19:04:53 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -546,9 +546,9 @@ PHP_FUNCTION(spl_autoload_unregister)
 			success = zend_u_hash_del(SPL_G(autoload_functions), Z_TYPE(zfunc_name), lc_name, Z_UNILEN(zfunc_name)+1);
 			if (success != SUCCESS && obj_ptr) {
 				size_t func_name_len = Z_UNISIZE(zfunc_name);
-				lc_name.v = erealloc(lc_name.v, func_name_len + 1 + sizeof(long));
-				memcpy(lc_name.v + func_name_len, &Z_OBJ_HANDLE_PP(obj_ptr), sizeof(long));
-				func_name_len += sizeof(long);
+				lc_name.v = erealloc(lc_name.v, func_name_len + 1 + sizeof(zend_object_handle));
+				memcpy(lc_name.v + func_name_len, &Z_OBJ_HANDLE_PP(obj_ptr), sizeof(zend_object_handle));
+				func_name_len += sizeof(zend_object_handle);
 				lc_name.s[func_name_len] = '\0';
 				if (Z_TYPE(zfunc_name) == IS_UNICODE) {
 					func_name_len /= sizeof(UChar);

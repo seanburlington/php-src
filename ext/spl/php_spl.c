@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.14 2007/01/10 18:14:37 iliaa Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.15 2007/04/06 16:00:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -449,13 +449,13 @@ PHP_FUNCTION(spl_autoload_register)
 		efree(func_name);
 
 		if (SPL_G(autoload_functions) && zend_hash_exists(SPL_G(autoload_functions), (char*)lc_name, func_name_len+1)) {
-			goto skip;			
+			goto skip;
 		}
 
 		if (obj_ptr && !(alfi.func_ptr->common.fn_flags & ZEND_ACC_STATIC)) {
 			/* add object id to the hash to ensure uniqueness, for more reference look at bug #40091 */
-			memcpy(lc_name + func_name_len, obj_ptr, sizeof(long));
-			func_name_len += sizeof(long);
+			memcpy(lc_name + func_name_len, &Z_OBJ_HANDLE_PP(obj_ptr), sizeof(zend_object_handle));
+			func_name_len += sizeof(zend_object_handle);
 			lc_name[func_name_len] = '\0';
 			alfi.obj = *obj_ptr;
 			alfi.obj->refcount++;
@@ -528,9 +528,9 @@ PHP_FUNCTION(spl_autoload_unregister)
 			/* remove specific */
 			success = zend_hash_del(SPL_G(autoload_functions), func_name, func_name_len+1);
 			if (success != SUCCESS && obj_ptr) {
-				func_name = erealloc(func_name, func_name_len + 1 + sizeof(long));
-				memcpy(func_name + func_name_len, obj_ptr, sizeof(long));
-				func_name_len += sizeof(long);
+				func_name = erealloc(func_name, func_name_len + 1 + sizeof(zend_object_handle));
+				memcpy(func_name + func_name_len, &Z_OBJ_HANDLE_PP(obj_ptr), sizeof(zend_object_handle));
+				func_name_len += sizeof(zend_object_handle);
 				func_name[func_name_len] = '\0';
 				success = zend_hash_del(SPL_G(autoload_functions), func_name, func_name_len+1);
 			}

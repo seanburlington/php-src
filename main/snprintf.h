@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.39 2007/02/24 18:24:06 helly Exp $ */
+/* $Id: snprintf.h,v 1.40 2007/04/06 19:27:15 andrei Exp $ */
 
 /*
 
@@ -78,10 +78,10 @@ typedef enum {
 
 
 BEGIN_EXTERN_C()
-PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);
-PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap) PHP_ATTRIBUTE_FORMAT(printf, 3, 0);
-PHPAPI int ap_php_snprintf(char *, size_t, const char *, ...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);
-PHPAPI int ap_php_vsnprintf(char *, size_t, const char *, va_list ap) PHP_ATTRIBUTE_FORMAT(printf, 3, 0);
+PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...);
+PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap);
+PHPAPI int ap_php_snprintf(char *, size_t, const char *, ...);
+PHPAPI int ap_php_vsnprintf(char *, size_t, const char *, va_list ap);
 PHPAPI int php_sprintf (char* s, const char* format, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);
 PHPAPI char * php_gcvt(double value, int ndigit, char dec_point, char exponent, char *buf);
 PHPAPI char * php_conv_fp(register char format, register double num,

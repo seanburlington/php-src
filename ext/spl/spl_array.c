@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.10 2007/03/24 16:28:53 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.11 2007/04/06 17:57:10 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -520,7 +520,7 @@ SPL_METHOD(Array, offsetExists)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &index) == FAILURE) {
 		return;
 	}
-	RETURN_BOOL(spl_array_has_dimension_ex(0, getThis(), index, 1 TSRMLS_CC));
+	RETURN_BOOL(spl_array_has_dimension_ex(0, getThis(), index, 0 TSRMLS_CC));
 } /* }}} */
 
 /* {{{ proto mixed ArrayObject::offsetGet(mixed $index)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.83 2007/03/03 20:41:12 helly Exp $ */
+/* $Id: plain_wrapper.c,v 1.84 2007/04/09 15:38:21 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1266,7 +1266,7 @@ not_relative_path:
 	
 #ifdef PHP_WIN32
 	if (IS_SLASH(filename[0])) {
-		int cwd_len;
+		size_t cwd_len;
 		char *cwd;
 		cwd = virtual_getcwd_ex(&cwd_len TSRMLS_CC);
 		/* getcwd() will return always return [DRIVE_LETTER]:/) on windows. */

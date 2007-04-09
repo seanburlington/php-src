@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.53 2007/02/26 11:55:32 tony2001 Exp $ */
+/* $Id: snprintf.c,v 1.54 2007/04/09 15:35:49 dmitry Exp $ */
 
 
 #include "php.h"
@@ -603,8 +603,6 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 	struct lconv *lconv = NULL;
 #endif
 
-	TSRMLS_FETCH();
-
 	/*
 	 * Flag variables
 	 */
@@ -615,6 +613,8 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 	boolean_e adjust_precision;
 	boolean_e adjust_width;
 	bool_int is_negative;
+
+	TSRMLS_FETCH();
 
 	sp = odp->nextb;
 	bep = odp->buf_end;

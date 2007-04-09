@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.23 2007/03/28 15:39:22 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.24 2007/04/09 15:39:59 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -31,7 +31,6 @@
 
 #include <windows.h>
 
-	typedef unsigned int size_t;
 	typedef unsigned int in_addr_t;
 
 	struct sockaddr_un {

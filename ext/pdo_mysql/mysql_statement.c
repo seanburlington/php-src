@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.59 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: mysql_statement.c,v 1.60 2007/04/10 07:08:51 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -196,7 +196,7 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			return 0;
 		}
 
-		stmt->row_count = 0;
+		stmt->row_count = mysql_num_rows(S->result);
 
 		if (!stmt->executed) {
 			stmt->column_count = (int) mysql_num_fields(S->result);

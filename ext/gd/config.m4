@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.170 2007/04/05 11:59:13 pajoye Exp $
+dnl $Id: config.m4,v 1.171 2007/04/11 10:43:28 scottmac Exp $
 dnl
 
 dnl
@@ -288,6 +288,7 @@ dnl These are always defined with bundled library
   AC_DEFINE(HAVE_GD_GIF_READ,         1, [ ])
   AC_DEFINE(HAVE_GD_GIF_CREATE,       1, [ ])
   AC_DEFINE(HAVE_GD_FONTCACHESHUTDOWN,1, [ ])
+  AC_DEFINE(HAVE_GD_FONTMUTEX,        1, [ ])
 
 elif test "$PHP_GD" != "no"; then
 

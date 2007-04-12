@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.316 2007/03/27 20:27:39 helly Exp $ */
+/* $Id: run-tests.php,v 1.317 2007/04/12 13:17:14 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -81,6 +81,10 @@ if (ob_get_level()) echo "Not all buffers were deleted.\n";
 
 error_reporting(E_ALL);
 ini_set('magic_quotes_runtime',0); // this would break tests by modifying EXPECT sections
+
+if (ini_get("unicode.semantics")) {
+	error("It is currently not possible to use run-tests.php with unicode.semantics=On. Please turn it Off and re-run the tests.");
+}
 
 $environment = isset($_ENV) ? $_ENV : array();
 
@@ -401,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.316 $'."\n";
+					echo '$Revision: 1.317 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -869,7 +873,9 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 		$e = null;
 		$n = @stream_select($r, $w, $e, $leak_check ? 300 : 60);
 
-		if ($n === 0) {
+		if ($n === false) {
+			break;
+		} else if ($n === 0) {
 			/* timed out */
 			$data .= "\n ** ERROR: process timed out **\n";
 			proc_terminate($proc);

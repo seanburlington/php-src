@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.36 2007/03/17 23:00:49 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.37 2007/04/12 18:39:46 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -747,23 +747,27 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 		string_printf(str, "static ");
 	}
 
-	/* These are mutually exclusive */
-	switch (fptr->common.fn_flags & ZEND_ACC_PPP_MASK) {
-		case ZEND_ACC_PUBLIC:
-			string_printf(str, "public ");
-			break;
-		case ZEND_ACC_PRIVATE:
-			string_printf(str, "private ");
-			break;
-		case ZEND_ACC_PROTECTED:
-			string_printf(str, "protected ");
-			break;
-		default:
-		    string_printf(str, "<visibility error> ");
-		    break;
+	if (fptr->common.scope) {
+		/* These are mutually exclusive */
+		switch (fptr->common.fn_flags & ZEND_ACC_PPP_MASK) {
+			case ZEND_ACC_PUBLIC:
+				string_printf(str, "public ");
+				break;
+			case ZEND_ACC_PRIVATE:
+				string_printf(str, "private ");
+				break;
+			case ZEND_ACC_PROTECTED:
+				string_printf(str, "protected ");
+				break;
+			default:
+			    string_printf(str, "<visibility error> ");
+			    break;
+		}
+		string_printf(str, "method ");
+	} else {
+		string_printf(str, "function ");
 	}
 
-	string_printf(str, fptr->common.scope ? "method " : "function ");
 	if (fptr->op_array.return_reference) {
 		string_printf(str, "&");
 	}
@@ -4889,7 +4893,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.36 2007/03/17 23:00:49 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.37 2007/04/12 18:39:46 johannes Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

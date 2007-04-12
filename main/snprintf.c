@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.54 2007/04/09 15:35:49 dmitry Exp $ */
+/* $Id: snprintf.c,v 1.55 2007/04/12 22:00:56 tony2001 Exp $ */
 
 
 #include "php.h"
@@ -705,6 +705,16 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 				case 'L':
 					fmt++;
 					modifier = LM_LONG_DOUBLE;
+					break;
+				case 'I':
+					fmt++;
+#if SIZEOF_LONG_LONG
+					if (*fmt == '6' && *(fmt+1) == '4') {
+						fmt += 2;
+						modifier = LM_LONG_LONG;
+					} else
+#endif
+						modifier = LM_LONG;
 					break;
 				case 'l':
 					fmt++;

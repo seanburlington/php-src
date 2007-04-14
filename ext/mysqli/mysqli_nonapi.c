@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.69 2007/04/14 10:35:00 tony2001 Exp $ 
+  $Id: mysqli_nonapi.c,v 1.70 2007/04/14 10:42:41 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -89,6 +89,10 @@ PHP_FUNCTION(mysqli_connect)
 #if MYSQL_VERSION_ID > 50012
 	mysql_options(mysql->mysql, MYSQL_OPT_RECONNECT, (const char *)&my_true);
 #endif
+
+	if (!socket) {
+		socket = MyG(default_socket);
+	}
 
 	if (mysql_real_connect(mysql->mysql, hostname, username, passwd, dbname, port, socket, CLIENT_MULTI_RESULTS) == NULL) {
 		/* Save error messages */

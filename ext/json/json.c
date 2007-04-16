@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.23 2007/02/19 19:44:44 tony2001 Exp $ */
+/* $Id: json.c,v 1.24 2007/04/16 16:52:20 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -307,7 +307,7 @@ static void json_escape_string(smart_str *buf, zstr s, int len, zend_uchar type)
                 break;
             default:
                 {
-                    if (us < ' ' || (us & 127) == us)
+                    if (us >= ' ' && (us & 127) == us)
                     {
                         smart_str_appendc(buf, (unsigned char) us);
                     }

@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.64 2007/04/10 06:22:45 dmitry Exp $
+// $Id: config.w32,v 1.65 2007/04/16 09:43:53 dmitry Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -124,8 +124,7 @@ if (VCVERS >= 14) {
 	// fun stuff: MS deprecated ANSI stdio and similar functions
 	// disable annoying warnings
 	if (X64) {
-		ADD_FLAG('CFLAGS', ' /wd4996 ');
-//		ADD_FLAG('CFLAGS', ' /wd4996 /Wp64 ');
+		ADD_FLAG('CFLAGS', ' /wd4996 /Wp64 ');
 	} else {
 		ADD_FLAG('CFLAGS', ' /wd4996 ');
 	}

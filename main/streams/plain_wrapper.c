@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.18 2007/04/09 15:38:41 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.19 2007/04/16 08:09:56 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -223,9 +223,9 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 		}
 #elif defined(PHP_WIN32)
 		{
-			long handle = _get_osfhandle(self->fd);
+			zend_uintptr_t handle = _get_osfhandle(self->fd);
 
-			if (handle != 0xFFFFFFFF) {
+			if (handle != (zend_uintptr_t)INVALID_HANDLE_VALUE) {
 				self->is_pipe = GetFileType((HANDLE)handle) == FILE_TYPE_PIPE;
 			}
 		}
@@ -261,9 +261,9 @@ PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STRE
 		}
 #elif defined(PHP_WIN32)
 		{
-			long handle = _get_osfhandle(self->fd);
+			zend_uintptr_t handle = _get_osfhandle(self->fd);
 
-			if (handle != 0xFFFFFFFF) {
+			if (handle != (zend_uintptr_t)INVALID_HANDLE_VALUE) {
 				self->is_pipe = GetFileType((HANDLE)handle) == FILE_TYPE_PIPE;
 			}
 		}
@@ -601,7 +601,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 				return -1;
 			}
 
-			if ((long) ptrparam == PHP_STREAM_LOCK_SUPPORTED) {
+			if ((zend_uintptr_t) ptrparam == PHP_STREAM_LOCK_SUPPORTED) {
 				return 0;
 			}
 

@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.14 2007/04/02 20:44:30 stas Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.15 2007/04/16 08:09:55 dmitry Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -946,7 +946,7 @@ PHP_FUNCTION(proc_open)
 						break;
 				}
 #ifdef PHP_WIN32
-				stream = php_stream_fopen_from_fd(_open_osfhandle((long)descriptors[i].parentend,
+				stream = php_stream_fopen_from_fd(_open_osfhandle((zend_intptr_t)descriptors[i].parentend,
 							descriptors[i].mode_flags), mode_string, NULL);
 #else
 				stream = php_stream_fopen_from_fd(descriptors[i].parentend, mode_string, NULL);

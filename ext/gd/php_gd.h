@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.73 2007/04/04 01:54:34 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.74 2007/04/17 15:11:56 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -109,6 +109,11 @@ PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);
 PHP_FUNCTION(imagecopyresampled);
+
+#ifdef PHP_WIN32
+PHP_FUNCTION(imagegrabwindow);
+PHP_FUNCTION(imagegrabscreen);
+#endif
 
 #ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imagerotate);

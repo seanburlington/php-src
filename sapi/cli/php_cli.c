@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.16 2007/02/22 10:06:22 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.17 2007/04/17 19:46:13 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -652,7 +652,10 @@ int main(int argc, char *argv[])
 	while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0))!=-1) {
 		switch (c) {
 			case 'c':
-				cli_sapi_module.php_ini_path_override = strdup(php_optarg);
+				if (cli_sapi_module.php_ini_path_override) {
+					free(cli_sapi_module.php_ini_path_override);
+				}
+ 				cli_sapi_module.php_ini_path_override = strdup(php_optarg);
 				break;
 			case 'n':
 				cli_sapi_module.php_ini_ignore = 1;

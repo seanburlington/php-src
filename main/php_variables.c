@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.7 2007/03/28 09:14:08 tony2001 Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.8 2007/04/17 15:06:50 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -158,8 +158,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 				array_init(gpc_element);
 				zend_hash_next_index_insert(symtable1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 			} else {
-				if (PG(magic_quotes_gpc) && (index != var)) {
-					/* no need to addslashes() the index if it's the main variable name */
+				if (PG(magic_quotes_gpc)) {
 					escaped_index = php_addslashes(index, index_len, &index_len, 0 TSRMLS_CC);
 				} else {
 					escaped_index = index;

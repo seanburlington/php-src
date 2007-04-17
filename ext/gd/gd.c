@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.370 2007/04/17 15:11:56 pajoye Exp $ */
+/* $Id: gd.c,v 1.371 2007/04/17 15:24:05 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -282,8 +282,9 @@ ZEND_END_ARG_INFO()
 
 #ifdef PHP_WIN32
 static
-ZEND_BEGIN_ARG_INFO(arginfo_imagegrabwindow, 0)
+ZEND_BEGIN_ARG_INFO(arginfo_imagegrabwindow, 0, 0, 1)
 	ZEND_ARG_INFO(0, handle)
+	ZEND_ARG_INFO(0, client_area)
 ZEND_END_ARG_INFO()
 
 static

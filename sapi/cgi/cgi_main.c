@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.318 2007/04/15 23:02:05 sniper Exp $ */
+/* $Id: cgi_main.c,v 1.319 2007/04/17 18:51:24 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1409,6 +1409,9 @@ consult the installation file that came with this distribution, or visit \n\
 							break;
 
   					case 'f': /* parse file */
+							if (script_file) {
+								efree(script_file);
+							}
 							script_file = estrdup(php_optarg);
 							no_headers = 1;
 							/* arguments after the file are considered script args */

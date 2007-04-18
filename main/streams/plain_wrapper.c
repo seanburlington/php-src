@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.85 2007/04/16 09:43:52 dmitry Exp $ */
+/* $Id: plain_wrapper.c,v 1.86 2007/04/18 13:53:32 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -718,8 +718,16 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 							return PHP_STREAM_OPTION_RETURN_ERR;
 						}
 
-						if (range->length == 0) {
-							range->length = GetFileSize(hfile, NULL) - range->offset;
+						size = GetFileSize(hfile, NULL);
+						if (range->length == 0 && range->offset > 0 && range->offset < size) {
+							range->length = size - range->offset;
+						}
+						if (range->length == 0 || range->length > size) {
+							range->length = size;
+						}
+						if (range->offset >= size) {
+							range->offset = size;
+							range->length = 0;
 						}
 
 						/* figure out how big a chunk to map to be able to view the part that we need */

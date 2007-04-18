@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.175.2.3.2.10 2007/04/10 22:30:07 tony2001 Exp $ */
+/* $Id: fopen_wrappers.c,v 1.175.2.3.2.11 2007/04/18 11:58:40 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -151,6 +151,8 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 			if (path_len > 1 && path_tmp[path_len - 2] == ':') {
 				/* this is c:\,  */
 				path_tmp[path_len] = '\0';
+			} else {
+				path_tmp[path_len - 1] = '\0';
 			}
 #else
 			path_tmp[path_len - 1] = '\0';

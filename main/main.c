@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.34 2007/04/16 08:09:56 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.35 2007/04/18 09:38:56 rrichards Exp $ */
 
 /* {{{ includes
  */
@@ -63,6 +63,7 @@
 #ifdef PHP_WIN32
 #include <io.h>
 #include "win32/php_registry.h"
+#include "ext/standard/flock_compat.h"
 #endif
 #include "php_syslog.h"
 #include "Zend/zend_exceptions.h"
@@ -362,8 +363,11 @@ PHPAPI void php_log_err(char *log_message TSRMLS_DC)
 			time(&error_time);
 			strftime(error_time_str, sizeof(error_time_str), "%d-%b-%Y %H:%M:%S", php_localtime_r(&error_time, &tmbuf));
 			len = spprintf(&tmp, 0, "[%s] %s%s", error_time_str, log_message, PHP_EOL);
+#ifdef PHP_WIN32
+			php_flock(fd, 2);
+#endif
 			write(fd, tmp, len);
-			efree(tmp); 
+			efree(tmp);
 			close(fd);
 			return;
 		}

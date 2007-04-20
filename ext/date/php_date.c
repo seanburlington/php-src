@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.135 2007/04/13 14:10:38 derick Exp $ */
+/* $Id: php_date.c,v 1.136 2007/04/20 20:55:30 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2367,7 +2367,7 @@ PHP_FUNCTION(timezone_abbreviations_list)
 			add_ascii_assoc_null(element, "timezone_id");
 		}
 
-		if (zend_hash_find(HASH_OF(return_value), entry->name, strlen(entry->name) + 1, (void **) &abbr_array_pp) == FAILURE) {
+		if (zend_ascii_hash_find(HASH_OF(return_value), entry->name, strlen(entry->name) + 1, (void **) &abbr_array_pp) == FAILURE) {
 			MAKE_STD_ZVAL(abbr_array);
 			array_init(abbr_array);
 			add_ascii_assoc_zval(return_value, entry->name, abbr_array);

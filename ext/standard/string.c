@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.633 2007/03/26 10:23:49 tony2001 Exp $ */
+/* $Id: string.c,v 1.634 2007/04/22 19:22:19 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -718,6 +718,9 @@ static UChar *php_u_trim(UChar *c, int len, UChar *what, int what_len, zval *ret
 	if ( what ) {
 		what = eustrndup(what, what_len);
 		php_expand_uchar_range(&what, &what_len TSRMLS_CC);
+	} else {
+		what = USTR_MAKE(" \n\r\t\v\0");
+		what_len = sizeof(" \n\r\t\v\0") - 1;
 	}
 
 	if ( mode & 1 ) {

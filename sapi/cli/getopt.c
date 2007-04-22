@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: getopt.c,v 1.12 2007/03/22 21:34:58 johannes Exp $ */
+/* $Id: getopt.c,v 1.13 2007/04/22 15:24:19 helly Exp $ */
 
 #include <stdio.h>
 #include <string.h>
@@ -107,6 +107,7 @@ int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **opta
 			(*optind)++;
 			return (php_opt_error(argc, argv, *optind-1, optchr, OPTERRCOLON, show_err));
 		}
+		arg_start = 1 + optchr;
 	}
 	if (opts_idx < 0) {
 		while (1) {
@@ -120,6 +121,7 @@ int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **opta
 					(*optind)++;
 				} else {
 					optchr++;
+					arg_start++;
 				}
 				return(php_opt_error(argc, argv, errind, errchr, OPTERRNF, show_err));
 			} else if (argv[*optind][optchr] == opts[opts_idx].opt_char) {
@@ -143,7 +145,7 @@ int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **opta
 		}
 		return opts[opts_idx].opt_char;
 	} else {
-		if (arg_start == 2) {
+		if (arg_start >= 2) {
 			if (!argv[*optind][optchr+1])
 			{
 				dash = 0;

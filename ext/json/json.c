@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.24 2007/04/16 16:52:20 andrei Exp $ */
+/* $Id: json.c,v 1.25 2007/04/23 10:48:13 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -176,7 +176,7 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) /* {{{ */
                 } else if (r == 1) {
                     if (i == HASH_KEY_IS_STRING ||
 						i == HASH_KEY_IS_UNICODE) {
-                        if (key.s[0] == '\0') {
+                        if (key.s[0] == '\0' && Z_TYPE_PP(val) == IS_OBJECT) {
                             /* Skip protected and private members. */
                             continue;
                         }

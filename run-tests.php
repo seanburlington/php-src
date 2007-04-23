@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.25 2007/04/17 19:49:26 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.26 2007/04/23 11:19:15 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -398,7 +398,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.25 $'."\n";
+					echo '$Revision: 1.226.2.37.2.26 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -648,7 +648,10 @@ define('QA_SUBMISSION_PAGE', 'http://qa.php.net/buildtest-process.php');
 /* We got failed Tests, offer the user to send an e-mail to QA team, unless NO_INTERACTION is set */
 if (!getenv('NO_INTERACTION')) {
 	$fp = fopen("php://stdin", "r+");
-	echo "\nYou may have found a problem in PHP.\nWe would like to send this report automatically to the\n";
+	if ($sum_results['FAILED'] || $sum_results['BORKED'] || $sum_results['WARNED'] || $sum_results['LEAKED']) {
+		echo "\nYou may have found a problem in PHP.";
+	}
+	echo "\nWe would like to send this report automatically to the\n";
 	echo "PHP QA team, to give us a better understanding of how\nthe test cases are doing. If you don't want to send it\n";
 	echo "immediately, you can choose \"s\" to save the report to\na file that you can send us later.\n";
 	echo "Do you want to send this report now? [Yns]: ";

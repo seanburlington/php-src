@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.172 2007/04/23 20:17:19 helly Exp $ */
+/* $Id: php_cli.c,v 1.173 2007/04/23 20:47:58 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -468,7 +468,7 @@ static void php_cli_usage(char *argv0)
 				"  args...          Arguments passed to script. Use -- args when first argument\n"
 				"                   starts with - or script is read from stdin\n"
 				"\n"
-				"  --ini            Show ini configuration files\n"
+				"  --ini            Show configuration file names\n"
 				"\n"
 #if (HAVE_REFLECTION)
 				"  --rf <name>      Show information about function <name>.\n"

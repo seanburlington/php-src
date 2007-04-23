@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.3 2007/04/14 10:35:05 tony2001 Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.4 2007/04/23 09:27:07 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -39,9 +39,6 @@ PHP_FUNCTION(mysqli_connect)
 	char 				*hostname = NULL, *username=NULL, *passwd=NULL, *dbname=NULL, *socket=NULL;
 	unsigned int 		hostname_len = 0, username_len = 0, passwd_len = 0, dbname_len = 0, socket_len = 0;
 	long				port=0;
-#if MYSQL_VERSION_ID > 50012
-	my_bool				my_true = 1;
-#endif
 
 	if (getThis() && !ZEND_NUM_ARGS()) {
 		RETURN_NULL();
@@ -85,10 +82,6 @@ PHP_FUNCTION(mysqli_connect)
 		hostname[0] = '\0';
 		mysql_options(mysql->mysql, MYSQL_OPT_USE_EMBEDDED_CONNECTION, 0);
 	}
-#endif
-
-#if MYSQL_VERSION_ID > 50012
-	mysql_options(mysql->mysql, MYSQL_OPT_RECONNECT, (const char *)&my_true);
 #endif
 
 	if (!socket) {

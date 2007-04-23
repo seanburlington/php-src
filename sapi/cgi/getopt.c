@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: getopt.c,v 1.9.2.1.2.3 2007/04/22 15:31:16 helly Exp $ */
+/* $Id: getopt.c,v 1.9.2.1.2.4 2007/04/23 11:05:16 tony2001 Exp $ */
 
 #include <stdio.h>
 #include <string.h>
@@ -145,7 +145,8 @@ int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **opta
 		}
 		return opts[opts_idx].opt_char;
 	} else {
-		if (arg_start >= 2) {
+		/* multiple options specified as one (exclude long opts) */
+		if (arg_start >= 2 && !((argv[*optind][0] == '-') && (argv[*optind][1] == '-'))) {
 			if (!argv[*optind][optchr+1])
 			{
 				dash = 0;

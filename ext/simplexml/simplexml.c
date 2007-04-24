@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.25 2007/04/24 13:54:59 iliaa Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.26 2007/04/24 14:11:28 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1543,7 +1543,7 @@ SXE_METHOD(addAttribute)
 	}
 
 	if (qname_len == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute name and value are required");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute name is required");
 		return;
 	}
 
@@ -2368,7 +2368,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.26 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.18 2006/12/09 22:18:42 wez Exp $
+dnl $Id: config.m4,v 1.19 2007/04/25 07:47:15 sniper Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -56,7 +56,7 @@ for more detail on this issue.
   
   ifdef([PHP_INSTALL_HEADERS],
   [
-    PHP_INSTALL_HEADERS(ext/pdo, [php_pdo.h php_pdo_driver.h])
+    PHP_INSTALL_HEADERS(ext/pdo, [php_pdo.h php_pdo_driver.h php_pdo_phpvers_compat.h])
   ], [
     PHP_ADD_MAKEFILE_FRAGMENT
   ])

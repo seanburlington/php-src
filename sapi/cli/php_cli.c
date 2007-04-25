@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.174 2007/04/23 21:24:54 bjori Exp $ */
+/* $Id: php_cli.c,v 1.175 2007/04/25 09:53:20 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1306,7 +1306,7 @@ int main(int argc, char *argv[])
 					zend_module_entry *module;
 
 					if (zend_hash_find(&module_registry, lcname, len+1, (void**)&module) == FAILURE) {
-						if(!strcmp(reflection_what, "core")) {
+						if(!strcmp(reflection_what, "main")) {
 							display_ini_entries(NULL);
 						} else {
 							zend_printf("Extension '%s' not present.\n", reflection_what);

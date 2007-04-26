@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib_fopen_wrapper.c,v 1.48 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.49 2007/04/26 12:53:34 dmitry Exp $ */
 
 #define _GNU_SOURCE
 
@@ -76,7 +76,7 @@ static int php_gziop_close(php_stream *stream, int close_handle TSRMLS_DC)
 			self->gz_file = NULL;
 		}
 		if (self->stream) {
-			php_stream_close(self->stream);
+			php_stream_free(self->stream, PHP_STREAM_FREE_CLOSE | PHP_STREAM_FREE_PRESERVE_HANDLE);
 			self->stream = NULL;
 		}
 	}

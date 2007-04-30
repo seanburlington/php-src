@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.169 2007/03/23 15:07:38 cardoe Exp $ */
+/* $Id: ldap.c,v 1.170 2007/04/30 21:39:48 tony2001 Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -318,7 +318,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.169 2007/03/23 15:07:38 cardoe Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.170 2007/04/30 21:39:48 tony2001 Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -376,9 +376,9 @@ PHP_FUNCTION(ldap_connect)
 	int hostlen;
 	long port = 389; /* Default port */
 #ifdef HAVE_ORALDAP
-	char *wallet, *walletpasswd;
-	int walletlen, walletpasswdlen;
-	long authmode;
+	char *wallet = NULL, *walletpasswd = NULL;
+	int walletlen = 0, walletpasswdlen = 0;
+	long authmode = GSLC_SSL_NO_AUTH;
 	int ssl=0;
 #endif
 	ldap_linkdata *ld;

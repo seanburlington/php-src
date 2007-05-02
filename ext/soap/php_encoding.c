@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.158 2007/05/02 08:22:32 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.159 2007/05/02 09:38:22 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1563,6 +1563,8 @@ static int model_to_xml_object(xmlNodePtr node, sdlContentModelPtr model, zval *
 						property = xmlNewNode(NULL, BAD_CAST("BOGUS"));
 						xmlAddChild(node, property);
 						set_xsi_nil(property);
+					} else if (Z_TYPE_P(data) == IS_NULL && model->min_occurs == 0) {
+						return 1;
 					} else {
 						property = master_to_xml(enc, data, style, node);
 						if (property->children && property->children->content &&

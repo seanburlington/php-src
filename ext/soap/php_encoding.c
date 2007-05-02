@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.29 2007/04/06 18:27:58 andrei Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.30 2007/05/02 08:22:13 dmitry Exp $ */
 
 #include <time.h>
 
@@ -3356,8 +3356,12 @@ static int is_map(zval *array)
 	int i, count = zend_hash_num_elements(Z_ARRVAL_P(array));
 
 	zend_hash_internal_pointer_reset(Z_ARRVAL_P(array));
-	for (i = 0;i < count;i++) {
-		if (zend_hash_get_current_key_type(Z_ARRVAL_P(array)) == HASH_KEY_IS_STRING) {
+	for (i = 0; i < count; i++) {
+		char *str_index;
+		ulong num_index;
+
+		if (zend_hash_get_current_key(Z_ARRVAL_P(array), &str_index, &num_index, 0) == HASH_KEY_IS_STRING ||
+		    num_index != i) {
 			return TRUE;
 		}
 		zend_hash_move_forward(Z_ARRVAL_P(array));

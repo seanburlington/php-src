@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.113 2007/01/05 03:57:57 pollita Exp $ */
+/* $Id: php_session.h,v 1.114 2007/05/02 10:30:24 tony2001 Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
 
 #include "ext/standard/php_var.h"
 
-#ifdef HAVE_HASH_EXT
+#if defined(HAVE_HASH_EXT) && !defined(COMPILE_DL_HASH)
 # include "ext/hash/php_hash.h"
 #endif
 
@@ -125,7 +125,7 @@ typedef struct _php_ps_globals {
 	zend_bool apply_trans_sid;	/* whether or not to enable trans-sid for the current request */
 
 	long hash_func;
-#ifdef HAVE_HASH_EXT
+#if defined(HAVE_HASH_EXT) && !defined(COMPILE_DL_HASH)
 	php_hash_ops *hash_ops;
 #endif
 	long hash_bits_per_character;

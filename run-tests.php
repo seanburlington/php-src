@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.320 2007/04/23 20:55:56 johannes Exp $ */
+/* $Id: run-tests.php,v 1.321 2007/05/02 15:25:32 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +405,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.320 $'."\n";
+					echo '$Revision: 1.321 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1214,6 +1214,12 @@ TEST $file
 				"unset REQUEST_METHOD; unset QUERY_STRING; unset PATH_TRANSLATED; unset SCRIPT_FILENAME; unset REQUEST_METHOD;": "";
 
 			$ini_settings .= " -dunicode.semantics=" . (int)$unicode_test;
+
+			if ($leak_check) {
+				$env['USE_ZEND_ALLOC'] = '0';
+			} else {
+				$env['USE_ZEND_ALLOC'] = '1';
+			}
 
 			$output = system_with_timeout("$extra $php -q $ini_settings $test_skipif", $env);
 			if (!$cfg['keep']['skip']) {

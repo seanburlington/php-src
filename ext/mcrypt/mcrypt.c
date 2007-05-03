@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.77.4.7.4.3 2007/05/01 16:07:37 derick Exp $ */
+/* $Id: mcrypt.c,v 1.77.4.7.4.4 2007/05/03 03:15:01 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -647,8 +647,8 @@ PHP_FUNCTION(mcrypt_enc_get_supported_key_sizes)
 	int argc, i, count;
 	int *key_sizes;
 	
-	argc = ZEND_NUM_ARGS();
 	MCRYPT_GET_TD_ARG
+	argc = ZEND_NUM_ARGS();
 
 	key_sizes = mcrypt_enc_get_supported_key_sizes (pm->td, &count);
 

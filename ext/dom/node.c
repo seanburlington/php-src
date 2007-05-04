@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.55 2007/03/18 21:29:20 rrichards Exp $ */
+/* $Id: node.c,v 1.56 2007/05/04 19:32:19 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1587,8 +1587,11 @@ PHP_FUNCTION(dom_node_is_default_namespace)
 	}
 
 	DOM_GET_OBJ(nodep, id, xmlNodePtr, intern);
+	if (nodep->type == XML_DOCUMENT_NODE || nodep->type == XML_HTML_DOCUMENT_NODE) {
+		nodep = xmlDocGetRootElement((xmlDocPtr) nodep);
+	}
 
-	if (uri_len > 0) {
+	if (nodep && uri_len > 0) {
 		nsptr = xmlSearchNs(nodep->doc, nodep, NULL);
 		if (nsptr && xmlStrEqual(nsptr->href, uri)) {
 			RETURN_TRUE;
@@ -1618,6 +1621,12 @@ PHP_FUNCTION(dom_node_lookup_namespace_uri)
 	}
 
 	DOM_GET_OBJ(nodep, id, xmlNodePtr, intern);
+	if (nodep->type == XML_DOCUMENT_NODE || nodep->type == XML_HTML_DOCUMENT_NODE) {
+		nodep = xmlDocGetRootElement((xmlDocPtr) nodep);
+		if (nodep == NULL) {
+			RETURN_NULL();
+		}
+	}
 
 	nsptr = xmlSearchNs(nodep->doc, nodep, prefix);
 	if (nsptr && nsptr->href != NULL) {

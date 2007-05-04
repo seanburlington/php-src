@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.52 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: element.c,v 1.53 2007/05/04 19:32:19 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -709,6 +709,7 @@ PHP_FUNCTION(dom_element_set_attribute_ns)
 					} else {
 						nsptr = dom_get_ns(elemp, uri, &errorcode, prefix);
 					}
+					xmlReconciliateNs(elemp->doc, elemp);
 				}
 			} else {
 				if (is_xmlns == 1) {

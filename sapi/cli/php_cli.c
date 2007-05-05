@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.177 2007/05/05 12:09:21 helly Exp $ */
+/* $Id: php_cli.c,v 1.178 2007/05/05 12:46:30 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -195,7 +195,7 @@ static void print_modules(TSRMLS_D)
 	zend_hash_destroy(&sorted_registry);
 }
 
-static int print_extension_info(zend_extension *ext, void *arg TSRMLS_DC)
+static int print_extension_info(zend_extension *ext TSRMLS_DC)
 {
 	php_printf("%s\n", ext->name);
 	return ZEND_HASH_APPLY_KEEP;

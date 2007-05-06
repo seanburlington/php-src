@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.178 2007/05/05 12:46:30 helly Exp $ */
+/* $Id: php_cli.c,v 1.179 2007/05/06 12:57:27 johannes Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -595,9 +595,7 @@ int main(int argc, char *argv[])
 	zend_file_handle file_handle;
 /* temporary locals */
 	enum behavior_mode behavior = PHP_MODE_STANDARD;
-#ifdef HAVE_REFLECTION
 	char *reflection_what = NULL;
-#endif
 	int orig_optind=php_optind;
 	char *orig_optarg=php_optarg;
 	char *arg_free=NULL, **arg_excp=&arg_free;

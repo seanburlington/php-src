@@ -1,8 +1,8 @@
 --TEST--
-bug #8700, getFromIndex(0) fails
+Bug #8700 (getFromIndex(0) fails)
 --SKIPIF--
 <?php
-/* $Id: bug8700.phpt,v 1.1 2006/09/15 12:10:50 pajoye Exp $ */
+/* $Id: bug8700.phpt,v 1.2 2007/05/07 16:50:39 tony2001 Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--

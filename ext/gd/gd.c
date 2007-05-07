@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.24 2007/04/24 12:51:22 sniper Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.25 2007/05/07 14:54:36 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1370,8 +1370,10 @@ PHP_MINFO_FUNCTION(gd)
 		char tmp[256];
 #ifdef FREETYPE_PATCH
 		snprintf(tmp, sizeof(tmp), "%d.%d.%d", FREETYPE_MAJOR, FREETYPE_MINOR, FREETYPE_PATCH);
-#else
+#elif defined(FREETYPE_MAJOR)
 		snprintf(tmp, sizeof(tmp), "%d.%d", FREETYPE_MAJOR, FREETYPE_MINOR);
+#else
+		snprintf(tmp, sizeof(tmp), "1.x");
 #endif
 		php_info_print_table_row(2, "FreeType Version", tmp);
 	}

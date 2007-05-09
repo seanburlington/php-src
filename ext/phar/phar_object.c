@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.46 2007/03/26 00:29:21 cellog Exp $ */
+/* $Id: phar_object.c,v 1.47 2007/05/09 18:09:40 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -32,7 +32,7 @@ static int phar_get_extract_list(void *pDest, int num_args, va_list args, zend_h
 {
 	zval *return_value = va_arg(args, zval*);
 
-	add_assoc_string_ex(return_value, hash_key->arKey, hash_key->nKeyLength, (char*)pDest, 1);
+	add_assoc_string_ex(return_value, *(char**)&hash_key->arKey, hash_key->nKeyLength, (char*)pDest, 1);
 	
 	return ZEND_HASH_APPLY_KEEP;
 }
@@ -130,7 +130,7 @@ PHP_METHOD(Phar, canCompress)
  * Returns whether phar extension supports writing and creating phars */
 PHP_METHOD(Phar, canWrite)
 {
-	RETURN_BOOL(PHAR_G(readonly));
+	RETURN_BOOL(!PHAR_G(readonly));
 }
 /* }}} */
 

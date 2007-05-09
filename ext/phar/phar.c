@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.190 2007/03/27 21:28:21 helly Exp $ */
+/* $Id: phar.c,v 1.191 2007/05/09 18:09:40 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3016,7 +3016,7 @@ PHAR_ADD_ENTRY:
 }
 /* }}}*/
 
-#if defined(PHP_VERSION_ID) && PHP_VERSION_ID < 50300
+#if defined(PHP_VERSION_ID) && (PHP_VERSION_ID < 50300 || PHP_VERSION_ID >= 60000)
 
 static int _php_stream_unlink(char *url, int options, php_stream_context *context TSRMLS_DC)
 {
@@ -3449,7 +3449,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.190 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.191 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

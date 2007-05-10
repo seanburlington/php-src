@@ -17,11 +17,12 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.104 2007/05/10 21:26:51 tony2001 Exp $ */
+/* $Id: php_http.c,v 1.105 2007/05/10 21:54:08 tony2001 Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
 #include "ext/standard/md5.h"
+#include "ext/standard/php_rand.h"
 
 static char *get_http_header_value(char *headers, char *type);
 static int get_http_body(php_stream *socketd, int close, char *headers,  char **response, int *out_size TSRMLS_DC);

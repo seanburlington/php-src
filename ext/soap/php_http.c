@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.103 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: php_http.c,v 1.104 2007/05/10 21:26:51 tony2001 Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -465,10 +465,9 @@ try_again:
 					char          HA1[33], HA2[33], response[33], cnonce[33], nc[9];
 					PHP_MD5_CTX   md5ctx;
 					unsigned char hash[16];
-					unsigned int ctx;
 
 					PHP_MD5Init(&md5ctx);
-					snprintf(cnonce, sizeof(cnonce), "%d", php_rand_r(&ctx));
+					snprintf(cnonce, sizeof(cnonce), "%ld", php_rand(TSRMLS_C);
 					PHP_MD5Update(&md5ctx, (unsigned char*)cnonce, strlen(cnonce));
 					PHP_MD5Final(hash, &md5ctx);
 					make_digest(cnonce, hash);

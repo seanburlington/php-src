@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.60 2007/02/12 20:27:48 tony2001 Exp $ */
+/* $Id: iptc.c,v 1.61 2007/05/10 12:21:42 tony2001 Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -211,16 +211,16 @@ PHP_FUNCTION(iptcembed)
 
 	if (php_iptc_get1(fp, spool, poi?&poi:0 TSRMLS_CC) != 0xFF) {
 		fclose(fp);
-		if (poi) {
-			efree(poi);
+		if (spoolbuf) {
+			efree(spoolbuf);
 		}
 		RETURN_FALSE;
 	}
 
 	if (php_iptc_get1(fp, spool, poi?&poi:0 TSRMLS_CC) != 0xD8) {
 		fclose(fp);
-		if (poi) {
-			efree(poi);
+		if (spoolbuf) {
+			efree(spoolbuf);
 		}
 		RETURN_FALSE;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.136.2.4.2.9 2007/05/06 14:01:26 bjori Exp $ */
+/* $Id: php_ini.c,v 1.136.2.4.2.10 2007/05/10 19:48:30 bjori Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -359,13 +359,16 @@ int php_init_config(TSRMLS_D)
 
 				if ((path = getenv("PATH")) != NULL) {
 					char *search_dir, search_path[MAXPATHLEN];
+					char *last;
 
-					while ((search_dir = strsep(&path, ":")) != NULL) {
+					search_dir = php_strtok_r(path, ":", &last);
+					while (search_dir) {
 						snprintf(search_path, MAXPATHLEN, "%s/%s", search_dir, sapi_module.executable_location);
 						if (VCWD_REALPATH(search_path, binary_location) && !VCWD_ACCESS(binary_location, X_OK)) {
 							found = 1;
 							break;
 						}
+						search_dir = php_strtok_r(NULL, ":", &last);
 					}
 				}
 				if (!found) {

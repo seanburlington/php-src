@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.56 2007/01/01 09:29:33 sebastian Exp $ */
+/* $Id: sysvsem.c,v 1.57 2007/05/11 15:46:22 tony2001 Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -136,7 +136,6 @@ static void release_sysvsem_sem(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	/* Release the semaphore if it has been acquired but not released. */
 
 	if (sem_ptr->count) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Releasing SysV semaphore id %d key 0x%x in request cleanup", sem_ptr->id, sem_ptr->key);
 
 		sop[1].sem_num = SYSVSEM_SEM;
 		sop[1].sem_op  = sem_ptr->count;
@@ -144,10 +143,8 @@ static void release_sysvsem_sem(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 		opcount++;
 	}
-	if (semop(sem_ptr->semid, sop, opcount) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed in release_sysvsem_sem for key 0x%x: %s", sem_ptr->key, strerror(errno));
-	}
 
+	semop(sem_ptr->semid, sop, opcount);
 	efree(sem_ptr);
 }
 /* }}} */

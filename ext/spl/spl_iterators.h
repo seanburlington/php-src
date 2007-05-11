@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.41 2007/02/08 20:13:49 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.42 2007/05/11 00:14:36 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -94,6 +94,7 @@ enum {
 enum {
 	/* public */
 	REGIT_USE_KEY            = 0x00000001,
+	REGIT_INVERTED           = 0x00000002,
 };
 
 typedef enum {

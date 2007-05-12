@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.136.2.4.2.10 2007/05/10 19:48:30 bjori Exp $ */
+/* $Id: php_ini.c,v 1.136.2.4.2.11 2007/05/12 16:06:46 bjori Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -354,12 +354,15 @@ int php_init_config(TSRMLS_D)
 		if (sapi_module.executable_location) {
 			binary_location = (char *)emalloc(PATH_MAX);
 			if (!strchr(sapi_module.executable_location, '/')) {
-				char *path;
+				char *envpath, *path;
 				int found = 0;
 
-				if ((path = getenv("PATH")) != NULL) {
+				if ((envpath = getenv("PATH")) != NULL) {
 					char *search_dir, search_path[MAXPATHLEN];
 					char *last;
+					int pathlen = strlen(envpath) + 1;
+					path = malloc(pathlen);
+					memcpy(path, envpath, pathlen);
 
 					search_dir = php_strtok_r(path, ":", &last);
 					while (search_dir) {

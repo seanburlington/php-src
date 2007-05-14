@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.70.2.7.2.3 2007/05/10 13:16:54 scottmac Exp $ */
+/* $Id: dns.c,v 1.70.2.7.2.4 2007/05/14 11:33:34 tony2001 Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -265,8 +265,7 @@ PHP_FUNCTION(dns_check_record)
 			type = T_MX;
 			convert_to_string_ex(arg1);
 			
-			if (Z_STRLEN_PP(arg1) == 0)
-			{
+			if (Z_STRLEN_PP(arg1) == 0) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Host cannot be empty");
 				RETURN_FALSE;
 			}
@@ -279,8 +278,7 @@ PHP_FUNCTION(dns_check_record)
 			convert_to_string_ex(arg1);
 			convert_to_string_ex(arg2);
 
-			if (Z_STRLEN_PP(arg1) == 0 || Z_STRLEN_PP(arg2) == 0)
-			{
+			if (Z_STRLEN_PP(arg1) == 0 || Z_STRLEN_PP(arg2) == 0) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Host and type cannot be empty");
 				RETURN_FALSE;
 			}

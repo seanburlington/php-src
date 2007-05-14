@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.11 2007/05/14 17:10:46 scottmac Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.12 2007/05/14 18:09:20 scottmac Exp $ */
 
 /* TODO:
  *
@@ -1141,7 +1141,7 @@ PHP_FUNCTION(mysql_set_charset)
 	php_mysql_conn *mysql;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|r", &csname, &csname_len, &mysql_link) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	if (ZEND_NUM_ARGS() == 1) {

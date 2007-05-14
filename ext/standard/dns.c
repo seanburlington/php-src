@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.84 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: dns.c,v 1.85 2007/05/14 14:38:29 scottmac Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -261,6 +261,12 @@ PHP_FUNCTION(dns_check_record)
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &hostname, &hostname_len, &rectype, &rectype_len) == FAILURE) {
 		return;
+	}
+
+	if (hostname_len == 0)
+	{
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Host cannot be empty");
+		RETURN_FALSE;
 	}
 
 	if (rectype) {

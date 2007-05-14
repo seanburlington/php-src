@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.14 2007/05/08 21:41:36 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.15 2007/05/14 09:23:49 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -769,7 +769,7 @@ static PHP_FUNCTION(xmlwriter_write_element)
 	zval *this = getThis();
 	
 	if (this) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s",
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s!",
 			&name, &name_len, &content, &content_len) == FAILURE) {
 			return;
 		}
@@ -777,7 +777,7 @@ static PHP_FUNCTION(xmlwriter_write_element)
 	} else
 #endif
 	{
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rss", &pind, 
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|s!", &pind, 
 			&name, &name_len, &content, &content_len) == FAILURE) {
 			return;
 		}
@@ -789,7 +789,7 @@ static PHP_FUNCTION(xmlwriter_write_element)
 	ptr = intern->ptr;
 
 	if (ptr) {
-		if (!content || content_len < 1) {
+		if (!content) {
 			retval = xmlTextWriterStartElement(ptr, (xmlChar *)name);
             if (retval == -1) {
                 RETURN_FALSE;
@@ -824,7 +824,7 @@ static PHP_FUNCTION(xmlwriter_write_element_ns)
 	zval *this = getThis();
 	
 	if (this) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s!ss!|s", 
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s!ss!|s!", 
 			&prefix, &prefix_len, &name, &name_len, &uri, &uri_len, &content, &content_len) == FAILURE) {
 			return;
 		}
@@ -832,7 +832,7 @@ static PHP_FUNCTION(xmlwriter_write_element_ns)
 	} else
 #endif
 	{
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs!ss!|s", &pind, 
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs!ss!|s!", &pind, 
 			&prefix, &prefix_len, &name, &name_len, &uri, &uri_len, &content, &content_len) == FAILURE) {
 			return;
 		}
@@ -844,7 +844,7 @@ static PHP_FUNCTION(xmlwriter_write_element_ns)
 	ptr = intern->ptr;
 
 	if (ptr) {
-		if (!content || content_len < 1) {
+		if (!content) {
 			retval = xmlTextWriterStartElementNS(ptr,(xmlChar *)prefix, (xmlChar *)name, (xmlChar *)uri);
             if (retval == -1) {
                 RETURN_FALSE;

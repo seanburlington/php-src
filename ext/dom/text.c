@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.32 2007/05/14 11:44:50 rrichards Exp $ */
+/* $Id: text.c,v 1.33 2007/05/14 11:54:58 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,11 +110,10 @@ int dom_text_whole_text_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 	if (wholetext != NULL) {
 		ZVAL_XML_STRING(*retval, wholetext, ZSTR_DUPLICATE);
+		xmlFree(wholetext);
 	} else {
 		ZVAL_EMPTY_STRING(*retval);
 	}
-
-	xmlFree(wholetext);
 
 	return SUCCESS;
 }

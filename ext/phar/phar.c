@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.191 2007/05/09 18:09:40 helly Exp $ */
+/* $Id: phar.c,v 1.192 2007/05/14 18:59:03 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -2231,6 +2231,15 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 		++new_manifest_count;
 		offset += 4 + entry->filename_len + sizeof(entry_buffer);
 
+		metadata_str.c = 0;
+		if (entry->metadata) {
+			PHP_VAR_SERIALIZE_INIT(metadata_hash);
+			php_var_serialize(&metadata_str, &entry->metadata, &metadata_hash TSRMLS_CC);
+			PHP_VAR_SERIALIZE_DESTROY(metadata_hash);
+			offset += metadata_str.len;
+			smart_str_free(&metadata_str);
+		}
+
 		/* compress and rehash as necessary */
 		if (oldfile && !entry->is_modified) {
 			continue;
@@ -3449,7 +3458,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.191 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.192 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

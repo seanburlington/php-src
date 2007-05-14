@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.31 2007/05/09 19:33:59 helly Exp $ */
+/* $Id: phar_internal.h,v 1.32 2007/05/14 19:13:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -157,6 +157,7 @@ typedef struct _phar_entry_info {
 	int                      is_modified:1;
 	int                      is_deleted:1;
 	phar_archive_data        *phar;
+	smart_str                metadata_str;
 } phar_entry_info;
 
 /* information about a phar file (the archive itself) */

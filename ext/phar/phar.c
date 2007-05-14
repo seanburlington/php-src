@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.192 2007/05/14 18:59:03 helly Exp $ */
+/* $Id: phar.c,v 1.193 2007/05/14 19:13:59 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -272,6 +272,10 @@ static void destroy_phar_manifest(void *pDest) /* {{{ */
 	if (entry->metadata) {
 		zval_ptr_dtor(&entry->metadata);
 		entry->metadata = 0;
+	}
+	if (entry->metadata_str.c) {
+		smart_str_free(&entry->metadata_str);
+		entry->metadata_str.c = 0;
 	}
 	efree(entry->filename);
 }
@@ -2229,16 +2233,19 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 		}
 		/* after excluding deleted files, calculate manifest size in bytes and number of entries */
 		++new_manifest_count;
-		offset += 4 + entry->filename_len + sizeof(entry_buffer);
 
-		metadata_str.c = 0;
 		if (entry->metadata) {
+			if (entry->metadata_str.c) {
+				smart_str_free(&entry->metadata_str);
+			}
 			PHP_VAR_SERIALIZE_INIT(metadata_hash);
-			php_var_serialize(&metadata_str, &entry->metadata, &metadata_hash TSRMLS_CC);
+			php_var_serialize(&entry->metadata_str, &entry->metadata, &metadata_hash TSRMLS_CC);
 			PHP_VAR_SERIALIZE_DESTROY(metadata_hash);
-			offset += metadata_str.len;
-			smart_str_free(&metadata_str);
+		} else {
+			entry->metadata_str.len = 0;
 		}
+
+		offset += 4 + entry->filename_len + sizeof(entry_buffer) + entry->metadata_str.len;
 
 		/* compress and rehash as necessary */
 		if (oldfile && !entry->is_modified) {
@@ -2433,22 +2440,15 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			4: metadata-len
 			+: metadata
 		*/
-		metadata_str.c = 0;
-		if (entry->metadata) {
-			PHP_VAR_SERIALIZE_INIT(metadata_hash);
-			php_var_serialize(&metadata_str, &entry->metadata, &metadata_hash TSRMLS_CC);
-			PHP_VAR_SERIALIZE_DESTROY(metadata_hash);
-		}
 		mytime = time(NULL);
 		phar_set_32(entry_buffer, entry->uncompressed_filesize);
 		phar_set_32(entry_buffer+4, mytime);
 		phar_set_32(entry_buffer+8, entry->compressed_filesize);
 		phar_set_32(entry_buffer+12, entry->crc32);
 		phar_set_32(entry_buffer+16, entry->flags);
-		phar_set_32(entry_buffer+20, metadata_str.len);
+		phar_set_32(entry_buffer+20, entry->metadata_str.len);
 		if (sizeof(entry_buffer) != php_stream_write(newfile, entry_buffer, sizeof(entry_buffer))
-		|| metadata_str.len != php_stream_write(newfile, metadata_str.c, metadata_str.len)) {
-			smart_str_free(&metadata_str);
+		|| entry->metadata_str.len != php_stream_write(newfile, entry->metadata_str.c, entry->metadata_str.len)) {
 			if (closeoldfile) {
 				php_stream_close(oldfile);
 			}
@@ -2458,7 +2458,6 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			}
 			return EOF;
 		}
-		smart_str_free(&metadata_str);
 	}
 	
 	/* now copy the actual file data to the new phar */
@@ -3458,7 +3457,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.192 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.193 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

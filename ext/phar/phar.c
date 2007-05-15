@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.195 2007/05/14 19:36:43 helly Exp $ */
+/* $Id: phar.c,v 1.196 2007/05/15 20:21:18 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1338,19 +1338,57 @@ static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias,
 }
 /* }}} */
 
+int phar_detect_phar_fname_ext(const char *filename, int check_length, char **ext_str, int *ext_len) /* {{{ */
+{
+	char end;
+	char *pos_p = strstr(filename, ".phar.php");
+	char *pos_z = strstr(filename, ".phar.gz");
+	char *pos_b = strstr(filename, ".phar.bz2");
+
+	if (pos_p) {
+		if (pos_z) {
+			return FAILURE;
+		}
+		*ext_str = pos_p;
+		*ext_len = 9;
+	} else if (pos_z) {
+		*ext_str = pos_z;
+		*ext_len = 8;
+	} else if (pos_b) {
+		*ext_str = pos_b;
+		*ext_len = 9;
+	} else if ((pos_p = strstr(filename, ".phar")) != NULL) {
+		*ext_str = pos_p;
+		*ext_len = 5;
+	} else {
+		return FAILURE;
+	}
+	if (check_length && (*ext_str)[*ext_len] != '\0') {
+		return FAILURE;
+	}
+	end = (*ext_str)[*ext_len];
+	if (end != '\0' && end != '/' && end != '\\') {
+		return FAILURE;
+	}
+	return SUCCESS;
+}
+/* }}} */
+
 /**
  * Process a phar stream name, ensuring we can handle any of:
  * 
- * - phar://whatever.phar
  * - whatever.phar
  * - whatever.phar.gz
  * - whatever.phar.bz2
+ * - whatever.phar.php
+ *
+ * Optionally the name might start with 'phar://'
  *
  * This is used by phar_open_url()
  */
 int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_len, char **entry, int *entry_len TSRMLS_DC) /* {{{ */
 {
-	char *pos_p, *pos_z, *pos_b, *ext_str;
+	char *ext_str;
 	int ext_len;
 
 	if (!strncasecmp(filename, "phar://", 7)) {
@@ -1358,27 +1396,10 @@ int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_le
 		filename_len -= 7;
 	}
 
-	pos_p = strstr(filename, ".phar.php");
-	pos_z = strstr(filename, ".phar.gz");
-	pos_b = strstr(filename, ".phar.bz2");
-	if (pos_p) {
-		if (pos_z) {
-			return FAILURE;
-		}
-		ext_str = pos_p;
-		ext_len = 9;
-	} else if (pos_z) {
-		ext_str = pos_z;
-		ext_len = 8;
-	} else if (pos_b) {
-		ext_str = pos_b;
-		ext_len = 9;
-	} else if ((pos_p = strstr(filename, ".phar")) != NULL) {
-		ext_str = pos_p;
-		ext_len = 5;
-	} else {
+	if (phar_detect_phar_fname_ext(filename, 0, &ext_str, &ext_len) == FAILURE) {
 		return FAILURE;
 	}
+
 	*arch_len = ext_str - filename + ext_len;
 	*arch = estrndup(filename, *arch_len);
 	if (ext_str[ext_len]) {
@@ -3459,7 +3480,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.195 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.196 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

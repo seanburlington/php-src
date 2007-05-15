@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.36 2007/04/17 20:00:53 sniper Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.37 2007/05/15 08:17:08 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -331,7 +331,16 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 			}
 
 		} else {
-			len = slprintf(buf, sizeof(buf), "Status: %d\r\n", SG(sapi_headers).http_response_code);
+			char *s;
+
+			if (SG(sapi_headers).http_status_line &&
+			    (s = strchr(SG(sapi_headers).http_status_line, ' ')) != 0 &&
+			    (s - SG(sapi_headers).http_status_line) >= 5 &&
+			    strncasecmp(SG(sapi_headers).http_status_line, "HTTP/", 5) == 0) {
+				len = slprintf(buf, sizeof(buf), "Status:%s\r\n", s);
+			} else {
+				len = slprintf(buf, sizeof(buf), "Status: %d\r\n", SG(sapi_headers).http_response_code);
+			}
 		}
 
 		PHPWRITE_H(buf, len);

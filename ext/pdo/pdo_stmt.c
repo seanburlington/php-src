@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.17 2007/05/16 19:33:57 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.18 2007/05/16 20:04:32 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1041,7 +1041,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 						
 						if (Z_TYPE_P(val) == IS_STRING) {
 							zend_symtable_update(Z_ARRVAL_P(return_value), Z_STRVAL_P(val), Z_STRLEN_P(val) + 1, &tmp, sizeof(zval *), NULL);
-						} else if (Z_TYPE_P(val) = IS_LONG) {
+						} else if (Z_TYPE_P(val) == IS_LONG) {
 							zend_hash_index_update(Z_ARRVAL_P(return_value), Z_LVAL_P(val), tmp, sizeof(tmp), NULL);
 						} else {
 							convert_to_string(val);

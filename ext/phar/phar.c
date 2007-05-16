@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.197 2007/05/16 23:16:50 helly Exp $ */
+/* $Id: phar.c,v 1.198 2007/05/16 23:20:30 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3501,7 +3501,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.197 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.198 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");
@@ -3548,7 +3548,7 @@ zend_module_entry phar_module_entry = {
 	phar_functions,
 	PHP_MINIT(phar),
 	PHP_MSHUTDOWN(phar),
-	PHP_RINIT(phar),
+	NULL,
 	PHP_RSHUTDOWN(phar),
 	PHP_MINFO(phar),
 	PHAR_EXT_VERSION_STR,

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.86 2007/01/03 20:33:09 nlopess Exp $ */
+/* $Id: php_pdo_driver.h,v 1.87 2007/05/16 19:58:58 iliaa Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -91,6 +91,7 @@ enum pdo_fetch_type {
 	PDO_FETCH_INTO,		/* fetch row into an existing object */
 	PDO_FETCH_FUNC,		/* fetch into function and return its result */
 	PDO_FETCH_NAMED,    /* like PDO_FETCH_ASSOC, but can handle duplicate names */
+	PDO_FETCH_KEY_PAIR,	/* fetch into an array where the 1st column is a key and all subsequent columns are values */
 	PDO_FETCH__MAX /* must be last */
 };
 

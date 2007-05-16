@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.51 2007/05/15 20:42:37 helly Exp $ */
+/* $Id: phar_object.c,v 1.52 2007/05/16 23:16:50 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -45,6 +45,7 @@ PHP_METHOD(Phar, getExtractList)
 {
 	array_init(return_value);
 
+	phar_request_initialize(TSRMLS_C);
 	zend_hash_apply_with_arguments(&PHAR_G(phar_plain_map), phar_get_extract_list, 1, return_value);
 }
 /* }}} */

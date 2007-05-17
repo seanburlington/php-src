@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.99 2007/01/17 08:25:25 tony2001 Exp $ */
+/* $Id: formatted_print.c,v 1.100 2007/05/17 17:29:09 tony2001 Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -839,7 +839,7 @@ static char * php_formatted_print(int ht, int *len, int use_array, int format_of
 					int use_copy = 0;
 
 					if (Z_TYPE_P(tmp) != IS_UNICODE) {
-						zend_make_printable_zval(tmp, &var_copy, &use_copy);
+						zend_make_string_zval(tmp, &var_copy, &use_copy);
 					} else {
 						var_copy = *tmp;
 						zval_copy_ctor(&var_copy);

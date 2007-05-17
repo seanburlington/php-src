@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.50 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: type.c,v 1.51 2007/05/17 17:29:09 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -204,7 +204,7 @@ PHP_FUNCTION(strval)
 	if (UG(unicode)) {
 		zend_make_unicode_zval(*num, &expr_copy, &use_copy);
 	} else {
-		zend_make_printable_zval(*num, &expr_copy, &use_copy);
+		zend_make_string_zval(*num, &expr_copy, &use_copy);
 	}
 	if (use_copy) {
 		tmp = &expr_copy;

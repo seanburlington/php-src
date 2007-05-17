@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.50 2007/05/10 16:28:11 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.51 2007/05/17 06:38:13 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4130,8 +4130,6 @@ PHP_RINIT_FUNCTION(basic)
 #endif
 	BG(user_shutdown_function_names) = NULL;
 
-	PHP_RINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
-
 	PHP_RINIT(filestat)(INIT_FUNC_ARGS_PASSTHRU);
 #ifdef HAVE_SYSLOG_H
 	PHP_RINIT(syslog)(INIT_FUNC_ARGS_PASSTHRU);
@@ -4186,8 +4184,10 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	 */
 	
 	PHP_RSHUTDOWN(filestat)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef PHP_WIN32
 #ifdef HAVE_SYSLOG_H
 	PHP_RSHUTDOWN(syslog)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 #endif
 	PHP_RSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);

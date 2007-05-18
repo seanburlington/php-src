@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.44 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: lcg.c,v 1.45 2007/05/18 12:15:01 rasmus Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -103,14 +103,6 @@ PHP_MINIT_FUNCTION(lcg)
 #else
 	lcg_init_globals(&lcg_globals);
 #endif
-	return SUCCESS;
-}
-
-PHP_RINIT_FUNCTION(lcg)
-{
-	if (!LCG(seeded)) {
-		lcg_seed(TSRMLS_C);
-	}
 	return SUCCESS;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_lcg.h,v 1.23 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: php_lcg.h,v 1.24 2007/05/18 12:15:01 rasmus Exp $ */
 
 #ifndef PHP_LCG_H
 #define PHP_LCG_H
@@ -33,7 +33,6 @@ PHPAPI double php_combined_lcg(TSRMLS_D);
 PHP_FUNCTION(lcg_value);
 
 PHP_MINIT_FUNCTION(lcg);
-PHP_RINIT_FUNCTION(lcg);
 
 #ifdef ZTS
 #define LCG(v) TSRMG(lcg_globals_id, php_lcg_globals *, v)

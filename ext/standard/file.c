@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.18 2007/05/18 12:06:44 tony2001 Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.19 2007/05/18 20:34:13 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -536,17 +536,17 @@ PHP_FUNCTION(file_get_contents)
 		return;
 	}
 
+	if (ZEND_NUM_ARGS() == 5 && maxlen < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "length must be greater than or equal to zero");
+		RETURN_FALSE;
+	}
+
 	context = php_stream_context_from_zval(zcontext, 0);
 
 	stream = php_stream_open_wrapper_ex(filename, "rb", 
 				(use_include_path ? USE_PATH : 0) | ENFORCE_SAFE_MODE | REPORT_ERRORS,
 				NULL, context);
 	if (!stream) {
-		RETURN_FALSE;
-	}
-
-	if (maxlen < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length must be greater than or equal to zero");
 		RETURN_FALSE;
 	}
 

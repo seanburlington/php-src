@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.487 2007/04/16 09:43:52 dmitry Exp $ */
+/* $Id: file.c,v 1.488 2007/05/18 12:05:55 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -563,6 +563,11 @@ PHP_FUNCTION(file_get_contents)
 				((flags & PHP_FILE_USE_INCLUDE_PATH) ? USE_PATH : 0) | REPORT_ERRORS,
 				NULL, context);
 	if (!stream) {
+		RETURN_FALSE;
+	}
+
+	if (maxlen < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length must be greater than or equal to zero");
 		RETURN_FALSE;
 	}
 

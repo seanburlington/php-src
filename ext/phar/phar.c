@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.198 2007/05/16 23:20:30 helly Exp $ */
+/* $Id: phar.c,v 1.199 2007/05/18 04:31:38 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3460,14 +3460,6 @@ PHP_MSHUTDOWN_FUNCTION(phar) /* {{{ */
 }
 /* }}} */
 
-PHP_RINIT_FUNCTION(phar) /* {{{ */
-{
-	PHAR_GLOBALS->request_done = 0;
-	PHAR_GLOBALS->request_ends = 0;
-	PHAR_GLOBALS->request_init = 0;
-	return SUCCESS;
-}
-
 void phar_request_initialize(TSRMLS_D) /* {{{ */
 {
 	if (!PHAR_GLOBALS->request_init)
@@ -3501,7 +3493,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.198 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.199 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

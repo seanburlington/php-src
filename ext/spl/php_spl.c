@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.16 2007/05/19 18:32:35 iliaa Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17 2007/05/19 18:40:27 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -45,7 +45,7 @@ ZEND_GET_MODULE(spl)
 
 ZEND_DECLARE_MODULE_GLOBALS(spl)
 
-#define SPL_DEFAULT_FILE_EXTRNSIONS ".inc,.php"
+#define SPL_DEFAULT_FILE_EXTENSIONS ".inc,.php"
 
 /* {{{ spl_functions_none
  */
@@ -274,7 +274,7 @@ PHP_FUNCTION(spl_autoload)
 	}
 
 	if (file_exts == NULL) { /* autoload_extensions is not intialzed, set to defaults */
-		copy = pos1 = estrndup(SPL_DEFAULT_FILE_EXTRNSIONS, sizeof(SPL_DEFAULT_FILE_EXTRNSIONS)-1);
+		copy = pos1 = estrndup(SPL_DEFAULT_FILE_EXTENSIONS, sizeof(SPL_DEFAULT_FILE_EXTENSIONS)-1);
 	} else {
 		copy = pos1 = estrndup(file_exts, file_exts_len);
 	}
@@ -335,7 +335,7 @@ PHP_FUNCTION(spl_autoload_extensions)
 	}
 
 	if (SPL_G(autoload_extensions) == NULL) {
-		RETURN_STRINGL(SPL_DEFAULT_FILE_EXTRNSIONS, sizeof(SPL_DEFAULT_FILE_EXTRNSIONS) - 1, 1);
+		RETURN_STRINGL(SPL_DEFAULT_FILE_EXTENSIONS, sizeof(SPL_DEFAULT_FILE_EXTENSIONS) - 1, 1);
 	} else {
 		RETURN_STRINGL(SPL_G(autoload_extensions), SPL_G(autoload_extensions_len), 1);
 	}

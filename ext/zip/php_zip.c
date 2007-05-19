@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.32 2007/05/19 19:29:37 iliaa Exp $ */
+/* $Id: php_zip.c,v 1.1.2.33 2007/05/19 22:25:11 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -62,7 +62,7 @@ static int le_zip_entry;
 		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Empty string as entry name"); \
 		RETURN_FALSE; \
 	} \
-	if (zip_stat(za, path, flags, &sb)) { \
+	if (zip_stat(za, path, flags, &sb) != 0) { \
 		RETURN_FALSE; \
 	}
 /* }}} */
@@ -103,7 +103,7 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 	size_t file_basename_len;
 	int is_dir_only = 0;
 
-	if (file_len >= MAXPATHLEN || zip_stat(za, file, 0, &sb)) {
+	if (file_len >= MAXPATHLEN || zip_stat(za, file, 0, &sb) != 0) {
 		return 0;
 	}
 
@@ -1879,7 +1879,7 @@ static ZIPARCHIVE_METHOD(getStream)
 		return;
 	}
 
-	if (zip_stat(intern, filename, 0, &sb)) {
+	if (zip_stat(intern, filename, 0, &sb) != 0) {
 		RETURN_FALSE;
 	}
 
@@ -2022,7 +2022,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.32 2007/05/19 19:29:37 iliaa Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.33 2007/05/19 22:25:11 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.153 2007/05/14 12:19:25 tony2001 Exp $ */
+/* $Id: php_ini.c,v 1.154 2007/05/19 12:52:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -350,7 +350,7 @@ int php_init_config(TSRMLS_D)
 		}
 #else
 		if (sapi_module.executable_location) {
-			binary_location = (char *)emalloc(PATH_MAX);
+			binary_location = (char *)emalloc(MAXPATHLEN);
 			if (!strchr(sapi_module.executable_location, '/')) {
 				char *envpath, *path;
 				int found = 0;

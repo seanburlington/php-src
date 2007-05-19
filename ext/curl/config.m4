@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.36 2007/05/16 21:19:53 mike Exp $ 
+dnl $Id: config.m4,v 1.37 2007/05/19 19:36:35 mike Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for cURL support,
@@ -58,7 +58,7 @@ if test "$PHP_CURL" != "no"; then
    save_CFLAGS="$CFLAGS"
    CFLAGS="`$CURL_CONFIG --cflags`"
    save_LDFLAGS="$LDFALGS"
-   LDFLAGS="`$CURL_CONFIG --libs` -Wl,--rpath -Wl,$CURL_DIR/$PHP_LIBDIR"
+   LDFLAGS="`$CURL_CONFIG --libs` $ld_runpath_switch$CURL_DIR/$PHP_LIBDIR"
    
    AC_CHECK_HEADER([openssl/crypto.h], [
     AC_MSG_CHECKING([for openssl support in libcurl])

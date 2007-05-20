@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.199 2007/05/18 04:31:38 helly Exp $ */
+/* $Id: phar.c,v 1.200 2007/05/20 21:46:53 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3465,6 +3465,8 @@ void phar_request_initialize(TSRMLS_D) /* {{{ */
 	if (!PHAR_GLOBALS->request_init)
 	{
 		PHAR_GLOBALS->request_init = 1;
+		PHAR_GLOBALS->request_ends = 0;
+		PHAR_GLOBALS->request_done = 0;
 		zend_hash_init(&(PHAR_GLOBALS->phar_fname_map), sizeof(phar_archive_data*), zend_get_hash_value, destroy_phar_data,  0);
 		zend_hash_init(&(PHAR_GLOBALS->phar_alias_map), sizeof(phar_archive_data*), zend_get_hash_value, NULL, 0);
 		zend_hash_init(&(PHAR_GLOBALS->phar_plain_map), sizeof(const char *),       zend_get_hash_value, NULL, 0);
@@ -3481,6 +3483,7 @@ PHP_RSHUTDOWN_FUNCTION(phar) /* {{{ */
 		zend_hash_destroy(&(PHAR_GLOBALS->phar_alias_map));
 		zend_hash_destroy(&(PHAR_GLOBALS->phar_fname_map));
 		zend_hash_destroy(&(PHAR_GLOBALS->phar_plain_map));
+		PHAR_GLOBALS->request_done = 0;
 	}
 	PHAR_GLOBALS->request_done = 1;
 	return SUCCESS;
@@ -3493,7 +3496,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.199 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.200 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

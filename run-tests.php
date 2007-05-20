@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /*
    +----------------------------------------------------------------------+
@@ -23,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.321 2007/05/02 15:25:32 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.322 2007/05/20 18:24:15 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -405,7 +406,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.321 $'."\n";
+					echo '$Revision: 1.322 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";

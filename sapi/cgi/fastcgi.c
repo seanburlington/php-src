@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.38 2007/05/10 15:22:15 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.39 2007/05/21 09:08:25 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -175,6 +175,11 @@ static void fcgi_signal_handler(int signo)
 int fcgi_in_shutdown(void)
 {
 	return in_shutdown;
+}
+
+void fcgi_shutdown(void)
+{
+	is_fastcgi = 0;
 }
 
 int fcgi_init(void)

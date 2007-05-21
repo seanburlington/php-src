@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.12.2.8 2007/05/10 14:58:17 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.9 2007/05/21 13:13:50 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -717,7 +717,7 @@ static sdlPtr load_wsdl(zval *this_ptr, char *struri TSRMLS_DC)
 				  trav2 = trav2->next;
 				}
 				if (!address) {
-					if (has_soap_port || trav->next) {
+					if (has_soap_port || trav->next || i < n-1) {
 						efree(tmpbinding);
 						trav = trav->next;
 						continue;

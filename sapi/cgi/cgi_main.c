@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.38 2007/05/20 15:56:09 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.39 2007/05/21 09:08:12 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1429,6 +1429,9 @@ consult the installation file that came with this distribution, or visit \n\
 			switch (c) {
 				case 'h':
 				case '?':
+#if PHP_FASTCGI
+					fcgi_shutdown();
+#endif
 					no_headers = 1;
 					php_output_startup();
 					php_output_activate(TSRMLS_C);
@@ -1823,6 +1826,7 @@ fastcgi_request_done:
 			}
 			/* end of fastcgi loop */
 		}
+		fcgi_shutdown();
 #endif
 
 		if (cgi_sapi_module.php_ini_path_override) {

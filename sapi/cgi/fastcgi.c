@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.25 2007/05/10 15:21:02 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.26 2007/05/21 09:08:13 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -253,6 +253,11 @@ int fcgi_is_fastcgi(void)
 	} else {
 		return is_fastcgi;
 	}
+}
+
+void fcgi_shutdown(void)
+{
+	is_fastcgi = 0;
 }
 
 #ifdef _WIN32

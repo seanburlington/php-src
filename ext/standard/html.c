@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.10 2007/05/22 12:37:00 iliaa Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.11 2007/05/22 15:38:27 bjori Exp $ */
 
 /*
  * HTML entity resources:
@@ -1248,7 +1248,7 @@ void register_html_constants(INIT_FUNC_ARGS)
 }
 /* }}} */
 
-/* {{{ proto string htmlspecialchars(string string [, int quote_style][, string charset])
+/* {{{ proto string htmlspecialchars(string string [, int quote_style[, string charset[, bool double_encode]]])
    Convert special characters to HTML entities */
 PHP_FUNCTION(htmlspecialchars)
 {
@@ -1345,7 +1345,7 @@ PHP_FUNCTION(html_entity_decode)
 /* }}} */
 
 
-/* {{{ proto string htmlentities(string string [, int quote_style][, string charset])
+/* {{{ proto string htmlentities(string string [, int quote_style[, string charset[, bool double_encode]]])
    Convert all applicable characters to HTML entities */
 PHP_FUNCTION(htmlentities)
 {

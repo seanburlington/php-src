@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.374 2007/05/07 14:50:07 pajoye Exp $ */
+/* $Id: gd.c,v 1.375 2007/05/22 09:44:55 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2563,6 +2563,14 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 			}
 			(*func_p)(im, fp);
 			break;
+#ifdef HAVE_GD_GD2
+		case PHP_GDIMG_TYPE_GD2:
+			if (quality == -1) {
+				quality = 128;
+			}
+			(*func_p)(im, fp, quality, type);
+			break;
+#endif
 		default:
 			if (quality == -1) {
 				quality = 128;

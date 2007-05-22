@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.13.2.10 2007/04/13 00:42:48 stas Exp $ */
+/* $Id: php_variables.c,v 1.45.2.13.2.11 2007/05/22 18:16:38 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -66,6 +66,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	zval *gpc_element, **gpc_element_p;
 	zend_bool is_array;
 	HashTable *symtable1=NULL;
+	int nest_level = 0;
 
 	assert(var != NULL);
 	
@@ -128,6 +129,10 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 			char *escaped_index = NULL, *index_s;
 			int new_idx_len = 0;
 
+			if(++nest_level > PG(max_input_nesting_level)) {
+				/* too many levels of nesting */
+				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Input variable nesting level more than allowed %d (change max_input_nesting_level in php.ini to increase the limit)", PG(max_input_nesting_level));	
+			}
 			ip++;
 			index_s = ip;
 			if (isspace(*ip)) {

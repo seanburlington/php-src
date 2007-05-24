@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.636 2007/05/24 20:56:20 rasmus Exp $ */
+/* $Id: string.c,v 1.637 2007/05/24 21:31:35 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4735,6 +4735,7 @@ PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int should_
 	php_charmask((unsigned char*)what, wlength, flags TSRMLS_CC);
 
 	for (source = str, end = source + length, target = new_str; source < end; source++) {
+		c = *source;
 		if (flags[(unsigned char)c]) {
 			if ((unsigned char) c < 32 || (unsigned char) c > 126) {
 				*target++ = '\\';

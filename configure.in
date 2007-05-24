@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.626 2007/05/24 21:43:56 sniper Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.627 2007/05/24 23:31:15 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1196,9 +1196,6 @@ all_targets="$lcov_target \$(OVERALL_TARGET) \$(PHP_MODULES) \$(PHP_CLI_TARGET)"
 install_targets="$install_modules install-build install-headers install-programs"
 
 case $PHP_SAPI in
-  cgi)
-    install_targets="install-sapi $install_targets"
-    ;;
   cli)
     install_targets="$PHP_INSTALL_CLI_TARGET $install_targets"
     ;;

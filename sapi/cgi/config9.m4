@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.22 2007/02/20 20:10:53 tony2001 Exp $
+dnl $Id: config9.m4,v 1.23 2007/05/24 23:31:15 sniper Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -44,15 +44,15 @@ if test "$PHP_SAPI" = "default"; then
     PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/sapi/cgi/Makefile.frag)
     case $host_alias in
       *cygwin* )
-        SAPI_CGI_PATH=sapi/cgi/php.exe
+        SAPI_CGI_PATH=sapi/cgi/php-cgi.exe
         ;;
       * )
-        SAPI_CGI_PATH=sapi/cgi/php
+        SAPI_CGI_PATH=sapi/cgi/php-cgi
         ;;
     esac
     PHP_SUBST(SAPI_CGI_PATH)
 
-    INSTALL_IT="@echo \"Installing PHP CGI into: \$(INSTALL_ROOT)\$(bindir)/\"; \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/\$(program_prefix)php\$(program_suffix)\$(EXEEXT)"
+    INSTALL_IT="@echo \"Installing PHP CGI into: \$(INSTALL_ROOT)\$(bindir)/\"; \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/\$(program_prefix)php-cgi\$(program_suffix)\$(EXEEXT)"
     PHP_SELECT_SAPI(cgi, program, fastcgi.c cgi_main.c getopt.c, , '$(SAPI_CGI_PATH)')
 
     case $host_alias in

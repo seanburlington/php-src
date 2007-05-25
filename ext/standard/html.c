@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.11 2007/05/22 15:38:27 bjori Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.12 2007/05/25 14:09:02 bjori Exp $ */
 
 /*
  * HTML entity resources:
@@ -1224,7 +1224,7 @@ static void php_html_entities(INTERNAL_FUNCTION_PARAMETERS, int all)
 	char *replaced;
 	zend_bool double_encode = 1;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lsb", &str, &str_len, &quote_style, &hint_charset, &hint_charset_len, &double_encode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|ls!b", &str, &str_len, &quote_style, &hint_charset, &hint_charset_len, &double_encode) == FAILURE) {
 		return;
 	}
 

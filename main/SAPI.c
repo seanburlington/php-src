@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.13 2007/04/25 14:18:01 dmitry Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.14 2007/05/25 09:12:35 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -986,12 +986,14 @@ SAPI_API int sapi_get_target_gid(gid_t *obj TSRMLS_DC)
 
 SAPI_API time_t sapi_get_request_time(TSRMLS_D)
 {
+	if(SG(global_request_time)) return SG(global_request_time);
+
 	if (sapi_module.get_request_time) {
-		return sapi_module.get_request_time(TSRMLS_C);
+		SG(global_request_time) = (SG(server_context))?sapi_module.get_request_time(TSRMLS_C):time(0);
 	} else {
-		if(!SG(global_request_time)) SG(global_request_time) = time(0);
-		return SG(global_request_time);
+		SG(global_request_time) = time(0);
 	}
+	return SG(global_request_time);
 }
 
 /*

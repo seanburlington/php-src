@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.3.2.6 2007/05/21 13:32:35 mike Exp $ 
+dnl $Id: config.m4,v 1.28.2.3.2.7 2007/05/25 12:47:55 mike Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for cURL support,
@@ -57,7 +57,7 @@ if test "$PHP_CURL" != "no"; then
    
    save_CFLAGS="$CFLAGS"
    CFLAGS="`$CURL_CONFIG --cflags`"
-   save_LDFLAGS="$LDFALGS"
+   save_LDFLAGS="$LDFLAGS"
    LDFLAGS="`$CURL_CONFIG --libs` $ld_runpath_switch$CURL_DIR/$PHP_LIBDIR"
    
    AC_PROG_CPP

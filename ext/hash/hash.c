@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.34 2007/01/08 22:29:52 nlopess Exp $ */
+/* $Id: hash.c,v 1.35 2007/05/26 03:56:41 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -751,9 +751,9 @@ PHP_MINFO_FUNCTION(hash)
 		(type = zend_hash_get_current_key_ex(&php_hash_hashtable, &str, NULL, &idx, 0, &pos)) != HASH_KEY_NON_EXISTANT;
 		zend_hash_move_forward_ex(&php_hash_hashtable, &pos)) {
 #if (PHP_MAJOR_VERSION >= 6)
-		s += snprintf(s, e - s, "%s ", str.s);
+		s += slprintf(s, e - s, "%s ", str.s);
 #else
-		s += snprintf(s, e - s, "%s ", str);
+		s += slprintf(s, e - s, "%s ", str);
 #endif
 	}
 	*s = 0;

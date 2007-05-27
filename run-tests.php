@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.323 2007/05/20 18:29:43 helly Exp $ */
+/* $Id: run-tests.php,v 1.324 2007/05/27 19:22:24 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -105,7 +105,7 @@ if (getenv('TEST_PHP_EXECUTABLE')) {
 if (getenv('TEST_PHP_CGI_EXECUTABLE')) {
 	$php_cgi = getenv('TEST_PHP_CGI_EXECUTABLE');
 	if ($php_cgi=='auto') {
-		$php_cgi = $cwd.'/sapi/cgi/php';
+		$php_cgi = $cwd.'/sapi/cgi/php-cgi';
 		putenv("TEST_PHP_CGI_EXECUTABLE=$php_cgi");
 	}
 	$environment['TEST_PHP_CGI_EXECUTABLE'] = $php_cgi;
@@ -406,7 +406,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.323 $'."\n";
+					echo '$Revision: 1.324 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1078,9 +1078,9 @@ TEST $file
 		if (!strncasecmp(PHP_OS, "win", 3) && file_exists(dirname($php) ."/php-cgi.exe")) {
 			$old_php = $php;
 			$php = realpath(dirname($php) ."/php-cgi.exe") .' -C ';
-		} elseif (file_exists("./sapi/cgi/php")) {
+		} elseif (file_exists("./sapi/cgi/php-cgi")) {
 			$old_php = $php;
-			$php = realpath("./sapi/cgi/php") . ' -C ';
+			$php = realpath("./sapi/cgi/php-cgi") . ' -C ';
 		} else {
 			show_result("SKIP", $tested, $tested_file, $unicode_semantics, "reason: CGI not available");
 			return 'SKIPPED';

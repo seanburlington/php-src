@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.13 2007/05/27 15:45:18 nlopess Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.14 2007/05/27 15:57:11 nlopess Exp $ */
 
 /*
  * HTML entity resources:
@@ -1154,7 +1154,7 @@ encode_amp:
 					len += sizeof("&amp;") - 1;
 				} else {
 					char *e = memchr(old + i, ';', oldlen - i);
-					char *s = old + i + 1;
+					char *s = old + i;
 
 					if (!e || (e - s) > 10) { /* minor optimization to avoid "entities" over 10 chars in length */
 						goto encode_amp;

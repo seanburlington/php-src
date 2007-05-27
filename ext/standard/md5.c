@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.39.2.1.2.3 2007/05/27 14:50:09 sniper Exp $ */
+/* $Id: md5.c,v 1.39.2.1.2.4 2007/05/27 15:29:38 nlopess Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -28,7 +28,7 @@
 
 PHPAPI void make_digest(char *md5str, unsigned char *digest)
 {
-	make_digest_ex(md5str, digest, strlen(digest));
+	make_digest_ex(md5str, digest, 16);
 }
 
 PHPAPI void make_digest_ex(char *md5str, unsigned char *digest, int len)

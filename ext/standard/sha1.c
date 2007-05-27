@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sha1.c,v 1.13.2.1.2.2 2007/05/19 20:30:35 iliaa Exp $ */
+/* $Id: sha1.c,v 1.13.2.1.2.3 2007/05/27 14:50:09 sniper Exp $ */
 
 #include "php.h"
 
@@ -27,7 +27,7 @@
 
 PHPAPI void make_sha1_digest(char *sha1str, unsigned char *digest)
 {
-	return make_digest_ex(sha1str, digest, 20);
+	make_digest_ex(sha1str, digest, 20);
 }
 
 /* {{{ proto string sha1(string str [, bool raw_output])

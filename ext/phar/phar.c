@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.202 2007/05/27 15:47:51 helly Exp $ */
+/* $Id: phar.c,v 1.203 2007/05/27 16:54:36 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -763,7 +763,8 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 			MAPPHAR_ALLOC_FAIL("internal corruption of phar \"%s\" (truncated manifest at script end)")
 		}
 		if ((char) nextchar == '\r') {
-			if (EOF == (nextchar = php_stream_getc(fp))) {
+			/* if we have an \r we require an \n as well */
+			if (EOF == (nextchar = php_stream_getc(fp)) || (char)nextchar != '\n') {
 				MAPPHAR_ALLOC_FAIL("internal corruption of phar \"%s\" (truncated manifest at script end)")
 			}
 			halt_offset++;
@@ -2097,7 +2098,7 @@ static int phar_flush_clean_deleted_apply(void *data TSRMLS_DC) /* {{{ */
  */
 int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **error TSRMLS_DC) /* {{{ */
 {
-	static const char newstub[] = "<?php __HALT_COMPILER();";
+	static const char newstub[] = "<?php __HALT_COMPILER(); ?>\r\n";
 	phar_entry_info *entry;
 	int halt_offset, restore_alias_len, global_flags = 0, closeoldfile;
 	char *buf, *pos;
@@ -2111,6 +2112,7 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 	php_stream_filter *filter;
 	php_serialize_data_t metadata_hash;
 	smart_str main_metadata_str = {0};
+	int free_user_stub;
 
 	if (error) {
 		*error = NULL;
@@ -2148,7 +2150,7 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 				}
 				php_stream_close(newfile);
 				if (error) {
-					spprintf(error, 0, "unable to read resource to copy stub to new phar \"%s\"", archive->fname);
+					spprintf(error, 0, "unable to access resource to copy stub to new phar \"%s\"", archive->fname);
 				}
 				return EOF;
 			}
@@ -2157,41 +2159,53 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			} else {
 				len = -len;
 			}
-			offset = php_stream_copy_to_stream(stubfile, newfile, len);
-			if (len != offset && len != PHP_STREAM_COPY_ALL) {
+			user_stub = 0;
+			if (!(len = php_stream_copy_to_mem(stubfile, &user_stub, len, 0)) || !user_stub) {
 				if (closeoldfile) {
 					php_stream_close(oldfile);
 				}
 				php_stream_close(newfile);
 				if (error) {
-					spprintf(error, 0, "unable to copy stub from resource to new phar \"%s\"", archive->fname);
+					spprintf(error, 0, "unable to read resource to copy stub to new phar \"%s\"", archive->fname);
 				}
 				return EOF;
 			}
-			archive->halt_offset = offset;
+			free_user_stub = 1;
 		} else {
-			if ((pos = strstr(user_stub, "__HALT_COMPILER();")) == NULL)
-			{
-				if (closeoldfile) {
-					php_stream_close(oldfile);
-				}
-				php_stream_close(newfile);
-				if (error) {
-					spprintf(error, 0, "illegal stub for phar \"%s\"", archive->fname);
-				}
-				return EOF;
+			free_user_stub = 0;
+		}
+		if ((pos = strstr(user_stub, "__HALT_COMPILER();")) == NULL)
+		{
+			if (closeoldfile) {
+				php_stream_close(oldfile);
 			}
-			if ((size_t)len != php_stream_write(newfile, user_stub, len)) {
-				if (closeoldfile) {
-					php_stream_close(oldfile);
-				}
-				php_stream_close(newfile);
-				if (error) {
-					spprintf(error, 0, "unable to create stub from string in new phar \"%s\"", archive->fname);
-				}
-				return EOF;
+			php_stream_close(newfile);
+			if (error) {
+				spprintf(error, 0, "illegal stub for phar \"%s\"", archive->fname);
 			}
-			archive->halt_offset = len;
+			if (free_user_stub) {
+				efree(user_stub);
+			}
+			return EOF;
+		}
+		len = pos - user_stub + 18;
+		if ((size_t)len != php_stream_write(newfile, user_stub, len)
+		||            5 != php_stream_write(newfile, " ?>\r\n", 5)) {
+			if (closeoldfile) {
+				php_stream_close(oldfile);
+			}
+			php_stream_close(newfile);
+			if (error) {
+				spprintf(error, 0, "unable to create stub from string in new phar \"%s\"", archive->fname);
+			}
+			if (free_user_stub) {
+				efree(user_stub);
+			}
+			return EOF;
+		}
+		archive->halt_offset = len + 5;
+		if (free_user_stub) {
+			efree(user_stub);
 		}
 	} else {
 		if (archive->halt_offset && oldfile && !archive->is_brandnew) {
@@ -3478,7 +3492,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.202 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.203 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

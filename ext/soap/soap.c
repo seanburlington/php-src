@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.24 2007/05/06 17:21:13 iliaa Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.25 2007/05/27 17:46:46 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -314,11 +314,11 @@ ZEND_BEGIN_ARG_INFO(__call_args, 0)
 	ZEND_ARG_PASS_INFO(0)
 ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(__soap_call_args, 0, 0, 2)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(1)
+	ZEND_ARG_INFO(0, function_name)
+	ZEND_ARG_INFO(0, arguments)
+	ZEND_ARG_INFO(0, options)
+	ZEND_ARG_INFO(0, input_headers)
+	ZEND_ARG_INFO(1, output_headers)
 ZEND_END_ARG_INFO()
 #else
 unsigned char __call_args[] = { 2, BYREF_NONE, BYREF_NONE };

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.140 2007/05/16 19:58:58 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.141 2007/05/28 23:43:24 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -830,7 +830,7 @@ static PHP_METHOD(PDO, setAttribute)
 
 	PDO_CONSTRUCT_CHECK;
 
-	if (pdo_dbh_attribute_set(dbh, attr, value TSRMLS_CC)) {
+	if (pdo_dbh_attribute_set(dbh, attr, value TSRMLS_CC) != FAILURE) {
  		RETURN_TRUE;
  	}
  	RETURN_FALSE;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.60 2007/04/10 07:08:51 tony2001 Exp $ */
+/* $Id: mysql_statement.c,v 1.61 2007/05/28 23:43:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -363,6 +363,7 @@ static int pdo_mysql_stmt_fetch(pdo_stmt_t *stmt,
 #endif
 
 	if (!S->result) {
+		strcpy(stmt->error_code, "HY000");
 		return 0;	
 	}
 	if ((S->current_data = mysql_fetch_row(S->result)) == NULL) {

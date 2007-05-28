@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.324 2007/05/27 19:22:24 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.325 2007/05/28 23:52:13 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -406,7 +406,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.324 $'."\n";
+					echo '$Revision: 1.325 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1391,6 +1391,15 @@ TEST $file
 	} elseif (array_key_exists('POST', $section_text) && !empty($section_text['POST'])) {
 
 		$post = trim($section_text['POST']);
+
+		if (array_key_exists('GZIP_POST', $section_text) && function_exists('gzencode')) {
+			$post = gzencode($post, 9, FORCE_GZIP);
+			$env['HTTP_CONTENT_ENCODING'] = 'gzip';
+		} else if (array_key_exists('DEFLATE_POST', $section_text) && function_exists('gzcompress')) {
+			$post = gzcompress($post, 9);
+			$env['HTTP_CONTENT_ENCODING'] = 'deflate';
+		}
+
 		save_text($tmp_post, $post);
 		$content_length = strlen($post);
 

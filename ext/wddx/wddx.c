@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.144 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: wddx.c,v 1.145 2007/05/28 23:00:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -984,6 +984,9 @@ static void php_wddx_pop_element(void *user_data, const XML_Char *name)
 									goto bigint;
 								}
 								l = (long) d;
+								if (l != d) {
+									goto bigint;
+								}
 							case IS_LONG:
 								zend_hash_index_update(target_hash, l, &ent1->data, sizeof(zval *), NULL);
 								break;
@@ -1034,10 +1037,9 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 					Z_STRVAL_P(ent->data) = estrndup(decoded, decoded_len);
 					Z_STRLEN_P(ent->data) = decoded_len;
 				} else {
-					Z_STRVAL_P(ent->data) = erealloc(Z_STRVAL_P(ent->data),
-							Z_STRLEN_P(ent->data) + decoded_len + 1);
-					strncpy(Z_STRVAL_P(ent->data)+Z_STRLEN_P(ent->data), decoded, decoded_len);
 					Z_STRLEN_P(ent->data) += decoded_len;
+					Z_STRVAL_P(ent->data) = erealloc(Z_STRVAL_P(ent->data), Z_STRLEN_P(ent->data) + 1);
+					strlcpy(Z_STRVAL_P(ent->data) + Z_STRLEN_P(ent->data), decoded, Z_STRLEN_P(ent->data) + 1);
 					Z_STRVAL_P(ent->data)[Z_STRLEN_P(ent->data)] = '\0';
 				}
 

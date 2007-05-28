@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.39 2007/01/31 00:15:06 iliaa Exp $ */
+/* $Id: shmop.c,v 1.40 2007/05/28 23:00:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -179,6 +179,11 @@ PHP_FUNCTION(shmop_open)
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid access mode");
 			goto err;
+	}
+
+	if (shmop->shmflg & IPC_CREAT && shmop->size < 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Shared memory segment size must be greater then zero.");
+		goto err;
 	}
 
 	shmop->shmid = shmget(shmop->key, shmop->size, shmop->shmflg);

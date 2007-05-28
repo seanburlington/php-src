@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.75 2007/01/01 09:29:33 sebastian Exp $ */
+/* $Id: sysvshm.c,v 1.76 2007/05/28 23:00:24 iliaa Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -117,6 +117,11 @@ PHP_FUNCTION(shm_attach)
 	if (SUCCESS != zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l|ll", &shm_key, &shm_size, &shm_flag)) {
 		RETURN_FALSE;
 	}
+
+	if (shm_size < 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Segment size must be greater then zero.");
+		RETURN_FALSE;
+  	}
 
 	shm_list_ptr = (sysvshm_shm *) emalloc(sizeof(sysvshm_shm));
 

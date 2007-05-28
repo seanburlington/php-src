@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.322 2007/05/21 09:08:25 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.323 2007/05/28 08:12:11 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1253,8 +1253,6 @@ consult the installation file that came with this distribution, or visit \n\
 		}
 	}
 
-	/* for windows, socket listening is broken in the fastcgi library itself
-	   so dissabling this feature on windows till time is available to fix it */
 	if (bindpath) {
 		fcgi_fd = fcgi_listen(bindpath, 128);
 		if (fcgi_fd < 0) {

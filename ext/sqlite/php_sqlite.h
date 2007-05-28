@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: php_sqlite.h,v 1.36 2007/01/01 09:29:30 sebastian Exp $ 
+   $Id: php_sqlite.h,v 1.37 2007/05/28 23:33:12 iliaa Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -38,7 +38,6 @@ extern zend_module_entry sqlite_module_entry;
 
 PHP_MINIT_FUNCTION(sqlite);
 PHP_MSHUTDOWN_FUNCTION(sqlite);
-PHP_RINIT_FUNCTION(sqlite);
 PHP_RSHUTDOWN_FUNCTION(sqlite);
 PHP_MINFO_FUNCTION(sqlite);
 

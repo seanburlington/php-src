@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_udf.c,v 1.11 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: php_ibase_udf.c,v 1.12 2007/05/28 23:33:13 iliaa Exp $ */
 
 /**
 * This UDF library adds the ability to call PHP functions from SQL
@@ -145,7 +145,7 @@ static void __attribute__((destructor)) fini()
 void exec_php(BLOBCALLBACK b, PARAMDSC *res, ISC_SHORT *init)
 {
 	int result, remaining = b->blob_total_length, i = 0;
-	char *code = malloc(remaining+1);
+	char *code = pemalloc(remaining+1, 1);
 	ISC_USHORT read;
 
 	for (code[remaining] = '\0'; remaining > 0; remaining -= read)

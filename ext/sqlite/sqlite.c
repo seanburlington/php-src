@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.201 2007/01/03 20:49:27 tony2001 Exp $
+   $Id: sqlite.c,v 1.202 2007/05/28 23:33:12 iliaa Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -81,7 +81,7 @@ extern int sqlite_encode_binary(const unsigned char *in, int n, unsigned char *o
 extern int sqlite_decode_binary(const unsigned char *in, unsigned char *out);
 
 #define php_sqlite_encode_binary(in, n, out) sqlite_encode_binary((const unsigned char *)in, n, (unsigned char *)out)
-#define php_sqlite_decode_binary(in, out)    sqlite_decode_binary((const unsigned char *)in, (unsigned char *)out)
+#define php_sqlite_decode_binary(in, out) in && *in ? sqlite_decode_binary((const unsigned char *)in, (unsigned char *)out) : 0
 
 static int sqlite_count_elements(zval *object, long *count TSRMLS_DC);
 
@@ -341,7 +341,7 @@ zend_module_entry sqlite_module_entry = {
 	sqlite_functions,
 	PHP_MINIT(sqlite),
 	PHP_MSHUTDOWN(sqlite),
-	PHP_RINIT(sqlite),
+	NULL,
 	PHP_RSHUTDOWN(sqlite),
 	PHP_MINFO(sqlite),
 #if ZEND_MODULE_API_NO >= 20010901
@@ -1220,7 +1220,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.201 2007/01/03 20:49:27 tony2001 Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.202 2007/05/28 23:33:12 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

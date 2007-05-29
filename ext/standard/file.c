@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.489 2007/05/18 20:34:07 tony2001 Exp $ */
+/* $Id: file.c,v 1.490 2007/05/29 20:48:38 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1136,6 +1136,11 @@ PHPAPI PHP_FUNCTION(fgets)
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "r|l", &zstream, &length) == FAILURE) {
 		RETURN_NULL();
+	}
+
+	if (length <= 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater than 0");
+		RETURN_FALSE;
 	}
 
 	if (length == 1) {

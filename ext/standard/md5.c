@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.50 2007/05/28 23:14:57 iliaa Exp $ */
+/* $Id: md5.c,v 1.51 2007/05/29 08:01:23 tony2001 Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -75,7 +75,7 @@ PHP_NAMED_FUNCTION(php_if_md5)
 	if (raw_output) {
 		RETVAL_STRINGL((char*)digest, 16, 1);
 	} else {
-		make_digest_ex(md5str, digest. 16);
+		make_digest_ex(md5str, digest, 16);
 		RETVAL_ASCII_STRING(md5str, ZSTR_DUPLICATE);
 	}
 

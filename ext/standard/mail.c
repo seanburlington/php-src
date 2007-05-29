@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.91 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: mail.c,v 1.92 2007/05/29 20:11:23 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -47,8 +47,8 @@
 
 #define SKIP_LONG_HEADER_SEP(str, pos)										\
 	if (str[pos] == '\r' && str[pos + 1] == '\n' && (str[pos + 2] == ' ' || str[pos + 2] == '\t')) {	\
-		pos += 3;											\
-		while (str[pos] == ' ' || str[pos] == '\t') {							\
+		pos += 2;											\
+		while (str[pos + 1] == ' ' || str[pos + 1] == '\t') {							\
 			pos++;											\
 		}												\
 		continue;											\

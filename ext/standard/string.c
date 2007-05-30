@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.52.2.13 2007/05/24 21:31:05 rasmus Exp $ */
+/* $Id: string.c,v 1.333.2.52.2.14 2007/05/30 00:35:41 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1511,11 +1511,18 @@ static PHP_ATTRIBUTE_MALLOC char *php_chunk_split(char *src, int srclen, char *e
 	char *p, *q;
 	int chunks; /* complete chunks! */
 	int restlen;
+	int out_len;
 
 	chunks = srclen / chunklen;
 	restlen = srclen - chunks * chunklen; /* srclen % chunklen */
 
-	dest = safe_emalloc(sizeof(char), (srclen + (chunks + 1) * endlen + 1), 0);
+	out_len = (srclen + (chunks + 1) * endlen + 1);
+
+	if (out_len > INT_MAX || out_len <= 0) {
+		return NULL;
+	}
+
+	dest = safe_emalloc(out_len, sizeof(char), 0);
 
 	for (p = src, q = dest; p < (src + srclen - chunklen + 1); ) {
 		memcpy(q, p, chunklen);

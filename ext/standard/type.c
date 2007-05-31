@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.51 2007/05/17 17:29:09 tony2001 Exp $ */
+/* $Id: type.c,v 1.52 2007/05/31 21:36:56 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -215,7 +215,7 @@ PHP_FUNCTION(strval)
 }
 /* }}} */
 
-static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
+static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type) /* {{{ */
 {
 	zval *arg;
 
@@ -274,7 +274,7 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 		RETURN_FALSE;
 	}
 }
-
+/* }}} */
 
 /* {{{ proto bool is_null(mixed var) U
    Returns true if variable is null */

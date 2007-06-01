@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.172 2007/05/04 21:57:22 sniper Exp $
+dnl $Id: config.m4,v 1.173 2007/06/01 21:33:30 sniper Exp $
 dnl
 
 dnl
@@ -383,7 +383,7 @@ dnl T1LIB support is gdlib independent
 
     PHP_TEST_BUILD(foobar, [], [
       AC_MSG_ERROR([GD build test failed. Please check the config.log for details.])
-    ], [ -L$GD_LIB $GD_SHARED_LIBADD ], [char foobar () {}])
+    ], [ $GD_SHARED_LIBADD ], [char foobar () {}])
   else
     GD_INCDIR=`$GDLIB_CONFIG --includedir`
     GD_CFLAGS=`$GDLIB_CONFIG --cflags`

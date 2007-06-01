@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.82 2007/02/07 09:35:09 tony2001 Exp $ */
+/* $Id: sapi_apache2.c,v 1.83 2007/06/01 10:02:41 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -646,11 +646,17 @@ zend_first_try {
 	return OK;
 }
 
+static void php_apache_child_init(apr_pool_t *pchild, server_rec *s)
+{
+	apr_pool_cleanup_register(pchild, NULL, php_apache_server_shutdown, apr_pool_cleanup_null);
+}
+
 void php_ap2_register_hook(apr_pool_t *p)
 {
 	ap_hook_pre_config(php_pre_config, NULL, NULL, APR_HOOK_MIDDLE);
 	ap_hook_post_config(php_apache_server_startup, NULL, NULL, APR_HOOK_MIDDLE);
 	ap_hook_handler(php_handler, NULL, NULL, APR_HOOK_MIDDLE);
+	ap_hook_child_init(php_apache_child_init, NULL, NULL, APR_HOOK_MIDDLE);
 }
 
 /*

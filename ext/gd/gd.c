@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.375 2007/05/22 09:44:55 tony2001 Exp $ */
+/* $Id: gd.c,v 1.376 2007/06/02 15:41:02 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1560,7 +1560,7 @@ PHP_FUNCTION(imagecreatetruecolor)
 		return;
 	}
 
-	if (x_size <= 0 || y_size <= 0) {
+	if (x_size <= 0 || y_size <= 0 ||  x_size >= INT_MAX || y_size >= INT_MAX) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid image dimensions");
 		RETURN_FALSE;
 	}
@@ -2109,7 +2109,7 @@ PHP_FUNCTION(imagecreate)
 		return;
 	}
 
-	if (x_size <= 0 || y_size <= 0) {
+	if (x_size <= 0 || y_size <= 0 ||  x_size >= INT_MAX || y_size >= INT_MAX) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid image dimensions");
 		RETURN_FALSE;
 	}

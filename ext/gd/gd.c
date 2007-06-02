@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.26 2007/05/22 10:22:49 tony2001 Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.27 2007/06/02 15:38:09 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1718,7 +1718,9 @@ PHP_FUNCTION(imagecreatetruecolor)
 	convert_to_long_ex(x_size);
 	convert_to_long_ex(y_size);
 
-	if (Z_LVAL_PP(x_size) <= 0 || Z_LVAL_PP(y_size) <= 0) {
+	if (Z_LVAL_PP(x_size) <= 0 || Z_LVAL_PP(y_size) <= 0 ||
+			Z_LVAL_PP(x_size) >= INT_MAX || Z_LVAL_PP(y_size) >= INT_MAX 
+		) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid image dimensions");
 		RETURN_FALSE;
 	}
@@ -2326,7 +2328,9 @@ PHP_FUNCTION(imagecreate)
 	convert_to_long_ex(x_size);
 	convert_to_long_ex(y_size);
 
-	if (Z_LVAL_PP(x_size) <= 0 || Z_LVAL_PP(y_size) <= 0) {
+	if (Z_LVAL_PP(x_size) <= 0 || Z_LVAL_PP(y_size) <= 0 ||
+			Z_LVAL_PP(x_size) >= INT_MAX || Z_LVAL_PP(y_size) >= INT_MAX
+		) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid image dimensions");
 		RETURN_FALSE;
 	}

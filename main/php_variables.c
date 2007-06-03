@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.139 2007/06/03 16:19:55 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.140 2007/06/03 16:53:37 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -146,7 +146,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 				zval_dtor(val);
 
 				if (!PG(display_errors)) {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Input variable nesting level more than allowed %ld (change max_input_nesting_level in php.ini to increase the limit)", PG(max_input_nesting_level));
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Input variable nesting level exceeded %ld. To increase the limit change max_input_nesting_level in php.ini.", PG(max_input_nesting_level));
 				}
 				return;
 			}

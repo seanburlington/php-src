@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.13.2.12 2007/06/03 16:29:24 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.45.2.13.2.13 2007/06/03 16:54:46 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -143,7 +143,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 				zval_dtor(val);
 
 				if (!PG(display_errors)) {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Input variable nesting level more than allowed %ld (change max_input_nesting_level in php.ini to increase the limit)", PG(max_input_nesting_level));
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Input variable nesting level exceeded %ld. To increase the limit change max_input_nesting_level in php.ini.", PG(max_input_nesting_level));
 				}
 				return;
 			}

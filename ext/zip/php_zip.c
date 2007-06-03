@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.34 2007/06/03 19:47:17 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.1.2.35 2007/06/03 21:21:57 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 			len = spprintf(&file_dirname_fullpath, 0, "%s", dest);
 		}
 
-		php_basename(file, file_len, NULL, 0, &file_basename, (unsigned int *)&file_basename_len TSRMLS_CC);
+		php_basename(file, file_len, NULL, 0, &file_basename, (size_t *)&file_basename_len TSRMLS_CC);
 
 		if (OPENBASEDIR_CHECKPATH(file_dirname_fullpath)) {
 			efree(file_dirname_fullpath);
@@ -1005,7 +1005,6 @@ static ZIPARCHIVE_METHOD(addEmptyDir)
 	}
 
     if (dirname[dirname_len-1] != '/') {
-
 		s=(char *)emalloc(dirname_len+2);
 		strcpy(s, dirname);
 		s[dirname_len] = '/';
@@ -1016,14 +1015,23 @@ static ZIPARCHIVE_METHOD(addEmptyDir)
 
 	idx = zip_stat(intern, s, 0, &sb);
 	if (idx >= 0) {
-		RETURN_FALSE;
+		RETVAL_FALSE;
+	} else {
+		/* reset the error */
+		if (intern->error.str) {
+			_zip_error_fini(&intern->error);
+		}
+		_zip_error_init(&intern->error);
+
+		if (zip_add_dir(intern, (const char *)s) == -1) {
+			RETVAL_FALSE;
+		}
+		RETVAL_TRUE;
 	}
 
-	if (zip_add_dir(intern, (const char *)s) == -1) {
-		RETURN_FALSE;
+	if (s != dirname) {
+		efree(s);
 	}
-
-	RETURN_TRUE;
 }
 /* }}} */
 
@@ -2042,7 +2050,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.34 2007/06/03 19:47:17 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.35 2007/06/03 21:21:57 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

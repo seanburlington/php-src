@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17.4.1 2007/06/03 20:27:16 sniper Exp $
+dnl $Id: config.m4,v 1.17.4.2 2007/06/03 21:54:35 sniper Exp $
 dnl
 
 RESULT=no
@@ -24,7 +24,7 @@ if test "$PHP_ISAPI" != "no"; then
   PHP_SELECT_SAPI(isapi, shared, php5isapi.c)
   INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$ZEUSPATH/web/bin/"
   RESULT=yes
-])
+fi
 AC_MSG_RESULT($RESULT)
 
 dnl ## Local Variables:

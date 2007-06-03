@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2007/06/03 20:26:45 sniper Exp $
+dnl $Id: config.m4,v 1.9 2007/06/03 21:57:31 sniper Exp $
 dnl 
 
 RESULT=no
@@ -21,7 +21,7 @@ if test "$PHP_PHTTPD" != "no"; then
   PHP_SELECT_SAPI(phttpd, shared, phttpd.c)
   INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PHP_PHTTPD/modules/"
   RESULT=yes
-])
+fi
 AC_MSG_RESULT($RESULT)
 
 dnl ## Local Variables:

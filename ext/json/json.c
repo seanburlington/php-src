@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.25 2007/04/23 10:48:13 tony2001 Exp $ */
+/* $Id: json.c,v 1.26 2007/06/04 23:52:34 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -363,7 +363,7 @@ static void json_encode_r(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
                 double dbl = Z_DVAL_P(val);
 
                 if (!zend_isinf(dbl) && !zend_isnan(dbl)) {
-                    len = spprintf(&d, 0, "%.9g", dbl);
+		    len = spprintf(&d, 0, "%.*g", (int) EG(precision), dbl);
                     if (d) {
                         if (dbl > LONG_MAX && !memchr(d, '.', len)) {
                             smart_str_append_unsigned(buf, (unsigned long)Z_DVAL_P(val));

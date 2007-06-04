@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.140 2007/06/03 16:53:37 sniper Exp $ */
+/* $Id: php_variables.c,v 1.141 2007/06/04 07:56:39 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -136,11 +136,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 				HashTable *ht;
 				/* too many levels of nesting */
 
-				if (track_vars_array) {
-					ht = Z_ARRVAL_P(track_vars_array);
-				} else if (PG(register_globals)) {
-					ht = EG(active_symbol_table);
-				}
+				ht = Z_ARRVAL_P(track_vars_array);
 
 				zend_hash_del(ht, var, var_len + 1);
 				zval_dtor(val);

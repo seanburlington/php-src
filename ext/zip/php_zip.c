@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.46 2007/06/03 21:35:39 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.47 2007/06/04 06:38:08 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1015,12 +1015,12 @@ static ZIPARCHIVE_METHOD(addEmptyDir)
 		RETURN_FALSE;
 	}
 
-    if (dirname[dirname_len-1] != '/') {
+	if (dirname[dirname_len-1] != '/') {
 		s=(char *)emalloc(dirname_len+2);
 		strcpy(s, dirname);
 		s[dirname_len] = '/';
 		s[dirname_len+1] = '\0';
-    } else {
+	} else {
 		s = dirname;
 	}
 
@@ -2145,7 +2145,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.46 2007/06/03 21:35:39 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.47 2007/06/04 06:38:08 tony2001 Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

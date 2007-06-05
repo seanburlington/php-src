@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.26 2007/04/24 14:11:28 iliaa Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.27 2007/06/05 10:03:12 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,7 +238,7 @@ next_iter:
 
 /* {{{ sxe_prop_dim_read()
  */
-static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, zend_bool attribs, zend_bool silent TSRMLS_DC)
+static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, zend_bool attribs, int type TSRMLS_DC)
 {
 	zval           *return_value;
 	php_sxe_object *sxe;
@@ -248,6 +248,12 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 	zval            tmp_zv;
 	int             nodendx = 0;
 	int             test = 0;
+
+	if (!member) {
+		return_value = &EG(uninitialized_zval);
+		return_value->is_ref = 1;
+		return return_value;
+	}
 
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 
@@ -357,7 +363,7 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
  */
 static zval * sxe_property_read(zval *object, zval *member, int type TSRMLS_DC)
 {
-	return sxe_prop_dim_read(object, member, 1, 0, type == BP_VAR_IS TSRMLS_CC);
+	return sxe_prop_dim_read(object, member, 1, 0, type TSRMLS_CC);
 }
 /* }}} */
 
@@ -365,7 +371,7 @@ static zval * sxe_property_read(zval *object, zval *member, int type TSRMLS_DC)
  */
 static zval * sxe_dimension_read(zval *object, zval *offset, int type TSRMLS_DC)
 {
-	return sxe_prop_dim_read(object, offset, 0, 1, 0 TSRMLS_CC);
+	return sxe_prop_dim_read(object, offset, 0, 1, type TSRMLS_CC);
 }
 /* }}} */
 
@@ -2368,7 +2374,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.26 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.27 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

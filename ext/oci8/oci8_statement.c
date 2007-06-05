@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.23 2007/03/01 22:27:44 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.24 2007/06/05 07:49:00 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -82,7 +82,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 			php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 
 #if HAVE_OCI_STMT_PREPARE2
-			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, OCI_STRLS_CACHE_DELETE));
+			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, OCI_DEFAULT));
 			PHP_OCI_CALL(OCIHandleFree,(statement->err, OCI_HTYPE_ERROR));
 #else
 			PHP_OCI_CALL(OCIHandleFree,(statement->stmt, OCI_HTYPE_STMT));
@@ -733,7 +733,7 @@ void php_oci_statement_free(php_oci_statement *statement TSRMLS_DC)
  	if (statement->stmt) {
 #if HAVE_OCI_STMT_PREPARE2
 		if (statement->last_query_len) { /* FIXME: magical */
-			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, OCI_STRLS_CACHE_DELETE));
+			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, OCI_DEFAULT));
 		} else {
 			PHP_OCI_CALL(OCIHandleFree, (statement->stmt, OCI_HTYPE_STMT));
 		}

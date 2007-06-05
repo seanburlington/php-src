@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.133 2007/06/05 12:02:38 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.134 2007/06/05 13:51:29 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -982,7 +982,7 @@ SPL_METHOD(SplFileInfo, getLinkTarget)
 	}
 
 #ifdef HAVE_SYMLINK
-	ret = readlink(intern->file_name, buff, MAXPATHLEN-1);
+	ret = readlink(intern->file_name.s, buff, MAXPATHLEN-1);
 #else
 	ret = -1; /* always fail if not implemented */
 #endif

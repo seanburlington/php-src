@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.132 2007/03/04 12:13:20 helly Exp $ */
+/* $Id: spl_directory.c,v 1.133 2007/06/05 12:02:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -981,7 +981,11 @@ SPL_METHOD(SplFileInfo, getLinkTarget)
 		link = intern->file_name.s;
 	}
 
-	ret = readlink(link, buff, MAXPATHLEN-1);
+#ifdef HAVE_SYMLINK
+	ret = readlink(intern->file_name, buff, MAXPATHLEN-1);
+#else
+	ret = -1; /* always fail if not implemented */
+#endif
 
 	if (ret == -1) {
 		zend_throw_exception_ex(spl_ce_RuntimeException, 0 TSRMLS_CC, "Unable to read link %R, error: %s", intern->file_name_type, intern->file_name, strerror(errno));

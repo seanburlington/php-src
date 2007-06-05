@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.35 2007/05/28 23:52:13 iliaa Exp $ */
+/* $Id: php_content_types.c,v 1.36 2007/06/05 11:24:37 tony2001 Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -52,7 +52,7 @@ SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
 		if ((PG(always_populate_raw_post_data) || NULL == SG(request_info).post_entry) && SG(request_info).post_data) {
 			length = SG(request_info).post_data_length;
 			data = estrndup(SG(request_info).post_data, length);
-			SET_VAR_STRINGL("HTTP_RAW_POST_DATA", data, length);
+			SET_VAR_ASCII_STRINGL("HTTP_RAW_POST_DATA", data, length);
 		}
 	}
 

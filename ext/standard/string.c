@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.61 2007/06/06 17:59:07 stas Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.62 2007/06/06 18:15:41 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1969,7 +1969,7 @@ static char *php_chunk_split(char *src, int srclen, char *end, int endlen, int c
 		return NULL;
 	}
 	out_len = chunks + 1;
-	if(out_len > INT_MAX/endlen) {
+	if(endlen !=0 && out_len > INT_MAX/endlen) {
 		return NULL;
 	}
 	out_len *= endlen;

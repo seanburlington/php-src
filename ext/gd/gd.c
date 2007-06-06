@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.28 2007/06/03 17:46:18 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.29 2007/06/06 09:45:43 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1740,6 +1740,10 @@ PHP_FUNCTION(imagecreatetruecolor)
 
 	im = gdImageCreateTrueColor(Z_LVAL_PP(x_size), Z_LVAL_PP(y_size));
 
+	if (!im) {
+		RETURN_FALSE;
+	}
+
 	ZEND_REGISTER_RESOURCE(return_value, im, le_gd);
 }
 /* }}} */
@@ -2349,6 +2353,10 @@ PHP_FUNCTION(imagecreate)
 	}
 
 	im = gdImageCreate(Z_LVAL_PP(x_size), Z_LVAL_PP(y_size));
+
+	if (!im) {
+		RETURN_FALSE;
+	}
 
 	ZEND_REGISTER_RESOURCE(return_value, im, le_gd);
 }

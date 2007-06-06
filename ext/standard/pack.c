@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.40.2.7.2.6 2007/01/01 09:46:48 sebastian Exp $ */
+/* $Id: pack.c,v 1.40.2.7.2.7 2007/06/06 22:04:34 iliaa Exp $ */
 
 #include "php.h"
 
@@ -635,6 +635,12 @@ PHP_FUNCTION(unpack)
 			/* Use sizeof(double) bytes of input */
 			case 'd':
 				size = sizeof(double);
+				break;
+
+			default:
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid format type %c", type);
+				zval_dtor(return_value);
+				RETURN_FALSE;
 				break;
 		}
 

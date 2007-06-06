@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.641 2007/06/06 20:06:43 stas Exp $ */
+/* $Id: string.c,v 1.642 2007/06/06 21:55:18 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2919,7 +2919,7 @@ PHP_FUNCTION(strripos)
 			u_e = haystack.u + haystack_len - needle_len;
 		} else {
 			u_p = haystack.u;
-			if (-offset > haystack_len || -offset < 0) {
+			if (-offset > haystack_len || offset < -INT_MAX) {
 				RETURN_FALSE;
 			} else {
 				cu_offset = haystack_len;
@@ -2957,7 +2957,7 @@ PHP_FUNCTION(strripos)
 				e = haystack.s + haystack_len - 1;
 			} else {
 				p = haystack.s;
-				if (-offset > haystack_len || -offset < 0) {
+				if (-offset > haystack_len || offset < INT_MAX) {
 					RETURN_FALSE;
 				} else {
 					e = haystack.s + haystack_len + offset;
@@ -2988,7 +2988,7 @@ PHP_FUNCTION(strripos)
 			p = haystack_dup + offset;
 			e = haystack_dup + haystack_len - needle_len;
 		} else {
-			if (-offset > haystack_len || -offset < 0) {
+			if (-offset > haystack_len || offset < -INT_MAX) {
 				efree(haystack_dup);
 				efree(needle_dup);
 				RETURN_FALSE;

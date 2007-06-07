@@ -16,7 +16,7 @@
 ** sqliteRegisterDateTimeFunctions() found at the bottom of the file.
 ** All other code has file scope.
 **
-** $Id: date.c,v 1.6 2007/01/01 09:29:30 sebastian Exp $
+** $Id: date.c,v 1.7 2007/06/07 09:07:12 tony2001 Exp $
 **
 ** NOTES:
 **
@@ -418,6 +418,9 @@ static double localtimeOffset(DateTime *p){
   t = (x.rJD-2440587.5)*86400.0 + 0.5;
   sqliteOsEnterMutex();
   pTm = php_localtime_r(&t, &tmbuf);
+  if (!pTm) {
+	  return 0;
+  }
   y.Y = pTm->tm_year + 1900;
   y.M = pTm->tm_mon + 1;
   y.D = pTm->tm_mday;

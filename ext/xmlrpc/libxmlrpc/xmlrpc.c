@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.10 2007/01/01 09:29:33 sebastian Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.11 2007/06/07 09:07:12 tony2001 Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -43,6 +43,9 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.10 2007/01/01 09:29:33 sebas
  *   9/1999 - 10/2000
  * HISTORY
  *   $Log: xmlrpc.c,v $
+ *   Revision 1.11  2007/06/07 09:07:12  tony2001
+ *   php_localtime_r() checks
+ *
  *   Revision 1.10  2007/01/01 09:29:33  sebastian
  *   Bump year.
  *
@@ -239,6 +242,9 @@ static int date_from_ISO8601 (const char *text, time_t * value) {
 static int date_to_ISO8601 (time_t value, char *buf, int length) {
    struct tm *tm, tmbuf;
    tm = php_localtime_r(&value, &tmbuf);
+   if (!tm) {
+	   return 0;
+   }
 #if 0  /* TODO: soap seems to favor this method. xmlrpc the latter. */
 	return strftime (buf, length, "%Y-%m-%dT%H:%M:%SZ", tm);
 #else

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.278 2007/04/02 12:42:18 sniper Exp $ */
+/* $Id: info.c,v 1.279 2007/06/07 09:07:12 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1002,7 +1002,7 @@ PHPAPI char *php_logo_guid()
 	the_time = time(NULL);
 	ta = php_localtime_r(&the_time, &tmbuf);
 
-	if ((ta->tm_mon==3) && (ta->tm_mday==1)) {
+	if (ta && (ta->tm_mon==3) && (ta->tm_mday==1)) {
 		logo_guid = PHP_EGG_LOGO_GUID;
 	} else {
 		logo_guid = PHP_LOGO_GUID;

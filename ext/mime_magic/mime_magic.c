@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.56 2007/05/28 23:33:13 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.57 2007/06/07 08:46:32 tony2001 Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1764,6 +1764,9 @@ static void mprint(union VALUETYPE *p, struct magic *m)
 		{
 			char ctimebuf[52];
 			pp = php_ctime_r((time_t *) &p->l, ctimebuf);
+			if (!pp) {
+				return;
+			}
 			if ((rt = strchr(pp, '\n')) != NULL) {
 				*rt = '\0';
 			}

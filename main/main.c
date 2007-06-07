@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.728 2007/04/26 09:39:03 tony2001 Exp $ */
+/* $Id: main.c,v 1.729 2007/06/07 08:46:32 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -1132,8 +1132,12 @@ static void php_message_handler_for_zend(long message, void *data)
 				time(&curtime);
 				ta = php_localtime_r(&curtime, &tmbuf);
 				datetime_str = php_asctime_r(ta, asctimebuf);
-				datetime_str[strlen(datetime_str)-1]=0;	/* get rid of the trailing newline */
-				snprintf(memory_leak_buf, sizeof(memory_leak_buf), "[%s]  Script:  '%s'\n", datetime_str, SAFE_FILENAME(SG(request_info).path_translated));
+				if (datetime_str) {
+					datetime_str[strlen(datetime_str)-1]=0;	/* get rid of the trailing newline */
+					snprintf(memory_leak_buf, sizeof(memory_leak_buf), "[%s]  Script:  '%s'\n", datetime_str, SAFE_FILENAME(SG(request_info).path_translated));
+				} else {
+					snprintf(memory_leak_buf, sizeof(memory_leak_buf), "[null]  Script:  '%s'\n", SAFE_FILENAME(SG(request_info).path_translated));
+				}
 #	if defined(PHP_WIN32)
 				OutputDebugString(memory_leak_buf);
 #	else

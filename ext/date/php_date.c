@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.138 2007/06/06 23:16:45 iliaa Exp $ */
+/* $Id: php_date.c,v 1.139 2007/06/07 02:21:55 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2486,9 +2486,9 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 	N = (calc_sunset ? h_set : h_rise) + gmt_offset;
 
 	if (N > 24) {
-		N -= floor(N / 24) * N;
+		N -= floor(N / 24) * 24;
 	} else if (N < 0) {
-		N = floor(N / 24) * -N + 24;
+		N = floor(N / 24) * 24 + 24;
 	}
 
 	switch (retformat) {

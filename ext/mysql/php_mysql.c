@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.12 2007/05/14 18:09:20 scottmac Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.13 2007/06/07 12:17:35 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -738,6 +738,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 
 			mysql = (php_mysql_conn *) le->ptr;
+			mysql->active_result_id = 0;
 		}
 		ZEND_REGISTER_RESOURCE(return_value, mysql, le_plink);
 	} else { /* non persistent */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.32 2007/03/16 09:30:18 tony2001 Exp $ */
+/* $Id: ibase_query.c,v 1.33 2007/06/07 08:58:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -675,7 +675,11 @@ static int _php_ibase_bind(XSQLDA *sqlda, zval ***b_vars, BIND_BUF *buf, /* {{{ 
 			case SQL_TYPE_DATE:
 			case SQL_TYPE_TIME:
 				if (Z_TYPE_P(b_var) == IS_LONG) {
-					php_gmtime_r(&Z_LVAL_P(b_var), &t);
+					struct tm *res;
+					res = php_gmtime_r(&Z_LVAL_P(b_var), &t);
+					if (!res) {
+						return FAILURE;
+					}
 				} else {
 #ifdef HAVE_STRPTIME
 					char *format = INI_STR("ibase.timestampformat");

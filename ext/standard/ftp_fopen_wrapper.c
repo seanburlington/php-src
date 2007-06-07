@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.93 2007/04/16 09:43:52 dmitry Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.94 2007/06/07 08:58:38 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -808,6 +808,9 @@ static int php_stream_ftp_url_stat(php_stream_wrapper *wrapper, char *url, int f
 		/* figure out the GMT offset */
 		stamp = time(NULL);
 		gmt = php_gmtime_r(&stamp, &tmbuf);
+		if (!gmt) {
+			goto mdtm_error;
+		}
 		gmt->tm_isdst = -1;
 
 		/* apply the GMT offset */

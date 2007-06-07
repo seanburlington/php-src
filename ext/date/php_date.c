@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.48 2007/06/07 02:21:26 iliaa Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.49 2007/06/07 08:44:40 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -578,16 +578,18 @@ static char* guess_timezone(const timelib_tzdb *tzdb TSRMLS_DC)
 	{
 		struct tm *ta, tmbuf;
 		time_t     the_time;
-		char      *tzid;
+		char      *tzid = NULL;
 		
 		the_time = time(NULL);
 		ta = php_localtime_r(&the_time, &tmbuf);
-		tzid = timelib_timezone_id_from_abbr(ta->tm_zone, ta->tm_gmtoff, ta->tm_isdst);
+		if (ta) {
+			tzid = timelib_timezone_id_from_abbr(ta->tm_zone, ta->tm_gmtoff, ta->tm_isdst);
+		}
 		if (! tzid) {
 			tzid = "UTC";
 		}
 		
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, DATE_TZ_ERRMSG "We selected '%s' for '%s/%.1f/%s' instead", tzid, ta->tm_zone, (float) (ta->tm_gmtoff / 3600), ta->tm_isdst ? "DST" : "no DST");
+		php_error_docref(NULL TSRMLS_CC, E_STRICT, DATE_TZ_ERRMSG "We selected '%s' for '%s/%.1f/%s' instead", tzid, ta ? ta->tm_zone : "Unknown", ta ? (float) (ta->tm_gmtoff / 3600) : 0, ta ? (ta->tm_isdst ? "DST" : "no DST") : "Unknown");
 		return tzid;
 	}
 #endif

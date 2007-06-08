@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.62.2.2.2.7 2007/06/06 22:09:25 tony2001 Exp $ */
+/* $Id: bcmath.c,v 1.62.2.2.2.8 2007/06/08 00:41:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -465,13 +465,17 @@ PHP_FUNCTION(bcpowmod)
 
 	scale_int = (int) ((int)scale < 0) ? 0 : scale;
 
-	bc_raisemod(first, second, mod, &result, scale_int TSRMLS_CC);
-	if (result->n_scale > scale) {
-		result->n_scale = scale;
+	if (bc_raisemod(first, second, mod, &result, scale_int TSRMLS_CC) != -1) {
+		if (result->n_scale > scale) {
+			result->n_scale = scale;
+		}
+		Z_STRVAL_P(return_value) = bc_num2str(result);
+		Z_STRLEN_P(return_value) = strlen(Z_STRVAL_P(return_value));
+		Z_TYPE_P(return_value) = IS_STRING;
+	} else {
+		RETVAL_FALSE;
 	}
-	Z_STRVAL_P(return_value) = bc_num2str(result);
-	Z_STRLEN_P(return_value) = strlen(Z_STRVAL_P(return_value));
-	Z_TYPE_P(return_value) = IS_STRING;
+	
 	bc_free_num(&first);
 	bc_free_num(&second);
 	bc_free_num(&mod);

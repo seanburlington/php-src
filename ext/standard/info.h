@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.43 2007/01/23 19:58:45 helly Exp $ */
+/* $Id: info.h,v 1.44 2007/06/09 11:42:55 sniper Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -66,6 +66,8 @@ PHP_FUNCTION(php_egg_logo_guid);
 PHP_FUNCTION(php_sapi_name);
 PHP_FUNCTION(php_uname);
 PHP_FUNCTION(php_ini_scanned_files);
+PHP_FUNCTION(php_ini_loaded_file);
+
 /* NOTE: use UTF-8 if you print anything non-ASCII */
 PHPAPI char *php_info_html_esc(char *string TSRMLS_DC);
 PHPAPI void php_print_info_htmlhead(TSRMLS_D);

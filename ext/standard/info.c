@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.12 2007/06/07 09:07:36 tony2001 Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.13 2007/06/09 11:44:08 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1164,6 +1164,18 @@ PHP_FUNCTION(php_ini_scanned_files)
 {
 	if (strlen(PHP_CONFIG_FILE_SCAN_DIR) && php_ini_scanned_files) {
 		RETURN_STRING(php_ini_scanned_files, 1);
+	} else {
+		RETURN_FALSE;
+	}
+}
+/* }}} */
+
+/* {{{ proto string php_ini_loaded_file(void)
+   Return the actual loaded ini filename */
+PHP_FUNCTION(php_ini_loaded_file)
+{
+	if (php_ini_opened_path) {
+		RETURN_STRING(php_ini_opened_path, 1);
 	} else {
 		RETURN_FALSE;
 	}

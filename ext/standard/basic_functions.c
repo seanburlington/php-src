@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.53 2007/05/22 15:38:27 bjori Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.54 2007/06/09 11:44:08 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1765,6 +1765,10 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO(arginfo_php_ini_scanned_files, 0)
 ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_php_ini_loaded_file, 0)
+ZEND_END_ARG_INFO()
 /* }}} */
 /* {{{ iptc.c */
 static
@@ -3132,6 +3136,7 @@ zend_function_entry basic_functions[] = {
 	PHP_FE(php_sapi_name,													arginfo_php_sapi_name)
 	PHP_FE(php_uname,														arginfo_php_uname)
 	PHP_FE(php_ini_scanned_files,											arginfo_php_ini_scanned_files)
+	PHP_FE(php_ini_loaded_file,												arginfo_php_ini_loaded_file)
 
 	PHP_FE(strnatcmp,														arginfo_strnatcmp)
 	PHP_FE(strnatcasecmp,													arginfo_strnatcasecmp)

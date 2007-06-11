@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.145 2007/05/28 23:00:24 iliaa Exp $ */
+/* $Id: wddx.c,v 1.146 2007/06/11 15:10:12 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -975,25 +975,7 @@ static void php_wddx_pop_element(void *user_data, const XML_Char *name)
 						add_property_zval(ent2->data, ent1->varname, ent1->data);
 						EG(scope) = old_scope;
 					} else {
-						long l;  
-						double d;
-				
-						switch (is_numeric_string(ent1->varname, strlen(ent1->varname), &l, &d, 0)) {
-							case IS_DOUBLE:
-								if (d > INT_MAX) {
-									goto bigint;
-								}
-								l = (long) d;
-								if (l != d) {
-									goto bigint;
-								}
-							case IS_LONG:
-								zend_hash_index_update(target_hash, l, &ent1->data, sizeof(zval *), NULL);
-								break;
-							default:
-bigint:
-								zend_hash_update(target_hash,ent1->varname, strlen(ent1->varname)+1, &ent1->data, sizeof(zval *), NULL);
-						}
+						zend_symtable_update(target_hash, ent1->varname, strlen(ent1->varname)+1, &ent1->data, sizeof(zval *), NULL);
 					}
 					efree(ent1->varname);
 				} else	{

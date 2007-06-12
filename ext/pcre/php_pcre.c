@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.17 2007/04/23 10:05:33 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.18 2007/06/12 14:08:16 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -126,6 +126,8 @@ static PHP_MINFO_FUNCTION(pcre)
 	php_info_print_table_row(2, "PCRE (Perl Compatible Regular Expressions) Support", "enabled" );
 	php_info_print_table_row(2, "PCRE Library Version", pcre_version() );
 	php_info_print_table_end();
+
+	DISPLAY_INI_ENTRIES();
 }
 /* }}} */
 

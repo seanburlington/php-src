@@ -69,3 +69,4 @@ php_test_results_*.txt
 lcov_data
 lcov_html
 php_lcov.info
+tmp-php.ini

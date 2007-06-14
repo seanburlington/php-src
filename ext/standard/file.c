@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.491 2007/05/30 09:16:29 tony2001 Exp $ */
+/* $Id: file.c,v 1.492 2007/06/14 19:56:35 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -646,7 +646,7 @@ PHP_FUNCTION(file_put_contents)
 	if (flags & PHP_FILE_APPEND) {
 		mode[0] = 'a';
 	}
-	if (flags & PHP_FILE_BINARY) {
+	if (flags & PHP_FILE_BINARY || (Z_TYPE_P(data) == IS_STRING)) {
 		mode[1] = 'b';
 	} else if (flags & PHP_FILE_TEXT) {
 		mode[1] = 't';

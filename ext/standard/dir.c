@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.6 2007/06/12 13:42:32 scottmac Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.7 2007/06/14 23:28:06 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -480,6 +480,11 @@ PHP_FUNCTION(scandir)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lr", &dirn, &dirn_len, &flags, &zcontext) == FAILURE) {
 		return;
+	}
+
+	if (dirn_len < 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Directory name cannot be empty");
+		RETURN_FALSE;
 	}
 
 	if (zcontext) {

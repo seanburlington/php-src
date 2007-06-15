@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.471 2007/06/07 08:58:38 tony2001 Exp $ */
+/* $Id: session.c,v 1.472 2007/06/15 22:42:43 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -398,7 +398,7 @@ static void php_session_initialize(TSRMLS_D)
 	int vallen;
 
 	/* check session name for invalid characters */
-	if (PS(id) && strpbrk(PS(id), "\r\n\t <>'\"\\")) {
+	if (PS(id) && strpbrk(PS(id), "\r\n\t <>'\"\\()@,;:[]?={}&%")) {
 		efree(PS(id));
 		PS(id) = NULL;
 	}

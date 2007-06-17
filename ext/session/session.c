@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.20 2007/06/16 07:48:23 sesser Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.21 2007/06/17 14:26:32 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,6 +45,7 @@
 #include "ext/standard/php_rand.h"                   /* for RAND_MAX */
 #include "ext/standard/info.h"
 #include "ext/standard/php_smart_str.h"
+#include "ext/standard/url.h"
 
 #include "mod_files.h"
 #include "mod_user.h"

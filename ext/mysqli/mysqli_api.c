@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.11 2007/03/08 22:49:53 stas Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.12 2007/06/18 21:51:32 stas Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1289,6 +1289,12 @@ PHP_FUNCTION(mysqli_options)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
+	if ((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) {
+		if(mysql_option == MYSQL_OPT_LOCAL_INFILE) {
+			RETURN_FALSE;
+		}
+	}
+
 	switch (Z_TYPE_PP(&mysql_value)) {
 		case IS_STRING:
 			ret = mysql_options(mysql->mysql, mysql_option, Z_STRVAL_PP(&mysql_value));
@@ -1427,9 +1433,9 @@ PHP_FUNCTION(mysqli_real_connect)
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
 	/* remove some insecure options */
-	flags ^= CLIENT_MULTI_STATEMENTS;   /* don't allow multi_queries via connect parameter */
-	if (PG(open_basedir) && strlen(PG(open_basedir))) {
-		flags ^= CLIENT_LOCAL_FILES;
+	flags &= ~CLIENT_MULTI_STATEMENTS;   /* don't allow multi_queries via connect parameter */
+	if ((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) {
+		flags &= ~CLIENT_LOCAL_FILES;
 	}
 
 	if (!socket) {

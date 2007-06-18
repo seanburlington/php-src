@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.28 2007/06/05 12:12:55 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.29 2007/06/18 16:53:09 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2213,7 +2213,7 @@ PHP_FUNCTION(array_slice)
 	   is not passed */
 	convert_to_long_ex(offset);
 	offset_val = Z_LVAL_PP(offset);
-	if (argc >= 3) {
+	if (argc >= 3 && Z_TYPE_PP(length) != IS_NULL) {
 		convert_to_long_ex(length);
 		length_val = Z_LVAL_PP(length);
 	} else {

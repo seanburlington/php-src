@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.11 2007/02/23 11:12:49 rrichards Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.12 2007/06/18 16:46:21 iliaa Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -674,6 +674,7 @@ static PHP_RSHUTDOWN_FUNCTION(libxml)
 		efree(LIBXML(error_list));
 		LIBXML(error_list) = NULL;
 	}
+	xmlResetLastError();
 
 	return SUCCESS;
 }

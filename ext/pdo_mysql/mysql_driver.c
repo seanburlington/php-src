@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.77 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: mysql_driver.c,v 1.78 2007/06/18 21:59:05 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -475,6 +475,10 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		H->buffered = pdo_attr_lval(driver_options, PDO_MYSQL_ATTR_USE_BUFFERED_QUERY, 1 TSRMLS_CC);
 		H->emulate_prepare = pdo_attr_lval(driver_options, PDO_MYSQL_ATTR_DIRECT_QUERY, 1 TSRMLS_CC);
 		H->max_buffer_size = pdo_attr_lval(driver_options, PDO_MYSQL_ATTR_MAX_BUFFER_SIZE, H->max_buffer_size TSRMLS_CC);
+
+		if (PG(open_basedir) && PG(open_basedir)[0] != '\0') {
+			local_infile = 0;
+		}
 
 		if (mysql_options(H->server, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&connect_timeout)) {
 			pdo_mysql_error(dbh);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.644 2007/06/18 13:39:02 dmitry Exp $ */
+/* $Id: string.c,v 1.645 2007/06/18 13:54:59 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7894,7 +7894,7 @@ PHP_FUNCTION(substr_compare)
 		}
 
 		if(len > s1_len - offset) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The length cannot exceed initial string length");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The specified segment exceeds string length");
 			RETURN_FALSE;
 		}
 

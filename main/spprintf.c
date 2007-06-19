@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.44 2007/01/19 09:12:08 helly Exp $ */
+/* $Id: spprintf.c,v 1.45 2007/06/19 12:19:27 derick Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -670,6 +670,7 @@ fmt_string:
 
 				case 'g':
 				case 'G':
+				case 'H':
 					switch(modifier) {
 						case LM_LONG_DOUBLE:
 							fp_num = (double) va_arg(ap, long double);
@@ -708,7 +709,7 @@ fmt_string:
 						lconv = localeconv();
 					}
 #endif
-					s = php_gcvt(fp_num, precision, LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
+					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

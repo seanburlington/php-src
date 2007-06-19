@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.25.2.2.2.5 2007/01/01 09:36:11 sebastian Exp $ */
+/* $Id: spprintf.c,v 1.25.2.2.2.6 2007/06/19 12:20:50 derick Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -566,7 +566,7 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap)
 #endif
 						s = php_conv_fp((*fmt == 'f')?'F':*fmt, fp_num, alternate_form,
 						 (adjust_precision == NO) ? FLOAT_DIGITS : precision,
-						 (*fmt == 'f')?(*lconv->decimal_point):'.',
+						 (*fmt == 'f')?LCONV_DECIMAL_POINT:'.',
 									&is_negative, &num_buf[1], &s_len);
 						if (is_negative)
 							prefix_char = '-';
@@ -580,6 +580,7 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap)
 
 				case 'g':
 				case 'G':
+				case 'H':
 					switch(modifier) {
 						case LM_LONG_DOUBLE:
 							fp_num = (double) va_arg(ap, long double);
@@ -618,7 +619,7 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap)
 						lconv = localeconv();
 					}
 #endif
-					s = php_gcvt(fp_num, precision, *lconv->decimal_point, (*fmt == 'G')?'E':'e', &num_buf[1]);
+					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

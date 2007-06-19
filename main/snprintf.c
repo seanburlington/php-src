@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.37.2.4.2.11 2007/04/12 22:01:20 tony2001 Exp $ */
+/* $Id: snprintf.c,v 1.37.2.4.2.12 2007/06/19 12:20:50 derick Exp $ */
 
 
 #include "php.h"
@@ -996,6 +996,7 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 
 				case 'g':
 				case 'G':
+				case 'H':
 					switch(modifier) {
 						case LM_LONG_DOUBLE:
 							fp_num = (double) va_arg(ap, long double);
@@ -1035,7 +1036,7 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 						lconv = localeconv();
 					}
 #endif
-					s = php_gcvt(fp_num, precision, LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
+					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
 					if (*s == '-') {
 						prefix_char = *s++;
 					} else if (print_sign) {

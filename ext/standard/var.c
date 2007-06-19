@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.16 2007/04/23 09:56:56 dmitry Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.17 2007/06/19 12:20:50 derick Exp $ */
 
 
 
@@ -407,7 +407,7 @@ PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC)
 		php_printf("%ld", Z_LVAL_PP(struc));
 		break;
 	case IS_DOUBLE:
-		php_printf("%.*G", (int) EG(precision), Z_DVAL_PP(struc));
+		php_printf("%.*H", (int) EG(precision), Z_DVAL_PP(struc));
 		break;
 	case IS_STRING:
 		tmp_str = php_addcslashes(Z_STRVAL_PP(struc), Z_STRLEN_PP(struc), &tmp_len, 0, "'\\\0", 3 TSRMLS_CC);

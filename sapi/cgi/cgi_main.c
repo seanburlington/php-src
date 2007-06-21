@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.41 2007/06/04 15:38:12 tony2001 Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.42 2007/06/21 08:40:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1833,6 +1833,10 @@ fastcgi_request_done:
 				fcgi_finish_request(&request);
 				if (bindpath) {
 					free(bindpath);
+				}
+				if (max_requests != 1) {
+					/* no need to return exit_status of the last request */
+					exit_status = 0;
 				}
 				break;
 			}

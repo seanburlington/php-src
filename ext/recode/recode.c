@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.41 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: recode.c,v 1.42 2007/06/22 00:05:54 stas Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -122,7 +122,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.41 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
 	php_info_print_table_end();
 }
 
@@ -132,7 +132,7 @@ PHP_FUNCTION(recode_string)
 {
 	RECODE_REQUEST request = NULL;
 	char *r = NULL;
-	int r_len = 0, r_alen = 0;
+	size_t r_len = 0, r_alen = 0;
 	int req_len, str_len;
 	char *req, *str;
 

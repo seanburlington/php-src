@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.29.2.1.8.2 2007/01/01 09:46:46 sebastian Exp $ */
+/* $Id: recode.c,v 1.29.2.1.8.3 2007/06/22 00:06:54 stas Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -119,7 +119,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.29.2.1.8.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.29.2.1.8.3 $");
 	php_info_print_table_end();
 }
 
@@ -132,7 +132,7 @@ PHP_FUNCTION(recode_string)
 	zval **str;
 	zval **req;
 	bool success;
-	int r_len=0, r_alen =0;
+	size_t r_len=0, r_alen =0;
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &req, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;

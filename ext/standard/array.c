@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.29 2007/06/18 16:53:09 iliaa Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.30 2007/06/24 17:37:01 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1957,7 +1957,11 @@ PHP_FUNCTION(array_push)
 		new_var = *args[i];
 		new_var->refcount++;
 	
-		zend_hash_next_index_insert(Z_ARRVAL_P(stack), &new_var, sizeof(zval *), NULL);
+		if (zend_hash_next_index_insert(Z_ARRVAL_P(stack), &new_var, sizeof(zval *), NULL) == FAILURE) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot add element to the array as the next element is already occupied");
+			efree(args);
+			RETURN_FALSE;
+		}
 	}
 	
 	/* Clean up and return the number of values in the stack */

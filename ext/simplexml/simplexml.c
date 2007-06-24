@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.234 2007/06/13 13:38:59 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.235 2007/06/24 11:43:34 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -271,9 +271,6 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 		name = Z_STRVAL_P(member);
 	}
 
-	MAKE_STD_ZVAL(return_value);
-	ZVAL_NULL(return_value);
-
 	GET_NODE(sxe, node);
 
 	if (sxe->iter.type == SXE_ITER_ATTRLIST) {
@@ -293,6 +290,9 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 			return NULL;
 		}
 	}
+
+	MAKE_STD_ZVAL(return_value);
+	ZVAL_NULL(return_value);
 
 	if (node) {
 		if (attribs) {
@@ -2474,7 +2474,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.234 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.235 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

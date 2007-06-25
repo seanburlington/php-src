@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.33 2007/02/15 20:53:26 nlopess Exp $
+dnl $Id: config.m4,v 1.34 2007/06/25 16:26:19 sniper Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -112,10 +112,10 @@ if test "$PHP_PDO_SQLITE" != "no"; then
 EOF
       AC_CHECK_FUNCS(usleep nanosleep)
       AC_CHECK_HEADERS(time.h)
-      
-      dnl Solaris fix
-      PHP_CHECK_LIBRARY(rt, fdatasync, [PHP_ADD_LIBRARY(rt,, PDO_SQLITE_SHARED_LIBADD)])
   fi
+
+  dnl Solaris fix
+  PHP_CHECK_LIBRARY(rt, fdatasync, [PHP_ADD_LIBRARY(rt,, PDO_SQLITE_SHARED_LIBADD)])
 
   ifdef([PHP_ADD_EXTENSION_DEP],
   [

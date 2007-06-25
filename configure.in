@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.627 2007/05/24 23:31:15 sniper Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.628 2007/06/25 14:23:21 dmitry Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -371,6 +371,7 @@ sys/poll.h \
 sys/resource.h \
 sys/select.h \
 sys/socket.h \
+sys/stat.h \
 sys/statfs.h \
 sys/statvfs.h \
 sys/vfs.h \

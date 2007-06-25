@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.56 2007/06/19 12:19:27 derick Exp $ */
+/* $Id: snprintf.c,v 1.57 2007/06/25 08:39:23 dmitry Exp $ */
 
 
 #include "php.h"
@@ -1082,7 +1082,7 @@ fmt_string:
 						lconv = localeconv();
 					}
 #endif
-					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G')?'E':'e', &num_buf[1]);
+					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G' || *fmt == 'H')?'E':'e', &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

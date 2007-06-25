@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.163 2007/06/12 13:42:04 scottmac Exp $ */
+/* $Id: dir.c,v 1.164 2007/06/25 08:40:36 dmitry Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -423,16 +423,15 @@ PHP_FUNCTION(glob)
 #endif
 
 	if (PG(open_basedir) && *PG(open_basedir)) {
-		size_t base_len = php_dirname(pattern, strlen(pattern));
-		char pos = pattern[base_len];
-
-		pattern[base_len] = '\0';
-
+		int pattern_len = strlen(pattern);
+		char *basename = estrndup(pattern, pattern_len);
+		
+		php_dirname(basename, pattern_len);
 		if (php_check_open_basedir(pattern TSRMLS_CC)) {
+			efree(basename);
 			RETURN_FALSE;
 		}
-
-		pattern[base_len] = pos;
+		efree(basename);
 	}
 
 	globbuf.gl_offs = 0;

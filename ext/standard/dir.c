@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.164 2007/06/25 08:40:36 dmitry Exp $ */
+/* $Id: dir.c,v 1.165 2007/06/25 09:42:49 dmitry Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -427,7 +427,7 @@ PHP_FUNCTION(glob)
 		char *basename = estrndup(pattern, pattern_len);
 		
 		php_dirname(basename, pattern_len);
-		if (php_check_open_basedir(pattern TSRMLS_CC)) {
+		if (php_check_open_basedir(basename TSRMLS_CC)) {
 			efree(basename);
 			RETURN_FALSE;
 		}

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.27 2007/03/29 09:30:25 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.28 2007/06/25 18:25:08 tony2001 Exp $ */
 
 
 
@@ -864,8 +864,7 @@ int php_oci_lob_write_tmp (php_oci_descriptor *descriptor, ub1 type, zstr data, 
 			break;
 	}
 
-	if (!data.v || data_len <= 0) {
-		/* nothing to write, silently fail */
+	if (data_len < 0) {
 		return 1;
 	}
 

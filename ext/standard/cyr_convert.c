@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.32 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: cyr_convert.c,v 1.33 2007/06/26 21:37:14 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -187,7 +187,7 @@ _cyr_mac = {
 };
 /* }}} */
 
-/* {{{ php_convert_cyr_string
+/* {{{ static char * php_convert_cyr_string(unsigned char *str, int length, char from, char to TSRMLS_DC)
 * This is the function that performs real in-place conversion of the string 
 * between charsets. 
 * Parameters:

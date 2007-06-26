@@ -16,15 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: css.c,v 1.15 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: css.c,v 1.16 2007/06/26 21:37:14 tony2001 Exp $ */
 
 #include "php.h"
 #include "info.h"
 
-
-/* {{{ php_info_print_css
- */
-PHPAPI void php_info_print_css(TSRMLS_D)
+PHPAPI void php_info_print_css(TSRMLS_D) /* {{{ */
 {
 	PUTS("body {background-color: #ffffff; color: #000000;}\n");
 	PUTS("body, td, th, h1, h2 {font-family: sans-serif;}\n");

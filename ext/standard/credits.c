@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.46 2007/05/22 15:46:27 bjori Exp $ */
+/* $Id: credits.c,v 1.47 2007/06/26 21:37:14 tony2001 Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -28,9 +28,7 @@
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
 #define CREDIT_PUTS(s) php_output_write_utf8((s), strlen(s) TSRMLS_CC)
 
-/* {{{ php_print_credits
- */
-PHPAPI void php_print_credits(int flag TSRMLS_DC)
+PHPAPI void php_print_credits(int flag TSRMLS_DC) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text && flag & PHP_CREDITS_FULLPAGE) {
 		php_print_info_htmlhead(TSRMLS_C);

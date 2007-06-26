@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.85 2007/05/14 14:38:29 scottmac Exp $ */
+/* $Id: dns.c,v 1.86 2007/06/26 11:03:42 tony2001 Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -276,6 +276,7 @@ PHP_FUNCTION(dns_check_record)
 		else if (!strcasecmp("PTR",   rectype)) type = DNS_T_PTR;
 		else if (!strcasecmp("ANY",   rectype)) type = DNS_T_ANY;
 		else if (!strcasecmp("SOA",   rectype)) type = DNS_T_SOA;
+		else if (!strcasecmp("TXT",   rectype)) type = DNS_T_TXT;
 		else if (!strcasecmp("CNAME", rectype)) type = DNS_T_CNAME;
 		else if (!strcasecmp("AAAA",  rectype)) type = DNS_T_AAAA;
 		else if (!strcasecmp("SRV",   rectype)) type = DNS_T_SRV;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.165 2007/06/25 09:42:49 dmitry Exp $ */
+/* $Id: dir.c,v 1.166 2007/06/26 12:14:24 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -24,6 +24,7 @@
 #include "fopen_wrappers.h"
 #include "file.h"
 #include "php_dir.h"
+#include "php_string.h"
 #include "php_scandir.h"
 
 #ifdef HAVE_DIRENT_H

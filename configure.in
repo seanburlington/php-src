@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.628 2007/06/25 14:23:21 dmitry Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.629 2007/06/27 14:40:02 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -422,14 +422,16 @@ PHP_TM_GMTOFF
 PHP_STRUCT_FLOCK
 PHP_SOCKLEN_T
 
-AC_CHECK_SIZEOF(intmax_t, 0)
 AC_CHECK_SIZEOF(size_t, 8)
-AC_CHECK_SIZEOF(ssize_t, 8)
-AC_CHECK_SIZEOF(ptrdiff_t, 8)
 AC_CHECK_SIZEOF(long long, 8)
 AC_CHECK_SIZEOF(long long int, 8)
 AC_CHECK_SIZEOF(long, 8)
 AC_CHECK_SIZEOF(int, 4)
+
+dnl These are defined elsewhere than stdio.h
+PHP_CHECK_SIZEOF(intmax_t, 0)
+PHP_CHECK_SIZEOF(ssize_t, 8)
+PHP_CHECK_SIZEOF(ptrdiff_t, 8)
 
 dnl Check for members of the stat structure
 AC_STRUCT_ST_BLKSIZE

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.12 2007/06/27 02:02:18 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.13 2007/06/28 03:13:29 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -280,7 +280,7 @@ static PHP_METHOD(PDO, dbh_constructor)
 		pdo_dbh_t *pdbh = NULL;
 
 		if (SUCCESS == zend_hash_index_find(Z_ARRVAL_P(options), PDO_ATTR_PERSISTENT, (void**)&v)) {
-			if (Z_TYPE_PP(v) == IS_STRING) {
+			if (Z_TYPE_PP(v) == IS_STRING && !is_numeric_string(Z_STRVAL_PP(v), Z_STRLEN_PP(v), NULL, NULL, 0) && Z_STRLEN_PP(v) > 0) {
 				/* user specified key */
 				plen = spprintf(&hashkey, 0, "PDO:DBH:DSN=%s:%s:%s:%s", data_source,
 						username ? username : "",

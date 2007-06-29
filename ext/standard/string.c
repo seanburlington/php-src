@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.645 2007/06/18 13:54:59 dmitry Exp $ */
+/* $Id: string.c,v 1.646 2007/06/29 14:53:02 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3613,7 +3613,9 @@ PHP_FUNCTION(ord)
 		WRONG_PARAM_COUNT;
 	}
 
-	convert_to_text_ex(str);
+	if (Z_TYPE_PP(str) != IS_UNICODE && Z_TYPE_PP(str) != IS_STRING) {
+		convert_to_text_ex(str);
+	}
 	if (Z_TYPE_PP(str) == IS_UNICODE) {
 		RETURN_LONG(zend_get_codepoint_at(Z_USTRVAL_PP(str), Z_USTRLEN_PP(str), 0));
 	} else {

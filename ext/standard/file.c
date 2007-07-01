@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.492 2007/06/14 19:56:35 pajoye Exp $ */
+/* $Id: file.c,v 1.493 2007/07/01 21:26:30 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1996,7 +1996,7 @@ PHP_FUNCTION(fputcsv)
 	int count, i = 0;
 	smart_str csvline = {0};
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|ass",
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ra|ss",
 			&fp, &fields, &delimiter_str, &delimiter_str_len,
 			&enclosure_str, &enclosure_str_len) == FAILURE) {
 		return;

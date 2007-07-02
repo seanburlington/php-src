@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.20 2007/02/24 02:17:25 helly Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.21 2007/07/02 15:37:43 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -80,6 +80,10 @@
 #endif
 
 #define CHECK_DEFAULT_LINK(x) if ((x) == -1) { php_error_docref(NULL TSRMLS_CC, E_WARNING, "No PostgreSQL link opened yet"); }
+
+#ifndef HAVE_PQFREEMEM
+#define PGfreemem free
+#endif
 
 ZEND_DECLARE_MODULE_GLOBALS(pgsql)
 static PHP_GINIT_FUNCTION(pgsql);

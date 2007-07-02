@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.237 2007/07/02 11:36:28 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.238 2007/07/02 11:53:08 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2110,7 +2110,8 @@ PHP_FUNCTION(simplexml_load_string)
 SXE_METHOD(__construct)
 {
 	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
-	char           *data, *ns = NULL;
+	zstr            data;
+	char           *ns = NULL;
 	int             data_len, ns_len = 0;
 	xmlDocPtr       docp;
 	long            options = 0;
@@ -2127,20 +2128,19 @@ SXE_METHOD(__construct)
 
 	if (data_type == IS_UNICODE) {
 		if (is_url) {
-			if (php_stream_path_encode(NULL, &data, &data_len, (UChar*)data, data_len, REPORT_ERRORS, NULL) == FAILURE) {
+			if (php_stream_path_encode(NULL, &data.s, &data_len, data.u, data_len, REPORT_ERRORS, NULL) == FAILURE) {
 				zend_throw_exception(zend_exception_get_default(TSRMLS_C), "String could not be parsed as XML", 0 TSRMLS_CC);
 				return;
 			}
 		} else {
-			zend_throw_exception(zend_exception_get_default(TSRMLS_C), "SimpleXMLElement can only parse a binary string", 0 TSRMLS_CC);
-			return;
+			data.s = php_libxml_unicode_to_string(data.u, data_len, &data_len TSRMLS_CC);
 		}
 	}
 
-	docp = is_url ? xmlReadFile(data, NULL, options) : xmlReadMemory(data, data_len, NULL, NULL, options);
+	docp = is_url ? xmlReadFile(data.s, NULL, options) : xmlReadMemory(data.s, data_len, NULL, NULL, options);
 
-	if (is_url && data_type == IS_UNICODE) {
-		efree(data);
+	if (data_type == IS_UNICODE) {
+		efree(data.s);
 	}
 
 	if (!docp) {
@@ -2486,7 +2486,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.237 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.238 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

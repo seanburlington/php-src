@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.238 2007/07/02 11:53:08 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.239 2007/07/03 15:02:40 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1458,15 +1458,12 @@ SXE_METHOD(getNamespaces)
 	GET_NODE(sxe, node);
 	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
-	while (node) {
-		SKIP_TEXT(node)
+	if (node) {
 		if (node->type == XML_ELEMENT_NODE) {
 			sxe_add_namespaces(sxe, node, recursive, return_value TSRMLS_CC);
 		} else if (node->type == XML_ATTRIBUTE_NODE && node->ns) {
 			sxe_add_namespace_name(return_value, node->ns TSRMLS_CC);
 		}
-next_iter:
-		node = node->next;
 	}
 }
 /* }}} */
@@ -2486,7 +2483,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.238 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.239 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

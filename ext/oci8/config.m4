@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.6 2007/05/04 11:30:37 tony2001 Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.7 2007/07/03 17:25:34 sniper Exp $
 dnl
 
 if test -z "$SED"; then
@@ -96,10 +96,9 @@ dnl --with-oci8=shared,instantclient,/path/to/client/dir/lib
 dnl or
 dnl --with-oci8=shared,/path/to/oracle/home
 PHP_ARG_WITH(oci8, for Oracle (OCI8) support,
-[  --with-oci8[=DIR]       Include Oracle (OCI8) support. 
-                          The default DIR is ORACLE_HOME.
-                          Use --with-oci8=instantclient,/path/to/oic/lib
-                          to use an Oracle Instant Client installation])
+[  --with-oci8[=DIR]       Include Oracle (OCI8) support. DIR defaults to \$ORACLE_HOME.
+                          Use --with-oci8=instantclient,/path/to/oic/lib 
+                          for an Oracle Instant Client installation])
 
   AC_MSG_CHECKING([PHP version])
 

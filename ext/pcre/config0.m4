@@ -1,15 +1,13 @@
 dnl
-dnl $Id: config0.m4,v 1.38.2.3.2.7 2007/06/15 19:09:24 nlopess Exp $
+dnl $Id: config0.m4,v 1.38.2.3.2.8 2007/07/03 17:25:34 sniper Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
 dnl if DIR is supplied, we'll use that for linking
 
 PHP_ARG_WITH(pcre-regex,for PCRE support,
-[  --without-pcre-regex    Do not include Perl Compatible Regular Expressions 
-                          support. Use --with-pcre-regex=DIR to specify DIR
-                          where PCRE's include and library files are located,
-                          if not using bundled library.],yes)
+[  --without-pcre-regex    Do not include Perl Compatible Regular Expressions support.
+                          DIR is the PCRE install prefix [BUNDLED]], yes)
 
 if test "$PHP_PCRE_REGEX" != "no"; then
   if test "$PHP_PCRE_REGEX" = "yes"; then

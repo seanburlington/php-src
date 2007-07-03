@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.7.2.4 2007/03/07 09:36:22 tony2001 Exp $
+dnl $Id: config.m4,v 1.25.2.7.2.5 2007/07/03 17:25:35 sniper Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -19,7 +19,7 @@ PHP_ARG_WITH(pdo-mysql, for MySQL support for PDO,
 
 if test -z "$PHP_ZLIB_DIR"; then
   PHP_ARG_WITH(zlib-dir, for the location of libz,
-  [  --with-zlib-dir[=DIR]     PDO_MySQL: Set the path to libz install prefix], no, no)
+  [  --with-zlib-dir[=DIR]       PDO_MySQL: Set the path to libz install prefix], no, no)
 fi
 
 if test "$PHP_PDO_MYSQL" != "no"; then

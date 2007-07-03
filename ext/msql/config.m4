@@ -1,11 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.12 2002/03/12 16:25:28 sas Exp $
+dnl $Id: config.m4,v 1.14.4.1 2007/07/03 17:25:34 sniper Exp $
 dnl
 
 dnl
 dnl Test mSQL version by checking if msql.h has "IDX_TYPE" defined.
 dnl
-AC_DEFUN(PHP_MSQL_VERSION,[
+AC_DEFUN([PHP_MSQL_VERSION],[
   AC_MSG_CHECKING([mSQL version])
   ac_php_oldcppflags=$CPPFLAGS
   CPPFLAGS="$INCLUDES $CPPFLAGS"
@@ -23,7 +23,7 @@ AC_DEFUN(PHP_MSQL_VERSION,[
 
 PHP_ARG_WITH(msql,for mSQL support,
 [  --with-msql[=DIR]       Include mSQL support.  DIR is the mSQL base
-                          install directory, defaults to /usr/local/Hughes.])
+                          install directory [/usr/local/Hughes]])
 
   if test "$PHP_MSQL" != "no"; then
     if test "$PHP_MSQL" = "yes"; then

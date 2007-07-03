@@ -1,10 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.3 2004/06/23 13:26:08 abies Exp $
+dnl $Id: config.m4,v 1.8.4.1 2007/07/03 17:25:35 sniper Exp $
 dnl
 
+if test "$PHP_PDO" != "no"; then
+
 PHP_ARG_WITH(pdo-firebird,for Firebird support for PDO,
-[  --with-pdo-firebird[=DIR]  Include Firebird support for PDO.  DIR is the Firebird base
-                          install directory, defaults to /opt/firebird])
+[  --with-pdo-firebird[=DIR] PDO: Firebird support.  DIR is the Firebird base
+                            install directory [/opt/firebird]])
 
 if test "$PHP_PDO_FIREBIRD" != "no"; then
   if test "$PHP_PDO_FIREBIRD" = "yes"; then
@@ -15,35 +17,37 @@ if test "$PHP_PDO_FIREBIRD" != "no"; then
     FIREBIRD_LIBDIR=$PHP_PDO_FIREBIRD/lib
   fi
 
-  PHP_CHECK_LIBRARY(gds, isc_detach_database,
+  PHP_CHECK_LIBRARY(fbclient, isc_detach_database,
   [
-    FIREBIRD_LIBNAME=gds
+    FIREBIRD_LIBNAME=fbclient
   ], [
-    PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
+    PHP_CHECK_LIBRARY(gds, isc_detach_database,
     [
-      FIREBIRD_LIBNAME=ib_util
+      FIREBIRD_LIBNAME=gds
     ], [
-      AC_MSG_ERROR([libgds or libib_util not found! Check config.log for more information.])
+      PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
+      [
+        FIREBIRD_LIBNAME=ib_util
+      ], [
+        AC_MSG_ERROR([libfbclient, libgds or libib_util not found! Check config.log for more information.])
+      ], [
+        -L$FIREBIRD_LIBDIR
+      ])
     ], [
       -L$FIREBIRD_LIBDIR
     ])
   ], [
     -L$FIREBIRD_LIBDIR
   ])
-  
-  if test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$prefix/include/php/ext
-  elif test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$abs_srcdir/ext
-  elif test -f ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=ext
-  else
-   AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
-  fi
-				  
+ 
+  PHP_CHECK_PDO_INCLUDES
+
   PHP_ADD_LIBRARY_WITH_PATH($FIREBIRD_LIBNAME, $FIREBIRD_LIBDIR, PDO_FIREBIRD_SHARED_LIBADD)
   PHP_ADD_INCLUDE($FIREBIRD_INCDIR)
   AC_DEFINE(HAVE_PDO_FIREBIRD,1,[ ])
   PHP_NEW_EXTENSION(pdo_firebird, pdo_firebird.c firebird_driver.c firebird_statement.c, $ext_shared,,-I$pdo_inc_path)
   PHP_SUBST(PDO_FIREBIRD_SHARED_LIBADD)
+  PHP_ADD_EXTENSION_DEP(pdo_firebird, pdo)
+fi
+
 fi

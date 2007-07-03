@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.24.2.4.2.5 2007/06/30 02:30:34 sixd Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.4.2.6 2007/07/03 04:32:26 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -353,7 +353,38 @@ static long oci_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS
 
 static int oci_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype  TSRMLS_DC) /* {{{ */
 {
-	return 0;
+	int qcount = 0;
+	char const *cu, *l, *r;
+	char *c;
+
+	if (!unquotedlen) {
+		*quotedlen = 2;
+		*quoted = emalloc(*quotedlen+1);
+		strcpy(*quoted, "''");
+		return 1;
+	}
+
+	/* count single quotes */
+	for (cu = unquoted; (cu = strchr(cu,'\'')); qcount++, cu++)
+		; /* empty loop */
+
+	*quotedlen = unquotedlen + qcount + 2;
+	*quoted = c = emalloc(*quotedlen+1);
+	*c++ = '\'';
+	
+	/* foreach (chunk that ends in a quote) */
+	for (l = unquoted; (r = strchr(l,'\'')); l = r+1) {
+		strncpy(c, l, r-l+1);
+		c += (r-l+1);		
+		*c++ = '\'';			/* add second quote */
+	}
+
+    /* Copy remainder and add enclosing quote */	
+	strncpy(c, l, *quotedlen-(c-*quoted)-1);
+	(*quoted)[*quotedlen-1] = '\''; 
+	(*quoted)[*quotedlen]   = '\0';
+	
+	return 1;
 }
 /* }}} */
 

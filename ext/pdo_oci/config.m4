@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2006/01/06 11:48:03 tony2001 Exp $
+dnl $Id: config.m4,v 1.18 2007/07/03 17:24:37 sniper Exp $
 
 if test "$PHP_PDO" != "no"; then
 
@@ -52,9 +52,10 @@ AC_DEFUN([AC_PDO_OCI_CHECK_LIB_DIR],[
 ])
 
 PHP_ARG_WITH(pdo-oci, Oracle OCI support for PDO,
-[  --with-pdo-oci[=DIR]      PDO: Oracle-OCI support. Default DIR is ORACLE_HOME.
-                            You may also use --with-pdo-oci=instantclient,prefix,version to use
-                            the InstantClient SDK. For Linux with 10.1.0.3 rpms (for example) use:
+[  --with-pdo-oci[=DIR]      PDO: Oracle-OCI support. DIR defaults to \$ORACLE_HOME.
+                            Use --with-pdo-oci=instantclient,prefix,version 
+                            for an Oracle InstantClient SDK. 
+                            For Linux with 10.1.0.3 rpms (for example) use:
                             --with-pdo-oci=instantclient,/usr,10.1.0.3])
 
 if test "$PHP_PDO_OCI" != "no"; then

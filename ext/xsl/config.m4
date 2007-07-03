@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.12 2006/09/08 16:51:32 bjori Exp $
+dnl $Id: config.m4,v 1.13 2007/07/03 17:24:37 sniper Exp $
 dnl
 
 PHP_ARG_WITH(xsl, for XSL support,
-[  --with-xsl[=DIR]        Include new XSL support (requires libxslt >= 1.1.0).
-                          DIR is the libxslt install directory])
+[  --with-xsl[=DIR]        Include XSL support.  DIR is the libxslt base
+                          install directory (libxslt >= 1.1.0 required)])
 
 if test "$PHP_XSL" != "no"; then
 

@@ -1,11 +1,14 @@
-dnl $Id: config.m4,v 1.34 2007/06/25 16:26:19 sniper Exp $
+dnl $Id: config.m4,v 1.35 2007/07/03 17:24:37 sniper Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
 if test "$PHP_PDO" != "no"; then
 
 PHP_ARG_WITH(pdo-sqlite, for sqlite 3 driver for PDO,
-[  --without-pdo-sqlite      PDO: sqlite 3 support],yes)
+[  --without-pdo-sqlite[=DIR]
+                            PDO: sqlite 3 support.  DIR is the sqlite base
+                            install directory [BUNDLED]], yes)
+
 
 if test "$PHP_PDO_SQLITE" != "no"; then
 

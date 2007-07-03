@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.8 2005/06/14 00:00:52 sniper Exp $
+dnl $Id: config.m4,v 1.9 2007/07/03 17:24:37 sniper Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
 
 PHP_ARG_WITH(pdo-firebird,for Firebird support for PDO,
 [  --with-pdo-firebird[=DIR] PDO: Firebird support.  DIR is the Firebird base
-                            install directory, defaults to /opt/firebird])
+                            install directory [/opt/firebird]])
 
 if test "$PHP_PDO_FIREBIRD" != "no"; then
   if test "$PHP_PDO_FIREBIRD" = "yes"; then

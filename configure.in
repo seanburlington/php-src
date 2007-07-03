@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.630 2007/06/29 01:09:53 sniper Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.631 2007/07/03 17:24:36 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -719,8 +719,7 @@ esac
 
 PHP_ARG_WITH(config-file-path,[path to configuration file],
 [  --with-config-file-path=PATH
-                          Set the path in which to look for php.ini
-                          [PREFIX/lib]], DEFAULT, no)
+                          Set the path in which to look for php.ini [PREFIX/lib]], DEFAULT, no)
 
 if test "$PHP_CONFIG_FILE_PATH" = "DEFAULT"; then
   case $PHP_LAYOUT in

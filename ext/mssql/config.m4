@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.12 2005/10/10 10:28:21 sniper Exp $
+dnl $Id: config.m4,v 1.13 2007/07/03 17:24:36 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
 [  --with-mssql[=DIR]      Include MSSQL-DB support.  DIR is the FreeTDS home
-                          directory, defaults to /usr/local/freetds])
+                          directory [/usr/local/freetds]])
 
 if test "$PHP_MSSQL" != "no"; then
 

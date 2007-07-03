@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.20 2004/05/12 14:29:42 abies Exp $
+dnl $Id: config.m4,v 1.21 2007/07/03 17:24:36 sniper Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
 [  --with-interbase[=DIR]  Include InterBase support.  DIR is the InterBase base
-                          install directory, defaults to /usr/interbase])
+                          install directory [/usr/interbase]])
 
 if test "$PHP_INTERBASE" != "no"; then
   if test "$PHP_INTERBASE" = "yes"; then

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.111 2007/03/02 22:04:46 stas Exp $ */
+/* $Id: php_globals.h,v 1.112 2007/07/03 10:22:55 dmitry Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -142,6 +142,7 @@ struct _php_core_globals {
 	zend_bool com_initialized;
 #endif
 	long max_input_nesting_level;
+	zend_bool in_user_include;
 };
 
 

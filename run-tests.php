@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.31 2007/06/29 09:49:21 dmitry Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.32 2007/07/04 10:16:22 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.31 $'."\n";
+					echo '$Revision: 1.226.2.37.2.32 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1188,7 +1188,7 @@ TEST $file
 			} else {
 				$env['USE_ZEND_ALLOC'] = '1';
 			}
-			$output = system_with_timeout("$extra $php -q $ini_settings $test_skipif", $env);
+			$output = system_with_timeout("$extra $php $pass_options -q $ini_settings $test_skipif", $env);
 			if (!$cfg['keep']['skip']) {
 				@unlink($test_skipif);
 			}
@@ -1396,7 +1396,7 @@ COMMAND $cmd
 				settings2params($clean_params);
 				$extra = substr(PHP_OS, 0, 3) !== "WIN" ?
 					"unset REQUEST_METHOD; unset QUERY_STRING; unset PATH_TRANSLATED; unset SCRIPT_FILENAME; unset REQUEST_METHOD;": "";
-				system_with_timeout("$extra $php -q $clean_params $test_clean", $env);
+				system_with_timeout("$extra $php $pass_options -q $clean_params $test_clean", $env);
 			}
 			if (!$cfg['keep']['clean']) {
 				@unlink($test_clean);

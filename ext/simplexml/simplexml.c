@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.239 2007/07/03 15:02:40 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.240 2007/07/04 05:05:32 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -797,6 +797,11 @@ static int sxe_prop_dim_exists(zval *object, zval *member, int check_empty, zend
 					attr = attr->next;
 				}
 			}
+			if (exists && check_empty == 1 &&
+				(!attr->children || !attr->children->content || !attr->children->content[0] || !xmlStrcmp(attr->children->content, "0")) ) {
+				/* Attribute with no content in it's text node */
+				exists = 0;
+			}
 		}
 
 		if (elements) {
@@ -819,6 +824,11 @@ static int sxe_prop_dim_exists(zval *object, zval *member, int check_empty, zend
 			}
 			if (node) {
 				exists = 1;
+                                if (check_empty == 1 && 
+					(!node->children || (node->children->type == XML_TEXT_NODE && !node->children->next &&
+						(!node->children->content || !node->children->content[0] || !xmlStrcmp(node->children->content, "0")))) ) {
+					exists = 0;
+				}
 			}
 		}
 	}
@@ -2483,7 +2493,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.239 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.240 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

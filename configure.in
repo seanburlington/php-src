@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.52.2.61 2007/07/03 17:25:33 sniper Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.52.2.62 2007/07/06 10:44:23 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -678,8 +678,8 @@ if test "$PHP_GCOV" = "yes"; then
 
   dnl Remove all optimization flags from CFLAGS
   changequote({,})
-  CFLAGS=`echo "$CFLAGS" | $SED -e 's/-O[0-9]*//g'`
-  CXXFLAGS=`echo "$CXXFLAGS" | $SED -e 's/-O[0-9]*//g'`
+  CFLAGS=`echo "$CFLAGS" | $SED -e 's/-O[0-9s]*//g'`
+  CXXFLAGS=`echo "$CXXFLAGS" | $SED -e 's/-O[0-9s]*//g'`
   changequote([,])
 
   dnl Add the special gcc flags
@@ -694,8 +694,8 @@ if test "$PHP_DEBUG" = "yes"; then
   PHP_DEBUG=1
   ZEND_DEBUG=yes
   changequote({,})
-  CFLAGS=`echo "$CFLAGS" | $SED -e 's/-O[0-9]*//g'`
-  CXXFLAGS=`echo "$CXXFLAGS" | $SED -e 's/-O[0-9]*//g'`
+  CFLAGS=`echo "$CFLAGS" | $SED -e 's/-O[0-9s]*//g'`
+  CXXFLAGS=`echo "$CXXFLAGS" | $SED -e 's/-O[0-9s]*//g'`
   changequote([,])
   dnl add -O0 only if GCC or ICC is used
   if test "$GCC" = "yes" || test "$ICC" = "yes"; then

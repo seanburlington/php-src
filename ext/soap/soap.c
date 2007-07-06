@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.223 2007/06/29 13:58:34 dmitry Exp $ */
+/* $Id: soap.c,v 1.224 2007/07/06 10:36:20 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3550,7 +3550,7 @@ static void set_soap_fault(zval *obj, char *fault_code_ns, char *fault_code, cha
 			add_property_zval(obj, "faultcodens", tmp);
 		} else {
 			if (soap_version == SOAP_1_1) {
-				add_property_string(obj, "faultcode", fault_code, 1);
+				add_property_ascii_string(obj, "faultcode", fault_code, 1);
 				if (strcmp(fault_code,"Client") == 0 ||
 				    strcmp(fault_code,"Server") == 0 ||
 				    strcmp(fault_code,"VersionMismatch") == 0 ||

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.64 2007/03/27 09:28:49 tony2001 Exp $ */
+/* $Id: var_unserializer.re,v 1.65 2007/07/09 13:43:50 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -140,6 +140,7 @@ static char *unserialize_str(const unsigned char **p, int *len)
 					return NULL;
 				}
 			}
+			end += 2;
 			str[i] = (char)ch;
 		}
 		(*p)++;

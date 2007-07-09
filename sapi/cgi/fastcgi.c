@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.39 2007/05/21 09:08:25 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.40 2007/07/09 11:48:53 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -927,7 +927,11 @@ int fcgi_accept_request(fcgi_request *req)
 					}
 				}
 
+#ifdef _WIN32
 				if (req->fd < 0 && (in_shutdown || errno != EINTR)) {
+#else
+				if (req->fd < 0 && (in_shutdown || (errno != EINTR && errno != ECONNABORTED))) {
+#endif
 					return -1;
 				}
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.410 2007/06/28 16:06:23 tony2001 Exp $ */
+/* $Id: array.c,v 1.411 2007/07/09 14:32:59 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1403,7 +1403,7 @@ PHP_FUNCTION(extract)
 
 	if (prefix) {
 		convert_to_text(prefix);
-		if (Z_UNILEN_P(prefix) && !php_valid_var_name(Z_UNIVAL_P(prefix), Z_UNILEN_P(prefix), Z_TYPE_P(prefix))) {
+		if (!Z_UNILEN_P(prefix) || !php_valid_var_name(Z_UNIVAL_P(prefix), Z_UNILEN_P(prefix), Z_TYPE_P(prefix))) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "prefix is not a valid identifier");
 			return;
 		}

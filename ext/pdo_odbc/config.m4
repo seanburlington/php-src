@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.22.2.1 2006/04/30 01:42:53 wez Exp $
+dnl $Id: config.m4,v 1.22.2.1.2.1 2007/07/09 11:13:56 jani Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
@@ -89,7 +89,7 @@ if test "$PHP_PDO_ODBC" != "no"; then
         pdo_odbc_def_lib="`echo $PHP_PDO_ODBC | cut -d, -f3`"
         pdo_odbc_def_ldflags="`echo $PHP_PDO_ODBC | cut -d, -f4`"
         pdo_odbc_def_cflags="`echo $PHP_PDO_ODBC | cut -d, -f5`"
-        pdo_odbc_flavour="$pdo_odbc_flavour ($pdo_odbc_def_lib)"
+        pdo_odbc_flavour="generic-$pdo_odbc_def_lib"
         ;;
 
       *)

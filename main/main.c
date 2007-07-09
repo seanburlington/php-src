@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.38 2007/06/15 09:20:27 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.39 2007/07/09 17:27:23 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1121,6 +1121,7 @@ int php_request_startup(TSRMLS_D)
 		PG(modules_activated) = 0;
 		PG(header_is_being_sent) = 0;
 		PG(connection_status) = PHP_CONNECTION_NORMAL;
+		PG(in_user_include) = 0;
 		
 		zend_activate(TSRMLS_C);
 		sapi_activate(TSRMLS_C);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.129 2007/07/03 10:22:55 dmitry Exp $ */
+/* $Id: php_streams.h,v 1.130 2007/07/09 16:42:45 dmitry Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -619,7 +619,7 @@ END_EXTERN_C()
 /* use glob stream for directory open in plain files stream */
 #define STREAM_USE_GLOB_DIR_OPEN        0x00001000
 
-/* use glob stream for directory open in plain files stream */
+/* don't check allow_url_fopen and allow_url_include */
 #define STREAM_DISABLE_URL_PROTECTION   0x00002000
 
 /* Antique - no longer has meaning */

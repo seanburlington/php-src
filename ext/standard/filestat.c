@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.160 2007/02/26 20:35:41 tony2001 Exp $ */
+/* $Id: filestat.c,v 1.161 2007/07/09 18:10:17 tony2001 Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -434,7 +434,7 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp) /* {{{ */
 	if (Z_TYPE_P(group) == IS_LONG) {
 		gid = (gid_t)Z_LVAL_P(group);
 	} else {
-#if HAVE_GETGRNAM_R
+#if defined(ZTS) && defined(HAVE_GETGRNAM_R) && defined(_SC_GETGR_R_SIZE_MAX) 
 		struct group gr;
 		struct group *retgrptr;
 		int grbuflen = sysconf(_SC_GETGR_R_SIZE_MAX);

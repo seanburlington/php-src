@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.18 2007/03/29 09:33:03 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.19 2007/07/09 09:08:59 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -215,8 +215,8 @@ typedef struct { /* php_oci_out_column {{{ */
 	php_oci_define *define;			/* define handle */
 	int piecewise;					/* column is fetched piece-by-piece */
 	ub4 cb_retlen;					/* */
-	ub2 scale;						/* column scale */
-	ub2 precision;					/* column precision */
+	sb1 scale;						/* column scale */
+	sb2 precision;					/* column precision */
 	ub1 charset_form;				/* charset form, required for NCLOBs */
 	ub2 charset_id;					/* charset ID */
 } php_oci_out_column; /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.66 2007/07/09 14:33:37 dmitry Exp $ */
+/* $Id: var_unserializer.re,v 1.67 2007/07/09 15:58:52 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -363,6 +363,8 @@ static inline int object_custom(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 {
 	long datalen;
 	int type;
+	zstr buf;
+	size_t buf_len;
 
 	if(ce->unserialize == NULL) {
 		zend_error(E_WARNING, "Class %v has no unserializer", ce->name);
@@ -393,11 +395,23 @@ static inline int object_custom(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 		return 0;
 	}
 
-	if(ce->unserialize(rval, ce, type, ZSTR((char*)*p), datalen, (zend_unserialize_data *)var_hash TSRMLS_CC) != SUCCESS) {
+	if (type == IS_UNICODE) {
+		buf.u = unserialize_ustr(p, datalen);
+		buf_len = u_strlen(buf.u);
+	} else {
+		buf.s = (char*)*p;
+		buf_len = datalen;
+		(*p) += datalen;
+	}
+	if(ce->unserialize(rval, ce, type, buf, buf_len, (zend_unserialize_data *)var_hash TSRMLS_CC) != SUCCESS) {
+		if (type == IS_UNICODE) {
+			efree(buf.v);
+		}
 		return 0;
 	}
-
-	(*p) += datalen;
+	if (type == IS_UNICODE) {
+		efree(buf.v);
+	}
 
 	return finish_nested_data(UNSERIALIZE_PASSTHRU);
 }

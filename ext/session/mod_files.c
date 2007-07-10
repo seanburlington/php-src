@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.100.2.3.2.5 2007/03/03 15:07:31 iliaa Exp $ */
+/* $Id: mod_files.c,v 1.100.2.3.2.6 2007/07/10 17:40:41 stas Exp $ */
 
 #include "php.h"
 
@@ -294,6 +294,14 @@ PS_OPEN_FUNC(files)
 	}
 	save_path = argv[argc - 1];
 
+	if (PG(safe_mode) && (!php_checkuid(save_path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		return FAILURE;
+	}
+
+	if (PG(open_basedir) && php_check_open_basedir(save_path TSRMLS_CC)) {
+		return FAILURE;
+	}
+
 	data = emalloc(sizeof(*data));
 	memset(data, 0, sizeof(*data));
 	
@@ -304,7 +312,7 @@ PS_OPEN_FUNC(files)
 	data->basedir = estrndup(save_path, data->basedir_len);
 	
 	PS_SET_MOD_DATA(data);
-	
+
 	return SUCCESS;
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.194 2007/06/01 13:33:48 tony2001 Exp $ */
+/* $Id: fopen_wrappers.c,v 1.195 2007/07/10 13:21:30 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -579,7 +579,9 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC)
 	char cwd[MAXPATHLEN];
 	char *result;
 
-	if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
+	if (!filepath[0]) {
+		return NULL;
+	} else if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
 		cwd[0] = '\0';
 	} else{
 		result = VCWD_GETCWD(cwd, MAXPATHLEN);

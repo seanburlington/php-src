@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.83.2.9.2.8 2007/03/09 10:29:33 tony2001 Exp $ */
+/* $Id: mod_files.c,v 1.83.2.9.2.9 2007/07/10 17:50:46 stas Exp $ */
 
 #include "php.h"
 
@@ -264,6 +264,14 @@ PS_OPEN_FUNC(files)
 		}
 		save_path = p + 1;
 	}
+
+	if (PG(safe_mode) && (!php_checkuid(save_path, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
+		return FAILURE;
+	}
+	if (php_check_open_basedir(save_path TSRMLS_CC)) {
+		return FAILURE;
+	}
+
 	data->basedir_len = strlen(save_path);
 	data->basedir = estrndup(save_path, data->basedir_len);
 	

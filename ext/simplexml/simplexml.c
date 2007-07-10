@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.240 2007/07/04 05:05:32 pollita Exp $ */
+/* $Id: simplexml.c,v 1.241 2007/07/10 12:26:37 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1633,11 +1633,16 @@ SXE_METHOD(addChild)
 	newnode = xmlNewChild(node, NULL, localname, (xmlChar *)value);
 
 	if (nsuri != NULL) {
-		nsptr = xmlSearchNsByHref(node->doc, node, (xmlChar *)nsuri);
-		if (nsptr == NULL) {
+		if (nsuri_len == 0) {
+			newnode->ns = NULL;
 			nsptr = xmlNewNs(newnode, (xmlChar *)nsuri, prefix);
+		} else {
+			nsptr = xmlSearchNsByHref(node->doc, node, (xmlChar *)nsuri);
+			if (nsptr == NULL) {
+				nsptr = xmlNewNs(newnode, (xmlChar *)nsuri, prefix);
+			}
+			newnode->ns = nsptr;
 		}
-		newnode->ns = nsptr;
 	}
 
 	_node_as_zval(sxe, newnode, return_value, SXE_ITER_NONE, (char *)localname, prefix, 0 TSRMLS_CC);
@@ -2493,7 +2498,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.240 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.241 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

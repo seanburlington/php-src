@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.111 2007/01/05 17:29:30 pollita Exp $ */
+/* $Id: mod_files.c,v 1.112 2007/07/10 17:52:32 stas Exp $ */
 
 #include "php.h"
 
@@ -312,6 +312,10 @@ PS_OPEN_FUNC(files)
 		}
 	}
 	save_path = argv[argc - 1];
+
+	if (PG(open_basedir) && php_check_open_basedir(save_path TSRMLS_CC)) {
+		return FAILURE;
+	}
 
 	data = ecalloc(1, sizeof(*data));
 	

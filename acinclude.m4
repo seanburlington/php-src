@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.332.2.14.2.17 2007/06/29 01:10:35 sniper Exp $
+dnl $Id: acinclude.m4,v 1.332.2.14.2.18 2007/07/10 10:18:48 jani Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -744,16 +744,6 @@ PHP_ARG_ANALYZE($5,[$2],$6)
 dnl -------------------------------------------------------------------------
 dnl Build macros
 dnl -------------------------------------------------------------------------
-
-dnl
-dnl PHP_SET_SYM_FILE(path)
-dnl
-dnl set the path of the file which contains the symbol export list
-dnl
-AC_DEFUN([PHP_SET_SYM_FILE],
-[
-  PHP_SYM_FILE=$1
-])
 
 dnl
 dnl PHP_BUILD_THREAD_SAFE

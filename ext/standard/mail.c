@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.92 2007/05/29 20:11:23 iliaa Exp $ */
+/* $Id: mail.c,v 1.93 2007/07/10 20:23:26 stas Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -139,7 +139,7 @@ PHP_FUNCTION(mail)
 	}
 
 	if (force_extra_parameters) {
-		extra_cmd = estrdup(force_extra_parameters);
+		extra_cmd = php_escape_shell_cmd(force_extra_parameters);
 	} else if (extra_cmd) {
 		extra_cmd = php_escape_shell_cmd(extra_cmd);
 	}

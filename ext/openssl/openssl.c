@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.141 2007/06/20 05:27:38 pajoye Exp $ */
+/* $Id: openssl.c,v 1.142 2007/07/10 07:57:15 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1559,7 +1559,7 @@ PHP_FUNCTION(openssl_pkcs12_read)
 	BIO * bio_in = NULL;
 	int i;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "szs", &zp12, &zout, &pass, &pass_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "szs", &zp12, &zp12_len, &zout, &pass, &pass_len) == FAILURE) {
 		return;
 	}
 

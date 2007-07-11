@@ -1,19 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.24 2007/01/10 23:46:09 andrei Exp $
+dnl $Id: config.m4,v 1.25 2007/07/11 23:10:14 jani Exp $
 dnl
 
+PHP_ARG_ENABLE(cli,,
+[  --disable-cli           Disable building CLI version of PHP], yes, no)
+
 AC_MSG_CHECKING(for CLI build)
-
-AC_ARG_ENABLE(cli,
-[  --disable-cli           Disable building CLI version of PHP
-                          (this forces --without-pear)],
-[
-  PHP_SAPI_CLI=$enableval
-],[
-  PHP_SAPI_CLI=yes
-])
-
-if test "$PHP_SAPI_CLI" != "no"; then
+if test "$PHP_CLI" != "no"; then
   PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/sapi/cli/Makefile.frag,$abs_srcdir/sapi/cli,sapi/cli)
   SAPI_CLI_PATH=sapi/cli/php
   PHP_SUBST(SAPI_CLI_PATH)
@@ -38,5 +31,4 @@ if test "$PHP_SAPI_CLI" != "no"; then
   PHP_SUBST(INSTALL_CLI)
   PHP_OUTPUT(sapi/cli/php.1)
 fi
-
-AC_MSG_RESULT($PHP_SAPI_CLI)
+AC_MSG_RESULT($PHP_CLI)

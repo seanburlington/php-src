@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.143 2007/07/11 07:27:20 dmitry Exp $ */
+/* $Id: openssl.c,v 1.144 2007/07/11 07:35:53 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2610,6 +2610,7 @@ PHP_FUNCTION(openssl_pkey_export)
 			RETVAL_TRUE;
 
 			bio_mem_len = BIO_get_mem_data(bio_out, &bio_mem_ptr);
+			zval_dtor(out);
 			ZVAL_STRINGL(out, bio_mem_ptr, bio_mem_len, 1);
 		}
 	}

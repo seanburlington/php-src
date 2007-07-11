@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.93 2007/07/10 20:23:26 stas Exp $ */
+/* $Id: mail.c,v 1.94 2007/07/11 17:39:04 johannes Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -35,7 +35,6 @@
 #include "php_ini.h"
 #include "exec.h"
 
-#if HAVE_SENDMAIL
 #ifdef PHP_WIN32
 #include "win32/sendmail.h"
 #endif
@@ -270,13 +269,6 @@ PHP_MINFO_FUNCTION(mail)
 #endif
 }
 /* }}} */
-
-#else
-
-PHP_FUNCTION(mail) {}
-PHP_MINFO_FUNCTION(mail) {}
-
-#endif
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.863 2007/07/11 15:52:44 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.864 2007/07/11 17:39:04 johannes Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1816,7 +1816,6 @@ ZEND_END_ARG_INFO()
 #endif
 /* }}} */
 /* {{{ mail.c */
-#ifdef HAVE_SENDMAIL
 static
 ZEND_BEGIN_ARG_INFO(arginfo_ezmlm_hash, 0)
 	ZEND_ARG_INFO(0, addr)
@@ -1830,7 +1829,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_mail, 0, 0, 3)
 	ZEND_ARG_INFO(0, additional_headers)
 	ZEND_ARG_INFO(0, additional_parameters)
 ZEND_END_ARG_INFO()
-#endif
 /* }}} */
 /* {{{ math.c */
 static
@@ -3693,10 +3691,8 @@ zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FALIAS(diskfreespace,		disk_free_space,						arginfo_disk_free_space)
 
 	/* functions from mail.c */
-#ifdef HAVE_SENDMAIL
 	PHP_FE(mail,															arginfo_mail)
 	PHP_FE(ezmlm_hash,														arginfo_ezmlm_hash)
-#endif
 
 	/* functions from syslog.c */
 #ifdef HAVE_SYSLOG_H
@@ -4944,14 +4940,9 @@ PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers T
 
 		case 1:		/*send an email */
 			{
-#if HAVE_SENDMAIL
 				if (!php_mail(opt, "PHP error_log message", message, headers, NULL TSRMLS_CC)) {
 					return FAILURE;
 				}
-#else
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Mail option not available!");
-				return FAILURE;
-#endif
 			}
 			break;
 

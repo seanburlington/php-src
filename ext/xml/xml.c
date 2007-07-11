@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.171 2007/01/01 09:29:33 sebastian Exp $ */
+/* $Id: xml.c,v 1.172 2007/07/11 08:27:33 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1703,6 +1703,9 @@ PHP_FUNCTION(utf8_decode)
 		RETURN_FALSE;
 	}
 
+	if (data_type == IS_UNICODE) {
+		RETURN_UNICODEL(data, data_len, 1);
+	}
 	if (UG(unicode)) {
 		decoded = xml_utf8_decode(data, data_len, &len, NULL);
 	} else {

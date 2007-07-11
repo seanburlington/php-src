@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.35 2007/06/19 22:09:49 iliaa Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.36 2007/07/11 07:26:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2256,6 +2256,7 @@ static EVP_PKEY * php_openssl_evp_from_zval(zval ** val, int public_key, char * 
 		} else {
 			tmp = **zphrase;
 			zval_copy_ctor(&tmp);
+			convert_to_string(&tmp);
 			passphrase = Z_STRVAL(tmp);
 		}
 

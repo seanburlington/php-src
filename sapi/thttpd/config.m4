@@ -1,15 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.23.6.1 2007/06/03 20:27:16 sniper Exp $
+dnl $Id: config.m4,v 1.23.6.2 2007/07/11 23:20:37 jani Exp $
 dnl
 
-AC_ARG_WITH(thttpd,
-[  --with-thttpd=SRCDIR    Build PHP as thttpd module], [
-  PHP_THTTPD=$withval
-],[
-  PHP_THTTPD=no
-])
+PHP_ARG_WITH(thttpd,,
+[  --with-thttpd=SRCDIR    Build PHP as thttpd module], no, no)
 
-AC_MSG_CHECKING(for thttpd)
+AC_MSG_CHECKING([for thttpd])
+
 if test "$PHP_THTTPD" != "no"; then
   if test ! -d $PHP_THTTPD; then
     AC_MSG_RESULT(thttpd directory does not exist ($PHP_THTTPD))

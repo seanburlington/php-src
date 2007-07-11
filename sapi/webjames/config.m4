@@ -1,15 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.5.22.1 2007/06/03 20:27:16 sniper Exp $
+dnl $Id: config.m4,v 1.5.22.2 2007/07/11 23:20:37 jani Exp $
 dnl
 
-AC_ARG_WITH(webjames,
-[  --with-webjames=SRCDIR  Build PHP as a WebJames module (RISC OS only)],[
-  PHP_WEBJAMES=$withval
-],[
-  PHP_WEBJAMES=no
-])
+PHP_ARG_WITH(webjames,,
+[  --with-webjames=SRCDIR  Build PHP as a WebJames module (RISC OS only)], no, no)
 
-AC_MSG_CHECKING(for webjames)
+AC_MSG_CHECKING([for webjames])
+
 if test "$PHP_WEBJAMES" != "no"; then
   PHP_EXPAND_PATH($PHP_WEBJAMES, PHP_WEBJAMES)
   INSTALL_IT="\

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.80.2.3.2.2 2007/07/11 11:50:37 jani Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.80.2.3.2.3 2007/07/11 11:56:03 jani Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -210,7 +210,7 @@ divert(5)dnl
 dnl
 dnl Check for regex library type
 dnl
-PHP_ARG_WITH(regex, for selected regex library type,
+PHP_ARG_WITH(regex,,
 [  --with-regex=TYPE       regex library type: system, apache, php. [TYPE=php]
                           WARNING: Do NOT use unless you know what you are doing!], php, no)
 
@@ -230,7 +230,7 @@ case $PHP_REGEX in
     ;;
   *)
     REGEX_TYPE=php
-    AC_MSG_WARN(Invalid regex library type. Using default value: php)
+    AC_MSG_WARN(Invalid regex library type selected. Using default value: php)
     ;;
 esac
 

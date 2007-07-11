@@ -1,9 +1,6 @@
 dnl
-dnl $Id: config.m4,v 1.51 2007/02/19 19:46:36 tony2001 Exp $
+dnl $Id: config.m4,v 1.52 2007/07/11 21:51:10 jani Exp $
 dnl
-
-AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
-])
 
 PHP_ARG_WITH(pgsql,for PostgreSQL support,
 [  --with-pgsql[=DIR]      Include PostgreSQL support.  DIR is the PostgreSQL
@@ -63,7 +60,7 @@ if test "$PHP_PGSQL" != "no"; then
   fi
 
   if test -z "$PGSQL_INCLUDE" -a -z "$PGSQL_LIBDIR" ; then
-    AC_MSG_ERROR([Unable to find libpq anywhere under $withval])
+    AC_MSG_ERROR([Unable to find libpq anywhere under $PGSQL_SEARCH_PATHS])
   fi
 
   AC_DEFINE(HAVE_PGSQL,1,[Whether to build PostgreSQL support or not])

@@ -4,7 +4,7 @@ XMLReader: libxml2 XML Reader, DTD
 <?php if (!extension_loaded("xmlreader")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: 008.phpt,v 1.3 2006/08/05 12:32:54 rrichards Exp $ */
+/* $Id: 008.phpt,v 1.4 2007/07/11 16:47:30 dmitry Exp $ */
 
 $xmlstring = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE LIST SYSTEM "dtdexample.dtd">
@@ -22,7 +22,7 @@ $xmlstring = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 </MOVIE>
 </LIST>';
 
-$dtdfile = rawurlencode(dirname(__FILE__)) . b'/dtdexample.dtd'; 
+$dtdfile = rawurlencode((binary)dirname(__FILE__)) . b'/dtdexample.dtd'; 
 $file = dirname(__FILE__) . '/__008.xml';
 file_put_contents($file, $xmlstring);
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.42 2007/07/11 10:24:04 jani Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.43 2007/07/11 17:36:56 johannes Exp $ */
 
 /* {{{ includes
  */
@@ -231,7 +231,7 @@ static PHP_INI_MH(OnUpdateTimeout)
 #if defined(PHP_PROG_SENDMAIL) && !defined(NETWARE)
 #	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
 #else
-#	define DEFAULT_SENDMAIL_PATH NULL
+#	define DEFAULT_SENDMAIL_PATH "/usr/sbin/sendmail -t -i" 
 #endif
 /* {{{ PHP_INI
  */

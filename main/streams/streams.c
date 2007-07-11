@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.15 2007/07/10 11:57:34 dmitry Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.16 2007/07/11 14:33:30 dmitry Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1557,7 +1557,7 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 #ifdef PHP_WIN32
 			if (localhost == 0 && path[n+3] != '\0' && path[n+3] != '/' && path[n+4] != ':')	{
 #else
-			if (localhost == 0 && path[n+3] != '/')	{
+			if (localhost == 0 && path[n+3] != '\0' && path[n+3] != '/') {
 #endif
 				if (options & REPORT_ERRORS) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "remote host file access not supported, %s", path);

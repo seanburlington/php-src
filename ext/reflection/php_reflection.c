@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.39 2007/05/29 08:44:05 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.40 2007/07/11 13:27:49 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3616,7 +3616,7 @@ ZEND_METHOD(reflection_class, isSubclassOf)
 		case IS_STRING:
 			if (zend_lookup_class(Z_STRVAL_P(class_name), Z_STRLEN_P(class_name), &pce TSRMLS_CC) == FAILURE) {
 				zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
-						"Interface %s does not exist", Z_STRVAL_P(class_name));
+						"Class %s does not exist", Z_STRVAL_P(class_name));
 				return;
 			}
 			class_ce = *pce;
@@ -4878,7 +4878,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.39 2007/05/29 08:44:05 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.40 2007/07/11 13:27:49 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

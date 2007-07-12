@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.635 2007/07/12 11:33:18 jani Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.636 2007/07/12 14:18:01 jani Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -732,7 +732,7 @@ if test "$PHP_CONFIG_FILE_PATH" = "DEFAULT"; then
 fi
 
 AC_MSG_CHECKING([where to scan for configuration files])
-PHP_ARG_WITH(config-file-scan-dir,
+PHP_ARG_WITH(config-file-scan-dir,,
 [  --with-config-file-scan-dir=PATH
                           Set the path where to scan for configuration files], DEFAULT, no) 
 if test "$PHP_CONFIG_FILE_SCAN_DIR" = "DEFAULT"; then

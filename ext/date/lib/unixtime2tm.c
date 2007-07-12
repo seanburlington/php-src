@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.18 2007/01/01 09:29:22 sebastian Exp $ */
+/* $Id: unixtime2tm.c,v 1.19 2007/07/12 18:56:41 derick Exp $ */
 
 #include "timelib.h"
 
@@ -69,9 +69,11 @@ void timelib_unixtime2gmt(timelib_time* tm, timelib_sll ts)
 		/* Guess why this might be for, it has to do with a pope ;-). It's also
 		 * only valid for Great Brittain and it's colonies. It needs fixing for
 		 * other locales. *sigh*, why is this crap so complex! */
+		/*
 		if (ts <= TIMELIB_LL_CONST(-6857352000)) {
 			tmp_days -= 11;
 		}
+		*/
 
 		while (tmp_days <= 0) {
 			cur_year--;

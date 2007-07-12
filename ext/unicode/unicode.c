@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.43 2007/01/01 09:29:33 sebastian Exp $ */ 
+/* $Id: unicode.c,v 1.44 2007/07/12 15:07:32 tony2001 Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -433,12 +433,10 @@ PHP_RSHUTDOWN_FUNCTION(unicode)
 PHP_MINFO_FUNCTION(unicode)
 {
 	php_info_print_box_start(0);
-	php_printf("ICU API extension\n");
-	php_printf("Based on ICU library %s\n", U_COPYRIGHT_STRING);
-	php_printf("ICU Version %s\n", U_ICU_VERSION);
+	php_info_print_table_row(2, "ICU API extension", "enabled");
+	php_info_print_table_row(2, "Based on ICU library", U_COPYRIGHT_STRING);
+	php_info_print_table_row(2, "ICU Version", U_ICU_VERSION);
 	php_info_print_box_end();
-	/* add your stuff here */
-
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.23 2007/07/11 17:36:55 johannes Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.24 2007/07/12 15:31:54 masugata Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3770,7 +3770,7 @@ PHP_FUNCTION(mb_send_mail)
 	headers = (char *)device.buffer;
 
 	if (force_extra_parameters) {
-		extra_cmd = estrdup(force_extra_parameters);
+		extra_cmd = php_escape_shell_cmd(force_extra_parameters);
 	} else if (extra_cmd) {
 		extra_cmd = php_escape_shell_cmd(extra_cmd);
 	} 

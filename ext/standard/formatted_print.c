@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.101 2007/06/03 09:11:52 shire Exp $ */
+/* $Id: formatted_print.c,v 1.102 2007/07/13 15:52:38 tony2001 Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -308,7 +308,7 @@ php_u_sprintf_appenduint(UChar **buffer, int *pos, int *size,
 	register unsigned long magn, nmagn;
 	register unsigned int i = NUM_BUF_SIZE - 1;
 
-	magn = (unsigned int) number;
+	magn = (unsigned long) number;
 
 	/* Can't right-pad 0's on integers */
 	if (alignment == 0 && padding == 0x30 /* '0' */) padding = 0x20 /* ' ' */;

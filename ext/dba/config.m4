@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.75 2007/07/13 14:23:41 jani Exp $
+dnl $Id: config.m4,v 1.76 2007/07/13 15:08:55 jani Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -477,7 +477,7 @@ PHP_DBA_STD_RESULT(dbm)
 dnl
 dnl Bundled modules that should be enabled by default if any other option is enabled
 dnl
-if test "$PHP_DBA" != "no" || test "$HAVE_DBA" = "1" || test "$with_cdb" != "no" || test "$enable_inifile" != "no" || test "$enable_flatfile" != "no"; then
+if test "$PHP_DBA" != "no" || test "$HAVE_DBA" = "1" || test "$with_cdb" = "yes" || test "$enable_inifile" = "yes" || test "$enable_flatfile" = "yes"; then
   php_dba_enable=yes
 else
   php_dba_enable=no

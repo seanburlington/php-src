@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.8 2007/07/11 22:16:11 tony2001 Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.9 2007/07/13 09:24:30 tony2001 Exp $
 dnl
 
 if test -z "$SED"; then
@@ -138,11 +138,17 @@ if test "`echo $PHP_OCI8 | cut -d, -f2`" = "instantclient"; then
     if test "$PHP_OCI8_INSTANT_CLIENT" = ""; then
         PHP_OCI8_INSTANT_CLIENT="yes"
     fi
+    if test -z "$PHP_OCI8"; then
+        PHP_OCI8=yes
+    fi
 elif test "`echo $PHP_OCI8 | cut -d, -f1`" = "instantclient"; then
     PHP_OCI8_INSTANT_CLIENT="`echo $PHP_OCI8 | cut -d, -f2`"
     PHP_OCI8="`echo $PHP_OCI8 | cut -d, -f3,4`"
     if test "$PHP_OCI8_INSTANT_CLIENT" = ""; then
         PHP_OCI8_INSTANT_CLIENT="yes"
+    fi
+    if test -z "$PHP_OCI8"; then
+        PHP_OCI8=yes
     fi
 fi
 

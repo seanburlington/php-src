@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.142 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: math.c,v 1.143 2007/07/14 08:38:19 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1064,8 +1064,6 @@ PHP_FUNCTION(fmod)
 	RETURN_DOUBLE(fmod(num1, num2));
 }
 /* }}} */
-
-
 
 /*
  * Local variables:

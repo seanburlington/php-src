@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.23 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: versioning.c,v 1.24 2007/07/14 08:38:20 tony2001 Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -79,6 +79,7 @@ php_canonicalize_version(const char *version)
 }
 
 /* }}} */
+
 /* {{{ compare_special_version_forms() */
 
 typedef struct {
@@ -120,6 +121,7 @@ compare_special_version_forms(char *form1, char *form2)
 }
 
 /* }}} */
+
 /* {{{ php_version_compare() */
 
 PHPAPI int

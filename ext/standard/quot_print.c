@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.33 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: quot_print.c,v 1.34 2007/07/14 08:38:20 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -34,7 +34,7 @@
 /*
 *  Converting HEX char to INT value
 */
-static char php_hex2int(int c)
+static char php_hex2int(int c) /* {{{ */
 {
 	if (isdigit(c)) {
 		return c - '0';
@@ -49,8 +49,9 @@ static char php_hex2int(int c)
 		return -1;
 	}
 }
+/* }}} */
 
-PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t length, size_t *ret_length, int replace_us_by_ws)
+PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t length, size_t *ret_length, int replace_us_by_ws) /* {{{ */
 {
 	register unsigned int i;
 	register unsigned const char *p1;
@@ -140,7 +141,7 @@ PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t len
 	*ret_length = decoded_len;
 	return retval;
 }
-
+/* }}} */
 
 /*
 *

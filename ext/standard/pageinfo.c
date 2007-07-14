@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.44 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: pageinfo.c,v 1.45 2007/07/14 08:38:20 tony2001 Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -92,13 +92,14 @@ long php_getuid(void)
 }
 /* }}} */
 
-long php_getgid(void)
+long php_getgid(void) /* {{{ */
 {
 	TSRMLS_FETCH();
 
 	php_statpage(TSRMLS_C);
 	return (BG(page_gid));
 }
+/* }}} */
 
 /* {{{ proto int getmyuid(void) U
    Get PHP script owner's UID */
@@ -158,11 +159,12 @@ PHP_FUNCTION(getmyinode)
 }
 /* }}} */
 
-PHPAPI time_t php_getlastmod(TSRMLS_D)
+PHPAPI time_t php_getlastmod(TSRMLS_D) /* {{{ */
 {
 	php_statpage(TSRMLS_C);
 	return BG(page_mtime);
 }
+/* }}} */
 
 /* {{{ proto int getlastmod(void) U
    Get time of last page modification */

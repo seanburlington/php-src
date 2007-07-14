@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.47 2007/05/28 23:52:13 iliaa Exp $ */
+/* $Id: url_scanner.c,v 1.48 2007/07/14 08:38:20 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -32,18 +32,19 @@
 #define BUFSIZE 256
 #endif
 
-int php_url_scanner_activate(TSRMLS_D)
+int php_url_scanner_activate(TSRMLS_D) /* {{{ */
 {
 	url_adapt(NULL,0,NULL,NULL);
 	return SUCCESS;
 }
+/* }}} */
 
-
-int php_url_scanner_deactivate(TSRMLS_D)
+int php_url_scanner_deactivate(TSRMLS_D) /* {{{ */
 {
 	url_adapt(NULL,0,NULL,NULL);
 	return SUCCESS;
 }
+/* }}} */
 
 /* {{{ url_attr_addon
  */

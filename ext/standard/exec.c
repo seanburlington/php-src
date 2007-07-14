@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.123 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: exec.c,v 1.124 2007/07/14 08:38:19 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -165,7 +165,7 @@ err:
 }
 /* }}} */
 
-static void php_exec_ex(INTERNAL_FUNCTION_PARAMETERS, int mode)
+static void php_exec_ex(INTERNAL_FUNCTION_PARAMETERS, int mode) /* {{{ */
 {
 	char *cmd;
 	int cmd_len;
@@ -211,6 +211,7 @@ static void php_exec_ex(INTERNAL_FUNCTION_PARAMETERS, int mode)
 		efree(cmd);
 	}
 }
+/* }}} */
 
 /* {{{ proto string exec(string command [, array &output [, int &return_value]]) U
    Execute an external program */

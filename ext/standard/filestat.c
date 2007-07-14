@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.161 2007/07/09 18:10:17 tony2001 Exp $ */
+/* $Id: filestat.c,v 1.162 2007/07/14 08:38:19 tony2001 Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -1038,6 +1038,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 /* }}} */
 
 /* another quickie macro to make defining similar functions easier */
+/* {{{ FileFunction(name, funcnum) */
 #define FileFunction(name, funcnum) \
 void name(INTERNAL_FUNCTION_PARAMETERS) { \
 	char *filename; \
@@ -1060,6 +1061,8 @@ void name(INTERNAL_FUNCTION_PARAMETERS) { \
 		efree(filename); \
 	} \
 }
+
+/* }}} */
 
 /* {{{ proto int fileperms(string filename) U
    Get file permissions */

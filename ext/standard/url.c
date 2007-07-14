@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.105 2007/01/01 09:29:32 sebastian Exp $ */
+/* $Id: url.c,v 1.106 2007/07/14 08:38:20 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -136,15 +136,17 @@ PHPAPI char *php_replace_controlchars_ex(char *str, int len)
 } 
 /* }}} */
 
-PHPAPI char *php_replace_controlchars(char *str)
+PHPAPI char *php_replace_controlchars(char *str) /* {{{ */
 {
 	return php_replace_controlchars_ex(str, strlen(str));
 } 
+/* }}} */
 
-PHPAPI php_url *php_url_parse(char const *str)
+PHPAPI php_url *php_url_parse(char const *str) /* {{{ */
 {
 	return php_url_parse_ex(str, strlen(str));
 }
+/* }}} */
 
 /* {{{ php_url_parse
  */

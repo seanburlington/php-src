@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.86 2007/07/11 11:55:46 jani Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.87 2007/07/15 19:50:06 jani Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -206,52 +206,6 @@ AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpcl
 AC_FUNC_FNMATCH	
 
 divert(5)dnl
-
-dnl
-dnl Check for regex library type
-dnl
-PHP_ARG_WITH(regex,,
-[  --with-regex=TYPE       regex library type: system, apache, php. [TYPE=php]
-                          WARNING: Do NOT use unless you know what you are doing!], php, no)
-
-case $PHP_REGEX in
-  system)
-    if test "$PHP_SAPI" = "apache" || test "$PHP_SAPI" = "apache2filter" || test "$PHP_SAPI" = "apache2handler"; then
-      REGEX_TYPE=php
-    else
-      REGEX_TYPE=system
-    fi
-    ;;
-  apache)
-    REGEX_TYPE=apache
-    ;;
-  php)
-    REGEX_TYPE=php
-    ;;
-  *)
-    REGEX_TYPE=php
-    AC_MSG_WARN(Invalid regex library type selected. Using default value: php)
-    ;;
-esac
-
-if test "$REGEX_TYPE" = "php"; then
-  AC_DEFINE(HAVE_REGEX_T_RE_MAGIC, 1, [ ])
-  AC_DEFINE(HSREGEX,1,[ ])
-  AC_DEFINE(REGEX,1,[ ])  
-  PHP_ADD_SOURCES(regex, regcomp.c regexec.c regerror.c regfree.c)
-elif test "$REGEX_TYPE" = "system"; then
-  AC_DEFINE(REGEX,0,[ ])
-  dnl Check if field re_magic exists in struct regex_t
-  AC_CACHE_CHECK([whether field re_magic exists in struct regex_t], ac_cv_regex_t_re_magic, [
-  AC_TRY_COMPILE([#include <sys/types.h>
-#include <regex.h>], [regex_t rt; rt.re_magic;],
-  [ac_cv_regex_t_re_magic=yes], [ac_cv_regex_t_re_magic=no])])
-  if test "$ac_cv_regex_t_re_magic" = "yes"; then
-    AC_DEFINE([HAVE_REGEX_T_RE_MAGIC], [ ], 1)   
-  fi 
-fi   
-AC_MSG_CHECKING([which regex library to use])
-AC_MSG_RESULT([$REGEX_TYPE])
 
 dnl
 dnl round fuzz
@@ -508,7 +462,7 @@ PHP_NEW_EXTENSION(standard, array.c base64.c basic_functions.c browscap.c crc32.
                             flock_compat.c formatted_print.c fsock.c head.c html.c image.c \
                             info.c iptc.c lcg.c link.c mail.c math.c md5.c metaphone.c \
                             microtime.c pack.c pageinfo.c quot_print.c rand.c \
-                            reg.c soundex.c string.c scanf.c syslog.c type.c uniqid.c url.c \
+                            soundex.c string.c scanf.c syslog.c type.c uniqid.c url.c \
                             url_scanner.c var.c versioning.c assert.c strnatcmp.c levenshtein.c \
                             incomplete_class.c url_scanner_ex.c ftp_fopen_wrapper.c \
                             http_fopen_wrapper.c php_fopen_wrapper.c credits.c css.c \

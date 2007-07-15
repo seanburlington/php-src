@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.124 2007/07/14 08:38:19 tony2001 Exp $ */
+/* $Id: html.c,v 1.125 2007/07/15 19:50:06 jani Exp $ */
 
 /*
  * HTML entity resources:
@@ -43,7 +43,6 @@
 #else
 #include <php_config.h>
 #endif
-#include "reg.h"
 #include "html.h"
 #include "php_string.h"
 #include "SAPI.h"

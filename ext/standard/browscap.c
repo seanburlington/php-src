@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.93 2007/06/26 21:37:14 tony2001 Exp $ */
+/* $Id: browscap.c,v 1.94 2007/07/15 19:50:06 jani Exp $ */
 
 #include "php.h"
-#include "php_regex.h"
 #include "php_browscap.h"
 #include "php_ini.h"
 #include "php_string.h"
+#include "ext/ereg/php_regex.h"
 
 #include "zend_globals.h"
 

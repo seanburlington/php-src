@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.238 2007/01/16 22:18:39 andrei Exp $ */
+/* $Id: php.h,v 1.239 2007/07/15 19:50:06 jani Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -70,8 +70,6 @@
 #define PHP_UNAME  "NetWare"
 #define PHP_OS      PHP_UNAME
 #endif
-
-#include "php_regex.h"
 
 #if HAVE_ASSERT_H
 #if PHP_DEBUG
@@ -191,10 +189,6 @@ typedef zval pval;
 
 #ifndef HAVE_STRERROR
 char *strerror(int);
-#endif
-
-#if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
-#include "regex/regex_extra.h"
 #endif
 
 #if HAVE_PWD_H

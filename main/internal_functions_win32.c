@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.90 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.91 2007/07/15 19:50:06 jani Exp $ */
 
 /* {{{ includes
  */
@@ -60,7 +60,6 @@
 #if HAVE_FTP
 #include "ext/ftp/php_ftp.h"
 #endif
-#include "ext/standard/reg.h"
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 #include "ext/pcre/php_pcre.h"
 #endif

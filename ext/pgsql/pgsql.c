@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.367 2007/05/29 21:06:04 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.368 2007/07/15 19:50:06 jani Exp $ */
 
 #include <stdlib.h>
 
@@ -36,6 +36,7 @@
 #include "php_ini.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/php_smart_str.h"
+#include "ext/ereg/php_regex.h"
 
 #undef PACKAGE_BUGREPORT
 #undef PACKAGE_NAME

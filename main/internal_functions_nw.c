@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: internal_functions_nw.c,v 1.12 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: internal_functions_nw.c,v 1.13 2007/07/15 19:50:06 jani Exp $ */
 
 /* {{{ includes
  */
@@ -51,7 +51,6 @@
 /*#include "ext/com/php_COM.h"
 #include "ext/com/php_VARIANT.h"*/
 #include "ext/ftp/php_ftp.h"
-#include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
 /*#include "ext/odbc/php_odbc.h"*/	/* Commented out for now */
 #include "ext/session/php_session.h"

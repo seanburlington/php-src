@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_regex.h,v 1.18 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: php_regex.h,v 1.19 2007/07/15 19:50:06 jani Exp $ */
 
 #ifndef PHP_REGEX_H
 #define PHP_REGEX_H
@@ -29,12 +29,12 @@
 
 #if REGEX
 /* get aliases */
-#include "regex/regex_extra.h"
-#include "regex/regex.h"
+#include "ext/ereg/regex/regex_extra.h"
+#include "ext/ereg/regex/regex.h"
 
 /* get rid of aliases */
 #define PHP_NO_ALIASES
-#include "regex/regex_extra.h"
+#include "ext/ereg/regex/regex_extra.h"
 #undef PHP_NO_ALIASES
 
 #undef _PCREPOSIX_H
@@ -63,3 +63,8 @@
 #endif
 
 #endif /* PHP_REGEX_H */
+
+/* No frame, regex_extra.h must be included always */
+#if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
+#include "ext/ereg/regex/regex_extra.h"
+#endif

@@ -18,13 +18,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.647 2007/07/10 14:16:40 dmitry Exp $ */
+/* $Id: string.c,v 1.648 2007/07/15 19:50:06 jani Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
 #include <stdio.h>
 #include "php.h"
-#include "reg.h"
 #include "php_rand.h"
 #include "php_string.h"
 #include "php_variables.h"

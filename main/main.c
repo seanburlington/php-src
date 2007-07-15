@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.43 2007/07/11 17:36:56 johannes Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.44 2007/07/15 14:15:02 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1336,6 +1336,16 @@ void php_request_shutdown(void *dummy)
 			}
 		}
 	} zend_end_try();
+
+	/* 6.5 free last error information */
+	if (PG(last_error_message)) {
+		free(PG(last_error_message));
+		PG(last_error_message) = NULL;
+	}
+	if (PG(last_error_file)) {
+		free(PG(last_error_file));
+		PG(last_error_file) = NULL;
+	}
 
 	/* 7. Shutdown scanner/executor/compiler and restore ini entries */
 	zend_deactivate(TSRMLS_C);

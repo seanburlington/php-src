@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.7 2004/01/17 13:00:04 sniper Exp $
+// $Id: config.w32,v 1.8 2007/07/16 19:02:43 tony2001 Exp $
 
 ARG_ENABLE('apache', 'Build Apache 1.3.x version of PHP', 'no');
 
@@ -15,7 +15,7 @@ if (PHP_APACHE != "no") {
 				';..\\php_build\\apache\\src\\corer')) {
 		// We need to play tricks to get our readdir.h used by apache
 		// headers
-		SAPI('apache', 'mod_php5.c sapi_apache.c php_apache.c',
+		SAPI('apache', 'mod_php.c sapi_apache.c php_apache.c',
 				'php' + PHP_VERSION + 'apache.dll',
 				'/D APACHEPHP5_EXPORTS /D APACHE_READDIR_H /I win32');
 	} else {

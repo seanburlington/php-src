@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.15 2007/01/01 09:29:27 sebastian Exp $ */
+/* $Id: pdo_dblib.c,v 1.16 2007/07/16 19:36:28 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -67,7 +67,7 @@ zend_module_entry pdo_dblib_module_entry = {
 	PHP_RSHUTDOWN(pdo_dblib),
 	PHP_MINFO(pdo_dblib),
 	"0.9",
-	PHP_MODULE_GLOBASLS(dblib),
+	PHP_MODULE_GLOBALS(dblib),
 	PHP_GINIT(dblib),
 	NULL,
 	NULL,

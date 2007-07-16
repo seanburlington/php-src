@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.8 2007/06/25 08:40:20 dmitry Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.9 2007/07/16 20:29:21 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -412,6 +412,7 @@ PHP_FUNCTION(glob)
 		efree(basename);
 	}
 
+	memset(&globbuf, 0, sizeof(glob_t));
 	globbuf.gl_offs = 0;
 	if (0 != (ret = glob(pattern, flags & GLOB_FLAGMASK, NULL, &globbuf))) {
 #ifdef GLOB_NOMATCH

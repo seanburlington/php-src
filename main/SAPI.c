@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.225 2007/05/25 09:19:05 rasmus Exp $ */
+/* $Id: SAPI.c,v 1.226 2007/07/16 12:58:23 jani Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -29,9 +29,6 @@
 #include "php_ini.h"
 #include "ext/standard/php_string.h"
 #include "ext/standard/pageinfo.h"
-#if (HAVE_PCRE || HAVE_BUNDLED_PCRE) && !defined(COMPILE_DL_PCRE)
-#include "ext/pcre/php_pcre.h"
-#endif
 #if HAVE_ZLIB
 #include "ext/zlib/php_zlib.h"
 #endif

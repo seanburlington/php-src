@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.46 2007/06/08 08:44:26 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.47 2007/07/16 19:16:00 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -234,7 +234,7 @@ int php_oci_statement_fetch(php_oci_statement *statement, ub4 nrows TSRMLS_DC)
 							(void *) column->oci_define,
 							OCI_HTYPE_DEFINE,
 							statement->err,
-							((void*)zstr_data.s) + column->retlen4,
+							((char *)zstr_data.s) + column->retlen4,
 							&(column->cb_retlen),
 							piecep,
 							&column->indicator,

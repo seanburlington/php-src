@@ -1,11 +1,11 @@
-dnl $Id: config0.m4,v 1.1 2007/07/15 19:50:06 jani Exp $
+dnl $Id: config0.m4,v 1.2 2007/07/16 13:41:12 jani Exp $
 dnl config.m4 for extension ereg
 
 dnl
 dnl Check for regex library type
 dnl
 PHP_ARG_WITH(regex,,
-[  --with-regex=TYPE       regex library type: system, apache, php. [TYPE=php]
+[  --with-regex=TYPE       regex library type: system, php. [TYPE=php]
                           WARNING: Do NOT use unless you know what you are doing!], php, no)
 
 case $PHP_REGEX in
@@ -15,9 +15,6 @@ case $PHP_REGEX in
     else
       REGEX_TYPE=system
     fi
-    ;;
-  apache)
-    REGEX_TYPE=apache
     ;;
   yes | php)
     REGEX_TYPE=php
@@ -34,9 +31,10 @@ AC_MSG_RESULT([$REGEX_TYPE])
 if test "$REGEX_TYPE" = "php"; then
   ereg_regex_sources="regex/regcomp.c regex/regexec.c regex/regerror.c regex/regfree.c"
   ereg_regex_headers="regex/"
+  PHP_EREG_CFLAGS="-Dregexec=php_regexec -Dregerror=php_regerror -Dregfree=php_regfree -Dregcomp=php_regcomp"
 fi
 
-PHP_NEW_EXTENSION(ereg, ereg.c $ereg_regex_sources, no)
+PHP_NEW_EXTENSION(ereg, ereg.c $ereg_regex_sources, no,,$PHP_EREG_CFLAGS)
 PHP_INSTALL_HEADERS([ext/ereg], [php_ereg.h php_regex.h $ereg_regex_headers])
 
 if test "$REGEX_TYPE" = "php"; then

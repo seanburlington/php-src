@@ -18,9 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_apache_http.h,v 1.17 2007/07/15 19:50:07 jani Exp $ */
-
-#define NO_REGEX_EXTRA_H
+/* $Id: php_apache_http.h,v 1.18 2007/07/16 13:41:12 jani Exp $ */
 
 #ifdef WIN32
 #include <stddef.h>

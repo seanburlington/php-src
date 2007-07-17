@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.81 2007/07/11 23:10:46 jani Exp $
+dnl $Id: config.m4,v 1.82 2007/07/17 12:11:41 jani Exp $
 dnl
 
 AC_DEFUN([PHP_ODBC_CHECK_HEADER],[
@@ -119,6 +119,7 @@ PHP_ARG_WITH(adabas,,
     PHP_ADD_LIBRARY(sqlrte)
     PHP_ADD_LIBRARY_WITH_PATH(odbc_adabas, $abs_builddir/ext/odbc)
     ODBC_TYPE=adabas
+    ODBC_INCDIR=$PHP_ADABAS/incl
     PHP_ODBC_CHECK_HEADER(sqlext.h)
     AC_DEFINE(HAVE_ADABAS,1,[ ])
     AC_MSG_RESULT([$ext_output])

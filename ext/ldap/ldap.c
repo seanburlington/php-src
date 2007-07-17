@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.173 2007/07/13 02:00:26 jani Exp $ */
+/* $Id: ldap.c,v 1.174 2007/07/17 08:38:19 jani Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -322,7 +322,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.173 2007/07/13 02:00:26 jani Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.174 2007/07/17 08:38:19 jani Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -2074,6 +2074,7 @@ PHP_FUNCTION(ldap_rename)
 	zval **link, **dn, **newrdn, **newparent, **deleteoldrdn;
 	ldap_linkdata *ld;
 	int rc;
+	char *newp = NULL;
 	
 	if (ZEND_NUM_ARGS() != 5 || zend_get_parameters_ex(5, &link, &dn, &newrdn, &newparent, &deleteoldrdn) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -2086,10 +2087,12 @@ PHP_FUNCTION(ldap_rename)
 	convert_to_string_ex(newparent);
 	convert_to_boolean_ex(deleteoldrdn);
 
+	newp = (Z_STRLEN_PP(newparent) > 0) ?  Z_STRVAL_PP(newparent) : NULL;
+
 #if (LDAP_API_VERSION > 2000) || HAVE_NSLDAP || HAVE_ORALDAP_10
-	rc = ldap_rename_s(ld->link, Z_STRVAL_PP(dn), Z_STRVAL_PP(newrdn), Z_STRVAL_PP(newparent), Z_BVAL_PP(deleteoldrdn), NULL, NULL);
+	rc = ldap_rename_s(ld->link, Z_STRVAL_PP(dn), Z_STRVAL_PP(newrdn), newp, Z_BVAL_PP(deleteoldrdn), NULL, NULL);
 #else
-	if (Z_STRLEN_PP(newparent) != 0) {
+	if (newp != NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You are using old LDAP API, newparent must be the empty string, can only modify RDN");
 		RETURN_FALSE;
 	}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.40 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: xp_socket.c,v 1.41 2007/07/17 13:27:38 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -281,18 +281,11 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 			}
 			
 		case PHP_STREAM_OPTION_BLOCKING:
-	
 			oldmode = sock->is_blocked;
-	
-			/* no need to change anything */
-			if (value == oldmode)
-				return oldmode;
-	
 			if (SUCCESS == php_set_sock_blocking(sock->socket, value TSRMLS_CC)) {
 				sock->is_blocked = value;
 				return oldmode;
 			}
-
 			return PHP_STREAM_OPTION_RETURN_ERR;
 
 		case PHP_STREAM_OPTION_READ_TIMEOUT:
@@ -751,11 +744,8 @@ static int php_tcp_sockop_set_option(php_stream *stream, int option, int value, 
 					/* fall through */
 					;
 			}
-			
-			/* fall through */
-		default:
-			return php_sockop_set_option(stream, option, value, ptrparam TSRMLS_CC);
 	}
+	return php_sockop_set_option(stream, option, value, ptrparam TSRMLS_CC);
 }
 
 

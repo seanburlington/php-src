@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.28 2007/06/25 18:25:08 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.29 2007/07/18 15:09:37 sixd Exp $ */
 
 
 
@@ -677,7 +677,8 @@ void php_oci_lob_free (php_oci_descriptor *descriptor TSRMLS_DC)
  Import LOB contents from the given file */
 int php_oci_lob_import (php_oci_descriptor *descriptor, char *filename TSRMLS_DC)
 {
-	int fp, loblen;
+	int fp;
+	ub4 loblen;
 	OCILobLocator *lob = (OCILobLocator *)descriptor->descriptor;
 	php_oci_connection *connection = descriptor->connection;
 	char buf[8192];
@@ -700,9 +701,9 @@ int php_oci_lob_import (php_oci_descriptor *descriptor, char *filename TSRMLS_DC
 					connection->err, 
 					lob, 
 					&loblen, 
-					(ub4) offset, 
+					offset, 
 					(dvoid *) &buf, 
-					(ub4) loblen, 
+					loblen, 
 					OCI_ONE_PIECE, 
 					(dvoid *)0, 
 					(OCICallbackLobWrite) 0, 

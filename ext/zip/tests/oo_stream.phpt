@@ -2,7 +2,7 @@
 getStream
 --SKIPIF--
 <?php
-/* $Id: oo_stream.phpt,v 1.2 2006/10/31 19:03:57 pajoye Exp $ */
+/* $Id: oo_stream.phpt,v 1.3 2007/07/18 13:54:30 tony2001 Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -43,6 +43,14 @@ fclose($fp);
 --EXPECTF--
 resource(%d) of type (stream)
 string(5) "foo
+
+"
+string(5) "foo
+
+"
+--UEXPECTF--
+resource(%d) of type (stream)
+unicode(5) "foo
 
 "
 string(5) "foo

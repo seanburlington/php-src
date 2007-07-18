@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.33 2007/06/08 08:44:39 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.34 2007/07/18 15:10:42 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -433,7 +433,7 @@ oci_error:
 	OCIErrorGet(OCI_G(env), (ub4)1, NULL, &error_code, tmp_buf, (ub4)PHP_OCI_ERRBUF_LEN, (ub4)OCI_HTYPE_ERROR);
 
 	if (error_code) {
-		int tmp_buf_len = strlen(tmp_buf);
+		int tmp_buf_len = strlen((char *)tmp_buf);
 
 		if (tmp_buf_len > 0 && tmp_buf[tmp_buf_len - 1] == '\n') {
 			tmp_buf[tmp_buf_len - 1] = '\0';
@@ -674,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.3");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.33 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.34 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -922,14 +922,14 @@ sb4 php_oci_fetch_errmsg(OCIError *error_handle, text **error_buf TSRMLS_DC)
 	PHP_OCI_CALL(OCIErrorGet, (error_handle, (ub4)1, NULL, &error_code, tmp_buf, (ub4)PHP_OCI_ERRBUF_LEN, (ub4)OCI_HTYPE_ERROR));
 	
 	if (error_code) {
-		int tmp_buf_len = strlen(tmp_buf);
+		int tmp_buf_len = strlen((char *)tmp_buf);
 		
 		if (tmp_buf_len && tmp_buf[tmp_buf_len - 1] == '\n') {
 			tmp_buf[tmp_buf_len - 1] = '\0';
 		}
 		if (tmp_buf_len && error_buf) {
 			*error_buf = NULL;
-			*error_buf = estrndup(tmp_buf, tmp_buf_len);
+			*error_buf = (text *)estrndup((char *)tmp_buf, tmp_buf_len);
 		}
 	}
 	return error_code;
@@ -1041,7 +1041,7 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 
 #if HAVE_OCI_ENV_NLS_CREATE
 	if (charset && *charset) {
-		PHP_OCI_CALL_RETURN(charsetid, OCINlsCharSetNameToId, (OCI_G(env), charset));
+		PHP_OCI_CALL_RETURN(charsetid, OCINlsCharSetNameToId, (OCI_G(env), (CONST oratext *)charset));
 		if (!charsetid) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid character set name: %s", charset);
 		} else {

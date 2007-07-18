@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.126 2007/07/17 13:29:25 jani Exp $ */
+/* $Id: network.c,v 1.127 2007/07/18 09:04:37 jani Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1035,7 +1035,7 @@ PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC)
 	flags = !block;
 	if (ioctlsocket(socketd, FIONBIO, &flags) == SOCKET_ERROR) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", WSAGetLastError());
-		ret = FALSE;
+		ret = FAILURE;
 	}
 #else
 	flags = fcntl(socketd, F_GETFL);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.12 2007/06/27 12:30:28 tony2001 Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13 2007/07/20 10:53:56 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -72,7 +72,7 @@ typedef struct _spl_array_object {
 static inline HashTable *spl_array_get_hash_table(spl_array_object* intern, int check_std_props TSRMLS_DC) {
 	if ((intern->ar_flags & SPL_ARRAY_IS_SELF) != 0) {
 		return intern->std.properties;
-	} else if ((intern->ar_flags & SPL_ARRAY_USE_OTHER) && (check_std_props == 0 || (intern->ar_flags & SPL_ARRAY_STD_PROP_LIST) == 0)) {
+	} else if ((intern->ar_flags & SPL_ARRAY_USE_OTHER) && (check_std_props == 0 || (intern->ar_flags & SPL_ARRAY_STD_PROP_LIST) == 0) && Z_TYPE_P(intern->array) == IS_OBJECT) {
 		spl_array_object *other  = (spl_array_object*)zend_object_store_get_object(intern->array TSRMLS_CC);
 		return spl_array_get_hash_table(other, check_std_props TSRMLS_CC);
 	} else if ((intern->ar_flags & ((check_std_props ? SPL_ARRAY_STD_PROP_LIST : 0) | SPL_ARRAY_IS_SELF)) != 0) {
@@ -1056,6 +1056,7 @@ SPL_METHOD(Array, exchangeArray)
 		}
 		zval_ptr_dtor(&intern->array);
 		intern->array = *array;
+		intern->ar_flags &= ~SPL_ARRAY_USE_OTHER;
 	}
 	if (object == *array) {
 		intern->ar_flags |= SPL_ARRAY_IS_SELF;

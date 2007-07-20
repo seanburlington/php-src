@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.16 2007/07/13 17:49:18 derick Exp $ */
+/* $Id: timelib.c,v 1.17 2007/07/20 23:53:29 jani Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -30,7 +30,7 @@
 
 #define TIMELIB_LLABS(y) (y < 0 ? (y * -1) : y)
 
-timelib_time* timelib_time_ctor()
+timelib_time* timelib_time_ctor(void)
 {
 	timelib_time *t;
 	t = calloc(1, sizeof(timelib_time));
@@ -55,7 +55,7 @@ void timelib_time_dtor(timelib_time* t)
 	TIMELIB_TIME_FREE(t);
 }
 
-timelib_time_offset* timelib_time_offset_ctor()
+timelib_time_offset* timelib_time_offset_ctor(void)
 {
 	timelib_time_offset *t;
 	t = calloc(1, sizeof(timelib_time_offset));

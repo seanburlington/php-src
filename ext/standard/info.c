@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.281 2007/07/14 08:38:19 tony2001 Exp $ */
+/* $Id: info.c,v 1.282 2007/07/21 01:23:37 jani Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -728,7 +728,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 }
 /* }}} */
 
-PHPAPI void php_info_print_table_start() /* {{{ */
+PHPAPI void php_info_print_table_start(void) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text) {
 		php_info_print("<table border=\"0\" cellpadding=\"3\" width=\"600\">\n");
@@ -738,7 +738,7 @@ PHPAPI void php_info_print_table_start() /* {{{ */
 }
 /* }}} */
 
-PHPAPI void php_info_print_table_end() /* {{{ */
+PHPAPI void php_info_print_table_end(void) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text) {
 		php_info_print("</table><br />\n");
@@ -764,7 +764,7 @@ PHPAPI void php_info_print_box_start(int flag) /* {{{ */
 }
 /* }}} */
 
-PHPAPI void php_info_print_box_end() /* {{{ */
+PHPAPI void php_info_print_box_end(void) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text) {
 		php_info_print("</td></tr>\n");
@@ -773,7 +773,7 @@ PHPAPI void php_info_print_box_end() /* {{{ */
 }
 /* }}} */
 
-PHPAPI void php_info_print_hr() /* {{{ */
+PHPAPI void php_info_print_hr(void) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text) {
 		php_info_print("<hr />\n");
@@ -999,7 +999,7 @@ PHP_FUNCTION(phpcredits)
 
 /* {{{ php_logo_guid
  */
-PHPAPI char *php_logo_guid()
+PHPAPI char *php_logo_guid(void)
 {
 	char *logo_guid;
 

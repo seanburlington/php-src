@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15.2.2.2.4 2007/01/01 09:36:02 sebastian Exp $ */
+/* $Id: php_libxml.h,v 1.15.2.2.2.5 2007/07/21 00:51:17 jani Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -93,8 +93,8 @@ PHP_LIBXML_API zval *php_libxml_switch_context(zval *context TSRMLS_DC);
 PHP_LIBXML_API void php_libxml_issue_error(int level, const char *msg TSRMLS_DC);
 
 /* Init/shutdown functions*/
-PHP_LIBXML_API void php_libxml_initialize();
-PHP_LIBXML_API void php_libxml_shutdown();
+PHP_LIBXML_API void php_libxml_initialize(void);
+PHP_LIBXML_API void php_libxml_shutdown(void);
 
 #ifdef ZTS
 #define LIBXML(v) TSRMG(libxml_globals_id, zend_libxml_globals *, v)

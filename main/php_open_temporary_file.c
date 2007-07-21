@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.34.2.1.2.8 2007/07/17 23:46:40 iliaa Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.34.2.1.2.9 2007/07/21 01:43:33 jani Exp $ */
 
 #include "php.h"
 
@@ -151,7 +151,7 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 /* Cache the chosen temporary directory. */
 static char* temporary_directory;
 
-PHPAPI void php_shutdown_temporary_directory()
+PHPAPI void php_shutdown_temporary_directory(void)
 {
 	if (temporary_directory) {
 		free(temporary_directory);

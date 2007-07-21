@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_open_temporary_file.h,v 1.16 2007/02/03 14:57:24 helly Exp $ */
+/* $Id: php_open_temporary_file.h,v 1.17 2007/07/21 01:41:55 jani Exp $ */
 
 #ifndef PHP_OPEN_TEMPORARY_FILE_H
 #define PHP_OPEN_TEMPORARY_FILE_H
@@ -25,7 +25,7 @@ BEGIN_EXTERN_C()
 PHPAPI FILE *php_open_temporary_file(const char *dir, const char *pfx, char **opened_path_p TSRMLS_DC);
 PHPAPI int php_open_temporary_fd(const char *dir, const char *pfx, char **opened_path_p TSRMLS_DC);
 PHPAPI const char *php_get_temporary_directory(void);
-PHPAPI void php_shutdown_temporary_directory();
+PHPAPI void php_shutdown_temporary_directory(void);
 END_EXTERN_C()
 
 #endif /* PHP_OPEN_TEMPORARY_FILE_H */

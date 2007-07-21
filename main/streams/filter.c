@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.42 2007/01/15 14:59:40 tony2001 Exp $ */
+/* $Id: filter.c,v 1.43 2007/07/21 01:41:55 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -32,7 +32,7 @@
 static HashTable stream_filters_hash;
 
 /* Should only be used during core initialization */
-PHPAPI HashTable *php_get_stream_filters_hash_global()
+PHPAPI HashTable *php_get_stream_filters_hash_global(void)
 {
 	return &stream_filters_hash;
 }

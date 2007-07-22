@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.63 2007/06/06 21:53:54 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.64 2007/07/22 15:55:15 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -651,6 +651,11 @@ PHP_FUNCTION(wordwrap)
 
 	if (textlen == 0) {
 		RETURN_EMPTY_STRING();
+	}
+
+	if (breakcharlen == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Break string cannot be empty");
+		RETURN_FALSE;
 	}
 
 	if (linelength == 0 && docut) {

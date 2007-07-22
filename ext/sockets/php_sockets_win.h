@@ -19,17 +19,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sockets_win.h,v 1.14 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: php_sockets_win.h,v 1.15 2007/07/22 23:00:14 jani Exp $ */
 
 
 #ifdef PHP_WIN32
-
-#define F_SETFL		0
-#define F_GETFL		1
-#define F_SETFD		2
-#define F_GETFD		3
-
-#define O_NONBLOCK FIONBIO
 
 #define EPROTONOSUPPORT	WSAEPROTONOSUPPORT
 #define ECONNRESET		WSAECONNRESET
@@ -50,6 +43,5 @@ struct	sockaddr_un {
 
 int socketpair(int domain, int type, int protocol, SOCKET sock[2]);
 int inet_aton(const char *cp, struct in_addr *inp);
-int	fcntl(int fd, int cmd, ...);
 
 #endif

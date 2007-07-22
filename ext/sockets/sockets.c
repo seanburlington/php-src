@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.190 2007/05/28 23:14:57 iliaa Exp $ */
+/* $Id: sockets.c,v 1.191 2007/07/22 22:17:51 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -117,7 +117,9 @@ zend_function_entry sockets_functions[] = {
 	PHP_FE(socket_select,			first_through_third_args_force_ref)
 	PHP_FE(socket_create,			NULL)
 	PHP_FE(socket_create_listen,	NULL)
+#ifdef HAVE_SOCKETPAIR
 	PHP_FE(socket_create_pair,		fourth_arg_force_ref)
+#endif
 	PHP_FE(socket_accept,			NULL)
 	PHP_FE(socket_set_nonblock,		NULL)
 	PHP_FE(socket_set_block,		NULL)
@@ -1726,6 +1728,7 @@ PHP_FUNCTION(socket_set_option)
 }
 /* }}} */
 
+#ifdef HAVE_SOCKETPAIR
 /* {{{ proto bool socket_create_pair(int domain, int type, int protocol, array &fd) U
    Creates a pair of indistinguishable sockets and stores them in fds. */
 PHP_FUNCTION(socket_create_pair)
@@ -1786,6 +1789,7 @@ PHP_FUNCTION(socket_create_pair)
 	RETURN_TRUE;
 }
 /* }}} */
+#endif
 
 #ifdef HAVE_SHUTDOWN
 /* {{{ proto bool socket_shutdown(resource socket[, int how]) U

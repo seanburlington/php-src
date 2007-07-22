@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.40 2007/05/28 23:33:13 iliaa Exp $ */
+/* $Id: php_sockets.h,v 1.41 2007/07/22 22:17:51 jani Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -45,7 +45,9 @@ PHP_RSHUTDOWN_FUNCTION(sockets);
 
 PHP_FUNCTION(socket_select);
 PHP_FUNCTION(socket_create_listen);
+#ifdef HAVE_SOCKETPAIR
 PHP_FUNCTION(socket_create_pair);
+#endif
 PHP_FUNCTION(socket_accept);
 PHP_FUNCTION(socket_set_nonblock);
 PHP_FUNCTION(socket_set_block);

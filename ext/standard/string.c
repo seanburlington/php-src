@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.649 2007/07/23 11:47:44 jani Exp $ */
+/* $Id: string.c,v 1.650 2007/07/23 13:27:34 jani Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7309,7 +7309,7 @@ PHP_FUNCTION(str_pad)
 	}
 	/* If resulting string turns out to be shorter than input string,
 	   we simply copy the input and return. */
-	if (num_pad_chars < 0) {
+	if (pad_length < 0 || num_pad_chars < 0) {
 		if (input_type == IS_UNICODE) {
 			RETURN_UNICODEL((UChar *)input, input_len, 1);
 		} else {

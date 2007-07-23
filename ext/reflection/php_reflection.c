@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.278 2007/07/11 22:03:59 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.279 2007/07/23 01:21:04 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -996,6 +996,7 @@ static void _extension_string(string *str, zend_module_entry *module, char *inde
 		while (func->fname) {
 			if (zend_ascii_hash_find(EG(function_table), func->fname, strlen(func->fname) + 1, (void**) &fptr) == FAILURE) {
 				zend_error(E_WARNING, "Internal error: Cannot find extension function %s in global function table", func->fname);
+				func++;
 				continue;
 			}
 			
@@ -4327,6 +4328,7 @@ ZEND_METHOD(reflection_extension, getFunctions)
 		while (func->fname) {
 			if (zend_ascii_hash_find(EG(function_table), func->fname, strlen(func->fname) + 1, (void**) &fptr) == FAILURE) {
 				zend_error(E_WARNING, "Internal error: Cannot find extension function %s in global function table", func->fname);
+				func++;
 				continue;
 			}
 			
@@ -5005,7 +5007,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.278 2007/07/11 22:03:59 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.279 2007/07/23 01:21:04 bjori Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

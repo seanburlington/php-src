@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.64 2007/07/22 15:55:15 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.65 2007/07/23 13:27:58 jani Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4746,7 +4746,7 @@ PHP_FUNCTION(str_pad)
 
 	/* If resulting string turns out to be shorter than input string,
 	   we simply copy the input and return. */
-	if (num_pad_chars < 0) {
+	if (Z_LVAL_PP(pad_length) < 0 || num_pad_chars < 0) {
 		RETURN_ZVAL(*input, 1, 0);
 	}
 

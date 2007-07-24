@@ -1,6 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5                                                        |
+  | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
@@ -12,10 +12,12 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Georg Richter <georg@php.net>                                |
+  | Authors: Georg Richter <georg@php.net>                               |
+  |          Andrey Hristov <andrey@php.net>                             |
+  |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.16 2007/01/01 09:29:26 sebastian Exp $ 
+  $Id: mysqli_report.c,v 1.17 2007/07/24 16:13:26 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -25,7 +27,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "php_mysqli.h"
+#include "php_mysqli_structs.h"
 
 /* {{{ proto bool mysqli_report(int flags) U
    sets report level */
@@ -45,13 +47,13 @@ PHP_FUNCTION(mysqli_report)
 /* }}} */
 
 /* {{{ void php_mysqli_report_error(char *sqlstate, int errorno, char *error) */ 
-void php_mysqli_report_error(char *sqlstate, int errorno, char *error TSRMLS_DC) {
-	php_mysqli_throw_sql_exception(sqlstate, errorno TSRMLS_CC, "%s", error);
+void php_mysqli_report_error(const char *sqlstate, int errorno, const char *error TSRMLS_DC) {
+	php_mysqli_throw_sql_exception((char *)sqlstate, errorno TSRMLS_CC, "%s", error);
 }
 /* }}} */
 
 /* {{{ void php_mysqli_report_index() */ 
-void php_mysqli_report_index(char *query, unsigned int status TSRMLS_DC) {
+void php_mysqli_report_index(const char *query, unsigned int status TSRMLS_DC) {
 	char index[15];
 
 	if (status & SERVER_QUERY_NO_GOOD_INDEX_USED) {

@@ -1,6 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5                                                        |
+  | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
@@ -12,10 +12,12 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Georg Richter <georg@php.net>                                |
+  | Authors: Georg Richter <georg@php.net>                               |
+  |          Andrey Hristov <andrey@php.net>                             |
+  |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_repl.c,v 1.6 2007/01/01 09:29:26 sebastian Exp $
+  $Id: mysqli_repl.c,v 1.7 2007/07/24 16:13:26 andrey Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -27,7 +29,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "php_mysqli.h"
+#include "php_mysqli_structs.h"
 
 /* {{{ proto void mysqli_disable_reads_from_master(object link)
 */

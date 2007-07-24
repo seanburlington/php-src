@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.740 2007/07/24 14:18:47 jani Exp $ */
+/* $Id: main.c,v 1.741 2007/07/24 20:14:03 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -374,6 +374,7 @@ static PHP_INI_DISP(display_errors_mode)
 {
 	int mode, tmp_value_length, cgi_or_cli;
 	char *tmp_value;
+	TSRMLS_FETCH();
 
 	if (type == ZEND_INI_DISPLAY_ORIG && ini_entry->modified) {
 		tmp_value = (ini_entry->orig_value ? ini_entry->orig_value : NULL );

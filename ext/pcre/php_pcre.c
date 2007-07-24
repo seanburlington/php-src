@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.216 2007/07/10 09:57:23 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.217 2007/07/24 22:34:17 tony2001 Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -66,7 +66,7 @@ typedef struct {
 	int cp_offset;
 } offset_map_t;
 
-ZEND_DECLARE_MODULE_GLOBALS(pcre);
+ZEND_DECLARE_MODULE_GLOBALS(pcre)
 
 
 static void pcre_handle_exec_error(int pcre_code TSRMLS_DC) /* {{{ */
@@ -161,6 +161,7 @@ static PHP_MINIT_FUNCTION(pcre)
 	REGISTER_LONG_CONSTANT("PREG_BACKTRACK_LIMIT_ERROR", PHP_PCRE_BACKTRACK_LIMIT_ERROR, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PREG_RECURSION_LIMIT_ERROR", PHP_PCRE_RECURSION_LIMIT_ERROR, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PREG_BAD_UTF8_ERROR", PHP_PCRE_BAD_UTF8_ERROR, CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("PCRE_VERSION", (char *)pcre_version(), CONST_CS | CONST_PERSISTENT);
 
 	return SUCCESS;
 }

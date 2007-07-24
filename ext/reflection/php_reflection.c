@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.279 2007/07/23 01:21:04 bjori Exp $ */
+/* $Id: php_reflection.c,v 1.280 2007/07/24 23:16:47 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4512,6 +4512,20 @@ ZEND_METHOD(reflection_extension, getDependencies)
 }
 /* }}} */
 
+/* {{{ proto public void ReflectionExtension::info() U
+       Prints phpinfo block for the extension */
+ZEND_METHOD(reflection_extension, info)
+{
+	reflection_object *intern;
+	zend_module_entry *module;
+
+	METHOD_NOTSTATIC_NUMPARAMS(reflection_extension_ptr, 0);
+	GET_REFLECTION_OBJECT_PTR(module);
+
+	php_info_print_module(module TSRMLS_CC);
+}
+/* }}} */
+
 /* {{{ method tables */
 static zend_function_entry reflection_exception_functions[] = {
 	{NULL, NULL, NULL}
@@ -4889,6 +4903,7 @@ static zend_function_entry reflection_extension_functions[] = {
 	ZEND_ME(reflection_extension, getClasses, NULL, 0)
 	ZEND_ME(reflection_extension, getClassNames, NULL, 0)
 	ZEND_ME(reflection_extension, getDependencies, NULL, 0)
+	ZEND_ME(reflection_extension, info, NULL, 0)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -5007,7 +5022,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.279 2007/07/23 01:21:04 bjori Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.280 2007/07/24 23:16:47 johannes Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

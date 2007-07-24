@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.738 2007/07/21 01:41:55 jani Exp $ */
+/* $Id: main.c,v 1.739 2007/07/24 13:29:39 jani Exp $ */
 
 /* {{{ includes
  */
@@ -210,7 +210,10 @@ static PHP_INI_MH(OnUpdateTimeout)
 	zend_set_timeout(EG(timeout_seconds));
 	return SUCCESS;
 }
+/* }}} */
 
+/* {{{ PHP_INI_MH
+ */
 static ZEND_INI_MH(OnUpdateOutputEncoding)
 {
 	if (new_value) {

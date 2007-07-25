@@ -18,25 +18,17 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.h,v 1.1 2007/07/24 16:13:26 andrey Exp $ */
+/* $Id: mysqlnd_result_meta.h,v 1.1 2007/07/25 23:47:32 jani Exp $ */
 
-#ifndef MYSQLND_RESULT_H
-#define MYSQLND_RESULT_H
+#ifndef MYSQLND_RESULT_META_H
+#define MYSQLND_RESULT_META_H
 
-MYSQLND_RES *mysqlnd_result_init(unsigned int field_count, MYSQLND_THD_ZVAL_PCACHE *cache);
 
-void mysqlnd_unbuffered_free_last_data(MYSQLND_RES *result TSRMLS_DC);
+MYSQLND_RES_METADATA *mysqlnd_result_meta_init(unsigned int field_count);
 
-enum_func_status
-mysqlnd_store_result_fetch_data(MYSQLND * const conn, MYSQLND_RES *result,
-								MYSQLND_RES_METADATA *meta,
-								zend_bool binary_protocol,
-								zend_bool update_max_length,
-								zend_bool to_cache TSRMLS_DC);
 
-enum_func_status mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC);
 
-#endif /* MYSQLND_RESULT_H */
+#endif /* MYSQLND_RESULT_META_H */
 
 /*
  * Local variables:

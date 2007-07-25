@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.65 2007/07/24 16:13:26 andrey Exp $ 
+  $Id: php_mysqli.h,v 1.66 2007/07/25 23:47:32 jani Exp $ 
 */
 
 #ifndef PHP_MYSQLI_H
@@ -144,13 +144,10 @@ ZEND_FUNCTION(mysqli_result_construct);
 ZEND_FUNCTION(mysqli_driver_construct);
 ZEND_METHOD(mysqli_warning,__construct);
 
-
 #define phpext_mysqli_ptr &mysqli_module_entry
 extern zend_module_entry mysqli_module_entry;
 
 #endif	/* PHP_MYSQLI.H */
-
-#include "ext/mysqli/mysqlnd/php_mysqlnd.h"
 
 /*
  * Local variables:

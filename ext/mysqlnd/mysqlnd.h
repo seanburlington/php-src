@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.1 2007/07/24 16:13:26 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.1 2007/07/25 23:47:32 jani Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
@@ -47,7 +47,7 @@ extern zend_module_entry mysqlnd_module_entry;
 */
 #define MYSQLND_DO_WIRE_CHECK_BEFORE_COMMAND 1
 
-#include "portability.h"
+#include "mysqlnd_portability.h"
 
 #ifdef ZTS
 #include "TSRM.h"

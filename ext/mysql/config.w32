@@ -1,15 +1,19 @@
-// $Id: config.w32,v 1.2 2005/06/05 19:25:00 wez Exp $
+// $Id: config.w32,v 1.3 2007/07/25 23:47:32 jani Exp $
 // vim:ft=javascript
 
 ARG_WITH("mysql", "MySQL support", "no");
 
 if (PHP_MYSQL != "no") {
-	if (CHECK_LIB("libmysql.lib", "mysql", PHP_MYSQL) &&
-			CHECK_HEADER_ADD_INCLUDE("mysql.h", "CFLAGS_MYSQL",
-				PHP_MYSQL + "\\include;" + PHP_PHP_BUILD + "\\include\\mysql;" + PHP_MYSQL)) {
-		EXTENSION("mysql", "php_mysql.c");
-		AC_DEFINE('HAVE_MYSQL', 1, 'Have MySQL library');
-	} else {
-		WARNING("mysql not enabled; libraries and headers not found");
-	}
+  if (PHP_MYSQLI != "mysqlnd") {
+    if (CHECK_LIB("libmysql.lib", "mysql", PHP_MYSQL) &&
+        CHECK_HEADER_ADD_INCLUDE("mysql.h", "CFLAGS_MYSQL",
+          PHP_MYSQL + "\\include;" + PHP_PHP_BUILD + "\\include\\mysql;" + PHP_MYSQL)) {
+    } else {
+        WARNING("mysql not enabled; libraries and headers not found");
+    }
+  } else {
+    ADD_EXTENSION_DEP('mysql', 'mysqlnd', true);
+  }
+  EXTENSION("mysql", "php_mysql.c");
+  AC_DEFINE('HAVE_MYSQL', 1, 'Have MySQL library');
 }

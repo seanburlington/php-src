@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.39 2007/07/26 14:30:08 jani Exp $ */
+/* $Id: scanf.c,v 1.40 2007/07/26 15:23:31 jani Exp $ */
 
 /*
 	scanf.c --
@@ -1105,6 +1105,7 @@ PHPAPI int php_sscanf_internal( char *string, char *format,
 				return FAILURE;
 			}
 		}
+		varStart = 0; /* Array index starts from 0 */
 	}
 
 	baseString = string;
@@ -1750,6 +1751,7 @@ PHPAPI int php_u_sscanf_internal(	UChar *string, UChar *format,
 				return FAILURE;
 			}
 		}
+		varStart = 0; /* Array index starts from 0 */
 	}
 
 	baseString = string;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1 2007/07/25 23:47:32 jani Exp $
+dnl $Id: config9.m4,v 1.2 2007/07/26 14:54:49 jani Exp $
 dnl config.m4 for mysqlnd driver
 
 dnl If some extension uses mysqlnd it will get compiled in PHP core
@@ -16,7 +16,7 @@ if test "$PHP_MYSQLND_ENABLED" = "yes"; then
   AC_DEFINE([HAVE_MYSQLND], 1, [Whether mysqlnd is enabled])
 
   dnl This creates a file so it has to be after above macros
-  PHP_CHECK_TYPES([int8 uint8 int16 uint16 int32 uint32 uchar int8_t uint8_t int16_t uint16_t int32_t uint32_t int64_t uint64_t], [
+  PHP_CHECK_TYPES([int8 uint8 int16 uint16 int32 uint32 uchar ulong int8_t uint8_t int16_t uint16_t int32_t uint32_t int64_t uint64_t], [
     $ext_builddir/php_mysqlnd_config.h
   ],[
 #ifdef HAVE_SYS_TYPES_H

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.71 2007/07/26 18:49:51 jani Exp $
+dnl $Id: config.m4,v 1.72 2007/07/26 19:07:53 jani Exp $
 dnl
 
 AC_DEFUN([MYSQL_LIB_CHK], [
@@ -156,6 +156,6 @@ if test "$PHP_MYSQL" != "no"; then
   PHP_SUBST(MYSQL_SHARED_LIBADD)
 
   if test "$PHP_MYSQL" = "mysqlnd"; then
-    PHP_ADD_EXTENSION_DEP(mysqli, mysqlnd)
+    PHP_ADD_EXTENSION_DEP(mysql, mysqlnd)
   fi
 fi

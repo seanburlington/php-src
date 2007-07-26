@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.32 2007/07/04 10:16:22 dmitry Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.33 2007/07/26 22:45:59 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,14 +399,16 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.32 $'."\n";
+					echo '$Revision: 1.226.2.37.2.33 $'."\n";
 					exit(1);
+
+				case 'u':
+				case 'U':
+					// Allow using u or U for forward compatibility
+					break;
+					
 				default:
 					echo "Illegal switch '$switch' specified!\n";
-					if ($switch == 'u' || $switch == 'U') {
-						break;
-					}
-					// break
 				case 'h':
 				case '-help':
 				case '--help':

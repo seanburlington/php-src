@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.61 2007/07/21 00:49:53 jani Exp $ */
+/* $Id: libxml.c,v 1.62 2007/07/28 08:34:09 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -240,11 +240,14 @@ static void php_libxml_node_free_list(xmlNodePtr node TSRMLS_DC)
 				case XML_ENTITY_REF_NODE:
 					php_libxml_node_free_list((xmlNodePtr) node->properties TSRMLS_CC);
 					break;
+				case XML_ATTRIBUTE_NODE:
+    					if ((node->doc != NULL) && (((xmlAttrPtr) node)->atype == XML_ATTRIBUTE_ID)) {
+	    					xmlRemoveID(node->doc, (xmlAttrPtr) node);
+    					}
 				case XML_ATTRIBUTE_DECL:
 				case XML_DTD_NODE:
 				case XML_DOCUMENT_TYPE_NODE:
 				case XML_ENTITY_DECL:
-				case XML_ATTRIBUTE_NODE:
 				case XML_NAMESPACE_DECL:
 				case XML_TEXT_NODE:
 					php_libxml_node_free_list(node->children TSRMLS_CC);

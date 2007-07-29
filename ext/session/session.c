@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.38 2007/06/17 14:25:46 iliaa Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.39 2007/07/29 14:43:30 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1221,10 +1221,7 @@ PHPAPI void php_session_start(TSRMLS_D)
 
 	PS(apply_trans_sid) = PS(use_trans_sid);
 
-	PS(define_sid) = 1;
-	PS(send_cookie) = 1;
 	if (PS(session_status) != php_session_none) {
-		
 		if (PS(session_status) == php_session_disabled) {
 			char *value;
 
@@ -1241,6 +1238,9 @@ PHPAPI void php_session_start(TSRMLS_D)
 		
 		php_error(E_NOTICE, "A session had already been started - ignoring session_start()");
 		return;
+	} else {
+		PS(define_sid) = 1;
+		PS(send_cookie) = 1;
 	}
 
 	lensess = strlen(PS(session_name));

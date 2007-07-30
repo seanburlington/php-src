@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.378 2007/06/06 09:43:39 tony2001 Exp $ */
+/* $Id: gd.c,v 1.379 2007/07/30 21:44:53 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -3825,7 +3825,8 @@ PHP_FUNCTION(imagepsloadfont)
 	f_ind = T1_AddFont(filename);
 
 	if (f_ind < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "T1Lib Error: %s", T1_StrError(f_ind));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "T1Lib Error (%i): %s", f_ind, T1_StrError(f_ind));
+		RETURN_FALSE;
 	}
 
 	if (T1_LoadFont(f_ind)) {

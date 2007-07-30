@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.65 2007/07/23 13:27:58 jani Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.66 2007/07/30 14:22:06 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2226,7 +2226,7 @@ PHP_FUNCTION(substr_replace)
 			if (f > Z_STRLEN_PP(str) || (f < 0 && -f > Z_STRLEN_PP(str))) {
 				RETURN_FALSE;
 			} else if (l > Z_STRLEN_PP(str) || (l < 0 && -l > Z_STRLEN_PP(str))) {
-				RETURN_FALSE;
+				l = Z_STRLEN_PP(str);
 			}
 
 			if ((f + l) > Z_STRLEN_PP(str)) {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.7.2.5 2007/07/03 17:25:35 sniper Exp $
+dnl $Id: config.m4,v 1.25.2.7.2.6 2007/07/31 13:02:00 jani Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -78,10 +78,10 @@ if test "$PHP_PDO_MYSQL" != "no"; then
     else
       PDO_MYSQL_INC_DIR=$PDO_MYSQL_DIR/include
     fi
-    if test -r $PDO_MYSQL_DIR/lib/mysql; then
-      PDO_MYSQL_LIB_DIR=$PDO_MYSQL_DIR/lib/mysql
+    if test -r $PDO_MYSQL_DIR/$PHP_LIBDIR/mysql; then
+      PDO_MYSQL_LIB_DIR=$PDO_MYSQL_DIR/$PHP_LIBDIR/mysql
     else
-      PDO_MYSQL_LIB_DIR=$PDO_MYSQL_DIR/lib
+      PDO_MYSQL_LIB_DIR=$PDO_MYSQL_DIR/$PHP_LIBDIR
     fi
 
     if test -r "$PDO_MYSQL_LIB_DIR"; then

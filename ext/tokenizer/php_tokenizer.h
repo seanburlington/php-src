@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_tokenizer.h,v 1.13 2007/05/28 12:18:26 bjori Exp $ */
+/* $Id: php_tokenizer.h,v 1.14 2007/07/31 23:23:37 johannes Exp $ */
 
 #ifndef PHP_TOKENIZER_H
 #define PHP_TOKENIZER_H
@@ -33,6 +33,10 @@ extern zend_module_entry tokenizer_module_entry;
 #ifdef ZTS
 #include "TSRM.h"
 #endif
+
+void tokenizer_register_constants(INIT_FUNC_ARGS);
+char *get_token_type_name(int token_type);
+
 
 PHP_MINIT_FUNCTION(tokenizer);
 PHP_MINFO_FUNCTION(tokenizer);

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.35 2007/07/09 09:08:52 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.36 2007/07/31 19:19:39 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -272,7 +272,6 @@ typedef struct { /* php_oci_out_column {{{ */
 #define PHP_OCI_REGISTER_RESOURCE(resource, le_resource) \
 	do { \
 		resource->id = ZEND_REGISTER_RESOURCE(NULL, resource, le_resource); \
-		zend_list_addref(resource->connection->rsrc_id); \
 	} while (0)
 
 #define PHP_OCI_ZVAL_TO_CONNECTION(zval, connection) \

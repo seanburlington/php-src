@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.30 2007/01/11 11:58:34 tony2001 Exp $ */
+/* $Id: oci8_interface.c,v 1.31 2007/07/31 19:19:39 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2208,3 +2208,12 @@ PHP_FUNCTION(oci_new_collection)
 #endif
 
 #endif /* HAVE_OCI8 */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

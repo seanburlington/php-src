@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.328 2007/07/04 10:15:47 dmitry Exp $ */
+/* $Id: run-tests.php,v 1.329 2007/07/31 21:29:11 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -407,7 +407,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.328 $'."\n";
+					echo '$Revision: 1.329 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -481,7 +481,18 @@ HELP;
 		}
 		if (!$is_switch) {
 			$testfile = realpath($argv[$i]);
-			if (is_dir($testfile)) {
+			if (!$testfile && strpos($argv[$i], '*') !== false && function_exists('glob')) {
+				if (preg_match("/\.phpt$/", $argv[$i])) {
+					$pattern_match = glob($argv[$i]);
+				} else if (preg_match("/\*$/", $argv[$i])) {
+					$pattern_match = glob($argv[$i] . '.phpt');
+				} else {
+					die("bogus test name " . $argv[$i] . "\n");
+				}
+				if (is_array($pattern_match)) {
+					$test_files = array_merge($test_files, $pattern_match);
+				}
+			} else if (is_dir($testfile)) {
 				find_files($testfile);
 			} else if (preg_match("/\.phpt$/", $testfile)) {
 				$test_files[] = $testfile;

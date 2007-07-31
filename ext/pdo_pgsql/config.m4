@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2007/07/11 21:51:10 jani Exp $
+dnl $Id: config.m4,v 1.19 2007/07/31 13:01:42 jani Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -43,7 +43,7 @@ if test "$PHP_PDO_PGSQL" != "no"; then
         fi
       done
 
-      for j in lib lib/pgsql lib/postgres lib/postgresql ""; do
+      for j in $PHP_LIBDIR $PHP_LIBDIR/pgsql $PHP_LIBDIR/postgres $PHP_LIBDIR/postgresql ""; do
         if test -f "$i/$j/libpq.so" || test -f "$i/$j/libpq.a"; then 
           PGSQL_LIBDIR=$i/$j
         fi

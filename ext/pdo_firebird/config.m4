@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2007/07/03 17:24:37 sniper Exp $
+dnl $Id: config.m4,v 1.10 2007/07/31 13:01:42 jani Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -14,7 +14,7 @@ if test "$PHP_PDO_FIREBIRD" != "no"; then
     FIREBIRD_LIBDIR=/opt/firebird/lib
   else
     FIREBIRD_INCDIR=$PHP_PDO_FIREBIRD/include
-    FIREBIRD_LIBDIR=$PHP_PDO_FIREBIRD/lib
+    FIREBIRD_LIBDIR=$PHP_PDO_FIREBIRD/$PHP_LIBDIR
   fi
 
   PHP_CHECK_LIBRARY(fbclient, isc_detach_database,

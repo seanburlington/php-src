@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2007/07/03 17:24:36 sniper Exp $
+dnl $Id: config.m4,v 1.22 2007/07/31 13:01:42 jani Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -12,7 +12,7 @@ if test "$PHP_INTERBASE" != "no"; then
     IBASE_LIBDIR=/usr/interbase/lib
   else
     IBASE_INCDIR=$PHP_INTERBASE/include
-    IBASE_LIBDIR=$PHP_INTERBASE/lib
+    IBASE_LIBDIR=$PHP_INTERBASE/$PHP_LIBDIR
   fi
 
   PHP_CHECK_LIBRARY(fbclient, isc_detach_database,

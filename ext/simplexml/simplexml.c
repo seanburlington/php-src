@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.241 2007/07/10 12:26:37 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.242 2007/07/31 15:07:15 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1637,7 +1637,9 @@ SXE_METHOD(addChild)
 			newnode->ns = NULL;
 			nsptr = xmlNewNs(newnode, (xmlChar *)nsuri, prefix);
 		} else {
-			nsptr = xmlSearchNsByHref(node->doc, node, (xmlChar *)nsuri);
+			if (node) {
+				nsptr = xmlSearchNsByHref(node->doc, node, (xmlChar *)nsuri);
+			}
 			if (nsptr == NULL) {
 				nsptr = xmlNewNs(newnode, (xmlChar *)nsuri, prefix);
 			}
@@ -2498,7 +2500,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.241 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.242 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

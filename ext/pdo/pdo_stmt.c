@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.21 2007/07/22 15:50:17 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.22 2007/07/31 22:48:42 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -867,10 +867,10 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 	zend_class_entry *ce = NULL, *old_ce = NULL;
 	zval grp_val, *grp, **pgrp, *retval, *old_ctor_args = NULL;
 
-	how = how & ~PDO_FETCH_FLAGS;
 	if (how == PDO_FETCH_USE_DEFAULT) {
 		how = stmt->default_fetch_type;
 	}
+	how = how & ~PDO_FETCH_FLAGS;
 
 	if (!do_fetch_common(stmt, ori, offset, do_bind TSRMLS_CC)) {
 		return 0;

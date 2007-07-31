@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.7.2.6.2.13 2007/07/18 15:10:42 sixd Exp $ */
+/* $Id: oci8_lob.c,v 1.7.2.6.2.14 2007/07/31 19:21:08 tony2001 Exp $ */
 
 
 
@@ -69,6 +69,8 @@ php_oci_descriptor *php_oci_lob_create (php_oci_connection *connection, long typ
 
 	descriptor = ecalloc(1, sizeof(php_oci_descriptor));
 	descriptor->type = type;
+	descriptor->connection = connection;
+	zend_list_addref(descriptor->connection->rsrc_id);
 
 	PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIDescriptorAlloc, (connection->env, (dvoid*)&(descriptor->descriptor), descriptor->type, (size_t) 0, (dvoid **) 0));
 
@@ -78,8 +80,6 @@ php_oci_descriptor *php_oci_lob_create (php_oci_connection *connection, long typ
 		efree(descriptor);
 		return NULL;
 	}
-
-	descriptor->connection = connection;
 
 	PHP_OCI_REGISTER_RESOURCE(descriptor, le_descriptor);
 	
@@ -895,3 +895,12 @@ int php_oci_lob_write_tmp (php_oci_descriptor *descriptor, ub1 type, char *data,
 } /* }}} */
 
 #endif /* HAVE_OCI8 */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

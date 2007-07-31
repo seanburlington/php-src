@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.26 2007/07/18 15:10:42 sixd Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.27 2007/07/31 19:21:08 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -107,6 +107,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 	statement->connection = connection;
 	statement->has_data = 0;
 	statement->nested = 0;
+	zend_list_addref(statement->connection->rsrc_id);
 
 	if (OCI_G(default_prefetch) > 0) {
 		php_oci_statement_set_prefetch(statement, OCI_G(default_prefetch) TSRMLS_CC);
@@ -1587,3 +1588,12 @@ php_oci_bind *php_oci_bind_array_helper_date(zval* var, long max_table_length, p
 } /* }}} */
 
 #endif /* HAVE_OCI8 */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

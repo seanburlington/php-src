@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.65 2006/12/21 17:37:52 masugata Exp $
+dnl $Id: config.m4,v 1.66 2007/07/31 12:23:42 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -251,7 +251,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
     ],[
       AC_MSG_ERROR([Problem with libmbfl. Please check config.log for more information.])
     ], [
-      -LPHP_LIBMBFL/$PHP_LIBDIR
+      -L$PHP_LIBMBFL/$PHP_LIBDIR
     ])
   fi
 ])

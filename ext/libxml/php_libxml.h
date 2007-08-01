@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15.2.2.2.5 2007/07/21 00:51:17 jani Exp $ */
+/* $Id: php_libxml.h,v 1.15.2.2.2.6 2007/08/01 11:43:05 tony2001 Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -75,8 +75,8 @@ typedef struct _php_libxml_node_object {
 
 typedef void * (*php_libxml_export_node) (zval *object TSRMLS_DC);
 
-int php_libxml_increment_node_ptr(php_libxml_node_object *object, xmlNodePtr node, void *private_data TSRMLS_DC);
-int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC);
+PHP_LIBXML_API int php_libxml_increment_node_ptr(php_libxml_node_object *object, xmlNodePtr node, void *private_data TSRMLS_DC);
+PHP_LIBXML_API int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC);
 PHP_LIBXML_API int php_libxml_increment_doc_ref(php_libxml_node_object *object, xmlDocPtr docp TSRMLS_DC);
 PHP_LIBXML_API int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC);
 PHP_LIBXML_API xmlNodePtr php_libxml_import_node(zval *object TSRMLS_DC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.62 2007/07/28 08:34:09 rrichards Exp $ */
+/* $Id: libxml.c,v 1.63 2007/08/01 11:43:27 tony2001 Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -897,7 +897,7 @@ PHP_LIBXML_API xmlNodePtr php_libxml_import_node(zval *object TSRMLS_DC)
 
 }
 
-int php_libxml_increment_node_ptr(php_libxml_node_object *object, xmlNodePtr node, void *private_data TSRMLS_DC)
+PHP_LIBXML_API int php_libxml_increment_node_ptr(php_libxml_node_object *object, xmlNodePtr node, void *private_data TSRMLS_DC)
 {
 	int ret_refcount = -1;
 
@@ -929,7 +929,7 @@ int php_libxml_increment_node_ptr(php_libxml_node_object *object, xmlNodePtr nod
 	return ret_refcount;
 }
 
-int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC)
+PHP_LIBXML_API int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC)
 {
 	int ret_refcount = -1;
 	php_libxml_node_ptr *obj_node;
@@ -949,7 +949,7 @@ int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC)
 	return ret_refcount;
 }
 
-int php_libxml_increment_doc_ref(php_libxml_node_object *object, xmlDocPtr docp TSRMLS_DC)
+PHP_LIBXML_API int php_libxml_increment_doc_ref(php_libxml_node_object *object, xmlDocPtr docp TSRMLS_DC)
 {
 	int ret_refcount = -1;
 
@@ -969,7 +969,7 @@ int php_libxml_increment_doc_ref(php_libxml_node_object *object, xmlDocPtr docp 
 	return ret_refcount;
 }
 
-int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC)
+PHP_LIBXML_API int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC)
 {
 	int ret_refcount = -1;
 

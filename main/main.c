@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.49 2007/07/24 20:32:32 tony2001 Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.50 2007/08/01 12:49:34 johannes Exp $ */
 
 /* {{{ includes
  */
@@ -314,6 +314,8 @@ static PHP_INI_DISP(display_errors_mode)
 
 #if defined(PHP_PROG_SENDMAIL) && !defined(NETWARE)
 #	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
+#elif defined(PHP_WIN32)
+#	define DEFAULT_SENDMAIL_PATH NULL
 #else
 #	define DEFAULT_SENDMAIL_PATH "/usr/sbin/sendmail -t -i" 
 #endif

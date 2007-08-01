@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.63.2.16 2007/07/10 18:35:13 stas Exp $ */
+/* $Id: main.c,v 1.512.2.63.2.17 2007/08/01 23:52:43 stas Exp $ */
 
 /* {{{ includes
  */
@@ -384,14 +384,6 @@ PHPAPI void php_log_err(char *log_message TSRMLS_DC)
 			return;
 		}
 #endif
-		if (PG(safe_mode) && (!php_checkuid(PG(error_log), NULL, CHECKUID_CHECK_FILE_AND_DIR|CHECKUID_NO_ERRORS))) {
-			return FAILURE;
-		}
-
-		if (PG(open_basedir) && php_check_open_basedir_ex(PG(error_log), 0 TSRMLS_CC)) {
-			return FAILURE;
-		}
-		
 		log_file = VCWD_FOPEN(PG(error_log), "ab");
 		if (log_file != NULL) {
 			time(&error_time);

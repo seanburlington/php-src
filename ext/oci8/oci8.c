@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.35 2007/07/31 19:21:08 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.36 2007/08/02 22:39:54 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -674,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.3");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.35 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.36 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1012,6 +1012,16 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Privileged connect is disabled. Enable oci8.privileged_connect to be able to connect as SYSOPER or SYSDBA");
 				return NULL;
 			}
+			/*  Disable privileged connections in Safe Mode (N.b. safe mode has been removed in PHP 6 anyway) */
+			if (PG(safe_mode)) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Privileged connect is disabled in Safe Mode");
+				return NULL;
+			}
+			/* Increase security by not caching privileged
+			 * oci_pconnect() connections. The connection becomes
+			 * equivalent to oci_connect() or oci_new_connect().
+			 */
+			persistent = 0;
 			break;
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid session mode specified (%ld)", session_mode);

@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.334 2007/07/31 19:19:39 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.335 2007/08/02 22:49:58 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -674,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.334 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.335 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1043,6 +1043,11 @@ php_oci_connection *php_oci_do_connect_ex(zstr username, int username_len, zstr 
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Privileged connect is disabled. Enable oci8.privileged_connect to be able to connect as SYSOPER or SYSDBA");
 				return NULL;
 			}
+			/* Increase security by not caching privileged
+			 * oci_pconnect() connections. The connection becomes
+			 * equivalent to oci_connect() or oci_new_connect().
+			 */
+			persistent = 0;
 			break;
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid session mode specified (%ld)", session_mode);

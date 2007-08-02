@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.27 2007/07/31 19:21:08 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.28 2007/08/02 19:04:37 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -629,6 +629,15 @@ int php_oci_statement_execute(php_oci_statement *statement, ub4 mode TSRMLS_DC)
 #endif
 #ifdef SQLT_TIMESTAMP_TZ
 						|| (outcol->data_type == SQLT_TIMESTAMP_TZ)
+#endif
+#ifdef SQLT_TIMESTAMP_LTZ
+						|| (outcol->data_type == SQLT_TIMESTAMP_LTZ)
+#endif
+#ifdef SQLT_INTERVAL_YM
+						|| (outcol->data_type == SQLT_INTERVAL_YM)
+#endif
+#ifdef SQLT_INTERVAL_DS
+						|| (outcol->data_type == SQLT_INTERVAL_DS)
 #endif
 						) {
 						outcol->storage_size4 = 512; /* XXX this should fit "most" NLS date-formats and Numbers */

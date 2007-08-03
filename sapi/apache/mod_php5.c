@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.7.2.10 2007/06/18 15:52:46 scottmac Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.11 2007/08/03 01:14:44 stas Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -80,6 +80,7 @@ typedef struct _php_per_dir_entry {
 	uint key_length;
 	uint value_length;
 	int type;
+    char htaccess;
 } php_per_dir_entry;
 
 /* some systems are missing these from their header files */
@@ -547,7 +548,7 @@ static void init_request_info(TSRMLS_D)
  */
 static int php_apache_alter_ini_entries(php_per_dir_entry *per_dir_entry TSRMLS_DC)
 {
-	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length, per_dir_entry->type, PHP_INI_STAGE_ACTIVATE);
+	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length, per_dir_entry->type, data->htaccess?PHP_INI_STAGE_HTACCESS:PHP_INI_STAGE_ACTIVATE);
 	return 0;
 }
 /* }}} */
@@ -791,6 +792,7 @@ static CONST_PREFIX char *php_apache_value_handler_ex(cmd_parms *cmd, HashTable 
 		php_apache_startup(&apache_sapi_module);
 	}
 	per_dir_entry.type = mode;
+	per_dir_entry.htaccess = ((cmd->override & (RSRC_CONF|ACCESS_CONF)) == 0);
 
 	if (strcasecmp(arg2, "none") == 0) {
 		arg2 = "";

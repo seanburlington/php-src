@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.52 2007/08/03 01:15:51 stas Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.53 2007/08/03 01:30:21 stas Exp $ */
 
 /* {{{ includes
  */
@@ -303,7 +303,7 @@ static PHP_INI_MH(OnUpdateErrorLog)
 {
 	/* Only do the safemode/open_basedir check at runtime */
 	if ((stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) &&
-		strcmp(PG(error_log), "syslog")) {
+		strcmp(new_value, "syslog")) {
 		if (PG(safe_mode) && (!php_checkuid(new_value, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 			return FAILURE;
 		}

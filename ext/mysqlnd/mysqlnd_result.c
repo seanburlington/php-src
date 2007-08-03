@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.1 2007/07/25 23:47:32 jani Exp $ */
+/* $Id: mysqlnd_result.c,v 1.2 2007/08/03 16:32:26 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -905,7 +905,7 @@ static MYSQLND_FIELD *
 MYSQLND_METHOD(mysqlnd_res, fetch_field_direct)(const MYSQLND_RES * const result,
 												MYSQLND_FIELD_OFFSET fieldnr)
 {
-	return result->meta? &result->meta->fields[fieldnr]:NULL;
+	return result->meta? result->meta->m->fetch_field_direct(result->meta, fieldnr):NULL;
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_wireprotocol.h,v 1.1 2007/07/25 23:47:33 jani Exp $ */
+/* $Id: mysqlnd_wireprotocol.h,v 1.2 2007/08/03 16:32:27 andrey Exp $ */
 
 #ifndef MYSQLND_WIREPROTOCOL_H
 #define MYSQLND_WIREPROTOCOL_H
@@ -307,7 +307,9 @@ typedef struct st_php_mysql_packet_chg_user_resp {
 size_t mysqlnd_stream_write(MYSQLND * const conn, char * const buf, size_t count TSRMLS_DC);
 size_t mysqlnd_stream_write_w_header(MYSQLND * const conn, char * const buf, size_t count TSRMLS_DC);
 
+#ifdef MYSQLND_DO_WIRE_CHECK_BEFORE_COMMAND
 size_t php_mysqlnd_consume_uneaten_data(MYSQLND * const conn, enum php_mysqlnd_server_command cmd TSRMLS_DC);
+#endif
 
 void php_mysqlnd_scramble(zend_uchar * const buffer, const zend_uchar * const scramble, const zend_uchar * const pass);
 

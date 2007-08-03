@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.25.2.2.2.8 2007/08/03 09:48:58 tony2001 Exp $ */
+/* $Id: spprintf.c,v 1.25.2.2.2.9 2007/08/03 09:51:12 tony2001 Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -112,6 +112,8 @@
 
 #include "ext/standard/php_smart_str.h"
 
+/* {{{ macros */
+
 /*
  * NUM_BUF_SIZE is the size of the buffer used for arithmetic conversions
  *
@@ -176,12 +178,12 @@
 		}												\
 } while (0)
 
-
+/* }}} */
 
 /*
  * Do format conversion placing the output in buffer
  */
-static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap)
+static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap) /* {{{ */
 {
 	register char *s = NULL;
 	char *q;
@@ -745,12 +747,12 @@ skip_output:
 	}
 	return;
 }
-
+/* }}} */
 
 /*
  * This is the general purpose conversion function.
  */
-PHPAPI int vspprintf(char **pbuf, size_t max_len, const char *format, va_list ap)
+PHPAPI int vspprintf(char **pbuf, size_t max_len, const char *format, va_list ap) /* {{{ */
 {
 	smart_str xbuf = {0};
 
@@ -765,9 +767,9 @@ PHPAPI int vspprintf(char **pbuf, size_t max_len, const char *format, va_list ap
 	
 	return xbuf.len;
 }
+/* }}} */
 
-
-PHPAPI int spprintf(char **pbuf, size_t max_len, const char *format, ...)
+PHPAPI int spprintf(char **pbuf, size_t max_len, const char *format, ...) /* {{{ */
 {
 	int cc;
 	va_list ap;
@@ -777,6 +779,8 @@ PHPAPI int spprintf(char **pbuf, size_t max_len, const char *format, ...)
 	va_end(ap);
 	return (cc);
 }
+/* }}} */
+
 /*
  * Local variables:
  * tab-width: 4

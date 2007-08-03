@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.474 2007/06/17 14:26:16 iliaa Exp $ */
+/* $Id: session.c,v 1.475 2007/08/03 01:40:05 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -542,7 +542,7 @@ static PHP_INI_MH(OnUpdateSerializer)
 static PHP_INI_MH(OnUpdateSaveDir)
 {
 	/* Only do the safemode/open_basedir check at runtime */
-	if (stage == PHP_INI_STAGE_RUNTIME) {
+	if (stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) {
  		char *p;
 
 		if (memchr(new_value, '\0', new_value_length) != NULL) {

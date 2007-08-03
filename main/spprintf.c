@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.48 2007/08/03 09:51:05 tony2001 Exp $ */
+/* $Id: spprintf.c,v 1.49 2007/08/03 14:30:59 tony2001 Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -347,7 +347,16 @@ static void xbuf_format_converter(int unicode, smart_str *xbuf, const char *fmt,
 						modifier = LM_LONG_LONG;
 					} else
 #endif
-						modifier = LM_LONG;
+						if (*fmt == '3' && *(fmt+1) == '2') {
+							fmt += 2;
+							modifier = LM_LONG;
+						} else {
+#ifdef _WIN64
+							modifier = LM_LONG_LONG;
+#else
+							modifier = LM_LONG;
+#endif
+						}
 					break;
 				case 'l':
 					fmt++;

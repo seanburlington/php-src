@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache_config.c,v 1.7.2.1.2.3 2007/08/03 01:14:23 stas Exp $ */
+/* $Id: apache_config.c,v 1.7.2.1.2.4 2007/08/03 09:33:17 jani Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -35,7 +35,7 @@
 #include "http_log.h"
 #include "http_main.h"
 #include "util_script.h"
-#include "http_core.h"                         
+#include "http_core.h"
 
 #ifdef PHP_AP_DEBUG
 #define phpapdebug(a) fprintf a
@@ -51,7 +51,7 @@ typedef struct {
 	char *value;
 	size_t value_len;
 	char status;
-    char htaccess;
+	char htaccess;
 } php_dir_entry;
 
 static const char *real_value_hnd(cmd_parms *cmd, void *dummy, const char *name, const char *value, int status)

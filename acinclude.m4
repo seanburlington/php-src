@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.332.2.14.2.24 2007/07/26 22:45:59 jani Exp $
+dnl $Id: acinclude.m4,v 1.332.2.14.2.25 2007/08/03 10:45:23 jani Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -2708,7 +2708,7 @@ AC_DEFUN([PHP_CHECK_CONFIGURE_OPTIONS],[
           esac 
         fi
         is_arg_set=php_[]`echo [$]arg_name | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-' 'abcdefghijklmnopqrstuvwxyz_'`
-        if eval test -z "\$$is_arg_set"; then
+        if eval test "x\$$is_arg_set" = "x"; then
           PHP_UNKNOWN_CONFIGURE_OPTIONS="$PHP_UNKNOWN_CONFIGURE_OPTIONS
 [$]arg"
         fi

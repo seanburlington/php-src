@@ -2,7 +2,7 @@
 ziparchive::properties isset()/empty() checks
 --SKIPIF--
 <?php
-/* $Id: oo_properties.phpt,v 1.1.2.2 2007/08/06 22:02:32 bjori Exp $ */
+/* $Id: oo_properties.phpt,v 1.1.2.3 2007/08/06 23:35:46 bjori Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -30,7 +30,7 @@ printf("zip->numFiles (%d):\n\tempty(): %d\n\tisset(): %d\n", $zip->numFiles, em
 printf("zip->filename (%d):\n\tempty(): %d\n\tisset(): %d\n", strlen($zip->filename), empty($zip->filename), isset($zip->filename));
 printf("zip->comment (%d):\n\tempty(): %d\n\tisset(): %d\n", strlen($zip->comment), empty($zip->comment), isset($zip->comment));
 
-var_dump(unlink($file));
+@unlink($file);
 ?>
 --EXPECTF--
 zip->status (0):

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.36 2007/07/31 19:19:39 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.37 2007/08/06 20:31:40 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -117,6 +117,7 @@ typedef struct { /* php_oci_connection {{{ */
 	unsigned is_persistent:1;	/* self-descriptive */
 	unsigned used_this_request:1; /* helps to determine if we should reset connection's next ping time and check its timeout */
 	unsigned needs_commit:1;	/* helps to determine if we should rollback this connection on close/shutdown */
+	unsigned passwd_changed:1;	/* helps determine if a persistent connection hash should be invalidated after a password change */
 	int rsrc_id;				/* resource ID */
 	time_t idle_expiry;			/* time when the connection will be considered as expired */
 	time_t next_ping;			/* time of the next ping */

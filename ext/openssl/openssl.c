@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.39 2007/08/06 19:11:20 pajoye Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.40 2007/08/06 19:49:45 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1743,7 +1743,7 @@ static int php_openssl_make_REQ(struct php_x509_request * req, X509_REQ * csr, z
 				len = 200;
 			}
 			memcpy(buffer, type, len);
-			buffer[len] = '\0';
+			buffer[len - 1] = '\0';
 			type = buffer;
 		
 			/* Skip past any leading X. X: X, etc to allow for multiple

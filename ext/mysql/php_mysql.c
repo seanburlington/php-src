@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.239 2007/07/24 16:13:25 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.240 2007/08/06 15:11:46 andrey Exp $ */
 
 /* TODO:
  *
@@ -800,6 +800,10 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 					mysql_options(mysql->conn, MYSQL_OPT_LOCAL_INFILE, (char *)&MySG(allow_local_infile));
 				}
+			} else {
+#ifdef HAVE_MYSQLND
+				mysqlnd_restart_psession(mysql->conn);
+#endif
 			}
 		}
 		ZEND_REGISTER_RESOURCE(return_value, mysql, le_plink);

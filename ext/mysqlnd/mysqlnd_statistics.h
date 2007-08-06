@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.h,v 1.2 2007/08/03 16:32:26 andrey Exp $ */
+/* $Id: mysqlnd_statistics.h,v 1.3 2007/08/06 15:11:46 andrey Exp $ */
 
 #ifndef MYSQLND_STATISTICS_H
 #define MYSQLND_STATISTICS_H
@@ -100,7 +100,7 @@ extern MYSQLND_STATS *mysqlnd_global_stats;
  } 
 
 #define MYSQLND_INC_CONN_STATISTIC_W_VALUE3(conn_stats, statistic1, value1, statistic2, value2, statistic3, value3) \
- { \							\
+ { \
  	if (mysqlnd_global_stats) { \
 		my_uint64 v1 = (value1); \
 		my_uint64 v2 = (value2); \

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.7.2.12 2007/08/03 09:32:34 jani Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.13 2007/08/06 12:54:57 tony2001 Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -548,7 +548,7 @@ static void init_request_info(TSRMLS_D)
  */
 static int php_apache_alter_ini_entries(php_per_dir_entry *per_dir_entry TSRMLS_DC)
 {
-	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length, per_dir_entry->type, data->htaccess?PHP_INI_STAGE_HTACCESS:PHP_INI_STAGE_ACTIVATE);
+	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length, per_dir_entry->type, per_dir_entry->htaccess?PHP_INI_STAGE_HTACCESS:PHP_INI_STAGE_ACTIVATE);
 	return 0;
 }
 /* }}} */

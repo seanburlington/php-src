@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.17 2007/08/08 02:16:41 iliaa Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18 2007/08/08 07:01:49 jani Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1313,11 +1313,11 @@ PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size
 		p = php_stream_mmap_range(src, php_stream_tell(src), maxlen, PHP_STREAM_MAP_MODE_SHARED_READONLY, &mapped);
 
 		if (p) {
-			size_t written = php_stream_write(dest, p, mapped);
+			mapped = php_stream_write(dest, p, mapped);
 
 			php_stream_mmap_unmap(src);
 
-			return written;
+			return mapped;
 		}
 	}
 

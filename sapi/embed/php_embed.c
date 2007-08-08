@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.19 2007/08/08 21:08:51 stas Exp $ */
+/* $Id: php_embed.c,v 1.20 2007/08/08 21:14:11 stas Exp $ */
 
 #include "php_embed.h"
 #include <ext/standard/dl.h>
@@ -155,8 +155,8 @@ int php_embed_init(int argc, char **argv PTSRMLS_DC)
 {
 	zend_llist global_vars;
 #ifdef ZTS
-	sapi_globals_struct *sapi_globals;
-	void ***tsrm_ls;
+	sapi_globals_struct *sapi_globals = NULL;
+	void ***tsrm_ls = NULL;
 #endif
 	int ini_entries_len = 0;
 

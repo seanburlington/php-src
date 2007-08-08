@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.21 2007/06/04 09:47:54 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.22 2007/08/08 23:51:24 stas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -607,10 +607,6 @@ int main(int argc, char *argv[])
 	int hide_argv = 0;
 /* end of temporary locals */
 #ifdef ZTS
-	zend_compiler_globals *compiler_globals;
-	zend_executor_globals *executor_globals;
-	php_core_globals *core_globals;
-	sapi_globals_struct *sapi_globals;
 	void ***tsrm_ls;
 #endif
 #ifdef PHP_CLI_WIN32_NO_CONSOLE
@@ -648,6 +644,7 @@ int main(int argc, char *argv[])
 
 #ifdef ZTS
 	tsrm_startup(1, 1, 0, NULL);
+	tsrm_ls = ts_resource(0);
 #endif
 
 	cli_sapi_module.ini_defaults = sapi_cli_ini_defaults;
@@ -715,14 +712,6 @@ int main(int argc, char *argv[])
 	php_optarg = orig_optarg;
 
 	cli_sapi_module.executable_location = argv[0];
-
-#ifdef ZTS
-	compiler_globals = ts_resource(compiler_globals_id);
-	executor_globals = ts_resource(executor_globals_id);
-	core_globals = ts_resource(core_globals_id);
-	sapi_globals = ts_resource(sapi_globals_id);
-	tsrm_ls = ts_resource(0);
-#endif
 
 	/* startup after we get the above ini override se we get things right */
 	if (cli_sapi_module.startup(&cli_sapi_module)==FAILURE) {

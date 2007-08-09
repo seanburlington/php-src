@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xbm.c,v 1.10 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: xbm.c,v 1.11 2007/08/09 12:09:30 mattias Exp $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -96,7 +96,9 @@ gdImagePtr gdImageCreateFromXbm(FILE * fd)
 		return 0;
 	}
 
-	im = gdImageCreate(width, height);
+	if(!(im = gdImageCreate(width, height))) {
+		return 0;
+	}
 	gdImageColorAllocate(im, 255, 255, 255);
 	gdImageColorAllocate(im, 0, 0, 0);
 	h[2] = '\0';

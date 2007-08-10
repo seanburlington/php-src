@@ -8,7 +8,7 @@ Sybase-CT sybase_fetch_object
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: test_fetch_object.phpt,v 1.2 2007/03/14 12:00:35 thekid Exp $
+ * $Id: test_fetch_object.phpt,v 1.3 2007/08/10 13:28:11 jani Exp $
  */
 
   require('test.inc');
@@ -65,7 +65,7 @@ article::__set_state(array(
    'lastchange' => '%s',
 ))
 
-Notice: sybase_fetch_object(): Sybase:  Class *** has not been declared in %s/test_fetch_object.php on line %d
+Notice: sybase_fetch_object(): Sybase:  Class *** has not been declared in %stest_fetch_object.php on line %d
 stdClass::__set_state(array(
    'id' => 1,
    'caption' => 'Hello',

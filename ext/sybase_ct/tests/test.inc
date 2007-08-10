@@ -1,13 +1,14 @@
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: test.inc,v 1.6 2007/03/11 12:56:38 tony2001 Exp $ 
+ * $Id: test.inc,v 1.7 2007/08/10 13:28:11 jani Exp $ 
  */
 
   // Change if needed
   define('HOST',     '****');
   define('USER',     '****');
   define('PASSWORD', '****');
+  define('TEMPDB',   'tempdb');
 
   // {{{ bool sybase_msg_handler(int msgnumber, int severity, int state, int line, string text)
   //     Handles server messages
@@ -78,8 +79,8 @@
   // {{{ mixed sybase_select_single(resource dbh, string query)
   //     Fires an SQL query and returns the first value from the first row
   function sybase_select_single($dbh, $query) {
-	$a = sybase_fetch_row(sybase_query($query, $dbh));
-	return array_shift($a);
+    $a = sybase_fetch_row(sybase_query($query, $dbh));
+    return array_shift($a);
   }
   // }}}
 ?>

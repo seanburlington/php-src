@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2007/07/03 17:24:37 sniper Exp $
+dnl $Id: config.m4,v 1.14 2007/08/10 13:25:12 jani Exp $
 dnl
 
 PHP_ARG_WITH(sybase,for Sybase support,
@@ -26,6 +26,6 @@ if test "$PHP_SYBASE" != "no"; then
      [ AC_DEFINE(PHP_SYBASE_DBOPEN,tdsdbopen,[ ])
        AC_DEFINE(DBMFIX,1,[ ]) ],
      [ AC_DEFINE(PHP_SYBASE_DBOPEN,dbopen,[ ]) ])
-
+     
   PHP_SUBST(SYBASE_SHARED_LIBADD)
 fi

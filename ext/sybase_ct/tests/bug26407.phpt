@@ -6,7 +6,7 @@ Sybase-CT bug #26407 (Result set fetching broken around transactions)
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: bug26407.phpt,v 1.2 2005/02/06 12:59:03 thekid Exp $ 
+ * $Id: bug26407.phpt,v 1.3 2007/08/10 13:28:11 jani Exp $ 
  */
 
   require('test.inc');
@@ -80,7 +80,7 @@ bool(true)
     select "bar"   
   
 
-Notice: sybase_query(): Sybase:  Unexpected results, cancelling current in %s/test.inc on line %d
+Notice: sybase_query(): Sybase:  Unexpected results, cancelling current in %stest.inc on line %d
 <<< Return: resource
 array(1) {
   [0]=>

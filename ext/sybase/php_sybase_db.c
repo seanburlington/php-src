@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.66.2.5.2.5 2007/03/16 21:59:17 stas Exp $ */
+/* $Id: php_sybase_db.c,v 1.66.2.5.2.6 2007/08/10 00:43:50 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -355,7 +355,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 				host = Z_STRVAL_PP(yyhost);
 				user = Z_STRVAL_PP(yyuser);
 				passwd = Z_STRVAL_PP(yypasswd);
-				spprintf(&hashed_details, 0, "sybase_%s_%s_%s__", Z_STRVAL_PP(yyhost), Z_STRVAL_PP(yyuser), Z_STRVAL_PP(yypasswd));
+				hashed_details_length = spprintf(&hashed_details, 0, "sybase_%s_%s_%s__", Z_STRVAL_PP(yyhost), Z_STRVAL_PP(yyuser), Z_STRVAL_PP(yypasswd));
 			}
 			break;
 		case 4: {

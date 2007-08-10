@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14.2.5.2.2 2007/08/02 19:38:08 sixd Exp $
+dnl $Id: config.m4,v 1.14.2.5.2.3 2007/08/10 07:01:47 sixd Exp $
 
 if test "$PHP_PDO" != "no"; then
 
@@ -7,6 +7,8 @@ AC_DEFUN([AC_PDO_OCI_VERSION],[
   if test -s "$PDO_OCI_DIR/orainst/unix.rgs"; then
     PDO_OCI_VERSION=`grep '"ocommon"' $PDO_OCI_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`
     test -z "$PDO_OCI_VERSION" && PDO_OCI_VERSION=7.3
+  elif test -f $PDO_OCI_LIB_DIR/libclntsh.$SHLIB_SUFFIX_NAME.11.1; then
+    PDO_OCI_VERSION=11.1    
   elif test -f $PDO_OCI_LIB_DIR/libclntsh.$SHLIB_SUFFIX_NAME.10.1; then
     PDO_OCI_VERSION=10.1    
   elif test -f $PDO_OCI_LIB_DIR/libclntsh.$SHLIB_SUFFIX_NAME.9.0; then
@@ -152,13 +154,19 @@ You need to tell me where to find your oracle SDK, or set ORACLE_HOME.
     9.0)
       PHP_ADD_LIBRARY(clntsh, 1, PDO_OCI_SHARED_LIBADD)
       ;;
-      
+
     10.1)
       PHP_ADD_LIBRARY(clntsh, 1, PDO_OCI_SHARED_LIBADD)
       ;;
+
     10.2)
       PHP_ADD_LIBRARY(clntsh, 1, PDO_OCI_SHARED_LIBADD)
       ;;
+
+    11.1)
+      PHP_ADD_LIBRARY(clntsh, 1, PDO_OCI_SHARED_LIBADD)
+      ;;
+
     *)
       AC_MSG_ERROR(Unsupported Oracle version! $PDO_OCI_VERSION)
       ;;
@@ -243,7 +251,6 @@ You need to tell me where to find your oracle SDK, or set ORACLE_HOME.
   [
     PHP_ADD_EXTENSION_DEP(pdo_oci, pdo)
   ])
-  
 fi
 
 fi

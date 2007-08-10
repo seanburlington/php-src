@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.23 2007/08/10 00:36:57 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.24 2007/08/10 08:58:44 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1766,7 +1766,7 @@ PHPAPI int php_copy_file_ex(char *src, char *dest, int src_chk TSRMLS_DC)
 		goto safe_to_copy;
 	}
 	if (S_ISDIR(src_s.sb.st_mode)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument to copy() function cannot be a directory.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument to copy() function cannot be a directory");
 		return FAILURE;
 	}
 	if (!src_s.sb.st_ino || !dest_s.sb.st_ino) {

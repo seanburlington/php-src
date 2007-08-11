@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.24 2007/08/10 08:58:44 tony2001 Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.25 2007/08/11 04:34:59 hirokawa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -127,6 +127,9 @@ php_file_globals file_globals;
 #include <wchar.h>
 #endif
 
+#ifndef S_ISDIR
+#define S_ISDIR(mode)	(((mode)&S_IFMT) == S_IFDIR)
+#endif
 /* }}} */
 
 #define PHP_STREAM_TO_ZVAL(stream, arg) \

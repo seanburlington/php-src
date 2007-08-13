@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.497 2007/08/12 02:00:03 hirokawa Exp $ */
+/* $Id: file.c,v 1.498 2007/08/13 08:14:03 jani Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1903,12 +1903,12 @@ PHPAPI int php_copy_file_ex(char *src, char *dest, int src_chk TSRMLS_DC)
 		default: /* failed to stat file, does not exist? */
 			return ret;
 	}
-	if (php_stream_stat_path_ex(dest, PHP_STREAM_URL_STAT_QUIET, &dest_s, NULL) != 0) {
-		goto safe_to_copy;
-	}
 	if (S_ISDIR(src_s.sb.st_mode)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument to copy() function cannot be a directory");
 		return FAILURE;
+	}
+	if (php_stream_stat_path_ex(dest, PHP_STREAM_URL_STAT_QUIET, &dest_s, NULL) != 0) {
+		goto safe_to_copy;
 	}
 	if (!src_s.sb.st_ino || !dest_s.sb.st_ino) {
 		goto no_stat;

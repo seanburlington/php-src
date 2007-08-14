@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14.2.5.2.3 2007/08/10 07:01:47 sixd Exp $
+dnl $Id: config.m4,v 1.14.2.5.2.4 2007/08/14 12:15:04 tony2001 Exp $
 
 if test "$PHP_PDO" != "no"; then
 
@@ -41,11 +41,11 @@ AC_DEFUN([AC_PDO_OCI_CHECK_LIB_DIR],[
   fi
 
   AC_MSG_CHECKING([OCI8 libraries dir])
-  if test -d "$PDO_OCI_DIR/lib" -a ! -d "$PDO_OCI_DIR/lib32"; then
+  if test -d "$PDO_OCI_DIR/lib" && test ! -d "$PDO_OCI_DIR/lib32"; then
     PDO_OCI_LIB_DIR="$PDO_OCI_DIR/lib"
-  elif ! test -d "$PDO_OCI_DIR/lib" -a -d "$PDO_OCI_DIR/lib32"; then
+  elif test ! -d "$PDO_OCI_DIR/lib" && test -d "$PDO_OCI_DIR/lib32"; then
     PDO_OCI_LIB_DIR="$PDO_OCI_DIR/lib32"
-  elif test -d "$PDO_OCI_DIR/lib" -a -d "$PDO_OCI_DIR/lib32"; then
+  elif test -d "$PDO_OCI_DIR/lib" && test -d "$PDO_OCI_DIR/lib32"; then
     PDO_OCI_LIB_DIR=$TMP_PDO_OCI_LIB_DIR
   else
     AC_MSG_ERROR([Oracle (OCI8) required libraries not found])

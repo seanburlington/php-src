@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.10 2007/08/10 07:02:33 sixd Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.11 2007/08/14 12:15:04 tony2001 Exp $
 dnl
 
 if test -z "$SED"; then
@@ -36,11 +36,11 @@ AC_DEFUN([AC_OCI8_CHECK_LIB_DIR],[
   fi
 
   AC_MSG_CHECKING([OCI8 libraries dir])
-  if test -d "$OCI8_DIR/lib" -a ! -d "$OCI8_DIR/lib32"; then
+  if test -d "$OCI8_DIR/lib" && test ! -d "$OCI8_DIR/lib32"; then
     OCI8_LIB_DIR=lib
-  elif ! test -d "$OCI8_DIR/lib" -a -d "$OCI8_DIR/lib32"; then
+  elif test ! -d "$OCI8_DIR/lib" && test -d "$OCI8_DIR/lib32"; then
     OCI8_LIB_DIR=lib32
-  elif test -d "$OCI8_DIR/lib" -a -d "$OCI8_DIR/lib32"; then
+  elif test -d "$OCI8_DIR/lib" && test -d "$OCI8_DIR/lib32"; then
     OCI8_LIB_DIR=$TMP_OCI8_LIB_DIR
   else
     AC_MSG_ERROR([Oracle (OCI8) required libraries not found])

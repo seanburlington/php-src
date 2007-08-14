@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.19 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: spl_sxe.c,v 1.20 2007/08/14 12:09:52 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -142,8 +142,7 @@ SPL_METHOD(SimpleXMLIterator, getChildren)
 	if (!sxe->iter.data || sxe->iter.type == SXE_ITER_ATTRLIST) {
 		return; /* return NULL */
 	}
-	return_value->type = IS_OBJECT;
-	return_value->value.obj = zend_objects_store_clone_obj(sxe->iter.data TSRMLS_CC);
+	RETURN_ZVAL(sxe->iter.data, 1, 0);
 }
 
 /* {{{ proto int SimpleXMLIterator::count() U

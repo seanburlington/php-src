@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.60 2007/08/16 22:17:10 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.61 2007/08/16 23:05:43 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4338,7 +4338,8 @@ PHP_FUNCTION(ip2long)
 		/* the only special case when we should return -1 ourselves,
 		 * because inet_addr() considers it wrong.
 		 */
-		if (!memcmp(Z_STRVAL_PP(str), "255.255.255.255", sizeof("255.255.255.255") - 1)) {
+		if (Z_STRLEN_PP(str) == sizeof("255.255.255.255") - 1 &&
+			!memcmp(Z_STRVAL_PP(str), "255.255.255.255", sizeof("255.255.255.255") - 1)) {
 			RETURN_LONG(-1);
 		}
 		

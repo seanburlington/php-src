@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.31.2.3.2.6 2007/07/09 17:27:24 dmitry Exp $ */
+/* $Id: userspace.c,v 1.31.2.3.2.7 2007/08/16 23:54:24 stas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -443,7 +443,7 @@ static php_stream *user_wrapper_opendir(php_stream_wrapper *wrapper, char *filen
 }
 
 
-/* {{{ proto bool stream_wrapper_register(string protocol, string classname)
+/* {{{ proto bool stream_wrapper_register(string protocol, string classname[, integer flags])
    Registers a custom URL protocol handler class */
 PHP_FUNCTION(stream_wrapper_register)
 {

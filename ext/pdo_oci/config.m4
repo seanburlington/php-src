@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14.2.5.2.4 2007/08/14 12:15:04 tony2001 Exp $
+dnl $Id: config.m4,v 1.14.2.5.2.5 2007/08/17 13:30:36 sixd Exp $
 
 if test "$PHP_PDO" != "no"; then
 
@@ -78,8 +78,6 @@ You need to tell me where to find your oracle SDK, or set ORACLE_HOME.
     AC_MSG_RESULT([yes])
   fi
 
-  AC_PDO_OCI_CHECK_LIB_DIR($PDO_OCI_DIR)
-
   if test "instantclient" = "`echo $PDO_OCI_DIR | cut -d, -f1`" ; then
     PDO_OCI_IC_PREFIX="`echo $PDO_OCI_DIR | cut -d, -f2`"
     PDO_OCI_IC_VERS="`echo $PDO_OCI_DIR | cut -d, -f3`"
@@ -110,6 +108,8 @@ You need to tell me where to find your oracle SDK, or set ORACLE_HOME.
     fi
     PDO_OCI_VERSION="`echo $PDO_OCI_IC_VERS | cut -d. -f1-2`"
   else
+    AC_PDO_OCI_CHECK_LIB_DIR($PDO_OCI_DIR)
+
     if test -d "$PDO_OCI_DIR/rdbms/public"; then
       PHP_ADD_INCLUDE($PDO_OCI_DIR/rdbms/public)
       PDO_OCI_INCLUDES="$PDO_OCI_INCLUDES -I$PDO_OCI_DIR/rdbms/public"

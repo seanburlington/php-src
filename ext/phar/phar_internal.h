@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.35 2007/05/18 17:54:23 helly Exp $ */
+/* $Id: phar_internal.h,v 1.36 2007/08/17 04:47:49 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,6 +147,8 @@ typedef struct _phar_entry_info {
 	php_uint32               crc32;
 	php_uint32               flags;
 	/* remainder */
+	/* when changing compression, save old flags in case fp is NULL */
+	php_uint32               old_flags;
 	zval                     *metadata;
 	php_uint32               filename_len;
 	char                     *filename;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.114 2007/07/04 13:33:01 tony2001 Exp $ */
+/* $Id: interface.c,v 1.115 2007/08/20 18:56:05 pollita Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -594,6 +594,9 @@ PHP_MINIT_FUNCTION(curl)
 #endif
 
 	REGISTER_CURL_CONSTANT(CURLPROXY_HTTP);
+#ifdef CURLPROXY_SOCKS4
+	REGISTER_CURL_CONSTANT(CURLPROXY_SOCKS4);
+#endif
 	REGISTER_CURL_CONSTANT(CURLPROXY_SOCKS5);
 
 	REGISTER_CURL_CONSTANT(CURL_NETRC_OPTIONAL);

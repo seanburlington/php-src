@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.281 2007/08/17 14:21:00 johannes Exp $ */
+/* $Id: php_reflection.c,v 1.282 2007/08/20 17:01:59 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2778,7 +2778,7 @@ ZEND_METHOD(reflection_class, getStaticProperties)
 /* }}} */
 
 /* {{{ proto public mixed ReflectionClass::getStaticPropertyValue(string name [, mixed default]) U
-   Returns the value of a tsstic property */
+   Returns the value of a static property */
 ZEND_METHOD(reflection_class, getStaticPropertyValue)
 {
 	reflection_object *intern;
@@ -5022,7 +5022,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.281 2007/08/17 14:21:00 johannes Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.282 2007/08/20 17:01:59 sebastian Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

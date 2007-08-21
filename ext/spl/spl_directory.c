@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.21 2007/06/05 12:02:46 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.22 2007/08/21 22:45:53 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -858,7 +858,11 @@ SPL_METHOD(SplFileInfo, getRealPath)
 
 	php_set_error_handling(EH_THROW, spl_ce_RuntimeException TSRMLS_CC);
 
-	if (VCWD_REALPATH(intern->file_name, buff)) {
+	if (intern->type == SPL_FS_DIR && !intern->file_name && intern->u.dir.entry.d_name[0]) {
+		spl_filesystem_object_get_file_name(intern TSRMLS_CC);
+	}
+
+	if (intern->file_name_len && VCWD_REALPATH(intern->file_name, buff)) {
 #ifdef ZTS
 		if (VCWD_ACCESS(buff, F_OK)) {
 			RETVAL_FALSE;

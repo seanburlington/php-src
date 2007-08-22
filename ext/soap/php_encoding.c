@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.34 2007/06/14 07:09:31 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.35 2007/08/22 14:18:09 dmitry Exp $ */
 
 #include <time.h>
 
@@ -447,7 +447,10 @@ xmlNodePtr master_to_xml(encodePtr encode, zval *data, int style, xmlNodePtr par
 				    zend_hash_get_current_key_ex(SOAP_GLOBAL(class_map), &type_name, &type_len, &idx, 0, &pos) == HASH_KEY_IS_STRING) {
 
 				    /* TODO: namespace isn't stored */
-			    	encodePtr enc = get_encoder(SOAP_GLOBAL(sdl), SOAP_GLOBAL(sdl)->target_ns, type_name);
+			    	encodePtr enc = NULL;
+			    	if (SOAP_GLOBAL(sdl)) {
+			    		enc = get_encoder(SOAP_GLOBAL(sdl), SOAP_GLOBAL(sdl)->target_ns, type_name);
+			    	}
 			    	if (enc) {
 			    		encode = enc;
 				 	} else if (SOAP_GLOBAL(sdl)) {

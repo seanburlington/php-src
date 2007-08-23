@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.113 2007/08/03 01:40:05 stas Exp $ */
+/* $Id: mod_files.c,v 1.114 2007/08/23 13:09:27 jani Exp $ */
 
 #include "php.h"
 
@@ -278,8 +278,10 @@ PS_OPEN_FUNC(files)
 		/* if save path is an empty string, determine the temporary dir */
 		save_path = php_get_temporary_directory();
 
-		if (php_check_open_basedir(save_path TSRMLS_CC)) {
-			return FAILURE;
+		if (strcmp(save_path, "/tmp")) {
+			if (php_check_open_basedir(save_path TSRMLS_CC)) {
+				return FAILURE;
+			}
 		}
 	}
 	

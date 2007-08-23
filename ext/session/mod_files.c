@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.100.2.3.2.7 2007/08/03 01:16:40 stas Exp $ */
+/* $Id: mod_files.c,v 1.100.2.3.2.8 2007/08/23 02:04:39 iliaa Exp $ */
 
 #include "php.h"
 
@@ -164,6 +164,28 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 				data->filemode);
 		
 		if (data->fd != -1) {
+#ifndef PHP_WIN32
+			/* check to make sure that the opened file is not a symlink, linking to data outside of allowable dirs */
+			if (PG(safe_mode) || PG(open_basedir)) {
+				struct stat sbuf;
+
+				if (fstat(data->fd, &sbuf)) {
+					close(data->fd);
+					return;
+				}
+				if (
+					S_ISLNK(sbuf.st_mode) && 
+					(
+						php_check_open_basedir(buf TSRMLS_CC) ||
+						(PG(safe_mode) && !php_checkuid(buf, NULL, CHECKUID_CHECK_FILE_AND_DIR))
+					)
+				) {
+
+					close(data->fd);
+					return;
+				}
+			}
+#endif
 			flock(data->fd, LOCK_EX);
 
 #ifdef F_SETFD

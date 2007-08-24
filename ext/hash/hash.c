@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.36 2007/05/30 07:10:25 mike Exp $ */
+/* $Id: hash.c,v 1.37 2007/08/24 21:27:38 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -341,13 +341,18 @@ PHP_FUNCTION(hash_init)
 {
 	char *algo, *key = NULL;
 	int algo_len, key_len = 0, argc = ZEND_NUM_ARGS();
-	zend_uchar key_type;
 	long options = 0;
 	void *context;
 	const php_hash_ops *ops;
 	php_hash_data *hash;
 
+#if PHP_MAJOR_VERSION >= 6
+	zend_uchar key_type;
+
 	if (zend_parse_parameters(argc TSRMLS_CC, "s|lt", &algo, &algo_len, &options, &key, &key_len, &key_type) == FAILURE) {
+#else
+	if (zend_parse_parameters(argc TSRMLS_CC, "s|ls", &algo, &algo_len, &options, &key, &key_len) == FAILURE) {
+#endif
 		return;
 	}
 

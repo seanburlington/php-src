@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.868 2007/07/19 15:56:33 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.869 2007/08/24 13:50:52 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4188,7 +4188,7 @@ PHP_FUNCTION(constant)
 		return;
 	}
 
-	if (!zend_u_get_constant(const_type, const_name, const_name_len, return_value, NULL TSRMLS_CC)) {
+	if (!zend_u_get_constant_ex(const_type, const_name, const_name_len, return_value, NULL, 0 TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't find constant %R", const_type, const_name);
 		RETURN_NULL();
 	}

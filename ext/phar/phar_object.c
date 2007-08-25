@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.61 2007/08/25 01:32:34 cellog Exp $ */
+/* $Id: phar_object.c,v 1.62 2007/08/25 01:36:20 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -331,6 +331,7 @@ PHP_METHOD(Phar, delete)
 		
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ proto int Phar::getAlias()
  * Returns the alias for the PHAR or NULL

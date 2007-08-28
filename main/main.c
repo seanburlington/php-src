@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.744 2007/08/03 01:40:05 stas Exp $ */
+/* $Id: main.c,v 1.745 2007/08/28 12:12:02 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1814,6 +1814,8 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	PG(error_handling) = EH_NORMAL;
 	PG(disable_functions) = NULL;
 	PG(disable_classes) = NULL;
+	PG(allow_url_fopen_list) = NULL;
+	PG(allow_url_include_list) = NULL;
 
 #if HAVE_SETLOCALE
 	setlocale(LC_CTYPE, "");

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.37 2007/08/25 01:32:34 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.36.2.1 2007/08/30 03:20:06 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,6 +197,9 @@ typedef struct _phar_entry_data {
 	/* stream position proxy, allows multiple open streams referring to the same fp */
 	php_stream               *fp;
 	off_t                    position;
+	/* for copies of the phar fp, defines where 0 is */
+	off_t                    zero;
+	int                      for_write:1;
 	phar_entry_info          *internal_file;
 } phar_entry_data;
 

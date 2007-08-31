@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.23 2007/06/30 03:02:10 sixd Exp $ */
+/* $Id: oci_statement.c,v 1.24 2007/08/31 21:11:03 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -395,7 +395,7 @@ static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC) /* {{{ */
 	col->precision = scale;
 	col->maxlen = data_size;
 	col->namelen = namelen;
-	col->name = estrndup(colname, namelen);
+	col->name = estrndup((char *)colname, namelen);
 
 	/* how much room do we need to store the field */
 	switch (dtype) {

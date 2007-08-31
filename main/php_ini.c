@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.154 2007/05/19 12:52:31 tony2001 Exp $ */
+/* $Id: php_ini.c,v 1.155 2007/08/31 08:09:41 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -592,7 +592,7 @@ void php_ini_register_extensions(TSRMLS_D)
 
 /* {{{ cfg_get_entry
  */
-zval *cfg_get_entry(char *name, uint name_length)
+PHPAPI zval *cfg_get_entry(char *name, uint name_length)
 {
 	zval *tmp;
 
@@ -609,7 +609,7 @@ zval *cfg_get_entry(char *name, uint name_length)
 PHPAPI int cfg_get_long(char *varname, long *result)
 {
 	zval *tmp, var;
-	
+
 	if (zend_hash_find(&configuration_hash, varname, strlen(varname) + 1, (void **) &tmp) == FAILURE) {
 		*result = 0;
 		return FAILURE;
@@ -627,7 +627,7 @@ PHPAPI int cfg_get_long(char *varname, long *result)
 PHPAPI int cfg_get_double(char *varname, double *result)
 {
 	zval *tmp, var;
-	
+
 	if (zend_hash_find(&configuration_hash, varname, strlen(varname) + 1, (void **) &tmp) == FAILURE) {
 		*result = (double) 0;
 		return FAILURE;

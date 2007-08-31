@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.76 2007/08/10 13:25:12 jani Exp $ */
+/* $Id: php_sybase_db.c,v 1.77 2007/08/31 07:41:45 jani Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -32,6 +32,7 @@
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"
 #include "php_globals.h"
+#include "php_ini.h"
 
 #if HAVE_SYBASE
 

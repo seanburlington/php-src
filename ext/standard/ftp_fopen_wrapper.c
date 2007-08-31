@@ -18,11 +18,12 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.2 2007/06/07 08:59:00 tony2001 Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.3 2007/08/31 07:42:00 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
 #include "php_network.h"
+#include "php_ini.h"
 
 #include <stdio.h>
 #include <stdlib.h>

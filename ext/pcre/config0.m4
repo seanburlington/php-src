@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.48 2007/07/03 17:24:37 sniper Exp $
+dnl $Id: config0.m4,v 1.49 2007/09/01 18:01:43 nlopess Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -11,7 +11,7 @@ PHP_ARG_WITH(pcre-regex,for PCRE support,
 
 if test "$PHP_PCRE_REGEX" != "no"; then
   if test "$PHP_PCRE_REGEX" = "yes"; then
-    PHP_NEW_EXTENSION(pcre, pcrelib/pcre_chartables.c pcrelib/pcre_ucp_searchfuncs.c pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c pcrelib/pcre_ord2utf8.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_valid_utf8.c pcrelib/pcre_version.c pcrelib/pcre_xclass.c php_pcre.c, $ext_shared,,-I@ext_srcdir@/pcrelib)
+    PHP_NEW_EXTENSION(pcre, pcrelib/pcre_chartables.c pcrelib/pcre_ucp_searchfuncs.c pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c pcrelib/pcre_ord2utf8.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_valid_utf8.c pcrelib/pcre_version.c pcrelib/pcre_xclass.c php_pcre.c, $ext_shared,,-DHAVE_CONFIG_H -I@ext_srcdir@/pcrelib)
     PHP_ADD_BUILD_DIR($ext_builddir/pcrelib)
     PHP_INSTALL_HEADERS([ext/pcre], [php_pcre.h pcrelib/])
 	PHP_ADD_INCLUDE(pcrelib)

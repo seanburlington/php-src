@@ -16,16 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.218 2007/08/24 12:13:30 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.219 2007/09/01 18:01:43 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
  *   - should use fcall info cache (enhancement)
  */
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #include "php.h"
 #include "php_ini.h"

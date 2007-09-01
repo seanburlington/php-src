@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.62 2007/08/31 10:46:19 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.63 2007/09/01 18:38:38 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4340,7 +4340,7 @@ PHP_FUNCTION(ip2long)
 		 */
 		if (Z_STRLEN_PP(str) == sizeof("255.255.255.255") - 1 &&
 			!memcmp(Z_STRVAL_PP(str), "255.255.255.255", sizeof("255.255.255.255") - 1)) {
-			RETURN_LONG(-1);
+			RETURN_LONG(0xFFFFFFFF);
 		}
 		
 		RETURN_FALSE;

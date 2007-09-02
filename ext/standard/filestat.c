@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.162 2007/07/14 08:38:19 tony2001 Exp $ */
+/* $Id: filestat.c,v 1.163 2007/09/02 11:53:51 bjori Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -755,6 +755,10 @@ PHP_FUNCTION(touch)
    Clear file stat cache */
 PHP_FUNCTION(clearstatcache)
 {
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
+
 	if (BG(CurrentStatFile)) {
 		efree(BG(CurrentStatFile));
 		BG(CurrentStatFile) = NULL;

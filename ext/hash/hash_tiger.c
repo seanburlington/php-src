@@ -17,11 +17,21 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_tiger.c,v 1.8 2007/01/08 22:29:52 nlopess Exp $ */
+/* $Id: hash_tiger.c,v 1.9 2007/09/04 18:46:08 tony2001 Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_tiger.h"
 #include "php_hash_tiger_tables.h"
+
+#if (defined(__APPLE__) || defined(__APPLE_CC__)) && (defined(__BIG_ENDIAN__) || defined(__LITTLE_ENDIAN__))
+# if defined(__LITTLE_ENDIAN__)
+#  undef WORDS_BIGENDIAN
+# else 
+#  if defined(__BIG_ENDIAN__)
+#   define WORDS_BIGENDIAN
+#  endif
+# endif
+#endif
 
 /* {{{ */
 #define save_abc \

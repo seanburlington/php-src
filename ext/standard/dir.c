@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.168 2007/08/22 14:58:30 jani Exp $ */
+/* $Id: dir.c,v 1.169 2007/09/05 12:55:36 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -425,6 +425,11 @@ PHP_FUNCTION(glob)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|l", &pppattern, &flags) == FAILURE ||
 		php_stream_path_param_encode(pppattern, &pattern, &pattern_len, REPORT_ERRORS, FG(default_context)) == FAILURE) {
 		return;
+	}
+
+	if (pattern_len >= MAXPATHLEN) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Pattern exceeds the maximum allowed length of %d characters", MAXPATHLEN);
+		RETURN_FALSE;
 	}
 
 	if ((GLOB_AVAILABLE_FLAGS & flags) != flags) {

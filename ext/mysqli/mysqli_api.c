@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.14 2007/07/24 09:22:16 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.15 2007/09/05 12:36:44 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -325,6 +325,9 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 			case MYSQL_TYPE_VAR_STRING:
 			case MYSQL_TYPE_STRING:
 			case MYSQL_TYPE_BLOB:
+			case MYSQL_TYPE_TINY_BLOB:
+			case MYSQL_TYPE_MEDIUM_BLOB:
+			case MYSQL_TYPE_LONG_BLOB:
 			case MYSQL_TYPE_TIMESTAMP:
 			case MYSQL_TYPE_DECIMAL:
 #ifdef FIELD_TYPE_NEWDECIMAL
@@ -2000,7 +2003,10 @@ PHP_FUNCTION(mysqli_stmt_store_result)
 	  double - but this is a known problem of the simple MySQL API ;)
 	*/
 	for (i = mysql_stmt_field_count(stmt->stmt) - 1; i >=0; --i) {
-		if (stmt->stmt->fields && stmt->stmt->fields[i].type == MYSQL_TYPE_BLOB) {
+		if (stmt->stmt->fields && (stmt->stmt->fields[i].type == MYSQL_TYPE_BLOB ||
+			stmt->stmt->fields[i].type == MYSQL_TYPE_MEDIUM_BLOB ||
+			stmt->stmt->fields[i].type == MYSQL_TYPE_LONG_BLOB))
+		{
 			my_bool	tmp=1;
 			mysql_stmt_attr_set(stmt->stmt, STMT_ATTR_UPDATE_MAX_LENGTH, &tmp);
 			break;

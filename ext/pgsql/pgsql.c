@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.369 2007/08/21 23:51:34 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.370 2007/09/05 12:56:16 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -4975,7 +4975,7 @@ PHP_PGSQL_API int php_pgsql_convert(PGconn *pg_link, const char *table_name, con
 							ZVAL_STRINGL(new_val, "NOW()", sizeof("NOW()")-1, 1);
 						} else {
 							/* FIXME: better regex must be used */
-							if (php_pgsql_convert_match(Z_STRVAL_PP(val), "^([0-9]{4}[/-][0-9]{1,2}[/-][0-9]{1,2})([ \\t]+(([0-9]{1,2}:[0-9]{1,2}){1}(:[0-9]{1,2}){0,1}(\\.[0-9]+){0,1}([ \\t]*([+-][0-9]{1,2}(:[0-9]{1,2}){0,1}|[a-zA-Z]{1,5})){0,1})){0,1}$", 1 TSRMLS_CC) == FAILURE) {
+							if (php_pgsql_convert_match(Z_STRVAL_PP(val), "^([0-9]{4}[/-][0-9]{1,2}[/-][0-9]{1,2})([ \\t]+(([0-9]{1,2}:[0-9]{1,2}){1}(:[0-9]{1,2}){0,1}(\\.[0-9]+){0,1}([ \\t]*([+-][0-9]{1,2}(:[0-9]{1,2}){0,1}|[-a-zA-Z_/+]{1,50})){0,1})){0,1}$", 1 TSRMLS_CC) == FAILURE) {
 								err = 1;
 							} else {
 								ZVAL_STRING(new_val, Z_STRVAL_PP(val), 1);

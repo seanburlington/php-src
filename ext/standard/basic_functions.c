@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.871 2007/09/01 18:37:27 derick Exp $ */
+/* $Id: basic_functions.c,v 1.872 2007/09/06 13:27:31 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4280,7 +4280,8 @@ PHP_FUNCTION(ip2long)
 
 	if (addr_len == 0 || (ip = inet_addr(addr)) == INADDR_NONE) {
 		/* the only special case when we should return -1 ourselves,
-		 * because inet_addr() considers it wrong.
+		 * because inet_addr() considers it wrong. We return 0xFFFFFFFF and
+		 * not -1 or ~0 because of 32/64bit issues.
 		 */
 		if (addr_len == sizeof("255.255.255.255") - 1 &&
 			!memcmp(addr, "255.255.255.255", sizeof("255.255.255.255") - 1)) {

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.15 2007/09/05 12:36:44 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16 2007/09/06 10:07:42 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -458,6 +458,7 @@ PHP_FUNCTION(mysqli_close)
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
 	mysql_close(mysql->mysql);
+	mysql->mysql = NULL;
 	php_clear_mysql(mysql);
 	efree(mysql);
 	MYSQLI_CLEAR_RESOURCE(&mysql_link);	

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.68 2007/09/07 02:28:42 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69 2007/09/07 18:23:58 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -659,7 +659,7 @@ PHP_FUNCTION(wordwrap)
 	}
 
 	if (linelength == 0 && docut) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't force cut when width is zero.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't force cut when width is zero");
 		RETURN_FALSE;
 	}
 

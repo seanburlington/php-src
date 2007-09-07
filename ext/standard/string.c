@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.67 2007/08/05 14:47:42 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.68 2007/09/07 02:28:42 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4000,8 +4000,12 @@ PHP_FUNCTION(setlocale)
 			loc = NULL;
 		} else {
 			loc = Z_STRVAL_PP(plocale);
+			if (Z_STRLEN_PP(plocale) >= 255) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Specified locale name is too long");
+				break;
+			}
 		}
-		
+
 		retval = setlocale (cat, loc);
 		zend_update_current_locale();
 		if (retval) {

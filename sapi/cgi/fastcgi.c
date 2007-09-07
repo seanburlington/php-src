@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.41 2007/09/07 08:30:10 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.42 2007/09/07 08:42:33 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -717,6 +717,10 @@ static int fcgi_read_request(fcgi_request *req)
 		padding = hdr.paddingLength;
 
 		while (hdr.type == FCGI_PARAMS && len > 0) {
+			if (len + padding > FCGI_MAX_LENGTH) {
+				return 0;
+			}
+
 			if (safe_read(req, buf, len+padding) != len+padding) {
 				req->keep = 0;
 				return 0;

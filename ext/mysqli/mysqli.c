@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.16 2007/06/25 16:01:30 scottmac Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17 2007/09/12 09:12:56 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -665,7 +665,7 @@ PHP_MINIT_FUNCTION(mysqli)
 PHP_MSHUTDOWN_FUNCTION(mysqli)
 {
 #ifdef PHP_WIN32
-	unsigned long client_ver = mysql_get_client_version;
+	unsigned long client_ver = mysql_get_client_version();
 	/* Can't call mysql_server_end() multiple times prior to 5.0.42 on Windows */
 	if ((client_ver > 50042 && client_ver < 50100) || client_ver > 50122) {
 		mysql_server_end();

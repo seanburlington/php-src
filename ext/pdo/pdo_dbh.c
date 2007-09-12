@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.16 2007/08/30 14:06:12 bjori Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17 2007/09/12 18:26:49 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1453,12 +1453,6 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 		}
 	}
 
-	if (dbh->properties) {
-		zend_hash_destroy(dbh->properties);
-		efree(dbh->properties);
-		dbh->properties = NULL;
-	}
-
 	pefree(dbh, dbh->is_persistent);
 }
 
@@ -1477,6 +1471,12 @@ static void pdo_dbh_free_storage(pdo_dbh_t *dbh TSRMLS_DC)
 	if (dbh->in_txn && dbh->methods && dbh->methods->rollback) {
 		dbh->methods->rollback(dbh TSRMLS_CC);
 		dbh->in_txn = 0;
+	}
+
+	if (dbh->properties) {
+		zend_hash_destroy(dbh->properties);
+		efree(dbh->properties);
+		dbh->properties = NULL;
 	}
 	
 	if (!dbh->is_persistent) {

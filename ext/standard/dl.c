@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.106.2.1.2.2 2007/02/23 00:37:35 iliaa Exp $ */
+/* $Id: dl.c,v 1.106.2.1.2.3 2007/09/13 00:56:31 stas Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -124,6 +124,13 @@ void php_dl(zval *file, int type, zval *return_value, int start_now TSRMLS_DC)
 
 	if (extension_dir && extension_dir[0]){
 		int extension_dir_len = strlen(extension_dir);
+
+		if(type == MODULE_TEMPORARY) {
+			if(strchr(Z_STRVAL_P(file), '/') != NULL || strchr(Z_STRVAL_P(file), DEFAULT_SLASH) != NULL) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Temporary module name should contain only filename");
+				RETURN_FALSE;
+			}
+		}
 
 		if (IS_SLASH(extension_dir[extension_dir_len-1])) {
 			spprintf(&libpath, 0, "%s%s", extension_dir, Z_STRVAL_P(file));

@@ -2,6 +2,8 @@
 Bug #20175 (Static vars can't store ref to new instance)
 --SKIPIF--
 <?php if (version_compare(zend_version(),'2.0.0-dev','<')) die('skip ZE1 does not have static class members'); ?>
+--INI--
+error_reporting=4095
 --FILE--
 <?php
 print zend_version()."\n";
@@ -137,6 +139,7 @@ $oop_tester = new oop_test; // repeated.
 print $oop_tester->oop_static()."\n";
 ?>
 --EXPECTF--
+Strict Standards: Assigning the return value of new by reference is deprecated in %s.php on line %d
 %s
 foo_static()
 foo_global()
@@ -145,10 +148,11 @@ foo_static()
 foo:1
 bar_static()
 bar_global()
+
+Strict Standards: Only variables should be assigned by reference in %sbug20175.php on line 47
 bar:1
 bar_static()
-bar_global()
-bar:2
+bar:1
 wow_static()
 wow_global()
 wow:1

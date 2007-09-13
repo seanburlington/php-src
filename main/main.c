@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.54 2007/08/31 08:35:37 jani Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.55 2007/09/13 20:04:22 stas Exp $ */
 
 /* {{{ includes
  */
@@ -318,6 +318,19 @@ static PHP_INI_MH(OnUpdateErrorLog)
 }
 /* }}} */
 
+/* {{{ PHP_INI_MH
+ */
+static PHP_INI_MH(OnChangeMailForceExtra)
+{
+	/* Don't allow changing it in htaccess */
+	if (stage == PHP_INI_STAGE_HTACCESS) {
+			return FAILURE;
+	}
+	return SUCCESS;
+}
+/* }}} */
+
+
 /* Need to convert to strings and make use of:
  * PHP_SAFE_MODE
  *
@@ -428,7 +441,7 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY("precision",					"14",		PHP_INI_ALL,		OnSetPrecision)
 	PHP_INI_ENTRY("sendmail_from",				NULL,		PHP_INI_ALL,		NULL)
 	PHP_INI_ENTRY("sendmail_path",	DEFAULT_SENDMAIL_PATH,	PHP_INI_SYSTEM,		NULL)
-	PHP_INI_ENTRY("mail.force_extra_parameters",NULL,		PHP_INI_SYSTEM|PHP_INI_PERDIR,		NULL)
+	PHP_INI_ENTRY("mail.force_extra_parameters",NULL,		PHP_INI_SYSTEM|PHP_INI_PERDIR,		OnChangeMailForceExtra)
 	PHP_INI_ENTRY("disable_functions",			"",			PHP_INI_SYSTEM,		NULL)
 	PHP_INI_ENTRY("disable_classes",			"",			PHP_INI_SYSTEM,		NULL)
 

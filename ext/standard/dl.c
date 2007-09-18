@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.106.2.1.2.4 2007/09/13 07:42:12 jani Exp $ */
+/* $Id: dl.c,v 1.106.2.1.2.5 2007/09/18 20:19:34 stas Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -70,6 +70,11 @@ PHP_FUNCTION(dl)
 		RETURN_FALSE;
 	} else if (PG(safe_mode)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't allowed when running in Safe Mode");
+		RETURN_FALSE;
+	}
+
+	if (Z_STRLEN_PP(file) >= MAXPATHLEN) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "File name exceeds the maximum allowed length of %d characters", MAXPATHLEN);
 		RETURN_FALSE;
 	}
 

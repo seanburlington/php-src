@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.118 2007/09/19 00:06:05 stas Exp $ */
+/* $Id: dl.c,v 1.119 2007/09/19 01:08:38 johannes Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -63,7 +63,7 @@ PHP_FUNCTION(dl)
 		return;
 	}
 
-	if (Z_STRLEN_PP(filename) >= MAXPATHLEN) {
+	if (Z_STRLEN_P(filename) >= MAXPATHLEN) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "File name exceeds the maximum allowed length of %d characters", MAXPATHLEN);
 		RETURN_FALSE;
 	}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.114 2007/09/20 22:30:48 nlopess Exp $ */
+/* $Id: tidy.c,v 1.115 2007/09/20 22:44:17 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -932,8 +932,9 @@ static void php_tidy_create_node(INTERNAL_FUNCTION_PARAMETERS, tidy_base_nodetyp
 
 	tidy_instanciate(tidy_ce_node, return_value TSRMLS_CC);
 	newobj = (PHPTidyObj *) zend_object_store_get_object(return_value TSRMLS_CC);
-	newobj->type = is_node;
+	newobj->type  = is_node;
 	newobj->ptdoc = obj->ptdoc;
+	newobj->node  = node;
 	newobj->ptdoc->ref_count++;
 	newobj->converter = obj->converter;
 	if (obj->converter) obj->converter->ref_count++;
@@ -1061,7 +1062,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.114 2007/09/20 22:30:48 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.115 2007/09/20 22:44:17 nlopess Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

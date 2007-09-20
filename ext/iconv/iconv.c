@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.155 2007/09/20 21:57:11 stas Exp $ */
+/* $Id: iconv.c,v 1.156 2007/09/20 22:38:25 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -765,10 +765,14 @@ static php_iconv_err_t _php_iconv_substr(smart_str *pretval,
 		}
 	}
 
-	if (offset >= total_len || len > total_len) {
+	if(len > total_len) {
+		len = total_len;
+	}
+
+	if (offset >= total_len) {
 		return PHP_ICONV_ERR_SUCCESS;
 	}
-	
+
 	if ((offset + len) > total_len) {
 		/* trying to compute the length */
 		len = total_len - offset;

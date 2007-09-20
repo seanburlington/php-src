@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.20 2007/09/01 17:51:35 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21 2007/09/20 08:10:44 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1220,8 +1220,11 @@ static char *php_replace_in_subject(zval *regex, zval *replace, zval **subject, 
 				efree(subject_value);
 				subject_value = result;
 				subject_len = *result_len;
+			} else {
+				efree(subject_value);
+				return NULL;
 			}
-			
+
 			zend_hash_move_forward(Z_ARRVAL_P(regex));
 		}
 

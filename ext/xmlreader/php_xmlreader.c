@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.47 2007/07/26 13:19:22 bjori Exp $ */
+/* $Id: php_xmlreader.c,v 1.48 2007/09/20 09:30:16 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1096,7 +1096,7 @@ PHP_METHOD(xmlreader, XML)
 	xmlreader_object *intern = NULL;
 	zstr source;
 	char *uri = NULL, *encoding = NULL;
-	int resolved_path_len;
+	int resolved_path_len, ret = 0;
 	char *directory=NULL, resolved_path[MAXPATHLEN];
 	xmlParserInputBufferPtr inputbfr;
 	xmlTextReaderPtr reader = NULL;
@@ -1150,15 +1150,20 @@ PHP_METHOD(xmlreader, XML)
 			xmlFree(uri);
 		}
 		if (reader != NULL) {
-			if (id == NULL) {
-				object_init_ex(return_value, xmlreader_class_entry);
-				intern = (xmlreader_object *)zend_objects_get_address(return_value TSRMLS_CC);
-			} else {
-				RETVAL_TRUE;
+#if LIBXML_VERSION >= 20628
+			ret = xmlTextReaderSetup(reader, NULL, uri, encoding, options);
+#endif
+			if (ret == 0) {
+				if (id == NULL) {
+					object_init_ex(return_value, xmlreader_class_entry);
+					intern = (xmlreader_object *)zend_objects_get_address(return_value TSRMLS_CC);
+				} else {
+					RETVAL_TRUE;
+				}
+				intern->input = inputbfr;
+				intern->ptr = reader;
+				return;
 			}
-			intern->input = inputbfr;
-			intern->ptr = reader;
-			return;
 		}
 	}
 

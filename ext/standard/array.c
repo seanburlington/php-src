@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.418 2007/09/21 13:11:16 dmitry Exp $ */
+/* $Id: array.c,v 1.419 2007/09/21 13:50:47 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4477,6 +4477,8 @@ PHP_FUNCTION(array_map)
 				efree(args);
 				efree(array_pos);
 				zval_dtor(return_value);
+				zval_ptr_dtor(&null);
+				efree(params);
 				RETURN_NULL();
 			}
 		}

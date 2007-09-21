@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.163 2007/09/02 11:53:51 bjori Exp $ */
+/* $Id: filestat.c,v 1.164 2007/09/21 14:05:01 tony2001 Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -877,7 +877,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 			gid_t *gids;
 
 			groups = getgroups(0, NULL);
-			if(groups) {
+			if(groups > 0) {
 				gids=(gid_t *)safe_emalloc(groups, sizeof(gid_t), 0);
 				n=getgroups(groups, gids);
 				for(i=0;i<n;i++){

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.13 2007/07/23 23:03:09 iliaa Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.14 2007/09/21 14:05:18 tony2001 Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -821,7 +821,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 			gid_t *gids;
 
 			groups = getgroups(0, NULL);
-			if(groups) {
+			if(groups > 0) {
 				gids=(gid_t *)safe_emalloc(groups, sizeof(gid_t), 0);
 				n=getgroups(groups, gids);
 				for(i=0;i<n;i++){

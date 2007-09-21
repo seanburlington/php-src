@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.55 2007/09/13 20:04:22 stas Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.56 2007/09/21 14:12:52 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -229,11 +229,13 @@ static int php_get_display_errors_mode(char *value, int value_length)
 		mode = PHP_DISPLAY_ERRORS_STDERR;
 	} else if (value_length == 6 && !strcasecmp(value, "stdout")) {
 		mode = PHP_DISPLAY_ERRORS_STDOUT;
-	} else {
+	} else if (value) {
 		mode = atoi(value);
 		if (mode && mode != PHP_DISPLAY_ERRORS_STDOUT && mode != PHP_DISPLAY_ERRORS_STDERR) {
 			mode = PHP_DISPLAY_ERRORS_STDOUT;
 		}
+	} else {
+		mode = PHP_DISPLAY_ERRORS_STDOUT;
 	}
 	return mode;
 }

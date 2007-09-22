@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.35 2007/09/21 13:51:49 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.36 2007/09/22 15:32:11 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3634,6 +3634,8 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 		hash = HASH_OF(*args[i]);
 		list = (Bucket **) pemalloc((hash->nNumOfElements + 1) * sizeof(Bucket *), hash->persistent);
 		if (!list) {
+			efree(ptrs);
+			efree(lists);
 			RETURN_FALSE;
 		}
 		lists[i] = list;

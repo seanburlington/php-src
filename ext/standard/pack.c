@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.69 2007/07/02 10:29:49 dmitry Exp $ */
+/* $Id: pack.c,v 1.70 2007/09/22 15:26:51 iliaa Exp $ */
 
 #include "php.h"
 
@@ -55,6 +55,9 @@
 
 #define INC_OUTPUTPOS(a,b) \
 	if ((a) < 0 || ((INT_MAX - outputpos)/(b)) < (a)) { \
+		efree(argv);	\
+		efree(formatcodes);	\
+		efree(formatargs);	\
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type %c: integer overflow in format string", code); \
 		RETURN_FALSE; \
 	} \

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.56 2007/09/21 14:12:52 tony2001 Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57 2007/09/24 11:53:40 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1298,6 +1298,8 @@ int php_request_startup(TSRMLS_D)
 	} zend_catch {
 		retval = FAILURE;
 	} zend_end_try();
+
+	SG(sapi_started) = 1;
 
 	return retval;
 }

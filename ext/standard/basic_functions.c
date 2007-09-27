@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.82 2009/04/29 22:06:28 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -50,16 +50,11 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #include <time.h>
 #include <stdio.h>
 
-#ifndef PHP_WIN32 
-#include <sys/types.h>
-#include <sys/stat.h>
-#endif
-
 #ifdef NETWARE
 #include <netinet/in.h>
 #endif
 
-#include <netdb.h>
+#include<netdb.h>
 
 #if HAVE_ARPA_INET_H
 # include <arpa/inet.h>
@@ -378,7 +373,7 @@ ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_extract, 0, 0, 1)
-	ZEND_ARG_INFO(ZEND_SEND_PREFER_REF, arg) /* ARRAY_INFO(0, arg, 0) */
+	ZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */
 	ZEND_ARG_INFO(0, extract_type)
 	ZEND_ARG_INFO(0, prefix)
 ZEND_END_ARG_INFO()
@@ -3102,7 +3097,7 @@ ZEND_END_ARG_INFO()
 /* }}} */
 /* }}} */
 
-zend_function_entry basic_functions[] = {
+const zend_function_entry basic_functions[] = {
 	PHP_FE(constant,														arginfo_constant)
 	PHP_FE(bin2hex,															arginfo_bin2hex)
 	PHP_FE(sleep,															arginfo_sleep)
@@ -3826,7 +3821,7 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY_EX("safe_mode_allowed_env_vars",   SAFE_MODE_ALLOWED_ENV_VARS,   PHP_INI_SYSTEM, OnUpdateSafeModeAllowedEnvVars,   NULL)
 PHP_INI_END()
 
-static zend_module_dep standard_deps[] = {
+static const zend_module_dep standard_deps[] = {
 	ZEND_MOD_OPTIONAL("session")
 	{NULL, NULL, NULL}
 };
@@ -3917,8 +3912,6 @@ static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 	memset(&BG(mblen_state), 0, sizeof(BG(mblen_state)));
 #endif
 	BG(incomplete_class) = incomplete_class_entry;
-	BG(page_uid) = -1;
-	BG(page_gid) = -1;
 }
 
 
@@ -4133,7 +4126,6 @@ PHP_RINIT_FUNCTION(basic)
 	memset(BG(strtok_table), 0, 256);
 	BG(strtok_string) = NULL;
 	BG(strtok_zval) = NULL;
-	BG(strtok_last) = NULL;
 	BG(locale_string) = NULL;
 	BG(user_compare_func_name) = NULL;
 	BG(array_walk_func_name) = NULL;
@@ -4222,8 +4214,6 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 
 	PHP_RSHUTDOWN(user_filters)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	
-	BG(page_uid) = -1;
-	BG(page_gid) = -1;
 	return SUCCESS;
 }
 
@@ -4329,60 +4319,52 @@ PHP_NAMED_FUNCTION(php_inet_pton)
 /* }}} */
 #endif /* HAVE_INET_PTON */
 
+
+
 /* {{{ proto int ip2long(string ip_address)
    Converts a string containing an (IPv4) Internet Protocol dotted address into a proper address */
 PHP_FUNCTION(ip2long)
 {
-	char *addr;
-	int addr_len;
-#ifdef HAVE_INET_PTON
-	struct in_addr ip;
-#else
+	zval **str;
 	unsigned long int ip;
-#endif
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &addr, &addr_len) == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &str) == FAILURE) {
+		WRONG_PARAM_COUNT;
 	}
 
-#ifdef HAVE_INET_PTON
-	if (addr_len == 0 || inet_pton(AF_INET, addr, &ip) != 1) {
-		RETURN_FALSE;
-	}
-	RETURN_LONG(ntohl(ip.s_addr));
-#else
-	if (addr_len == 0 || (ip = inet_addr(addr)) == INADDR_NONE) {
-		/* The only special case when we should return -1 ourselves,
+	convert_to_string_ex(str);
+
+	if (Z_STRLEN_PP(str) == 0 || (ip = inet_addr(Z_STRVAL_PP(str))) == INADDR_NONE) {
+		/* the only special case when we should return -1 ourselves,
 		 * because inet_addr() considers it wrong. We return 0xFFFFFFFF and
-		 * not -1 or ~0 because of 32/64bit issues. */
-		if (addr_len == sizeof("255.255.255.255") - 1 &&
-			!memcmp(addr, "255.255.255.255", sizeof("255.255.255.255") - 1)
-		) {
+		 * not -1 or ~0 because of 32/64bit issues.
+		 */
+		if (Z_STRLEN_PP(str) == sizeof("255.255.255.255") - 1 &&
+			!memcmp(Z_STRVAL_PP(str), "255.255.255.255", sizeof("255.255.255.255") - 1)) {
 			RETURN_LONG(0xFFFFFFFF);
 		}
+		
 		RETURN_FALSE;
 	}
+
 	RETURN_LONG(ntohl(ip));
-#endif
 }
 /* }}} */
-
 
 /* {{{ proto string long2ip(int proper_address)
    Converts an (IPv4) Internet network address into a string in Internet standard dotted format */
 PHP_FUNCTION(long2ip)
 {
-	/* "It's a long but it's not, PHP ints are signed */
-	char *ip;
-	int ip_len;
+	zval **num;
 	unsigned long n;
 	struct in_addr myaddr;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &ip, &ip_len) == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &num) == FAILURE) {
+		WRONG_PARAM_COUNT;
 	}
-
-	n = strtoul(ip, NULL, 0);
+	convert_to_string_ex(num);
+	
+	n = strtoul(Z_STRVAL_PP(num), NULL, 0);
 
 	myaddr.s_addr = htonl(n);
 	RETURN_STRING(inet_ntoa(myaddr), 1);
@@ -4514,7 +4496,7 @@ PHP_FUNCTION(putenv)
 		}
 	}
 
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter syntax");
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter syntax.");
 	RETURN_FALSE;
 }
 /* }}} */
@@ -4581,11 +4563,10 @@ PHP_FUNCTION(getopt)
 	 * in order to be on the safe side, even though it is also available
 	 * from the symbol table.
 	 */
-	if ((zend_hash_find(HASH_OF(PG(http_globals)[TRACK_VARS_SERVER]), "argv", sizeof("argv"), (void **) &args) != FAILURE ||
-		zend_hash_find(&EG(symbol_table), "argv", sizeof("argv"), (void **) &args) != FAILURE) && Z_TYPE_PP(args) == IS_ARRAY
-	) {
+	if (zend_hash_find(HASH_OF(PG(http_globals)[TRACK_VARS_SERVER]), "argv", sizeof("argv"), (void **) &args) != FAILURE ||
+		zend_hash_find(&EG(symbol_table), "argv", sizeof("argv"), (void **) &args) != FAILURE) {
 		int pos = 0;
-		zval **entry;
+		zval **arg;
 
 		argc = zend_hash_num_elements(Z_ARRVAL_PP(args));
 
@@ -4600,22 +4581,8 @@ PHP_FUNCTION(getopt)
 
 		/* Iterate over the hash to construct the argv array. */
 		while (zend_hash_get_current_data(Z_ARRVAL_PP(args),
-										  (void **)&entry) == SUCCESS) {
-			zval arg, *arg_ptr = *entry;
-
-			if (Z_TYPE_PP(entry) != IS_STRING) {
-				arg = **entry;
-				zval_copy_ctor(&arg);
-				convert_to_string(&arg);
-				arg_ptr = &arg;
-			}
-
-			argv[pos++] = estrdup(Z_STRVAL_P(arg_ptr));
-
-			if (arg_ptr != *entry) {
-				zval_dtor(&arg);
-			}
-
+										  (void **)&arg) == SUCCESS) {
+			argv[pos++] = estrdup(Z_STRVAL_PP(arg));
 			zend_hash_move_forward(Z_ARRVAL_PP(args));
 		}
 
@@ -4633,7 +4600,7 @@ PHP_FUNCTION(getopt)
 #ifdef HARTMUT_0
 		int len, c = zend_hash_num_elements(Z_ARRVAL_P(p_longopts));
 		struct option *p;
-		zval **entry;
+		zval **arg;
 		char *name;
 
 		longopts = (struct option *)ecalloc(c+1, sizeof(struct option));
@@ -4646,19 +4613,10 @@ PHP_FUNCTION(getopt)
 
 		/* Iterate over the hash to construct the argv array. */
 		while (zend_hash_get_current_data(Z_ARRVAL_P(p_longopts),
-										  (void **)&entry) == SUCCESS) {
-			zval arg, *arg_ptr = *entry;
-
-			if (Z_TYPE_PP(entry) != IS_STRING) {
-				arg = **entry;
-				zval_copy_ctor(&arg);
-				convert_to_string(&arg);
-				arg_ptr = &arg;
-			}
-
+										  (void **)&arg) == SUCCESS) {
 
 			p->has_arg = 0;
-			name = estrdup(Z_STRVAL_P(arg_ptr));
+			name = estrdup(Z_STRVAL_PP(arg));
 			len = strlen(name);
 			if((len > 0) && (name[len-1] == ':')) {
 				p->has_arg++;
@@ -4672,10 +4630,6 @@ PHP_FUNCTION(getopt)
 			p->name = name; 
 			p->flag = NULL;
 			p->val = 0;
-
-			if (arg_ptr != *entry) {
-				zval_dtor(&arg);
-			}
 
 			zend_hash_move_forward(Z_ARRVAL_P(p_longopts));
 			p++;
@@ -4856,7 +4810,7 @@ PHP_FUNCTION(time_sleep_until)
 
 	c_ts = (double)(d_ts - tm.tv_sec - tm.tv_usec / 1000000.00);
 	if (c_ts < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sleep until to time is less than current time");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sleep until to time is less than current time.");
 		RETURN_FALSE;
 	}
 
@@ -4957,7 +4911,6 @@ error options:
 	1 = send via email to 3rd parameter 4th option = additional headers
 	2 = send via tcp/ip to 3rd parameter (name or ip:port)
 	3 = save to file in 3rd parameter
-	4 = send to SAPI logger directly
 */
 
 /* {{{ proto bool error_log(string message [, int message_type [, string destination [, string extra_headers]]])
@@ -5060,13 +5013,7 @@ PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers T
 			php_stream_write(stream, message, strlen(message));
 			php_stream_close(stream);
 			break;
-		case 4: /* send to SAPI */
-			if (sapi_module.log_message) {
-				sapi_module.log_message(message);
-			} else {
-				return FAILURE;
-			}
-			break;
+
 		default:
 			php_log_err(message TSRMLS_CC);
 			break;
@@ -5239,10 +5186,8 @@ PHP_FUNCTION(call_user_method)
 	SEPARATE_ZVAL(params[0]);
 	convert_to_string(*params[0]);
 
-	if (call_user_function_ex(EG(function_table), params[1], *params[0], &retval_ptr, arg_count-2, params+2, 0, NULL TSRMLS_CC) == SUCCESS) {
-		if (retval_ptr) {
-			COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
-		}
+	if (call_user_function_ex(EG(function_table), params[1], *params[0], &retval_ptr, arg_count-2, params+2, 0, NULL TSRMLS_CC) == SUCCESS && retval_ptr) {
+		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s()", Z_STRVAL_PP(params[0]));
 	}
@@ -5283,10 +5228,8 @@ PHP_FUNCTION(call_user_method_array)
 		element++;
 	}
 	
-	if (call_user_function_ex(EG(function_table), obj, *method_name, &retval_ptr, num_elems, method_args, 0, NULL TSRMLS_CC) == SUCCESS)  {
-		if (retval_ptr) {
-			COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
-		}
+	if (call_user_function_ex(EG(function_table), obj, *method_name, &retval_ptr, num_elems, method_args, 0, NULL TSRMLS_CC) == SUCCESS && retval_ptr) {
+		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s()", Z_STRVAL_PP(method_name));
 	}
@@ -6132,10 +6075,6 @@ PHP_FUNCTION(move_uploaded_file)
 	zval **path, **new_path;
 	zend_bool successful = 0;
 
-#ifndef PHP_WIN32
-	int oldmask; int ret;
-#endif
-
 	if (!SG(rfc1867_uploaded_files)) {
 		RETURN_FALSE;
 	}
@@ -6161,16 +6100,6 @@ PHP_FUNCTION(move_uploaded_file)
 	VCWD_UNLINK(Z_STRVAL_PP(new_path));
 	if (VCWD_RENAME(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path)) == 0) {
 		successful = 1;
-#ifndef PHP_WIN32
-		oldmask = umask(077);
-		umask(oldmask);
-
-		ret = VCWD_CHMOD(Z_STRVAL_PP(new_path), 0666 & ~oldmask);
-
-		if (ret == -1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
-		}
-#endif
 	} else if (php_copy_file_ex(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path), STREAM_DISABLE_OPEN_BASEDIR TSRMLS_CC) == SUCCESS) {
 		VCWD_UNLINK(Z_STRVAL_PP(path));
 		successful = 1;
@@ -6325,11 +6254,7 @@ PHP_FUNCTION(parse_ini_file)
 	Z_TYPE(fh) = ZEND_HANDLE_FILENAME;
 
 	array_init(return_value);
-	if (zend_parse_ini_file(&fh, 0, ini_parser_cb, return_value) == FAILURE) {
-		zend_hash_destroy(Z_ARRVAL_P(return_value));
-		efree(Z_ARRVAL_P(return_value));
-		RETURN_FALSE;
-	}
+	zend_parse_ini_file(&fh, 0, ini_parser_cb, return_value);
 }
 /* }}} */
 
@@ -6348,7 +6273,7 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 	prefix_len = va_arg(args, uint);
 
 	if (!prefix_len && !hash_key->nKeyLength) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Numeric key detected - possible security hazard");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Numeric key detected - possible security hazard.");
 		return 0;
 	}
 

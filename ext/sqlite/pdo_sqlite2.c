@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.6.2.3.2.4 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.6.2.3.2.2.2.1 2007/09/27 18:00:44 dmitry Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -481,12 +481,12 @@ static PHP_FUNCTION(sqlite2_create_function)
 	/* TODO: implement this stuff */
 }
 
-static zend_function_entry dbh_methods[] = {
+static const zend_function_entry dbh_methods[] = {
 	PHP_FE(sqlite2_create_function, NULL)
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
+static const zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
 	switch (kind) {
 		case PDO_DBH_DRIVER_METHOD_KIND_DBH:

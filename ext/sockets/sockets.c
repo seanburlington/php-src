@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.24 2009/05/10 01:07:01 felipe Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.14.2.1 2007/09/27 18:00:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ static
 
 /* {{{ sockets_functions[]
  */
-zend_function_entry sockets_functions[] = {
+const zend_function_entry sockets_functions[] = {
 	PHP_FE(socket_select,			first_through_third_args_force_ref)
 	PHP_FE(socket_create,			NULL)
 	PHP_FE(socket_create_listen,	NULL)
@@ -229,7 +229,7 @@ static int php_open_listen_sock(php_socket **php_sock, int port, int backlog TSR
 	sock->type = PF_INET;
 
 	if (bind(sock->bsd_socket, (struct sockaddr *)&la, sizeof(la)) < 0) {
-		PHP_SOCKET_ERROR(sock, "unable to bind to given address", errno);
+		PHP_SOCKET_ERROR(sock, "unable to bind to given adress", errno);
 		close(sock->bsd_socket);
 		efree(sock);
 		return 0;
@@ -509,9 +509,6 @@ PHP_MINIT_FUNCTION(sockets)
 	REGISTER_LONG_CONSTANT("SO_ERROR",		SO_ERROR,		CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SOL_SOCKET",	SOL_SOCKET,		CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SOMAXCONN",		SOMAXCONN,		CONST_CS | CONST_PERSISTENT);
-#ifdef TCP_NODELAY
-	REGISTER_LONG_CONSTANT("TCP_NODELAY",   TCP_NODELAY,    CONST_CS | CONST_PERSISTENT);
-#endif
 	REGISTER_LONG_CONSTANT("PHP_NORMAL_READ", PHP_NORMAL_READ, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PHP_BINARY_READ", PHP_BINARY_READ, CONST_CS | CONST_PERSISTENT);
 
@@ -603,7 +600,6 @@ static int php_sock_array_from_fd_set(zval *sock_array, fd_set *fds TSRMLS_DC) /
 		if (PHP_SAFE_FD_ISSET(php_sock->bsd_socket, fds)) {
 			/* Add fd to new array */
 			zend_hash_next_index_insert(new_hash, (void *)element, sizeof(zval *), (void **)&dest_element);
-
 			if (dest_element) zval_add_ref(dest_element);
 		}
 		num++;
@@ -901,9 +897,6 @@ PHP_FUNCTION(socket_read)
 
 		efree(tmpbuf);
 		RETURN_FALSE;
-	} else if (!retval) {
-		efree(tmpbuf);
-		RETURN_EMPTY_STRING();
 	}
 
 	tmpbuf = erealloc(tmpbuf, retval + 1);
@@ -1176,8 +1169,8 @@ PHP_FUNCTION(socket_connect)
 			memset(&s_un, 0, sizeof(struct sockaddr_un));
 
 			s_un.sun_family = AF_UNIX;
-			memcpy(&s_un.sun_path, addr, addr_len);
-			retval = connect(php_sock->bsd_socket, (struct sockaddr *) &s_un, (socklen_t) XtOffsetOf(struct sockaddr_un, sun_path) + addr_len);
+			snprintf(s_un.sun_path, 108, "%s", addr);
+			retval = connect(php_sock->bsd_socket, (struct sockaddr *) &s_un, SUN_LEN(&s_un));
 			break;
 
 		default:
@@ -1418,7 +1411,6 @@ PHP_FUNCTION(socket_recvfrom)
 			sin.sin_family = AF_INET;
 
 			if (arg6 == NULL) {
-				efree(recv_buf);
 				WRONG_PARAM_COUNT;
 			}
 
@@ -1447,7 +1439,6 @@ PHP_FUNCTION(socket_recvfrom)
 			sin6.sin6_family = AF_INET6;
 
 			if (arg6 == NULL) {
-				efree(recv_buf);
 				WRONG_PARAM_COUNT;
 			}
 

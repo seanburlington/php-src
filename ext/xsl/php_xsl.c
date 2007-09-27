@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.32.2.6.2.4 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_xsl.c,v 1.32.2.6.2.2.2.1 2007/09/27 18:00:46 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,12 +35,12 @@ static zend_object_handlers xsl_object_handlers;
  *
  * Every user visible function must have an entry in xsl_functions[].
  */
-zend_function_entry xsl_functions[] = {
+const zend_function_entry xsl_functions[] = {
 	{NULL, NULL, NULL}  /* Must be the last line in xsl_functions[] */
 };
 /* }}} */
 
-static zend_module_dep xsl_deps[] = {
+static const zend_module_dep xsl_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	{NULL, NULL, NULL}
 };

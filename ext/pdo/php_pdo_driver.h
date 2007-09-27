@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.66.2.11.2.9 2008/12/31 11:17:41 sebastian Exp $ */
+/* $Id: php_pdo_driver.h,v 1.66.2.11.2.6.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -67,7 +67,7 @@ enum pdo_param_type {
 	PDO_PARAM_STMT, /* hierarchical result set */
 
 	/* get_col ptr should point to a zend_bool */
-	PDO_PARAM_BOOL
+	PDO_PARAM_BOOL,
 };
 
 /* magic flag to denote a parameter as being input/output */
@@ -288,7 +288,7 @@ enum {
 	PDO_DBH_DRIVER_METHOD_KIND__MAX
 };
 
-typedef zend_function_entry *(*pdo_dbh_get_driver_methods_func)(pdo_dbh_t *dbh, int kind TSRMLS_DC);
+typedef const zend_function_entry *(*pdo_dbh_get_driver_methods_func)(pdo_dbh_t *dbh, int kind TSRMLS_DC);
 
 struct pdo_dbh_methods {
 	pdo_dbh_close_func		closer;

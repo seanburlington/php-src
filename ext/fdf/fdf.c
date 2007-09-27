@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.89.2.2.2.11 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: fdf.c,v 1.89.2.2.2.9.2.1 2007/09/27 18:00:39 dmitry Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -276,7 +276,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ fdf_functions[]
  */
-zend_function_entry fdf_functions[] = {
+const zend_function_entry fdf_functions[] = {
 	PHP_FE(fdf_add_template,						arginfo_fdf_add_template)
 	PHP_FE(fdf_close,								arginfo_fdf_close)
 	PHP_FE(fdf_create,								arginfo_fdf_create)

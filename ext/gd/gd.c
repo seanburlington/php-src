@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.39 2009/03/29 17:04:05 iliaa Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.1 2007/09/27 18:00:39 dmitry Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -73,7 +73,6 @@ static void php_free_ps_enc(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #include <gdfontmb.h> /* 3 Medium bold font */
 #include <gdfontl.h>  /* 4 Large font */
 #include <gdfontg.h>  /* 5 Giant font */
-#include <gdhelpers.h>
 #ifdef HAVE_GD_WBMP
 #include "libgd/wbmp.h"
 #endif
@@ -967,7 +966,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_imagefilter, 0, 0, 2)
 	ZEND_ARG_INFO(0, arg1)
 	ZEND_ARG_INFO(0, arg2)
 	ZEND_ARG_INFO(0, arg3)
-	ZEND_ARG_INFO(0, arg4)
 ZEND_END_ARG_INFO()
 
 static
@@ -991,7 +989,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ gd_functions[]
  */
-zend_function_entry gd_functions[] = {
+const zend_function_entry gd_functions[] = {
 	PHP_FE(gd_info,                                 arginfo_gd_info)
 	PHP_FE(imagearc,								arginfo_imagearc)
 	PHP_FE(imageellipse,							arginfo_imageellipse)
@@ -1638,22 +1636,6 @@ PHP_FUNCTION(imageloadfont)
 		font->nchars = FLIPWORD(font->nchars);
 		body_size = font->w * font->h * font->nchars;
 	}
-		 
-	if (overflow2(font->nchars, font->h)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error reading font, invalid font header");
-		efree(font);
-		php_stream_close(stream);
-		RETURN_FALSE;
-	}
-	if (overflow2(font->nchars * font->h, font->w )) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error reading font, invalid font header");
-		efree(font);
-		php_stream_close(stream);
-		RETURN_FALSE;
-	}
-
-
-
 
 	if (body_size != body_size_check) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error reading font");
@@ -2831,7 +2813,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 		}
 	}
 
-	if (argc >= 2 && Z_STRLEN_PP(file)) {
+	if ((argc == 2) || (argc > 2 && Z_STRLEN_PP(file))) {
 		PHP_GD_CHECK_OPEN_BASEDIR(fn, "Invalid filename");
 
 		fp = VCWD_FOPEN(fn, "wb");
@@ -4566,7 +4548,7 @@ PHP_FUNCTION(imagepsslantfont)
 }
 /* }}} */
 
-/* {{{ proto array imagepstext(resource image, string text, resource font, int size, int foreground, int background, int xcoord, int ycoord [, int space [, int tightness [, float angle [, int antialias]]]])
+/* {{{ proto array imagepstext(resource image, string text, resource font, int size, int foreground, int background, int xcoord, int ycoord [, int space, int tightness, float angle, int antialias])
    Rasterize a string over an image */
 PHP_FUNCTION(imagepstext)
 {

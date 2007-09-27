@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70.2.3.2.22 2009/01/04 15:08:34 tony2001 Exp $ */
+/* $Id: posix.c,v 1.70.2.3.2.16.2.1 2007/09/27 18:00:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,11 +36,6 @@
 #endif
 
 #include <sys/resource.h>
-
-#if defined(_GNU_SOURCE) && !defined(__USE_GNU)
-# define __USE_GNU
-#endif
-
 #include <sys/utsname.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -58,7 +53,7 @@ static PHP_MINFO_FUNCTION(posix);
 
 /* {{{ posix_functions[]
  */
-zend_function_entry posix_functions[] = {
+const zend_function_entry posix_functions[] = {
     /* POSIX.1, 3.3 */
 	PHP_FE(posix_kill,		NULL)
 
@@ -152,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.16.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -472,7 +467,7 @@ PHP_FUNCTION(posix_uname)
 	add_assoc_string(return_value, "release",  u.release,  1);
 	add_assoc_string(return_value, "version",  u.version,  1);
 	add_assoc_string(return_value, "machine",  u.machine,  1);
-#if defined(_GNU_SOURCE) && !defined(DARWIN) && defined(HAVE_UTSNAME_DOMAINNAME)
+#ifdef _GNU_SOURCE
 	add_assoc_string(return_value, "domainname", u.domainname, 1);
 #endif
 }
@@ -880,7 +875,7 @@ PHP_FUNCTION(posix_getgrgid)
 #if defined(ZTS) && defined(HAVE_GETGRGID_R) && defined(_SC_GETGR_R_SIZE_MAX)
 	int ret;
 	struct group _g;
-	struct group *retgrptr = NULL;
+	struct group *retgrptr;
 	long grbuflen;
 	char *grbuf;
 #endif
@@ -899,7 +894,7 @@ PHP_FUNCTION(posix_getgrgid)
 	grbuf = emalloc(grbuflen);
 
 	ret = getgrgid_r(gid, &_g, grbuf, grbuflen, &retgrptr);
-	if (ret || retgrptr == NULL) {
+	if (ret) {
 		POSIX_G(last_error) = ret;
 		efree(grbuf);
 		RETURN_FALSE;
@@ -1014,7 +1009,7 @@ PHP_FUNCTION(posix_getpwuid)
 	pwbuf = emalloc(pwbuflen);
 
 	ret = getpwuid_r(uid, &_pw, pwbuf, pwbuflen, &retpwptr);
-	if (ret || retpwptr == NULL) {
+	if (ret) {
 		POSIX_G(last_error) = ret;
 		efree(pwbuf);
 		RETURN_FALSE;

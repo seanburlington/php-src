@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.44 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.38.2.1 2007/09/27 18:00:41 dmitry Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -203,7 +203,7 @@ PHP_FUNCTION(oci_collection_trim);
 
 /* {{{ extension definition structures
 */
-static zend_function_entry php_oci_functions[] = {
+static const zend_function_entry php_oci_functions[] = {
 	PHP_FE(oci_define_by_name,          oci_third_arg_force_ref)
 	PHP_FE(oci_bind_by_name,            oci_third_arg_force_ref)
 	PHP_FE(oci_bind_array_by_name,      oci_third_arg_force_ref)
@@ -326,7 +326,7 @@ static zend_function_entry php_oci_functions[] = {
 	{NULL,NULL,NULL}
 };
 
-static zend_function_entry php_oci_lob_class_functions[] = {
+static const zend_function_entry php_oci_lob_class_functions[] = {
 	PHP_FALIAS(load,        oci_lob_load,           NULL)
 	PHP_FALIAS(tell,        oci_lob_tell,           NULL)
 	PHP_FALIAS(truncate,    oci_lob_truncate,       NULL)
@@ -355,7 +355,7 @@ static zend_function_entry php_oci_lob_class_functions[] = {
 };
 
 #ifdef PHP_OCI8_HAVE_COLLECTIONS
-static zend_function_entry php_oci_coll_class_functions[] = {
+static const zend_function_entry php_oci_coll_class_functions[] = {
 	PHP_FALIAS(append,        oci_collection_append,            NULL)
 	PHP_FALIAS(getelem,       oci_collection_element_get,       NULL)
 	PHP_FALIAS(assignelem,    oci_collection_element_assign,    NULL)
@@ -377,7 +377,7 @@ zend_module_entry oci8_module_entry = {
 	PHP_RINIT(oci),       /* per-request startup function */
 	PHP_RSHUTDOWN(oci),   /* per-request shutdown function */
 	PHP_MINFO(oci),       /* information function */
-	"1.2.5",
+	"1.2.4",
 #if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION > 1) || (PHP_MAJOR_VERSION > 5)
 	PHP_MODULE_GLOBALS(oci),  /* globals descriptor */
 	PHP_GINIT(oci),           /* globals ctor */
@@ -673,8 +673,8 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Version", "1.2.5");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.44 $");
+	php_info_print_table_row(2, "Version", "1.2.4");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.1 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1604,7 +1604,6 @@ int php_oci_column_to_zval(php_oci_out_column *column, zval *value, int mode TSR
 	ub4 lob_length;
 	int column_size;
 	char *lob_buffer;
-	int lob_fetch_status;
 	
 	if (column->indicator == -1) { /* column is NULL */ 
 		ZVAL_NULL(value); 
@@ -1635,11 +1634,7 @@ int php_oci_column_to_zval(php_oci_out_column *column, zval *value, int mode TSR
 		if (column->data_type != SQLT_RDD && (mode & PHP_OCI_RETURN_LOBS)) {
 			/* PHP_OCI_RETURN_LOBS means that we want the content of the LOB back instead of the locator */
 			
-			lob_fetch_status = php_oci_lob_read(descriptor, -1, 0, &lob_buffer, &lob_length TSRMLS_CC);
-#ifdef HAVE_OCI8_TEMP_LOB
-			php_oci_temp_lob_close(descriptor TSRMLS_CC);
-#endif
-			if (lob_fetch_status) {
+			if (php_oci_lob_read(descriptor, -1, 0, &lob_buffer, &lob_length TSRMLS_CC)) {
 				ZVAL_FALSE(value);
 				return 1;
 			} else {

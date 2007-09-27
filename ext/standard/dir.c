@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.21 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.12.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -26,7 +26,6 @@
 #include "php_dir.h"
 #include "php_string.h"
 #include "php_scandir.h"
-#include "basic_functions.h"
 
 #ifdef HAVE_DIRENT_H
 #include <dirent.h>
@@ -94,7 +93,7 @@ static zend_class_entry *dir_class_entry_ptr;
 			RETURN_FALSE; \
 	} 
 
-static zend_function_entry php_dir_class_functions[] = {
+static const zend_function_entry php_dir_class_functions[] = {
 	PHP_FALIAS(close,	closedir,	NULL)
 	PHP_FALIAS(rewind,	rewinddir,	NULL)
 	PHP_NAMED_FE(read,  php_if_readdir, NULL)
@@ -221,8 +220,6 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	if (dirp == NULL) {
 		RETURN_FALSE;
 	}
-
-	dirp->flags |= PHP_STREAM_FLAG_NO_FCLOSE;
 		
 	php_set_default_dir(dirp->rsrc_id TSRMLS_CC);
 
@@ -259,21 +256,14 @@ PHP_FUNCTION(closedir)
 {
 	zval **id, **tmp, *myself;
 	php_stream *dirp;
-	int rsrc_id;
 
 	FETCH_DIRP();
 
-	if (!(dirp->flags & PHP_STREAM_FLAG_IS_DIR)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%d is not a valid Directory resource", dirp->rsrc_id);
-		RETURN_FALSE;
-	}
-
-	rsrc_id = dirp->rsrc_id;
-	zend_list_delete(dirp->rsrc_id);
-
-	if (rsrc_id == DIRG(default_dir)) {
+	if (dirp->rsrc_id == DIRG(default_dir)) {
 		php_set_default_dir(-1 TSRMLS_CC);
 	}
+
+	zend_list_delete(dirp->rsrc_id);
 }
 /* }}} */
 
@@ -295,7 +285,7 @@ PHP_FUNCTION(chroot)
 		RETURN_FALSE;
 	}
 
-	php_clear_stat_cache(TSRMLS_C);
+	realpath_cache_clean(TSRMLS_C);
 	
 	ret = chdir("/");
 	
@@ -328,15 +318,6 @@ PHP_FUNCTION(chdir)
 	if (ret != 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s (errno %d)", strerror(errno), errno);
 		RETURN_FALSE;
-	}
-
-	if (BG(CurrentStatFile) && !IS_ABSOLUTE_PATH(BG(CurrentStatFile), strlen(BG(CurrentStatFile)))) {
-		efree(BG(CurrentStatFile));
-		BG(CurrentStatFile) = NULL;
-	}
-	if (BG(CurrentLStatFile) && !IS_ABSOLUTE_PATH(BG(CurrentLStatFile), strlen(BG(CurrentLStatFile)))) {
-		efree(BG(CurrentLStatFile));
-		BG(CurrentLStatFile) = NULL;
 	}
 
 	RETURN_TRUE;
@@ -377,11 +358,6 @@ PHP_FUNCTION(rewinddir)
 	
 	FETCH_DIRP();
 
-	if (!(dirp->flags & PHP_STREAM_FLAG_IS_DIR)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%d is not a valid Directory resource", dirp->rsrc_id);
-		RETURN_FALSE;
-	}
-
 	php_stream_rewinddir(dirp);
 }
 /* }}} */
@@ -395,11 +371,6 @@ PHP_NAMED_FUNCTION(php_if_readdir)
 	php_stream_dirent entry;
 
 	FETCH_DIRP();
-
-	if (!(dirp->flags & PHP_STREAM_FLAG_IS_DIR)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%d is not a valid Directory resource", dirp->rsrc_id);
-		RETURN_FALSE;
-	}
 
 	if (php_stream_readdir(dirp, &entry)) {
 		RETURN_STRINGL(entry.d_name, strlen(entry.d_name), 1);
@@ -496,7 +467,7 @@ no_results:
 	array_init(return_value);
 	for (n = 0; n < globbuf.gl_pathc; n++) {
 		if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
-			if (PG(safe_mode) && (!php_checkuid_ex(globbuf.gl_pathv[n], NULL, CHECKUID_CHECK_FILE_AND_DIR, CHECKUID_NO_ERRORS))) {
+			if (PG(safe_mode) && (!php_checkuid(globbuf.gl_pathv[n], NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 				basedir_limit = 1;
 				continue;
 			} else if (php_check_open_basedir_ex(globbuf.gl_pathv[n], 0 TSRMLS_CC)) {

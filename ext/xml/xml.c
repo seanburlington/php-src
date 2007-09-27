@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157.2.4.2.9 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: xml.c,v 1.157.2.4.2.5.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -107,7 +107,7 @@ static
 		ZEND_ARG_PASS_INFO(1)
 	ZEND_END_ARG_INFO();
 
-zend_function_entry xml_functions[] = {
+const zend_function_entry xml_functions[] = {
 	PHP_FE(xml_parser_create, NULL)
 	PHP_FE(xml_parser_create_ns, NULL)
 	PHP_FE(xml_set_object, second_arg_force_ref)
@@ -136,7 +136,7 @@ zend_function_entry xml_functions[] = {
 };
 
 #ifdef LIBXML_EXPAT_COMPAT
-static zend_module_dep xml_deps[] = {
+static const zend_module_dep xml_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	{NULL, NULL, NULL}
 };
@@ -579,27 +579,15 @@ PHPAPI char *xml_utf8_decode(const XML_Char *s, int len, int *newlen, const XML_
 	while (pos > 0) {
 		c = (unsigned char)(*s);
 		if (c >= 0xf0) { /* four bytes encoded, 21 bits */
-			if(pos-4 >= 0) {
-				c = ((s[0]&7)<<18) | ((s[1]&63)<<12) | ((s[2]&63)<<6) | (s[3]&63);
-			} else {
-				c = '?';	
-			}
+			c = ((s[0]&7)<<18) | ((s[1]&63)<<12) | ((s[2]&63)<<6) | (s[3]&63);
 			s += 4;
 			pos -= 4;
 		} else if (c >= 0xe0) { /* three bytes encoded, 16 bits */
-			if(pos-3 >= 0) {
-				c = ((s[0]&63)<<12) | ((s[1]&63)<<6) | (s[2]&63);
-			} else {
-				c = '?';
-			}
+			c = ((s[0]&63)<<12) | ((s[1]&63)<<6) | (s[2]&63);
 			s += 3;
 			pos -= 3;
 		} else if (c >= 0xc0) { /* two bytes encoded, 11 bits */
-			if(pos-2 >= 0) {
-				c = ((s[0]&63)<<6) | (s[1]&63);
-			} else {
-				c = '?';
-			}
+			c = ((s[0]&63)<<6) | (s[1]&63);
 			s += 2;
 			pos -= 2;
 		} else {

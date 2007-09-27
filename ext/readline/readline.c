@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.3.2.9 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: readline.c,v 1.42.2.3.2.3.2.1 2007/09/27 18:00:43 dmitry Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -69,7 +69,7 @@ PHP_RSHUTDOWN_FUNCTION(readline);
 /* }}} */
 /* {{{ module stuff */
 
-static zend_function_entry php_readline_functions[] = {
+static const zend_function_entry php_readline_functions[] = {
 	PHP_FE(readline,	   		        NULL)
 	PHP_FE(readline_info,  	            NULL)
 	PHP_FE(readline_add_history, 		NULL)
@@ -115,14 +115,12 @@ PHP_MINIT_FUNCTION(readline)
 
 PHP_RSHUTDOWN_FUNCTION(readline)
 {
-	if (_readline_completion) {
-		zval_dtor(_readline_completion);
+	if (_readline_completion) 
 		FREE_ZVAL(_readline_completion);
-	}
 #if HAVE_RL_CALLBACK_READ_CHAR
 	if (_prepped_callback) {
 		rl_callback_handler_remove();
-		zval_ptr_dtor(&_prepped_callback);
+		FREE_ZVAL(_prepped_callback);
 		_prepped_callback = 0;
 	}
 #endif
@@ -458,12 +456,9 @@ PHP_FUNCTION(readline_completion_function)
 		efree(name);
 		RETURN_FALSE;
 	}
-	efree(name);
 
-	if (_readline_completion) {
-		zval_dtor(_readline_completion);
+	if (_readline_completion)
 		FREE_ZVAL(_readline_completion);
-	}
 
 	MAKE_STD_ZVAL(_readline_completion);
 	*_readline_completion = *arg;
@@ -509,14 +504,11 @@ PHP_FUNCTION(readline_callback_handler_install)
 
 	if (!zend_is_callable(callback, 0, &name)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s is not callable", name);
-		efree(name);
 		RETURN_FALSE;
 	}
-	efree(name);
 
 	if (_prepped_callback) {
 		rl_callback_handler_remove();
-		zval_dtor(_prepped_callback);
 		FREE_ZVAL(_prepped_callback);
 	}
 
@@ -546,7 +538,6 @@ PHP_FUNCTION(readline_callback_handler_remove)
 {
 	if (_prepped_callback) {
 		rl_callback_handler_remove();
-		zval_dtor(_prepped_callback);
 		FREE_ZVAL(_prepped_callback);
 		_prepped_callback = 0;
 		RETURN_TRUE;

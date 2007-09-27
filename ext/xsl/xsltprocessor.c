@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.17 2009/05/10 15:15:47 felipe Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.1 2007/09/27 18:00:46 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,57 +27,6 @@
 #include "php_xsl.h"
 #include "ext/libxml/php_libxml.h"
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_import_stylesheet, 0, 0, 1)
-	ZEND_ARG_INFO(0, doc)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_doc, 0, 0, 1)
-	ZEND_ARG_INFO(0, doc)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_uri, 0, 0, 2)
-	ZEND_ARG_INFO(0, doc)
-	ZEND_ARG_INFO(0, uri)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_xml, 0, 0, 1)
-	ZEND_ARG_INFO(0, doc)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_set_parameter, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespace)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_get_parameter, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespace)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_remove_parameter, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespace)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_has_exslt_support, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_register_php_functions, 0, 0, 0)
-	ZEND_ARG_INFO(0, restrict)
-ZEND_END_ARG_INFO();
-/* }}} */
-
 /*
 * class xsl_xsltprocessor 
 *
@@ -85,19 +34,20 @@ ZEND_END_ARG_INFO();
 * Since: 
 */
 
-zend_function_entry php_xsl_xsltprocessor_class_functions[] = {
-	PHP_FALIAS(importStylesheet, xsl_xsltprocessor_import_stylesheet, arginfo_xsl_xsltprocessor_import_stylesheet)
-	PHP_FALIAS(transformToDoc, xsl_xsltprocessor_transform_to_doc, arginfo_xsl_xsltprocessor_transform_to_doc)
-	PHP_FALIAS(transformToUri, xsl_xsltprocessor_transform_to_uri, arginfo_xsl_xsltprocessor_transform_to_uri)
-	PHP_FALIAS(transformToXml, xsl_xsltprocessor_transform_to_xml, arginfo_xsl_xsltprocessor_transform_to_xml)
-	PHP_FALIAS(setParameter, xsl_xsltprocessor_set_parameter, arginfo_xsl_xsltprocessor_set_parameter)
-	PHP_FALIAS(getParameter, xsl_xsltprocessor_get_parameter, arginfo_xsl_xsltprocessor_get_parameter)
-	PHP_FALIAS(removeParameter, xsl_xsltprocessor_remove_parameter, arginfo_xsl_xsltprocessor_remove_parameter)
-	PHP_FALIAS(hasExsltSupport, xsl_xsltprocessor_has_exslt_support, arginfo_xsl_xsltprocessor_has_exslt_support)
-	PHP_FALIAS(registerPHPFunctions, xsl_xsltprocessor_register_php_functions, arginfo_xsl_xsltprocessor_register_php_functions)
+const zend_function_entry php_xsl_xsltprocessor_class_functions[] = {
+	PHP_FALIAS(importStylesheet, xsl_xsltprocessor_import_stylesheet, NULL)
+	PHP_FALIAS(transformToDoc, xsl_xsltprocessor_transform_to_doc, NULL)
+	PHP_FALIAS(transformToUri, xsl_xsltprocessor_transform_to_uri, NULL)
+	PHP_FALIAS(transformToXml, xsl_xsltprocessor_transform_to_xml, NULL)
+	PHP_FALIAS(setParameter, xsl_xsltprocessor_set_parameter, NULL)
+	PHP_FALIAS(getParameter, xsl_xsltprocessor_get_parameter, NULL)
+	PHP_FALIAS(removeParameter, xsl_xsltprocessor_remove_parameter, NULL)
+	PHP_FALIAS(hasExsltSupport, xsl_xsltprocessor_has_exslt_support, NULL)
+	PHP_FALIAS(registerPHPFunctions, xsl_xsltprocessor_register_php_functions, NULL)
 	{NULL, NULL, NULL}
 };
 
+/* {{{ attribute protos, not implemented yet */
 /* {{{ php_xsl_xslt_string_to_xpathexpr()
    Translates a string to a XPath Expression */
 static char *php_xsl_xslt_string_to_xpathexpr(const char *str TSRMLS_DC)
@@ -122,7 +72,7 @@ static char *php_xsl_xslt_string_to_xpathexpr(const char *str TSRMLS_DC)
 	}
 	return (char *) value;
 }
-/* }}} */
+
 
 /* {{{ php_xsl_xslt_make_params()
    Translates a PHP array to a libxslt parameters array */
@@ -157,13 +107,11 @@ static char **php_xsl_xslt_make_params(HashTable *parht, int xpath_params TSRMLS
 			if (!xpath_params) {
 				xpath_expr = php_xsl_xslt_string_to_xpathexpr(Z_STRVAL_PP(value) TSRMLS_CC);
 			} else {
-				xpath_expr = estrndup(Z_STRVAL_PP(value), Z_STRLEN_PP(value));
+				xpath_expr = estrndup(Z_STRVAL_PP(value), strlen(Z_STRVAL_PP(value)));
 			}
 			if (xpath_expr) {
 				params[i++] = string_key;
 				params[i++] = xpath_expr;
-			} else {
-				efree(string_key);
 			}
 		}
 	}
@@ -174,7 +122,8 @@ static char **php_xsl_xslt_make_params(HashTable *parht, int xpath_params TSRMLS
 }
 /* }}} */
 
-static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int type) /* {{{ */
+
+static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int type)
 {
 	xsltTransformContextPtr tctxt;
 	zval **args;
@@ -282,9 +231,7 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 				}
 				break;
 			default:
-				str = xmlXPathCastToString(obj);
-				ZVAL_STRING(args[i], str, 1);
-				xmlFree(str);
+			ZVAL_STRING(args[i], xmlXPathCastToString(obj), 1);
 		}
 		xmlXPathFreeObject(obj);
 		fci.params[i] = &args[i];
@@ -366,19 +313,17 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 		efree(fci.params);
 	}
 }
-/* }}} */
 
-void xsl_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */
+void xsl_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs)
 {
 	xsl_ext_function_php(ctxt, nargs, 1);
 }
-/* }}} */
 
-void xsl_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */
+void xsl_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs)
 {
 	xsl_ext_function_php(ctxt, nargs, 2);
 }
-/* }}} */
+
 
 /* {{{ proto void xsl_xsltprocessor_import_stylesheet(domdocument doc);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#
@@ -467,7 +412,8 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 }
 /* }}} end xsl_xsltprocessor_import_stylesheet */
 
-static xmlDocPtr php_xsl_apply_stylesheet(zval *id, xsl_object *intern, xsltStylesheetPtr style, zval *docp TSRMLS_DC) /* {{{ */
+
+static xmlDocPtr php_xsl_apply_stylesheet(zval *id, xsl_object *intern, xsltStylesheetPtr style, zval *docp TSRMLS_DC)
 {
 	xmlDocPtr newdocp;
 	xmlDocPtr doc = NULL;
@@ -549,7 +495,6 @@ static xmlDocPtr php_xsl_apply_stylesheet(zval *id, xsl_object *intern, xsltStyl
 	return newdocp;
 
 }
-/* }}} */
 
 /* {{{ proto domdocument xsl_xsltprocessor_transform_to_doc(domnode doc);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#
@@ -610,6 +555,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_doc)
 }
 /* }}} end xsl_xsltprocessor_transform_to_doc */
 
+
 /* {{{ proto int xsl_xsltprocessor_transform_to_uri(domdocument doc, string uri);
 */
 PHP_FUNCTION(xsl_xsltprocessor_transform_to_uri)
@@ -640,6 +586,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_uri)
 	RETVAL_LONG(ret);
 }
 /* }}} end xsl_xsltprocessor_transform_to_uri */
+
 
 /* {{{ proto string xsl_xsltprocessor_transform_to_xml(domdocument doc);
 */
@@ -678,6 +625,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_xml)
 	}
 }
 /* }}} end xsl_xsltprocessor_transform_to_xml */
+
 
 /* {{{ proto bool xsl_xsltprocessor_set_parameter(string namespace, mixed name [, string value]);
 */
@@ -778,7 +726,7 @@ PHP_FUNCTION(xsl_xsltprocessor_remove_parameter)
 }
 /* }}} end xsl_xsltprocessor_remove_parameter */
 
-/* {{{ proto void xsl_xsltprocessor_register_php_functions([mixed $restrict]);
+/* {{{ proto void xsl_xsltprocessor_register_php_functions();
 */
 PHP_FUNCTION(xsl_xsltprocessor_register_php_functions)
 {
@@ -836,11 +784,3 @@ PHP_FUNCTION(xsl_xsltprocessor_has_exslt_support)
 }
 /* }}} end xsl_xsltprocessor_has_exslt_support(); */
 
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- * vim600: sw=4 ts=4 fdm=marker
- * vim<600: sw=4 ts=4
- */

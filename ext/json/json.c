@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.26 2009/02/12 00:36:23 scottmac Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.1 2007/09/27 18:00:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,7 @@ static const char digits[] = "0123456789abcdef";
  *
  * Every user visible function must have an entry in json_functions[].
  */
-static function_entry json_functions[] = {
+static const function_entry json_functions[] = {
     PHP_FE(json_encode, NULL)
     PHP_FE(json_decode, NULL)
     {NULL, NULL, NULL}  /* Must be the last line in json_functions[] */
@@ -84,7 +84,7 @@ static PHP_MINFO_FUNCTION(json)
 /* }}} */
 
 static void json_encode_r(smart_str *buf, zval *val TSRMLS_DC);
-static void json_escape_string(smart_str *buf, char *s, int len TSRMLS_DC);
+static void json_escape_string(smart_str *buf, char *s, int len);
 
 static int json_determine_array_type(zval **val TSRMLS_DC)  /* {{{ */
 {
@@ -181,9 +181,6 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) { /* {{{ */
                     if (i == HASH_KEY_IS_STRING) {
                         if (key[0] == '\0' && Z_TYPE_PP(val) == IS_OBJECT) {
                             /* Skip protected and private members. */
-							if (tmp_ht) {
-								tmp_ht->nApplyCount--;
-							}
                             continue;
                         }
 
@@ -193,7 +190,7 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) { /* {{{ */
                             need_comma = 1;
                         }
 
-                        json_escape_string(buf, key, key_len - 1 TSRMLS_CC);
+                        json_escape_string(buf, key, key_len - 1);
                         smart_str_appendc(buf, ':');
 
                         json_encode_r(buf, *data TSRMLS_CC);
@@ -233,7 +230,7 @@ static void json_encode_array(smart_str *buf, zval **val TSRMLS_DC) { /* {{{ */
 
 #define REVERSE16(us) (((us & 0xf) << 12) | (((us >> 4) & 0xf) << 8) | (((us >> 8) & 0xf) << 4) | ((us >> 12) & 0xf))
 
-static void json_escape_string(smart_str *buf, char *s, int len TSRMLS_DC) /* {{{ */
+static void json_escape_string(smart_str *buf, char *s, int len) /* {{{ */
 {
     int pos = 0;
     unsigned short us;
@@ -254,14 +251,8 @@ static void json_escape_string(smart_str *buf, char *s, int len TSRMLS_DC) /* {{
         {
             efree(utf16);
         }
-	if(len < 0) {
-		if(!PG(display_errors)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid UTF-8 sequence in argument");
-		}
-	        smart_str_appendl(buf, "null", 4);
-	} else {
-	        smart_str_appendl(buf, "\"\"", 2);
-	}
+
+        smart_str_appendl(buf, "\"\"", 2);
         return;
     }
 
@@ -368,7 +359,7 @@ static void json_encode_r(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
                 double dbl = Z_DVAL_P(val);
 
                 if (!zend_isinf(dbl) && !zend_isnan(dbl)) {
-			len = spprintf(&d, 0, "%.*k", (int) EG(precision), dbl);
+			len = spprintf(&d, 0, "%.*g", (int) EG(precision), dbl);
 			smart_str_appendl(buf, d, len);
 			efree(d);
                 } else {
@@ -378,7 +369,7 @@ static void json_encode_r(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
             }
             break;
         case IS_STRING:
-            json_escape_string(buf, Z_STRVAL_P(val), Z_STRLEN_P(val) TSRMLS_CC);
+            json_escape_string(buf, Z_STRVAL_P(val), Z_STRLEN_P(val));
             break;
         case IS_ARRAY:
         case IS_OBJECT:
@@ -479,7 +470,13 @@ static PHP_FUNCTION(json_decode)
 			RETURN_DOUBLE(d);
 		}
 	}
+	if (parameter_len > 1 && *parameter == '"' && parameter[parameter_len-1] == '"') {
+	        RETURN_STRINGL(parameter+1, parameter_len-2, 1);
+	} else if (*parameter == '{' || *parameter == '[') { /* invalid JSON string */
 		RETURN_NULL();
+	} else {
+	        RETURN_STRINGL(parameter, parameter_len, 1);
+	}
     }
 }
 /* }}} */

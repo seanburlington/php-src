@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.26 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.1 2007/09/27 18:00:41 dmitry Exp $ */
 
 /* TODO:
  *
@@ -66,7 +66,7 @@
 
 #include <mysql.h>
 #include "php_ini.h"
-#include "php_mysql_structs.h"
+#include "php_mysql.h"
 
 /* True globals, no need for thread safety */
 static int le_result, le_link, le_plink;
@@ -130,7 +130,7 @@ typedef struct _php_mysql_conn {
 
 /* {{{ mysql_functions[]
  */
-zend_function_entry mysql_functions[] = {
+const zend_function_entry mysql_functions[] = {
 	PHP_FE(mysql_connect,								NULL)
 	PHP_FE(mysql_pconnect,								NULL)
 	PHP_FE(mysql_close,									NULL)
@@ -419,7 +419,7 @@ PHP_MSHUTDOWN_FUNCTION(mysql)
 #ifdef PHP_WIN32
 	unsigned long client_ver = mysql_get_client_version();
 	/* Can't call mysql_server_end() multiple times prior to 5.0.42 on Windows */
-	if ((client_ver >= 50046 && client_ver < 50100) || client_ver > 50122) {
+	if ((client_ver > 50042 && client_ver < 50100) || client_ver > 50122) {
 		mysql_server_end();
 	}
 #else
@@ -514,14 +514,14 @@ PHP_MINFO_FUNCTION(mysql)
 static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 {
 	char *user=NULL, *passwd=NULL, *host_and_port=NULL, *socket=NULL, *tmp=NULL, *host=NULL;
-	int  user_len, passwd_len, host_len;
 	char *hashed_details=NULL;
 	int hashed_details_length, port = MYSQL_PORT;
-	long client_flags = 0;
+	int client_flags = 0;
 	php_mysql_conn *mysql=NULL;
 #if MYSQL_VERSION_ID <= 32230
 	void (*handler) (int);
 #endif
+	zval **z_host=NULL, **z_user=NULL, **z_passwd=NULL, **z_new_link=NULL, **z_client_flags=NULL;
 	zend_bool free_host=0, new_link=0;
 	long connect_timeout;
 
@@ -556,37 +556,100 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		hashed_details_length = spprintf(&hashed_details, 0, "mysql__%s_", user);
 		client_flags = CLIENT_INTERACTIVE;
 	} else {
-		/* mysql_pconnect does not support new_link parameter */
-		if (persistent) {
-			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s!s!s!l", &host_and_port, &host_len,
-									&user, &user_len, &passwd, &passwd_len,
-									&client_flags)==FAILURE) {
-				return;
-        	}
-		} else {
-			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s!s!s!bl", &host_and_port, &host_len,
-										&user, &user_len, &passwd, &passwd_len, 
-										&new_link, &client_flags)==FAILURE) {
-				return;
-			}
+		host_and_port = MySG(default_host);
+		user = MySG(default_user);
+		passwd = MySG(default_password);
+		
+		switch(ZEND_NUM_ARGS()) {
+			case 0: /* defaults */
+				break;
+			case 1: {					
+					if (zend_get_parameters_ex(1, &z_host)==FAILURE) {
+						MYSQL_DO_CONNECT_RETURN_FALSE();
+					}
+				}
+				break;
+			case 2: {
+					if (zend_get_parameters_ex(2, &z_host, &z_user)==FAILURE) {
+						MYSQL_DO_CONNECT_RETURN_FALSE();
+					}
+					convert_to_string_ex(z_user);
+					user = Z_STRVAL_PP(z_user);
+				}
+				break;
+			case 3: {
+					if (zend_get_parameters_ex(3, &z_host, &z_user, &z_passwd) == FAILURE) {
+						MYSQL_DO_CONNECT_RETURN_FALSE();
+					}
+					convert_to_string_ex(z_user);
+					convert_to_string_ex(z_passwd);
+					user = Z_STRVAL_PP(z_user);
+					passwd = Z_STRVAL_PP(z_passwd);
+				}
+				break;
+			case 4: {
+					if (!persistent) {
+						if (zend_get_parameters_ex(4, &z_host, &z_user, &z_passwd, &z_new_link) == FAILURE) {
+							MYSQL_DO_CONNECT_RETURN_FALSE();
+						}
+						convert_to_string_ex(z_user);
+						convert_to_string_ex(z_passwd);
+						convert_to_boolean_ex(z_new_link);
+						user = Z_STRVAL_PP(z_user);
+						passwd = Z_STRVAL_PP(z_passwd);
+						new_link = Z_BVAL_PP(z_new_link);
+					}
+					else {
+						if (zend_get_parameters_ex(4, &z_host, &z_user, &z_passwd, &z_client_flags) == FAILURE) {
+							MYSQL_DO_CONNECT_RETURN_FALSE();
+						}
+						convert_to_string_ex(z_user);
+						convert_to_string_ex(z_passwd);
+						convert_to_long_ex(z_client_flags);
+						user = Z_STRVAL_PP(z_user);
+						passwd = Z_STRVAL_PP(z_passwd);
+						client_flags = Z_LVAL_PP(z_client_flags);
+					}
+				}
+				break;
+			case 5: {
+					if (zend_get_parameters_ex(5, &z_host, &z_user, &z_passwd, &z_new_link, &z_client_flags) == FAILURE) {
+						MYSQL_DO_CONNECT_RETURN_FALSE();
+					}
+					convert_to_string_ex(z_user);
+					convert_to_string_ex(z_passwd);
+					convert_to_boolean_ex(z_new_link);
+					convert_to_long_ex(z_client_flags);
+					user = Z_STRVAL_PP(z_user);
+					passwd = Z_STRVAL_PP(z_passwd);
+					new_link = Z_BVAL_PP(z_new_link);
+					client_flags = Z_LVAL_PP(z_client_flags);
+				}
+				break;
+			default:
+				WRONG_PARAM_COUNT;
+				break;
 		}
-
-		if (!host_and_port) {
-			host_and_port = MySG(default_host);
-		}
-		if (!user) {
-			user = MySG(default_user);
-		}
-		if (!passwd) {
-			passwd = MySG(default_password);
-		}
-
 		/* disable local infile option for open_basedir */
 		if (((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) && (client_flags & CLIENT_LOCAL_FILES)) {
                 	client_flags ^= CLIENT_LOCAL_FILES;
 		}
 
-		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%ld", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
+		if (z_host) {
+			SEPARATE_ZVAL(z_host); /* We may modify z_host if it contains a port, separate */
+			convert_to_string_ex(z_host);
+			host_and_port = Z_STRVAL_PP(z_host);
+			if (z_user) {
+				convert_to_string_ex(z_user);
+				user = Z_STRVAL_PP(z_user);
+				if (z_passwd) {
+					convert_to_string_ex(z_passwd);
+					passwd = Z_STRVAL_PP(z_passwd);
+				}
+			}
+		}
+
+		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%d", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
 	}
 
 	/* We cannot use mysql_port anymore in windows, need to use

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -211,7 +211,7 @@ PHP_METHOD(mysqli_warning, __construct)
 }
 /* }}} */
 
-zend_function_entry mysqli_warning_methods[] = {
+const zend_function_entry mysqli_warning_methods[] = {
 	PHP_ME(mysqli_warning, __construct,		NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(mysqli_warning, next, 			NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.7.2.1.2.4 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: namelist.c,v 1.7.2.1.2.1.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,18 +28,6 @@
 #include "php_dom.h"
 
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_namelist_get_name, 0, 0, 1)
-	ZEND_ARG_INFO(0, index)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_namelist_get_namespace_uri, 0, 0, 1)
-	ZEND_ARG_INFO(0, index)
-ZEND_END_ARG_INFO();
-/* }}} */
-
 /*
 * class DOMNameList 
 *
@@ -47,9 +35,9 @@ ZEND_END_ARG_INFO();
 * Since: DOM Level 3
 */
 
-zend_function_entry php_dom_namelist_class_functions[] = {
-	PHP_FALIAS(getName, dom_namelist_get_name, arginfo_dom_namelist_get_name)
-	PHP_FALIAS(getNamespaceURI, dom_namelist_get_namespace_uri, arginfo_dom_namelist_get_namespace_uri)
+const zend_function_entry php_dom_namelist_class_functions[] = {
+	PHP_FALIAS(getName, dom_namelist_get_name, NULL)
+	PHP_FALIAS(getNamespaceURI, dom_namelist_get_namespace_uri, NULL)
 	{NULL, NULL, NULL}
 };
 

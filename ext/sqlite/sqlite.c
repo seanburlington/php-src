@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.12 2008/12/31 11:17:44 sebastian Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.9.2.1 2007/09/27 18:00:45 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -164,7 +164,7 @@ static int php_sqlite_fetch(struct php_sqlite_result *rres TSRMLS_DC);
 
 enum { PHPSQLITE_ASSOC = 1, PHPSQLITE_NUM = 2, PHPSQLITE_BOTH = PHPSQLITE_ASSOC|PHPSQLITE_NUM };
 
-zend_function_entry sqlite_functions[] = {
+const zend_function_entry sqlite_functions[] = {
 	PHP_FE(sqlite_open, third_arg_force_ref)
 	PHP_FE(sqlite_popen, third_arg_force_ref)
 	PHP_FE(sqlite_close, NULL)
@@ -207,7 +207,7 @@ zend_function_entry sqlite_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_db[] = {
+const zend_function_entry sqlite_funcs_db[] = {
 	PHP_ME_MAPPING(__construct, sqlite_open, third_arg_force_ref, 0)
 /*	PHP_ME_MAPPING(close, sqlite_close, NULL, 0)*/
 	PHP_ME_MAPPING(query, sqlite_query, third_arg_force_ref, 0)
@@ -227,7 +227,7 @@ zend_function_entry sqlite_funcs_db[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_query[] = {
+const zend_function_entry sqlite_funcs_query[] = {
 	PHP_ME_MAPPING(fetch, sqlite_fetch_array, NULL, 0)
 	PHP_ME_MAPPING(fetchObject, sqlite_fetch_object, NULL, 0)
 	PHP_ME_MAPPING(fetchSingle, sqlite_fetch_single, NULL, 0)
@@ -251,7 +251,7 @@ zend_function_entry sqlite_funcs_query[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_ub_query[] = {
+const zend_function_entry sqlite_funcs_ub_query[] = {
 	PHP_ME_MAPPING(fetch, sqlite_fetch_array, NULL, 0)
 	PHP_ME_MAPPING(fetchObject, sqlite_fetch_object, NULL, 0)
 	PHP_ME_MAPPING(fetchSingle, sqlite_fetch_single, NULL, 0)
@@ -266,12 +266,12 @@ zend_function_entry sqlite_funcs_ub_query[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_exception[] = {
+const zend_function_entry sqlite_funcs_exception[] = {
 	{NULL, NULL, NULL}
 };
 
 /* Dependancies */
-static zend_module_dep sqlite_deps[] = {
+static const zend_module_dep sqlite_deps[] = {
 #if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	ZEND_MOD_REQUIRED("spl")
 #endif
@@ -1128,7 +1128,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.12 2008/12/31 11:17:44 sebastian Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.9.2.1 2007/09/27 18:00:45 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2917,13 +2917,11 @@ static enum callback_prep_t prep_callback_struct(struct php_sqlite_db *db, int i
 	MAKE_STD_ZVAL(alloc_funcs->step);
 	*(alloc_funcs->step)  = *step;
 	zval_copy_ctor(alloc_funcs->step);
-	INIT_PZVAL(alloc_funcs->step);
 
 	if (is_agg) {
 		MAKE_STD_ZVAL(alloc_funcs->fini);
 		*(alloc_funcs->fini) = *fini;
 		zval_copy_ctor(alloc_funcs->fini);
-		INIT_PZVAL(alloc_funcs->fini);
 	} else {
 		alloc_funcs->fini = NULL;
 	}

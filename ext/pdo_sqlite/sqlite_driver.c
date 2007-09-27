@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.20.2.5.2.5 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: sqlite_driver.c,v 1.20.2.5.2.2.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -368,8 +368,8 @@ static int do_callback(struct pdo_sqlite_fci *fc, zval *cb,
 	}
 
 	/* clean up the params */
-	if (zargs) {
-		for (i = is_agg; i < fake_argc; i++) {
+	if (argc) {
+		for (i = is_agg; i < argc; i++) {
 			zval_ptr_dtor(zargs[i]);
 			efree(zargs[i]);
 		}
@@ -498,7 +498,6 @@ static PHP_METHOD(SQLite, sqliteCreateFunction)
 		MAKE_STD_ZVAL(func->func);
 		*(func->func) = *callback;
 		zval_copy_ctor(func->func);
-		INIT_PZVAL(func->func);
 		
 		func->argc = argc;
 
@@ -577,12 +576,10 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 		MAKE_STD_ZVAL(func->step);
 		*(func->step) = *step_callback;
 		zval_copy_ctor(func->step);
-		INIT_PZVAL(func->step);
 
 		MAKE_STD_ZVAL(func->fini);
 		*(func->fini) = *fini_callback;
 		zval_copy_ctor(func->fini);
-		INIT_PZVAL(func->fini);
 		
 		func->argc = argc;
 
@@ -596,13 +593,13 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 	RETURN_FALSE;
 }
 /* }}} */
-static zend_function_entry dbh_methods[] = {
+static const zend_function_entry dbh_methods[] = {
 	PHP_ME(SQLite, sqliteCreateFunction, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(SQLite, sqliteCreateAggregate, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
+static const zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
 	switch (kind) {
 		case PDO_DBH_DRIVER_METHOD_KIND_DBH:

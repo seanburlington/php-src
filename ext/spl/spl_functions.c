@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.28.2.3.2.5 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: spl_functions.c,v 1.28.2.3.2.3.2.1 2007/09/27 18:00:44 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -36,7 +36,7 @@ void spl_destroy_class(zend_class_entry ** ppce)
 /* }}} */
 
 /* {{{ spl_register_interface */
-void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_function_entry * functions TSRMLS_DC)
+void spl_register_interface(zend_class_entry ** ppce, char * class_name, const zend_function_entry * functions TSRMLS_DC)
 {
 	zend_class_entry ce;
 	
@@ -47,7 +47,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 /* }}} */
 
 /* {{{ spl_register_std_class */
-PHPAPI void spl_register_std_class(zend_class_entry ** ppce, char * class_name, void * obj_ctor, zend_function_entry * function_list TSRMLS_DC)
+PHPAPI void spl_register_std_class(zend_class_entry ** ppce, char * class_name, void * obj_ctor, const zend_function_entry * function_list TSRMLS_DC)
 {
 	zend_class_entry ce;
 	
@@ -63,7 +63,7 @@ PHPAPI void spl_register_std_class(zend_class_entry ** ppce, char * class_name, 
 /* }}} */
 
 /* {{{ spl_register_sub_class */
-PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, void *obj_ctor, zend_function_entry * function_list TSRMLS_DC)
+PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, void *obj_ctor, const zend_function_entry * function_list TSRMLS_DC)
 {
 	zend_class_entry ce;
 	
@@ -88,7 +88,7 @@ void spl_register_parent_ce(zend_class_entry * class_entry, zend_class_entry * p
 /* }}} */
 
 /* {{{ spl_register_functions */
-void spl_register_functions(zend_class_entry * class_entry, zend_function_entry * function_list TSRMLS_DC)
+void spl_register_functions(zend_class_entry * class_entry, const zend_function_entry * function_list TSRMLS_DC)
 {
 	zend_register_functions(class_entry, function_list, &class_entry->function_table, MODULE_PERSISTENT TSRMLS_CC);
 }

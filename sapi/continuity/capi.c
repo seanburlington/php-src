@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -80,7 +80,7 @@ PHP_FUNCTION(continuity_virtual);
 PHP_FUNCTION(continuity_request_headers);
 PHP_FUNCTION(continuity_response_headers);
 
-zend_function_entry continuity_functions[] = {
+const zend_function_entry continuity_functions[] = {
         {NULL, NULL, NULL}
 };
 
@@ -110,7 +110,7 @@ PHP_MSHUTDOWN_FUNCTION(continuity)
 PHP_MINFO_FUNCTION(continuity)
 {
         php_info_print_table_start();
-        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.11.2.2.2.3 $");
+        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.11.2.2.2.1.2.1 $");
         php_info_print_table_row(2, "Server Version", conFget_build());
 #ifdef CONTINUITY_CDPEXT
 	php_info_print_table_row(2,"CDP Extensions", "enabled");

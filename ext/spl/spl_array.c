@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.22 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.1 2007/09/27 18:00:44 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -255,7 +255,6 @@ static zval **spl_array_get_dimension_ptr_ptr(int check_inherited, zval *object,
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 	zval **retval;
 	long index;
-	HashTable *ht = spl_array_get_hash_table(intern, 0 TSRMLS_CC);
 
 /*  We cannot get the pointer pointer so we don't allow it here for now
 	if (check_inherited && intern->fptr_offset_get) {
@@ -268,17 +267,9 @@ static zval **spl_array_get_dimension_ptr_ptr(int check_inherited, zval *object,
 	
 	switch(Z_TYPE_P(offset)) {
 	case IS_STRING:
-		if (zend_symtable_find(ht, Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void **) &retval) == FAILURE) {
-			if (type == BP_VAR_W || type == BP_VAR_RW) {
-				zval *value;
-				ALLOC_INIT_ZVAL(value);
-				zend_symtable_update(ht, Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void**)&value, sizeof(void*), NULL);
-				zend_symtable_find(ht, Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void **) &retval);
-				return retval;
-			} else {
-				zend_error(E_NOTICE, "Undefined index:  %s", Z_STRVAL_P(offset));
-				return &EG(uninitialized_zval_ptr);
-			}
+		if (zend_symtable_find(spl_array_get_hash_table(intern, 0 TSRMLS_CC), Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void **) &retval) == FAILURE) {
+			zend_error(E_NOTICE, "Undefined index:  %s", Z_STRVAL_P(offset));
+			return &EG(uninitialized_zval_ptr);
 		} else {
 			return retval;
 		}
@@ -291,17 +282,9 @@ static zval **spl_array_get_dimension_ptr_ptr(int check_inherited, zval *object,
 		} else {
 			index = Z_LVAL_P(offset);
 		}
-		if (zend_hash_index_find(ht, index, (void **) &retval) == FAILURE) {
-			if (type == BP_VAR_W || type == BP_VAR_RW) {
-				zval *value;
-				ALLOC_INIT_ZVAL(value);
-				zend_hash_index_update(ht, index, (void**)&value, sizeof(void*), NULL);
-				zend_hash_index_find(ht, index, (void **) &retval);
-				return retval;
-			} else {
-				zend_error(E_NOTICE, "Undefined offset:  %ld", Z_LVAL_P(offset));
-				return &EG(uninitialized_zval_ptr);
-			}
+		if (zend_hash_index_find(spl_array_get_hash_table(intern, 0 TSRMLS_CC), index, (void **) &retval) == FAILURE) {
+			zend_error(E_NOTICE, "Undefined offset:  %ld", Z_LVAL_P(offset));
+			return &EG(uninitialized_zval_ptr);
 		} else {
 			return retval;
 		}
@@ -910,7 +893,9 @@ SPL_METHOD(Array, __construct)
 	spl_array_object *intern;
 	zval **array;
 	long ar_flags = 0;
-	zend_class_entry * ce_get_iterator = spl_ce_Iterator;
+	char *class_name;
+	int class_name_len;
+	zend_class_entry ** pce_get_iterator;
 
 	if (ZEND_NUM_ARGS() == 0) {
 		return; /* nothing to do */
@@ -919,7 +904,7 @@ SPL_METHOD(Array, __construct)
 
 	intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|lC", &array, &ar_flags, &ce_get_iterator) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|ls", &array, &ar_flags, &class_name, &class_name_len) == FAILURE) {
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		return;
 	}
@@ -929,7 +914,12 @@ SPL_METHOD(Array, __construct)
 	}
 
 	if (ZEND_NUM_ARGS() > 2) {
-		intern->ce_get_iterator = ce_get_iterator;
+		if (zend_lookup_class(class_name, class_name_len, &pce_get_iterator TSRMLS_CC) == FAILURE) {
+			zend_throw_exception(spl_ce_InvalidArgumentException, "A class that implements Iterator must be specified", 0 TSRMLS_CC);
+			php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
+			return;
+		}
+		intern->ce_get_iterator = *pce_get_iterator;
 	}
 
 	ar_flags &= ~SPL_ARRAY_INT_MASK;
@@ -982,14 +972,21 @@ SPL_METHOD(Array, setIteratorClass)
 {
 	zval *object = getThis();
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
-	zend_class_entry * ce_get_iterator = spl_ce_Iterator;
+	char *class_name;
+	int class_name_len;
+	zend_class_entry ** pce_get_iterator;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "C", &ce_get_iterator) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &class_name, &class_name_len) == FAILURE) {
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		return;
 	}
 
-	intern->ce_get_iterator = ce_get_iterator;
+	if (zend_lookup_class(class_name, class_name_len, &pce_get_iterator TSRMLS_CC) == FAILURE) {
+		zend_throw_exception(spl_ce_InvalidArgumentException, "A class that implements Iterator must be specified", 0 TSRMLS_CC);
+		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
+		return;
+	}
+	intern->ce_get_iterator = *pce_get_iterator;
 }
 /* }}} */
 
@@ -1183,7 +1180,6 @@ static void spl_array_method(INTERNAL_FUNCTION_PARAMETERS, char *fname, int fnam
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 	HashTable *aht = spl_array_get_hash_table(intern, 0 TSRMLS_CC);
 	zval tmp, *arg;
-	zval *retval_ptr = NULL;
 	
 	INIT_PZVAL(&tmp);
 	Z_TYPE(tmp) = IS_ARRAY;
@@ -1194,12 +1190,9 @@ static void spl_array_method(INTERNAL_FUNCTION_PARAMETERS, char *fname, int fnam
 			zend_throw_exception(spl_ce_BadMethodCallException, "Function expects exactly one argument", 0 TSRMLS_CC);
 			return;
 		}
-		zend_call_method(NULL, NULL, NULL, fname, fname_len, &retval_ptr, 2, &tmp, arg TSRMLS_CC);
+		zend_call_method(NULL, NULL, NULL, fname, fname_len, &return_value, 2, &tmp, arg TSRMLS_CC);
 	} else {
-		zend_call_method(NULL, NULL, NULL, fname, fname_len, &retval_ptr, 1, &tmp, NULL TSRMLS_CC);
-	}
-	if (retval_ptr) {
-		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
+		zend_call_method(NULL, NULL, NULL, fname, fname_len, &return_value, 1, &tmp, NULL TSRMLS_CC);
 	}
 }
 
@@ -1372,7 +1365,7 @@ SPL_METHOD(Array, hasChildren)
    Create a sub iterator for the current element (same class as $this) */
 SPL_METHOD(Array, getChildren)
 {
-	zval *object = getThis(), **entry, *flags;
+	zval *object = getThis(), **entry;
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 	HashTable *aht = spl_array_get_hash_table(intern, 0 TSRMLS_CC);
 
@@ -1394,10 +1387,7 @@ SPL_METHOD(Array, getChildren)
 		RETURN_ZVAL(*entry, 0, 0);
 	}
 
-  MAKE_STD_ZVAL(flags);
-  ZVAL_LONG(flags, SPL_ARRAY_USE_OTHER);
-	spl_instantiate_arg_ex2(intern->std.ce, &return_value, 0, *entry, flags TSRMLS_CC);
-	zval_ptr_dtor(&flags);
+	spl_instantiate_arg_ex1(Z_OBJCE_P(getThis()), &return_value, 0, *entry TSRMLS_CC);
 }
 /* }}} */
 
@@ -1447,7 +1437,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_array_uXsort, 0)
 	ZEND_ARG_INFO(0, cmp_function )
 ZEND_END_ARG_INFO();
 
-static zend_function_entry spl_funcs_ArrayObject[] = {
+static const zend_function_entry spl_funcs_ArrayObject[] = {
 	SPL_ME(Array, __construct,      arginfo_array___construct,      ZEND_ACC_PUBLIC)
 	SPL_ME(Array, offsetExists,     arginfo_array_offsetGet,        ZEND_ACC_PUBLIC)
 	SPL_ME(Array, offsetGet,        arginfo_array_offsetGet,        ZEND_ACC_PUBLIC)
@@ -1472,7 +1462,7 @@ static zend_function_entry spl_funcs_ArrayObject[] = {
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry spl_funcs_ArrayIterator[] = {
+static const zend_function_entry spl_funcs_ArrayIterator[] = {
 	SPL_ME(Array, __construct,      arginfo_array___construct,      ZEND_ACC_PUBLIC)
 	SPL_ME(Array, offsetExists,     arginfo_array_offsetGet,        ZEND_ACC_PUBLIC)
 	SPL_ME(Array, offsetGet,        arginfo_array_offsetGet,        ZEND_ACC_PUBLIC)
@@ -1499,7 +1489,7 @@ static zend_function_entry spl_funcs_ArrayIterator[] = {
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry spl_funcs_RecursiveArrayIterator[] = {
+static const zend_function_entry spl_funcs_RecursiveArrayIterator[] = {
 	SPL_ME(Array, hasChildren,   NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(Array, getChildren,   NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

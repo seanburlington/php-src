@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.46.2.2.2.6 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: calendar.c,v 1.46.2.2.2.4.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ ZEND_END_ARG_INFO()
 
 /* }}} */
 
-zend_function_entry calendar_functions[] = {
+const zend_function_entry calendar_functions[] = {
 	PHP_FE(jdtogregorian, arginfo_jdtogregorian)
 	PHP_FE(gregoriantojd, arginfo_gregoriantojd)
 	PHP_FE(jdtojulian, arginfo_jdtojulian)

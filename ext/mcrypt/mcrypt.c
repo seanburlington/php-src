@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.3.2.14 2008/12/31 11:17:39 sebastian Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.11.2.1 2007/09/27 18:00:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@ typedef struct _php_mcrypt {
 	zend_bool init;
 } php_mcrypt;
 
-zend_function_entry mcrypt_functions[] = { /* {{{ */
+const zend_function_entry mcrypt_functions[] = { /* {{{ */
 	PHP_FE(mcrypt_ecb, NULL)
 	PHP_FE(mcrypt_cbc, NULL)
 	PHP_FE(mcrypt_cfb, NULL)
@@ -1041,17 +1041,15 @@ static void php_mcrypt_do_crypt (char* cipher, zval **key, zval **data, char *mo
 	/* Check IV */
 	iv_s = NULL;
 	iv_size = mcrypt_enc_get_iv_size (td);
-	
-	/* IV is required */
-	if (mcrypt_enc_mode_has_iv(td) == 1) {
-		if (argc == 5) {
-			if (iv_size != Z_STRLEN_PP(iv)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, MCRYPT_IV_WRONG_SIZE);
-			} else {
-				iv_s = emalloc(iv_size + 1);
-				memcpy(iv_s, Z_STRVAL_PP(iv), iv_size);
-			}
-		} else if (argc == 4) {
+	if (argc == 5) {
+		if (iv_size != Z_STRLEN_PP(iv)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, MCRYPT_IV_WRONG_SIZE);
+		} else {
+			iv_s = emalloc(iv_size + 1);
+			memcpy(iv_s, Z_STRVAL_PP(iv), iv_size);
+		}
+	} else if (argc == 4) {
+		if (iv_size != 0) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attempt to use an empty IV, which is NOT recommend");
 			iv_s = emalloc(iv_size + 1);
 			memset(iv_s, 0, iv_size + 1);

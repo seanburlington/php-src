@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite.c,v 1.10.2.6.2.4 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: pdo_sqlite.c,v 1.10.2.6.2.2.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,7 +34,7 @@
 #define PHP_PDO_SQLITE_MODULE_VERSION	"1.0.1"
 
 /* {{{ pdo_sqlite_functions[] */
-zend_function_entry pdo_sqlite_functions[] = {
+const zend_function_entry pdo_sqlite_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -42,7 +42,7 @@ zend_function_entry pdo_sqlite_functions[] = {
 /* {{{ pdo_sqlite_deps
  */
 #if ZEND_MODULE_API_NO >= 20050922
-static zend_module_dep pdo_sqlite_deps[] = {
+static const zend_module_dep pdo_sqlite_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
 };
@@ -100,7 +100,7 @@ PHP_MINFO_FUNCTION(pdo_sqlite)
 	"(bundled) "
 #endif
 		PHP_PDO_SQLITE_MODULE_VERSION 
-		" $Id: pdo_sqlite.c,v 1.10.2.6.2.4 2008/12/31 11:17:42 sebastian Exp $");
+		" $Id: pdo_sqlite.c,v 1.10.2.6.2.2.2.1 2007/09/27 18:00:42 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite3_libversion());
 	php_info_print_table_end();
 }

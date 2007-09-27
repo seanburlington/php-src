@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.18.2.6.2.7 2008/12/31 11:17:48 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.18.2.6.2.5.2.1 2007/09/27 18:00:46 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -478,7 +478,7 @@ PHP_MINFO_FUNCTION(apache)
 	}
 }
 
-static zend_function_entry apache_functions[] = {
+static const zend_function_entry apache_functions[] = {
 	PHP_FE(apache_lookup_uri, NULL)
 	PHP_FE(virtual, NULL) 
 	PHP_FE(apache_request_headers, NULL)

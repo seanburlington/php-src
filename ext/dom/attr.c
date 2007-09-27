@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.18.2.2.2.6 2009/03/13 13:41:42 rrichards Exp $ */
+/* $Id: attr.c,v 1.18.2.2.2.2.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,17 +29,6 @@
 
 #include "php_dom.h"
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_attr_is_id, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_attr_construct, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-/* }}} */
 
 /*
 * class DOMAttr extends DOMNode 
@@ -48,9 +37,9 @@ ZEND_END_ARG_INFO();
 * Since: 
 */
 
-zend_function_entry php_dom_attr_class_functions[] = {
-	PHP_FALIAS(isId, dom_attr_is_id, arginfo_dom_attr_is_id)
-	PHP_ME(domattr, __construct, arginfo_dom_attr_construct, ZEND_ACC_PUBLIC)
+const zend_function_entry php_dom_attr_class_functions[] = {
+	PHP_FALIAS(isId, dom_attr_is_id, NULL)
+	PHP_ME(domattr, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -98,6 +87,7 @@ PHP_METHOD(domattr, __construct)
 
 /* }}} end DOMAttr::__construct */
 
+
 /* {{{ name	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-1112119403
@@ -122,6 +112,8 @@ int dom_attr_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
+
+
 /* {{{ specified	boolean	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-862529273
@@ -136,6 +128,8 @@ int dom_attr_specified_read(dom_object *obj, zval **retval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ value	string	
 readonly=no 
@@ -204,6 +198,8 @@ int dom_attr_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 /* }}} */
 
+
+
 /* {{{ ownerElement	DOMElement	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-ownerElement
@@ -221,13 +217,12 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
-	ALLOC_ZVAL(*retval);
-
 	nodeparent = nodep->parent;
 	if (!nodeparent) {
-		ZVAL_NULL(*retval);
-		return SUCCESS;
+		return FAILURE;
 	}
+
+	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING,  "Cannot create required DOM object");
@@ -238,6 +233,8 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ schemaTypeInfo	DOMTypeInfo	
 readonly=yes 
@@ -253,6 +250,8 @@ int dom_attr_schema_type_info_read(dom_object *obj, zval **retval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ proto boolean dom_attr_is_id();
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-isId

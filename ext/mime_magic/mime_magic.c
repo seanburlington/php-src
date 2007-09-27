@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.42.2.5.2.9 2008/12/31 11:17:39 sebastian Exp $ 
+  $Id: mime_magic.c,v 1.42.2.5.2.7.2.1 2007/09/27 18:00:41 dmitry Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -218,7 +218,7 @@ static PHP_GINIT_FUNCTION(mime_magic);
 static magic_server_config_rec mime_global;
 
 /* {{{ mime_magic_functions[] */
-zend_function_entry mime_magic_functions[] = {
+const zend_function_entry mime_magic_functions[] = {
 	PHP_FE(mime_content_type,	NULL)	   
 	{NULL, NULL, NULL}	
 };

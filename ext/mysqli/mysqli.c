@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.28 2009/02/17 10:40:18 johannes Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.1 2007/09/27 18:00:41 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -125,7 +125,8 @@ void php_clear_stmt_bind(MY_STMT *stmt)
 /* {{{ php_clear_mysql */
 void php_clear_mysql(MY_MYSQL *mysql) {
 	if (mysql->li_read) {
-		zval_ptr_dtor(&(mysql->li_read));
+		efree(Z_STRVAL_P(mysql->li_read));
+		FREE_ZVAL(mysql->li_read);
 		mysql->li_read = NULL;
 	}
 }
@@ -254,6 +255,13 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	}
 
 	if (ret == SUCCESS) {
+		if (strcmp(obj->zo.ce->name, "mysqli_driver") &&
+            (!obj->ptr || ((MYSQLI_RESOURCE *)(obj->ptr))->status < MYSQLI_STATUS_INITIALIZED)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", obj->zo.ce->name );
+			retval = EG(uninitialized_zval_ptr);
+			return(retval);
+		}
+
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */
@@ -408,7 +416,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry *class_
 /* {{{ mysqli_module_entry
  */
 /* Dependancies */
-static zend_module_dep mysqli_deps[] = {
+static const zend_module_dep mysqli_deps[] = {
 #if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	ZEND_MOD_REQUIRED("spl")
 #endif
@@ -486,12 +494,6 @@ PHP_MINIT_FUNCTION(mysqli)
 	zend_object_handlers *std_hnd = zend_get_std_object_handlers();
 	
 	REGISTER_INI_ENTRIES();
-
-#if MYSQL_VERSION_ID >= 40000
-	if (mysql_server_init(0, NULL, NULL)) {
-		return FAILURE;
-	}
-#endif
 
 	memcpy(&mysqli_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
 	mysqli_object_handlers.clone_obj = NULL;
@@ -630,15 +632,13 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_TYPE_BIT", FIELD_TYPE_BIT, CONST_CS | CONST_PERSISTENT);
 #endif
 
-	REGISTER_LONG_CONSTANT("MYSQLI_SET_CHARSET_NAME", MYSQL_SET_CHARSET_NAME, CONST_CS | CONST_PERSISTENT);
 
-#ifdef HAVE_LIBMYSQL_REPLICATION
+
 	/* replication */
 	REGISTER_LONG_CONSTANT("MYSQLI_RPL_MASTER", MYSQL_RPL_MASTER, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_RPL_SLAVE", MYSQL_RPL_SLAVE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_RPL_ADMIN", MYSQL_RPL_ADMIN, CONST_CS | CONST_PERSISTENT);
-#endif
-
+	
 	/* bind support */
 	REGISTER_LONG_CONSTANT("MYSQLI_NO_DATA", MYSQL_NO_DATA, CONST_CS | CONST_PERSISTENT);
 #ifdef MYSQL_DATA_TRUNCATED
@@ -652,6 +652,10 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_REPORT_ALL", MYSQLI_REPORT_ALL, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_REPORT_OFF", 0, CONST_CS | CONST_PERSISTENT);
 
+	if (mysql_server_init(0, NULL, NULL)) {
+		return FAILURE;
+	}
+
 	return SUCCESS;
 }
 /* }}} */
@@ -660,16 +664,14 @@ PHP_MINIT_FUNCTION(mysqli)
  */
 PHP_MSHUTDOWN_FUNCTION(mysqli)
 {
-#if MYSQL_VERSION_ID >= 40000
 #ifdef PHP_WIN32
 	unsigned long client_ver = mysql_get_client_version();
 	/* Can't call mysql_server_end() multiple times prior to 5.0.42 on Windows */
-	if ((client_ver >= 50046 && client_ver < 50100) || client_ver > 50122) {
+	if ((client_ver > 50042 && client_ver < 50100) || client_ver > 50122) {
 		mysql_server_end();
 	}
 #else
 	mysql_server_end();
-#endif
 #endif
 
 	zend_hash_destroy(&mysqli_driver_properties);
@@ -688,7 +690,7 @@ PHP_MSHUTDOWN_FUNCTION(mysqli)
  */
 PHP_RINIT_FUNCTION(mysqli)
 {
-#if defined(ZTS) && MYSQL_VERSION_ID >= 40000
+#ifdef ZTS
 	if (mysql_thread_init()) {
 		return FAILURE;
 	}
@@ -704,7 +706,7 @@ PHP_RINIT_FUNCTION(mysqli)
  */
 PHP_RSHUTDOWN_FUNCTION(mysqli)
 {
-#if defined(ZTS) && MYSQL_VERSION_ID >= 40000
+#ifdef ZTS
 	mysql_thread_end();
 #endif
 	if (MyG(error_msg)) {
@@ -1189,9 +1191,7 @@ void php_local_infile_end(void *ptr)
 		return;
 	}
 
-	if (mysql->li_stream) {
-		php_stream_close(mysql->li_stream);
-	}
+	php_stream_close(mysql->li_stream);
 	free(data);
 	return;	
 }

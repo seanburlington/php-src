@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.74.2.2.2.11 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: dbase.c,v 1.74.2.2.2.9.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -826,7 +826,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ dbase_functions[]
  */
-zend_function_entry dbase_functions[] = {
+const zend_function_entry dbase_functions[] = {
 	PHP_FE(dbase_open,								arginfo_dbase_open)
 	PHP_FE(dbase_create,							arginfo_dbase_create)
 	PHP_FE(dbase_close,								arginfo_dbase_close)

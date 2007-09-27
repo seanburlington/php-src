@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -105,7 +105,7 @@ ZEND_END_ARG_INFO()
 /* {{{ ctype_functions[]
  * Every user visible function must have an entry in ctype_functions[].
  */
-static zend_function_entry ctype_functions[] = {
+static const zend_function_entry ctype_functions[] = {
 	PHP_FE(ctype_alnum,	arginfo_ctype_alnum)
 	PHP_FE(ctype_alpha,	arginfo_ctype_alpha)
 	PHP_FE(ctype_cntrl,	arginfo_ctype_cntrl)

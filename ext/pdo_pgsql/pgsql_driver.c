@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.14.2.12 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.14.2.9.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -627,14 +627,14 @@ static PHP_METHOD(PDO, pgsqlLOBUnlink)
 /* }}} */
 
 
-static zend_function_entry dbh_methods[] = {
+static const zend_function_entry dbh_methods[] = {
 	PHP_ME(PDO, pgsqlLOBCreate, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, pgsqlLOBOpen, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, pgsqlLOBUnlink, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry *pdo_pgsql_get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
+static const zend_function_entry *pdo_pgsql_get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
 	switch (kind) {
 		case PDO_DBH_DRIVER_METHOD_KIND_DBH:
@@ -692,14 +692,14 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	}
 
 	/* support both full connection string & connection string + login and/or password */
-	if (dbh->username && dbh->password) {
+	if (!dbh->username || !dbh->password) {
+		spprintf(&conn_str, 0, "%s connect_timeout=%ld", (char *) dbh->data_source, connect_timeout);
+	} else if (dbh->username && dbh->password) {
 		spprintf(&conn_str, 0, "%s user=%s password=%s connect_timeout=%ld", dbh->data_source, dbh->username, dbh->password, connect_timeout);
 	} else if (dbh->username) {
 		spprintf(&conn_str, 0, "%s user=%s connect_timeout=%ld", dbh->data_source, dbh->username, connect_timeout);
-	} else if (dbh->password) {
-		spprintf(&conn_str, 0, "%s password=%s connect_timeout=%ld", dbh->data_source, dbh->password, connect_timeout);
 	} else {
-		spprintf(&conn_str, 0, "%s connect_timeout=%ld", (char *) dbh->data_source, connect_timeout);
+		spprintf(&conn_str, 0, "%s password=%s connect_timeout=%ld", dbh->data_source, dbh->password, connect_timeout);
 	}
 
 	H->server = PQconnectdb(conn_str);

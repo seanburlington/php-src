@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.37.2.1.2.5 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: recode.c,v 1.37.2.1.2.3.2.1 2007/09/27 18:00:43 dmitry Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -67,7 +67,7 @@ ZEND_DECLARE_MODULE_GLOBALS(recode);
 static PHP_GINIT_FUNCTION(recode);
 
 /* {{{ module stuff */
-static zend_function_entry php_recode_functions[] = {
+static const zend_function_entry php_recode_functions[] = {
 	PHP_FE(recode_string, NULL)
 	PHP_FE(recode_file, NULL)
 	PHP_FALIAS(recode, recode_string, NULL)
@@ -122,7 +122,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.37.2.1.2.5 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.37.2.1.2.3.2.1 $");
 	php_info_print_table_end();
 }
 

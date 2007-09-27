@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70.2.2.2.8 2009/03/19 23:10:44 iliaa Exp $ */
+/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -41,7 +41,7 @@
 
 /* {{{ sysvshm_functions[]
  */
-zend_function_entry sysvshm_functions[] = {
+const zend_function_entry sysvshm_functions[] = {
 	PHP_FE(shm_attach, NULL)
 	PHP_FE(shm_remove, NULL)
 	PHP_FE(shm_detach, NULL)
@@ -375,7 +375,7 @@ static int php_put_shm_data(sysvshm_chunk_head *ptr, long key, char *data, long 
 	long total_size;
 	long shm_varpos;
 
-	total_size = ((long) (len + sizeof(sysvshm_chunk) - 1) / sizeof(long)) * sizeof(long) + sizeof(long); /* long alligment */
+	total_size = ((long) (len + sizeof(sysvshm_chunk) - 1) / 4) * 4 + 4; /* 4-byte alligment */
 
 	if ((shm_varpos = php_check_shm_data(ptr, key)) > 0) {
 		php_remove_shm_data(ptr, shm_varpos);

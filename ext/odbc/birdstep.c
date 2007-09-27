@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.13.2.2.2.4 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: birdstep.c,v 1.13.2.2.2.2.2.1 2007/09/27 18:00:41 dmitry Exp $ */
 
 /*
  * TODO:
@@ -49,7 +49,7 @@
 #include "ext/standard/info.h"
 #include "php_ini.h"
 
-zend_function_entry birdstep_functions[] = {
+const zend_function_entry birdstep_functions[] = {
 	PHP_FE(birdstep_connect,        NULL)
 	PHP_FE(birdstep_close,          NULL)
 	PHP_FE(birdstep_exec,           NULL)

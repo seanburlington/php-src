@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -50,7 +50,7 @@ static
  *
  * Every user visible function must have an entry in ncurses_functions[].
  */
-zend_function_entry ncurses_functions[] = {
+const zend_function_entry ncurses_functions[] = {
 	PHP_FE(ncurses_addch,			NULL)
 #ifdef HAVE_NCURSES_COLOR_SET
 	PHP_FE(ncurses_color_set,		NULL)

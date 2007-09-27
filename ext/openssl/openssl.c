@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.1 2007/09/27 08:46:00 dmitry Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.2 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,7 +101,7 @@ PHP_FUNCTION(openssl_dh_compute_key);
 
 /* {{{ openssl_functions[]
  */
-zend_function_entry openssl_functions[] = {
+const zend_function_entry openssl_functions[] = {
 /* public/private key functions */
 	PHP_FE(openssl_pkey_free,			NULL)
 	PHP_FE(openssl_pkey_new,			NULL)

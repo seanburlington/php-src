@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.51.2.3.2.4 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: sysvsem.c,v 1.51.2.3.2.2.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -58,7 +58,7 @@ union semun {
 
 /* {{{ sysvsem_functions[]
  */
-zend_function_entry sysvsem_functions[] = {
+const zend_function_entry sysvsem_functions[] = {
 	PHP_FE(sem_get,			NULL)
 	PHP_FE(sem_acquire,		NULL)
 	PHP_FE(sem_release,		NULL)

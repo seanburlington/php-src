@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.20 2008/12/31 11:17:43 sebastian Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.1 2007/09/27 18:00:44 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -49,7 +49,7 @@ ZEND_DECLARE_MODULE_GLOBALS(spl)
 
 /* {{{ spl_functions_none
  */
-zend_function_entry spl_functions_none[] = {
+const zend_function_entry spl_functions_none[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -89,7 +89,7 @@ static zend_class_entry * spl_find_ce_by_name(char *name, int len, zend_bool aut
 	return *ce;
 }
 
-/* {{{ proto array class_parents(object instance [, boolean autoload = true])
+/* {{{ proto array class_parents(object instance)
  Return an array containing the names of all parent classes */
 PHP_FUNCTION(class_parents)
 {
@@ -690,7 +690,7 @@ ZEND_END_ARG_INFO();
 
 /* {{{ spl_functions
  */
-zend_function_entry spl_functions[] = {
+const zend_function_entry spl_functions[] = {
 	PHP_FE(spl_classes,             NULL)
 	PHP_FE(spl_autoload,            NULL)
 	PHP_FE(spl_autoload_extensions, NULL)
@@ -749,7 +749,7 @@ PHP_RSHUTDOWN_FUNCTION(spl) /* {{{ */
 } /* }}} */
 
 #ifdef HAVE_SIMPLEXML
-static zend_module_dep spl_deps[] = {
+static const zend_module_dep spl_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	ZEND_MOD_REQUIRED("simplexml")
 	{NULL, NULL, NULL}

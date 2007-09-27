@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,12 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xsl_fe.h,v 1.8.2.1.2.4 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: xsl_fe.h,v 1.8.2.1.2.1.2.1 2007/09/27 18:00:46 dmitry Exp $ */
 
 #ifndef XSL_FE_H
 #define XSL_FE_H
 
-extern zend_function_entry php_xsl_xsltprocessor_class_functions[];
+extern const zend_function_entry php_xsl_xsltprocessor_class_functions[];
 extern zend_class_entry *xsl_xsltprocessor_class_entry;
 
 PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet);
@@ -34,12 +34,3 @@ PHP_FUNCTION(xsl_xsltprocessor_remove_parameter);
 PHP_FUNCTION(xsl_xsltprocessor_has_exslt_support);
 PHP_FUNCTION(xsl_xsltprocessor_register_php_functions);
 #endif
-
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- * vim600: sw=4 ts=4 fdm=marker
- * vim<600: sw=4 ts=4
- */

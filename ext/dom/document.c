@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.13 2009/04/07 15:33:20 rrichards Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.5.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,182 +41,6 @@ struct _idsIterator {
 #define DOM_LOAD_STRING 0
 #define DOM_LOAD_FILE 1
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_element, 0, 0, 1)
-	ZEND_ARG_INFO(0, tagName)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_document_fragment, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_text_node, 0, 0, 1)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_comment, 0, 0, 1)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_cdatasection, 0, 0, 1)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_processing_instruction, 0, 0, 2)
-	ZEND_ARG_INFO(0, target)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_attribute, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_entity_reference, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_get_elements_by_tag_name, 0, 0, 1)
-	ZEND_ARG_INFO(0, tagName)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_import_node, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, importedNode, DOMNode, 0)
-	ZEND_ARG_INFO(0, deep)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_element_ns, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespaceURI)
-	ZEND_ARG_INFO(0, qualifiedName)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_create_attribute_ns, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespaceURI)
-	ZEND_ARG_INFO(0, qualifiedName)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_get_elements_by_tag_name_ns, 0, 0, 2)
-	ZEND_ARG_INFO(0, namespaceURI)
-	ZEND_ARG_INFO(0, localName)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_get_element_by_id, 0, 0, 1)
-	ZEND_ARG_INFO(0, elementId)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_adopt_node, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, source, DOMNode, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_normalize_document, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_rename_node, 0, 0, 3)
-	ZEND_ARG_OBJ_INFO(0, node, DOMNode, 0)
-	ZEND_ARG_INFO(0, namespaceURI)
-	ZEND_ARG_INFO(0, qualifiedName)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_load, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-	ZEND_ARG_INFO(0, options)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_save, 0, 0, 1)
-	ZEND_ARG_INFO(0, file)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_loadxml, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-	ZEND_ARG_INFO(0, options)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_savexml, 0, 0, 0)
-	ZEND_ARG_OBJ_INFO(0, node, DOMNode, 1)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_construct, 0, 0, 0)
-	ZEND_ARG_INFO(0, version)
-	ZEND_ARG_INFO(0, encoding)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_validate, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_xinclude, 0, 0, 0)
-	ZEND_ARG_INFO(0, options)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_loadhtml, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_loadhtmlfile, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_savehtml, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_savehtmlfile, 0, 0, 1)
-	ZEND_ARG_INFO(0, file)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_schema_validate_file, 0, 0, 1)
-	ZEND_ARG_INFO(0, filename)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_schema_validate_xml, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_relaxNG_validate_file, 0, 0, 1)
-	ZEND_ARG_INFO(0, filename)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_relaxNG_validate_xml, 0, 0, 1)
-	ZEND_ARG_INFO(0, source)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_registernodeclass, 0, 0, 2)
-	ZEND_ARG_INFO(0, baseClass)
-	ZEND_ARG_INFO(0, extendedClass)
-ZEND_END_ARG_INFO();
-/* }}} */
-
 /*
 * class DOMDocument extends DOMNode 
 *
@@ -224,44 +48,44 @@ ZEND_END_ARG_INFO();
 * Since: 
 */
 
-zend_function_entry php_dom_document_class_functions[] = {
-	PHP_FALIAS(createElement, dom_document_create_element, arginfo_dom_document_create_element)
-	PHP_FALIAS(createDocumentFragment, dom_document_create_document_fragment, arginfo_dom_document_create_document_fragment)
-	PHP_FALIAS(createTextNode, dom_document_create_text_node, arginfo_dom_document_create_text_node)
-	PHP_FALIAS(createComment, dom_document_create_comment, arginfo_dom_document_create_comment)
-	PHP_FALIAS(createCDATASection, dom_document_create_cdatasection, arginfo_dom_document_create_cdatasection)
-	PHP_FALIAS(createProcessingInstruction, dom_document_create_processing_instruction, arginfo_dom_document_create_processing_instruction)
-	PHP_FALIAS(createAttribute, dom_document_create_attribute, arginfo_dom_document_create_attribute)
-	PHP_FALIAS(createEntityReference, dom_document_create_entity_reference, arginfo_dom_document_create_entity_reference)
-	PHP_FALIAS(getElementsByTagName, dom_document_get_elements_by_tag_name, arginfo_dom_document_get_elements_by_tag_name)
-	PHP_FALIAS(importNode, dom_document_import_node, arginfo_dom_document_import_node)
-	PHP_FALIAS(createElementNS, dom_document_create_element_ns, arginfo_dom_document_create_element_ns)
-	PHP_FALIAS(createAttributeNS, dom_document_create_attribute_ns, arginfo_dom_document_create_attribute_ns)
-	PHP_FALIAS(getElementsByTagNameNS, dom_document_get_elements_by_tag_name_ns, arginfo_dom_document_get_elements_by_tag_name_ns)
-	PHP_FALIAS(getElementById, dom_document_get_element_by_id, arginfo_dom_document_get_element_by_id)
-	PHP_FALIAS(adoptNode, dom_document_adopt_node, arginfo_dom_document_adopt_node)
-	PHP_FALIAS(normalizeDocument, dom_document_normalize_document, arginfo_dom_document_normalize_document)
-	PHP_FALIAS(renameNode, dom_document_rename_node, arginfo_dom_document_rename_node)
-	PHP_ME(domdocument, load, arginfo_dom_document_load, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
-	PHP_FALIAS(save, dom_document_save, arginfo_dom_document_save)
-	PHP_ME(domdocument, loadXML, arginfo_dom_document_loadxml, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
-	PHP_FALIAS(saveXML, dom_document_savexml, arginfo_dom_document_savexml)
-	PHP_ME(domdocument, __construct, arginfo_dom_document_construct, ZEND_ACC_PUBLIC)
-	PHP_FALIAS(validate, dom_document_validate, arginfo_dom_document_validate)
-	PHP_FALIAS(xinclude, dom_document_xinclude, arginfo_dom_document_xinclude)
+const zend_function_entry php_dom_document_class_functions[] = {
+	PHP_FALIAS(createElement, dom_document_create_element, NULL)
+	PHP_FALIAS(createDocumentFragment, dom_document_create_document_fragment, NULL)
+	PHP_FALIAS(createTextNode, dom_document_create_text_node, NULL)
+	PHP_FALIAS(createComment, dom_document_create_comment, NULL)
+	PHP_FALIAS(createCDATASection, dom_document_create_cdatasection, NULL)
+	PHP_FALIAS(createProcessingInstruction, dom_document_create_processing_instruction, NULL)
+	PHP_FALIAS(createAttribute, dom_document_create_attribute, NULL)
+	PHP_FALIAS(createEntityReference, dom_document_create_entity_reference, NULL)
+	PHP_FALIAS(getElementsByTagName, dom_document_get_elements_by_tag_name, NULL)
+	PHP_FALIAS(importNode, dom_document_import_node, NULL)
+	PHP_FALIAS(createElementNS, dom_document_create_element_ns, NULL)
+	PHP_FALIAS(createAttributeNS, dom_document_create_attribute_ns, NULL)
+	PHP_FALIAS(getElementsByTagNameNS, dom_document_get_elements_by_tag_name_ns, NULL)
+	PHP_FALIAS(getElementById, dom_document_get_element_by_id, NULL)
+	PHP_FALIAS(adoptNode, dom_document_adopt_node, NULL)
+	PHP_FALIAS(normalizeDocument, dom_document_normalize_document, NULL)
+	PHP_FALIAS(renameNode, dom_document_rename_node, NULL)
+	PHP_ME(domdocument, load, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
+	PHP_FALIAS(save, dom_document_save, NULL)
+	PHP_ME(domdocument, loadXML, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
+	PHP_FALIAS(saveXML, dom_document_savexml, NULL)
+	PHP_ME(domdocument, __construct, NULL, ZEND_ACC_PUBLIC)
+	PHP_FALIAS(validate, dom_document_validate, NULL)
+	PHP_FALIAS(xinclude, dom_document_xinclude, NULL)
 #if defined(LIBXML_HTML_ENABLED)
-	PHP_ME(domdocument, loadHTML, arginfo_dom_document_loadhtml, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
-	PHP_ME(domdocument, loadHTMLFile, arginfo_dom_document_loadhtmlfile, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
-	PHP_FALIAS(saveHTML, dom_document_save_html, arginfo_dom_document_savehtml)
-	PHP_FALIAS(saveHTMLFile, dom_document_save_html_file, arginfo_dom_document_savehtmlfile)
+	PHP_ME(domdocument, loadHTML, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
+	PHP_ME(domdocument, loadHTMLFile, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
+	PHP_FALIAS(saveHTML, dom_document_save_html, NULL)
+	PHP_FALIAS(saveHTMLFile, dom_document_save_html_file, NULL)
 #endif  /* defined(LIBXML_HTML_ENABLED) */
 #if defined(LIBXML_SCHEMAS_ENABLED)
-	PHP_FALIAS(schemaValidate, dom_document_schema_validate_file, arginfo_dom_document_schema_validate_file)
-	PHP_FALIAS(schemaValidateSource, dom_document_schema_validate_xml, arginfo_dom_document_schema_validate_xml)
-	PHP_FALIAS(relaxNGValidate, dom_document_relaxNG_validate_file, arginfo_dom_document_relaxNG_validate_file)
-	PHP_FALIAS(relaxNGValidateSource, dom_document_relaxNG_validate_xml, arginfo_dom_document_relaxNG_validate_xml)
+	PHP_FALIAS(schemaValidate, dom_document_schema_validate_file, NULL)
+	PHP_FALIAS(schemaValidateSource, dom_document_schema_validate_xml, NULL)
+	PHP_FALIAS(relaxNGValidate, dom_document_relaxNG_validate_file, NULL)
+	PHP_FALIAS(relaxNGValidateSource, dom_document_relaxNG_validate_xml, NULL)
 #endif
-	PHP_ME(domdocument, registerNodeClass, arginfo_dom_document_registernodeclass, ZEND_ACC_PUBLIC)
+	PHP_ME(domdocument, registerNodeClass, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -283,14 +107,12 @@ int dom_document_doctype_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
-	ALLOC_ZVAL(*retval);
-
 	dtdptr = xmlGetIntSubset(docp);
 	if (!dtdptr) {
-		ZVAL_NULL(*retval);
-		return SUCCESS;
+		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
 	if (NULL == (*retval = php_dom_create_object((xmlNodePtr) dtdptr, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
@@ -300,6 +122,8 @@ int dom_document_doctype_read(dom_object *obj, zval **retval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ implementation	DOMImplementation	
 readonly=yes 
@@ -314,6 +138,8 @@ int dom_document_implementation_read(dom_object *obj, zval **retval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ documentElement	DOMElement	
 readonly=yes 
@@ -333,14 +159,12 @@ int dom_document_document_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
-	ALLOC_ZVAL(*retval);
-
 	root = xmlDocGetRootElement(docp);
 	if (!root) {
-		ZVAL_NULL(*retval);
-		return SUCCESS;
+		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
 	if (NULL == (*retval = php_dom_create_object(root, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
@@ -421,6 +245,8 @@ int dom_document_encoding_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 /* }}} */
 
+
+
 /* {{{ standalone	boolean	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-Document3-standalone
@@ -484,6 +310,8 @@ int dom_document_standalone_write(dom_object *obj, zval *newval TSRMLS_DC)
 }
 
 /* }}} */
+
+
 
 /* {{{ version	string	
 readonly=no
@@ -1245,9 +1073,6 @@ PHP_FUNCTION(dom_document_import_node)
 	if (nodep->doc == docp) {
 		retnodep = nodep;
 	} else {
-		if ((recursive == 0) && (nodep->type == XML_ELEMENT_NODE)) {
-			recursive = 2;
-		}
 		retnodep = xmlDocCopyNode(nodep, docp, recursive);
 		if (!retnodep) {
 			RETURN_FALSE;
@@ -1686,7 +1511,7 @@ static xmlDocPtr dom_document_parser(zval *id, int mode, char *source, int optio
 			EG(error_reporting) = old_error_reporting;
 		}
 		/* If loading from memory, set the base reference uri for the document */
-		if (ret && ret->URL == NULL && ctxt->directory != NULL) {
+		if (ret->URL == NULL && ctxt->directory != NULL) {
 			ret->URL = xmlStrdup(ctxt->directory);
 		}
 	} else {
@@ -1912,10 +1737,6 @@ static void php_dom_remove_xinclude_nodes(xmlNodePtr cur TSRMLS_DC) {
 
 			/* XML_XINCLUDE_END node will be a sibling of XML_XINCLUDE_START */
 			while(cur && cur->type != XML_XINCLUDE_END) {
-				/* remove xinclude processing nodes from recursive xincludes */
-				if (cur->type == XML_ELEMENT_NODE) {
-					   php_dom_remove_xinclude_nodes(cur->children TSRMLS_CC);
-				}
 				cur = cur->next;
 			}
 

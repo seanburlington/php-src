@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.18 2008/12/31 11:17:39 sebastian Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.15.2.1 2007/09/27 18:00:39 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -112,7 +112,7 @@ ZEND_END_ARG_INFO()
 /* }}} */
 
 /* {{{ extension definition structures */
-static zend_function_entry libxml_functions[] = {
+static const zend_function_entry libxml_functions[] = {
 	PHP_FE(libxml_set_streams_context, arginfo_libxml_set_streams_context)
 	PHP_FE(libxml_use_internal_errors, arginfo_libxml_use_internal_errors)
 	PHP_FE(libxml_get_last_error, arginfo_libxml_get_last_error)
@@ -141,6 +141,24 @@ zend_module_entry libxml_module_entry = {
 /* }}} */
 
 /* {{{ internal functions for interoperability */
+static int php_libxml_dec_node(php_libxml_node_ptr *nodeptr)
+{
+	int ret_refcount;
+
+	ret_refcount = --nodeptr->refcount;
+	if (ret_refcount == 0) {
+		if (nodeptr->node != NULL && nodeptr->node->type != XML_DOCUMENT_NODE) {
+			nodeptr->node->_private = NULL;
+		}
+		/* node is destroyed by another object. reset ret_refcount to 1 and node to NULL
+		so the php_libxml_node_ptr is detroyed when the object is destroyed */
+		nodeptr->refcount = 1;
+		nodeptr->node = NULL;
+	}
+
+	return ret_refcount;
+}
+
 static int php_libxml_clear_object(php_libxml_node_object *object TSRMLS_DC)
 {
 	if (object->properties) {
@@ -161,10 +179,7 @@ static int php_libxml_unregister_node(xmlNodePtr nodep TSRMLS_DC)
 		if (wrapper) {
 			php_libxml_clear_object(wrapper TSRMLS_CC);
 		} else {
-			if (nodeptr->node != NULL && nodeptr->node->type != XML_DOCUMENT_NODE) {
-				nodeptr->node->_private = NULL;
-			}
-			nodeptr->node = NULL;
+			php_libxml_dec_node(nodeptr);
 		}
 	}
 

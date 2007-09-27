@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domexception.c,v 1.11.2.1.2.3 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: domexception.c,v 1.11.2.1.2.1.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@
 
 extern zend_class_entry *dom_domexception_class_entry;
 
-zend_function_entry php_dom_domexception_class_functions[] = {
+const zend_function_entry php_dom_domexception_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 

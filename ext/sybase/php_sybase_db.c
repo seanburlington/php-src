@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.66.2.5.2.10 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: php_sybase_db.c,v 1.66.2.5.2.8.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -81,7 +81,7 @@ typedef struct {
 } sybase_result;
 
 
-zend_function_entry sybase_functions[] = {
+const zend_function_entry sybase_functions[] = {
 	PHP_FE(sybase_connect,			NULL)
 	PHP_FE(sybase_pconnect,			NULL)
 	PHP_FE(sybase_close,			NULL)

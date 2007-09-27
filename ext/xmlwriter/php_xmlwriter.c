@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.21 2009/05/11 12:35:00 iliaa Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.15.2.1 2007/09/27 18:00:46 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -168,12 +168,12 @@ static zend_object_value xmlwriter_object_new(zend_class_entry *class_type TSRML
 
 #define XMLW_NAME_CHK(__err) \
 	if (xmlValidateName((xmlChar *) name, 0) != 0) {	\
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", __err);	\
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, __err);	\
 		RETURN_FALSE;	\
 	}	\
 
 /* {{{ xmlwriter_functions */
-static zend_function_entry xmlwriter_functions[] = {
+static const zend_function_entry xmlwriter_functions[] = {
 	PHP_FE(xmlwriter_open_uri,			NULL)
 	PHP_FE(xmlwriter_open_memory,		NULL)
 #if LIBXML_VERSION >= 20605
@@ -230,7 +230,7 @@ static zend_function_entry xmlwriter_functions[] = {
 
 #ifdef ZEND_ENGINE_2
 /* {{{ xmlwriter_class_functions */
-static zend_function_entry xmlwriter_class_functions[] = {
+static const zend_function_entry xmlwriter_class_functions[] = {
 	PHP_ME_MAPPING(openUri,		xmlwriter_open_uri,		NULL, 0)
 	PHP_ME_MAPPING(openMemory,	xmlwriter_open_memory, 	NULL, 0)
 #if LIBXML_VERSION >= 20605
@@ -464,9 +464,6 @@ static void php_xmlwriter_end(INTERNAL_FUNCTION_PARAMETERS, xmlwriter_read_int_t
 	
 	if (this) {
 		XMLWRITER_FROM_OBJECT(intern, this);
-		if (ZEND_NUM_ARGS()) {
-			WRONG_PARAM_COUNT;
-		}
 	} else 
 #endif
 	{
@@ -1451,7 +1448,6 @@ static PHP_FUNCTION(xmlwriter_open_uri)
 
 	valid_file = _xmlwriter_get_valid_file_path(source, resolved_path, MAXPATHLEN TSRMLS_CC);
 	if (!valid_file) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to resolve file path");
 		RETURN_FALSE;
 	}
 
@@ -1484,9 +1480,6 @@ static PHP_FUNCTION(xmlwriter_open_uri)
 	intern->uri_output = out_buffer;
 #else
 	if (this) {
-		if (ze_obj->xmlwriter_ptr) {
-			xmlwriter_free_resource_ptr(ze_obj->xmlwriter_ptr TSRMLS_CC);
-		}
 		ze_obj->xmlwriter_ptr = intern;
 		RETURN_TRUE;
 	} else
@@ -1537,9 +1530,6 @@ static PHP_FUNCTION(xmlwriter_open_memory)
 	intern->uri_output = NULL;
 #else
 	if (this) {
-		if (ze_obj->xmlwriter_ptr) {
-			xmlwriter_free_resource_ptr(ze_obj->xmlwriter_ptr TSRMLS_CC);
-		}
 		ze_obj->xmlwriter_ptr = intern;
 		RETURN_TRUE;
 	} else

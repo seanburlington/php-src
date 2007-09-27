@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.3.2.7 2008/12/31 11:17:39 sebastian Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.5.2.1 2007/09/27 18:00:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 #include "php_globals.h"
 #include "ext/standard/info.h"
 
-zend_function_entry mhash_functions[] = {
+const zend_function_entry mhash_functions[] = {
 	PHP_FE(mhash_get_block_size, NULL)
 	PHP_FE(mhash_get_hash_name, NULL)
 	PHP_FE(mhash_keygen_s2k, NULL)

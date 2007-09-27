@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.114.2.3.2.8 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: php_fbsql.c,v 1.114.2.3.2.6.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 /* TODO:
  *
@@ -543,7 +543,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ fbsql_functions[]
  */
-zend_function_entry fbsql_functions[] = {
+const zend_function_entry fbsql_functions[] = {
 	PHP_FE(fbsql_connect,			arginfo_fbsql_connect)
 	PHP_FE(fbsql_pconnect,			arginfo_fbsql_pconnect)
 	PHP_FE(fbsql_close,				arginfo_fbsql_close)

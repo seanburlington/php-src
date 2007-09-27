@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.12.2.15 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.12.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -186,7 +186,7 @@ int dom_set_doc_classmap(php_libxml_ref_obj *document, zend_class_entry *basece,
 		if (ce) {
 			return zend_hash_update(doc_props->classmap, basece->name, basece->name_length + 1, &ce, sizeof(ce), NULL);
 		} else {
-			zend_hash_del(doc_props->classmap, basece->name, basece->name_length + 1);
+			return zend_hash_del(doc_props->classmap, basece->name, basece->name_length + 1);
 		}
 	}
 	return SUCCESS;
@@ -512,7 +512,7 @@ zend_object_value dom_objects_ze1_clone_obj(zval *zobject TSRMLS_DC)
 	return zobject->value.obj;
 }
 
-static zend_function_entry dom_functions[] = {
+static const zend_function_entry dom_functions[] = {
 	PHP_FE(dom_import_simplexml, NULL)
 	{NULL, NULL, NULL}
 };
@@ -525,7 +525,7 @@ static zend_object_handlers* dom_get_obj_handlers(TSRMLS_D) {
 	}
 }
 
-static zend_module_dep dom_deps[] = {
+static const zend_module_dep dom_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	ZEND_MOD_CONFLICTS("domxml")
 	{NULL, NULL, NULL}

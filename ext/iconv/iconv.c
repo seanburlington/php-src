@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20.2.1 2007/09/27 09:18:50 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.20.2.2 2007/09/27 18:00:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -141,7 +141,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ iconv_functions[]
  */
-zend_function_entry iconv_functions[] = {
+const zend_function_entry iconv_functions[] = {
 	PHP_RAW_NAMED_FE(iconv,php_if_iconv,				arginfo_iconv)
 	PHP_FE(ob_iconv_handler,						arginfo_ob_iconv_handler)
 	PHP_FE(iconv_get_encoding,						arginfo_iconv_get_encoding)

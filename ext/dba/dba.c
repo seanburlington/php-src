@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.111.2.4.2.8 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: dba.c,v 1.111.2.4.2.5.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -144,7 +144,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ dba_functions[]
  */
-zend_function_entry dba_functions[] = {
+const zend_function_entry dba_functions[] = {
 	PHP_FE(dba_open, arginfo_dba_open)
 	PHP_FE(dba_popen, arginfo_dba_popen)
 	PHP_FE(dba_close, arginfo_dba_close)
@@ -360,7 +360,7 @@ static dba_handler handler[] = {
 	DBA_HND(db3, DBA_LOCK_ALL) /* No lock in lib */
 #endif
 #if DBA_DB4
-	DBA_HND(db4, DBA_LOCK_ALL) /* No lock in lib */
+	DBA_HND(db4, DBA_LOCK_EXT) /* Locking done in library itself */
 #endif
 #if DBA_INIFILE
 	DBA_HND(inifile, DBA_STREAM_OPEN|DBA_LOCK_ALL|DBA_CAST_AS_FD) /* No lock in lib */

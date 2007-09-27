@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.17.2.13 2009/05/02 15:58:39 iliaa Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.9.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,11 +102,7 @@ PHP_FUNCTION(pdo_drivers)
 {
 	HashPosition pos;
 	pdo_driver_t **pdriver;
-
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
-	}
-
+	
 	array_init(return_value);
 
 	zend_hash_internal_pointer_reset_ex(&pdo_driver_hash, &pos);
@@ -118,7 +114,7 @@ PHP_FUNCTION(pdo_drivers)
 /* }}} */
 
 /* {{{ pdo_functions[] */
-zend_function_entry pdo_functions[] = {
+const zend_function_entry pdo_functions[] = {
 	PHP_FE(pdo_drivers,             NULL)
 	{NULL, NULL, NULL}
 };
@@ -126,7 +122,7 @@ zend_function_entry pdo_functions[] = {
 
 /* {{{ pdo_functions[] */
 #if ZEND_MODULE_API_NO >= 20050922
-static zend_module_dep pdo_deps[] = {
+static const zend_module_dep pdo_deps[] = {
 #ifdef HAVE_SPL
 	ZEND_MOD_REQUIRED("spl")
 #endif

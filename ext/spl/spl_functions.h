@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.h,v 1.19.2.3.2.4 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: spl_functions.h,v 1.19.2.3.2.2.2.1 2007/09/27 18:00:44 dmitry Exp $ */
 
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
@@ -57,13 +57,13 @@ typedef zend_object_value (*create_object_func_t)(zend_class_entry *class_type T
 
 void spl_destroy_class(zend_class_entry ** ppce);
 
-void spl_register_std_class(zend_class_entry ** ppce, char * class_name, create_object_func_t ctor, zend_function_entry * function_list TSRMLS_DC);
-void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, create_object_func_t ctor, zend_function_entry * function_list TSRMLS_DC);
+void spl_register_std_class(zend_class_entry ** ppce, char * class_name, create_object_func_t ctor, const zend_function_entry * function_list TSRMLS_DC);
+void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, create_object_func_t ctor, const zend_function_entry * function_list TSRMLS_DC);
 
-void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_function_entry *functions TSRMLS_DC);
+void spl_register_interface(zend_class_entry ** ppce, char * class_name, const zend_function_entry *functions TSRMLS_DC);
 
 void spl_register_parent_ce(zend_class_entry * class_entry, zend_class_entry * parent_class TSRMLS_DC);
-void spl_register_functions(zend_class_entry * class_entry, zend_function_entry * function_list TSRMLS_DC);
+void spl_register_functions(zend_class_entry * class_entry, const zend_function_entry * function_list TSRMLS_DC);
 void spl_register_property( zend_class_entry * class_entry, char *prop_name, int prop_name_len, int prop_flags TSRMLS_DC);
 
 /* sub: whether to allow subclasses/interfaces

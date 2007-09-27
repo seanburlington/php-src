@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.7 2008/12/31 11:17:41 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.4.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -44,7 +44,7 @@
 ZEND_DECLARE_MODULE_GLOBALS(pcntl)
 static PHP_GINIT_FUNCTION(pcntl);
 
-zend_function_entry pcntl_functions[] = {
+const zend_function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_fork,			NULL)
 	PHP_FE(pcntl_waitpid,		second_arg_force_ref)
 	PHP_FE(pcntl_wait,		first_arg_force_ref)
@@ -225,7 +225,7 @@ PHP_FUNCTION(pcntl_fork)
 
 	id = fork();
 	if (id == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error %d", errno);
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Error %d", errno);
 	}
 	
 	RETURN_LONG((long) id);

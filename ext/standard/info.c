@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.19 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -57,7 +57,6 @@ ZEND_EXTERN_MODULE_GLOBALS(iconv)
 						} \
 
 PHPAPI extern char *php_ini_opened_path;
-PHPAPI extern char *php_ini_scanned_path;
 PHPAPI extern char *php_ini_scanned_files;
 	
 static int php_info_write_wrapper(const char *str, uint str_length)
@@ -278,7 +277,7 @@ PHPAPI char *php_get_uname(char mode)
 				php_uname = tmp_uname;
 				break;
 			case PROCESSOR_ARCHITECTURE_MIPS :
-				snprintf(tmp_uname, sizeof(tmp_uname), "MIPS R%d000", SysInfo.wProcessorLevel);
+				php_uname = "MIPS R4000";
 				php_uname = tmp_uname;
 				break;
 			case PROCESSOR_ARCHITECTURE_ALPHA :
@@ -327,30 +326,6 @@ PHPAPI char *php_get_uname(char mode)
 	if (uname((struct utsname *)&buf) == -1) {
 		php_uname = PHP_UNAME;
 	} else {
-#ifdef NETWARE
-		if (mode == 's') {
-			php_uname = buf.sysname;
-		} else if (mode == 'r') {
-			snprintf(tmp_uname, sizeof(tmp_uname), "%d.%d.%d", 
-					 buf.netware_major, buf.netware_minor, buf.netware_revision);
-			php_uname = tmp_uname;
-		} else if (mode == 'n') {
-			php_uname = buf.servername;
-		} else if (mode == 'v') {
-			snprintf(tmp_uname, sizeof(tmp_uname), "libc-%d.%d.%d #%d",
-					 buf.libmajor, buf.libminor, buf.librevision, buf.libthreshold);
-			php_uname = tmp_uname;
-		} else if (mode == 'm') {
-			php_uname = buf.machine;
-		} else { /* assume mode == 'a' */
-			snprintf(tmp_uname, sizeof(tmp_uname), "%s %s %d.%d.%d libc-%d.%d.%d #%d %s",
-					 buf.sysname, buf.servername,
-					 buf.netware_major, buf.netware_minor, buf.netware_revision,
-					 buf.libmajor, buf.libminor, buf.librevision, buf.libthreshold,
-					 buf.machine);
-			php_uname = tmp_uname;
-		}
-#else
 		if (mode == 's') {
 			php_uname = buf.sysname;
 		} else if (mode == 'r') {
@@ -367,7 +342,6 @@ PHPAPI char *php_get_uname(char mode)
 					 buf.machine);
 			php_uname = tmp_uname;
 		}
-#endif /* NETWARE */
 	}
 #else
 	php_uname = PHP_UNAME;
@@ -502,9 +476,14 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 
 		php_info_print_table_row(2, "Configuration File (php.ini) Path", PHP_CONFIG_FILE_PATH);
 		php_info_print_table_row(2, "Loaded Configuration File", php_ini_opened_path ? php_ini_opened_path : "(none)");
-		php_info_print_table_row(2, "Scan this dir for additional .ini files", php_ini_scanned_path ? php_ini_scanned_path : "(none)");
-		php_info_print_table_row(2, "additional .ini files parsed", php_ini_scanned_files ? php_ini_scanned_files : "(none)");
 
+		if (strlen(PHP_CONFIG_FILE_SCAN_DIR)) {
+			php_info_print_table_row(2, "Scan this dir for additional .ini files", PHP_CONFIG_FILE_SCAN_DIR);
+			if (php_ini_scanned_files) {
+				php_info_print_table_row(2, "additional .ini files parsed", php_ini_scanned_files);
+			}
+		}
+		
 		snprintf(temp_api, sizeof(temp_api), "%d", PHP_API_VERSION);
 		php_info_print_table_row(2, "PHP API", temp_api);
 
@@ -1041,7 +1020,7 @@ PHP_FUNCTION(phpversion)
 	if (argc == 0) {
 		RETURN_STRING(PHP_VERSION, 1);
 	} else if (argc == 1 && zend_get_parameters_ex(1, &arg) == SUCCESS) {
-		char *version;
+		const char *version;
 		convert_to_string_ex(arg);
 		version = zend_get_module_version(Z_STRVAL_PP(arg));
 		if (version == NULL) {

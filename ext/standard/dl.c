@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.106.2.1.2.7 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: dl.c,v 1.106.2.1.2.5.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -197,7 +197,7 @@ void php_dl(zval *file, int type, zval *return_value, int start_now TSRMLS_DC)
 				  unsigned int zend_api;
 			};
 
-			char *name;
+			const char *name;
 			int zend_api;
 			unsigned char zend_debug, zts;
 

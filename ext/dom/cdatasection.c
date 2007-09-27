@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cdatasection.c,v 1.11.2.1.2.5 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: cdatasection.c,v 1.11.2.1.2.1.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,13 +28,6 @@
 #include "php_dom.h"
 
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_cdatasection_construct, 0, 0, 1)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-/* }}} */
-
 /*
 * class DOMCdataSection extends DOMText 
 *
@@ -42,8 +35,8 @@ ZEND_END_ARG_INFO();
 * Since: 
 */
 
-zend_function_entry php_dom_cdatasection_class_functions[] = {
-	PHP_ME(domcdatasection, __construct, arginfo_dom_cdatasection_construct, ZEND_ACC_PUBLIC)
+const zend_function_entry php_dom_cdatasection_class_functions[] = {
+	PHP_ME(domcdatasection, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -73,7 +66,7 @@ PHP_METHOD(domcdatasection, __construct)
 
 	intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 	if (intern != NULL) {
-		oldnode = dom_object_get_node(intern);
+		oldnode = (xmlNodePtr)intern->ptr;
 		if (oldnode != NULL) {
 			php_libxml_node_free_resource(oldnode  TSRMLS_CC);
 		}

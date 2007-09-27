@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.27 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.20.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 /*  ToDos
  *
@@ -132,7 +132,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ exif_functions[]
  */
-zend_function_entry exif_functions[] = {
+const zend_function_entry exif_functions[] = {
 	PHP_FE(exif_read_data, arginfo_exif_read_data)
 	PHP_FALIAS(read_exif_data, exif_read_data, arginfo_exif_read_data)
 	PHP_FE(exif_tagname, arginfo_exif_tagname)
@@ -142,7 +142,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.27 2008/12/31 11:17:37 sebastian Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.1 2007/09/27 18:00:38 dmitry Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -241,21 +241,12 @@ PHP_MSHUTDOWN_FUNCTION(exif)
 }
 /* }}} */
 
-/* {{{ exif dependencies */
-static zend_module_dep exif_module_deps[] = {
-	ZEND_MOD_REQUIRED("standard")
-#if EXIF_USE_MBSTRING
-	ZEND_MOD_REQUIRED("mbstring")
-#endif
-	{NULL, NULL, NULL}
-};
-/* }}} */
-
 /* {{{ exif_module_entry
  */
 zend_module_entry exif_module_entry = {
-	STANDARD_MODULE_HEADER_EX, NULL,
-	exif_module_deps,
+#if ZEND_MODULE_API_NO >= 20010901
+	STANDARD_MODULE_HEADER,
+#endif
 	"exif",
 	exif_functions,
 	PHP_MINIT(exif), 
@@ -2862,9 +2853,11 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 		/* If its bigger than 4 bytes, the dir entry contains an offset. */
 		value_ptr = offset_base+offset_val;
 		if (offset_val+byte_count > IFDlength || value_ptr < dir_entry) {
-			/* It is important to check for IMAGE_FILETYPE_TIFF
-			 * JPEG does not use absolute pointers instead its pointers are
-			 * relative to the start of the TIFF header in APP1 section. */
+			/*
+			// It is important to check for IMAGE_FILETYPE_TIFF
+			// JPEG does not use absolute pointers instead its pointers are relative to the start
+			// of the TIFF header in APP1 section.
+			*/
 			if (offset_val+byte_count>ImageInfo->FileSize || (ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_II && ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_MM && ImageInfo->FileType!=IMAGE_FILETYPE_JPEG)) {
 				if (value_ptr < dir_entry) {
 					/* we can read this if offset_val > 0 */
@@ -2875,18 +2868,20 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 					/* exception are IFD pointers */
 					exif_error_docref("exif_read_data#error_ifd" EXIFERR_CC, ImageInfo, E_WARNING, "Process tag(x%04X=%s): Illegal pointer offset(x%04X + x%04X = x%04X > x%04X)", tag, exif_get_tagname(tag, tagname, -12, tag_table TSRMLS_CC), offset_val, byte_count, offset_val+byte_count, IFDlength);
 				}
-				return FALSE;
+				return TRUE;
 			}
 			if (byte_count>sizeof(cbuf)) {
 				/* mark as outside range and get buffer */
 				value_ptr = safe_emalloc(byte_count, 1, 0);
 				outside = value_ptr;
 			} else {
-				/* In most cases we only access a small range so
-				 * it is faster to use a static buffer there
-				 * BUT it offers also the possibility to have
-				 * pointers read without the need to free them
-				 * explicitley before returning. */
+				/*
+				// in most cases we only access a small range so
+				// it is faster to use a static buffer there
+				// BUT it offers also the possibility to have
+				// pointers read without the need to free them
+				// explicitley before returning.
+				*/
 				memset(&cbuf, 0, sizeof(cbuf));
 				value_ptr = cbuf;
 			}

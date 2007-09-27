@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.46 2008/12/31 11:17:43 sebastian Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.1 2007/09/27 18:00:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -422,12 +422,19 @@ static void change_node_zval(xmlNodePtr node, zval *value TSRMLS_DC)
 			convert_to_string(value);
 			/* break missing intentionally */
 		case IS_STRING:
-			buffer = xmlEncodeEntitiesReentrant(node->doc, (xmlChar *)Z_STRVAL_P(value));
-			buffer_len = xmlStrlen(buffer);
+			if (node->type == XML_ATTRIBUTE_NODE) {
+				buffer = xmlEncodeEntitiesReentrant(node->doc, (xmlChar *)Z_STRVAL_P(value));
+				buffer_len = xmlStrlen(buffer);
+			} else {
+				buffer = (xmlChar *)Z_STRVAL_P(value);
+				buffer_len = Z_STRLEN_P(value);
+			}
 			/* check for NULL buffer in case of memory error in xmlEncodeEntitiesReentrant */
 			if (buffer) {
 				xmlNodeSetContentLen(node, buffer, buffer_len);
-				xmlFree(buffer);
+				if (node->type == XML_ATTRIBUTE_NODE) {
+					xmlFree(buffer);
+				}
 			}
 			if (value == &value_copy) {
 				zval_dtor(value);
@@ -695,12 +702,11 @@ static zval** sxe_property_get_adr(zval *object, zval *member TSRMLS_DC) /* {{{ 
 	convert_to_string(member);
 	name = Z_STRVAL_P(member);
 	node = sxe_get_element_by_name(sxe, node, &name, &type TSRMLS_CC);
-	if (node) {
-		return NULL;
+	if (!node) {
+		sxe_prop_dim_write(object, member, NULL, 1, 0, &node TSRMLS_CC);
+		type = SXE_ITER_NONE;
+		name = NULL;
 	}
-	sxe_prop_dim_write(object, member, NULL, 1, 0, &node TSRMLS_CC);
-	type = SXE_ITER_NONE;
-	name = NULL;
 	MAKE_STD_ZVAL(return_value);
 	_node_as_zval(sxe, node, return_value, type, name, sxe->iter.nsprefix, sxe->iter.isprefix TSRMLS_CC);
 
@@ -800,7 +806,7 @@ static int sxe_prop_dim_exists(zval *object, zval *member, int check_empty, zend
 				while (node) {
 					xmlNodePtr nnext;
 					nnext = node->next;
-					if ((node->type == XML_ELEMENT_NODE) && !xmlStrcmp(node->name, (xmlChar *)Z_STRVAL_P(member))) {
+					if (!xmlStrcmp(node->name, (xmlChar *)Z_STRVAL_P(member))) {
 						break;
 					}
 					node = nnext;
@@ -1101,13 +1107,9 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 				SKIP_TEXT(node);
 			} else {
 				if (node->type == XML_TEXT_NODE) {
-					const xmlChar *cur = node->content;
-					
-					if (*cur != 0) {
-						MAKE_STD_ZVAL(value);
-						ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
-						zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
-					}
+					MAKE_STD_ZVAL(value);
+					ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
+					zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
 					goto next_iter;
 				}
 			}
@@ -1233,7 +1235,7 @@ SXE_METHOD(xpath)
 			if (nodeptr->type == XML_TEXT_NODE) {
 				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_NONE, NULL, NULL, 0 TSRMLS_CC);
 			} else if (nodeptr->type == XML_ATTRIBUTE_NODE) {
-				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_ATTRLIST, (char*)nodeptr->name, nodeptr->ns ? (xmlChar *)nodeptr->ns->href : NULL, 0 TSRMLS_CC);
+				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_ATTRLIST, (char*)nodeptr->name, NULL, 0 TSRMLS_CC);
 			} else {
 				_node_as_zval(sxe, nodeptr, value, SXE_ITER_NONE, NULL, NULL, 0 TSRMLS_CC);
 			}
@@ -1327,7 +1329,7 @@ SXE_METHOD(asXML)
 
 	if (node) {
 		if (node->parent && (XML_DOCUMENT_NODE == node->parent->type)) {
-			xmlDocDumpMemoryEnc((xmlDocPtr) sxe->document->ptr, &strval, &strval_len, ((xmlDocPtr) sxe->document->ptr)->encoding);
+			xmlDocDumpMemory((xmlDocPtr) sxe->document->ptr, &strval, &strval_len);
 			RETVAL_STRINGL((char *)strval, strval_len, 1);
 			xmlFree(strval);
 		} else {
@@ -1633,13 +1635,6 @@ SXE_METHOD(addAttribute)
 
 	localname = xmlSplitQName2((xmlChar *)qname, &prefix);
 	if (localname == NULL) {
-		if (nsuri_len > 0) {
-			if (prefix != NULL) {
-				xmlFree(prefix);
-			}
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute requires prefix for namespace");
-			return;
-		}
 		localname = xmlStrdup((xmlChar *)qname);
 	}
 
@@ -1736,11 +1731,6 @@ static int sxe_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 				contents = xmlNodeListGetString((xmlDocPtr) sxe->document->ptr, sxe->node->node->children, 1);
 			}
 		}
-	}
-
-	if (readobj == writeobj) {
-		INIT_PZVAL(writeobj);
-		zval_dtor(readobj);
 	}
 
 	rv = cast_object(writeobj, type, (char *)contents TSRMLS_CC);
@@ -2353,14 +2343,14 @@ PHP_FUNCTION(simplexml_import_dom)
 }
 /* }}} */
 
-zend_function_entry simplexml_functions[] = {
+const zend_function_entry simplexml_functions[] = {
 	PHP_FE(simplexml_load_file, NULL)
 	PHP_FE(simplexml_load_string, NULL)
 	PHP_FE(simplexml_import_dom, NULL)
 	{NULL, NULL, NULL}
 };
 
-static zend_module_dep simplexml_deps[] = {
+static const zend_module_dep simplexml_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	{NULL, NULL, NULL}
 };
@@ -2385,7 +2375,7 @@ ZEND_GET_MODULE(simplexml)
 
 /* the method table */
 /* each method can have its own parameters and visibility */
-static zend_function_entry sxe_functions[] = {
+static const zend_function_entry sxe_functions[] = {
 	SXE_ME(__construct,            NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL) /* must be called */
 	SXE_ME(asXML,                  NULL, ZEND_ACC_PUBLIC)
 	SXE_MALIAS(saveXML, asXML,	   NULL, ZEND_ACC_PUBLIC)
@@ -2450,7 +2440,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.46 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.1 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

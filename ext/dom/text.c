@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.23.2.1.2.9 2008/12/31 11:17:37 sebastian Exp $ */
+/* $Id: text.c,v 1.23.2.1.2.4.2.1 2007/09/27 18:00:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,27 +28,6 @@
 #include "php_dom.h"
 #include "dom_ce.h"
 
-/* {{{ arginfo */
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_text_split_text, 0, 0, 1)
-	ZEND_ARG_INFO(0, offset)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_text_is_whitespace_in_element_content, 0, 0, 0)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_text_replace_whole_text, 0, 0, 1)
-	ZEND_ARG_INFO(0, content)
-ZEND_END_ARG_INFO();
-
-static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_text_construct, 0, 0, 0)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO();
-/* }}} */
-
 /*
 * class DOMText extends DOMCharacterData 
 *
@@ -56,12 +35,12 @@ ZEND_END_ARG_INFO();
 * Since: 
 */
 
-zend_function_entry php_dom_text_class_functions[] = {
-	PHP_FALIAS(splitText, dom_text_split_text, arginfo_dom_text_split_text)
-	PHP_FALIAS(isWhitespaceInElementContent, dom_text_is_whitespace_in_element_content, arginfo_dom_text_is_whitespace_in_element_content)
-	PHP_FALIAS(isElementContentWhitespace, dom_text_is_whitespace_in_element_content, arginfo_dom_text_is_whitespace_in_element_content)
-	PHP_FALIAS(replaceWholeText, dom_text_replace_whole_text, arginfo_dom_text_replace_whole_text)
-	PHP_ME(domtext, __construct, arginfo_dom_text_construct, ZEND_ACC_PUBLIC)
+const zend_function_entry php_dom_text_class_functions[] = {
+	PHP_FALIAS(splitText, dom_text_split_text, NULL)
+	PHP_FALIAS(isWhitespaceInElementContent, dom_text_is_whitespace_in_element_content, NULL)
+	PHP_FALIAS(isElementContentWhitespace, dom_text_is_whitespace_in_element_content, NULL)
+	PHP_FALIAS(replaceWholeText, dom_text_replace_whole_text, NULL)
+	PHP_ME(domtext, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -91,7 +70,7 @@ PHP_METHOD(domtext, __construct)
 
 	intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 	if (intern != NULL) {
-		oldnode = dom_object_get_node(intern);
+		oldnode = (xmlNodePtr)intern->ptr;
 		if (oldnode != NULL) {
 			php_libxml_node_free_resource(oldnode  TSRMLS_CC);
 		}
@@ -172,19 +151,19 @@ PHP_FUNCTION(dom_text_split_text)
 	if (cur == NULL) {
 		RETURN_FALSE;
 	}
-	length = xmlUTF8Strlen(cur);
+	length = xmlStrlen(cur);
 
 	if (offset > length || offset < 0) {
 		xmlFree(cur);
 		RETURN_FALSE;
 	}
 
-	first = xmlUTF8Strndup(cur, offset);
-	second = xmlUTF8Strsub(cur, offset, length - offset);
+	first = xmlStrndup(cur, offset);
+	second = xmlStrdup(cur + offset);
 	
 	xmlFree(cur);
 
-	xmlNodeSetContent(node, first);
+	xmlNodeSetContentLen(node, first, offset);
 	nnode = xmlNewDocText(node->doc, second);
 	
 	xmlFree(first);

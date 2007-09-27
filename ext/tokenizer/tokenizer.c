@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.5.2.9 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.1 2007/09/27 18:00:45 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -97,7 +97,7 @@ struct yy_buffer_state
  *
  * Every user visible function must have an entry in tokenizer_functions[].
  */
-zend_function_entry tokenizer_functions[] = {
+const zend_function_entry tokenizer_functions[] = {
 	PHP_FE(token_get_all,	NULL)
 	PHP_FE(token_name,	NULL)
 	{NULL, NULL, NULL}	/* Must be the last line in tokenizer_functions[] */

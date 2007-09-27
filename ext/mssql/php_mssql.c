@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.12 2009/02/23 21:21:23 kalle Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.4.2.1 2007/09/27 18:00:41 dmitry Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -47,7 +47,7 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 
 static void _mssql_bind_hash_dtor(void *data);
 
-zend_function_entry mssql_functions[] = {
+const zend_function_entry mssql_functions[] = {
 	PHP_FE(mssql_connect,				NULL)
 	PHP_FE(mssql_pconnect,				NULL)
 	PHP_FE(mssql_close,					NULL)
@@ -345,7 +345,9 @@ PHP_RINIT_FUNCTION(mssql)
 	MS_SQL_G(min_error_severity) = MS_SQL_G(cfg_min_error_severity);
 	MS_SQL_G(min_message_severity) = MS_SQL_G(cfg_min_message_severity);
 	if (MS_SQL_G(connect_timeout) < 1) MS_SQL_G(connect_timeout) = 1;
+	dbsetlogintime(MS_SQL_G(connect_timeout));
 	if (MS_SQL_G(timeout) < 0) MS_SQL_G(timeout) = 60;
+	dbsettime(MS_SQL_G(timeout));
 	if (MS_SQL_G(max_procs) != -1) {
 		dbsetmaxprocs((TDS_SHORT)MS_SQL_G(max_procs));
 	}
@@ -465,9 +467,6 @@ static void php_mssql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Out of memory");
 		RETURN_FALSE;
 	}
-
-	dbsetlogintime(MS_SQL_G(connect_timeout));
-	dbsettime(MS_SQL_G(timeout));
 
 	/* set a DBLOGIN record */	
 	if ((mssql.login = dblogin()) == NULL) {
@@ -876,15 +875,11 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			unsigned char *res_buf;
 			int res_length = dbdatlen(mssql_ptr->link, offset);
 
-			if (!res_length) {
-				ZVAL_NULL(result);
-			} else {
-				bin = ((DBBINARY *)dbdata(mssql_ptr->link, offset));
-				res_buf = (unsigned char *) emalloc(res_length+1);
-				memcpy(res_buf,bin,res_length);
-				res_buf[res_length] = '\0';
-				ZVAL_STRINGL(result, res_buf, res_length, 0);
-			}
+			res_buf = (unsigned char *) emalloc(res_length+1);
+			bin = ((DBBINARY *)dbdata(mssql_ptr->link, offset));
+			memcpy(res_buf,bin,res_length);
+			res_buf[res_length] = '\0';
+			ZVAL_STRINGL(result, res_buf, res_length, 0);
 			}
 			break;
 		case SQLNUMERIC:
@@ -938,7 +933,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 	}
 }
 
-static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr, int offset,zval *result, int column_type TSRMLS_DC)
+static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int offset,zval *result, int column_type TSRMLS_DC)
 {
 	if (dbdatlen(mssql_ptr->link,offset) == 0) {
 		ZVAL_NULL(result);
@@ -2158,12 +2153,11 @@ PHP_FUNCTION(mssql_execute)
 	int num_fields;
 	int batchsize;
 	int ac = ZEND_NUM_ARGS();
-	int exec_retval;
 
 	batchsize = MS_SQL_G(batchsize);
 	if (ac < 1 || ac > 2 || zend_get_parameters_ex(ac, &stmt, &skip)==FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
+        WRONG_PARAM_COUNT;
+    }
 	if (ac == 2) {
 		skip_results = Z_BVAL_PP(skip);
 	}
@@ -2171,15 +2165,10 @@ PHP_FUNCTION(mssql_execute)
 	ZEND_FETCH_RESOURCE(statement, mssql_statement *, stmt, -1, "MS SQL-Statement", le_statement);
 
 	mssql_ptr=statement->link;
-	exec_retval = dbrpcexec(mssql_ptr->link);
 
-	if (exec_retval == FAIL || dbsqlok(mssql_ptr->link) == FAIL) {
+	if (dbrpcexec(mssql_ptr->link)==FAIL || dbsqlok(mssql_ptr->link)==FAIL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "stored procedure execution failed");
-
-		if (exec_retval == FAIL) {
-			dbcancel(mssql_ptr->link);
-		}
-
+		dbcancel(mssql_ptr->link);
 		RETURN_FALSE;
 	}
 

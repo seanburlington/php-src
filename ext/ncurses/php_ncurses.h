@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -36,7 +36,7 @@ extern int le_ncurses_panels;
 extern zend_module_entry ncurses_module_entry;
 #define phpext_ncurses_ptr &ncurses_module_entry
 
-extern zend_function_entry ncurses_functions[];
+extern const zend_function_entry ncurses_functions[];
 #include "php_ncurses_fe.h"
 
 #ifdef PHP_WIN32

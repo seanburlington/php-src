@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.28 2009/05/02 15:58:39 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.1 2007/09/27 18:00:42 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -669,17 +669,8 @@ static PHP_METHOD(PDO, rollBack)
 
 static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_DC) /* {{{ */
 {
-
-#define PDO_LONG_PARAM_CHECK \
-	if (Z_TYPE_P(value) != IS_LONG && Z_TYPE_P(value) != IS_STRING && Z_TYPE_P(value) != IS_BOOL) { \
-		pdo_raise_impl_error(dbh, NULL, "HY000", "attribute value must be an integer" TSRMLS_CC); \
-		PDO_HANDLE_DBH_ERR(); \
-		return FAILURE; \
-	} \
-
 	switch (attr) {
 		case PDO_ATTR_ERRMODE:
-			PDO_LONG_PARAM_CHECK;
 			convert_to_long(value);
 			switch (Z_LVAL_P(value)) {
 				case PDO_ERRMODE_SILENT:
@@ -695,7 +686,6 @@ static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_D
 			return FAILURE;
 
 		case PDO_ATTR_CASE:
-			PDO_LONG_PARAM_CHECK;
 			convert_to_long(value);
 			switch (Z_LVAL_P(value)) {
 				case PDO_CASE_NATURAL:
@@ -711,7 +701,6 @@ static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_D
 			return FAILURE;
 
 		case PDO_ATTR_ORACLE_NULLS:
-			PDO_LONG_PARAM_CHECK;
 			convert_to_long(value);
 			dbh->oracle_nulls = Z_LVAL_P(value);
 			return SUCCESS;
@@ -725,8 +714,6 @@ static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_D
 						return FAILURE;
 					}
 				}
-			} else {
-				PDO_LONG_PARAM_CHECK;
 			}
 			convert_to_long(value);
 			if (Z_LVAL_P(value) == PDO_FETCH_USE_DEFAULT) {
@@ -737,7 +724,6 @@ static int pdo_dbh_attribute_set(pdo_dbh_t *dbh, long attr, zval *value TSRMLS_D
 			return SUCCESS;
 
 		case PDO_ATTR_STRINGIFY_FETCHES:
-			PDO_LONG_PARAM_CHECK;
 			convert_to_long(value);
 			dbh->stringify = Z_LVAL_P(value) ? 1 : 0;
 			return SUCCESS;
@@ -829,9 +815,9 @@ static PHP_METHOD(PDO, setAttribute)
 {
 	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	long attr;
-	zval *value;
+	zval *value = NULL;
 
-	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz", &attr, &value)) {
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz!", &attr, &value)) {
 		RETURN_FALSE;
 	}
 
@@ -992,7 +978,7 @@ static PHP_METHOD(PDO, errorInfo)
 	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+		RETURN_FALSE;
 	}
 	PDO_CONSTRUCT_CHECK;
 
@@ -1127,17 +1113,13 @@ static PHP_METHOD(PDO, __sleep)
 }
 /* }}} */
 
-/* {{{ proto array PDO::getAvailableDrivers()
+/* {{{ proto array pdo_drivers()
    Return array of available PDO drivers */
 static PHP_METHOD(PDO, getAvailableDrivers)
 {
 	HashPosition pos;
 	pdo_driver_t **pdriver;
-
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
-	}
-
+	
 	array_init(return_value);
 
 	zend_hash_internal_pointer_reset_ex(&pdo_driver_hash, &pos);
@@ -1178,7 +1160,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_pdo_quote, 0, 0, 1)
 ZEND_END_ARG_INFO()
 /* }}} */
 
-zend_function_entry pdo_dbh_functions[] = {
+const zend_function_entry pdo_dbh_functions[] = {
 	ZEND_MALIAS(PDO, __construct, dbh_constructor,	arginfo_pdo___construct,	ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, prepare, 				arginfo_pdo_prepare,		ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, beginTransaction,		NULL,			ZEND_ACC_PUBLIC)
@@ -1201,7 +1183,7 @@ zend_function_entry pdo_dbh_functions[] = {
 /* {{{ overloaded object handlers for PDO class */
 int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
-	zend_function_entry *funcs;
+	const zend_function_entry *funcs;
 	zend_function func;
 	zend_internal_function *ifunc = (zend_internal_function*)&func;
 	int namelen;
@@ -1210,7 +1192,8 @@ int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 	if (!dbh || !dbh->methods || !dbh->methods->get_driver_methods) {
 		return 0;
 	}
-	funcs =	dbh->methods->get_driver_methods(dbh, kind TSRMLS_CC);
+	funcs =	dbh->methods->get_driver_methods(dbh,
+			PDO_DBH_DRIVER_METHOD_KIND_DBH TSRMLS_CC);
 	if (!funcs) {
 		return 0;
 	}
@@ -1223,11 +1206,11 @@ int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 	while (funcs->fname) {
 		ifunc->type = ZEND_INTERNAL_FUNCTION;
 		ifunc->handler = funcs->handler;
-		ifunc->function_name = funcs->fname;
+		ifunc->function_name = (char*)funcs->fname;
 		ifunc->scope = dbh->ce;
 		ifunc->prototype = NULL;
 		if (funcs->arg_info) {
-			ifunc->arg_info = funcs->arg_info + 1;
+			ifunc->arg_info = (zend_arg_info*)funcs->arg_info + 1;
 			ifunc->num_args = funcs->num_args;
 			if (funcs->arg_info[0].required_num_args == -1) {
 				ifunc->required_num_args = funcs->num_args;
@@ -1277,7 +1260,7 @@ static union _zend_function *dbh_method_get(
 	lc_method_name = emalloc(method_len + 1);
 	zend_str_tolower_copy(lc_method_name, method_name, method_len);
 
-	if ((fbc = std_object_handlers.get_method(object_pp, lc_method_name, method_len TSRMLS_CC)) == NULL) {
+	if (zend_hash_find(&dbh->ce->function_table, lc_method_name, method_len+1, (void**)&fbc) == FAILURE) {
 		/* not a pre-defined method, nor a user-defined method; check
 		 * the driver specific methods */
 		if (!dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH]) {
@@ -1290,13 +1273,12 @@ static union _zend_function *dbh_method_get(
 
 		if (zend_hash_find(dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH],
 				lc_method_name, method_len+1, (void**)&fbc) == FAILURE) {
-			if (!fbc) {
-				fbc = NULL;
-			}
+			fbc = NULL;
+			goto out;
 		}
 		/* got it */
 	}
-
+	
 out:
 	efree(lc_method_name);
 	return fbc;

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.11 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.4.2.1 2007/09/27 13:15:40 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -300,21 +300,19 @@ connect_errexit:
 
 /* {{{ php_fopen_do_pasv
  */
-static unsigned short php_fopen_do_pasv(php_stream *stream, char *ip, size_t ip_size, char **phoststart TSRMLS_DC)
+static unsigned short php_fopen_do_pasv(php_stream *stream, char *ip, int ip_size, char **phoststart TSRMLS_DC)
 {
 	char tmp_line[512];
 	int result, i;
 	unsigned short portno;
 	char *tpath, *ttpath, *hoststart=NULL;
 
-#ifdef HAVE_IPV6
 	/* We try EPSV first, needed for IPv6 and works on some IPv4 servers */
 	php_stream_write_string(stream, "EPSV\r\n");
 	result = GET_FTP_RESULT(stream);
 
 	/* check if we got a 229 response */
 	if (result != 229) {
-#endif
 		/* EPSV failed, let's try PASV */
 		php_stream_write_string(stream, "PASV\r\n");
 		result = GET_FTP_RESULT(stream);
@@ -359,8 +357,6 @@ static unsigned short php_fopen_do_pasv(php_stream *stream, char *ip, size_t ip_
 		tpath++;
 		/* pull out the LSB of the port */
 		portno += (unsigned short) strtoul(tpath, &ttpath, 10);
-
-#ifdef HAVE_IPV6
 	} else {
 		/* parse epsv command (|||6446|) */
 		for (i = 0, tpath = tmp_line + 4; *tpath; tpath++) {
@@ -376,8 +372,7 @@ static unsigned short php_fopen_do_pasv(php_stream *stream, char *ip, size_t ip_
 		/* pull out the port */
 		portno = (unsigned short) strtoul(tpath + 1, &ttpath, 10);
 	}
-#endif
-
+	
 	if (ttpath == NULL) {
 		/* didn't get correct response from EPSV/PASV */
 		return 0;
@@ -417,7 +412,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	}
 	if (strpbrk(mode, "wa+")) {
 		if (read_write) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "FTP does not support simultaneous read/write connections");
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "FTP does not support simultaneous read/write connections.");
 			return NULL;
 		}
 		if (strchr(mode, 'a')) {
@@ -428,7 +423,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	}
 	if (!read_write) {
 		/* No mode specified? */
-		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unknown file open mode");
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unknown file open mode.");
 		return NULL;
 	}
 
@@ -491,7 +486,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 					goto errexit;
 				}
 			} else {
-				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Remote file already exists and overwrite context option not specified");
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Remote file already exists and overwrite context option not specified.");
 				errno = EEXIST;
 				goto errexit;
 			}
@@ -774,14 +769,6 @@ static int php_stream_ftp_url_stat(php_stream_wrapper *wrapper, char *url, int f
 		ssb->sb.st_mode |= S_IFREG;
 	} else {
 		ssb->sb.st_mode |= S_IFDIR;
-	}
-
-	php_stream_write_string(stream, "TYPE I\r\n"); /* we need this since some servers refuse to accept SIZE command in ASCII mode */
-
-	result = GET_FTP_RESULT(stream);
-
-	if(result < 200 || result > 299) {
-		goto stat_errexit;
 	}
 
 	php_stream_printf(stream TSRMLS_CC, "SIZE %s\r\n", (resource->path != NULL ? resource->path : "/"));

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.283 2007/09/11 11:16:46 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.284 2007/09/27 09:14:56 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2018,7 +2018,7 @@ ZEND_METHOD(reflection_parameter, getClass)
 {
 	reflection_object *intern;
 	parameter_reference *param;
-	zend_class_entry **pce;
+	zend_class_entry **pce, *ce;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_parameter_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(param);
@@ -2038,7 +2038,7 @@ ZEND_METHOD(reflection_parameter, getClass)
 		 * lint-mode.
 		 */
 		if (ZEND_U_EQUAL(ZEND_STR_TYPE, param->arg_info->class_name, param->arg_info->class_name_len, "self", sizeof("self")- 1)) {
-			zend_class_entry *ce= param->fptr->common.scope;
+			ce = param->fptr->common.scope;
 			if (!ce) {
 			   zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 				   "Parameter uses 'self' as type hint but function is not a class member!");
@@ -2046,7 +2046,7 @@ ZEND_METHOD(reflection_parameter, getClass)
 			}
 			pce= &ce;
 		} else if (ZEND_U_EQUAL(ZEND_STR_TYPE, param->arg_info->class_name,  param->arg_info->class_name_len, "parent", sizeof("parent")- 1)) {
-			zend_class_entry *ce= param->fptr->common.scope;
+			ce = param->fptr->common.scope;
 			if (!ce) {
 			   zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 				   "Parameter uses 'parent' as type hint but function is not a class member!");
@@ -5022,7 +5022,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.283 2007/09/11 11:16:46 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.284 2007/09/27 09:14:56 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

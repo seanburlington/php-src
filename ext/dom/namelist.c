@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.10 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: namelist.c,v 1.11 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 * Since: DOM Level 3
 */
 
-zend_function_entry php_dom_namelist_class_functions[] = {
+const zend_function_entry php_dom_namelist_class_functions[] = {
 	PHP_FALIAS(getName, dom_namelist_get_name, NULL)
 	PHP_FALIAS(getNamespaceURI, dom_namelist_get_namespace_uri, NULL)
 	{NULL, NULL, NULL}

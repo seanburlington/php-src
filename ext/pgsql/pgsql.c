@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.372 2007/09/05 13:03:33 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.373 2007/09/27 18:28:41 dmitry Exp $ */
 
 #include <stdlib.h>
 
@@ -91,7 +91,7 @@ static PHP_GINIT_FUNCTION(pgsql);
 
 /* {{{ pgsql_functions[]
  */
-zend_function_entry pgsql_functions[] = {
+const zend_function_entry pgsql_functions[] = {
 	/* connection functions */
 	PHP_FE(pg_connect,		NULL)
 	PHP_FE(pg_pconnect,		NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.17 2007/01/20 16:19:20 helly Exp $ */
+/* $Id: spl_observer.c,v 1.18 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -48,7 +48,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_SplObserver_update, 0)
 	ZEND_ARG_OBJ_INFO(0, SplSubject, SplSubject, 0)
 ZEND_END_ARG_INFO();
 
-static zend_function_entry spl_funcs_SplObserver[] = {
+static const zend_function_entry spl_funcs_SplObserver[] = {
 	SPL_ABSTRACT_ME(SplObserver, update,   arginfo_SplObserver_update)
 	{NULL, NULL, NULL}
 };
@@ -63,7 +63,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_SplSubject_notify, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, ignore, SplObserver, 1)
 ZEND_END_ARG_INFO();*/
 
-static zend_function_entry spl_funcs_SplSubject[] = {
+static const zend_function_entry spl_funcs_SplSubject[] = {
 	SPL_ABSTRACT_ME(SplSubject,  attach,   arginfo_SplSubject_attach)
 	SPL_ABSTRACT_ME(SplSubject,  detach,   arginfo_SplSubject_attach)
 	SPL_ABSTRACT_ME(SplSubject,  notify,   NULL)
@@ -451,7 +451,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_Serialized, 0)
 	ZEND_ARG_INFO(0, serialized)
 ZEND_END_ARG_INFO();
 
-static zend_function_entry spl_funcs_SplObjectStorage[] = {
+static const zend_function_entry spl_funcs_SplObjectStorage[] = {
 	SPL_ME(SplObjectStorage,  attach,      arginfo_Object,        0)
 	SPL_ME(SplObjectStorage,  detach,      arginfo_Object,        0)
 	SPL_ME(SplObjectStorage,  contains,    arginfo_Object,        0)

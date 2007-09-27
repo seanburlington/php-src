@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.29 2007/09/01 17:17:05 jan Exp $ */
+/* $Id: json.c,v 1.30 2007/09/27 18:28:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,7 +36,7 @@ static const char digits[] = "0123456789abcdef";
  *
  * Every user visible function must have an entry in json_functions[].
  */
-function_entry json_functions[] = {
+const function_entry json_functions[] = {
 	PHP_FE(json_encode, NULL)
 	PHP_FE(json_decode, NULL)
 	{NULL, NULL, NULL}  /* Must be the last line in json_functions[] */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.29 2007/01/03 18:52:23 tony2001 Exp $ */
+/* $Id: php_functions.c,v 1.30 2007/09/27 18:28:43 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -478,7 +478,7 @@ PHP_MINFO_FUNCTION(apache)
 	}
 }
 
-static zend_function_entry apache_functions[] = {
+static const zend_function_entry apache_functions[] = {
 	PHP_FE(apache_lookup_uri, NULL)
 	PHP_FE(virtual, NULL) 
 	PHP_FE(apache_request_headers, NULL)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.33 2007/05/28 23:00:25 iliaa Exp $ */
+/* $Id: bz2.c,v 1.34 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ ZEND_END_ARG_INFO()
 
 /* }}} */
 
-static zend_function_entry bz2_functions[] = {
+static const zend_function_entry bz2_functions[] = {
 	PHP_FE(bzopen,       arginfo_bzopen)
 	PHP_FE(bzread,       arginfo_bzread)
 	PHP_FALIAS(bzwrite,   fwrite,		NULL)

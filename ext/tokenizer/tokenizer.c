@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.43 2007/07/31 23:23:37 johannes Exp $ */
+/* $Id: tokenizer.c,v 1.44 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -97,7 +97,7 @@ struct yy_buffer_state
  *
  * Every user visible function must have an entry in tokenizer_functions[].
  */
-zend_function_entry tokenizer_functions[] = {
+const zend_function_entry tokenizer_functions[] = {
 	PHP_FE(token_get_all,	NULL)
 	PHP_FE(token_name,	NULL)
 	{NULL, NULL, NULL}	/* Must be the last line in tokenizer_functions[] */

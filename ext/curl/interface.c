@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.116 2007/08/21 21:23:35 pollita Exp $ */
+/* $Id: interface.c,v 1.117 2007/09/27 18:28:38 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -289,7 +289,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ curl_functions[]
  */
-zend_function_entry curl_functions[] = {
+const zend_function_entry curl_functions[] = {
 	PHP_FE(curl_init,                arginfo_curl_init)
 	PHP_FE(curl_copy_handle,         arginfo_curl_copy_handle)
 	PHP_FE(curl_version,             arginfo_curl_version)

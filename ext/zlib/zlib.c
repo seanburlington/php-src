@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.215 2007/04/18 19:39:12 mike Exp $ */
+/* $Id: zlib.c,v 1.216 2007/09/27 18:28:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #	include "config.h"
@@ -608,7 +608,7 @@ ZEND_GET_MODULE(php_zlib)
 #endif
 
 /* {{{ php_zlib_functions[] */
-zend_function_entry php_zlib_functions[] = {
+const zend_function_entry php_zlib_functions[] = {
 	PHP_FE(readgzfile,						NULL)
 	PHP_FALIAS(gzrewind,	rewind,			NULL)
 	PHP_FALIAS(gzclose,		fclose,			NULL)

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.175 2007/07/17 09:09:03 jani Exp $ */
+/* $Id: ldap.c,v 1.176 2007/09/27 18:28:39 dmitry Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -100,7 +100,7 @@ static int le_link, le_result, le_result_entry;
 */
 /* {{{ ldap_functions[]
  */
-zend_function_entry ldap_functions[] = {
+const zend_function_entry ldap_functions[] = {
 	PHP_FE(ldap_connect,								NULL)
 	PHP_FALIAS(ldap_close,		ldap_unbind,			NULL)
 	PHP_FE(ldap_bind,									NULL)
@@ -322,7 +322,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.175 2007/07/17 09:09:03 jani Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.176 2007/09/27 18:28:39 dmitry Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

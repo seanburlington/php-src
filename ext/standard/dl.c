@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.119 2007/09/19 01:08:38 johannes Exp $ */
+/* $Id: dl.c,v 1.120 2007/09/27 18:28:42 dmitry Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -191,7 +191,7 @@ void php_dl(zval *file, int type, zval *return_value, int start_now TSRMLS_DC)
 				  unsigned int zend_api;
 			};
 
-			char *name;
+			const char *name;
 			int zend_api;
 			unsigned char zend_debug, zts;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.123 2007/02/24 16:25:53 helly Exp $ */
+/* $Id: php_fbsql.c,v 1.124 2007/09/27 18:28:39 dmitry Exp $ */
 
 /* TODO:
  *
@@ -543,7 +543,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ fbsql_functions[]
  */
-zend_function_entry fbsql_functions[] = {
+const zend_function_entry fbsql_functions[] = {
 	PHP_FE(fbsql_connect,			arginfo_fbsql_connect)
 	PHP_FE(fbsql_pconnect,			arginfo_fbsql_pconnect)
 	PHP_FE(fbsql_close,				arginfo_fbsql_close)

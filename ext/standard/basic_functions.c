@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.872 2007/09/06 13:27:31 derick Exp $ */
+/* $Id: basic_functions.c,v 1.873 2007/09/27 18:28:42 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3089,7 +3089,7 @@ ZEND_END_ARG_INFO()
 /* }}} */
 /* }}} */
 
-zend_function_entry basic_functions[] = { /* {{{ */
+const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(constant,														arginfo_constant)
 	PHP_FE(bin2hex,															arginfo_bin2hex)
 	PHP_FE(sleep,															arginfo_sleep)
@@ -3774,7 +3774,7 @@ zend_function_entry basic_functions[] = { /* {{{ */
 };
 /* }}} */
 
-static zend_module_dep standard_deps[] = { /* {{{ */
+static const zend_module_dep standard_deps[] = { /* {{{ */
 	ZEND_MOD_OPTIONAL("session")
 	{NULL, NULL, NULL}
 };

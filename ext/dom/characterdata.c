@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.22 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: characterdata.c,v 1.23 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_characterdata_class_functions[] = {
+const zend_function_entry php_dom_characterdata_class_functions[] = {
 	PHP_FALIAS(substringData, dom_characterdata_substring_data, NULL)
 	PHP_FALIAS(appendData, dom_characterdata_append_data, NULL)
 	PHP_FALIAS(insertData, dom_characterdata_insert_data, NULL)

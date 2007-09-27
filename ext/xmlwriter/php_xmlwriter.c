@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.48 2007/05/14 09:22:44 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.49 2007/09/27 18:28:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -173,7 +173,7 @@ static zend_object_value xmlwriter_object_new(zend_class_entry *class_type TSRML
 	}	\
 
 /* {{{ xmlwriter_functions */
-static zend_function_entry xmlwriter_functions[] = {
+static const zend_function_entry xmlwriter_functions[] = {
 	PHP_FE(xmlwriter_open_uri,			NULL)
 	PHP_FE(xmlwriter_open_memory,		NULL)
 #if LIBXML_VERSION >= 20605
@@ -234,7 +234,7 @@ static zend_function_entry xmlwriter_functions[] = {
 #define PHP_ME_MAPPING(name, func_name, arg_types, flags) ZEND_ME_MAPPING(name, func_name, arg_types)
 #endif
 /* {{{ xmlwriter_class_functions */
-static zend_function_entry xmlwriter_class_functions[] = {
+static const zend_function_entry xmlwriter_class_functions[] = {
 	PHP_ME_MAPPING(openUri,		xmlwriter_open_uri,		NULL, 0)
 	PHP_ME_MAPPING(openMemory,	xmlwriter_open_memory, 	NULL, 0)
 #if LIBXML_VERSION >= 20605

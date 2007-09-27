@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.380 2007/09/11 21:10:51 pajoye Exp $ */
+/* $Id: gd.c,v 1.381 2007/09/27 18:28:39 dmitry Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -936,7 +936,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ gd_functions[]
  */
-zend_function_entry gd_functions[] = {
+const zend_function_entry gd_functions[] = {
 	PHP_FE(gd_info,                                 arginfo_gd_info)
 	PHP_FE(imagearc,								arginfo_imagearc)
 	PHP_FE(imageellipse,							arginfo_imageellipse)

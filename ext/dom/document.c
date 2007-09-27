@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.86 2007/06/29 13:58:34 dmitry Exp $ */
+/* $Id: document.c,v 1.87 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,7 +50,7 @@ struct _idsIterator {
 * Since: 
 */
 
-zend_function_entry php_dom_document_class_functions[] = {
+const zend_function_entry php_dom_document_class_functions[] = {
 	PHP_FALIAS(createElement, dom_document_create_element, NULL)
 	PHP_FALIAS(createDocumentFragment, dom_document_create_document_fragment, NULL)
 	PHP_FALIAS(createTextNode, dom_document_create_text_node, NULL)

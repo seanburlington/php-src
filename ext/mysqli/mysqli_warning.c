@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_warning.c,v 1.13 2007/07/24 16:13:26 andrey Exp $ 
+  $Id: mysqli_warning.c,v 1.14 2007/09/27 18:28:40 dmitry Exp $ 
 */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -313,7 +313,7 @@ PHP_METHOD(mysqli_warning, __construct)
 /* }}} */
 
 /* {{{ mysqli_warning_methods */
-zend_function_entry mysqli_warning_methods[] = {
+const zend_function_entry mysqli_warning_methods[] = {
 	PHP_ME(mysqli_warning, __construct,		NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(mysqli_warning, next, 			NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

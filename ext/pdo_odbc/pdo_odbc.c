@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.17 2005/11/25 15:44:40 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.18 2007/09/27 18:28:41 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,14 +31,14 @@
 #include "php_pdo_odbc_int.h"
 
 /* {{{ pdo_odbc_functions[] */
-function_entry pdo_odbc_functions[] = {
+const function_entry pdo_odbc_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
 /* {{{ pdo_odbc_deps[] */
 #if ZEND_MODULE_API_NO >= 20050922
-static zend_module_dep pdo_odbc_deps[] = {
+static const zend_module_dep pdo_odbc_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
 };

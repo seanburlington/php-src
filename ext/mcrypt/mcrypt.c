@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.106 2007/07/19 14:25:37 tony2001 Exp $ */
+/* $Id: mcrypt.c,v 1.107 2007/09/27 18:28:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@ typedef struct _php_mcrypt {
 	zend_bool init;
 } php_mcrypt;
 
-zend_function_entry mcrypt_functions[] = { /* {{{ */
+const zend_function_entry mcrypt_functions[] = { /* {{{ */
 	PHP_FE(mcrypt_ecb, NULL)
 	PHP_FE(mcrypt_cbc, NULL)
 	PHP_FE(mcrypt_cfb, NULL)

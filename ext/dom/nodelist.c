@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.24 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: nodelist.c,v 1.25 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_nodelist_class_functions[] = {
+const zend_function_entry php_dom_nodelist_class_functions[] = {
 	PHP_FALIAS(item, dom_nodelist_item, NULL)
 	{NULL, NULL, NULL}
 };

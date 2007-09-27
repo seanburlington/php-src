@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.37 2007/08/24 21:27:38 pollita Exp $ */
+/* $Id: hash.c,v 1.38 2007/09/27 18:28:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -856,7 +856,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ hash_functions[]
  */
-zend_function_entry hash_functions[] = {
+const zend_function_entry hash_functions[] = {
 	PHP_HASH_FE(hash)
 	PHP_HASH_FE(hash_file)
 

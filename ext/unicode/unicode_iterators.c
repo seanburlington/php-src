@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.45 2007/01/01 09:29:33 sebastian Exp $ */
+/* $Id: unicode_iterators.c,v 1.46 2007/09/27 18:28:42 dmitry Exp $ */
 
 /*
  * TODO
@@ -1364,7 +1364,7 @@ PHP_METHOD(TextIterator, getAll)
 /* }}} */
 
 /* {{{ TextIterator function entry table */
-static zend_function_entry text_iterator_funcs[] = {
+static const zend_function_entry text_iterator_funcs[] = {
 
 	PHP_ME(TextIterator, __construct, NULL, ZEND_ACC_PUBLIC)
 

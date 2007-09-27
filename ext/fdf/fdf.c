@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.102 2007/01/03 04:05:36 iliaa Exp $ */
+/* $Id: fdf.c,v 1.103 2007/09/27 18:28:39 dmitry Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -276,7 +276,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ fdf_functions[]
  */
-zend_function_entry fdf_functions[] = {
+const zend_function_entry fdf_functions[] = {
 	PHP_FE(fdf_add_template,						arginfo_fdf_add_template)
 	PHP_FE(fdf_close,								arginfo_fdf_close)
 	PHP_FE(fdf_create,								arginfo_fdf_create)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.235 2007/02/28 10:46:16 bjori Exp $ */
+/* $Id: interbase.c,v 1.236 2007/09/27 18:28:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,7 +47,7 @@ ZEND_DECLARE_MODULE_GLOBALS(ibase)
 static PHP_GINIT_FUNCTION(ibase);
 
 /* {{{ extension definition structures */
-zend_function_entry ibase_functions[] = {
+const zend_function_entry ibase_functions[] = {
 	PHP_FE(ibase_connect, NULL)
 	PHP_FE(ibase_pconnect, NULL)
 	PHP_FE(ibase_close, NULL)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.113 2007/07/09 13:41:45 jani Exp $ */
+/* $Id: snmp.c,v 1.114 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -114,7 +114,7 @@ static oid objid_mib[] = {1, 3, 6, 1, 2, 1};
 
 /* {{{ snmp_functions[]
  */
-zend_function_entry snmp_functions[] = {
+const zend_function_entry snmp_functions[] = {
 	PHP_FE(snmpget, NULL)
 	PHP_FE(snmpgetnext, NULL)
 	PHP_FE(snmpwalk, NULL)

@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.44 2007/07/12 15:07:32 tony2001 Exp $ */ 
+/* $Id: unicode.c,v 1.45 2007/09/27 18:28:42 dmitry Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -299,7 +299,7 @@ PHP_FUNCTION(unicode_restore_error_handler)
 /* }}} */
 
 /* {{{ unicode_functions[] */
-zend_function_entry unicode_functions[] = {
+const zend_function_entry unicode_functions[] = {
 	PHP_FE(locale_get_default, NULL)
 	PHP_FE(locale_set_default, NULL)
 	PHP_FE(unicode_decode, NULL)

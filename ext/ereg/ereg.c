@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.89 2007/07/15 19:50:06 jani Exp $ */
+/* $Id: ereg.c,v 1.90 2007/09/27 18:28:39 dmitry Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -76,7 +76,7 @@ ZEND_END_ARG_INFO()
 /* }}} */
 
 /* {{{ Function table */
-zend_function_entry ereg_functions[] = {
+const zend_function_entry ereg_functions[] = {
 	PHP_FE(ereg,						arginfo_ereg)  
 	PHP_FE(ereg_replace,				arginfo_ereg_replace)
 	PHP_FE(eregi,						arginfo_eregi)

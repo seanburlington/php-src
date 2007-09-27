@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.118 2007/04/10 15:59:29 helly Exp $ */
+/* $Id: php_sybase_ct.c,v 1.119 2007/09/27 18:28:42 dmitry Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -41,7 +41,7 @@ ZEND_DECLARE_MODULE_GLOBALS(sybase)
 static PHP_GINIT_FUNCTION(sybase);
 static PHP_GSHUTDOWN_FUNCTION(sybase);
 
-zend_function_entry sybase_functions[] = {
+const zend_function_entry sybase_functions[] = {
 	PHP_FE(sybase_connect, NULL)
 	PHP_FE(sybase_pconnect, NULL)
 	PHP_FE(sybase_close, NULL)

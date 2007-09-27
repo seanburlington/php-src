@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.31 2007/01/17 08:25:25 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.32 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,7 +66,7 @@ static
  *
  * Every user visible function must have an entry in sysvmsg_functions[].
  */
-zend_function_entry sysvmsg_functions[] = {
+const zend_function_entry sysvmsg_functions[] = {
 	PHP_FE(msg_get_queue,				NULL)
 	PHP_FE(msg_send,					sixth_arg_force_ref)
 	PHP_FE(msg_receive,					msg_receive_args_force_ref)
@@ -136,7 +136,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.31 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.32 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domexception.c,v 1.15 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: domexception.c,v 1.16 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@
 
 extern zend_class_entry *dom_domexception_class_entry;
 
-zend_function_entry php_dom_domexception_class_functions[] = {
+const zend_function_entry php_dom_domexception_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 

@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.58 2007/05/29 12:28:57 mike Exp $ */
+/* $Id: mhash.c,v 1.59 2007/09/27 18:28:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,7 +32,7 @@
 #include "php_globals.h"
 #include "ext/standard/info.h"
 
-zend_function_entry mhash_functions[] = {
+const zend_function_entry mhash_functions[] = {
 	PHP_FE(mhash_count, NULL)
 	PHP_FE(mhash_get_block_size, NULL)
 	PHP_FE(mhash_get_hash_name, NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.42 2007/06/22 00:05:54 stas Exp $ */
+/* $Id: recode.c,v 1.43 2007/09/27 18:28:41 dmitry Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -67,7 +67,7 @@ ZEND_DECLARE_MODULE_GLOBALS(recode);
 static PHP_GINIT_FUNCTION(recode);
 
 /* {{{ module stuff */
-static zend_function_entry php_recode_functions[] = {
+static const zend_function_entry php_recode_functions[] = {
 	PHP_FE(recode_string, NULL)
 	PHP_FE(recode_file, NULL)
 	PHP_FALIAS(recode, recode_string, NULL)
@@ -122,7 +122,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.43 $");
 	php_info_print_table_end();
 }
 

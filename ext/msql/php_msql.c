@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_msql.c,v 1.67 2007/02/24 16:25:54 helly Exp $ */
+/* $Id: php_msql.c,v 1.68 2007/09/27 18:28:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,7 +46,7 @@ static php_msql_globals msql_globals;
 
 /* {{{ msql_functions[]
  */
-zend_function_entry msql_functions[] = {
+const zend_function_entry msql_functions[] = {
 	PHP_FE(msql_connect,							NULL)
 	PHP_FE(msql_pconnect,							NULL)
 	PHP_FE(msql_close,								NULL)

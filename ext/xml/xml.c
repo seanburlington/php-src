@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.172 2007/07/11 08:27:33 dmitry Exp $ */
+/* $Id: xml.c,v 1.173 2007/09/27 18:28:43 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -107,7 +107,7 @@ static
 		ZEND_ARG_PASS_INFO(1)
 	ZEND_END_ARG_INFO();
 
-zend_function_entry xml_functions[] = {
+const zend_function_entry xml_functions[] = {
 	PHP_FE(xml_parser_create, NULL)
 	PHP_FE(xml_parser_create_ns, NULL)
 	PHP_FE(xml_set_object, second_arg_force_ref)
@@ -136,7 +136,7 @@ zend_function_entry xml_functions[] = {
 };
 
 #ifdef LIBXML_EXPAT_COMPAT
-static zend_module_dep xml_deps[] = {
+static const zend_module_dep xml_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	{NULL, NULL, NULL}
 };

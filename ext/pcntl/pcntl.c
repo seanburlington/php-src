@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.57 2007/01/01 09:29:26 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.58 2007/09/27 18:28:40 dmitry Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -44,7 +44,7 @@
 ZEND_DECLARE_MODULE_GLOBALS(pcntl)
 static PHP_GINIT_FUNCTION(pcntl);
 
-zend_function_entry pcntl_functions[] = {
+const zend_function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_fork,			NULL)
 	PHP_FE(pcntl_waitpid,		second_arg_force_ref)
 	PHP_FE(pcntl_wait,		first_arg_force_ref)

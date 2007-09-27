@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.476 2007/08/05 13:10:32 jani Exp $ */
+/* $Id: session.c,v 1.477 2007/09/27 18:28:41 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -597,7 +597,7 @@ static PHP_INI_MH(OnUpdateHashFunc)
 
 #if defined(HAVE_HASH_EXT) && !defined(COMPILE_DL_HASH)
 {
-	php_hash_ops *ops = php_hash_fetch_ops(new_value, new_value_length);
+	php_hash_ops *ops = (php_hash_ops*)php_hash_fetch_ops(new_value, new_value_length);
 
 	if (ops) {
 		PS(hash_func) = PS_HASH_FUNC_OTHER;
@@ -1774,7 +1774,7 @@ static PHP_FUNCTION(session_write_close)
 
 /* {{{ session_functions[]
  */
-static zend_function_entry session_functions[] = {
+static const zend_function_entry session_functions[] = {
 	PHP_FE(session_name,              NULL)
 	PHP_FE(session_module_name,       NULL)
 	PHP_FE(session_save_path,         NULL)

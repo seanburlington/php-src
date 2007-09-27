@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.94 2007/07/25 09:05:55 bjori Exp $ */
+/* $Id: posix.c,v 1.95 2007/09/27 18:28:41 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,7 +53,7 @@ static PHP_MINFO_FUNCTION(posix);
 
 /* {{{ posix_functions[]
  */
-zend_function_entry posix_functions[] = {
+const zend_function_entry posix_functions[] = {
     /* POSIX.1, 3.3 */
 	PHP_FE(posix_kill,		NULL)
 
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.95 $");
 	php_info_print_table_end();
 }
 /* }}} */

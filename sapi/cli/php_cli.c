@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.180 2007/08/08 23:56:19 stas Exp $ */
+/* $Id: php_cli.c,v 1.181 2007/09/27 18:28:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -415,7 +415,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_dl, 0)
 ZEND_END_ARG_INFO()
 /* }}} */
 
-static zend_function_entry additional_functions[] = {
+static const zend_function_entry additional_functions[] = {
 	ZEND_FE(dl, arginfo_dl)
 	{NULL, NULL, NULL}
 };

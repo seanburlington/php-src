@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.115 2007/09/20 22:44:17 nlopess Exp $ */
+/* $Id: tidy.c,v 1.116 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -286,7 +286,7 @@ STD_PHP_INI_ENTRY("tidy.default_config",	"",		PHP_INI_SYSTEM,		OnUpdateString,		
 STD_PHP_INI_ENTRY("tidy.clean_output",		"0",	PHP_INI_USER,		php_tidy_set_clean_output,	clean_output,		zend_tidy_globals,	tidy_globals)
 PHP_INI_END()
 
-static zend_function_entry tidy_functions[] = {
+static const zend_function_entry tidy_functions[] = {
 	PHP_FE(tidy_getopt,             NULL)
 	PHP_FE(tidy_parse_string,       NULL)
 	PHP_FE(tidy_parse_file,         NULL)
@@ -316,7 +316,7 @@ static zend_function_entry tidy_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry tidy_funcs_doc[] = {
+static const zend_function_entry tidy_funcs_doc[] = {
 	TIDY_METHOD_MAP(getOpt, tidy_getopt, NULL)
 	TIDY_METHOD_MAP(cleanRepair, tidy_clean_repair, NULL)
 	TIDY_DOC_ME(parseFile, NULL)
@@ -341,7 +341,7 @@ static zend_function_entry tidy_funcs_doc[] = {
 	{NULL, NULL, NULL}
 };
 
-static zend_function_entry tidy_funcs_node[] = {
+static const zend_function_entry tidy_funcs_node[] = {
 	TIDY_NODE_ME(hasChildren, NULL)
 	TIDY_NODE_ME(hasSiblings, NULL)
 	TIDY_NODE_ME(isComment, NULL)
@@ -1062,7 +1062,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.115 2007/09/20 22:44:17 nlopess Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.116 2007/09/27 18:28:42 dmitry Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

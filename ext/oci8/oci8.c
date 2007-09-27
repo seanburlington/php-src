@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.336 2007/08/06 20:31:40 sixd Exp $ */
+/* $Id: oci8.c,v 1.337 2007/09/27 18:28:40 dmitry Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -203,7 +203,7 @@ PHP_FUNCTION(oci_collection_trim);
 
 /* {{{ extension definition structures
 */
-static zend_function_entry php_oci_functions[] = {
+static const zend_function_entry php_oci_functions[] = {
 	PHP_FE(oci_define_by_name,          oci_third_arg_force_ref)
 	PHP_FE(oci_bind_by_name,            oci_third_arg_force_ref)
 	PHP_FE(oci_bind_array_by_name,      oci_third_arg_force_ref)
@@ -326,7 +326,7 @@ static zend_function_entry php_oci_functions[] = {
 	{NULL,NULL,NULL}
 };
 
-static zend_function_entry php_oci_lob_class_functions[] = {
+static const zend_function_entry php_oci_lob_class_functions[] = {
 	PHP_FALIAS(load,        oci_lob_load,           NULL)
 	PHP_FALIAS(tell,        oci_lob_tell,           NULL)
 	PHP_FALIAS(truncate,    oci_lob_truncate,       NULL)
@@ -355,7 +355,7 @@ static zend_function_entry php_oci_lob_class_functions[] = {
 };
 
 #ifdef PHP_OCI8_HAVE_COLLECTIONS
-static zend_function_entry php_oci_coll_class_functions[] = {
+static const zend_function_entry php_oci_coll_class_functions[] = {
 	PHP_FALIAS(append,        oci_collection_append,            NULL)
 	PHP_FALIAS(getelem,       oci_collection_element_get,       NULL)
 	PHP_FALIAS(assignelem,    oci_collection_element_assign,    NULL)
@@ -674,7 +674,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.2.2");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.336 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.337 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

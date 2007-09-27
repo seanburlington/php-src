@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.109 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: php_ftp.c,v 1.110 2007/09/27 18:28:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,7 @@ ZEND_END_ARG_INFO()
 
 /* }}} */
 
-zend_function_entry php_ftp_functions[] = {
+const zend_function_entry php_ftp_functions[] = {
 	PHP_FE(ftp_connect,			arginfo_ftp_connect)
 #if HAVE_OPENSSL_EXT
 	PHP_FE(ftp_ssl_connect,		arginfo_ftp_ssl_connect)

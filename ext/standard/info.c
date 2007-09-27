@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.282 2007/07/21 01:23:37 jani Exp $ */
+/* $Id: info.c,v 1.283 2007/09/27 18:28:42 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -967,7 +967,7 @@ PHP_FUNCTION(phpversion)
 	if (!ext_name) {
 		RETURN_ASCII_STRING(PHP_VERSION, 1);
 	} else {
-		char *version;
+		const char *version;
 		version = zend_get_module_version(ext_name);
 		if (version == NULL) {
 			RETURN_FALSE;

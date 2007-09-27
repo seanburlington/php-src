@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.26 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: attr.c,v 1.27 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_attr_class_functions[] = {
+const zend_function_entry php_dom_attr_class_functions[] = {
 	PHP_FALIAS(isId, dom_attr_is_id, NULL)
 	PHP_ME(domattr, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

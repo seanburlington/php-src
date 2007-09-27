@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.20 2007/08/14 12:09:52 rrichards Exp $ */
+/* $Id: spl_sxe.c,v 1.21 2007/09/27 18:28:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -156,7 +156,7 @@ SPL_METHOD(SimpleXMLIterator, count)
 	RETURN_LONG(count);
 }
 
-static zend_function_entry spl_funcs_SimpleXMLIterator[] = {
+static const zend_function_entry spl_funcs_SimpleXMLIterator[] = {
 	SPL_ME(SimpleXMLIterator, rewind,                 NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SimpleXMLIterator, valid,                  NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SimpleXMLIterator, current,                NULL, ZEND_ACC_PUBLIC)

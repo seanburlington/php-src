@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.48 2007/01/01 09:29:28 sebastian Exp $ */
+/* $Id: readline.c,v 1.49 2007/09/27 18:28:41 dmitry Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -69,7 +69,7 @@ PHP_RSHUTDOWN_FUNCTION(readline);
 /* }}} */
 /* {{{ module stuff */
 
-static zend_function_entry php_readline_functions[] = {
+static const zend_function_entry php_readline_functions[] = {
 	PHP_FE(readline,	   		        NULL)
 	PHP_FE(readline_info,  	            NULL)
 	PHP_FE(readline_add_history, 		NULL)

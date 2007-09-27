@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.13 2007/04/10 22:44:57 andrei Exp $ */
+/* $Id: collator.c,v 1.14 2007/09/27 18:28:42 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -24,7 +24,7 @@
 #include <unicode/ucol.h>
 
 
-zend_function_entry collator_funcs_collator[] = {
+const zend_function_entry collator_funcs_collator[] = {
 	ZEND_ME(collator, __construct, NULL, ZEND_ACC_PUBLIC)
 	ZEND_FENTRY(getDefault, 	ZEND_FN(collator_get_default), NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	ZEND_FENTRY(setDefault, 	ZEND_FN(collator_set_default), NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.220 2007/09/20 08:10:20 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.221 2007/09/27 18:28:40 dmitry Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -2006,7 +2006,7 @@ PHP_FUNCTION(preg_last_error)
 
 /* {{{ module definition structures */
 
-zend_function_entry pcre_functions[] = {
+const zend_function_entry pcre_functions[] = {
 	PHP_FE(preg_match,				third_arg_force_ref)
 	PHP_FE(preg_match_all,			third_arg_force_ref)
 	PHP_FE(preg_replace,			fifth_arg_force_ref)

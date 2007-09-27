@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.3 2007/08/06 15:11:46 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.4 2007/09/27 18:28:40 dmitry Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -1562,7 +1562,7 @@ PHPAPI MYSQLND *mysqlnd_init(zend_bool persistent)
  *
  * Every user visible function must have an entry in mysqlnd_functions[].
  */
-static zend_function_entry mysqlnd_functions[] = {
+static const zend_function_entry mysqlnd_functions[] = {
 	{NULL, NULL, NULL}	/* Must be the last line in mysqlnd_functions[] */
 };
 /* }}} */

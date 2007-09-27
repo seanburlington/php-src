@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.78 2007/01/01 09:29:27 sebastian Exp $ */
+/* $Id: pdo.c,v 1.79 2007/09/27 18:28:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -114,7 +114,7 @@ PHP_FUNCTION(pdo_drivers)
 /* }}} */
 
 /* {{{ pdo_functions[] */
-zend_function_entry pdo_functions[] = {
+const zend_function_entry pdo_functions[] = {
 	PHP_FE(pdo_drivers,             NULL)
 	{NULL, NULL, NULL}
 };
@@ -122,7 +122,7 @@ zend_function_entry pdo_functions[] = {
 
 /* {{{ pdo_functions[] */
 #if ZEND_MODULE_API_NO >= 20050922
-static zend_module_dep pdo_deps[] = {
+static const zend_module_dep pdo_deps[] = {
 #ifdef HAVE_SPL
 	ZEND_MOD_REQUIRED("spl")
 #endif

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.336 2007/09/27 07:29:58 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.337 2007/09/27 18:28:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -623,7 +623,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_dl, 0)
 ZEND_END_ARG_INFO()
 /* }}} */
 
-static zend_function_entry additional_functions[] = {
+static const zend_function_entry additional_functions[] = {
 	ZEND_FE(dl, arginfo_dl)
 	{NULL, NULL, NULL}
 };

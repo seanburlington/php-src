@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cdatasection.c,v 1.17 2007/01/01 09:29:23 sebastian Exp $ */
+/* $Id: cdatasection.c,v 1.18 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_cdatasection_class_functions[] = {
+const zend_function_entry php_dom_cdatasection_class_functions[] = {
 	PHP_ME(domcdatasection, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };

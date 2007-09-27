@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.51 2007/09/18 19:52:27 iliaa Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.52 2007/09/27 18:28:43 dmitry Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -75,7 +75,7 @@
 
 static int le_xmlrpc_server;
 
-zend_function_entry xmlrpc_functions[] = {
+const zend_function_entry xmlrpc_functions[] = {
 	PHP_FE(xmlrpc_encode,									NULL) 
 	PHP_FE(xmlrpc_decode,									NULL)
 	PHP_FE(xmlrpc_decode_request,							second_arg_force_ref)

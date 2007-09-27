@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.56 2007/05/04 19:32:19 rrichards Exp $ */
+/* $Id: node.c,v 1.57 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,7 +34,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_node_class_functions[] = {
+const zend_function_entry php_dom_node_class_functions[] = {
 	PHP_FALIAS(insertBefore, dom_node_insert_before, NULL)
 	PHP_FALIAS(replaceChild, dom_node_replace_child, NULL)
 	PHP_FALIAS(removeChild, dom_node_remove_child, NULL)

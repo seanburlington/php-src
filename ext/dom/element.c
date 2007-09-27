@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.53 2007/05/04 19:32:19 rrichards Exp $ */
+/* $Id: element.c,v 1.54 2007/09/27 18:28:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 * Since: 
 */
 
-zend_function_entry php_dom_element_class_functions[] = {
+const zend_function_entry php_dom_element_class_functions[] = {
 	PHP_FALIAS(getAttribute, dom_element_get_attribute, NULL)
 	PHP_FALIAS(setAttribute, dom_element_set_attribute, NULL)
 	PHP_FALIAS(removeAttribute, dom_element_remove_attribute, NULL)

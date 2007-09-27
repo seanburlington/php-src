@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.54 2007/01/16 14:42:14 tony2001 Exp $ */
+/* $Id: gettext.c,v 1.55 2007/09/27 18:28:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,7 +101,7 @@ ZEND_END_ARG_INFO()
 
 /* {{{ php_gettext_functions[]
  */
-zend_function_entry php_gettext_functions[] = {
+const zend_function_entry php_gettext_functions[] = {
 	PHP_NAMED_FE(textdomain,		zif_textdomain,		arginfo_textdomain)
 	PHP_NAMED_FE(gettext,			zif_gettext,		arginfo_gettext)
 	/* Alias for gettext() */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.202 2007/03/13 00:12:08 stas Exp $ */
+/* $Id: php_odbc.c,v 1.203 2007/09/27 18:28:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -68,7 +68,7 @@ static int le_result, le_conn, le_pconn;
 
 /* {{{ odbc_functions[]
  */
-zend_function_entry odbc_functions[] = {
+const zend_function_entry odbc_functions[] = {
 	PHP_FE(odbc_autocommit, NULL)
 	PHP_FE(odbc_binmode, NULL)
 	PHP_FE(odbc_close, NULL)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.241 2007/09/09 16:07:45 scottmac Exp $ */
+/* $Id: php_mysql.c,v 1.242 2007/09/27 18:28:40 dmitry Exp $ */
 
 /* TODO:
  *
@@ -132,7 +132,7 @@ static MYSQLND_QCACHE		*mysql_mysqlnd_qcache;
 
 /* {{{ mysql_functions[]
  */
-zend_function_entry mysql_functions[] = {
+const zend_function_entry mysql_functions[] = {
 	PHP_FE(mysql_connect,								NULL)
 	PHP_FE(mysql_pconnect,								NULL)
 	PHP_FE(mysql_close,									NULL)
@@ -219,7 +219,7 @@ zend_function_entry mysql_functions[] = {
 /* }}} */
 
 /* Dependancies */
-static zend_module_dep mysql_deps[] = {
+static const zend_module_dep mysql_deps[] = {
 #if defined(HAVE_MYSQLND)
 	ZEND_MOD_REQUIRED("mysqlnd")
 #endif

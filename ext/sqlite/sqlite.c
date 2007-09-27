@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.202 2007/05/28 23:33:12 iliaa Exp $
+   $Id: sqlite.c,v 1.203 2007/09/27 18:28:42 dmitry Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -210,7 +210,7 @@ static int php_sqlite_fetch(struct php_sqlite_result *rres TSRMLS_DC);
 
 enum { PHPSQLITE_ASSOC = 1, PHPSQLITE_NUM = 2, PHPSQLITE_BOTH = PHPSQLITE_ASSOC|PHPSQLITE_NUM };
 
-zend_function_entry sqlite_functions[] = {
+const zend_function_entry sqlite_functions[] = {
 	PHP_FE(sqlite_open, third_arg_force_ref)
 	PHP_FE(sqlite_popen, third_arg_force_ref)
 	PHP_FE(sqlite_close, NULL)
@@ -253,7 +253,7 @@ zend_function_entry sqlite_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_db[] = {
+const zend_function_entry sqlite_funcs_db[] = {
 	PHP_ME_MAPPING(__construct, sqlite_open, third_arg_force_ref, 0)
 /*	PHP_ME_MAPPING(close, sqlite_close, NULL, 0)*/
 	PHP_ME_MAPPING(query, sqlite_query, third_arg_force_ref, 0)
@@ -273,7 +273,7 @@ zend_function_entry sqlite_funcs_db[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_query[] = {
+const zend_function_entry sqlite_funcs_query[] = {
 	PHP_ME_MAPPING(fetch, sqlite_fetch_array, NULL, 0)
 	PHP_ME_MAPPING(fetchObject, sqlite_fetch_object, NULL, 0)
 	PHP_ME_MAPPING(fetchSingle, sqlite_fetch_single, NULL, 0)
@@ -297,7 +297,7 @@ zend_function_entry sqlite_funcs_query[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_ub_query[] = {
+const zend_function_entry sqlite_funcs_ub_query[] = {
 	PHP_ME_MAPPING(fetch, sqlite_fetch_array, NULL, 0)
 	PHP_ME_MAPPING(fetchObject, sqlite_fetch_object, NULL, 0)
 	PHP_ME_MAPPING(fetchSingle, sqlite_fetch_single, NULL, 0)
@@ -312,12 +312,12 @@ zend_function_entry sqlite_funcs_ub_query[] = {
 	{NULL, NULL, NULL}
 };
 
-zend_function_entry sqlite_funcs_exception[] = {
+const zend_function_entry sqlite_funcs_exception[] = {
 	{NULL, NULL, NULL}
 };
 
 /* Dependancies */
-static zend_module_dep sqlite_deps[] = {
+static const zend_module_dep sqlite_deps[] = {
 #if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	ZEND_MOD_REQUIRED("spl")
 #endif
@@ -1220,7 +1220,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.202 2007/05/28 23:33:12 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.203 2007/09/27 18:28:42 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

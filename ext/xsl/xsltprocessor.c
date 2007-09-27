@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.56 2007/07/28 09:16:15 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.57 2007/09/27 18:28:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,7 +34,7 @@
 * Since: 
 */
 
-zend_function_entry php_xsl_xsltprocessor_class_functions[] = {
+const zend_function_entry php_xsl_xsltprocessor_class_functions[] = {
 	PHP_FALIAS(importStylesheet, xsl_xsltprocessor_import_stylesheet, NULL)
 	PHP_FALIAS(transformToDoc, xsl_xsltprocessor_transform_to_doc, NULL)
 	PHP_FALIAS(transformToUri, xsl_xsltprocessor_transform_to_uri, NULL)

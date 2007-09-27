@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20 2007/09/21 13:37:30 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.21 2007/09/27 09:19:06 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2271,12 +2271,10 @@ PHP_FUNCTION(iconv_mime_decode_headers)
 		}
 
 		if (header_name != NULL) {
-			zval **elem;
+			zval **elem, *new_elem;
 
 			if (zend_hash_find(Z_ARRVAL_P(return_value), header_name, header_name_len, (void **)&elem) == SUCCESS) {
 				if (Z_TYPE_PP(elem) != IS_ARRAY) {
-					zval *new_elem;
-
 					MAKE_STD_ZVAL(new_elem);
 					array_init(new_elem);
 

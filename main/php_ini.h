@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ini.h,v 1.52 2007/09/28 02:04:28 jani Exp $ */
+/* $Id: php_ini.h,v 1.53 2007/09/28 10:23:14 jani Exp $ */
 
 #ifndef PHP_INI_H
 #define PHP_INI_H
@@ -24,7 +24,7 @@
 #include "zend_ini.h"
 
 BEGIN_EXTERN_C()
-void config_zval_dtor(zval *zvalue);
+PHPAPI void config_zval_dtor(zval *zvalue);
 int php_init_config(TSRMLS_D);
 int php_shutdown_config(void);
 void php_ini_register_extensions(TSRMLS_D);

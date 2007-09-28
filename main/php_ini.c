@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.157 2007/09/28 02:04:28 jani Exp $ */
+/* $Id: php_ini.c,v 1.158 2007/09/28 10:23:14 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -164,7 +164,7 @@ PHPAPI void display_ini_entries(zend_module_entry *module)
 
 /* {{{ config_zval_dtor
  */
-void config_zval_dtor(zval *zvalue)
+PHPAPI void config_zval_dtor(zval *zvalue)
 {
 	if (Z_TYPE_P(zvalue) == IS_ARRAY) {
 		zend_hash_destroy(Z_ARRVAL_P(zvalue));

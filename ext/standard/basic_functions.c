@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.875 2007/09/28 11:52:49 jani Exp $ */
+/* $Id: basic_functions.c,v 1.876 2007/09/28 13:06:22 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4803,7 +4803,6 @@ PHP_FUNCTION(get_cfg_var)
 {
 	char *varname;
 	int varname_len;
-	char *value;
 	zval *retval;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s&", &varname, &varname_len, UG(utf8_conv)) == FAILURE) {

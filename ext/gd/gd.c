@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.381 2007/09/27 18:28:39 dmitry Exp $ */
+/* $Id: gd.c,v 1.382 2007/09/28 12:52:12 jani Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2040,7 +2040,7 @@ PHP_FUNCTION(imagegrabscreen)
 	}
 }
 /* }}} */
-#endif PHP_WIN32
+#endif /* PHP_WIN32 */
 
 #ifdef HAVE_GD_BUNDLED
 /* {{{ proto resource imagerotate(resource src_im, float angle, int bgdcolor [, int ignoretransparent]) U

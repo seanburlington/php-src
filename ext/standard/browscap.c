@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.95 2007/09/28 02:04:28 jani Exp $ */
+/* $Id: browscap.c,v 1.96 2007/09/28 23:34:31 jani Exp $ */
 
 #include "php.h"
 #include "php_browscap.h"
@@ -29,7 +29,7 @@
 
 static HashTable browser_hash;
 static zval *current_section;
-static zval *current_section_name;
+static char *current_section_name;
 
 #define DEFAULT_SECTION_NAME "Default Browser Capability Settings"
 

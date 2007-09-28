@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.139.2.4.2.8 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: basic_functions.h,v 1.139.2.4.2.6.2.1 2007/09/28 02:05:09 jani Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -125,6 +125,9 @@ PHP_FUNCTION(move_uploaded_file);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);
+#if ZEND_DEBUG
+PHP_FUNCTION(dump_config_hash);
+#endif
 
 PHP_FUNCTION(str_rot13);
 PHP_FUNCTION(stream_get_filters);

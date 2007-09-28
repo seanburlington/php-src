@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.98.2.1.2.9 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_globals.h,v 1.98.2.1.2.7.2.1 2007/09/28 02:05:09 jani Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -161,6 +161,9 @@ struct _php_core_globals {
 #endif
 	long max_input_nesting_level;
 	zend_bool in_user_include;
+
+	char *user_ini_filename;
+	long user_ini_cache_ttl;
 };
 
 

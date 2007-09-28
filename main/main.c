@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.70 2009/05/04 19:55:42 derick Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.1 2007/09/28 02:05:09 jani Exp $ */
 
 /* {{{ includes
  */
@@ -58,8 +58,6 @@
 #include "php_main.h"
 #include "fopen_wrappers.h"
 #include "ext/standard/php_standard.h"
-#include "ext/standard/php_string.h"
-#include "ext/date/php_date.h"
 #include "php_variables.h"
 #include "ext/standard/credits.h"
 #ifdef PHP_WIN32
@@ -220,11 +218,7 @@ static PHP_INI_MH(OnUpdateTimeout)
 static int php_get_display_errors_mode(char *value, int value_length)
 {
 	int mode;
-
-	if (!value) {
-		return PHP_DISPLAY_ERRORS_STDOUT;
-	}
-
+	
 	if (value_length == 2 && !strcasecmp("on", value)) {
 		mode = PHP_DISPLAY_ERRORS_STDOUT;
 	} else if (value_length == 3 && !strcasecmp("yes", value)) {
@@ -235,13 +229,14 @@ static int php_get_display_errors_mode(char *value, int value_length)
 		mode = PHP_DISPLAY_ERRORS_STDERR;
 	} else if (value_length == 6 && !strcasecmp(value, "stdout")) {
 		mode = PHP_DISPLAY_ERRORS_STDOUT;
-	} else {
+	} else if (value) {
 		mode = atoi(value);
 		if (mode && mode != PHP_DISPLAY_ERRORS_STDOUT && mode != PHP_DISPLAY_ERRORS_STDERR) {
 			mode = PHP_DISPLAY_ERRORS_STDOUT;
 		}
+	} else {
+		mode = PHP_DISPLAY_ERRORS_STDOUT;
 	}
-
 	return mode;
 }
 /* }}} */
@@ -353,15 +348,13 @@ static PHP_INI_MH(OnChangeMailForceExtra)
 #	define PHP_SAFE_MODE_EXEC_DIR ""
 #endif
 
- /* Windows and Netware use the internal mail */
-#if defined(PHP_WIN32) || defined(NETWARE)
-# define DEFAULT_SENDMAIL_PATH NULL
-#elif defined(PHP_PROG_SENDMAIL)
-# define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
+#if defined(PHP_PROG_SENDMAIL) && !defined(NETWARE)
+#	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
+#elif defined(PHP_WIN32)
+#	define DEFAULT_SENDMAIL_PATH NULL
 #else
-# define DEFAULT_SENDMAIL_PATH "/usr/sbin/sendmail -t -i"
+#	define DEFAULT_SENDMAIL_PATH "/usr/sbin/sendmail -t -i" 
 #endif
-
 /* {{{ PHP_INI
  */
 PHP_INI_BEGIN()
@@ -454,12 +447,15 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY("disable_functions",			"",			PHP_INI_SYSTEM,		NULL)
 	PHP_INI_ENTRY("disable_classes",			"",			PHP_INI_SYSTEM,		NULL)
 
-	STD_PHP_INI_BOOLEAN("allow_url_fopen",		"1",		PHP_INI_SYSTEM,		OnUpdateBool,		allow_url_fopen,		php_core_globals,	core_globals)
-	STD_PHP_INI_BOOLEAN("allow_url_include",	"0",		PHP_INI_SYSTEM,		OnUpdateBool,		allow_url_include,		php_core_globals,	core_globals)
+	STD_PHP_INI_BOOLEAN("allow_url_fopen",		"1",		PHP_INI_SYSTEM,		OnUpdateBool,		allow_url_fopen,		php_core_globals,		core_globals)
+	STD_PHP_INI_BOOLEAN("allow_url_include",	"0",		PHP_INI_SYSTEM,		OnUpdateBool,		allow_url_include,		php_core_globals,		core_globals)
 	STD_PHP_INI_BOOLEAN("always_populate_raw_post_data",	"0",	PHP_INI_SYSTEM|PHP_INI_PERDIR,	OnUpdateBool,	always_populate_raw_post_data,	php_core_globals,	core_globals)
 
 	STD_PHP_INI_ENTRY("realpath_cache_size",	"16K",		PHP_INI_SYSTEM,		OnUpdateLong,	realpath_cache_size_limit,	virtual_cwd_globals,	cwd_globals)
 	STD_PHP_INI_ENTRY("realpath_cache_ttl",		"120",		PHP_INI_SYSTEM,		OnUpdateLong,	realpath_cache_ttl,			virtual_cwd_globals,	cwd_globals)
+
+	STD_PHP_INI_ENTRY("user_ini.filename",		".user.ini",	PHP_INI_SYSTEM,		OnUpdateString,		user_ini_filename,	php_core_globals,		core_globals)
+	STD_PHP_INI_ENTRY("user_ini.cache_ttl",		"300",			PHP_INI_SYSTEM,		OnUpdateLong,		user_ini_cache_ttl,	php_core_globals,		core_globals)
 PHP_INI_END()
 /* }}} */
 
@@ -474,6 +470,8 @@ static int module_shutdown = 0;
 PHPAPI void php_log_err(char *log_message TSRMLS_DC)
 {
 	int fd = -1;
+	char error_time_str[128];
+	struct tm tmbuf;
 	time_t error_time;
 
 	/* Try to use the specified logging location. */
@@ -488,17 +486,14 @@ PHPAPI void php_log_err(char *log_message TSRMLS_DC)
 		if (fd != -1) {
 			char *tmp;
 			int len;
-			char *error_time_str;
-
 			time(&error_time);
-			error_time_str = php_format_date("d-M-Y H:i:s", 11, error_time, 1 TSRMLS_CC);
+			strftime(error_time_str, sizeof(error_time_str), "%d-%b-%Y %H:%M:%S", php_localtime_r(&error_time, &tmbuf));
 			len = spprintf(&tmp, 0, "[%s] %s%s", error_time_str, log_message, PHP_EOL);
 #ifdef PHP_WIN32
 			php_flock(fd, 2);
 #endif
 			write(fd, tmp, len);
 			efree(tmp);
-			efree(error_time_str);
 			close(fd);
 			return;
 		}
@@ -570,8 +565,8 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	char *docref_target = "", *docref_root = "";
 	char *p;
 	int buffer_len = 0;
-	char *space = "";
-	char *class_name = "";
+	char *space;
+	char *class_name = get_active_class_name(&space TSRMLS_CC);
 	char *function;
 	int origin_len;
 	char *origin;
@@ -627,7 +622,6 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 			function = "Unknown";
 		} else {
 			is_function = 1;
-			class_name = get_active_class_name(&space TSRMLS_CC);
 		}
 	}
 
@@ -653,16 +647,15 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 
 	/* no docref given but function is known (the default) */
 	if (!docref && is_function) {
-		int doclen;
 		if (space[0] == '\0') {
-			doclen = spprintf(&docref_buf, 0, "function.%s", function);
+			spprintf(&docref_buf, 0, "function.%s", function);
 		} else {
-			doclen = spprintf(&docref_buf, 0, "%s.%s", class_name, function);
+			spprintf(&docref_buf, 0, "function.%s-%s", class_name, function);
 		}
 		while((p = strchr(docref_buf, '_')) != NULL) {
 			*p = '-';
 		}
-		docref = php_strtolower(docref_buf, doclen);
+		docref = docref_buf;
 	}
 
 	/* we have a docref for a function AND
@@ -980,8 +973,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 		case E_USER_ERROR:
 			EG(exit_status) = 255;
 			if (module_initialized) {
-				if (!PG(display_errors) &&
-				    !SG(headers_sent) &&
+				if (!SG(headers_sent) &&
 					SG(sapi_headers).http_response_code == 200
 				) {
 					sapi_header_line ctr = {0};
@@ -1036,7 +1028,7 @@ PHP_FUNCTION(set_time_limit)
 	}
 
 	convert_to_string_ex(new_timeout);
-	if (zend_alter_ini_entry("max_execution_time", sizeof("max_execution_time"), Z_STRVAL_PP(new_timeout), Z_STRLEN_PP(new_timeout), PHP_INI_USER, PHP_INI_STAGE_RUNTIME) == SUCCESS) {
+	if (zend_alter_ini_entry_ex("max_execution_time", sizeof("max_execution_time"), Z_STRVAL_PP(new_timeout), Z_STRLEN_PP(new_timeout), PHP_INI_USER, PHP_INI_STAGE_RUNTIME, 0 TSRMLS_CC) == SUCCESS) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;
@@ -1441,8 +1433,6 @@ void php_request_shutdown(void *dummy)
 	EG(opline_ptr) = NULL;
 	EG(active_op_array) = NULL;
 
-	php_deactivate_ticks(TSRMLS_C);
-
 	/* 1. Call all possible shutdown functions registered with register_shutdown_function() */
 	if (PG(modules_activated)) zend_try {
 		php_call_shutdown_functions(TSRMLS_C);
@@ -1783,19 +1773,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	zend_set_utility_values(&zuv);
 	php_startup_sapi_content_types(TSRMLS_C);
 
-	/* Register constants */
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_VERSION", PHP_VERSION, sizeof(PHP_VERSION)-1, CONST_PERSISTENT | CONST_CS);
-	REGISTER_MAIN_LONG_CONSTANT("PHP_MAJOR_VERSION", PHP_MAJOR_VERSION, CONST_PERSISTENT | CONST_CS);
-	REGISTER_MAIN_LONG_CONSTANT("PHP_MINOR_VERSION", PHP_MINOR_VERSION, CONST_PERSISTENT | CONST_CS);
-	REGISTER_MAIN_LONG_CONSTANT("PHP_RELEASE_VERSION", PHP_RELEASE_VERSION, CONST_PERSISTENT | CONST_CS);
-	REGISTER_MAIN_STRINGL_CONSTANT("PHP_EXTRA_VERSION", PHP_EXTRA_VERSION, sizeof(PHP_EXTRA_VERSION) - 1, CONST_PERSISTENT | CONST_CS);
-	REGISTER_MAIN_LONG_CONSTANT("PHP_VERSION_ID", PHP_VERSION_ID, CONST_PERSISTENT | CONST_CS);
-#ifdef ZTS
-	REGISTER_MAIN_LONG_CONSTANT("PHP_ZTS", 1, CONST_PERSISTENT | CONST_CS);
-#else
-	REGISTER_MAIN_LONG_CONSTANT("PHP_ZTS", 0, CONST_PERSISTENT | CONST_CS);
-#endif
-	REGISTER_MAIN_LONG_CONSTANT("PHP_DEBUG", PHP_DEBUG, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_OS", php_os, strlen(php_os), CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_SAPI", sapi_module.name, strlen(sapi_module.name), CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_STRINGL_CONSTANT("DEFAULT_INCLUDE_PATH", PHP_INCLUDE_PATH, sizeof(PHP_INCLUDE_PATH)-1, CONST_PERSISTENT | CONST_CS);

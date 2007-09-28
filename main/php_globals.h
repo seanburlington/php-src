@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.113 2007/07/24 14:18:47 jani Exp $ */
+/* $Id: php_globals.h,v 1.114 2007/09/28 02:04:28 jani Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -147,6 +147,9 @@ struct _php_core_globals {
 #endif
 	long max_input_nesting_level;
 	zend_bool in_user_include;
+
+	char *user_ini_filename;
+	long user_ini_cache_ttl;
 };
 
 

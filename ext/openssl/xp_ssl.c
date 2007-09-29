@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.33 2007/05/27 19:13:11 tony2001 Exp $ */
+/* $Id: xp_ssl.c,v 1.34 2007/09/29 11:26:51 nlopess Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -464,7 +464,7 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 								"ssl", "peer_certificate",
 								zcert);
 						peer_cert = NULL;
-						efree(zcert);
+						FREE_ZVAL(zcert);
 					}
 
 					if (SUCCESS == php_stream_context_get_option(
@@ -490,8 +490,8 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 										zend_list_insert(mycert,
 											php_openssl_get_x509_list_id()));
 								add_next_index_zval(arr, zcert);
+								FREE_ZVAL(zcert);
 							}
-							efree(zcert);
 						} else {
 							ZVAL_NULL(arr);
 						}

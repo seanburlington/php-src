@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli_readline.c,v 1.12 2007/01/01 09:29:36 sebastian Exp $ */
+/* $Id: php_cli_readline.c,v 1.13 2007/09/29 11:26:51 nlopess Exp $ */
 
 #include "php.h"
 
@@ -423,7 +423,7 @@ TODO:
 
 - future: respect scope ("php > function foo() { $[tab]" should only expand to local variables...)
 */
-	char *retval;
+	char *retval = NULL;
 	int textlen = strlen(text);
 	TSRMLS_FETCH();
 

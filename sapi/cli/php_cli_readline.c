@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli_readline.c,v 1.3.2.5.2.5 2008/12/31 11:17:49 sebastian Exp $ */
+/* $Id: php_cli_readline.c,v 1.3.2.5.2.3.2.1 2007/09/29 11:18:42 nlopess Exp $ */
 
 #include "php.h"
 
@@ -362,7 +362,7 @@ TODO:
 
 - future: respect scope ("php > function foo() { $[tab]" should only expand to local variables...)
 */
-	char *retval;
+	char *retval = NULL;
 	int textlen = strlen(text);
 	TSRMLS_FETCH();
 

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2006 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.52.2.2.2.10 2009/03/17 23:10:13 felipe Exp $ */
+/* $Id: var_unserializer.re,v 1.52.2.2.2.6.2.1 2007/09/29 11:18:41 nlopess Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -294,10 +294,10 @@ static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, long
 				zend_hash_index_update(ht, Z_LVAL_P(key), &data, sizeof(data), NULL);
 				break;
 			case IS_STRING:
-				if (zend_symtable_find(ht, Z_STRVAL_P(key), Z_STRLEN_P(key) + 1, (void **)&old_data)==SUCCESS) {
+				if (zend_hash_find(ht, Z_STRVAL_P(key), Z_STRLEN_P(key) + 1, (void **)&old_data)==SUCCESS) {
 					var_push_dtor(var_hash, old_data);
 				}
-				zend_symtable_update(ht, Z_STRVAL_P(key), Z_STRLEN_P(key) + 1, &data, sizeof(data), NULL);
+				zend_hash_update(ht, Z_STRVAL_P(key), Z_STRLEN_P(key) + 1, &data, sizeof(data), NULL);
 				break;
 		}
 		
@@ -462,26 +462,6 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 }
 
 "i:" iv ";"	{
-#if SIZEOF_LONG == 4
-	int digits = YYCURSOR - start - 3;
-
-	if (start[2] == '-' || start[2] == '+') {
-		digits--;
-	}
-
-	/* Use double for large long values that were serialized on a 64-bit system */
-	if (digits >= MAX_LENGTH_OF_LONG - 1) {
-		if (digits == MAX_LENGTH_OF_LONG - 1) {
-			int cmp = strncmp(YYCURSOR - MAX_LENGTH_OF_LONG, long_min_digits, MAX_LENGTH_OF_LONG - 1);
-
-			if (!(cmp < 0 || (cmp == 0 && start[2] == '-'))) {
-				goto use_double;
-			}
-		} else {
-			goto use_double;
-		}
-	}
-#endif
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
 	ZVAL_LONG(*rval, parse_iv(start + 2));
@@ -504,9 +484,6 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 }
 
 "d:" (iv | nv | nvexp) ";"	{
-#if SIZEOF_LONG == 4
-use_double:
-#endif
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
 	ZVAL_DOUBLE(*rval, zend_strtod((const char *)start + 2, NULL));

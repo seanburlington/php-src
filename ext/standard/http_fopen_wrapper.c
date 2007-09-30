@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.16 2009/05/14 13:49:50 jani Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.1 2007/09/30 05:49:45 jani Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -81,7 +81,7 @@
 #define HTTP_HEADER_CONTENT_LENGTH	16
 #define HTTP_HEADER_TYPE			32
 
-php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context, int redirect_max, int header_init STREAMS_DC TSRMLS_DC) /* {{{ */
+php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context, int redirect_max, int header_init STREAMS_DC TSRMLS_DC)
 {
 	php_stream *stream = NULL;
 	php_url *resource = NULL;
@@ -105,7 +105,6 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	char *protocol_version = NULL;
 	int protocol_version_len = 3; /* Default: "1.0" */
 	struct timeval timeout;
-	char *user_headers = NULL;
 
 	tmp_line[0] = '\0';
 
@@ -317,31 +316,13 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	/* send it */
 	php_stream_write(stream, scratch, strlen(scratch));
 
-	if (context && php_stream_context_get_option(context, "http", "header", &tmpzval) == SUCCESS) {
-		tmp = NULL;
-		
-		if (Z_TYPE_PP(tmpzval) == IS_ARRAY) {
-			HashPosition pos;
-			zval **tmpheader = NULL;
-			smart_str tmpstr = {0};
-
-			for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(tmpzval), &pos);
-				SUCCESS == zend_hash_get_current_data_ex(Z_ARRVAL_PP(tmpzval), (void *)&tmpheader, &pos);
-				zend_hash_move_forward_ex(Z_ARRVAL_PP(tmpzval), &pos)
-			) {
-				if (Z_TYPE_PP(tmpheader) == IS_STRING) {
-					smart_str_appendl(&tmpstr, Z_STRVAL_PP(tmpheader), Z_STRLEN_PP(tmpheader));
-					smart_str_appendl(&tmpstr, "\r\n", sizeof("\r\n") - 1);
-				}
-			}
-			smart_str_0(&tmpstr);
-			tmp = tmpstr.c;
-		}
-		if (Z_TYPE_PP(tmpzval) == IS_STRING && Z_STRLEN_PP(tmpzval)) {
-			/* Remove newlines and spaces from start and end php_trim will estrndup() */
-			tmp = php_trim(Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval), NULL, 0, NULL, 3 TSRMLS_CC);
-		}
-		if (tmp && strlen(tmp) > 0) {
+	if (context &&
+		php_stream_context_get_option(context, "http", "header", &tmpzval) == SUCCESS &&
+		Z_TYPE_PP(tmpzval) == IS_STRING && Z_STRLEN_PP(tmpzval)) {
+		/* Remove newlines and spaces from start and end,
+		   php_trim will estrndup() */
+		tmp = php_trim(Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval), NULL, 0, NULL, 3 TSRMLS_CC);
+		if (strlen(tmp) > 0) {
 			if (!header_init) { /* Remove post headers for redirects */
 				int l = strlen(tmp);
 				char *s, *s2, *tmp_c = estrdup(tmp);
@@ -370,8 +351,10 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 				efree(tmp);
 				tmp = tmp_c;
 			}
-
-			user_headers = estrdup(tmp);
+		
+			/* Output trimmed headers with \r\n at the end */
+			php_stream_write(stream, tmp, strlen(tmp));
+			php_stream_write(stream, "\r\n", sizeof("\r\n") - 1);
 
 			/* Make lowercase for easy comparison against 'standard' headers */
 			php_strtolower(tmp, strlen(tmp));
@@ -394,9 +377,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 				 have_header |= HTTP_HEADER_TYPE;
 			}
 		}
-		if (tmp) {
-			efree(tmp);
-		}
+		efree(tmp);
 	}
 
 	/* auth header if it was specified */
@@ -410,7 +391,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		strcat(scratch, ":");
 		strcat(scratch, resource->pass);
 
-		tmp = (char*)php_base64_encode((unsigned char*)scratch, strlen(scratch), NULL);
+		tmp = php_base64_encode((unsigned char*)scratch, strlen(scratch), NULL);
 		
 		if (snprintf(scratch, scratch_len, "Authorization: Basic %s\r\n", tmp) > 0) {
 			php_stream_write(stream, scratch, strlen(scratch));
@@ -469,27 +450,6 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 				efree(ua);
 			}
 		}	
-	}
-
-	if (user_headers) {
-		/* A bit weird, but some servers require that Content-Length be sent prior to Content-Type for POST
-		 * see bug #44603 for details. Since Content-Type maybe part of user's headers we need to do this check first.
-		 */
-		if (
-				header_init &&
-				context &&
-				!(have_header & HTTP_HEADER_CONTENT_LENGTH) &&
-				php_stream_context_get_option(context, "http", "content", &tmpzval) == SUCCESS &&
-				Z_TYPE_PP(tmpzval) == IS_STRING && Z_STRLEN_PP(tmpzval) > 0
-		) {
-			scratch_len = slprintf(scratch, scratch_len, "Content-Length: %d\r\n", Z_STRLEN_PP(tmpzval));
-			php_stream_write(stream, scratch, scratch_len);
-			have_header |= HTTP_HEADER_CONTENT_LENGTH;
-		}
-
-		php_stream_write(stream, user_headers, strlen(user_headers));
-		php_stream_write(stream, "\r\n", sizeof("\r\n")-1);
-		efree(user_headers);
 	}
 
 	/* Request content, such as for POST requests */
@@ -685,7 +645,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		unsigned char *s, *e;	\
 		int l;	\
 		l = php_url_decode(val, strlen(val));	\
-		s = (unsigned char*)val; e = s + l;	\
+		s = val; e = s + l;	\
 		while (s < e) {	\
 			if (iscntrl(*s)) {	\
 				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Invalid redirect URL! %s", new_path);	\
@@ -744,22 +704,22 @@ out:
 
 	return stream;
 }
-/* }}} */
 
-php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC) /* {{{ */
+php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)
 {
 	return php_stream_url_wrap_http_ex(wrapper, path, mode, options, opened_path, context, PHP_URL_REDIRECT_MAX, 1 STREAMS_CC TSRMLS_CC);
 }
-/* }}} */
 
-static int php_stream_http_stream_stat(php_stream_wrapper *wrapper, php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */
+static int php_stream_http_stream_stat(php_stream_wrapper *wrapper,
+		php_stream *stream,
+		php_stream_statbuf *ssb
+		TSRMLS_DC)
 {
 	/* one day, we could fill in the details based on Date: and Content-Length:
 	 * headers.  For now, we return with a failure code to prevent the underlying
 	 * file's details from being used instead. */
 	return -1;
 }
-/* }}} */
 
 static php_stream_wrapper_ops http_stream_wops = {
 	php_stream_url_wrap_http,

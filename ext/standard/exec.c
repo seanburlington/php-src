@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.113.2.3.2.13 2009/04/30 15:25:05 pajoye Exp $ */
+/* $Id: exec.c,v 1.113.2.3.2.1.2.1 2007/09/30 05:49:44 jani Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -25,7 +25,6 @@
 #include "safe_mode.h"
 #include "ext/standard/head.h"
 #include "ext/standard/file.h"
-#include "basic_functions.h"
 #include "exec.h"
 #include "php_globals.h"
 #include "SAPI.h"
@@ -80,12 +79,6 @@ int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 			goto err;
 		}
 		b = strrchr(cmd, PHP_DIR_SEPARATOR);
-#ifdef PHP_WIN32
-		if (b && *b == '\\' && b == cmd) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid absolute path.");
-			goto err;
-		}
-#endif
 		spprintf(&d, 0, "%s%s%s%s%s", PG(safe_mode_exec_dir), (b ? "" : "/"), (b ? b : cmd), (c ? " " : ""), (c ? c : ""));
 		if (c) {
 			*(c - 1) = ' ';
@@ -137,9 +130,7 @@ int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 
 			if (type == 1) {
 				PHPWRITE(buf, bufl);
-				if (OG(ob_nesting_level) < 1) {
-					sapi_flush(TSRMLS_C);
-				}
+				sapi_flush(TSRMLS_C);
 			} else if (type == 2) {
 				/* strip trailing whitespaces */	
 				l = bufl;
@@ -274,25 +265,11 @@ char *php_escape_shell_cmd(char *str) {
 	register int x, y, l;
 	char *cmd;
 	char *p = NULL;
-	
-	TSRMLS_FETCH();
 
 	l = strlen(str);
 	cmd = safe_emalloc(2, l, 1);
 	
 	for (x = 0, y = 0; x < l; x++) {
-		int mb_len = php_mblen(str + x, (l - x));
-
-		/* skip non-valid multibyte characters */
-		if (mb_len < 0) {
-			continue;
-		} else if (mb_len > 1) {
-			memcpy(cmd + y, str + x, mb_len);
-			y += mb_len;
-			x += mb_len - 1;
-			continue;
-		}
-
 		switch (str[x]) {
 			case '"':
 			case '\'':
@@ -351,7 +328,6 @@ char *php_escape_shell_cmd(char *str) {
 char *php_escape_shell_arg(char *str) {
 	int x, y, l;
 	char *cmd;
-	TSRMLS_FETCH();
 
 	y = 0;
 	l = strlen(str);
@@ -365,18 +341,6 @@ char *php_escape_shell_arg(char *str) {
 #endif
 
 	for (x = 0; x < l; x++) {
-		int mb_len = php_mblen(str + x, (l - x));
-
-		/* skip non-valid multibyte characters */
-		if (mb_len < 0) {
-			continue;
-		} else if (mb_len > 1) {
-			memcpy(cmd + y, str + x, mb_len);
-			y += mb_len;
-			x += mb_len - 1;
-			continue;
-		}
-
 		switch (str[x]) {
 #ifdef PHP_WIN32
 		case '"':
@@ -408,19 +372,18 @@ char *php_escape_shell_arg(char *str) {
    Escape shell metacharacters */
 PHP_FUNCTION(escapeshellcmd)
 {
-	char *command;
-	int command_len;
+	zval **arg1;
 	char *cmd = NULL;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &command, &command_len) == FAILURE) {
-		return;
+	if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
+		WRONG_PARAM_COUNT;
 	}
-
-	if (command_len) {
-		cmd = php_escape_shell_cmd(command);
-		RETVAL_STRING(cmd, 0);
-	} else {
-		RETVAL_EMPTY_STRING();
+	
+	convert_to_string_ex(arg1);
+	if (Z_STRLEN_PP(arg1)) {
+		cmd = php_escape_shell_cmd(Z_STRVAL_PP(arg1));
+		RETVAL_STRING(cmd, 1);
+		efree(cmd);
 	}
 }
 /* }}} */
@@ -429,17 +392,18 @@ PHP_FUNCTION(escapeshellcmd)
    Quote and escape an argument for use in a shell command */
 PHP_FUNCTION(escapeshellarg)
 {
-	char *argument;
-	int argument_len;
+	zval **arg1;
 	char *cmd = NULL;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &argument, &argument_len) == FAILURE) {
-		return;
+	if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
+		WRONG_PARAM_COUNT;
 	}
-
-	if (argument) {
-		cmd = php_escape_shell_arg(argument);
-		RETVAL_STRING(cmd, 0);
+	
+	convert_to_string_ex(arg1);
+	if (Z_STRLEN_PP(arg1)) {
+		cmd = php_escape_shell_arg(Z_STRVAL_PP(arg1));
+		RETVAL_STRING(cmd, 1);
+		efree(cmd);
 	}
 }
 /* }}} */

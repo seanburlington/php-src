@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.87.2.1.2.12 2009/04/15 14:25:06 iliaa Exp $ */
+/* $Id: mail.c,v 1.87.2.1.2.7.2.1 2007/09/30 05:49:45 jani Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -29,12 +29,6 @@
 #endif
 #if HAVE_SYS_SYSEXITS_H
 #include <sys/sysexits.h>
-#endif
-
-#if PHP_SIGCHILD
-#if HAVE_SIGNAL_H
-#include <signal.h>
-#endif
 #endif
 
 #include "php_mail.h"
@@ -73,7 +67,7 @@
 PHP_FUNCTION(ezmlm_hash)
 {
 	char *str = NULL;
-	unsigned int h = 5381;
+	unsigned long h = 5381L;
 	int j, str_len;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
@@ -206,9 +200,6 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 	int ret;
 	char *sendmail_path = INI_STR("sendmail_path");
 	char *sendmail_cmd = NULL;
-#if PHP_SIGCHILD
-	void (*sig_handler)() = NULL;
-#endif
 
 	if (!sendmail_path) {
 #if (defined PHP_WIN32 || defined NETWARE)
@@ -233,16 +224,6 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		sendmail_cmd = sendmail_path;
 	}
 
-#if PHP_SIGCHILD
-	/* Set signal handler of SIGCHLD to default to prevent other signal handlers
-	 * from being called and reaping the return code when our child exits.
-	 * The original handler needs to be restored after pclose() */
-	sig_handler = (void *)signal(SIGCHLD, SIG_DFL);
-	if (sig_handler == SIG_ERR) {
-		sig_handler = NULL;
-	}
-#endif
-
 #ifdef PHP_WIN32
 	sendmail = popen(sendmail_cmd, "wb");
 #else
@@ -260,13 +241,6 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		if (EACCES == errno) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Permission denied: unable to execute shell to run mail delivery binary '%s'", sendmail_path);
 			pclose(sendmail);
-#if PHP_SIGCHILD
-			/* Restore handler in case of error on Windows
-			   Not sure if this applicable on Win but just in case. */
-			if (sig_handler) {
-				signal(SIGCHLD, sig_handler);
-			}
-#endif	
 			return 0;
 		}
 #endif
@@ -277,12 +251,6 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		}
 		fprintf(sendmail, "\n%s\n", message);
 		ret = pclose(sendmail);
-#if PHP_SIGCHILD
-		if (sig_handler) {
-			signal(SIGCHLD, sig_handler);
-		}
-#endif
-
 #ifdef PHP_WIN32
 		if (ret == -1)
 #else
@@ -301,11 +269,6 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		}
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not execute mail delivery program '%s'", sendmail_path);
-#if PHP_SIGCHILD
-		if (sig_handler) {
-			signal(SIGCHLD, sig_handler);						
-		}
-#endif
 		return 0;
 	}
 

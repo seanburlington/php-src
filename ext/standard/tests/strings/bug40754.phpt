@@ -53,10 +53,10 @@ bool(false)
 Warning: stripos(): Offset not contained in string in %s on line %d
 bool(false)
 
-Warning: strrpos(): Offset is greater than the length of haystack string in %s on line %d
+Notice: strrpos(): Offset is greater than the length of haystack string in %s on line %d
 bool(false)
 
-Warning: strripos(): Offset is greater than the length of haystack string in %s on line %d
+Notice: strripos(): Offset is greater than the length of haystack string in %s on line %d
 bool(false)
 int(2)
 string(8) "abcdeabc"

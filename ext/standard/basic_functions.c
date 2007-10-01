@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.4 2007/10/01 12:40:53 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.5 2007/10/01 20:36:01 johannes Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6125,7 +6125,7 @@ PHP_FUNCTION(move_uploaded_file)
 		RETURN_FALSE;
 	}
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &path, &path_len, &new_path, new_path_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &path, &path_len, &new_path, &new_path_len) == FAILURE) {
 		return;
 	}
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.59 2007/09/04 11:19:33 derick Exp $ */
+/* $Id: snprintf.c,v 1.60 2007/10/01 15:25:01 iliaa Exp $ */
 
 
 #include "php.h"
@@ -1051,6 +1051,7 @@ fmt_string:
 
 
 				case 'g':
+				case 'k':
 				case 'G':
 				case 'H':
 					switch(modifier) {
@@ -1091,7 +1092,7 @@ fmt_string:
 						lconv = localeconv();
 					}
 #endif
-					s = php_gcvt(fp_num, precision, *fmt=='H' ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G' || *fmt == 'H')?'E':'e', &num_buf[1]);
+					s = php_gcvt(fp_num, precision, (*fmt == 'H' || *fmt == 'k') ? '.' : LCONV_DECIMAL_POINT, (*fmt == 'G' || *fmt == 'H')?'E':'e', &num_buf[1]);
 					if (*s == '-')
 						prefix_char = *s++;
 					else if (print_sign)

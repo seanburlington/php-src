@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.37.2.4.2.18 2008/12/31 11:17:48 sebastian Exp $ */
+/* $Id: snprintf.c,v 1.37.2.4.2.14.2.1 2007/10/01 15:22:41 iliaa Exp $ */
 
 
 #include "php.h"
@@ -155,7 +155,10 @@ PHPAPI char *php_gcvt(double value, int ndigit, char dec_point, char exponent, c
 		*dst++ = '-';
 	}
 
-	if ((decpt >= 0 && decpt > ndigit) || decpt < -3) { /* use E-style */
+	for (i = 0; i < ndigit && digits[i] != '\0'; i++);
+	
+	if ((decpt >= 0 && decpt - i > 4)
+			|| (decpt < 0 && decpt < -3)) {     /* use E-style */
 		/* exponential format (e.g. 1.2345e+13) */
 		if (--decpt < 0) {
 			sign = 1;

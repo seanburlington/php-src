@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.25.2.2.2.16 2009/03/30 19:59:07 iliaa Exp $ */
+/* $Id: spprintf.c,v 1.25.2.2.2.10.2.1 2007/10/01 15:22:41 iliaa Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -76,7 +76,6 @@
  * SIO stdio-replacement strx_* functions by Panos Tsirigotis
  * <panos@alumni.cs.colorado.edu> for xinetd.
  */
-#define _GNU_SOURCE
 #include "php.h"
 
 #include <stddef.h>
@@ -180,13 +179,6 @@
 } while (0)
 
 /* }}} */
-
-#if !HAVE_STRNLEN
-static size_t strnlen(const char *s, size_t maxlen) {
-	char *r = memchr(s, '\0', maxlen);
-	return r ? r-s : maxlen;
-}
-#endif
 
 /*
  * Do format conversion placing the output in buffer
@@ -555,11 +547,9 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap) 
 				case 'v':
 					s = va_arg(ap, char *);
 					if (s != NULL) {
-						if (!adjust_precision) {
-							s_len = strlen(s);
-						} else {
-							s_len = strnlen(s, precision);
-						}
+						s_len = strlen(s);
+						if (adjust_precision && precision < s_len)
+							s_len = precision;
 					} else {
 						s = S_NULL;
 						s_len = S_NULL_LEN;

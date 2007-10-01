@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.66 2009/05/10 16:45:01 colder Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.1 2007/10/01 12:34:19 jani Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -102,7 +102,7 @@ ZEND_DECLARE_MODULE_GLOBALS(array)
  */
 static void php_array_init_globals(zend_array_globals *array_globals)
 {
-	memset(array_globals, 0, sizeof(zend_array_globals));
+	memset(array_globals, 0, sizeof(array_globals));
 }
 /* }}} */
 
@@ -283,11 +283,6 @@ static int php_count_recursive(zval *array, long mode TSRMLS_DC) /* {{{ */
 	zval **element;
 
 	if (Z_TYPE_P(array) == IS_ARRAY) {
-		if (Z_ARRVAL_P(array)->nApplyCount > 1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");
-			return 0;
-		}
-
 		cnt = zend_hash_num_elements(Z_ARRVAL_P(array));
 		if (mode == COUNT_RECURSIVE) {
 			HashPosition pos;
@@ -295,9 +290,7 @@ static int php_count_recursive(zval *array, long mode TSRMLS_DC) /* {{{ */
 			for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(array), &pos);
 				 zend_hash_get_current_data_ex(Z_ARRVAL_P(array), (void **) &element, &pos) == SUCCESS;
 				 zend_hash_move_forward_ex(Z_ARRVAL_P(array), &pos)) {
-				Z_ARRVAL_P(array)->nApplyCount++;
 				cnt += php_count_recursive(*element, COUNT_RECURSIVE TSRMLS_CC);
-				Z_ARRVAL_P(array)->nApplyCount--;
 			}
 		}
 	}
@@ -331,7 +324,7 @@ PHP_FUNCTION(count)
 			if (Z_OBJ_HT_P(array)->get_class_entry && instanceof_function(Z_OBJCE_P(array), spl_ce_Countable TSRMLS_CC)) {
 				zend_call_method_with_0_params(&array, NULL, NULL, "count", &retval);
 				if (retval) {
-					convert_to_long_ex(&retval);
+					convert_to_long(retval);
 					RETVAL_LONG(Z_LVAL_P(retval));
 					zval_ptr_dtor(&retval);
 				}
@@ -667,7 +660,6 @@ PHP_FUNCTION(usort)
 		PHP_ARRAY_CMP_FUNC_RESTORE();
 		WRONG_PARAM_COUNT;
 	}
-
 	target_hash = HASH_OF(*array);
 	if (!target_hash) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The argument should be an array");
@@ -676,7 +668,6 @@ PHP_FUNCTION(usort)
 	}
 
 	PHP_ARRAY_CMP_FUNC_CHECK(BG(user_compare_func_name))
-	BG(user_compare_fci_cache).initialized = 0;
 	
 	if (zend_hash_sort(target_hash, zend_qsort, array_user_compare, 1 TSRMLS_CC) == FAILURE) {
 		PHP_ARRAY_CMP_FUNC_RESTORE();
@@ -709,7 +700,6 @@ PHP_FUNCTION(uasort)
 	}
 
 	PHP_ARRAY_CMP_FUNC_CHECK(BG(user_compare_func_name))
-	BG(user_compare_fci_cache).initialized = 0;
 
 	if (zend_hash_sort(target_hash, zend_qsort, array_user_compare, 0 TSRMLS_CC) == FAILURE) {
 		PHP_ARRAY_CMP_FUNC_RESTORE();
@@ -793,7 +783,6 @@ PHP_FUNCTION(uksort)
 	}
 
 	PHP_ARRAY_CMP_FUNC_CHECK(BG(user_compare_func_name))
-	BG(user_compare_fci_cache).initialized = 0;
 
 	if (zend_hash_sort(target_hash, zend_qsort, array_user_key_compare, 0 TSRMLS_CC) == FAILURE) {
 		PHP_ARRAY_CMP_FUNC_RESTORE();
@@ -975,7 +964,7 @@ PHP_FUNCTION(min)
 	zval **result;
 
 	if (argc<=0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "At least one value should be passed");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Atleast one value should be passed");
 		RETURN_NULL();
 	}
 	set_compare_func(SORT_REGULAR TSRMLS_CC);
@@ -988,7 +977,7 @@ PHP_FUNCTION(min)
 		if (zend_hash_minmax(Z_ARRVAL_PP(arr), array_data_compare, 0, (void **) &result TSRMLS_CC) == SUCCESS) {
 			RETVAL_ZVAL(*result, 1, 0);
 		} else {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Array must contain at least one element");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Array must contain atleast one element");
 			RETURN_FALSE;
 		}
 	} else {
@@ -1025,7 +1014,7 @@ PHP_FUNCTION(max)
 	zval **result;
 
 	if (argc<=0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "At least one value should be passed");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Atleast one value should be passed");
 		RETURN_NULL();
 	}
 	set_compare_func(SORT_REGULAR TSRMLS_CC);
@@ -1038,7 +1027,7 @@ PHP_FUNCTION(max)
 		if (zend_hash_minmax(Z_ARRVAL_PP(arr), array_data_compare, 1, (void **) &result TSRMLS_CC) == SUCCESS) {
 			RETVAL_ZVAL(*result, 1, 0);
 		} else {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Array must contain at least one element");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Array must contain atleast one element");
 			RETURN_FALSE;
 		}
 	} else {
@@ -1088,15 +1077,13 @@ static int php_array_walk(HashTable *target_hash, zval **userdata, int recursive
 		if (recursive && Z_TYPE_PP(args[0]) == IS_ARRAY) {
 			HashTable *thash;
 			
-			SEPARATE_ZVAL_IF_NOT_REF(args[0]);
+			SEPARATE_ZVAL_TO_MAKE_IS_REF(args[0]);
 			thash = HASH_OF(*(args[0]));
-			if (thash->nApplyCount > 1) {
+			if (thash == target_hash) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");
 				return 0;
 			}
-			thash->nApplyCount++;
 			php_array_walk(thash, userdata, recursive TSRMLS_CC);
-			thash->nApplyCount--;
 		} else {
 			zend_fcall_info fci;
 
@@ -1330,90 +1317,86 @@ static int php_valid_var_name(char *var_name, int len) /* {{{ */
 }
 /* }}} */
 
+PHPAPI int php_prefix_varname(zval *result, zval *prefix, char *var_name, int var_name_len, zend_bool add_underscore TSRMLS_DC) /* {{{ */
+{
+	Z_STRLEN_P(result) = Z_STRLEN_P(prefix) + (add_underscore ? 1 : 0) + var_name_len;
+	Z_TYPE_P(result) = IS_STRING;
+	Z_STRVAL_P(result) = emalloc(Z_STRLEN_P(result) + 1);
+	memcpy(Z_STRVAL_P(result), Z_STRVAL_P(prefix), Z_STRLEN_P(prefix));
+
+	if (add_underscore) {
+		Z_STRVAL_P(result)[Z_STRLEN_P(prefix)] = '_';
+	}
+
+	memcpy(Z_STRVAL_P(result) + Z_STRLEN_P(prefix) + (add_underscore ? 1 : 0), var_name, var_name_len + 1);
+
+	return SUCCESS;
+}
+/* }}} */
+
 /* {{{ proto int extract(array var_array [, int extract_type [, string prefix]])
    Imports variables into symbol table from an array */
 PHP_FUNCTION(extract)
 {
-	zval **var_array, *orig_var_array, **z_extract_type, **prefix;
+	zval *var_array, *prefix = NULL;
+	long extract_type = EXTR_OVERWRITE;
 	zval **entry, *data;
 	char *var_name;
-	smart_str final_name = {0};
 	ulong num_key;
 	uint var_name_len;
-	int var_exists, extract_type, key_type, count = 0;
+	int var_exists, key_type, count = 0;
 	int extract_refs = 0;
 	HashPosition pos;
 
-	switch (ZEND_NUM_ARGS()) {
-		case 1:
-			if (zend_get_parameters_ex(1, &var_array) == FAILURE) {
-				WRONG_PARAM_COUNT;
-			}
-			extract_type = EXTR_OVERWRITE;
-			break;
-
-		case 2:
-			if (zend_get_parameters_ex(2, &var_array, &z_extract_type) == FAILURE) {
-				WRONG_PARAM_COUNT;
-			}
-			convert_to_long_ex(z_extract_type);
-			extract_type = Z_LVAL_PP(z_extract_type);
-			extract_refs = (extract_type & EXTR_REFS);
-			extract_type &= 0xff;
-			if (extract_type > EXTR_SKIP && extract_type <= EXTR_PREFIX_IF_EXISTS) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Prefix expected to be specified");
-				return;
-			}
-			break;
-			
-		case 3:
-			if (zend_get_parameters_ex(3, &var_array, &z_extract_type, &prefix) == FAILURE) {
-				WRONG_PARAM_COUNT;
-			}
-			convert_to_long_ex(z_extract_type);
-			extract_type = Z_LVAL_PP(z_extract_type);
-			extract_refs = (extract_type & EXTR_REFS);
-			extract_type &= 0xff;
-			convert_to_string_ex(prefix);
-			break;
-
-		default:
-			WRONG_PARAM_COUNT;
-			break;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a|lz/", &var_array, &extract_type, &prefix) == FAILURE) {
+		return;
 	}
-	
+
+	extract_refs = (extract_type & EXTR_REFS);
+	extract_type &= 0xff;
+
 	if (extract_type < EXTR_OVERWRITE || extract_type > EXTR_IF_EXISTS) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown extract type");
-		return;
-	}
-	
-	if (Z_TYPE_PP(var_array) != IS_ARRAY) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First argument should be an array");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid extract type");
 		return;
 	}
 
-	/* var_array is passed by ref for the needs of EXTR_REFS (needs to
-	 * work on the original array to create refs to its members)
-	 * simulate pass_by_value if EXTR_REFS is not used */
-	if (!extract_refs) {
-		orig_var_array = *var_array;
-		SEPARATE_ARG_IF_REF((*var_array));
+	if (extract_type > EXTR_SKIP && extract_type <= EXTR_PREFIX_IF_EXISTS && ZEND_NUM_ARGS() < 3) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "specified extract type requires the prefix parameter");
+		return;
 	}
 
-	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(var_array), &pos);
-	while (zend_hash_get_current_data_ex(Z_ARRVAL_PP(var_array), (void **)&entry, &pos) == SUCCESS) {
-		key_type = zend_hash_get_current_key_ex(Z_ARRVAL_PP(var_array), &var_name, &var_name_len, &num_key, 0, &pos);
+	if (prefix) {
+		convert_to_string(prefix);
+		if (Z_STRLEN_P(prefix) && !php_valid_var_name(Z_STRVAL_P(prefix), Z_STRLEN_P(prefix))) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "prefix is not a valid identifier");
+			return;
+		}
+	}
+
+	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(var_array), &pos);
+	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(var_array), (void **)&entry, &pos) == SUCCESS) {
+		zval final_name;
+
+		ZVAL_NULL(&final_name);
+
+		key_type = zend_hash_get_current_key_ex(Z_ARRVAL_P(var_array), &var_name, &var_name_len, &num_key, 0, &pos);
 		var_exists = 0;
 
 		if (key_type == HASH_KEY_IS_STRING) {
 			var_name_len--;
 			var_exists = zend_hash_exists(EG(active_symbol_table), var_name, var_name_len + 1);
-		} else if (extract_type == EXTR_PREFIX_ALL || extract_type == EXTR_PREFIX_INVALID) {
-			smart_str_appendl(&final_name, Z_STRVAL_PP(prefix), Z_STRLEN_PP(prefix));
-			smart_str_appendc(&final_name, '_');
-			smart_str_append_long(&final_name, num_key);
+		} else if (key_type == HASH_KEY_IS_LONG &&
+				(extract_type == EXTR_PREFIX_ALL ||
+				 extract_type == EXTR_PREFIX_INVALID)
+		) {
+			zval num;
+
+			ZVAL_LONG(&num, num_key);
+			convert_to_string(&num);
+			php_prefix_varname(&final_name, prefix, Z_STRVAL(num), Z_STRLEN(num), 1 TSRMLS_CC);
+			zval_dtor(&num);
 		} else {
-			zend_hash_move_forward_ex(Z_ARRVAL_PP(var_array), &pos);
+			zend_hash_move_forward_ex(Z_ARRVAL_P(var_array), &pos);
 			continue;
 		}
 			
@@ -1424,86 +1407,83 @@ PHP_FUNCTION(extract)
 
 			case EXTR_OVERWRITE:
 				/* GLOBALS protection */
-				if (var_exists && !strcmp(var_name, "GLOBALS")) {
+				if (var_exists && 
+					var_name_len == sizeof("GLOBALS") &&
+					!strcmp(var_name, "GLOBALS")
+				) {
 					break;
 				}
-				smart_str_appendl(&final_name, var_name, var_name_len);
+				ZVAL_STRINGL(&final_name, var_name, var_name_len, 1);
 				break;
 
 			case EXTR_PREFIX_IF_EXISTS:
 				if (var_exists) {
-					smart_str_appendl(&final_name, Z_STRVAL_PP(prefix), Z_STRLEN_PP(prefix));
-					smart_str_appendc(&final_name, '_');
-					smart_str_appendl(&final_name, var_name, var_name_len);
+					php_prefix_varname(&final_name, prefix, var_name, var_name_len, 1 TSRMLS_CC);
 				}
 				break;
 
 			case EXTR_PREFIX_SAME:
-				if (!var_exists)
-					smart_str_appendl(&final_name, var_name, var_name_len);
+				if (!var_exists && var_name_len != 0) {
+					ZVAL_STRINGL(&final_name, var_name, var_name_len, 1);
+				}
 				/* break omitted intentionally */
 
 			case EXTR_PREFIX_ALL:
-				if (final_name.len == 0 && var_name_len != 0) {
-					smart_str_appendl(&final_name, Z_STRVAL_PP(prefix), Z_STRLEN_PP(prefix));
-					smart_str_appendc(&final_name, '_');
-					smart_str_appendl(&final_name, var_name, var_name_len);
+				if (Z_TYPE(final_name) == IS_NULL && var_name_len != 0) {
+					php_prefix_varname(&final_name, prefix, var_name, var_name_len, 1 TSRMLS_CC);
 				}
 				break;
 
 			case EXTR_PREFIX_INVALID:
-				if (final_name.len == 0) {
+				if (Z_TYPE(final_name) == IS_NULL) {
 					if (!php_valid_var_name(var_name, var_name_len)) {
-						smart_str_appendl(&final_name, Z_STRVAL_PP(prefix), Z_STRLEN_PP(prefix));
-						smart_str_appendc(&final_name, '_');
-						smart_str_appendl(&final_name, var_name, var_name_len);
-					} else
-						smart_str_appendl(&final_name, var_name, var_name_len);
+						php_prefix_varname(&final_name, prefix, var_name, var_name_len, 1 TSRMLS_CC);
+					} else {
+						ZVAL_STRINGL(&final_name, var_name, var_name_len, 1);
+					}
 				}
 				break;
 
 			default:
-				if (!var_exists)
-					smart_str_appendl(&final_name, var_name, var_name_len);
+				if (!var_exists) {
+					ZVAL_STRINGL(&final_name, var_name, var_name_len, 1);
+				}
 				break;
 		}
 
-		if (final_name.len) {
-			smart_str_0(&final_name);
-			if (php_valid_var_name(final_name.c, final_name.len)) {
-				if (extract_refs) {
-					zval **orig_var;
+		if (Z_TYPE(final_name) != IS_NULL && php_valid_var_name(Z_STRVAL(final_name), Z_STRLEN(final_name))) {
+			if (extract_refs) {
+				zval **orig_var;
 
+				if (zend_hash_find(EG(active_symbol_table), Z_STRVAL(final_name), Z_STRLEN(final_name) + 1, (void **) &orig_var) == SUCCESS) {
 					SEPARATE_ZVAL_TO_MAKE_IS_REF(entry);
 					zval_add_ref(entry);
+						
+					zval_ptr_dtor(orig_var);
 
-					if (zend_hash_find(EG(active_symbol_table), final_name.c, final_name.len+1, (void **) &orig_var) == SUCCESS) {
-						zval_ptr_dtor(orig_var);
-						*orig_var = *entry;
-					} else {
-						zend_hash_update(EG(active_symbol_table), final_name.c, final_name.len+1, (void **) entry, sizeof(zval *), NULL);
-					}
+					*orig_var = *entry;
 				} else {
-					MAKE_STD_ZVAL(data);
-					*data = **entry;
-					zval_copy_ctor(data);
-
-					ZEND_SET_SYMBOL_WITH_LENGTH(EG(active_symbol_table), final_name.c, final_name.len+1, data, 1, 0);
+					if (var_array->refcount > 1 || *entry == EG(uninitialized_zval_ptr)) {
+						SEPARATE_ZVAL_TO_MAKE_IS_REF(entry);
+					} else {
+						(*entry)->is_ref = 1;
+					}
+					zval_add_ref(entry);
+					zend_hash_update(EG(active_symbol_table), Z_STRVAL(final_name), Z_STRLEN(final_name) + 1, (void **) entry, sizeof(zval *), NULL);
 				}
+			} else {
+				MAKE_STD_ZVAL(data);
+				*data = **entry;
+				zval_copy_ctor(data);
 
-				count++;
+				ZEND_SET_SYMBOL_WITH_LENGTH(EG(active_symbol_table), Z_STRVAL(final_name), Z_STRLEN(final_name) + 1, data, 1, 0);
 			}
-			final_name.len = 0;
+			count++;
 		}
+		zval_dtor(&final_name);
 
-		zend_hash_move_forward_ex(Z_ARRVAL_PP(var_array), &pos);
+		zend_hash_move_forward_ex(Z_ARRVAL_P(var_array), &pos);
 	}
-
-	if (!extract_refs) {
-		zval_ptr_dtor(var_array);
-		*var_array = orig_var_array;
-	}
-	smart_str_free(&final_name);
 
 	RETURN_LONG(count);
 }
@@ -1860,7 +1840,7 @@ PHP_FUNCTION(shuffle)
 {
 	zval *array;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &array) == FAILURE) {
+	if (zend_parse_parameters(1 TSRMLS_CC, "a", &array) == FAILURE) {
 		RETURN_FALSE;
 	}
 
@@ -1991,7 +1971,6 @@ PHP_FUNCTION(array_push)
 		new_var->refcount++;
 	
 		if (zend_hash_next_index_insert(Z_ARRVAL_P(stack), &new_var, sizeof(zval *), NULL) == FAILURE) {
-			new_var->refcount--;
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot add element to the array as the next element is already occupied");
 			efree(args);
 			RETURN_FALSE;
@@ -2010,7 +1989,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	zval **stack,			/* Input stack */
 	     **val;			/* Value to be popped */
 	char *key = NULL;
-	uint key_len = 0;
+	int key_len = 0;
 	ulong index;
 	
 	/* Get the arguments and do error-checking */
@@ -2028,11 +2007,10 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	}
 		
 	/* Get the first or last value and copy it into the return value */
-	if (off_the_end) {
+	if (off_the_end)
 		zend_hash_internal_pointer_end(Z_ARRVAL_PP(stack));
-	} else {
+	else
 		zend_hash_internal_pointer_reset(Z_ARRVAL_PP(stack));
-	}
 	zend_hash_get_current_data(Z_ARRVAL_PP(stack), (void **)&val);
 	RETVAL_ZVAL(*val, 1, 0);
 	
@@ -2219,83 +2197,103 @@ PHP_FUNCTION(array_splice)
    Returns elements specified by offset and length */
 PHP_FUNCTION(array_slice)
 {
-	zval	 *input,		/* Input array */
-			**z_length,		/* How many elements to get */
-			**entry;		/* An array entry */
-	long	 offset,		/* Offset to get elements from */
-			 length = 0;
-	zend_bool preserve_keys = 0; /* Whether to preserve keys while copying to the new array or not */
-	int		 num_in,		/* Number of elements in the input array */
-			 pos;			/* Current position in the array */
+	zval	   **input,		/* Input array */
+		   **offset,		/* Offset to get elements from */
+		   **length,		/* How many elements to get */
+		   **entry,			/* An array entry */
+		   **z_preserve_keys; /* Whether to preserve keys while copying to the new array or not */
+	int	     offset_val,	/* Value of the offset argument */
+		     length_val,	/* Value of the length argument */
+		     num_in,		/* Number of elements in the input array */
+		     pos,		/* Current position in the array */
+		     argc;		/* Number of function arguments */
+				 
 	char *string_key;
 	uint string_key_len;
 	ulong num_key;
 	HashPosition hpos;
+	zend_bool	 preserve_keys = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|Zb", &input, &offset, &z_length, &preserve_keys) == FAILURE) {
+	/* Get the arguments and do error-checking */	
+	argc = ZEND_NUM_ARGS();
+	if (argc < 2 || argc > 4 || zend_get_parameters_ex(argc, &input, &offset, &length, &z_preserve_keys)) {
+		WRONG_PARAM_COUNT;
+	}
+	
+	if (Z_TYPE_PP(input) != IS_ARRAY) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument should be an array");
 		return;
 	}
-
-	/* Get number of entries in the input hash */
-	num_in = zend_hash_num_elements(Z_ARRVAL_P(input));
-
-	/* We want all entries from offset to the end if length is not passed or is null */
-	if (ZEND_NUM_ARGS() < 3 || Z_TYPE_PP(z_length) == IS_NULL) {
-		length = num_in;
+	
+	/* Make sure offset and length are integers and assume
+	   we want all entries from offset to the end if length
+	   is not passed */
+	convert_to_long_ex(offset);
+	offset_val = Z_LVAL_PP(offset);
+	if (argc >= 3 && Z_TYPE_PP(length) != IS_NULL) {
+		convert_to_long_ex(length);
+		length_val = Z_LVAL_PP(length);
 	} else {
-		convert_to_long_ex(z_length);
-		length = Z_LVAL_PP(z_length);
+		length_val = zend_hash_num_elements(Z_ARRVAL_PP(input));
 	}
 
+	if (ZEND_NUM_ARGS() > 3) {
+		convert_to_boolean_ex(z_preserve_keys);
+		preserve_keys = Z_BVAL_PP(z_preserve_keys);
+	}
+	
 	/* Initialize returned array */
 	array_init(return_value);
-
+	
+	/* Get number of entries in the input hash */
+	num_in = zend_hash_num_elements(Z_ARRVAL_PP(input));
+	
 	/* Clamp the offset.. */
-	if (offset > num_in) {
+	if (offset_val > num_in)
 		return;
-	} else if (offset < 0 && (offset = (num_in + offset)) < 0) {
-		offset = 0;
-	}
-
+	else if (offset_val < 0 && (offset_val = (num_in + offset_val)) < 0)
+		offset_val = 0;
+	
 	/* ..and the length */
-	if (length < 0) {
-		length = num_in - offset + length;
-	} else if (((unsigned long) offset + (unsigned long) length) > (unsigned) num_in) {
-		length = num_in - offset;
+	if (length_val < 0) {
+		length_val = num_in - offset_val + length_val;
+	} else if (((unsigned)offset_val + (unsigned)length_val) > (unsigned)num_in) {
+		length_val = num_in - offset_val;
 	}
-
-	if (length == 0) {
+	
+	if (length_val == 0)
 		return;
-	}
-
+	
 	/* Start at the beginning and go until we hit offset */
 	pos = 0;
-	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(input), &hpos);
-	while (pos < offset && zend_hash_get_current_data_ex(Z_ARRVAL_P(input), (void **)&entry, &hpos) == SUCCESS) {
+	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(input), &hpos);
+	while (pos < offset_val && zend_hash_get_current_data_ex(Z_ARRVAL_PP(input), (void **)&entry, &hpos) == SUCCESS) {
 		pos++;
-		zend_hash_move_forward_ex(Z_ARRVAL_P(input), &hpos);
+		zend_hash_move_forward_ex(Z_ARRVAL_PP(input), &hpos);
 	}
-
+	
 	/* Copy elements from input array to the one that's returned */
-	while (pos < offset + length && zend_hash_get_current_data_ex(Z_ARRVAL_P(input), (void **)&entry, &hpos) == SUCCESS) {
+	while (pos < offset_val+length_val && zend_hash_get_current_data_ex(Z_ARRVAL_PP(input), (void **)&entry, &hpos) == SUCCESS) {
+		
+		(*entry)->refcount++;
 
-		zval_add_ref(entry);
-
-		switch (zend_hash_get_current_key_ex(Z_ARRVAL_P(input), &string_key, &string_key_len, &num_key, 0, &hpos)) {
+		switch (zend_hash_get_current_key_ex(Z_ARRVAL_PP(input), &string_key, &string_key_len, &num_key, 0, &hpos)) {
 			case HASH_KEY_IS_STRING:
-				zend_hash_update(Z_ARRVAL_P(return_value), string_key, string_key_len, entry, sizeof(zval *), NULL);
+				zend_hash_update(Z_ARRVAL_P(return_value), string_key, string_key_len,
+								 entry, sizeof(zval *), NULL);
 				break;
-
+	
 			case HASH_KEY_IS_LONG:
-				if (preserve_keys) {
-					zend_hash_index_update(Z_ARRVAL_P(return_value), num_key, entry, sizeof(zval *), NULL);
-				} else {
-					zend_hash_next_index_insert(Z_ARRVAL_P(return_value), entry, sizeof(zval *), NULL);
-				}
+				if (preserve_keys)
+					zend_hash_index_update(Z_ARRVAL_P(return_value), num_key,
+										   entry, sizeof(zval *), NULL);
+				else
+					zend_hash_next_index_insert(Z_ARRVAL_P(return_value),
+												entry, sizeof(zval *), NULL);
 				break;
 		}
 		pos++;
-		zend_hash_move_forward_ex(Z_ARRVAL_P(input), &hpos);
+		zend_hash_move_forward_ex(Z_ARRVAL_PP(input), &hpos);
 	}
 }
 /* }}} */
@@ -2312,40 +2310,20 @@ PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS
 	while (zend_hash_get_current_data_ex(src, (void **)&src_entry, &pos) == SUCCESS) {
 		switch (zend_hash_get_current_key_ex(src, &string_key, &string_key_len, &num_key, 0, &pos)) {
 			case HASH_KEY_IS_STRING:
-				if (recursive && zend_hash_find(dest, string_key, string_key_len, (void **)&dest_entry) == SUCCESS) {
-					HashTable *thash = HASH_OF(*dest_entry);
-
-					if ((thash && thash->nApplyCount > 1) || (*src_entry == *dest_entry && (*dest_entry)->is_ref && ((*dest_entry)->refcount % 2))) {
+				if (recursive &&
+					zend_hash_find(dest, string_key, string_key_len, (void **)&dest_entry) == SUCCESS) {
+					if (*src_entry == *dest_entry && ((*dest_entry)->refcount % 2)) {
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");
 						return 0;
 					}
 					SEPARATE_ZVAL(dest_entry);
 					SEPARATE_ZVAL(src_entry);
 					
-					if (Z_TYPE_PP(dest_entry) == IS_NULL) {
-						convert_to_array_ex(dest_entry);
-						add_next_index_null(*dest_entry);
-					} else {
-						convert_to_array_ex(dest_entry);
-					}
-					if (Z_TYPE_PP(src_entry) == IS_NULL) {
-						convert_to_array_ex(src_entry);
-						add_next_index_null(*src_entry);
-					} else {
-						convert_to_array_ex(src_entry);
-					}			
-					if (thash) {
-						thash->nApplyCount++;
-					}
-					if (!php_array_merge(Z_ARRVAL_PP(dest_entry), Z_ARRVAL_PP(src_entry), recursive TSRMLS_CC)) {
-						if (thash) {
-							thash->nApplyCount--;
-						}
+					convert_to_array_ex(dest_entry);
+					convert_to_array_ex(src_entry);
+					if (!php_array_merge(Z_ARRVAL_PP(dest_entry),
+									Z_ARRVAL_PP(src_entry), recursive TSRMLS_CC))
 						return 0;
-					}
-					if (thash) {
-						thash->nApplyCount--;
-					}
 				} else {
 					(*src_entry)->refcount++;
 
@@ -2673,11 +2651,6 @@ PHP_FUNCTION(array_pad)
 	/* Do some initial calculations */
 	input_size = zend_hash_num_elements(Z_ARRVAL_PP(input));
 	pad_size_abs = abs(Z_LVAL_PP(pad_size));
-	if (pad_size_abs < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You may only pad up to 1048576 elements at a time");
-		zval_dtor(return_value);
-		RETURN_FALSE;
-	}
 	do_pad = (input_size >= pad_size_abs) ? 0 : 1;
 	
 	/* Copy the original array */
@@ -2826,7 +2799,7 @@ PHP_FUNCTION(array_change_key_case)
 }
 /* }}} */
 
-/* {{{ proto array array_unique(array input [, int sort_flags])
+/* {{{ proto array array_unique(array input)
    Removes duplicate values from array */
 PHP_FUNCTION(array_unique)
 {
@@ -2839,18 +2812,15 @@ PHP_FUNCTION(array_unique)
 	};
 	struct bucketindex *arTmp, *cmpdata, *lastkept;
 	unsigned int i;
-	long sort_type = SORT_REGULAR;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|l", &array, &sort_type) == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &array) == FAILURE) {
+		WRONG_PARAM_COUNT;
 	}
 	target_hash = HASH_OF(*array);
 	if (!target_hash) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The argument should be an array");
 		RETURN_FALSE;
 	}
-
-	set_compare_func(sort_type TSRMLS_CC);
 
 	array_init(return_value);
 	zend_hash_copy(Z_ARRVAL_P(return_value), target_hash, (copy_ctor_func_t) zval_add_ref, (void *)&tmp, sizeof(zval*));
@@ -2869,6 +2839,7 @@ PHP_FUNCTION(array_unique)
 		arTmp[i].i = i;
 	}
 	arTmp[i].b = NULL;
+	set_compare_func(SORT_STRING TSRMLS_CC);
 	zend_qsort((void *) arTmp, i, sizeof(struct bucketindex), array_data_compare TSRMLS_CC);
 
 	/* go through the sorted array and delete duplicates from the copy */
@@ -3000,17 +2971,8 @@ static void php_array_intersect_key(INTERNAL_FUNCTION_PARAMETERS, int data_compa
 		efree(callback_name);
 		intersect_data_compare_func = zval_user_compare;
 		BG(user_compare_func_name) = args[argc];
-		BG(user_compare_fci_cache).initialized = 0;
 	} else if (data_compare_type == INTERSECT_COMP_DATA_INTERNAL) {
 		intersect_data_compare_func = zval_compare;
-	}
-
-	for (i = 0; i < argc; i++) {
-		if (Z_TYPE_PP(args[i]) != IS_ARRAY) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument #%d is not an array", i + 1);
-			RETVAL_NULL();
-			goto out;
-		}
 	}
 
 	array_init(return_value);
@@ -3046,7 +3008,6 @@ static void php_array_intersect_key(INTERNAL_FUNCTION_PARAMETERS, int data_compa
 			}
 		}
 	}
-out:
 	efree(args);
 }
 /* }}} */
@@ -3104,7 +3065,6 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 			efree(callback_name);
 
 			BG(user_compare_func_name) = args[arr_argc];
-			BG(user_compare_fci_cache).initialized = 0;
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_compare_type is %d. This should never happen. Please report as a bug", data_compare_type);
 			return;
@@ -3166,7 +3126,6 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 				intersect_key_compare_func = array_user_key_compare;
 				intersect_data_compare_func = array_data_compare;
 				BG(user_compare_func_name) = args[arr_argc];
-				BG(user_compare_fci_cache).initialized = 0;
 		} else if (data_compare_type == INTERSECT_COMP_DATA_USER
 				&&
 				key_compare_type == INTERSECT_COMP_KEY_USER) {
@@ -3194,7 +3153,6 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 				intersect_key_compare_func = array_user_key_compare;
 				intersect_data_compare_func = array_user_compare;
 				BG(user_compare_func_name) = args[arr_argc + 1];/* data - key */
-				BG(user_compare_fci_cache).initialized = 0;
 		} else {
 			efree(args);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_compare_type is %d. key_compare_type is %d. This should never happen. Please report as a bug", data_compare_type, key_compare_type);
@@ -3253,7 +3211,6 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 	if ((behavior & INTERSECT_NORMAL) && data_compare_type == INTERSECT_COMP_DATA_USER) {
 		/* array_uintersect() */
 		BG(user_compare_func_name) = args[arr_argc];
-		BG(user_compare_fci_cache).initialized = 0;
 	}
 	
 	/* go through the lists and look for common values */
@@ -3263,7 +3220,6 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 			key_compare_type == INTERSECT_COMP_KEY_USER) {
 
 			BG(user_compare_func_name) = args[argc - 1];
-			BG(user_compare_fci_cache).initialized = 0;
 		}
 
 		for (i = 1; i < arr_argc; i++) {
@@ -3285,13 +3241,11 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 					*/ 
 					if (data_compare_type == INTERSECT_COMP_DATA_USER) {
 						BG(user_compare_func_name) = args[arr_argc];
-						BG(user_compare_fci_cache).initialized = 0;
 					}
 				 	if (intersect_data_compare_func(ptrs[0], ptrs[i] TSRMLS_CC) != 0) {
 				 		c = 1;
 				 		if (key_compare_type == INTERSECT_COMP_KEY_USER) {
 				 			BG(user_compare_func_name) = args[argc - 1];
-							BG(user_compare_fci_cache).initialized = 0;
 				 			/* When KEY_USER, the last parameter is always the callback */
 				 		}
 				 		/* we are going to the break */
@@ -3478,19 +3432,10 @@ static void php_array_diff_key(INTERNAL_FUNCTION_PARAMETERS, int data_compare_ty
 		efree(callback_name);
 		diff_data_compare_func = zval_user_compare;
 		BG(user_compare_func_name) = args[argc];
-		BG(user_compare_fci_cache).initialized = 0;
 	} else if (data_compare_type == DIFF_COMP_DATA_INTERNAL) {
 		diff_data_compare_func = zval_compare;
 	}
 
-	for (i = 0; i < argc; i++) {
-		if (Z_TYPE_PP(args[i]) != IS_ARRAY) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument #%d is not an array", i + 1);
-			RETVAL_NULL();
-			goto out;
-		}
-	}
-	
 	array_init(return_value);
 
 	for (p = Z_ARRVAL_PP(args[0])->pListHead; p != NULL; p = p->pListNext) {
@@ -3524,7 +3469,6 @@ static void php_array_diff_key(INTERNAL_FUNCTION_PARAMETERS, int data_compare_ty
 			}
 		}
 	}
-out:
 	efree(args);
 }
 /* }}} */
@@ -3582,7 +3526,6 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 			efree(callback_name);
 
 			BG(user_compare_func_name) = args[arr_argc];
-			BG(user_compare_fci_cache).initialized = 0;
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_compare_type is %d. This should never happen. Please report as a bug", data_compare_type);
 			return;		
@@ -3644,7 +3587,6 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 			diff_key_compare_func = array_user_key_compare;
 			diff_data_compare_func = array_data_compare;
 			BG(user_compare_func_name) = args[arr_argc];
-			BG(user_compare_fci_cache).initialized = 0;
 		} else if (data_compare_type == DIFF_COMP_DATA_USER 
 				&& 
 			key_compare_type == DIFF_COMP_KEY_USER) {
@@ -3672,7 +3614,6 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 			diff_key_compare_func = array_user_key_compare;
 			diff_data_compare_func = array_user_compare;
 			BG(user_compare_func_name) = args[arr_argc + 1];/* data - key*/
-			BG(user_compare_fci_cache).initialized = 0;
 		} else {
 			efree(args);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_compare_type is %d. key_compare_type is %d. This should never happen. Please report as a bug", data_compare_type, key_compare_type);
@@ -3731,7 +3672,6 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 	if (behavior == DIFF_NORMAL && data_compare_type == DIFF_COMP_DATA_USER) {
 		/* array_udiff() */
 		BG(user_compare_func_name) = args[arr_argc];
-		BG(user_compare_fci_cache).initialized = 0;
 	}
 	
 	/* go through the lists and look for values of ptr[0] that are not in the others */
@@ -3741,18 +3681,16 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 			key_compare_type == DIFF_COMP_KEY_USER) {
 			
 			BG(user_compare_func_name) = args[argc - 1];
-			BG(user_compare_fci_cache).initialized = 0;
 		}
 		c = 1;
 		for (i = 1; i < arr_argc; i++) {
-			Bucket **ptr = ptrs[i];
 			if (behavior == DIFF_NORMAL) {
-				while (*ptr && (0 < (c = diff_data_compare_func(ptrs[0], ptr TSRMLS_CC)))) {
-					ptr++;
+				while (*ptrs[i] && (0 < (c = diff_data_compare_func(ptrs[0], ptrs[i] TSRMLS_CC)))) {
+					ptrs[i]++;
 				}
 			} else if (behavior & DIFF_ASSOC) { /* triggered also when DIFF_KEY */
-				while (*ptr && (0 != (c = diff_key_compare_func(ptrs[0], ptr TSRMLS_CC)))) {
-					ptr++;
+				while (*ptrs[i] && (0 < (c = diff_key_compare_func(ptrs[0], ptrs[i] TSRMLS_CC)))) {
+					ptrs[i]++;
 				}
 			}
 			if (!c) {
@@ -3766,17 +3704,15 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 						In this branch is execute only when DIFF_ASSOC. If behavior == DIFF_KEY
 						data comparison is not needed - skipped.
 					*/
-					if (*ptr) {
+					if (*ptrs[i]) {
 						if (data_compare_type == DIFF_COMP_DATA_USER) {
 							BG(user_compare_func_name) = args[arr_argc];
-							BG(user_compare_fci_cache).initialized = 0;
 						}
-						if (diff_data_compare_func(ptrs[0], ptr TSRMLS_CC) != 0) {
+						if (diff_data_compare_func(ptrs[0], ptrs[i] TSRMLS_CC) != 0) {
 							/* the data is not the same */
 							c = -1;
 							if (key_compare_type == DIFF_COMP_KEY_USER) {
 								BG(user_compare_func_name) = args[argc - 1];
-								BG(user_compare_fci_cache).initialized = 0;
 							}
 						} else {
 							break;
@@ -4203,6 +4139,10 @@ PHP_FUNCTION(array_rand)
 		}
 		num_avail--;
 		zend_hash_move_forward_ex(Z_ARRVAL_PP(input), &pos);
+	}
+
+	if (num_req_val == num_avail) {
+		array_data_shuffle(return_value TSRMLS_CC);
 	}
 }
 /* }}} */

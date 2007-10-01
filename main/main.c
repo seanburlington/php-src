@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.750 2007/09/28 02:04:28 jani Exp $ */
+/* $Id: main.c,v 1.751 2007/10/01 14:56:34 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -338,6 +338,10 @@ static int php_get_display_errors_mode(char *value, int value_length)
 {
 	int mode;
 
+	if (!value) {
+		return PHP_DISPLAY_ERRORS_STDOUT;
+	}
+
 	if (value_length == 2 && !strcasecmp("on", value)) {
 		mode = PHP_DISPLAY_ERRORS_STDOUT;
 	} else if (value_length == 3 && !strcasecmp("yes", value)) {
@@ -348,13 +352,11 @@ static int php_get_display_errors_mode(char *value, int value_length)
 		mode = PHP_DISPLAY_ERRORS_STDERR;
 	} else if (value_length == 6 && !strcasecmp(value, "stdout")) {
 		mode = PHP_DISPLAY_ERRORS_STDOUT;
-	} else if (value ){
+	} else {
 		mode = atoi(value);
 		if (mode && mode != PHP_DISPLAY_ERRORS_STDOUT && mode != PHP_DISPLAY_ERRORS_STDERR) {
 			mode = PHP_DISPLAY_ERRORS_STDOUT;
 		}
-	} else {
-		mode = PHP_DISPLAY_ERRORS_STDOUT;
 	}
 	return mode;
 }

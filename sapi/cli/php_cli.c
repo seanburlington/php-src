@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.34 2009/04/09 10:20:39 bjori Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.22.2.1 2007/10/01 12:40:54 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -90,12 +90,6 @@
 #include "zend_exceptions.h"
 
 #include "php_getopt.h"
-
-#ifndef PHP_WIN32
-# define php_select(m, r, w, e, t)	select(m, r, w, e, t)
-#else
-# include "win32/select.h"
-#endif
 
 PHPAPI extern char *php_ini_opened_path;
 PHPAPI extern char *php_ini_scanned_files;
@@ -230,38 +224,15 @@ static void print_extensions(TSRMLS_D) /* {{{ */
 #define STDOUT_FILENO 1
 #endif
 
-static inline int sapi_cli_select(int fd TSRMLS_DC)
-{
-	fd_set wfd, dfd;
-	struct timeval tv;
-	int ret;
-
-	FD_ZERO(&wfd);
-	FD_ZERO(&dfd);
-
-	PHP_SAFE_FD_SET(fd, &wfd);
-
-	tv.tv_sec = FG(default_socket_timeout);
-	tv.tv_usec = 0;
-
-	ret = php_select(fd+1, &dfd, &wfd, &dfd, &tv);
-
-	return ret != -1;
-}
-
-static inline size_t sapi_cli_single_write(const char *str, uint str_length TSRMLS_DC) /* {{{ */
+static inline size_t sapi_cli_single_write(const char *str, uint str_length) /* {{{ */
 {
 #ifdef PHP_WRITE_STDOUT
 	long ret;
 
-	do {
-		ret = write(STDOUT_FILENO, str, str_length);
-	} while (ret <= 0 && errno == EAGAIN && sapi_cli_select(STDOUT_FILENO TSRMLS_CC));
-
+	ret = write(STDOUT_FILENO, str, str_length);
 	if (ret <= 0) {
 		return 0;
 	}
-
 	return ret;
 #else
 	size_t ret;
@@ -287,12 +258,13 @@ static int sapi_cli_ub_write(const char *str, uint str_length TSRMLS_DC) /* {{{ 
 
 	while (remaining > 0)
 	{
-		ret = sapi_cli_single_write(ptr, remaining TSRMLS_CC);
+		ret = sapi_cli_single_write(ptr, remaining);
 		if (!ret) {
-#ifndef PHP_CLI_WIN32_NO_CONSOLE
+#ifdef PHP_CLI_WIN32_NO_CONSOLE
+			break;
+#else
 			php_handle_aborted_connection();
 #endif
-			break;
 		}
 		ptr += ret;
 		remaining -= ret;
@@ -485,9 +457,9 @@ static void php_cli_usage(char *argv0)
 				"  -F <file>        Parse and execute <file> for every input line\n"
 				"  -E <end_code>    Run PHP <end_code> after processing all input lines\n"
 				"  -H               Hide any passed arguments from external tools.\n"
-				"  -s               Output HTML syntax highlighted source.\n"
+				"  -s               Display colour syntax highlighted source.\n"
 				"  -v               Version number\n"
-				"  -w               Output source with stripped comments and whitespace.\n"
+				"  -w               Display source with stripped comments and whitespace.\n"
 				"  -z <file>        Load Zend extension <file>.\n"
 				"\n"
 				"  args...          Arguments passed to script. Use -- args when first argument\n"
@@ -532,7 +504,7 @@ static void cli_register_file_handles(TSRMLS_D) /* {{{ */
 		if (s_err) php_stream_close(s_err);
 		return;
 	}
-	
+
 #if PHP_DEBUG
 	/* do not close stdout and stderr */
 	s_out->flags |= PHP_STREAM_FLAG_NO_CLOSE;
@@ -590,7 +562,7 @@ static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file,
 	/* #!php support */
 	c = fgetc(file_handle->handle.fp);
 	if (c == '#') {
-		while (c != '\n' && c != '\r' && c != EOF) {
+		while (c != '\n' && c != '\r') {
 			c = fgetc(file_handle->handle.fp);	/* skip to end of line */
 		}
 		/* handle situations where line is terminated by \r\n */
@@ -616,7 +588,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 int main(int argc, char *argv[])
 #endif
 {
-	volatile int exit_status = SUCCESS;
+	int exit_status = SUCCESS;
 	int c;
 	zend_file_handle file_handle;
 /* temporary locals */
@@ -627,8 +599,8 @@ int main(int argc, char *argv[])
 	char *arg_free=NULL, **arg_excp=&arg_free;
 	char *script_file=NULL;
 	int interactive=0;
-	volatile int module_started = 0;
-	volatile int request_started = 0;
+	int module_started = 0;
+	int request_started = 0;
 	int lineno = 0;
 	char *exec_direct=NULL, *exec_run=NULL, *exec_begin=NULL, *exec_end=NULL;
 	const char *param_error=NULL;
@@ -692,7 +664,7 @@ int main(int argc, char *argv[])
 	memcpy(cli_sapi_module.ini_entries, HARDCODED_INI, ini_entries_len+1);
 	cli_sapi_module.ini_entries[ini_entries_len+1] = 0;
 
-	while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0))!=-1) {
+	while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2))!=-1) {
 		switch (c) {
 			case 'c':
 				if (cli_sapi_module.php_ini_path_override) {
@@ -757,7 +729,13 @@ int main(int argc, char *argv[])
 		CG(in_compilation) = 0; /* not initialized but needed for several options */
 		EG(uninitialized_zval_ptr) = NULL;
 
-		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
+		if (cli_sapi_module.php_ini_path_override && cli_sapi_module.php_ini_ignore) {
+			PUTS("You cannot use both -n and -c switch. Use -h for help.\n");
+			exit_status=1;
+			goto out_err;
+		}
+
+		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 			switch (c) {
 
 			case 'h': /* help & quit */
@@ -801,7 +779,7 @@ int main(int argc, char *argv[])
 				}
 
 				request_started = 1;
-				php_printf("PHP %s (%s) (built: %s %s) %s\nCopyright (c) 1997-2009 The PHP Group\n%s",
+				php_printf("PHP %s (%s) (built: %s %s) %s\nCopyright (c) 1997-2007 The PHP Group\n%s",
 					PHP_VERSION, sapi_module.name, __DATE__, __TIME__,
 #if ZEND_DEBUG && defined(HAVE_GCOV)
 					"(DEBUG GCOV)",
@@ -828,7 +806,7 @@ int main(int argc, char *argv[])
 
 		php_optind = orig_optind;
 		php_optarg = orig_optarg;
-		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
+		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 			switch (c) {
 
 			case 'a':	/* interactive mode */
@@ -1143,7 +1121,7 @@ int main(int argc, char *argv[])
 					pos = 0;
 					
 					if (php_last_char != '\0' && php_last_char != '\n') {
-						sapi_cli_single_write("\n", 1 TSRMLS_CC);
+						sapi_cli_single_write("\n", 1);
 					}
 
 					if (EG(exception)) {
@@ -1251,9 +1229,8 @@ int main(int argc, char *argv[])
 				if (exec_end && zend_eval_string_ex(exec_end, NULL, "Command line end code", 1 TSRMLS_CC) == FAILURE) {
 					exit_status=254;
 				}
-
+	
 				break;
-			}
 #ifdef HAVE_REFLECTION
 			case PHP_MODE_REFLECTION_FUNCTION:
 			case PHP_MODE_REFLECTION_CLASS:
@@ -1334,6 +1311,7 @@ int main(int argc, char *argv[])
 					zend_printf("Additional .ini files parsed:      %s\n", php_ini_scanned_files ? php_ini_scanned_files : "(none)");
 					break;
 				}
+			}
 		}
 
 	} zend_end_try();

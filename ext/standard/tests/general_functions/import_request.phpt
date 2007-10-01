@@ -4,8 +4,6 @@ import_request_variables() tests
 a=1&b=heh&c=3&d[]=5&GLOBALS=test&1=hm
 --POST--
 ap=25&bp=test&cp=blah3&dp[]=ar
---INI--
-register_globals=off
 --FILE--
 <?php
 
@@ -28,10 +26,8 @@ var_dump($r_a, $r_b, $r_c, $r_ap);
 echo "Done\n";
 ?>
 --EXPECTF--	
-Warning: Wrong parameter count for import_request_variables() in %s on line %d
+Warning: import_request_variables() expects at least 1 parameter, 0 given in %s on line %d
 NULL
-
-Notice: import_request_variables(): No prefix specified - possible security hazard in %s on line %d
 NULL
 
 Notice: import_request_variables(): No prefix specified - possible security hazard in %s on line %d

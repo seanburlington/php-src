@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.24 2007/07/11 23:10:14 jani Exp $
+dnl $Id: config9.m4,v 1.25 2007/10/01 12:32:39 jani Exp $
 dnl
 
 PHP_ARG_ENABLE(cgi,,
@@ -50,7 +50,7 @@ if test "$PHP_SAPI" = "default"; then
     PHP_SUBST(SAPI_CGI_PATH)
 
     INSTALL_IT="@echo \"Installing PHP CGI binary: \$(INSTALL_ROOT)\$(bindir)/\"; \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/\$(program_prefix)php-cgi\$(program_suffix)\$(EXEEXT)"
-    PHP_SELECT_SAPI(cgi, program, fastcgi.c cgi_main.c getopt.c, , '$(SAPI_CGI_PATH)')
+    PHP_SELECT_SAPI(cgi, program, fastcgi.c cgi_main.c, , '$(SAPI_CGI_PATH)')
 
     case $host_alias in
       *aix*)

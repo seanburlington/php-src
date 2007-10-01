@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.87 2007/07/15 19:50:06 jani Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.88 2007/10/01 12:32:39 jani Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -250,12 +250,6 @@ if test "$php_can_support_proc_open" = "yes"; then
 else
   AC_MSG_RESULT(no)
 fi
-
-dnl getopt long options disabled for now
-dnl as we can't be sure that we get the right getopt.h here
-dnl using the standard AC_CHECK macros
-dnl AC_CHECK_HEADERS(getopt.h)
-dnl AC_CHECK_FUNCS(getopt_long getopt_long_only)
 
 if test "$PHP_SAPI" = "cgi" || test "$PHP_SAPI" = "cli" || test "$PHP_SAPI" = "embed"; then
   AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.181 2007/09/27 18:28:43 dmitry Exp $ */
+/* $Id: php_cli.c,v 1.182 2007/10/01 12:32:39 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -666,7 +666,7 @@ int main(int argc, char *argv[])
 	memcpy(cli_sapi_module.ini_entries, HARDCODED_INI, ini_entries_len+1);
 	cli_sapi_module.ini_entries[ini_entries_len+1] = 0;
 
-	while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0))!=-1) {
+	while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2))!=-1) {
 		switch (c) {
 			case 'c':
 				if (cli_sapi_module.php_ini_path_override) {
@@ -738,7 +738,7 @@ int main(int argc, char *argv[])
 			goto err;
 		}
 
-		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
+		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 			switch (c) {
 
 			case 'h': /* help & quit */
@@ -809,7 +809,7 @@ int main(int argc, char *argv[])
 
 		php_optind = orig_optind;
 		php_optarg = orig_optarg;
-		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0)) != -1) {
+		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 			switch (c) {
 
 			case 'a':	/* interactive mode */

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.15.2.1.2.3 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_xsl.h,v 1.15.2.1.2.1.2.1 2007/10/02 06:31:17 chregu Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -60,6 +60,7 @@ typedef struct _xsl_object {
 	HashTable *registered_phpfunctions;
 	HashTable *node_list;
 	php_libxml_node_object *doc;
+	char *profiling;
 } xsl_object;
 
 void php_xsl_set_object(zval *wrapper, void *obj TSRMLS_DC);

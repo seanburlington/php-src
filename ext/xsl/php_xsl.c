@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.32.2.6.2.2.2.2 2007/09/28 05:33:11 tony2001 Exp $ */
+/* $Id: php_xsl.c,v 1.32.2.6.2.2.2.3 2007/10/02 06:31:17 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -123,6 +123,7 @@ zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)
 	intern->registered_phpfunctions = NULL;
 	intern->node_list = NULL;
 	intern->doc = NULL;
+	intern->profiling = NULL;
 
 	zend_object_std_init(&intern->std, class_type TSRMLS_CC);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));

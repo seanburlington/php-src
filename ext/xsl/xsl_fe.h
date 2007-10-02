@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xsl_fe.h,v 1.8.2.1.2.1.2.1 2007/09/27 18:00:46 dmitry Exp $ */
+/* $Id: xsl_fe.h,v 1.8.2.1.2.1.2.2 2007/10/02 06:31:18 chregu Exp $ */
 
 #ifndef XSL_FE_H
 #define XSL_FE_H
@@ -33,4 +33,5 @@ PHP_FUNCTION(xsl_xsltprocessor_get_parameter);
 PHP_FUNCTION(xsl_xsltprocessor_remove_parameter);
 PHP_FUNCTION(xsl_xsltprocessor_has_exslt_support);
 PHP_FUNCTION(xsl_xsltprocessor_register_php_functions);
+PHP_FUNCTION(xsl_xsltprocessor_set_profiling);
 #endif

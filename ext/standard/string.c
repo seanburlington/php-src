@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.653 2007/10/01 13:41:57 jani Exp $ */
+/* $Id: string.c,v 1.654 2007/10/02 11:35:26 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2306,7 +2306,11 @@ PHPAPI int php_u_strcspn(UChar *s1, UChar *s2, UChar *s1_end, UChar *s2_end)
 
 	for (i = 0, codepts = 0 ; i < len1 ; ) {
 		U16_NEXT(s1, i, len1, ch);
-		if (!len2 || u_memchr32(s2, ch, len2)) {
+		if (len2) {
+			if (u_memchr32(s2, ch, len2)) {
+				break;
+			}
+		} else if (ch == (UChar32)0x00){
 			break;
 		}
 		codepts++;

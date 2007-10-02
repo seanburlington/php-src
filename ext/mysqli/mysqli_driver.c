@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqli_driver.c,v 1.12 2007/09/27 18:28:40 dmitry Exp $ */
+/* $Id: mysqli_driver.c,v 1.13 2007/10/02 10:43:09 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ ZEND_FUNCTION(mysqli_driver_construct)
 	((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->ptr = mysqli_resource;
 }
 
-mysqli_property_entry mysqli_driver_property_entries[] = {
+const mysqli_property_entry mysqli_driver_property_entries[] = {
 	{"client_info", driver_client_info_read, NULL},
 	{"client_version", driver_client_version_read, NULL},
 	{"driver_version", driver_driver_version_read, NULL},

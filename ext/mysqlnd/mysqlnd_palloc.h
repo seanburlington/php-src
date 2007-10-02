@@ -18,9 +18,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.h,v 1.1 2007/07/25 23:47:32 jani Exp $ */
+/* $Id: mysqlnd_palloc.h,v 1.2 2007/10/02 10:43:09 andrey Exp $ */
 #ifndef MYSQLND_PALLOC_H
 #define MYSQLND_PALLOC_H
+
+/* Used in mysqlnd_debug.c */
+extern char * mysqlnd_palloc_zval_ptr_dtor_name;
+extern char * mysqlnd_palloc_get_zval_name;
+
 
 /* Session caching allocator */
 struct st_mysqlnd_zval_list {

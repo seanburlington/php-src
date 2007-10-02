@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_qcache.c,v 1.1 2007/07/25 23:47:32 jani Exp $ */
+/* $Id: mysqlnd_qcache.c,v 1.2 2007/10/02 10:43:09 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"

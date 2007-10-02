@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqlnd.h,v 1.1 2007/07/25 23:47:33 jani Exp $ 
+  $Id: php_mysqlnd.h,v 1.2 2007/10/02 10:43:10 andrey Exp $ 
 */
 
 #ifndef PHP_MYSQLND_H

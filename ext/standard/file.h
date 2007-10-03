@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.104 2007/01/10 15:06:58 bjori Exp $ */
+/* $Id: file.h,v 1.105 2007/10/03 10:31:04 dsp Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -78,7 +78,7 @@ PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC);
 PHPAPI int php_copy_file_ex(char *src, char *dest, int src_chk TSRMLS_DC);
 PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC);
 PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC);
-PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, size_t buf_len, char *buf, zval *return_value TSRMLS_DC);
+PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char escape, size_t buf_len, char *buf, zval *return_value TSRMLS_DC);
 PHPAPI void php_fgetcsv_ex(php_stream *stream, char *delimiter, int delimiter_len, char *enclosure, int enclosure_len, char *escape, int escape_len,
 		char *buffer, int buffer_len, zval *return_value TSRMLS_DC);
 PHPAPI void php_u_fgetcsv(php_stream *stream, UChar *delimiter, int delimiter_len, UChar *enclosure, int enclosure_len, UChar *escape, int escape_len,

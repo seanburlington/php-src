@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.34 2007/03/04 00:42:30 helly Exp $ */
+/* $Id: spl_directory.h,v 1.35 2007/10/03 10:31:03 dsp Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -93,6 +93,7 @@ struct _spl_filesystem_object {
 			zend_function      *func_getCurr;
 			char               delimiter;
 			char               enclosure;
+			char               escape;
 		} file;
 	} u;
 	spl_filesystem_iterator    it;

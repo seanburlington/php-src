@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.23 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.14.2.1 2007/10/03 05:05:08 stas Exp $ */
 
 /*
  * HTML entity resources:
@@ -528,10 +528,6 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 				do {
 					if (this_char < 0x80) {
 						more = 0;
-						if(stat) {
-							/* we didn't finish the UTF sequence correctly */
-							*status = FAILURE;
-						}
 						break;
 					} else if (this_char < 0xc0) {
 						switch (stat) {
@@ -847,7 +843,7 @@ det_charset:
 		
 		/* now walk the charset map and look for the codeset */
 		for (i = 0; charset_map[i].codeset; i++) {
-			if (len == strlen(charset_map[i].codeset) && strncasecmp(charset_hint, charset_map[i].codeset, len) == 0) {
+			if (strncasecmp(charset_hint, charset_map[i].codeset, len) == 0) {
 				charset = charset_map[i].charset;
 				found = 1;
 				break;
@@ -954,7 +950,6 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 					case cs_cp1251:
 					case cs_8859_5:
 					case cs_cp866:
-					case cs_koi8r:
 						replacement[0] = k;
 						replacement[1] = '\0';
 						replacement_len = 1;
@@ -1127,6 +1122,7 @@ PHPAPI char *php_escape_html_entities_ex(unsigned char *old, int oldlen, int *ne
 		maxlen = 128;
 	replaced = emalloc (maxlen);
 	len = 0;
+	//Sleep(10*1000);
 	i = 0;
 	while (i < oldlen) {
 		unsigned char mbsequence[16];	/* allow up to 15 characters in a multibyte sequence */
@@ -1199,25 +1195,14 @@ encode_amp:
 					} else {
 						if (*s == '#') { /* numeric entities */
 							s++;
-							/* Hex (&#x5A;) */
-							if (*s == 'x' || *s == 'X') {
-								s++;
-								while (s < e) {
-									if (!isxdigit((int)*(unsigned char *)s++)) {
-										goto encode_amp;
-									}
-								}
-							/* Dec (&#90;)*/
-							} else {
-								while (s < e) {
-									if (!isdigit((int)*(unsigned char *)s++)) {
-										goto encode_amp;
-									}
+							while (s < e) {
+								if (!isdigit(*s++)) {
+									goto encode_amp;
 								}
 							}
 						} else { /* text entities */
 							while (s < e) {
-								if (!isalnum((int)*(unsigned char *)s++)) {
+								if (!isalnum(*s++)) {
 									goto encode_amp;
 								}
 							}

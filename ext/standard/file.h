@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.94.2.2.2.7 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: file.h,v 1.94.2.2.2.5.2.1 2007/10/03 10:44:32 dsp Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -78,7 +78,7 @@ PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC);
 PHPAPI int php_copy_file_ex(char *src, char *dest, int src_chk TSRMLS_DC);
 PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC);
 PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC);
-PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, size_t buf_len, char *buf, zval *return_value TSRMLS_DC);
+PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char escape_char, size_t buf_len, char *buf, zval *return_value TSRMLS_DC);
 
 #define META_DEF_BUFSIZE 8192
 

@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.5 2007/09/27 13:15:09 jani Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.6 2007/10/04 13:31:11 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -412,7 +412,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	}
 	if (strpbrk(mode, "wa+")) {
 		if (read_write) {
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "FTP does not support simultaneous read/write connections.");
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "FTP does not support simultaneous read/write connections");
 			return NULL;
 		}
 		if (strchr(mode, 'a')) {
@@ -423,7 +423,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	}
 	if (!read_write) {
 		/* No mode specified? */
-		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unknown file open mode.");
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unknown file open mode");
 		return NULL;
 	}
 
@@ -486,7 +486,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 					goto errexit;
 				}
 			} else {
-				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Remote file already exists and overwrite context option not specified.");
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Remote file already exists and overwrite context option not specified");
 				errno = EEXIST;
 				goto errexit;
 			}

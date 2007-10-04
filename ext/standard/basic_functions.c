@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64 2007/09/06 13:28:05 derick Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.65 2007/10/04 13:31:10 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4496,7 +4496,7 @@ PHP_FUNCTION(putenv)
 		}
 	}
 
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter syntax.");
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter syntax");
 	RETURN_FALSE;
 }
 /* }}} */
@@ -4810,7 +4810,7 @@ PHP_FUNCTION(time_sleep_until)
 
 	c_ts = (double)(d_ts - tm.tv_sec - tm.tv_usec / 1000000.00);
 	if (c_ts < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sleep until to time is less than current time.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sleep until to time is less than current time");
 		RETURN_FALSE;
 	}
 
@@ -6273,7 +6273,7 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 	prefix_len = va_arg(args, uint);
 
 	if (!prefix_len && !hash_key->nKeyLength) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Numeric key detected - possible security hazard.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Numeric key detected - possible security hazard");
 		return 0;
 	}
 

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_regex.h,v 1.16.2.1.2.3 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_regex.h,v 1.20.2.2 2007/10/05 15:00:06 jani Exp $ */
 
 #ifndef PHP_REGEX_H
 #define PHP_REGEX_H
@@ -27,15 +27,14 @@
  * 1.. bundled regex
  */
 
-#if REGEX
-/* get aliases */
-#include "regex/regex_extra.h"
-#include "regex/regex.h"
+#if (REGEX == 1)
+/* Define aliases */
+#define regexec php_regexec
+#define regerror php_regerror
+#define regfree php_regfree
+#define regcomp php_regcomp
 
-/* get rid of aliases */
-#define PHP_NO_ALIASES
-#include "regex/regex_extra.h"
-#undef PHP_NO_ALIASES
+#include "ext/ereg/regex/regex.h"
 
 #undef _PCREPOSIX_H
 #define _PCREPOSIX_H 1
@@ -55,6 +54,7 @@
 #ifndef _H_REGEX
 #define _H_REGEX 1              /* This one is for AIX */
 #endif
+
 #elif REGEX == 0
 #include <regex.h>
 #ifndef _REGEX_H_

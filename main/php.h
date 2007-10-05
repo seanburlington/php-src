@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.10 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.8.2.1 2007/10/05 15:00:09 jani Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -70,8 +70,6 @@
 #define PHP_UNAME  "NetWare"
 #define PHP_OS      PHP_UNAME
 #endif
-
-#include "php_regex.h"
 
 #if HAVE_ASSERT_H
 #if PHP_DEBUG
@@ -191,10 +189,6 @@ typedef unsigned int socklen_t;
 
 #ifndef HAVE_STRERROR
 char *strerror(int);
-#endif
-
-#if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
-#include "regex/regex_extra.h"
 #endif
 
 #if HAVE_PWD_H

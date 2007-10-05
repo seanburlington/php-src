@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.877 2007/10/01 12:32:39 jani Exp $ */
+/* $Id: basic_functions.c,v 1.878 2007/10/05 15:19:47 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -100,7 +100,7 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #ifdef ZTS
 PHPAPI int basic_globals_id;
 #else
-php_basic_globals basic_globals;
+PHPAPI php_basic_globals basic_globals;
 #endif
 
 #include "php_fopen_wrappers.h"

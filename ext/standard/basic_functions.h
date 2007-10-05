@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.157 2007/09/28 02:04:28 jani Exp $ */
+/* $Id: basic_functions.h,v 1.158 2007/10/05 15:19:47 jani Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -230,7 +230,7 @@ typedef struct _php_basic_globals {
 PHPAPI extern int basic_globals_id;
 #else
 #define BG(v) (basic_globals.v)
-extern php_basic_globals basic_globals;
+PHPAPI extern php_basic_globals basic_globals;
 #endif
 
 #if HAVE_PUTENV

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.11.2.2.2.4 2008/12/31 11:17:40 sebastian Exp $ 
+  $Id: mysqli_report.c,v 1.11.2.2.2.2.2.1 2007/10/05 21:23:56 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -25,7 +25,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "php_mysqli.h"
+#include "php_mysqli_structs.h"
 
 /* {{{ proto bool mysqli_report(int flags)
    sets report level */
@@ -45,13 +45,14 @@ PHP_FUNCTION(mysqli_report)
 /* }}} */
 
 /* {{{ void php_mysqli_report_error(char *sqlstate, int errorno, char *error) */ 
-void php_mysqli_report_error(char *sqlstate, int errorno, char *error TSRMLS_DC) {
-	php_mysqli_throw_sql_exception(sqlstate, errorno TSRMLS_CC, "%s", error);
+void php_mysqli_report_error(const char *sqlstate, int errorno, const char *error TSRMLS_DC)
+{
+	php_mysqli_throw_sql_exception((char *)sqlstate, errorno TSRMLS_CC, "%s", error);
 }
 /* }}} */
 
 /* {{{ void php_mysqli_report_index() */ 
-void php_mysqli_report_index(char *query, unsigned int status TSRMLS_DC) {
+void php_mysqli_report_index(const char *query, unsigned int status TSRMLS_DC) {
 	char index[15];
 
 	if (status & SERVER_QUERY_NO_GOOD_INDEX_USED) {

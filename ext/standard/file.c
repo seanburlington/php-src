@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.501 2007/10/03 10:31:04 dsp Exp $ */
+/* $Id: file.c,v 1.502 2007/10/06 21:15:46 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2259,10 +2259,7 @@ cleanup:
 }
 /* }}} */
 
-PHPAPI void php_fgetcsv(php_stream *stream, /* {{{ */
-						char delimiter, char enclosure, char escape,
-						size_t buf_len, char *buf,
-						zval *return_value TSRMLS_DC)
+PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char escape, size_t buf_len, char *buf, zval *return_value TSRMLS_DC) /* {{{ */
 {
 	char *delim = &delimiter, *enc = &enclosure, *buffer = buf, *esc;
 	int delim_len = 1, enc_len = 1, esc_len = 1, buffer_len = buf_len;
@@ -2273,7 +2270,6 @@ PHPAPI void php_fgetcsv(php_stream *stream, /* {{{ */
 	}
 
 	if (type == IS_UNICODE) {
-		UChar esc = '\\';
 
 		/* Unicode stream, but binary delimiter/enclosures/prefetch, promote to unicode */
 		if (FAILURE == zend_string_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), (UChar**)&delim, &delim_len, &delimiter, 1 TSRMLS_CC)) {

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.176 2007/09/27 18:28:39 dmitry Exp $ */
+/* $Id: ldap.c,v 1.177 2007/10/06 01:42:40 jani Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -258,6 +258,9 @@ PHP_MINIT_FUNCTION(ldap)
 	REGISTER_LONG_CONSTANT("LDAP_OPT_DEREF", LDAP_OPT_DEREF, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_SIZELIMIT", LDAP_OPT_SIZELIMIT, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_TIMELIMIT", LDAP_OPT_TIMELIMIT, CONST_PERSISTENT | CONST_CS);
+#ifdef LDAP_OPT_NETWORK_TIMEOUT
+	REGISTER_LONG_CONSTANT("LDAP_OPT_NETWORK_TIMEOUT", LDAP_OPT_NETWORK_TIMEOUT, CONST_PERSISTENT | CONST_CS);
+#endif
 	REGISTER_LONG_CONSTANT("LDAP_OPT_PROTOCOL_VERSION", LDAP_OPT_PROTOCOL_VERSION, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_ERROR_NUMBER", LDAP_OPT_ERROR_NUMBER, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_REFERRALS", LDAP_OPT_REFERRALS, CONST_PERSISTENT | CONST_CS);
@@ -322,7 +325,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.176 2007/09/27 18:28:39 dmitry Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.177 2007/10/06 01:42:40 jani Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1714,12 +1717,29 @@ PHP_FUNCTION(ldap_get_option)
 #endif
 		{
 			int val;
+
 			if (ldap_get_option(ld->link, opt, &val)) {
 				RETURN_FALSE;
 			}
 			zval_dtor(*retval);
 			ZVAL_LONG(*retval, val);
 		} break;
+#ifdef LDAP_OPT_NETWORK_TIMEOUT
+	case LDAP_OPT_NETWORK_TIMEOUT:
+		{
+			struct timeval *timeout;
+			
+			if (ldap_get_option(ld->link, opt, (void *) &timeout)) {
+				if (timeout) {
+					ldap_memfree(timeout);
+				}
+				RETURN_FALSE;
+			}			
+			zval_dtor(*retval);
+			ZVAL_LONG(*retval, timeout->tv_sec);
+			ldap_memfree(timeout);
+		} break;
+#endif
 	/* options with string value */
 	case LDAP_OPT_ERROR_STRING:
 #ifdef LDAP_OPT_HOST_NAME
@@ -1795,12 +1815,26 @@ PHP_FUNCTION(ldap_set_option)
 #endif
 		{
 			int val;
+
 			convert_to_long_ex(newval);
 			val = Z_LVAL_PP(newval);
 			if (ldap_set_option(ldap, opt, &val)) {
 				RETURN_FALSE;
 			}
 		} break;
+#ifdef LDAP_OPT_NETWORK_TIMEOUT
+	case LDAP_OPT_NETWORK_TIMEOUT:
+		{
+			struct timeval timeout;
+			
+			convert_to_long_ex(newval);
+			timeout.tv_sec = Z_LVAL_PP(newval);
+			timeout.tv_usec = 0;
+			if (ldap_set_option(ldap, opt, (void *) &timeout)) {
+				RETURN_FALSE;
+			}			
+		} break;
+#endif
 		/* options with string value */
 	case LDAP_OPT_ERROR_STRING:
 #ifdef LDAP_OPT_HOST_NAME

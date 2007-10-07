@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.17.2.1 2007/09/27 18:00:45 dmitry Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.17.2.2 2007/10/07 08:33:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -969,8 +969,8 @@ static void php_wddx_pop_element(void *user_data, const XML_Char *name)
 					} else if (Z_TYPE_P(ent2->data) == IS_OBJECT) {
 						zend_class_entry *old_scope = EG(scope);
 	
-		    				EG(scope) = Z_OBJCE_P(ent2->data);
-						ent1->data->refcount--;
+						EG(scope) = Z_OBJCE_P(ent2->data);
+						Z_DELREF_P(ent1->data);
 						add_property_zval(ent2->data, ent1->varname, ent1->data);
 						EG(scope) = old_scope;
 					} else {

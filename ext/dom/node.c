@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.57 2007/09/27 18:28:38 dmitry Exp $ */
+/* $Id: node.c,v 1.58 2007/10/07 05:15:03 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -240,7 +240,7 @@ int dom_node_node_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 		case XML_CDATA_SECTION_NODE:
 		case XML_PI_NODE:
 			if (newval->type != IS_STRING) {
-				if(newval->refcount > 1) {
+				if(Z_REFCOUNT_P(newval) > 1) {
 					value_copy = *newval;
 					zval_copy_ctor(&value_copy);
 					newval = &value_copy;
@@ -700,7 +700,7 @@ int dom_node_prefix_write(dom_object *obj, zval *newval TSRMLS_DC)
 				}
 			}
 			if (newval->type != IS_STRING) {
-				if(newval->refcount > 1) {
+				if(Z_REFCOUNT_P(newval) > 1) {
 					value_copy = *newval;
 					zval_copy_ctor(&value_copy);
 					newval = &value_copy;

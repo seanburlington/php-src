@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.58 2007/01/11 22:23:06 tony2001 Exp $ */
+/* $Id: php_mbregex.c,v 1.59 2007/10/07 05:15:04 davidw Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1112,7 +1112,7 @@ PHP_FUNCTION(mb_ereg_search_init)
 	}
 
 	MBSTRG(search_str) = *arg_str;
-	ZVAL_ADDREF(MBSTRG(search_str));
+	Z_ADDREF_P(MBSTRG(search_str));
 	SEPARATE_ZVAL_IF_NOT_REF(&MBSTRG(search_str));
 
 	MBSTRG(search_pos) = 0;

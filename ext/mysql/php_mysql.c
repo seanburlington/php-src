@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.243 2007/10/02 10:43:09 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.244 2007/10/07 05:15:04 davidw Exp $ */
 
 /* TODO:
  *
@@ -2093,7 +2093,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 			}
 			if (result_type & MYSQL_ASSOC) {
 				if (result_type & MYSQL_NUM) {
-					ZVAL_ADDREF(data);
+					Z_ADDREF_P(data);
 				}
 				if (UG(unicode)) {
 					UChar *ustr;

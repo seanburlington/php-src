@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.115 2007/09/27 18:28:42 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.116 2007/10/07 05:15:05 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -470,7 +470,7 @@ PHP_FUNCTION(spl_autoload_register)
 			memcpy(lc_name.s + func_name_len, &Z_OBJ_HANDLE_PP(obj_ptr), sizeof(zend_object_handle));
 			func_name_len += sizeof(zend_object_handle);
 			alfi.obj = *obj_ptr;
-			alfi.obj->refcount++;
+			Z_ADDREF_P(alfi.obj);
 			if (Z_TYPE(zfunc_name) == IS_UNICODE) {
 				func_name_len /= sizeof(UChar);
 				Z_STRLEN(zfunc_name) = func_name_len;

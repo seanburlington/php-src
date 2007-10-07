@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.18 2007/09/27 18:28:42 dmitry Exp $ */
+/* $Id: spl_observer.c,v 1.19 2007/10/07 05:15:05 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -175,7 +175,7 @@ void spl_object_storage_attach(spl_SplObjectStorage *intern, zval *obj TSRMLS_DC
 	}
 #endif
 
-	obj->refcount++;
+	Z_ADDREF_P(obj);
 } /* }}} */
 
 /* {{{ proto void SplObjectStorage::attach($obj) U

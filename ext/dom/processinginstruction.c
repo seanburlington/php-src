@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.24 2007/09/27 18:28:38 dmitry Exp $ */
+/* $Id: processinginstruction.c,v 1.25 2007/10/07 05:15:03 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -150,7 +150,7 @@ int dom_processinginstruction_data_write(dom_object *obj, zval *newval TSRMLS_DC
 	}
 
 	if (newval->type != IS_STRING) {
-		if(newval->refcount > 1) {
+		if(Z_REFCOUNT_P(newval) > 1) {
 			value_copy = *newval;
 			zval_copy_ctor(&value_copy);
 			newval = &value_copy;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_persist.c,v 1.12 2007/09/27 18:28:38 dmitry Exp $ */
+/* $Id: com_persist.c,v 1.13 2007/10/07 05:15:03 davidw Exp $ */
 
 /* Infrastructure for working with persistent COM objects.
  * Implements: IStream* wrapper for PHP streams.
@@ -261,7 +261,7 @@ static void istream_destructor(php_istream *stm)
 		return;
 	}
 
-	if (stm->refcount > 0) {
+	if (Z_REFCOUNT_P(stm) > 0) {
 		CoDisconnectObject((IUnknown*)stm, 0);
 	}
 
@@ -281,7 +281,7 @@ PHPAPI IStream *php_com_wrapper_export_stream(php_stream *stream TSRMLS_DC)
 	memset(stm, 0, sizeof(*stm));
 	stm->engine_thread = GetCurrentThreadId();
 	stm->lpVtbl = &php_istream_vtbl;
-	stm->refcount = 1;
+	Z_SET_REFCOUNT_P(stm, 1);
 	stm->stream = stream;
 
 	zend_list_addref(stream->rsrc_id);

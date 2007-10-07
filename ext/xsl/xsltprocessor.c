@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.59 2007/10/06 21:28:10 tony2001 Exp $ */
+/* $Id: xsltprocessor.c,v 1.60 2007/10/07 05:15:07 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -700,7 +700,7 @@ PHP_FUNCTION(xsl_xsltprocessor_set_parameter)
 			convert_to_string_with_converter(*entry, UG(utf8_conv));
 
 			ALLOC_ZVAL(new_string);
-			ZVAL_ADDREF(*entry);
+			Z_ADDREF_P(*entry);
 			COPY_PZVAL_TO_ZVAL(*new_string, *entry);
 			
 			zend_hash_update(intern->parameter, string_key.s, tmp_len, &new_string, sizeof(zval*), NULL);

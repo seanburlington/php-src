@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.50 2007/09/27 18:28:42 dmitry Exp $ */
+/* $Id: user_filters.c,v 1.51 2007/10/07 05:15:06 davidw Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -336,8 +336,8 @@ static php_stream_filter *user_filter_factory_create(const char *filtername, zva
 	/* create the object */
 	ALLOC_ZVAL(obj);
 	object_init_ex(obj, fdat->ce);
-	ZVAL_REFCOUNT(obj) = 1;
-	PZVAL_IS_REF(obj) = 1;
+	Z_SET_REFCOUNT_P(obj, 1);
+	Z_SET_ISREF_P(obj);
 
 	/* filtername */
 	add_property_rt_string(obj, "filtername", (char*)filtername, 1);

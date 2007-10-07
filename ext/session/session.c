@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.477 2007/09/27 18:28:41 dmitry Exp $ */
+/* $Id: session.c,v 1.478 2007/10/07 05:15:04 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1502,7 +1502,7 @@ static PHP_FUNCTION(session_set_save_handler)
 	mdata = emalloc(sizeof(*mdata));
 	
 	for (i = 0; i < 6; i++) {
-		ZVAL_ADDREF(*args[i]);
+		Z_ADDREF_P(*args[i]);
 		mdata->names[i] = *args[i];
 	}
 

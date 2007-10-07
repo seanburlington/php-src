@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.116 2007/09/27 18:28:42 dmitry Exp $ */
+/* $Id: tidy.c,v 1.117 2007/10/07 05:15:06 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -663,8 +663,8 @@ static zval * tidy_instanciate(zend_class_entry *pce, zval *object TSRMLS_DC)
 
 	Z_TYPE_P(object) = IS_OBJECT;
 	object_init_ex(object, pce);
-	object->refcount = 1;
-	object->is_ref = 1;
+	Z_SET_REFCOUNT_P(object, 1);
+	Z_SET_ISREF_P(object);
 	return object;
 }
 
@@ -1062,7 +1062,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.116 2007/09/27 18:28:42 dmitry Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.117 2007/10/07 05:15:06 davidw Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

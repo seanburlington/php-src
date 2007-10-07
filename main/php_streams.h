@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.131 2007/07/21 01:41:55 jani Exp $ */
+/* $Id: php_streams.h,v 1.132 2007/10/07 05:15:07 davidw Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -414,15 +414,15 @@ static inline int _php_stream_path_param_encode(zval **ppzval, char **ppath, int
 		}
 		MAKE_STD_ZVAL(zpath);
 		ZVAL_STRINGL(zpath, path, path_len, 0);
-		zpath->is_ref = 0;
-		zpath->refcount = 1;
+		Z_UNSET_ISREF_P(zpath);
+		Z_SET_REFCOUNT_P(zpath, 1);
 
 		/* Replace the param stack with the new zval */
 		zval_ptr_dtor(ppzval);
 		*ppzval = zpath;
 	} else if (Z_TYPE_PP(ppzval) != IS_STRING) {
-		if ((*ppzval)->is_ref ||
-			(*ppzval)->refcount > 1) {
+		if (Z_ISREF_PP(ppzval) ||
+			Z_REFCOUNT_PP(ppzval) > 1) {
 			zval *zpath;
 
 			/* Produce a new zval of type string */
@@ -430,8 +430,8 @@ static inline int _php_stream_path_param_encode(zval **ppzval, char **ppath, int
 			*zpath = **ppzval;
 			zval_copy_ctor(zpath);
 			convert_to_string(zpath);
-			zpath->is_ref = 0;
-			zpath->refcount = 1;
+			Z_UNSET_ISREF_P(zpath);
+			Z_SET_REFCOUNT_P(zpath, 1);
 
 			/* Replace the param stack with it */
 			zval_ptr_dtor(ppzval);

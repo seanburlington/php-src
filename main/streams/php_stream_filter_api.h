@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.20 2007/01/01 09:29:35 sebastian Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.21 2007/10/07 05:15:07 davidw Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -73,7 +73,7 @@ PHPAPI php_stream_bucket *php_stream_bucket_new(php_stream *stream, char *buf, s
 PHPAPI php_stream_bucket *php_stream_bucket_new_unicode(php_stream *stream, UChar *buf, int32_t buflen, int own_buf, int buf_persistent TSRMLS_DC);
 PHPAPI int php_stream_bucket_split(php_stream_bucket *in, php_stream_bucket **left, php_stream_bucket **right, size_t length TSRMLS_DC);
 PHPAPI void php_stream_bucket_delref(php_stream_bucket *bucket TSRMLS_DC);
-#define php_stream_bucket_addref(bucket)	(bucket)->refcount++
+#define php_stream_bucket_addref(bucket)	Z_ADDREF_P((bucket))
 PHPAPI void php_stream_bucket_prepend(php_stream_bucket_brigade *brigade, php_stream_bucket *bucket TSRMLS_DC);
 PHPAPI void php_stream_bucket_append(php_stream_bucket_brigade *brigade, php_stream_bucket *bucket TSRMLS_DC);
 PHPAPI void php_stream_bucket_unlink(php_stream_bucket *bucket TSRMLS_DC);

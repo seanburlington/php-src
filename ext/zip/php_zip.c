@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.49 2007/09/27 18:28:43 dmitry Exp $ */
+/* $Id: php_zip.c,v 1.50 2007/10/07 05:15:07 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -433,7 +433,7 @@ static zval* php_zip_read_property(zval *object, zval *member, int type TSRMLS_D
 		ret = php_zip_property_reader(obj, hnd, &retval, 1 TSRMLS_CC);
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */
-			retval->refcount = 0;
+			Z_SET_REFCOUNT_P(retval, 0);
 		} else {
 			retval = EG(uninitialized_zval_ptr);
 		}
@@ -477,8 +477,8 @@ static int php_zip_has_property(zval *object, zval *member, int type TSRMLS_DC) 
 		if (type == 2) {
 			retval = 1;
 		} else if (php_zip_property_reader(obj, hnd, &tmp, 1 TSRMLS_CC) == SUCCESS) {
-			tmp->refcount = 1;
-			tmp->is_ref = 0;
+			Z_SET_REFCOUNT_P(tmp, 1);
+			Z_UNSET_ISREF_P(tmp);
 			if (type == 1) {
 				retval = zend_is_true(tmp);
 			} else if (type == 0) {
@@ -2195,7 +2195,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.49 2007/09/27 18:28:43 dmitry Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.50 2007/10/07 05:15:07 davidw Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

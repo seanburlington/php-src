@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.30.2.5.2.8 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: com_handlers.c,v 1.30.2.5.2.6.2.1 2007/10/07 05:22:04 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,8 +38,8 @@ static zval *com_property_read(zval *object, zval *member, int type TSRMLS_DC)
 
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
-	return_value->refcount = 0;
-	return_value->is_ref = 0;
+	Z_SET_REFCOUNT_P(return_value, 0);
+	Z_UNSET_ISREF_P(return_value);
 
 	obj = CDNO_FETCH(object);
 
@@ -92,8 +92,8 @@ static zval *com_read_dimension(zval *object, zval *offset, int type TSRMLS_DC)
 
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
-	return_value->refcount = 0;
-	return_value->is_ref = 0;
+	Z_SET_REFCOUNT_P(return_value, 0);
+	Z_UNSET_ISREF_P(return_value);
 
 	obj = CDNO_FETCH(object);
 

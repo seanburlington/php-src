@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.4 2007/10/05 15:00:08 jani Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.5 2007/10/07 05:22:07 davidw Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3569,7 +3569,7 @@ static void php_str_replace_common(INTERNAL_FUNCTION_PARAMETERS, int case_sensit
 				php_str_replace_in_subject(*search, *replace, subject_entry, result, case_sensitivity, (argc > 3) ? &count : NULL);
 			} else {
 				ALLOC_ZVAL(result);
-				ZVAL_ADDREF(*subject_entry);
+				Z_ADDREF_P(*subject_entry);
 				COPY_PZVAL_TO_ZVAL(*result, *subject_entry);
 			}
 			/* Add to return array */

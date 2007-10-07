@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.13.2.14.2.9.2.1 2007/09/27 18:00:45 dmitry Exp $ */
+/* $Id: php_xmlreader.c,v 1.13.2.14.2.9.2.2 2007/10/07 05:22:07 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -173,7 +173,7 @@ zval *xmlreader_read_property(zval *object, zval *member, int type TSRMLS_DC)
 		ret = xmlreader_property_reader(obj, hnd, &retval TSRMLS_CC);
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */
-			retval->refcount = 0;
+			Z_SET_REFCOUNT_P(retval, 0);
 		} else {
 			retval = EG(uninitialized_zval_ptr);
 		}

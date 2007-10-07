@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -38,8 +38,8 @@ PHPAPI void spl_instantiate(zend_class_entry *pce, zval **object, int alloc TSRM
 		ALLOC_ZVAL(*object);
 	}
 	object_init_ex(*object, pce);
-	(*object)->refcount = 1;
-	(*object)->is_ref = 1; /* check if this can be hold always */
+	Z_SET_REFCOUNT_PP(object, 1);
+	Z_SET_ISREF_PP(object); /* check if this can be hold always */
 }
 /* }}} */
 

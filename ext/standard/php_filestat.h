@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.24.2.4.2.4 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: php_filestat.h,v 1.24.2.4.2.1.2.1 2007/10/07 05:22:07 davidw Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -62,7 +62,7 @@ PHP_FUNCTION(clearstatcache);
 #define MAKE_LONG_ZVAL_INCREF(name, val)\
 	MAKE_STD_ZVAL(name); \
 	ZVAL_LONG(name, val); \
-	name->refcount++; 
+	Z_ADDREF_P(name); 
 
 #ifdef PHP_WIN32
 #define S_IRUSR S_IREAD
@@ -87,7 +87,6 @@ typedef unsigned int php_stat_len;
 typedef int php_stat_len;
 #endif
 
-PHPAPI void php_clear_stat_cache(TSRMLS_D);
 PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int type, zval *return_value TSRMLS_DC);
 
 /* Switches for various filestat functions: */

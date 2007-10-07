@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.9.2.1.2.7 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: com_wrapper.c,v 1.9.2.1.2.5.2.1 2007/10/07 05:22:04 davidw Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -551,7 +551,7 @@ static php_dispatchex *disp_constructor(zval *object TSRMLS_DC)
 
 
 	if (object)
-		ZVAL_ADDREF(object);
+		Z_ADDREF_P(object);
 	disp->object = object;
 
 	disp->id = zend_list_insert(disp, le_dispatch);

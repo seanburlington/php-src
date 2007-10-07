@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.11.2.17 2009/01/19 21:57:45 iliaa Exp $ */
+/* $Id: php_http.c,v 1.77.2.11.2.12.2.1 2007/10/07 05:22:06 davidw Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -33,7 +33,7 @@ static int get_http_headers(php_stream *socketd,char **response, int *out_size T
 
 static int stream_alive(php_stream *stream  TSRMLS_DC)
 {
-	int socket;
+	long socket;
 	char buf;
 
 	/* maybe better to use:
@@ -438,11 +438,7 @@ try_again:
 				smart_str_appendl(&soap_headers, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp));
 				smart_str_append_const(&soap_headers, "\r\n");
 			}
-		} else if (FG(user_agent)) {
-			smart_str_append_const(&soap_headers, "User-Agent: ");
-			smart_str_appends(&soap_headers, FG(user_agent));
-			smart_str_append_const(&soap_headers, "\r\n");
-		} else {
+		} else{
 			smart_str_append_const(&soap_headers, "User-Agent: PHP-SOAP/"PHP_VERSION"\r\n");
 		}
 
@@ -922,7 +918,7 @@ try_again:
 				efree(http_body);
 				efree(loc);
 				if (new_url->scheme == NULL && new_url->path != NULL) {
-					new_url->scheme = phpurl->scheme ? estrdup(phpurl->scheme) : NULL;
+					new_url->scheme = NULL;
 					new_url->host = phpurl->host ? estrdup(phpurl->host) : NULL;
 					new_url->port = phpurl->port;
 					if (new_url->path && new_url->path[0] != '/') {
@@ -998,7 +994,7 @@ try_again:
 			if (digest != NULL) {
 				php_url *new_url  = emalloc(sizeof(php_url));
 
-				digest->refcount--;
+				Z_DELREF_P(digest);
 				add_property_zval_ex(this_ptr, "_digest", sizeof("_digest"), digest TSRMLS_CC);
 
 				*new_url = *phpurl;

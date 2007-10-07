@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.15.2.2.2.5 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: com_saproxy.c,v 1.15.2.2.2.3.2.1 2007/10/07 05:22:04 davidw Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -427,7 +427,7 @@ static void saproxy_clone(void *object, void **clone_ptr TSRMLS_DC)
 	cloneproxy = emalloc(sizeof(*cloneproxy));
 	memcpy(cloneproxy, proxy, sizeof(*cloneproxy));
 
-	ZVAL_ADDREF(cloneproxy->zobj);
+	Z_ADDREF_P(cloneproxy->zobj);
 	cloneproxy->indices = safe_emalloc(cloneproxy->dimensions, sizeof(zval *), 0);
 	clone_indices(cloneproxy, proxy, proxy->dimensions);
 
@@ -451,7 +451,7 @@ int php_com_saproxy_create(zval *com_object, zval *proxy_out, zval *index TSRMLS
 		proxy->zobj = com_object;
 	}
 
-	ZVAL_ADDREF(proxy->zobj);
+	Z_ADDREF_P(proxy->zobj);
 	proxy->indices = safe_emalloc(proxy->dimensions, sizeof(zval *), 0);
 
 	if (rel) {
@@ -570,7 +570,7 @@ zend_object_iterator *php_com_saproxy_iter_get(zend_class_entry *ce, zval *objec
 
 	I->proxy = proxy;
 	I->proxy_obj = object;
-	ZVAL_ADDREF(I->proxy_obj);
+	Z_ADDREF_P(I->proxy_obj);
 
 	I->indices = safe_emalloc(proxy->dimensions + 1, sizeof(LONG), 0);
 	for (i = 0; i < proxy->dimensions; i++) {

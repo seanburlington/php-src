@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.9.2.1 2007/09/27 18:00:45 dmitry Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.9.2.2 2007/10/07 05:22:06 davidw Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -628,7 +628,7 @@ static void php_sqlite_agg_step_function_callback(sqlite_func *func, int argc, c
 
 	if (*context_p == NULL) {
 		MAKE_STD_ZVAL(*context_p);
-		(*context_p)->is_ref = 1;
+		Z_SET_ISREF_PP(context_p);
 		Z_TYPE_PP(context_p) = IS_NULL;
 	}
 
@@ -899,8 +899,8 @@ static zval * sqlite_instanciate(zend_class_entry *pce, zval *object TSRMLS_DC)
 	}
 	Z_TYPE_P(object) = IS_OBJECT;
 	object_init_ex(object, pce);
-	object->refcount = 1;
-	object->is_ref = 1;
+	Z_SET_REFCOUNT_P(object, 1);
+	Z_SET_ISREF_P(object);
 	return object;
 }
 
@@ -1016,7 +1016,7 @@ zend_object_iterator *sqlite_get_iterator(zend_class_entry *ce, zval *object, in
 	if (by_ref) {
 		zend_error(E_RECOVERABLE_ERROR, "An iterator cannot be used with foreach by reference");
 	}
-	object->refcount++;
+	Z_ADDREF_P(object);
 	iterator->it.data = (void*)object;
 	iterator->it.funcs = ce->iterator_funcs.funcs;
 	iterator->res = obj->u.res;
@@ -1128,7 +1128,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.9.2.1 2007/09/27 18:00:45 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.9.2.2 2007/10/07 05:22:06 davidw Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1858,7 +1858,7 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 		if (mode & PHPSQLITE_NUM) {
 			if (mode & PHPSQLITE_ASSOC) {
 				add_index_zval(return_value, j, decoded);
-				ZVAL_ADDREF(decoded);
+				Z_ADDREF_P(decoded);
 				add_assoc_zval(return_value, (char*)colnames[j], decoded);
 			} else {
 				add_next_index_zval(return_value, decoded);

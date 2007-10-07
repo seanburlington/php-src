@@ -201,7 +201,7 @@ static const int state_transition_table[30][31] = {
 /*29*/ {29,29,-1,-1,-1,-1,-1,-1, 3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
 };
 
-#define JSON_PARSER_MAX_DEPTH 512
+#define JSON_PARSER_MAX_DEPTH 128
 
 
 /*
@@ -284,27 +284,15 @@ static void json_create_zval(zval **z, smart_str *buf, int type)
 
     if (type == IS_LONG)
     {
-		if (buf->c[0] == '-') {
-			buf->len--;
-		}
-
-		if (buf->len >= MAX_LENGTH_OF_LONG - 1) {
-			if (buf->len == MAX_LENGTH_OF_LONG - 1) {
-				int cmp = strcmp(buf->c + (buf->c[0] == '-'), long_min_digits);
-
-				if (!(cmp < 0 || (cmp == 0 && buf->c[0] == '-'))) {
-					goto use_double;
-				}
-			} else {
-				goto use_double;
-			}
-		}
-
-		ZVAL_LONG(*z, strtol(buf->c, NULL, 10));
+	double d = zend_strtod(buf->c, NULL);
+	if (d > LONG_MAX || d < -LONG_MAX) {
+		ZVAL_DOUBLE(*z, d);
+	} else {
+		ZVAL_LONG(*z, (long)d);
+	}
     }
     else if (type == IS_DOUBLE)
     {
-use_double:
         ZVAL_DOUBLE(*z, zend_strtod(buf->c, NULL));
     }
     else if (type == IS_STRING)
@@ -376,7 +364,7 @@ static void attach_zval(json_parser *json, int up, int cur, smart_str *key, int 
         {
             add_property_zval_ex(root, (key->len ? key->c : "_empty_"), (key->len ? (key->len + 1) : sizeof("_empty_")), child TSRMLS_CC);
 #if PHP_MAJOR_VERSION >= 5
-            ZVAL_DELREF(child);
+            Z_DELREF_P(child);
 #endif
         }
         else
@@ -506,7 +494,9 @@ JSON_parser(zval *z, unsigned short p[], int length, int assoc TSRMLS_DC)
     }
 */
             case -7:
-                if (type != -1 && JSON(the_stack)[JSON(the_top)] == MODE_OBJECT)
+                if (type != -1 &&
+                    (JSON(the_stack)[JSON(the_top)] == MODE_OBJECT ||
+                     JSON(the_stack)[JSON(the_top)] == MODE_ARRAY))
                 {
                     zval *mval;
                     smart_str_0(&buf);
@@ -517,7 +507,7 @@ JSON_parser(zval *z, unsigned short p[], int length, int assoc TSRMLS_DC)
                     {
                         add_property_zval_ex(JSON(the_zstack)[JSON(the_top)], (key.len ? key.c : "_empty_"), (key.len ? (key.len + 1) : sizeof("_empty_")), mval TSRMLS_CC);
 #if PHP_MAJOR_VERSION >= 5
-                        ZVAL_DELREF(mval);
+                        Z_DELREF_P(mval);
 #endif
                     }
                     else
@@ -576,7 +566,9 @@ JSON_parser(zval *z, unsigned short p[], int length, int assoc TSRMLS_DC)
 */
             case -5:
             {
-                if (type != -1 && JSON(the_stack)[JSON(the_top)] == MODE_ARRAY)
+                if (type != -1 &&
+                    (JSON(the_stack)[JSON(the_top)] == MODE_OBJECT ||
+                     JSON(the_stack)[JSON(the_top)] == MODE_ARRAY))
                 {
                     zval *mval;
                     smart_str_0(&buf);
@@ -646,7 +638,7 @@ JSON_parser(zval *z, unsigned short p[], int length, int assoc TSRMLS_DC)
                                 {
                                     add_property_zval_ex(JSON(the_zstack)[JSON(the_top)], (key.len ? key.c : "_empty_"), (key.len ? (key.len + 1) : sizeof("_empty_")), mval TSRMLS_CC);
 #if PHP_MAJOR_VERSION >= 5
-                                    ZVAL_DELREF(mval);
+                                    Z_DELREF_P(mval);
 #endif
                                 }
                                 else

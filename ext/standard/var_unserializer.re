@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.52.2.2.2.6.2.1 2007/09/29 11:18:41 nlopess Exp $ */
+/* $Id: var_unserializer.re,v 1.52.2.2.2.6.2.2 2007/10/07 05:22:07 davidw Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -74,7 +74,7 @@ static inline void var_push_dtor(php_unserialize_data_t *var_hashx, zval **rval)
 			prev->next = var_hash;
 	}
 
-	(*rval)->refcount++;
+	Z_ADDREF_PP(rval);
 	var_hash->data[var_hash->used_slots++] = *rval;
 }
 
@@ -418,8 +418,8 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 		zval_ptr_dtor(rval);
 	}
 	*rval = *rval_ref;
-	(*rval)->refcount++;
-	(*rval)->is_ref = 1;
+	Z_ADDREF_PP(rval);
+	Z_SET_ISREF_PP(rval);
 	
 	return 1;
 }
@@ -441,8 +441,8 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 		zval_ptr_dtor(rval);
 	}
 	*rval = *rval_ref;
-	(*rval)->refcount++;
-	(*rval)->is_ref = 0;
+	Z_ADDREF_PP(rval);
+	Z_UNSET_ISREF_PP(rval);
 	
 	return 1;
 }

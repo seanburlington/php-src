@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.136.2.4.2.15.2.2 2007/09/28 10:23:38 jani Exp $ */
+/* $Id: php_ini.c,v 1.136.2.4.2.15.2.3 2007/10/07 05:22:07 davidw Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -207,7 +207,7 @@ static void php_ini_parser_cb(zval *arg1, zval *arg2, zval *arg3, int callback_t
 
 					copy = *arg2;
 					zval_copy_ctor(&copy);
-					copy.refcount = 0;
+					Z_SET_REFCOUNT(copy, 0);
 					zend_llist_add_element(&extension_lists.functions, &copy);
 				} else if (!strcasecmp(Z_STRVAL_P(arg1), ZEND_EXTENSION_TOKEN)) { /* load Zend extension */
 					char *extension_name = estrndup(Z_STRVAL_P(arg2), Z_STRLEN_P(arg2));
@@ -573,7 +573,7 @@ int php_init_config(TSRMLS_D)
 			Z_STRLEN(tmp) = strlen(fh.filename);
 			Z_STRVAL(tmp) = zend_strndup(fh.filename, Z_STRLEN(tmp));
 			Z_TYPE(tmp) = IS_STRING;
-			tmp.refcount = 0;
+			Z_SET_REFCOUNT(tmp, 0);
 
 			zend_hash_update(&configuration_hash, "cfg_file_path", sizeof("cfg_file_path"), (void *) &tmp, sizeof(zval), NULL);
 			if (php_ini_opened_path) {

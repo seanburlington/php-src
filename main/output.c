@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.3.2.9 2009/03/26 00:00:18 cseiler Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.4.2.1 2007/10/07 05:22:07 davidw Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -227,8 +227,8 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 
 		ALLOC_INIT_ZVAL(orig_buffer);
 		ZVAL_STRINGL(orig_buffer, OG(active_ob_buffer).buffer, OG(active_ob_buffer).text_length, 1);
-		orig_buffer->refcount=2;	/* don't let call_user_function() destroy our buffer */
-		orig_buffer->is_ref=1;
+		Z_SET_REFCOUNT_P(orig_buffer, 2);	/* don't let call_user_function() destroy our buffer */
+		Z_SET_ISREF_P(orig_buffer);
 
 		ALLOC_INIT_ZVAL(z_status);
 		ZVAL_LONG(z_status, status);
@@ -248,8 +248,8 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 		if (!just_flush) {
 			zval_ptr_dtor(&OG(active_ob_buffer).output_handler);
 		}
-		orig_buffer->refcount -=2;
-		if (orig_buffer->refcount <= 0) { /* free the zval */
+		Z_SET_REFCOUNT_P(orig_buffer, Z_REFCOUNT_P(orig_buffer) - 2);
+		if (Z_REFCOUNT_P(orig_buffer) <= 0) { /* free the zval */
 			zval_dtor(orig_buffer);
 			FREE_ZVAL(orig_buffer);
 		}
@@ -510,7 +510,7 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 		/* do we have array(object,method) */
 		if (zend_is_callable(output_handler, 0, &handler_name)) {
 			SEPARATE_ZVAL(&output_handler);
-			output_handler->refcount++;
+			Z_ADDREF_P(output_handler);
 			result = php_ob_init_named(initial_size, block_size, handler_name, output_handler, chunk_size, erase TSRMLS_CC);
 			efree(handler_name);
 		} else {
@@ -855,12 +855,10 @@ PHP_FUNCTION(ob_get_flush)
 	/* error checks */
 	if (!OG(ob_nesting_level)) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete and flush buffer. No buffer to delete or flush.");
-		zval_dtor(return_value);
 		RETURN_FALSE;
 	}
 	if (OG(ob_nesting_level) && !OG(active_ob_buffer).status && !OG(active_ob_buffer).erase) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer %s.", OG(active_ob_buffer).handler_name);
-		zval_dtor(return_value);
 		RETURN_FALSE;
 	}
 	/* flush */
@@ -882,12 +880,10 @@ PHP_FUNCTION(ob_get_clean)
 	/* error checks */
 	if (!OG(ob_nesting_level)) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer. No buffer to delete.");
-		zval_dtor(return_value);
 		RETURN_FALSE;
 	}
 	if (OG(ob_nesting_level) && !OG(active_ob_buffer).status && !OG(active_ob_buffer).erase) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer %s.", OG(active_ob_buffer).handler_name);
-		zval_dtor(return_value);
 		RETURN_FALSE;
 	}
 	/* delete buffer */

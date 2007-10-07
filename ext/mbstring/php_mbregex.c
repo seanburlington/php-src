@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.9 2008/12/31 11:17:39 sebastian Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.1 2007/10/07 05:22:04 davidw Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -66,7 +66,6 @@ void _php_mb_regex_globals_dtor(zend_mbstring_globals *pglobals TSRMLS_DC)
 /* {{{ PHP_MINIT_FUNCTION(mb_regex) */
 PHP_MINIT_FUNCTION(mb_regex)
 {
-	onig_init();
 	return SUCCESS;
 }
 /* }}} */
@@ -74,7 +73,6 @@ PHP_MINIT_FUNCTION(mb_regex)
 /* {{{ PHP_MSHUTDOWN_FUNCTION(mb_regex) */
 PHP_MSHUTDOWN_FUNCTION(mb_regex)
 {
-	onig_end();
 	return SUCCESS;
 }
 /* }}} */
@@ -548,13 +546,6 @@ static void _php_mb_regex_ereg_exec(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		convert_to_string_ex(arg_pattern);
 		/* don't bother doing an extended regex with just a number */
 	}
-
-	if (!Z_STRVAL_PP(arg_pattern) || Z_STRLEN_PP(arg_pattern) == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "empty pattern");
-		RETVAL_FALSE;
-		goto out;
-	}
-
 	re = php_mbregex_compile_pattern(Z_STRVAL_PP(arg_pattern), Z_STRLEN_PP(arg_pattern), options, MBSTRG(current_mbctype), MBSTRG(regex_default_syntax) TSRMLS_CC);
 	if (re == NULL) {
 		RETVAL_FALSE;
@@ -746,12 +737,7 @@ static void _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, OnigOp
 				/* null terminate buffer */
 				smart_str_appendc(&eval_buf, '\0');
 				/* do eval */
-				if (zend_eval_string(eval_buf.c, &v, description TSRMLS_CC) == FAILURE) {
-					efree(description);
-					php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code: %s%s", PHP_EOL, eval_buf.c);
-					/* zend_error() does not return in this case */
-				}
-
+				zend_eval_string(eval_buf.c, &v, description TSRMLS_CC);
 				/* result of eval */
 				convert_to_string(&v);
 				smart_str_appendl(&out_buf, Z_STRVAL(v), Z_STRLEN(v));
@@ -1126,7 +1112,7 @@ PHP_FUNCTION(mb_ereg_search_init)
 	}
 
 	MBSTRG(search_str) = *arg_str;
-	ZVAL_ADDREF(MBSTRG(search_str));
+	Z_ADDREF_P(MBSTRG(search_str));
 	SEPARATE_ZVAL_IF_NOT_REF(&MBSTRG(search_str));
 
 	MBSTRG(search_pos) = 0;

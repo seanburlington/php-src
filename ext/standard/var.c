@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.25 2009/01/07 14:36:49 derick Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.18.2.1 2007/10/07 05:22:07 davidw Exp $ */
 
 
 
@@ -35,8 +35,7 @@
 #include "basic_functions.h"
 #include "php_incomplete_class.h"
 
-#define COMMON ((*struc)->is_ref ? "&" : "")
-#define Z_REFCOUNT_PP(a) ((*a)->refcount)
+#define COMMON (Z_ISREF_PP(struc) ? "&" : "")
 
 /* }}} */
 
@@ -269,7 +268,8 @@ PHPAPI void php_debug_zval_dump(zval **struc, int level TSRMLS_DC)
 		php_printf("%slong(%ld) refcount(%u)\n", COMMON, Z_LVAL_PP(struc), Z_REFCOUNT_PP(struc));
 		break;
 	case IS_DOUBLE:
-		php_printf("%sdouble(%.*G) refcount(%u)\n", COMMON, (int) EG(precision), Z_DVAL_PP(struc), Z_REFCOUNT_PP(struc));
+		php_printf("%sdouble(%.*G) refcount(%u)\n", COMMON, (int) EG(precision), Z_DVAL_PP(struc), 
+Z_REFCOUNT_PP(struc));
 		break;
 	case IS_STRING:
 		php_printf("%sstring(%d) \"", COMMON, Z_STRLEN_PP(struc));
@@ -355,15 +355,13 @@ static int php_array_element_export(zval **zv, int num_args, va_list args, zend_
 	if (hash_key->nKeyLength==0) { /* numeric key */
 		php_printf("%*c%ld => ", level + 1, ' ', hash_key->h);
 	} else { /* string key */
-		char *key, *tmp_str;
-		int key_len, tmp_len;
+		char *key;
+		int key_len;
 		key = php_addcslashes(hash_key->arKey, hash_key->nKeyLength - 1, &key_len, 0, "'\\", 2 TSRMLS_CC);
-		tmp_str = php_str_to_str_ex(key, key_len, "\0", 1, "' . \"\\0\" . '", 12, &tmp_len, 0, NULL);
 		php_printf("%*c'", level + 1, ' ');
-		PHPWRITE(tmp_str, tmp_len);
+		PHPWRITE(key, key_len);
 		php_printf("' => ");
 		efree(key);
-		efree(tmp_str);
 	}
 	php_var_export(zv, level + 2 TSRMLS_CC);
 	PUTS (",\n");
@@ -378,23 +376,21 @@ static int php_object_element_export(zval **zv, int num_args, va_list args, zend
 
 	level = va_arg(args, int);
 
-	php_printf("%*c", level + 1, ' ');
 	if (hash_key->nKeyLength != 0) {
-		zend_unmangle_property_name(hash_key->arKey, hash_key->nKeyLength - 1, &class_name, &prop_name);
+		php_printf("%*c", level + 1, ' ');
+		zend_unmangle_property_name(hash_key->arKey, hash_key->nKeyLength-1, &class_name, &prop_name);
 		php_printf(" '%s' => ", prop_name);
-	} else {
-		php_printf(" %ld => ", hash_key->h);
+		php_var_export(zv, level + 2 TSRMLS_CC);
+		PUTS (",\n");
 	}
-	php_var_export(zv, level + 2 TSRMLS_CC);
-	PUTS (",\n");
 	return 0;
 }
 
 PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC)
 {
 	HashTable *myht;
- 	char *tmp_str, *tmp_str2;
- 	int tmp_len, tmp_len2;
+	char*     tmp_str;
+	int       tmp_len;
 	char *class_name;
 	zend_uint class_name_len;
 
@@ -412,13 +408,11 @@ PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC)
 		php_printf("%.*H", (int) EG(precision), Z_DVAL_PP(struc));
 		break;
 	case IS_STRING:
-		tmp_str = php_addcslashes(Z_STRVAL_PP(struc), Z_STRLEN_PP(struc), &tmp_len, 0, "'\\", 2 TSRMLS_CC);
-		tmp_str2 = php_str_to_str_ex(tmp_str, tmp_len, "\0", 1, "' . \"\\0\" . '", 12, &tmp_len2, 0, NULL);
+		tmp_str = php_addcslashes(Z_STRVAL_PP(struc), Z_STRLEN_PP(struc), &tmp_len, 0, "'\\\0", 3 TSRMLS_CC);
 		PUTS ("'");
-		PHPWRITE(tmp_str2, tmp_len2);
+		PHPWRITE(tmp_str, tmp_len);
 		PUTS ("'");
-		efree(tmp_str2);
-		efree(tmp_str);
+		efree (tmp_str);
 		break;
 	case IS_ARRAY:
 		myht = Z_ARRVAL_PP(struc);
@@ -426,7 +420,7 @@ PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC)
 			php_printf("\n%*c", level - 1, ' ');
 		}
 		PUTS ("array (\n");
-		zend_hash_apply_with_arguments(myht, (apply_func_args_t) php_array_element_export, 1, level, 0);
+		zend_hash_apply_with_arguments(myht, (apply_func_args_t) php_array_element_export, 1, level, (Z_TYPE_PP(struc) == IS_ARRAY ? 0 : 1));
 		if (level > 1) {
 			php_printf("%*c", level - 1, ' ');
 		}
@@ -506,7 +500,7 @@ static inline int php_add_var_hash(HashTable *var_hash, zval *var, void *var_old
 	}
 
 	if (var_old && zend_hash_find(var_hash, p, len, var_old) == SUCCESS) {
-		if (!var->is_ref) {
+		if (!Z_ISREF_P(var)) {
 			/* we still need to bump up the counter, since non-refs will
 			   be counted separately by unserializer */
 			var_no = -1;
@@ -595,7 +589,7 @@ static void php_var_serialize_class(smart_str *buf, zval *struc, zval *retval_pt
 			if (Z_TYPE_PP(name) != IS_STRING) {
 				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only "
 						"containing the names of instance-variables to "
-						"serialize");
+						"serialize.");
 				/* we should still add element even if it's not OK,
 				   since we already wrote the length of the array before */
 				smart_str_appendl(buf,"N;", 2);
@@ -654,7 +648,7 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 
 	if (var_hash 
 	    && php_add_var_hash(var_hash, struc, (void *) &var_already TSRMLS_CC) == FAILURE) {
-		if(struc->is_ref) {
+		if(Z_ISREF_P(struc)) {
 			smart_str_appendl(buf, "R:", 2);
 			smart_str_append_long(buf, *var_already);
 			smart_str_appendc(buf, ';');
@@ -748,7 +742,7 @@ static void php_var_serialize_intern(smart_str *buf, zval *struc, HashTable *var
 							} else {
 								php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only "
 												 "containing the names of instance-variables to "
-												 "serialize");
+												 "serialize.");
 								/* we should still add element even if it's not OK,
 				   				since we already wrote the length of the array before */
 								smart_str_appendl(buf,"N;", 2);

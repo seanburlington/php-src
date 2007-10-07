@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.17.2.1 2007/09/27 18:00:44 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.2 2007/10/07 05:22:06 davidw Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -468,7 +468,7 @@ PHP_FUNCTION(spl_autoload_register)
 			func_name_len += sizeof(zend_object_handle);
 			lc_name[func_name_len] = '\0';
 			alfi.obj = *obj_ptr;
-			alfi.obj->refcount++;
+			Z_ADDREF_P(alfi.obj);
 		} else {
 			alfi.obj = NULL;
 		}

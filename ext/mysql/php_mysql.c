@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.2 2007/10/05 21:23:55 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.3 2007/10/07 05:22:04 davidw Exp $ */
 
 /* TODO:
  *
@@ -2065,7 +2065,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 			}
 			if (result_type & MYSQL_ASSOC) {
 				if (result_type & MYSQL_NUM) {
-					ZVAL_ADDREF(data);
+					Z_ADDREF_P(data);
 				}
 				add_assoc_zval(return_value, mysql_field->name, data);
 			}

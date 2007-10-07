@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.4 2007/10/07 05:15:04 davidw Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.5 2007/10/07 12:23:28 tony2001 Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1494,7 +1494,7 @@ void mysqlnd_stmt_separate_result_bind(MYSQLND_STMT * const stmt TSRMLS_DC)
 	for (i = 0; i < stmt->field_count; i++) {
 		/* Let's try with no cache */
 		if (stmt->result_bind[i].bound == TRUE) {
-			DBG_INF_FMT("%d has refcount=%u", i, ZVAL_REFCOUNT(stmt->result_bind[i].zv));
+			DBG_INF_FMT("%d has refcount=%u", i, Z_REFCOUNT_P(stmt->result_bind[i].zv));
 			/*
 			  We have to separate the actual zval value of the bound
 			  variable from our allocated zvals or we will face double-free

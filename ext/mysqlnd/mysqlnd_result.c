@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.5 2007/10/07 05:15:04 davidw Exp $ */
+/* $Id: mysqlnd_result.c,v 1.6 2007/10/07 12:23:29 tony2001 Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1138,7 +1138,7 @@ MYSQLND_METHOD(mysqlnd_res, fetch_field_data)(MYSQLND_RES *result, unsigned int 
 
 	*return_value = **entry;
 	zval_copy_ctor(return_value);
-	Z_REFCOUNT_P(return_value) = 1;
+	Z_SET_REFCOUNT_P(return_value, 1);
 	zval_dtor(&row);
 
 	DBG_VOID_RETURN;

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.2 2007/10/07 05:22:05 davidw Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.3 2007/10/07 08:30:47 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -138,7 +138,7 @@ end_1:
 		stmt->param.vars = (zval **)safe_emalloc(num_vars, sizeof(zval), 0);
 		for (i = 0; i < num_vars; i++) {
 			if (bind[i].buffer_type  != MYSQL_TYPE_LONG_BLOB) {
-				Z_ADDREF_PP(*args[i+start]);
+				Z_ADDREF_P(*args[i+start]);
 				stmt->param.vars[i] = *args[i+start];
 			} else {
 				stmt->param.vars[i] = NULL;

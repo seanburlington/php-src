@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.175.2.3.2.23 2009/02/10 16:14:27 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.175.2.3.2.13.2.1 2007/10/08 23:44:50 ab5602 Exp $ */
 
 /* {{{ includes
  */
@@ -81,8 +81,9 @@
 
 /* {{{ php_check_specific_open_basedir
 	When open_basedir is not NULL, check if the given filename is located in
-	open_basedir. Returns -1 if error or not in the open_basedir, else 0.
-	When open_basedir is NULL, always return 0.
+	open_basedir. Returns -1 if error or not in the open_basedir, else 0
+	
+	When open_basedir is NULL, always return 0
 */
 PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path TSRMLS_DC)
 {
@@ -95,7 +96,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	int resolved_name_len;
 	int path_len;
 	int nesting_level = 0;
-
+	
 	/* Special case basedir==".": Use script-directory */
 	if (strcmp(basedir, ".") || !VCWD_GETCWD(local_open_basedir, MAXPATHLEN)) {
 		/* Else use the unmodified path */
@@ -112,7 +113,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	if (expand_filepath(path, resolved_name TSRMLS_CC) == NULL) {
 		return -1;
 	}
-
+	
 	path_len = strlen(resolved_name);
 	memcpy(path_tmp, resolved_name, path_len + 1); /* safe */
 
@@ -121,7 +122,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 		if (nesting_level == 0) {
 			int ret;
 			char buf[MAXPATHLEN];
-
+			
 			ret = readlink(path_tmp, buf, MAXPATHLEN - 1);
 			if (ret < 0) {
 				/* not a broken symlink, move along.. */
@@ -148,10 +149,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 			path_len = path_file - path_tmp + 1;
 #if defined(PHP_WIN32) || defined(NETWARE)
 			if (path_len > 1 && path_tmp[path_len - 2] == ':') {
-				if (path_len != 3) {
-					return -1;
-				} 
-				/* this is c:\ */
+				/* this is c:\,  */
 				path_tmp[path_len] = '\0';
 			} else {
 				path_tmp[path_len - 1] = '\0';
@@ -244,7 +242,8 @@ PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC)
 			ptr = end;
 		}
 		if (warn) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, PG(open_basedir));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, 
+				"open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, PG(open_basedir));
 		}
 		efree(pathbuf);
 		errno = EPERM; /* we deny permission to open it */
@@ -268,10 +267,11 @@ PHPAPI int php_check_safe_mode_include_dir(const char *path TSRMLS_DC)
 			char resolved_name[MAXPATHLEN];
 
 			/* Resolve the real path into resolved_name */
-			if (expand_filepath(path, resolved_name TSRMLS_CC) == NULL) {
+			if (expand_filepath(path, resolved_name TSRMLS_CC) == NULL)
 				return -1;
-			}
+
 			pathbuf = estrdup(PG(safe_mode_include_dir));
+
 			ptr = pathbuf;
 
 			while (ptr && *ptr) {
@@ -351,7 +351,7 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 			if (pwbuflen < 1) {
 				return FAILURE;
 			}
-
+			
 			pwbuf = emalloc(pwbuflen);
 #endif
 			length = s - (path_info + 2);
@@ -369,7 +369,8 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 			pw = getpwnam(user);
 #endif
 			if (pw && pw->pw_dir) {
-				spprintf(&filename, 0, "%s%c%s%c%s", pw->pw_dir, PHP_DIR_SEPARATOR, PG(user_dir), PHP_DIR_SEPARATOR, s + 1); /* Safe */
+				spprintf(&filename, 0, "%s%c%s%c%s", pw->pw_dir, PHP_DIR_SEPARATOR,
+								PG(user_dir), PHP_DIR_SEPARATOR, s+1); /* Safe */
 				STR_FREE(SG(request_info).path_translated);
 				SG(request_info).path_translated = filename;
 			}
@@ -400,9 +401,9 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 
 	if (!filename) {
 		/* we have to free SG(request_info).path_translated here because
-		 * php_destroy_request_info assumes that it will get
-		 * freed when the include_names hash is emptied, but
-		 * we're not adding it in this case */
+		   php_destroy_request_info assumes that it will get
+		   freed when the include_names hash is emptied, but
+		   we're not adding it in this case */
 		STR_FREE(SG(request_info).path_translated);
 		SG(request_info).path_translated = NULL;
 		return FAILURE;
@@ -425,9 +426,9 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 
 	file_handle->opened_path = expand_filepath(filename, NULL TSRMLS_CC);
 
-	if (!(SG(options) & SAPI_OPTION_NO_CHDIR)) {
+    if (!(SG(options) & SAPI_OPTION_NO_CHDIR)) {
 		VCWD_CHDIR_FILE(filename);
-	}
+    }
 	SG(request_info).path_translated = filename;
 
 	file_handle->filename = SG(request_info).path_translated;
@@ -457,13 +458,13 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 	if (opened_path) {
 		*opened_path = NULL;
 	}
-
-	if (!filename) {
+	
+	if(!filename) {
 		return NULL;
 	}
 
 	filename_length = strlen(filename);
-
+	
 	/* Relative path open */
 	if (*filename == '.') {
 		if (PG(safe_mode) && (!php_checkuid(filename, mode, CHECKUID_CHECK_MODE_PARAM))) {
@@ -471,21 +472,21 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 		}
 		return php_fopen_and_set_opened_path(filename, mode, opened_path TSRMLS_CC);
 	}
-
+	
 	/*
 	 * files in safe_mode_include_dir (or subdir) are excluded from
 	 * safe mode GID/UID checks
 	 */
-
+	
 	/* Absolute path open */
 	if (IS_ABSOLUTE_PATH(filename, filename_length)) {
-		if (php_check_safe_mode_include_dir(filename TSRMLS_CC) == 0) {
+		if ((php_check_safe_mode_include_dir(filename TSRMLS_CC)) == 0)
 			/* filename is in safe_mode_include_dir (or subdir) */
 			return php_fopen_and_set_opened_path(filename, mode, opened_path TSRMLS_CC);
-		}
-		if (PG(safe_mode) && (!php_checkuid(filename, mode, CHECKUID_CHECK_MODE_PARAM))) {
+			
+		if (PG(safe_mode) && (!php_checkuid(filename, mode, CHECKUID_CHECK_MODE_PARAM)))
 			return NULL;
-		}
+
 		return php_fopen_and_set_opened_path(filename, mode, opened_path TSRMLS_CC);
 	}
 
@@ -506,15 +507,16 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 		path_length = strlen(path);
 
 		while ((--exec_fname_length >= 0) && !IS_SLASH(exec_fname[exec_fname_length]));
-		if ((exec_fname && exec_fname[0] == '[') || exec_fname_length <= 0) {
+		if ((exec_fname && exec_fname[0] == '[')
+			|| exec_fname_length<=0) {
 			/* [no active file] or no path */
 			pathbuf = estrdup(path);
-		} else {
-			pathbuf = (char *) emalloc(exec_fname_length + path_length + 1 + 1);
+		} else {		
+			pathbuf = (char *) emalloc(exec_fname_length + path_length +1 +1);
 			memcpy(pathbuf, path, path_length);
 			pathbuf[path_length] = DEFAULT_DIR_SEPARATOR;
-			memcpy(pathbuf + path_length + 1, exec_fname, exec_fname_length);
-			pathbuf[path_length + exec_fname_length + 1] = '\0';
+			memcpy(pathbuf+path_length+1, exec_fname, exec_fname_length);
+			pathbuf[path_length + exec_fname_length +1] = '\0';
 		}
 	} else {
 		pathbuf = estrdup(path);
@@ -528,20 +530,17 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 			*end = '\0';
 			end++;
 		}
-		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) >= MAXPATHLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
-		}
+		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
 		if (PG(safe_mode)) {
 			if (VCWD_STAT(trypath, &sb) == 0) {
 				/* file exists ... check permission */
-				if (php_check_safe_mode_include_dir(trypath TSRMLS_CC) == 0 ||
-					php_checkuid(trypath, mode, CHECKUID_CHECK_MODE_PARAM)
-				) {
+				if ((php_check_safe_mode_include_dir(trypath TSRMLS_CC) == 0) ||
+						php_checkuid(trypath, mode, CHECKUID_CHECK_MODE_PARAM))
 					/* UID ok, or trypath is in safe_mode_include_dir */
 					fp = php_fopen_and_set_opened_path(trypath, mode, opened_path TSRMLS_CC);
-				} else {
+				else
 					fp = NULL;
-				}
+
 				efree(pathbuf);
 				return fp;
 			}
@@ -558,29 +557,29 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 	return NULL;
 }
 /* }}} */
-
+ 
 /* {{{ php_strip_url_passwd
  */
 PHPAPI char *php_strip_url_passwd(char *url)
 {
 	register char *p, *url_start;
-
+	
 	if (url == NULL) {
 		return "";
 	}
-
+	
 	p = url;
-
+	
 	while (*p) {
-		if (*p == ':' && *(p + 1) == '/' && *(p + 2) == '/') {
+		if (*p==':' && *(p+1)=='/' && *(p+2)=='/') {
 			/* found protocol */
-			url_start = p = p + 3;
-
+			url_start = p = p+3;
+			
 			while (*p) {
-				if (*p == '@') {
+				if (*p=='@') {
 					int i;
-
-					for (i = 0; i < 3 && url_start < p; i++, url_start++) {
+					
+					for (i=0; i<3 && url_start<p; i++, url_start++) {
 						*url_start = '.';
 					}
 					for (; *p; p++) {
@@ -603,67 +602,45 @@ PHPAPI char *php_strip_url_passwd(char *url)
  */
 PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC)
 {
-	return expand_filepath_ex(filepath, real_path, NULL, 0 TSRMLS_CC);
-}
-/* }}} */
-
-/* {{{ expand_filepath_ex
- */
-PHPAPI char *expand_filepath_ex(const char *filepath, char *real_path, const char *relative_to, size_t relative_to_len TSRMLS_DC)
-{
 	cwd_state new_state;
 	char cwd[MAXPATHLEN];
-	int copy_len;
 
-	if (!filepath[0]) {
-		return NULL;
-	} else if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
-		cwd[0] = '\0';
-	} else {
-		const char *iam = SG(request_info).path_translated;
-		const char *result;
-		if (relative_to) {
-			if (relative_to_len > MAXPATHLEN-1U) {
-				return NULL;
-			}
-			result = relative_to;
-			memcpy(cwd, relative_to, relative_to_len+1U);
-		} else {
-			result = VCWD_GETCWD(cwd, MAXPATHLEN);
-		}
-
-		if (!result && (iam != filepath)) {
-			int fdtest = -1;
-
-			fdtest = VCWD_OPEN(filepath, O_RDONLY);
-			if (fdtest != -1) {
-				/* return a relative file path if for any reason
-				 * we cannot cannot getcwd() and the requested,
-				 * relatively referenced file is accessible */
-				copy_len = strlen(filepath) > MAXPATHLEN - 1 ? MAXPATHLEN - 1 : strlen(filepath);
-				real_path = estrndup(filepath, copy_len);
-				close(fdtest);
-				return real_path;
-			} else {
-				cwd[0] = '\0';
-			}
-		} else if (!result) {
-			cwd[0] = '\0';
-		}
-	}
+        if (!filepath[0]) {
+                return NULL;
+        } else if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
+                cwd[0] = '\0';
+        } else {
+                const char *iam = SG(request_info).path_translated;
+                char *result = VCWD_GETCWD(cwd, MAXPATHLEN);
+                if (!result && (iam != filepath)) {
+                        int fdtest = -1;
+                        fdtest = VCWD_OPEN(filepath, O_RDONLY);
+                        if (fdtest != -1) {
+                                /* return a relative file path if for any reason 
+                                   we cannot cannot getcwd() and the requested, 
+                                   relatively referenced file is accessible */
+                                int copy_len = strlen(filepath)>MAXPATHLEN-1?MAXPATHLEN-1:strlen(filepath);
+                                real_path = estrndup(filepath, copy_len);
+                                return real_path;
+                            }
+                         }
+                else {
+                        cwd[0] = '\0';
+                        }
+                }
 
 	new_state.cwd = strdup(cwd);
 	new_state.cwd_length = strlen(cwd);
 
-	if (virtual_file_ex(&new_state, filepath, NULL, CWD_FILEPATH)) {
+	if(virtual_file_ex(&new_state, filepath, NULL, CWD_FILEPATH)) {
 		free(new_state.cwd);
 		return NULL;
 	}
 
-	if (real_path) {
-		copy_len = new_state.cwd_length > MAXPATHLEN - 1 ? MAXPATHLEN - 1 : new_state.cwd_length;
+	if(real_path) {
+		int copy_len = new_state.cwd_length>MAXPATHLEN-1?MAXPATHLEN-1:new_state.cwd_length;
 		memcpy(real_path, new_state.cwd, copy_len);
-		real_path[copy_len] = '\0';
+		real_path[copy_len]='\0';
 	} else {
 		real_path = estrndup(new_state.cwd, new_state.cwd_length);
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.3 2007/10/07 05:22:04 davidw Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.4 2007/10/08 16:14:56 andrey Exp $ */
 
 /* TODO:
  *
@@ -66,7 +66,7 @@
 #endif
 
 #include "php_ini.h"
-#include "php_mysql.h"
+#include "php_mysql_structs.h"
 
 /* True globals, no need for thread safety */
 static int le_result, le_link, le_plink;

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -13,11 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Author: Zeev Suraski <zeev@zend.com>                                 |
+   |         Andrey Hristov <andrey@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
 
-/* $Id: php_mysql_structs.h,v 1.1.4.4 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: php_mysql_structs.h,v 1.1.2.1 2007/10/08 16:14:56 andrey Exp $ */
 
 #ifndef PHP_MYSQL_STRUCTS_H
 #define PHP_MYSQL_STRUCTS_H
@@ -28,15 +29,28 @@
 #define PHP_MYSQL_API
 #endif
 
-#if HAVE_MYSQL
-
 #ifdef ZTS
 #include "TSRM.h"
 #endif
 
-extern zend_module_entry mysql_module_entry;
+#ifndef TRUE
+#define TRUE 1
+#endif
 
-#define mysql_module_ptr &mysql_module_entry
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#if defined(HAVE_MYSQLND)
+#include "ext/mysqlnd/mysqlnd.h"
+#include "ext/mysql/mysql_mysqlnd.h"
+#else
+#include <mysql.h>
+#endif
+
+#if (MYSQL_VERSION_ID >= 40113 && MYSQL_VERSION_ID < 50000) || MYSQL_VERSION_ID >= 50007 || HAVE_MYSQLND
+#define MYSQL_HAS_SET_CHARSET
+#endif
 
 PHP_MINIT_FUNCTION(mysql);
 PHP_RINIT_FUNCTION(mysql);
@@ -91,9 +105,6 @@ PHP_FUNCTION(mysql_stat);
 PHP_FUNCTION(mysql_thread_id);
 PHP_FUNCTION(mysql_client_encoding);
 PHP_FUNCTION(mysql_ping);
-#if (MYSQL_VERSION_ID >= 40113 && MYSQL_VERSION_ID < 50000) || MYSQL_VERSION_ID >= 50007
-PHP_FUNCTION(mysql_set_charset);
-#endif
 
 ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long default_link;
@@ -108,6 +119,12 @@ ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long connect_timeout;
 	long result_allocated;
 	long trace_mode;
+	long allow_local_infile;
+#ifdef HAVE_MYSQLND
+	MYSQLND_THD_ZVAL_PCACHE *mysqlnd_thd_zval_cache;
+	MYSQLND_QCACHE			*mysqlnd_qcache;
+	long					cache_size;
+#endif
 ZEND_END_MODULE_GLOBALS(mysql)
 
 #ifdef ZTS
@@ -116,13 +133,5 @@ ZEND_END_MODULE_GLOBALS(mysql)
 # define MySG(v) (mysql_globals.v)
 #endif
 
-
-#else
-
-#define mysql_module_ptr NULL
-
-#endif
-
-#define phpext_mysql_ptr mysql_module_ptr
 
 #endif /* PHP_MYSQL_STRUCTS_H */

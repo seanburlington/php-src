@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.178 2007/10/07 05:15:04 davidw Exp $ */
+/* $Id: pdo_stmt.c,v 1.179 2007/10/08 04:05:22 davidw Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -845,7 +845,7 @@ static int do_fetch_opt_finish(pdo_stmt_t *stmt, int free_ctor_agrs TSRMLS_DC) /
 		stmt->fetch.cls.fci.param_count = 0;
 	}
 	if (stmt->fetch.func.values) {
-		FREE_ZVAL(stmt->fetch.func.values);
+		efree(stmt->fetch.func.values);
 		stmt->fetch.func.values = NULL;
 	}
 	return 1;

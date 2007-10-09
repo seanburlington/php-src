@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.20 2009/05/04 14:46:37 tony2001 Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.6.2.1 2007/10/09 21:53:44 auroraeosrose Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -90,6 +90,9 @@ int inet_aton(const char *, struct in_addr *);
 # define SOCK_ERR INVALID_SOCKET
 # define SOCK_CONN_ERR SOCKET_ERROR
 # define PHP_TIMEOUT_ERROR_VALUE		WSAETIMEDOUT
+
+struct in6_addr in6addr_any = {0}; /* IN6ADDR_ANY_INIT; */
+
 #else
 # define SOCK_ERR -1
 # define SOCK_CONN_ERR -1
@@ -162,9 +165,7 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 	struct sockaddr **sap;
 	int n;
 #if HAVE_GETADDRINFO
-# if HAVE_IPV6
 	static int ipv6_borked = -1; /* the way this is used *is* thread safe */
-# endif
 	struct addrinfo hints, *res, *sai;
 #else
 	struct hostent *host_info;
@@ -202,20 +203,10 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 # endif
 		
 	if ((n = getaddrinfo(host, NULL, &hints, &res))) {
-		if (error_string) {
-			spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
-		} else {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
-		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
 		return 0;
 	} else if (res == NULL) {
-		if (error_string) {
-			spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed (null result pointer) errno=%d", errno);
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
-		} else {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed (null result pointer)");
-		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed (null result pointer)");
 		return 0;
 	}
 
@@ -239,12 +230,7 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 		/* XXX NOT THREAD SAFE (is safe under win32) */
 		host_info = gethostbyname(host);
 		if (host_info == NULL) {
-			if (error_string) {
-				spprintf(error_string, 0, "php_network_getaddresses: gethostbyname failed. errno=%d", errno);
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
-			} else {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: gethostbyname failed");
-			}
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: gethostbyname failed");
 			return 0;
 		}
 		in = *((struct in_addr *) host_info->h_addr);
@@ -641,7 +627,6 @@ PHPAPI int php_network_get_peer_name(php_socket_t sock,
 {
 	php_sockaddr_storage sa;
 	socklen_t sl = sizeof(sa);
-	memset(&sa, 0, sizeof(sa));
 	
 	if (getpeername(sock, (struct sockaddr*)&sa, &sl) == 0) {
 		php_network_populate_name_from_sockaddr((struct sockaddr*)&sa, sl,
@@ -661,7 +646,6 @@ PHPAPI int php_network_get_sock_name(php_socket_t sock,
 {
 	php_sockaddr_storage sa;
 	socklen_t sl = sizeof(sa);
-	memset(&sa, 0, sizeof(sa));
 	
 	if (getsockname(sock, (struct sockaddr*)&sa, &sl) == 0) {
 		php_network_populate_name_from_sockaddr((struct sockaddr*)&sa, sl,
@@ -786,14 +770,9 @@ php_socket_t php_network_connect_socket_to_host(const char *host, unsigned short
 		switch (sa->sa_family) {
 #if HAVE_GETADDRINFO && HAVE_IPV6
 			case AF_INET6:
-				if (bindto && strchr(bindto, ':')) {
-					((struct sockaddr_in6 *)sa)->sin6_family = sa->sa_family;
-					((struct sockaddr_in6 *)sa)->sin6_port = htons(port);
-					socklen = sizeof(struct sockaddr_in6);
-				} else {
-					socklen = 0;
-					sa = NULL;
-				}
+				((struct sockaddr_in6 *)sa)->sin6_family = sa->sa_family;
+				((struct sockaddr_in6 *)sa)->sin6_port = htons(port);
+				socklen = sizeof(struct sockaddr_in6);
 				break;
 #endif
 			case AF_INET:
@@ -813,7 +792,7 @@ php_socket_t php_network_connect_socket_to_host(const char *host, unsigned short
 			if (bindto) {
 				struct sockaddr *local_address = NULL;
 				int local_address_len = 0;
-
+			
 				if (sa->sa_family == AF_INET) {
 					struct sockaddr_in *in4 = emalloc(sizeof(struct sockaddr_in));
 
@@ -1058,11 +1037,7 @@ PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC)
 	/* with ioctlsocket, a non-zero sets nonblocking, a zero sets blocking */
 	flags = !block;
 	if (ioctlsocket(socketd, FIONBIO, &flags) == SOCKET_ERROR) {
-		char *error_string;
-		
-		error_string = php_socket_strerror(WSAGetLastError(), NULL, 0);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", error_string);
-		efree(error_string);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", WSAGetLastError());
 		ret = FAILURE;
 	}
 #else
@@ -1146,12 +1121,6 @@ PHPAPI int php_poll2(php_pollfd *ufds, unsigned int nfds, int timeout)
 		tv.tv_sec = timeout / 1000;
 		tv.tv_usec = (timeout - (tv.tv_sec * 1000)) * 1000;
 	}
-/* Reseting/initializing */
-#ifdef PHP_WIN32
-	WSASetLastError(0);
-#else
-	errno = 0;
-#endif
 	n = select(max_fd + 1, &rset, &wset, &eset, timeout >= 0 ? &tv : NULL);
 
 	if (n >= 0) {

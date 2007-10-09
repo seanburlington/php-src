@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.56.2.1.2.4 2009/01/07 20:41:47 felipe Exp $ */
+/* $Id: php_network.h,v 1.56.2.1.2.1.2.1 2007/10/09 21:53:44 auroraeosrose Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -52,10 +52,6 @@
 #	define fsync _commit
 #	define ftruncate(a, b) chsize(a, b)
 #endif /* defined(PHP_WIN32) */
-
-#ifndef EWOULDBLOCK
-# define EWOULDBLOCK EAGAIN
-#endif
 
 #ifdef PHP_WIN32
 #define php_socket_errno() WSAGetLastError()
@@ -125,12 +121,14 @@ typedef struct _php_pollfd {
 
 PHPAPI int php_poll2(php_pollfd *ufds, unsigned int nfds, int timeout);
 
+#ifndef POLLIN
 # define POLLIN      0x0001    /* There is data to read */
 # define POLLPRI     0x0002    /* There is urgent data to read */
 # define POLLOUT     0x0004    /* Writing now will not block */
 # define POLLERR     0x0008    /* Error condition */
 # define POLLHUP     0x0010    /* Hung up */
 # define POLLNVAL    0x0020    /* Invalid request: fd not open */
+#endif
 
 # ifndef PHP_USE_POLL_2_EMULATION
 #  define PHP_USE_POLL_2_EMULATION 1

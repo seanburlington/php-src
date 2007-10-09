@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.196 2007/07/19 10:03:17 tony2001 Exp $ */
+/* $Id: fopen_wrappers.c,v 1.197 2007/10/09 02:41:14 ab5602 Exp $ */
 
 /* {{{ includes
  */
@@ -577,18 +577,30 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC)
 {
 	cwd_state new_state;
 	char cwd[MAXPATHLEN];
-	char *result;
 
-	if (!filepath[0]) {
-		return NULL;
-	} else if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
-		cwd[0] = '\0';
-	} else{
-		result = VCWD_GETCWD(cwd, MAXPATHLEN);
-		if (!result) {
-			cwd[0] = '\0';
-		}
-	}
+        if (!filepath[0]) {
+                return NULL;
+        } else if (IS_ABSOLUTE_PATH(filepath, strlen(filepath))) {
+                cwd[0] = '\0';
+        } else {
+                const char *iam = SG(request_info).path_translated;
+                char *result = VCWD_GETCWD(cwd, MAXPATHLEN);
+                if (!result && (iam != filepath)) {
+                        int fdtest = -1;
+                        fdtest = VCWD_OPEN(filepath, O_RDONLY);
+                        if (fdtest != -1) {
+                                /* return a relative file path if for any reason 
+                                   we cannot cannot getcwd() and the requested, 
+                                   relatively referenced file is accessible */
+                                int copy_len = strlen(filepath)>MAXPATHLEN-1?MAXPATHLEN-1:strlen(filepath);
+                                real_path = estrndup(filepath, copy_len);
+                                return real_path;
+                            }   
+                         }
+                else {
+                        cwd[0] = '\0';
+                        }
+                }
 
 	new_state.cwd = strdup(cwd);
 	new_state.cwd_length = strlen(cwd);

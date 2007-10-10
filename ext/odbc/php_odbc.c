@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.1 2007/09/27 18:00:41 dmitry Exp $ */
+/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.2 2007/10/10 14:29:27 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1573,8 +1573,7 @@ PHP_FUNCTION(odbc_fetch_into)
 		result->fetched++;
 
 	for(i = 0; i < result->numcols; i++) {
-		ALLOC_ZVAL(tmp);
-		tmp->refcount = 1;
+		MAKE_STD_ZVAL(tmp);
 		Z_TYPE_P(tmp) = IS_STRING;
 		Z_STRLEN_P(tmp) = 0;
 		sql_c_type = SQL_C_CHAR;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.106 2007/10/07 05:15:06 davidw Exp $ */
+/* $Id: streamsfuncs.c,v 1.107 2007/10/10 12:44:29 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -656,7 +656,7 @@ static int stream_array_from_fd_set(zval *stream_array, fd_set *fds TSRMLS_DC)
 	zval **elem, **dest_elem;
 	php_stream *stream;
 	HashTable *new_hash;
-	int this_fd, ret = 0;
+	php_socket_t this_fd, ret = 0;
 
 	if (Z_TYPE_P(stream_array) != IS_ARRAY) {
 		return 0;

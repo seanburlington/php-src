@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.127 2007/07/18 09:04:37 jani Exp $ */
+/* $Id: network.c,v 1.128 2007/10/10 23:23:54 auroraeosrose Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -90,6 +90,9 @@ int inet_aton(const char *, struct in_addr *);
 # define SOCK_ERR INVALID_SOCKET
 # define SOCK_CONN_ERR SOCKET_ERROR
 # define PHP_TIMEOUT_ERROR_VALUE		WSAETIMEDOUT
+
+struct in6_addr in6addr_any = {0}; /* IN6ADDR_ANY_INIT; */
+
 #else
 # define SOCK_ERR -1
 # define SOCK_CONN_ERR -1

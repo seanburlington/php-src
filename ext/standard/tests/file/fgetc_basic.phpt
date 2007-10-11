@@ -40,7 +40,7 @@ for($outerloop_counter = 0; $outerloop_counter < count($file_content_types); $ou
       exit();
     }
 
-    // perform the read file at least 6 char and check 
+    // perform the read file atleast 6 char and check 
     for( $counter = 1; $counter <= 6; $counter++ ) {
       // read data from the file and check, file pointer position, feof etc
       var_dump( fgetc($file_handle) ); // read a char
@@ -69,475 +69,475 @@ echo "Done\n";
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(8) of type (stream)
 -- Innerloop iteration 2 of Outerloop Iteration 1 --
 -- Testing fgetc() : file opened using rb mode --
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(9) of type (stream)
 -- Innerloop iteration 3 of Outerloop Iteration 1 --
 -- Testing fgetc() : file opened using rt mode --
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(10) of type (stream)
 -- Innerloop iteration 4 of Outerloop Iteration 1 --
 -- Testing fgetc() : file opened using r+ mode --
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(11) of type (stream)
 -- Innerloop iteration 5 of Outerloop Iteration 1 --
 -- Testing fgetc() : file opened using r+b mode --
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(12) of type (stream)
 -- Innerloop iteration 6 of Outerloop Iteration 1 --
 -- Testing fgetc() : file opened using r+t mode --
 string(1) "2"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 string(1) "2"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 string(1) "2"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 string(1) "2"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 string(1) "2"
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 string(1) "2"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(13) of type (stream)
 --- Outerloop iteration 2 ---
 -- Innerloop iteration 1 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using r mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(16) of type (stream)
 -- Innerloop iteration 2 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using rb mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(17) of type (stream)
 -- Innerloop iteration 3 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using rt mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(18) of type (stream)
 -- Innerloop iteration 4 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using r+ mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(19) of type (stream)
 -- Innerloop iteration 5 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using r+b mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(20) of type (stream)
 -- Innerloop iteration 6 of Outerloop Iteration 2 --
 -- Testing fgetc() : file opened using r+t mode --
 string(1) "t"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 string(1) "e"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 string(1) "x"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 string(1) "t"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 string(1) " "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 string(1) "t"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(21) of type (stream)
 --- Outerloop iteration 3 ---
 -- Innerloop iteration 1 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using r mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(24) of type (stream)
 -- Innerloop iteration 2 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using rb mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(25) of type (stream)
 -- Innerloop iteration 3 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using rt mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(26) of type (stream)
 -- Innerloop iteration 4 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using r+ mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(27) of type (stream)
 -- Innerloop iteration 5 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using r+b mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(28) of type (stream)
 -- Innerloop iteration 6 of Outerloop Iteration 3 --
 -- Testing fgetc() : file opened using r+t mode --
 string(1) "l"
 int(1)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 string(1) "i"
 int(2)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 string(1) "n"
 int(3)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 string(1) "e"
 int(4)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 string(1) "
 "
 int(5)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 string(1) "l"
 int(6)
 bool(false)
-resource(%d) of type (stream)
+resource(29) of type (stream)
 Done

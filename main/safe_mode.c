@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.11 2007/10/10 23:54:39 ab5602 Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.12 2007/10/11 08:28:02 jani Exp $ */
 
 #include "php.h"
 
@@ -86,14 +86,16 @@ PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mod
 	 * If that fails, passthrough and check directory...
 	 */
 	if (mode != CHECKUID_ALLOW_ONLY_DIR) {
+#if HAVE_BROKEN_GETCWD
+		char ftest[MAXPATHLEN];
 
-                char ftest[MAXPATHLEN];
-                strcpy(ftest,filename);
-                if (VCWD_GETCWD(ftest, sizeof(ftest)) == NULL) {
-                        strcpy(path,filename);
-                } else {
-                        expand_filepath(filename, path TSRMLS_CC);
-                        }
+		strcpy(ftest,filename);
+		if (VCWD_GETCWD(ftest, sizeof(ftest)) == NULL) {
+			strcpy(path,filename);
+		} else {
+			expand_filepath(filename, path TSRMLS_CC);
+		}
+#endif
 
 		ret = VCWD_STAT(path, &sb);
 		if (ret < 0) {

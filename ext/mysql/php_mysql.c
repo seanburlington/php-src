@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.244 2007/10/07 05:15:04 davidw Exp $ */
+/* $Id: php_mysql.c,v 1.245 2007/10/12 07:23:44 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -1989,7 +1989,7 @@ PHP_FUNCTION(mysql_num_fields)
 #else
 #define IS_BINARY_DATA(f) (((f)->type == MYSQL_TYPE_TINY_BLOB || (f)->type == MYSQL_TYPE_BLOB || \
 	(f)->type == MYSQL_TYPE_MEDIUM_BLOB || (f)->type == MYSQL_TYPE_LONG_BLOB || \
-	(f)->type == MYSQL_TYPE_VAR_STRING || \ (f)->type == MYSQL_TYPE_VARCHAR || \
+	(f)->type == MYSQL_TYPE_VAR_STRING || (f)->type == MYSQL_TYPE_VARCHAR || \
 	(f)->type == MYSQL_TYPE_STRING)&& (f)->charsetnr == MYSQL_BINARY_CHARSET_NR)
 
 #endif

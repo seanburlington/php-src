@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.29.2.1.2.3 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: php_image.h,v 1.29.2.1.2.1.2.1 2007/10/13 18:02:22 scottmac Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -49,7 +49,8 @@ typedef enum
   IMAGE_FILETYPE_IFF,
   IMAGE_FILETYPE_WBMP,
   /* IMAGE_FILETYPE_JPEG2000 is a userland alias for IMAGE_FILETYPE_JPC */
-  IMAGE_FILETYPE_XBM
+  IMAGE_FILETYPE_XBM,
+  IMAGE_FILETYPE_ICO
 /* WHEN EXTENDING: PLEASE ALSO REGISTER IN image.c:PHP_MINIT_FUNCTION(imagetypes) */
 } image_filetype;
 /* }}} */

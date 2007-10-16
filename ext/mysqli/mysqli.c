@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.4 2007/10/16 13:20:14 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.5 2007/10/16 20:56:22 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -314,6 +314,14 @@ static int mysqli_write_na(mysqli_object *obj, zval *newval TSRMLS_DC)
 	return FAILURE;
 }
 /* }}} */
+
+#ifndef Z_ADDREF_P
+/* PHP 5.2, old GC */
+#define Z_ADDREF_P(pz)				(++(pz)->refcount)
+#define Z_REFCOUNT_P(pz)			((pz)->refcount)
+#define Z_SET_REFCOUNT_P(pz, rc)	((pz)->refcount = rc)
+#endif
+
 
 /* {{{ mysqli_read_property */
 zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)

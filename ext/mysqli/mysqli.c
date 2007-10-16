@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.3 2007/10/07 05:22:05 davidw Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.4 2007/10/16 13:20:14 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -202,8 +202,7 @@ void php_clear_mysql(MY_MYSQL *mysql) {
 		mysql->hash_key = NULL;
 	}
 	if (mysql->li_read) {
-		efree(Z_STRVAL_P(mysql->li_read));
-		FREE_ZVAL(mysql->li_read);
+		zval_dtor(mysql->li_read);
 		mysql->li_read = NULL;
 	}
 }

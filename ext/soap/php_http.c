@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.109 2007/07/24 09:28:12 dmitry Exp $ */
+/* $Id: php_http.c,v 1.110 2007/10/17 11:18:49 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -925,7 +925,7 @@ try_again:
 				efree(http_body);
 				efree(loc);
 				if (new_url->scheme == NULL && new_url->path != NULL) {
-					new_url->scheme = NULL;
+					new_url->scheme = phpurl->scheme ? estrdup(phpurl->scheme) : NULL;
 					new_url->host = phpurl->host ? estrdup(phpurl->host) : NULL;
 					new_url->port = phpurl->port;
 					if (new_url->path && new_url->path[0] != '/') {

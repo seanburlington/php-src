@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.164 2007/10/07 05:15:05 davidw Exp $ */
+/* $Id: php_encoding.c,v 1.165 2007/10/17 12:09:14 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1135,6 +1135,7 @@ static zval* get_zval_property(zval* object, char* name TSRMLS_DC)
 		zval *data;
 		zend_class_entry *old_scope;
 
+		INIT_PZVAL(&member);
 		ZVAL_STRING(&member, name, 0);
 		old_scope = EG(scope);
 		EG(scope) = Z_OBJCE_P(object);
@@ -1169,6 +1170,7 @@ static void unset_zval_property(zval* object, char* name TSRMLS_DC)
 		zval member;
 		zend_class_entry *old_scope;
 
+		INIT_PZVAL(&member);
 		ZVAL_STRING(&member, name, 0);
 		old_scope = EG(scope);
 		EG(scope) = Z_OBJCE_P(object);

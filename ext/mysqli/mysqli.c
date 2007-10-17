@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.111 2007/10/16 13:18:55 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.112 2007/10/17 08:17:34 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -205,7 +205,7 @@ void php_clear_mysql(MY_MYSQL *mysql) {
 		mysql->hash_key = NULL;
 	}
 	if (mysql->li_read) {
-		zval_dtor(mysql->li_read);
+		zval_ptr_dtor(&(mysql->li_read));
 		mysql->li_read = NULL;
 	}
 }

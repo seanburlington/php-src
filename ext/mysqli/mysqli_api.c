@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.5 2007/10/17 08:18:09 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.6 2007/10/17 08:19:07 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1371,7 +1371,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 	} else {
 		zval_dtor(mysql->li_read);
 	}
-	ZVAL_STRINGL(mysql->li_read, callback_name, 0);
+	ZVAL_STRING(mysql->li_read, callback_name, 0);
 
 	RETURN_TRUE;
 }

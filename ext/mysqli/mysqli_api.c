@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.4 2007/10/16 13:20:14 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.5 2007/10/17 08:18:09 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1336,7 +1336,7 @@ PHP_FUNCTION(mysqli_set_local_infile_default)
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);
 
 	if (mysql->li_read) {
-		zval_dtor(mysql->li_read);
+		zval_ptr_dtor(&(mysql->li_read));
 		mysql->li_read = NULL;
 	}
 }
@@ -1364,7 +1364,6 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 		efree(callback_name);
 		RETURN_FALSE;
 	}
-	efree(callback_name);
 
 	/* save callback function */
 	if (!mysql->li_read) {
@@ -1372,7 +1371,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 	} else {
 		zval_dtor(mysql->li_read);
 	}
-	ZVAL_STRINGL(mysql->li_read, Z_STRVAL_P(callback_func), Z_STRLEN_P(callback_func), 1);
+	ZVAL_STRINGL(mysql->li_read, callback_name, 0);
 
 	RETURN_TRUE;
 }

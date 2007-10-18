@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.131 2007/10/18 04:49:54 helly Exp $ */
+/* $Id: spl_array.c,v 1.132 2007/10/18 05:19:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1418,7 +1418,7 @@ SPL_METHOD(Array, getChildren)
 
   MAKE_STD_ZVAL(flags);
   ZVAL_LONG(flags, SPL_ARRAY_USE_OTHER);
-	spl_instantiate_arg_ex1(intern->std.ce, &return_value, 0, *entry TSRMLS_CC);
+	spl_instantiate_arg_ex2(intern->std.ce, &return_value, 0, *entry, flags TSRMLS_CC);
 	zval_ptr_dtor(&flags);
 }
 /* }}} */

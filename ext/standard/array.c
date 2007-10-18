@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.3 2007/10/07 05:22:06 davidw Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.4 2007/10/18 14:33:14 scottmac Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1842,7 +1842,7 @@ PHP_FUNCTION(shuffle)
 {
 	zval *array;
 
-	if (zend_parse_parameters(1 TSRMLS_CC, "a", &array) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &array) == FAILURE) {
 		RETURN_FALSE;
 	}
 

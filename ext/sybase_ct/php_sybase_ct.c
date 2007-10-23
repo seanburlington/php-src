@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.103.2.5.2.13.2.1 2007/09/27 18:00:45 dmitry Exp $ */
+/* $Id: php_sybase_ct.c,v 1.103.2.5.2.13.2.2 2007/10/23 15:21:20 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1799,7 +1799,7 @@ static void php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int numerics)
 		}
 		if (numerics) {
 			zend_hash_index_update(Z_ARRVAL_P(return_value), i, (void *) &tmp, sizeof(zval *), NULL);
-			tmp->refcount++;
+			Z_ADDREF_P(tmp);
 		}
 		
 		if (zend_hash_exists(Z_ARRVAL_P(return_value), result->fields[i].name, strlen(result->fields[i].name)+1)) {

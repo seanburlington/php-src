@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5 2007/10/02 10:43:09 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.6 2007/10/23 10:17:39 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -2032,7 +2032,7 @@ static PHP_RSHUTDOWN_FUNCTION(mysqlnd)
 	DBG_ENTER("RSHUTDOWN");
 	if (dbg) {
 		dbg->m->close(dbg);
-		dbg->m->free(dbg);
+		dbg->m->free_handle(dbg);
 		MYSQLND_G(dbg) = NULL;
 	}
 #endif

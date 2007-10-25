@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.5 2007/10/25 05:39:06 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.6 2007/10/25 10:01:30 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -760,7 +760,7 @@ static void php_cgi_usage(char *argv0)
 				"  -v               Version number\n"
 				"  -w               Display source with stripped comments and whitespace.\n"
 				"  -z <file>        Load Zend extension <file>.\n"
-			   "  -T <count>       Measure execution time of script repeated <count> times.\n",
+				"  -T <count>       Measure execution time of script repeated <count> times.\n",
 				prog, prog);
 }
 /* }}} */
@@ -1539,7 +1539,7 @@ consult the installation file that came with this distribution, or visit \n\
 		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 1, 2)) != -1) {
 			switch (c) {
 				case 'T':
-			        benchmark = 1;
+					benchmark = 1;
 					repeats = atoi(php_optarg);
 					gettimeofday(&start, NULL);
 					break;

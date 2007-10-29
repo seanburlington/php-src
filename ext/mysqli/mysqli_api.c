@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.6 2007/10/17 08:19:07 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.7 2007/10/29 09:51:08 jani Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -105,7 +105,11 @@ int mysqli_stmt_bind_param_do_bind(MY_STMT *stmt, unsigned int argc, unsigned in
 				break;
 
 			case 'i': /* Integer */
-				bind[ofs].buffer_type = (sizeof(long) > 4) ? MYSQL_TYPE_LONGLONG : MYSQL_TYPE_LONG;
+#if SIZEOF_LONG==8
+				bind[ofs].buffer_type = MYSQL_TYPE_LONGLONG;
+#elif SIZEOF_LONG==4
+				bind[ofs].buffer_type = MYSQL_TYPE_LONG;
+#endif
 				bind[ofs].buffer = &Z_LVAL_PP(args[i]);
 				bind[ofs].is_null = &stmt->param.is_null[ofs];
 				break;
@@ -719,6 +723,7 @@ PHP_FUNCTION(mysqli_stmt_execute)
 						convert_to_double_ex(&stmt->param.vars[i]);
 						stmt->stmt->params[i].buffer = &Z_LVAL_PP(&stmt->param.vars[i]);
 						break;
+					case MYSQL_TYPE_LONGLONG:
 					case MYSQL_TYPE_LONG:
 						convert_to_long_ex(&stmt->param.vars[i]);
 						stmt->stmt->params[i].buffer = &Z_LVAL_PP(&stmt->param.vars[i]);

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.4 2007/10/11 20:54:41 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.5 2007/10/31 12:57:51 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1544,6 +1544,10 @@ static PHP_METHOD(PDOStatement, fetchAll)
 			pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "Extraneous additional parameters" TSRMLS_CC);
 			error = 1;
 		}
+	}
+
+	if ((how & ~PDO_FETCH_FLAGS) == PDO_FETCH_USE_DEFAULT) {
+		how |= stmt->default_fetch_type & ~PDO_FETCH_FLAGS;
 	}
 
 	if (!error)	{

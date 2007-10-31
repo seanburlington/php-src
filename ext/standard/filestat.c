@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.14 2007/09/21 14:05:18 tony2001 Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.15 2007/10/31 13:23:06 jani Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -698,14 +698,10 @@ PHP_FUNCTION(touch)
 /* }}} */
 #endif
 
-/* {{{ proto void clearstatcache(void)
-   Clear file stat cache */
-PHP_FUNCTION(clearstatcache)
+/* {{{ php_clear_stat_cache()
+*/
+PHPAPI void php_clear_stat_cache(TSRMLS_D)
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
-	}
-
 	if (BG(CurrentStatFile)) {
 		efree(BG(CurrentStatFile));
 		BG(CurrentStatFile) = NULL;
@@ -715,6 +711,17 @@ PHP_FUNCTION(clearstatcache)
 		BG(CurrentLStatFile) = NULL;
 	}
 	realpath_cache_clean(TSRMLS_C);
+}
+/* }}} */
+
+/* {{{ proto void clearstatcache(void)
+   Clear file stat cache */
+PHP_FUNCTION(clearstatcache)
+{
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
+	php_clear_stat_cache(TSRMLS_C);
 }
 /* }}} */
 

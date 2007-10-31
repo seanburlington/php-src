@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.32 2009/02/10 16:14:27 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.1 2007/10/31 13:22:45 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -62,9 +62,6 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 			break;
 		case 'x':
 			flags = O_CREAT|O_EXCL;
-			break;
-		case 'c':
-			flags = O_CREAT;
 			break;
 		default:
 			/* unknown mode */
@@ -242,7 +239,6 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 #ifdef ESPIPE
 			if (stream->position == (off_t)-1 && errno == ESPIPE) {
 				stream->position = 0;
-				stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 				self->is_pipe = 1;
 			}
 #endif
@@ -1013,6 +1009,8 @@ static int php_plain_files_unlink(php_stream_wrapper *wrapper, char *url, int op
 {
 	char *p;
 	int ret;
+	zval funcname;
+	zval *retval = NULL;
 
 	if ((p = strstr(url, "://")) != NULL) {
 		url = p + 3;
@@ -1324,9 +1322,7 @@ not_relative_path:
 		/* getcwd() will return always return [DRIVE_LETTER]:/) on windows. */
 		*(cwd+3) = '\0';
 	
-		if (snprintf(trypath, MAXPATHLEN, "%s%s", cwd, filename) >= MAXPATHLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", cwd, filename, MAXPATHLEN);
-		}
+		snprintf(trypath, MAXPATHLEN, "%s%s", cwd, filename);
 		
 		free(cwd);
 		
@@ -1387,9 +1383,7 @@ not_relative_path:
 		if (*ptr == '\0') {
 			goto stream_skip;
 		}
-		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) >= MAXPATHLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
-		}
+		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
 
 		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir_ex(trypath, 0 TSRMLS_CC)) {
 			goto stream_skip;

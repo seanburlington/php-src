@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.2 2007/09/27 18:00:42 dmitry Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.3 2007/10/31 13:22:44 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,6 +47,9 @@
 #include <openssl/rand.h>
 #include <openssl/ssl.h>
 #include <openssl/pkcs12.h>
+
+/* Common */
+#include <time.h>
 
 #define DEFAULT_KEY_LENGTH	512
 #define MIN_KEY_LENGTH		384
@@ -1233,7 +1236,7 @@ static int check_cert(X509_STORE *ctx, X509 *x, STACK_OF(X509) *untrustedchain, 
 }
 /* }}} */
 
-/* {{{ proto int openssl_x509_checkpurpose(mixed x509cert, int purpose, array cainfo [, string untrustedfile])
+/* {{{ proto mixed openssl_x509_checkpurpose(mixed x509cert, int purpose, array cainfo [, string untrustedfile])
    Checks the CERT to see if it can be used for the purpose in purpose. cainfo holds information about trusted CAs */
 PHP_FUNCTION(openssl_x509_checkpurpose)
 {
@@ -1244,10 +1247,9 @@ PHP_FUNCTION(openssl_x509_checkpurpose)
 	STACK_OF(X509) * untrustedchain = NULL;
 	long purpose;
 	char * untrusted = NULL;
-	int untrusted_len;
+	int untrusted_len, ret;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Zl|a!s", &zcert, &purpose, &zcainfo, &untrusted, &untrusted_len)
-			== FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Zl|a!s", &zcert, &purpose, &zcainfo, &untrusted, &untrusted_len) == FAILURE) {
 		return;
 	}
 
@@ -1268,7 +1270,13 @@ PHP_FUNCTION(openssl_x509_checkpurpose)
 	if (cert == NULL) {
 		goto clean_exit;
 	}
-	RETVAL_LONG(check_cert(cainfo, cert, untrustedchain, purpose));
+
+	ret = check_cert(cainfo, cert, untrustedchain, purpose);
+	if (ret != 0 && ret != 1) {
+		RETVAL_LONG(ret);
+	} else {
+		RETVAL_BOOL(ret);
+	}
 
 clean_exit:
 	if (certresource == 1 && cert) {

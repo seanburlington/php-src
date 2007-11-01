@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.160 2007/10/07 05:15:03 davidw Exp $ */
+/* $Id: iconv.c,v 1.161 2007/11/01 19:13:28 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2234,9 +2234,9 @@ PHP_FUNCTION(iconv_mime_encode)
 PHP_FUNCTION(iconv_mime_decode)
 {
 	char *encoded_str;
-	int encoded_str_len = 0;
+	int encoded_str_len;
 	char *charset;
-	int charset_len;
+	int charset_len = 0;
 	long mode = 0;
 	
 	smart_str retval = {0};

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.344 2007/11/01 11:13:06 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.345 2007/11/01 11:49:27 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -394,7 +394,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 				(s - SG(sapi_headers).http_status_line) >= 5 &&
 				strncasecmp(SG(sapi_headers).http_status_line, "HTTP/", 5) == 0
 			) {
-				len = sprintf(buf, "Status:%s\r\n", s);
+				len = slprintf(buf, sizeof(buf), "Status:%s\r\n", s);
 			} else {
 				h = (sapi_header_struct*)zend_llist_get_first_ex(&sapi_headers->headers, &pos);
 				while (h) {

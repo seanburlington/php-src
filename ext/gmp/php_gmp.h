@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -72,6 +72,7 @@ ZEND_FUNCTION(gmp_setbit);
 ZEND_FUNCTION(gmp_clrbit);
 ZEND_FUNCTION(gmp_scan0);
 ZEND_FUNCTION(gmp_scan1);
+ZEND_FUNCTION(gmp_testbit);
 ZEND_FUNCTION(gmp_popcount);
 ZEND_FUNCTION(gmp_hamdist);
 ZEND_FUNCTION(gmp_nextprime);

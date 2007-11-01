@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.116 2007/10/07 05:15:05 davidw Exp $ */
+/* $Id: php_spl.c,v 1.117 2007/11/01 22:31:39 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
-	#include "config.h"
+#include "config.h"
 #endif
 
 #include "php.h"

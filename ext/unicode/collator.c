@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.14 2007/09/27 18:28:42 dmitry Exp $ */
+/* $Id: collator.c,v 1.15 2007/11/02 16:19:57 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -235,7 +235,7 @@ PHP_FUNCTION(collator_sort)
 	collatorobj = (php_collator_obj *) zend_object_store_get_object(object TSRMLS_CC);
 
 	target_hash = HASH_OF(array);
-	php_set_compare_func(SORT_LOCALE_STRING TSRMLS_CC);
+	php_set_compare_func(PHP_SORT_LOCALE_STRING TSRMLS_CC);
 	orig_collator = UG(default_collator);
 	UG(default_collator) = collatorobj->zcoll;
 	if (zend_hash_sort(target_hash, zend_qsort, php_array_data_compare, 1 TSRMLS_CC) == FAILURE) {

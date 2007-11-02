@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.425 2007/11/02 11:48:35 jani Exp $ */
+/* $Id: array.c,v 1.426 2007/11/02 12:03:25 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2304,9 +2304,9 @@ PHP_FUNCTION(array_slice)
 	zend_bool preserve_keys = 0; /* Whether to preserve keys while copying to the new array or not */
 	int		 num_in,		/* Number of elements in the input array */
 		     pos;			/* Current position in the array */
-	zval	*lenght_param;
+	zval	*length_param;
 	zstr string_key;
-	int string_key_len;
+	uint string_key_len;
 	ulong num_key;
 	HashPosition hpos;
 

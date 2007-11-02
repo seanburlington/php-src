@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.2.2.6.2.3.2.2 2007/10/07 05:22:06 davidw Exp $ */
+/* $Id: spl_observer.c,v 1.2.2.6.2.3.2.3 2007/11/02 19:40:38 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -113,6 +113,43 @@ static zend_object_value spl_object_storage_new_ex(zend_class_entry *class_type,
 	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) spl_SplOjectStorage_free_storage, NULL TSRMLS_CC);
 	retval.handlers = &spl_handler_SplObjectStorage;
 	return retval;
+}
+/* }}} */
+
+static HashTable* spl_object_storage_debug_info(zval *obj, int *is_temp TSRMLS_DC) /* {{{ */
+{
+	spl_SplObjectStorage *intern = (spl_SplObjectStorage*)zend_object_store_get_object(obj TSRMLS_CC);
+	HashTable *rv, *props;
+	HashPosition pos;
+	zval *tmp, *storage, **entry;
+	char md5str[33];
+	int name_len;
+	char *zname;
+
+	*is_temp = 1;
+
+	props = Z_OBJPROP_P(obj);
+	ALLOC_HASHTABLE(rv);
+	ZEND_INIT_SYMTABLE_EX(rv, zend_hash_num_elements(props) + 1, 0);
+
+	zend_hash_copy(rv, props, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
+
+	MAKE_STD_ZVAL(storage);
+	array_init(storage);
+
+	zend_hash_internal_pointer_reset_ex(&intern->storage, &pos);
+	while (zend_hash_get_current_data_ex(&intern->storage, (void **)&entry, &pos) == SUCCESS) {
+	        php_spl_object_hash(*entry, md5str TSRMLS_CC);
+	        zval_add_ref(entry);
+	        add_assoc_zval_ex(storage, md5str, 33, *entry);
+	        zend_hash_move_forward_ex(&intern->storage, &pos);
+	}
+
+	zname = spl_gen_private_prop_name(spl_ce_SplObjectStorage, "storage", sizeof("storage")-1, &name_len TSRMLS_CC);
+	zend_symtable_update(rv, zname, name_len+1, &storage, sizeof(zval *), NULL);
+	efree(zname);
+
+	return rv;
 }
 /* }}} */
 
@@ -437,6 +474,7 @@ PHP_MINIT_FUNCTION(spl_observer)
 
 	REGISTER_SPL_STD_CLASS_EX(SplObjectStorage, spl_SplObjectStorage_new, spl_funcs_SplObjectStorage);
 	memcpy(&spl_handler_SplObjectStorage, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+	spl_handler_SplObjectStorage.get_debug_info = spl_object_storage_debug_info;
 
 	REGISTER_SPL_IMPLEMENTS(SplObjectStorage, Countable);
 	REGISTER_SPL_IMPLEMENTS(SplObjectStorage, Iterator);

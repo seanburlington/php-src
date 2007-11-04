@@ -2620,7 +2620,6 @@ void gdImageCopyResampled (gdImagePtr dst, gdImagePtr src, int dstX, int dstY, i
 				green /= spixels;
 				blue /= spixels;
 				alpha /= spixels;
-				alpha += 0.5;
 			}
 			if ( alpha_sum != 0.0f) {
 				if( contrib_sum != 0.0f) {
@@ -3136,7 +3135,7 @@ gdImagePtr gdImageRotate (gdImagePtr src, double dAngle, int clrBack, int ignore
 		return NULL;
 	}
 
-	if (!gdImageTrueColor(src) && (clrBack < 0 || clrBack>=gdImageColorsTotal(src))) {
+	if (!gdImageTrueColor(src) && clrBack>=gdImageColorsTotal(src)) {
 		return NULL;
 	}
 
@@ -3864,7 +3863,7 @@ int gdImageConvolution(gdImagePtr src, float filter[3][3], float filter_div, flo
 	int         x, y, i, j, new_a;
 	float       new_r, new_g, new_b;
 	int         new_pxl, pxl=0;
-	gdImagePtr  srcback, srctrans;
+	gdImagePtr  srcback;
 	typedef int (*FuncPtr)(gdImagePtr, int, int);
 	FuncPtr f;
 
@@ -3874,14 +3873,11 @@ int gdImageConvolution(gdImagePtr src, float filter[3][3], float filter_div, flo
 
 	/* We need the orinal image with each safe neoghb. pixel */
 	srcback = gdImageCreateTrueColor (src->sx, src->sy);
+	gdImageCopy(srcback, src,0,0,0,0,src->sx,src->sy);
+
 	if (srcback==NULL) {
 		return 0;
 	}
-	srcback->saveAlphaFlag = 1;
-	srctrans = gdImageColorAllocateAlpha(srcback, 0, 0, 0, 127);
-	gdImageFill(srcback, 0, 0, srctrans);
-
-	gdImageCopy(srcback, src,0,0,0,0,src->sx,src->sy);
 
 	f = GET_PIXEL_FUNCTION(src);
 
@@ -3939,10 +3935,11 @@ int gdImageSelectiveBlur( gdImagePtr src)
 
 	/* We need the orinal image with each safe neoghb. pixel */
 	srcback = gdImageCreateTrueColor (src->sx, src->sy);
+	gdImageCopy(srcback, src,0,0,0,0,src->sx,src->sy);
+
 	if (srcback==NULL) {
 		return 0;
 	}
-	gdImageCopy(srcback, src,0,0,0,0,src->sx,src->sy);
 
 	f = GET_PIXEL_FUNCTION(src);
 

@@ -1,4 +1,4 @@
-/* 
+/*
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.146 2007/06/26 21:37:14 tony2001 Exp $ */
+/* $Id: datetime.c,v 1.147 2007/11/05 13:09:31 jani Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -79,7 +79,7 @@ PHPAPI char *php_std_date(time_t t TSRMLS_DC)
 				((tm1->tm_year) % 100),
 				tm1->tm_hour, tm1->tm_min, tm1->tm_sec);
 	}
-	
+
 	str[79] = 0;
 	return (str);
 }
@@ -102,8 +102,7 @@ PHP_FUNCTION(strptime)
 	char      *unparsed_part;
 	zend_uchar type;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "TT", 
-		&ts, &ts_length, &type, &format, &format_length, &type) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "TT",  &ts, &ts_length, &type, &format, &format_length, &type) == FAILURE) {
 		return;
 	}
 

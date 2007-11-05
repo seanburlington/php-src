@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.166 2007/11/05 16:12:55 jani Exp $ */
+/* $Id: filestat.c,v 1.167 2007/11/05 16:14:11 jani Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -439,7 +439,7 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp) /* {{{ */
 		struct group *retgrptr;
 		long grbuflen = sysconf(_SC_GETGR_R_SIZE_MAX);
 		char *grbuf;
-		
+
 		if (grbuflen < 1) {
 			RETURN_FALSE;
 		}

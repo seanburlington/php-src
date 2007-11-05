@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.36.2.4.2.9 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: credits.c,v 1.36.2.4.2.4.2.1 2007/11/05 12:27:42 jani Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -25,9 +25,7 @@
 
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
 
-/* {{{ php_print_credits
- */
-PHPAPI void php_print_credits(int flag TSRMLS_DC)
+PHPAPI void php_print_credits(int flag TSRMLS_DC) /* {{{ */
 {
 	if (!sapi_module.phpinfo_as_text && flag & PHP_CREDITS_FULLPAGE) {
 		php_print_info_htmlhead(TSRMLS_C);
@@ -61,11 +59,11 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 
 		/* PHP Language */
 		php_info_print_table_start();
-		php_info_print_table_colspan_header(2, "PHP 5 Authors");
+		php_info_print_table_colspan_header(2, "PHP Authors");
 		php_info_print_table_header(2, "Contribution", "Authors");
 		CREDIT_LINE("Zend Scripting Language Engine", "Andi Gutmans, Zeev Suraski");
 		CREDIT_LINE("Extension Module API", "Andi Gutmans, Zeev Suraski, Andrei Zmievski");
-		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann, Jani Taskinen");
+		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann");
 		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski, Wez Furlong");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
 		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong, Sara Golemon");
@@ -96,9 +94,9 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 	if (flag & PHP_CREDITS_DOCS) {
 		php_info_print_table_start();
 		php_info_print_table_colspan_header(2, "PHP Documentation");
-		CREDIT_LINE("Authors", "Mehdi Achour, Friedhelm Betz, Antony Dovgal, Nuno Lopes, Hannes Magnusson, Georg Richter, Damien Seguy, Jakub Vrana");
+		CREDIT_LINE("Authors", "Mehdi Achour, Friedhelm Betz, Antony Dovgal, Nuno Lopes, Philip Olson, Georg Richter, Damien Seguy, Jakub Vrana");
 		CREDIT_LINE("Editor", "Philip Olson");
-		CREDIT_LINE("User Note Maintainers", "Friedhelm Betz, Etienne Kneuss, Nuno Lopes, Hannes Magnusson, Felipe Pena, Maciek Sokolewicz");
+		CREDIT_LINE("User Note Maintainers", "Mehdi Achour, Friedhelm Betz, Vincent Gevers, Aidan Lister, Nuno Lopes, Tom Sommer");
 		CREDIT_LINE("Other Contributors", "Previously active authors, editors and other contributors are listed in the manual.");
 		php_info_print_table_end();
 	}
@@ -114,7 +112,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		/* Website Team */
 		php_info_print_table_start();
 		php_info_print_table_header(1, "PHP Website Team");
-		php_info_print_table_row(1, "Rasmus Lerdorf, Hannes Magnusson, Philip Olson");
+		php_info_print_table_row(1, "Hannes Magnusson, Colin Viebrock, Jim Winstead");
 		php_info_print_table_end();
 	}
 

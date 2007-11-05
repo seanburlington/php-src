@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -14,15 +14,15 @@
    +----------------------------------------------------------------------+
    | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
- */
+*/
 
-/* $Id: assert.c,v 1.60.2.3.2.8 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: assert.c,v 1.60.2.3.2.6.2.1 2007/11/05 11:52:31 jani Exp $ */
 
-/* {{{ includes/startup/misc */
-
+/* {{{ includes */
 #include "php.h"
 #include "php_assert.h"
 #include "php_ini.h"
+/* }}} */
 
 ZEND_BEGIN_MODULE_GLOBALS(assert)
 	long active;
@@ -51,7 +51,7 @@ enum {
 	ASSERT_QUIET_EVAL
 };
 
-static PHP_INI_MH(OnChangeCallback)
+static PHP_INI_MH(OnChangeCallback) /* {{{ */
 {
 	if (EG(in_execution)) {
 		if (ASSERTG(callback)) {
@@ -75,22 +75,24 @@ static PHP_INI_MH(OnChangeCallback)
 	}
 	return SUCCESS;
 }
+/* }}} */
 
 PHP_INI_BEGIN()
-	 STD_PHP_INI_ENTRY("assert.active",	    "1",	PHP_INI_ALL,	OnUpdateLong,		active,	 			zend_assert_globals,		assert_globals)
-	 STD_PHP_INI_ENTRY("assert.bail",	    "0",	PHP_INI_ALL,	OnUpdateLong,		bail,	 			zend_assert_globals,		assert_globals)
+	 STD_PHP_INI_ENTRY("assert.active",		"1",	PHP_INI_ALL,	OnUpdateLong,		active,	 			zend_assert_globals,		assert_globals)
+	 STD_PHP_INI_ENTRY("assert.bail",		"0",	PHP_INI_ALL,	OnUpdateLong,		bail,	 			zend_assert_globals,		assert_globals)
 	 STD_PHP_INI_ENTRY("assert.warning",	"1",	PHP_INI_ALL,	OnUpdateLong,		warning, 			zend_assert_globals,		assert_globals)
-	 PHP_INI_ENTRY    ("assert.callback",   NULL,   PHP_INI_ALL,    OnChangeCallback)
+	 PHP_INI_ENTRY("assert.callback",		NULL,	PHP_INI_ALL,	OnChangeCallback)
 	 STD_PHP_INI_ENTRY("assert.quiet_eval", "0",	PHP_INI_ALL,	OnUpdateLong,		quiet_eval,		 	zend_assert_globals,		assert_globals)
 PHP_INI_END()
 
-static void php_assert_init_globals(zend_assert_globals *assert_globals_p TSRMLS_DC)
+static void php_assert_init_globals(zend_assert_globals *assert_globals_p TSRMLS_DC) /* {{{ */
 {
 	assert_globals_p->callback = NULL;
 	assert_globals_p->cb = NULL;
 }
+/* }}} */
 
-PHP_MINIT_FUNCTION(assert)
+PHP_MINIT_FUNCTION(assert) /* {{{ */
 {
 	ZEND_INIT_MODULE_GLOBALS(assert, php_assert_init_globals, NULL);
 
@@ -104,8 +106,9 @@ PHP_MINIT_FUNCTION(assert)
 
 	return SUCCESS;
 }
+/* }}} */
 
-PHP_MSHUTDOWN_FUNCTION(assert)
+PHP_MSHUTDOWN_FUNCTION(assert) /* {{{ */
 {
 	if (ASSERTG(cb)) {
 		pefree(ASSERTG(cb), 1);
@@ -113,35 +116,34 @@ PHP_MSHUTDOWN_FUNCTION(assert)
 	}
 	return SUCCESS;
 }
+/* }}} */
 
-PHP_RSHUTDOWN_FUNCTION(assert)
+PHP_RSHUTDOWN_FUNCTION(assert) /* {{{ */
 {
-	if (ASSERTG(callback)) { 
+	if (ASSERTG(callback)) {
 		zval_ptr_dtor(&ASSERTG(callback));
 		ASSERTG(callback) = NULL;
 	}
 
 	return SUCCESS;
 }
+/* }}} */
 
-PHP_MINFO_FUNCTION(assert)
+PHP_MINFO_FUNCTION(assert) /* {{{ */
 {
 	DISPLAY_INI_ENTRIES();
 }
+/* }}} */
 
-/* }}} */
-/* {{{ internal functions */
-/* }}} */
 /* {{{ proto int assert(string|bool assertion)
    Checks if assertion is false */
-
 PHP_FUNCTION(assert)
 {
-	zval **assertion;	
+	zval **assertion;
 	int val;
 	char *myeval = NULL;
 	char *compiled_string_description;
-	
+
 	if (! ASSERTG(active)) {
 		RETURN_TRUE;
 	}
@@ -206,7 +208,7 @@ PHP_FUNCTION(assert)
 		ZVAL_STRING(args[0], SAFE_STRING(filename), 1);
 		ZVAL_LONG (args[1], lineno);
 		ZVAL_STRING(args[2], SAFE_STRING(myeval), 1);
-		
+
 		MAKE_STD_ZVAL(retval);
 		ZVAL_FALSE(retval);
 
@@ -231,17 +233,16 @@ PHP_FUNCTION(assert)
 		zend_bailout();
 	}
 }
-
 /* }}} */
+
 /* {{{ proto mixed assert_options(int what [, mixed value])
    Set/get the various assert flags */
-
 PHP_FUNCTION(assert_options)
 {
 	zval **what, **value;
 	int oldint;
 	int ac = ZEND_NUM_ARGS();
-	
+
 	if (ac < 1 || ac > 2 || zend_get_parameters_ex(ac, &what, &value) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
@@ -310,7 +311,6 @@ PHP_FUNCTION(assert_options)
 
 	RETURN_FALSE;
 }
-
 /* }}} */
 
 /*

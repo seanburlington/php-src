@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.167 2007/11/05 16:14:11 jani Exp $ */
+/* $Id: filestat.c,v 1.168 2007/11/05 16:29:04 jani Exp $ */
 
 #include "php.h"
 #include "fopen_wrappers.h"
@@ -1081,7 +1081,6 @@ void name(INTERNAL_FUNCTION_PARAMETERS) { \
 		efree(filename); \
 	} \
 }
-
 /* }}} */
 
 /* {{{ proto int fileperms(string filename) U

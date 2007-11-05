@@ -67,7 +67,7 @@ foreach($string_formats as $string_format) {
 
 // closing the resources
 fclose($fp);
-closedir($dfp);
+fclose($dfp);
 
 echo "\n*** Done ***";
 ?>
@@ -218,3 +218,4 @@ array(0) {
 bool(false)
 
 *** Done ***
+

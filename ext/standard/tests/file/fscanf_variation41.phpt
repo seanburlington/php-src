@@ -63,7 +63,7 @@ foreach($unsigned_formats as $unsigned_format) {
 
 // closing the resources
 fclose($fp);
-closedir($dfp);
+fclose($dfp);
 
 echo "\n*** Done ***";
 ?>
@@ -214,3 +214,4 @@ array(0) {
 bool(false)
 
 *** Done ***
+

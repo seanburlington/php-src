@@ -11,7 +11,7 @@ echo "*** Testing ftruncate() : error conditions ***\n";
 
 $filename = dirname(__FILE__)."/ftruncate_error.tmp";
 $file_handle = fopen($filename, "w" );
-fwrite($file_handle, "Testing ftruncate error conditions \n");
+fwrite($file_handle, (binary)"Testing ftruncate error conditions \n");
 fflush($file_handle);
 echo "\n Initial file size = ".filesize($filename)."\n";
 
@@ -114,7 +114,7 @@ Warning: ftruncate(): supplied argument is not a valid stream resource in %s on 
 bool(false)
 -- Testing ftruncate() with closed/unset file handle --
 
-Warning: ftruncate(): %d is not a valid stream resource in %s on line %d
+Warning: ftruncate(): 5 is not a valid stream resource in %s on line %d
 bool(false)
 int(36)
 

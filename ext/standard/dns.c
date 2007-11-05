@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.87 2007/11/05 13:40:36 jani Exp $ */
+/* $Id: dns.c,v 1.88 2007/11/05 13:42:16 jani Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -678,7 +678,7 @@ PHP_FUNCTION(dns_get_record)
 	}
 
 	if (type_param & ~PHP_DNS_ALL && type_param != PHP_DNS_ANY) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type '%d' not supported", type_param);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type '%ld' not supported", type_param);
 		RETURN_FALSE;
 	}
 

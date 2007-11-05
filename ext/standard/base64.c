@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,21 +15,21 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.43.2.2.2.7 2009/01/25 18:27:39 iliaa Exp $ */
+/* $Id: base64.c,v 1.43.2.2.2.3.2.1 2007/11/05 12:07:37 jani Exp $ */
 
 #include <string.h>
 
 #include "php.h"
 #include "base64.h"
 
-/* {{{ */
-static const char base64_table[] =
-	{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-	  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-	  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-	  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-	  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', '\0'
-	};
+/* {{{ base64 tables */
+static const char base64_table[] = {
+	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+	'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+	'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', '\0'
+};
 
 static const char base64_pad = '=';
 
@@ -53,8 +53,7 @@ static const short base64_reverse_table[256] = {
 };
 /* }}} */
 
-/* {{{ php_base64_encode */
-PHPAPI unsigned char *php_base64_encode(const unsigned char *str, int length, int *ret_length)
+PHPAPI unsigned char *php_base64_encode(const unsigned char *str, int length, int *ret_length) /* {{{ */
 {
 	const unsigned char *current = str;
 	unsigned char *p;
@@ -135,31 +134,24 @@ void php_base64_init(void)
 */
 /* }}} */
 
-PHPAPI unsigned char *php_base64_decode(const unsigned char *str, int length, int *ret_length)
+PHPAPI unsigned char *php_base64_decode(const unsigned char *str, int length, int *ret_length) /* {{{ */
 {
 	return php_base64_decode_ex(str, length, ret_length, 0);
 }
+/* }}} */
 
-/* {{{ php_base64_decode */
-/* as above, but backwards. :) */
-PHPAPI unsigned char *php_base64_decode_ex(const unsigned char *str, int length, int *ret_length, zend_bool strict)
+PHPAPI unsigned char *php_base64_decode_ex(const unsigned char *str, int length, int *ret_length, zend_bool strict) /* {{{ */
 {
 	const unsigned char *current = str;
 	int ch, i = 0, j = 0, k;
 	/* this sucks for threaded environments */
 	unsigned char *result;
-	
-	result = (unsigned char *)emalloc(length + 1);
+
+	result = (unsigned char *)safe_emalloc(length, 1, 1);
 
 	/* run through the whole string, converting as we go */
 	while ((ch = *current++) != '\0' && length-- > 0) {
-		if (ch == base64_pad) {
-			if (*current != '=' && (i % 4) == 1) {
-				efree(result);
-				return NULL;
-			}
-			continue;
-		}
+		if (ch == base64_pad) break;
 
 		ch = base64_reverse_table[ch];
 		if ((!strict && ch < 0) || ch == -1) { /* a space or some other separator character, we simply skip over */
@@ -220,15 +212,14 @@ PHP_FUNCTION(base64_encode)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
 		return;
 	}
-	result = php_base64_encode(str, str_len, &ret_length);
+	result = php_base64_encode((unsigned char*)str, str_len, &ret_length);
 	if (result != NULL) {
-		RETVAL_STRINGL(result, ret_length, 0);
+		RETVAL_STRINGL((char*)result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}
 }
 /* }}} */
-
 
 /* {{{ proto string base64_decode(string str[, bool strict])
    Decodes string using MIME base64 algorithm */
@@ -242,15 +233,14 @@ PHP_FUNCTION(base64_decode)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &str, &str_len, &strict) == FAILURE) {
 		return;
 	}
-	result = php_base64_decode_ex(str, str_len, &ret_length, strict);
+	result = php_base64_decode_ex((unsigned char*)str, str_len, &ret_length, strict);
 	if (result != NULL) {
-		RETVAL_STRINGL(result, ret_length, 0);
+		RETVAL_STRINGL((char*)result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}
 }
 /* }}} */
-
 
 /*
  * Local variables:

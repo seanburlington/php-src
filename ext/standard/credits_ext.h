@@ -22,6 +22,7 @@ CREDIT_LINE("DBA", "Sascha Schumann, Marcus Boerger");
 CREDIT_LINE("dBase", "Jim Winstead");
 CREDIT_LINE("DB-LIB (MS SQL, Sybase)", "Wez Furlong, Frank M. Kromann");
 CREDIT_LINE("DOM", "Christian Stocker, Rob Richards, Marcus Boerger");
+CREDIT_LINE("ereg", "Rasmus Lerdorf, Jim Winstead, Jaakko Hyvätti");
 CREDIT_LINE("EXIF", "Rasmus Lerdorf, Marcus Boerger");
 CREDIT_LINE("FBSQL", "Frank M. Kromann");
 CREDIT_LINE("FDF", "Uwe Steinmann");

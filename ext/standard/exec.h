@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: exec.h,v 1.28 2007/01/01 09:29:31 sebastian Exp $ */
+/* $Id: exec.h,v 1.29 2007/11/05 14:06:19 jani Exp $ */
 
 #ifndef EXEC_H
 #define EXEC_H
@@ -36,6 +36,6 @@ PHP_MINIT_FUNCTION(proc_open);
 
 PHPAPI char *php_escape_shell_cmd(char *);
 PHPAPI char *php_escape_shell_arg(char *);
-int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC);
+PHPAPI int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC);
 
 #endif /* EXEC_H */

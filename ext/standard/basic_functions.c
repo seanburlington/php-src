@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.9 2007/11/02 19:40:38 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.10 2007/11/06 12:12:58 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4026,6 +4026,7 @@ PHP_MINIT_FUNCTION(basic) /* {{{ */
 
 	php_register_url_stream_wrapper("php", &php_stream_php_wrapper TSRMLS_CC);
 	php_register_url_stream_wrapper("file", &php_plain_files_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("glob", &php_glob_stream_wrapper TSRMLS_CC);
 	php_register_url_stream_wrapper("data", &php_stream_rfc2397_wrapper TSRMLS_CC);
 #ifndef PHP_CURL_URL_WRAPPERS
 	php_register_url_stream_wrapper("http", &php_stream_http_wrapper TSRMLS_CC);

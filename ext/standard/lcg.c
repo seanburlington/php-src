@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.46 2007/07/14 08:38:19 tony2001 Exp $ */
+/* $Id: lcg.c,v 1.47 2007/11/06 10:56:58 jani Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -36,7 +36,6 @@ int lcg_globals_id;
 #else
 static php_lcg_globals lcg_globals;
 #endif
- 
 
 #ifdef PHP_WIN32
 #include <process.h>
@@ -44,7 +43,7 @@ static php_lcg_globals lcg_globals;
 
 /*
  * combinedLCG() returns a pseudo random number in the range of (0, 1).
- * The function combines two CGs with periods of 
+ * The function combines two CGs with periods of
  * 2^31 - 85 and 2^31 - 249. The period of this function
  * is equal to the product of both primes.
  */
@@ -57,7 +56,7 @@ PHPAPI double php_combined_lcg(TSRMLS_D) /* {{{ */
 {
 	php_int32 q;
 	php_int32 z;
-	
+
 	if (!LCG(seeded)) {
 		lcg_seed(TSRMLS_C);
 	}

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.67.2.1.2.1.2.1 2007/10/05 21:23:55 andrey Exp $
+dnl $Id: config.m4,v 1.67.2.1.2.1.2.2 2007/11/06 10:00:04 jani Exp $
 dnl
 
 AC_DEFUN([MYSQL_LIB_CHK], [
@@ -40,8 +40,9 @@ AC_DEFUN([PHP_MYSQL_SOCKET_SEARCH], [
 
 
 PHP_ARG_WITH(mysql, for MySQL support,
-[  --with-mysql[=DIR]        Include MySQL support. DIR is the MySQL base directory.
-                            If mysqlnd is passed as DIR, the MySQL native driver will be used])
+[  --with-mysql[=DIR]      Include MySQL support.  DIR is the MySQL base
+                          directory.  If mysqlnd is passed as DIR, 
+                          the MySQL native driver will be used [/usr/local]])
 
 PHP_ARG_WITH(mysql-sock, for specified location of the MySQL UNIX socket,
 [  --with-mysql-sock[=DIR]   MySQL: Location of the MySQL unix socket pointer.
@@ -155,7 +156,7 @@ if test "$PHP_MYSQL" != "no"; then
   PHP_NEW_EXTENSION(mysql, php_mysql.c, $ext_shared)
   PHP_SUBST(MYSQL_SHARED_LIBADD)
 
-  if test "$PHP_MYSQLI" = "mysqlnd"; then
-    PHP_ADD_EXTENSION_DEP(mysqli, mysqlnd)
+  if test "$PHP_MYSQL" = "mysqlnd"; then
+    PHP_ADD_EXTENSION_DEP(mysql, mysqlnd)
   fi
 fi

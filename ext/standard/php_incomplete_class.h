@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.17.2.2.2.4 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: php_incomplete_class.h,v 1.17.2.2.2.1.2.1 2007/11/06 10:53:01 jani Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -31,10 +31,6 @@
 	if (Z_OBJ_HT_P(struc)->get_class_entry && \
             Z_OBJCE_P(struc) == BG(incomplete_class)) {	\
 		class_name = php_lookup_class_name(struc, &name_len); \
-		if (!class_name) { \
-			name_len = sizeof(INCOMPLETE_CLASS) - 1; \
-			class_name = estrndup(INCOMPLETE_CLASS, name_len); \
-		} \
 		free_class_name = 1; \
 		incomplete_class = 1; \
 	} else { \
@@ -56,9 +52,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-zend_class_entry *php_create_incomplete_class(TSRMLS_D);
 
+PHPAPI zend_class_entry *php_create_incomplete_class(TSRMLS_D);
 PHPAPI char *php_lookup_class_name(zval *object, zend_uint *nlen);
 PHPAPI void  php_store_class_name(zval *object, const char *name, zend_uint len);
 

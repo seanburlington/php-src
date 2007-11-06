@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.12.2.1.2.5 2009/04/19 17:10:52 lbarnaud Exp $ */
+/* $Id: cast.c,v 1.12.2.1.2.1.2.1 2007/11/06 11:02:36 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -214,9 +214,9 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 
 			newstream = php_stream_fopen_tmpfile();
 			if (newstream) {
-				int ret = php_stream_copy_to_stream_ex(stream, newstream, PHP_STREAM_COPY_ALL, NULL);
+				size_t copied = php_stream_copy_to_stream(stream, newstream, PHP_STREAM_COPY_ALL);
 
-				if (ret != SUCCESS) {
+				if (copied == 0) {
 					php_stream_close(newstream);
 				} else {
 					int retcode = php_stream_cast(newstream, castas | flags, ret, show_err);
@@ -327,7 +327,12 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
 	if (*newstream == NULL)
 		return PHP_STREAM_FAILED;
 
-	if (php_stream_copy_to_stream_ex(origstream, *newstream, PHP_STREAM_COPY_ALL, NULL) != SUCCESS) {
+#if ZEND_DEBUG
+	(*newstream)->open_filename = origstream->open_filename;
+	(*newstream)->open_lineno = origstream->open_lineno;
+#endif
+
+	if (php_stream_copy_to_stream(origstream, *newstream, PHP_STREAM_COPY_ALL) == 0) {
 		php_stream_close(*newstream);
 		*newstream = NULL;
 		return PHP_STREAM_CRITICAL;

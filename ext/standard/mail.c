@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.95 2007/11/06 17:58:41 jani Exp $ */
+/* $Id: mail.c,v 1.96 2007/11/07 08:32:17 dmitry Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -92,6 +92,7 @@ PHP_FUNCTION(mail)
 	int subject_len, extra_cmd_len, i;
 	char *force_extra_parameters = INI_STR("mail.force_extra_parameters");
 	char *to_r, *subject_r;
+	char *p, *e;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|ss",	&to, &to_len, &subject, &subject_len, &message, &message_len,
 																	&headers, &headers_len, &extra_cmd, &extra_cmd_len) == FAILURE

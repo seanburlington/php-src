@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.246 2007/10/16 20:58:35 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.247 2007/11/08 13:28:38 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -2056,6 +2056,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 
 	if ((result_type & MYSQL_BOTH) == 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The result type should be either MYSQL_NUM, MYSQL_ASSOC or MYSQL_BOTH");
+		result_type = MYSQL_BOTH;
 	}
 	
 	ZEND_FETCH_RESOURCE(mysql_result, MYSQL_RES *, result, -1, "MySQL result", le_result);

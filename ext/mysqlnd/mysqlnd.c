@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5.2.3 2007/10/23 10:10:18 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.5.2.4 2007/11/08 17:29:42 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -571,6 +571,10 @@ PHPAPI MYSQLND *mysqlnd_connect(MYSQLND *conn,
 											    NULL /*ctx*/, &errstr, &errcode);
 	DBG_INF_FMT("stream=%p", conn->net.stream);
 
+	if (errstr || !conn->net.stream) {
+		goto err;
+	}
+
 	if (hashed_details) {
 		/*
 		  If persistent, the streams register it in EG(persistent_list).
@@ -595,10 +599,6 @@ PHPAPI MYSQLND *mysqlnd_connect(MYSQLND *conn,
 		conn->net.stream->__exposed = 1;
 #endif
 		mnd_efree(hashed_details);
-	}
-
-	if (errstr || !conn->net.stream) {
-		goto err;
 	}
 
 	if (conn->options.timeout_read)

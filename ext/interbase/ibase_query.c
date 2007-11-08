@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.13 2008/12/31 11:17:38 sebastian Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.1 2007/11/08 19:16:27 lwe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,6 +49,7 @@ typedef struct {
 typedef struct {
 	ibase_db_link *link;
 	ibase_trans *trans;
+	struct _ib_query *query;
 	isc_stmt_handle stmt;
 	unsigned short type;
 	unsigned char has_more_rows, statement_type;
@@ -56,9 +57,10 @@ typedef struct {
 	ibase_array out_array[1]; /* last member */
 } ibase_result;
 
-typedef struct {
+typedef struct _ib_query {
 	ibase_db_link *link;
 	ibase_trans *trans;
+	ibase_result *result;
 	int result_res_id;
 	isc_stmt_handle stmt;
 	XSQLDA *in_sqlda, *out_sqlda;
@@ -116,6 +118,22 @@ static void _php_ibase_free_xsqlda(XSQLDA *sqlda) /* {{{ */
 }
 /* }}} */
 
+static void _php_ibase_free_stmt_handle(ibase_db_link *link, isc_stmt_handle stmt TSRMLS_DC) /* {{{ */
+{
+	if (stmt) {
+		IBDEBUG("Dropping statement handle (free_stmt_handle)...");
+		/* Only free statement if db-connection is still open */
+		char db_items[] = {isc_info_page_size}, res_buf[40];
+		if (SUCCESS == isc_database_info(IB_STATUS, &link->handle, 
+							sizeof(db_items), db_items, sizeof(res_buf), res_buf)) {
+			if (isc_dsql_free_statement(IB_STATUS, &stmt, DSQL_drop)) {
+				_php_ibase_error(TSRMLS_C);
+			}
+		}
+	}
+}
+/* }}} */
+
 static void _php_ibase_free_result(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
 {
 	ibase_result *ib_result = (ibase_result *) rsrc->ptr;
@@ -123,9 +141,11 @@ static void _php_ibase_free_result(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ 
 	IBDEBUG("Freeing result by dtor...");
 	if (ib_result) {
 		_php_ibase_free_xsqlda(ib_result->out_sqlda);
-		if (ib_result->stmt && ib_result->type != EXECUTE_RESULT) {
-			IBDEBUG("Dropping statement handle (free_result dtor)...");
-			isc_dsql_free_statement(IB_STATUS, &ib_result->stmt, DSQL_drop);
+		if (ib_result->query != NULL) {
+			IBDEBUG("query still valid; don't drop statement handle");
+			ib_result->query->result = NULL;	/* Indicate to query, that result is released */
+		} else {
+			_php_ibase_free_stmt_handle(ib_result->link, ib_result->stmt TSRMLS_CC);
 		}
 		efree(ib_result);
 	}
@@ -142,11 +162,11 @@ static void _php_ibase_free_query(ibase_query *ib_query TSRMLS_DC) /* {{{ */
 	if (ib_query->out_sqlda) {
 		efree(ib_query->out_sqlda);
 	}
-	if (ib_query->stmt) {
-		IBDEBUG("Dropping statement handle (free_query)...");
-		if (isc_dsql_free_statement(IB_STATUS, &ib_query->stmt, DSQL_drop)) {
-			_php_ibase_error(TSRMLS_C);
-		}
+	if (ib_query->result != NULL) {
+		IBDEBUG("result still valid; don't drop statement handle");
+		ib_query->result->query = NULL;	/* Indicate to result, that query is released */
+	} else {
+		_php_ibase_free_stmt_handle(ib_query->link, ib_query->stmt TSRMLS_CC);
 	}
 	if (ib_query->in_array) {
 		efree(ib_query->in_array);
@@ -166,11 +186,7 @@ static void php_ibase_free_query_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {
 
 	if (ib_query != NULL) {
 		IBDEBUG("Preparing to free query by dtor...");
-
 		_php_ibase_free_query(ib_query TSRMLS_CC);
-		if (ib_query->statement_type != isc_info_sql_stmt_exec_procedure) {
-			zend_list_delete(ib_query->result_res_id);
-		}
 		efree(ib_query);
 	}
 }
@@ -302,9 +318,16 @@ static int _php_ibase_alloc_query(ibase_query *ib_query, ibase_db_link *link, /*
 	static char info_type[] = {isc_info_sql_stmt_type};
 	char result[8];
 
+	/* Return FAILURE, if querystring is empty */
+	if (*query == '\0') {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Querystring empty.");
+		return FAILURE;
+	}
+
 	ib_query->link = link;
 	ib_query->trans = trans;
 	ib_query->result_res_id = 0;
+	ib_query->result = NULL;
 	ib_query->stmt = NULL;
 	ib_query->in_array = NULL;
 	ib_query->out_array = NULL;
@@ -929,7 +952,10 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 		res = emalloc(sizeof(ibase_result)+sizeof(ibase_array)*max(0,ib_query->out_array_cnt-1));
 		res->link = ib_query->link;
 		res->trans = ib_query->trans;
-		res->stmt = ib_query->stmt; 
+		res->stmt = ib_query->stmt;
+		/* ib_result and ib_query point at each other to handle release of statement handle properly */
+		res->query = ib_query;
+		ib_query->result = res;
 		res->statement_type = ib_query->statement_type;
 		res->has_more_rows = 1;
 
@@ -1288,9 +1314,23 @@ PHP_FUNCTION(ibase_num_rows)
 static int _php_ibase_var_zval(zval *val, void *data, int type, int len, /* {{{ */
 	int scale, int flag TSRMLS_DC)
 {
-	static ISC_INT64 const scales[] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 100000000, 1000000000, 
-		1000000000, LL_LIT(10000000000),LL_LIT(100000000000),LL_LIT(10000000000000),LL_LIT(100000000000000),
-		LL_LIT(1000000000000000),LL_LIT(1000000000000000),LL_LIT(1000000000000000000) };
+	static ISC_INT64 const scales[] = { 1, 10, 100, 1000, 
+		10000, 
+		100000, 
+		1000000, 
+		10000000,
+		100000000, 
+		1000000000, 
+		LL_LIT(10000000000), 
+		LL_LIT(100000000000),
+		LL_LIT(1000000000000), 
+		LL_LIT(10000000000000), 
+		LL_LIT(100000000000000),
+		LL_LIT(1000000000000000),
+		LL_LIT(10000000000000000), 
+		LL_LIT(100000000000000000), 
+		LL_LIT(1000000000000000000)
+	};
 
 	switch (type & ~1) {
 		unsigned short l;
@@ -1819,17 +1859,16 @@ PHP_FUNCTION(ibase_execute)
 		if (bind_n != expected_n) {
 			php_error_docref(NULL TSRMLS_CC, (bind_n < expected_n) ? E_WARNING : E_NOTICE,
 				"Statement expects %d arguments, %d given", expected_n, bind_n);
-
 			if (bind_n < expected_n) {
 				break;
 			}
-		}
-		
-		/* have variables to bind */
-		args = (zval ***) do_alloca((expected_n + 1) * sizeof(zval **));
+
+		} else if (bind_n > 0) { /* have variables to bind */
+			args = (zval ***) do_alloca(ZEND_NUM_ARGS() * sizeof(zval **));
 	
-		if (FAILURE == zend_get_parameters_array_ex((expected_n + 1), args)) {
-			break;
+			if (FAILURE == zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args)) {
+				break;
+			}
 		}
 
 		/* Have we used this cursor before and it's still open (exec proc has no cursor) ? */

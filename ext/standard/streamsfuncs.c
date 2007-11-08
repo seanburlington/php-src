@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.108 2007/10/10 12:51:06 jani Exp $ */
+/* $Id: streamsfuncs.c,v 1.109 2007/11/08 13:29:38 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1666,7 +1666,7 @@ PHP_FUNCTION(stream_is_local)
 		wrapper = stream->wrapper;
 	} else {
 		convert_to_string_ex(&zstream);
-		wrapper = php_stream_locate_url_wrapper(Z_STRVAL_P(zstream), NULL, STREAM_LOCATE_WRAPPERS_ONLY TSRMLS_CC);
+		wrapper = php_stream_locate_url_wrapper(Z_STRVAL_P(zstream), NULL, 0 TSRMLS_CC);
 	}
 
 	if(!wrapper) {

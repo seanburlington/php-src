@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.160 2007/10/07 05:15:07 davidw Exp $ */
+/* $Id: php_ini.c,v 1.161 2007/11/09 16:02:50 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -755,6 +755,21 @@ PHPAPI void php_ini_activate_per_dir_config(char *path, uint path_len TSRMLS_DC)
 			}
 			*ptr = '/';
 			ptr++;
+		}
+	}
+}
+/* }}} */
+
+/* {{{ php_ini_activate_per_host_config
+ */
+PHPAPI void php_ini_activate_per_host_config(char *host, uint host_len TSRMLS_DC)
+{
+	zval *tmp;
+
+	if (host && host_len) {
+		/* Search for source array matching the host from configuration_hash */
+		if (zend_hash_find(&configuration_hash, host, host_len, (void **) &tmp) == SUCCESS) {
+			php_ini_activate_config(Z_ARRVAL_P(tmp), PHP_INI_SYSTEM, PHP_INI_STAGE_ACTIVATE TSRMLS_CC);
 		}
 	}
 }

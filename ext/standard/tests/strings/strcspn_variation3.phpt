@@ -43,8 +43,8 @@ $values = array(
       // float data
       10.5,
       -10.5,
-      10.1234567e8,
-      10.7654321E-8,
+      10.1234567e10,
+      10.7654321E-10,
       .5,
 
       // array data
@@ -109,11 +109,11 @@ int(0)
 int(0)
 int(0)
 
--- Iteration with start value as "1012345670" --
-bool(false)
-bool(false)
+-- Iteration with start value as "101234567000" --
+int(0)
+int(0)
 
--- Iteration with start value as "1.07654321E-7" --
+-- Iteration with start value as "1.07654321E-9" --
 int(0)
 int(0)
 
@@ -123,7 +123,7 @@ int(0)
 
 -- Iteration with start value as "Array" --
 
-Warning: strcspn() expects parameter 3 to be long, array given in %s on line %d
+Warning: strcspn() expects parameter 3 to be long, array given in %s on line 89
 NULL
 
 Warning: strcspn() expects parameter 3 to be long, array given in %s on line %d

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.2 2007/11/09 10:56:28 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.3 2007/11/09 11:06:07 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -148,7 +148,7 @@ PHP_FUNCTION(mysqli_connect)
 				le.type = php_le_pmysqli();
 				le.ptr = plist = calloc(1, sizeof(mysqli_plist_entry));
 
-				zend_ptr_stack_init(&plist->free_links, 1);
+				zend_ptr_stack_init_ex(&plist->free_links, 1);
 				zend_hash_update(&EG(persistent_list), hash_key, hash_len + 1, (void *)&le, sizeof(le), NULL);
 			}
 		}

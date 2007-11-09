@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.3 2007/11/06 17:11:56 jani Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.4 2007/11/09 11:08:22 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2244,11 +2244,10 @@ PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char
 								state = 0;
 								break;
 							default:
-								if ((escape_char == enclosure && *bptr == escape_char && *(bptr+1) == escape_char)
-									|| (escape_char != enclosure && *bptr == escape_char)) {
-									state = 1;
-								} else if (*bptr == enclosure) {
+								if (*bptr == enclosure) {
 									state = 2;
+								} else if (*bptr == escape_char) {
+									state = 1;
 								}
 								bptr++;
 								break;

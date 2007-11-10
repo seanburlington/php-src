@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.21 2007/10/22 10:35:33 andrey Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.22 2007/11/10 19:52:08 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -693,7 +693,7 @@ PHP_MSHUTDOWN_FUNCTION(mysqli)
  */
 PHP_RINIT_FUNCTION(mysqli)
 {
-#ifdef ZTS && MYSQL_VERSION_ID >= 40000
+#if defined(ZTS) && MYSQL_VERSION_ID >= 40000
 	if (mysql_thread_init()) {
 		return FAILURE;
 	}
@@ -709,7 +709,7 @@ PHP_RINIT_FUNCTION(mysqli)
  */
 PHP_RSHUTDOWN_FUNCTION(mysqli)
 {
-#ifdef ZTS && MYSQL_VERSION_ID >= 40000
+#if defined(ZTS) && MYSQL_VERSION_ID >= 40000
 	mysql_thread_end();
 #endif
 	if (MyG(error_msg)) {

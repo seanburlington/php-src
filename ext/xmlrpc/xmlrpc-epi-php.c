@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.52 2007/09/27 18:28:43 dmitry Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.53 2007/11/12 11:22:00 tony2001 Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -864,8 +864,7 @@ static XMLRPC_VALUE php_xmlrpc_callback(XMLRPC_SERVER server, XMLRPC_REQUEST xRe
 
 	pData->php_executed = 1;
 
-	zval_dtor(xmlrpc_params);
-	FREE_ZVAL(xmlrpc_params);
+	zval_ptr_dtor(&xmlrpc_params);
 
 	return NULL;
 }

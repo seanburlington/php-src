@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.3 2007/10/11 01:03:19 helly Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.4 2007/11/12 18:58:48 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1655,6 +1655,13 @@ SXE_METHOD(addAttribute)
 
 	localname = xmlSplitQName2((xmlChar *)qname, &prefix);
 	if (localname == NULL) {
+		if (nsuri_len > 0) {
+			if (prefix != NULL) {
+				xmlFree(prefix);
+			}
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute requires prefix for namespace");
+			return;
+		}
 		localname = xmlStrdup((xmlChar *)qname);
 	}
 
@@ -2466,7 +2473,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.3 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.4 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

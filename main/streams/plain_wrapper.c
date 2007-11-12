@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.3 2007/11/06 12:12:58 helly Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.4 2007/11/12 18:44:18 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -62,6 +62,9 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 			break;
 		case 'x':
 			flags = O_CREAT|O_EXCL;
+			break;
+		case 'c':
+			flags = O_CREAT;
 			break;
 		default:
 			/* unknown mode */

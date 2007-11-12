@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.4 2007/11/09 11:08:22 dmitry Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.5 2007/11/12 18:44:18 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -581,6 +581,7 @@ PHP_FUNCTION(file_put_contents)
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
 	php_stream *srcstream = NULL;
+	char mode[3] = "wb";
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz/|lr!", &filename, &filename_len, &data, &flags, &zcontext) == FAILURE) {
 		return;
@@ -592,8 +593,14 @@ PHP_FUNCTION(file_put_contents)
 
 	context = php_stream_context_from_zval(zcontext, flags & PHP_FILE_NO_DEFAULT_CONTEXT);
 
-	stream = php_stream_open_wrapper_ex(filename, (flags & PHP_FILE_APPEND) ? "ab" : "wb",
-			((flags & PHP_FILE_USE_INCLUDE_PATH) ? USE_PATH : 0) | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, context);
+	if (flags & PHP_FILE_APPEND) {
+		mode[0] = 'a';
+	} else if (flags & LOCK_EX) {
+		mode[0] = 'c';
+	}
+	mode[2] = '\0';
+
+	stream = php_stream_open_wrapper_ex(filename, mode, ((flags & PHP_FILE_USE_INCLUDE_PATH) ? USE_PATH : 0) | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, context);
 	if (stream == NULL) {
 		RETURN_FALSE;
 	}
@@ -601,6 +608,10 @@ PHP_FUNCTION(file_put_contents)
 	if (flags & LOCK_EX && (!php_stream_supports_lock(stream) || php_stream_lock(stream, LOCK_EX))) {
 		php_stream_close(stream);
 		RETURN_FALSE;
+	}
+
+	if (mode[0] = 'c') {
+		php_stream_truncate_set_size(stream, 0);
 	}
 
 	switch (Z_TYPE_P(data)) {

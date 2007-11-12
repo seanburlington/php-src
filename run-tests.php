@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35 2007/09/14 15:28:03 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.36 2007/11/12 21:16:27 zoe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -399,7 +399,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35 $'."\n";
+					echo '$Revision: 1.226.2.37.2.36 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -1493,7 +1493,7 @@ COMMAND $cmd
 			$wanted_re = str_replace('%i', '[+-]?\d+', $wanted_re);
 			$wanted_re = str_replace('%d', '\d+', $wanted_re);
 			$wanted_re = str_replace('%x', '[0-9a-fA-F]+', $wanted_re);
-			$wanted_re = str_replace('%f', '[+-]?\.?\d+\.?\d*(?:E-?\d+)?', $wanted_re);
+			$wanted_re = str_replace('%f', '[+-]?\.?\d+\.?\d*(?:E[+-]?\d+)?', $wanted_re);
 			$wanted_re = str_replace('%c', '.', $wanted_re);
 			// %f allows two points "-.0.0" but that is the best *simple* expression
 		}

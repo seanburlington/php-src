@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.211 2007/10/18 19:47:22 cellog Exp $ */
+/* $Id: phar.c,v 1.212 2007/11/13 05:57:13 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1481,6 +1481,13 @@ int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_le
 		filename += 7;
 		filename_len -= 7;
 	}
+
+#ifdef PHP_WIN32
+	if (filename_len > 3 && *filename == '/' && *(filename + 2) == ':' && *(filename + 3) == '/') {
+		filename++;
+		filename_len--;
+	}
+#endif
 
 	if (phar_detect_phar_fname_ext(filename, 0, &ext_str, &ext_len) == FAILURE) {
 		return FAILURE;
@@ -3707,7 +3714,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.211 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.212 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");

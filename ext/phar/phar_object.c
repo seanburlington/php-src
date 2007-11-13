@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.63 2007/10/04 03:33:20 cellog Exp $ */
+/* $Id: phar_object.c,v 1.64 2007/11/13 05:57:13 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -244,7 +244,16 @@ PHP_METHOD(Phar, __construct)
 	phar_obj->arc.archive = phar_data;
 	phar_obj->spl.oth_handler = &phar_spl_foreign_handler;
 
+#ifdef PHP_WIN32
+	/* check for drive filenames like C:/ and prepend / */
+	if (fname_len > 2 && *(fname + 1) == ':' && *(fname + 2) == '/') {
+		fname_len = spprintf(&fname, 0, "phar:///%s", fname);
+	} else {
+		fname_len = spprintf(&fname, 0, "phar://%s", fname);
+	}
+#else
 	fname_len = spprintf(&fname, 0, "phar://%s", fname);
+#endif
 
 	INIT_PZVAL(&arg1);
 	ZVAL_STRINGL(&arg1, fname, fname_len, 0);

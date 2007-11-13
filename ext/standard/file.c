@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.5 2007/11/12 18:44:18 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.6 2007/11/13 10:31:24 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -610,7 +610,7 @@ PHP_FUNCTION(file_put_contents)
 		RETURN_FALSE;
 	}
 
-	if (mode[0] = 'c') {
+	if (mode[0] == 'c') {
 		php_stream_truncate_set_size(stream, 0);
 	}
 

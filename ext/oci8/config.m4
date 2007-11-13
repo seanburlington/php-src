@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.13 2008/05/13 16:06:55 sixd Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.11.2.1 2007/11/13 11:09:42 tony2001 Exp $
 dnl
 
 if test -z "$SED"; then
@@ -143,9 +143,7 @@ fi
 
 PHP_OCI8_INSTANT_CLIENT="no"
 
-if test "`echo $PHP_OCI8`" = "instantclient"; then
-    PHP_OCI8_INSTANT_CLIENT="yes"
-elif test "`echo $PHP_OCI8 | cut -d, -f2`" = "instantclient"; then
+if test "`echo $PHP_OCI8 | cut -d, -f2`" = "instantclient"; then
     PHP_OCI8_INSTANT_CLIENT="`echo $PHP_OCI8 | cut -d, -f3`"
     PHP_OCI8="`echo $PHP_OCI8 | cut -d, -f1,4`"
     if test "$PHP_OCI8_INSTANT_CLIENT" = ""; then
@@ -204,48 +202,11 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
 
   case $OCI8_VERSION in
     8.0)
-      PHP_ADD_LIBRARY_WITH_PATH(nlsrtl3, "", OCI8_SHARED_LIBADD)
-      PHP_ADD_LIBRARY_WITH_PATH(core4, "", OCI8_SHARED_LIBADD)
-      PHP_ADD_LIBRARY_WITH_PATH(psa, "", OCI8_SHARED_LIBADD)
-      PHP_ADD_LIBRARY_WITH_PATH(clntsh, $OCI8_DIR/$OCI8_LIB_DIR, OCI8_SHARED_LIBADD)
-
-      PHP_CHECK_LIBRARY(clntsh, OCIEnvCreate,
-      [
-        AC_DEFINE(HAVE_OCI_ENV_CREATE,1,[ ])
-      ], [], [
-        -L$OCI8_DIR/$OCI8_LIB_DIR $OCI8_SHARED_LIBADD
-      ])
-
-      PHP_CHECK_LIBRARY(clntsh, OCIStmtPrepare2,
-      [
-        AC_DEFINE(HAVE_OCI_STMT_PREPARE2,1,[ ])
-      ], [], [
-        -L$OCI8_DIR/$OCI8_LIB_DIR $OCI8_SHARED_LIBADD
-      ])
+      AC_MSG_ERROR([Oracle client libraries < 9.0 are not supported any more. Please consider upgrading.])
       ;;
 
     8.1)
-      PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
-      PHP_ADD_LIBPATH($OCI8_DIR/$OCI8_LIB_DIR, OCI8_SHARED_LIBADD)
-
-      PHP_CHECK_LIBRARY(clntsh, OCIEnvCreate,
-      [
-        AC_DEFINE(HAVE_OCI_ENV_CREATE,1,[ ])
-      ], [], [
-        -L$OCI8_DIR/$OCI8_LIB_DIR $OCI8_SHARED_LIBADD
-      ])
-
-      PHP_CHECK_LIBRARY(clntsh, OCIStmtPrepare2,
-      [
-        AC_DEFINE(HAVE_OCI_STMT_PREPARE2,1,[ ])
-      ], [], [
-        -L$OCI8_DIR/$OCI8_LIB_DIR $OCI8_SHARED_LIBADD
-      ])
- 
-      dnl 
-      dnl OCI_ATTR_STATEMENT is not available in all 8.1.x versions
-      dnl 
-      PHP_OCI_IF_DEFINED(OCI_ATTR_STATEMENT, [AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])], $OCI8_INCLUDES)
+      AC_MSG_ERROR([Oracle client libraries < 9.0 are not supported any more. Please consider upgrading.])
       ;;
 
     9.0)
@@ -302,7 +263,7 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
       AC_DEFINE(PHP_OCI8_HAVE_COLLECTIONS,1,[ ])
       ;;
     *)
-      AC_MSG_ERROR([Unsupported Oracle version!])
+      AC_MSG_ERROR([Oracle version $OCI8_VERSION is not supported])
       ;;
   esac
 
@@ -347,21 +308,14 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
   
 elif test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" != "no"; then
 
-  AC_CHECK_SIZEOF(long int, 4)
-  LIBDIR_SUFFIX=""
-  if test "$ac_cv_sizeof_long_int" = "8" ; then
-    LIBDIR_SUFFIX=64
-  fi
-
   AC_MSG_CHECKING([Oracle Instant Client directory])
   if test "$PHP_OCI8_INSTANT_CLIENT" = "yes"; then
-dnl Find the directory if user specified "instantclient" but did not give a dir.
 dnl Generally the Instant Client can be anywhere so the user must pass in the
 dnl directory to the libraries.  But on Linux we default to the most recent
 dnl version in /usr/lib
-    PHP_OCI8_INSTANT_CLIENT=`ls -d /usr/lib/oracle/*/client${LIBDIR_SUFFIX}/lib 2> /dev/null | tail -1`
+    PHP_OCI8_INSTANT_CLIENT=`ls -d /usr/lib/oracle/*/client/lib  2> /dev/null | tail -1`
     if test -z "$PHP_OCI8_INSTANT_CLIENT"; then
-      AC_MSG_ERROR([Oracle Instant Client directory /usr/lib/oracle/.../client${LIBDIR_SUFFIX}/lib not found. Try --with-oci8=instantclient,DIR])
+      AC_MSG_ERROR([Oracle Instant Client directory not found. Try --with-oci8=instantclient,DIR])
     fi
   fi
   AC_MSG_RESULT($PHP_OCI8_INSTANT_CLIENT)
@@ -371,7 +325,7 @@ dnl version in /usr/lib
   AC_MSG_CHECKING([Oracle Instant Client SDK header directory])
 
 dnl Header directory for Instant Client SDK RPM install
-  OCISDKRPMINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!^/usr/lib/oracle/\(.*\)/client\('${LIBDIR_SUFFIX}'\)*/lib[/]*$!/usr/include/oracle/\1/client\2!'`
+  OCISDKRPMINC=`echo "$PHP_OCI8_INSTANT_CLIENT" | $PHP_OCI8_SED -e 's!^/usr/lib/oracle/\(.*\)/client/lib[/]*$!/usr/include/oracle/\1/client!'`
 
 dnl Header directory for Instant Client SDK zip file install
   OCISDKZIPINC=$PHP_OCI8_INSTANT_CLIENT/sdk/include
@@ -408,7 +362,7 @@ dnl Header directory for manual installation
       ;;
 
     *)
-      AC_MSG_ERROR([Unsupported Oracle Instant Client version])
+      AC_MSG_ERROR([Oracle Instant CLient version $PHP_OCI8_INSTANT_CLIENT is not supported])
       ;;
   esac
 

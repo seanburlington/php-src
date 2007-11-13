@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.30.2.6 2007/11/01 15:41:25 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.30.2.7 2007/11/13 15:10:16 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4487,6 +4487,7 @@ static sdlFunctionPtr get_doc_function(sdlPtr sdl, xmlNodePtr params)
 								break;
 							}
 							zend_hash_move_forward((*tmp)->requestParameters);
+							node = node->next;
 						}
 						if (ok /*&& node == NULL*/) {
 							return (*tmp);

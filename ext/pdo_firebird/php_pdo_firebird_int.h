@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.10.2.1.2.1.2.1 2007/10/30 16:26:25 lwe Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.10.2.1.2.1.2.2 2007/11/14 22:09:21 lwe Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -102,7 +102,10 @@ typedef struct {
 	/* whether EOF was reached for this statement */
 	unsigned exhausted:1;
 
-	unsigned _reserved:23;
+	/* successful isc_dsql_execute opens a cursor */
+	unsigned cursor_open:1;
+
+	unsigned _reserved:22;
 
 	/* the named params that were converted to ?'s by the driver */
 	HashTable *named_params;

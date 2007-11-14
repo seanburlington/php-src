@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.12 2007/09/19 22:37:58 iliaa Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.13 2007/11/14 23:45:39 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -467,7 +467,7 @@ no_results:
 	array_init(return_value);
 	for (n = 0; n < globbuf.gl_pathc; n++) {
 		if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
-			if (PG(safe_mode) && (!php_checkuid(globbuf.gl_pathv[n], NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+			if (PG(safe_mode) && (!php_checkuid_ex(globbuf.gl_pathv[n], NULL, CHECKUID_CHECK_FILE_AND_DIR, CHECKUID_NO_ERRORS))) {
 				basedir_limit = 1;
 				continue;
 			} else if (php_check_open_basedir_ex(globbuf.gl_pathv[n], 0 TSRMLS_CC)) {

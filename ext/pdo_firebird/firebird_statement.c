@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.18.2.1.2.5.2.3 2007/11/14 22:15:21 lwe Exp $ */
+/* $Id: firebird_statement.c,v 1.18.2.1.2.5.2.4 2007/11/14 23:19:29 lwe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -623,6 +623,7 @@ static int firebird_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 		return 0;
 	}
 	*S->name = 0;
+	S->cursor_open = 0;
 	return 1;
 }
 /* }}} */

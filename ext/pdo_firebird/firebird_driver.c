@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.17.2.2.2.4.2.1 2007/10/30 16:30:40 lwe Exp $ */
+/* $Id: firebird_driver.c,v 1.17.2.2.2.4.2.2 2007/11/15 00:10:38 lwe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -491,6 +491,11 @@ static int firebird_handle_set_attribute(pdo_dbh_t *dbh, long attr, zval *val TS
 				}
 				dbh->auto_commit = Z_BVAL_P(val);
 			}
+			return 1;
+
+		case PDO_ATTR_FETCH_TABLE_NAMES:
+			convert_to_boolean(val);
+			H->fetch_table_names = Z_BVAL_P(val);
 			return 1;
 
 		case PDO_FB_ATTR_DATE_FORMAT:

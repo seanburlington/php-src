@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.10.2.1.2.1.2.2 2007/11/14 22:09:21 lwe Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.10.2.1.2.1.2.3 2007/11/15 00:10:38 lwe Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -81,6 +81,11 @@ typedef struct {
 	char *date_format;
 	char *time_format;
 	char *timestamp_format;
+	
+	/* prepend table names on column names in fetch */
+	unsigned fetch_table_names:1;
+	
+	unsigned _reserved:31;
 	
 } pdo_firebird_db_handle;
 

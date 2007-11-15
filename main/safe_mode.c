@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.62.2.1.2.10.2.3 2007/10/11 09:33:30 jani Exp $ */
+/* $Id: safe_mode.c,v 1.62.2.1.2.10.2.4 2007/11/15 18:57:14 iliaa Exp $ */
 
 #include "php.h"
 
@@ -122,10 +122,17 @@ PHPAPI int php_checkuid_ex(const char *filename, const char *fopen_mode, int mod
 
 		/* Trim off filename */
 		if ((s = strrchr(path, DEFAULT_SLASH))) {
-			if (s == path)
-				path[1] = '\0';
-			else
+			if (*(s + 1) == '\0' && s != path) { /* make sure that the / is not the last character */
 				*s = '\0';
+				s = strrchr(path, DEFAULT_SLASH);
+			}
+			if (s) {
+				if (s == path) {
+					path[1] = '\0';
+				} else {
+					*s = '\0';
+				}
+			}
 		}
 	} else { /* CHECKUID_ALLOW_ONLY_DIR */
 		s = strrchr(filename, DEFAULT_SLASH);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.18.2.1.2.5.2.5 2007/11/15 00:10:38 lwe Exp $ */
+/* $Id: firebird_statement.c,v 1.18.2.1.2.5.2.6 2007/11/15 00:25:37 lwe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -630,7 +630,7 @@ static int firebird_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 	pdo_firebird_stmt *S = (pdo_firebird_stmt*)stmt->driver_data;
 	
 	/* close the statement handle */
-	if (isc_dsql_free_statement(S->H->isc_status, &S->stmt, DSQL_close)) {
+	if ((*S->name || S->cursor_open) && isc_dsql_free_statement(H->isc_status, &S->stmt, DSQL_close)) {
 		RECORD_ERROR(stmt);
 		return 0;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.1 2007/10/07 05:22:04 davidw Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.2 2007/11/16 12:26:34 jani Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -737,7 +737,12 @@ static void _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, OnigOp
 				/* null terminate buffer */
 				smart_str_appendc(&eval_buf, '\0');
 				/* do eval */
-				zend_eval_string(eval_buf.c, &v, description TSRMLS_CC);
+				if (zend_eval_string(eval_buf.c, &v, description TSRMLS_CC) == FAILURE) {
+					efree(description);
+					php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code: %s%s", PHP_EOL, eval_buf.c);
+					/* zend_error() does not return in this case */
+				}
+
 				/* result of eval */
 				convert_to_string(&v);
 				smart_str_appendl(&out_buf, Z_STRVAL(v), Z_STRLEN(v));

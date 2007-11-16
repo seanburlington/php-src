@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.14.2.2 2007/11/05 17:30:07 jani Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.14.2.3 2007/11/16 14:24:08 dmitry Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -396,12 +396,12 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp) /* {{{ */
 	int ret;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz/", &filename, &filename_len, &group) == FAILURE) {
-		return;
+		RETURN_FALSE;
 	}
 
 	if (Z_TYPE_P(group) == IS_LONG) {
 		gid = (gid_t)Z_LVAL_P(group);
-	} else {
+	} else if (Z_TYPE_P(group) == IS_STRING) {
 #if defined(ZTS) && defined(HAVE_GETGRNAM_R) && defined(_SC_GETGR_R_SIZE_MAX)
 		struct group gr;
 		struct group *retgrptr;
@@ -429,6 +429,9 @@ static void php_do_chgrp(INTERNAL_FUNCTION_PARAMETERS, int do_lchgrp) /* {{{ */
 		}
 		gid = gr->gr_gid;
 #endif
+	} else {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "parameter 2 should be string or integer, %s given",zend_zval_type_name(group));
+		RETURN_FALSE;
 	}
 
 	if (PG(safe_mode) &&(!php_checkuid(filename, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {

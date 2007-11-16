@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.64 2007/11/13 05:57:13 cellog Exp $ */
+/* $Id: phar_object.c,v 1.65 2007/11/16 04:17:36 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -160,7 +160,7 @@ PHP_METHOD(Phar, canWrite)
 /* }}} */
 
 /* {{{ proto bool Phar::isValidPharFilename(string filename)
- * Returns whether the given filename is a vaild phar filename */
+ * Returns whether the given filename is a valid phar filename */
 PHP_METHOD(Phar, isValidPharFilename)
 {
 	char *fname, *ext_str;

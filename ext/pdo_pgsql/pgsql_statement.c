@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.7 2007/04/17 15:29:13 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.8 2007/11/20 23:12:30 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -265,6 +265,11 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 							sizeof(Oid));
 				}
 				if (param->paramno >= 0) {
+					if (param->paramno > zend_hash_num_elements(stmt->bound_param_map)) {
+						pdo_pgsql_error_stmt(stmt, PGRES_FATAL_ERROR, "HY105");
+						return 0;
+					}
+
 					if (PDO_PARAM_TYPE(param->param_type) == PDO_PARAM_LOB &&
 							Z_TYPE_P(param->parameter) == IS_RESOURCE) {
 						php_stream *stm;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.30.2.5.2.6.2.1 2007/10/07 05:22:04 davidw Exp $ */
+/* $Id: com_handlers.c,v 1.30.2.5.2.6.2.2 2007/11/20 09:51:12 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -255,7 +255,7 @@ static void function_dtor(void *pDest)
 static PHP_FUNCTION(com_method_handler)
 {
 	Z_OBJ_HANDLER_P(getThis(), call_method)(
-			((zend_internal_function*)EG(function_state_ptr)->function)->function_name,
+			((zend_internal_function*)EG(current_execute_data)->function_state.function)->function_name,
 			INTERNAL_FUNCTION_PARAM_PASSTHRU);
 }
 

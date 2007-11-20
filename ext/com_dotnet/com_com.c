@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.16.2.2.2.7 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: com_com.c,v 1.16.2.2.2.5.2.1 2007/11/20 09:51:12 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -469,7 +469,7 @@ int php_com_do_invoke_byref(php_com_dotnet_object *obj, char *name, int namelen,
 	HRESULT hr;
 	VARIANT *vargs = NULL, *byref_vals = NULL;
 	int i, byref_count = 0, j;
-	zend_internal_function *f = (zend_internal_function*)EG(function_state_ptr)->function;
+	zend_internal_function *f = (zend_internal_function*)EG(current_execute_data)->function_state.function;
 
 	/* assumption: that the active function (f) is the function we generated for the engine */
 	if (!f || f->arg_info == NULL) {

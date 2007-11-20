@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvmsg.h,v 1.6.2.1.2.4 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: php_sysvmsg.h,v 1.6.2.1.2.2.2.1 2007/11/20 21:25:10 johannes Exp $ */
 
 #ifndef PHP_SYSVMSG_H
 #define PHP_SYSVMSG_H
@@ -48,6 +48,7 @@ PHP_FUNCTION(msg_stat_queue);
 PHP_FUNCTION(msg_set_queue);
 PHP_FUNCTION(msg_send);
 PHP_FUNCTION(msg_receive);
+PHP_FUNCTION(msg_queue_exists);
 
 typedef struct {
 	key_t key;

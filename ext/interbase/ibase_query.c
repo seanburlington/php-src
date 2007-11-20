@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.2 2007/11/20 19:58:39 lwe Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.3 2007/11/20 21:36:20 lwe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,12 +120,12 @@ static void _php_ibase_free_xsqlda(XSQLDA *sqlda) /* {{{ */
 
 static void _php_ibase_free_stmt_handle(ibase_db_link *link, isc_stmt_handle stmt TSRMLS_DC) /* {{{ */
 {
+	static char info[] = { isc_info_base_level, isc_info_end };
+
 	if (stmt) {
+		char res_buf[8];
 		IBDEBUG("Dropping statement handle (free_stmt_handle)...");
 		/* Only free statement if db-connection is still open */
-		static char info[] = { isc_info_base_level, isc_info_end };
-		char res_buf[8];
-
 		if (SUCCESS == isc_database_info(IB_STATUS, &link->handle, 
 							sizeof(info), info, sizeof(res_buf), res_buf)) {
 			if (isc_dsql_free_statement(IB_STATUS, &stmt, DSQL_drop)) {

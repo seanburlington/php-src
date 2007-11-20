@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.6 2007/11/20 14:22:27 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.7 2007/11/20 23:12:17 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -168,11 +168,6 @@ static int dispatch_param_event(pdo_stmt_t *stmt, enum pdo_param_event event_typ
 
 iterate:
 	if (ht) {
-		if (zend_hash_num_elements(stmt->bound_param_map) != zend_hash_num_elements(ht)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of bound paramters %d does not match number of bound values %d", zend_hash_num_elements(stmt->bound_param_map), zend_hash_num_elements(ht));
-			return 0;	
-		}
-
 		zend_hash_internal_pointer_reset(ht);
 		while (SUCCESS == zend_hash_get_current_data(ht, (void**)&param)) {
 			if (!stmt->methods->param_hook(stmt, param, event_type TSRMLS_CC)) {

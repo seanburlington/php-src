@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.14 2008/12/31 11:17:42 sebastian Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.7.2.1 2007/11/20 23:12:17 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,7 +238,7 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 								param->name, param->namelen + 1, (void**)&nameptr)) {
 							param->paramno = atoi(nameptr + 1) - 1;
 						} else {
-							pdo_raise_impl_error(stmt->dbh, stmt, "HY093", param->name TSRMLS_CC);
+							pdo_pgsql_error_stmt(stmt, PGRES_FATAL_ERROR, "HY093");
 							return 0;
 						}
 					}
@@ -246,16 +246,10 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 				break;
 
 			case PDO_PARAM_EVT_ALLOC:
-			case PDO_PARAM_EVT_EXEC_POST:
-			case PDO_PARAM_EVT_FETCH_PRE:
-			case PDO_PARAM_EVT_FETCH_POST:
 				/* work is handled by EVT_NORMALIZE */
 				return 1;
 
 			case PDO_PARAM_EVT_EXEC_PRE:
-				if (!stmt->bound_param_map) {
-					return 0;
-				}
 				if (!S->param_values) {
 					S->param_values = ecalloc(
 							zend_hash_num_elements(stmt->bound_param_map),
@@ -296,16 +290,10 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 								S->param_types[param->paramno] = OIDOID;
 								return 1;
 							} else {
-								int len;
-								
 								SEPARATE_ZVAL_IF_NOT_REF(&param->parameter);
 								Z_TYPE_P(param->parameter) = IS_STRING;
-								
-								if ((len = php_stream_copy_to_mem(stm, &Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0)) > 0) {
-									Z_STRLEN_P(param->parameter) = len;
-								} else {
-									ZVAL_EMPTY_STRING(param->parameter);
-								}
+								Z_STRLEN_P(param->parameter) = php_stream_copy_to_mem(stm,
+										&Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0);
 							}
 						} else {
 							/* expected a stream resource */
@@ -607,7 +595,6 @@ static int pgsql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned 
 			case PDO_PARAM_STR:
 			case PDO_PARAM_STMT:
 			case PDO_PARAM_INPUT_OUTPUT:
-			default:
 				break;
 		}
 	}

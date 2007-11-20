@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvmsg.h,v 1.9 2007/01/08 22:35:25 nlopess Exp $ */
+/* $Id: php_sysvmsg.h,v 1.10 2007/11/20 21:24:34 johannes Exp $ */
 
 #ifndef PHP_SYSVMSG_H
 #define PHP_SYSVMSG_H
@@ -48,6 +48,7 @@ PHP_FUNCTION(msg_stat_queue);
 PHP_FUNCTION(msg_set_queue);
 PHP_FUNCTION(msg_send);
 PHP_FUNCTION(msg_receive);
+PHP_FUNCTION(msg_queue_exists);
 
 typedef struct {
 	key_t key;

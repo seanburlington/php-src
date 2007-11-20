@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.109 2007/11/08 13:29:38 dmitry Exp $ */
+/* $Id: streamsfuncs.c,v 1.110 2007/11/20 22:16:19 johannes Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1676,6 +1676,26 @@ PHP_FUNCTION(stream_is_local)
 	RETURN_BOOL(wrapper->is_url==0);
 }
 /* }}} */
+
+/* {{{ proto bool stream_supports_lock(resource stream)
+   Tells wether the stream supports locking through flock(). */
+PHP_FUNCTION(stream_supports_lock)
+{
+	php_stream *stream;
+	zval *zsrc;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zsrc) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	php_stream_from_zval(stream, &zsrc);
+
+	if (!php_stream_supports_lock(stream)) {
+		RETURN_FALSE;
+	}
+
+	RETURN_TRUE;
+}
 
 #ifdef HAVE_SHUTDOWN
 /* {{{ proto int stream_socket_shutdown(resource stream, int how) U

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.655 2007/10/07 05:15:06 davidw Exp $ */
+/* $Id: string.c,v 1.656 2007/11/21 02:27:07 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7802,7 +7802,7 @@ PHP_FUNCTION(str_split)
 	}
 
 	if (p != (str.s + str_len * charsize)) {
-		add_next_index_zstrl(return_value, str_type, ZSTR(p), (str.s + str_len * charsize - p), 1);
+		add_next_index_zstrl(return_value, str_type, ZSTR(p), (str.s + str_len * charsize - p)/charsize, 1);
 	}
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.13 2007/11/20 22:17:00 johannes Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.14 2007/11/21 10:24:21 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4532,6 +4532,10 @@ static int parse_opts(char * opts, opt_struct ** result)
 		paras->opt_name = NULL;
 		if (paras->need_param == 1) {
 			opts++;
+			if (*opts == ':') {
+				paras->need_param++;
+				opts++;
+			}
 		}
 		paras++;
 	}

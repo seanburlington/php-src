@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /*
    +----------------------------------------------------------------------+
@@ -23,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.36 2007/11/12 21:16:27 zoe Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.37 2007/11/21 08:20:45 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -173,6 +174,7 @@ $ini_overwrites = array(
 		'auto_prepend_file=',
 		'auto_append_file=',
 		'magic_quotes_runtime=0',
+		'ignore_repeated_errors=0',
 	);
 
 function write_information($show_html)
@@ -399,7 +401,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.36 $'."\n";
+					echo '$Revision: 1.226.2.37.2.37 $'."\n";
 					exit(1);
 
 				case 'u':

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.17.2.4 2007/11/20 09:51:12 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.5 2007/11/22 13:27:13 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,12 +72,13 @@ static zend_class_entry * spl_find_ce_by_name(char *name, int len, zend_bool aut
 
 	if (!autoload) {
 		char *lc_name;
+		ALLOCA_FLAG(use_heap)
 
-		lc_name = do_alloca(len + 1);
+		lc_name = do_alloca(len + 1, use_heap);
 		zend_str_tolower_copy(lc_name, name, len);
 
 		found = zend_hash_find(EG(class_table), lc_name, len +1, (void **) &ce);
-		free_alloca(lc_name);
+		free_alloca(lc_name, use_heap);
 	} else {
  		found = zend_lookup_class(name, len, &ce TSRMLS_CC);
  	}

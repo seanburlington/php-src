@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.3 2007/11/20 21:36:20 lwe Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.4 2007/11/22 13:27:13 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1843,6 +1843,7 @@ PHP_FUNCTION(ibase_execute)
 	zval *query, ***args = NULL;
 	ibase_query *ib_query;
 	ibase_result *result = NULL;
+	ALLOCA_FLAG(use_heap)
 
 	RESET_ERRMSG;
 	
@@ -1866,7 +1867,7 @@ PHP_FUNCTION(ibase_execute)
 			}
 
 		} else if (bind_n > 0) { /* have variables to bind */
-			args = (zval ***) do_alloca(ZEND_NUM_ARGS() * sizeof(zval **));
+			args = (zval ***) do_alloca(ZEND_NUM_ARGS() * sizeof(zval **), use_heap);
 	
 			if (FAILURE == zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args)) {
 				break;
@@ -1907,7 +1908,7 @@ PHP_FUNCTION(ibase_execute)
 	} while (0);
 
 	if (args) {
-		free_alloca(args);
+		free_alloca(args, use_heap);
 	}
 }
 /* }}} */

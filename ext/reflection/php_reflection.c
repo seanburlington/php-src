@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.4 2007/10/28 13:42:24 iliaa Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.5 2007/11/22 13:27:13 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1047,14 +1047,15 @@ static void reflection_extension_factory(zval *object, const char *name_str TSRM
 	int name_len = strlen(name_str);
 	char *lcname;
 	struct _zend_module_entry *module;
+	ALLOCA_FLAG(use_heap)
 
-	lcname = do_alloca(name_len + 1);
+	lcname = do_alloca(name_len + 1, use_heap);
 	zend_str_tolower_copy(lcname, name_str, name_len);
 	if (zend_hash_find(&module_registry, lcname, name_len + 1, (void **)&module) == FAILURE) {
-		free_alloca(lcname);
+		free_alloca(lcname, use_heap);
 		return;
 	}
-	free_alloca(lcname);
+	free_alloca(lcname, use_heap);
 
 	reflection_instantiate(reflection_extension_ptr, object TSRMLS_CC);
 	intern = (reflection_object *) zend_object_store_get_object(object TSRMLS_CC);
@@ -4127,6 +4128,7 @@ ZEND_METHOD(reflection_extension, __construct)
 	zend_module_entry *module;
 	char *name_str;
 	int name_len;
+	ALLOCA_FLAG(use_heap)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name_str, &name_len) == FAILURE) {
 		return;
@@ -4137,15 +4139,15 @@ ZEND_METHOD(reflection_extension, __construct)
 	if (intern == NULL) {
 		return;
 	}
-	lcname = do_alloca(name_len + 1);
+	lcname = do_alloca(name_len + 1, use_heap);
 	zend_str_tolower_copy(lcname, name_str, name_len);
 	if (zend_hash_find(&module_registry, lcname, name_len + 1, (void **)&module) == FAILURE) {
-		free_alloca(lcname);
+		free_alloca(lcname, use_heap);
 		zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 			"Extension %s does not exist", name_str);
 		return;
 	}
-	free_alloca(lcname);
+	free_alloca(lcname, use_heap);
 	MAKE_STD_ZVAL(name);
 	ZVAL_STRING(name, module->name, 1);
 	zend_hash_update(Z_OBJPROP_P(object), "name", sizeof("name"), (void **) &name, sizeof(zval *), NULL);
@@ -4907,7 +4909,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.4 2007/10/28 13:42:24 iliaa Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.5 2007/11/22 13:27:13 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

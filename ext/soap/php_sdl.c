@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.12.2.13 2008/12/31 11:17:43 sebastian Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.9.2.1 2007/11/23 10:02:24 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -240,12 +240,7 @@ static void load_wsdl_ex(zval *this_ptr, char *struri, sdlCtx *ctx, int include 
 	wsdl = soap_xmlParseFile(struri TSRMLS_CC);
 	
 	if (!wsdl) {
-		xmlErrorPtr xmlErrorPtr = xmlGetLastError();
-		if (xmlErrorPtr) {
-			soap_error2(E_ERROR, "Parsing WSDL: Couldn't load from '%s' : %s", struri, xmlErrorPtr->message);
-		} else {
-			soap_error1(E_ERROR, "Parsing WSDL: Couldn't load from '%s'", struri);
-		}
+		soap_error1(E_ERROR, "Parsing WSDL: Couldn't load from '%s'", struri);
 	}
 
 	zend_hash_add(&ctx->docs, struri, strlen(struri)+1, (void**)&wsdl, sizeof(xmlDocPtr), NULL);
@@ -721,12 +716,12 @@ static sdlPtr load_wsdl(zval *this_ptr, char *struri TSRMLS_DC)
 					}
 				  trav2 = trav2->next;
 				}
-				if (!address || tmpbinding->bindingType == BINDING_HTTP) {
+				if (!address) {
 					if (has_soap_port || trav->next || i < n-1) {
 						efree(tmpbinding);
 						trav = trav->next;
 						continue;
-					} else if (!address) {
+					} else {
 						soap_error0(E_ERROR, "Parsing WSDL: No address associated with <port>");
 					}
 				}
@@ -2020,7 +2015,7 @@ static void add_sdl_to_cache(const char *fn, const char *uri, time_t t, sdlPtr s
 #ifdef ZEND_WIN32
 	f = open(fn,O_CREAT|O_WRONLY|O_EXCL|O_BINARY,S_IREAD|S_IWRITE);
 #else
-	f = open(fn,O_CREAT|O_WRONLY|O_EXCL|O_BINARY,S_IREAD|S_IWRITE|S_IROTH|S_IWOTH|S_IRGRP|S_IWGRP);
+	f = open(fn,O_CREAT|O_WRONLY|O_EXCL|O_BINARY,S_IREAD|S_IWRITE);
 #endif
 	if (f < 0) {return;}
 
@@ -3122,16 +3117,24 @@ sdlPtr get_sdl(zval *this_ptr, char *uri, long cache_wsdl TSRMLS_DC)
 		unsigned char digest[16];
 		int len = strlen(SOAP_GLOBAL(cache_dir));
 		time_t cached;
+		char *user = php_get_current_user();
+		int user_len = user ? strlen(user) + 1 : 0;
 
 		md5str[0] = '\0';
 		PHP_MD5Init(&context);
 		PHP_MD5Update(&context, (unsigned char*)uri, uri_len);
 		PHP_MD5Final(digest, &context);
 		make_digest(md5str, digest);
-		key = emalloc(len+sizeof("/wsdl-")-1+sizeof(md5str));
+		key = emalloc(len+sizeof("/wsdl-")-1+user_len+sizeof(md5str));
 		memcpy(key,SOAP_GLOBAL(cache_dir),len);
 		memcpy(key+len,"/wsdl-",sizeof("/wsdl-")-1);
-		memcpy(key+len+sizeof("/wsdl-")-1,md5str,sizeof(md5str));
+		len += sizeof("/wsdl-")-1;
+		if (user_len) {
+			memcpy(key+len, user, user_len-1);
+			len += user_len-1;
+			key[len++] = '-';
+		}
+		memcpy(key+len,md5str,sizeof(md5str));
 
 		if ((sdl = get_sdl_from_cache(key, uri, t-SOAP_GLOBAL(cache_ttl), &cached TSRMLS_CC)) != NULL) {
 			t = cached;

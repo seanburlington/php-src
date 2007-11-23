@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.6 2007/11/20 22:17:00 johannes Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.7 2007/11/23 19:48:56 stas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -389,7 +389,7 @@ PHP_FUNCTION(stream_socket_recvfrom)
 }
 /* }}} */
 
-/* {{{ proto long stream_get_contents(resource source [, long maxlen [, long offset]])
+/* {{{ proto string stream_get_contents(resource source [, long maxlen [, long offset]])
    Reads all remaining bytes (or up to maxlen bytes) from a stream and returns them as a string. */
 PHP_FUNCTION(stream_get_contents)
 {

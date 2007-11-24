@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.217 2007/11/24 04:06:43 cellog Exp $ */
+/* $Id: phar.c,v 1.218 2007/11/24 04:30:07 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3798,7 +3798,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.217 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.218 $");
 	php_info_print_table_row(2, "gzip compression", 
 #if HAVE_ZLIB
 		"enabled");
@@ -3815,6 +3815,18 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	}
 #else
 	php_info_print_table_row(2, "bzip2 compression", 
+		"disabled");
+#endif
+#if HAVE_GNUPGLIB
+        if (zend_hash_exists(&module_registry, "gnupg", sizeof("gnupg"))) {
+		php_info_print_table_row(2, "GPG signature", 
+			"enabled");
+	} else {
+		php_info_print_table_row(2, "GPG signature", 
+			"disabled (install pecl/gnupg)");
+	}
+#else
+	php_info_print_table_row(2, "GPG signature", 
 		"disabled");
 #endif
 	php_info_print_table_end();
@@ -3837,6 +3849,9 @@ static zend_module_dep phar_deps[] = {
 #endif
 #if HAVE_BZ2
 	ZEND_MOD_OPTIONAL("bz2")
+#endif
+#if HAVE_GNUPG
+	ZEND_MOD_OPTIONAL("gnupg")
 #endif
 #if HAVE_SPL
 	ZEND_MOD_REQUIRED("spl")

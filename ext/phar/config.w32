@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.9 2007/11/24 04:07:06 cellog Exp $
+// $Id: config.w32,v 1.10 2007/11/24 04:30:07 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
@@ -8,4 +8,5 @@ if (PHP_PHAR != "no") {
 	ADD_EXTENSION_DEP('phar', 'zlib', true);
 	ADD_EXTENSION_DEP('phar', 'bz2', false);
 	ADD_EXTENSION_DEP('phar', 'spl', false);
+	ADD_EXTENSION_DEP('phar', 'gnupg', false);
 }

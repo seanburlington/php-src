@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.40 2007/11/24 04:30:07 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.41 2007/11/25 05:04:39 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -114,6 +114,9 @@ ZEND_BEGIN_MODULE_GLOBALS(phar)
 	int         require_hash;
 	int         request_done;
 	int         request_ends;
+	int         has_bz2:1;
+	int         has_gnupg:1;
+	int         has_zlib:1;
 ZEND_END_MODULE_GLOBALS(phar)
 
 ZEND_EXTERN_MODULE_GLOBALS(phar)

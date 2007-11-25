@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.42 2007/11/06 13:28:21 jani Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.43 2007/11/25 15:56:47 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -102,7 +102,7 @@ ZEND_DECLARE_MODULE_GLOBALS(array)
  */
 static void php_array_init_globals(zend_array_globals *array_globals)
 {
-	memset(array_globals, 0, sizeof(array_globals));
+	memset(array_globals, 0, sizeof(zend_array_globals));
 }
 /* }}} */
 

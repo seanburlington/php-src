@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.21 2007/10/07 05:15:07 davidw Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.22 2007/11/26 10:58:28 jani Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -64,7 +64,7 @@ struct _php_stream_bucket_brigade {
 typedef enum {
 	PSFS_ERR_FATAL,	/* error in data stream */
 	PSFS_FEED_ME,	/* filter needs more data; stop processing chain until more is available */
-	PSFS_PASS_ON,	/* filter generated output buckets; pass them on to next in chain */
+	PSFS_PASS_ON	/* filter generated output buckets; pass them on to next in chain */
 } php_stream_filter_status_t;
 
 /* Buckets API. */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.225 2007/10/07 12:21:05 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.226 2007/11/26 10:58:28 jani Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -53,7 +53,7 @@ enum {
 	PHP_PCRE_INTERNAL_ERROR,
 	PHP_PCRE_BACKTRACK_LIMIT_ERROR,
 	PHP_PCRE_RECURSION_LIMIT_ERROR,
-	PHP_PCRE_BAD_UTF8_ERROR,
+	PHP_PCRE_BAD_UTF8_ERROR
 };
 
 typedef struct {

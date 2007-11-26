@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.88 2007/09/27 18:28:40 dmitry Exp $ */
+/* $Id: php_pdo_driver.h,v 1.89 2007/11/26 10:58:28 jani Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -68,7 +68,7 @@ enum pdo_param_type {
 	PDO_PARAM_STMT, /* hierarchical result set */
 
 	/* get_col ptr should point to a zend_bool */
-	PDO_PARAM_BOOL,
+	PDO_PARAM_BOOL
 };
 
 /* magic flag to denote a parameter as being input/output */

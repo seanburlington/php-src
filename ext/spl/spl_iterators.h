@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.42 2007/05/11 00:14:36 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.43 2007/11/26 10:58:28 jani Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -94,7 +94,7 @@ enum {
 enum {
 	/* public */
 	REGIT_USE_KEY            = 0x00000001,
-	REGIT_INVERTED           = 0x00000002,
+	REGIT_INVERTED           = 0x00000002
 };
 
 typedef enum {
@@ -103,7 +103,7 @@ typedef enum {
 	REGIT_MODE_ALL_MATCHES,
 	REGIT_MODE_SPLIT,
 	REGIT_MODE_REPLACE,
-	REGIT_MODE_MAX,
+	REGIT_MODE_MAX
 } regex_mode;
 
 typedef struct _spl_dual_it_object {

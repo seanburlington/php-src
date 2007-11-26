@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21 2007/09/20 08:10:44 tony2001 Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.22 2007/11/26 10:59:17 jani Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -48,7 +48,7 @@ enum {
 	PHP_PCRE_INTERNAL_ERROR,
 	PHP_PCRE_BACKTRACK_LIMIT_ERROR,
 	PHP_PCRE_RECURSION_LIMIT_ERROR,
-	PHP_PCRE_BAD_UTF8_ERROR,
+	PHP_PCRE_BAD_UTF8_ERROR
 };
 
 

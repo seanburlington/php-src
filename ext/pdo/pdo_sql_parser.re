@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.41 2007/10/29 22:37:44 iliaa Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.42 2007/11/26 21:10:18 iliaa Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -46,7 +46,7 @@ static int scan(Scanner *s)
 
 	s->tok = cursor;
 	/*!re2c
-	BINDCHR		= [:][a-zA-Z0-9_-]+;
+	BINDCHR		= [:][a-zA-Z0-9_]+;
 	QUESTION	= [?];
 	SPECIALS	= [:?"'];
 	EOF		= [\000];

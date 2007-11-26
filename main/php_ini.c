@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.162 2007/11/09 16:26:55 jani Exp $ */
+/* $Id: php_ini.c,v 1.163 2007/11/26 16:34:07 jani Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -347,7 +347,7 @@ int php_init_config(TSRMLS_D)
 	}
 
 	zend_llist_init(&extension_lists.engine, sizeof(char *), (llist_dtor_func_t) free_estring, 1);
-	zend_llist_init(&extension_lists.functions, sizeof(zval), (llist_dtor_func_t) free_estring, 1);
+	zend_llist_init(&extension_lists.functions, sizeof(char *), (llist_dtor_func_t) free_estring, 1);
 
 	open_basedir = PG(open_basedir);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.58 2007/09/27 18:28:40 dmitry Exp $ */
+/* $Id: pcntl.c,v 1.59 2007/11/27 17:13:31 iliaa Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -225,7 +225,7 @@ PHP_FUNCTION(pcntl_fork)
 
 	id = fork();
 	if (id == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Error %d", errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error %d", errno);
 	}
 	
 	RETURN_LONG((long) id);

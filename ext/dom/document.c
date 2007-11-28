@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.5 2007/01/01 09:36:00 sebastian Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.6 2007/11/28 10:45:16 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1737,6 +1737,10 @@ static void php_dom_remove_xinclude_nodes(xmlNodePtr cur TSRMLS_DC) {
 
 			/* XML_XINCLUDE_END node will be a sibling of XML_XINCLUDE_START */
 			while(cur && cur->type != XML_XINCLUDE_END) {
+				/* remove xinclude processing nodes from recursive xincludes */
+				if (cur->type == XML_ELEMENT_NODE) {
+					   php_dom_remove_xinclude_nodes(cur->children TSRMLS_CC);
+				}
 				cur = cur->next;
 			}
 

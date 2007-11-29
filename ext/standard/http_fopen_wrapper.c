@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.2 2007/11/05 01:00:43 pollita Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.3 2007/11/29 12:28:15 derick Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -502,7 +502,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			}
 			/* when we request only the header, don't fail even on error codes */
 			if ((options & STREAM_ONLY_GET_HEADERS) ||
-				(php_stream_context_get_option(context, "http", "ignore_errors",  &tmpzval) == SUCCESS && zend_is_true(*tmpzval)) ) {
+				(context && php_stream_context_get_option(context, "http", "ignore_errors",  &tmpzval) == SUCCESS && zend_is_true(*tmpzval)) ) {
 				reqok = 1;
 			}
 			switch(response_code) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.376 2007/11/22 00:20:40 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.377 2007/11/29 21:23:59 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -5739,6 +5739,9 @@ PHP_PGSQL_API int php_pgsql_result2array(PGresult *pg_result, zval *ret_array TS
 			} else {
 				char *element = PQgetvalue(pg_result, pg_row, i);
 				if (element) {
+					char *data;
+					size_t data_len;
+
 					data_len = strlen(element);
 					data = safe_estrndup(element, data_len);
 

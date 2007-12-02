@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.8 2007/11/20 23:12:30 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.9 2007/12/02 21:00:06 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,7 +238,7 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 								param->name, param->namelen + 1, (void**)&nameptr)) {
 							param->paramno = atoi(nameptr + 1) - 1;
 						} else {
-							pdo_pgsql_error_stmt(stmt, PGRES_FATAL_ERROR, "HY093");
+							pdo_raise_impl_error(stmt->dbh, stmt, "HY093", param->name TSRMLS_CC);
 							return 0;
 						}
 					}

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.19 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.15.2.1 2007/12/03 16:04:36 dmitry Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -593,10 +593,6 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 		&& !strncasecmp(header_line, "HTTP/", 5)) {
 		/* filter out the response code */
 		sapi_update_response_code(sapi_extract_response_code(header_line) TSRMLS_CC);
-		/* sapi_update_response_code doesn't free the status line if the code didn't change */
-		if (SG(sapi_headers).http_status_line) {
-			efree(SG(sapi_headers).http_status_line);
-		}
 		SG(sapi_headers).http_status_line = header_line;
 		return SUCCESS;
 	} else {

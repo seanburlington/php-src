@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.15 2007/05/25 09:20:01 rasmus Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.16 2007/12/03 16:04:26 dmitry Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -301,6 +301,7 @@ SAPI_API void sapi_activate_headers_only(TSRMLS_D)
 
 	/* SG(sapi_headers).http_response_code = 200; */ 
 	SG(sapi_headers).http_status_line = NULL;
+	SG(sapi_headers).mimetype = NULL;
 	SG(read_post_bytes) = 0;
 	SG(request_info).post_data = NULL;
 	SG(request_info).raw_post_data = NULL;
@@ -340,6 +341,7 @@ SAPI_API void sapi_activate(TSRMLS_D)
 	SG(sapi_headers).http_response_code = 200;
 	*/
 	SG(sapi_headers).http_status_line = NULL;
+	SG(sapi_headers).mimetype = NULL;
 	SG(headers_sent) = 0;
 	SG(read_post_bytes) = 0;
 	SG(request_info).post_data = NULL;

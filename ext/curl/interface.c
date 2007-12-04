@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.119 2007/11/16 14:18:59 jani Exp $ */
+/* $Id: interface.c,v 1.120 2007/12/04 08:55:58 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -930,7 +930,7 @@ static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx
 }
 /* }}} */
 
-static int curl_debug(CURL *cp, curl_infotype type, char *buf, size_t buf_len, void *ctx)
+static int curl_debug(CURL *cp, curl_infotype type, char *buf, size_t buf_len, void *ctx) /* {{{ */
 {
 	php_curl    *ch   = (php_curl *) ctx;
 
@@ -946,6 +946,7 @@ static int curl_debug(CURL *cp, curl_infotype type, char *buf, size_t buf_len, v
 
 	return 0;
 }
+/* }}} */
 
 #if CURLOPT_PASSWDFUNCTION != 0
 /* {{{ curl_passwd
@@ -1220,7 +1221,7 @@ PHP_FUNCTION(curl_copy_handle)
 }
 /* }}} */
 
-static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *return_value TSRMLS_DC)
+static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *return_value TSRMLS_DC) /* {{{ */
 {
 	CURLcode     error=CURLE_OK;
 
@@ -1659,6 +1660,7 @@ type_conflict:
 		return 0;
 	}
 }
+/* }}} */
 
 /* {{{ proto bool curl_setopt(resource ch, int option, mixed value) U
    Set an option for a cURL transfer */

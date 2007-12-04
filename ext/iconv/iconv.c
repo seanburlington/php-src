@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20.2.4 2007/11/01 19:13:39 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.20.2.5 2007/12/04 11:27:25 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1040,7 +1040,7 @@ static php_iconv_err_t _php_iconv_mime_encode(smart_str *pretval, const char *fn
 		goto out;
 	}
 
-	cd_pl = iconv_open("ASCII", enc);
+	cd_pl = iconv_open(ICONV_ASCII_ENCODING, enc);
 	if (cd_pl == (iconv_t)(-1)) {
 #if ICONV_SUPPORTS_ERRNO
 		if (errno == EINVAL) {
@@ -1351,7 +1351,7 @@ static php_iconv_err_t _php_iconv_mime_decode(smart_str *pretval, const char *st
 		*next_pos = NULL;
 	}
 
-	cd_pl = iconv_open(enc, "ASCII");
+	cd_pl = iconv_open(enc, ICONV_ASCII_ENCODING);
 
 	if (cd_pl == (iconv_t)(-1)) {
 #if ICONV_SUPPORTS_ERRNO

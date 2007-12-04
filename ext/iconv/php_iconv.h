@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2007 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Revision: 1.28.2.2.2.4 $ */
+/* $Revision: 1.28.2.2.2.2.2.1 $ */
 
 #ifndef PHP_ICONV_H
 #define PHP_ICONV_H
@@ -37,6 +37,7 @@
 #include "ext/iconv/php_have_libiconv.h"
 #include "ext/iconv/php_have_glibc_iconv.h"
 #include "ext/iconv/php_have_bsd_iconv.h"
+#include "ext/iconv/php_have_ibm_iconv.h"
 #include "ext/iconv/php_iconv_supports_errno.h"
 #include "ext/iconv/php_php_iconv_impl.h"
 #include "ext/iconv/php_php_iconv_h_path.h"
@@ -75,9 +76,17 @@ ZEND_END_MODULE_GLOBALS(iconv)
 #define ICONVG(v) (iconv_globals.v)
 #endif
 
-#define ICONV_INPUT_ENCODING "ISO-8859-1" 
-#define ICONV_OUTPUT_ENCODING "ISO-8859-1"
-#define ICONV_INTERNAL_ENCODING "ISO-8859-1" 
+#ifdef HAVE_IBM_ICONV
+# define ICONV_INPUT_ENCODING "ISO8859-1"
+# define ICONV_OUTPUT_ENCODING "ISO8859-1"
+# define ICONV_INTERNAL_ENCODING "ISO8859-1"
+# define ICONV_ASCII_ENCODING "IBM-850"
+#else
+# define ICONV_INPUT_ENCODING "ISO-8859-1"
+# define ICONV_OUTPUT_ENCODING "ISO-8859-1"
+# define ICONV_INTERNAL_ENCODING "ISO-8859-1"
+# define ICONV_ASCII_ENCODING "ASCII"
+#endif
 
 #ifndef ICONV_CSNMAXLEN
 #define ICONV_CSNMAXLEN 64

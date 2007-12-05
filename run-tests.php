@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.3 2007/11/21 08:20:22 jani Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.4 2007/12/05 13:55:46 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -122,8 +122,10 @@ if (getenv('TEST_PHP_CGI_EXECUTABLE')) {
 	$environment['TEST_PHP_CGI_EXECUTABLE'] = $php_cgi;
 }
 
-if ($argc !=2 || ($argv[1] != '-h' && $argv[1] != '-help' && $argv != '--help'))
+function verify_config()
 {
+	global $php;
+
 	if (empty($php) || !file_exists($php)) {
 		error("environment variable TEST_PHP_EXECUTABLE must be set to specify PHP executable!");
 	}
@@ -350,6 +352,10 @@ if (isset($argc) && $argc > 1) {
 				case '--no-clean':
 					$no_clean = true;
 					break;
+				case 'p':
+					$php = $argv[++$i];
+					putenv("TEST_PHP_EXECUTABLE=$php");
+					break;
 				case 'q':
 					putenv('NO_INTERACTION=1');
 					break;
@@ -401,7 +407,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.3 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.4 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -541,6 +547,7 @@ HELP;
 	}
 }
 
+verify_config();
 write_information($html_output);
 
 // Compile a list of all test files (*.phpt).

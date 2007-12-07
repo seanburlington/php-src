@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.6 2007/12/06 16:04:17 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.7 2007/12/07 13:33:10 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1446,16 +1446,15 @@ SPL_METHOD(Array, serialize)
 	zval *object = getThis();
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 	HashTable *aht = spl_array_get_hash_table(intern, 0 TSRMLS_CC);
+	zval **entry, members, *pmembers;
+	HashPosition      pos;
+	php_serialize_data_t var_hash;
+	smart_str buf = {0};
 
 	if (!aht) {
 		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Array was modified outside object and is no longer an array");
 		return;
 	}
-
-	zval **entry, members, *pmembers;
-	HashPosition      pos;
-	php_serialize_data_t var_hash;
-	smart_str buf = {0};
 
 	PHP_VAR_SERIALIZE_INIT(var_hash);
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.219 2007/11/25 05:04:39 cellog Exp $ */
+/* $Id: phar.c,v 1.220 2007/12/09 21:57:42 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3757,6 +3757,51 @@ static void php_phar_init_globals_module(zend_phar_globals *phar_globals)
 }
 /* }}} */
 
+static zend_op_array *(*orig_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);
+
+static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC) /* {{{ */
+{
+	zend_op_array *res;
+	char *fname = NULL;
+	int fname_len;
+
+	zend_compile_file = orig_compile_file;
+	if (zend_hash_num_elements(&(PHAR_GLOBALS->phar_fname_map))) {
+		char *arch, *entry;
+		int arch_len, entry_len;
+		fname = zend_get_executed_filename(TSRMLS_C);
+		if (strncasecmp(fname, "phar://", 7)) {
+			goto skip_phar;
+		}
+		fname_len = strlen(fname);
+		if (SUCCESS == phar_split_fname(fname, fname_len, &arch, &arch_len, &entry, &entry_len TSRMLS_CC)) {
+			char *s, *name;
+
+			efree(entry);
+			entry = file_handle->filename;
+			/* include within phar, if :// is not in the url, then prepend phar://<archive>/ */
+			entry_len = strlen(entry);
+			for (s = entry; s < (entry + entry_len - 4); s++) {
+				if (*s == ':' && *(s + 1) == '/' && *(s + 2) == '/') {
+					efree(arch);
+					goto skip_phar;
+				}
+			}
+			/* auto-convert to phar:// */
+			spprintf(&name, 4096, "phar://%s/%s", arch, entry);
+			efree(arch);
+			file_handle->type = ZEND_HANDLE_FILENAME;
+			file_handle->free_filename = 1;
+			file_handle->filename = name;
+		}
+	}
+skip_phar:
+	res = orig_compile_file(file_handle, type TSRMLS_CC);
+	zend_compile_file = phar_compile_file;
+	return res;
+}
+/* }}} */
+
 PHP_MINIT_FUNCTION(phar) /* {{{ */
 {
 	ZEND_INIT_MODULE_GLOBALS(phar, php_phar_init_globals_module, NULL);
@@ -3765,6 +3810,8 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 	PHAR_G(has_gnupg) = zend_hash_exists(&module_registry, "gnupg", sizeof("gnupg"));
 	PHAR_G(has_bz2) = zend_hash_exists(&module_registry, "bz2", sizeof("bz2"));
 	PHAR_G(has_zlib) = zend_hash_exists(&module_registry, "zlib", sizeof("zlib"));
+	orig_compile_file = zend_compile_file;
+	zend_compile_file = phar_compile_file;
 	phar_object_init(TSRMLS_C);
 
 	return php_register_url_stream_wrapper("phar", &php_stream_phar_wrapper TSRMLS_CC);
@@ -3774,6 +3821,7 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 PHP_MSHUTDOWN_FUNCTION(phar) /* {{{ */
 {
 	return php_unregister_url_stream_wrapper("phar" TSRMLS_CC);
+	zend_compile_file = orig_compile_file;
 }
 /* }}} */
 
@@ -3813,7 +3861,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.219 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.220 $");
 #if HAVE_ZLIB
 	if (PHAR_G(has_zlib)) {
 		php_info_print_table_row(2, "gzip compression", 

@@ -17,10 +17,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.220 2007/12/09 21:57:42 cellog Exp $ */
+/* $Id: phar.c,v 1.220.2.1 2007/12/10 20:42:01 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
+#include "phar2.h"
 #include "SAPI.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(phar)
@@ -946,6 +947,10 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 			spprintf(error, 0, "phar \"%s\" is API version %1.u.%1.u.%1.u, and cannot be processed", fname, manifest_ver >> 12, (manifest_ver >> 8) & 0xF, (manifest_ver >> 4) & 0x0F);
 		}
 		return FAILURE;
+	}
+	if ((manifest_ver & PHAR_API_MAJORVERSION) == PHAR_API_MAJORVERSION) {
+		/* this is a phar in tar format */
+		return phar2_open_file(fp, fname, fname_len, alias, alias_len, halt_offset, pphar, savebuf, error TSRMLS_CC);
 	}
 
 	PHAR_GET_32(buffer, manifest_flags);
@@ -3861,7 +3866,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.220 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.220.2.1 $");
 #if HAVE_ZLIB
 	if (PHAR_G(has_zlib)) {
 		php_info_print_table_row(2, "gzip compression", 

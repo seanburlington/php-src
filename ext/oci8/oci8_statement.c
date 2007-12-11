@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.28 2007/08/02 19:04:37 sixd Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.28.4.1 2007/12/11 05:50:38 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -368,7 +368,6 @@ sb4 php_oci_define_callback(dvoid *ctx, OCIDefine *define, ub4 iter, dvoid **buf
 				if (!descr) {
 					return OCI_ERROR;
 				}
-				zend_list_addref(outcol->statement->id);
 				outcol->descid = descr->id;
 				descr->charset_form = outcol->charset_form;
 				

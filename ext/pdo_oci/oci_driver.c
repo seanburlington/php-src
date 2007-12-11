@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2007 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.24.2.4.2.12 2009/05/12 21:57:40 mbeccati Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.4.2.7.2.1 2007/12/11 06:57:39 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,13 +70,15 @@ ub4 _oci_error(OCIError *err, pdo_dbh_t *dbh, pdo_stmt_t *stmt, char *what, swor
 		S = (pdo_oci_stmt*)stmt->driver_data;
 		einfo = &S->einfo;
 		pdo_err = &stmt->error_code;
+		if (einfo->errmsg) {
+			efree(einfo->errmsg);
+		}
 	}
 	else {
 		einfo = &H->einfo;
-	}
-
-	if (einfo->errmsg) {
-		pefree(einfo->errmsg, dbh->is_persistent);
+		if (einfo->errmsg) {
+			pefree(einfo->errmsg, dbh->is_persistent);
+		}
 	}
 
 	einfo->errmsg = NULL;
@@ -492,7 +494,7 @@ static int oci_handle_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_valu
 			OCIClientVersion(&major, &minor, &update, &patch, &port_update);
 			slprintf(verstr, sizeof(verstr), "%d.%d.%d.%d.%d", major, minor, update, patch, port_update);
 			ZVAL_STRING(return_value, verstr, 1);
-#elif defined(PHP_PDO_OCI_CLIENT_VERSION)
+#elif PHP_PDO_OCI_CLIENT_VERSION
 			/* Compile time client version */
 			ZVAL_STRING(return_value, PHP_PDO_OCI_CLIENT_VERSION, 1);
 #else

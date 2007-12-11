@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.14.2.2 2007/10/05 15:00:08 jani Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.14.2.3 2007/12/11 11:29:09 jani Exp $ */
 
 /*
  * HTML entity resources:
@@ -1132,9 +1132,7 @@ PHPAPI char *php_escape_html_entities_ex(unsigned char *old, int oldlen, int *ne
 		if(status == FAILURE) {
 			/* invalid MB sequence */
 			efree(replaced);
-			if(!PG(display_errors)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid multibyte sequence in argument");
-			}
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid multibyte sequence in argument");
 			*newlen = 0;
 			return STR_EMPTY_ALLOC();
 		}

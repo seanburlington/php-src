@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.432 2007/12/05 19:57:09 iliaa Exp $ */
+/* $Id: array.c,v 1.433 2007/12/11 08:30:46 jani Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2292,13 +2292,12 @@ PHP_FUNCTION(array_slice)
 	zend_bool preserve_keys = 0; /* Whether to preserve keys while copying to the new array or not */
 	int		 num_in,		/* Number of elements in the input array */
 			 pos;			/* Current position in the array */
-	zval	*length_param;
 	zstr string_key;
 	uint string_key_len;
 	ulong num_key;
 	HashPosition hpos;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|zb", &input, &offset, &length_param, &preserve_keys) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|lb", &input, &offset, &length, &preserve_keys) == FAILURE) {
 		return;
 	}
 
@@ -2306,9 +2305,7 @@ PHP_FUNCTION(array_slice)
 	num_in = zend_hash_num_elements(Z_ARRVAL_P(input));
 
 	/* We want all entries from offset to the end if length is not passed or length is 0 */
-	if (ZEND_NUM_ARGS() >= 3 && Z_TYPE_P(length_param) != IS_NULL) {
-		length = Z_LVAL_P(length_param);
-	} else {
+	if (length == 0) {
 		length = num_in;
 	}
 

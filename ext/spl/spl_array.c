@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.7 2007/12/07 13:33:10 rrichards Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.8 2007/12/12 03:29:31 davidc Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1481,9 +1481,9 @@ SPL_METHOD(Array, serialize)
 
 	if (buf.c) {
 		RETURN_STRINGL(buf.c, buf.len, 0);
-	} else {
-		RETURN_NULL();
 	}
+
+	RETURN_NULL();
 	
 } /* }}} */
 

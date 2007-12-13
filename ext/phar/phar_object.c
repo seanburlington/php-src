@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.71 2007/12/13 00:54:13 cellog Exp $ */
+/* $Id: phar_object.c,v 1.72 2007/12/13 01:01:26 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -398,7 +398,7 @@ static int phar_build(zend_object_iterator *iter, void *puser TSRMLS_DC)
 	}
 	php_stream_close(fp);
 
-	add_assoc_string(p_obj->ret, str_key, opened, 1);
+	add_assoc_string(p_obj->ret, str_key, opened, 0);
 
 	data->internal_file->compressed_filesize = data->internal_file->uncompressed_filesize = contents_len;
 	phar_entry_delref(data TSRMLS_CC);

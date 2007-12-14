@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.222 2007/12/11 19:28:34 cellog Exp $ */
+/* $Id: phar.c,v 1.223 2007/12/14 05:00:58 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -785,10 +785,6 @@ static int phar_open_loaded(char *fname, int fname_len, char *alias, int alias_l
 		}
 		return SUCCESS;
 	} else {
-		if (phar) {
-			printf("new %s\n", phar->fname);
-			printf("old %s\n", fname);
-		}
 		if (pphar) {
 			*pphar = NULL;
 		}
@@ -3847,7 +3843,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.222 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.223 $");
 #if HAVE_ZLIB
 	if (PHAR_G(has_zlib)) {
 		php_info_print_table_row(2, "gzip compression", 

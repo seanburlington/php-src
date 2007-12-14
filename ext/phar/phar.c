@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.226 2007/12/14 18:34:11 cellog Exp $ */
+/* $Id: phar.c,v 1.227 2007/12/14 18:42:56 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -767,14 +767,27 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 static int phar_open_loaded(char *fname, int fname_len, char *alias, int alias_len, int options, phar_archive_data** pphar, char **error TSRMLS_DC) /* {{{ */
 {
 	phar_archive_data *phar;
+#ifdef PHP_WIN32
+	char *unixfname;
+#endif
 
 	if (error) {
 		*error = NULL;
 	}
+#ifdef PHP_WIN32
+	unixfname = estrndup(fname, fname_len);
+	phar_unixify_path_separators(unixfname, fname_len);
+	if (SUCCESS == phar_get_archive(&phar, unixfname, fname_len, alias, alias_len, error TSRMLS_CC)
+		&& ((alias && fname_len == phar->fname_len
+		&& !strncmp(unixfname, phar->fname, fname_len)) || !alias)
+	) {
+		efree(unixfname);
+#else
 	if (SUCCESS == phar_get_archive(&phar, fname, fname_len, alias, alias_len, error TSRMLS_CC)
 		&& ((alias && fname_len == phar->fname_len
 		&& !strncmp(fname, phar->fname, fname_len)) || !alias)
 	) {
+#endif
 		/* logic above is as follows:
 		   If an explicit alias was requested, ensure the filename passed in
 		   matches the phar's filename.
@@ -785,6 +798,9 @@ static int phar_open_loaded(char *fname, int fname_len, char *alias, int alias_l
 		}
 		return SUCCESS;
 	} else {
+#ifdef PHP_WIN32
+		efree(unixfname);
+#endif
 		if (pphar) {
 			*pphar = NULL;
 		}
@@ -3835,7 +3851,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.226 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.227 $");
 #if HAVE_ZLIB
 	if (PHAR_G(has_zlib)) {
 		php_info_print_table_row(2, "gzip compression", 

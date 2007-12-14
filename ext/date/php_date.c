@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.4 2007/12/14 14:28:36 scottmac Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.5 2007/12/14 14:49:15 scottmac Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -209,7 +209,7 @@ const zend_function_entry date_funcs_date[] = {
 	PHP_ME_MAPPING(setTime,		date_time_set,		NULL, 0)
 	PHP_ME_MAPPING(setDate,		date_date_set,		NULL, 0)
 	PHP_ME_MAPPING(setISODate,	date_isodate_set,	NULL, 0)
-	PHP_ME_MAPPING(createFromTimestamp,	date_timestamp_set, NULL, 0)
+	PHP_ME_MAPPING(setTimestamp,	date_timestamp_set, NULL, 0)
 	{NULL, NULL, NULL}
 };
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.224 2007/12/14 05:39:19 cellog Exp $ */
+/* $Id: phar.c,v 1.225 2007/12/14 05:45:47 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -2624,9 +2624,9 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			php_stream_rewind(file);
 		}
 		php_stream_filter_append((&file->readfilters), filter);
-		entry->compressed_filesize = (php_uint32) php_stream_copy_to_stream(file, entry->cfp, entry->uncompressed_filesize+8192 TSRMLS_CC);
+		entry->compressed_filesize = (php_uint32) php_stream_copy_to_stream(file, entry->cfp, entry->uncompressed_filesize+8192);
 		php_stream_filter_flush(filter, 1);
-		entry->compressed_filesize += (php_uint32) php_stream_copy_to_stream(file, entry->cfp, entry->uncompressed_filesize+8192 TSRMLS_CC);
+		entry->compressed_filesize += (php_uint32) php_stream_copy_to_stream(file, entry->cfp, entry->uncompressed_filesize+8192);
 		php_stream_filter_remove(filter, 1 TSRMLS_CC);
 		/* generate crc on compressed file */
 		php_stream_rewind(entry->cfp);
@@ -3843,7 +3843,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.224 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.225 $");
 #if HAVE_ZLIB
 	if (PHAR_G(has_zlib)) {
 		php_info_print_table_row(2, "gzip compression", 

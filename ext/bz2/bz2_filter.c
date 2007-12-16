@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.13 2007/08/10 09:00:42 tony2001 Exp $ */
+/* $Id: bz2_filter.c,v 1.14 2007/12/16 17:21:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,6 +139,8 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 				data->strm.avail_out = data->outbuf_len;
 				data->strm.next_out = data->outbuf;
 				exit_status = PSFS_PASS_ON;
+			} else if (status == BZ_OK) {
+				break;
 			}
 		}
 	}

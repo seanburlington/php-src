@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.8 2007/12/12 03:29:31 davidc Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.9 2007/12/16 18:31:07 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1269,7 +1269,7 @@ SPL_ARRAY_METHOD(Array, natsort, 0) /* }}} */
 /* {{{ proto int ArrayObject::natcasesort()
        proto int ArrayIterator::natcasesort()
  Sort the entries by key using case insensitive "natural order" algorithm. */
-SPL_ARRAY_METHOD(Array, natcasesort, 0) /* }}} /
+SPL_ARRAY_METHOD(Array, natcasesort, 0) /* }}} */
 
 /* {{{ proto mixed|NULL ArrayIterator::current()
    Return current array entry */

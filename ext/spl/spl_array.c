@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.9 2007/12/16 18:31:07 bjori Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.10 2007/12/17 13:46:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -598,7 +598,7 @@ SPL_METHOD(Array, offsetUnset)
 	spl_array_unset_dimension_ex(0, getThis(), index TSRMLS_CC);
 } /* }}} */
 
-/* {{ proto array ArrayObject::getArrayCopy()
+/* {{{ proto array ArrayObject::getArrayCopy()
       proto array ArrayIterator::getArrayCopy()
  Return a copy of the contained array */
 SPL_METHOD(Array, getArrayCopy)

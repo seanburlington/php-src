@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.21 2007/12/16 17:14:54 iliaa Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.22 2007/12/17 08:52:30 jani Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.21 2007/12/16 17:14:54 iliaa Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.22 2007/12/17 08:52:30 jani Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -244,9 +244,9 @@ PHP_MSHUTDOWN_FUNCTION(exif)
 /* {{{ exif dependencies */
 static const zend_module_dep exif_module_deps[] = {
 	ZEND_MOD_REQUIRED("standard")
-	#if EXIF_USE_MBSTRING
+#if EXIF_USE_MBSTRING
 	ZEND_MOD_REQUIRED("mbstring")
-	#endif
+#endif
 	{NULL, NULL, NULL}
 };
 /* }}} */

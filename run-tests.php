@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.6 2007/12/12 09:20:54 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.7 2007/12/17 11:00:16 bjori Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -408,7 +408,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.6 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.7 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -519,6 +519,7 @@ HELP;
 	// Run selected tests.
 	$test_cnt = count($test_files);
 	if ($test_cnt) {
+		verify_config();
 		write_information($html_output);
 		usort($test_files, "test_sort");
 		$start_time = time();

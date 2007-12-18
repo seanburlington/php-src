@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.190 2007/02/24 16:25:55 helly Exp $ */
+/* $Id: rfc1867.c,v 1.191 2007/12/18 10:52:59 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1332,7 +1332,7 @@ var_done:
 			}
 
 			/* The \ check should technically be needed for win32 systems only where
-			 * it is a valid path separator. However, IE in all it's wisdom always sends
+			 * it is a valid path separator. However, IE in all its wisdom always sends
 			 * the full path of the file on the user's filesystem, which means that unless
 			 * the user does basename() they get a bogus file name. Until IE's user base drops 
 			 * to nill or problem is fixed this code must remain enabled for all systems.

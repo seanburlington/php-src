@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.272 2007/12/09 16:54:30 derick Exp $ */
+/* $Id: var.c,v 1.273 2007/12/18 10:53:25 derick Exp $ */
 
 /* {{{ includes
 */
@@ -480,12 +480,13 @@ static int php_array_element_export(zval **zv, int num_args, va_list args, zend_
 		if (hash_key->type == IS_UNICODE) {
 			php_var_dump_unicode(hash_key->arKey.u, hash_key->nKeyLength-1, 0, "", 1 TSRMLS_CC);
 		} else {
-			char *key;
-			int key_len;
-
+			char *key, *tmp_str;
+			int key_len, tmp_len;
 			key = php_addcslashes(hash_key->arKey.s, hash_key->nKeyLength - 1, &key_len, 0, "'\\", 2 TSRMLS_CC);
-			PHPWRITE(key, key_len);
+	 		tmp_str = php_str_to_str_ex(key, key_len, "\0", 1, "' . \"\\0\" . '", 12, &tmp_len, 0, NULL);
+			PHPWRITE(tmp_str, tmp_len);
 			efree(key);
+	 		efree(tmp_str);
 		}
 		php_printf("' => ");
 	}

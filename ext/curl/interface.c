@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.120 2007/12/04 08:55:58 tony2001 Exp $ */
+/* $Id: interface.c,v 1.121 2007/12/18 13:48:19 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -153,7 +153,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 #define CAAL(s, v) add_assoc_long_ex(return_value, s, sizeof(s), (long) v);
 #define CAAD(s, v) add_assoc_double_ex(return_value, s, sizeof(s), (double) v);
-#define CAAS(s, v) add_assoc_ascii_string_ex(return_value, s, sizeof(s), (char *) v, 1);
+#define CAAS(s, v) add_assoc_ascii_string_ex(return_value, s, sizeof(s), (char *) (v ? v : ""), 1);
 #define CAAZ(s, v) add_assoc_zval_ex(return_value, s, sizeof(s), (zval *) v);
 
 #if defined(PHP_WIN32) || defined(__GNUC__)

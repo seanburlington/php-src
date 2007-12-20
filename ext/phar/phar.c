@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.230 2007/12/19 04:37:24 cellog Exp $ */
+/* $Id: phar.c,v 1.231 2007/12/20 04:12:22 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -3841,7 +3841,8 @@ static void phar_fopen(INTERNAL_FUNCTION_PARAMETERS)
 		}
 	}
 skip_phar:
-	return PHAR_G(orig_fopen)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	PHAR_G(orig_fopen)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	return;
 }
 
 static void phar_getcwd(INTERNAL_FUNCTION_PARAMETERS)
@@ -3862,7 +3863,8 @@ static void phar_getcwd(INTERNAL_FUNCTION_PARAMETERS)
 	fname[fname_len] = '\0';
 	RETURN_STRINGL(fname, fname_len, 0);
 skip_phar:
-	return PHAR_G(orig_getcwd)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	PHAR_G(orig_getcwd)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	return;
 }
 
 PHP_MINIT_FUNCTION(phar) /* {{{ */
@@ -3946,7 +3948,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.230 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.231 $");
 #if HAVE_ZLIB
 	if (phar_has_zlib) {
 		php_info_print_table_row(2, "gzip compression", 

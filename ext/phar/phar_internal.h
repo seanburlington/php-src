@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.45 2007/12/20 23:12:39 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.46 2007/12/21 04:49:24 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,7 +118,6 @@ ZEND_BEGIN_MODULE_GLOBALS(phar)
 	int         request_done;
 	int         request_ends;
 	void        (*orig_fopen)(INTERNAL_FUNCTION_PARAMETERS);
-	void        (*orig_getcwd)(INTERNAL_FUNCTION_PARAMETERS);
 ZEND_END_MODULE_GLOBALS(phar)
 
 ZEND_EXTERN_MODULE_GLOBALS(phar)
@@ -257,7 +256,6 @@ static void phar_getcwd(INTERNAL_FUNCTION_PARAMETERS);
 
 #ifdef PHAR_MAIN
 static void phar_fopen(INTERNAL_FUNCTION_PARAMETERS);
-static void phar_getcwd(INTERNAL_FUNCTION_PARAMETERS);
 static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, int options, phar_archive_data** pphar, char **error TSRMLS_DC);
 
 static php_url* phar_open_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);

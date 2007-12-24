@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.48 2007/12/23 21:12:41 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.49 2007/12/24 21:40:53 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,7 +47,9 @@
 #include "ext/standard/sha1.h"
 #include "ext/standard/php_var.h"
 #include "ext/standard/php_smart_str.h"
+#ifndef PHP_WIN32
 #include "TSRM/tsrm_strtok_r.h"
+#endif
 #if HAVE_SPL
 #include "ext/spl/spl_array.h"
 #include "ext/spl/spl_directory.h"
@@ -255,6 +257,9 @@ union _phar_entry_object {
 #endif
 
 BEGIN_EXTERN_C()
+#ifdef PHP_WIN32
+char *tsrm_strtok_r(char *s, const char *delim, char **last);
+#endif
 
 void phar_request_initialize(TSRMLS_D);
 

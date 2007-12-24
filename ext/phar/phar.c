@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.236 2007/12/24 20:30:43 cellog Exp $ */
+/* $Id: phar.c,v 1.237 2007/12/24 21:40:53 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1594,6 +1594,49 @@ static int php_check_dots(const char *element, int n)
 	(len == 1 && element[0] == '.')
 
 #define IS_BACKSLASH(c)     ((c) == '/')
+
+#ifdef PHP_WIN32
+/* stupid-ass non-extern declaration in tsrm_strtok.h breaks dumbass MS compiler */
+static inline int in_character_class(char ch, const char *delim)
+{
+	while (*delim) {
+		if (*delim == ch) {
+			return 1;
+		}
+		delim++;
+	}
+	return 0;
+}
+
+char *tsrm_strtok_r(char *s, const char *delim, char **last)
+{
+	char *token;
+
+	if (s == NULL) {
+		s = *last;
+	}
+
+	while (*s && in_character_class(*s, delim)) {
+		s++;
+	}
+	if (!*s) {
+		return NULL;
+	}
+
+	token = s;
+
+	while (*s && !in_character_class(*s, delim)) {
+		s++;
+	}
+	if (!*s) {
+		*last = s;
+	} else {
+		*s = '\0';
+		*last = s + 1;
+	}
+	return token;
+}
+#endif
 
 /**
  * Remove .. and . references within a phar filename
@@ -4031,7 +4074,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.236 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.237 $");
 #if HAVE_ZLIB
 	if (phar_has_zlib) {
 		php_info_print_table_row(2, "gzip compression", 

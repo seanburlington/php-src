@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.657 2007/12/13 22:29:15 tony2001 Exp $ */
+/* $Id: string.c,v 1.658 2007/12/24 18:10:19 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3339,7 +3339,7 @@ PHP_FUNCTION(chunk_split)
 	zstr result;
 	char *end    = "\r\n";
 	UChar u_end[3] = { 0x0d, 0x0a, 0x0 };
-	int chunklen = 76;
+	long chunklen = 76;
 	int result_len;
 	zend_uchar str_type;
 

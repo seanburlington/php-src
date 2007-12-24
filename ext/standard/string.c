@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.6 2007/12/13 22:29:48 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.7 2007/12/24 18:09:50 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2182,12 +2182,12 @@ PHP_FUNCTION(chunk_split)
 	char *result;
 	char *end    = "\r\n";
 	int endlen   = 2;
-	int chunklen = 76;
+	long chunklen = 76;
 	int result_len;
 	int argc = ZEND_NUM_ARGS();
 
-	if (argc < 1 || argc > 3 ||	zend_get_parameters_ex(argc, &p_str, &p_chunklen, &p_ending) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|ZZ", &p_str, &p_chunklen, &p_ending) == FAILURE) {
+		return;
 	}
 
 	convert_to_string_ex(p_str);

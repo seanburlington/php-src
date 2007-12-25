@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.155 2007/11/09 12:13:15 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.156 2007/12/25 18:23:07 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1696,6 +1696,8 @@ PHP_FUNCTION(mysqli_real_connect)
 
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
+	/* set some required options */
+	flags |= CLIENT_MULTI_RESULTS; /* needed for mysql_multi_query() */
 	/* remove some insecure options */
 	flags &= ~CLIENT_MULTI_STATEMENTS;   /* don't allow multi_queries via connect parameter */
 	if (PG(open_basedir) && PG(open_basedir)[0] != '\0') {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29 2007/07/27 01:09:18 jani Exp $
+dnl $Id: config.m4,v 1.30 2007/12/28 15:38:23 andrey Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -61,8 +61,6 @@ elif test "$PHP_MYSQLI" != "no"; then
   ],[
     $MYSQLI_LIBLINE
   ])
-
-  mysqli_extra_sources="$mysqli_extra_sources mysqli_repl.c"
 fi
 
 dnl Build extension

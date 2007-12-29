@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.92 2007/12/29 02:38:28 cellog Exp $ */
+/* $Id: phar_object.c,v 1.93 2007/12/29 02:40:48 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -288,7 +288,7 @@ PHP_METHOD(Phar, webPhar)
 	if (strstr(path_info, basename)) {
 		entry_len -= fname_len - (basename - fname) + 1;
 		entry = estrndup(path_info + (fname_len - (basename - fname) + 1), entry_len);
-		if (!entry_len) {
+		if (!entry_len || (entry_len == 1 && entry[0] == '/')) {
 			efree(entry);
 			/* direct request */
 			if (index_php_len) {

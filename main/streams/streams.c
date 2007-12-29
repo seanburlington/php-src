@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.2 2007/12/10 14:16:57 iliaa Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.3 2007/12/29 10:52:24 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -859,10 +859,17 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 	if (delim_len == 0 || !delim) {
 		toread = maxlen;
 	} else {
+		size_t seek_len;
+
+		seek_len = stream->writepos - stream->readpos;
+		if (seek_len > maxlen) {
+			seek_len = maxlen;
+		}
+
 		if (delim_len == 1) {
-			e = memchr(stream->readbuf + stream->readpos, *delim, maxlen);
+			e = memchr(stream->readbuf + stream->readpos, *delim, seek_len);
 		} else {
-			e = php_memnstr(stream->readbuf + stream->readpos, delim, delim_len, (stream->readbuf + stream->readpos + maxlen));
+			e = php_memnstr(stream->readbuf + stream->readpos, delim, delim_len, (stream->readbuf + stream->readpos + seek_len));
 		}
 
 		if (!e) {

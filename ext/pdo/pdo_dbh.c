@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17 2007/09/12 18:26:49 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.18 2007/12/30 17:59:31 dsp Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1273,12 +1273,18 @@ static union _zend_function *dbh_method_get(
 
 		if (zend_hash_find(dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH],
 				lc_method_name, method_len+1, (void**)&fbc) == FAILURE) {
-			fbc = NULL;
+			if (std_object_handlers.get_method) {
+				fbc = std_object_handlers.get_method(object_pp, lc_method_name, method_len TSRMLS_CC);
+			}
+			if (!fbc) {
+				fbc = NULL;
+			}
+
 			goto out;
 		}
 		/* got it */
 	}
-	
+
 out:
 	efree(lc_method_name);
 	return fbc;

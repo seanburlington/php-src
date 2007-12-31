@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.21 2007/08/06 20:32:55 sixd Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.22 2007/12/31 07:20:09 sebastian Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H

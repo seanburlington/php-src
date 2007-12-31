@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.14 2007/09/26 10:55:07 tony2001 Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.15 2007/12/31 07:20:11 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

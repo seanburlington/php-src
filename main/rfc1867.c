@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.173.2.1.2.9 2007/07/17 23:46:40 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.173.2.1.2.10 2007/12/31 07:20:15 sebastian Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group

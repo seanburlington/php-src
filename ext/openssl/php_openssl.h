@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.20 2007/04/05 07:24:21 tony2001 Exp $ */
+/* $Id: php_openssl.h,v 1.21 2007/12/31 07:12:12 sebastian Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H

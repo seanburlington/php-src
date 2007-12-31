@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.h,v 1.16 2007/01/01 09:29:29 sebastian Exp $ */
+/* $Id: php_schema.h,v 1.17 2007/12/31 07:12:14 sebastian Exp $ */
 
 #ifndef PHP_SCHEMA_H
 #define PHP_SCHEMA_H

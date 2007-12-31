@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_sha.h,v 1.6 2007/01/01 09:29:24 sebastian Exp $ */
+/* $Id: php_hash_sha.h,v 1.7 2007/12/31 07:12:10 sebastian Exp $ */
 
 #ifndef PHP_HASH_SHA_H
 #define PHP_HASH_SHA_H

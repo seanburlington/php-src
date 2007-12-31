@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysql.h,v 1.43 2007/10/16 20:58:35 andrey Exp $ */
+/* $Id: php_mysql.h,v 1.44 2007/12/31 07:12:11 sebastian Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H

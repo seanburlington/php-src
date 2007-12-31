@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2007 The PHP Group                                |
+  | Copyright (c) 2006-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.h,v 1.2.2.2 2007/10/05 21:23:56 andrey Exp $ */
+/* $Id: mysqlnd_result.h,v 1.2.2.3 2007/12/31 07:17:11 sebastian Exp $ */
 
 #ifndef MYSQLND_RESULT_H
 #define MYSQLND_RESULT_H

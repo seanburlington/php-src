@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.66.2.4.2.10 2009/03/15 20:44:17 moriyoshi Exp $ */
+/* $Id: mbstring.h,v 1.66.2.4.2.5.2.1 2007/12/31 07:17:09 sebastian Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -118,6 +118,8 @@ PHP_FUNCTION(mb_strimwidth);
 PHP_FUNCTION(mb_convert_encoding);
 PHP_FUNCTION(mb_detect_encoding);
 PHP_FUNCTION(mb_list_encodings);
+PHP_FUNCTION(mb_list_encodings_alias_names);
+PHP_FUNCTION(mb_list_mime_names);
 PHP_FUNCTION(mb_convert_kana);
 PHP_FUNCTION(mb_encode_mimeheader);
 PHP_FUNCTION(mb_decode_mimeheader);
@@ -159,11 +161,9 @@ MBSTRING_API int php_mb_gpc_encoding_detector(char **arg_string, int *arg_length
 
 MBSTRING_API int php_mb_stripos(int mode, char *old_haystack, int old_haystack_len, char *old_needle, int old_needle_len, long offset, char *from_encoding TSRMLS_DC);
 
-/* internal use only */
-int _php_mb_ini_mbstring_internal_encoding_set(const char *new_value, uint new_value_length TSRMLS_DC);
-
 ZEND_BEGIN_MODULE_GLOBALS(mbstring)
 	enum mbfl_no_language language;
+	enum mbfl_no_language current_language;
 	enum mbfl_no_encoding internal_encoding;
 	enum mbfl_no_encoding current_internal_encoding;
 #ifdef ZEND_MULTIBYTE

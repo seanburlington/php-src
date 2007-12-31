@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.9.2.2.2.5 2009/03/20 22:14:17 sfox Exp $ */
+/* $Id: dblib_driver.c,v 1.9.2.2.2.2.2.1 2007/12/31 07:17:12 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -229,11 +229,7 @@ static int pdo_dblib_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	if (H->link == NULL) {
 		goto cleanup;
 	}
-
-	if (DBSETOPT(H->link, DBTEXTLIMIT, "2147483647") == FAIL) {
-		goto cleanup;
-	}
-
+	
 	if (vars[3].optval && FAIL == dbuse(H->link, vars[3].optval)) {
 		goto cleanup;
 	}

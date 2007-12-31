@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.7 2007/11/23 19:48:56 stas Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.8 2007/12/31 07:17:15 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

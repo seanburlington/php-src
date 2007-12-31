@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.28.2.1.2.8 2008/12/31 11:17:45 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.28.2.1.2.4.2.1 2007/12/31 07:17:15 sebastian Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -144,18 +144,13 @@ static char Lookahead(char *word, int how_far)
  * could be one though; or more too). */
 #define Phonize(c)	{ \
 						if (p_idx >= max_buffer_len) { \
-							*phoned_word = safe_erealloc(*phoned_word, 2, sizeof(char), max_buffer_len); \
+							*phoned_word = erealloc(*phoned_word, max_buffer_len + 2); \
 							max_buffer_len += 2; \
 						} \
 						(*phoned_word)[p_idx++] = c; \
 					}
 /* Slap a null character on the end of the phoned word */
-#define End_Phoned_Word	{ \
-							if (p_idx == max_buffer_len) { \
-								*phoned_word = safe_erealloc(*phoned_word, 1, sizeof(char), max_buffer_len); \
-							} \
-							(*phoned_word)[p_idx] = '\0'; \
-						}
+#define End_Phoned_Word	{(*phoned_word)[p_idx] = '\0';}
 /* How long is the phoned word? */
 #define Phone_Len	(p_idx)
 

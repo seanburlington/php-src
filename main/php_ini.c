@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.136.2.4.2.15.2.5 2007/11/26 16:34:30 jani Exp $ */
+/* $Id: php_ini.c,v 1.136.2.4.2.15.2.6 2007/12/31 07:17:17 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"

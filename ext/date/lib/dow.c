@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dow.c,v 1.8.2.3.2.6 2008/12/31 11:17:36 sebastian Exp $ */
+/* $Id: dow.c,v 1.8.2.3.2.3.2.1 2007/12/31 07:17:07 sebastian Exp $ */
 
 #include "timelib.h"
 
@@ -35,12 +35,10 @@ static timelib_sll timelib_day_of_week_ex(timelib_sll y, timelib_sll m, timelib_
 {
 	timelib_sll c1, y1, m1, dow;
 
-	/* Only valid for Gregorian calendar, commented out as we don't handle
-	 * julian calendar. We just return the 'wrong' day of week to be
-	 * consistent.
+	/* Only valid for Gregorian calendar */
 	if (y < 1753) {
 		return -1;
-	} */
+	}
 	c1 = century_value(y / 100);
 	y1 = (y % 100);
 	m1 = timelib_is_leap(y) ? m_table_leap[m] : m_table_common[m];

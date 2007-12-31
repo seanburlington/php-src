@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.16.2.1.2.4 2008/12/31 11:17:38 sebastian Exp $ */
+/* $Id: php_ibase_includes.h,v 1.16.2.1.2.1.2.1 2007/12/31 07:17:09 sebastian Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -30,7 +30,7 @@
 #endif
 
 #ifndef METADATALENGTH
-#define METADATALENGTH 68
+#define METADATALENGTH 32
 #endif
 
 #define RESET_ERRMSG do { IBG(errmsg)[0] = '\0'; IBG(sql_code) = 0; } while (0)

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_collection.c,v 1.5.2.3.2.10 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: oci8_collection.c,v 1.5.2.3.2.7.2.1 2007/12/31 07:17:11 sebastian Exp $ */
 
 
 
@@ -44,9 +44,9 @@
 
 /* {{{ php_oci_collection_create() 
  Create and return connection handle */
-php_oci_collection * php_oci_collection_create(php_oci_connection *connection, char *tdo, int tdo_len, char *schema, int schema_len TSRMLS_DC)
+php_oci_collection * php_oci_collection_create(php_oci_connection* connection, char *tdo, int tdo_len, char *schema, int schema_len TSRMLS_DC)
 {	
-	dvoid *dschp1 = NULL;
+	dvoid *dschp1;
 	dvoid *parmp1;
 	dvoid *parmp2;
 	php_oci_collection *collection;
@@ -219,17 +219,11 @@ php_oci_collection * php_oci_collection_create(php_oci_connection *connection, c
 		goto CLEANUP;
 	}
 
-	/* free the describe handle (Bug #44113) */
-	PHP_OCI_CALL(OCIHandleFree, ((dvoid *) dschp1, OCI_HTYPE_DESCRIBE));
 	PHP_OCI_REGISTER_RESOURCE(collection, le_collection);
 	return collection;
 	
 CLEANUP:
 
-	if (dschp1) {
-		/* free the describe handle (Bug #44113) */
-		PHP_OCI_CALL(OCIHandleFree, ((dvoid *) dschp1, OCI_HTYPE_DESCRIBE));
-	}
 	php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 	php_oci_collection_close(collection TSRMLS_CC);	
 	return NULL;

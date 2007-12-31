@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_error.c,v 1.7 2005/06/09 19:57:09 dillo Exp $
+
   zip_error.c -- struct zip_error helper functions
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2008 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -35,6 +37,7 @@
 
 #include <stdlib.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 

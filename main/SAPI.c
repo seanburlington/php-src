@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.15.2.1 2007/12/03 16:04:36 dmitry Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.15.2.2 2007/12/31 07:17:17 sebastian Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.17.2.2.2.6 2009/03/15 20:44:17 moriyoshi Exp $ */
+/* $Id: mb_gpc.c,v 1.17.2.2.2.3.2.1 2007/12/31 07:17:09 sebastian Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -58,11 +58,6 @@ MBSTRING_API SAPI_TREAT_DATA_FUNC(mbstr_treat_data)
 	int free_buffer=0;
 	enum mbfl_no_encoding detected;
 	php_mb_encoding_handler_info_t info;
-
-	{
-		char *value = zend_ini_string("mbstring.internal_encoding", sizeof("mbstring.internal_encoding"), 0);
-		_php_mb_ini_mbstring_internal_encoding_set(value, value ? strlen(value): 0 TSRMLS_CC);
-	}
 
 	if (!MBSTRG(encoding_translation)) {
 		php_default_treat_data(arg, str, destArray TSRMLS_CC);

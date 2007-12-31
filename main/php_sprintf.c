@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.23.2.1.2.4 2009/05/14 08:21:38 dmitry Exp $ */
+/* $Id: php_sprintf.c,v 1.23.2.1.2.1.2.1 2007/12/31 07:17:17 sebastian Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -37,7 +37,9 @@ php_sprintf (char*s, const char* format, ...)
   s[0] = '\0';
   ret = vsprintf (s, format, args);
   va_end (args);
-  return (ret < 0) ? -1 : ret;
+  if (!ret)
+    return -1;
+  return strlen (s);
 }
 
 /*

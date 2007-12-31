@@ -4,7 +4,7 @@
   regint.h -  Oniguruma (regular expression library)
 **********************************************************************/
 /*-
- * Copyright (c) 2002-2009  K.Kosako  <sndgk393 AT ybb DOT ne DOT jp>
+ * Copyright (c) 2002-2008  K.Kosako  <sndgk393 AT ybb DOT ne DOT jp>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -256,7 +256,7 @@
 #define NULL_UCHARP                   ((UChar* )0)
 
 #ifndef PLATFORM_UNALIGNED_WORD_ACCESS
-#define WORD_ALIGNMENT_SIZE       SIZEOF_LONG
+#define WORD_ALIGNMENT_SIZE       SIZEOF_INT
 
 #define GET_ALIGNMENT_PAD_SIZE(addr,pad_size) do {\
   (pad_size) = WORD_ALIGNMENT_SIZE \

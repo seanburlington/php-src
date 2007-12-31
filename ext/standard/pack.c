@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57.2.5.2.9 2009/05/12 12:35:45 iliaa Exp $ */
+/* $Id: pack.c,v 1.57.2.5.2.6.2.1 2007/12/31 07:17:15 sebastian Exp $ */
 
 #include "php.h"
 
@@ -799,13 +799,6 @@ PHP_FUNCTION(unpack)
 						}
 
 						v |= php_unpack(&input[inputpos], 4, issigned, map);
-						if (sizeof(long) > 4) {
- 							if (type == 'l') {
-								v = (signed int) v; 
-							} else {
-								v = (unsigned int) v;
-							}
-						}
 						add_assoc_long(return_value, n, v);
 						break;
 					}

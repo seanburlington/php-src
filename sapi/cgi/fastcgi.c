@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.35 2008/12/31 11:17:48 sebastian Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.28.2.1 2007/12/31 07:17:18 sebastian Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -133,7 +133,18 @@ typedef union _sa_t {
 	struct sockaddr_in  sa_inet;
 } sa_t;
 
-static HashTable fcgi_mgmt_vars;
+typedef struct _fcgi_mgmt_rec {
+	char*  name;
+	char   name_len;
+	char   val;
+} fcgi_mgmt_rec;
+
+static const fcgi_mgmt_rec fcgi_mgmt_vars[] = {
+	{"FCGI_MAX_CONNS",  sizeof("FCGI_MAX_CONNS")-1,  1},
+	{"FCGI_MAX_REQS",   sizeof("FCGI_MAX_REQS")-1,   1},
+	{"FCGI_MPXS_CONNS", sizeof("FCGI_MPXS_CONNS")-1, 0}
+};
+
 
 static int is_initialized = 0;
 static int is_fastcgi = 0;
@@ -159,20 +170,6 @@ static void fcgi_signal_handler(int signo)
 	}
 }
 
-static void fcgi_setup_signals(void)
-{
-	struct sigaction new_sa, old_sa;
-
-	sigemptyset(&new_sa.sa_mask);
-	new_sa.sa_flags = 0;
-	new_sa.sa_handler = fcgi_signal_handler;
-	sigaction(SIGUSR1, &new_sa, NULL);
-	sigaction(SIGTERM, &new_sa, NULL);
-	sigaction(SIGPIPE, NULL, &old_sa);
-	if (old_sa.sa_handler == SIG_DFL) {
-		sigaction(SIGPIPE, &new_sa, NULL);
-	}
-}
 #endif
 
 int fcgi_in_shutdown(void)
@@ -183,14 +180,6 @@ int fcgi_in_shutdown(void)
 int fcgi_init(void)
 {
 	if (!is_initialized) {
-#ifndef _WIN32
-		sa_t sa;
-		socklen_t len = sizeof(sa);
-#endif
-		zend_hash_init(&fcgi_mgmt_vars, 0, NULL, fcgi_free_mgmt_var_cb, 1);
-		fcgi_set_mgmt_var("FCGI_MPXS_CONNS", sizeof("FCGI_MPXS_CONNS")-1, "0", sizeof("0")-1);
-
-		is_initialized = 1;
 #ifdef _WIN32
 # if 0
 		/* TODO: Support for TCP sockets */
@@ -201,6 +190,8 @@ int fcgi_init(void)
 			return 0;
 		}
 # endif
+		is_initialized = 1;
+
 		if ((GetStdHandle(STD_OUTPUT_HANDLE) == INVALID_HANDLE_VALUE) &&
 		    (GetStdHandle(STD_ERROR_HANDLE)  == INVALID_HANDLE_VALUE) &&
 		    (GetStdHandle(STD_INPUT_HANDLE)  != INVALID_HANDLE_VALUE)) {
@@ -227,9 +218,24 @@ int fcgi_init(void)
 			return is_fastcgi = 0;
 		}
 #else
+		sa_t sa;
+		socklen_t len = sizeof(sa);
+
+		is_initialized = 1;
 		errno = 0;
 		if (getpeername(0, (struct sockaddr *)&sa, &len) != 0 && errno == ENOTCONN) {
-			fcgi_setup_signals();
+			struct sigaction new_sa, old_sa;
+
+			sigemptyset(&new_sa.sa_mask);
+			new_sa.sa_flags = 0;
+			new_sa.sa_handler = fcgi_signal_handler;
+			sigaction(SIGUSR1, &new_sa, NULL);
+			sigaction(SIGTERM, &new_sa, NULL);
+			sigaction(SIGPIPE, NULL, &old_sa);
+			if (old_sa.sa_handler == SIG_DFL) {
+				sigaction(SIGPIPE, &new_sa, NULL);
+			}
+
 			return is_fastcgi = 1;
 		} else {
 			return is_fastcgi = 0;
@@ -251,9 +257,6 @@ int fcgi_is_fastcgi(void)
 
 void fcgi_shutdown(void)
 {
-	if (is_initialized) {
-		zend_hash_destroy(&fcgi_mgmt_vars);
-	}
 	is_fastcgi = 0;
 }
 
@@ -456,35 +459,35 @@ int fcgi_listen(const char *path, int backlog)
 	if (!tcp) {
 		chmod(path, 0777);
 	} else {
-			char *ip = getenv("FCGI_WEB_SERVER_ADDRS");
-			char *cur, *end;
-			int n;
-			
-			if (ip) {
-				ip = strdup(ip);
-				cur = ip;
-				n = 0;
-				while (*cur) {
-					if (*cur == ',') n++;
-					cur++;
-				}
-				allowed_clients = malloc(sizeof(in_addr_t) * (n+2));
-				n = 0;
-				cur = ip;
-				while (cur) {
-					end = strchr(cur, ',');
-					if (end) {
-						*end = 0;
-						end++;
-					}
-					allowed_clients[n] = inet_addr(cur);
-					if (allowed_clients[n] == INADDR_NONE) {
+	    char *ip = getenv("FCGI_WEB_SERVER_ADDRS");
+	    char *cur, *end;
+	    int n;
+	    
+	    if (ip) {
+	    	ip = strdup(ip);
+	    	cur = ip;
+	    	n = 0;
+	    	while (*cur) {
+	    		if (*cur == ',') n++;
+	    		cur++;
+	    	}
+	    	allowed_clients = malloc(sizeof(in_addr_t) * (n+2));
+	    	n = 0;
+	    	cur = ip;
+	    	while (cur) {
+		    	end = strchr(cur, ',');
+		    	if (end) {
+	    			*end = 0;
+	    			end++;
+	    		}
+	    		allowed_clients[n] = inet_addr(cur);
+	    		if (allowed_clients[n] == INADDR_NONE) {
 					fprintf(stderr, "Wrong IP address '%s' in FCGI_WEB_SERVER_ADDRS\n", cur);
-					}
-					n++;
-					cur = end;
-				}
-				allowed_clients[n] = INADDR_NONE;
+	    		}
+	    		n++;
+	    		cur = end;
+	    	}
+	    	allowed_clients[n] = INADDR_NONE;
 			free(ip);
 		}
 	}
@@ -498,8 +501,6 @@ int fcgi_listen(const char *path, int backlog)
 	if (tcp) {
 		listen_socket = _open_osfhandle((long)listen_socket, 0);
 	}
-#else
-	fcgi_setup_signals();
 #endif
 	return listen_socket;
 }
@@ -592,9 +593,6 @@ static inline int fcgi_make_header(fcgi_header *hdr, fcgi_request_type type, int
 	hdr->reserved = 0;
 	hdr->type = type;
 	hdr->version = FCGI_VERSION_1;
-	if (pad) {
-		memset(((unsigned char*)hdr) + sizeof(fcgi_header) + len, 0, pad);
-	}
 	return pad;
 }
 
@@ -742,13 +740,8 @@ static int fcgi_read_request(fcgi_request *req)
 			padding = hdr.paddingLength;
 		}
 	} else if (hdr.type == FCGI_GET_VALUES) {
+		int j;
 		unsigned char *p = buf + sizeof(fcgi_header);
-		HashPosition pos;
-		char * str_index;
-		uint str_length;
-		ulong num_index;
-		int key_type;
-		zval ** value;
 
 		if (safe_read(req, buf, len+padding) != len+padding) {
 			req->keep = 0;
@@ -760,41 +753,11 @@ static int fcgi_read_request(fcgi_request *req)
 			return 0;
 		}
 
-		zend_hash_internal_pointer_reset_ex(&req->env, &pos);
-		while ((key_type = zend_hash_get_current_key_ex(&req->env, &str_index, &str_length, &num_index, 0, &pos)) != HASH_KEY_NON_EXISTANT) {
-			int zlen;
-			zend_hash_move_forward_ex(&req->env, &pos);
-			if (key_type != HASH_KEY_IS_STRING) {
-				continue;
+		for (j = 0; j < sizeof(fcgi_mgmt_vars)/sizeof(fcgi_mgmt_vars[0]); j++) {
+			if (zend_hash_exists(&req->env, fcgi_mgmt_vars[j].name, fcgi_mgmt_vars[j].name_len+1) == 0) {
+		                sprintf((char*)p, "%c%c%s%c", fcgi_mgmt_vars[j].name_len, 1, fcgi_mgmt_vars[j].name, fcgi_mgmt_vars[j].val);
+		                p += fcgi_mgmt_vars[j].name_len + 3;
 			}
-			if (zend_hash_find(&fcgi_mgmt_vars, str_index, str_length, (void**) &value) != SUCCESS) {
-				continue;
-			}
-			--str_length;
-			zlen = Z_STRLEN_PP(value);
-			if ((p + 4 + 4 + str_length + zlen) >= (buf + sizeof(buf))) {
-				break;
-			}
-			if (str_length < 0x80) {
-				*p++ = str_length;
-			} else {
-				*p++ = ((str_length >> 24) & 0xff) | 0x80;
-				*p++ = (str_length >> 16) & 0xff;
-				*p++ = (str_length >> 8) & 0xff;
-				*p++ = str_length & 0xff;
-			}
-			if (zlen < 0x80) {
-				*p++ = zlen;
-			} else {
-				*p++ = ((zlen >> 24) & 0xff) | 0x80;
-				*p++ = (zlen >> 16) & 0xff;
-				*p++ = (zlen >> 8) & 0xff;
-				*p++ = zlen & 0xff;
-			}
-			memcpy(p, str_index, str_length);
-			p += str_length;
-			memcpy(p, Z_STRVAL_PP(value), zlen);
-			p += zlen;
 		}
 		len = p - buf - sizeof(fcgi_header);
 		len += fcgi_make_header((fcgi_header*)buf, FCGI_GET_VALUES_RESULT, 0, len);
@@ -814,7 +777,7 @@ int fcgi_read(fcgi_request *req, char *str, int len)
 {
 	int ret, n, rest;
 	fcgi_header hdr;
-	unsigned char buf[255];
+	unsigned char buf[8];
 
 	n = 0;
 	rest = len;
@@ -1252,23 +1215,6 @@ void fcgi_impersonate(void)
 	}
 }
 #endif
-
-void fcgi_set_mgmt_var(char * name, size_t name_len, const char * value, size_t value_len)
-{
-	zval * zvalue;
-	zvalue = pemalloc(sizeof(*zvalue), 1);
-	Z_TYPE_P(zvalue) = IS_STRING;
-	Z_STRVAL_P(zvalue) = pestrndup(value, value_len, 1);
-	Z_STRLEN_P(zvalue) = value_len;
-	zend_hash_add(&fcgi_mgmt_vars, name, name_len + 1, &zvalue, sizeof(zvalue), NULL);
-}
-
-void fcgi_free_mgmt_var_cb(void * ptr)
-{
-	zval ** var = (zval **)ptr;
-	pefree(Z_STRVAL_PP(var), 1);
-	pefree(*var, 1);
-}
 
 /*
  * Local variables:

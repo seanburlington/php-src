@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.17 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.13.2.1 2007/12/31 07:17:11 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1509,8 +1509,11 @@ PHP_FUNCTION(oci_free_statement)
 	}
 
 	PHP_OCI_ZVAL_TO_STATEMENT(z_statement, statement);
-
-	zend_list_delete(statement->id);
+	if (!statement->nested) {
+		/* nested cursors cannot be freed, they are allocated once and used during the fetch */
+		zend_list_delete(statement->id);
+	}
+	
 	RETURN_TRUE;
 }
 /* }}} */

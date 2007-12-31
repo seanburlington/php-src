@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.19 2008/12/31 11:17:48 sebastian Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.15.2.1 2007/12/31 07:17:18 sebastian Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -134,6 +134,8 @@ php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		ctx->r->proto_num = 1000 + (sline[7]-'0');
 		if ((sline[7]-'0') == 0) {
 			apr_table_set(ctx->r->subprocess_env, "force-response-1.0", "true");
+		} else {
+			apr_table_set(ctx->r->subprocess_env, "force-response-1.1", "true");
 		}
 	}
 	
@@ -456,9 +458,6 @@ static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	if (!PG(safe_mode) || (PG(safe_mode) && !ap_auth_type(r))) {
 		auth = apr_table_get(r->headers_in, "Authorization");
 		php_handle_auth_data(auth TSRMLS_CC);
-		if (SG(request_info).auth_user == NULL && r->user) {
-			SG(request_info).auth_user = estrdup(r->user);
-		}
 		ctx->r->user = apr_pstrdup(ctx->r->pool, SG(request_info).auth_user);
 	} else {
 		SG(request_info).auth_user = NULL;

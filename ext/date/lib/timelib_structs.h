@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2009 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.6.2.7 2009/05/03 18:22:59 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.1 2007/12/31 07:17:07 sebastian Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
 
-#include "timelib_config.h"
+#include <timelib_config.h>
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -200,9 +200,6 @@ typedef struct _timelib_tzdb {
 #define SECS_PER_DAY   86400
 #define DAYS_PER_YEAR    365
 #define DAYS_PER_LYEAR   366
-/* 400*365 days + 97 leap days */
-#define DAYS_PER_LYEAR_PERIOD 146097
-#define YEARS_PER_LYEAR_PERIOD 400
 
 #define timelib_is_leap(y) ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 

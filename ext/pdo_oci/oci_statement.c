@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.10.2.10 2009/05/12 21:57:41 mbeccati Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.10.2.7.2.1 2007/12/31 07:17:12 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -87,7 +87,7 @@ static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 	}
 
 	if (S->einfo.errmsg) {
-		pefree(S->einfo.errmsg, stmt->dbh->is_persistent);
+		efree(S->einfo.errmsg);
 		S->einfo.errmsg = NULL;
 	}
 

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2007 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.11.2.12.2.2 2007/10/17 11:18:34 dmitry Exp $ */
+/* $Id: php_http.c,v 1.77.2.11.2.12.2.3 2007/12/31 07:17:13 sebastian Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"

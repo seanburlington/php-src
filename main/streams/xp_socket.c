@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2009 The PHP Group                                |
+  | Copyright (c) 1997-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.33.2.2.2.15 2009/02/08 16:54:43 iliaa Exp $ */
+/* $Id: xp_socket.c,v 1.33.2.2.2.6.2.1 2007/12/31 07:17:17 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -33,10 +33,6 @@
 
 #ifndef MSG_DONTWAIT
 # define MSG_DONTWAIT 0
-#endif
-
-#ifndef MSG_PEEK
-# define MSG_PEEK 0
 #endif
 
 php_stream_ops php_stream_generic_socket_ops;
@@ -281,7 +277,7 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 				if (sock->socket == -1) {
 					alive = 0;
 				} else if (php_pollfd_for(sock->socket, PHP_POLLREADABLE|POLLPRI, &tv) > 0) {
-					if (0 >= recv(sock->socket, &buf, sizeof(buf), MSG_PEEK) && php_socket_errno() != EWOULDBLOCK) {
+					if (0 == recv(sock->socket, &buf, sizeof(buf), MSG_PEEK) && php_socket_errno() != EAGAIN) {
 						alive = 0;
 					}
 				}
@@ -601,7 +597,7 @@ static inline int php_tcp_sockop_connect(php_stream *stream, php_netstream_data_
 {
 	char *host = NULL, *bindto = NULL;
 	int portno, bindport = 0;
-	int err = 0;
+	int err;
 	int ret;
 	zval **tmpzval = NULL;
 
@@ -621,7 +617,7 @@ static inline int php_tcp_sockop_connect(php_stream *stream, php_netstream_data_
 		parse_unix_address(xparam, &unix_addr TSRMLS_CC);
 
 		ret = php_network_connect_socket(sock->socket,
-				(const struct sockaddr *)&unix_addr, (socklen_t) XtOffsetOf(struct sockaddr_un, sun_path) + xparam->inputs.namelen,
+				(const struct sockaddr *)&unix_addr, (socklen_t)sizeof(unix_addr),
 				xparam->op == STREAM_XPORT_OP_CONNECT_ASYNC, xparam->inputs.timeout,
 				xparam->want_errortext ? &xparam->outputs.error_text : NULL,
 				&err);

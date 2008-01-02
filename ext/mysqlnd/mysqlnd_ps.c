@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.3.2.4 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.3.2.5 2008/01/02 21:14:35 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1215,7 +1215,7 @@ MYSQLND_METHOD(mysqlnd_stmt, bind_result)(MYSQLND_STMT * const stmt,
 
 
 /* {{{ mysqlnd_stmt::insert_id */
-static mynd_ulonglong
+static uint64
 MYSQLND_METHOD(mysqlnd_stmt, insert_id)(const MYSQLND_STMT * const stmt)
 {
 	return stmt->upsert_status.last_insert_id;
@@ -1224,7 +1224,7 @@ MYSQLND_METHOD(mysqlnd_stmt, insert_id)(const MYSQLND_STMT * const stmt)
 
 
 /* {{{ mysqlnd_stmt::affected_rows */
-static mynd_ulonglong
+static uint64
 MYSQLND_METHOD(mysqlnd_stmt, affected_rows)(const MYSQLND_STMT * const stmt)
 {
 	return stmt->upsert_status.affected_rows;
@@ -1233,7 +1233,7 @@ MYSQLND_METHOD(mysqlnd_stmt, affected_rows)(const MYSQLND_STMT * const stmt)
 
 
 /* {{{ mysqlnd_stmt::num_rows */
-static mynd_ulonglong
+static uint64
 MYSQLND_METHOD(mysqlnd_stmt, num_rows)(const MYSQLND_STMT * const stmt)
 {
 	return stmt->result? mysqlnd_num_rows(stmt->result):0;
@@ -1297,7 +1297,7 @@ MYSQLND_METHOD(mysqlnd_stmt, sqlstate)(const MYSQLND_STMT * const stmt)
 
 /* {{{ mysqlnd_stmt::data_seek */
 static enum_func_status
-MYSQLND_METHOD(mysqlnd_stmt, data_seek)(const MYSQLND_STMT * const stmt, mynd_ulonglong row TSRMLS_DC)
+MYSQLND_METHOD(mysqlnd_stmt, data_seek)(const MYSQLND_STMT * const stmt, uint64 row TSRMLS_DC)
 {
 	return stmt->result? stmt->result->m.seek_data(stmt->result, row TSRMLS_CC) : FAIL;
 }

@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.3 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.4 2008/01/02 21:14:35 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.2-dev - 070928 - $Revision: 1.3.2.3 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.2-dev - 070928 - $Revision: 1.3.2.4 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
@@ -250,6 +250,7 @@ PHPAPI ulong mysqlnd_old_escape_string(char *newstr, const char *escapestr, int 
 #define mysqlnd_stmt_bind_result(stmt,bind)	(stmt)->m->bind_result((stmt), (bind) TSRMLS_CC)
 #define mysqlnd_stmt_param_metadata(stmt)	(stmt)->m->get_parameter_metadata((stmt))
 #define mysqlnd_stmt_result_metadata(stmt)	(stmt)->m->get_result_metadata((stmt) TSRMLS_CC)
+#define mysqlnd_stmt_ronly_result_metadata(stmt) ((stmt)->result)
 
 #define	mysqlnd_stmt_free_result(stmt)		(stmt)->m->free_result((stmt) TSRMLS_CC)
 #define	mysqlnd_stmt_close(stmt, implicit)	(stmt)->m->dtor((stmt), (implicit) TSRMLS_CC)

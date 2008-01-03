@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.114 2007/12/31 07:12:11 sebastian Exp $ 
+  $Id: mysqli.c,v 1.115 2008/01/03 14:32:52 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -757,13 +757,6 @@ PHP_MINIT_FUNCTION(mysqli)
 
 	REGISTER_LONG_CONSTANT("MYSQLI_SET_CHARSET_NAME", MYSQL_SET_CHARSET_NAME, CONST_CS | CONST_PERSISTENT);
 
-	/* replication */
-#if !defined(HAVE_MYSQLND)
-	REGISTER_LONG_CONSTANT("MYSQLI_RPL_MASTER", MYSQL_RPL_MASTER, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("MYSQLI_RPL_SLAVE", MYSQL_RPL_SLAVE, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("MYSQLI_RPL_ADMIN", MYSQL_RPL_ADMIN, CONST_CS | CONST_PERSISTENT);
-#endif
-	
 	/* bind support */
 	REGISTER_LONG_CONSTANT("MYSQLI_NO_DATA", MYSQL_NO_DATA, CONST_CS | CONST_PERSISTENT);
 #ifdef MYSQL_DATA_TRUNCATED

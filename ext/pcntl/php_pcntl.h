@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.1 2007/12/31 07:17:11 sebastian Exp $ */
+/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.2 2008/01/03 16:20:32 nlopess Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -26,12 +26,6 @@
 #include "php_ticks.h"
 extern zend_module_entry pcntl_module_entry;
 #define phpext_pcntl_ptr &pcntl_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_PCNTL_API __declspec(dllexport)
-#else
-#define PHP_PCNTL_API
-#endif
 
 PHP_MINIT_FUNCTION(pcntl);
 PHP_MSHUTDOWN_FUNCTION(pcntl);

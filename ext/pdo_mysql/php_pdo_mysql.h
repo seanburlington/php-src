@@ -16,19 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql.h,v 1.3.2.1.2.1.2.1 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: php_pdo_mysql.h,v 1.3.2.1.2.1.2.2 2008/01/03 16:20:32 nlopess Exp $ */
 
 #ifndef PHP_PDO_MYSQL_H
 #define PHP_PDO_MYSQL_H
 
 extern zend_module_entry pdo_mysql_module_entry;
 #define phpext_pdo_mysql_ptr &pdo_mysql_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_PDO_MYSQL_API __declspec(dllexport)
-#else
-#define PHP_PDO_MYSQL_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

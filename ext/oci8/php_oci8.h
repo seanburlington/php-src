@@ -25,17 +25,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.1 2007/12/31 07:17:11 sebastian Exp $ */
+/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.2 2008/01/03 16:20:31 nlopess Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
 #  define PHP_OCI8_H
-
-#ifdef PHP_WIN32
-#define PHP_OCI_API __declspec(dllexport)
-#else
-#define PHP_OCI_API
-#endif                                   
 
 #ifdef ZTS
 # include "TSRM.h"

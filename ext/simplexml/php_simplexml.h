@@ -16,19 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.28 2007/12/31 07:12:14 sebastian Exp $ */
+/* $Id: php_simplexml.h,v 1.29 2008/01/03 16:18:29 nlopess Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
 
 extern zend_module_entry simplexml_module_entry;
 #define phpext_simplexml_ptr &simplexml_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_SIMPLEXML_API __declspec(dllexport)
-#else
-#define PHP_SIMPLEXML_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

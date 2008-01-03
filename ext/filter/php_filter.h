@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.14 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: php_filter.h,v 1.15 2008/01/03 16:18:27 nlopess Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -32,12 +32,6 @@
 
 extern zend_module_entry filter_module_entry;
 #define phpext_filter_ptr &filter_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_FILTER_API __declspec(dllexport)
-#else
-#define PHP_FILTER_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

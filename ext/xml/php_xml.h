@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.34 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_xml.h,v 1.35 2008/01/03 16:18:29 nlopess Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -33,12 +33,6 @@ extern zend_module_entry xml_module_entry;
 #ifdef HAVE_XML 
 
 #include "ext/xml/expat_compat.h"
-
-#ifdef PHP_WIN32
-#define PHP_XML_API __declspec(dllexport)
-#else
-#define PHP_XML_API
-#endif
 
 
 #ifdef XML_UNICODE

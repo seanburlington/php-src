@@ -16,19 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.h,v 1.9 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_xmlreader.h,v 1.10 2008/01/03 16:18:29 nlopess Exp $ */
 
 #ifndef PHP_XMLREADER_H
 #define PHP_XMLREADER_H
 
 extern zend_module_entry xmlreader_module_entry;
 #define phpext_xmlreader_ptr &xmlreader_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_XMLREADER_API __declspec(dllexport)
-#else
-#define PHP_XMLREADER_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

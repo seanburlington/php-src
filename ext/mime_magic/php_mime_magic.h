@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_mime_magic.h,v 1.14 2007/12/31 07:12:11 sebastian Exp $ 
+  $Id: php_mime_magic.h,v 1.15 2008/01/03 16:18:27 nlopess Exp $ 
 */
 
 #ifndef PHP_MIME_MAGIC_H
@@ -23,12 +23,6 @@
 
 extern zend_module_entry mime_magic_module_entry;
 #define phpext_mime_magic_ptr &mime_magic_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_MIME_MAGIC_API __declspec(dllexport)
-#else
-#define PHP_MIME_MAGIC_API
-#endif
 
 PHP_MINIT_FUNCTION(mime_magic);
 PHP_MSHUTDOWN_FUNCTION(mime_magic);

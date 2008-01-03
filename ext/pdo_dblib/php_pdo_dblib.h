@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_dblib.h,v 1.5 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: php_pdo_dblib.h,v 1.6 2008/01/03 16:18:28 nlopess Exp $ */
 
 #ifndef PHP_PDO_DBLIB_H
 #define PHP_PDO_DBLIB_H
@@ -25,12 +25,6 @@
 
 extern zend_module_entry pdo_dblib_module_entry;
 #define phpext_pdo_dblib_ptr &pdo_dblib_module_entry
-
-#ifdef PHP_WIN32
-# define PHP_PDO_DBLIB_API __declspec(dllexport)
-#else
-# define PHP_PDO_DBLIB_API
-#endif
 
 #ifdef ZTS
 # include "TSRM.h"

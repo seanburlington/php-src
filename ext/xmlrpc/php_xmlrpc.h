@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_xmlrpc.h,v 1.15 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_xmlrpc.h,v 1.16 2008/01/03 16:18:29 nlopess Exp $ */
 
 #ifndef _PHP_XMLRPC_H
 #define _PHP_XMLRPC_H
@@ -60,12 +60,6 @@
 
 extern zend_module_entry xmlrpc_module_entry;
 #define phpext_xmlrpc_ptr &xmlrpc_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_XMLRPC_API __declspec(dllexport)
-#else
-#define PHP_XMLRPC_API
-#endif
 
 PHP_MINIT_FUNCTION(xmlrpc);
 PHP_MINFO_FUNCTION(xmlrpc);

@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.43 2007/12/31 07:12:14 sebastian Exp $ */
+/* $Id: php_sockets.h,v 1.44 2008/01/03 16:18:29 nlopess Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -30,10 +30,8 @@ extern zend_module_entry sockets_module_entry;
 #define phpext_sockets_ptr &sockets_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_SOCKETS_API __declspec(dllexport)
 #include <winsock.h>
 #else
-#define PHP_SOCKETS_API
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif

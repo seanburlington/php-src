@@ -16,25 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird.h,v 1.6 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: php_pdo_firebird.h,v 1.7 2008/01/03 16:18:28 nlopess Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_H
 #define PHP_PDO_FIREBIRD_H
 
 extern zend_module_entry pdo_firebird_module_entry;
 #define phpext_pdo_firebird_ptr &pdo_firebird_module_entry
-
-#ifdef PHP_WIN32
-# ifdef PDO_FIREBIRD_EXPORTS
-#  define PDO_FB_API __declspec(dllexport)
-# elif defined(COMPILE_DL_PDO_FIREBIRD)
-#  define PDO_FB_API __declspec(dllimport)
-# else
-#  define PDO_FB_API
-# endif
-#else
-# define PDO_FB_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

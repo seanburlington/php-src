@@ -16,19 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.19 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_xsl.h,v 1.20 2008/01/03 16:18:29 nlopess Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
 
 extern zend_module_entry xsl_module_entry;
 #define phpext_xsl_ptr &xsl_module_entry
-
-#ifdef PHP_WIN32
-#define PHP_XSL_API __declspec(dllexport)
-#else
-#define PHP_XSL_API
-#endif
 
 #ifdef ZTS
 #include "TSRM.h"

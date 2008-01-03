@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.47 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: php_mssql.h,v 1.48 2008/01/03 16:18:27 nlopess Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -25,11 +25,6 @@
 
 #if HAVE_MSSQL
 #define MSDBLIB
-#ifdef PHP_WIN32
-#define PHP_MSSQL_API __declspec(dllexport)
-#else
-#define PHP_MSSQL_API
-#endif
 
 #include <sqlfront.h>
 #include <sqldb.h>

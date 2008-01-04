@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.241 2008/01/04 01:45:36 cellog Exp $ */
+/* $Id: phar.c,v 1.242 2008/01/04 04:57:10 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -4866,6 +4866,7 @@ void phar_request_initialize(TSRMLS_D) /* {{{ */
 		zend_hash_init(&(PHAR_GLOBALS->phar_fname_map), sizeof(phar_archive_data*), zend_get_hash_value, destroy_phar_data,  0);
 		zend_hash_init(&(PHAR_GLOBALS->phar_alias_map), sizeof(phar_archive_data*), zend_get_hash_value, NULL, 0);
 		zend_hash_init(&(PHAR_GLOBALS->phar_plain_map), sizeof(const char *),       zend_get_hash_value, NULL, 0);
+		zend_hash_init(&(PHAR_GLOBALS->phar_SERVER_mung_list), sizeof(const char *),       zend_get_hash_value, NULL, 0);
 		phar_split_extract_list(TSRMLS_C);
 		if (SUCCESS == zend_hash_find(CG(function_table), "fopen", 6, (void **)&orig)) {
 			PHAR_G(orig_fopen) = orig->internal_function.handler;
@@ -4890,6 +4891,8 @@ PHP_RSHUTDOWN_FUNCTION(phar) /* {{{ */
 		PHAR_GLOBALS->phar_fname_map.arBuckets = NULL;
 		zend_hash_destroy(&(PHAR_GLOBALS->phar_plain_map));
 		PHAR_GLOBALS->phar_plain_map.arBuckets = NULL;
+		zend_hash_destroy(&(PHAR_GLOBALS->phar_SERVER_mung_list));
+		PHAR_GLOBALS->phar_SERVER_mung_list.arBuckets = NULL;
 		PHAR_GLOBALS->request_init = 0;
 	}
 	PHAR_GLOBALS->request_done = 1;
@@ -4903,7 +4906,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.241 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.242 $");
 	php_info_print_table_row(2, "Phar-based phar archives", 
 		"enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", 

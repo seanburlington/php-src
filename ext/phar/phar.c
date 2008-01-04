@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.243 2008/01/04 16:10:48 helly Exp $ */
+/* $Id: phar.c,v 1.244 2008/01/04 17:04:40 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -208,7 +208,7 @@ static void phar_destroy_phar_data(phar_archive_data *data TSRMLS_DC) /* {{{ */
 {
 #if HAVE_PHAR_ZIP
 	if (data->zip) {
-		zip_close(data->zip);
+		_zip_free(data->zip);
 		data->zip = 0;
 	}
 #endif
@@ -3256,7 +3256,7 @@ int phar_zip_flush(phar_archive_data *archive, char *user_stub, long len, char *
 			efree(user_stub);
 		}
 	} else {
-		if (archive->is_brandnew) {
+		if (-1 != phar_stub_index) {
 			struct zip_source *source;
 			/* this is a brand new phar, add the stub */
 			if (NULL == (source = zip_source_buffer(archive->zip, newstub, sizeof(newstub) - 1, 0)) || -1 == zip_add(archive->zip, ".phar/stub.php", source)) {
@@ -4906,7 +4906,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.243 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.244 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

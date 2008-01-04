@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.97 2008/01/04 04:57:10 cellog Exp $ */
+/* $Id: phar_object.c,v 1.98 2008/01/04 14:06:48 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -173,7 +173,6 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 	zend_file_handle file_handle;
 	zend_op_array *new_op_array;
 	zval *result = NULL;
-;
 
 	switch (code) {
 		case PHAR_MIME_PHPS:

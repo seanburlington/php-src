@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.242 2008/01/04 04:57:10 cellog Exp $ */
+/* $Id: phar.c,v 1.243 2008/01/04 16:10:48 helly Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -4906,53 +4906,40 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.242 $");
-	php_info_print_table_row(2, "Phar-based phar archives", 
-		"enabled");
-	php_info_print_table_row(2, "Tar-based phar archives", 
-		"enabled");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.243 $");
+	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
+	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP
-	php_info_print_table_row(2, "ZIP-based phar archives", 
-		"enabled");
+	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");
 #else
-	php_info_print_table_row(2, "ZIP-based phar archives", 
-		"disabled");
+	php_info_print_table_row(2, "ZIP-based phar archives", "unavailable");
 #endif
 #if HAVE_ZLIB
 	if (phar_has_zlib) {
-		php_info_print_table_row(2, "gzip compression", 
-			"enabled");
+		php_info_print_table_row(2, "gzip compression", "enabled");
 	} else {
-		php_info_print_table_row(2, "gzip compression", 
-			"disabled");
+		php_info_print_table_row(2, "gzip compression", "disabled");
 	}
 #else
-	php_info_print_table_row(2, "gzip compression", 
-		"disabled");
+	php_info_print_table_row(2, "gzip compression", "unavailable");
 #endif
 #if HAVE_BZ2
-	if (phar_has_bz2 ) {
-		php_info_print_table_row(2, "bzip2 compression", 
-			"disabled");
+	if (phar_has_bz2) {
+		php_info_print_table_row(2, "bzip2 compression", "enabled");
 	} else {
-		php_info_print_table_row(2, "bzip2 compression", 
-			"enabled");
+		php_info_print_table_row(2, "bzip2 compression", "disabled (install pecl/bz2)");
 	}
 #else
-	php_info_print_table_row(2, "bzip2 compression", 
-		"disabled");
+	php_info_print_table_row(2, "bzip2 compression", "unavailable (install pecl/bz2)");
 #endif
 #if HAVE_GNUPGLIB
-        if (phar_has_gnupg) {
-		php_info_print_table_row(2, "GPG signature", 
-			"enabled");
+  if (phar_has_gnupg) {
+		php_info_print_table_row(2, "GPG signature", "enabled");
 	} else {
-		php_info_print_table_row(2, "GPG signature", 
-			"disabled (install pecl/gnupg)");
+		php_info_print_table_row(2, "GPG signature", "disabled (install pecl/gnupg)");
 	}
 #else
-	php_info_print_table_row(2, "GPG signature", 
-		"disabled");
+	php_info_print_table_row(2, "GPG signature", "unavailable (install pecl/gnupg)");
 #endif
 	php_info_print_table_end();
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.244 2008/01/04 17:04:40 cellog Exp $ */
+/* $Id: phar.c,v 1.245 2008/01/05 03:41:42 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1990,6 +1990,9 @@ int phar_detect_phar_fname_ext(const char *filename, int check_length, char **ex
 	} else if ((pos_p = strstr(filename, ".phar")) != NULL) {
 		*ext_str = pos_p;
 		*ext_len = 5;
+	} else if ((pos_p = strstr(filename, ".php")) != NULL) {
+		*ext_str = pos_p;
+		*ext_len = 4;
 	} else {
 		/* We have an alias with no extension, so locate the first / and fail */
 		*ext_str = strstr(filename, "/");
@@ -4906,7 +4909,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.244 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.245 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

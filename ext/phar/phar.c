@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.245 2008/01/05 03:41:42 cellog Exp $ */
+/* $Id: phar.c,v 1.246 2008/01/05 22:46:52 cellog Exp $ */
 
 #define PHAR_MAIN
 #include "phar_internal.h"
@@ -1782,14 +1782,23 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 		return FAILURE;
 	}
 
-	fp = php_stream_open_wrapper(fname, PHAR_G(readonly)?"rb":"r+b", IGNORE_URL|STREAM_MUST_SEEK|0, NULL);
+	/* first open readonly so it won't be created if not present */
+	fp = php_stream_open_wrapper(fname, "rb", IGNORE_URL|STREAM_MUST_SEEK|0, NULL);
 
-	if (fp && phar_open_fp(fp, fname, fname_len, alias, alias_len, options, pphar, 0 TSRMLS_CC) == SUCCESS) {
-		if (!PHAR_G(readonly)) {
-			(*pphar)->is_writeable = 1;
+	if (fp) {
+		if (phar_open_fp(fp, fname, fname_len, alias, alias_len, options, pphar, error TSRMLS_CC) == SUCCESS) {
+			if (!PHAR_G(readonly)) {
+				(*pphar)->is_writeable = 1;
+			}
+			return SUCCESS;
+		} else {
+			/* file exists, but is either corrupt or not a phar archive */
+			php_stream_close(fp);
+			return FAILURE;
 		}
-		return SUCCESS;
 	}
+
+	php_stream_close(fp);
 
 	if (PHAR_G(readonly)) {
 		if (options & REPORT_ERRORS) {
@@ -1799,6 +1808,8 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 		}
 		return FAILURE;
 	}
+	/* re-open for writing */
+	fp = php_stream_open_wrapper(fname, "r+b", IGNORE_URL|STREAM_MUST_SEEK|0, NULL);
 
 	/* set up our manifest */
 	mydata = ecalloc(sizeof(phar_archive_data), 1);
@@ -4909,7 +4920,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.245 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.246 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

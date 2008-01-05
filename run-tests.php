@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.11 2008/01/05 21:05:06 cellog Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.12 2008/01/05 21:39:53 cellog Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -408,7 +408,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.11 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.12 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -1600,7 +1600,7 @@ COMMAND $cmd
 		$wanted = $wanted_headers . "\n--HEADERS--\n" . $wanted;
 		$output = $output_headers . "\n--HEADERS--\n" . $output;
 		if (isset($wanted_re)) {
-			$wanted_re = $wanted_headers . "\n--HEADERS--\n" . $wanted_re;
+			$wanted_re = preg_quote($wanted_headers . "\n--HEADERS--\n", '/') . $wanted_re;
 		}
 	}
 

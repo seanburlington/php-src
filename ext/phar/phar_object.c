@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.107 2008/01/07 05:41:08 cellog Exp $ */
+/* $Id: phar_object.c,v 1.108 2008/01/07 17:28:44 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -492,7 +492,6 @@ PHP_METHOD(Phar, webPhar)
 
 	if (FAILURE == phar_get_entry_data(&phar, fname, fname_len, entry, entry_len, "r", &error TSRMLS_CC)) {
 		phar_do_404(fname, fname_len, f404, f404_len, entry, entry_len TSRMLS_CC);
-		phar_entry_delref(phar TSRMLS_CC);
 #ifdef PHP_WIN32
 		efree(fname);
 #endif

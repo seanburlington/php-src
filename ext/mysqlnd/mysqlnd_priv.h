@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.7 2008/01/02 21:16:46 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.8 2008/01/08 13:13:39 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -143,7 +143,7 @@
 	{ \
 		error_info.error_no = 0; \
 		error_info.error[0] = '\0'; \
-		strncpy(error_info.sqlstate, "00000", sizeof("00000") - 1); \
+		strlcpy(error_info.sqlstate, "00000", sizeof(error_info.sqlstate)); \
 	}
 
 #define SET_CLIENT_ERROR(error_info, a, b, c) \

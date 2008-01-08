@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.255 2008/01/08 20:31:53 cellog Exp $ */
+/* $Id: phar.c,v 1.256 2008/01/08 22:14:15 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -468,9 +468,8 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 				}
 				/* found a file in this path */
 				entry = (phar_entry_info *) ecalloc(1, sizeof(phar_entry_info));
-				entry->is_dir = 1;
 				/* this next line tells PharFileInfo->__destruct() to efree the filename */
-				entry->is_zip = entry->is_tar = 0;
+				entry->is_temp_dir = entry->is_dir = 1;
 				entry->filename = (char *) estrndup(path, path_len + 1);
 				entry->filename_len = path_len;
 				return entry;
@@ -764,15 +763,13 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 		/* prevent attempts to check the CRC */
 		etemp.is_crc_checked = 1;
 		etemp.index = -1;
-		etemp.filename = estrndup(path, path_len);
-	} else {
-		etemp.is_tar = phar->is_tar;
-		etemp.tar_type = '0';
-		etemp.filename = estrndup(path, path_len);
 	}
-#else
-	etemp.filename = estrndup(path, path_len);
 #endif
+	etemp.filename = estrndup(path, path_len);
+	if (phar->is_tar) {
+		etemp.is_tar = phar->is_tar;
+		etemp.tar_type = TAR_FILE;
+	}
 	zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry);
 	
 	if (!entry) {
@@ -1293,8 +1290,15 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 		if (buffer + entry.filename_len + 20 > endbuffer) {
 			MAPPHAR_FAIL("internal corruption of phar \"%s\" (truncated manifest entry)");
 		}
+		if (buffer[entry.filename_len - 1] == '/') {
+			entry.is_dir = 1;
+			entry.filename_len--;
+			entry.flags |= PHAR_ENT_PERM_DEF_DIR;
+		} else {
+			entry.is_dir = 0;
+		}
 		entry.filename = estrndup(buffer, entry.filename_len);
-		buffer += entry.filename_len;
+		buffer += entry.filename_len + entry.is_dir;
 		PHAR_GET_32(buffer, entry.uncompressed_filesize);
 		PHAR_GET_32(buffer, entry.timestamp);
 		if (offset == 0) {
@@ -2627,6 +2631,16 @@ int phar_flush(phar_archive_data *archive, char *user_stub, long len, char **err
 			}
 			return EOF;
 		}
+		if (entry->is_dir && 1 != php_stream_write(newfile, "/", 1)) {
+			if (closeoldfile) {
+				php_stream_close(oldfile);
+			}
+			php_stream_close(newfile);
+			if (error) {
+				spprintf(error, 0, "unable to write filename of file \"%s\" to manifest of new phar \"%s\"", entry->filename, archive->fname);
+			}
+			return EOF;
+		}
 		/* set the manifest meta-data:
 			4: uncompressed filesize
 			4: creation timestamp
@@ -3105,7 +3119,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.255 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.256 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

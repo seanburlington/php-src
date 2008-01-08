@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.4 2008/01/02 21:14:35 andrey Exp $ */
+/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.5 2008/01/08 13:11:55 andrey Exp $ */
 
 #ifndef MYSQLND_WIREPROTOCOL_H
 #define MYSQLND_WIREPROTOCOL_H

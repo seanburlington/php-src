@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.4.2.4 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.85.2.4.2.4.2.5 2008/01/08 19:08:50 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -774,6 +774,7 @@ static int php_stream_ftp_url_stat(php_stream_wrapper *wrapper, char *url, int f
 		ssb->sb.st_mode |= S_IFDIR;
 	}
 
+	php_stream_write_string(stream, "TYPE I\r\n"); /* we need this since some servers refuse to accept SIZE command in ASCII mode */
 	php_stream_printf(stream TSRMLS_CC, "SIZE %s\r\n", (resource->path != NULL ? resource->path : "/"));
 	result = GET_FTP_RESULT(stream);
 	if (result < 200 || result > 299) {

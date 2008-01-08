@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.16 2008/01/03 04:44:59 cellog Exp $
+dnl $Id: config.m4,v 1.17 2008/01/08 19:40:22 cellog Exp $
 dnl config.m4 for extension phar
 
 PHP_ARG_ENABLE(phar, for phar support/phar zlib support,
@@ -32,7 +32,7 @@ if test "$PHP_PHAR" != "no"; then
 	else
 		AC_MSG_RESULT([no])
 	fi
-  PHP_NEW_EXTENSION(phar, tar.c phar.c phar_object.c phar_path_check.c $PHP_PHAR_SOURCES, $ext_shared)
+  PHP_NEW_EXTENSION(phar, tar.c zip.c phar.c phar_object.c phar_path_check.c $PHP_PHAR_SOURCES, $ext_shared)
   PHP_ADD_BUILD_DIR($ext_builddir/lib, 1)
   PHP_SUBST(PHAR_SHARED_LIBADD)
   PHP_ADD_EXTENSION_DEP(phar, zlib, true)

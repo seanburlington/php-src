@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.153 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: openssl.c,v 1.154 2008/01/09 16:46:52 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3725,7 +3725,7 @@ PHP_FUNCTION(openssl_sign)
 	}
 
 	if (method == NULL || Z_TYPE_P(method) == IS_LONG) {
-		if (Z_TYPE_P(method) == IS_LONG) {
+		if (method != NULL) {
 			signature_algo = Z_LVAL_P(method);
 		}
 		mdtype = php_openssl_get_evp_md_from_algo(signature_algo);
@@ -3780,7 +3780,7 @@ PHP_FUNCTION(openssl_verify)
 	}
 
 	if (method == NULL || Z_TYPE_P(method) == IS_LONG) {
-		if (Z_TYPE_P(method) == IS_LONG) {
+		if (method != NULL) {
 			signature_algo = Z_LVAL_P(method);
 		}
 		mdtype = php_openssl_get_evp_md_from_algo(signature_algo);

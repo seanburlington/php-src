@@ -17,10 +17,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dirstream.h,v 1.2 2008/01/08 22:14:15 cellog Exp $ */
+/* $Id: dirstream.h,v 1.3 2008/01/09 00:58:36 cellog Exp $ */
 
 BEGIN_EXTERN_C()
-php_stream* phar_wrapper_open_dir(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 int phar_wrapper_mkdir(php_stream_wrapper *wrapper, char *url_from, int mode, int options, php_stream_context *context TSRMLS_DC);
 int phar_wrapper_rmdir(php_stream_wrapper *wrapper, char *url, int options, php_stream_context *context TSRMLS_DC);
 

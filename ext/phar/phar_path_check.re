@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_path_check.re,v 1.7 2007/02/05 21:38:49 cellog Exp $ */
+/* $Id: phar_path_check.re,v 1.8 2008/01/09 00:58:36 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -60,10 +60,6 @@ ANY = .;
 "\\" {
 			*error = "back-slash";
 			return pcr_err_back_slash;
-		}
-"/" END {
-			*error = "empty directory";
-			return pcr_err_empty_entry;
 		}
 "*" {
 			*error = "star";

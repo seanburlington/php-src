@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_soap.h,v 1.38.2.6.2.7 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: php_soap.h,v 1.38.2.6.2.8 2008/01/09 16:45:28 dmitry Exp $ */
 
 #ifndef PHP_SOAP_H
 #define PHP_SOAP_H
@@ -160,7 +160,9 @@ ZEND_BEGIN_MODULE_GLOBALS(soap)
 	zend_bool  use_soap_error_handler;
 	char*      error_code;
 	zval*      error_object;
-	long       cache;
+	char       cache;
+	char       cache_mode;
+	char       cache_enabled;
 	char*      cache_dir;
 	long       cache_ttl;
 	long       cache_limit;

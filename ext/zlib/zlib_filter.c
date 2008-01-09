@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zlib_filter.c,v 1.6.2.2.2.5 2007/12/31 07:20:14 sebastian Exp $ */
+/* $Id: zlib_filter.c,v 1.6.2.2.2.6 2008/01/09 06:45:15 cellog Exp $ */
 
 #include "php.h"
 #include "php_zlib.h"
@@ -323,7 +323,7 @@ static php_stream_filter *php_zlib_filter_create(const char *filtername, zval *f
 				/* log-2 base of history window (9 - 15) */
 				SEPARATE_ZVAL(tmpzval);
 				convert_to_long_ex(tmpzval);
-				if (Z_LVAL_PP(tmpzval) < -MAX_WBITS || Z_LVAL_PP(tmpzval) > MAX_WBITS) {
+				if (Z_LVAL_PP(tmpzval) < -MAX_WBITS || Z_LVAL_PP(tmpzval) > MAX_WBITS + 32) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter give for window size. (%ld)", Z_LVAL_PP(tmpzval));
 				} else {
 					windowBits = Z_LVAL_PP(tmpzval);

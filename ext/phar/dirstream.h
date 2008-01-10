@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dirstream.h,v 1.3 2008/01/09 00:58:36 cellog Exp $ */
+/* $Id: dirstream.h,v 1.4 2008/01/10 15:12:59 cellog Exp $ */
 
 BEGIN_EXTERN_C()
 int phar_wrapper_mkdir(php_stream_wrapper *wrapper, char *url_from, int mode, int options, php_stream_context *context TSRMLS_DC);
@@ -33,6 +33,8 @@ static int    phar_dir_close(php_stream *stream, int close_handle TSRMLS_DC);
 static int    phar_dir_flush(php_stream *stream TSRMLS_DC);
 static int    phar_dir_seek( php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC);
 static int    phar_dir_stat( php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC);
+#else
+php_stream* phar_wrapper_open_dir(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 #endif
 END_EXTERN_C()
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.167 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: spl_iterators.c,v 1.168 2008/01/10 10:11:21 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -860,6 +860,7 @@ int spl_dual_it_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
 		func_params[current] = (zval **) p - (arg_count-current);
 		current++;
 	}
+	arg_count = current; /* restore */
 
 	if (call_user_function_ex(EG(function_table), NULL, &func, &retval_ptr, arg_count, func_params, 0, NULL TSRMLS_CC) == SUCCESS && retval_ptr) {
 		RETURN_ZVAL(retval_ptr, 0, 1);

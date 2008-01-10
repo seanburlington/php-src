@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.262 2008/01/10 21:21:37 cellog Exp $ */
+/* $Id: phar.c,v 1.263 2008/01/10 22:05:29 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1716,7 +1716,7 @@ static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias,
 				php_stream *temp;
 
 				if (!phar_has_bz2) {
-					MAPPHAR_ALLOC_FILE("unable to decompress bzipped phar archive \"%s\" to temporary file, enable bzip2 extension in php.ini")
+					MAPPHAR_ALLOC_FAIL("unable to decompress bzipped phar archive \"%s\" to temporary file, enable bzip2 extension in php.ini")
 				}
 				/* entire file is bzip-compressed, uncompress to temporary file */
 				if (!(temp = php_stream_fopen_tmpfile())) {
@@ -3659,7 +3659,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.262 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.263 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

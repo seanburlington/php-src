@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.1 2008/01/11 07:30:02 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.2 2008/01/11 07:39:01 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -377,7 +377,6 @@ PHPAPI void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value T
 {
 	zval *stat_dev, *stat_ino, *stat_mode, *stat_nlink, *stat_uid, *stat_gid, *stat_rdev,
 		 *stat_size, *stat_atime, *stat_mtime, *stat_ctime, *stat_blksize, *stat_blocks;
-	php_stream_statbuf ssb;
 	int rmask=S_IROTH, wmask=S_IWOTH, xmask=S_IXOTH; /* access rights defaults to other */
 	char *stat_sb_names[13] = {
 		"dev", "ino", "mode", "nlink", "uid", "gid", "rdev",

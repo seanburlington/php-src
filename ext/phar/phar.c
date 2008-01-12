@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.266 2008/01/12 05:17:11 cellog Exp $ */
+/* $Id: phar.c,v 1.267 2008/01/12 16:15:16 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1672,6 +1672,10 @@ static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias,
 					MAPPHAR_ALLOC_FAIL("unable to decompress gzipped phar archive \"%s\" to temporary file, enable zlib extension in php.ini")
 				}
 				array_init(&filterparams);
+/* this is defined in zlib's zconf.h */
+#ifndef MAX_WBITS
+#define MAX_WBITS 15
+#endif
 				add_assoc_long(&filterparams, "window", MAX_WBITS + 32);
 				/* entire file is gzip-compressed, uncompress to temporary file */
 				if (!(temp = php_stream_fopen_tmpfile())) {
@@ -3302,7 +3306,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.266 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.267 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

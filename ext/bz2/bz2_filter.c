@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.3.2.2.2.7 2007/12/31 07:20:04 sebastian Exp $ */
+/* $Id: bz2_filter.c,v 1.3.2.2.2.8 2008/01/12 21:35:44 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,12 +101,7 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 			consumed += desired;
 			bin += desired;
 
-			if (!desired) {
-				flags |= PSFS_FLAG_FLUSH_CLOSE;
-				break;
-			}
-
-			if (data->strm.avail_out < data->outbuf_len) {
+			if (status == BZ_STREAM_END || data->strm.avail_out < data->outbuf_len) {
 				php_stream_bucket *out_bucket;
 				size_t bucketlen = data->outbuf_len - data->strm.avail_out;
 				out_bucket = php_stream_bucket_new(stream, estrndup(data->outbuf, bucketlen), bucketlen, 1, 0 TSRMLS_CC);
@@ -114,6 +109,13 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 				data->strm.avail_out = data->outbuf_len;
 				data->strm.next_out = data->outbuf;
 				exit_status = PSFS_PASS_ON;
+				if (status == BZ_STREAM_END) {
+					/* no more data to decompress, and nothing was spat out */
+					if (data->strm.avail_out >= data->outbuf_len) {
+						php_stream_bucket_delref(bucket TSRMLS_CC);
+					}
+					return PSFS_PASS_ON;
+				}
 			}
 		}
 		php_stream_bucket_delref(bucket TSRMLS_CC);

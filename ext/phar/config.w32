@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.18 2008/01/12 04:32:17 cellog Exp $
+// $Id: config.w32,v 1.19 2008/01/12 16:18:25 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
@@ -8,6 +8,9 @@ if (PHP_PHAR != "no") {
 	EXTENSION("phar", "tar.c zip.c stream.c dirstream.c func_interceptors.c phar.c phar_object.c phar_path_check.c");
 	if (PHP_ZIP_SHARED) {
 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_ZIP ");
+	}
+	if (PHP_PHAR_SHARED) {
+		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
 	}
 	if (PHP_ZIP != "no") {
 		ADD_EXTENSION_DEP('phar', 'zip', true);

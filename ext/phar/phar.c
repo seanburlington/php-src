@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.267 2008/01/12 16:15:16 cellog Exp $ */
+/* $Id: phar.c,v 1.268 2008/01/12 16:18:25 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1852,7 +1852,7 @@ static int php_check_dots(const char *element, int n)
 
 #define IS_BACKSLASH(c)     ((c) == '/')
 
-#ifdef PHP_WIN32
+#ifdef COMPILE_PHAR_DL
 /* stupid-ass non-extern declaration in tsrm_strtok.h breaks dumbass MS compiler */
 static inline int in_character_class(char ch, const char *delim)
 {
@@ -3306,7 +3306,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.267 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.268 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

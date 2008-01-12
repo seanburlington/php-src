@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.3 2008/01/12 02:13:51 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.4 2008/01/12 04:32:17 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -386,7 +386,7 @@ skip_phar:
 
 /* {{{ php_stat
  */
-PHPAPI void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value TSRMLS_DC)
+void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value TSRMLS_DC)
 {
 	zval *stat_dev, *stat_ino, *stat_mode, *stat_nlink, *stat_uid, *stat_gid, *stat_rdev,
 		 *stat_size, *stat_atime, *stat_mtime, *stat_ctime, *stat_blksize, *stat_blocks;
@@ -561,7 +561,7 @@ PHPAPI void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value T
 }
 /* }}} */
 
-PHPAPI void phar_file_stat(const char *filename, php_stat_len filename_length, int type, void (*orig_stat_func)(INTERNAL_FUNCTION_PARAMETERS), INTERNAL_FUNCTION_PARAMETERS)
+void phar_file_stat(const char *filename, php_stat_len filename_length, int type, void (*orig_stat_func)(INTERNAL_FUNCTION_PARAMETERS), INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (!filename_length) {
 		RETURN_FALSE;
@@ -570,11 +570,12 @@ PHPAPI void phar_file_stat(const char *filename, php_stat_len filename_length, i
 	if (!IS_ABSOLUTE_PATH(filename, filename_length)) {
 		char *arch, *entry, *fname;
 		int arch_len, entry_len, fname_len;
-		fname = zend_get_executed_filename(TSRMLS_C);
 		struct stat sb = {0};
 		phar_entry_info *data = NULL;
 		char *tmp;
 		int tmp_len;
+
+		fname = zend_get_executed_filename(TSRMLS_C);
 
 		/* we are checking for existence of a file within the relative path.  Chances are good that this is
 		   retrieving something from within the phar archive */

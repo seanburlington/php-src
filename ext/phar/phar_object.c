@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.119 2008/01/12 04:32:17 cellog Exp $ */
+/* $Id: phar_object.c,v 1.120 2008/01/12 05:17:11 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -2461,7 +2461,7 @@ PHP_METHOD(PharFileInfo, chmod)
 		zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "Cannot modify permissions for file \"%s\" in phar \"%s\", write operations are prohibited", entry_obj->ent.entry->filename, entry_obj->ent.entry->phar->fname);
 		return;
 	}
-#if HAVE_ZIP
+#if HAVE_PHAR_ZIP
 	if (entry_obj->ent.entry->is_zip) {
 		zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "Cannot modify permissions for file \"%s\" in phar \"%s\", not supported for zip-based phars", entry_obj->ent.entry->filename, entry_obj->ent.entry->phar->fname);
 		return;

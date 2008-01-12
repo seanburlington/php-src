@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.120 2008/01/12 05:17:11 cellog Exp $ */
+/* $Id: phar_object.c,v 1.121 2008/01/12 22:15:59 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -306,7 +306,11 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 			PHAR_G(cwd_len) = 0;
 			if (zend_hash_add(&EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1, (void *)&dummy, sizeof(int), NULL)==SUCCESS) {
 				if ((cwd = strrchr(entry, '/'))) {
-					if (entry[0] == '/') {
+					if (entry == cwd) {
+						/* root directory */
+						PHAR_G(cwd_len) = 0;
+						PHAR_G(cwd) = NULL;
+					} else if (entry[0] == '/') {
 						PHAR_G(cwd_len) = cwd - (entry + 1);
 						PHAR_G(cwd) = estrndup(entry + 1, PHAR_G(cwd_len));
 					} else {

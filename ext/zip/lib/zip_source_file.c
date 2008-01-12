@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_source_file.c,v 1.2 2004/11/18 16:28:13 wiz Exp $
+
   zip_source_file.c -- create data source from file
-  Copyright (C) 1999-2009 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2003, 2004 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -36,13 +38,17 @@
 #include <errno.h>
 #include <stdio.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(struct zip_source *)
+PHPZIPAPI struct zip_source *
 zip_source_file(struct zip *za, const char *fname, off_t start, off_t len)
 {
+    struct zip_source *zs;
+    FILE *fp;
+
     if (za == NULL)
 	return NULL;
 
@@ -51,5 +57,19 @@ zip_source_file(struct zip *za, const char *fname, off_t start, off_t len)
 	return NULL;
     }
 
-    return _zip_source_file_or_p(za, fname, NULL, start, len);
+    if ((fp=fopen(fname, "rb")) == NULL) {
+	_zip_error_set(&za->error, ZIP_ER_OPEN, errno);
+	return NULL;
+    }
+
+#ifdef PHP_WIN32
+	_setmode(_fileno(fp), _O_BINARY );
+#endif
+
+    if ((zs=zip_source_filep(za, fp, start, len)) == NULL) {
+	fclose(fp);
+	return NULL;
+    }
+
+    return zs;
 }

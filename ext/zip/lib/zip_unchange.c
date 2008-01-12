@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_unchange.c,v 1.19 2006/04/23 13:21:18 wiz Exp $
+
   zip_unchange.c -- undo changes to file in zip archive
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2004, 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -34,12 +36,12 @@
 
 
 #include <stdlib.h>
-
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_unchange(struct zip *za, int idx)
 {
     return _zip_unchange(za, idx, 0);
@@ -47,7 +49,7 @@ zip_unchange(struct zip *za, int idx)
 
 
 
-int
+PHPZIPAPI int
 _zip_unchange(struct zip *za, int idx, int allow_duplicates)
 {
     int i;

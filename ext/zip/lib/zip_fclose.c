@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_fclose.c,v 1.14 2005/06/09 19:57:09 dillo Exp $
+
   zip_fclose.c -- close file in zip archive
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2004, 2005 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -35,11 +37,12 @@
 
 #include <stdlib.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_fclose(struct zip_file *zf)
 {
     int i, ret;
@@ -48,6 +51,7 @@ zip_fclose(struct zip_file *zf)
 	inflateEnd(zf->zstr);
     free(zf->buffer);
     free(zf->zstr);
+
 	if (zf->za) {
 		for (i=0; i<zf->za->nfile; i++) {
 			if (zf->za->file[i] == zf) {

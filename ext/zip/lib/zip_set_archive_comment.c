@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_set_archive_comment.c,v 1.3 2006/04/24 10:34:39 dillo Exp $
+
   zip_set_archive_comment.c -- set archive comment
-  Copyright (C) 2006-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -35,11 +37,12 @@
 
 #include <stdlib.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_set_archive_comment(struct zip *za, const char *comment, int len)
 {
     char *tmpcom;
@@ -57,7 +60,7 @@ zip_set_archive_comment(struct zip *za, const char *comment, int len)
     else
 	tmpcom = NULL;
 
-    free(za->ch_comment);
+    if (za->ch_comment) free(za->ch_comment);
     za->ch_comment = tmpcom;
     za->ch_comment_len = len;
     

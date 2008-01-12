@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_memdup.c,v 1.2 2006/04/24 10:34:39 dillo Exp $
+
   zip_memdup.c -- internal zip function, "strdup" with len
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2003, 2004, 2005, 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -34,11 +36,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-void *
+PHPZIPAPI void *
 _zip_memdup(const void *mem, size_t len, struct zip_error *error)
 {
     void *ret;

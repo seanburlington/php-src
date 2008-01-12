@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_stat_index.c,v 1.10 2006/04/24 14:04:19 dillo Exp $
+
   zip_stat_index.c -- get information about file by index
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2003, 2004 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -33,11 +35,12 @@
 
 
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_stat_index(struct zip *za, int index, int flags, struct zip_stat *st)
 {
     const char *name;
@@ -64,7 +67,7 @@ zip_stat_index(struct zip *za, int index, int flags, struct zip_stat *st)
 	    _zip_error_set(&za->error, ZIP_ER_INVAL, 0);
 	    return -1;
 	}
-	
+
 	st->crc = za->cdir->entry[index].crc;
 	st->size = za->cdir->entry[index].uncomp_size;
 	st->mtime = za->cdir->entry[index].last_mod;

@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_delete.c,v 1.17 2005/06/09 19:57:09 dillo Exp $
+
   zip_delete.c -- delete file from zip archive
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2004, 2005 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -33,11 +35,12 @@
 
 
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_delete(struct zip *za, int idx)
 {
     if (idx < 0 || idx >= za->nentry) {

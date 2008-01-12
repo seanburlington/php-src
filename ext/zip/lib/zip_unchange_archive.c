@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_unchange_archive.c,v 1.1 2006/04/23 13:14:46 wiz Exp $
+
   zip_unchange_archive.c -- undo global changes to ZIP archive
-  Copyright (C) 2006-2009 Dieter Baron and Thomas Klausner
+  Copyright (C) 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -34,19 +36,17 @@
 
 
 #include <stdlib.h>
-
+#include "zip.h"
 #include "zipint.h"
 
 
 
-ZIP_EXTERN(int)
+PHPZIPAPI int
 zip_unchange_archive(struct zip *za)
 {
     free(za->ch_comment);
     za->ch_comment = NULL;
     za->ch_comment_len = -1;
-
-    za->ch_flags = za->flags;
 
     return 0;
 }

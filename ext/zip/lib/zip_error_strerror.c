@@ -1,9 +1,11 @@
 /*
+  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+
   zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999-2007 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
-  The authors can be contacted at <libzip@nih.at>
+  The authors can be contacted at <nih@giga.or.at>
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
@@ -38,11 +40,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "zip.h"
 #include "zipint.h"
 
 
 
-const char *
+PHPZIPAPI const char *
 _zip_error_strerror(struct zip_error *err)
 {
     const char *zs, *ss;
@@ -51,7 +54,7 @@ _zip_error_strerror(struct zip_error *err)
     _zip_error_fini(err);
 
     if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	sprintf(buf, "Unknown error %d", err->zip_err);
+	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
 	zs = NULL;
 	ss = buf;
     }
@@ -75,16 +78,16 @@ _zip_error_strerror(struct zip_error *err)
     if (ss == NULL)
 	return zs;
     else {
-	if ((s=(char *)malloc(strlen(ss)
-			      + (zs ? strlen(zs)+2 : 0) + 1)) == NULL)
+    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
+	if ((s=(char *)malloc(l)) == NULL)
 	    return _zip_err_str[ZIP_ER_MEMORY];
 	
-	sprintf(s, "%s%s%s",
+	snprintf(s, l, "%s%s%s",
 		(zs ? zs : ""),
 		(zs ? ": " : ""),
 		ss);
 	err->str = s;
 
-	return s;
+	return ss;
     }
 }

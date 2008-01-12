@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_set_name.c,v 1.16 2004/11/30 23:02:47 wiz Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_set_name.c -- rename helper function
+  Copyright (C) 1999, 2003, 2004 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,59 +35,43 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "zip.h"
 #include "zipint.h"
 
 
 
-PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+PHPZIPAPI int
+_zip_set_name(struct zip *za, int idx, const char *name)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
-
-    _zip_error_fini(err);
-
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
-    }
-    else {
-	zs = _zip_err_str[err->zip_err];
-	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
-
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
-	}
+    char *s;
+    int i;
+    
+    if (idx < 0 || idx >= za->nentry || name == NULL) {
+	_zip_error_set(&za->error, ZIP_ER_INVAL, 0);
+	return -1;
     }
 
-    if (ss == NULL)
-	return zs;
-    else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
+    if ((i=_zip_name_locate(za, name, 0, NULL)) != -1 && i != idx) {
+	_zip_error_set(&za->error, ZIP_ER_EXISTS, 0);
+	return -1;
     }
+
+    /* no effective name change */
+    if (i == idx)
+	return 0;
+    
+    if ((s=strdup(name)) == NULL) {
+	_zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
+	return -1;
+    }
+    
+    if (za->entry[idx].state == ZIP_ST_UNCHANGED) 
+	za->entry[idx].state = ZIP_ST_RENAMED;
+
+    free(za->entry[idx].ch_filename);
+    za->entry[idx].ch_filename = s;
+
+    return 0;
 }

@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_get_name.c,v 1.13 2005/01/20 21:00:54 dillo Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_get_name.c -- get filename for a file in zip file
+  Copyright (C) 1999, 2003, 2004, 2005 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,59 +35,40 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "zip.h"
 #include "zipint.h"
 
 
 
 PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+zip_get_name(struct zip *za, int idx, int flags)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
+    return _zip_get_name(za, idx, flags, &za->error);
+}
 
-    _zip_error_fini(err);
+
 
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
+PHPZIPAPI const char *
+_zip_get_name(struct zip *za, int idx, int flags, struct zip_error *error)
+{
+    if (idx < 0 || idx >= za->nentry) {
+	_zip_error_set(error, ZIP_ER_INVAL, 0);
+	return NULL;
     }
-    else {
-	zs = _zip_err_str[err->zip_err];
-	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
 
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
+    if ((flags & ZIP_FL_UNCHANGED) == 0) {
+	if (za->entry[idx].state == ZIP_ST_DELETED) {
+	    _zip_error_set(error, ZIP_ER_DELETED, 0);
+	    return NULL;
 	}
+	if (za->entry[idx].ch_filename)
+	    return za->entry[idx].ch_filename;
     }
 
-    if (ss == NULL)
-	return zs;
-    else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
+    if (za->cdir == NULL || idx >= za->cdir->nentry) {
+	_zip_error_set(error, ZIP_ER_INVAL, 0);
+	return NULL;
     }
+    
+    return za->cdir->entry[idx].filename;
 }

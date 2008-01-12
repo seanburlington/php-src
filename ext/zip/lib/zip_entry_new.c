@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_entry_new.c,v 1.2 2006/04/09 19:05:47 wiz Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_entry_new.c -- create and init struct zip_entry
+  Copyright (C) 1999, 2003, 2004, 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,59 +35,47 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "zip.h"
 #include "zipint.h"
 
 
 
-PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+PHPZIPAPI struct zip_entry *
+_zip_entry_new(struct zip *za)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
-
-    _zip_error_fini(err);
-
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
-    }
-    else {
-	zs = _zip_err_str[err->zip_err];
-	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
-
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
+    struct zip_entry *ze;
+    if (!za) {
+	ze = (struct zip_entry *)malloc(sizeof(struct zip_entry));
+	if (!ze) {
+	    _zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
+	    return NULL;
 	}
     }
-
-    if (ss == NULL)
-	return zs;
     else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
+	if (za->nentry >= za->nentry_alloc-1) {
+	    za->nentry_alloc += 16;
+	    za->entry = (struct zip_entry *)realloc(za->entry,
+						    sizeof(struct zip_entry)
+						    * za->nentry_alloc);
+	    if (!za->entry) {
+		_zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
+		return NULL;
+	    }
+	}
+	ze = za->entry+za->nentry;
     }
+
+    ze->state = ZIP_ST_UNCHANGED;
+
+    ze->ch_filename = NULL;
+    ze->ch_comment = NULL;
+    ze->ch_comment_len = -1;
+    ze->source = NULL;
+
+    if (za)
+	za->nentry++;
+
+    return ze;
 }

@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_source_function.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_source_function.c -- create zip data source from callback function
+  Copyright (C) 1999, 2003, 2004 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,59 +35,28 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "zip.h"
 #include "zipint.h"
 
 
 
-PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+PHPZIPAPI struct zip_source *
+zip_source_function(struct zip *za, zip_source_callback zcb, void *ud)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
+    struct zip_source *zs;
 
-    _zip_error_fini(err);
+    if (za == NULL)
+	return NULL;
 
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
-    }
-    else {
-	zs = _zip_err_str[err->zip_err];
-	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
-
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
-	}
+    if ((zs=(struct zip_source *)malloc(sizeof(*zs))) == NULL) {
+	_zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
+	return NULL;
     }
 
-    if (ss == NULL)
-	return zs;
-    else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
-    }
+    zs->f = zcb;
+    zs->ud = ud;
+    
+    return zs;
 }

@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_name_locate.c,v 1.19 2005/06/09 19:57:10 dillo Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_name_locate.c -- get index by name
+  Copyright (C) 1999, 2003, 2004, 2005 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,9 +35,6 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "zip.h"
@@ -45,49 +42,53 @@
 
 
 
-PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+PHPZIPAPI int
+zip_name_locate(struct zip *za, const char *fname, int flags)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
+    return _zip_name_locate(za, fname, flags, &za->error);
+}
 
-    _zip_error_fini(err);
+
 
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
+PHPZIPAPI int
+_zip_name_locate(struct zip *za, const char *fname, int flags,
+		 struct zip_error *error)
+{
+    int (*cmp)(const char *, const char *);
+    const char *fn, *p;
+    int i, n;
+
+    if (fname == NULL) {
+	_zip_error_set(error, ZIP_ER_INVAL, 0);
+	return -1;
     }
-    else {
-	zs = _zip_err_str[err->zip_err];
+#ifdef PHP_WIN32
+	cmp = (flags & ZIP_FL_NOCASE) ? stricmp : strcmp;
+#else
+	cmp = (flags & ZIP_FL_NOCASE) ? strcasecmp : strcmp;
+#endif
+
+    n = (flags & ZIP_FL_UNCHANGED) ? za->cdir->nentry : za->nentry;
+    for (i=0; i<n; i++) {
+	if (flags & ZIP_FL_UNCHANGED)
+	    fn = za->cdir->entry[i].filename;
+	else
+	    fn = _zip_get_name(za, i, flags, error);
+
+	/* newly added (partially filled) entry */
+	if (fn == NULL)
+	    continue;
 	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
-
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
+	if (flags & ZIP_FL_NODIR) {
+	    p = strrchr(fn, '/');
+	    if (p)
+		fn = p+1;
 	}
+
+	if (cmp(fname, fn) == 0)
+	    return i;
     }
 
-    if (ss == NULL)
-	return zs;
-    else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
-    }
+    _zip_error_set(error, ZIP_ER_NOENT, 0);
+    return -1;
 }

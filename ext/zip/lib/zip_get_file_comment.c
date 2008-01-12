@@ -1,8 +1,8 @@
 /*
-  $NiH: zip_error_strerror.c,v 1.4 2006/02/21 09:41:00 dillo Exp $
+  $NiH: zip_get_file_comment.c,v 1.2 2006/04/23 13:06:28 wiz Exp $
 
-  zip_error_sterror.c -- get string representation of struct zip_error
-  Copyright (C) 1999, 2003 Dieter Baron and Thomas Klausner
+  zip_get_file_comment.c -- get file comment
+  Copyright (C) 2006 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <nih@giga.or.at>
@@ -35,59 +35,27 @@
 
 
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "zip.h"
 #include "zipint.h"
 
 
 
 PHPZIPAPI const char *
-_zip_error_strerror(struct zip_error *err)
+zip_get_file_comment(struct zip *za, int idx, int *lenp, int flags)
 {
-    const char *zs, *ss;
-    char buf[128], *s;
-
-    _zip_error_fini(err);
-
-    if (err->zip_err < 0 || err->zip_err >= _zip_nerr_str) {
-	snprintf(buf, sizeof(buf), "Unknown error %d", err->zip_err);
-	zs = NULL;
-	ss = buf;
-    }
-    else {
-	zs = _zip_err_str[err->zip_err];
-	
-	switch (_zip_err_type[err->zip_err]) {
-	case ZIP_ET_SYS:
-	    ss = strerror(err->sys_err);
-	    break;
-
-	case ZIP_ET_ZLIB:
-	    ss = zError(err->sys_err);
-	    break;
-
-	default:
-	    ss = NULL;
-	}
+    if (idx < 0 || idx >= za->nentry) {
+	_zip_error_set(&za->error, ZIP_ER_INVAL, 0);
+	return NULL;
     }
 
-    if (ss == NULL)
-	return zs;
-    else {
-    int l = strlen(ss) + (zs ? strlen(zs)+2 : 0) + 1;
-	if ((s=(char *)malloc(l)) == NULL)
-	    return _zip_err_str[ZIP_ER_MEMORY];
-	
-	snprintf(s, l, "%s%s%s",
-		(zs ? zs : ""),
-		(zs ? ": " : ""),
-		ss);
-	err->str = s;
-
-	return ss;
+    if ((flags & ZIP_FL_UNCHANGED)
+	|| (za->entry[idx].ch_comment_len == -1)) {
+	if (lenp != NULL)
+	    *lenp = za->cdir->entry[idx].comment_len;
+	return za->cdir->entry[idx].comment;
     }
+    
+    if (lenp != NULL)
+	*lenp = za->entry[idx].ch_comment_len;
+    return za->entry[idx].ch_comment;
 }

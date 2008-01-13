@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.227 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.228 2008/01/13 14:57:53 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1747,7 +1747,9 @@ PHPAPI void php_pcre_split_impl(pcre_cache_entry *pce, zend_uchar utype, char *s
 	}
 
 
-	if (!no_empty || start_offset != subject_len)
+	start_offset = last_match - subject; /* the offset might have been incremented, but without further successful matches */
+
+	if (!no_empty || start_offset < subject_len)
 	{
 		if (offset_capture) {
 			/* Add the last (match, offset) pair to the return value */

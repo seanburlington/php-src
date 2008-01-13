@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.11.2.3.2.2 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: php_date.h,v 1.17.2.11.2.3.2.3 2008/01/13 15:15:48 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -49,7 +49,10 @@ PHP_FUNCTION(getdate);
 /* Advanced Interface */
 PHP_METHOD(DateTime, __construct);
 PHP_FUNCTION(date_create);
+PHP_FUNCTION(date_create_from_format);
 PHP_FUNCTION(date_parse);
+PHP_FUNCTION(date_parse_from_format);
+PHP_FUNCTION(date_get_last_errors);
 PHP_FUNCTION(date_format);
 PHP_FUNCTION(date_modify);
 PHP_FUNCTION(date_timezone_get);
@@ -89,6 +92,7 @@ ZEND_BEGIN_MODULE_GLOBALS(date)
 	char      *default_timezone;
 	char      *timezone;
 	HashTable  tzcache;
+	timelib_error_container *last_errors;
 ZEND_END_MODULE_GLOBALS(date)
 
 #ifdef ZTS

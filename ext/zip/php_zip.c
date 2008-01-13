@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.5 2008/01/13 06:02:30 cellog Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.6 2008/01/13 06:22:27 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,9 +274,9 @@ static char * php_zipobj_get_zip_comment(struct zip *za, int *len TSRMLS_DC) /* 
 
 /* {{{ zend_function_entry */
 static const zend_function_entry zip_functions[] = {
-	PHP_RAW_NAMED_FE("zip_open", zif_zip_open, NULL)
-	PHP_RAW_NAMED_FE("zip_close", zif_zip_close, NULL)
-	PHP_RAW_NAMED_FE("zip_read", zif_zip_read, NULL)
+	ZEND_RAW_FENTRY("zip_open", zif_zip_open, NULL, 0)
+	ZEND_RAW_FENTRY("zip_close", zif_zip_close, NULL, 0)
+	ZEND_RAW_FENTRY("zip_read", zif_zip_read, NULL, 0)
 	PHP_FE(zip_entry_open,		NULL)
 	PHP_FE(zip_entry_close,		NULL)
 	PHP_FE(zip_entry_read,		NULL)
@@ -2111,7 +2111,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.5 2008/01/13 06:02:30 cellog Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.6 2008/01/13 06:22:27 cellog Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.7 2008/01/13 15:15:48 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.8 2008/01/13 18:42:19 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1646,7 +1646,7 @@ static zval * date_instantiate(zend_class_entry *pce, zval *object TSRMLS_DC)
 
 /* Helper function used to store the latest found warnings and errors while
  * parsing, from either strtotime or parse_from_format. */
-static void update_errors_warnings(timelib_error_container *last_errors)
+static void update_errors_warnings(timelib_error_container *last_errors TSRMLS_DC)
 {
 	if (DATEG(last_errors)) {
 		timelib_error_container_dtor(DATEG(last_errors));
@@ -1675,7 +1675,7 @@ static void date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int
 	}
 
 	// update last errors and warnings
-	update_errors_warnings(err);
+	update_errors_warnings(err TSRMLS_CC);
 
 	if (timezone_object) {
 		php_timezone_obj *tzobj;

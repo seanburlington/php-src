@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1.2.1.2.1 2008/01/12 03:48:38 cellog Exp $
+// $Id: config.w32,v 1.1.2.1.2.2 2008/01/14 03:16:08 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("zip", "ZIP support", "no");
@@ -31,9 +31,7 @@ if (PHP_ZIP != "no") {
 
 		AC_DEFINE('HAVE_ZLIB', 1);
 		AC_DEFINE('HAVE_ZIP', 1);
-		if (PHP_ZIP_SHARED) {
-			ADD_FLAG("CFLAGS_ZIP", "/D PHP_ZIP_EXPORTS ");
-		}
+		ADD_FLAG("CFLAGS_ZIP", "/D PHP_ZIP_EXPORTS ");
 	} else {
 		WARNING("zip not enabled; libraries and headers not found");
 	}

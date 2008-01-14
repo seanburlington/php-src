@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.434 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: array.c,v 1.435 2008/01/14 22:08:00 shire Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1061,7 +1061,7 @@ static int php_array_walk(HashTable *target_hash, zval **userdata, int recursive
 			zend_fcall_info orig_array_walk_fci;
 			zend_fcall_info_cache orig_array_walk_fci_cache;
 
-			SEPARATE_ZVAL_TO_MAKE_IS_REF(args[0]);
+			SEPARATE_ZVAL_IF_NOT_REF(args[0]);
 			thash = HASH_OF(*(args[0]));
 			if (thash->nApplyCount > 1) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");

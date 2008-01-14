@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.54 2008/01/13 06:24:27 cellog Exp $ */
+/* $Id: php_zip.c,v 1.55 2008/01/14 08:17:55 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -943,7 +943,7 @@ static PHP_NAMED_FUNCTION(zif_zip_entry_filesize)
 
 /* {{{ proto string zip_entry_compressionmethod(resource zip_entry) U
    Return a string containing the compression method used on a particular entry */
-static PHP_FUNCTION(zif_zip_entry_compressionmethod)
+static PHP_NAMED_FUNCTION(zif_zip_entry_compressionmethod)
 {
 	php_zip_entry_get_info(INTERNAL_FUNCTION_PARAM_PASSTHRU, 3);
 }
@@ -2205,7 +2205,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.54 2008/01/13 06:24:27 cellog Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.55 2008/01/14 08:17:55 tony2001 Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

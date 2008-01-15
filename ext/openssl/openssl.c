@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.5 2008/01/09 16:47:25 rrichards Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.6 2008/01/15 15:12:47 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3716,6 +3716,7 @@ PHP_FUNCTION(openssl_sign)
 		efree(sigbuf);
 		RETVAL_FALSE;
 	}
+	EVP_MD_CTX_cleanup(&md_ctx);
 	if (keyresource == -1) {
 		EVP_PKEY_free(pkey);
 	}
@@ -3766,6 +3767,7 @@ PHP_FUNCTION(openssl_verify)
 	EVP_VerifyInit   (&md_ctx, mdtype);
 	EVP_VerifyUpdate (&md_ctx, data, data_len);
 	err = EVP_VerifyFinal (&md_ctx, (unsigned char *)signature, signature_len, pkey);
+	EVP_MD_CTX_cleanup(&md_ctx);
 
 	if (keyresource == -1) {
 		EVP_PKEY_free(pkey);

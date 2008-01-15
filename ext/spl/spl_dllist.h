@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2007 The PHP Group                                |
+   | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_dllist.h,v 1.1.2.2 2008/01/15 09:38:15 colder Exp $ */
+/* $Id: spl_dllist.h,v 1.1.2.3 2008/01/15 09:44:07 colder Exp $ */
 
 #ifndef SPL_DLLIST_H
 #define SPL_DLLIST_H

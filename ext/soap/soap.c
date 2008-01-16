@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.36 2008/01/09 16:45:28 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.37 2008/01/16 06:14:45 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -404,7 +404,7 @@ ZEND_INI_MH(OnUpdateCacheMode)
 	char *base = (char *) ts_resource(*((int *) mh_arg2));
 #endif
 
-	p = (long*) (base+(size_t) mh_arg1);
+	p = (char*) (base+(size_t) mh_arg1);
 
 	*p = (char)atoi(new_value);
 

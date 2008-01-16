@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.85 2007/12/31 07:12:19 sebastian Exp $ */
+/* $Id: sapi_apache2.c,v 1.86 2008/01/16 15:50:53 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -134,8 +134,6 @@ php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		ctx->r->proto_num = 1000 + (sline[7]-'0');
 		if ((sline[7]-'0') == 0) {
 			apr_table_set(ctx->r->subprocess_env, "force-response-1.0", "true");
-		} else {
-			apr_table_set(ctx->r->subprocess_env, "force-response-1.1", "true");
 		}
 	}
 	

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.289 2007/12/31 07:12:14 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.290 2008/01/16 14:19:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -519,7 +519,8 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 			zend_hash_internal_pointer_reset_ex(&ce->function_table, &pos);
 
 			while (zend_hash_get_current_data_ex(&ce->function_table, (void **) &mptr, &pos) == SUCCESS) {
-				if (!(mptr->common.fn_flags & ZEND_ACC_STATIC)) {
+				if ((mptr->common.fn_flags & ZEND_ACC_STATIC) == 0 &&
+					((mptr->common.fn_flags & ZEND_ACC_PRIVATE) == 0 || mptr->common.scope == ce)) {
 					zstr key;
 					uint key_len;
 					ulong num_index;
@@ -541,6 +542,9 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 				zend_hash_move_forward_ex(&ce->function_table, &pos);
 			}
 			string_printf(str, "\n%s  - Methods [%d] {", indent, count);
+			if (!count) {
+				string_printf(str, "\n");
+			}
 			string_append(str, &dyn);
 			string_free(&dyn);
 		} else {
@@ -5028,7 +5032,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.289 2007/12/31 07:12:14 sebastian Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.290 2008/01/16 14:19:07 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

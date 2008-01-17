@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.90 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: dns.c,v 1.91 2008/01/17 14:12:36 iliaa Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -654,7 +654,7 @@ PHP_FUNCTION(dns_get_record)
 	char *hostname;
 	int hostname_len;
 	long type_param = PHP_DNS_ANY;
-	zval *authns, *addtl;
+	zval *authns = NULL, *addtl = NULL;
 	int addtl_recs = 0;
 	int type_to_fetch;
 	struct __res_state res;

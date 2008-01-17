@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.63 2008/01/16 07:24:38 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.64 2008/01/17 03:19:29 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -64,9 +64,6 @@
 #include "ext/spl/spl_engine.h"
 #include "ext/spl/spl_exceptions.h"
 #include "ext/spl/spl_iterators.h"
-#endif
-#if HAVE_GNUPGLIB
-#include "ext/gnupg/php_gnupg.h"
 #endif
 #include "php_phar.h"
 #ifdef HAVE_STDINT_H
@@ -172,7 +169,6 @@ ZEND_END_MODULE_GLOBALS(phar)
 ZEND_EXTERN_MODULE_GLOBALS(phar)
 
 int phar_has_bz2;
-int phar_has_gnupg;
 int phar_has_zlib;
 int phar_has_zip;
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.22 2008/01/17 02:03:58 cellog Exp $
+dnl $Id: config.m4,v 1.23 2008/01/17 03:19:29 cellog Exp $
 dnl config.m4 for extension phar
 
 PHP_ARG_ENABLE(phar, for phar support/phar zlib support,
@@ -13,6 +13,5 @@ if test "$PHP_PHAR" != "no"; then
   PHP_ADD_EXTENSION_DEP(phar, zlib, true)
   PHP_ADD_EXTENSION_DEP(phar, bz2, true)
   PHP_ADD_EXTENSION_DEP(phar, spl, true)
-  PHP_ADD_EXTENSION_DEP(phar, gnupg, true)
   PHP_ADD_MAKEFILE_FRAGMENT
 fi

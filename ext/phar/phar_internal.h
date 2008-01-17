@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.64 2008/01/17 03:19:29 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.65 2008/01/17 05:52:17 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -171,6 +171,7 @@ ZEND_EXTERN_MODULE_GLOBALS(phar)
 int phar_has_bz2;
 int phar_has_zlib;
 int phar_has_zip;
+char *phar_zip_ver;
 
 #ifdef ZTS
 #	include "TSRM.h"

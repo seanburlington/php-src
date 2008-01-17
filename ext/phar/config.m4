@@ -1,7 +1,7 @@
-dnl $Id: config.m4,v 1.24 2008/01/17 03:48:28 cellog Exp $
+dnl $Id: config.m4,v 1.25 2008/01/17 03:59:06 cellog Exp $
 dnl config.m4 for extension phar
 
-PHP_ARG_ENABLE(phar, for phar support/phar zlib support,
+PHP_ARG_ENABLE(phar, for phar archive support,
 [  --enable-phar           Enable phar support])
 
 if test "$PHP_PHAR" != "no"; then

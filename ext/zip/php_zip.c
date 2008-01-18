@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.6 2008/01/13 06:22:27 cellog Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.7 2008/01/18 00:20:56 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -654,7 +654,7 @@ zend_module_entry zip_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(zip),
-	"1.4.0",
+	"2.0.0",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -2111,7 +2111,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.6 2008/01/13 06:22:27 cellog Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.7 2008/01/18 00:20:56 cellog Exp $");
 	php_info_print_table_row(2, "Zip version", "2.0.0");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

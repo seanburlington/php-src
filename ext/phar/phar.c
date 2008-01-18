@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.276 2008/01/18 00:11:36 cellog Exp $ */
+/* $Id: phar.c,v 1.277 2008/01/18 05:42:15 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2343,7 +2343,8 @@ static int phar_flush_clean_deleted_apply(void *data TSRMLS_DC) /* {{{ */
  */
 int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error TSRMLS_DC) /* {{{ */
 {
-	static const char newstub[] = "<?php __HALT_COMPILER(); ?>\r\n";
+#include "stub.h"
+/*	static const char newstub[] = "<?php __HALT_COMPILER(); ?>\r\n"; */
 	phar_entry_info *entry, *newentry;
 	int halt_offset, restore_alias_len, global_flags = 0, closeoldfile;
 	char *buf, *pos;
@@ -3199,12 +3200,12 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 	phar_has_bz2 = zend_hash_exists(&module_registry, "bz2", sizeof("bz2"));
 	phar_has_zlib = zend_hash_exists(&module_registry, "zlib", sizeof("zlib"));
 	if (SUCCESS == zend_hash_find(&module_registry, "zip", sizeof("zip"), (void **) &test)) {
-		if (strlen(test->version) == sizeof("1.8.11")-1 && !strncmp(test->version, "1.8.11", sizeof("1.8.11")-1)) {
+		if (php_version_compare((const char *) test->version, "1.8.11") != -1) {
 			phar_has_zip = 1;
 		} else {
 			phar_has_zip = 0;
 		}
-		phar_zip_ver = test->version;
+		phar_zip_ver = (char *) test->version;
 	} else {
 		phar_has_zip = 0;
 		phar_zip_ver = NULL;
@@ -3285,7 +3286,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.276 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.277 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

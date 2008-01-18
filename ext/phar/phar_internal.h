@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.65 2008/01/17 05:52:17 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.66 2008/01/18 05:42:15 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -54,6 +54,7 @@
 #include "ext/standard/sha1.h"
 #include "ext/standard/php_var.h"
 #include "ext/standard/php_smart_str.h"
+#include "ext/standard/php_versioning.h"
 #ifndef PHP_WIN32
 #include "TSRM/tsrm_strtok_r.h"
 #endif

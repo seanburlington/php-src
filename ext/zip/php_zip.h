@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.10.2.3.2.1 2007/12/31 07:17:16 sebastian Exp $ */
+/* $Id: php_zip.h,v 1.10.2.3.2.2 2008/01/18 01:11:26 pajoye Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -29,6 +29,8 @@ extern zend_module_entry zip_module_entry;
 #endif
 
 #include "lib/zip.h"
+
+#define PHP_ZIP_VERSION_STRING "1.8.11"
 
 /* {{{ OPENBASEDIR_CHECKPATH(filename) */
 #if (PHP_MAJOR_VERSION < 6)

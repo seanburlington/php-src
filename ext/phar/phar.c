@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.275 2008/01/17 05:52:17 cellog Exp $ */
+/* $Id: phar.c,v 1.276 2008/01/18 00:11:36 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3285,7 +3285,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.275 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.276 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP
@@ -3332,7 +3332,11 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
  */
 static zend_module_dep phar_deps[] = {
 #if HAVE_PHAR_ZIP
+# ifdef PHP_WIN32
+	ZEND_MOD_REQUIRED("zip")
+# else
 	ZEND_MOD_OPTIONAL("zip")
+# endif
 #endif
 	ZEND_MOD_OPTIONAL("zlib")
 	ZEND_MOD_OPTIONAL("bz2")

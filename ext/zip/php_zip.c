@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.42 2008/01/18 00:31:23 cellog Exp $ */
+/* $Id: php_zip.c,v 1.1.2.43 2008/01/18 00:51:38 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2111,9 +2111,9 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.42 2008/01/18 00:31:23 cellog Exp $");
-	php_info_print_table_row(2, "Zip version", "2.0.0");
-	php_info_print_table_row(2, "Libzip version", "0.7.1");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.43 2008/01/18 00:51:38 pajoye Exp $");
+	php_info_print_table_row(2, "Zip version", PHP_ZIP_VERSION_STRING);
+	php_info_print_table_row(2, "Libzip version", "0.8.0-compatible");
 
 	php_info_print_table_end();
 }

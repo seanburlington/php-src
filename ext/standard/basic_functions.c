@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.15 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.16 2008/01/19 19:27:21 davidc Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2624,6 +2624,11 @@ ZEND_BEGIN_ARG_INFO(arginfo_ucfirst, 0)
 ZEND_END_ARG_INFO()
 
 static
+ZEND_BEGIN_ARG_INFO(arginfo_lcfirst, 0)
+	ZEND_ARG_INFO(0, str)
+ZEND_END_ARG_INFO()
+	
+static
 ZEND_BEGIN_ARG_INFO(arginfo_ucwords, 0)
 	ZEND_ARG_INFO(0, str)
 ZEND_END_ARG_INFO()
@@ -3148,6 +3153,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(substr_replace,													arginfo_substr_replace)
 	PHP_FE(quotemeta,														arginfo_quotemeta)
 	PHP_FE(ucfirst,															arginfo_ucfirst)
+	PHP_FE(lcfirst,															arginfo_lcfirst)
 	PHP_FE(ucwords,															arginfo_ucwords)
 	PHP_FE(strtr,															arginfo_strtr)
 	PHP_FE(addslashes,														arginfo_addslashes)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.87.2.2.2.3.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: php_string.h,v 1.87.2.2.2.3.2.2 2008/01/19 19:27:21 davidc Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -53,6 +53,7 @@ PHP_FUNCTION(strrchr);
 PHP_FUNCTION(substr);
 PHP_FUNCTION(quotemeta);
 PHP_FUNCTION(ucfirst);
+PHP_FUNCTION(lcfirst);
 PHP_FUNCTION(ucwords);
 PHP_FUNCTION(strtr);
 PHP_FUNCTION(strrev);

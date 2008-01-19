@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.10 2008/01/16 08:34:33 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.11 2008/01/19 19:27:21 davidc Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2643,6 +2643,36 @@ PHP_FUNCTION(ucfirst)
 
 	ZVAL_STRINGL(return_value, str, str_len, 1);
 	php_ucfirst(Z_STRVAL_P(return_value));
+}
+/* }}} */
+
+/* {{{
+   Lowercase the first character of the word in a native string */
+static void php_lcfirst(char *str)
+{
+	register char *r;
+	r = str;
+	*r = tolower((unsigned char) *r);
+}
+/* }}} */
+
+/* {{{ proto string ucfirst(string str)
+   Make a string's first character lowercase */
+PHP_FUNCTION(lcfirst)
+{
+	char  *str;
+	int   str_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
+		return;
+	}
+
+	if (!str_len) {
+		RETURN_EMPTY_STRING();
+	}
+
+	ZVAL_STRINGL(return_value, str, str_len, 1);
+	php_lcfirst(Z_STRVAL_P(return_value));
 }
 /* }}} */
 

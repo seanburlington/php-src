@@ -1,10 +1,10 @@
-// $Id: config.w32,v 1.4 2007/10/23 10:44:25 andrey Exp $
+// $Id: config.w32,v 1.5 2008/01/19 18:56:19 andrey Exp $
 // vim:ft=javascript
 
 ARG_WITH("mysql", "MySQL support", "no");
 
 if (PHP_MYSQL != "no") {
-	if (PHP_MYSQLI != "mysqlnd") {
+	if (PHP_MYSQL != "mysqlnd") {
 		if (CHECK_LIB("libmysql.lib", "mysql", PHP_MYSQL) &&
 			CHECK_HEADER_ADD_INCLUDE("mysql.h", "CFLAGS_MYSQL",
 			PHP_MYSQL + "\\include;" + PHP_PHP_BUILD + "\\include\\mysql;" + PHP_MYSQL)) {

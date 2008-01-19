@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.278 2008/01/19 04:26:21 cellog Exp $ */
+/* $Id: phar.c,v 1.279 2008/01/19 18:30:28 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1331,7 +1331,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 		if (buffer + entry.filename_len + 20 > endbuffer) {
 			MAPPHAR_FAIL("internal corruption of phar \"%s\" (truncated manifest entry)");
 		}
-		if (buffer[entry.filename_len - 1] == '/') {
+		if ((manifest_ver & PHAR_API_VER_MASK) >= PHAR_API_MIN_DIR && buffer[entry.filename_len - 1] == '/') {
 			entry.is_dir = 1;
 			entry.filename_len--;
 			entry.flags |= PHAR_ENT_PERM_DEF_DIR;
@@ -2380,7 +2380,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 	char *newstub;
 	phar_entry_info *entry, *newentry;
 	int halt_offset, restore_alias_len, global_flags = 0, closeoldfile;
-	char *buf, *pos;
+	char *buf, *pos, has_dirs = 0;
 	char manifest[18], entry_buffer[24];
 	off_t manifest_ftell;
 	long offset;
@@ -2561,6 +2561,10 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 		/* after excluding deleted files, calculate manifest size in bytes and number of entries */
 		++new_manifest_count;
 
+		if (entry->is_dir) {
+			/* we use this to calculate API version, 1.1.1 is used for phars with directories */
+			has_dirs = 1;
+		}
 		if (entry->metadata) {
 			if (entry->metadata_str.c) {
 				smart_str_free(&entry->metadata_str);
@@ -2701,8 +2705,13 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 	manifest_len = offset + phar->alias_len + sizeof(manifest) + main_metadata_str.len;
 	phar_set_32(manifest, manifest_len);
 	phar_set_32(manifest+4, new_manifest_count);
-	*(manifest + 8) = (unsigned char) (((PHAR_API_VERSION) >> 8) & 0xFF);
-	*(manifest + 9) = (unsigned char) (((PHAR_API_VERSION) & 0xF0));
+	if (has_dirs) {
+		*(manifest + 8) = (unsigned char) (((PHAR_API_VERSION) >> 8) & 0xFF);
+		*(manifest + 9) = (unsigned char) (((PHAR_API_VERSION) & 0xF0));
+	} else {
+		*(manifest + 8) = (unsigned char) (((PHAR_API_VERSION_NODIR) >> 8) & 0xFF);
+		*(manifest + 9) = (unsigned char) (((PHAR_API_VERSION_NODIR) & 0xF0));
+	}
 	phar_set_32(manifest+10, global_flags);
 	phar_set_32(manifest+14, phar->alias_len);
 
@@ -3321,7 +3330,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.278 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.279 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 #if HAVE_PHAR_ZIP

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.7 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.8 2008/01/20 14:10:44 bjori Exp $ */
 
 /* TODO:
  *
@@ -646,7 +646,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s!s!s!ll", &host_and_port, &host_len,
 									&user, &user_len, &passwd, &passwd_len, 
 									&new_link, &client_flags)==FAILURE) {
-			WRONG_PARAM_COUNT;
+			return;
 		}
 
 		if (!host_and_port) {

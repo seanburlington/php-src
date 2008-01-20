@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.248 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.249 2008/01/20 14:10:16 bjori Exp $ */
 
 /* TODO:
  *
@@ -646,7 +646,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s&s&s&ll", &host_and_port, &host_len, UG(utf8_conv),
 									&user, &user_len, UG(utf8_conv), &passwd, &passwd_len, UG(utf8_conv),
 									&new_link, &client_flags)==FAILURE) {
-			WRONG_PARAM_COUNT;
+			return;
 		}
 
 		/* mysql_pconnect does not support new_link parameter */

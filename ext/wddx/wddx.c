@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.17.2.3 2007/12/31 07:17:16 sebastian Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.17.2.4 2008/01/20 15:33:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -407,10 +407,7 @@ static void php_wddx_serialize_number(wddx_packet *packet, zval *var)
  */
 static void php_wddx_serialize_boolean(wddx_packet *packet, zval *var)
 {
-	char tmp_buf[WDDX_BUF_LEN];
-
-	snprintf(tmp_buf, sizeof(tmp_buf), WDDX_BOOLEAN, Z_LVAL_P(var) ? "true" : "false");
-	php_wddx_add_chunk(packet, tmp_buf);
+	php_wddx_add_chunk(packet, Z_LVAL_P(var) ? WDDX_BOOLEAN_TRUE : WDDX_BOOLEAN_FALSE);
 }
 /* }}} */
 

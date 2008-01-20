@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.29 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_wddx_api.h,v 1.30 2008/01/20 15:33:42 iliaa Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
@@ -27,7 +27,8 @@
 #define WDDX_ARRAY_E			"</array>"
 #define WDDX_BINARY_S			"<binary>"
 #define WDDX_BINARY_E			"</binary>"
-#define WDDX_BOOLEAN			"<boolean value='%s'/>"
+#define WDDX_BOOLEAN_TRUE		"<boolean value='true'/>"
+#define WDDX_BOOLEAN_FALSE		"<boolean value='false'/>"
 #define WDDX_CHAR				"<char code='%02X'/>"
 #define WDDX_COMMENT_S			"<comment>"
 #define WDDX_COMMENT_E			"</comment>"

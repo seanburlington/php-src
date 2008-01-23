@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.16.2.1.2.1.2.1 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: php_ibase_includes.h,v 1.16.2.1.2.1.2.2 2008/01/23 01:22:24 iliaa Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -30,7 +30,7 @@
 #endif
 
 #ifndef METADATALENGTH
-#define METADATALENGTH 32
+#define METADATALENGTH 68
 #endif
 
 #define RESET_ERRMSG do { IBG(errmsg)[0] = '\0'; IBG(sql_code) = 0; } while (0)

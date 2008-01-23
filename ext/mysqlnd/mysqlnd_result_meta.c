@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result_meta.c,v 1.4 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: mysqlnd_result_meta.c,v 1.5 2008/01/23 19:09:33 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -141,7 +141,7 @@ static enum_func_status
 MYSQLND_METHOD(mysqlnd_res_meta, read_metadata)(MYSQLND_RES_METADATA * const meta,
 												MYSQLND *conn TSRMLS_DC)
 {
-	int i = 0;
+	unsigned int i = 0;
 	php_mysql_packet_res_field field_packet;
 
 	DBG_ENTER("mysqlnd_res_meta::read_metadata");

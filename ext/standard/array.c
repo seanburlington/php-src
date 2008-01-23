@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.14 2008/01/14 22:09:52 shire Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.15 2008/01/23 12:09:52 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2197,8 +2197,18 @@ PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS
 					SEPARATE_ZVAL(dest_entry);
 					SEPARATE_ZVAL(src_entry);
 
-					convert_to_array_ex(dest_entry);
-					convert_to_array_ex(src_entry);
+					if (Z_TYPE_PP(dest_entry) == IS_NULL) {
+						convert_to_array_ex(dest_entry);
+						add_next_index_null(*dest_entry);
+					} else {
+						convert_to_array_ex(dest_entry);
+					}
+					if (Z_TYPE_PP(src_entry) == IS_NULL) {
+						convert_to_array_ex(src_entry);
+						add_next_index_null(*src_entry);
+					} else {
+						convert_to_array_ex(src_entry);
+					}
 					if (thash) {
 						thash->nApplyCount++;
 					}

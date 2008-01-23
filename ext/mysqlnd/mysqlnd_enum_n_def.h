@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_enum_n_def.h,v 1.2.2.4 2008/01/08 13:11:55 andrey Exp $ */
+/* $Id: mysqlnd_enum_n_def.h,v 1.2.2.5 2008/01/23 19:11:28 andrey Exp $ */
 #ifndef MYSQLND_ENUM_N_DEF_H
 #define MYSQLND_ENUM_N_DEF_H
 

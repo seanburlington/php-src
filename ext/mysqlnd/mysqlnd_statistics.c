@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.c,v 1.2.2.3 2007/12/31 07:17:11 sebastian Exp $ */
+/* $Id: mysqlnd_statistics.c,v 1.2.2.4 2008/01/23 19:11:28 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"

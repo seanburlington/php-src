@@ -1,6 +1,9 @@
-// $Id: config.w32,v 1.4.2.2 2007/10/05 21:23:56 andrey Exp $
+// $Id: config.w32,v 1.4.2.3 2008/01/23 19:11:28 andrey Exp $
 // vim:ft=javascript
 
+ARG_WITH("mysqlnd", "MySQL-nd support", "no");
+
+if (PHP_MYSQLND != "no") {
 mysqld_source = "";
 if (CHECK_LIB("ws2_32.lib", "mysqlnd")) {
 	mysqlnd_source = 
@@ -17,4 +20,5 @@ if (CHECK_LIB("ws2_32.lib", "mysqlnd")) {
 		"mysqlnd_statistics.c " +
 		"mysqlnd_wireprotocol.c";
 	EXTENSION("mysqlnd", mysqlnd_source, false);
+}
 }

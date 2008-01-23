@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.5 2008/01/08 13:11:55 andrey Exp $ */
+/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.6 2008/01/23 19:11:28 andrey Exp $ */
 
 #ifndef MYSQLND_WIREPROTOCOL_H
 #define MYSQLND_WIREPROTOCOL_H
@@ -157,13 +157,13 @@ typedef struct st_php_mysql_packet_auth {
 	uint32		max_packet_size;
 	mysqlnd_1b	charset_no;
 	/* 23 byte pad */
-	char		*user;
+	const char	*user;
 	/* 8 byte scramble */
-	char		*db;
+	const char	*db;
 	/* 12 byte scramble */
 
 	/* Here the packet ends. This is user supplied data */
-	char		*password;
+	const char	*password;
 	/* +1 for \0 because of scramble() */
 	unsigned char	*server_scramble_buf;
 	size_t			db_len;

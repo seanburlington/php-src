@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.7.2.6.2.16 2008/01/15 20:42:13 sixd Exp $ */
+/* $Id: oci8_lob.c,v 1.7.2.6.2.17 2008/01/24 14:10:21 rrichards Exp $ */
 
 
 
@@ -579,7 +579,7 @@ int php_oci_lob_close (php_oci_descriptor *descriptor TSRMLS_DC)
 		return 1;
 	}
 
-	if (php_oci_temp_lob_close(descriptor)) {
+	if (php_oci_temp_lob_close(descriptor TSRMLS_CC)) {
 		return 1;
 	}
 	
@@ -675,7 +675,7 @@ void php_oci_lob_free (php_oci_descriptor *descriptor TSRMLS_DC)
 
 #ifdef HAVE_OCI8_TEMP_LOB
 	if (descriptor->type == OCI_DTYPE_LOB) {
-		php_oci_temp_lob_close(descriptor);
+		php_oci_temp_lob_close(descriptor TSRMLS_CC);
 	}
 #endif
 

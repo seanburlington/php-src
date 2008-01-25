@@ -16,12 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.26.2.1.2.5.2.1 2007/12/31 07:17:16 sebastian Exp $ */
+/* $Id: php_tidy.h,v 1.26.2.1.2.5.2.2 2008/01/25 20:29:48 nlopess Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
 
-extern zend_module_entry tidy_module_entry;
+extern const zend_module_entry tidy_module_entry;
 #define phpext_tidy_ptr &tidy_module_entry
 
 #define TIDY_METHOD_MAP(name, func_name, arg_types) \

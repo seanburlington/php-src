@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.133 2008/01/25 15:00:23 sfox Exp $ */
+/* $Id: phar_object.c,v 1.134 2008/01/25 16:05:25 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1348,6 +1348,9 @@ static void phar_convert_to_other(phar_archive_data *source, int convert, php_ui
 	phar_archive_data phar = {0};
 	long offset = 0;
 	char *error, *opened_path = NULL;
+#if HAVE_PHAR_ZIP
+	int fd, ziperror;
+#endif
 
 	/* set whole-archive compression from parameter */
 	phar.flags = flags;
@@ -1358,8 +1361,6 @@ static void phar_convert_to_other(phar_archive_data *source, int convert, php_ui
 		case 2 :
 			phar.is_zip = 1;
 #if HAVE_PHAR_ZIP
-			int fd, ziperror;
-
 			if (!((fd = php_open_temporary_fd(NULL, "pharzip", &opened_path TSRMLS_CC)) >= 0)) {
 				zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 					"Cannot convert phar archive \"%s\", unable to open temporary zip archive", source->fname);

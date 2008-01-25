@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.12 2008/01/22 01:34:24 iliaa Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.13 2008/01/25 01:31:10 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2604,9 +2604,14 @@ PHP_FUNCTION(chr)
 	long c;
 	char temp[2];
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &c) == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS() != 1) {
+		WRONG_PARAM_COUNT;
 	}
+
+	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "l", &c) == FAILURE) {
+		c = 0;
+	}
+
 	temp[0] = (char)c;
 	temp[1] = '\0';
 

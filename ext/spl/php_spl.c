@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.120 2008/01/15 09:37:50 colder Exp $ */
+/* $Id: php_spl.c,v 1.121 2008/01/25 20:30:36 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,13 +45,6 @@ ZEND_GET_MODULE(spl)
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(spl)
-
-/* {{{ spl_functions_none
- */
-const zend_function_entry spl_functions_none[] = {
-	{NULL, NULL, NULL}
-};
-/* }}} */
 
 /* {{{ PHP_GINIT_FUNCTION
  */
@@ -788,7 +781,7 @@ static const zend_module_dep spl_deps[] = {
 
 /* {{{ spl_module_entry
  */
-zend_module_entry spl_module_entry = {
+const zend_module_entry spl_module_entry = {
 #ifdef HAVE_SIMPLEXML
 	STANDARD_MODULE_HEADER_EX, NULL,
 	spl_deps,

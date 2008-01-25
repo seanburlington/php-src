@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.14.2.5 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.14.2.6 2008/01/25 18:10:45 scottmac Exp $ */
 
 /*
  * HTML entity resources:
@@ -1034,8 +1034,6 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 								break;
 
 							case cs_cp1252:
-							case cs_cp1251:
-							case cs_cp866:
 								if (code > 0xff) {
 									invalid_code = 1;
 								} else {
@@ -1043,6 +1041,8 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 								}
 								break;
 
+							case cs_cp1251:
+							case cs_cp866:
 							case cs_big5:
 							case cs_big5hkscs:
 							case cs_sjis:

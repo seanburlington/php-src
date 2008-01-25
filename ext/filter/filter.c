@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.39.2.2 2007/12/31 07:17:08 sebastian Exp $ */
+/* $Id: filter.c,v 1.52.2.39.2.3 2008/01/25 20:20:07 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ typedef struct filter_list_entry {
 } filter_list_entry;
 
 /* {{{ filter_list */
-filter_list_entry filter_list[] = {
+static const filter_list_entry filter_list[] = {
 	{ "int",             FILTER_VALIDATE_INT,           php_filter_int             },
 	{ "boolean",         FILTER_VALIDATE_BOOLEAN,       php_filter_boolean         },
 	{ "float",           FILTER_VALIDATE_FLOAT,         php_filter_float           },
@@ -79,7 +79,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 /* {{{ filter_functions[]
  */
-const zend_function_entry filter_functions[] = {
+static const zend_function_entry filter_functions[] = {
 	PHP_FE(filter_input,		NULL)
 	PHP_FE(filter_var,		NULL)
 	PHP_FE(filter_input_array,	NULL)
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.2 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.3 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.28.2.1.2.4.2.1 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: php_dom.h,v 1.28.2.1.2.4.2.2 2008/01/25 16:13:04 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -66,6 +66,17 @@ extern zend_module_entry dom_module_entry;
 #define DOM_API_VERSION "20031129"
 /* Define a custom type for iterating using an unused nodetype */
 #define DOM_NODESET XML_XINCLUDE_START
+
+typedef struct _dom_xpath_object {
+	zend_object  std;
+	void *ptr;
+	php_libxml_ref_obj *document;
+	HashTable *prop_handler;
+	zend_object_handle handle;
+	int registerPhpFunctions;
+	HashTable *registered_phpfunctions;
+	HashTable *node_list;
+} dom_xpath_object;
 
 typedef struct _dom_nnodemap_object {
 	dom_object *baseobj;

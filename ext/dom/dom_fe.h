@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.14.2.1.2.4.2.2 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: dom_fe.h,v 1.14.2.1.2.4.2.3 2008/01/25 16:13:04 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -264,6 +264,7 @@ PHP_METHOD(domxpath, __construct);
 PHP_FUNCTION(dom_xpath_register_ns);
 PHP_FUNCTION(dom_xpath_query);
 PHP_FUNCTION(dom_xpath_evaluate);
+PHP_FUNCTION(dom_xpath_register_php_functions);
 #endif
 
 #endif /* DOM_FE_H */

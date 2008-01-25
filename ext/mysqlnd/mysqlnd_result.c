@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.10 2008/01/23 19:09:33 andrey Exp $ */
+/* $Id: mysqlnd_result.c,v 1.11 2008/01/25 15:54:31 rrichards Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -766,9 +766,9 @@ mysqlnd_fetch_row_buffered_c(MYSQLND_RES *result TSRMLS_DC)
 	if (result->data->data_cursor &&
 		(result->data->data_cursor - result->data->data) < result->data->row_count)
 	{
-		ret = mnd_malloc(result->field_count * sizeof(char *));
-
 		zval **current_row = *result->data->data_cursor;
+
+		ret = mnd_malloc(result->field_count * sizeof(char *));
 		for (i = 0; i < result->field_count; i++) {
 			zval *data = current_row[i];
 			if (Z_TYPE_P(data) != IS_NULL) {

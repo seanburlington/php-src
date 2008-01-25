@@ -51,7 +51,7 @@ $stub = '/*
   +----------------------------------------------------------------------+
 */
 
-/* $Id: makestub.php,v 1.3 2008/01/20 00:49:44 cellog Exp $ */
+/* $Id: makestub.php,v 1.4 2008/01/25 17:26:16 sfox Exp $ */
 
 static inline void phar_get_stub(const char *index_php, const char *web, size_t *len, char **stub, const int name_len, const int web_len TSRMLS_DC)
 {
@@ -93,9 +93,7 @@ foreach ($s3split as $i => $chunk) {
     $stub .= "\tstatic const char newstub3_" . $i . '[] = "' . $chunk . '";
 ';
 }
-$stub .= "
-
-\tstatic const int newstub_len = " . $slen . ";
+$stub .= "\n\tstatic const int newstub_len = " . $slen . ";
 
 \t*len = spprintf(stub, name_len + web_len + newstub_len, \"%s%s" . str_repeat('%s', $s1count) . '%s%s%d'
     . str_repeat('%s', $s3count) . '", newstub0, web';

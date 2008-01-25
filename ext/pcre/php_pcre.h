@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.54 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: php_pcre.h,v 1.55 2008/01/25 19:39:45 nlopess Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -32,14 +32,6 @@
 #if HAVE_LOCALE_H
 #include <locale.h>
 #endif
-
-PHP_FUNCTION(preg_match);
-PHP_FUNCTION(preg_match_all);
-PHP_FUNCTION(preg_replace);
-PHP_FUNCTION(preg_replace_callback);
-PHP_FUNCTION(preg_split);
-PHP_FUNCTION(preg_quote);
-PHP_FUNCTION(preg_grep);
 
 PHPAPI char *php_pcre_replace(zend_uchar utype, char *regex, int regex_len, char *subject, int subject_len, zval *replace_val, int is_callable_replace, int *result_len, int limit, int *replace_count TSRMLS_DC);
 PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *options TSRMLS_DC);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.67 2008/01/17 20:43:58 derick Exp $ */
+/* $Id: parse_date.re,v 1.68 2008/01/27 22:15:59 derick Exp $ */
 
 #include "timelib.h"
 
@@ -1011,6 +1011,7 @@ relativetext = reltextnumber space reltextunit;
 		TIMELIB_HAVE_RELATIVE();
 		TIMELIB_UNHAVE_DATE();
 		TIMELIB_UNHAVE_TIME();
+		TIMELIB_HAVE_TZ();
 
 		i = timelib_get_unsigned_nr((char **) &ptr, 24);
 		s->time->y = 1970;

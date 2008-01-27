@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.12 2008/01/27 17:29:14 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.13 2008/01/27 17:44:29 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2467,7 +2467,7 @@ static int check_id_allowed(char *id, long what)
 	return 0;
 }
 
-/* {{{ proto array timezone_identifiers_list()
+/* {{{ proto array timezone_identifiers_list([long what])
    Returns numerically index array with all timezone identifiers.
 */
 PHP_FUNCTION(timezone_identifiers_list)

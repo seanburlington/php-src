@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_dllist.c,v 1.1.2.7 2008/01/26 23:04:43 colder Exp $ */
+/* $Id: spl_dllist.c,v 1.1.2.8 2008/01/27 13:59:51 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -908,7 +908,6 @@ static void spl_dllist_it_helper_move_forward(spl_ptr_llist_element **traverse_p
 			}
 		} else {
 			*traverse_pointer_ptr = old->next;
-			(*traverse_position_ptr)++;
 
 			if (flags & SPL_DLLIST_IT_DELETE) {
 				zval *prev = (zval *)spl_ptr_llist_shift(llist);
@@ -916,6 +915,8 @@ static void spl_dllist_it_helper_move_forward(spl_ptr_llist_element **traverse_p
 				if (prev) {
 					zval_ptr_dtor((zval **)&prev);
 				}
+			} else {
+				(*traverse_position_ptr)++;
 			}
 		}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.17.2.8 2008/01/25 20:29:48 nlopess Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.9 2008/01/27 15:04:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -764,7 +764,7 @@ static const zend_module_dep spl_deps[] = {
 
 /* {{{ spl_module_entry
  */
-const zend_module_entry spl_module_entry = {
+zend_module_entry spl_module_entry = {
 #ifdef HAVE_SIMPLEXML
 	STANDARD_MODULE_HEADER_EX, NULL,
 	spl_deps,

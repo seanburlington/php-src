@@ -18,10 +18,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_enum_n_def.h,v 1.3 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: mysqlnd_enum_n_def.h,v 1.4 2008/01/28 18:27:49 andrey Exp $ */
 #ifndef MYSQLND_ENUM_N_DEF_H
 #define MYSQLND_ENUM_N_DEF_H
 
+#define MYSQLND_MAX_PACKET_SIZE (256L*256L*256L-1)
 
 #define MYSQLND_ERRMSG_SIZE			512
 #define MYSQLND_SQLSTATE_LENGTH		5

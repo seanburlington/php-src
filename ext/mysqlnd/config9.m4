@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.3 2007/10/02 10:43:09 andrey Exp $
+dnl $Id: config9.m4,v 1.4 2008/01/28 18:27:49 andrey Exp $
 dnl config.m4 for mysqlnd driver
 
 dnl If some extension uses mysqlnd it will get compiled in PHP core

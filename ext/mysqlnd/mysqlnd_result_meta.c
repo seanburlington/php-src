@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result_meta.c,v 1.5 2008/01/23 19:09:33 andrey Exp $ */
+/* $Id: mysqlnd_result_meta.c,v 1.6 2008/01/28 18:27:49 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -421,8 +421,8 @@ MYSQLND_RES_METADATA *mysqlnd_result_meta_init(unsigned int field_count TSRMLS_D
 	/* +1 is to have empty marker at the end */
 	ret = mnd_ecalloc(1, sizeof(MYSQLND_RES_METADATA));
 	ret->field_count = field_count;
-	ret->fields = ecalloc(field_count + 1, sizeof(MYSQLND_FIELD));
-	ret->zend_hash_keys = ecalloc(field_count, sizeof(struct mysqlnd_field_hash_key));
+	ret->fields = mnd_ecalloc(field_count + 1, sizeof(MYSQLND_FIELD));
+	ret->zend_hash_keys = mnd_ecalloc(field_count, sizeof(struct mysqlnd_field_hash_key));
 
 	ret->m = & mysqlnd_mysqlnd_res_meta_methods;
 	DBG_INF_FMT("meta=%p", ret);

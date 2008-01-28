@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.34 2007/12/31 07:12:11 sebastian Exp $ 
+  $Id: mysqli_prop.c,v 1.35 2008/01/28 18:27:49 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -213,7 +213,7 @@ static int result_type_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 	if (!p) {
 		ZVAL_NULL(*retval);
 	} else {
-		ZVAL_LONG(*retval, (p->data) ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT);
+		ZVAL_LONG(*retval, mysqli_result_is_unbuffered(p) ? MYSQLI_USE_RESULT:MYSQLI_STORE_RESULT);
 	}
 	return SUCCESS;
 }

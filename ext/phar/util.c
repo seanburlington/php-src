@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.1 2008/01/28 08:52:06 cellog Exp $ */
+/* $Id: util.c,v 1.2 2008/01/28 20:18:13 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -245,7 +245,12 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 		etemp.is_tar = phar->is_tar;
 		etemp.tar_type = TAR_FILE;
 	}
-	zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry);
+	if (FAILURE == zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry)) {
+		if (error) {
+			spprintf(error, 0, "phar error: unable to add new entry \"%s\" to phar \"%s\"", etemp.filename, phar->fname);
+		}
+		return NULL;
+	}
 	
 	if (!entry) {
 		php_stream_close(etemp.fp);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.4 2008/01/28 18:27:49 andrey Exp $
+dnl $Id: config9.m4,v 1.5 2008/01/28 22:54:21 andrey Exp $
 dnl config.m4 for mysqlnd driver
 
 dnl If some extension uses mysqlnd it will get compiled in PHP core
@@ -7,7 +7,8 @@ if test "$PHP_MYSQLND_ENABLED" = "yes"; then
   mysqlnd_sources="mysqlnd.c mysqlnd_charset.c mysqlnd_wireprotocol.c \
                    mysqlnd_ps.c mysqlnd_loaddata.c mysqlnd_palloc.c \
                    mysqlnd_ps_codec.c mysqlnd_statistics.c mysqlnd_qcache.c\
-				   mysqlnd_result.c mysqlnd_result_meta.c mysqlnd_debug.c"
+				   mysqlnd_result.c mysqlnd_result_meta.c mysqlnd_debug.c\
+				   mysqlnd_block_alloc.c"
 
   PHP_NEW_EXTENSION(mysqlnd, $mysqlnd_sources, no)
   PHP_ADD_BUILD_DIR([ext/mysqlnd], 1)

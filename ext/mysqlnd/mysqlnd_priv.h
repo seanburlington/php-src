@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.10 2008/01/28 18:27:49 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.11 2008/01/28 22:54:21 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -182,9 +182,6 @@ extern struct st_mysqlnd_perm_bind mysqlnd_ps_fetch_functions[MYSQL_TYPE_LAST + 
 
 extern const char * mysqlnd_out_of_sync;
 extern const char * mysqlnd_server_gone;
-
-extern MYSQLND_MEMORY_POOL mysqlnd_memory_pool;
-
 
 enum_func_status mysqlnd_handle_local_infile(MYSQLND *conn, const char *filename, zend_bool *is_warning TSRMLS_DC);
 

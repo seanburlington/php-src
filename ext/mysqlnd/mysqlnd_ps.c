@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.9 2008/01/28 18:27:49 andrey Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.10 2008/01/28 22:54:21 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1249,8 +1249,6 @@ MYSQLND_METHOD(mysqlnd_stmt, bind_param)(MYSQLND_STMT * const stmt,
 static enum_func_status
 MYSQLND_METHOD(mysqlnd_stmt, refresh_bind_param)(MYSQLND_STMT * const stmt TSRMLS_DC)
 {
-	unsigned int i = 0;
-
 	DBG_ENTER("mysqlnd_stmt::refresh_bind_param");
 	DBG_INF_FMT("stmt=%lu param_count=%u", stmt->stmt_id, stmt->param_count);
 

@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.6 2008/01/28 18:25:50 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.7 2008/01/28 23:23:08 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.2-dev - 070928 - $Revision: 1.3.2.6 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.3.2.7 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
@@ -57,7 +57,12 @@
 #include "mysqlnd_structs.h"
 
 
+
+
 /* Library related */
+void mysqlnd_library_init(TSRMLS_D);
+void mysqlnd_library_end(TSRMLS_D);
+
 #define mysqlnd_restart_psession(conn) _mysqlnd_restart_psession((conn) TSRMLS_CC)
 PHPAPI void _mysqlnd_restart_psession(MYSQLND *conn TSRMLS_DC);
 PHPAPI void mysqlnd_end_psession(MYSQLND *conn);

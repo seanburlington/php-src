@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.135 2008/01/28 08:52:06 cellog Exp $ */
+/* $Id: phar_object.c,v 1.136 2008/01/28 14:39:16 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -27,21 +27,6 @@ static zend_class_entry *phar_ce_PharException;
 
 #if HAVE_SPL
 static zend_class_entry *phar_ce_entry;
-#endif
-
-#ifdef PHP_WIN32
-static inline void phar_unixify_path_separators(char *path, int path_len) /* {{{ */
-{
-	char *s;
-
-	/* unixify win paths */
-	for (s = path; s - path < path_len; s++) {
-		if (*s == '\\') {
-			*s = '/';
-		}
-	}
-}
-/* }}} */
 #endif
 
 static int phar_get_extract_list(void *pDest, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */

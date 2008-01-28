@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.282 2008/01/28 08:52:06 cellog Exp $ */
+/* $Id: phar.c,v 1.283 2008/01/28 14:39:16 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -70,21 +70,6 @@ ZEND_INI_MH(phar_ini_modify_handler) /* {{{ */
 	return SUCCESS;
 }
 /* }}}*/
-
-#ifdef PHP_WIN32
-static inline void phar_unixify_path_separators(char *path, int path_len) /* {{{ */
-{
-	char *s;
-
-	/* unixify win paths */
-	for (s = path; s - path < path_len; s++) {
-		if (*s == '\\') {
-			*s = '/';
-		}
-	}
-}
-/* }}} */
-#endif
 
 static void phar_split_extract_list(TSRMLS_D)
 {
@@ -868,7 +853,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 		buffer += entry.filename_len;
 		PHAR_GET_32(buffer, entry.uncompressed_filesize);
 		PHAR_GET_32(buffer, entry.timestamp);
-		if (offset == halt_offset + manifest_len + 4) {
+		if (offset == halt_offset + (int)manifest_len + 4) {
 			mydata->min_timestamp = entry.timestamp;
 			mydata->max_timestamp = entry.timestamp;
 		} else {
@@ -2702,7 +2687,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.282 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.283 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

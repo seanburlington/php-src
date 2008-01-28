@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.72 2008/01/28 08:52:06 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.73 2008/01/28 14:39:16 sfox Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -332,6 +332,18 @@ union _phar_entry_object {
 BEGIN_EXTERN_C()
 #ifdef PHP_WIN32
 char *tsrm_strtok_r(char *s, const char *delim, char **last);
+
+static inline void phar_unixify_path_separators(char *path, int path_len)
+{
+	char *s;
+
+	/* unixify win paths */
+	for (s = path; s - path < path_len; s++) {
+		if (*s == '\\') {
+			*s = '/';
+		}
+	}
+}
 #endif
 
 void phar_request_initialize(TSRMLS_D);

@@ -1,23 +1,12 @@
-// $Id: config.w32,v 1.25 2008/01/25 15:00:23 sfox Exp $
+// $Id: config.w32,v 1.26 2008/01/28 08:52:06 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
 
 if (PHP_PHAR != "no") {
-	EXTENSION("phar", "dirstream.c func_interceptors.c phar.c phar_object.c phar_path_check.c stream.c tar.c zip.c");
+	EXTENSION("phar", "util.c dirstream.c func_interceptors.c phar.c phar_object.c phar_path_check.c stream.c tar.c zip.c");
 	if (PHP_PHAR_SHARED) {
 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
-	}
-	if (PHP_ZIP_SHARED) {
-		if (PHP_PHAR_SHARED) {
-			ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_ZIP ");
-		} else {
-			ERROR("Phar cannot be built statically with shared Zip extension");
-		}
-	}
-	if (PHP_ZIP != "no") {
-		ADD_EXTENSION_DEP('phar', 'zip', true);
-		AC_DEFINE('HAVE_PHAR_ZIP', 1);
 	}
 	ADD_EXTENSION_DEP('phar', 'bz2', true);
 	ADD_EXTENSION_DEP('phar', 'spl', true);

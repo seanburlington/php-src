@@ -17,16 +17,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysql_structs.h,v 1.3 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: php_mysql_structs.h,v 1.4 2008/01/28 11:16:37 nlopess Exp $ */
 
 #ifndef PHP_MYSQL_STRUCTS_H
 #define PHP_MYSQL_STRUCTS_H
-
-#ifdef PHP_WIN32
-#define PHP_MYSQL_API __declspec(dllexport)
-#else
-#define PHP_MYSQL_API
-#endif
 
 #if HAVE_MYSQL
 

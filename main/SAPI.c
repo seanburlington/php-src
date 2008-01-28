@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.228 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: SAPI.c,v 1.229 2008/01/28 16:08:14 scottmac Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -616,6 +616,10 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 		&& !strncasecmp(header_line, "HTTP/", 5)) {
 		/* filter out the response code */
 		sapi_update_response_code(sapi_extract_response_code(header_line) TSRMLS_CC);
+		/* sapi_update_response_code doesn't free the status line if the code didn't change */
+		if (SG(sapi_headers).http_status_line) {
+			efree(SG(sapi_headers).http_status_line);
+		}
 		SG(sapi_headers).http_status_line = header_line;
 		return SUCCESS;
 	} else {

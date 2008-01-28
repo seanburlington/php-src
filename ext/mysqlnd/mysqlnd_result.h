@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.h,v 1.2.2.5 2008/01/23 19:11:28 andrey Exp $ */
+/* $Id: mysqlnd_result.h,v 1.2.2.6 2008/01/28 18:25:50 andrey Exp $ */
 
 #ifndef MYSQLND_RESULT_H
 #define MYSQLND_RESULT_H
@@ -31,11 +31,14 @@ enum_func_status
 mysqlnd_store_result_fetch_data(MYSQLND * const conn, MYSQLND_RES *result,
 								MYSQLND_RES_METADATA *meta,
 								zend_bool binary_protocol,
-								zend_bool update_max_length,
 								zend_bool to_cache TSRMLS_DC);
 
 enum_func_status mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC);
 
+void mysqlnd_res_initialize_result_set_rest(MYSQLND_RES * const result TSRMLS_DC);
+
+
+enum_func_status mysqlnd_background_store_result_fetch_data(MYSQLND_RES *result TSRMLS_DC);
 #endif /* MYSQLND_RESULT_H */
 
 /*

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.23.2.5.2.2.2.3 2007/12/31 07:17:10 sebastian Exp $ 
+  $Id: mysqli_prop.c,v 1.23.2.5.2.2.2.4 2008/01/28 18:25:50 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -211,7 +211,7 @@ static int result_type_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 	if (!p) {
 		ZVAL_NULL(*retval);
 	} else {
-		ZVAL_LONG(*retval, (p->data) ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT);
+		ZVAL_LONG(*retval, mysqli_result_is_unbuffered(p) ? MYSQLI_USE_RESULT:MYSQLI_STORE_RESULT);
 	}
 	return SUCCESS;
 }

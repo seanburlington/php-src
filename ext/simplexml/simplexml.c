@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.8 2008/01/23 09:52:57 tony2001 Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.9 2008/01/29 09:59:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1081,6 +1081,9 @@ static HashTable * sxe_get_prop_hash(zval *object, int is_debug TSRMLS_DC) /* {{
 		zend_hash_init(rv, 0, NULL, ZVAL_PTR_DTOR, 0);
 	}
 	else if (sxe->properties) {
+		if (GC_G(gc_active)) {
+			return sxe->properties;
+		}
 		zend_hash_clean(sxe->properties);
 		rv = sxe->properties;
 	} else {
@@ -2504,7 +2507,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.8 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.9 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

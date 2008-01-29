@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.7.2.3 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.7.2.4 2008/01/29 01:17:30 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -631,18 +631,16 @@ static int pgsql_stmt_get_column_meta(pdo_stmt_t *stmt, long colno, zval *return
 		/* Failed to get system catalogue, but return success
 		 * with the data we have collected so far
 		 */
-		PQclear(res);
-		return 1;
+		goto done;
 	}
 
 	/* We want exactly one row returned */
 	if (1 != PQntuples(res)) {
-		PQclear(res);
-		return 1;
+		goto done;
 	}
 
 	add_assoc_string(return_value, "native_type", PQgetvalue(res, 0, 0), 1);
-
+done:
 	PQclear(res);		
 	return 1;
 }

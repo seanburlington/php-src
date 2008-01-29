@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.6 2008/01/29 07:51:43 sebastian Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.7 2008/01/29 21:21:20 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,6 +74,7 @@ ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_register_php_functions, 0, 0, 0)
+	ZEND_ARG_INFO(0, restrict)
 ZEND_END_ARG_INFO();
 
 static
@@ -796,7 +797,7 @@ PHP_FUNCTION(xsl_xsltprocessor_remove_parameter)
 }
 /* }}} end xsl_xsltprocessor_remove_parameter */
 
-/* {{{ proto void xsl_xsltprocessor_register_php_functions();
+/* {{{ proto void xsl_xsltprocessor_register_php_functions([mixed $restrict]);
 */
 PHP_FUNCTION(xsl_xsltprocessor_register_php_functions)
 {

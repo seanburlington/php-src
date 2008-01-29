@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.665 2008/01/21 14:37:19 tony2001 Exp $ */
+/* $Id: string.c,v 1.666 2008/01/29 01:44:38 davidc Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3889,8 +3889,8 @@ static void php_lcfirst(char *str)
 }
 /* }}} */
 
-/* {{{ proto string ucfirst(string str) U
-   Makes a string's first character uppercase */
+/* {{{ proto string lcfirst(string str) U
+   Makes a string's first character lowercase */
 PHP_FUNCTION(lcfirst)
 {
 	zstr       str;

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.2.2.8 2008/01/28 22:50:06 andrey Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.2.2.9 2008/01/29 18:11:46 andrey Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H
@@ -448,7 +448,7 @@ struct st_mysqlnd_connection
 	/* stats */
 	MYSQLND_STATS	stats;
 
-#ifdef ZTS
+#ifdef MYSQLND_THREADED
 	MUTEX_T			LOCK_state;
 
 	pthread_cond_t	COND_work_done;

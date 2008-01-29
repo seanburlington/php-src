@@ -18,19 +18,17 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.7 2008/01/28 23:23:08 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.8 2008/01/29 18:11:46 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.3.2.7 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.3.2.8 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
 #define MYSQLND_USE_OPTIMISATIONS 0
 
-
-//#define MYSQLND_THREADING
 
 /* #define MYSQLND_STRING_TO_INT_CONVERSION */
 /*

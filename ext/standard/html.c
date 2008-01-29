@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.18 2007/12/31 07:20:12 sebastian Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.19 2008/01/29 13:39:03 tony2001 Exp $ */
 
 /*
  * HTML entity resources:
@@ -954,6 +954,7 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 					case cs_cp1251:
 					case cs_8859_5:
 					case cs_cp866:
+					case cs_koi8r:
 						replacement[0] = k;
 						replacement[1] = '\0';
 						replacement_len = 1;

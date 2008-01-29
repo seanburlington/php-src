@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.439 2008/01/29 00:39:26 tony2001 Exp $ */
+/* $Id: array.c,v 1.440 2008/01/29 10:45:19 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -324,7 +324,7 @@ PHP_FUNCTION(count)
 			if (Z_OBJ_HT_P(array)->get_class_entry && instanceof_function(Z_OBJCE_P(array), spl_ce_Countable TSRMLS_CC)) {
 				zend_call_method_with_0_params(&array, NULL, NULL, "count", &retval);
 				if (retval) {
-					convert_to_long(retval);
+					convert_to_long_ex(&retval);
 					RETVAL_LONG(Z_LVAL_P(retval));
 					zval_ptr_dtor(&retval);
 				}

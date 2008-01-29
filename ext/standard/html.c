@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.131 2008/01/28 23:08:07 tony2001 Exp $ */
+/* $Id: html.c,v 1.132 2008/01/29 22:03:44 stas Exp $ */
 
 /*
  * HTML entity resources:
@@ -1125,7 +1125,6 @@ PHPAPI char *php_escape_html_entities_ex(unsigned char *old, int oldlen, int *ne
 		maxlen = 128;
 	replaced = emalloc (maxlen);
 	len = 0;
-	//Sleep(10*1000);
 	i = 0;
 	while (i < oldlen) {
 		unsigned char mbsequence[16];	/* allow up to 15 characters in a multibyte sequence */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.12.2.4 2008/01/29 20:10:09 derick Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.12.2.5 2008/01/29 20:14:18 derick Exp $ */
 
 #include "timelib.h"
 
@@ -755,7 +755,7 @@ static long timelib_get_zone(char **ptr, int *dst, timelib_time *t, int *tz_not_
 	while (**ptr == ' ' || **ptr == '\t' || **ptr == '(') {
 		++*ptr;
 	}
-	if ((*ptr)[0] == 'G' && (*ptr)[1] == 'M' && (*ptr)[2] == 'T' && ((*ptr)[3] == '+' | (*ptr)[3] == '-')) {
+	if ((*ptr)[0] == 'G' && (*ptr)[1] == 'M' && (*ptr)[2] == 'T' && ((*ptr)[3] == '+' || (*ptr)[3] == '-')) {
 		*ptr += 3;
 	}
 	if (**ptr == '+') {

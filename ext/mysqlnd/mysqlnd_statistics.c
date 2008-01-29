@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.c,v 1.2.2.4 2008/01/23 19:11:28 andrey Exp $ */
+/* $Id: mysqlnd_statistics.c,v 1.2.2.5 2008/01/29 11:59:53 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -141,6 +141,32 @@ PHPAPI void _mysqlnd_get_client_stats(zval *return_value TSRMLS_DC ZEND_FILE_LIN
 	}
 	mysqlnd_fill_stats_hash(stats_ptr, return_value TSRMLS_CC ZEND_FILE_LINE_CC);
 	DBG_VOID_RETURN;
+}
+/* }}} */
+
+
+/* {{{ mysqlnd_stats_init */
+void
+mysqlnd_stats_init(MYSQLND_STATS ** stats)
+{
+	*stats = calloc(1, sizeof(MYSQLND_STATS));
+#ifdef ZTS
+	(*stats)->LOCK_access = tsrm_mutex_alloc();
+#endif
+
+}
+/* }}} */
+
+
+/* {{{ mysqlnd_stats_end */
+void
+mysqlnd_stats_end(MYSQLND_STATS * stats)
+{
+#ifdef ZTS
+	tsrm_mutex_free(stats->LOCK_access);
+#endif
+	/* mnd_free will reference LOCK_access and crash...*/
+	free(stats);
 }
 /* }}} */
 

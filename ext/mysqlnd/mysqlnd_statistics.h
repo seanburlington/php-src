@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.h,v 1.4.2.6 2008/01/23 19:11:28 andrey Exp $ */
+/* $Id: mysqlnd_statistics.h,v 1.4.2.7 2008/01/29 11:59:53 andrey Exp $ */
 
 #ifndef MYSQLND_STATISTICS_H
 #define MYSQLND_STATISTICS_H
@@ -195,6 +195,10 @@ extern const MYSQLND_STRING mysqlnd_stats_values_names[];
 
 void mysqlnd_fill_stats_hash(const MYSQLND_STATS * const stats, zval *return_value
 							 TSRMLS_DC ZEND_FILE_LINE_DC);
+
+
+void mysqlnd_stats_init(MYSQLND_STATS ** stats);
+void mysqlnd_stats_end(MYSQLND_STATS * stats);
 
 #endif	/* MYSQLND_STATISTICS_H */
 

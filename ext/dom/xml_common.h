@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.28 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: xml_common.h,v 1.29 2008/01/30 09:56:21 dmitry Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
@@ -35,14 +35,19 @@ typedef struct _dom_object {
 } dom_object;
 
 #ifdef PHP_WIN32
-#ifdef PHPAPI
-#undef PHPAPI
-#endif
-#ifdef DOM_EXPORTS
-#define PHPAPI __declspec(dllexport)
-#else
-#define PHPAPI __declspec(dllimport)
-#endif /* DOM_EXPORTS */
+#	ifdef PHPAPI
+#		undef PHPAPI
+#	endif
+#	ifdef DOM_EXPORTS
+#		define PHPAPI __declspec(dllexport)
+#	else
+#		define PHPAPI __declspec(dllimport)
+#	endif /* DOM_EXPORTS */
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	ifdef PHPAPI
+#		undef PHPAPI
+#	endif
+#	define PHPAPI __attribute__ ((visibility("default")))
 #endif /* PHP_WIN32 */
 
 #define PHP_DOM_EXPORT PHPAPI

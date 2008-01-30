@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.75 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.76 2008/01/30 09:56:21 dmitry Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -49,9 +49,11 @@
 #define PHP_GDIMG_TYPE_GD2PART 10
 
 #ifdef PHP_WIN32
-#define PHP_GD_API __declspec(dllexport)
+#	define PHP_GD_API __declspec(dllexport)
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PHP_GD_API __attribute__ ((visibility("default")))
 #else
-#define PHP_GD_API
+#	define PHP_GD_API
 #endif
 
 PHPAPI extern const char php_sig_gif[3];

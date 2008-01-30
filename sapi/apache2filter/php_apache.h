@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.29 2007/12/31 07:12:19 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.30 2008/01/30 09:56:22 dmitry Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -64,5 +64,11 @@ extern const command_rec php_dir_cmds[];
 		val = elts[i].val;
 
 #define APR_ARRAY_FOREACH_CLOSE() }}
+
+/* fix for gcc4 visibility patch */
+#ifndef PHP_WIN32
+# undef AP_MODULE_DECLARE_DATA
+# define AP_MODULE_DECLARE_DATA PHPAPI
+#endif
 
 #endif /* PHP_APACHE_H */

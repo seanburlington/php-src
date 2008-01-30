@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.16 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: php_pdo.h,v 1.17 2008/01/30 09:56:22 dmitry Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
@@ -31,15 +31,17 @@ extern zend_module_entry pdo_module_entry;
 #define phpext_pdo_ptr &pdo_module_entry
 
 #ifdef PHP_WIN32
-# if defined(PDO_EXPORTS) || (!defined(COMPILE_DL_PDO))
-#  define PDO_API __declspec(dllexport)
-# elif defined(COMPILE_DL_PDO)
-#  define PDO_API __declspec(dllimport)
-# else
-#  define PDO_API /* nothing special */
-# endif
+#	if defined(PDO_EXPORTS) || (!defined(COMPILE_DL_PDO))
+#		define PDO_API __declspec(dllexport)
+#	elif defined(COMPILE_DL_PDO)
+#		define PDO_API __declspec(dllimport)
+#	else
+#		define PDO_API /* nothing special */
+#	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PDO_API __attribute__ ((visibility("default")))
 #else
-# define PDO_API /* nothing special */
+#	define PDO_API /* nothing special */
 #endif
 
 #ifdef ZTS

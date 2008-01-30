@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.13 2007/12/31 07:12:19 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.14 2008/01/30 09:56:22 dmitry Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -82,5 +82,10 @@ extern php_apache2_info_struct php_apache2_info;
 #define AP2(v) (php_apache2_info.v)
 #endif
 
+/* fix for gcc4 visibility patch */
+#ifndef PHP_WIN32
+# undef AP_MODULE_DECLARE_DATA
+# define AP_MODULE_DECLARE_DATA PHPAPI
+#endif
 
 #endif /* PHP_APACHE_H */

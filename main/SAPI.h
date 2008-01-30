@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.122 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: SAPI.h,v 1.123 2008/01/30 09:56:22 dmitry Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -35,12 +35,14 @@
 
 #ifdef PHP_WIN32
 #	ifdef SAPI_EXPORTS
-#	define SAPI_API __declspec(dllexport) 
+#		define SAPI_API __declspec(dllexport) 
 #	else
-#	define SAPI_API __declspec(dllimport) 
+#		define SAPI_API __declspec(dllimport) 
 #	endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define SAPI_API __attribute__ ((visibility("default")))
 #else
-#define SAPI_API
+#	define SAPI_API
 #endif
 
 #undef shutdown

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.73.2.1.2.2.2.1 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: php_pgsql.h,v 1.73.2.1.2.2.2.2 2008/01/30 09:41:12 dmitry Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -42,7 +42,11 @@ extern zend_module_entry pgsql_module_entry;
 #endif
 #else
 #include <libpq/libpq-fs.h>
-#define PHP_PGSQL_API /* nothing special */
+# if defined(__GNUC__) && __GNUC__ >= 4
+#  define PHP_PGSQL_API __attribute__ ((visibility("default")))
+# else
+#  define PHP_PGSQL_API
+# endif
 #endif
 
 #ifdef HAVE_PG_CONFIG_H

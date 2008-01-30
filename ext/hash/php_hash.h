@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.7.2.3.2.1 2007/12/31 07:17:08 sebastian Exp $ */
+/* $Id: php_hash.h,v 1.13.2.7.2.3.2.2 2008/01/30 09:41:12 dmitry Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -100,9 +100,11 @@ extern zend_module_entry hash_module_entry;
 #define phpext_hash_ptr &hash_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_HASH_API __declspec(dllexport)
+#	define PHP_HASH_API __declspec(dllexport)
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PHP_HASH_API __attribute__ ((visibility("default")))
 #else
-#define PHP_HASH_API
+#	define PHP_HASH_API
 #endif
 
 #ifdef ZTS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15.2.2.2.6.2.1 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: php_libxml.h,v 1.15.2.2.2.6.2.2 2008/01/30 09:41:12 dmitry Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -27,9 +27,11 @@ extern zend_module_entry libxml_module_entry;
 #define libxml_module_ptr &libxml_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_LIBXML_API __declspec(dllexport)
+#	define PHP_LIBXML_API __declspec(dllexport)
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#	define PHP_LIBXML_API __attribute__ ((visibility("default")))
 #else
-#define PHP_LIBXML_API
+#	define PHP_LIBXML_API
 #endif
 
 #include "ext/standard/php_smart_str.h"

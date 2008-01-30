@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli_structs.h,v 1.4.2.7 2008/01/28 18:25:50 andrey Exp $ 
+  $Id: php_mysqli_structs.h,v 1.4.2.8 2008/01/30 09:41:12 dmitry Exp $ 
 */
 
 #ifndef PHP_MYSQLI_STRUCTS_H
@@ -145,7 +145,11 @@ typedef struct {
 #define L64(x) x##i64
 typedef __int64 my_longlong;
 #else
-#define PHP_MYSQLI_API
+# if defined(__GNUC__) && __GNUC__ >= 4
+#  define PHP_MYSQLI_API __attribute__ ((visibility("default")))
+# else
+#  define PHP_MYSQLI_API
+# endif
 #define MYSQLI_LLU_SPEC "%llu"
 #define MYSQLI_LL_SPEC "%lld"
 #define L64(x) x##LL

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.25.2.1.2.2.2.1 2007/12/31 07:17:18 sebastian Exp $ */
+/* $Id: php_apache.h,v 1.25.2.1.2.2.2.2 2008/01/30 09:41:12 dmitry Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -73,5 +73,11 @@ static long php_apache_fteller_stream(void * TSRMLS_DC);
 		val = elts[i].val;
 
 #define APR_ARRAY_FOREACH_CLOSE() }}
+
+/* fix for gcc4 visibility patch */
+#ifndef PHP_WIN32
+# undef AP_MODULE_DECLARE_DATA
+# define AP_MODULE_DECLARE_DATA PHPAPI
+#endif
 
 #endif /* PHP_APACHE_H */

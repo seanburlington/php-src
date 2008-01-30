@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.7 2008/01/22 09:27:46 dmitry Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.8 2008/01/30 09:41:11 dmitry Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -164,6 +164,14 @@ alpha*)
     fi
     ;;
 esac
+
+dnl activate some gcc specific optimizations for gcc >= 4
+if test "$GCC" = "yes"; then
+  GCC_MAJOR_VERSION=`$CC --version | $SED -n '1s/[[^0-9]]*\([[0-9]]\+\)\.[[0-9]]\+\..*/\1/;1p'`
+  if test $GCC_MAJOR_VERSION -ge 4; then
+    CFLAGS="$CFLAGS -fvisibility=hidden"
+  fi
+fi
 
 case $host_alias in
 *solaris*)

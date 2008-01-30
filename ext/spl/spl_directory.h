@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.3 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.4 2008/01/30 20:31:07 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -43,6 +43,8 @@ typedef struct _spl_filesystem_object  spl_filesystem_object;
 typedef void (*spl_foreign_dtor_t)(spl_filesystem_object *object TSRMLS_DC);
 typedef void (*spl_foreign_clone_t)(spl_filesystem_object *src, spl_filesystem_object *dst TSRMLS_DC);
 
+PHPAPI char* spl_filesystem_object_get_path(spl_filesystem_object *intern, int *len TSRMLS_DC);
+
 typedef struct _spl_other_handler {
 	spl_foreign_dtor_t     dtor;
 	spl_foreign_clone_t    clone;
@@ -52,8 +54,8 @@ struct _spl_filesystem_object {
 	zend_object        std;
 	void               *oth;
 	spl_other_handler  *oth_handler;
-	char               *path;
-	int                path_len;
+	char               *_path;
+	int                _path_len;
 	char               *file_name;
 	int                file_name_len; 
 	SPL_FS_OBJ_TYPE    type;

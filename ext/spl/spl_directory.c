@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.8 2008/01/30 20:31:06 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.9 2008/01/30 23:08:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -511,7 +511,11 @@ static HashTable* spl_filesystem_object_get_debug_info(zval *obj, int *is_temp T
 		}
 		efree(pnstr);
 		pnstr = spl_gen_private_prop_name(spl_ce_RecursiveDirectoryIterator, "subPathName", sizeof("subPathName")-1, &pnlen TSRMLS_CC);
-		add_assoc_stringl_ex(&zrv, pnstr, pnlen+1, intern->u.dir.sub_path, intern->u.dir.sub_path_len, 1);
+		if (intern->u.dir.sub_path) {
+			add_assoc_stringl_ex(&zrv, pnstr, pnlen+1, intern->u.dir.sub_path, intern->u.dir.sub_path_len, 1);
+		} else {
+			add_assoc_stringl_ex(&zrv, pnstr, pnlen+1, "", 0, 1);
+		}
 		efree(pnstr);
 	}
 	if (intern->type == SPL_FS_FILE) {

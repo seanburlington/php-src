@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157.2.4.2.5.2.3 2008/01/29 23:21:10 rasmus Exp $ */
+/* $Id: xml.c,v 1.157.2.4.2.5.2.4 2008/01/30 08:52:17 rasmus Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -595,7 +595,7 @@ PHPAPI char *xml_utf8_decode(const XML_Char *s, int len, int *newlen, const XML_
 			s += 3;
 			pos -= 3;
 		} else if (c >= 0xc0) { /* two bytes encoded, 11 bits */
-			if(pos-3 >= 0) {
+			if(pos-2 >= 0) {
 				c = ((s[0]&63)<<6) | (s[1]&63);
 			} else {
 				c = '?';

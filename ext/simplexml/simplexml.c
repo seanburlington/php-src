@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.37 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.38 2008/01/31 21:59:41 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1740,6 +1740,11 @@ static int sxe_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 		}
 	}
 
+	if (readobj == writeobj) {
+		INIT_PZVAL(writeobj);
+		zval_dtor(readobj);
+	}
+
 	rv = cast_object(writeobj, type, (char *)contents TSRMLS_CC);
 
 	if (contents) {
@@ -2447,7 +2452,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.37 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.38 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

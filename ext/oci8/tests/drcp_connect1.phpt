@@ -50,7 +50,7 @@ drcp_set_packagevar($pconn1,1000);
 oci_close($pconn1);
 echo " Connection pconn1  closed....\n";
 
-// Second connection with oci_pconnect should return the same session hence the
+// Second conenction with oci_pconnect should return the same session hence the
 // value returned is what is set by pconn1
 
 var_dump($pconn2 = oci_pconnect($user,$password,$dbase));

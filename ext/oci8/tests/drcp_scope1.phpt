@@ -19,7 +19,6 @@ require dirname(__FILE__)."/details.inc";
 
 // Create the table
 $c = oci_new_connect($user,$password,$dbase);
-@drcp_drop_table($c);
 drcp_create_table($c);
 
 // OCI_NEW_CONNECT

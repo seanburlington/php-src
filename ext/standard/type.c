@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.30.2.2.2.3.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: type.c,v 1.30.2.2.2.3.2.2 2008/01/31 11:21:15 helly Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -374,6 +374,7 @@ PHP_FUNCTION(is_callable)
 		syntax = Z_BVAL_PP(syntax_only);
 	}
 
+	syntax = syntax ? IS_CALLABLE_CHECK_SYNTAX_ONLY : IS_CALLABLE_STRICT;
 	if (argc > 2) {
 		retval = zend_is_callable(*var, syntax, &name);
 		zval_dtor(*callable_name);

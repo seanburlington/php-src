@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.141 2008/01/30 23:49:49 helly Exp $ */
+/* $Id: spl_directory.c,v 1.142 2008/01/31 11:09:50 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -168,10 +168,10 @@ PHPAPI zstr spl_filesystem_object_get_path(spl_filesystem_object *intern, int *l
 {
 	if (intern->type == SPL_FS_DIR) {
 		if (php_stream_is(intern->u.dir.dirp ,&php_glob_stream_ops)) {
+			zstr ret;
 			if (type) {
 				*type = IS_STRING;
 			}
-			zstr ret;
 			ret.s = php_glob_stream_get_path(intern->u.dir.dirp, 0, len);
 			return ret;
 		}

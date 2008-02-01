@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.73 2008/01/28 14:39:16 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.74 2008/02/01 22:13:13 davidc Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -168,8 +168,8 @@ ZEND_END_MODULE_GLOBALS(phar)
 
 ZEND_EXTERN_MODULE_GLOBALS(phar)
 
-int phar_has_bz2;
-int phar_has_zlib;
+extern int phar_has_bz2;
+extern int phar_has_zlib;
 
 #ifdef ZTS
 #	include "TSRM.h"

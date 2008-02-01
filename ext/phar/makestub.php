@@ -48,7 +48,7 @@ $stub = '/*
   +----------------------------------------------------------------------+
 */
 
-/* $Id: makestub.php,v 1.5 2008/01/29 07:10:21 sfox Exp $ */
+/* $Id: makestub.php,v 1.6 2008/02/01 14:38:44 sfox Exp $ */
 
 static inline void phar_get_stub(const char *index_php, const char *web, size_t *len, char **stub, const int name_len, const int web_len TSRMLS_DC)
 {
@@ -105,5 +105,5 @@ foreach ($s3split as $i => $unused) {
 $stub .= ");
 }";
 
-file_put_contents(dirname(__FILE__) . '/stub.h', $stub);
+file_put_contents(dirname(__FILE__) . '/stub.h', $stub."\n");
 ?>

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.139 2008/01/30 23:50:22 helly Exp $ */
+/* $Id: phar_object.c,v 1.140 2008/02/01 11:25:58 tony2001 Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1075,7 +1075,7 @@ static int phar_build(zend_object_iterator *iter, void *puser TSRMLS_DC)
 							efree(fname);
 							return ZEND_HASH_APPLY_KEEP;
 						}
-						test = expand_filepath(fname, test TSRMLS_CC);
+						test = expand_filepath(fname, NULL TSRMLS_CC);
 						if (test) {
 							efree(fname);
 							fname = test;

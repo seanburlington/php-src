@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.54 2008/01/26 16:26:33 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.55 2008/02/02 17:26:23 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2168,6 +2168,7 @@ PHP_FUNCTION(timezone_open)
 	tzobj = zend_object_store_get_object(date_instantiate(date_ce_timezone, return_value TSRMLS_CC) TSRMLS_CC);
 	tzobj->type = TIMELIB_ZONETYPE_ID;
 	tzobj->tzi.tz = tzi;
+	tzobj->initialized = 1;
 }
 /* }}} */
 

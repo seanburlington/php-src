@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.38 2008/01/30 23:49:49 helly Exp $ */
+/* $Id: spl_directory.h,v 1.39 2008/02/02 22:53:05 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -26,7 +26,9 @@
 
 extern PHPAPI zend_class_entry *spl_ce_SplFileInfo;
 extern PHPAPI zend_class_entry *spl_ce_DirectoryIterator;
+extern PHPAPI zend_class_entry *spl_ce_FilesystemIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveDirectoryIterator;
+extern PHPAPI zend_class_entry *spl_ce_GlobIterator;
 extern PHPAPI zend_class_entry *spl_ce_SplFileObject;
 extern PHPAPI zend_class_entry *spl_ce_SplTempFileObject;
 
@@ -108,7 +110,7 @@ static inline spl_filesystem_iterator* spl_filesystem_object_to_iterator(spl_fil
 
 static inline spl_filesystem_object* spl_filesystem_iterator_to_object(spl_filesystem_iterator *it)
 {
-	return (spl_filesystem_object*)((char*)it - offsetof(spl_filesystem_object, it));
+	return (spl_filesystem_object*)((char*)it - XtOffsetOf(spl_filesystem_object, it));
 }
 
 #define SPL_FILE_OBJECT_DROP_NEW_LINE      0x00000001 /* drop new lines */
@@ -122,10 +124,6 @@ static inline spl_filesystem_object* spl_filesystem_iterator_to_object(spl_files
 
 #define SPL_FILE_DIR_KEY_AS_FILENAME       0x00000100 /* make RecursiveDirectoryTree::key() return getFilename() */
 #define SPL_FILE_DIR_KEY_MODE_MASK         0x00000F00 /* mask RecursiveDirectoryTree::key() */
-
-#define SPL_FILE_DIR_GLOB_USE              0x00001000 /* use glob for open dir*/
-#define SPL_FILE_DIR_GLOB_REFETCH_PATH     0x00002000 /* whether we need to refetch the path in glob mode */
-#define SPL_FILE_DIR_GLOB_CHILD            0x00004000 /* do use glob on childs */
 
 #endif /* SPL_DIRECTORY_H */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.122 2008/01/27 15:03:55 helly Exp $ */
+/* $Id: php_spl.c,v 1.123 2008/02/02 22:56:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -158,7 +158,9 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(DirectoryIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(DomainException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(EmptyIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(FilesystemIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(FilterIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(GlobIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(InfiniteIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(InvalidArgumentException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(IteratorIterator, z_list, sub, allow, ce_flags); \

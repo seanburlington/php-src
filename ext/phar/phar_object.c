@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.141 2008/02/01 19:50:05 cellog Exp $ */
+/* $Id: phar_object.c,v 1.142 2008/02/02 05:20:36 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -433,6 +433,10 @@ PHP_METHOD(Phar, webPhar)
 		if (index_php_len) {
 			entry = index_php;
 			entry_len = index_php_len;
+			if (entry[0] != '/') {
+				spprintf(&entry, 0, "/%s", index_php);
+				entry_len++;
+			}
 		} else {
 			/* assume "index.php" is starting point */
 			entry = estrndup("/index.php", sizeof("/index.php"));
@@ -446,7 +450,7 @@ PHP_METHOD(Phar, webPhar)
 			zend_bailout();
 			return;
 		} else {
-			char *tmp, sa, *myentry;
+			char *tmp, sa;
 			sapi_header_line ctr = {0};
 			ctr.response_code = 301;
 			ctr.line_len = sizeof("HTTP/1.1 301 Moved Permanently")+1;
@@ -457,12 +461,11 @@ PHP_METHOD(Phar, webPhar)
 			sa = *tmp;
 			*tmp = '\0';
 			ctr.response_code = 0;
-			if (entry[0] == '/' && path_info[strlen(path_info)-1] == '/') {
-				myentry = entry + 1;
+			if (path_info[strlen(path_info)-1] == '/') {
+				ctr.line_len = spprintf(&(ctr.line), 4096, "Location: %s%s", path_info, entry + 1);
 			} else {
-				myentry = entry;
+				ctr.line_len = spprintf(&(ctr.line), 4096, "Location: %s%s", path_info, entry);
 			}
-			ctr.line_len = spprintf(&(ctr.line), 4096, "Location: %s%s", path_info, myentry);
 			*tmp = sa;
 			sapi_header_op(SAPI_HEADER_REPLACE, &ctr TSRMLS_CC);
 			sapi_send_headers(TSRMLS_C);

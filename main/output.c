@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.208 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: output.c,v 1.209 2008/02/02 23:25:43 helly Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -537,12 +537,13 @@ PHPAPI php_output_handler *php_output_handler_create_user(zval *output_handler, 
 		default:
 			user = ecalloc(1, sizeof(php_output_handler_user_func_t));
 			MAKE_STD_ZVAL(handler_name);
-			if (SUCCESS == zend_fcall_info_init(output_handler, &user->fci, &user->fcc, handler_name TSRMLS_CC)) {
+			if (SUCCESS == zend_fcall_info_init(output_handler, 0, &user->fci, &user->fcc, handler_name, NULL TSRMLS_CC)) {
 				handler = php_output_handler_init(handler_name, chunk_size, (flags & ~0xf) | PHP_OUTPUT_HANDLER_USER);
 				Z_ADDREF_P(output_handler);
 				user->zoh = output_handler;
 				handler->func.user = user;
 			} else {
+				/* TODO(helly) log the rror? */
 				efree(user);
 			}
 			zval_ptr_dtor(&handler_name);

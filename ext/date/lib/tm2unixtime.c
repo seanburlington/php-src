@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.20 2008/01/17 20:58:26 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.21 2008/02/03 14:10:48 derick Exp $ */
 
 #include "timelib.h"
 
@@ -127,6 +127,15 @@ static void do_adjust_relative(timelib_time* time)
 		time->d += time->relative.d;
 		time->m += time->relative.m;
 		time->y += time->relative.y;
+	}
+	switch (time->relative.first_last_day_of) {
+		case 1: // first
+			time->d = 1;
+			break;
+		case 2: // last
+			time->d = 0;
+			time->m++;
+			break;
 	}
 	do_normalize(time);
 

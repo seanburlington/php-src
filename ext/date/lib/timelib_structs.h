@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.24 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: timelib_structs.h,v 1.25 2008/02/03 14:10:48 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -122,6 +122,8 @@ typedef struct timelib_rel_time {
 
 	int weekday; /* Stores the day in 'next monday' */
 	int weekday_behavior; /* 0: the current day should *not* be counted when advancing forwards; 1: the current day *should* be counted */
+
+	int first_last_day_of;
 } timelib_rel_time;
 
 typedef struct timelib_time_offset {

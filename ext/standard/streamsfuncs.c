@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.18 2007/12/31 07:20:13 sebastian Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.19 2008/02/03 16:15:30 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1325,6 +1325,9 @@ PHP_FUNCTION(stream_socket_enable_crypto)
 		if (php_stream_xport_crypto_setup(stream, cryptokind, sessstream TSRMLS_CC) < 0) {
 			RETURN_FALSE;
 		}
+	} else if (enable) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "When enabling encryption you must specify the crypto type");
+		RETURN_FALSE;
 	}
 
 	ret = php_stream_xport_crypto_enable(stream, enable TSRMLS_CC);

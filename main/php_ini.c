@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.164 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: php_ini.c,v 1.165 2008/02/03 14:35:29 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -836,13 +836,10 @@ PHPAPI int cfg_get_string(char *varname, char **result)
 }
 /* }}} */
 
-#if ZEND_DEBUG
-#include "php_ini.h"
-PHPAPI HashTable get_configuration_hash(void)
+PHPAPI HashTable* php_ini_get_configuration_hash(void) /* {{{ */
 {
-	return configuration_hash;
-}
-#endif
+	return &configuration_hash;
+} /* }}} */
 
 /*
  * Local variables:

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.4.2.11 2008/01/29 22:06:43 rrichards Exp $ */
+/* $Id: mysqlnd_result.c,v 1.4.2.12 2008/02/04 17:33:46 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -351,8 +351,6 @@ void mysqlnd_internal_free_result_contents(MYSQLND_RES *result TSRMLS_DC)
 		result->row_packet = NULL;
 	}
 
-	result->conn = NULL;
-
 	if (result->meta) {
 		result->meta->m->free_metadata(result->meta, FALSE TSRMLS_CC);
 		result->meta = NULL;
@@ -374,12 +372,14 @@ static
 void mysqlnd_internal_free_result(MYSQLND_RES *result TSRMLS_DC)
 {
 	DBG_ENTER("mysqlnd_internal_free_result");
+
+	result->m.free_result_contents(result TSRMLS_CC);
+
 	if (result->conn) {
 		result->conn->m->free_reference(result->conn TSRMLS_CC);
 		result->conn = NULL;
 	}
 
-	result->m.free_result_contents(result TSRMLS_CC);
 	efree(result);
 
 	DBG_VOID_RETURN;

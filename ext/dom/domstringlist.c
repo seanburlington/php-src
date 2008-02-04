@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domstringlist.c,v 1.6.2.1.2.1.2.2 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: domstringlist.c,v 1.6.2.1.2.1.2.3 2008/02/04 15:22:59 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,13 @@
 #include "php_dom.h"
 
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_stringlist_item, 0, 0, 1)
+	ZEND_ARG_INFO(0, index)
+ZEND_END_ARG_INFO();
+/* }}} */
+
 /*
 * class domstringlist 
 *
@@ -36,7 +43,7 @@
 */
 
 const zend_function_entry php_dom_domstringlist_class_functions[] = {
-	PHP_FALIAS(item, dom_domstringlist_item, NULL)
+	PHP_FALIAS(item, dom_domstringlist_item, arginfo_dom_stringlist_item)
 	{NULL, NULL, NULL}
 };
 

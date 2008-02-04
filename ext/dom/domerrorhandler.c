@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domerrorhandler.c,v 1.5.2.1.2.2 2007/12/31 07:20:05 sebastian Exp $ */
+/* $Id: domerrorhandler.c,v 1.5.2.1.2.3 2008/02/04 15:23:11 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,13 @@
 #include "php_dom.h"
 
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_domerrorhandler_handle_error, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, error, DOMError, 0)
+ZEND_END_ARG_INFO();
+/* }}} */
+
 /*
 * class domerrorhandler 
 *
@@ -36,7 +43,7 @@
 */
 
 zend_function_entry php_dom_domerrorhandler_class_functions[] = {
-	PHP_FALIAS(handleError, dom_domerrorhandler_handle_error, NULL)
+	PHP_FALIAS(handleError, dom_domerrorhandler_handle_error, arginfo_dom_domerrorhandler_handle_error)
 	{NULL, NULL, NULL}
 };
 

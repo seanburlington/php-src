@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.5.2.1.2.2 2007/12/31 07:20:05 sebastian Exp $ */
+/* $Id: domconfiguration.c,v 1.5.2.1.2.3 2008/02/04 15:23:10 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,25 @@
 #include "php_dom.h"
 
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_set_parameter, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_OBJ_INFO(0, value, DOMUserData, 0)
+ZEND_END_ARG_INFO();
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_get_parameter, 0, 0, 0)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO();
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_can_set_parameter, 0, 0, 0)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_OBJ_INFO(0, value, DOMUserData, 0)
+ZEND_END_ARG_INFO();
+/* }}} */
+
 /*
 * class domdomconfiguration 
 *
@@ -36,9 +55,9 @@
 */
 
 zend_function_entry php_dom_domconfiguration_class_functions[] = {
-	PHP_FALIAS(setParameter, dom_domconfiguration_set_parameter, NULL)
-	PHP_FALIAS(getParameter, dom_domconfiguration_get_parameter, NULL)
-	PHP_FALIAS(canSetParameter, dom_domconfiguration_can_set_parameter, NULL)
+	PHP_FALIAS(setParameter, dom_domconfiguration_set_parameter, arginfo_dom_configuration_set_parameter)
+	PHP_FALIAS(getParameter, dom_domconfiguration_get_parameter, arginfo_dom_configuration_get_parameter)
+	PHP_FALIAS(canSetParameter, dom_domconfiguration_can_set_parameter, arginfo_dom_configuration_can_set_parameter)
 	{NULL, NULL, NULL}
 };
 

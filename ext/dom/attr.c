@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.18.2.2.2.3 2007/12/31 07:20:05 sebastian Exp $ */
+/* $Id: attr.c,v 1.18.2.2.2.4 2008/02/04 15:23:10 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,6 +30,18 @@
 #include "php_dom.h"
 
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_attr_is_id, 0, 0, 0)
+ZEND_END_ARG_INFO();
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_attr_construct, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO();
+/* }}} */
+
 /*
 * class DOMAttr extends DOMNode 
 *
@@ -38,8 +50,8 @@
 */
 
 zend_function_entry php_dom_attr_class_functions[] = {
-	PHP_FALIAS(isId, dom_attr_is_id, NULL)
-	PHP_ME(domattr, __construct, NULL, ZEND_ACC_PUBLIC)
+	PHP_FALIAS(isId, dom_attr_is_id, arginfo_dom_attr_is_id)
+	PHP_ME(domattr, __construct, arginfo_dom_attr_construct, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 

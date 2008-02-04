@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.144 2008/02/04 17:18:48 helly Exp $ */
+/* $Id: spl_directory.c,v 1.145 2008/02/04 18:35:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -619,8 +619,6 @@ void spl_filesystem_object_construct(INTERNAL_FUNCTION_PARAMETERS, int ctor_flag
 	}
 
 	intern = (spl_filesystem_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
-
-	intern->flags = flags;
 	if ((ctor_flags & DIT_CTOR_GLOB) && (
 		(path_type == IS_STRING && strstr(path.s, "glob://") != path.s) ||
 		(path_type == IS_UNICODE && u_strstr(path.u, u_glob) != path.u)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.145 2008/02/04 18:35:08 helly Exp $ */
+/* $Id: spl_directory.c,v 1.146 2008/02/04 18:46:02 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -602,10 +602,8 @@ void spl_filesystem_object_construct(INTERNAL_FUNCTION_PARAMETERS, int ctor_flag
 	php_set_error_handling(EH_THROW, spl_ce_RuntimeException TSRMLS_CC);
 
 	if (ctor_flags & DIT_CTOR_FLAGS) {
-		flags = SPL_FILE_DIR_CURRENT_AS_FILEINFO;
 		parsed = zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t|l", &path, &len, &path_type, &flags);
 	} else {
-		flags = 0;
 		parsed = zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t", &path, &len, &path_type);
 	}
 	if (parsed == FAILURE) {

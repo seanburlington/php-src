@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.143 2008/02/02 22:53:05 helly Exp $ */
+/* $Id: spl_directory.c,v 1.144 2008/02/04 17:18:48 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -597,7 +597,7 @@ void spl_filesystem_object_construct(INTERNAL_FUNCTION_PARAMETERS, int ctor_flag
 	zstr path;
 	int parsed, len;
 	zend_uchar path_type;
-	long flags;
+	long flags = 0;
 	
 	php_set_error_handling(EH_THROW, spl_ce_RuntimeException TSRMLS_CC);
 

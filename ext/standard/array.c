@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.19 2008/01/29 10:45:06 dmitry Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.20 2008/02/05 15:58:27 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2109,17 +2109,16 @@ PHP_FUNCTION(array_slice)
 	zval	 *input,		/* Input array */
 			**entry;		/* An array entry */
 	long	 offset,		/* Offset to get elements from */
-			 length = 0;	/* How many elements to get */
+			 length = NULL;	/* How many elements to get */
 	zend_bool preserve_keys = 0; /* Whether to preserve keys while copying to the new array or not */
 	int		 num_in,		/* Number of elements in the input array */
 			 pos;			/* Current position in the array */
-	zval	*z_length;
 	char *string_key;
 	uint string_key_len;
 	ulong num_key;
 	HashPosition hpos;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|z/b", &input, &offset, &z_length, &preserve_keys) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "al|lb", &input, &offset, &length, &preserve_keys) == FAILURE) {
 		return;
 	}
 
@@ -2127,10 +2126,7 @@ PHP_FUNCTION(array_slice)
 	num_in = zend_hash_num_elements(Z_ARRVAL_P(input));
 
 	/* We want all entries from offset to the end if length is not passed or is null */
-	if (ZEND_NUM_ARGS() >= 3 && Z_TYPE_P(z_length) != IS_NULL) {
-		convert_to_long(z_length);
-		length = Z_LVAL_P(z_length);
-	} else {
+	if (length == NULL) {
 		length = num_in;
 	}
 

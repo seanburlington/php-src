@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.4.2.13 2008/02/06 11:34:44 andrey Exp $ */
+/* $Id: mysqlnd_result.c,v 1.4.2.14 2008/02/06 14:12:32 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -438,6 +438,7 @@ mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC
 	ret = FAIL;
 	PACKET_INIT_ALLOCA(rset_header, PROT_RSET_HEADER_PACKET);
 	do {
+		SET_ERROR_AFF_ROWS(conn);
 		if (FAIL == (ret = PACKET_READ_ALLOCA(rset_header, conn))) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error reading result set's header");
 			break;
@@ -454,7 +455,6 @@ mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC
 			  safe to unconditionally turn off the flag here.
 			*/
 			conn->upsert_status.server_status &= ~SERVER_MORE_RESULTS_EXISTS;
-			conn->upsert_status.affected_rows = -1;
 			/*
 			  This will copy the error code and the messages, as they
 			  are buffers in the struct
@@ -506,6 +506,9 @@ mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC
 
 				MYSQLND_INC_CONN_STATISTIC(&conn->stats, STAT_RSET_QUERY);
 				memset(&conn->upsert_status, 0, sizeof(conn->upsert_status));
+				/* restore after zeroing */
+				SET_ERROR_AFF_ROWS(conn);
+
 				conn->last_query_type = QUERY_SELECT;
 				CONN_SET_STATE(conn, CONN_FETCHING_DATA);
 				/* PS has already allocated it */

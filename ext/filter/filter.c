@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.39.2.3 2008/01/25 20:20:07 nlopess Exp $ */
+/* $Id: filter.c,v 1.52.2.39.2.4 2008/02/06 19:06:58 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.3 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.4 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -453,15 +453,16 @@ static void php_zval_filter_recursive(zval **value, long filter, long flags, zva
 
 		for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(value), &pos);
 			 zend_hash_get_current_data_ex(Z_ARRVAL_PP(value), (void **) &element, &pos) == SUCCESS;
-			 zend_hash_move_forward_ex(Z_ARRVAL_PP(value), &pos)) {
-
-				if (Z_TYPE_PP(element) == IS_ARRAY) {
-					Z_ARRVAL_PP(element)->nApplyCount++;
-					php_zval_filter_recursive(element, filter, flags, options, charset, copy TSRMLS_CC);
-					Z_ARRVAL_PP(element)->nApplyCount--;
-				} else {
-					php_zval_filter(element, filter, flags, options, charset, copy TSRMLS_CC);
-				}
+			 zend_hash_move_forward_ex(Z_ARRVAL_PP(value), &pos)
+		) {
+			SEPARATE_ZVAL_IF_NOT_REF(element);
+			if (Z_TYPE_PP(element) == IS_ARRAY) {
+				Z_ARRVAL_PP(element)->nApplyCount++;
+				php_zval_filter_recursive(element, filter, flags, options, charset, copy TSRMLS_CC);
+				Z_ARRVAL_PP(element)->nApplyCount--;
+			} else {
+				php_zval_filter(element, filter, flags, options, charset, copy TSRMLS_CC);
+			}
 		}
 	} else {
 		php_zval_filter(value, filter, flags, options, charset, copy TSRMLS_CC);

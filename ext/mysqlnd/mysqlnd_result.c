@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.4.2.12 2008/02/04 17:33:46 andrey Exp $ */
+/* $Id: mysqlnd_result.c,v 1.4.2.13 2008/02/06 11:34:44 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -372,7 +372,6 @@ static
 void mysqlnd_internal_free_result(MYSQLND_RES *result TSRMLS_DC)
 {
 	DBG_ENTER("mysqlnd_internal_free_result");
-
 	result->m.free_result_contents(result TSRMLS_CC);
 
 	if (result->conn) {

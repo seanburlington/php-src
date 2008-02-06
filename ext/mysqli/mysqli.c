@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.10 2008/01/28 18:25:49 andrey Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.11 2008/02/06 11:34:43 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -687,7 +687,7 @@ PHP_MINIT_FUNCTION(mysqli)
 	/* for mysqli_query */
 	REGISTER_LONG_CONSTANT("MYSQLI_STORE_RESULT", MYSQLI_STORE_RESULT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_USE_RESULT", MYSQLI_USE_RESULT, CONST_CS | CONST_PERSISTENT);
-#if defined(HAVE_MYSQLND) && defined(MYSQLND_THREADING)
+#if defined(HAVE_MYSQLND) && defined(MYSQLND_THREADED)
 	REGISTER_LONG_CONSTANT("MYSQLI_BG_STORE_RESULT", MYSQLI_BG_STORE_RESULT, CONST_CS | CONST_PERSISTENT);
 #endif
 
@@ -984,7 +984,7 @@ ZEND_FUNCTION(mysqli_result_construct)
 		case MYSQLI_USE_RESULT:
 			result = mysql_use_result(mysql->mysql);
 			break;
-#if defined(HAVE_MYSQLND) && defined(MYSQLND_THREADING)
+#if defined(HAVE_MYSQLND) && defined(MYSQLND_THREADED)
 		case MYSQLI_BG_STORE_RESULT:
 			result = mysqli_bg_store_result(mysql->mysql);
 			break;

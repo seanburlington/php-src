@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.341 2008/01/15 13:03:22 helly Exp $ */
+/* $Id: run-tests.php,v 1.342 2008/02/08 16:47:20 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.341 $'."\n";
+					echo '$Revision: 1.342 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1099,7 +1099,7 @@ TEST $file
 		}
 
 		// End of actual test?
-		if ($secfile && preg_match('/^===DONE===$/', $line)) {
+		if ($secfile && preg_match('/^===DONE===\s*$/', $line)) {
 			$secdone = true;
 		}
 	}

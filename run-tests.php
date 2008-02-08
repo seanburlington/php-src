@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.14 2008/01/15 13:03:54 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.15 2008/02/08 16:46:23 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -440,7 +440,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.14 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.15 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -1077,7 +1077,7 @@ TEST $file
 		}
 
 		// End of actual test?
-		if ($secfile && preg_match('/^===DONE===$/', $line)) {
+		if ($secfile && preg_match('/^===DONE===\s*$/', $line)) {
 			$secdone = true;
 		}
 	}

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.285 2008/02/07 08:45:42 tony2001 Exp $ */
+/* $Id: phar.c,v 1.286 2008/02/08 04:26:40 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1014,7 +1014,6 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 			return SUCCESS;
 		} else {
 			/* file exists, but is either corrupt or not a phar archive */
-			php_stream_close(fp);
 			if (actual) {
 				efree(actual);
 			}
@@ -1199,6 +1198,7 @@ static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias,
 				if (!phar_has_zlib) {
 					MAPPHAR_ALLOC_FAIL("unable to decompress gzipped phar archive \"%s\" to temporary file, enable zlib extension in php.ini")
 				}
+				INIT_ZVAL(filterparams);
 				array_init(&filterparams);
 /* this is defined in zlib's zconf.h */
 #ifndef MAX_WBITS
@@ -1220,7 +1220,6 @@ static int phar_open_fp(php_stream* fp, char *fname, int fname_len, char *alias,
 						MAPPHAR_ALLOC_FAIL("unable to decompress gzipped phar archive \"%s\", ext/zlib is buggy in PHP versions older than 5.2.6")
 					}
 				}
-				zval_dtor(&filterparams);
 				php_stream_filter_append(&temp->writefilters, filter);
 				if (0 == php_stream_copy_to_stream(fp, temp, PHP_STREAM_COPY_ALL)) {
 					if (err) {
@@ -2407,10 +2406,10 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 			/* to properly compress, we have to tell zlib to add a zlib header */
 			zval filterparams;
 
+			INIT_ZVAL(filterparams);
 			array_init(&filterparams);
 			add_assoc_long(&filterparams, "window", MAX_WBITS+16);
 			filter = php_stream_filter_create("zlib.deflate", &filterparams, php_stream_is_persistent(phar->fp) TSRMLS_CC);
-			zval_dtor(&filterparams);
 			if (!filter) {
 				if (error) {
 					spprintf(error, 4096, "unable to compress all contents of phar \"%s\" using zlib, PHP versions older than 5.2.6 have a buggy zlib", phar->fname);
@@ -2685,7 +2684,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.285 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.286 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

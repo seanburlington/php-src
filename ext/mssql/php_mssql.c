@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.4.2.3 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.4.2.4 2008/02/10 14:49:23 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -889,6 +889,10 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 				char *res_buf;
 				DBDATEREC dateinfo;	
 				int res_length = dbdatlen(mssql_ptr->link,offset);
+
+				if (res_length == -1) {
+					res_length = 255;
+				}
 
 				if ((column_type != SQLDATETIME && column_type != SQLDATETIM4) || MS_SQL_G(datetimeconvert)) {
 

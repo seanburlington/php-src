@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.291 2008/02/11 06:46:43 cellog Exp $ */
+/* $Id: phar.c,v 1.292 2008/02/11 06:53:55 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1038,28 +1038,11 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 	/* set up our manifest */
 	mydata = ecalloc(sizeof(phar_archive_data), 1);
 
-	/* re-open for writing (we only reach here if the file does not exist) */
-	fp = php_stream_open_wrapper(fname, "w+b", IGNORE_URL|STREAM_MUST_SEEK|0, &mydata->fname);
-	if (!fp) {
-		if (options & REPORT_ERRORS) {
-			if (error) {
-				spprintf(error, 0, "creating archive \"%s\" failed", fname);
-			}
-		}
-		return FAILURE;
-	}
-	if (mydata->fname) {
-		fname = mydata->fname;
+	mydata->fname = expand_filepath(fname, NULL TSRMLS_CC);
 #ifdef PHP_WIN32
-		phar_unixify_path_separators(fname, fname_len);
+	phar_unixify_path_separators(fname, fname_len);
 #endif
-		fname_len = strlen(mydata->fname);
-	} else {
-		mydata->fname = estrndup(fname, fname_len);
-#ifdef PHP_WIN32
-		phar_unixify_path_separators(mydata->fname, fname_len);
-#endif
-	}
+	fname_len = strlen(mydata->fname);
 	
 	if (pphar) {
 		*pphar = mydata;
@@ -1072,7 +1055,7 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 	snprintf(mydata->version, sizeof(mydata->version), "%s", PHAR_API_VERSION_STR);
 	mydata->is_temporary_alias = alias ? 0 : 1;
 	mydata->internal_file_start = -1;
-	mydata->fp = fp;
+	mydata->fp = NULL;
 	mydata->is_writeable = 1;
 	mydata->is_brandnew = 1;
 	if (!alias_len || !alias) {
@@ -2700,7 +2683,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.291 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.292 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

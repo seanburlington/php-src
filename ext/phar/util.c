@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.3 2008/02/01 11:36:44 tony2001 Exp $ */
+/* $Id: util.c,v 1.4 2008/02/11 06:53:55 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -39,6 +39,9 @@ int phar_seek_efp(phar_entry_info *entry, off_t offset, int whence, off_t positi
 	php_stream *fp = phar_get_efp(entry);
 	off_t temp;
 
+	if (entry->is_dir) {
+		return 0;
+	}
 	switch (whence) {
 		case SEEK_END :
 			temp = entry->offset + entry->uncompressed_filesize + offset;

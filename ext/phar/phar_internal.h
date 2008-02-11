@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.75 2008/02/01 22:23:36 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.76 2008/02/11 06:46:43 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -265,7 +265,8 @@ struct _phar_archive_data {
 	int                      sig_len;
 	char                     *signature;
 	zval                     *metadata;
-	int                      is_explicit_alias:1;
+	/* if 1, then this alias was manually specified by the user and is not a permanent alias */
+	int                      is_temporary_alias:1;
 	int                      is_modified:1;
 	int                      is_writeable:1;
 	int                      is_brandnew:1;

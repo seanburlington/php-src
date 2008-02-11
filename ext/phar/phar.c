@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.293 2008/02/11 07:33:19 cellog Exp $ */
+/* $Id: phar.c,v 1.294 2008/02/11 17:13:17 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -213,6 +213,13 @@ int phar_archive_delref(phar_archive_data *phar TSRMLS_DC) /* {{{ */
 			phar_destroy_phar_data(phar TSRMLS_CC);
 		}
 		return 1;
+	} else if (!phar->refcount) {
+		if (phar->fp) {
+			/* close open file handle - allows removal or rename of
+			the file on windows, which has greedy locking */
+			php_stream_close(phar->fp);
+			phar->fp = NULL;
+		}
 	}
 	return 0;
 }
@@ -2683,7 +2690,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.293 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.294 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

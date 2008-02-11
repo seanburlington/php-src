@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.292 2008/02/11 06:53:55 cellog Exp $ */
+/* $Id: phar.c,v 1.293 2008/02/11 07:33:19 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1039,10 +1039,10 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 	mydata = ecalloc(sizeof(phar_archive_data), 1);
 
 	mydata->fname = expand_filepath(fname, NULL TSRMLS_CC);
-#ifdef PHP_WIN32
-	phar_unixify_path_separators(fname, fname_len);
-#endif
 	fname_len = strlen(mydata->fname);
+#ifdef PHP_WIN32
+	phar_unixify_path_separators(mydata->fname, fname_len);
+#endif
 	
 	if (pphar) {
 		*pphar = mydata;
@@ -2683,7 +2683,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.292 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.293 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

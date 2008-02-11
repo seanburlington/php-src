@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.20 2008/02/05 15:58:27 iliaa Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.21 2008/02/11 13:34:41 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2109,7 +2109,7 @@ PHP_FUNCTION(array_slice)
 	zval	 *input,		/* Input array */
 			**entry;		/* An array entry */
 	long	 offset,		/* Offset to get elements from */
-			 length = NULL;	/* How many elements to get */
+			 length = 0;	/* How many elements to get */
 	zend_bool preserve_keys = 0; /* Whether to preserve keys while copying to the new array or not */
 	int		 num_in,		/* Number of elements in the input array */
 			 pos;			/* Current position in the array */
@@ -2126,7 +2126,7 @@ PHP_FUNCTION(array_slice)
 	num_in = zend_hash_num_elements(Z_ARRVAL_P(input));
 
 	/* We want all entries from offset to the end if length is not passed or is null */
-	if (length == NULL) {
+	if (length == 0) {
 		length = num_in;
 	}
 

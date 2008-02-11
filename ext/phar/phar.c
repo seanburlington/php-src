@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.289 2008/02/08 05:56:25 cellog Exp $ */
+/* $Id: phar.c,v 1.290 2008/02/11 04:48:57 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2418,7 +2418,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 			array_init(&filterparams);
 			/* ext/zlib zval_dtors a separated zval, so we have to make sure it doesn't destroy ours */
 #if PHP_VERSION_ID < 50300
-			filterparams->refcount = 26;
+			filterparams.refcount = 26;
 #else
 			Z_SET_REFCOUNT(filterparams, 26);
 #endif
@@ -2699,7 +2699,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.289 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.290 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

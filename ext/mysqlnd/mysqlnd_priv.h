@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.4.2.9 2008/01/28 22:50:06 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.4.2.10 2008/02/11 14:48:04 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -90,7 +90,7 @@
 #define SERVER_STATUS_LAST_ROW_SENT			128
 #define SERVER_STATUS_DB_DROPPED			256 /* A database was dropped */
 #define SERVER_STATUS_NO_BACKSLASH_ESCAPES	512
-
+#define SERVER_QUERY_WAS_SLOW				1024
 
 
 /* Client Error codes */

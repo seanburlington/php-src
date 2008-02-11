@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.17 2008/02/04 17:55:51 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.18 2008/02/11 16:45:15 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -28,6 +28,8 @@
 #include "mysqlnd_charset.h"
 #include "mysqlnd_debug.h"
 #include "mysqlnd_block_alloc.h"
+/* for php_get_current_user() */
+#include "ext/standard/basic_functions.h" 
 
 /* the server doesn't support 4byte utf8, but let's make it forward compatible */
 #define MYSQLND_MAX_ALLOWED_USER_LEN	256  /* 64 char * 4byte */

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.10 2008/01/29 22:06:16 rrichards Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.11 2008/02/11 16:45:15 andrey Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H
@@ -398,9 +398,6 @@ struct st_mysqlnd_connection
 	unsigned int	port;
 	unsigned long	client_flag;
 	unsigned long	server_capabilities;
-
-	int				tmp_int;
-
 
 	/* For UPSERT queries */
 	mysqlnd_upsert_status upsert_status;

@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.10 2008/01/29 18:13:12 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.11 2008/02/11 16:45:15 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.10 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.11 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
@@ -44,6 +44,12 @@
 */
 #if PHP_DEBUG
 #define MYSQLND_DO_WIRE_CHECK_BEFORE_COMMAND 1
+#endif
+
+#if PHP_DEBUG && !defined(PHP_WIN32)
+#define MYSQLND_DBG_ENABLED 1
+#else
+#define MYSQLND_DBG_ENABLED 0
 #endif
 
 #ifdef ZTS

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.20 2008/01/20 14:13:11 bjori Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.21 2008/02/12 10:24:35 felipe Exp $ */
 
 /* TODO:
  *
@@ -556,7 +556,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		hashed_details_length = spprintf(&hashed_details, 0, "mysql__%s_", user);
 		client_flags = CLIENT_INTERACTIVE;
 	} else {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s!s!s!ll", &host_and_port, &host_len,
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s!s!s!bl", &host_and_port, &host_len,
 									&user, &user_len, &passwd, &passwd_len, 
 									&new_link, &client_flags)==FAILURE) {
 			return;

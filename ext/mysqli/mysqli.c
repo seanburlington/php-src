@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.15 2008/02/12 20:19:21 johannes Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.16 2008/02/12 22:05:34 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -781,17 +781,16 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_REPORT_ALL", MYSQLI_REPORT_ALL, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_REPORT_OFF", 0, CONST_CS | CONST_PERSISTENT);
 
-	REGISTER_LONG_CONSTANT("MYSQLI_DEBUG_TRACE_ENABLED", 
+	/* We use non-nested macros with expansion, as VC has problems */
 #ifdef HAVE_MYSQLND
-	MYSQLND_DBG_ENABLED
+	REGISTER_LONG_CONSTANT("MYSQLI_DEBUG_TRACE_ENABLED", MYSQLND_DBG_ENABLED, CONST_CS | CONST_PERSISTENT);
 #else
 #ifndef DBUG_OFF
-	0
+	REGISTER_LONG_CONSTANT("MYSQLI_DEBUG_TRACE_ENABLED", 0, CONST_CS | CONST_PERSISTENT);
 #else
-	1
+	REGISTER_LONG_CONSTANT("MYSQLI_DEBUG_TRACE_ENABLED", 1, CONST_CS | CONST_PERSISTENT);
 #endif
 #endif
-	, CONST_CS | CONST_PERSISTENT);
 
 	return SUCCESS;
 }

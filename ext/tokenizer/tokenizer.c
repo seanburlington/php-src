@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.2 2007/12/31 07:17:16 sebastian Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.3 2008/02/12 09:28:01 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -178,7 +178,7 @@ static void tokenize(zval *return_value TSRMLS_DC)
 			MAKE_STD_ZVAL(keyword);
 			array_init(keyword);
 			add_next_index_long(keyword, token_type);
-			if (token_type == T_END_HEREDOC) {
+			if (token_type == T_END_HEREDOC || token_type == T_END_NOWDOC) {
 				if (CG(increment_lineno)) {
 					token_line = ++CG(zend_lineno);
 					CG(increment_lineno) = 0;

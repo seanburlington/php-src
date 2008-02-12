@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.119 2008/02/12 10:51:25 andrey Exp $ 
+  $Id: mysqli.c,v 1.120 2008/02/12 10:54:27 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -75,7 +75,6 @@ static int le_pmysqli;
 void php_mysqli_dtor_p_elements(void *data)
 {
 	MYSQL *mysql = (MYSQL *) data;
-	TSRMLS_FETCH();
 #if defined(HAVE_MYSQLND)
 	mysqlnd_end_psession(mysql);
 #endif

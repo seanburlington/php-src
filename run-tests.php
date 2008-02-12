@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.15 2008/02/08 16:46:23 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.16 2008/02/12 18:23:14 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -231,6 +231,7 @@ More .INIs  : " . (function_exists(\'php_ini_scanned_files\') ? str_replace("\n"
 		'tidy' => array('tidy.clean_output=0'),
 		'zlib' => array('zlib.output_compression=Off'),
 		'xdebug' => array('xdebug.default_enable=0'),
+		'mbstring' => array('mbstring.func_overload=0'),
 	);
 	foreach($info_params_ex as $ext => $ini_overwrites_ex) {
 		if (in_array($ext, $exts_to_test)) {
@@ -440,7 +441,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.15 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.16 $'."\n";
 					exit(1);
 
 				case 'u':

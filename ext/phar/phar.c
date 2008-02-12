@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.294 2008/02/11 17:13:17 cellog Exp $ */
+/* $Id: phar.c,v 1.295 2008/02/12 05:28:05 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -214,9 +214,11 @@ int phar_archive_delref(phar_archive_data *phar TSRMLS_DC) /* {{{ */
 		}
 		return 1;
 	} else if (!phar->refcount) {
-		if (phar->fp) {
+		if (phar->fp && !(phar->flags & PHAR_FILE_COMPRESSION_MASK)) {
 			/* close open file handle - allows removal or rename of
-			the file on windows, which has greedy locking */
+			the file on windows, which has greedy locking
+			only close if the archive was not already compressed.  If it
+			was compressed, then the fp does not refer to the original file */
 			php_stream_close(phar->fp);
 			phar->fp = NULL;
 		}
@@ -2690,7 +2692,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.294 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.295 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.14 2008/02/12 10:54:54 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.15 2008/02/12 20:19:21 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -73,6 +73,8 @@ void php_mysqli_dtor_p_elements(void *data)
 {
 	MYSQL *mysql = (MYSQL *) data;
 #if defined(HAVE_MYSQLND)
+	TSRMLS_FETCH();
+
 	mysqlnd_end_psession(mysql);
 #endif
 	mysqli_close(mysql, MYSQLI_CLOSE_IMPLICIT);

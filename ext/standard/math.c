@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.6.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.6.2.2 2008/02/12 07:15:40 zoe Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -471,14 +471,14 @@ PHP_FUNCTION(pow)
    Returns e raised to the power of the number */
 PHP_FUNCTION(exp)
 {
-	zval **num;
+        double num;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &num) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_double_ex(num);
-	Z_DVAL_P(return_value) = exp(Z_DVAL_PP(num));
-	Z_TYPE_P(return_value) = IS_DOUBLE;
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d", &num) == FAILURE) {
+                return;
+        }
+
+        RETURN_DOUBLE(exp(num));
+
 }
 /* }}} */
 

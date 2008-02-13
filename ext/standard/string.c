@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.667 2008/02/12 01:03:43 stas Exp $ */
+/* $Id: string.c,v 1.668 2008/02/13 16:59:56 colder Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7985,10 +7985,6 @@ PHP_FUNCTION(substr_compare)
 				--len;
 			}
 
-			if (len > 0) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "The specified segment exceeds string length");
-				RETURN_FALSE;
-			}
 		} else {
 			end_offset = s1_len;
 		}
@@ -8006,14 +8002,13 @@ PHP_FUNCTION(substr_compare)
 			offset = (offset < 0) ? 0 : offset;
 		}
 
-		if (offset > s1_len) {
+		if (offset >= s1_len) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The start position cannot exceed initial string length");
 			RETURN_FALSE;
 		}
 
 		if (len > s1_len - offset) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The specified segment exceeds string length");
-			RETURN_FALSE;
+			len = s1_len - offset;
 		}
 
 		cmp_len = (uint) (len ? len : MAX(s2_len, (s1_len - offset)));

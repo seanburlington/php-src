@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.25 2008/02/04 20:43:50 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.26 2008/02/13 12:23:26 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -962,7 +962,7 @@ SPL_METHOD(RecursiveDirectoryIterator, __construct)
 	spl_filesystem_object *intern;
 	char *path;
 	int len;
-	long flags = 0;
+	long flags = SPL_FILE_DIR_KEY_AS_PATHNAME|SPL_FILE_DIR_CURRENT_AS_FILEINFO;
 
 	php_set_error_handling(EH_THROW, spl_ce_UnexpectedValueException TSRMLS_CC);
 

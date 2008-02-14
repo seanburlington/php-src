@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.22 2008/02/12 01:31:12 felipe Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.23 2008/02/14 08:46:25 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1911,6 +1911,7 @@ PHP_FUNCTION(array_push)
 		Z_ADDREF_P(new_var);
 
 		if (zend_hash_next_index_insert(Z_ARRVAL_P(stack), &new_var, sizeof(zval *), NULL) == FAILURE) {
+			Z_DELREF_P(new_var);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot add element to the array as the next element is already occupied");
 			efree(args);
 			RETURN_FALSE;

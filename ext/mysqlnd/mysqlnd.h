@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.9 2008/02/11 16:44:48 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.10 2008/02/14 12:49:30 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.3.2.9 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.3.2.10 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
@@ -346,6 +346,9 @@ ZEND_BEGIN_MODULE_GLOBALS(mysqlnd)
 	MYSQLND_DEBUG	*dbg;	/* The DBG object */
 	long			net_cmd_buffer_size;
 	long			net_read_buffer_size;
+#ifdef ZTS
+	THREAD_T		thread_id;
+#endif
 ZEND_END_MODULE_GLOBALS(mysqlnd)
 
 ZEND_EXTERN_MODULE_GLOBALS(mysqlnd);

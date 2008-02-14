@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps_codec.c,v 1.5 2008/01/02 21:16:46 andrey Exp $ */
+/* $Id: mysqlnd_ps_codec.c,v 1.6 2008/02/14 12:51:00 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"

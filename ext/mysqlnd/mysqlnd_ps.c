@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.11 2008/01/29 22:06:16 rrichards Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.12 2008/02/14 12:51:00 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.2 2008/01/29 18:13:12 andrey Exp $ */
+/* $Id: php_mysqlnd.c,v 1.3 2008/02/14 12:51:00 andrey Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"
@@ -189,7 +189,8 @@ static PHP_RINIT_FUNCTION(mysqlnd)
 			return FAILURE;
 		}
 		dbg->m->set_mode(dbg, MYSQLND_G(debug));
-		MYSQLND_G(dbg) = dbg;	
+		MYSQLND_G(dbg) = dbg;
+		MYSQLND_G(thread_id) = tsrm_thread_id();
 	}
 	return SUCCESS;
 }

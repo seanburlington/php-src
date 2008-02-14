@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.h,v 1.7 2008/01/29 12:00:52 andrey Exp $ */
+/* $Id: mysqlnd_statistics.h,v 1.8 2008/02/14 12:51:00 andrey Exp $ */
 
 #ifndef MYSQLND_STATISTICS_H
 #define MYSQLND_STATISTICS_H

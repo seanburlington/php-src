@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.h,v 1.5 2008/01/29 18:13:12 andrey Exp $ */
+/* $Id: mysqlnd_result.h,v 1.6 2008/02/14 12:51:00 andrey Exp $ */
 
 #ifndef MYSQLND_RESULT_H
 #define MYSQLND_RESULT_H

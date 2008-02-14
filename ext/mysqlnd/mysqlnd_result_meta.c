@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result_meta.c,v 1.6 2008/01/28 18:27:49 andrey Exp $ */
+/* $Id: mysqlnd_result_meta.c,v 1.7 2008/02/14 12:51:00 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"

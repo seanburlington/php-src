@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.11 2008/02/11 16:45:15 andrey Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.12 2008/02/14 12:51:00 andrey Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H

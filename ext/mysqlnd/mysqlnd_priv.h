@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.12 2008/02/11 14:48:39 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.13 2008/02/14 12:51:00 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H

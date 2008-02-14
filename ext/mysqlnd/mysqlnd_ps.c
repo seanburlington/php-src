@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.3.2.9 2008/01/29 22:06:43 rrichards Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.3.2.10 2008/02/14 14:50:21 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -512,6 +512,8 @@ MYSQLND_METHOD(mysqlnd_stmt, execute)(MYSQLND_STMT * const stmt TSRMLS_DC)
 		DBG_RETURN(FAIL);
 	}
 	stmt->execute_count++;
+
+	CONN_SET_STATE(conn, CONN_QUERY_SENT);
 
 	ret = mysqlnd_query_read_result_set_header(stmt->conn, stmt TSRMLS_CC);
 	if (ret == FAIL) {

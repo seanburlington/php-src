@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.9 2008/02/13 16:22:01 dmitry Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.10 2008/02/14 10:25:22 dmitry Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -515,7 +515,6 @@ lchown \
 lrand48 \
 memcpy \
 memmove \
-memrchr \
 mkstemp \
 mmap \
 nl_langinfo \

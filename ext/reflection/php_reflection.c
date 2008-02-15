@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.12 2008/02/15 12:38:53 derick Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.13 2008/02/15 12:48:13 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4119,9 +4119,9 @@ ZEND_METHOD(reflection_property, getDocComment)
 }
 /* }}} */
 
-/* {{{ proto public int ReflectionProperty::setAccesible()
+/* {{{ proto public int ReflectionProperty::setAccessible()
    Sets whether non-public properties can be requested */
-ZEND_METHOD(reflection_property, setAccesible)
+ZEND_METHOD(reflection_property, setAccessible)
 {
 	reflection_object *intern;
 	property_reference *ref;
@@ -4744,7 +4744,7 @@ ZEND_BEGIN_ARG_INFO(arginfo_reflection_property_setValue, 0)
 ZEND_END_ARG_INFO()
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_reflection_property_setAccesible, 0)
+ZEND_BEGIN_ARG_INFO(arginfo_reflection_property_setAccessible, 0)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
@@ -4764,7 +4764,7 @@ static const zend_function_entry reflection_property_functions[] = {
 	ZEND_ME(reflection_property, getModifiers, NULL, 0)
 	ZEND_ME(reflection_property, getDeclaringClass, NULL, 0)
 	ZEND_ME(reflection_property, getDocComment, NULL, 0)
-	ZEND_ME(reflection_property, setAccesible, arginfo_reflection_property_setAccesible, 0)
+	ZEND_ME(reflection_property, setAccessible, arginfo_reflection_property_setAccessible, 0)
 	{NULL, NULL, NULL}
 };
 
@@ -4943,7 +4943,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.12 2008/02/15 12:38:53 derick Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.13 2008/02/15 12:48:13 derick Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

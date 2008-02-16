@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.3 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.4 2008/02/16 11:46:03 hirokawa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -546,6 +546,13 @@ static void _php_mb_regex_ereg_exec(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		convert_to_string_ex(arg_pattern);
 		/* don't bother doing an extended regex with just a number */
 	}
+
+	if (!Z_STRVAL_PP(arg_pattern) || Z_STRLEN_PP(arg_pattern) == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "empty pattern");
+		RETVAL_FALSE;
+		goto out;
+	}
+
 	re = php_mbregex_compile_pattern(Z_STRVAL_PP(arg_pattern), Z_STRLEN_PP(arg_pattern), options, MBSTRG(current_mbctype), MBSTRG(regex_default_syntax) TSRMLS_CC);
 	if (re == NULL) {
 		RETVAL_FALSE;

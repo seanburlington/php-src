@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.21.2.3 2008/01/31 01:33:29 sixd Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.21.2.4 2008/02/16 01:20:22 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -102,7 +102,7 @@ typedef struct { /* php_oci_spool {{{ */
 	OCIError* err;			/* pool's error handle  */
 	OCISPool *poolh;		/* pool handle */
 	void* poolname;			/* session pool name */ 
-	unsigned int poolnamelen;	/* length of session pool name */
+	unsigned int poolname_len;	/* length of session pool name */
 	char *spool_hash_key;		/* Hash key for session pool in plist */
 } php_oci_spool; /* }}} */
 

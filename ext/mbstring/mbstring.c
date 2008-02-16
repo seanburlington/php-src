@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.275 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: mbstring.c,v 1.276 2008/02/16 08:49:07 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -892,6 +892,8 @@ PHP_RINIT_FUNCTION(mbstring)
 	const struct mb_overload_def *p;
 
 	MBSTRG(current_language) = MBSTRG(language);
+	php_mb_nls_get_default_detect_order_list(MBSTRG(language), 
+        &MBSTRG(default_detect_order_list), &MBSTRG(default_detect_order_list_size));
 
 	if (MBSTRG(internal_encoding) == mbfl_no_encoding_invalid) {
 		char *default_enc = NULL;

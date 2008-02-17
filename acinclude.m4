@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.332.2.14.2.29 2009/05/09 20:28:02 jani Exp $
+dnl $Id: acinclude.m4,v 1.332.2.14.2.26.2.1 2008/02/17 20:50:03 helly Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -920,7 +920,7 @@ AC_DEFUN([PHP_GEN_BUILD_DIRS],[
 ])
 
 dnl
-dnl PHP_NEW_EXTENSION(extname, sources [, shared [, sapi_class [, extra-cflags [, cxx [, zend_ext]]]]])
+dnl PHP_NEW_EXTENSION(extname, sources [, shared [,sapi_class[, extra-cflags[, cxx[, zend_ext]]]]])
 dnl
 dnl Includes an extension in the build.
 dnl
@@ -932,8 +932,6 @@ dnl a dynamically loadable library. Optional parameter "sapi_class" can
 dnl be set to "cli" to mark extension build only with CLI or CGI sapi's.
 dnl "extra-cflags" are passed to the compiler, with 
 dnl @ext_srcdir@ and @ext_builddir@ being substituted.
-dnl "cxx" can be used to indicate that a C++ shared module is desired.
-dnl "zend_ext" indicates a zend extension.
 AC_DEFUN([PHP_NEW_EXTENSION],[
   ext_builddir=[]PHP_EXT_BUILDDIR($1)
   ext_srcdir=[]PHP_EXT_SRCDIR($1)
@@ -968,15 +966,12 @@ dnl ---------------------------------------------- Shared module
   if test "$3" != "shared" && test "$3" != "yes" && test "$4" = "cli"; then
 dnl ---------------------------------------------- CLI static module
     [PHP_]translit($1,a-z_-,A-Z__)[_SHARED]=no
-    case "$PHP_SAPI" in
-      cgi|embed[)]
-        PHP_ADD_SOURCES(PHP_EXT_DIR($1),$2,$ac_extra,)
-        EXT_STATIC="$EXT_STATIC $1"
-        ;;
-      *[)]
-        PHP_ADD_SOURCES(PHP_EXT_DIR($1),$2,$ac_extra,cli)
-        ;;
-    esac
+    if test "$PHP_SAPI" = "cgi"; then
+      PHP_ADD_SOURCES(PHP_EXT_DIR($1),$2,$ac_extra,)
+      EXT_STATIC="$EXT_STATIC $1"
+    else
+      PHP_ADD_SOURCES(PHP_EXT_DIR($1),$2,$ac_extra,cli)
+    fi
     EXT_CLI_STATIC="$EXT_CLI_STATIC $1"
   fi
   PHP_ADD_BUILD_DIR($ext_builddir)
@@ -2158,17 +2153,17 @@ AC_DEFUN([PHP_PROG_RE2C],[
   AC_CHECK_PROG(RE2C, re2c, re2c)
   if test -n "$RE2C"; then
     AC_CACHE_CHECK([for re2c version], php_cv_re2c_version, [
-      re2c_vernum=`$RE2C --vernum 2>/dev/null`
-      if test -z "$re2c_vernum" || test "$re2c_vernum" -lt "1304"; then
+      re2c_vernum=`re2c --vernum 2>/dev/null`
+      if test -z "$re2c_vernum" || test "$re2c_vernum" -lt "1200"; then
         php_cv_re2c_version=invalid
       else
-        php_cv_re2c_version="`$RE2C --version | cut -d ' ' -f 2  2>/dev/null` (ok)"
+        php_cv_re2c_version="`re2c --version | cut -d ' ' -f 2  2>/dev/null` (ok)"
       fi 
     ])
   fi
   case $php_cv_re2c_version in
     ""|invalid[)]
-      AC_MSG_WARN([You will need re2c 0.13.4 or later if you want to regenerate PHP parsers.])
+      AC_MSG_WARN([You will need re2c 0.12.0 or later if you want to regenerate PHP parsers.])
       RE2C="exit 0;"
       ;;
   esac
@@ -2419,7 +2414,6 @@ AC_DEFUN([PHP_SETUP_ICONV], [
   $php_shtool mkdir -p ext/iconv
 
   echo > ext/iconv/php_have_bsd_iconv.h
-  echo > ext/iconv/php_have_ibm_iconv.h
   echo > ext/iconv/php_have_glibc_iconv.h
   echo > ext/iconv/php_have_libiconv.h
   echo > ext/iconv/php_have_iconv.h
@@ -2721,7 +2715,6 @@ AC_DEFUN([PHP_CHECK_CONFIGURE_OPTIONS],[
             enable-zend-multibyte[)] continue;;
           esac 
         fi
-
         is_arg_set=php_[]`echo [$]arg_name | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-' 'abcdefghijklmnopqrstuvwxyz_'`
         if eval test "x\$$is_arg_set" = "x"; then
           PHP_UNKNOWN_CONFIGURE_OPTIONS="$PHP_UNKNOWN_CONFIGURE_OPTIONS
@@ -2755,7 +2748,7 @@ ifelse([$2],[],[AC_MSG_ERROR([Cannot find php_pdo_driver.h.])],[$2])
 
 dnl
 dnl PHP_DETECT_ICC
-dnl Detect Intel C++ Compiler and unset $GCC if ICC found
+dnl
 AC_DEFUN([PHP_DETECT_ICC],
 [
   ICC="no"
@@ -2764,24 +2757,6 @@ AC_DEFUN([PHP_DETECT_ICC],
     ICC="no"
     AC_MSG_RESULT([no]),
     ICC="yes"
-    GCC="no"
-    AC_MSG_RESULT([yes])
-  )
-])
-
-dnl PHP_DETECT_SUNCC
-dnl Detect if the systems default compiler is suncc.
-dnl We also set some usefull CFLAGS if the user didn't set any
-AC_DEFUN([PHP_DETECT_SUNCC],[
-  SUNCC="no"
-  AC_MSG_CHECKING([for suncc])
-  AC_EGREP_CPP([^__SUNPRO_C], [__SUNPRO_C],
-    SUNCC="no"
-    AC_MSG_RESULT([no]),
-    SUNCC="yes"
-    GCC="no"
-    test -n "$auto_cflags" && CFLAGS="-fsimple=2 -xnorunpath -xO4 -xalias_level=basic -xipo=1 -xlibmopt -xprefetch_level=1 -xprefetch=auto -xstrconst -xtarget=native -zlazyload"
-    GCC=""
     AC_MSG_RESULT([yes])
   )
 ])

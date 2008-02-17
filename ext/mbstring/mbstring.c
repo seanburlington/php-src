@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.28 2008/02/16 08:25:11 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.29 2008/02/17 01:59:03 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1613,7 +1613,7 @@ PHP_FUNCTION(mb_strpos)
 		}
 	}
 
-	if (offset < 0 || (unsigned long)offset > haystack.len) {
+	if (offset < 0 || (unsigned long)offset > (unsigned long)mbfl_strlen(&haystack)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset not contained in string.");
 		RETURN_FALSE;
 	}

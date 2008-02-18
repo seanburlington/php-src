@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.23 2007/12/31 07:20:08 sebastian Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.24 2008/02/18 13:29:00 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1194,7 +1194,9 @@ void php_local_infile_end(void *ptr)
 		return;
 	}
 
-	php_stream_close(mysql->li_stream);
+	if (mysql->li_stream) {
+		php_stream_close(mysql->li_stream);
+	}
 	free(data);
 	return;	
 }

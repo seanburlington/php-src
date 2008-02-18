@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.298 2008/02/18 04:32:49 cellog Exp $ */
+/* $Id: phar.c,v 1.299 2008/02/18 04:42:03 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1957,7 +1957,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 		if (oldfile && !entry->is_modified) {
 			continue;
 		}
-		if (!phar_get_efp(entry)) {
+		if (!phar_get_efp(entry TSRMLS_CC)) {
 			/* re-open internal file pointer just-in-time */
 			newentry = phar_open_jit(phar, entry, oldfile, error, 0 TSRMLS_CC);
 			if (!newentry) {
@@ -1968,7 +1968,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 			}
 			entry = newentry;
 		}
-		file = phar_get_efp(entry);
+		file = phar_get_efp(entry TSRMLS_CC);
 		if (-1 == phar_seek_efp(entry, 0, SEEK_SET, 0 TSRMLS_CC)) {
 			if (closeoldfile) {
 				php_stream_close(oldfile);
@@ -2218,7 +2218,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, char **error 
 			file = entry->cfp;
 			php_stream_rewind(file);
 		} else {
-			file = phar_get_efp(entry);
+			file = phar_get_efp(entry TSRMLS_CC);
 			if (-1 == phar_seek_efp(entry, 0, SEEK_SET, 0 TSRMLS_CC)) {
 				if (closeoldfile) {
 					php_stream_close(oldfile);
@@ -2686,7 +2686,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.298 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.299 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -18,16 +18,17 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.8 2008/02/15 05:01:39 cellog Exp $ */
+/* $Id: util.c,v 1.9 2008/02/18 00:46:06 sfox Exp $ */
 
 #include "phar_internal.h"
 
 /* retrieve a phar_entry_info's current file pointer for reading contents */
 php_stream *phar_get_efp(phar_entry_info *entry)
 {
+	TSRMLS_FETCH();
+
 	if (entry->fp_type == PHAR_FP) {
 		if (!entry->phar->fp) {
-			TSRMLS_FETCH();
 			/* re-open just in time for cases where our refcount reached 0 on the phar archive */
 			phar_open_archive_fp(entry->phar TSRMLS_CC);
 		}

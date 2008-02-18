@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.13 2008/02/18 04:45:41 cellog Exp $ */
+/* $Id: util.c,v 1.14 2008/02/18 04:51:03 sfox Exp $ */
 
 #include "phar_internal.h"
 
@@ -78,7 +78,6 @@ int phar_mount_entry(phar_archive_data *phar, char *filename, int filename_len, 
 	phar_entry_info entry = {0};
 	php_stream_statbuf ssb;
 	const char *err;
-	int is_dir;
 
 	if (phar_path_check(&path, &path_len, &err) > pcr_is_ok) {
 		return FAILURE;

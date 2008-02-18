@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.48 2007/12/31 07:20:10 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.49 2008/02/18 14:30:25 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2144,7 +2144,6 @@ ZEND_METHOD(reflection_parameter, getDefaultValue)
 	reflection_object *intern;
 	parameter_reference *param;
 	zend_op *precv;
-	zval *zv, zv_copy;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_parameter_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(param);
@@ -2164,10 +2163,12 @@ ZEND_METHOD(reflection_parameter, getDefaultValue)
 		return;
 	}
 
-	zv_copy = precv->op2.u.constant;
-	zv = &zv_copy;
-	zval_update_constant_ex(&zv, (void*)0, param->fptr->common.scope TSRMLS_CC);
-	RETURN_ZVAL(zv, 1, 1);
+	*return_value = precv->op2.u.constant;
+	INIT_PZVAL(return_value);
+	if (Z_TYPE_P(return_value) != IS_CONSTANT) {
+		zval_copy_ctor(return_value);
+	}
+	zval_update_constant_ex(&return_value, (void*)0, param->fptr->common.scope TSRMLS_CC);
 }
 /* }}} */
 
@@ -4907,7 +4908,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.48 2007/12/31 07:20:10 sebastian Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.49 2008/02/18 14:30:25 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

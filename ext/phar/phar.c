@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.299 2008/02/18 04:42:03 sfox Exp $ */
+/* $Id: phar.c,v 1.300 2008/02/18 04:45:40 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -185,6 +185,10 @@ static void phar_destroy_phar_data(phar_archive_data *phar TSRMLS_DC) /* {{{ */
 	if (phar->manifest.arBuckets) {
 		zend_hash_destroy(&phar->manifest);
 		phar->manifest.arBuckets = NULL;
+	}
+	if (phar->mounted_dirs.arBuckets) {
+		zend_hash_destroy(&phar->mounted_dirs);
+		phar->mounted_dirs.arBuckets = NULL;
 	}
 	if (phar->metadata) {
 		zval_ptr_dtor(&phar->metadata);
@@ -838,6 +842,8 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 	/* set up our manifest */
 	zend_hash_init(&mydata->manifest, sizeof(phar_entry_info),
 		zend_get_hash_value, destroy_phar_manifest_entry, 0);
+	zend_hash_init(&mydata->mounted_dirs, sizeof(char *),
+		zend_get_hash_value, NULL, 0);
 	offset = halt_offset + manifest_len + 4;
 	memset(&entry, 0, sizeof(phar_entry_info));
 	entry.phar = mydata;
@@ -2686,7 +2692,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.299 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.300 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.80 2008/02/18 04:42:03 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.81 2008/02/18 04:45:41 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -261,6 +261,8 @@ struct _phar_archive_data {
 	size_t                   internal_file_start;
 	size_t                   halt_offset;
 	HashTable                manifest;
+	/* hash of mounted directory paths */
+	HashTable                mounted_dirs;
 	php_uint32               flags;
 	php_uint32               min_timestamp;
 	php_uint32               max_timestamp;

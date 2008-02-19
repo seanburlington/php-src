@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.19 2007/12/31 07:20:09 sebastian Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.20 2008/02/19 12:09:47 felipe Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -815,9 +815,9 @@ static PHP_METHOD(PDO, setAttribute)
 {
 	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	long attr;
-	zval *value = NULL;
+	zval *value;
 
-	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz!", &attr, &value)) {
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz", &attr, &value)) {
 		RETURN_FALSE;
 	}
 

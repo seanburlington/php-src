@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.4 2008/02/14 15:20:08 andrey Exp $ */
+/* $Id: php_mysqlnd.c,v 1.5 2008/02/19 15:38:24 andrey Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"
@@ -226,7 +226,7 @@ zend_module_entry mysqlnd_module_entry = {
 	mysqlnd_functions,
 	PHP_MINIT(mysqlnd),
 	PHP_MSHUTDOWN(mysqlnd),
-#ifdef PHP_DEBUG || defined(MYSQLND_THREADED)
+#if defined(PHP_DEBUG) || defined(MYSQLND_THREADED)
 	PHP_RINIT(mysqlnd),
 #else
 	NULL,

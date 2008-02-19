@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.52 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: oci8_statement.c,v 1.53 2008/02/19 01:44:29 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1226,6 +1226,14 @@ sb4 php_oci_bind_out_callback(
 	phpbind->out = 1; /* mark as OUT bind */
 
 	if (Z_TYPE_P(val) == IS_RESOURCE) {
+		/* Processing for ref-cursor out binds */
+		if (phpbind->statement != NULL) {
+			*bufpp = phpbind->statement;
+			*alenpp = &phpbind->dummy_len;
+			*piecep = OCI_ONE_PIECE;
+			*rcodepp = &phpbind->retcode;
+			*indpp = &phpbind->indicator;
+		}
 		retval = OCI_CONTINUE;
 	} else if (Z_TYPE_P(val) == IS_OBJECT) {
 		if (!phpbind->descriptor) {

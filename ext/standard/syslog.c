@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.49.2.3.2.2.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: syslog.c,v 1.49.2.3.2.2.2.2 2008/02/20 15:27:30 iliaa Exp $ */
 
 #include "php.h"
 
@@ -110,6 +110,7 @@ PHP_RINIT_FUNCTION(syslog)
 	} else {
 		BG(syslog_started)=0;
 	}
+	BG(syslog_device) = NULL;
 	return SUCCESS;
 }
 
@@ -126,6 +127,7 @@ PHP_MSHUTDOWN_FUNCTION(syslog)
 {
 	if (BG(syslog_device)) {
 		free(BG(syslog_device));
+		BG(syslog_device) = NULL;
 	}
 	return SUCCESS;
 }

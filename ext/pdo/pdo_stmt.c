@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.10 2008/01/14 18:41:31 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.11 2008/02/20 03:11:43 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -965,6 +965,8 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					} else {
 						break;
 					}
+				} else {
+					pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "Invalid column index" TSRMLS_CC);
 				}
 				return 0;
 

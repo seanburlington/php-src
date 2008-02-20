@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.c,v 1.1.2.7 2008/02/14 15:20:49 andrey Exp $ */
+/* $Id: mysqlnd_debug.c,v 1.1.2.8 2008/02/20 15:18:17 andrey Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -303,7 +303,9 @@ MYSQLND_METHOD(mysqlnd_debug, func_enter)(MYSQLND_DEBUG * self,
 										  unsigned int line, const char * const file,
 										  char * func_name, uint func_name_len)
 {
+#ifdef MYSQLND_THREADED
 	MYSQLND_ZTS(self);
+#endif
 	if ((self->flags & MYSQLND_DEBUG_DUMP_TRACE) == 0 || self->file_name == NULL) {
 		return FALSE;
 	}
@@ -349,8 +351,9 @@ MYSQLND_METHOD(mysqlnd_debug, func_leave)(MYSQLND_DEBUG * self, unsigned int lin
 										  const char * const file)
 {
 	char *func_name;
+#ifdef MYSQLND_THREADED
 	MYSQLND_ZTS(self);
-
+#endif
 	if ((self->flags & MYSQLND_DEBUG_DUMP_TRACE) == 0 || self->file_name == NULL) {
 		return PASS;
 	}

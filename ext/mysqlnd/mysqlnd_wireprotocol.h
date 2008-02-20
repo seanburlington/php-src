@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.8 2008/02/14 12:49:30 andrey Exp $ */
+/* $Id: mysqlnd_wireprotocol.h,v 1.4.2.9 2008/02/20 15:18:17 andrey Exp $ */
 
 #ifndef MYSQLND_WIREPROTOCOL_H
 #define MYSQLND_WIREPROTOCOL_H
@@ -42,11 +42,13 @@ extern char * mysqlnd_read_body_name;
 		packet = (c_type) pecalloc(1, packet_methods[(enum_type)].struct_size, (pers)); \
 		((c_type) (packet))->header.m = &packet_methods[(enum_type)]; \
 		((c_type) (packet))->header.persistent = (pers); \
+		DBG_INF_FMT("PACKET_INIT(%p, %d, %d)", packet, (int) enum_type, (int) pers); \
 	}
 #define PACKET_WRITE(packet, conn)	((packet)->header.m->write_to_net((packet), (conn) TSRMLS_CC))
 #define PACKET_READ(packet, conn)	((packet)->header.m->read_from_net((packet), (conn) TSRMLS_CC))
 #define PACKET_FREE(packet) \
 	do { \
+		DBG_INF_FMT("PACKET_FREE(%p)", packet); \
 		((packet)->header.m->free_mem((packet), FALSE TSRMLS_CC)); \
 	} while (0);
 

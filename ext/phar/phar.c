@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.302 2008/02/18 21:45:01 sfox Exp $ */
+/* $Id: phar.c,v 1.303 2008/02/20 19:22:11 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1712,7 +1712,7 @@ char *phar_create_default_stub(const char *index_php, const char *web_index, siz
 		*error = NULL;
 	}
 
-	if (!index_php) {
+	if (!index_php || strlen(index_php) == 0) {
 		index_php = "index.php";
 	}
 
@@ -2690,7 +2690,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.302 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.303 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.229 2008/01/25 19:39:45 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.230 2008/02/20 22:15:53 felipe Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -2013,7 +2013,7 @@ PHPAPI void  php_pcre_grep_impl(pcre_cache_entry *pce, zval *input, zval *return
 
 		zend_hash_move_forward(Z_ARRVAL_P(input));
 	}
-	
+	zend_hash_internal_pointer_reset(Z_ARRVAL_P(input));
 	/* Clean up */
 	efree(offsets);
 }

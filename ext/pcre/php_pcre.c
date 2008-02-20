@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.24 2008/01/14 09:46:54 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.25 2008/02/20 22:08:18 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1744,7 +1744,7 @@ PHPAPI void  php_pcre_grep_impl(pcre_cache_entry *pce, zval *input, zval *return
 		
 		zend_hash_move_forward(Z_ARRVAL_P(input));
 	}
-	
+	zend_hash_internal_pointer_reset(Z_ARRVAL_P(input));
 	/* Clean up */
 	efree(offsets);
 }

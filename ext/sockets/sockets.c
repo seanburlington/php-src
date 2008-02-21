@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.16 2008/02/21 02:34:50 felipe Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.17 2008/02/21 02:39:43 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -585,7 +585,7 @@ static int php_sock_array_from_fd_set(zval *sock_array, fd_set *fds TSRMLS_DC) /
 	php_socket	*php_sock;
 	HashTable	*new_hash;
 	char 		*key;
-	int			num;
+	int			num = 0;
 	ulong       num_key;
 	uint 		key_len;
 

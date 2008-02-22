@@ -1,5 +1,5 @@
 The Win32 Build System.
-$Id: README.WIN32-BUILD-SYSTEM,v 1.4 2003/12/23 02:51:18 wez Exp $
+$Id: README.WIN32-BUILD-SYSTEM,v 1.5 2008/02/22 17:15:57 philip Exp $
 Wez Furlong <wez@thebrainroom.com>
 
 If you need help with the build system, send mail to
@@ -87,7 +87,7 @@ a. Requirements
 
 c. Generating configure
 
- Change directory to where you have your PHP 5 sources.
+ Change directory to where you have your PHP sources.
  Run buildconf.bat.
 
 d. Configuring

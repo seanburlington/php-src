@@ -16,12 +16,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10.2.11.2.4 2007/12/31 07:20:05 sebastian Exp $ */
+/* $Id: timelib.h,v 1.10.2.11.2.5 2008/02/22 09:48:18 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
 
 #include "timelib_structs.h"
+#if HAVE_LIMITS_H
+#include <limits.h>
+#endif
 
 #define TIMELIB_NONE             0x00
 #define TIMELIB_OVERRIDE_TIME    0x01

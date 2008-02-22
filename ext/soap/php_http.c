@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.111 2007/12/31 07:12:14 sebastian Exp $ */
+/* $Id: php_http.c,v 1.112 2008/02/22 05:05:50 rasmus Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -1335,3 +1335,11 @@ static int get_http_headers(php_stream *stream, char **response, int *out_size T
 	(*out_size) = tmp_response.len;
 	return done;
 }
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
+ */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.669 2008/02/23 17:03:53 helly Exp $ */
+/* $Id: string.c,v 1.670 2008/02/23 18:29:16 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -491,7 +491,7 @@ PHP_FUNCTION(nl_langinfo)
 	}
 
 	if (UG(unicode)) {
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "deprecated in Unicode mode, please use ICU locale functions");
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "deprecated in Unicode mode, please use ICU locale functions");
 	}
 
 	switch(item) { /* {{{ */
@@ -6148,7 +6148,7 @@ PHP_FUNCTION(setlocale)
 	}
 
 	if (UG(unicode)) {
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "deprecated in Unicode mode, please use ICU locale functions");
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "deprecated in Unicode mode, please use ICU locale functions");
 	}
 
 #ifdef HAVE_SETLOCALE
@@ -7177,7 +7177,7 @@ PHP_FUNCTION(localeconv)
 	}
 
 	if (UG(unicode)) {
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "deprecated in Unicode mode, please use ICU locale functions");
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "deprecated in Unicode mode, please use ICU locale functions");
 	}
 
 	MAKE_STD_ZVAL(grouping);

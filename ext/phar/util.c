@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.14 2008/02/18 04:51:03 sfox Exp $ */
+/* $Id: util.c,v 1.15 2008/02/23 21:33:45 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -782,7 +782,7 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 		return NULL;
 	}
 
-	if (!&phar->manifest.arBuckets) {
+	if (!phar->manifest.arBuckets) {
 		return NULL;
 	}
 	if (is_dir) {

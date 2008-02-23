@@ -1,5 +1,7 @@
 --TEST--
 Bug #22231 (segfault when returning a global variable by reference)
+--INI--
+error_reporting=E_ALL | E_DEPRECATED
 --FILE--
 <?php
 class foo {
@@ -25,7 +27,7 @@ $foo = &foo();
 var_dump($foo->fubar);
 ?>
 --EXPECTF--
-Strict Standards: Assigning the return value of new by reference is deprecated in %s on line %d
+Deprecated: Assigning the return value of new by reference is deprecated in %s on line %d
 object(foo)#%d (1) {
   ["fubar"]=>
   string(5) "fubar"

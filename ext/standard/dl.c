@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.106.2.1.2.5.2.4 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: dl.c,v 1.106.2.1.2.5.2.5 2008/02/23 17:06:21 helly Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -80,7 +80,7 @@ PHP_FUNCTION(dl)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not supported in multithreaded Web servers - use extension=%s in your php.ini", Z_STRVAL_P(filename));
 		RETURN_FALSE;
 #else
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "dl() is deprecated - use extension=%s in your php.ini", Z_STRVAL_P(filename));
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "dl() is deprecated - use extension=%s in your php.ini", Z_STRVAL_P(filename));
 #endif
 	}
 
@@ -97,6 +97,8 @@ PHP_FUNCTION(dl)
 #define USING_ZTS 0
 #endif
 
+/* {{{ php_dl
+ */
 PHPAPI int php_load_extension(char *filename, int type, int start_now TSRMLS_DC) /* {{{ */
 {
 	void *handle;

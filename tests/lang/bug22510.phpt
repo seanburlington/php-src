@@ -1,5 +1,7 @@
 --TEST--
 Bug #22510 (segfault among complex references)
+--INI--
+error_reporting=E_ALL | E_DEPRECATED
 --FILE--
 <?php
 class foo 
@@ -89,15 +91,15 @@ $bar->instance->finalize();
 print "I'm alive!\n";
 ?>
 --EXPECTF--
-Strict Standards: Assigning the return value of new by reference is deprecated in %s on line %d
+Deprecated: Assigning the return value of new by reference is deprecated in %s on line %d
 ok1
 bar::run1
 foo::method1
 
-Strict Standards: Only variable references should be returned by reference in %s on line %d
+Notice: Only variable references should be returned by reference in %s on line %d
 foo::method1
 
-Strict Standards: Only variable references should be returned by reference in %s on line %d
+Notice: Only variable references should be returned by reference in %s on line %d
 foo::finalize
 done!
 ok2
@@ -116,9 +118,9 @@ ouch
 bar::run1
 foo::method1
 
-Strict Standards: Only variable references should be returned by reference in %s on line %d
+Notice: Only variable references should be returned by reference in %s on line %d
 foo::method1
 
-Strict Standards: Only variable references should be returned by reference in %s on line %d
+Notice: Only variable references should be returned by reference in %s on line %d
 foo::finalize
 I'm alive!

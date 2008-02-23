@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.668 2008/02/13 16:59:56 colder Exp $ */
+/* $Id: string.c,v 1.669 2008/02/23 17:03:53 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6158,7 +6158,7 @@ PHP_FUNCTION(setlocale)
 		cat = Z_LVAL_PP(pcategory);
 	} else { /* FIXME: The following behaviour should be removed. */
 		char *category;
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Passing locale category name as string is deprecated. Use the LC_* -constants instead");
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "Passing locale category name as string is deprecated. Use the LC_* -constants instead");
 		convert_to_string_ex(pcategory);
 		category = Z_STRVAL_P(*pcategory);
 

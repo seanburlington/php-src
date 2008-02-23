@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.123 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: dl.c,v 1.124 2008/02/23 17:03:53 helly Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -63,6 +63,18 @@ PHP_FUNCTION(dl)
 	if (Z_STRLEN_P(filename) >= MAXPATHLEN) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "File name exceeds the maximum allowed length of %d characters", MAXPATHLEN);
 		RETURN_FALSE;
+	}
+
+	if ((strncmp(sapi_module.name, "cgi", 3) != 0) &&
+		(strcmp(sapi_module.name, "cli") != 0) &&
+		(strncmp(sapi_module.name, "embed", 5) != 0)
+	) {
+#ifdef ZTS
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not supported in multithreaded Web servers - use extension=%s in your php.ini", Z_STRVAL_P(filename));
+		RETURN_FALSE;
+#else
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "dl() is deprecated - use extension=%s in your php.ini", Z_STRVAL_P(filename));
+#endif
 	}
 
 	php_dl(filename, MODULE_TEMPORARY, return_value, 0 TSRMLS_CC);
@@ -242,7 +254,7 @@ PHPAPI void php_dl(zval *file, int type, zval *return_value, int start_now TSRML
 
 	/* Load extension */
 	if (php_load_extension(filename, type, start_now TSRMLS_CC) == FAILURE) {
-		RETVAL_FALSE;  
+		RETVAL_FALSE;
 	} else {
 		RETVAL_TRUE;
 	}

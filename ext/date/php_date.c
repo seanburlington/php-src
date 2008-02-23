@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.165 2008/02/13 21:53:01 derick Exp $ */
+/* $Id: php_date.c,v 1.166 2008/02/23 17:03:53 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1360,7 +1360,7 @@ PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 	}
 	/* Support for the deprecated is_dst parameter */
 	if (dst != -1) {
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "The is_dst parameter is deprecated");
+		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "The is_dst parameter is deprecated");
 		if (gmt) {
 			/* GMT never uses DST */
 			if (dst == 1) {

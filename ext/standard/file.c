@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.512 2008/02/23 17:03:53 helly Exp $ */
+/* $Id: file.c,v 1.513 2008/02/24 11:49:39 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1493,7 +1493,6 @@ PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC)
 {
 	int ret;
 
-	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "This function is deprecated; use php_stream_mkdir() instead.");
 	if (php_check_open_basedir(dir TSRMLS_CC)) {
 		return -1;
 	}

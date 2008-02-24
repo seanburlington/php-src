@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.39.2.4 2008/02/06 19:06:58 jani Exp $ */
+/* $Id: filter.c,v 1.52.2.39.2.5 2008/02/24 18:41:08 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.4 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.39.2.5 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -322,7 +322,7 @@ static void php_zval_filter(zval **value, long filter, long flags, zval *options
 	filter_func.function(*value, flags, options, charset TSRMLS_CC);
 
 	if (
-		options &&
+		options && (Z_TYPE_P(options) == IS_ARRAY || Z_TYPE_P(options) == IS_OBJECT) &&
 		((flags & FILTER_NULL_ON_FAILURE && Z_TYPE_PP(value) == IS_NULL) || 
 		(!(flags & FILTER_NULL_ON_FAILURE) && Z_TYPE_PP(value) == IS_BOOL && Z_LVAL_PP(value) == 0)) &&
 		zend_hash_exists(HASH_OF(options), "default", sizeof("default"))

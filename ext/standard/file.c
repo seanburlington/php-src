@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.8 2008/02/23 17:06:21 helly Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.9 2008/02/24 11:45:55 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1381,8 +1381,6 @@ PHPAPI PHP_FUNCTION(fseek)
 PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC)
 {
 	int ret;
-
-	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "This function is deprecated; use php_stream_mkdir() instead.");
 
 	if (PG(safe_mode) && (!php_checkuid(dir, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		return -1;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.17.2.12 2008/02/04 17:07:06 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.13 2008/02/25 23:39:08 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,6 +36,7 @@
 #include "spl_exceptions.h"
 #include "spl_observer.h"
 #include "spl_dllist.h"
+#include "spl_heap.h"
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
 #include "ext/standard/md5.h"
@@ -157,6 +158,10 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(SplDoublyLinkedList, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplQueue, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplStack, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplHeap, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplMinHeap, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplMaxHeap, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplPriorityQueue, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(BadFunctionCallException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(BadMethodCallException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(CachingIterator, z_list, sub, allow, ce_flags); \
@@ -749,6 +754,7 @@ PHP_MINIT_FUNCTION(spl)
 	PHP_MINIT(spl_directory)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_sxe)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_dllist)(INIT_FUNC_ARGS_PASSTHRU);
+	PHP_MINIT(spl_heap)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_observer)(INIT_FUNC_ARGS_PASSTHRU);
 
 	return SUCCESS;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.28.2.1.2.4.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.28.2.1.2.4.2.2 2008/02/25 22:54:57 felipe Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -150,7 +150,12 @@ static char Lookahead(char *word, int how_far)
 						(*phoned_word)[p_idx++] = c; \
 					}
 /* Slap a null character on the end of the phoned word */
-#define End_Phoned_Word	{(*phoned_word)[p_idx] = '\0';}
+#define End_Phoned_Word	{ \
+							if (p_idx == max_buffer_len) { \
+								*phoned_word = erealloc(*phoned_word, max_buffer_len + 1); \
+							} \
+							(*phoned_word)[p_idx] = '\0'; \
+						}
 /* How long is the phoned word? */
 #define Phone_Len	(p_idx)
 

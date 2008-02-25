@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.53 2008/02/19 01:44:29 sixd Exp $ */
+/* $Id: oci8_statement.c,v 1.54 2008/02/25 23:49:51 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -108,7 +108,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, zst
 
 	statement->connection = connection;
 	statement->has_data = 0;
-	statement->nested = 0;
+	statement->parent_stmtid = 0;
 	zend_list_addref(statement->connection->rsrc_id);
 
 	if (OCI_G(default_prefetch) > 0) {
@@ -344,6 +344,7 @@ sb4 php_oci_define_callback(dvoid *ctx, OCIDefine *define, ub4 iter, dvoid **buf
 				if (!nested_stmt) {
 					return OCI_ERROR;
 				}
+				nested_stmt->parent_stmtid = outcol->statement->id;
 				zend_list_addref(outcol->statement->id);
 				outcol->nested_statement = nested_stmt;
 				outcol->stmtid = nested_stmt->id;

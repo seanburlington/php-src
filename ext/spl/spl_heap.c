@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.1 2008/02/25 23:36:36 colder Exp $ */
+/* $Id: spl_heap.c,v 1.2 2008/02/25 23:40:47 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1181,6 +1181,8 @@ PHP_MINIT_FUNCTION(spl_heap) /* {{{ */
 
 	return SUCCESS;
 }
+/* }}} */
+
 /*
  * Local variables:
  * tab-width: 4

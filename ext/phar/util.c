@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.18 2008/02/25 04:30:54 cellog Exp $ */
+/* $Id: util.c,v 1.19 2008/02/25 11:37:07 sfox Exp $ */
 
 #include "phar_internal.h"
 
@@ -126,7 +126,7 @@ void phar_rename_archive(phar_archive_data *phar, char *ext TSRMLS_DC)
 	if (!phar->is_zip && !phar->is_tar) {
 		phar->alias = estrndup(newpath, strlen(newpath));
 		phar->alias_len = strlen(newpath);
-		zend_hash_add(&(PHAR_GLOBALS->phar_alias_map), newpath, strlen(newpath), (void*)&phar, sizeof(phar_archive_data*), NULL);
+		zend_hash_update(&(PHAR_GLOBALS->phar_alias_map), newpath, strlen(newpath), (void*)&phar, sizeof(phar_archive_data*), NULL);
 	}
 
 	zend_hash_add(&(PHAR_GLOBALS->phar_fname_map), newpath, strlen(newpath), (void*)&phar, sizeof(phar_archive_data*), NULL);

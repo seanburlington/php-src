@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.33 2008/02/24 16:09:05 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.34 2008/02/26 00:14:04 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -165,10 +165,6 @@ static int dispatch_param_event(pdo_stmt_t *stmt, enum pdo_param_event event_typ
 	}
 
 	ht = stmt->bound_params;
-
-	if (ht && !stmt->bound_param_map) {
-		return 0;
-	}
 
 iterate:
 	if (ht) {

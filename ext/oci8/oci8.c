@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.343 2008/02/19 01:44:29 sixd Exp $ */
+/* $Id: oci8.c,v 1.344 2008/02/26 02:18:16 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -395,15 +395,15 @@ zend_module_entry oci8_module_entry = {
 
 /* {{{ PHP_INI */
 PHP_INI_BEGIN()
-    STD_PHP_INI_ENTRY("oci8.max_persistent",		"-1",	PHP_INI_SYSTEM,		ONUPDATELONGFUNC,		max_persistent,			zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.persistent_timeout",	"-1",	PHP_INI_SYSTEM,		ONUPDATELONGFUNC,		persistent_timeout,		zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.ping_interval",			"60",	PHP_INI_SYSTEM,		ONUPDATELONGFUNC,		ping_interval,			zend_oci_globals,	oci_globals)
-    STD_PHP_INI_BOOLEAN("oci8.privileged_connect",	"0",	PHP_INI_SYSTEM,		OnUpdateBool,			privileged_connect,		zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.statement_cache_size",	"20",	PHP_INI_SYSTEM,		ONUPDATELONGFUNC,		statement_cache_size, 	zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.default_prefetch",		"10",	PHP_INI_SYSTEM,		ONUPDATELONGFUNC,		default_prefetch,		zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.old_oci_close_semantics", "0",	PHP_INI_SYSTEM,		OnUpdateBool,			old_oci_close_semantics,zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.connection_class",		"" ,    PHP_INI_ALL,		OnUpdateUTF8String, 	connection_class, 		zend_oci_globals,	oci_globals)
-    STD_PHP_INI_ENTRY("oci8.events",				"0" ,	PHP_INI_SYSTEM,		OnUpdateBool, 			events, 				zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.max_persistent",			"-1",	PHP_INI_SYSTEM,	ONUPDATELONGFUNC,	max_persistent,			zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.persistent_timeout",		"-1",	PHP_INI_SYSTEM,	ONUPDATELONGFUNC,	persistent_timeout,		zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.ping_interval",			"60",	PHP_INI_SYSTEM,	ONUPDATELONGFUNC,	ping_interval,			zend_oci_globals,	oci_globals)
+	STD_PHP_INI_BOOLEAN("oci8.privileged_connect",		"0",	PHP_INI_SYSTEM,	OnUpdateBool,		privileged_connect,		zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.statement_cache_size",	"20",	PHP_INI_SYSTEM,	ONUPDATELONGFUNC,	statement_cache_size,	zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.default_prefetch",		"10",	PHP_INI_SYSTEM,	ONUPDATELONGFUNC,	default_prefetch,		zend_oci_globals,	oci_globals)
+	STD_PHP_INI_BOOLEAN("oci8.old_oci_close_semantics",	"0",	PHP_INI_SYSTEM,	OnUpdateBool,		old_oci_close_semantics,zend_oci_globals,	oci_globals)
+	STD_PHP_INI_ENTRY(	"oci8.connection_class",		"",		PHP_INI_ALL,	OnUpdateUTF8String,	connection_class,		zend_oci_globals,	oci_globals)
+	STD_PHP_INI_BOOLEAN("oci8.events",					"0",	PHP_INI_SYSTEM,	OnUpdateBool,		events,					zend_oci_globals,	oci_globals)
 PHP_INI_END()
 /* }}} */
 
@@ -671,7 +671,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", "1.3.1 Beta");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.343 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.344 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

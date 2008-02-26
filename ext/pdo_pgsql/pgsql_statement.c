@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.46 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: pgsql_statement.c,v 1.47 2008/02/26 00:14:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -183,6 +183,9 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 				break;
 
 			case PDO_PARAM_EVT_EXEC_PRE:
+				if (!stmt->bound_param_map) {
+					return 0;
+				}
 				if (!S->param_values) {
 					S->param_values = ecalloc(
 							zend_hash_num_elements(stmt->bound_param_map),

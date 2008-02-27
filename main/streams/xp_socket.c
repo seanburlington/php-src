@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.33.2.2.2.7 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: xp_socket.c,v 1.33.2.2.2.8 2008/02/27 00:32:39 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -33,6 +33,10 @@
 
 #ifndef MSG_DONTWAIT
 # define MSG_DONTWAIT 0
+#endif
+
+#ifndef MSG_PEEK
+# define MSG_PEEK 0
 #endif
 
 php_stream_ops php_stream_generic_socket_ops;

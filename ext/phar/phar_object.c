@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.173 2008/02/28 01:16:42 sfox Exp $ */
+/* $Id: phar_object.c,v 1.174 2008/02/28 02:09:48 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1821,7 +1821,6 @@ PHP_METHOD(Phar, convertToZip)
 		return;
 	}
 
-// need to check that the string isn't Phar::GZ etc
 	if (ext_len) {
 		if (strncmp(ext, "Phar::GZ", 8) || strncmp(ext, "Phar::BZ2", 9)) {
 			zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,

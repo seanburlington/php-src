@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.171 2008/02/27 21:34:25 sfox Exp $ */
+/* $Id: phar_object.c,v 1.172 2008/02/28 01:08:33 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1817,13 +1817,22 @@ PHP_METHOD(Phar, convertToZip)
 	int ext_len = 0;
 	PHAR_ARCHIVE_OBJECT();
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &ext) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &ext, &ext_len) == FAILURE) {
 		return;
 	}
-	
+
+// need to check that the string isn't Phar::GZ etc
+	if (ext_len) {
+		if (strncmp(ext, "Phar::GZ", 8) || strncmp(ext, "Phar::BZ2", 9)) {
+		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
+			"Cannot compress a zip-based archive with gz or bz2");
+		}
+	}
+
 	if (phar_obj->arc.archive->is_zip) {
 		RETURN_TRUE;
 	}
+
 	if (PHAR_G(readonly)) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 			"Cannot write out phar archive, phar is read-only");

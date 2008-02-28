@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.124 2008/02/23 17:03:53 helly Exp $ */
+/* $Id: dl.c,v 1.125 2008/02/28 16:59:21 dmitry Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -78,7 +78,9 @@ PHP_FUNCTION(dl)
 	}
 
 	php_dl(filename, MODULE_TEMPORARY, return_value, 0 TSRMLS_CC);
-	EG(full_tables_cleanup) = 1;
+	if (Z_LVAL_P(return_value) == 1) {
+		EG(full_tables_cleanup) = 1;
+	}
 }
 /* }}} */
 

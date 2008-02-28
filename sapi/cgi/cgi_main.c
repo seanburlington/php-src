@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.54 2007/12/31 07:20:16 sebastian Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.55 2008/02/28 00:29:29 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1017,7 +1017,7 @@ static void init_request_info(TSRMLS_D)
 						) {
 							/* PATH_TRANSLATED = PATH_TRANSLATED - SCRIPT_NAME + PATH_INFO */
 							int ptlen = strlen(pt) - strlen(env_script_name);
-							int path_translated_len = ptlen + env_path_info ? strlen(env_path_info) : 0;
+							int path_translated_len = ptlen + (env_path_info ? strlen(env_path_info) : 0);
 							char *path_translated = NULL;
 
 							path_translated = (char *) emalloc(path_translated_len + 1);

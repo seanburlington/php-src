@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.15 2007/11/02 16:19:57 jani Exp $ */
+/* $Id: collator.c,v 1.16 2008/02/28 14:16:24 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -332,7 +332,7 @@ PHP_FUNCTION(collator_get_attribute)
    Returns default collator */
 PHP_FUNCTION(collator_get_default)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {
+	if (zend_parse_parameters_none() == FAILURE) {
 		RETURN_FALSE;
 	}
 

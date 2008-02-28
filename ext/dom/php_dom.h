@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.36 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: php_dom.h,v 1.37 2008/02/28 14:16:12 felipe Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -138,8 +138,7 @@ entry = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 }
 
 #define DOM_NO_ARGS() \
-	if (ZEND_NUM_ARGS() != 0) { \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Expects exactly 0 parameters, %d given", ZEND_NUM_ARGS()); \
+	if (zend_parse_parameters_none() == FAILURE) { \
 		return; \
 	}
 

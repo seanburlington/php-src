@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.52 2007/12/31 07:12:16 sebastian Exp $ */
+/* $Id: user_filters.c,v 1.53 2008/02/28 14:16:14 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -577,8 +577,8 @@ PHP_FUNCTION(stream_get_filters)
 	HashPosition pos;
 	ulong num_key;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	array_init(return_value);

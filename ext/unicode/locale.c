@@ -14,7 +14,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: locale.c,v 1.11 2007/01/01 09:29:33 sebastian Exp $ */ 
+/* $Id: locale.c,v 1.12 2008/02/28 14:16:24 felipe Exp $ */ 
 
 #include "php_unicode.h"
 #include "unicode/ubrk.h"
@@ -42,7 +42,7 @@ static void php_canonicalize_locale_id(char **target, int32_t *target_len, char 
    Returns default locale */
 PHP_FUNCTION(locale_get_default)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {
+	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
 

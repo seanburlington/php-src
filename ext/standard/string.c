@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.670 2008/02/23 18:29:16 felipe Exp $ */
+/* $Id: string.c,v 1.671 2008/02/28 14:16:14 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7172,7 +7172,7 @@ PHP_FUNCTION(localeconv)
 	int len, i;
 
 	/* We don't need no stinkin' parameters... */
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {
+	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
 

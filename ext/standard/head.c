@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.98 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: head.c,v 1.99 2008/02/28 14:16:14 felipe Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -262,8 +262,8 @@ static void php_head_apply_header_list_to_hash(void *data, void *arg TSRMLS_DC)
    Return list of headers to be sent / already sent */
 PHP_FUNCTION(headers_list)
 {
-	if (ZEND_NUM_ARGS() > 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if (!&SG(sapi_headers).headers) {

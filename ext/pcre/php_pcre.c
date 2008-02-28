@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.230 2008/02/20 22:15:53 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.231 2008/02/28 14:16:13 felipe Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -2023,7 +2023,7 @@ PHPAPI void  php_pcre_grep_impl(pcre_cache_entry *pce, zval *input, zval *return
    Returns the error code of the last regexp execution. */
 static PHP_FUNCTION(preg_last_error)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {
+	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
 

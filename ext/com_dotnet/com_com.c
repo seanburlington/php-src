@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.25 2007/12/31 07:12:07 sebastian Exp $ */
+/* $Id: com_com.c,v 1.26 2008/02/28 14:16:12 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -658,8 +658,8 @@ PHP_FUNCTION(com_create_guid)
 	GUID retval;
 	OLECHAR *guid_string;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	php_com_initialize(TSRMLS_C);

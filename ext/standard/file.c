@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.513 2008/02/24 11:49:39 felipe Exp $ */
+/* $Id: file.c,v 1.514 2008/02/28 14:16:14 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -957,8 +957,8 @@ PHP_NAMED_FUNCTION(php_if_tmpfile)
 {
 	php_stream *stream;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	stream = php_stream_fopen_tmpfile();

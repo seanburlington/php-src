@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.45 2007/09/27 18:28:42 dmitry Exp $ */ 
+/* $Id: unicode.c,v 1.46 2008/02/28 14:16:24 felipe Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -224,7 +224,7 @@ PHP_FUNCTION(unicode_get_error_mode)
    Returns global substitution character for conversion from Unicode to codepage */
 PHP_FUNCTION(unicode_get_subst_char)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {
+	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
 

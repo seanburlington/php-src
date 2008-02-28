@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.60 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: mhash.c,v 1.61 2008/02/28 14:16:12 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,7 +63,7 @@ zend_module_entry mhash_module_entry = {
 ZEND_GET_MODULE(mhash)
 #endif
 
-#define NO_ARGS() (SUCCESS == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, ""))
+#define NO_ARGS() (SUCCESS == zend_parse_parameters_none())
 
 #ifndef HAVE_MHASH_GET_HASH_NAME_STATIC_PROTO
 extern const char *mhash_get_hash_name_static(hashid hash);

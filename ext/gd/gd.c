@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.384 2008/02/28 14:16:12 felipe Exp $ */
+/* $Id: gd.c,v 1.385 2008/02/28 17:43:32 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1351,7 +1351,7 @@ PHP_MINFO_FUNCTION(gd)
 PHP_FUNCTION(gd_info)
 {
 	if (zend_parse_parameters_none() == FAILURE) {
-		return;
+		RETURN_FALSE;
 	}
 
 	array_init(return_value);

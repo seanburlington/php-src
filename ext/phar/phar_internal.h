@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.86 2008/03/01 22:28:32 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.87 2008/03/01 22:38:09 sfox Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -338,12 +338,17 @@ union _phar_entry_object {
 };
 #endif
 
+#ifndef PHP_WIN32
+extern int phar_has_bz2;
+extern int phar_has_zlib;
+#endif
+
 BEGIN_EXTERN_C()
 
+#ifdef PHP_WIN32
 int phar_has_bz2;
 int phar_has_zlib;
 
-#ifdef PHP_WIN32
 char *tsrm_strtok_r(char *s, const char *delim, char **last);
 
 static inline void phar_unixify_path_separators(char *path, int path_len)

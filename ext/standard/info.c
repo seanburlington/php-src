@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.285 2008/02/28 14:16:14 felipe Exp $ */
+/* $Id: info.c,v 1.286 2008/03/02 15:36:24 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -376,7 +376,7 @@ PHPAPI char *php_get_uname(char mode)
 				php_uname = tmp_uname;
 				break;
 			case PROCESSOR_ARCHITECTURE_MIPS :
-				php_uname = "MIPS R4000";
+				snprintf(tmp_uname, sizeof(tmp_uname), "MIPS R%d000", SysInfo.wProcessorLevel);
 				php_uname = tmp_uname;
 				break;
 			case PROCESSOR_ARCHITECTURE_ALPHA :

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.188 2008/02/26 00:14:25 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.189 2008/03/03 18:58:59 johannes Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2674,9 +2674,13 @@ static zend_class_entry *row_get_ce(zval *object TSRMLS_DC)
 
 static int row_get_classname(zval *object, char **class_name, zend_uint *class_name_len, int parent TSRMLS_DC)
 {
-	*class_name = estrndup("PDORow", sizeof("PDORow")-1);
-	*class_name_len = sizeof("PDORow")-1;
-	return 0;
+	if (parent) {
+		return FAILURE;
+	} else {
+		*class_name = UG(unicode) ? USTR_MAKE("PDORow") : estrndup("PDORow", sizeof("PDORow")-1);
+		*class_name_len = sizeof("PDORow")-1;
+		return SUCCESS;
+	}
 }
 
 static int row_compare(zval *object1, zval *object2 TSRMLS_DC)

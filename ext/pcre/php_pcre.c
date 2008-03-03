@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.11 2008/02/20 22:12:17 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.12 2008/03/03 11:11:43 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -244,7 +244,6 @@ PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(char *regex, int regex_le
 
 	/* Try to lookup the cached regex entry, and if successful, just pass
 	   back the compiled pattern, otherwise go on and compile it. */
-	regex_len = strlen(regex);
 	if (zend_hash_find(&PCRE_G(pcre_cache), regex, regex_len+1, (void **)&pce) == SUCCESS) {
 		/*
 		 * We use a quick pcre_info() check to see whether cache is corrupted, and if it

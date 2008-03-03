@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.147 2008/02/21 13:38:12 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.148 2008/03/03 21:13:29 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -999,7 +999,7 @@ static PHP_METHOD(PDO, errorInfo)
 	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	if (ZEND_NUM_ARGS()) {
-		RETURN_FALSE;
+		WRONG_PARAM_COUNT;
 	}
 	PDO_CONSTRUCT_CHECK;
 
@@ -1140,6 +1140,10 @@ static PHP_METHOD(PDO, getAvailableDrivers)
 {
 	HashPosition pos;
 	pdo_driver_t **pdriver;
+
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
 	
 	array_init(return_value);
 

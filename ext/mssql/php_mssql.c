@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.172 2007/12/31 07:12:11 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.173 2008/03/04 19:39:33 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2056,14 +2056,19 @@ PHP_FUNCTION(mssql_bind)
 
 	/* modify datalen and maxlen according to dbrpcparam documentation */
 	if ( (type==SQLVARCHAR) || (type==SQLCHAR) || (type==SQLTEXT) )	{	/* variable-length type */
-		if (is_null) {
+		if (is_null || Z_TYPE_PP(var) == IS_NULL) {
 			maxlen=0;
 			datalen=0;
-		}
-		else {
+		} else {
 			convert_to_string_ex(var);
-			datalen=Z_STRLEN_PP(var);
-			value=(LPBYTE)Z_STRVAL_PP(var);
+			datalen = Z_STRLEN_PP(var);
+			value = (LPBYTE)Z_STRVAL_PP(var);
+			if (!datalen) {
+				datalen = 1;
+				if (maxlen == -1) {
+					maxlen = 1;
+				}
+			}
 		}
 	}
 	else	{	/* fixed-length type */

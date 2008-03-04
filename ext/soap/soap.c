@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.30.2.12 2008/02/15 06:51:12 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.30.2.13 2008/03/04 12:47:18 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -511,6 +511,7 @@ PHP_RINIT_FUNCTION(soap)
 	SOAP_GLOBAL(encoding) = NULL;
 	SOAP_GLOBAL(class_map) = NULL;
 	SOAP_GLOBAL(features) = 0;
+	SOAP_GLOBAL(ref_map) = NULL;
 	return SUCCESS;
 }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.22 2008/02/12 20:43:50 johannes Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.23 2008/03/04 22:25:35 felipe Exp $ */
 
 /* TODO:
  *
@@ -517,7 +517,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	int  user_len, passwd_len, host_len;
 	char *hashed_details=NULL;
 	int hashed_details_length, port = MYSQL_PORT;
-	int client_flags = 0;
+	long client_flags = 0;
 	php_mysql_conn *mysql=NULL;
 #if MYSQL_VERSION_ID <= 32230
 	void (*handler) (int);

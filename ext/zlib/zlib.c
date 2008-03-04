@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.217 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: zlib.c,v 1.218 2008/03/04 23:39:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #	include "config.h"
@@ -384,8 +384,8 @@ retry_raw_inflate:
    Returns the coding type used for output compression */
 PHP_FUNCTION(zlib_get_coding_type)
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 	switch (ZLIBG(compression_coding)) {
 		case PHP_ZLIB_ENCODING_GZIP:

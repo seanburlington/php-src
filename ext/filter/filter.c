@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.93 2008/02/24 18:42:09 felipe Exp $ */
+/* $Id: filter.c,v 1.94 2008/03/04 23:39:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.93 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.94 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -843,8 +843,8 @@ PHP_FUNCTION(filter_list)
 {
 	int i, size = sizeof(filter_list) / sizeof(filter_list_entry);
 
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	array_init(return_value);

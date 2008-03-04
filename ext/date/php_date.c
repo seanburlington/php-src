@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.168 2008/02/27 09:47:23 derick Exp $ */
+/* $Id: php_date.c,v 1.169 2008/03/04 23:39:15 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -299,8 +299,8 @@ struct _php_timezone_obj {
 	php_date_obj *obj;	\
 	DATE_SET_CONTEXT; \
 	if (object) {	\
-		if (ZEND_NUM_ARGS()) {	\
-			WRONG_PARAM_COUNT;	\
+		if (zend_parse_parameters_none() == FAILURE) {	\
+			return;	\
 		}	\
 	} else {	\
 		if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, NULL, "O", &object, date_ce_date) == FAILURE) {	\

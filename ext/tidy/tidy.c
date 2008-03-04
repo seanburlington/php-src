@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.120 2008/01/27 15:03:55 helly Exp $ */
+/* $Id: tidy.c,v 1.121 2008/03/04 23:39:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,8 +51,8 @@
 	PHPTidyObj *obj;	\
 	TIDY_SET_CONTEXT; \
 	if (object) {	\
-		if (ZEND_NUM_ARGS()) {	\
-			WRONG_PARAM_COUNT;	\
+		if (zend_parse_parameters_none() == FAILURE) {	\
+			return;	\
 		}	\
 	} else {	\
 		if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, NULL, "O", &object, tidy_ce_doc) == FAILURE) {	\
@@ -64,8 +64,8 @@
 #define TIDY_FETCH_ONLY_OBJECT	\
 	PHPTidyObj *obj;	\
 	TIDY_SET_CONTEXT; \
-	if (ZEND_NUM_ARGS()) {	\
-		WRONG_PARAM_COUNT;	\
+	if (zend_parse_parameters_none() == FAILURE) {	\
+		return;	\
 	}	\
 	obj = (PHPTidyObj *) zend_object_store_get_object(object TSRMLS_CC);	\
 
@@ -1062,7 +1062,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.120 2008/01/27 15:03:55 helly Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.121 2008/03/04 23:39:15 felipe Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1319,8 +1319,8 @@ static PHP_FUNCTION(tidy_diagnose)
    Get release date (version) for Tidy library */
 static PHP_FUNCTION(tidy_get_release)
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_ASCII_STRING((char *)tidyReleaseDate(), ZSTR_DUPLICATE);

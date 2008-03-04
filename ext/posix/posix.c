@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.96 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: posix.c,v 1.97 2008/03/04 23:39:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ const zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.96 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.97 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -209,7 +209,7 @@ zend_module_entry posix_module_entry = {
 ZEND_GET_MODULE(posix)
 #endif
 
-#define PHP_POSIX_NO_ARGS	if (ZEND_NUM_ARGS()) WRONG_PARAM_COUNT;
+#define PHP_POSIX_NO_ARGS	if (zend_parse_parameters_none() == FAILURE) return;
 
 #define PHP_POSIX_RETURN_LONG_FUNC(func_name)	\
 	PHP_POSIX_NO_ARGS	\

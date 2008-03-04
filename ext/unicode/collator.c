@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.16 2008/02/28 14:16:24 felipe Exp $ */
+/* $Id: collator.c,v 1.17 2008/03/04 23:39:15 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -56,8 +56,8 @@ struct _php_collator_obj {
 	php_collator_obj *obj;	\
 	COLLATOR_SET_CONTEXT; \
 	if (object) {	\
-		if (ZEND_NUM_ARGS()) {	\
-			WRONG_PARAM_COUNT;	\
+		if (zend_parse_parameters_none() == FAILURE) {	\
+			return;	\
 		}	\
 	} else {	\
 		if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, NULL, "O", &object, unicode_ce_collator) == FAILURE) {	\

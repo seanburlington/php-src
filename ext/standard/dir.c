@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.14 2007/12/31 07:20:12 sebastian Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.15 2008/03/05 09:29:37 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -261,9 +261,9 @@ PHP_FUNCTION(closedir)
 
 	if (dirp->rsrc_id == DIRG(default_dir)) {
 		php_set_default_dir(-1 TSRMLS_CC);
+	} else {
+		zend_list_delete(dirp->rsrc_id);
 	}
-
-	zend_list_delete(dirp->rsrc_id);
 }
 /* }}} */
 

@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.343 2008/02/23 18:41:31 felipe Exp $ */
+/* $Id: run-tests.php,v 1.344 2008/03/05 20:11:35 lstrojny Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -186,7 +186,7 @@ function write_information($show_html)
 	global $cwd, $php, $php_cgi, $php_info, $user_tests, $ini_overwrites, $pass_options, $exts_to_test, $leak_check, $valgrind_header;
 
 	// Get info from php
-	$info_file = realpath(dirname(__FILE__)) . '/run-test-info.php';
+	$info_file = __DIR__ . '/run-test-info.php';
 	@unlink($info_file);
 	$php_info = '<?php echo "
 PHP_SAPI    : " , PHP_SAPI , "
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.343 $'."\n";
+					echo '$Revision: 1.344 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -782,7 +782,7 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 			$libtool = shell_exec($CUR_DIR . '/libtool --version');
 
 			/* Use shtool to find out if there is glibtool present (MacOSX) */
-			$sys_libtool_path = shell_exec(dirname(__FILE__) . '/build/shtool path glibtool libtool');
+			$sys_libtool_path = shell_exec(__DIR__ . '/build/shtool path glibtool libtool');
 			if ($sys_libtool_path) {
 				$sys_libtool = shell_exec(str_replace("\n", "", $sys_libtool_path) . ' --version');
 			}
@@ -1209,7 +1209,7 @@ TEST $file
 	$temp_clean        = $temp_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'clean.php';
 	$test_clean        = $test_dir . DIRECTORY_SEPARATOR . basename($file,'phpt').$pu.'clean.php';
 	$tmp_post          = $temp_dir . DIRECTORY_SEPARATOR . uniqid('/phpt.');
-	$tmp_relative_file = str_replace(dirname(__FILE__).DIRECTORY_SEPARATOR, '', $test_file) . 't';
+	$tmp_relative_file = str_replace(__DIR__ . DIRECTORY_SEPARATOR, '', $test_file) . 't';
 
 	if ($temp_source && $temp_target) {
 		$temp_skipif  .= 's';

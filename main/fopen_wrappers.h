@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.2 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.3 2008/03/05 13:34:12 dmitry Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -32,6 +32,8 @@ PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC);
 PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path TSRMLS_DC);
 
 PHPAPI int php_check_safe_mode_include_dir(const char *path TSRMLS_DC);
+
+PHPAPI char *php_resolve_path(const char *filename, int filename_len, const char *path TSRMLS_DC);
 
 PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const char *path, char **opened_path TSRMLS_DC);
 

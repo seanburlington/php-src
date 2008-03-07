@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.199 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: exif.c,v 1.200 2008/03/07 18:41:59 pajoye Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.199 2007/12/31 07:12:09 sebastian Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.200 2008/03/07 18:41:59 pajoye Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -242,7 +242,7 @@ PHP_MSHUTDOWN_FUNCTION(exif)
 /* }}} */
 
 /* {{{ exif dependencies */
-static const zend_module_dep exif_module_deps[] = {
+static zend_module_dep exif_module_deps[] = {
 	ZEND_MOD_REQUIRED("standard")
 #if EXIF_USE_MBSTRING
 	ZEND_MOD_REQUIRED("mbstring")

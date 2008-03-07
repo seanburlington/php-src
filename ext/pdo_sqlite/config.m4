@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.35 2007/07/03 17:24:37 sniper Exp $
+dnl $Id: config.m4,v 1.36 2008/03/07 10:55:04 scottmac Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -82,7 +82,10 @@ if test "$PHP_PDO_SQLITE" != "no"; then
       sqlite/src/trigger.c sqlite/src/update.c sqlite/src/utf.c sqlite/src/util.c \
       sqlite/src/vacuum.c sqlite/src/vdbeapi.c sqlite/src/vdbeaux.c sqlite/src/vdbe.c \
       sqlite/src/vdbemem.c sqlite/src/where.c sqlite/src/parse.c sqlite/src/opcodes.c \
-      sqlite/src/alter.c sqlite/src/vdbefifo.c sqlite/src/vtab.c sqlite/src/loadext.c"
+      sqlite/src/alter.c sqlite/src/vdbefifo.c sqlite/src/vtab.c sqlite/src/loadext.c \
+      sqlite/src/btmutex.c sqlite/src/fault.c sqlite/src/journal.c \
+      sqlite/src/malloc.c sqlite/src/mem1.c sqlite/src/mutex.c sqlite/src/mutex_unix.c \
+      sqlite/src/mutex_w32.c sqlite/src/vdbeblob.c"
 
       PHP_NEW_EXTENSION(pdo_sqlite,
         $php_pdo_sqlite_sources_core $pdo_sqlite_sources,

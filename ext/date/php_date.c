@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.169 2008/03/04 23:39:15 felipe Exp $ */
+/* $Id: php_date.c,v 1.170 2008/03/07 02:05:48 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2039,8 +2039,8 @@ void zval_from_error_container(zval *z, timelib_error_container *error)
 */
 PHP_FUNCTION(date_get_last_errors)
 {
-	array_init(return_value);
 	if (DATEG(last_errors)) {
+		array_init(return_value);
 		zval_from_error_container(return_value, DATEG(last_errors));
 	} else {
 		RETURN_FALSE;

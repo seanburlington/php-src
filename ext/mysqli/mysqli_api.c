@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.12 2008/02/06 11:34:43 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.13 2008/03/08 14:55:52 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1595,7 +1595,7 @@ PHP_FUNCTION(mysqli_prepare)
    Open a connection to a mysql server */ 
 PHP_FUNCTION(mysqli_real_connect)
 {
-	mysqli_common_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, TRUE);
+	mysqli_common_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, TRUE, FALSE);
 }
 /* }}} */
 

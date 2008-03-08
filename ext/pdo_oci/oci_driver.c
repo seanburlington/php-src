@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.24.2.4.2.9 2007/12/31 07:20:09 sebastian Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.4.2.10 2008/03/08 14:01:49 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -494,7 +494,7 @@ static int oci_handle_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_valu
 			OCIClientVersion(&major, &minor, &update, &patch, &port_update);
 			slprintf(verstr, sizeof(verstr), "%d.%d.%d.%d.%d", major, minor, update, patch, port_update);
 			ZVAL_STRING(return_value, verstr, 1);
-#elif PHP_PDO_OCI_CLIENT_VERSION
+#elif defined(PHP_PDO_OCI_CLIENT_VERSION)
 			/* Compile time client version */
 			ZVAL_STRING(return_value, PHP_PDO_OCI_CLIENT_VERSION, 1);
 #else

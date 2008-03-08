@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.242 2008/01/30 09:56:22 dmitry Exp $ */
+/* $Id: php.h,v 1.243 2008/03/08 22:17:32 colder Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -277,12 +277,7 @@ int cfgparse(void);
 END_EXTERN_C()
 
 #define php_error zend_error
-
-typedef enum {
-	EH_NORMAL = 0,
-	EH_SUPPRESS,
-	EH_THROW
-} error_handling_t;
+#define error_handling_t zend_error_handling_t
 
 BEGIN_EXTERN_C()
 PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC);

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.122 2008/02/12 22:06:06 andrey Exp $ 
+  $Id: mysqli.c,v 1.123 2008/03/08 15:16:08 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -56,8 +56,6 @@ MYSQLND_ZVAL_PCACHE *mysqli_mysqlnd_zval_cache;
 MYSQLND_QCACHE		*mysqli_mysqlnd_qcache;
 #endif
 
-
-extern void php_mysqli_connect(INTERNAL_FUNCTION_PARAMETERS);
 
 typedef int (*mysqli_read_t)(mysqli_object *obj, zval **retval TSRMLS_DC);
 typedef int (*mysqli_write_t)(mysqli_object *obj, zval *newval TSRMLS_DC);
@@ -426,7 +424,7 @@ static union _zend_function *php_mysqli_constructor_get(zval *object TSRMLS_DC)
 
 		f.type = ZEND_INTERNAL_FUNCTION;
 		if (obj->zo.ce == mysqli_link_class_entry) {
-			f.handler = ZEND_FN(mysqli_connect);
+			f.handler = ZEND_FN(mysqli_link_construct);
 		} else if (obj->zo.ce == mysqli_stmt_class_entry) {
 			f.handler = ZEND_FN(mysqli_stmt_construct);
 		} else if (obj->zo.ce == mysqli_result_class_entry) {

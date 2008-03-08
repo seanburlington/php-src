@@ -1,9 +1,5 @@
 --TEST--
 ZE2 ArrayAccess::offsetSet without return
---SKIPIF--
-<?php
-	if (!class_exists('ArrayAccess')) die('skip ArrayAccess not present');
-?>
 --FILE--
 <?php
 class object implements ArrayAccess {
@@ -100,12 +96,16 @@ array(4) {
 }
 ===EMPTY===
 object::offsetExists(0)
+object::offsetGet(0)
 bool(false)
 object::offsetExists(1)
+object::offsetGet(1)
 bool(false)
 object::offsetExists(2)
+object::offsetGet(2)
 bool(false)
 object::offsetExists(4th)
+object::offsetGet(4th)
 bool(false)
 object::offsetExists(5th)
 bool(true)
@@ -135,11 +135,11 @@ object::offsetGet(4th)
 int(4)
 object::offsetGet(5th)
 
-Notice: Undefined index:  5th in %sarray_access_002.php on line %d
+Notice: Undefined index: 5th in %sarray_access_002.php on line %d
 NULL
 object::offsetGet(6)
 
-Notice: Undefined offset:  6 in %sarray_access_002.php on line %d
+Notice: Undefined offset: 6 in %sarray_access_002.php on line %d
 NULL
 ===offsetSet===
 WRITE 1

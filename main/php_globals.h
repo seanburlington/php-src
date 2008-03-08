@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.98.2.1.2.7.2.2 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: php_globals.h,v 1.98.2.1.2.7.2.3 2008/03/08 22:12:32 colder Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -150,8 +150,6 @@ struct _php_core_globals {
 	char *last_error_message;
 	char *last_error_file;
 	int  last_error_lineno;
-	error_handling_t  error_handling;
-	zend_class_entry *exception_class;
 
 	char *disable_functions;
 	char *disable_classes;

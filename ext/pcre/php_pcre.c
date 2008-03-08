@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.232 2008/03/08 11:59:44 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.233 2008/03/08 13:14:02 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -969,8 +969,8 @@ static int preg_do_repl_func(zval *function, char *subject, int *offsets, char *
 		result_len = offsets[1] - offsets[0];
 		*result = estrndup(&subject[offsets[0]], result_len);
 	}
-	zval_dtor(subpats);
-	FREE_ZVAL(subpats);
+
+	zval_ptr_dtor(&subpats);
 
 	return result_len;
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.23 2008/03/04 22:25:35 felipe Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.24 2008/03/08 14:59:37 andrey Exp $ */
 
 /* TODO:
  *
@@ -419,7 +419,7 @@ PHP_MSHUTDOWN_FUNCTION(mysql)
 #ifdef PHP_WIN32
 	unsigned long client_ver = mysql_get_client_version();
 	/* Can't call mysql_server_end() multiple times prior to 5.0.42 on Windows */
-	if ((client_ver > 50042 && client_ver < 50100) || client_ver > 50122) {
+	if ((client_ver >= 50046 && client_ver < 50100) || client_ver > 50122) {
 		mysql_server_end();
 	}
 #else

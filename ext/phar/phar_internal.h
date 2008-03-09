@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.89 2008/03/03 08:41:14 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.90 2008/03/09 04:46:15 sfox Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -376,7 +376,7 @@ char *phar_create_default_stub(const char *index_php, const char *web_index, siz
 char * phar_decompress_filter(phar_entry_info * entry, int return_unknown);
 char * phar_compress_filter(phar_entry_info * entry, int return_unknown);
 
-void phar_rename_archive(phar_archive_data *phar, char *ext TSRMLS_DC);
+void phar_rename_archive(phar_archive_data *phar, char *ext, zend_bool compress TSRMLS_DC);
 int phar_mount_entry(phar_archive_data *phar, char *filename, int filename_len, char *path, int path_len TSRMLS_DC);
 char *phar_find_in_include_path(char *file, char *entry, phar_archive_data *phar TSRMLS_DC);
 char *phar_fix_filepath(char *path, int *new_len, int use_cwd TSRMLS_DC);

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.13.2.9.2.4 2008/03/08 04:18:29 scottmac Exp $
+   $Id: sqlite.c,v 1.166.2.13.2.9.2.5 2008/03/09 21:30:28 scottmac Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -408,10 +408,10 @@ static int _clean_unfinished_results(zend_rsrc_list_entry *le, void *db TSRMLS_D
 	if (Z_TYPE_P(le) == le_sqlite_result) {
 		struct php_sqlite_result *res = (struct php_sqlite_result *)le->ptr;
 		if (res->db->rsrc_id == ((struct php_sqlite_db*)db)->rsrc_id) {
-			real_result_dtor(res TSRMLS_CC);
+			return ZEND_HASH_APPLY_REMOVE;
 		}
 	}
-	return 0;
+	return ZEND_HASH_APPLY_KEEP;
 }
 
 static ZEND_RSRC_DTOR_FUNC(php_sqlite_result_dtor)
@@ -1139,7 +1139,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.9.2.4 2008/03/08 04:18:29 scottmac Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.13.2.9.2.5 2008/03/09 21:30:28 scottmac Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

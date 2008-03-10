@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.125 2008/03/10 13:26:15 johannes Exp $ 
+  $Id: mysqli.c,v 1.126 2008/03/10 13:38:23 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -723,7 +723,7 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_GROUP_FLAG", GROUP_FLAG, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_ENUM_FLAG", ENUM_FLAG, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_BINARY_FLAG", BINARY_FLAG, CONST_CS | CONST_PERSISTENT);
-#if (MYSQL_VERSION_ID > 50001 || defined(HAVE_MYSQLND)
+#if MYSQL_VERSION_ID > 50001 || defined(HAVE_MYSQLND)
 	REGISTER_LONG_CONSTANT("MYSQLI_NO_DEFAULT_VALUE_FLAG", NO_DEFAULT_VALUE_FLAG, CONST_CS | CONST_PERSISTENT);
 #endif
 

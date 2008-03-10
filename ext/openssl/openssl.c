@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.6 2008/01/15 15:12:47 rrichards Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.7 2008/03/10 22:12:35 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3648,8 +3648,8 @@ PHP_FUNCTION(openssl_error_string)
 	char buf[512];
 	unsigned long val;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	val = ERR_get_error();

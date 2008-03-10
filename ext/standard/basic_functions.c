@@ -1,3 +1,4 @@
+
 /*
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
@@ -17,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.20 2008/02/23 17:06:21 helly Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.21 2008/03/10 22:12:36 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4866,8 +4867,8 @@ PHP_FUNCTION(time_sleep_until)
    Get the name of the owner of the current PHP script */
 PHP_FUNCTION(get_current_user)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRING(php_get_current_user(), 1);

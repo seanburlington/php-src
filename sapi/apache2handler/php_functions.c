@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.18.2.6.2.5.2.2 2007/12/31 07:17:18 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.18.2.6.2.5.2.3 2008/03/10 22:12:33 felipe Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -179,8 +179,8 @@ PHP_FUNCTION(apache_request_headers)
 	const apr_array_header_t *arr;
 	char *key, *val;
 
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	array_init(return_value);
@@ -203,8 +203,8 @@ PHP_FUNCTION(apache_response_headers)
 	const apr_array_header_t *arr;
 	char *key, *val;
 
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	array_init(return_value);

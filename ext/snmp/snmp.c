@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.106.2.2.2.5.2.2 2007/12/31 07:17:13 sebastian Exp $ */
+/* $Id: snmp.c,v 1.106.2.2.2.5.2.3 2008/03/10 22:12:35 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -693,8 +693,8 @@ PHP_FUNCTION(snmprealwalk)
    Return the current status of quick_print */
 PHP_FUNCTION(snmp_get_quick_print)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 #ifdef HAVE_NET_SNMP

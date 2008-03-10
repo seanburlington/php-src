@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.15 2008/03/10 20:15:38 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.16 2008/03/10 22:15:36 felipe Exp $ */
 
 /* TODO:
  *
@@ -1003,8 +1003,8 @@ PHP_FUNCTION(mysql_select_db)
    Returns a string that represents the client library version */
 PHP_FUNCTION(mysql_get_client_info)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRING((char *)mysql_get_client_info(),1);	

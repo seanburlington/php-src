@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.3 2008/03/02 15:35:05 iliaa Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.4 2008/03/10 22:12:36 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1082,8 +1082,8 @@ PHPAPI char *php_logo_guid(void)
 PHP_FUNCTION(php_logo_guid)
 {
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRING(php_logo_guid(), 0);
@@ -1095,8 +1095,8 @@ PHP_FUNCTION(php_logo_guid)
 PHP_FUNCTION(php_real_logo_guid)
 {
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRINGL(PHP_LOGO_GUID, sizeof(PHP_LOGO_GUID)-1, 1);
@@ -1107,8 +1107,8 @@ PHP_FUNCTION(php_real_logo_guid)
    Return the special ID used to request the PHP logo in phpinfo screens*/
 PHP_FUNCTION(php_egg_logo_guid)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRINGL(PHP_EGG_LOGO_GUID, sizeof(PHP_EGG_LOGO_GUID)-1, 1);
@@ -1119,8 +1119,8 @@ PHP_FUNCTION(php_egg_logo_guid)
    Return the special ID used to request the Zend logo in phpinfo screens*/
 PHP_FUNCTION(zend_logo_guid)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_STRINGL(ZEND_LOGO_GUID, sizeof(ZEND_LOGO_GUID)-1, 1);
@@ -1131,8 +1131,8 @@ PHP_FUNCTION(zend_logo_guid)
    Return the current SAPI module name */
 PHP_FUNCTION(php_sapi_name)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if (sapi_module.name) {

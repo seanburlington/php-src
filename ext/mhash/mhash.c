@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48.2.3.2.5.2.2 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: mhash.c,v 1.48.2.3.2.5.2.3 2008/03/10 22:12:34 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -95,8 +95,8 @@ PHP_MINFO_FUNCTION(mhash)
    Gets the number of available hashes */
 PHP_FUNCTION(mhash_count)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_LONG(mhash_count());

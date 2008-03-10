@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.9.2.3 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.9.2.4 2008/03/10 22:12:36 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -534,8 +534,8 @@ PHP_FUNCTION(stream_get_filters)
 	HashTable *filters_hash;
 	ulong num_key;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	array_init(return_value);

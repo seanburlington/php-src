@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.18 2008/02/23 17:06:21 helly Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.19 2008/03/10 22:12:36 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4683,8 +4683,8 @@ PHP_FUNCTION(localeconv)
 	int len, i;
 
 	/* We don't need no stinkin' parameters... */
-	if (ZEND_NUM_ARGS() > 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	MAKE_STD_ZVAL(grouping);

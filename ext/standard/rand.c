@@ -23,7 +23,7 @@
    |                     Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.70.2.1.2.2.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: rand.c,v 1.70.2.1.2.2.2.2 2008/03/10 22:12:36 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -351,8 +351,8 @@ PHP_FUNCTION(mt_rand)
    Returns the maximum value a random number can have */
 PHP_FUNCTION(getrandmax)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	RETURN_LONG(PHP_RAND_MAX);
@@ -363,8 +363,8 @@ PHP_FUNCTION(getrandmax)
    Returns the maximum value a random number from Mersenne Twister can have */
 PHP_FUNCTION(mt_getrandmax)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	/*

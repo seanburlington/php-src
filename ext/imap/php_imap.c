@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.3 2008/01/31 18:46:03 nlopess Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.4 2008/03/10 22:12:34 felipe Exp $ */
 
 #define IMAP41
 
@@ -3658,8 +3658,8 @@ PHP_FUNCTION(imap_alerts)
 {
 	STRINGLIST *cur=NIL;
 
-	if (ZEND_NUM_ARGS() > 0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	} 
   
 	if (IMAPG(imap_alertstack) == NIL) {
@@ -3685,8 +3685,8 @@ PHP_FUNCTION(imap_errors)
 {
 	ERRORLIST *cur=NIL;
 
-	if (ZEND_NUM_ARGS() > 0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	} 
   
 	if (IMAPG(imap_errorstack) == NIL) {
@@ -3712,8 +3712,8 @@ PHP_FUNCTION(imap_last_error)
 {
 	ERRORLIST *cur=NIL;
 
-	if (ZEND_NUM_ARGS() > 0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	} 
   
 	if (IMAPG(imap_errorstack) == NIL) {

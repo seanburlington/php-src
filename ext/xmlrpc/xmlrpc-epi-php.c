@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.3 2007/12/31 07:17:16 sebastian Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.4 2008/03/10 22:12:36 felipe Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -794,8 +794,8 @@ PHP_FUNCTION(xmlrpc_decode)
    Creates an xmlrpc server */
 PHP_FUNCTION(xmlrpc_server_create)
 {
-	if(ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if(return_value_used) {

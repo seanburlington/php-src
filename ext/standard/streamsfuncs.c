@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.9 2008/02/03 16:14:16 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.10 2008/03/10 22:12:36 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -520,8 +520,8 @@ PHP_FUNCTION(stream_get_transports)
 	int stream_xport_len;
 	ulong num_key;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if ((stream_xport_hash = php_stream_xport_get_hash())) {
@@ -548,8 +548,8 @@ PHP_FUNCTION(stream_get_wrappers)
 	int key_flags, stream_protocol_len = 0;
 	ulong num_key;
 
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if ((url_stream_wrappers_hash = php_stream_get_url_stream_wrappers_hash())) {

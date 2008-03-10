@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.12.2.5 2008/03/05 12:10:02 tony2001 Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.12.2.6 2008/03/10 22:12:36 felipe Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -333,8 +333,8 @@ PHP_FUNCTION(getcwd)
 	char path[MAXPATHLEN];
 	char *ret=NULL;
 	
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 #if HAVE_GETCWD

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.28.2.30.2.13 2008/03/04 12:47:18 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.28.2.30.2.14 2008/03/10 22:12:35 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -821,8 +821,8 @@ PHP_METHOD(SoapFault, __toString)
 	zend_fcall_info fci;
 	zval fname;
 
-	if (ZEND_NUM_ARGS() > 0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	faultcode   = zend_read_property(soap_fault_class_entry, this_ptr, "faultcode", sizeof("faultcode")-1, 1 TSRMLS_CC);

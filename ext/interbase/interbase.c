@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.225.2.4.2.7.2.2 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: interbase.c,v 1.225.2.4.2.7.2.3 2008/03/10 22:12:34 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -203,8 +203,8 @@ int le_link, le_plink, le_trans;
    Return error message */
 PHP_FUNCTION(ibase_errmsg)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if (IBG(sql_code) != 0) {
@@ -219,8 +219,8 @@ PHP_FUNCTION(ibase_errmsg)
    Return error code */
 PHP_FUNCTION(ibase_errcode)
 {
-	if (ZEND_NUM_ARGS() != 0) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	if (IBG(sql_code) != 0) {

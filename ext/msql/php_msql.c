@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_msql.c,v 1.60.2.4.2.2.2.2 2007/12/31 07:17:10 sebastian Exp $ */
+/* $Id: php_msql.c,v 1.60.2.4.2.2.2.3 2008/03/10 22:12:35 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -747,8 +747,8 @@ PHP_FUNCTION(msql_list_fields)
    Returns the text of the error message from previous mSQL operation */
 PHP_FUNCTION(msql_error)
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 	RETURN_STRING(msqlErrMsg,1);
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.111.2.4.2.5.2.2 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: dba.c,v 1.111.2.4.2.5.2.3 2008/03/10 22:12:33 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1200,8 +1200,7 @@ PHP_FUNCTION(dba_list)
 	zend_rsrc_list_entry *le;
 	dba_info *info;
 
-	if (ZEND_NUM_ARGS()!=0) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters_none() == FAILURE) {
 		RETURN_FALSE;
 	}
 

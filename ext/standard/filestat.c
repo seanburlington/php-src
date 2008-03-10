@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.14.2.5 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.14.2.6 2008/03/10 22:12:36 felipe Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -730,8 +730,8 @@ PHPAPI void php_clear_stat_cache(TSRMLS_D)
    Clear file stat cache */
 PHP_FUNCTION(clearstatcache)
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 	php_clear_stat_cache(TSRMLS_C);
 }

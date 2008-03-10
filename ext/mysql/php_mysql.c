@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.13 2008/03/08 15:00:50 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.14 2008/03/10 09:18:43 andrey Exp $ */
 
 /* TODO:
  *
@@ -673,7 +673,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			client_flags ^= CLIENT_LOCAL_FILES;
 		}
 
-		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%d", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
+		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%ld", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
 	}
 
 	/* We cannot use mysql_port anymore in windows, need to use

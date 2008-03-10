@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli_structs.h,v 1.12 2008/03/08 15:16:08 andrey Exp $ 
+  $Id: php_mysqli_structs.h,v 1.13 2008/03/10 09:16:13 andrey Exp $ 
 */
 
 #ifndef PHP_MYSQLI_STRUCTS_H
@@ -38,11 +38,11 @@
 
 #ifdef HAVE_MYSQLND
 #include "ext/mysqlnd/mysqlnd.h"
-#include "ext/mysqli/mysqli_mysqlnd.h"
+#include "mysqli_mysqlnd.h"
 #else
 #include <mysql.h>
 #include <errmsg.h>
-#include "ext/mysqli/mysqli_libmysql.h"
+#include "mysqli_libmysql.h"
 #endif
 
 #include "php_mysqli.h"

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.6 2008/01/28 22:54:21 andrey Exp $
+// $Id: config.w32,v 1.7 2008/03/10 20:27:15 andrey Exp $
 // vim:ft=javascript
 
 ARG_WITH("mysql", "MySQL support", "no");
@@ -14,7 +14,7 @@ if (PHP_MYSQL != "no") {
 			WARNING("mysql not enabled; libraries and headers not found");
 		}
 	} else {
-		AC_DEFINE('HAVE_MYSQLND', 1, 'MySQL native driver support enabled');
+		AC_DEFINE('MYSQLI_USE_MYSQLND', 1, 'MySQL native driver support enabled');
 		ADD_EXTENSION_DEP('mysql', 'mysqlnd', true);
 		EXTENSION("mysql", "php_mysql.c");
 		AC_DEFINE('HAVE_MYSQL', 1, 'Have MySQL library');

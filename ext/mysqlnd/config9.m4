@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.7 2008/01/29 18:13:12 andrey Exp $
+dnl $Id: config9.m4,v 1.8 2008/03/10 20:27:15 andrey Exp $
 dnl config.m4 for mysqlnd driver
 
 
@@ -19,7 +19,6 @@ if test "$PHP_MYSQLND_ENABLED" = "yes"; then
   PHP_ADD_BUILD_DIR([ext/mysqlnd], 1)
   PHP_INSTALL_HEADERS([ext/mysqlnd])
   PHP_INSTALL_HEADERS([$ext_builddir/php_mysqlnd_config.h])
-  AC_DEFINE([HAVE_MYSQLND], 1, [Whether mysqlnd is enabled])
 
   dnl Windows uses config.w32 thus this code is safe for now
   if test "$PHP_MYSQLND_THREADING" = "yes"; then

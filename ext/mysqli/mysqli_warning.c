@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_warning.c,v 1.16 2007/12/31 07:12:11 sebastian Exp $ 
+  $Id: mysqli_warning.c,v 1.17 2008/03/10 20:27:15 andrey Exp $ 
 */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,7 +47,7 @@ void php_clear_warnings(MYSQLI_WARNING *w)
 /* }}} */
 
 
-#ifndef HAVE_MYSQLND
+#ifndef MYSQLI_USE_MYSQLND
 /* {{{ MYSQLI_WARNING *php_new_warning */
 static
 MYSQLI_WARNING *php_new_warning(const char *reason, int errorno TSRMLS_DC)

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.11 2007/12/28 15:38:23 andrey Exp $
+// $Id: config.w32,v 1.12 2008/03/10 20:27:15 andrey Exp $
 // vim:ft=javascript
 
 // Note: The extension name is "mysqli", you enable it with "--with-mysqli".
@@ -33,7 +33,7 @@ if (PHP_MYSQLI != "no") {
 		}
 	} else {
 		EXTENSION("mysqli", mysqli_source);
-		AC_DEFINE('HAVE_MYSQLND', 1, 'MySQLi with native driver support enabled');
+		AC_DEFINE('MYSQLI_USE_MYSQLND', 1, 'MySQLi with native driver support enabled');
 		AC_DEFINE('HAVE_MYSQLILIB', 1, 'Have MySQLi library');
 		ADD_EXTENSION_DEP('mysqli', 'mysqlnd', true);
 	}

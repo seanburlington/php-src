@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.67.2.1.2.1.2.2 2007/11/06 10:00:04 jani Exp $
+dnl $Id: config.m4,v 1.67.2.1.2.1.2.3 2008/03/10 20:15:38 andrey Exp $
 dnl
 
 AC_DEFUN([MYSQL_LIB_CHK], [
@@ -158,5 +158,6 @@ if test "$PHP_MYSQL" != "no"; then
 
   if test "$PHP_MYSQL" = "mysqlnd"; then
     PHP_ADD_EXTENSION_DEP(mysql, mysqlnd)
+    AC_DEFINE([MYSQL_USE_MYSQLND], 1, [Whether mysqlnd is enabled])
   fi
 fi

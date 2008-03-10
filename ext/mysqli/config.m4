@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22.2.1.2.2.2.3 2007/12/28 15:37:52 andrey Exp $
+dnl $Id: config.m4,v 1.22.2.1.2.2.2.4 2008/03/10 20:15:38 andrey Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -73,5 +73,6 @@ if test "$PHP_MYSQLI" != "no"; then
 
   if test "$PHP_MYSQLI" = "mysqlnd"; then
     PHP_ADD_EXTENSION_DEP(mysqli, mysqlnd)
+    AC_DEFINE([MYSQLI_USE_MYSQLND], 1, [Whether mysqlnd is enabled])
   fi
 fi

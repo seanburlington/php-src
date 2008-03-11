@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.8 2008/03/10 20:09:22 andrey Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.9 2008/03/11 10:27:23 tony2001 Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -200,12 +200,20 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 # endif
 		
 	if ((n = getaddrinfo(host, NULL, &hints, &res))) {
-		spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+		if (error_string) {
+			spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+		} else {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
+		}
 		return 0;
 	} else if (res == NULL) {
-		spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed (null result pointer) errno=%d", errno);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+		if (error_string) {
+			spprintf(error_string, 0, "php_network_getaddresses: getaddrinfo failed (null result pointer) errno=%d", errno);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+		} else {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed (null result pointer)");
+		}
 		return 0;
 	}
 
@@ -229,8 +237,12 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 		/* XXX NOT THREAD SAFE (is safe under win32) */
 		host_info = gethostbyname(host);
 		if (host_info == NULL) {
-			spprintf(error_string, 0, "php_network_getaddresses: gethostbyname failed. errno=%d", errno);
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+			if (error_string) {
+				spprintf(error_string, 0, "php_network_getaddresses: gethostbyname failed. errno=%d", errno);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", *error_string);
+			} else {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: gethostbyname failed");
+			}
 			return 0;
 		}
 		in = *((struct in_addr *) host_info->h_addr);

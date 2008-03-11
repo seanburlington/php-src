@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.481 2008/03/07 23:20:15 gwynne Exp $ */
+/* $Id: session.c,v 1.482 2008/03/11 09:36:51 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1838,6 +1838,7 @@ static PHP_RSHUTDOWN_FUNCTION(session)
 	for (i = 0; i < 6; i++) {
 		if (PS(mod_user_names).names[i] != NULL) {
 			zval_ptr_dtor(&PS(mod_user_names).names[i]);
+			PS(mod_user_names).names[i] = NULL;
 		}
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.116 2008/03/08 22:17:32 colder Exp $ */
+/* $Id: php_globals.h,v 1.117 2008/03/12 20:53:04 stas Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -148,6 +148,8 @@ struct _php_core_globals {
 
 	char *user_ini_filename;
 	long user_ini_cache_ttl;
+
+	char *request_order;
 };
 
 

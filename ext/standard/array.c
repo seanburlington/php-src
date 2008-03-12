@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.26 2008/02/22 13:28:40 felipe Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.27 2008/03/12 19:18:42 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2210,7 +2210,7 @@ PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS
 				if (recursive && zend_hash_find(dest, string_key, string_key_len, (void **)&dest_entry) == SUCCESS) {
 					HashTable *thash = HASH_OF(*dest_entry);
 
-					if ((thash && thash->nApplyCount > 1) || (*src_entry == *dest_entry && (Z_REFCOUNT_PP(dest_entry) % 2))) {
+					if ((thash && thash->nApplyCount > 1) || (*src_entry == *dest_entry && Z_ISREF_PP(dest_entry) && (Z_REFCOUNT_PP(dest_entry) % 2))) {
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "recursion detected");
 						return 0;
 					}

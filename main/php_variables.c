@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.11.2.3 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.11.2.4 2008/03/12 20:24:45 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -835,7 +835,13 @@ static zend_bool php_auto_globals_create_request(char *name, uint name_len TSRML
 	array_init(form_variables);
 	INIT_PZVAL(form_variables);
 
-	for (p = PG(variables_order); p && *p; p++) {
+	if(PG(request_order) != NULL) {
+		p = PG(request_order);
+	} else {
+		p = PG(variables_order);
+	}
+
+	for (; p && *p; p++) {
 		switch (*p) {
 			case 'g':
 			case 'G':

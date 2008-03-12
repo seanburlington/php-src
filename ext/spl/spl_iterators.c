@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.168 2008/01/10 10:11:21 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.169 2008/03/12 13:35:04 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -702,8 +702,13 @@ static union _zend_function *spl_recursive_it_get_method(zval **object_ptr, zstr
 	union _zend_function    *function_handler;
 	spl_recursive_it_object *object = (spl_recursive_it_object*)zend_object_store_get_object(*object_ptr TSRMLS_CC);
 	long                     level = object->level;
-	zval                    *zobj = object->iterators[level].zobject;
-	
+	zval                    *zobj;
+
+	if (!object->iterators) {
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "The %s instance wasn't initialized properly", Z_OBJCE_PP(object_ptr)->name);
+	}
+	zobj = object->iterators[level].zobject;
+
 	function_handler = std_object_handlers.get_method(object_ptr, method, method_len TSRMLS_CC);
 	if (!function_handler) {
 		if (zend_u_hash_find(&Z_OBJCE_P(zobj)->function_table, UG(unicode)?IS_UNICODE:IS_STRING, method, method_len+1, (void **) &function_handler) == FAILURE) {

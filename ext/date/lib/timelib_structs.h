@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.2 2008/02/03 14:15:07 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.3 2008/03/13 15:59:48 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -178,7 +178,7 @@ typedef struct timelib_error_container {
 typedef struct _timelib_tz_lookup_table {
 	char       *name;
 	int         type;
-	int         gmtoffset;
+	float       gmtoffset;
 	char       *full_tz_name;
 } timelib_tz_lookup_table;
 

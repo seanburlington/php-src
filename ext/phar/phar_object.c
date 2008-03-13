@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.177 2008/03/09 04:46:15 sfox Exp $ */
+/* $Id: phar_object.c,v 1.178 2008/03/13 19:43:13 helly Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1144,7 +1144,11 @@ PHP_METHOD(Phar, __construct)
 #endif
 	}
 
+#if PHP_VERSION_ID >= 60000
+	objname = phar_obj->std.ce->name.s;
+#else
 	objname = phar_obj->std.ce->name;
+#endif
 
 	if (phar_open_or_create_filename(fname, fname_len, alias, alias_len, objname, REPORT_ERRORS, &phar_data, &error TSRMLS_CC) == FAILURE) {
 

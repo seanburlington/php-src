@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.311 2008/03/12 03:55:11 cellog Exp $ */
+/* $Id: phar.c,v 1.312 2008/03/13 09:57:48 tony2001 Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2615,7 +2615,7 @@ char *phar_resolve_path(const char *filename, int filename_len TSRMLS_DC)
 	efree(entry);
 	spprintf(&path, MAXPATHLEN, "phar://%s/%s%c%s", arch, PHAR_G(cwd), DEFAULT_DIR_SEPARATOR, PG(include_path));
 	efree(arch);
-	ret = php_resolve_path(filename, filename_len, path);
+	ret = php_resolve_path(filename, filename_len, path TSRMLS_CC);
 	efree(path);
 	return ret;
 #else /* PHP 5.2 */
@@ -3059,7 +3059,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
 	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.311 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.312 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

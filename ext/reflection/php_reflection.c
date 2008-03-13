@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.49 2008/02/18 14:30:25 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.50 2008/03/13 15:56:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -836,7 +836,7 @@ static int _extension_ini_string(zend_ini_entry *ini_entry, int num_args, va_lis
 
 	if (number == ini_entry->module_number) {
 		string_printf(str, "    %sEntry [ %s <", indent, ini_entry->name);
-		if (ini_entry->modifiable == ZEND_INI_ALL) {
+		if (ini_entry->modifiable & ZEND_INI_ALL) {
 			string_printf(str, "ALL");
 		} else {
 			if (ini_entry->modifiable & ZEND_INI_USER) {
@@ -4908,7 +4908,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.49 2008/02/18 14:30:25 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.50 2008/03/13 15:56:21 iliaa Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

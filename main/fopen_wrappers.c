@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.203 2008/03/05 13:35:01 dmitry Exp $ */
+/* $Id: fopen_wrappers.c,v 1.204 2008/03/13 14:10:08 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -454,13 +454,21 @@ PHPAPI char *php_resolve_path(const char *filename, int filename_length, const c
 {
 	char resolved_path[MAXPATHLEN];
 	char trypath[MAXPATHLEN];
-	char *ptr, *end;
+	const char *ptr, *end, *p;
 
 	if (!filename) {
 		return NULL;
 	}
 
-	if (*filename == '.' ||
+	/* Don't resolve patches which contain protocol */
+	for (p = filename; isalnum((int)*p) || *p == '+' || *p == '-' || *p == '.'; p++);
+    if ((*p == ':') && (p - filename > 1) && (p[1] == '/') && (p[2] == '/')) {
+    	return NULL;
+    }
+
+	if ((*filename == '.' && 
+	     (IS_SLASH(filename[1]) || 
+	      ((filename[1] == '.') && IS_SLASH(filename[2])))) ||
 	    IS_ABSOLUTE_PATH(filename, filename_length) ||
 	    !path ||
 	    !*path) {

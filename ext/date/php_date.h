@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.11.2.3.2.4 2008/01/28 20:30:51 derick Exp $ */
+/* $Id: php_date.h,v 1.17.2.11.2.3.2.5 2008/03/14 16:19:52 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -48,6 +48,8 @@ PHP_FUNCTION(getdate);
 
 /* Advanced Interface */
 PHP_METHOD(DateTime, __construct);
+PHP_METHOD(DateTime, __wakeup);
+PHP_METHOD(DateTime, __set_state);
 PHP_FUNCTION(date_create);
 PHP_FUNCTION(date_create_from_format);
 PHP_FUNCTION(date_parse);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.25 2008/03/14 16:19:52 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.26 2008/03/14 17:56:52 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1944,7 +1944,7 @@ PHP_METHOD(DateTime, __construct)
 }
 /* }}} */
 
-static int php_date_initialize_from_hash(zval **return_value, php_date_obj **dateobj, HashTable *myht)
+static int php_date_initialize_from_hash(zval **return_value, php_date_obj **dateobj, HashTable *myht TSRMLS_DC)
 {
 	zval            **z_date = NULL;
 	zval            **z_timezone = NULL;
@@ -2006,7 +2006,7 @@ PHP_METHOD(DateTime, __set_state)
 
 	date_instantiate(date_ce_date, return_value TSRMLS_CC);
 	dateobj = (php_date_obj *) zend_object_store_get_object(return_value TSRMLS_CC);
-	php_date_initialize_from_hash(&return_value, &dateobj, myht);
+	php_date_initialize_from_hash(&return_value, &dateobj, myht TSRMLS_CC);
 }
 /* }}} */
 
@@ -2022,7 +2022,7 @@ PHP_METHOD(DateTime, __wakeup)
 
 	myht = Z_OBJPROP_P(object);
 
-	php_date_initialize_from_hash(&return_value, &dateobj, myht);
+	php_date_initialize_from_hash(&return_value, &dateobj, myht TSRMLS_CC);
 }
 /* }}} */
 

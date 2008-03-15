@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.8.2.6.2.17.2.1 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: memory.c,v 1.8.2.6.2.17.2.2 2008/03/15 10:32:32 felipe Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -234,6 +234,9 @@ static int php_stream_memory_stat(php_stream *stream, php_stream_statbuf *ssb TS
 
 #ifndef PHP_WIN32
 	ssb->sb.st_blksize = -1;
+#endif
+
+#if !defined(PHP_WIN32) && !defined(__BEOS__)
 	ssb->sb.st_blocks = -1;
 #endif
 

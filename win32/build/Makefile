@@ -14,13 +14,16 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.35.2.1.2.7 2008/10/10 23:38:14 pajoye Exp $
+# $Id: Makefile,v 1.35.2.1.2.6.2.1 2008/03/16 22:16:56 helly Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
 LD="$(LINK)"
 MC="$(MC)"
 MT="$(MT)"
+RE2C="$(RE2C)"
+RE2C_FLAGS=""
+
 
 MCFILE=$(BUILD_DIR)\wsyslog.rc
 
@@ -42,11 +45,11 @@ Zend\zend_ini_parser.c Zend\zend_ini_parser.h: Zend\zend_ini_parser.y
 Zend\zend_language_parser.c Zend\zend_language_parser.h: Zend\zend_language_parser.y
 	$(BISON) --output=Zend/zend_language_parser.c -v -d -p zend Zend/zend_language_parser.y
 
-Zend\zend_ini_scanner.c: Zend\flex.skl Zend\zend_ini_scanner.l
-	$(FLEX) -B -i -SZend/flex.skl -Pini_ -oZend/zend_ini_scanner.c Zend/zend_ini_scanner.l
+Zend\zend_ini_scanner.c: Zend\zend_ini_scanner.l
+	$(RE2C) $(RE2C_FLAGS) --case-inverted -cbdFt Zend\zend_ini_scanner_defs.h -oZend/zend_ini_scanner.c Zend\zend_ini_scanner.l
 
-Zend\zend_language_scanner.c: Zend\flex.skl Zend\zend_language_scanner.l
-	$(FLEX) -i -SZend/flex.skl -Pzend -oZend/zend_language_scanner.c Zend/zend_language_scanner.l
+Zend\zend_language_scanner.c: Zend\zend_language_scanner.l
+	$(RE2C) $(RE2C_FLAGS) --case-inverted -cbdFt $(srcdir)/zend_language_scanner_defs.h -o$@ $(srcdir)/zend_language_scanner.l
 
 PHPDLL_RES=$(BUILD_DIR)\$(PHPDLL).res
 
@@ -112,18 +115,18 @@ build-snap: generated_files
 build-dist: $(BUILD_DIR)\deplister.exe
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
 	-rmdir /s /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip
-	-del /f /q $(BUILD_DIR)\php-debug-pack-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip
-	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip
+	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip
+	-del /f /q $(BUILD_DIR)\php-debug-pack-$(PHP_VERSION_STRING)-Win32.zip
+	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip
 	$(BUILD_DIR)\php.exe -n win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS) $(PHP_EXTRA_DIST_FILES)" "$(PECL_TARGETS) $(PECL_EXTRA_DIST_FILES)" "$(SNAPSHOT_TEMPLATE)"
 	cd $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip .
+	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING)-Win32.zip .
 	cd ..\..
 	cd $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip .
+	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING)-Win32.zip .
 	cd ..\..
 	cd $(BUILD_DIR)
-	-$(ZIP) -9 php-debug-pack-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32.zip *.pdb
+	-$(ZIP) -9 php-debug-pack-$(PHP_VERSION_STRING)-Win32.zip *.pdb
 	cd ..\..
 
 dist: all build-dist

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.26 2008/03/14 17:56:52 felipe Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.27 2008/03/16 15:15:21 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1993,7 +1993,6 @@ static int php_date_initialize_from_hash(zval **return_value, php_date_obj **dat
 */
 PHP_METHOD(DateTime, __set_state)
 {
-	zval             *object = getThis();
 	php_date_obj     *dateobj;
 	zval             *array;
 	HashTable        *myht;

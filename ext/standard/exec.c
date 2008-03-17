@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.113.2.3.2.1.2.3 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: exec.c,v 1.113.2.3.2.1.2.4 2008/03/17 23:01:27 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -271,6 +271,11 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 	cmd = safe_emalloc(2, l, 1);
 
 	for (x = 0, y = 0; x < l; x++) {
+		/* skip non-valid multibyte characters */
+		if (php_mblen(str + x, (l - x)) < 0) {
+			continue;
+		}
+
 		switch (str[x]) {
 			case '"':
 			case '\'':

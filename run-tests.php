@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.18 2008/03/05 20:10:12 lstrojny Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.19 2008/03/17 17:18:19 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -441,7 +441,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.18 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.19 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -1032,16 +1032,7 @@ TEST $file
 ";
 
 	// Load the sections of the test file.
-	$section_text = array(
-		'TEST'   => '',
-		'SKIPIF' => '',
-		'GET'    => '',
-		'COOKIE' => '',
-		'POST_RAW' => '',
-		'POST'   => '',
-		'UPLOAD' => '',
-		'ARGS'   => '',
-	);
+	$section_text = array('TEST' => '');
 
 	$fp = fopen($file, "rt") or error("Cannot open test file: $file");
 
@@ -1066,6 +1057,12 @@ TEST $file
 		// Match the beginning of a section.
 		if (preg_match('/^--([_A-Z]+)--/', $line, $r)) {
 			$section = $r[1];
+
+			if (isset($section_text[$section])) {
+				$bork_info = "duplicated $section section";
+				$borked    = true;
+			}
+
 			$section_text[$section] = '';
 			$secfile = $section == 'FILE' || $section == 'FILEEOF' || $section == 'FILE_EXTERNAL';
 			$secdone = false;
@@ -1392,7 +1389,7 @@ TEST $file
 		$env['HTTP_COOKIE'] = '';
 	}
 
-	$args = $section_text['ARGS'] ? ' -- '.$section_text['ARGS'] : '';
+	$args = isset($section_text['ARGS']) ? ' -- '.$section_text['ARGS'] : '';
 
 	if (array_key_exists('POST_RAW', $section_text) && !empty($section_text['POST_RAW'])) {
 		$post = trim($section_text['POST_RAW']);

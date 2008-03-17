@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.178 2008/03/13 19:43:13 helly Exp $ */
+/* $Id: phar_object.c,v 1.179 2008/03/17 08:55:55 tony2001 Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -297,7 +297,11 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 				zend_destroy_file_handle(&file_handle TSRMLS_CC);
 			} else {
 				new_op_array = NULL;
+#if PHP_VERSION_ID >= 50300
+				zend_file_handle_dtor(&file_handle TSRMLS_CC);
+#else
 				zend_file_handle_dtor(&file_handle);
+#endif
 			}
 #ifdef PHP_WIN32
 			efree(arch);

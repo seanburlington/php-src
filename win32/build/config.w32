@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.8 2008/03/17 17:06:51 scottmac Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.9 2008/03/17 17:29:13 stas Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -60,7 +60,7 @@ if (!PATH_PROG('bison')) {
 if (!PATH_PROG('re2c')) {
 	ERROR('re2c is required')
 }
-DEFINE('RE2C_FLAGS', null);
+DEFINE('RE2C_FLAGS', '');
 PATH_PROG('zip');
 PATH_PROG('lemon');
 

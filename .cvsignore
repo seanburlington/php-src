@@ -62,7 +62,7 @@ debug.log
 confdefs.h
 configure.js
 config.nice.bat
-config.bat
+configure.bat
 ZendEngine1
 php_test_results_*.txt
 *.gcda

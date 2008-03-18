@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.22 2008/03/18 16:57:30 andrey Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.23 2008/03/18 17:30:55 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -977,9 +977,7 @@ PHP_RSHUTDOWN_FUNCTION(mysqli)
  */
 PHP_MINFO_FUNCTION(mysqli)
 {
-#if defined(MYSQLI_USE_MYSQLND)
 	char buf[32];
-#endif
 
 	php_info_print_table_start();
 	php_info_print_table_header(2, "MysqlI Support", "enabled");

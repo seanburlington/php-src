@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.18 2007/12/31 07:12:11 sebastian Exp $ 
+  $Id: mysqli_report.c,v 1.19 2008/03/18 16:58:42 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -47,7 +47,8 @@ PHP_FUNCTION(mysqli_report)
 /* }}} */
 
 /* {{{ void php_mysqli_report_error(char *sqlstate, int errorno, char *error) */ 
-void php_mysqli_report_error(const char *sqlstate, int errorno, const char *error TSRMLS_DC) {
+void php_mysqli_report_error(const char *sqlstate, int errorno, const char *error TSRMLS_DC)
+{
 	php_mysqli_throw_sql_exception((char *)sqlstate, errorno TSRMLS_CC, "%s", error);
 }
 /* }}} */

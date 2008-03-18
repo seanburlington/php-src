@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.15 2008/03/16 21:55:46 felipe Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.16 2008/03/18 14:10:45 felipe Exp $ */
 
 /* {{{ includes
  */
@@ -1814,6 +1814,22 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	   to be loaded later */
 	if (php_init_config(TSRMLS_C) == FAILURE) {
 		return FAILURE;
+	}
+
+	/* Check for deprecated directives */
+	{
+		static const char *directives[] = {
+			"zend.ze1_compatibility_mode",
+			NULL};
+		const char **p = directives;
+		long val;
+
+		while (*p) {
+			if (cfg_get_long((char*)*p, &val) == SUCCESS && val) {
+				zend_error(E_WARNING, "Directive '%s' is no longer supported in PHP 5.3 and greater", *p);
+			}
+			++p;
+		}
 	}
 
 	/* Register PHP core ini entries */

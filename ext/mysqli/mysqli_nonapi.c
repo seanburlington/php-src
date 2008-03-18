@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.8 2008/03/10 20:15:38 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.9 2008/03/18 16:57:31 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -32,6 +32,19 @@
 #include "php_mysqli_structs.h"
 
 #define SAFE_STR(a) ((a)?a:"")
+
+/* {{{ php_mysqli_set_error
+ */
+static void php_mysqli_set_error(long mysql_errno, char *mysql_err TSRMLS_DC)
+{
+	MyG(error_no) = mysql_errno;
+	if (MyG(error_msg)) {
+		efree(MyG(error_msg));
+	}
+	MyG(error_msg) = estrdup(mysql_err);
+}
+/* }}} */
+
 
 void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_connect, zend_bool in_ctor)
 {
@@ -215,7 +228,7 @@ void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_conne
 						port, socket, flags, MyG(mysqlnd_thd_zval_cache) TSRMLS_CC) == NULL)
 #endif
 	{
-		/* Save error messages */
+		/* Save error messages - for mysqli_connect_error() & mysqli_connect_errno() */
 		php_mysqli_set_error(mysql_errno(mysql->mysql), (char *) mysql_error(mysql->mysql) TSRMLS_CC);
 		php_mysqli_throw_sql_exception((char *)mysql_sqlstate(mysql->mysql), mysql_errno(mysql->mysql) TSRMLS_CC,
 										"%s", mysql_error(mysql->mysql));
@@ -547,7 +560,6 @@ PHP_FUNCTION(mysqli_query)
 			break;
 #endif
 	}
-
 	if (!result) {
 		php_mysqli_throw_sql_exception((char *)mysql_sqlstate(mysql->mysql), mysql_errno(mysql->mysql) TSRMLS_CC,
 										"%s", mysql_error(mysql->mysql)); 
@@ -641,7 +653,7 @@ PHP_FUNCTION(mysqli_stmt_get_warnings)
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = mysqli_resource->info = (void *)w;
 	mysqli_resource->status = MYSQLI_STATUS_VALID;
-	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_warning_class_entry);	
+	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_warning_class_entry);
 }
 /* }}} */
 
@@ -652,10 +664,10 @@ PHP_FUNCTION(mysqli_set_charset)
 {
 	MY_MYSQL			*mysql;
 	zval				*mysql_link;
-	char				*cs_name = NULL;
-	unsigned int 		len;
+	char				*cs_name;
+	int			 		csname_len;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &mysql_link, mysqli_link_class_entry, &cs_name, &len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &mysql_link, mysqli_link_class_entry, &cs_name, &csname_len) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL*, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.14 2008/03/16 21:06:54 helly Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.15 2008/03/18 08:36:27 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1691,7 +1691,7 @@ consult the installation file that came with this distribution, or visit \n\
 							break;
 
 						case 'e': /* enable extended info output */
-							CG(extended_info) = 1;
+							CG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;
 							break;
 
 						case 'f': /* parse file */

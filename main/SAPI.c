@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.202.2.7.2.15.2.3 2008/01/28 16:09:08 scottmac Exp $ */
+/* $Id: SAPI.c,v 1.202.2.7.2.15.2.4 2008/03/18 21:42:50 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -1000,6 +1000,12 @@ SAPI_API time_t sapi_get_request_time(TSRMLS_D)
 		SG(global_request_time) = time(0);
 	}
 	return SG(global_request_time);
+}
+
+SAPI_API void sapi_terminate_process(TSRMLS_D) {
+	if (sapi_module.terminate_process) {
+		sapi_module.terminate_process(TSRMLS_C);
+	}
 }
 
 /*

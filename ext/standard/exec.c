@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.127 2008/03/17 23:02:35 iliaa Exp $ */
+/* $Id: exec.c,v 1.128 2008/03/18 00:32:58 felipe Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -24,6 +24,7 @@
 #include "php_string.h"
 #include "ext/standard/head.h"
 #include "ext/standard/file.h"
+#include "basic_functions.h"
 #include "exec.h"
 #include "php_globals.h"
 #include "SAPI.h"
@@ -252,6 +253,8 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 	char *cmd;
 	char *p = NULL;
 	size_t estimate = (2 * l) + 1;
+	
+	TSRMLS_FETCH();
 
 	cmd = safe_emalloc(2, l, 1);
 

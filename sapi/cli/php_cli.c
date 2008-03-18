@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.185 2008/02/03 17:50:06 helly Exp $ */
+/* $Id: php_cli.c,v 1.186 2008/03/18 08:36:49 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -837,7 +837,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 'e': /* enable extended info output */
-				CG(extended_info) = 1;
+				CG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;
 				break;
 
 			case 'F':

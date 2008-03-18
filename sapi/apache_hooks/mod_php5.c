@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.11.2.1.2.5.2.2 2008/03/16 21:06:54 helly Exp $ */
+/* $Id: mod_php5.c,v 1.11.2.1.2.5.2.3 2008/03/18 22:23:20 rasmus Exp $ */
 
 #include "php_apache_http.h"
 
@@ -524,6 +524,7 @@ static sapi_module_struct apache_sapi_module = {
 	sapi_apache_register_server_variables,		/* register server variables */
 	php_apache_log_message,			/* Log message */
 	NULL,							/* Get request time */
+	NULL,					/* child terminate */
 
 	NULL,							/* php.ini path override */
 

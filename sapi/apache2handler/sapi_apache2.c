@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.15.2.2 2008/01/16 15:49:46 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.15.2.3 2008/03/18 22:23:20 rasmus Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -343,6 +343,7 @@ static sapi_module_struct apache2_sapi_module = {
 	php_apache_sapi_register_variables,
 	php_apache_sapi_log_message,			/* Log message */
 	php_apache_sapi_get_request_time,		/* Request Time */
+	NULL,						/* Child Terminate */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

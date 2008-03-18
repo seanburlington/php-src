@@ -16,7 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5isapi.c,v 1.8.2.2.2.3.2.1 2007/12/31 07:17:18 sebastian Exp $ */
+/* $Id: php5isapi.c,v 1.8.2.2.2.3.2.2 2008/03/18 22:23:21 rasmus Exp $ */
 
 #include "php.h"
 #include <httpext.h>
@@ -688,6 +688,7 @@ static sapi_module_struct isapi_sapi_module = {
 	sapi_isapi_register_server_variables,	/* register server variables */
 	NULL,							/* Log message */
 	NULL,							/* Get request time */
+	NULL,							/* Child terminate */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

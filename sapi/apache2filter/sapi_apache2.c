@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.136.2.2.2.8.2.1 2007/12/31 07:17:18 sebastian Exp $ */
+/* $Id: sapi_apache2.c,v 1.136.2.2.2.8.2.2 2008/03/18 22:23:20 rasmus Exp $ */
 
 #include <fcntl.h>
 
@@ -335,6 +335,7 @@ static sapi_module_struct apache2_sapi_module = {
 	php_apache_sapi_register_variables,
 	php_apache_sapi_log_message,			/* Log message */
 	php_apache_sapi_get_request_time,		/* Get Request Time */
+	NULL,						/* Child terminate */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

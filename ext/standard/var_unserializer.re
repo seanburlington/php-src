@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.72 2007/10/17 10:36:45 dmitry Exp $ */
+/* $Id: var_unserializer.re,v 1.73 2008/03/19 03:12:39 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -330,10 +330,10 @@ static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, long
 				break;
 			case IS_STRING:
 			case IS_UNICODE:
-				if (zend_u_hash_find(ht, Z_TYPE_P(key), Z_UNIVAL_P(key), Z_UNILEN_P(key) + 1, (void **)&old_data)==SUCCESS) {
+				if (zend_u_symtable_find(ht, Z_TYPE_P(key), Z_UNIVAL_P(key), Z_UNILEN_P(key) + 1, (void **)&old_data)==SUCCESS) {
 					var_push_dtor(var_hash, old_data);
 				}
-				zend_u_hash_update(ht, Z_TYPE_P(key), Z_UNIVAL_P(key), Z_UNILEN_P(key) + 1, &data, sizeof(data), NULL);
+				zend_u_symtable_update(ht, Z_TYPE_P(key), Z_UNIVAL_P(key), Z_UNILEN_P(key) + 1, &data, sizeof(data), NULL);
 				break;
 		}
 

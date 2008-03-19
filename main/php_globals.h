@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.117 2008/03/12 20:53:04 stas Exp $ */
+/* $Id: php_globals.h,v 1.118 2008/03/19 16:37:48 rasmus Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -140,6 +140,7 @@ struct _php_core_globals {
 
 	char *disable_functions;
 	char *disable_classes;
+	zend_bool exit_on_timeout;
 #ifdef PHP_WIN32
 	zend_bool com_initialized;
 #endif

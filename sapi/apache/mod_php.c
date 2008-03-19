@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php.c,v 1.6 2007/12/31 07:12:19 sebastian Exp $ */
+/* $Id: mod_php.c,v 1.7 2008/03/19 16:37:48 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -431,6 +431,14 @@ static time_t php_apache_get_request_time(TSRMLS_D)
 }
 /* }}} */
 
+/* {{{ sapi_apache_child_terminate
+ */
+static void sapi_apache_child_terminate(TSRMLS_D)
+{
+	ap_child_terminate((request_rec *)SG(server_context));
+}
+/* }}} */
+
 /* {{{ sapi_module_struct apache_sapi_module
  */
 static sapi_module_struct apache_sapi_module = {
@@ -460,6 +468,7 @@ static sapi_module_struct apache_sapi_module = {
 	sapi_apache_register_server_variables,		/* register server variables */
 	php_apache_log_message,			/* Log message */
 	php_apache_get_request_time,	/* Get request time */
+	sapi_apache_child_terminate,
 
 	NULL,							/* php.ini path override */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.98 2007/12/31 07:12:20 sebastian Exp $ */
+/* $Id: thttpd.c,v 1.99 2008/03/19 16:37:49 rasmus Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -394,6 +394,7 @@ static sapi_module_struct thttpd_sapi_module = {
 	sapi_thttpd_register_variables,
 	NULL,									/* Log message */
 	NULL,									/* Get request time */
+	NULL,									/* Child terminate */
 
 	NULL,									/* php.ini path override */
 	NULL,									/* Block interruptions */

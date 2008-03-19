@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.14 2007/07/11 17:39:04 johannes Exp $
+	$Id: config.w32.h.in,v 1.15 2008/03/19 16:37:49 rasmus Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -53,6 +53,7 @@
 #define NEED_ISBLANK 1
 #define DISCARD_PATH 0
 #undef HAVE_SETITIMER
+#undef HAVE_SIGSETJMP
 #undef HAVE_IODBC
 #define HAVE_LIBDL 1
 #define HAVE_GETTIMEOFDAY 1

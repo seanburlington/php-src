@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.17 2008/03/18 21:42:50 rasmus Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.18 2008/03/19 12:42:16 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -118,7 +118,7 @@ static PHP_INI_MH(OnSetPrecision)
 static PHP_INI_MH(OnChangeMemoryLimit)
 {
 	if (new_value) {
-		PG(memory_limit) = zend_atoi(new_value, new_value_length);
+		PG(memory_limit) = zend_atol(new_value, new_value_length);
 	} else {
 		PG(memory_limit) = 1<<30;		/* effectively, no limit */
 	}

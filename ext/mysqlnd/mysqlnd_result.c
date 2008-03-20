@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result.c,v 1.19 2008/02/20 15:20:14 andrey Exp $ */
+/* $Id: mysqlnd_result.c,v 1.20 2008/03/20 13:25:49 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -518,8 +518,8 @@ mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC
 				conn->last_query_type = QUERY_SELECT;
 				CONN_SET_STATE(conn, CONN_FETCHING_DATA);
 				/* PS has already allocated it */
+				conn->field_count = rset_header.field_count;
 				if (!stmt) {
-					conn->field_count = rset_header.field_count;
 					result =
 						conn->current_result=
 							mysqlnd_result_init(rset_header.field_count,
@@ -533,7 +533,6 @@ mysqlnd_query_read_result_set_header(MYSQLND *conn, MYSQLND_STMT *stmt TSRMLS_DC
 						  prepared statements can't send result set metadata for these queries
 						  on prepare stage. Read it now.
 						*/
-						conn->field_count = rset_header.field_count;
 						result =
 							stmt->result =
 								mysqlnd_result_init(rset_header.field_count,

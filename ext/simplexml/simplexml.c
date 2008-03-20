@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.252 2008/01/31 21:58:09 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.253 2008/03/20 16:46:55 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -434,19 +434,12 @@ static void change_node_zval(xmlNodePtr node, zval *value TSRMLS_DC)
 			convert_to_string_with_converter(value, UG(utf8_conv));
 			/* break missing intentionally */
 		case IS_STRING:
-			if (node->type == XML_ATTRIBUTE_NODE) {
-				buffer = xmlEncodeEntitiesReentrant(node->doc, (xmlChar *)Z_STRVAL_P(value));
-				buffer_len = xmlStrlen(buffer);
-			} else {
-				buffer = (xmlChar *)Z_STRVAL_P(value);
-				buffer_len = Z_STRLEN_P(value);
-			}
+			buffer = xmlEncodeEntitiesReentrant(node->doc, (xmlChar *)Z_STRVAL_P(value));
+			buffer_len = xmlStrlen(buffer);
 			/* check for NULL buffer in case of memory error in xmlEncodeEntitiesReentrant */
 			if (buffer) {
 				xmlNodeSetContentLen(node, buffer, buffer_len);
-				if (node->type == XML_ATTRIBUTE_NODE) {
-					xmlFree(buffer);
-				}
+				xmlFree(buffer);
 			}
 			if (value == &value_copy) {
 				zval_dtor(value);
@@ -2549,7 +2542,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.252 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.253 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

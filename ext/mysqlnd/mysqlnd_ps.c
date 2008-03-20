@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.3.2.10 2008/02/14 14:50:21 andrey Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.3.2.11 2008/03/20 14:03:30 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -522,6 +522,7 @@ MYSQLND_METHOD(mysqlnd_stmt, execute)(MYSQLND_STMT * const stmt TSRMLS_DC)
 		if (CONN_GET_STATE(conn) == CONN_QUIT_SENT) {
 			/* close the statement here, the connection has been closed */
 		}
+		stmt->state = MYSQLND_STMT_PREPARED;
 	} else {
 		SET_EMPTY_ERROR(stmt->error_info);
 		SET_EMPTY_ERROR(stmt->conn->error_info);

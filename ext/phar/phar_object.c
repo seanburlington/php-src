@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.181 2008/03/21 19:54:06 cellog Exp $ */
+/* $Id: phar_object.c,v 1.182 2008/03/21 23:56:51 helly Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3034,9 +3034,9 @@ PHP_METHOD(PharFileInfo, __construct)
  */
 PHP_METHOD(PharFileInfo, __destruct)
 {
-	PHAR_ENTRY_OBJECT();
+	phar_entry_object *entry_obj = (phar_entry_object*)zend_object_store_get_object(getThis() TSRMLS_CC); \
 
-	if (entry_obj->ent.entry->is_temp_dir) {
+	if (entry_obj->ent.entry && entry_obj->ent.entry->is_temp_dir) {
 		if (entry_obj->ent.entry->filename) {
 			efree(entry_obj->ent.entry->filename);
 			entry_obj->ent.entry->filename = NULL;

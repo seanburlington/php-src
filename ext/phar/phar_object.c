@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.179 2008/03/17 08:55:55 tony2001 Exp $ */
+/* $Id: phar_object.c,v 1.180 2008/03/21 05:22:09 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -2442,7 +2442,8 @@ PHP_METHOD(Phar, compressAllFilesGZ)
 	}
 
 	phar_obj->arc.archive->is_modified = 1;
-	phar_rename_archive(phar_obj->arc.archive, NULL, 1 TSRMLS_CC);
+/* EXPERIMENT: REMOVING THIS LINE TO SEE THE IMPACT ON VALGRIND RESULTS, WILL BREAK TESTS */
+	/* phar_rename_archive(phar_obj->arc.archive, NULL, 1 TSRMLS_CC); */
 
 	phar_flush(phar_obj->arc.archive, 0, 0, 0, &error TSRMLS_CC);
 	if (error) {

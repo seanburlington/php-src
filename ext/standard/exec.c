@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.113.2.3.2.7 2008/03/20 23:25:42 iliaa Exp $ */
+/* $Id: exec.c,v 1.113.2.3.2.8 2008/03/21 08:28:36 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -341,6 +341,7 @@ char *php_escape_shell_cmd(char *str) {
 char *php_escape_shell_arg(char *str) {
 	int x, y, l;
 	char *cmd;
+	TSRMLS_FETCH();
 
 	y = 0;
 	l = strlen(str);

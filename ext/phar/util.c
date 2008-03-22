@@ -18,9 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.28 2008/03/21 19:54:06 cellog Exp $ */
+/* $Id: util.c,v 1.29 2008/03/22 16:33:32 helly Exp $ */
 
 #include "phar_internal.h"
+#if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
+extern php_stream_wrapper php_stream_phar_wrapper;
+#endif
 
 /* retrieve a phar_entry_info's current file pointer for reading contents */
 php_stream *phar_get_efp(phar_entry_info *entry TSRMLS_DC)

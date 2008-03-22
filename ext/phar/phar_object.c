@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.183 2008/03/22 00:11:42 helly Exp $ */
+/* $Id: phar_object.c,v 1.184 2008/03/22 17:09:23 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1012,7 +1012,7 @@ PHP_METHOD(Phar, loadPhar)
  * Returns the api version */
 PHP_METHOD(Phar, apiVersion)
 {
-	RETURN_STRINGL(PHAR_API_VERSION_STR, sizeof(PHAR_API_VERSION_STR)-1, 1);
+	RETURN_STRINGL(PHP_PHAR_API_VERSION, sizeof(PHP_PHAR_API_VERSION)-1, 1);
 }
 /* }}}*/
 

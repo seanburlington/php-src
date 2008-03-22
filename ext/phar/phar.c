@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.316 2008/03/22 00:15:44 helly Exp $ */
+/* $Id: phar.c,v 1.317 2008/03/22 17:09:23 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1119,7 +1119,7 @@ int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int a
 		mydata->alias = alias ? estrndup(alias, alias_len) : estrndup(mydata->fname, fname_len);
 		mydata->alias_len = alias ? alias_len : fname_len;
 	}
-	snprintf(mydata->version, sizeof(mydata->version), "%s", PHAR_API_VERSION_STR);
+	snprintf(mydata->version, sizeof(mydata->version), "%s", PHP_PHAR_API_VERSION);
 	mydata->is_temporary_alias = alias ? 0 : 1;
 	mydata->internal_file_start = -1;
 	mydata->fp = NULL;
@@ -2831,9 +2831,9 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
-	php_info_print_table_row(2, "Phar EXT version", PHAR_EXT_VERSION_STR);
-	php_info_print_table_row(2, "Phar API version", PHAR_API_VERSION_STR);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.316 $");
+	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
+	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.317 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");
@@ -2882,7 +2882,7 @@ zend_module_entry phar_module_entry = {
 	NULL,
 	PHP_RSHUTDOWN(phar),
 	PHP_MINFO(phar),
-	PHAR_EXT_VERSION_STR,
+	PHP_PHAR_VERSION,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

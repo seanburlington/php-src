@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.95 2008/03/22 21:54:14 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.96 2008/03/22 22:11:48 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -354,7 +354,7 @@ static inline void phar_unixify_path_separators(char *path, int path_len)
 	char *s;
 
 	/* unixify win paths */
-	for (s = path; s - path < path_len; s++) {
+	for (s = path; s - path < path_len; ++s) {
 		if (*s == '\\') {
 			*s = '/';
 		}

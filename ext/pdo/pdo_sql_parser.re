@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.43 2007/12/31 07:09:33 sebastian Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.44 2008/03/22 20:37:08 felipe Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -205,7 +205,7 @@ safe:
 						size_t len;
 						char *buf = NULL;
 					
-						len = php_stream_copy_to_mem(stm, &buf, PHP_STREAM_COPY_ALL, 0);
+						len = php_stream_copy_to_mem(stm, (void *)&buf, PHP_STREAM_COPY_ALL, 0);
 						if (!stmt->dbh->methods->quoter(stmt->dbh, buf, len, &plc->quoted, &plc->qlen,
 								param->param_type TSRMLS_CC)) {
 							/* bork */

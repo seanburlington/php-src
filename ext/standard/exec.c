@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.130 2008/03/21 08:28:09 tony2001 Exp $ */
+/* $Id: exec.c,v 1.131 2008/03/22 20:37:08 felipe Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -484,7 +484,7 @@ PHP_FUNCTION(shell_exec)
 	}
 
 	stream = php_stream_fopen_from_pipe(in, "rb");
-	total_readbytes = php_stream_copy_to_mem(stream, &ret, PHP_STREAM_COPY_ALL, 0);
+	total_readbytes = php_stream_copy_to_mem(stream, (void *)&ret, PHP_STREAM_COPY_ALL, 0);
 	php_stream_close(stream);
 
 	if (total_readbytes > 0) {

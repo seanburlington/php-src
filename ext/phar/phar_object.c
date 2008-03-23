@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.188 2008/03/23 06:00:29 cellog Exp $ */
+/* $Id: phar_object.c,v 1.189 2008/03/23 17:36:56 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -435,7 +435,7 @@ PHP_METHOD(Phar, running)
 	int fname_len, arch_len, entry_len;
 	zend_bool retphar = 1;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "b", &retphar) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|b", &retphar) == FAILURE) {
 		return;
 	}
 

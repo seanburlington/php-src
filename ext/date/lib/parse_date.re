@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.74 2008/03/13 15:54:53 derick Exp $ */
+/* $Id: parse_date.re,v 1.75 2008/03/23 15:49:51 iliaa Exp $ */
 
 #include "timelib.h"
 
@@ -1074,7 +1074,6 @@ relativetext = reltextnumber space reltextunit;
 
 	mssqltime
 	{
-		int tz_not_found;
 		DEBUG_OUTPUT("mssqltime");
 		TIMELIB_INIT;
 		TIMELIB_HAVE_TIME();

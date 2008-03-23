@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.321 2008/03/23 06:59:58 cellog Exp $ */
+/* $Id: phar.c,v 1.322 2008/03/23 16:51:51 helly Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2590,7 +2590,7 @@ static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type 
 				}
 			} else if (phar->flags & PHAR_FILE_COMPRESSION_MASK) {
 				/* compressed phar */
-#if PHP_VERSION_ID >= 50300
+#if PHP_VERSION_ID >= 50300 && PHP_VERSION_ID < 60000
 				file_handle->type = ZEND_HANDLE_STREAM;
 				file_handle->free_filename = 0;
 				file_handle->handle.stream.handle  = phar;
@@ -2827,7 +2827,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.321 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.322 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

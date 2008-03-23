@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.320 2008/03/23 05:39:57 cellog Exp $ */
+/* $Id: phar.c,v 1.321 2008/03/23 06:59:58 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -423,7 +423,7 @@ int phar_open_loaded(char *fname, int fname_len, char *alias, int alias_len, int
 		if (!is_data) {
 			/* prevent any ".phar" without a stub getting through */
 			if (!phar->halt_offset && !phar->is_brandnew) {
-				if (FAILURE == zend_hash_find(&(phar->manifest), ".phar/stub.php", sizeof(".phar/stub.php")-1, (void **)&stub)) {
+				if (PHAR_G(readonly) && FAILURE == zend_hash_find(&(phar->manifest), ".phar/stub.php", sizeof(".phar/stub.php")-1, (void **)&stub)) {
 					spprintf(error, 0, "'%s' is not a phar archive. Use PharData::__construct() for a standard zip or tar archive", fname);
 					return FAILURE;
 				}
@@ -2827,7 +2827,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.320 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.321 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

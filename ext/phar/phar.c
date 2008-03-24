@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.322 2008/03/23 16:51:51 helly Exp $ */
+/* $Id: phar.c,v 1.323 2008/03/24 03:01:29 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1827,7 +1827,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		*error = NULL;
 	}
 
-	if (PHAR_G(readonly)) {
+	if (PHAR_G(readonly) && !phar->is_data) {
 		return EOF;
 	}
 
@@ -2827,7 +2827,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.322 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.323 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

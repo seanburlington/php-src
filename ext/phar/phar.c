@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.323 2008/03/24 03:01:29 cellog Exp $ */
+/* $Id: phar.c,v 1.324 2008/03/24 03:05:23 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1386,6 +1386,7 @@ int phar_detect_phar_fname_ext(const char *filename, int check_length, const cha
 	*ext_str = NULL;
 	for (i = 0; i < sizeof(ext_info) / sizeof(ext_info[0]); ++i) {
 		pos = strstr(filename, ext_info[i].ext);
+		/* Marcus, I don't understand the next line, can you add explanatory comments? XXOO Greg */
 		if (pos && (!ext_info[i].check || pos[ext_info[i].len] != '\0') && (!*ext_str || pos <= *ext_str)) {
 			*ext_str = pos;
 			*ext_len = ext_info[i].len;
@@ -2827,7 +2828,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.323 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.324 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.159 2008/01/13 22:55:02 cellog Exp $ */
+/* $Id: streams.c,v 1.160 2008/03/24 16:28:08 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1646,27 +1646,6 @@ PHPAPI size_t _php_stream_copy_to_mem_ex(php_stream *src, zend_uchar rettype, vo
 
 	if (maxlen == PHP_STREAM_COPY_ALL) {
 		maxlen = 0;
-	}
-
-	if (php_stream_mmap_possible(src)) {
-		/* guarantees src->readbuf_type == IS_STRING */
-		char *p;
-		size_t mapped;
-
-		p = php_stream_mmap_range(src, php_stream_tell(src), maxlen, PHP_STREAM_MAP_MODE_SHARED_READONLY, &mapped);
-
-		if (p && mapped) {
-			*buf = pemalloc_rel_orig(mapped + 1, persistent);
-
-			if (*buf) {
-				memcpy(*buf, p, mapped);
-				((char*)(*buf))[mapped] = 0;
-			}
-
-			php_stream_mmap_unmap(src);
-
-			return mapped;
-		}
 	}
 
 	if (maxlen > 0) {

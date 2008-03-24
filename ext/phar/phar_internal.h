@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.97 2008/03/23 22:42:44 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.98 2008/03/24 01:33:29 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -361,6 +361,16 @@ static inline void phar_unixify_path_separators(char *path, int path_len)
 	}
 }
 #endif
+/**
+ * validate an alias, returns 1 for success, 0 for failure
+ */
+static inline int phar_validate_alias(const char *alias, int alias_len) /* {{{ */
+{
+	return !(memchr(alias, '/', alias_len) || memchr(alias, '\\', alias_len) || memchr(alias, ':', alias_len) ||
+		memchr(alias, ';', alias_len));
+}
+/* }}} */
+
 
 void phar_request_initialize(TSRMLS_D);
 

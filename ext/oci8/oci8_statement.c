@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.28.2.6 2008/03/22 01:27:50 sixd Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.28.2.7 2008/03/25 17:38:07 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -82,7 +82,7 @@ php_oci_statement *php_oci_statement_create (php_oci_connection *connection, cha
 			connection->errcode = php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 
 #if HAVE_OCI_STMT_PREPARE2
-			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, OCI_STRLS_CACHE_DELETE));
+			PHP_OCI_CALL(OCIStmtRelease, (statement->stmt, statement->err, NULL, 0, statement->errcode ? OCI_STRLS_CACHE_DELETE : OCI_DEFAULT));
 			PHP_OCI_CALL(OCIHandleFree,(statement->err, OCI_HTYPE_ERROR));
 #else
 			PHP_OCI_CALL(OCIHandleFree,(statement->stmt, OCI_HTYPE_STMT));

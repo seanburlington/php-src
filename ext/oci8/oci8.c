@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.38.2.11 2008/03/22 01:27:50 sixd Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.38.2.12 2008/03/25 02:00:28 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -715,8 +715,8 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Version", "1.3.1 Beta");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.11 $");
+	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.12 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -724,7 +724,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_row(2, "Active Connections", buf);
 
 #if !defined(PHP_WIN32) && !defined(HAVE_OCI_INSTANT_CLIENT)
-	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
+	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_ORACLE_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
 	php_info_print_table_row(2, "Libraries Used", PHP_OCI8_SHARED_LIBADD );
 #else
@@ -1019,7 +1019,6 @@ sb4 php_oci_fetch_errmsg(OCIError *error_handle, text **error_buf TSRMLS_DC)
 	return error_code;
 } /* }}} */
 
-#ifdef HAVE_OCI8_ATTR_STATEMENT
 /* {{{ php_oci_fetch_sqltext_offset()
  Compute offset in the SQL statement */
 int php_oci_fetch_sqltext_offset(php_oci_statement *statement, text **sqltext, ub2 *error_offset TSRMLS_DC)
@@ -1044,7 +1043,6 @@ int php_oci_fetch_sqltext_offset(php_oci_statement *statement, text **sqltext, u
 	}
 	return 0;
 } /* }}} */
-#endif
 
 /* {{{ php_oci_do_connect()
  Connect wrapper */

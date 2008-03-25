@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.11.2.6.2.21.2.7 2008/03/22 01:27:50 sixd Exp $ */
+/* $Id: php_oci8_int.h,v 1.11.2.6.2.21.2.8 2008/03/25 02:00:32 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -349,9 +349,7 @@ int php_oci_descriptor_delete_from_hash(void *data, void *id TSRMLS_DC);
 
 sb4 php_oci_error (OCIError *, sword TSRMLS_DC);
 sb4 php_oci_fetch_errmsg(OCIError *, text ** TSRMLS_DC);
-#ifdef HAVE_OCI8_ATTR_STATEMENT
 int php_oci_fetch_sqltext_offset(php_oci_statement *, text **, ub2 * TSRMLS_DC);
-#endif
 
 void php_oci_do_connect (INTERNAL_FUNCTION_PARAMETERS, int , int);
 php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, char *dbname, int dbname_len, char *charset, long session_mode, int persistent, int exclusive TSRMLS_DC);

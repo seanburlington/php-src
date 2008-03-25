@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.2 2008/01/03 16:20:31 nlopess Exp $ */
+/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.3 2008/03/25 02:00:31 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -34,6 +34,12 @@
 #ifdef ZTS
 # include "TSRM.h"
 #endif
+
+
+/* 
+ * The version of the OCI8 extension.
+ */
+#define PHP_OCI8_VERSION "1.3.1 Beta"
 
 extern zend_module_entry oci8_module_entry;
 #define phpext_oci8_ptr &oci8_module_entry

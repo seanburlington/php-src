@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.9 2008/03/18 16:57:31 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.10 2008/03/25 18:27:17 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -687,7 +687,7 @@ PHP_FUNCTION(mysqli_get_charset)
 {
 	MY_MYSQL				*mysql;
 	zval					*mysql_link;
-	char 					*name = NULL, *collation = NULL, *dir = NULL;
+	const char 				*name = NULL, *collation = NULL, *dir = NULL, *comment = NULL;
 	uint					minlength, maxlength, number, state;
 #if !defined(MYSQLI_USE_MYSQLND)
 	MY_CHARSET_INFO			cs;
@@ -711,6 +711,7 @@ PHP_FUNCTION(mysqli_get_charset)
 	maxlength = cs.mbmaxlen;
 	number = cs.number;
 	state = cs.state;
+	comment = cs.comment;
 #else
 	cs = mysql->mysql->charset;
 	name = cs->name;	
@@ -718,6 +719,7 @@ PHP_FUNCTION(mysqli_get_charset)
 	minlength = cs->char_minlen;
 	maxlength = cs->char_maxlen;
 	number = cs->nr;
+	comment = cs->comment;
 	state = 1;	/* all charsets are compiled in */
 #endif
 
@@ -728,6 +730,7 @@ PHP_FUNCTION(mysqli_get_charset)
 	add_property_long(return_value, "max_length", maxlength);
 	add_property_long(return_value, "number", number);
 	add_property_long(return_value, "state", state);
+	add_property_string(return_value, "comment", (comment) ? (char *)comment : "", 1);
 }
 /* }}} */
 #endif

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.3.2.11 2008/03/20 14:03:30 andrey Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.3.2.12 2008/03/25 18:27:17 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -529,11 +529,7 @@ MYSQLND_METHOD(mysqlnd_stmt, execute)(MYSQLND_STMT * const stmt TSRMLS_DC)
 		stmt->send_types_to_server = 0;
 		stmt->upsert_status = conn->upsert_status;
 		stmt->state = MYSQLND_STMT_EXECUTED;
-		if (conn->last_query_type == QUERY_UPSERT) {
-			stmt->upsert_status = conn->upsert_status;
-			DBG_INF("PASS");
-			DBG_RETURN(PASS);
-		} else if (conn->last_query_type == QUERY_LOAD_LOCAL) {
+		if (conn->last_query_type == QUERY_UPSERT || conn->last_query_type == QUERY_LOAD_LOCAL) {
 			DBG_INF("PASS");
 			DBG_RETURN(PASS);
 		}

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.72 2008/01/16 00:33:26 sixd Exp $
+dnl $Id: config.m4,v 1.73 2008/03/25 02:25:02 sixd Exp $
 dnl
 
 if test -z "$SED"; then
@@ -214,7 +214,6 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
     9.0)
       PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
       PHP_ADD_LIBPATH($OCI8_DIR/$OCI8_LIB_DIR, OCI8_SHARED_LIBADD)
-      AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
 
       dnl These functions are only available in version >= 9.2
       PHP_CHECK_LIBRARY(clntsh, OCIEnvNlsCreate,
@@ -256,7 +255,6 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
     11.1|10.1)
       PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
       PHP_ADD_LIBPATH($OCI8_DIR/$OCI8_LIB_DIR, OCI8_SHARED_LIBADD)
-      AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
       AC_DEFINE(HAVE_OCI_ENV_NLS_CREATE,1,[ ])
       AC_DEFINE(HAVE_OCI_ENV_CREATE,1,[ ])
       AC_DEFINE(HAVE_OCI_STMT_PREPARE2,1,[ ])
@@ -376,7 +374,6 @@ dnl Header directory for manual installation
   esac
 
   AC_DEFINE(HAVE_OCI_INSTANT_CLIENT,1,[ ])
-  AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
   AC_DEFINE(HAVE_OCI_ENV_NLS_CREATE,1,[ ])
   AC_DEFINE(HAVE_OCI_ENV_CREATE,1,[ ])
   AC_DEFINE(HAVE_OCI_STMT_PREPARE2,1,[ ])

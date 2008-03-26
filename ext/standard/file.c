@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.9 2008/02/24 11:45:55 felipe Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.10 2008/03/26 23:06:47 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -596,6 +596,13 @@ PHP_FUNCTION(file_put_contents)
 	if (flags & PHP_FILE_APPEND) {
 		mode[0] = 'a';
 	} else if (flags & LOCK_EX) {
+		/* check to make sure we are dealing with a regular file */
+		if (php_memnstr(filename, "://", sizeof("://") - 1, filename + filename_len)) {
+			if (strncasecmp(filename, "file://", sizeof("file://") - 1)) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Exclusive locks may only be set for regular files");
+				RETURN_FALSE;
+			}
+		}
 		mode[0] = 'c';
 	}
 	mode[2] = '\0';

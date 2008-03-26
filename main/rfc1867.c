@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.173.2.1.2.10 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: rfc1867.c,v 1.173.2.1.2.11 2008/03/26 12:59:42 tony2001 Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1090,8 +1090,14 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				} else if (blen > 0) {
 				
 					wlen = write(fd, buff, blen);
-			
-					if (wlen < blen) {
+
+					if (wlen == -1) {
+						/* write failed */
+#if DEBUG_FILE_UPLOAD
+						sapi_module.sapi_error(E_NOTICE, "write() failed - %s", strerror(errno));
+#endif
+						cancel_upload = UPLOAD_ERROR_F;
+					} else if (wlen < blen) {
 #if DEBUG_FILE_UPLOAD
 						sapi_module.sapi_error(E_NOTICE, "Only %d bytes were written, expected to write %d", wlen, blen);
 #endif

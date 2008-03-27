@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.325 2008/03/24 12:53:27 helly Exp $ */
+/* $Id: phar.c,v 1.326 2008/03/27 06:38:51 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2703,10 +2703,10 @@ int phar_zend_open(const char *filename, zend_file_handle *handle TSRMLS_DC) /* 
 				phar_archive_data *pphar = NULL;
 				/* retrieving an include within the current directory, so use this if possible */
 				if (SUCCESS == (zend_hash_find(&(PHAR_GLOBALS->phar_fname_map), arch, arch_len, (void **) &pphar))) {
-					if (!(entry = phar_find_in_include_path(entry, entry_len, &phar TSRMLS_CC))) {
+					if (!(entry = phar_find_in_include_path(entry, entry_len, &pphar TSRMLS_CC))) {
 						/* this file is not in the phar, use the original path */
 						if (SUCCESS == phar_orig_zend_open(filename, handle TSRMLS_CC)) {
-							if (SUCCESS == phar_mount_entry(phar, handle->opened_path ? handle->opened_path : (char *) filename, strlen(handle->opened_path ? handle->opened_path : filename), (char *) filename, strlen(filename) TSRMLS_CC)) {
+							if (SUCCESS == phar_mount_entry(pphar, handle->opened_path ? handle->opened_path : (char *) filename, strlen(handle->opened_path ? handle->opened_path : filename), (char *) filename, strlen(filename) TSRMLS_CC)) {
 								if (handle->opened_path) {
 									efree(handle->opened_path);
 								}
@@ -2835,7 +2835,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.325 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.326 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

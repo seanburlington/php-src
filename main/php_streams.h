@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.103.2.1.2.4.2.2 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: php_streams.h,v 1.103.2.1.2.4.2.3 2008/03/27 10:33:40 dmitry Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -510,6 +510,9 @@ END_EXTERN_C()
 
 /* don't check allow_url_fopen and allow_url_include */
 #define STREAM_DISABLE_URL_PROTECTION   0x00002000
+
+/* assume the path passed in exists and is fully expanded, avoiding syscalls */
+#define STREAM_ASSUME_REALPATH          0x00004000
 
 /* Antique - no longer has meaning */
 #define IGNORE_URL_WIN 0

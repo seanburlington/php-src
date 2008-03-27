@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.5 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.6 2008/03/27 10:33:40 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -892,9 +892,13 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 		}
 		return NULL;
 	}
-	
-	if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
-		return NULL;
+
+	if (options & STREAM_ASSUME_REALPATH) {
+		realpath = estrdup(filename);
+	} else {
+		if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
+			return NULL;
+		}
 	}
 
 	if (persistent) {

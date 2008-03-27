@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.326 2008/03/27 06:38:51 cellog Exp $ */
+/* $Id: phar.c,v 1.327 2008/03/27 12:54:22 helly Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2678,6 +2678,7 @@ int phar_zend_open(const char *filename, zend_file_handle *handle TSRMLS_DC) /* 
 		}
 		return FAILURE;
 	}
+#if HELLY_0
 	if (0 && zend_hash_num_elements(&(PHAR_GLOBALS->phar_fname_map))) {
 		char *fname = NULL;
 		int fname_len;
@@ -2737,6 +2738,7 @@ dopharthing:
 			return FAILURE;
 		}
 	}
+#endif
 skip_phar:
 	return phar_orig_zend_open(filename, handle TSRMLS_CC);
 }
@@ -2835,7 +2837,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.326 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.327 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

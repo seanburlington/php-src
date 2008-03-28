@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.27 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.28 2008/03/28 16:43:49 felipe Exp $ */
 
 #define IMAP41
 
@@ -1051,6 +1051,7 @@ PHP_FUNCTION(imap_setacl)
 	ZEND_FETCH_RESOURCE(imap_le_struct, pils *, streamind, -1, "imap", le_imap);
 
 	convert_to_string_ex(mailbox);
+	convert_to_string_ex(id);
 	convert_to_string_ex(rights);
 
 	RETURN_BOOL(imap_setacl(imap_le_struct->imap_stream, Z_STRVAL_PP(mailbox), Z_STRVAL_PP(id), Z_STRVAL_PP(rights)));

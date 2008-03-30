@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.10 2008/03/26 23:06:47 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.11 2008/03/30 15:05:48 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -614,6 +614,7 @@ PHP_FUNCTION(file_put_contents)
 
 	if (flags & LOCK_EX && (!php_stream_supports_lock(stream) || php_stream_lock(stream, LOCK_EX))) {
 		php_stream_close(stream);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Exclusive locks are not supported for this stream");
 		RETURN_FALSE;
 	}
 

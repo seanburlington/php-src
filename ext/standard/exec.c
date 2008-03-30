@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.113.2.3.2.1.2.7 2008/03/21 08:28:24 tony2001 Exp $ */
+/* $Id: exec.c,v 1.113.2.3.2.1.2.8 2008/03/30 12:24:10 felipe Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -280,6 +280,8 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 		if (mb_len < 0) {
 			continue;
 		} else if (mb_len > 1) {
+			memcpy(cmd + y, str + x, mb_len);
+			y += mb_len;
 			x += mb_len - 1;
 			continue;
 		}
@@ -368,6 +370,8 @@ PHPAPI char *php_escape_shell_arg(char *str)
 		if (mb_len < 0) {
 			continue;
 		} else if (mb_len > 1) {
+			memcpy(cmd + y, str + x, mb_len);
+			y += mb_len;
 			x += mb_len - 1;
 			continue;
 		}

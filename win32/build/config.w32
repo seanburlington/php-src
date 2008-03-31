@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.13 2008/03/22 17:59:52 helly Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.14 2008/03/31 00:28:16 sfox Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -58,7 +58,7 @@ if (!PATH_PROG('bison')) {
 }
 
 // There's a minimum requirement for re2c..
-MINRE2C = "0.13.4";
+MINRE2C = "0.13.3";
 
 RE2C = PATH_PROG('re2c');
 if (RE2C) {

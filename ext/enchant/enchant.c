@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.14 2006/03/21 18:10:45 pajoye Exp $
+  $Id: enchant.c,v 1.15 2008/03/31 09:35:55 sfox Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -103,7 +103,7 @@ zend_module_entry enchant_module_entry = {
 	NULL,	/* Replace with NULL if there's nothing to do at request end */
 	PHP_MINFO(enchant),
 #if ZEND_MODULE_API_NO >= 20010901
-	"0.1", /* Replace with version number for your extension */
+	PHP_ENCHANT_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -256,8 +256,8 @@ PHP_MINFO_FUNCTION(enchant)
 	pbroker = enchant_broker_init();
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
-	php_info_print_table_row(2, "Version", "@package_version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.14 $");
+	php_info_print_table_row(2, "Version", PHP_ENCHANT_VERSION);
+	php_info_print_table_row(2, "Revision", "$Revision: 1.15 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();

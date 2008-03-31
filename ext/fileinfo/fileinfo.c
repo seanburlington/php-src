@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.16 2006/11/07 21:18:51 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.17 2008/03/31 09:37:51 sfox Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,7 +225,7 @@ zend_module_entry fileinfo_module_entry = {
 	NULL,
 	PHP_MINFO(fileinfo),
 #if ZEND_MODULE_API_NO >= 20010901
-	"0.1", /* Replace with version number for your extension */
+	PHP_FILEINFO_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -241,6 +241,7 @@ PHP_MINFO_FUNCTION(fileinfo)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "fileinfo support", "enabled");
+	php_info_print_table_row(2, "version", PHP_FILEINFO_VERSION);
 	php_info_print_table_end();
 }
 /* }}} */

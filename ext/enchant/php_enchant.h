@@ -15,7 +15,7 @@
   | Author: Pierre-Alain Joye <paj@pearfr.org>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_enchant.h,v 1.3 2006/03/21 18:10:45 pajoye Exp $
+  $Id: php_enchant.h,v 1.4 2008/03/31 09:35:55 sfox Exp $
 */
 
 #ifndef PHP_ENCHANT_H
@@ -23,6 +23,8 @@
 
 extern zend_module_entry enchant_module_entry;
 #define phpext_enchant_ptr &enchant_module_entry
+
+#define PHP_ENCHANT_VERSION "1.0.2-dev"
 
 #ifdef PHP_WIN32
 #define PHP_ENCHANT_API __declspec(dllexport)

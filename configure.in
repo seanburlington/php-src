@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.650 2008/03/26 14:46:16 scottmac Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.651 2008/04/01 02:39:17 gwynne Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1260,7 +1260,7 @@ CC=$old_CC
 dnl Finish the Darwin hack
 if test "$php_did_darwin9_cheat" -eq 1; then
   if test "$PHP_DEBUG" = "yes"; then
-    CFLAGS=`echo "$CFLAGS" | $SED -e 's/-gstabs/-g/g'`
+    CFLAGS=`echo "-O2 $CFLAGS" | $SED -e 's/-gstabs/-g/g'`
   else
     CFLAGS=`echo "$CFLAGS" | $SED -e 's/-gstabs//g'`
   fi

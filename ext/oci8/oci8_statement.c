@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.56 2008/03/25 02:25:02 sixd Exp $ */
+/* $Id: oci8_statement.c,v 1.57 2008/04/02 14:56:03 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -780,7 +780,11 @@ void php_oci_statement_free(php_oci_statement *statement TSRMLS_DC)
 		zend_hash_destroy(statement->defines);
 		efree(statement->defines);
 	}
-	
+
+	if (statement->parent_stmtid) {
+		zend_list_delete(statement->parent_stmtid);
+	}
+
 	zend_list_delete(statement->connection->rsrc_id);
 	efree(statement);
 	

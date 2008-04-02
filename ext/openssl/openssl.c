@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.156 2008/02/28 14:16:13 felipe Exp $ */
+/* $Id: openssl.c,v 1.157 2008/04/02 14:35:16 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2051,7 +2051,7 @@ PHP_FUNCTION(openssl_csr_sign)
 	X509 * cert = NULL, *new_cert = NULL;
 	X509_REQ * csr;
 	EVP_PKEY * key = NULL, *priv_key = NULL;
-	long csr_resource, certresource, keyresource;
+	long csr_resource, certresource = 0, keyresource;
 	int i;
 	struct php_x509_request req;
 	

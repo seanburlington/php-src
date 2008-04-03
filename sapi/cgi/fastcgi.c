@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.28.2.2 2008/02/15 14:45:42 dmitry Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.28.2.3 2008/04/03 10:24:58 dmitry Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -593,6 +593,9 @@ static inline int fcgi_make_header(fcgi_header *hdr, fcgi_request_type type, int
 	hdr->reserved = 0;
 	hdr->type = type;
 	hdr->version = FCGI_VERSION_1;
+	if (pad) {
+		memset(((unsigned char*)hdr) + sizeof(fcgi_header) + len, 0, pad);
+	}
 	return pad;
 }
 
@@ -777,7 +780,7 @@ int fcgi_read(fcgi_request *req, char *str, int len)
 {
 	int ret, n, rest;
 	fcgi_header hdr;
-	unsigned char buf[8];
+	unsigned char buf[255];
 
 	n = 0;
 	rest = len;

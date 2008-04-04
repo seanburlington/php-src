@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.3 2008/03/10 22:12:34 felipe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.4 2008/04/04 17:42:18 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2812,7 +2812,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 		}
 	}
 
-	if ((argc == 2) || (argc > 2 && Z_STRLEN_PP(file))) {
+	if (argc >= 2 && Z_STRLEN_PP(file)) {
 		PHP_GD_CHECK_OPEN_BASEDIR(fn, "Invalid filename");
 
 		fp = VCWD_FOPEN(fn, "wb");

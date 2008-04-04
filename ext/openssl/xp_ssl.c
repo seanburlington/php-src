@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.35 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: xp_ssl.c,v 1.36 2008/04/04 12:49:57 jorton Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -727,7 +727,7 @@ static int php_openssl_sockop_cast(php_stream *stream, int castas, void **ret TS
 
 		case PHP_STREAM_AS_FD_FOR_SELECT:
 			if (ret) {
-				*ret = (void*)sslsock->s.socket;
+				*(int *)ret = sslsock->s.socket;
 			}
 			return SUCCESS;
 
@@ -737,7 +737,7 @@ static int php_openssl_sockop_cast(php_stream *stream, int castas, void **ret TS
 				return FAILURE;
 			}
 			if (ret) {
-				*ret = (void*)sslsock->s.socket;
+				*(int *)ret = sslsock->s.socket;
 			}
 			return SUCCESS;
 		default:

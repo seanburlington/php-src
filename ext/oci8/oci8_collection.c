@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_collection.c,v 1.5.2.3.2.7.2.3 2008/03/22 01:27:50 sixd Exp $ */
+/* $Id: oci8_collection.c,v 1.5.2.3.2.7.2.4 2008/04/07 21:55:20 sixd Exp $ */
 
 
 
@@ -344,7 +344,13 @@ int php_oci_collection_append_number(php_oci_collection *collection, char *numbe
 	OCINumber oci_number;
 	php_oci_connection *connection = collection->connection;
 
+#if (PHP_MAJOR_VERSION == 4 && PHP_MINOR_VERSION == 3 && PHP_RELEASE_VERSION < 10)
+    /* minimum PHP version ext/oci8/config.m4 accepts is 4.3.9 */
+	element_double = strtod(number, NULL);
+#else
+	/* zend_strtod was introduced in PHP 4.3.10 */
 	element_double = zend_strtod(number, NULL);
+#endif
 			
 	PHP_OCI_CALL_RETURN(connection->errcode, OCINumberFromReal, (connection->err, &element_double, sizeof(double), &oci_number));
 
@@ -626,7 +632,13 @@ int php_oci_collection_element_set_number(php_oci_collection *collection, long i
 	OCINumber oci_number;
 	php_oci_connection *connection = collection->connection;
 
+#if (PHP_MAJOR_VERSION == 4 && PHP_MINOR_VERSION == 3 && PHP_RELEASE_VERSION < 10)
+    /* minimum PHP version ext/oci8/config.m4 accepts is 4.3.9 */
+	element_double = strtod(number, NULL);
+#else
+	/* zend_strtod was introduced in PHP 4.3.10 */
 	element_double = zend_strtod(number, NULL);
+#endif
 			
 	PHP_OCI_CALL_RETURN(connection->errcode, OCINumberFromReal, (connection->err, &element_double, sizeof(double), &oci_number));
 

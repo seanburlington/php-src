@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.38.2.13 2008/04/01 18:37:32 sixd Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.38.2.14 2008/04/07 21:55:43 sixd Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -716,7 +716,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.13 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.14 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1438,7 +1438,7 @@ static int php_oci_connection_ping(php_oci_connection *connection TSRMLS_DC)
 	 * successfully performed a roundtrip and validated the
 	 * connection. Use OCIServerVersion for Pre-10.2 clients
 	 */
-#if ( (OCI_MAJOR_VERSION > 10) || ((OCI_MAJOR_VERSION == 10) && (OCI_MINOR_VERSION > 2)) )	/* OCIPing available 10.2 onwards */
+#if ( (OCI_MAJOR_VERSION > 10) || ((OCI_MAJOR_VERSION == 10) && (OCI_MINOR_VERSION >= 2)) )	/* OCIPing available 10.2 onwards */
 	PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIPing, (connection->svc, OCI_G(err), OCI_DEFAULT));
 #else
 	char version[256];

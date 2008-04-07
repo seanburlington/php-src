@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.161 2008/02/03 14:44:30 helly Exp $ */
+/* $Id: basic_functions.h,v 1.162 2008/04/07 10:39:43 colder Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -84,6 +84,8 @@ PHP_FUNCTION(call_user_func);
 PHP_FUNCTION(call_user_func_array);
 PHP_FUNCTION(call_user_method);
 PHP_FUNCTION(call_user_method_array);
+PHP_FUNCTION(forward_static_call);
+PHP_FUNCTION(forward_static_call_array);
 
 PHP_FUNCTION(register_shutdown_function);
 PHP_FUNCTION(highlight_file);

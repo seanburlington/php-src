@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.17.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.17.2.2 2008/04/08 08:42:24 jani Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -624,7 +624,7 @@ PHP_FUNCTION(proc_open)
 					goto exit_fail;
 				}
 
-				if (strcmp(Z_STRVAL_PP(zmode), "w") != 0) {
+				if (strncmp(Z_STRVAL_PP(zmode), "w", 1) != 0) {
 					descriptors[ndesc].parentend = newpipe[1];
 					descriptors[ndesc].childend = newpipe[0];
 					descriptors[ndesc].mode |= DESC_PARENT_MODE_WRITE;

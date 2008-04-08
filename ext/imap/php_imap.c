@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.8 2008/04/02 16:26:39 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.9 2008/04/08 00:01:48 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3047,8 +3047,8 @@ PHP_FUNCTION(imap_mail_compose)
 	}
 
 	zend_hash_internal_pointer_reset(Z_ARRVAL_PP(body));
-	if (zend_hash_get_current_data(Z_ARRVAL_PP(body), (void **) &data) != SUCCESS) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "body parameter cannot be empty");
+	if (zend_hash_get_current_data(Z_ARRVAL_PP(body), (void **) &data) != SUCCESS || Z_TYPE_PP(data) != IS_ARRAY) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "body parameter must be a non-empty array");
 		RETURN_FALSE;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.150 2008/03/13 19:45:22 helly Exp $ */
+/* $Id: spl_directory.c,v 1.151 2008/04/09 19:00:48 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -236,7 +236,7 @@ static void spl_filesystem_dir_open(spl_filesystem_object* intern, zend_uchar ty
 	}
 	intern->u.dir.index = 0;
 
-	if (intern->u.dir.dirp == NULL) {
+	if (EG(exception) || intern->u.dir.dirp == NULL) {
 		/* throw exception: should've been already happened */
 		intern->u.dir.entry.d_name[0] = '\0';
 	} else {

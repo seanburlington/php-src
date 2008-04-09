@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.16 2008/03/18 22:23:20 rasmus Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.17 2008/04/09 09:16:51 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1800,7 +1800,7 @@ consult the installation file that came with this distribution, or visit \n\
 				} else if (argc > php_optind) {
 					/* file is on command line, but not in -f opt */
 					STR_FREE(SG(request_info).path_translated);
-					SG(request_info).path_translated = estrdup(argv[php_optind++]);
+					SG(request_info).path_translated = estrdup(argv[php_optind]);
 					/* arguments after the file are considered script args */
 					SG(request_info).argc = argc - php_optind;
 					SG(request_info).argv = &argv[php_optind];

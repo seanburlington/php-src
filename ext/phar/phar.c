@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.327 2008/03/27 12:54:22 helly Exp $ */
+/* $Id: phar.c,v 1.328 2008/04/10 03:12:07 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -25,6 +25,21 @@
 #include "func_interceptors.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(phar)
+
+/**
+ * set's phar->is_writeable based on the current INI value
+ */
+static int phar_set_writeable_bit(void *pDest, void *argument TSRMLS_DC) /* {{{ */
+{
+	zend_bool keep = *(zend_bool *)argument;
+	phar_archive_data *phar = *(phar_archive_data **)pDest;
+
+	if (!phar->is_data) {
+		phar->is_writeable = !keep;
+	}
+	return ZEND_HASH_APPLY_KEEP;
+}
+/* }}} */
 
 /* if the original value is 0 (disabled), then allow setting/unsetting at will
    otherwise, only allow 1 (enabled), and error on disabling */
@@ -63,7 +78,10 @@ ZEND_INI_MH(phar_ini_modify_handler) /* {{{ */
 	}
 
 	if (entry->name_length == 14) {
-		PHAR_G(readonly) = ini; 
+		PHAR_G(readonly) = ini;
+		if (PHAR_GLOBALS->request_init && PHAR_GLOBALS->phar_fname_map.arBuckets) {
+			zend_hash_apply_with_argument(&(PHAR_GLOBALS->phar_fname_map), phar_set_writeable_bit, (void *)&ini TSRMLS_CC);
+		}
 	} else {
 		PHAR_G(require_hash) = ini;
 	} 
@@ -2837,7 +2855,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.327 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.328 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

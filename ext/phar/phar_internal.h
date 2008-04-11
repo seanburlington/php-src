@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.98 2008/03/24 01:33:29 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.99 2008/04/11 04:20:14 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,6 +120,10 @@
 #define PHAR_ENT_PERM_MASK_OTH    0x00000007
 #define PHAR_ENT_PERM_DEF_FILE    0x000001B6
 #define PHAR_ENT_PERM_DEF_DIR     0x000001FF
+
+#define PHAR_FORMAT_PHAR    0
+#define PHAR_FORMAT_TAR     1
+#define PHAR_FORMAT_ZIP     2
 
 #define TAR_FILE    '0'
 #define TAR_LINK    '1'

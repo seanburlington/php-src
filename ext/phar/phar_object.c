@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.203 2008/04/11 13:26:02 cellog Exp $ */
+/* $Id: phar_object.c,v 1.204 2008/04/11 13:26:35 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3889,7 +3889,7 @@ zend_function_entry php_archive_methods[] = {
 	PHP_ME(Phar, setAlias,              arginfo_phar_setAlias,     ZEND_ACC_PUBLIC)
 	PHP_ME(Phar, setDefaultStub,        arginfo_phar_createDS,     ZEND_ACC_PUBLIC)
 	PHP_ME(Phar, setMetadata,           arginfo_phar_setMetadata,  ZEND_ACC_PUBLIC)
-	PHP_ME(Phar, setSignatureAlgorithm, arginfo_phar_setSigAlgo ,  ZEND_ACC_PUBLIC)
+	PHP_ME(Phar, setSignatureAlgorithm, arginfo_phar_setSigAlgo,   ZEND_ACC_PUBLIC)
 	PHP_ME(Phar, setStub,               arginfo_phar_setStub,      ZEND_ACC_PUBLIC)
 	PHP_ME(Phar, startBuffering,        NULL,                      ZEND_ACC_PUBLIC)
 	PHP_ME(Phar, stopBuffering,         NULL,                      ZEND_ACC_PUBLIC)

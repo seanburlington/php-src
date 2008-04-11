@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.132 2008/01/29 22:03:44 stas Exp $ */
+/* $Id: html.c,v 1.133 2008/04/11 19:08:04 felipe Exp $ */
 
 /*
  * HTML entity resources:
@@ -848,7 +848,7 @@ det_charset:
 		
 		/* now walk the charset map and look for the codeset */
 		for (i = 0; charset_map[i].codeset; i++) {
-			if (strncasecmp(charset_hint, charset_map[i].codeset, len) == 0) {
+			if (len == strlen(charset_map[i].codeset) && strncasecmp(charset_hint, charset_map[i].codeset, len) == 0) {
 				charset = charset_map[i].charset;
 				found = 1;
 				break;

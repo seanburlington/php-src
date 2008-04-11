@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70.2.3.2.17 2007/12/31 07:20:10 sebastian Exp $ */
+/* $Id: posix.c,v 1.70.2.3.2.18 2008/04/11 11:00:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.18 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -875,7 +875,7 @@ PHP_FUNCTION(posix_getgrgid)
 #if defined(ZTS) && defined(HAVE_GETGRGID_R) && defined(_SC_GETGR_R_SIZE_MAX)
 	int ret;
 	struct group _g;
-	struct group *retgrptr;
+	struct group *retgrptr = NULL;
 	long grbuflen;
 	char *grbuf;
 #endif
@@ -894,7 +894,7 @@ PHP_FUNCTION(posix_getgrgid)
 	grbuf = emalloc(grbuflen);
 
 	ret = getgrgid_r(gid, &_g, grbuf, grbuflen, &retgrptr);
-	if (ret) {
+	if (ret || retgrptr == NULL) {
 		POSIX_G(last_error) = ret;
 		efree(grbuf);
 		RETURN_FALSE;
@@ -1009,7 +1009,7 @@ PHP_FUNCTION(posix_getpwuid)
 	pwbuf = emalloc(pwbuflen);
 
 	ret = getpwuid_r(uid, &_pw, pwbuf, pwbuflen, &retpwptr);
-	if (ret) {
+	if (ret || retpwptr == NULL) {
 		POSIX_G(last_error) = ret;
 		efree(pwbuf);
 		RETURN_FALSE;

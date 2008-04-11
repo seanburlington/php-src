@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.14 2006/12/19 10:26:44 edink Exp $
+<?php # $Id: mkdist.php,v 1.15 2008/04/11 21:57:19 bjori Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -344,7 +344,7 @@ if (!$use_pear_template) {
 
 	/* grab the bootstrap script */
 	echo "Downloading go-pear\n";
-	copy("http://go-pear.org/", "$dist_dir/PEAR/go-pear.php");
+	copy("http://pear.php.net/go-pear", "$dist_dir/PEAR/go-pear.php");
 
 	/* import the package list -- sets $packages variable */
 	include "pear/go-pear-list.php";

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.9 2008/03/22 22:11:48 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.10 2008/04/12 22:21:28 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -51,7 +51,7 @@ PHAR_FUNC(phar_opendir) /* {{{ */
 			char *name;
 
 			efree(entry);
-			entry = filename;
+			entry = estrndup(filename, filename_len);
 			/* fopen within phar, if :// is not in the url, then prepend phar://<archive>/ */
 			entry_len = filename_len;
 			if (strstr(entry, "://")) {
@@ -70,11 +70,9 @@ PHAR_FUNC(phar_opendir) /* {{{ */
 			stream = php_stream_opendir(name, REPORT_ERRORS, context);
 			efree(name);
 			if (!stream) {
-				efree(entry);
 				goto skip_phar;
 			}
 			php_stream_to_zval(stream, return_value);
-			efree(entry);
 			return;
 		}
 	}

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.329 2008/04/14 04:47:33 cellog Exp $ */
+/* $Id: phar.c,v 1.330 2008/04/14 15:21:40 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2045,7 +2045,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		offset += 4 + entry->filename_len + sizeof(entry_buffer) + entry->metadata_str.len + (entry->is_dir ? 1 : 0);
 
 		/* compress and rehash as necessary */
-		if (oldfile && !entry->is_modified) {
+		if ((oldfile && !entry->is_modified) || entry->is_dir) {
 			continue;
 		}
 		if (!phar_get_efp(entry TSRMLS_CC)) {
@@ -2302,7 +2302,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		if (zend_hash_get_current_data(&phar->manifest, (void **)&entry) == FAILURE) {
 			continue;
 		}
-		if (entry->is_deleted) {
+		if (entry->is_deleted || entry->is_dir) {
 			continue;
 		}
 		if (entry->cfp) {
@@ -2799,7 +2799,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.329 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.330 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

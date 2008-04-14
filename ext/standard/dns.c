@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.91 2008/01/17 14:12:36 iliaa Exp $ */
+/* $Id: dns.c,v 1.92 2008/04/14 16:49:30 colder Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -247,7 +247,7 @@ static char *php_gethostbyname(char *name)
 
 #if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32) || defined(NETWARE))
 
-/* {{{ proto int dns_check_record(string host [, string type]) U
+/* {{{ proto bool dns_check_record(string host [, string type]) U
    Check DNS records corresponding to a given Internet host name or IP address */
 PHP_FUNCTION(dns_check_record)
 {

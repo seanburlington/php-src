@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.206 2008/04/12 21:43:38 cellog Exp $ */
+/* $Id: phar_object.c,v 1.207 2008/04/14 17:14:53 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3009,7 +3009,7 @@ PHP_METHOD(Phar, offsetSet)
 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Cannot set alias \".phar/alias.txt\" directly in phar \"%s\", use setAlias", phar_obj->arc.archive->fname);
 		return;
 	}
-	phar_add_file(phar_obj->arc.archive, fname, fname_len, cont_str, cont_len, zresource);
+	phar_add_file(phar_obj->arc.archive, fname, fname_len, cont_str, cont_len, zresource TSRMLS_CC);
 }
 /* }}} */
 
@@ -3067,7 +3067,7 @@ PHP_METHOD(Phar, addEmptyDir)
 		return;
 	}
 
-	phar_mkdir(phar_obj->arc.archive, dirname, dirname_len);
+	phar_mkdir(phar_obj->arc.archive, dirname, dirname_len TSRMLS_CC);
 }
 /* }}} */
 
@@ -3097,7 +3097,7 @@ PHP_METHOD(Phar, addFile)
 
 	MAKE_STD_ZVAL(zresource);
 	php_stream_to_zval(resource, zresource);
-	phar_add_file(phar_obj->arc.archive, fname, fname_len, NULL, 0, zresource);
+	phar_add_file(phar_obj->arc.archive, fname, fname_len, NULL, 0, zresource TSRMLS_CC);
 	efree(zresource);
 }
 /* }}} */
@@ -3115,7 +3115,7 @@ PHP_METHOD(Phar, addFromString)
 		return;
 	}
 
-	phar_add_file(phar_obj->arc.archive, localname, localname_len, cont_str, cont_len, NULL);
+	phar_add_file(phar_obj->arc.archive, localname, localname_len, cont_str, cont_len, NULL TSRMLS_CC);
 }
 /* }}} */
 

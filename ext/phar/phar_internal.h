@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.99 2008/04/11 04:20:14 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.100 2008/04/14 04:47:33 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -342,13 +342,16 @@ union _phar_entry_object {
 };
 #endif
 
+#ifndef PHAR_MAIN
+extern int phar_has_bz2;
+extern int phar_has_zlib;
+# if PHP_VERSION_ID >= 50300
+extern char *(*phar_save_resolve_path)(const char *filename, int filename_len TSRMLS_DC);
+# endif
+#endif
+
 BEGIN_EXTERN_C()
 
-int phar_has_bz2;
-int phar_has_zlib;
-#if PHP_VERSION_ID >= 50300
-char *(*phar_save_resolve_path)(const char *filename, int filename_len TSRMLS_DC);
-#endif
 
 #ifdef PHP_WIN32
 char *tsrm_strtok_r(char *s, const char *delim, char **last);

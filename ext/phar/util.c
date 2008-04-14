@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.35 2008/04/14 15:21:40 cellog Exp $ */
+/* $Id: util.c,v 1.36 2008/04/14 16:26:00 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -982,7 +982,7 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 {
 	const char *pcr_error;
 	phar_entry_info *entry;
-	char is_dir = (path[path_len - 1] == '/');
+	char is_dir = path_len && (path[path_len - 1] == '/');
 
 	if (error) {
 		*error = NULL;

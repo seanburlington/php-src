@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.13 2008/04/13 23:33:30 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.14 2008/04/14 17:31:00 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -573,7 +573,7 @@ void phar_file_stat(const char *filename, php_stat_len filename_length, int type
 				efree(save2);
 				/* Error Occured */
 				if (!IS_EXISTS_CHECK(type)) {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "%sstat failed for %s", IS_LINK_OPERATION(type) ? "l" : "", filename);
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "%sstat failed for %s", IS_LINK_OPERATION(type) ? "L" : "", filename);
 				}
 				RETURN_FALSE;
 			}

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.11 2008/03/30 15:05:48 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.12 2008/04/15 15:48:20 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -775,16 +775,20 @@ parse_eol:
 			} while ((p = memchr(p, eol_marker, (e-p))));
 		} else {
 			do {
-				if (skip_blank_lines && !(p-s)) {
+				int windows_eol = 0;
+				if (eol_marker == '\n' && *(p - 1) == '\r') {
+					windows_eol++;
+				}
+				if (skip_blank_lines && !(p-s-windows_eol)) {
 					s = ++p;
 					continue;
 				}
 				if (PG(magic_quotes_runtime)) {
 					/* s is in target_buf which is freed at the end of the function */
-					slashed = php_addslashes(s, (p-s), &len, 0 TSRMLS_CC);
+					slashed = php_addslashes(s, (p-s-windows_eol), &len, 0 TSRMLS_CC);
 					add_index_stringl(return_value, i++, slashed, len, 0);
 				} else {
-					add_index_stringl(return_value, i++, estrndup(s, p-s), p-s, 0);
+					add_index_stringl(return_value, i++, estrndup(s, p-s-windows_eol), p-s-windows_eol, 0);
 				}
 				s = ++p;
 			} while ((p = memchr(p, eol_marker, (e-p))));

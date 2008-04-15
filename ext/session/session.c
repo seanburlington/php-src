@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.482 2008/03/11 09:36:51 dmitry Exp $ */
+/* $Id: session.c,v 1.483 2008/04/15 00:32:51 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1516,7 +1516,7 @@ static PHP_FUNCTION(session_set_save_handler)
    Return the current save path passed to module_name. If newname is given, the save path is replaced with newname */
 static PHP_FUNCTION(session_save_path)
 {
-	char *name;
+	char *name = NULL;
 	int name_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s&", &name, &name_len, UG(utf8_conv)) == FAILURE) {

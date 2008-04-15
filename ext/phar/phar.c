@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.330 2008/04/14 15:21:40 cellog Exp $ */
+/* $Id: phar.c,v 1.331 2008/04/15 04:56:33 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2706,6 +2706,8 @@ skip_phar:
 }
 /* }}} */
 #endif
+typedef zend_op_array* (zend_compile_t)(zend_file_handle*, int TSRMLS_DC);
+typedef zend_compile_t* (compile_hook)(zend_compile_t *ptr);
 
 PHP_MINIT_FUNCTION(phar) /* {{{ */
 {
@@ -2714,6 +2716,21 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 
 	phar_has_bz2 = zend_hash_exists(&module_registry, "bz2", sizeof("bz2"));
 	phar_has_zlib = zend_hash_exists(&module_registry, "zlib", sizeof("zlib"));
+	if (zend_hash_exists(&module_registry, "apc", sizeof("apc"))) {
+		zval magic;
+		if (zend_get_constant("\000apc_magic", sizeof("\000apc_magic"), &magic TSRMLS_CC)) {
+			compile_hook *set_compile_hook;
+
+			set_compile_hook = (compile_hook *) Z_LVAL(magic);
+			phar_orig_compile_file = set_compile_hook(phar_compile_file);
+		} else {
+			phar_orig_compile_file = zend_compile_file;
+			zend_compile_file = phar_compile_file;
+		}
+	} else {
+		phar_orig_compile_file = zend_compile_file;
+		zend_compile_file = phar_compile_file;
+	}
 
 #if PHP_VERSION_ID >= 50300
 	phar_save_resolve_path = zend_resolve_path;
@@ -2722,9 +2739,6 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 	phar_orig_zend_open = zend_stream_open_function;
 	zend_stream_open_function = phar_zend_open;
 #endif
-
-	phar_orig_compile_file = zend_compile_file;
-	zend_compile_file = phar_compile_file;
 
 	phar_object_init(TSRMLS_C);
 
@@ -2737,7 +2751,16 @@ PHP_MSHUTDOWN_FUNCTION(phar) /* {{{ */
 	return php_unregister_url_stream_wrapper("phar" TSRMLS_CC);
 	if (zend_compile_file == phar_compile_file) {
 		zend_compile_file = phar_orig_compile_file;
+	} else if (zend_hash_exists(&module_registry, "apc", sizeof("apc"))) {
+		zval magic;
+		if (zend_get_constant("\000apc_magic", sizeof("\000apc_magic"), &magic TSRMLS_CC)) {
+			compile_hook *set_compile_hook;
+
+			set_compile_hook = (compile_hook *) Z_LVAL(magic);
+			set_compile_hook(NULL);
+		}
 	}
+
 #if PHP_VERSION_ID < 50300
 	if (zend_stream_open_function == phar_zend_open) {
 		zend_stream_open_function = phar_orig_zend_open;
@@ -2799,7 +2822,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.330 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.331 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");
@@ -2830,6 +2853,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 /* {{{ phar_module_entry
  */
 static zend_module_dep phar_deps[] = {
+	ZEND_MOD_OPTIONAL("apc")
 	ZEND_MOD_OPTIONAL("zlib")
 	ZEND_MOD_OPTIONAL("bz2")
 #if HAVE_SPL

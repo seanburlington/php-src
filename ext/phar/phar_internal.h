@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.100 2008/04/14 04:47:33 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.101 2008/04/15 03:36:56 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -164,6 +164,7 @@ ZEND_BEGIN_MODULE_GLOBALS(phar)
 	void        (*orig_is_readable)(INTERNAL_FUNCTION_PARAMETERS);
 	void        (*orig_is_executable)(INTERNAL_FUNCTION_PARAMETERS);
 	void        (*orig_lstat)(INTERNAL_FUNCTION_PARAMETERS);
+	void        (*orig_readfile)(INTERNAL_FUNCTION_PARAMETERS);
 	void        (*orig_stat)(INTERNAL_FUNCTION_PARAMETERS);
 	/* used for includes with . in them inside front controller */
 	char*       cwd;

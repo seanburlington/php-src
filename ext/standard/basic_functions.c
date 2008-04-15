@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.26 2008/04/15 08:44:21 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.27 2008/04/15 09:02:40 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3419,6 +3419,9 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(connection_status,												arginfo_connection_status)
 	PHP_FE(ignore_user_abort,												arginfo_ignore_user_abort)
 	PHP_FE(parse_ini_file,													arginfo_parse_ini_file)
+#if ZEND_DEBUG
+	PHP_FE(config_get_hash,													arginfo_config_get_hash)
+#endif
 	PHP_FE(is_uploaded_file,												arginfo_is_uploaded_file)
 	PHP_FE(move_uploaded_file,												arginfo_move_uploaded_file)
 

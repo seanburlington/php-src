@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.14 2008/04/01 02:37:02 gwynne Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.15 2008/04/15 16:31:36 gwynne Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -211,7 +211,7 @@ dnl activate some gcc specific optimizations for gcc >= 4
 if test "$GCC" = "yes"; then
   case $host_alias in
   *darwin*)
-    GCC_MAJOR_VERSION=`$CC -dumpversion | $SED -nE '1s/([[0-9]]+)\.[[0-9]]+\..*/\1/;1p'`
+    GCC_MAJOR_VERSION=`$CC -dumpversion | /usr/bin/sed -nE '1s/([[0-9]]+)\.[[0-9]]+\..*/\1/;1p'`
     ;;
   *)
     GCC_MAJOR_VERSION=`$CC --version | $SED -n '1s/[[^0-9]]*\([[0-9]]\+\)\.[[0-9]]\+\..*/\1/;1p'`

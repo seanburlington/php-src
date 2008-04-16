@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.57 2008/03/31 09:12:15 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.58 2008/04/16 17:21:46 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2271,9 +2271,19 @@ PHP_FUNCTION(timezone_offset_get)
 	dateobj = (php_date_obj *) zend_object_store_get_object(dateobject TSRMLS_CC);
 	DATE_CHECK_INITIALIZED(dateobj->time, DateTime);
 
-	offset = timelib_get_time_zone_info(dateobj->time->sse, tzobj->tzi.tz);
-	RETVAL_LONG(offset->offset);
-	timelib_time_offset_dtor(offset);
+	switch (tzobj->type) {
+		case TIMELIB_ZONETYPE_ID:
+			offset = timelib_get_time_zone_info(dateobj->time->sse, tzobj->tzi.tz);
+			RETVAL_LONG(offset->offset);
+			timelib_time_offset_dtor(offset);
+			break;
+		case TIMELIB_ZONETYPE_OFFSET:
+			RETURN_LONG(tzobj->tzi.utc_offset * -60);
+			break;
+		case TIMELIB_ZONETYPE_ABBR:
+			RETURN_LONG((tzobj->tzi.z.utc_offset - (tzobj->tzi.z.dst*60)) * -60);
+			break;
+	}
 }
 /* }}} */
 

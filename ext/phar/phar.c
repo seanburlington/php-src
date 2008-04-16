@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.333 2008/04/15 19:16:46 cellog Exp $ */
+/* $Id: phar.c,v 1.334 2008/04/16 03:26:19 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -128,6 +128,7 @@ ZEND_INI_MH(phar_ini_extract_list) /* {{{ */
 	PHAR_G(extract_list) = new_value;
 
 	if (stage == ZEND_INI_STAGE_RUNTIME) {
+		phar_request_initialize(TSRMLS_C);
 		phar_split_extract_list(TSRMLS_C);
 	}
 
@@ -152,6 +153,7 @@ ZEND_INI_DISP(phar_ini_extract_list_disp) /*void name(zend_ini_entry *ini_entry,
 		char *key;
 		char *lasts;
 		char *q;
+		int started = 0;
 	
 		if (!sapi_module.phpinfo_as_text) {
 			php_printf("<ul>");
@@ -161,14 +163,17 @@ ZEND_INI_DISP(phar_ini_extract_list_disp) /*void name(zend_ini_entry *ini_entry,
 				key = php_strtok_r(NULL, ",", &lasts))
 		{
 			char *val = strchr(key, '=');
-	
+
 			if (val) {	
 				*val++ = '\0';
 				for (q = key; *q; ++q) {
 					*q = tolower(*q);
 				}
 				if (sapi_module.phpinfo_as_text) {
-					php_printf("%s => %s", key, val);
+					if (started++) {
+						php_printf(",");
+					}
+					php_printf("[%s = %s]", key, val);
 				} else {
 					php_printf("<li>%s => %s</li>", key, val);
 				}
@@ -2830,7 +2835,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.333 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.334 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

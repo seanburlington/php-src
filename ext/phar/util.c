@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.36 2008/04/14 16:26:00 cellog Exp $ */
+/* $Id: util.c,v 1.37 2008/04/16 20:26:21 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -682,7 +682,7 @@ int phar_open_entry_fp(phar_entry_info *entry, char **error TSRMLS_DC)
 			return FAILURE;
 		}
 	}
-	if (!(entry->flags & PHAR_ENT_COMPRESSION_MASK)) {
+	if ((entry->old_flags && !(entry->old_flags & PHAR_ENT_COMPRESSION_MASK)) || !(entry->flags & PHAR_ENT_COMPRESSION_MASK)) {
 		return SUCCESS;
 	}
 	if (!phar->ufp) {

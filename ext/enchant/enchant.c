@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.16 2008/04/07 21:45:17 pajoye Exp $
+  $Id: enchant.c,v 1.17 2008/04/16 09:30:16 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -259,7 +259,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_ENCHANT_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -348,7 +348,7 @@ PHP_FUNCTION(enchant_broker_get_error)
 /* }}} */
 
 /* {{{ proto string enchant_broker_list_dicts(resource broker)
-   Returns the last error of the broker */
+   Lists the dictionaries available for the given broker */
 PHP_FUNCTION(enchant_broker_list_dicts)
 {
 	zval *broker;
@@ -417,9 +417,8 @@ PHP_FUNCTION(enchant_broker_request_dict)
 }
 /* }}} */
 
-/* {{{ proto resource enchant_broker_request_pwl_dict(resource dict, string filename)
-   creates a dictionary using a PWL file. A PWL file is personal word file one word per line.
-   It must exist before the call.*/
+/* {{{ proto resource enchant_broker_request_pwl_dict(resource broker, string filename)
+   creates a dictionary using a PWL file. A PWL file is personal word file one word per line. It must exist before the call.*/
 PHP_FUNCTION(enchant_broker_request_pwl_dict)
 {
 	zval *broker;
@@ -532,8 +531,7 @@ PHP_FUNCTION(enchant_broker_set_ordering)
 /* }}} */
 
 /* {{{ proto array enchant_broker_describe(resource broker)
-	Enumerates the Enchant providers and tells
-	you some rudimentary information about them. The same info is provided through phpinfo() */
+	Enumerates the Enchant providers and tells you some rudimentary information about them. The same info is provided through phpinfo() */
 PHP_FUNCTION(enchant_broker_describe)
 {
 	EnchantBrokerDescribeFn describetozval = enumerate_providers_fn;

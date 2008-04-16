@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.5 2008/02/19 15:38:24 andrey Exp $ */
+/* $Id: php_mysqlnd.c,v 1.6 2008/04/16 12:53:18 andrey Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"
@@ -199,8 +199,10 @@ static PHP_RINIT_FUNCTION(mysqlnd)
 	return SUCCESS;
 }
 /* }}} */
+#endif
 
 
+#if defined(PHP_DEBUG)
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
 static PHP_RSHUTDOWN_FUNCTION(mysqlnd)

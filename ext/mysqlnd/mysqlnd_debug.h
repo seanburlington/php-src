@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.h,v 1.1.2.7 2008/02/11 16:44:48 andrey Exp $ */
+/* $Id: mysqlnd_debug.h,v 1.1.2.8 2008/04/16 12:57:38 andrey Exp $ */
 
 #ifndef MYSQLND_DEBUG_H
 #define MYSQLND_DEBUG_H
@@ -88,8 +88,6 @@ char *	mysqlnd_get_backtrace(TSRMLS_D);
 #define DBG_ENTER(func_name) zend_bool dbg_skip_trace = TRUE; if (MYSQLND_G(dbg)) dbg_skip_trace = !MYSQLND_G(dbg)->m->func_enter(MYSQLND_G(dbg), __LINE__, __FILE__, func_name, strlen(func_name));
 #define DBG_RETURN(value)	do { if (MYSQLND_G(dbg)) MYSQLND_G(dbg)->m->func_leave(MYSQLND_G(dbg), __LINE__, __FILE__); return (value); } while (0)
 #define DBG_VOID_RETURN		do { if (MYSQLND_G(dbg)) MYSQLND_G(dbg)->m->func_leave(MYSQLND_G(dbg), __LINE__, __FILE__); return; } while (0)
-
-
 
 #elif MYSQLND_DBG_ENABLED == 0
 

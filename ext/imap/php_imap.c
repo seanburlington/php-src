@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.30 2008/04/08 00:03:34 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.31 2008/04/17 11:04:49 felipe Exp $ */
 
 #define IMAP41
 
@@ -792,7 +792,7 @@ static void php_imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #ifdef SET_MAXLOGINTRIALS
 	if (myargc == 5) {
 		convert_to_long_ex(retries);
-		if (retries < 0) {
+		if (Z_LVAL_PP(retries) < 0) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING ,"Retries must be greater or equal to 0");
 		} else {
 			mail_parameters(NIL, SET_MAXLOGINTRIALS, (void *) Z_LVAL_PP(retries));

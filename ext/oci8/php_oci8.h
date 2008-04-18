@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2008 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.44 2008/03/25 02:25:02 sixd Exp $ */
+/* $Id: php_oci8.h,v 1.45 2008/04/18 00:04:44 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -36,10 +36,10 @@
 #endif
 
 
-/* 
+/*
  * The version of the OCI8 extension.
  */
-#define PHP_OCI8_VERSION "1.3.1 Beta"
+#define PHP_OCI8_VERSION "1.3.2 Beta"
 
 extern zend_module_entry oci8_module_entry;
 #define phpext_oci8_ptr &oci8_module_entry
@@ -64,5 +64,3 @@ PHP_MINFO_FUNCTION(oci);
  * c-basic-offset: 4
  * End:
  */
-
-

@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.4 2008/04/01 18:37:32 sixd Exp $ */
+/* $Id: php_oci8.h,v 1.36.2.2.2.1.2.5 2008/04/18 00:05:27 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -36,16 +36,17 @@
 #endif
 
 
-/* 
+/*
  * The version of the OCI8 extension.
  */
 #ifdef PHP_OCI8_VERSION
 /* The definition of PHP_OCI8_VERSION changed in PHP 5.3 and building
- * this code with PHP 5.2 and earlier (i.e. from PECL) might conflict
+ * this code with PHP 5.2 and earlier (e.g. when using OCI8 from PECL)
+ * will conflict.
  */
 #undef PHP_OCI8_VERSION
 #endif
-#define PHP_OCI8_VERSION "1.3.1 Beta"
+#define PHP_OCI8_VERSION "1.3.2 Beta"
 
 extern zend_module_entry oci8_module_entry;
 #define phpext_oci8_ptr &oci8_module_entry
@@ -70,5 +71,3 @@ PHP_MINFO_FUNCTION(oci);
  * c-basic-offset: 4
  * End:
  */
-
-

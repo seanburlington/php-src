@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.208 2008/04/18 04:13:12 cellog Exp $ */
+/* $Id: phar_object.c,v 1.209 2008/04/19 17:24:25 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1090,7 +1090,7 @@ PHP_METHOD(Phar, isValidPharFilename)
 	}
 
 	fname_len = executable;
-	RETURN_BOOL(phar_detect_phar_fname_ext(fname, 1, &ext_str, &ext_len, fname_len, 1, 1) == SUCCESS);
+	RETURN_BOOL(phar_detect_phar_fname_ext(fname, 1, &ext_str, &ext_len, fname_len, executable, 1 TSRMLS_CC) == SUCCESS);
 }
 /* }}} */
 

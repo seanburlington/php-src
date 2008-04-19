@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.1 2008/04/19 05:15:23 cellog Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.2 2008/04/19 05:35:02 cellog Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -279,6 +279,7 @@ class corrupt_zipmaker
 					strlen($this->start), $this->offset + 1,
 					strlen($this->comment) + 1) . $this->comment;
 				break;
+			case 'none' :
 		}
 		file_put_contents($zipfile, $write);
 	}

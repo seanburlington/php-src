@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.3 2008/04/19 05:45:09 cellog Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.4 2008/04/19 05:51:09 cellog Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -94,6 +94,13 @@ class corrupt_zipmaker
 						$filename .
 						$data;
 				break;
+			case 'encrypt' :
+				$file = "PK\x03\x04\x14\x00\x01\x00" . pack('v', $compmethod) .
+						$mtime .
+						pack("VVVvv", $crc32, $complength, $uncomplength, strlen($filename), 0x00) .
+						$filename .
+						$data;
+				break;
 			case 'crc32' :
 				$file = "PK\x03\x04\x14\x00\x00\x00" . pack('v', $compmethod) .
 						$mtime .
@@ -153,6 +160,14 @@ class corrupt_zipmaker
 		switch ($corrupt) {
 			case null :
 				$central = "PK\x01\x02\x00\x00\x14\x00\x00\x00" . pack('v', $compmethod) .
+						$mtime .
+						pack("VVVvvvvvVV", $crc32, $complength, $uncomplength, strlen($filename), 0x00,strlen($comment),0x00,0x00,
+							0x0000, $this->offset).
+						$filename . $comment;
+				$offset = strlen($central);
+				break;
+			case 'encrypt' :
+				$central = "PK\x01\x02\x00\x00\x14\x00\x01\x00" . pack('v', $compmethod) .
 						$mtime .
 						pack("VVVvvvvvVV", $crc32, $complength, $uncomplength, strlen($filename), 0x00,strlen($comment),0x00,0x00,
 							0x0000, $this->offset).

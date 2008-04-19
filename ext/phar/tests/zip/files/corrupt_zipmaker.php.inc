@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.2 2008/04/19 05:35:02 cellog Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.3 2008/04/19 05:45:09 cellog Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -261,16 +261,16 @@ class corrupt_zipmaker
 					$this->offset, strlen($this->start),
 					strlen($this->comment)) . $this->comment;
 				break;
-			case 'cdir_len' :
+			case 'cdir_offset' :
 				$write .= "PK\x05\x06\x00\x00\x00\x00" .
 					pack("vvVVv", $this->count, $this->count,
 					$this->offset, strlen($this->start) - 3,
 					strlen($this->comment)) . $this->comment;
 				break;
-			case 'cdir_offset' :
+			case 'cdir_len' :
 				$write .= "PK\x05\x06\x00\x00\x00\x00" .
 					pack("vvVVv", $this->count, $this->count,
-					$this->offset + 1, strlen($this->start),
+					$this->offset - 5, strlen($this->start),
 					strlen($this->comment)) . $this->comment;
 				break;
 			case 'comment' :

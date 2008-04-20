@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.82.2.3.2.4 2008/04/09 13:47:35 felipe Exp $ */
+/* $Id: reg.c,v 1.82.2.3.2.5 2008/04/20 01:43:18 felipe Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -564,12 +564,8 @@ static void php_split(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		} else if (subs[0].rm_so == 0 && subs[0].rm_eo == 0) {
 			/* No more matches */
 			regfree(&re);
-			
-			if (icase) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Regular Expression to spliti()");
-			} else {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Regular Expression to split()");
-			}
+
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Regular Expression");
 			
 			zend_hash_destroy(Z_ARRVAL_P(return_value));
 			efree(Z_ARRVAL_P(return_value));

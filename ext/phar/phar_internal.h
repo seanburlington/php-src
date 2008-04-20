@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.103 2008/04/18 04:13:12 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.104 2008/04/20 17:28:53 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -413,7 +413,7 @@ int phar_separate_entry_fp(phar_entry_info *entry, char **error TSRMLS_DC);
 int phar_open_archive_fp(phar_archive_data *phar TSRMLS_DC);
 
 /* tar functions in tar.c */
-int phar_is_tar(char *buf);
+int phar_is_tar(char *buf, char *fname);
 int phar_open_tarfile(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, int options, phar_archive_data** pphar, php_uint32 compression, char **error TSRMLS_DC);
 int phar_open_or_create_tar(char *fname, int fname_len, char *alias, int alias_len, int is_data, int options, phar_archive_data** pphar, char **error TSRMLS_DC);
 int phar_tar_flush(phar_archive_data *phar, char *user_stub, long len, int defaultstub, char **error TSRMLS_DC);

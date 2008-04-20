@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.340 2008/04/19 17:57:23 cellog Exp $ */
+/* $Id: phar.c,v 1.341 2008/04/20 00:24:00 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1409,6 +1409,9 @@ static int phar_analyze_path(const char *fname, const char *ext, int ext_len, in
 	old = *a;
 	*a = '\0';
 	if ((realpath = expand_filepath(fname, NULL TSRMLS_CC))) {
+#ifdef PHP_WIN32
+		phar_unixify_path_separators(realpath, strlen(realpath));
+#endif
 		if (zend_hash_exists(&(PHAR_GLOBALS->phar_fname_map), realpath, strlen(realpath))) {
 			*a = old;
 			efree(realpath);
@@ -3012,7 +3015,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.340 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.341 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

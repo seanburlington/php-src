@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.341 2008/04/20 00:24:00 cellog Exp $ */
+/* $Id: phar.c,v 1.342 2008/04/20 04:10:50 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1778,6 +1778,7 @@ char *phar_fix_filepath(char *path, int *new_len, int use_cwd TSRMLS_DC) /* {{{ 
 int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_len, char **entry, int *entry_len, int executable, int for_create TSRMLS_DC) /* {{{ */
 {
 	const char *ext_str;
+	char *save;
 	int ext_len, free_filename = 0;
 
 	if (!strncasecmp(filename, "phar://", 7)) {
@@ -1788,6 +1789,7 @@ int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_le
 	ext_len = 0;
 #ifdef PHP_WIN32
 	free_filename = 1;
+	save = filename;
 	filename = estrndup(filename, filename_len);
 	phar_unixify_path_separators(filename, filename_len);
 #endif
@@ -1795,7 +1797,7 @@ int phar_split_fname(char *filename, int filename_len, char **arch, int *arch_le
 		if (ext_len != -1) {
 			if (!ext_str) {
 				/* no / detected, restore arch for error message */
-				*arch = filename;
+				*arch = save;
 			}
 			if (free_filename) {
 				efree(filename);
@@ -3015,7 +3017,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.341 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.342 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

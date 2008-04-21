@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_crc32.h,v 1.6 2007/12/31 07:12:10 sebastian Exp $ */
+/* $Id: php_hash_crc32.h,v 1.7 2008/04/21 15:37:07 tony2001 Exp $ */
 
 #ifndef PHP_HASH_CRC32_H
 #define PHP_HASH_CRC32_H
@@ -31,6 +31,7 @@ PHP_HASH_API void PHP_CRC32Init(PHP_CRC32_CTX *context);
 PHP_HASH_API void PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
 PHP_HASH_API void PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
 PHP_HASH_API void PHP_CRC32Final(unsigned char digest[4], PHP_CRC32_CTX *context);
+PHP_HASH_API int PHP_CRC32Copy(const php_hash_ops *ops, PHP_CRC32_CTX *orig_context, PHP_CRC32_CTX *copy_context);
 
 #endif
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_tiger.c,v 1.10 2007/12/31 07:12:10 sebastian Exp $ */
+/* $Id: hash_tiger.c,v 1.11 2008/04/21 15:37:07 tony2001 Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_tiger.h"
@@ -302,6 +302,7 @@ PHP_HASH_API void PHP_TIGER192Final(unsigned char digest[24], PHP_TIGER_CTX *con
 		(php_hash_init_func_t) PHP_##p##TIGERInit, \
 		(php_hash_update_func_t) PHP_TIGERUpdate, \
 		(php_hash_final_func_t) PHP_TIGER##b##Final, \
+		(php_hash_copy_func_t) php_hash_copy, \
 		b/8, \
 		64, \
 		sizeof(PHP_TIGER_CTX) \

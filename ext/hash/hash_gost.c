@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_gost.c,v 1.6 2007/12/31 07:12:10 sebastian Exp $ */
+/* $Id: hash_gost.c,v 1.7 2008/04/21 15:37:07 tony2001 Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_gost.h"
@@ -306,6 +306,7 @@ const php_hash_ops php_hash_gost_ops = {
 	(php_hash_init_func_t) PHP_GOSTInit,
 	(php_hash_update_func_t) PHP_GOSTUpdate,
 	(php_hash_final_func_t) PHP_GOSTFinal,
+	(php_hash_copy_func_t) php_hash_copy,
 	32,
 	32,
 	sizeof(PHP_GOST_CTX)

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_snefru.c,v 1.3.2.3.2.2.2.1 2007/12/31 07:17:08 sebastian Exp $ */
+/* $Id: hash_snefru.c,v 1.3.2.3.2.2.2.2 2008/04/21 15:37:46 tony2001 Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_snefru.h"
@@ -197,6 +197,7 @@ const php_hash_ops php_hash_snefru_ops = {
 	(php_hash_init_func_t) PHP_SNEFRUInit,
 	(php_hash_update_func_t) PHP_SNEFRUUpdate,
 	(php_hash_final_func_t) PHP_SNEFRUFinal,
+	(php_hash_copy_func_t) php_hash_copy,
 	32,
 	32,
 	sizeof(PHP_SNEFRU_CTX)

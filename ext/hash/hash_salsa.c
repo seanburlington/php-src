@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_salsa.c,v 1.3.2.3.2.2.2.1 2007/12/31 07:17:08 sebastian Exp $ */
+/* $Id: hash_salsa.c,v 1.3.2.3.2.2.2.2 2008/04/21 15:37:46 tony2001 Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_salsa.h"
@@ -198,6 +198,7 @@ const php_hash_ops php_hash_salsa10_ops = {
 	(php_hash_init_func_t) PHP_SALSA10Init,
 	(php_hash_update_func_t) PHP_SALSAUpdate,
 	(php_hash_final_func_t) PHP_SALSAFinal,
+	(php_hash_copy_func_t) php_hash_copy,
 	64,
 	64,
 	sizeof(PHP_SALSA_CTX)
@@ -207,6 +208,7 @@ const php_hash_ops php_hash_salsa20_ops = {
 	(php_hash_init_func_t) PHP_SALSA20Init,
 	(php_hash_update_func_t) PHP_SALSAUpdate,
 	(php_hash_final_func_t) PHP_SALSAFinal,
+	(php_hash_copy_func_t) php_hash_copy,
 	64,
 	64,
 	sizeof(PHP_SALSA_CTX)

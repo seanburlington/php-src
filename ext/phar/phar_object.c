@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.211 2008/04/21 16:29:08 cellog Exp $ */
+/* $Id: phar_object.c,v 1.212 2008/04/21 17:46:22 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -419,6 +419,12 @@ static void phar_postprocess_ru_web(char *fname, int fname_len, char **entry, in
 		u[0] = '\0';
 		u_len = strlen(u + 1);
 		e_len -= u_len + 1;
+		if (e_len < 0) {
+			if (saveu) {
+				saveu[0] = '/';
+			}
+			return;
+		}
 	} while (1);
 }
 /* }}} */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.345 2008/04/21 06:17:49 cellog Exp $ */
+/* $Id: phar.c,v 1.346 2008/04/21 16:42:52 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2453,23 +2453,18 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 			phar_set_32(entry_buffer, entry->filename_len);
 		}
 		if (4 != php_stream_write(newfile, entry_buffer, 4)
-		|| entry->filename_len != php_stream_write(newfile, entry->filename, entry->filename_len)) {
+		|| entry->filename_len != php_stream_write(newfile, entry->filename, entry->filename_len)
+		|| (entry->is_dir && 1 != php_stream_write(newfile, "/", 1))) {
 			if (closeoldfile) {
 				php_stream_close(oldfile);
 			}
 			php_stream_close(newfile);
 			if (error) {
-				spprintf(error, 0, "unable to write filename of file \"%s\" to manifest of new phar \"%s\"", entry->filename, phar->fname);
-			}
-			return EOF;
-		}
-		if (entry->is_dir && 1 != php_stream_write(newfile, "/", 1)) {
-			if (closeoldfile) {
-				php_stream_close(oldfile);
-			}
-			php_stream_close(newfile);
-			if (error) {
-				spprintf(error, 0, "unable to write filename of directory \"%s\" to manifest of new phar \"%s\"", entry->filename, phar->fname);
+				if (entry->is_dir) {
+					spprintf(error, 0, "unable to write filename of directory \"%s\" to manifest of new phar \"%s\"", entry->filename, phar->fname);
+				} else {
+					spprintf(error, 0, "unable to write filename of file \"%s\" to manifest of new phar \"%s\"", entry->filename, phar->fname);
+				}
 			}
 			return EOF;
 		}
@@ -3030,7 +3025,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.345 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.346 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

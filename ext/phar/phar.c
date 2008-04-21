@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.348 2008/04/21 16:50:17 cellog Exp $ */
+/* $Id: phar.c,v 1.349 2008/04/21 16:51:25 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1964,20 +1964,6 @@ static inline void phar_set_32(char *buffer, int var) /* {{{ */
 #endif
 } /* }}} */
 
-/**
- * The only purpose of this is to store the API version, which was stored bigendian for some reason
- * in the original PHP_Archive, so we will do the same
- */
-static inline void phar_set_16(char *buffer, int var) /* {{{ */
-{
-#ifdef WORDS_BIGENDIAN
-	*((buffer) + 1) = (unsigned char) (((var) >> 8) & 0xFF); \
-	*(buffer) = (unsigned char) ((var) & 0xFF);
-#else
-	*(php_uint16 *)(buffer) = (php_uint16)(var);
-#endif
-} /* }}} */
-
 static int phar_flush_clean_deleted_apply(void *data TSRMLS_DC) /* {{{ */
 {
 	phar_entry_info *entry = (phar_entry_info *)data;
@@ -3013,7 +2999,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.348 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.349 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.217 2008/04/22 17:11:29 cellog Exp $ */
+/* $Id: phar_object.c,v 1.218 2008/04/22 17:13:06 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -157,12 +157,8 @@ static void phar_mung_server_vars(char *fname, char *entry, int entry_len, char 
 							
 			path_info = Z_STRVAL_PP(stuff); 
 			code = Z_STRLEN_PP(stuff); 
-			if (entry[0] != '/') {
-				Z_STRLEN_PP(stuff) = spprintf(&(Z_STRVAL_PP(stuff)), 4096, "phar://%s%s", fname, entry);
-			} else {
-				ZVAL_STRINGL(*stuff, entry, entry_len, 1);
-			}
-							
+			ZVAL_STRINGL(*stuff, entry, entry_len, 1);
+						
 			MAKE_STD_ZVAL(temp);
 			ZVAL_STRINGL(temp, path_info, code, 0);
 			zend_hash_update(Z_ARRVAL_PP(_SERVER), newname, sizeof(newname), (void *) &temp, sizeof(zval **), NULL); 

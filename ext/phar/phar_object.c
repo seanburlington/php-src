@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.220 2008/04/22 17:19:05 cellog Exp $ */
+/* $Id: phar_object.c,v 1.221 2008/04/22 17:33:59 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -313,13 +313,13 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 						}
 					}
 				} zend_catch {
-					if (PHAR_G(cwd)) {
-						efree(PHAR_G(cwd));
-						PHAR_G(cwd) = NULL;
-						PHAR_G(cwd_len) = 0;
-					}
-					efree(name);
 				} zend_end_try();
+				if (PHAR_G(cwd)) {
+					efree(PHAR_G(cwd));
+					PHAR_G(cwd) = NULL;
+					PHAR_G(cwd_len) = 0;
+				}
+				efree(name);
 				zend_bailout();
 			}
 			return PHAR_MIME_PHP;

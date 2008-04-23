@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.349 2008/04/21 16:51:25 cellog Exp $ */
+/* $Id: phar.c,v 1.350 2008/04/23 18:11:19 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1500,7 +1500,8 @@ static int phar_check_str(const char *fname, const char *ext_str, int ext_len, i
 		test[ext_len + 1] = '\0';
 		/* executable phars must contain ".phar" as a valid extension (phar://.pharmy/oops is invalid) */
 		/* (phar://hi/there/.phar/oops is also invalid) */
-		if ((pos = strstr(test, ".phar")) && (*(pos - 1) != '/')
+		pos = strstr(test, ".phar");
+		if (pos && (*(pos - 1) != '/')
 				&& (pos += 5) && (*pos == '\0' || *pos == '/' || *pos == '.')) {
 			return phar_analyze_path(fname, ext_str, ext_len, for_create TSRMLS_CC);
 		} else {
@@ -1508,7 +1509,9 @@ static int phar_check_str(const char *fname, const char *ext_str, int ext_len, i
 		}
 	}
 	/* data phars need only contain a single non-"." to be valid */
-	if (*(ext_str + 1) != '.' && *(ext_str + 1) != '/' && *(ext_str + 1) != '\0') {
+	pos = strstr(ext_str, ".phar");
+	if (!(pos && (*(pos - 1) != '/')
+				&& (pos += 5) && (*pos == '\0' || *pos == '/' || *pos == '.')) && *(ext_str + 1) != '.' && *(ext_str + 1) != '/' && *(ext_str + 1) != '\0') {
 		return phar_analyze_path(fname, ext_str, ext_len, for_create TSRMLS_CC);
 	}
 	return FAILURE;
@@ -1595,6 +1598,12 @@ int phar_detect_phar_fname_ext(const char *filename, int check_length, const cha
 next_extension:
 	if (!pos) {
 		return FAILURE;
+	}
+	if (pos != filename && (*(pos - 1) == '/' || *(pos - 1) == '\0')) {
+		pos = strchr(pos + 1, '.');
+		if (!pos) {
+			return FAILURE;
+		}
 	}
 
 	slash = strchr(pos, '/');
@@ -2999,7 +3008,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.349 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.350 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

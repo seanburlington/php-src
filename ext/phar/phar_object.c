@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.228 2008/04/23 18:44:42 cellog Exp $ */
+/* $Id: phar_object.c,v 1.229 2008/04/23 18:54:08 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1976,6 +1976,7 @@ PHP_METHOD(Phar, convertToData)
 			} else {
 				zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 					"Cannot write out data phar archive, use Phar::TAR or Phar::ZIP");
+				return;
 			}
 			break;
 		case PHAR_FORMAT_PHAR:

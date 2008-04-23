@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.221 2008/04/22 17:33:59 cellog Exp $ */
+/* $Id: phar_object.c,v 1.222 2008/04/23 16:00:05 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -371,6 +371,9 @@ nofile:
 }
 /* }}} */
 
+/* post-process REQUEST_URI and retrieve the actual request URI.  This is for
+   cases like http://localhost/blah.phar/path/to/file.php/extra/stuff
+   which calls "blah.phar" file "path/to/file.php" with PATH_INFO "/extra/stuff" */
 static void phar_postprocess_ru_web(char *fname, int fname_len, char **entry, int *entry_len, char **ru, int *ru_len TSRMLS_DC) /* {{{ */
 {
 	char *e = *entry + 1, *u = NULL, *u1 = NULL, *saveu = NULL;

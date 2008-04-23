@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.c,v 1.6 2008/02/14 15:20:08 andrey Exp $ */
+/* $Id: mysqlnd_debug.c,v 1.7 2008/04/23 16:55:51 johannes Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -637,7 +637,7 @@ MYSQLND_DEBUG *mysqlnd_debug_init(TSRMLS_D)
 
 
 /* {{{ _mysqlnd_debug */
-void _mysqlnd_debug(const char *mode TSRMLS_DC)
+PHPAPI void _mysqlnd_debug(const char *mode TSRMLS_DC)
 {
 #ifdef PHP_DEBUG
 	MYSQLND_DEBUG *dbg = MYSQLND_G(dbg);

@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.14 2008/04/16 12:53:18 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.15 2008/04/23 16:55:51 johannes Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.14 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.3-dev - 080129 - $Revision: 1.15 $"
 #define MYSQLND_VERSION_ID 50002
 
 /* This forces inlining of some accessor functions */
@@ -93,7 +93,7 @@ PHPAPI MYSQLND * mysqlnd_connect(MYSQLND *conn,
 #define mysqlnd_change_user(conn, user, passwd, db)		(conn)->m->change_user((conn), (user), (passwd), (db) TSRMLS_CC)
 
 #define mysqlnd_debug(x)								_mysqlnd_debug((x) TSRMLS_CC)
-void _mysqlnd_debug(const char *mode TSRMLS_DC);
+PHPAPI void _mysqlnd_debug(const char *mode TSRMLS_DC);
 
 /* Query */
 #define mysqlnd_fetch_into(result, flags, ret_val, ext)	(result)->m.fetch_into((result), (flags), (ret_val), (ext) TSRMLS_CC ZEND_FILE_LINE_CC)

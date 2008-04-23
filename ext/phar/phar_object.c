@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.227 2008/04/23 18:30:52 cellog Exp $ */
+/* $Id: phar_object.c,v 1.228 2008/04/23 18:44:42 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1874,6 +1874,7 @@ PHP_METHOD(Phar, convertToExecutable)
 
 	switch (format) {
 		case 9021976:
+		case PHAR_FORMAT_SAME: /* null is converted to 0 */
 			/* by default, use the existing format */
 			if (phar_obj->arc.archive->is_tar) {
 				format = PHAR_FORMAT_TAR;
@@ -1966,6 +1967,7 @@ PHP_METHOD(Phar, convertToData)
 
 	switch (format) {
 		case 9021976:
+		case PHAR_FORMAT_SAME: /* null is converted to 0 */
 			/* by default, use the existing format */
 			if (phar_obj->arc.archive->is_tar) {
 				format = PHAR_FORMAT_TAR;

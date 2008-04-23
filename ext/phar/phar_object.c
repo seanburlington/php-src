@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.222 2008/04/23 16:00:05 cellog Exp $ */
+/* $Id: phar_object.c,v 1.223 2008/04/23 16:47:11 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -560,7 +560,6 @@ PHP_METHOD(Phar, webPhar)
 	if (!(SG(request_info).request_method && SG(request_info).request_uri && (!strcmp(SG(request_info).request_method, "GET") || !strcmp(SG(request_info).request_method, "POST")))) {
 		return;
 	}
-
 #ifdef PHP_WIN32
 	fname = estrndup(fname, fname_len);
 	phar_unixify_path_separators(fname, fname_len);

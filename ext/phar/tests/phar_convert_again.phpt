@@ -53,11 +53,6 @@ $data->setStub('hi');
 echo $e->getMessage() . "\n";
 }
 try {
-$data->setDefaultStub();
-} catch (Exception $e) {
-echo $e->getMessage() . "\n";
-}
-try {
 $data->setAlias('hi');
 } catch (Exception $e) {
 echo $e->getMessage() . "\n";
@@ -129,11 +124,6 @@ $data->setAlias('hi');
 } catch (Exception $e) {
 echo $e->getMessage() . "\n";
 }
-try {
-$data->setDefaultStub();
-} catch (Exception $e) {
-echo $e->getMessage() . "\n";
-}
 ?>
 ===DONE===
 --CLEAN--
@@ -161,7 +151,6 @@ Unable to add newly converted phar "%sphar_convert_again.phar" to the list of ph
 hi
 %sphar_convert_again2.zip
 A Phar stub cannot be set in a plain zip archive
-A Phar stub cannot be set in a plain zip archive
 A Phar alias cannot be set in a plain zip archive
 %sphar_convert_again2.phar.tar
 %sphar_convert_again2.tar
@@ -178,5 +167,4 @@ Unknown compression specified, please pass one of Phar::GZ or Phar::BZ2
 Unknown compression specified, please pass one of Phar::GZ or Phar::BZ2
 A Phar stub cannot be set in a plain tar archive
 A Phar alias cannot be set in a plain tar archive
-A Phar stub cannot be set in a plain tar archive
 ===DONE===

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.352 2008/04/24 04:56:21 cellog Exp $ */
+/* $Id: phar.c,v 1.353 2008/04/24 16:59:22 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1562,7 +1562,7 @@ int phar_detect_phar_fname_ext(const char *filename, int check_length, const cha
 
 			if (keylen <= (uint) filename_len && !memcmp(key, filename, keylen - 1)) {
 				/* found plain map, so we grab the extension, if any */
-				if (is_complete && keylen != filename_len + 1) {
+				if (is_complete && keylen != (uint)filename_len + 1) {
 					continue;
 				}
 				if (for_create == 1) {
@@ -3018,7 +3018,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.352 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.353 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

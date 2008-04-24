@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.229 2008/04/23 18:54:08 cellog Exp $ */
+/* $Id: phar_object.c,v 1.230 2008/04/24 04:05:19 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -2595,7 +2595,7 @@ PHP_METHOD(Phar, compress)
 
 	if (phar_obj->arc.archive->is_zip) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
-			"Cannot compress zipbased archives with whole-archive compression");
+			"Cannot compress zip-based archives with whole-archive compression");
 		return;
 	}
 
@@ -2655,13 +2655,13 @@ PHP_METHOD(Phar, decompress)
 
 	if (PHAR_G(readonly) && !phar_obj->arc.archive->is_data) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
-			"Cannot compress phar archive, phar is read-only");
+			"Cannot decompress phar archive, phar is read-only");
 		return;
 	}
 
 	if (phar_obj->arc.archive->is_zip) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
-			"Cannot compress zipbased archives with whole-archive compression");
+			"Cannot decompress zip-based archives with whole-archive compression");
 		return;
 	}
 

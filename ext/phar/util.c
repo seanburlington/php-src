@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.39 2008/04/21 06:17:50 cellog Exp $ */
+/* $Id: util.c,v 1.40 2008/04/24 16:03:39 sfox Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -28,7 +28,7 @@ extern php_stream_wrapper php_stream_phar_wrapper;
 /* for links to relative location, prepend cwd of the entry */
 static char *phar_get_link_location(phar_entry_info *entry TSRMLS_DC)
 {
-	char *tmp, *ret, *p;
+	char *tmp, *p, *ret = NULL;
 	if (!entry->link) {
 		return NULL;
 	}
@@ -50,7 +50,7 @@ static char *phar_get_link_location(phar_entry_info *entry TSRMLS_DC)
 phar_entry_info *phar_get_link_source(phar_entry_info *entry TSRMLS_DC)
 {
 	phar_entry_info *link_entry;
-	char *link = phar_get_link_location(entry);
+	char *link = phar_get_link_location(entry TSRMLS_CC);
 
 	if (!entry->link) {
 		return entry;

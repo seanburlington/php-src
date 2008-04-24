@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli_structs.h,v 1.15 2008/03/18 16:58:42 andrey Exp $ 
+  $Id: php_mysqli_structs.h,v 1.16 2008/04/24 14:04:58 andrey Exp $ 
 */
 
 #ifndef PHP_MYSQLI_STRUCTS_H
@@ -477,6 +477,8 @@ PHP_FUNCTION(mysqli_stmt_get_result);
 PHP_FUNCTION(mysqli_stmt_get_warnings);
 PHP_FUNCTION(mysqli_stmt_reset);
 PHP_FUNCTION(mysqli_stmt_insert_id);
+PHP_FUNCTION(mysqli_stmt_more_results);
+PHP_FUNCTION(mysqli_stmt_next_result);
 PHP_FUNCTION(mysqli_stmt_num_rows);
 PHP_FUNCTION(mysqli_stmt_sqlstate);
 PHP_FUNCTION(mysqli_stmt_store_result);

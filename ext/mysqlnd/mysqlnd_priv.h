@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.4.2.11 2008/03/18 16:57:31 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.4.2.12 2008/04/24 14:22:19 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -74,23 +74,6 @@
 
 
 
-#define SERVER_STATUS_IN_TRANS				1	/* Transaction has started */
-#define SERVER_STATUS_AUTOCOMMIT			2	/* Server in auto_commit mode */
-#define SERVER_MORE_RESULTS_EXISTS			8	/* Multi query - next query exists */
-/*
-  The server was able to fulfill the clients request and opened a
-  read-only non-scrollable cursor for a query. This flag comes
-  in reply to COM_STMT_EXECUTE and COM_STMT_FETCH commands.
-*/
-#define SERVER_STATUS_CURSOR_EXISTS			64
-/*
-  This flag is sent when a read-only cursor is exhausted, in reply to
-  COM_STMT_FETCH command.
-*/
-#define SERVER_STATUS_LAST_ROW_SENT			128
-#define SERVER_STATUS_DB_DROPPED			256 /* A database was dropped */
-#define SERVER_STATUS_NO_BACKSLASH_ESCAPES	512
-#define SERVER_QUERY_WAS_SLOW				1024
 
 
 /* Client Error codes */

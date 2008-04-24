@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.10 2008/03/25 18:27:17 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.11 2008/04/24 14:22:19 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -409,8 +409,8 @@ PHP_FUNCTION(mysqli_fetch_all)
    Returns statistics about the zval cache */
 PHP_FUNCTION(mysqli_get_cache_stats) 
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 	mysqlnd_palloc_stats(mysqli_mysqlnd_zval_cache, return_value);
 }
@@ -421,8 +421,8 @@ PHP_FUNCTION(mysqli_get_cache_stats)
    Returns statistics about the zval cache */
 PHP_FUNCTION(mysqli_get_client_stats) 
 {
-	if (ZEND_NUM_ARGS()) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 	mysqlnd_get_client_stats(return_value);
 }
@@ -665,7 +665,7 @@ PHP_FUNCTION(mysqli_set_charset)
 	MY_MYSQL			*mysql;
 	zval				*mysql_link;
 	char				*cs_name;
-	int			 		csname_len;
+	int					csname_len;
 
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &mysql_link, mysqli_link_class_entry, &cs_name, &csname_len) == FAILURE) {
 		return;

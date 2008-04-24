@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.49.2.5.2.1.2.6 2008/03/10 20:15:38 andrey Exp $ 
+  $Id: mysqli_fe.c,v 1.49.2.5.2.1.2.7 2008/04/24 14:22:19 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -155,6 +155,10 @@ const zend_function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_stmt_data_seek,						NULL)
 	PHP_FE(mysqli_stmt_errno,							NULL)
 	PHP_FE(mysqli_stmt_error,							NULL)
+#if defined(MYSQLI_USE_MYSQLND)
+	PHP_FE(mysqli_stmt_more_results,					NULL)
+	PHP_FE(mysqli_stmt_next_result,						NULL)
+#endif
 	PHP_FE(mysqli_stmt_num_rows,						NULL)
 	PHP_FE(mysqli_stmt_sqlstate,   						NULL)
 	PHP_FE(mysqli_stmt_store_result,					NULL)
@@ -280,6 +284,10 @@ const zend_function_entry mysqli_stmt_methods[] = {
 	PHP_FALIAS(get_warnings, mysqli_stmt_get_warnings,	NULL)
 	PHP_FALIAS(result_metadata, mysqli_stmt_result_metadata,NULL)
 	PHP_FALIAS(num_rows, mysqli_stmt_num_rows,NULL)
+#if defined(MYSQLI_USE_MYSQLND)
+	PHP_FALIAS(more_results, mysqli_stmt_more_results, NULL)
+	PHP_FALIAS(next_result, mysqli_stmt_next_result, NULL)
+#endif
 	PHP_FALIAS(send_long_data,mysqli_stmt_send_long_data,NULL)
 	PHP_FALIAS(stmt,mysqli_prepare,NULL)
 	PHP_FALIAS(free_result,mysqli_stmt_free_result,NULL)

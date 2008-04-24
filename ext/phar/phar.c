@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.351 2008/04/23 18:22:08 cellog Exp $ */
+/* $Id: phar.c,v 1.352 2008/04/24 04:56:21 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2258,6 +2258,10 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 
 		/* compress and rehash as necessary */
 		if ((oldfile && !entry->is_modified) || entry->is_dir) {
+			if (entry->fp_type == PHAR_UFP) {
+				/* reset so we can copy the compressed data over */
+				entry->fp_type = PHAR_FP;
+			}
 			continue;
 		}
 		if (!phar_get_efp(entry, 0 TSRMLS_CC)) {
@@ -3014,7 +3018,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.351 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.352 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

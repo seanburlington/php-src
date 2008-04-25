@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.234 2008/04/25 04:34:02 cellog Exp $ */
+/* $Id: phar_object.c,v 1.235 2008/04/25 15:53:00 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3513,7 +3513,7 @@ PHP_METHOD(PharFileInfo, chmod)
 
 	if (entry_obj->ent.entry->is_temp_dir) {
 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, \
-			"Phar entry is a directory, cannot chmod"); \
+			"Phar entry \"%s\" is a temporary directory (not an actual entry in the archive), cannot chmod", entry_obj->ent.entry->filename); \
 		return;
 	}
 	if (PHAR_G(readonly) && !entry_obj->ent.entry->phar->is_data) {

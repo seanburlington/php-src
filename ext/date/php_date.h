@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.11.2.3.2.5 2008/03/14 16:19:52 derick Exp $ */
+/* $Id: php_date.h,v 1.17.2.11.2.3.2.6 2008/04/25 12:35:40 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -57,9 +57,12 @@ PHP_FUNCTION(date_parse_from_format);
 PHP_FUNCTION(date_get_last_errors);
 PHP_FUNCTION(date_format);
 PHP_FUNCTION(date_modify);
+PHP_FUNCTION(date_add);
+PHP_FUNCTION(date_sub);
 PHP_FUNCTION(date_timezone_get);
 PHP_FUNCTION(date_timezone_set);
 PHP_FUNCTION(date_offset_get);
+PHP_FUNCTION(date_diff);
 
 PHP_FUNCTION(date_time_set);
 PHP_FUNCTION(date_date_set);
@@ -75,6 +78,9 @@ PHP_FUNCTION(timezone_offset_get);
 PHP_FUNCTION(timezone_transitions_get);
 PHP_FUNCTION(timezone_identifiers_list);
 PHP_FUNCTION(timezone_abbreviations_list);
+
+PHP_METHOD(DateInterval, __construct);
+PHP_FUNCTION(date_interval_format);
 
 /* Options and Configuration */
 PHP_FUNCTION(date_default_timezone_set);

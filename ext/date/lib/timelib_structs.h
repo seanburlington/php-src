@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.3 2008/03/13 15:59:48 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.4 2008/04/25 12:35:58 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -124,6 +124,8 @@ typedef struct timelib_rel_time {
 	int weekday_behavior; /* 0: the current day should *not* be counted when advancing forwards; 1: the current day *should* be counted */
 
 	int first_last_day_of;
+	int invert; /* Whether the difference should be inverted */
+	timelib_sll days; /* Contains the number of *days*, instead of Y-M-D differences */
 } timelib_rel_time;
 
 typedef struct timelib_time_offset {

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.41 2008/04/25 16:10:58 cellog Exp $ */
+/* $Id: util.c,v 1.42 2008/04/25 21:37:40 sfox Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -594,7 +594,13 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 	phar_entry_info *entry, etemp;
 	phar_entry_data *ret;
 	const char *pcr_error;
-	char is_dir = (path_len > 0 && path != NULL) ? path[path_len - 1] == '/' : 0;
+	char is_dir;
+
+#ifdef PHP_WIN32
+	phar_unixify_path_separators(path, path_len);
+#endif
+
+	is_dir = (path_len > 0 && path != NULL) ? path[path_len - 1] == '/' : 0;
 
 	if (FAILURE == phar_get_archive(&phar, fname, fname_len, NULL, 0, error TSRMLS_CC)) {
 		return NULL;
@@ -1080,7 +1086,13 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 {
 	const char *pcr_error;
 	phar_entry_info *entry;
-	char is_dir = path_len && (path[path_len - 1] == '/');
+	char is_dir;
+
+#ifdef PHP_WIN32
+	phar_unixify_path_separators(path, path_len);
+#endif
+
+	is_dir = path_len && (path[path_len - 1] == '/');
 
 	if (error) {
 		*error = NULL;

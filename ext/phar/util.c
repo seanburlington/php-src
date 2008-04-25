@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.40 2008/04/24 16:03:39 sfox Exp $ */
+/* $Id: util.c,v 1.41 2008/04/25 16:10:58 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -1228,6 +1228,7 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 				entry->is_temp_dir = entry->is_dir = 1;
 				entry->filename = (char *) estrndup(path, path_len + 1);
 				entry->filename_len = path_len;
+				entry->phar = phar;
 				return entry;
 			}
 		}

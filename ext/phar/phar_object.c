@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.236 2008/04/25 16:05:04 cellog Exp $ */
+/* $Id: phar_object.c,v 1.237 2008/04/25 16:50:20 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3127,6 +3127,7 @@ PHP_METHOD(Phar, addFile)
 	php_stream_to_zval(resource, zresource);
 	phar_add_file(phar_obj->arc.archive, fname, fname_len, NULL, 0, zresource TSRMLS_CC);
 	efree(zresource);
+	php_stream_close(resource);
 }
 /* }}} */
 

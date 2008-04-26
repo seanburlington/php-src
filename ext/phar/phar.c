@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.353 2008/04/24 16:59:22 sfox Exp $ */
+/* $Id: phar.c,v 1.354 2008/04/26 23:16:48 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2914,7 +2914,7 @@ PHP_MINIT_FUNCTION(phar) /* {{{ */
 	phar_has_zlib = zend_hash_exists(&module_registry, "zlib", sizeof("zlib"));
 	if (zend_hash_exists(&module_registry, "apc", sizeof("apc"))) {
 		zval magic;
-		if (zend_get_constant("\000apc_magic", sizeof("\000apc_magic"), &magic TSRMLS_CC)) {
+		if (zend_get_constant("\000apc_magic", sizeof("\000apc_magic")-1, &magic TSRMLS_CC)) {
 			compile_hook *set_compile_hook;
 
 			set_compile_hook = (compile_hook *) Z_LVAL(magic);
@@ -3018,7 +3018,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.353 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.354 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

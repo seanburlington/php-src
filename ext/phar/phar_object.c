@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.242 2008/04/26 13:22:37 sfox Exp $ */
+/* $Id: phar_object.c,v 1.243 2008/04/26 17:09:57 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1417,6 +1417,10 @@ phar_spl_fileinfo:
 				return ZEND_HASH_APPLY_KEEP;
 			}
 			str_key = fname + base_len;
+			if (*str_key == '/' || *str_key == '\\') {
+				str_key++;
+				str_key_len--;
+			}
 		} else {
 			zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC, "Iterator %s returned a path \"%s\" that is not in the base directory \"%s\"", ce->name, fname, base);
 			if (save) {

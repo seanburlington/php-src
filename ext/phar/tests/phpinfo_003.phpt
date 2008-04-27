@@ -5,6 +5,8 @@ Phar: phpinfo display 3
 <?php if (extension_loaded("zlib")) die("skip zlib loaded"); ?>
 <?php if (extension_loaded("bz2")) die("skip bz2 loaded"); ?>
 --INI--
+phar.readonly=1
+phar.require_hash=1
 --FILE--
 <?php
 phpinfo(INFO_MODULES);
@@ -17,7 +19,7 @@ Phar
 Phar: PHP Archive support => enabled
 Phar EXT version => %s
 Phar API version => 1.1.1
-CVS revision => $Revision: 1.1 $
+CVS revision => $Revision: 1.2 $
 Phar-based phar archives => enabled
 Tar-based phar archives => enabled
 ZIP-based phar archives => enabled

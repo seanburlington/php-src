@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.244 2008/04/27 10:13:59 sfox Exp $ */
+/* $Id: phar_object.c,v 1.245 2008/04/27 11:26:14 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3586,7 +3586,7 @@ PHP_METHOD(Phar, extractTo)
 	zend_bool overwrite = 0;
 	PHAR_ARCHIVE_OBJECT();
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|zb", &pathto, &pathto_len, &zval_files, &overwrite) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|z!b", &pathto, &pathto_len, &zval_files, &overwrite) == FAILURE) {
 		return;
 	}
 

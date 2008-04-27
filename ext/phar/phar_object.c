@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.245 2008/04/27 11:26:14 sfox Exp $ */
+/* $Id: phar_object.c,v 1.246 2008/04/27 16:42:02 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -4063,7 +4063,7 @@ PHP_METHOD(PharFileInfo, getContent)
  */
 PHP_METHOD(PharFileInfo, compress)
 {
-	long method = 9021976;
+	long method;
 	char *error;
 	PHAR_ENTRY_OBJECT();
 

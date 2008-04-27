@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.22 2008/04/25 12:55:16 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.23 2008/04/27 19:12:10 derick Exp $ */
 
 #include "timelib.h"
 
@@ -124,6 +124,15 @@ static void do_adjust_for_weekday(timelib_time* time)
 	timelib_sll current_dow, difference;
 
 	current_dow = timelib_day_of_week(time->y, time->m, time->d);
+	if (time->relative.weekday_behavior == 2)
+	{
+		if (time->relative.weekday == 0) {
+			time->relative.weekday = 7;
+		}
+		time->d -= current_dow;
+		time->d += time->relative.weekday;
+		return;
+	}
 	difference = time->relative.weekday - current_dow;
 	if ((time->relative.d < 0 && difference < 0) || (time->relative.d >= 0 && difference <= -time->relative.weekday_behavior)) {
 		difference += 7;

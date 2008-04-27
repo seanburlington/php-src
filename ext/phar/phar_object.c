@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.246 2008/04/27 16:42:02 sfox Exp $ */
+/* $Id: phar_object.c,v 1.247 2008/04/27 23:59:40 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3241,6 +3241,18 @@ PHP_METHOD(Phar, addFile)
 	PHAR_ARCHIVE_OBJECT();
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &fname, &fname_len, &localname, &localname_len) == FAILURE) {
+		return;
+	}
+
+#if PHP_MAJOR_VERSION < 6
+	if (PG(safe_mode) && (!php_checkuid(fname, NULL, CHECKUID_ALLOW_ONLY_FILE))) {
+		zend_throw_exception_ex(spl_ce_RuntimeException, 0 TSRMLS_CC, "phar error: unable to open file \"%s\" to add to phar archive, safe_mode restrictions prevent this", fname);
+		return;
+	}
+#endif
+
+	if (!strstr(fname, "://") && php_check_open_basedir(fname TSRMLS_CC)) {
+		zend_throw_exception_ex(spl_ce_RuntimeException, 0 TSRMLS_CC, "phar error: unable to open file \"%s\" to add to phar archive, open_basedir restrictions prevent this", fname);
 		return;
 	}
 

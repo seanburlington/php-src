@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.248 2008/04/28 16:44:52 cellog Exp $ */
+/* $Id: phar_object.c,v 1.249 2008/04/28 23:00:45 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -317,7 +317,7 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 				}
 				PHAR_G(cwd_init) = 0;
 				efree(name);
-				if (EG(return_value_ptr_ptr)) {
+				if (EG(return_value_ptr_ptr) && *EG(return_value_ptr_ptr)) {
 					zval_ptr_dtor(EG(return_value_ptr_ptr));
 				}
 				if (EG(exception)) {

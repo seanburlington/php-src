@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.8 2008/04/28 22:37:31 cellog Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.9 2008/04/28 22:39:54 cellog Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1771,7 +1771,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 
 	if (options & USE_PATH) {
-		resolved_path = php_resolve_path(path, strlen(path), PG(include_path) TSRMLS_CC);
+		resolved_path = zend_resolve_path(path, strlen(path) TSRMLS_CC);
 		if (resolved_path) {
 			path = resolved_path;
 			/* we've found this file, don't re-check include_path or run realpath */

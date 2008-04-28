@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.44 2008/04/28 04:38:06 cellog Exp $ */
+/* $Id: util.c,v 1.45 2008/04/28 06:03:32 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -236,11 +236,20 @@ char *phar_find_in_include_path(char *filename, int filename_len, phar_archive_d
 		efree(entry);
 		try_len = filename_len;
 		test = phar_fix_filepath(estrndup(filename, filename_len), &try_len, 1 TSRMLS_CC);
-		if (zend_hash_exists(&((*pphar)->manifest), test + 1, try_len - 1)) {
-			spprintf(&ret, 0, "phar://%s%s", arch, test);
-			efree(arch);
-			efree(test);
-			return ret;
+		if (*test == '/') {
+			if (zend_hash_exists(&((*pphar)->manifest), test + 1, try_len - 1)) {
+				spprintf(&ret, 0, "phar://%s%s", arch, test);
+				efree(arch);
+				efree(test);
+				return ret;
+			}
+		} else {
+			if (zend_hash_exists(&((*pphar)->manifest), test, try_len)) {
+				spprintf(&ret, 0, "phar://%s/%s", arch, test);
+				efree(arch);
+				efree(test);
+				return ret;
+			}
 		}
 	}
 	efree(entry);

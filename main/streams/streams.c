@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.161 2008/03/27 10:33:52 dmitry Exp $ */
+/* $Id: streams.c,v 1.162 2008/04/28 22:37:45 cellog Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -164,7 +164,11 @@ void php_stream_display_wrapper_errors(php_stream_wrapper *wrapper, const char *
 
 			free_msg = 1;
 		} else {
-			msg = strerror(errno);
+			if (wrapper == &php_plain_files_wrapper) {
+				msg = strerror(errno);
+			} else {
+				msg = "operation failed";
+			}
 		}
 	} else {
 		msg = "no suitable wrapper could be found";

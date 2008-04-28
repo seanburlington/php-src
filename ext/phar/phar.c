@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.357 2008/04/28 06:03:32 cellog Exp $ */
+/* $Id: phar.c,v 1.358 2008/04/28 22:41:19 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2874,21 +2874,6 @@ static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type 
 #endif
 			}
 		}
-	} else if (PHAR_G(cwd_init) && !strstr(file_handle->filename, "://")) {
-		if ((name = phar_find_in_include_path((char *) file_handle->filename, strlen(file_handle->filename), NULL TSRMLS_CC))) {
-			zend_file_handle f = *file_handle;
-			if (SUCCESS == phar_orig_zend_open((const char *)name, file_handle TSRMLS_CC)) {
-				efree(name);
-				name = NULL;
-				file_handle->filename = f.filename;
-				if (f.opened_path) {
-					efree(f.opened_path);
-				}
-				file_handle->free_filename = 1;
-			} else {
-				*file_handle = f;
-			}
-		}
 	}
 	zend_try {
 		failed = 0;
@@ -3068,7 +3053,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.357 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.358 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

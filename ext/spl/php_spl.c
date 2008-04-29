@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.128 2008/03/26 14:46:16 scottmac Exp $ */
+/* $Id: php_spl.c,v 1.129 2008/04/29 09:18:54 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,6 +238,9 @@ int spl_autoload(const zstr class_name, const zstr lc_name, int class_name_len, 
 		if (new_op_array) {
 			EG(return_value_ptr_ptr) = &result;
 			EG(active_op_array) = new_op_array;
+			if (!EG(active_symbol_table)) {
+				zend_rebuild_symbol_table(TSRMLS_C);
+			}
 
 			zend_execute(new_op_array TSRMLS_CC);
 	

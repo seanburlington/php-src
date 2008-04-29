@@ -8,8 +8,6 @@ if(substr(PHP_OS, 0, 3) == "WIN")
 --INI--
 open_basedir=.
 session.save_handler=files
-session.save_path=
-session.name=PHPSESSID
 --FILE--
 <?php
 
@@ -22,16 +20,9 @@ ob_start();
  */
 
 echo "*** Testing session_save_path() : variation ***\n";
+
 $directory = dirname(__FILE__);
 $sessions = ($directory."/sessions");
-
-chdir($directory);
-
-// Delete the existing directory
-if (file_exists($sessions) === TRUE) {
-	@rmdir($sessions);
-}
-
 var_dump(mkdir($sessions));
 var_dump(chdir($sessions));
 ini_set("session.save_path", $directory);

@@ -8,8 +8,6 @@ if(substr(PHP_OS, 0, 3) != "WIN")
 --INI--
 open_basedir=.
 session.save_handler=files
-session.save_path=
-session.name=PHPSESSID
 --FILE--
 <?php
 
@@ -22,10 +20,8 @@ ob_start();
  */
 
 echo "*** Testing session_save_path() : variation ***\n";
-$initdir = getcwd();
-$sessions = ($initdir."/sessions");
-
-chdir($initdir);
+$directory = dirname(__FILE__);
+$sessions = ($directory."/sessions");
 
 // Delete the existing directory
 if (file_exists($sessions) === TRUE) {
@@ -34,7 +30,7 @@ if (file_exists($sessions) === TRUE) {
 
 var_dump(mkdir($sessions));
 var_dump(chdir($sessions));
-ini_set("session.save_path", $initdir);
+ini_set("session.save_path", $directory);
 var_dump(session_save_path());
 var_dump(session_start());
 var_dump(session_save_path());
@@ -46,8 +42,8 @@ echo "Done";
 ob_end_flush();
 ?>
 --CLEAN--
-$initdir = getcwd();
-$sessions = ($initdir."/sessions");
+$directory = dirname(__FILE__);
+$sessions = ($directory."/sessions");
 var_dump(rmdir($sessions));
 --EXPECTF--
 *** Testing session_save_path() : variation ***

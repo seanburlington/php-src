@@ -2,8 +2,6 @@
 Test session_id() function : variation
 --SKIPIF--
 <?php include('skipif.inc'); ?>
---INI--
-session.hash_function=0
 --FILE--
 <?php
 
@@ -37,12 +35,12 @@ ob_end_flush();
 string(1) "0"
 string(0) ""
 bool(true)
-string(%d) "%s"
+string(32) "%s"
 bool(true)
 string(1) "0"
 string(0) ""
 bool(true)
-string(%d) "%s"
+string(40) "%s"
 bool(true)
 Done
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.28 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: streams.c,v 1.29 2008/04/29 08:15:49 dmitry Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -64,6 +64,9 @@ static size_t on_data_available(char *data, size_t size, size_t nmemb, void *ctx
 	if (curlstream->readbuffer.writepos == 0) {
 		zval *sym;
 
+		if (!EG(active_symbol_table)) {
+			zend_rebuild_symbol_table(TSRMLS_C);
+		}
 		MAKE_STD_ZVAL(sym);
 		*sym = *curlstream->headers;
 		zval_copy_ctor(sym);

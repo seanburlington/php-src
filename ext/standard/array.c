@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.448 2008/03/12 19:21:30 felipe Exp $ */
+/* $Id: array.c,v 1.449 2008/04/29 08:15:49 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1420,6 +1420,10 @@ PHP_FUNCTION(extract)
 		}
 	}
 
+	if (!EG(active_symbol_table)) {
+		zend_rebuild_symbol_table(TSRMLS_C);
+	}
+
 	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(var_array), &pos);
 	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(var_array), (void **)&entry, &pos) == SUCCESS) {
 		zval final_name;
@@ -1615,6 +1619,10 @@ PHP_FUNCTION(compact)
 	if (zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE) {
 		efree(args);
 		WRONG_PARAM_COUNT;
+	}
+
+	if (!EG(active_symbol_table)) {
+		zend_rebuild_symbol_table(TSRMLS_C);
 	}
 
 	array_init(return_value);

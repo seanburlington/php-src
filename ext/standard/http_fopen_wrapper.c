@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.132 2008/04/06 15:21:45 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.133 2008/04/29 08:15:49 dmitry Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -536,6 +536,10 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	}
 
 	location[0] = '\0';
+
+	if (!EG(active_symbol_table)) {
+		zend_rebuild_symbol_table(TSRMLS_C);
+	}
 
 	if (header_init) {
 		zval *tmp;

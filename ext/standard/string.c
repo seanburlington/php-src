@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.671 2008/02/28 14:16:14 felipe Exp $ */
+/* $Id: string.c,v 1.672 2008/04/29 08:15:49 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6265,8 +6265,11 @@ PHP_FUNCTION(parse_str)
 
 	if (argCount == 1) {
 		zval tmp;
-		Z_ARRVAL(tmp) = EG(active_symbol_table);
 
+		if (!EG(active_symbol_table)) {
+			zend_rebuild_symbol_table(TSRMLS_C);
+		}
+		Z_ARRVAL(tmp) = EG(active_symbol_table);
 		sapi_module.treat_data(PARSE_STRING, res, &tmp TSRMLS_CC);
 	} else 	{
 		/* Clear out the array that was passed in. */

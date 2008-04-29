@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.11.2.4 2008/03/12 20:24:45 stas Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.11.2.5 2008/04/29 08:15:20 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -72,6 +72,9 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 	if (track_vars_array) {
 		symtable1 = Z_ARRVAL_P(track_vars_array);
 	} else if (PG(register_globals)) {
+		if (!EG(active_symbol_table)) {
+			zend_rebuild_symbol_table(TSRMLS_C);
+		}
 		symtable1 = EG(active_symbol_table);
 	}
 	if (!symtable1) {

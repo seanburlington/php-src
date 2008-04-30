@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.251 2008/04/30 02:20:47 cellog Exp $ */
+/* $Id: phar_object.c,v 1.252 2008/04/30 23:44:29 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1144,7 +1144,7 @@ PHP_METHOD(Phar, __construct)
 #if !HAVE_SPL
 	zend_throw_exception_ex(zend_exception_get_default(TSRMLS_C), 0 TSRMLS_CC, "Cannot instantiate Phar object without SPL extension");
 #else
-	char *fname, *alias = NULL, *error, *arch, *entry = NULL, *save_fname, *objname;
+	char *fname, *alias = NULL, *error, *arch = NULL, *entry = NULL, *save_fname, *objname;
 	int fname_len, alias_len = 0, arch_len, entry_len, is_data;
 	long flags = 0;
 	phar_archive_object *phar_obj;

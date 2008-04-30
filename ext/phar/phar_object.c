@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.250 2008/04/29 12:06:53 sfox Exp $ */
+/* $Id: phar_object.c,v 1.251 2008/04/30 02:20:47 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -320,10 +320,6 @@ static int phar_file_action(phar_entry_data *phar, char *mime_type, int code, ch
 				if (EG(return_value_ptr_ptr) && *EG(return_value_ptr_ptr)) {
 					zval_ptr_dtor(EG(return_value_ptr_ptr));
 				}
-				/*
-				if (EG(exception)) {
-					zend_throw_exception_internal(NULL TSRMLS_CC);
-				} */
 				zend_bailout();
 			}
 			return PHAR_MIME_PHP;

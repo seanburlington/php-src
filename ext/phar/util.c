@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.45 2008/04/28 06:03:32 cellog Exp $ */
+/* $Id: util.c,v 1.46 2008/04/30 20:17:26 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -315,7 +315,6 @@ char *phar_find_in_include_path(char *filename, int filename_len, phar_archive_d
 		efree(test);
 	}
 	efree(arch);
-	efree(entry);
 
 doit:
 	if (*filename == '.' ||

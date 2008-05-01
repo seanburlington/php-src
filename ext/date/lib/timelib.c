@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.7.2.4.2.6.2.3 2008/04/25 12:35:57 derick Exp $ */
+/* $Id: timelib.c,v 1.7.2.4.2.6.2.4 2008/05/01 00:12:24 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -44,6 +44,13 @@ timelib_rel_time* timelib_rel_time_ctor(void)
 	t = calloc(1, sizeof(timelib_rel_time));
 
 	return t;
+}
+
+timelib_rel_time* timelib_rel_time_clone(timelib_rel_time *rel)
+{
+	timelib_rel_time *tmp = timelib_rel_time_ctor();
+	memcpy(tmp, rel, sizeof(timelib_rel_time));
+	return tmp;
 }
 
 void timelib_time_tz_abbr_update(timelib_time* tm, char* tz_abbr)

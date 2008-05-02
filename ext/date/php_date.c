@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.182 2008/05/02 12:48:19 derick Exp $ */
+/* $Id: php_date.c,v 1.183 2008/05/02 21:32:13 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -903,7 +903,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 	timelib_time_offset *offset = NULL;
 	timelib_sll          isoweek, isoyear;
 	php_locale_data *loc_dat;
-	int                  rfc_colon = 0;
+	int                  rfc_colon;
 
 	if (!format_len) {
 		if (UG(unicode)) {
@@ -940,6 +940,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 
 	for (i = 0; i < format_len; i++) {
 		no_free = 0;
+		rfc_colon = 0;
 		switch (format[i]) {
 			/* day */
 			case 'd': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%02d", (int) t->d); break;

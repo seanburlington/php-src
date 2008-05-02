@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.39 2008/05/01 00:10:25 derick Exp $ */
+/* $Id: php_date.h,v 1.40 2008/05/02 12:48:19 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -85,6 +85,7 @@ PHP_METHOD(timezone, abbreviations_list);
 
 PHP_METHOD(DateInterval, __construct);
 PHP_FUNCTION(date_interval_format);
+PHP_FUNCTION(date_interval_create_from_date_string);
 
 PHP_METHOD(DatePeriod, __construct);
 

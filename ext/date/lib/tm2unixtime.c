@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.24 2008/05/01 16:14:29 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.25 2008/05/02 12:48:19 derick Exp $ */
 
 #include "timelib.h"
 
@@ -193,9 +193,6 @@ static void do_adjust_relative(timelib_time* time)
 			break;
 	}
 	do_normalize(time);
-
-	memset(&(time->relative), 0, sizeof(time->relative));
-	time->have_relative = 0;
 }
 
 static void do_adjust_special_weekday(timelib_time* time)

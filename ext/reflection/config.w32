@@ -1,5 +1,5 @@
-// $Id: config.w32,v 1.4 2008/05/02 13:12:02 lstrojny Exp $
+// $Id: config.w32,v 1.5 2008/05/02 14:10:05 auroraeosrose Exp $
 // vim:ft=javascript
 
-EXTENSION("reflection", "php_reflection.c");
+EXTENSION("reflection", "php_reflection.c", false /* never shared */);
 AC_DEFINE('HAVE_REFLECTION', 1, 'Reflection support enabled');

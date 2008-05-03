@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.253 2008/03/20 16:46:55 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.254 2008/05/03 15:09:24 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1851,6 +1851,23 @@ static int sxe_object_cast(zval *readobj, zval *writeobj, int type, void *extra 
 }
 /* }}} */
 
+/* {{{ proto object SimpleXMLElement::__toString() U
+   Returns the string content */
+SXE_METHOD(__toString)
+{
+	zval           *result;
+
+	ALLOC_INIT_ZVAL(result);
+
+	if (sxe_object_cast(getThis(), result, IS_STRING, NULL TSRMLS_CC) == SUCCESS) {
+		RETURN_ZVAL(result, 1, 1);
+	} else {
+		zval_ptr_dtor(&result);
+		RETURN_EMPTY_TEXT();
+	}
+}
+/* }}} */
+
 static int sxe_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ */
 {
 	php_sxe_object  *sxe;
@@ -2494,6 +2511,7 @@ static const zend_function_entry sxe_functions[] = { /* {{{ */
 	SXE_ME(getName,                NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(addChild,               NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(addAttribute,           NULL, ZEND_ACC_PUBLIC)
+	SXE_ME(__toString,             NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -2542,7 +2560,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.253 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.254 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

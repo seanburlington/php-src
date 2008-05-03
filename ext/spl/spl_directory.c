@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.26 2008/02/13 12:23:26 helly Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.27 2008/05/03 16:00:40 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1055,7 +1055,7 @@ SPL_METHOD(RecursiveDirectoryIterator, getChildren)
 	INIT_PZVAL(&zpath);
 	ZVAL_STRINGL(&zpath, intern->file_name, intern->file_name_len, 0);
 
-	spl_instantiate_arg_ex1(spl_ce_RecursiveDirectoryIterator, &return_value, 0, &zpath TSRMLS_CC);
+	spl_instantiate_arg_ex1(Z_OBJCE_P(getThis()), &return_value, 0, &zpath TSRMLS_CC);
 	
 	subdir = (spl_filesystem_object*)zend_object_store_get_object(return_value TSRMLS_CC);
 	if (subdir) {

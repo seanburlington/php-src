@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.151 2008/04/09 19:00:48 colder Exp $ */
+/* $Id: spl_directory.c,v 1.152 2008/05/03 16:01:00 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1276,7 +1276,7 @@ SPL_METHOD(RecursiveDirectoryIterator, getChildren)
 	ZVAL_LONG(&zflags, intern->flags);
 	ZVAL_ZSTRL(&zpath, intern->file_name_type, intern->file_name, intern->file_name_len, 1);
 
-	spl_instantiate_arg_ex2(spl_ce_RecursiveDirectoryIterator, &return_value, 0, &zpath, &zflags TSRMLS_CC);
+	spl_instantiate_arg_ex2(Z_OBJCE_P(getThis()), &return_value, 0, &zpath, &zflags TSRMLS_CC);
 
 	zval_dtor(&zpath);
 

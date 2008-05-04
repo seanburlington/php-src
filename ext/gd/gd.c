@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.34 2008/04/04 17:39:52 felipe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.35 2008/05/04 21:19:17 colder Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4548,7 +4548,7 @@ PHP_FUNCTION(imagepsslantfont)
 }
 /* }}} */
 
-/* {{{ proto array imagepstext(resource image, string text, resource font, int size, int foreground, int background, int xcoord, int ycoord [, int space, int tightness, float angle, int antialias])
+/* {{{ proto array imagepstext(resource image, string text, resource font, int size, int foreground, int background, int xcoord, int ycoord [, int space [, int tightness [, float angle [, int antialias]]]])
    Rasterize a string over an image */
 PHP_FUNCTION(imagepstext)
 {

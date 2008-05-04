@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.45 2008/04/07 10:44:03 tony2001 Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.46 2008/05/04 21:19:17 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2086,7 +2086,7 @@ cleanup:
 }
 /* }}} */
 
-/* {{{ proto bool openssl_csr_new(array dn, resource &privkey [, array configargs, array extraattribs])
+/* {{{ proto bool openssl_csr_new(array dn, resource &privkey [, array configargs [, array extraattribs]])
    Generates a privkey and CSR */
 PHP_FUNCTION(openssl_csr_new)
 {

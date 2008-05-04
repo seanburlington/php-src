@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.13 2008/04/14 08:15:11 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.14 2008/05/04 21:17:33 colder Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -75,7 +75,7 @@ PHP_FUNCTION(stream_socket_pair)
 /* }}} */
 #endif
 
-/* {{{ proto resource stream_socket_client(string remoteaddress [, long &errcode, string &errstring, double timeout, long flags, resource context])
+/* {{{ proto resource stream_socket_client(string remoteaddress [, long &errcode [, string &errstring [, double timeout [, long flags [, resource context]]]]])
    Open a client connection to a remote address */
 PHP_FUNCTION(stream_socket_client)
 {
@@ -162,7 +162,7 @@ PHP_FUNCTION(stream_socket_client)
 }
 /* }}} */
 
-/* {{{ proto resource stream_socket_server(string localaddress [, long &errcode, string &errstring, long flags, resource context])
+/* {{{ proto resource stream_socket_server(string localaddress [, long &errcode [, string &errstring [, long flags [, resource context]]]])
    Create a server socket bound to localaddress */
 PHP_FUNCTION(stream_socket_server)
 {
@@ -227,7 +227,7 @@ PHP_FUNCTION(stream_socket_server)
 }
 /* }}} */
 
-/* {{{ proto resource stream_socket_accept(resource serverstream, [ double timeout, string &peername ])
+/* {{{ proto resource stream_socket_accept(resource serverstream, [ double timeout [, string &peername ]])
    Accept a client connection from a server socket */
 PHP_FUNCTION(stream_socket_accept)
 {
@@ -1312,7 +1312,7 @@ PHP_FUNCTION(stream_set_write_buffer)
 }
 /* }}} */
 
-/* {{{ proto int stream_socket_enable_crypto(resource stream, bool enable [, int cryptokind, resource sessionstream])
+/* {{{ proto int stream_socket_enable_crypto(resource stream, bool enable [, int cryptokind [, resource sessionstream]])
    Enable or disable a specific kind of crypto on the stream */
 PHP_FUNCTION(stream_socket_enable_crypto)
 {

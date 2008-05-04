@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.12 2008/04/15 15:48:20 iliaa Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.13 2008/05/04 21:17:32 colder Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1118,7 +1118,7 @@ PHPAPI PHP_FUNCTION(fgetc)
 }
 /* }}} */
 
-/* {{{ proto string fgetss(resource fp [, int length, string allowable_tags])
+/* {{{ proto string fgetss(resource fp [, int length [, string allowable_tags]])
    Get a line from file pointer and strip HTML tags */
 PHPAPI PHP_FUNCTION(fgetss)
 {

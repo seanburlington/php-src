@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.29 2008/05/01 00:10:25 derick Exp $ */
+/* $Id: timelib.h,v 1.30 2008/05/04 20:50:46 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -29,7 +29,9 @@
 #define TIMELIB_NONE             0x00
 #define TIMELIB_OVERRIDE_TIME    0x01
 
-#define TIMELIB_SPECIAL_WEEKDAY  0x01
+#define TIMELIB_SPECIAL_WEEKDAY                   0x01
+#define TIMELIB_SPECIAL_DAY_OF_WEEK_IN_MONTH      0x02
+#define TIMELIB_SPECIAL_LAST_DAY_OF_WEEK_IN_MONTH 0x03
 
 #ifndef LONG_MAX
 #define LONG_MAX 2147483647L

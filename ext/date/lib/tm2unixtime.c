@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.26 2008/05/03 10:03:21 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.27 2008/05/04 20:50:46 derick Exp $ */
 
 #include "timelib.h"
 
@@ -261,6 +261,24 @@ static void do_adjust_special(timelib_time* time)
 	memset(&(time->relative.special), 0, sizeof(time->relative.special));
 }
 
+static void do_adjust_special_early(timelib_time* time)
+{
+	if (time->relative.have_special_relative) {
+		switch (time->relative.special.type) {
+			case TIMELIB_SPECIAL_DAY_OF_WEEK_IN_MONTH:
+				time->d = 1;
+				time->m += time->relative.m;
+				time->relative.m = 0;
+				break;
+			case TIMELIB_SPECIAL_LAST_DAY_OF_WEEK_IN_MONTH:
+				time->d = 1;
+				time->m += time->relative.m + 1;
+				time->relative.m = 0;
+				break;
+		}
+	}
+}
+
 static timelib_sll do_years(timelib_sll year)
 {
 	timelib_sll i;
@@ -389,6 +407,7 @@ void timelib_update_ts(timelib_time* time, timelib_tzinfo* tzi)
 {
 	timelib_sll res = 0;
 
+	do_adjust_special_early(time);
 	do_adjust_relative(time);
 	do_adjust_special(time);
 	res += do_years(time->y);

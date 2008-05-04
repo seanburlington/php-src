@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.7.2.4.2.6.2.5 2008/05/01 16:15:45 derick Exp $ */
+/* $Id: timelib.c,v 1.7.2.4.2.6.2.6 2008/05/04 20:52:56 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -241,6 +241,12 @@ void timelib_dump_date(timelib_time *d, int options)
 				switch (d->relative.special.type) {
 					case TIMELIB_SPECIAL_WEEKDAY:
 						printf(" / %lld weekday", d->relative.special.amount);
+						break;
+					case TIMELIB_SPECIAL_DAY_OF_WEEK_IN_MONTH:
+						printf(" / x y of z month");
+						break;
+					case TIMELIB_SPECIAL_LAST_DAY_OF_WEEK_IN_MONTH:
+						printf(" / last y of z month");
 						break;
 				}
 			}

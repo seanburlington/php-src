@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.98 2008/04/11 10:59:50 tony2001 Exp $ */
+/* $Id: posix.c,v 1.99 2008/05/04 09:33:56 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,15 +147,16 @@ const zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.98 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.99 $");
 	php_info_print_table_end();
 }
 /* }}} */
 
-static PHP_GINIT_FUNCTION(posix)
+static PHP_GINIT_FUNCTION(posix) /* {{{ */
 {
 	posix_globals->last_error = 0;
 }
+/* }}} */
 
 /* {{{ PHP_MINIT_FUNCTION(posix)
  */

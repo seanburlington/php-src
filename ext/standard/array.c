@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.28 2008/04/29 08:15:20 dmitry Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.29 2008/05/04 11:26:50 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1641,7 +1641,7 @@ PHP_FUNCTION(range)
 				goto err;
 			}
 			for (; *low >= *high; (*low) -= (unsigned int)lstep) {
-				add_next_index_stringl(return_value, low, 1, 1);
+				add_next_index_stringl(return_value, (const char *)low, 1, 1);
 				if (((signed int)*low - lstep) < 0) {
 					break;
 				}
@@ -1652,13 +1652,13 @@ PHP_FUNCTION(range)
 				goto err;
 			}
 			for (; *low <= *high; (*low) += (unsigned int)lstep) {
-				add_next_index_stringl(return_value, low, 1, 1);
+				add_next_index_stringl(return_value, (const char *)low, 1, 1);
 				if (((signed int)*low + lstep) > 255) {
 					break;
 				}
 			}
 		} else {
-			add_next_index_stringl(return_value, low, 1, 1);
+			add_next_index_stringl(return_value, (const char *)low, 1, 1);
 		}
 
 	} else if (Z_TYPE_P(zlow) == IS_DOUBLE || Z_TYPE_P(zhigh) == IS_DOUBLE || is_step_double) {

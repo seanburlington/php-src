@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.30 2008/05/05 07:29:41 kalle Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.31 2008/05/05 11:28:11 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3277,6 +3277,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(asin,															arginfo_asin)
 	PHP_FE(acos,															arginfo_acos)
 	PHP_FE(atan,															arginfo_atan)
+	PHP_FE(atanh,															arginfo_atanh)
 	PHP_FE(atan2,															arginfo_atan2)
 	PHP_FE(sinh,															arginfo_sinh)
 	PHP_FE(cosh,															arginfo_cosh)

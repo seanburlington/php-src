@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.33 2007/12/31 07:12:16 sebastian Exp $ */
+/* $Id: php_math.h,v 1.34 2008/05/05 06:28:03 kalle Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -69,23 +69,15 @@ PHP_FUNCTION(rad2deg);
    */
 PHP_FUNCTION(hypot);
 PHP_FUNCTION(expm1);
-#ifdef HAVE_LOG1P
 PHP_FUNCTION(log1p);
-#endif
 
 PHP_FUNCTION(sinh);
 PHP_FUNCTION(cosh);
 PHP_FUNCTION(tanh);
 
-#ifdef HAVE_ASINH
 PHP_FUNCTION(asinh);
-#endif
-#ifdef HAVE_ACOSH
 PHP_FUNCTION(acosh);
-#endif
-#ifdef HAVE_ATANH
 PHP_FUNCTION(atanh);
-#endif
 
 #include <math.h>
 

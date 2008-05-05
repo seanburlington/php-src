@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.6.2.5 2008/05/05 07:29:41 kalle Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.6.2.6 2008/05/05 10:09:54 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -360,7 +360,7 @@ PHP_FUNCTION(asinh)
 
 /* {{{ proto float acosh(float number)
    Returns the inverse hyperbolic cosine of the number, i.e. the value whose hyperbolic cosine is number */
-PHP_FUNCTION(php_acosh)
+PHP_FUNCTION(acosh)
 {
 	double num;
 	

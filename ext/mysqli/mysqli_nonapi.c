@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.11 2008/04/24 14:22:19 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.12 2008/05/06 17:05:14 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -32,6 +32,11 @@
 #include "php_mysqli_structs.h"
 
 #define SAFE_STR(a) ((a)?a:"")
+
+#ifndef zend_parse_parameters_none
+#define zend_parse_parameters_none()	\
+        zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "")
+#endif
 
 /* {{{ php_mysqli_set_error
  */

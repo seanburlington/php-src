@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.106 2008/04/23 18:44:42 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.107 2008/05/06 21:14:51 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -391,6 +391,7 @@ int phar_open_filename(char *fname, int fname_len, char *alias, int alias_len, i
 int phar_open_or_create_filename(char *fname, int fname_len, char *alias, int alias_len, int is_data, int options, phar_archive_data** pphar, char **error TSRMLS_DC);
 int phar_create_or_parse_filename(char *fname, int fname_len, char *alias, int alias_len, int is_data, int options, phar_archive_data** pphar, char **error TSRMLS_DC);
 int phar_open_compiled_file(char *alias, int alias_len, char **error TSRMLS_DC);
+int phar_free_alias(phar_archive_data *phar, char *alias, int alias_len TSRMLS_DC);
 int phar_get_archive(phar_archive_data **archive, char *fname, int fname_len, char *alias, int alias_len, char **error TSRMLS_DC);
 int phar_open_loaded(char *fname, int fname_len, char *alias, int alias_len, int is_data, int options, phar_archive_data** pphar, char **error TSRMLS_DC);
 

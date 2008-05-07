@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5.2.19 2008/04/24 14:22:19 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.5.2.20 2008/05/07 15:14:26 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1390,7 +1390,7 @@ MYSQLND_METHOD(mysqlnd_conn, info)(const MYSQLND * const conn)
 }
 /* }}} */
 
-
+#if !defined(MYSQLND_USE_OPTIMISATIONS) || MYSQLND_USE_OPTIMISATIONS == 0
 /* {{{ mysqlnd_get_client_info */
 PHPAPI const char * mysqlnd_get_client_info()
 {
@@ -1405,7 +1405,7 @@ PHPAPI unsigned int mysqlnd_get_client_version()
 	return MYSQLND_VERSION_ID;
 }
 /* }}} */
-
+#endif
 
 /* {{{ mysqlnd_conn::get_server_info */
 static const char *

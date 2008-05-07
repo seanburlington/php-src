@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.c,v 1.2.2.5 2008/01/29 11:59:53 andrey Exp $ */
+/* $Id: mysqlnd_statistics.c,v 1.2.2.6 2008/05/07 15:14:26 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -42,6 +42,7 @@ const MYSQLND_STRING mysqlnd_stats_values_names[STAT_LAST] =
 	{ STR_W_LEN("non_result_set_queries") },
 	{ STR_W_LEN("no_index_used") },
 	{ STR_W_LEN("bad_index_used") },
+	{ STR_W_LEN("slow_queries") },
 	{ STR_W_LEN("buffered_sets") },
 	{ STR_W_LEN("unbuffered_sets") },
 	{ STR_W_LEN("ps_buffered_sets") },

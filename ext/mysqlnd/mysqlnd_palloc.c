@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.c,v 1.2.2.6 2008/04/24 14:22:19 andrey Exp $ */
+/* $Id: mysqlnd_palloc.c,v 1.2.2.7 2008/05/07 15:14:26 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -132,7 +132,6 @@ PHPAPI MYSQLND_THD_ZVAL_PCACHE* _mysqlnd_palloc_init_thd_cache(MYSQLND_ZVAL_PCAC
 	MYSQLND_THD_ZVAL_PCACHE *ret = calloc(1, sizeof(MYSQLND_THD_ZVAL_PCACHE));
 	DBG_ENTER("_mysqlnd_palloc_init_thd_cache");
 	DBG_INF_FMT("ret = %p", ret);
-
 	ret->parent = mysqlnd_palloc_get_cache_reference(cache);
 
 #ifdef ZTS

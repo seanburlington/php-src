@@ -19,7 +19,7 @@ Phar
 Phar: PHP Archive support => enabled
 Phar EXT version => %s
 Phar API version => 1.1.1
-CVS revision => $Revision: 1.2 $
+CVS revision => $Revision: 1.3 $
 Phar-based phar archives => enabled
 Tar-based phar archives => enabled
 ZIP-based phar archives => enabled
@@ -31,7 +31,6 @@ Phar based on pear/PHP_Archive, original concept by Davey Shafik.
 Phar fully realized by Gregory Beaver and Marcus Boerger.
 Portions of tar implementation Copyright (c) 2003-2007 Tim Kientzle.
 Directive => Local Value => Master Value
-phar.extract_list =>  => 
 phar.readonly => On => On
 phar.require_hash => On => On
 %a

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.20 2008/05/04 21:19:18 colder Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.21 2008/05/07 20:02:42 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -879,7 +879,7 @@ static int parse_context_options(php_stream_context *context, zval *options)
 	return ret;
 }
 
-static int parse_context_params(php_stream_context *context, zval *params)
+static int parse_context_params(php_stream_context *context, zval *params TSRMLS_DC)
 {
 	int ret = SUCCESS;
 	zval **tmp;
@@ -898,7 +898,11 @@ static int parse_context_params(php_stream_context *context, zval *params)
 		context->notifier->dtor = user_space_stream_notifier_dtor;
 	}
 	if (SUCCESS == zend_hash_find(Z_ARRVAL_P(params), "options", sizeof("options"), (void**)&tmp)) {
-		parse_context_options(context, *tmp);
+		if (Z_TYPE_PP(tmp) == IS_ARRAY) {
+			parse_context_options(context, *tmp);
+		} else {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid stream/context parameter");
+		}
 	}
 	
 	return ret;
@@ -1006,7 +1010,7 @@ PHP_FUNCTION(stream_context_set_params)
 		RETURN_FALSE;
 	}
 
-	RETVAL_BOOL(parse_context_params(context, params) == SUCCESS);
+	RETVAL_BOOL(parse_context_params(context, params TSRMLS_CC) == SUCCESS);
 }
 /* }}} */
 

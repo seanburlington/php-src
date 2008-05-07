@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.88.2.12.2.10 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: php_sdl.c,v 1.88.2.12.2.11 2008/05/07 14:57:56 davidc Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -240,7 +240,12 @@ static void load_wsdl_ex(zval *this_ptr, char *struri, sdlCtx *ctx, int include 
 	wsdl = soap_xmlParseFile(struri TSRMLS_CC);
 	
 	if (!wsdl) {
-		soap_error1(E_ERROR, "Parsing WSDL: Couldn't load from '%s'", struri);
+		xmlErrorPtr xmlErrorPtr = xmlGetLastError();
+		if (xmlErrorPtr) {
+			soap_error2(E_ERROR, "Parsing WSDL: Couldn't load from '%s' : %s", struri, xmlErrorPtr->message);
+		} else {
+			soap_error1(E_ERROR, "Parsing WSDL: Couldn't load from '%s'", struri);
+		}
 	}
 
 	zend_hash_add(&ctx->docs, struri, strlen(struri)+1, (void**)&wsdl, sizeof(xmlDocPtr), NULL);

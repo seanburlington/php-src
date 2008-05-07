@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.108 2008/05/07 05:38:29 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.109 2008/05/07 17:24:21 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -260,6 +260,9 @@ typedef struct _phar_entry_info {
 struct _phar_archive_data {
 	char                     *fname;
 	int                      fname_len;
+	/* for phar_detect_fname_ext, this stores the location of the file extension within fname */
+	char                     *ext;
+	int                      ext_len;
 	char                     *alias;
 	int                      alias_len;
 	char                     version[12];

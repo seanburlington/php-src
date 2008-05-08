@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.366 2008/05/08 02:58:43 cellog Exp $ */
+/* $Id: phar.c,v 1.367 2008/05/08 03:10:17 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -936,7 +936,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 			MAPPHAR_FAIL("Cannot open archive \"%s\", invalid alias");
 		}
 		if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_alias_map), alias, alias_len, (void **)&fd_ptr)) {
-			if (SUCCESS != phar_free_alias(*fd_ptr, alias, alias_len)) {
+			if (SUCCESS != phar_free_alias(*fd_ptr, alias, alias_len TSRMLS_CC)) {
 				signature = NULL;
 				fp = NULL;
 				MAPPHAR_FAIL("Cannot open archive \"%s\", alias is already in use by existing archive");
@@ -1540,7 +1540,7 @@ int phar_detect_phar_fname_ext(const char *filename, int check_length, const cha
 		phar_archive_data **pphar;
 
 		if (is_complete) {
-			if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_fname_map), filename, filename_len, (void **)&pphar)) {
+			if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_fname_map), (char *) filename, filename_len, (void **)&pphar)) {
 				*ext_str = filename + (filename_len - (*pphar)->ext_len);
 woohoo:
 				*ext_len = (*pphar)->ext_len;
@@ -1566,7 +1566,7 @@ woohoo:
 					break;
 				}
 
-				if (keylen > filename_len) {
+				if (keylen > (uint) filename_len) {
 					zend_hash_move_forward(&(PHAR_GLOBALS->phar_fname_map));
 					continue;
 				}
@@ -2990,7 +2990,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.366 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.367 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

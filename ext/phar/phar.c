@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.365 2008/05/08 00:49:36 cellog Exp $ */
+/* $Id: phar.c,v 1.366 2008/05/08 02:58:43 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2208,7 +2208,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 			php_stream_close(entry->cfp);
 			entry->cfp = 0;
 		}
-		if (entry->is_deleted) {
+		if (entry->is_deleted || entry->is_mounted) {
 			/* remove this from the new phar */
 			continue;
 		}
@@ -2430,8 +2430,8 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		if (zend_hash_get_current_data(&phar->manifest, (void **)&entry) == FAILURE) {
 			continue;
 		}
-		if (entry->is_deleted) {
-			/* remove this from the new phar */
+		if (entry->is_deleted || entry->is_mounted) {
+			/* remove this from the new phar if deleted, ignore if mounted */
 			continue;
 		}
 		if (entry->is_dir) {
@@ -2493,7 +2493,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		if (zend_hash_get_current_data(&phar->manifest, (void **)&entry) == FAILURE) {
 			continue;
 		}
-		if (entry->is_deleted || entry->is_dir) {
+		if (entry->is_deleted || entry->is_dir || entry->is_mounted) {
 			continue;
 		}
 		if (entry->cfp) {
@@ -2990,7 +2990,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.365 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.366 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

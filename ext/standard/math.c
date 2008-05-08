@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.6.2.7 2008/05/06 10:55:49 kalle Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.6.2.8 2008/05/08 04:23:26 mattwil Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -354,7 +354,7 @@ PHP_FUNCTION(asinh)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "d", &num) == FAILURE) {
 		return;
 	}
-	RETURN_DOUBLE(asinh(num));
+	RETURN_DOUBLE(php_asinh(num));
 }
 /* }}} */
 

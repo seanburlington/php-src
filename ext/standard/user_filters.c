@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.53 2008/02/28 14:16:14 felipe Exp $ */
+/* $Id: user_filters.c,v 1.54 2008/05/08 17:22:07 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -636,7 +636,7 @@ PHP_FUNCTION(stream_filter_register)
 	fdat->classname_len = classname_len;
 
 	if (zend_hash_add(BG(user_filter_map), filtername, filtername_len + 1, (void*)fdat,
-				sizeof(*fdat) + classname_len, NULL) == SUCCESS &&
+				sizeof(*fdat), NULL) == SUCCESS &&
 			php_stream_filter_register_factory_volatile(filtername, &user_filter_factory TSRMLS_CC) == SUCCESS) {
 		RETVAL_TRUE;
 	}

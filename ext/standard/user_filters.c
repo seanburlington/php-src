@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.9.2.4 2008/03/10 22:12:36 felipe Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.9.2.5 2008/05/08 18:28:25 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -584,7 +584,7 @@ PHP_FUNCTION(stream_filter_register)
 		zend_hash_init(BG(user_filter_map), 5, NULL, (dtor_func_t) filter_item_dtor, 0);
 	}
 
-	fdat = ecalloc(1, sizeof(*fdat) + classname_len);
+	fdat = ecalloc(1, sizeof(struct php_user_filter_data) + classname_len);
 	memcpy(fdat->classname, classname, classname_len);
 
 	if (zend_hash_add(BG(user_filter_map), filtername, filtername_len + 1, (void*)fdat,

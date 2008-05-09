@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.672 2008/04/29 08:15:49 dmitry Exp $ */
+/* $Id: string.c,v 1.673 2008/05/09 12:58:50 scottmac Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -627,14 +627,12 @@ PHP_FUNCTION(nl_langinfo)
 #endif
 #ifdef DECIMAL_POINT
 		case DECIMAL_POINT:
-#endif
-#ifdef RADIXCHAR
+#elif defined(RADIXCHAR)
 		case RADIXCHAR:
 #endif
 #ifdef THOUSANDS_SEP
 		case THOUSANDS_SEP:
-#endif
-#ifdef THOUSEP
+#elif defined(THOUSEP)
 		case THOUSEP:
 #endif
 #ifdef GROUPING

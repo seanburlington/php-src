@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.35.2.1.2.6.2.4 2008/05/03 21:12:55 sfox Exp $
+# $Id: Makefile,v 1.35.2.1.2.6.2.5 2008/05/09 11:20:09 sfox Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -100,15 +100,15 @@ clean: clean-sapi
 	@echo Cleaning distribution build dirs
 	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @del /F /Q %D\*.* > NUL
 	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip > NUL
-	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
+	-rd /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
 
 clean-pecl:
 	@echo Cleaning PECL targets only
-	-rmdir /s /q $(BUILD_DIR)\pecl
+	-rd /s /q $(BUILD_DIR)\pecl
 
 clean-all:
 	@echo Cleaning standard build dirs
-	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @rmdir /s /q %D
+	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @rd /s /q %D
 	-@del /f /q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\*.rc $(BUILD_DIR)\*.dbg $(BUILD_DIR)\*.bin $(BUILD_DIR)\php*.dll $(BUILD_DIR)\php*.exe > NUL
 
 test:
@@ -124,8 +124,8 @@ build-snap: generated_files
 	-for %T in ($(PECL_TARGETS)) do $(MAKE) /I /nologo "%T"
 
 build-dist: $(BUILD_DIR)\deplister.exe
-	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
-	-rmdir /s /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
+	-rd /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
+	-rd /s /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
 	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip
 	-del /f /q $(BUILD_DIR)\php-debug-pack-$(PHP_VERSION_STRING)-Win32.zip
 	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip

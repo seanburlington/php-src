@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.20 2008/04/29 08:15:20 dmitry Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.21 2008/05/09 12:59:16 scottmac Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -414,14 +414,12 @@ PHP_MINIT_FUNCTION(nl_langinfo)
 #endif
 #ifdef DECIMAL_POINT
 	REGISTER_NL_LANGINFO_CONSTANT(DECIMAL_POINT);
-#endif
-#ifdef RADIXCHAR
+#elif defined(RADIXCHAR)
 	REGISTER_NL_LANGINFO_CONSTANT(RADIXCHAR);
 #endif
 #ifdef THOUSANDS_SEP
 	REGISTER_NL_LANGINFO_CONSTANT(THOUSANDS_SEP);
-#endif
-#ifdef THOUSEP
+#elif defined(THOUSEP)
 	REGISTER_NL_LANGINFO_CONSTANT(THOUSEP);
 #endif
 #ifdef GROUPING

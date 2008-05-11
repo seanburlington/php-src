@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.51 2008/05/11 19:17:50 cellog Exp $ */
+/* $Id: util.c,v 1.52 2008/05/11 22:59:15 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -33,7 +33,7 @@ static char *phar_get_link_location(phar_entry_info *entry TSRMLS_DC)
 		return NULL;
 	}
 	if (entry->link[0] == '/') {
-		return entry->link;
+		return estrdup(entry->link + 1);
 	}
 	tmp = estrndup(entry->filename, entry->filename_len);
 	p = strrchr(tmp, '/');

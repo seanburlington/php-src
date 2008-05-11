@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.18 2008/05/11 19:17:50 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.19 2008/05/11 20:53:37 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -633,6 +633,7 @@ notfound:
 				actual_len = entry[0] == '/' ? (entry_len - 1) : entry_len;
 				/* this file is not in the current directory, use the original path */
 				entry = estrndup(filename, filename_length);
+				entry_len = filename_length;
 				PHAR_G(cwd) = "/";
 				PHAR_G(cwd_len) = 0;
 				/* clean path without cwd */

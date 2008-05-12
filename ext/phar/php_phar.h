@@ -17,12 +17,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_phar.h,v 1.15 2008/05/07 06:43:06 cellog Exp $ */
+/* $Id: php_phar.h,v 1.16 2008/05/12 21:03:47 cellog Exp $ */
 
 #ifndef PHP_PHAR_H
 #define PHP_PHAR_H
 
-#define PHP_PHAR_VERSION      "2.0.0b1"
+#define PHP_PHAR_VERSION      "2.0.0b2-dev"
 
 #include "ext/standard/basic_functions.h"
 extern zend_module_entry phar_module_entry;

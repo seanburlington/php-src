@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.265 2008/05/11 22:45:02 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266 2008/05/12 20:42:06 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1157,6 +1157,9 @@ PHP_METHOD(Phar, __construct)
 			zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 				"%s", error);
 			efree(error);
+		} else {
+			zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
+				"Phar creation or opening failed");
 		}
 		return;
 	}

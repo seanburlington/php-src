@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.33 2008/05/08 22:21:18 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.34 2008/05/12 08:47:01 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3820,7 +3820,9 @@ static void php_putenv_destructor(putenv_entry *pe) /* {{{ */
 		SetEnvironmentVariable(pe->key, "bugbug");
 #endif
 		putenv(pe->previous_value);
+# if defined(PHP_WIN32)
 		efree(pe->previous_value);
+# endif
 	} else {
 # if HAVE_UNSETENV
 		unsetenv(pe->key);
@@ -4425,8 +4427,12 @@ PHP_FUNCTION(putenv)
 		pe.previous_value = NULL;
 		for (env = environ; env != NULL && *env != NULL; env++) {
 			if (!strncmp(*env, pe.key, pe.key_len) && (*env)[pe.key_len] == '=') {	/* found it */
-				/* must copy previous value because putenv can free the string without notice */
+#if defined(PHP_WIN32)
+				/* must copy previous value because MSVCRT's putenv can free the string without notice */
 				pe.previous_value = estrdup(*env);
+#else
+				pe.previous_value = *env;
+#endif
 				break;
 			}
 		}

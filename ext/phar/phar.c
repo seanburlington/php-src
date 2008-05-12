@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.368 2008/05/11 19:17:50 cellog Exp $ */
+/* $Id: phar.c,v 1.369 2008/05/12 00:16:58 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -197,6 +197,24 @@ static int phar_unalias_apply(void *pDest, void *argument TSRMLS_DC) /* {{{ */
 /* }}} */
 
 /**
+ * Delete aliases to phar's that got kicked out of the global table
+ */
+static int phar_tmpclose_apply(void *pDest TSRMLS_DC) /* {{{ */
+{
+	phar_entry_info *entry = (phar_entry_info *) pDest;
+
+	if (entry->fp_type != PHAR_TMP) {
+		return ZEND_HASH_APPLY_KEEP;
+	}
+	if (entry->fp && !entry->fp_refcount) {
+		php_stream_close(entry->fp);
+		entry->fp = NULL;
+	}
+	return ZEND_HASH_APPLY_KEEP;
+}
+/* }}} */
+
+/**
  * Filename map destructor
  */
 static void destroy_phar_data(void *pDest) /* {{{ */
@@ -205,6 +223,9 @@ static void destroy_phar_data(void *pDest) /* {{{ */
 	TSRMLS_FETCH();
 
 	if (PHAR_GLOBALS->request_ends) {
+		/* first, iterate over the manifest and close all PHAR_TMP entry fp handles,
+		this prevents unnecessary unfreed stream resources */
+		zend_hash_apply(&(phar_data->manifest), phar_tmpclose_apply TSRMLS_CC);
 		destroy_phar_data_only(pDest);
 		return;
 	}
@@ -2990,7 +3011,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.368 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.369 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

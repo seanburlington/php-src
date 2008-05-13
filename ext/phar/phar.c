@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.371 2008/05/13 18:35:25 sfox Exp $ */
+/* $Id: phar.c,v 1.372 2008/05/13 18:43:18 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1606,7 +1606,7 @@ woohoo:
 					zend_hash_move_forward(&(PHAR_GLOBALS->phar_fname_map));
 					continue;
 				}
-				if (!memcmp(filename, key.s, keylen) && (filename_len == keylen
+				if (!memcmp(filename, key.s, keylen) && ((uint)filename_len == keylen
 					|| filename[keylen] == '/' || filename[keylen] == '\0')) {
 					if (FAILURE == zend_hash_get_current_data(&(PHAR_GLOBALS->phar_fname_map), (void **) &pphar)) {
 						break;
@@ -1653,9 +1653,6 @@ next_extension:
 			return SUCCESS;
 		case FAILURE :
 			/* look for more extensions */
-			if (is_complete) {
-				return FAILURE;
-			}
 			pos = strchr(pos + 1, '.');
 			if (pos) {
 				*ext_str = NULL;
@@ -3026,7 +3023,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.371 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.372 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -1,17 +1,16 @@
 --TEST--
-Phar front controller $_SERVER munging success zip-based
+Phar front controller $_SERVER munging success tar-based
 --INI--
 default_charset=
 --SKIPIF--
 <?php if (!extension_loaded("phar")) die("skip"); ?>
-<?php if (!extension_loaded("zlib")) die("skip zlib not available"); ?>
 --ENV--
 SCRIPT_NAME=/frontcontroller21.phar.php
 REQUEST_URI=/frontcontroller21.phar.php/index.php?test=hi
 PATH_INFO=/index.php
 QUERY_STRING=test=hi
 --FILE_EXTERNAL--
-files/frontcontroller12.phar.zip
+files/frontcontroller12.phar.tar
 --EXPECTHEADERS--
 Content-type: text/html
 --EXPECTF--

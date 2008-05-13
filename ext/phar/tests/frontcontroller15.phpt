@@ -1,16 +1,15 @@
 --TEST--
-Phar front controller phps zip-based
+Phar front controller mime type override, Phar::PHPS
 --INI--
 default_charset=
 --SKIPIF--
 <?php if (!extension_loaded("phar")) die("skip"); ?>
-<?php if (!extension_loaded("zlib")) die("skip zlib not available"); ?>
 --ENV--
-SCRIPT_NAME=/frontcontroller3.phar.php
-REQUEST_URI=/frontcontroller3.phar.php/a.phps
-PATH_INFO=/a.phps
+SCRIPT_NAME=/frontcontroller15.php
+REQUEST_URI=/frontcontroller15.php/a.php
+PATH_INFO=/a.php
 --FILE_EXTERNAL--
-files/frontcontroller.phar.zip
+files/frontcontroller8.phar
 --EXPECTHEADERS--
 Content-type: text/html
 --EXPECT--
@@ -18,3 +17,4 @@ Content-type: text/html
 <span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">hio</span><span style="color: #007700">(){}</span>
 </span>
 </code>
+

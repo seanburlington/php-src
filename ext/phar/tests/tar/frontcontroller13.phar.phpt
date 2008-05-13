@@ -1,16 +1,15 @@
 --TEST--
-Phar front controller mime type not string/int zip-based
+Phar front controller mime type not string/int tar-based
 --INI--
 default_charset=
 --SKIPIF--
 <?php if (!extension_loaded("phar")) die("skip"); ?>
-<?php if (!extension_loaded("zlib")) die("skip zlib not available"); ?>
 --ENV--
 SCRIPT_NAME=/frontcontroller13.phar.php
 REQUEST_URI=/frontcontroller13.phar.php/a.php
 PATH_INFO=/a.php
 --FILE_EXTERNAL--
-files/frontcontroller7.phar.zip
+files/frontcontroller7.phar.tar
 --EXPECTHEADERS--
 Content-type: text/html
 --EXPECTF--

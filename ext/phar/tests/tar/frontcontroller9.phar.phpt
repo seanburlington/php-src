@@ -1,16 +1,15 @@
 --TEST--
-Phar front controller phps zip-based
+Phar front controller rewrite array tar-based
 --INI--
 default_charset=
 --SKIPIF--
 <?php if (!extension_loaded("phar")) die("skip"); ?>
-<?php if (!extension_loaded("zlib")) die("skip zlib not available"); ?>
 --ENV--
-SCRIPT_NAME=/frontcontroller3.phar.php
-REQUEST_URI=/frontcontroller3.phar.php/a.phps
-PATH_INFO=/a.phps
+SCRIPT_NAME=/frontcontroller9.phar.php
+REQUEST_URI=/frontcontroller9.phar.php/hi
+PATH_INFO=/hi
 --FILE_EXTERNAL--
-files/frontcontroller.phar.zip
+files/frontcontroller3.phar.tar
 --EXPECTHEADERS--
 Content-type: text/html
 --EXPECT--

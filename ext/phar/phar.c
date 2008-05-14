@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.372 2008/05/13 18:43:18 sfox Exp $ */
+/* $Id: phar.c,v 1.373 2008/05/14 21:27:31 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -817,7 +817,7 @@ int phar_open_file(php_stream *fp, char *fname, int fname_len, char *alias, int 
 		register_alias = 1;
 		temp_alias = 1;
 	}
-	
+
 	/* we have 5 32-bit items plus 1 byte at least */
 	if (manifest_count > ((manifest_len - 10 - tmp_len) / (5 * 4 + 1))) {
 		/* prevent serious memory issues */
@@ -1592,7 +1592,8 @@ woohoo:
 				return FAILURE;
 			}
 		} else {
-			zstr key;
+			phar_zstr key;
+			char *str_key;
 			uint keylen;
 			ulong unused;
 
@@ -1602,11 +1603,13 @@ woohoo:
 					break;
 				}
 
+				PHAR_STR(key, str_key);
+
 				if (keylen > (uint) filename_len) {
 					zend_hash_move_forward(&(PHAR_GLOBALS->phar_fname_map));
 					continue;
 				}
-				if (!memcmp(filename, key.s, keylen) && ((uint)filename_len == keylen
+				if (!memcmp(filename, str_key, keylen) && ((uint)filename_len == keylen
 					|| filename[keylen] == '/' || filename[keylen] == '\0')) {
 					if (FAILURE == zend_hash_get_current_data(&(PHAR_GLOBALS->phar_fname_map), (void **) &pphar)) {
 						break;
@@ -3023,7 +3026,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.372 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.373 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

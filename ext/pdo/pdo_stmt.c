@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.191 2008/03/22 19:29:43 felipe Exp $ */
+/* $Id: pdo_stmt.c,v 1.192 2008/05/14 12:28:28 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2714,10 +2714,12 @@ zend_object_handlers pdo_row_object_handlers = {
 
 void pdo_row_free_storage(pdo_stmt_t *stmt TSRMLS_DC)
 {
-	ZVAL_NULL(&stmt->lazy_object_ref);
-	
-	if (--stmt->refcount == 0) {
-		free_statement(stmt TSRMLS_CC);
+	if (stmt) {
+		ZVAL_NULL(&stmt->lazy_object_ref);
+		
+		if (--stmt->refcount == 0) {
+			free_statement(stmt TSRMLS_CC);
+		}
 	}
 }
 

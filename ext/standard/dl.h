@@ -18,13 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.h,v 1.28 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: dl.h,v 1.29 2008/05/16 12:11:15 felipe Exp $ */
 
 #ifndef DL_H
 #define DL_H
 
 PHPAPI int php_load_extension(char *filename, int type, int start_now TSRMLS_DC);
-PHPAPI void php_dl(zval *file,int type, zval *return_value, int start_now TSRMLS_DC);
+PHPAPI void php_dl(char *file, int type, zval *return_value, int start_now TSRMLS_DC);
 
 /* dynamic loading functions */
 PHPAPI PHP_FUNCTION(dl);

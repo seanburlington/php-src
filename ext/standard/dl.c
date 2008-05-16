@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.125 2008/02/28 16:59:21 dmitry Exp $ */
+/* $Id: dl.c,v 1.126 2008/05/16 03:11:56 felipe Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -56,9 +56,11 @@ PHP_FUNCTION(dl)
 {
 	zval *filename;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &filename) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/", &filename) == FAILURE) {
 		return;
 	}
+	
+	convert_to_string(filename);
 
 	if (Z_STRLEN_P(filename) >= MAXPATHLEN) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "File name exceeds the maximum allowed length of %d characters", MAXPATHLEN);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.106.2.1.2.5.2.6 2008/02/28 16:59:10 dmitry Exp $ */
+/* $Id: dl.c,v 1.106.2.1.2.5.2.7 2008/05/16 03:01:20 felipe Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -55,9 +55,11 @@ PHP_FUNCTION(dl)
 {
 	zval *filename;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &filename) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/", &filename) == FAILURE) {
 		return;
 	}
+	
+	convert_to_string(filename);
 
 	if (!PG(enable_dl)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't enabled");

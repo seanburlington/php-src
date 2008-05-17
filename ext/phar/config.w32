@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.27 2008/01/28 14:39:16 sfox Exp $
+// $Id: config.w32,v 1.28 2008/05/17 20:07:38 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
@@ -8,7 +8,5 @@ if (PHP_PHAR != "no") {
 	if (PHP_PHAR_SHARED) {
 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
 	}
-	ADD_EXTENSION_DEP('phar', 'bz2', true);
 	ADD_EXTENSION_DEP('phar', 'spl', true);
-	ADD_EXTENSION_DEP('phar', 'zlib', true);
 }

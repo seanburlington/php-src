@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.55 2008/03/12 19:13:00 felipe Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.56 2008/05/18 21:50:58 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2250,7 +2250,7 @@ PHP_FUNCTION(array_slice)
 	/* ..and the length */
 	if (length < 0) {
 		length = num_in - offset + length;
-	} else if (((unsigned) offset + (unsigned) length) > (unsigned) num_in) {
+	} else if (((unsigned long) offset + (unsigned long) length) > (unsigned) num_in) {
 		length = num_in - offset;
 	}
 

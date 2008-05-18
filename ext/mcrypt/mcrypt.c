@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91.2.3.2.11.2.4 2008/05/18 17:08:56 dsp Exp $ */
+/* $Id: mcrypt.c,v 1.91.2.3.2.11.2.5 2008/05/18 19:48:39 dsp Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -589,12 +589,7 @@ PHP_FUNCTION(mcrypt_enc_get_supported_key_sizes)
 PHP_FUNCTION(mcrypt_enc_self_test)
 {
 	MCRYPT_GET_TD_ARG
-
-	if (mcrypt_enc_self_test(pm->td) == 0) {
-		RETURN_TRUE;
-	} else {
-		RETURN_FALSE;
-	}
+	RETURN_LONG(mcrypt_enc_self_test(pm->td));
 }
 /* }}} */
 

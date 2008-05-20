@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.4 2008/05/15 17:05:20 colder Exp $ */
+/* $Id: spl_heap.c,v 1.5 2008/05/20 12:04:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -755,11 +755,11 @@ SPL_METHOD(SplPriorityQueue, setExtractFlags)
 	RETURN_LONG(intern->flags);
 }
 /* }}} */
+
 /* {{{ proto int SplPriorityQueue::getExtractFlags($flags) U
  Set the flags of extraction*/
 SPL_METHOD(SplPriorityQueue, getExtractFlags)
 {
-	long value;
 	spl_heap_object *intern;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE) {

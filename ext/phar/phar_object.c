@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.275 2008/05/20 04:09:41 cellog Exp $ */
+/* $Id: phar_object.c,v 1.276 2008/05/20 05:01:08 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1915,7 +1915,7 @@ static zval *phar_rename_archive(phar_archive_data *phar, char *ext, zend_bool c
 	efree(basepath);
 	efree(newname);
 
-	if (SUCCESS == zend_hash_exists(&(PHAR_GLOBALS->phar_fname_map), newpath, phar->fname_len, (void **) &pphar)) {
+	if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_fname_map), newpath, phar->fname_len, (void **) &pphar)) {
 		if (*pphar == phar) {
 			if (!zend_hash_num_elements(&phar->manifest)) {
 				goto its_ok;

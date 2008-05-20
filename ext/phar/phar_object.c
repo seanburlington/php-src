@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.6 2008/05/18 23:41:08 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.7 2008/05/20 03:56:35 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1819,6 +1819,7 @@ static zval *phar_rename_archive(phar_archive_data *phar, char *ext, zend_bool c
 	char *error;
 	const char *pcr_error;
 	int ext_len = ext ? strlen(ext) : 0;
+	phar_archive_data **pphar;
 
 	if (!ext) {
 		if (phar->is_zip) {
@@ -1889,12 +1890,18 @@ static zval *phar_rename_archive(phar_archive_data *phar, char *ext, zend_bool c
 	efree(basepath);
 	efree(newname);
 
-	if (zend_hash_exists(&(PHAR_GLOBALS->phar_fname_map), newpath, phar->fname_len)) {
+	if (SUCCESS == zend_hash_find(&(PHAR_GLOBALS->phar_fname_map), newpath, phar->fname_len, (void **) &pphar)) {
+		if (*pphar == phar) {
+			if (!zend_hash_num_elements(&phar->manifest)) {
+				goto its_ok;
+			}
+		}
 		efree(oldpath);
 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Unable to add newly converted phar \"%s\" to the list of phars, a phar with that name already exists", phar->fname);
 		return NULL;
 	}
 
+its_ok:
 	if (!phar->is_data) {
 		if (SUCCESS != phar_detect_phar_fname_ext(newpath, phar->fname_len, (const char **) &(phar->ext), &(phar->ext_len), 1, 1, 1 TSRMLS_CC)) {
 			efree(oldpath);

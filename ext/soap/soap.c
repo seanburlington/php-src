@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.245 2008/05/20 13:15:01 dsp Exp $ */
+/* $Id: soap.c,v 1.246 2008/05/20 13:28:31 dsp Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2851,8 +2851,9 @@ PHP_METHOD(SoapClient, SoapClient)
 
 		if (zend_ascii_hash_find(ht, "connection_timeout", sizeof("connection_timeout"), (void**)&tmp) == SUCCESS) {
 			convert_to_long(*tmp);
-			if(Z_LVAL_PP(tmp) >= 0) 
+			if(Z_LVAL_PP(tmp) >= 0) {
 		    		client->connection_timeout = Z_LVAL_PP(tmp);
+			}
 		}
 
 		if (context) {

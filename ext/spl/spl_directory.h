@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.9 2008/05/18 12:17:43 colder Exp $ */
+/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.10 2008/05/20 21:46:50 colder Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -65,6 +65,7 @@ struct _spl_filesystem_object {
 	spl_other_handler  *oth_handler;
 	char               *_path;
 	int                _path_len;
+	char               *orig_path;
 	char               *file_name;
 	int                file_name_len;
 	SPL_FS_OBJ_TYPE    type;

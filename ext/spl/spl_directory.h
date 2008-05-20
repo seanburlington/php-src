@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.43 2008/05/16 13:22:02 colder Exp $ */
+/* $Id: spl_directory.h,v 1.44 2008/05/20 21:46:13 colder Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -65,6 +65,7 @@ struct _spl_filesystem_object {
 	zend_uchar         _path_type;
 	zstr               _path;
 	int                _path_len;
+	char               *orig_path;
 	zend_uchar         file_name_type;
 	zstr               file_name;
 	int                file_name_len;

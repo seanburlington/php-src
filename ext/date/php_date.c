@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.186 2008/05/07 23:46:11 iliaa Exp $ */
+/* $Id: php_date.c,v 1.187 2008/05/20 12:07:13 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1788,7 +1788,7 @@ static void date_period_it_current_data(zend_object_iterator *iter, zval ***data
 
 
 /* {{{ date_period_it_current_key */
-static int date_period_it_current_key(zend_object_iterator *iter, char **str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
+static int date_period_it_current_key(zend_object_iterator *iter, zstr *str_key, uint *str_key_len, ulong *int_key TSRMLS_DC)
 {
 	date_period_it   *iterator = (date_period_it *)iter;
 	*int_key = iterator->current_index;

@@ -12,6 +12,8 @@
 .libs
 Debug
 Debug_TS
+Debug_TS_bundled
+Debug_bundled
 Makefile
 Makefile.fragments
 Makefile.global
@@ -19,8 +21,13 @@ Makefile.objects
 Release
 Release_TS
 Release_TSDbg
+Release_TSDbg_bundled
+Release_TS_bundled
 Release_TS_inline
+Release_TS_inline_bundled
+Release_bundled
 Release_inline
+Release_inline_bundled
 acinclude.m4
 aclocal.m4
 autom4te.cache

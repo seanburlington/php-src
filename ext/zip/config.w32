@@ -1,10 +1,9 @@
-// $Id: config.w32,v 1.1.2.1.2.2 2008/01/14 03:16:08 cellog Exp $
+// $Id: config.w32,v 1.1.2.1.2.3 2008/05/21 09:27:41 pajoye Exp $
 // vim:ft=javascript
 
-ARG_ENABLE("zip", "ZIP support", "no");
+ARG_ENABLE("zip", "ZIP support", "yes");
 
 if (PHP_ZIP != "no") {
-
 	if (CHECK_HEADER_ADD_INCLUDE("zlib.h", "CFLAGS_ZIP", "..\\zlib;" + php_usual_include_suspects + ";" + PHP_ZIP)) {
 		if (PHP_ZLIB_SHARED) {
 			CHECK_LIB("zlib.lib", "zip", PHP_ZIP);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.3 2008/05/17 20:07:22 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.4 2008/05/21 22:00:43 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -101,7 +101,7 @@ PHP_INI_END()
  * When all uses of a phar have been concluded, this frees the manifest
  * and the phar slot
  */
-static void phar_destroy_phar_data(phar_archive_data *phar TSRMLS_DC) /* {{{ */
+void phar_destroy_phar_data(phar_archive_data *phar TSRMLS_DC) /* {{{ */
 {
 	if (phar->alias && phar->alias != phar->fname) {
 		efree(phar->alias);
@@ -3025,7 +3025,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.3 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.4 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

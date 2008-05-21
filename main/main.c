@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.21 2008/03/22 12:56:16 tony2001 Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.22 2008/05/21 15:55:31 pajoye Exp $ */
 
 /* {{{ includes
  */
@@ -1691,6 +1691,9 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	if (old_invalid_parameter_handler != NULL) {
 		_set_invalid_parameter_handler(old_invalid_parameter_handler);
 	}
+
+	/* Disable the message box for assertions.*/
+	_CrtSetReportMode(_CRT_ASSERT, 0);
 #endif
 #else
 	php_os=PHP_OS;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.9 2008/05/21 22:00:43 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.10 2008/05/21 22:52:30 felipe Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1899,7 +1899,7 @@ static zval *phar_rename_archive(phar_archive_data *phar, char *ext, zend_bool c
 				(*pphar)->flags = phar->flags;
 				(*pphar)->fp = phar->fp;
 				phar->fp = NULL;
-				phar_destroy_phar_data(phar);
+				phar_destroy_phar_data(phar TSRMLS_CC);
 				phar = *pphar;
 				newpath = oldpath;
 				goto its_ok;

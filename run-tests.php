@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.345 2008/03/17 17:20:27 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.346 2008/05/21 13:02:35 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.345 $'."\n";
+					echo '$Revision: 1.346 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -920,12 +920,12 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 		0 => array('pipe', 'r'),
 		1 => array('pipe', 'w'),
 		2 => array('pipe', 'w')
-		), $pipes, null, $env, array("suppress_errors" => true));
+		), $pipes, null, $env, array("suppress_errors" => true, "binary_pipes" => true));
 
 	if (!$proc)
 		return false;
 
-	if (is_string($stdin)) {
+	if (!is_null($stdin)) {
 		fwrite($pipes[0], $stdin);
 	}
 	fclose($pipes[0]);
@@ -1655,7 +1655,7 @@ COMMAND $cmd
 		$wanted = trim($section_text['EXPECT']);
 		if ($unicode_semantics && is_unicode($wanted)) {
 			/* workaround until preg_replace() or str_replace() are upgraded */
-			$wanted = unicode_encode($wanted, ini_get('unicode.output_encoding'));
+			$wanted = unicode_encode($wanted, ini_get('unicode.output_encoding') ?: 'utf-8');
 		}
 		$wanted = preg_replace('/\r\n/',"\n",$wanted);
 		show_file_block('exp', $wanted);

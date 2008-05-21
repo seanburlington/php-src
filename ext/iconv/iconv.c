@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20.2.6 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.20.2.7 2008/05/21 15:03:20 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -228,7 +228,7 @@ static php_iconv_err_t php_iconv_stream_filter_unregister_factory(TSRMLS_D);
 /* }}} */
 
 /* {{{ static globals */
-static char _generic_superset_name[] = "UCS-4LE";
+static char _generic_superset_name[] = ICONV_UCS4_ENCODING;
 #define GENERIC_SUPERSET_NAME _generic_superset_name
 #define GENERIC_SUPERSET_NBYTES 4
 /* }}} */

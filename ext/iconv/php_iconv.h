@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Revision: 1.28.2.2.2.2.2.3 $ */
+/* $Revision: 1.28.2.2.2.2.2.4 $ */
 
 #ifndef PHP_ICONV_H
 #define PHP_ICONV_H
@@ -83,11 +83,13 @@ ZEND_END_MODULE_GLOBALS(iconv)
 # define ICONV_OUTPUT_ENCODING "ISO8859-1"
 # define ICONV_INTERNAL_ENCODING "ISO8859-1"
 # define ICONV_ASCII_ENCODING "IBM-850"
+# define ICONV_UCS4_ENCODING "UCS-4"
 #else
 # define ICONV_INPUT_ENCODING "ISO-8859-1"
 # define ICONV_OUTPUT_ENCODING "ISO-8859-1"
 # define ICONV_INTERNAL_ENCODING "ISO-8859-1"
 # define ICONV_ASCII_ENCODING "ASCII"
+# define ICONV_UCS4_ENCODING "UCS-4LE"
 #endif
 
 #ifndef ICONV_CSNMAXLEN

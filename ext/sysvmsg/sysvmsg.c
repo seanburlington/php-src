@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.34 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: sysvmsg.c,v 1.35 2008/05/21 12:01:55 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,7 +137,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.34 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.35 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -413,7 +413,7 @@ PHP_FUNCTION(msg_send)
 		char *p = NULL;
 		switch (Z_TYPE_P(message)) {
 			case IS_UNICODE:
-				if (SUCCESS != zend_unicode_to_string(UG(runtime_encoding_conv), &p, &message_len, Z_USTRVAL_P(message), Z_USTRLEN_P(message) TSRMLS_CC)) {
+				if (SUCCESS != zend_unicode_to_string(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &p, &message_len, Z_USTRVAL_P(message), Z_USTRLEN_P(message) TSRMLS_CC)) {
 					RETURN_FALSE;
 				}
 				break;

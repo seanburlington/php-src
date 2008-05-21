@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.346 2008/05/21 13:02:35 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.347 2008/05/21 14:01:31 felipe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -211,8 +211,8 @@ More .INIs  : " , (function_exists(\'php_ini_scanned_files\') ? str_replace("\n"
 	}
 	@unlink($info_file);
 
-	$unicode = `$php $pass_options $info_params -r "echo ini_get('unicode.semantics');"`;
-	define('TESTED_UNICODE', strcasecmp($unicode,"on") == 0 || $unicode == 1);
+	$unicode = 1;
+	define('TESTED_UNICODE', 1);
 
 	// load list of enabled extensions
 	save_text($info_file, '<?php echo join(",",get_loaded_extensions()); ?>');
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.346 $'."\n";
+					echo '$Revision: 1.347 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";

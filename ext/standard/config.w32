@@ -1,8 +1,11 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.4.2.2.2.1.2.1 2007/10/05 15:00:08 jani Exp $
+// $Id: config.w32,v 1.4.2.2.2.1.2.2 2008/05/22 22:06:15 kalle Exp $
 
 ARG_WITH("config-file-scan-dir", "Dir to check for additional php ini files", "");
+
 AC_DEFINE("PHP_CONFIG_FILE_SCAN_DIR", PHP_CONFIG_FILE_SCAN_DIR);
+AC_DEFINE("HAVE_INET_PTON", 1);
+AC_DEFINE("HAVE_INET_NTOP", 1);
 
 CHECK_HEADER_ADD_INCLUDE("timelib_config.h", "CFLAGS_STANDARD", "ext/date/lib");
 

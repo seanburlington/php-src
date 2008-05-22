@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.2 2008/05/15 16:09:00 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.3 2008/05/22 06:33:09 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -1172,6 +1172,9 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 		return NULL;
 	}
 	if (is_dir) {
+		if (!path_len || path_len == 1) {
+			return NULL;
+		}
 		path_len--;
 	}
 	if (SUCCESS == zend_hash_find(&phar->manifest, path, path_len, (void**)&entry)) {

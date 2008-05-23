@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.15 2008/04/15 16:31:36 gwynne Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.16 2008/05/23 19:10:39 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -214,7 +214,7 @@ if test "$GCC" = "yes"; then
     GCC_MAJOR_VERSION=`$CC -dumpversion | /usr/bin/sed -nE '1s/([[0-9]]+)\.[[0-9]]+\..*/\1/;1p'`
     ;;
   *)
-    GCC_MAJOR_VERSION=`$CC --version | $SED -n '1s/[[^0-9]]*\([[0-9]]\+\)\.[[0-9]]\+\..*/\1/;1p'`
+    GCC_MAJOR_VERSION=`$CC --version | $SED -n '1s/[[^0-9]]*//;1s/\..*//;1p'`
     ;;
   esac
   if test $GCC_MAJOR_VERSION -ge 4; then

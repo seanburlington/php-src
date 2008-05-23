@@ -1,22 +1,18 @@
 dnl
-dnl $Id: config0.m4,v 1.38.2.3.2.10.2.1 2008/04/10 19:42:32 helly Exp $
+dnl $Id: config0.m4,v 1.38.2.3.2.10.2.2 2008/05/23 19:07:27 tony2001 Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
 dnl if DIR is supplied, we'll use that for linking
 
-PHP_ARG_WITH(pcre-regex,for PCRE support,
+PHP_ARG_WITH(pcre-regex,,
 [  --with-pcre-regex=DIR   Include Perl Compatible Regular Expressions support.
                           DIR is the PCRE install prefix [BUNDLED]], yes)
 
-ext_shared=no
+  ext_shared=no
 
-  if test "$PHP_PCRE_REGEX" = "yes"; then
-    PHP_NEW_EXTENSION(pcre, pcrelib/pcre_chartables.c pcrelib/pcre_ucp_searchfuncs.c pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c pcrelib/pcre_ord2utf8.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_valid_utf8.c pcrelib/pcre_version.c pcrelib/pcre_xclass.c php_pcre.c, $ext_shared,,-I@ext_srcdir@/pcrelib)
-    PHP_ADD_BUILD_DIR($ext_builddir/pcrelib)
-    PHP_INSTALL_HEADERS([ext/pcre], [php_pcre.h pcrelib/])
-    AC_DEFINE(HAVE_BUNDLED_PCRE, 1, [ ])
-  else
+  if test "$PHP_PCRE_REGEX" != "yes" && test "$PHP_PCRE_REGEX" != "no"; then
+    AC_MSG_CHECKING([for PCRE headers location])
     for i in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/include $PHP_PCRE_REGEX/include/pcre; do
       test -f $i/pcre.h && PCRE_INCDIR=$i
     done
@@ -24,7 +20,9 @@ ext_shared=no
     if test -z "$PCRE_INCDIR"; then
       AC_MSG_ERROR([Could not find pcre.h in $PHP_PCRE_REGEX])
     fi
+    AC_MSG_RESULT([$PCRE_INCDIR])
 
+    AC_MSG_CHECKING([for PCRE library location])
     for j in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/$PHP_LIBDIR; do
       test -f $j/libpcre.a || test -f $j/libpcre.$SHLIB_SUFFIX_NAME && PCRE_LIBDIR=$j
     done
@@ -32,6 +30,7 @@ ext_shared=no
     if test -z "$PCRE_LIBDIR" ; then
       AC_MSG_ERROR([Could not find libpcre.(a|$SHLIB_SUFFIX_NAME) in $PHP_PCRE_REGEX])
     fi
+    AC_MSG_RESULT([$PCRE_LIBDIR])
 
     changequote({,})
     pcre_major=`grep PCRE_MAJOR $PCRE_INCDIR/pcre.h | sed -e 's/[^0-9]//g'`
@@ -53,4 +52,11 @@ ext_shared=no
     PHP_NEW_EXTENSION(pcre, php_pcre.c, $ext_shared)
     PHP_INSTALL_HEADERS([ext/pcre], [php_pcre.h])
     PHP_SUBST(PCRE_SHARED_LIBADD)
+  else
+    AC_MSG_CHECKING([for PCRE library to use])
+    AC_MSG_RESULT([bundled])
+    PHP_NEW_EXTENSION(pcre, pcrelib/pcre_chartables.c pcrelib/pcre_ucp_searchfuncs.c pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c pcrelib/pcre_ord2utf8.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_valid_utf8.c pcrelib/pcre_version.c pcrelib/pcre_xclass.c php_pcre.c, $ext_shared,,-I@ext_srcdir@/pcrelib)
+    PHP_ADD_BUILD_DIR($ext_builddir/pcrelib)
+    PHP_INSTALL_HEADERS([ext/pcre], [php_pcre.h pcrelib/])
+    AC_DEFINE(HAVE_BUNDLED_PCRE, 1, [ ])
   fi

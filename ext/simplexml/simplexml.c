@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.254 2008/05/03 15:09:24 colder Exp $ */
+/* $Id: simplexml.c,v 1.255 2008/05/23 15:46:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1392,7 +1392,7 @@ SXE_METHOD(asXML)
 
 	if (node) {
 		if (node->parent && (XML_DOCUMENT_NODE == node->parent->type)) {
-			xmlDocDumpMemory((xmlDocPtr) sxe->document->ptr, &strval, &strval_len);
+			xmlDocDumpMemoryEnc((xmlDocPtr) sxe->document->ptr, &strval, &strval_len, ((xmlDocPtr) sxe->document->ptr)->encoding);
 			RETVAL_STRINGL((char *)strval, strval_len, 1);
 			xmlFree(strval);
 		} else {
@@ -2560,7 +2560,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.254 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.255 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

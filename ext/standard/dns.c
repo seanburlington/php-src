@@ -18,10 +18,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.92 2008/04/14 16:49:30 colder Exp $ */
+/* $Id: dns.c,v 1.93 2008/05/23 09:40:19 mattwil Exp $ */
 
 /* {{{ includes */
 #include "php.h"
+#include "php_network.h"
 
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>

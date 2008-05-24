@@ -1,5 +1,5 @@
 --TEST--
-Bug #28822: ArrayObject::offsetExists() works inverted
+Bug #28822 (ArrayObject::offsetExists() works inverted)
 --FILE--
 <?php
 

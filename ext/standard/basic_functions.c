@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.899 2008/05/12 08:46:49 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.900 2008/05/24 14:36:16 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -766,6 +766,14 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO(arginfo_get_cfg_var, 0)
 	ZEND_ARG_INFO(0, option_name)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_get_magic_quotes_gpc, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_get_magic_quotes_runtime, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 static
@@ -3384,6 +3392,9 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(set_time_limit,													arginfo_set_time_limit)
 	PHP_FE(get_cfg_var,														arginfo_get_cfg_var)
 
+	PHP_FE(get_magic_quotes_gpc,											NULL)
+	PHP_FE(get_magic_quotes_runtime,										NULL)
+
 	PHP_FE(import_request_variables,										arginfo_import_request_variables)
 	PHP_FE(error_log,														arginfo_error_log)
 	PHP_FE(error_get_last,													arginfo_error_get_last)
@@ -4881,6 +4892,22 @@ PHP_FUNCTION(get_cfg_var)
 	} else {
 		RETURN_FALSE;
 	}
+}
+/* }}} */
+
+/* {{{ proto mixed get_magic_quotes_runtime(void) U
+   Get the value of a PHP configuration option */
+PHP_FUNCTION(get_magic_quotes_runtime)
+{
+	RETURN_FALSE;
+}
+/* }}} */
+
+/* {{{ proto mixed get_magic_quotes_gpc(void) U
+   Get the value of a PHP configuration option */
+PHP_FUNCTION(get_magic_quotes_gpc)
+{
+	RETURN_FALSE;
 }
 /* }}} */
 

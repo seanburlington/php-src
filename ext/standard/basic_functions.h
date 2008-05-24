@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.163 2008/04/15 08:43:48 jani Exp $ */
+/* $Id: basic_functions.h,v 1.164 2008/05/24 14:36:16 pajoye Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -71,7 +71,6 @@ PHP_FUNCTION(get_current_user);
 PHP_FUNCTION(set_time_limit);
 
 PHP_FUNCTION(get_cfg_var);
-PHP_FUNCTION(set_magic_quotes_runtime);
 PHP_FUNCTION(get_magic_quotes_runtime);
 PHP_FUNCTION(get_magic_quotes_gpc);
 

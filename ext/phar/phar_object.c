@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.11 2008/05/22 06:33:09 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.12 2008/05/24 13:13:47 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -455,6 +455,10 @@ PHP_METHOD(Phar, mount)
 
 	fname = zend_get_executed_filename(TSRMLS_C);
 	fname_len = strlen(fname);
+
+#ifdef PHP_WIN32
+	phar_unixify_path_separators(fname, fname_len);
+#endif
 
 	if (fname_len > 7 && !memcmp(fname, "phar://", 7) && SUCCESS == phar_split_fname(fname, fname_len, &arch, &arch_len, &entry, &entry_len, 2, 0 TSRMLS_CC)) {
 		efree(entry);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.1.2.4 2008/02/29 09:26:01 colder Exp $ */
+/* $Id: spl_heap.c,v 1.1.2.5 2008/05/24 14:38:04 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1165,6 +1165,9 @@ PHP_MINIT_FUNCTION(spl_heap) /* {{{ */
 
 	REGISTER_SPL_SUB_CLASS_EX(SplMinHeap,           SplHeap,        spl_heap_object_new, spl_funcs_SplMinHeap);
 	REGISTER_SPL_SUB_CLASS_EX(SplMaxHeap,           SplHeap,        spl_heap_object_new, spl_funcs_SplMaxHeap);
+
+	spl_ce_SplMaxHeap->get_iterator = spl_heap_get_iterator;
+	spl_ce_SplMinHeap->get_iterator = spl_heap_get_iterator;
 
 	REGISTER_SPL_STD_CLASS_EX(SplPriorityQueue, spl_heap_object_new, spl_funcs_SplPriorityQueue);
 	memcpy(&spl_handler_SplPriorityQueue, zend_get_std_object_handlers(), sizeof(zend_object_handlers));

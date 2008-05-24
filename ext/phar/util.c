@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.58 2008/05/15 16:09:21 cellog Exp $ */
+/* $Id: util.c,v 1.59 2008/05/24 14:18:31 sfox Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -1171,9 +1171,14 @@ phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, in
 	if (!phar->manifest.arBuckets) {
 		return NULL;
 	}
+
 	if (is_dir) {
+		if (!path_len || path_len == 1) {
+			return NULL;
+		}
 		path_len--;
 	}
+
 	if (SUCCESS == zend_hash_find(&phar->manifest, path, path_len, (void**)&entry)) {
 		if (entry->is_deleted) {
 			/* entry is deleted, but has not been flushed to disk yet */

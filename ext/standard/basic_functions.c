@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.34 2008/05/12 08:47:01 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.35 2008/05/25 14:06:13 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3347,8 +3347,8 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 
 	PHP_DEP_FALIAS(magic_quotes_runtime,	set_magic_quotes_runtime,		NULL)
 	PHP_DEP_FE(set_magic_quotes_runtime,									NULL)
-	PHP_DEP_FE(get_magic_quotes_gpc,										NULL)
-	PHP_DEP_FE(get_magic_quotes_runtime,									NULL)
+	PHP_FE(get_magic_quotes_gpc,										NULL)
+	PHP_FE(get_magic_quotes_runtime,									NULL)
 
 	PHP_FE(import_request_variables,										arginfo_import_request_variables)
 	PHP_FE(error_log,														arginfo_error_log)

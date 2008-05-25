@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.130 2008/05/25 12:17:27 colder Exp $ */
+/* $Id: php_spl.c,v 1.131 2008/05/25 12:23:22 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -393,11 +393,11 @@ PHP_FUNCTION(spl_autoload_call)
 	zval_ptr_dtor(&zclass_name);
 } /* }}} */
 
-#define HT_MOVE_TAIL_TO_HEAD(ht)						\
+#define HT_MOVE_TAIL_TO_HEAD(ht)							\
 	(ht)->pListTail->pListNext = (ht)->pListHead;			\
 	(ht)->pListHead = (ht)->pListTail;						\
 	(ht)->pListTail = (ht)->pListHead->pListLast;			\
-	(ht)->pListTail->pListNext = NULL;					\
+	(ht)->pListTail->pListNext = NULL;						\
 	(ht)->pListHead->pListLast = NULL;
 
 /* {{{ proto bool spl_autoload_register([mixed autoload_function = "spl_autoload" [, throw = true [, prepend = false]]]) U

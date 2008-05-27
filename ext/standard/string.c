@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.673 2008/05/09 12:58:50 scottmac Exp $ */
+/* $Id: string.c,v 1.674 2008/05/27 10:28:25 mattwil Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -39,8 +39,6 @@
 #ifdef HAVE_LIBINTL
 # include <libintl.h> /* For LC_MESSAGES */
 #endif
-
-#include <math.h>
 
 #include "scanf.h"
 #include "zend_API.h"
@@ -7865,14 +7863,14 @@ PHP_FUNCTION(str_split)
 		RETURN_FALSE;
 	}
 
-	array_init(return_value);
+	array_init_size(return_value, ((str_len - 1) / split_length) + 1);
 
 	if (split_length >= str_len) {
 		add_next_index_zstrl(return_value, str_type, str, str_len, 1);
 		return;
 	}
 
-	n_reg_segments = floor(str_len / split_length);
+	n_reg_segments = str_len / split_length;
 	p = str.s;
 	if (str_type == IS_UNICODE) {
 		charsize = 2;

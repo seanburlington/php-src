@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.288 2008/05/27 18:23:21 pajoye Exp $ */
+/* $Id: info.c,v 1.289 2008/05/27 18:27:23 pajoye Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -51,7 +51,7 @@ ZEND_EXTERN_MODULE_GLOBALS(iconv)
 #include <unicode/uversion.h>
 
 
-f _MSC_VER >= 1500
+#if _MSC_VER >= 1500
 #	define PHP_WINAPI_COMPILER "MSVC9 (2008)"
 #elif _MSC_VER >= 1400
 #	define PHP_WINAPI_COMPILER "MSVC8 (2005)"

@@ -2,7 +2,7 @@
 extractTo
 --SKIPIF--
 <?php
-/* $Id: oo_extract.phpt,v 1.2 2006/10/31 14:27:09 pajoye Exp $ */
+/* $Id: oo_extract.phpt,v 1.3 2008/05/27 02:55:52 felipe Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -68,19 +68,6 @@ if (!file_exists($dirname . '__oo_extract_tmp/foo')) {
 rmdir_rf($dirname . '__oo_extract_tmp');
 ?>
 --EXPECTF--
-blabla laber rababer sülz
-
-bar
-
-foo
-
-
-bar
-
-bar
-
-foo
---UEXPECTF--
 blabla laber rababer sÃ¼lz
 
 bar

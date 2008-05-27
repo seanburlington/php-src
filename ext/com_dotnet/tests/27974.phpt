@@ -4,7 +4,7 @@ COM: mapping a safearray
 <?php # vim:ft=php
 if (!extension_loaded("com_dotnet")) print "skip COM/.Net support not present"; ?>
 --FILE--
-<?php // $Id: 27974.phpt,v 1.3 2006/02/04 10:59:18 rrichards Exp $
+<?php // $Id: 27974.phpt,v 1.4 2008/05/27 18:15:58 sfox Exp $
 error_reporting(E_ALL);
 
 try {
@@ -36,8 +36,8 @@ object(variant)#1 (0) {
 123
 456
 789
-string(3) "123"
-string(5) "hello"
-string(3) "789"
+unicode(3) "123"
+unicode(5) "hello"
+unicode(3) "789"
 Got BADINDEX exception OK!
 OK!

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.115 2008/05/04 21:16:22 colder Exp $ */
+/* $Id: streamsfuncs.c,v 1.116 2008/05/28 18:02:52 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1577,6 +1577,14 @@ PHP_FUNCTION(stream_encoding)
 	}
 	if (remove_write_tail) {
 		php_stream_filter_remove(stream->writefilters.tail, 1 TSRMLS_CC);
+	}
+	
+	if (encoding_len == 0) {
+		if (UG(stream_encoding) == NULL) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The stream_encoding must be defined");
+			RETURN_FALSE;
+		}
+		encoding = UG(stream_encoding);
 	}
 
 	/* UTODO: Allow overriding error handling for converters */

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.518 2008/05/04 21:16:22 colder Exp $ */
+/* $Id: file.c,v 1.519 2008/05/28 17:24:47 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1358,7 +1358,7 @@ PHPAPI PHP_FUNCTION(fwrite)
 	php_stream *stream;
 	zval *zstream, *zstring;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "rz|l", &zstream, &zstring, &write_len) == FAILURE) {
+	if (zend_parse_parameters(argc TSRMLS_CC, "rz/|l", &zstream, &zstring, &write_len) == FAILURE) {
 		RETURN_NULL();
 	}
 

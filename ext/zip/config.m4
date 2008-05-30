@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8.2.3.2.2 2008/05/21 09:27:41 pajoye Exp $
+dnl $Id: config.m4,v 1.8.2.3.2.3 2008/05/30 19:46:56 pajoye Exp $
 dnl
 
 PHP_ARG_ENABLE(zip, for zip archive read/writesupport,
@@ -95,12 +95,7 @@ yes
 	PHP_NEW_EXTENSION(zip, php_zip.c zip_stream.c $PHP_ZIP_SOURCES, $ext_shared)
 	PHP_ADD_BUILD_DIR($ext_builddir/lib, 1)
 	PHP_SUBST(ZIP_SHARED_LIBADD)
-	ifdef([PHP_INSTALL_HEADERS],
-	[
-	  dnl Sadly, this is a complete NOP for pecl extensions
-	  PHP_INSTALL_HEADERS(ext/zip/lib, [lib/zip.h lib/zipint.h lib/zip_alias.h lib/zipint_alias.h])
-	])
-	
+
 	dnl so we always include the known-good working hack.
 	PHP_ADD_MAKEFILE_FRAGMENT
 fi

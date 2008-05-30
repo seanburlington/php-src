@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.132 2008/03/30 12:27:37 felipe Exp $ */
+/* $Id: exec.c,v 1.133 2008/05/30 16:52:06 scottmac Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -307,12 +307,12 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 			case '\x0A': /* excluding these two */
 			case '\xFF':
 #ifdef PHP_WIN32
-			/* since Windows does not allow us to escape these chars, just remove them */
+			/* This is Windows specific for enviromental variables */
 			case '%':
-				cmd[y++] = ' ';
-				break;
-#endif
+				cmd[y++] = '^';
+#else
 				cmd[y++] = '\\';
+#endif
 				/* fall-through */
 			default:
 				cmd[y++] = str[x];

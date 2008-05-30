@@ -17,14 +17,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dirstream.h,v 1.5 2008/04/14 04:46:59 cellog Exp $ */
+/* $Id: dirstream.h,v 1.6 2008/05/30 22:39:32 cellog Exp $ */
 
 BEGIN_EXTERN_C()
 int phar_wrapper_mkdir(php_stream_wrapper *wrapper, char *url_from, int mode, int options, php_stream_context *context TSRMLS_DC);
 int phar_wrapper_rmdir(php_stream_wrapper *wrapper, char *url, int options, php_stream_context *context TSRMLS_DC);
 
 #ifdef PHAR_DIRSTREAM
-php_url* phar_open_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
+php_url* phar_parse_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
 
 /* directory handlers */
 static size_t phar_dir_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);

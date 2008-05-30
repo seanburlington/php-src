@@ -17,12 +17,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: stream.h,v 1.3 2008/01/28 08:52:06 cellog Exp $ */
+/* $Id: stream.h,v 1.4 2008/05/30 22:39:33 cellog Exp $ */
 
 BEGIN_EXTERN_C()
 int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_data *idata, php_uint32 crc32, char **error TSRMLS_DC);
 
-php_url* phar_open_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
+php_url* phar_parse_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
 void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC);
 
 static php_stream* phar_wrapper_open_url(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);

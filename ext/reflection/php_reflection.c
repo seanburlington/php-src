@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.295 2008/02/18 14:31:01 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.296 2008/06/01 03:13:54 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4202,7 +4202,7 @@ ZEND_METHOD(reflection_property, getDeclaringClass)
 	prop_name_len = USTR_LEN(prop_name);
 	ce = tmp_ce = ref->ce;
 	while (tmp_ce && zend_u_hash_find(&tmp_ce->properties_info, UG(unicode)?IS_UNICODE:IS_STRING, prop_name, prop_name_len + 1, (void **) &tmp_info) == SUCCESS) {
-		if (tmp_info->flags & ZEND_ACC_PRIVATE) {
+		if (tmp_info->flags & ZEND_ACC_PRIVATE || tmp_info->flags & ZEND_ACC_SHADOW) {
 			/* it's a private property, so it can't be inherited */
 			break;
 		}
@@ -5060,7 +5060,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.295 2008/02/18 14:31:01 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.296 2008/06/01 03:13:54 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.14 2008/06/01 04:21:26 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.15 2008/06/01 17:14:48 helly Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -2685,9 +2685,8 @@ PHP_METHOD(Phar, setStub)
 /* {{{ proto array Phar::setSignatureAlgorithm(int sigtype[, string privatekey])
  * Sets the signature algorithm for a phar and applies it. The signature
  * algorithm must be one of Phar::MD5, Phar::SHA1, Phar::SHA256,
- * Phar::SHA512, or Phar::PGP (PGP is not yet supported and falls back to
- * SHA-1). Note that zip- and tar- based phar archives cannot support
- * signatures.
+ * Phar::SHA512, or Phar::OPENSSL. Note that zip- and tar- based phar archives
+ * cannot support signatures.
  */
 PHP_METHOD(Phar, setSignatureAlgorithm)
 {

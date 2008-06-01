@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.7.2.13.2.5 2008/03/18 21:42:50 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.13.2.6 2008/06/01 16:08:52 scottmac Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -438,7 +438,9 @@ static time_t php_apache_get_request_time(TSRMLS_D)
  */
 static void sapi_apache_child_terminate(TSRMLS_D)
 {
+#ifndef MULTITHREAD
 	ap_child_terminate((request_rec *)SG(server_context));
+#endif
 }
 /* }}} */
 

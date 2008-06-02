@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.32 2008/05/30 10:55:14 mattwil Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.33 2008/06/02 10:27:55 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2111,7 +2111,7 @@ PHP_FUNCTION(array_splice)
 	/* Don't create the array of removed elements if it's not going
 	 * to be used; e.g. only removing and/or replacing elements */
 	if (return_value_used) {
-		int size;
+		int size = 0;
 
 		/* Clamp the offset.. */
 		if (offset > num_in) {

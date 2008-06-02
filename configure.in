@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.18 2008/05/31 20:02:57 helly Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.19 2008/06/02 14:13:04 jani Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1001,10 +1001,6 @@ if test "$PHP_PEAR" != "no"; then
   dnl
   dnl PEAR dependancies
   dnl
-  if test "$PHP_PCRE_REGEX" = "no"; then
-    pear_error_msg="$pear_error_msg 
-                    PEAR requires PCRE to be enabled.    Add --with-pcre-regex to the configure line. (or --without-pear)"
-  fi
   if test "$PHP_XML" = "no"; then
     pear_error_msg="$pear_error_msg 
                     PEAR requires XML to be enabled.     Add --enable-xml to the configure line. (or --without-pear)"

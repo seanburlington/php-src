@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.161.2.3.2.11.2.9 2008/06/02 00:24:19 pajoye Exp $ */
+/* $Id: ldap.c,v 1.161.2.3.2.11.2.10 2008/06/02 06:48:35 pajoye Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -44,14 +44,12 @@
 #include "php_ldap.h"
 
 #ifdef PHP_WIN32
-/* TODO: check if this file is installed on *nix as well */
-#include <openldap/portable.h>
 #include <string.h>
 #if HAVE_NSLDAP
 #include <winsock2.h>
 #endif
-#ifndef _strdup
-#define strdup _strdup
+#ifndef strdup
+#  define strdup _strdup
 #endif
 #undef WINDOWS
 #undef strcasecmp
@@ -240,7 +238,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.9 2008/06/02 00:24:19 pajoye Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.10 2008/06/02 06:48:35 pajoye Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -250,8 +248,9 @@ PHP_MINFO_FUNCTION(ldap)
 	php_info_print_table_row(2, "Total Links", tmp);
 
 	
-#ifdef OPENLDAP_VERSION
-	snprintf(tmp, 31, "%s", OPENLDAP_VERSION);
+#ifdef LDAP_VENDOR_VERSION_MAJOR
+	snprintf(tmp, 31, "%d.%d.%d", LDAP_VENDOR_VERSION_MAJOR, 
+				LDAP_VENDOR_VERSION_MINOR, LDAP_VENDOR_VERSION_PATCH);
 	php_info_print_table_row(2, "Version", tmp);
 #endif
 

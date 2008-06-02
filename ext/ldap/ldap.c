@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.161.2.3.2.11.2.11 2008/06/02 08:46:41 jani Exp $ */
+/* $Id: ldap.c,v 1.161.2.3.2.11.2.12 2008/06/02 10:25:54 pajoye Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -49,7 +49,9 @@
 #if HAVE_NSLDAP
 #include <winsock2.h>
 #endif
+#ifndef strdup
 #define strdup _strdup
+#endif
 #undef WINDOWS
 #undef strcasecmp
 #undef strncasecmp
@@ -237,7 +239,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.11 2008/06/02 08:46:41 jani Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.12 2008/06/02 10:25:54 pajoye Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -254,10 +256,14 @@ PHP_MINFO_FUNCTION(ldap)
 #ifdef LDAP_VENDOR_NAME
 	php_info_print_table_row(2, "Vendor Name", LDAP_VENDOR_NAME);
 #endif
-
+	
 #ifdef LDAP_VENDOR_VERSION
 	snprintf(tmp, 31, "%d", LDAP_VENDOR_VERSION);
 	php_info_print_table_row(2, "Vendor Version", tmp);
+
+	snprintf(tmp, 31, "%d.%d.%d", LDAP_VENDOR_VERSION_MAJOR, 
+				LDAP_VENDOR_VERSION_MINOR, LDAP_VENDOR_VERSION_PATCH);
+	php_info_print_table_row(2, "Vendor Version String", tmp);
 #endif
 
 #if HAVE_NSLDAP

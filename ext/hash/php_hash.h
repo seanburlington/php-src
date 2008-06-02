@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.7.2.3.2.3 2008/04/21 15:37:46 tony2001 Exp $ */
+/* $Id: php_hash.h,v 1.13.2.7.2.3.2.4 2008/06/02 12:24:22 scottmac Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -58,6 +58,7 @@ extern const php_hash_ops php_hash_md2_ops;
 extern const php_hash_ops php_hash_md4_ops;
 extern const php_hash_ops php_hash_md5_ops;
 extern const php_hash_ops php_hash_sha1_ops;
+extern const php_hash_ops php_hash_sha224_ops;
 extern const php_hash_ops php_hash_sha256_ops;
 extern const php_hash_ops php_hash_sha384_ops;
 extern const php_hash_ops php_hash_sha512_ops;

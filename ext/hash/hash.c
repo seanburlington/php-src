@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.5.2.7.2.4 2008/04/21 15:37:45 tony2001 Exp $ */
+/* $Id: hash.c,v 1.18.2.5.2.7.2.5 2008/06/02 12:24:22 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -574,6 +574,7 @@ PHP_MINIT_FUNCTION(hash)
 	php_hash_register_algo("md4",			&php_hash_md4_ops);
 	php_hash_register_algo("md5",			&php_hash_md5_ops);
 	php_hash_register_algo("sha1",			&php_hash_sha1_ops);
+	php_hash_register_algo("sha224",		&php_hash_sha224_ops);
 	php_hash_register_algo("sha256",		&php_hash_sha256_ops);
 	php_hash_register_algo("sha384",		&php_hash_sha384_ops);
 	php_hash_register_algo("sha512",		&php_hash_sha512_ops);

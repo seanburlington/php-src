@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.5.2.7.2.5 2008/06/02 12:24:22 scottmac Exp $ */
+/* $Id: hash.c,v 1.18.2.5.2.7.2.6 2008/06/03 17:25:42 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -590,6 +590,7 @@ PHP_MINIT_FUNCTION(hash)
 	php_hash_register_algo("tiger160,4",	&php_hash_4tiger160_ops);
 	php_hash_register_algo("tiger192,4",	&php_hash_4tiger192_ops);
 	php_hash_register_algo("snefru",		&php_hash_snefru_ops);
+	php_hash_register_algo("snefru256",		&php_hash_snefru_ops);
 	php_hash_register_algo("gost",			&php_hash_gost_ops);
 	php_hash_register_algo("adler32",		&php_hash_adler32_ops);
 	php_hash_register_algo("crc32",			&php_hash_crc32_ops);

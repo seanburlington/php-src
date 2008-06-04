@@ -209,13 +209,18 @@ class PharCommand extends CLICommand
     {
         if (($arg == '0' || $arg == '1') && !file_exists($arg)) {
             $found = NULL;
-            foreach(split("\n", `pear list-files PHP_Archive`) as $ent) {
-                $matches = NULL;
-                if (preg_match(",^php[ \t]+([^ \t].*pear[\\\\/]PHP[\\\\/]Archive.php)$,", $ent, $matches)) {
-                    $found = $matches[1];
-                    break;
-                }
-            }
+        	$apiver = `pear -q info PHP_Archive 2>/dev/null|grep 'API Version'`;
+        	$apiver = trim(substr($apiver, strlen('API Version')));
+        	if ($apiver) {
+        		self::notice("Pear package PHP_Archive found: API Version: $apiver.\n");
+	            foreach(split("\n", `pear list-files PHP_Archive`) as $ent) {
+	                $matches = NULL;
+	                if (preg_match(",^php[ \t]+([^ \t].*pear[\\\\/]PHP[\\\\/]Archive.php)$,", $ent, $matches)) {
+	                    $found = $matches[1];
+	                    break;
+	                }
+	            }
+	        }
             if (!isset($found)) {
                 $msg = "Pear package PHP_Archive or Archive.php class file not found.\n";
                 if ($arg == '0') {
@@ -1534,7 +1539,7 @@ class PharCommand extends CLICommand
     	$use_ext = extension_loaded('phar');
     	$version = array(
     		'PHP Version' => phpversion(),
-    		'phar.phar version' => '$Revision: 1.49.2.6 $',
+    		'phar.phar version' => '$Revision: 1.49.2.7 $',
     		'Phar EXT version' => $use_ext ? phpversion('phar') : 'Not available',
 			'Phar API version' => Phar::apiVersion(),
 			'Phar-based phar archives' => true,

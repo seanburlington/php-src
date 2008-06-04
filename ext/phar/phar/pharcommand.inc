@@ -616,7 +616,7 @@ class PharCommand extends CLICommand
 
         try {
             foreach($dir as $file) {
-                if (empty($stub) || $file->getRealPath() != $stub->getRealPath()) {
+                if ((empty($stub) || $file->getRealPath() != $stub->getRealPath()) && !is_dir($file)) {
                     self::phar_add_file($phar, $level, $dir->getSubPathName(), $file, $compress, $noloader);
                 }
             }
@@ -1539,7 +1539,7 @@ class PharCommand extends CLICommand
     	$use_ext = extension_loaded('phar');
     	$version = array(
     		'PHP Version' => phpversion(),
-    		'phar.phar version' => '$Revision: 1.49.2.7 $',
+    		'phar.phar version' => '$Revision: 1.49.2.8 $',
     		'Phar EXT version' => $use_ext ? phpversion('phar') : 'Not available',
 			'Phar API version' => Phar::apiVersion(),
 			'Phar-based phar archives' => true,

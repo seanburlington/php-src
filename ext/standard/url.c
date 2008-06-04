@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.107 2007/12/31 07:12:16 sebastian Exp $ */
+/* $Id: url.c,v 1.108 2008/06/04 19:34:45 rrichards Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -647,7 +647,7 @@ PHPAPI char *php_raw_url_encode(char const *s, int len, int *new_length)
 		if ((str[y] < '0' && str[y] != '-' && str[y] != '.') ||
 			(str[y] < 'A' && str[y] > '9') ||
 			(str[y] > 'Z' && str[y] < 'a' && str[y] != '_') ||
-			(str[y] > 'z')) {
+			(str[y] > 'z' && str[y] != '~')) {
 			str[y++] = '%';
 			str[y++] = hexchars[(unsigned char) s[x] >> 4];
 			str[y] = hexchars[(unsigned char) s[x] & 15];

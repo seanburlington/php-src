@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.7.2.6.2.14.2.7 2008/04/18 00:05:27 sixd Exp $ */
+/* $Id: oci8_lob.c,v 1.7.2.6.2.14.2.8 2008/06/05 23:43:10 sixd Exp $ */
 
 
 
@@ -677,11 +677,9 @@ void php_oci_lob_free (php_oci_descriptor *descriptor TSRMLS_DC)
 		php_oci_lob_flush(descriptor, OCI_LOB_BUFFER_FREE TSRMLS_CC);
 	}
 
-#ifdef HAVE_OCI8_TEMP_LOB
 	if (descriptor->type == OCI_DTYPE_LOB) {
 		php_oci_temp_lob_close(descriptor TSRMLS_CC);
 	}
-#endif
 
 	PHP_OCI_CALL(OCIDescriptorFree, (descriptor->descriptor, descriptor->type));
 

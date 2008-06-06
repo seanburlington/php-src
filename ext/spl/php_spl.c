@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.131 2008/05/25 12:23:22 colder Exp $ */
+/* $Id: php_spl.c,v 1.132 2008/06/06 23:53:10 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,7 @@
 #include "spl_observer.h"
 #include "spl_dllist.h"
 #include "spl_heap.h"
+#include "spl_fastarray.h"
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
 #include "ext/standard/md5.h"
@@ -156,6 +157,7 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(SplMinHeap, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplMaxHeap, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplPriorityQueue, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplFastArray, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(BadFunctionCallException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(BadMethodCallException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(CachingIterator, z_list, sub, allow, ce_flags); \
@@ -800,6 +802,7 @@ PHP_MINIT_FUNCTION(spl)
 	PHP_MINIT(spl_sxe)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_dllist)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_heap)(INIT_FUNC_ARGS_PASSTHRU);
+	PHP_MINIT(spl_fastarray)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(spl_observer)(INIT_FUNC_ARGS_PASSTHRU);
 
 	return SUCCESS;

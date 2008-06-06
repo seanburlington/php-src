@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_engine.h,v 1.19.2.3.2.1.2.1 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: spl_engine.h,v 1.19.2.3.2.1.2.2 2008/06/06 23:53:43 colder Exp $ */
 
 #ifndef SPL_ENGINE_H
 #define SPL_ENGINE_H
@@ -37,6 +37,8 @@ static inline zend_class_entry *spl_get_class_entry(zval *obj TSRMLS_DC)
 /* }}} */
 
 PHPAPI void spl_instantiate(zend_class_entry *pce, zval **object, int alloc TSRMLS_DC);
+
+PHPAPI long spl_offset_convert_to_long(zval *offset TSRMLS_DC);
 
 /* {{{ spl_instantiate_arg_ex1 */
 static inline int spl_instantiate_arg_ex1(zend_class_entry *pce, zval **retval, int alloc, zval *arg1 TSRMLS_DC)

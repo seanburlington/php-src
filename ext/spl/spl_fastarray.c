@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: spl_fastarray.c,v 1.2 2008/06/07 01:46:27 colder Exp $ */
+/* $Id: spl_fastarray.c,v 1.3 2008/06/07 12:46:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -320,6 +320,12 @@ static zval *spl_fastarray_object_read_dimension(zval *object, zval *offset, int
 static inline void spl_fastarray_object_write_dimension_helper(spl_fastarray_object *intern, zval *offset, zval *value TSRMLS_DC) /* {{{ */
 {
 	long index;
+
+	if (!offset) {
+		/* '$array[] = value' syntax is not supported */
+		zend_throw_exception(spl_ce_RuntimeException, "Index invalid or out of range", 0 TSRMLS_CC);
+		return;
+	}
 
 	index = spl_offset_convert_to_long(offset TSRMLS_CC);
 

@@ -13,10 +13,11 @@
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
   | Author: Antony Dovgal <tony@daylessday.org>                          |
+  |         Etienne Kneuss <colder@php.net>                              |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: spl_fastarray.h,v 1.1.2.2 2008/06/06 23:53:43 colder Exp $ */
+/* $Id: spl_fastarray.h,v 1.1.2.3 2008/06/07 08:05:55 tony2001 Exp $ */
 
 #ifndef SPL_FASTARRAY_H
 #define SPL_FASTARRAY_H

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.188 2008/06/07 20:30:30 hnangelo Exp $ */
+/* $Id: php_date.c,v 1.189 2008/06/07 22:41:02 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2499,6 +2499,7 @@ void zval_from_error_container(zval *z, timelib_error_container *error)
 {
 	int   i;
 	zval *element;
+	TSRMLS_FETCH();
 
 	add_ascii_assoc_long(z, "warning_count", error->warning_count);
 	MAKE_STD_ZVAL(element);

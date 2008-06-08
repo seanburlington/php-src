@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.163 2008/04/28 22:40:10 cellog Exp $ */
+/* $Id: streams.c,v 1.164 2008/06/08 18:21:59 stas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -509,7 +509,7 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 							stream->readbuflen += bucket->buflen;
 							stream->readbuf.v = perealloc(stream->readbuf.v, PS_ULEN(stream->readbuf_type == IS_UNICODE, stream->readbuflen), stream->is_persistent);
 						}
-						memcpy(stream->readbuf.s + stream->writepos, bucket->buf.s, PS_ULEN(stream->readbuf_type == IS_UNICODE, bucket->buflen));
+						memcpy(stream->readbuf.s + PS_ULEN(stream->readbuf_type == IS_UNICODE, stream->writepos), bucket->buf.s, PS_ULEN(stream->readbuf_type == IS_UNICODE, bucket->buflen));
 						stream->writepos += bucket->buflen;
 
 						php_stream_bucket_unlink(bucket TSRMLS_CC);

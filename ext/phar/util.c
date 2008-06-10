@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.3 2008/05/22 06:33:09 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.4 2008/06/10 17:58:09 cellog Exp $ */
 
 #include "phar_internal.h"
 #if !defined(PHP_VERSION_ID) || PHP_VERSION_ID < 50300
@@ -656,6 +656,7 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 		if (error) {
 			spprintf(error, 0, "phar error: unable to create temporary file");
 		}
+		efree(ret);
 		return NULL;
 	}
 	etemp.fp_refcount = 1;
@@ -681,6 +682,7 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 		etemp.tar_type = TAR_FILE;
 	}
 	if (FAILURE == zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry)) {
+		efree(ret);
 		if (error) {
 			spprintf(error, 0, "phar error: unable to add new entry \"%s\" to phar \"%s\"", etemp.filename, phar->fname);
 		}
@@ -690,6 +692,7 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 	if (!entry) {
 		php_stream_close(etemp.fp);
 		efree(etemp.filename);
+		efree(ret);
 		return NULL;
 	}
 

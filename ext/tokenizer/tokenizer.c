@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.47 2008/03/26 14:46:17 scottmac Exp $ */
+/* $Id: tokenizer.c,v 1.48 2008/06/11 07:45:26 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -170,6 +170,10 @@ PHP_FUNCTION(token_get_all)
 
 	tokenize(return_value TSRMLS_CC);
 	
+	while (!zend_stack_is_empty(&LANG_SCNG(state_stack))) {
+		zend_stack_del_top(&LANG_SCNG(state_stack));
+	}
+
 	zend_restore_lexical_state(&original_lex_state TSRMLS_CC);
 	zval_dtor(&source_z);
 }

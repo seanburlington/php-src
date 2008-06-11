@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.42 2008/04/29 14:42:38 scottmac Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.43 2008/06/11 07:46:43 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1508,6 +1508,15 @@ PHP_FUNCTION(session_set_save_handler)
 	}
 
 	zend_alter_ini_entry("session.save_handler", sizeof("session.save_handler"), "user", sizeof("user")-1, PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
+
+	mdata = PS(mod_data);
+
+	if (mdata) {
+		for (i = 0; i < 6; i++) {
+			zval_ptr_dtor(&mdata->names[i]);
+		}
+		efree(mdata);
+	}
 
 	mdata = emalloc(sizeof(*mdata));
 

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.10 2008/04/17 11:08:13 felipe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.11 2008/06/11 02:32:22 philip Exp $ */
 
 #define IMAP41
 
@@ -1457,7 +1457,7 @@ PHP_FUNCTION(imap_list_full)
 }
 /* }}} */
 
-/* {{{ proto array imap_scan(resource stream_id, string ref, string pattern, string content)
+/* {{{ proto array imap_listscan(resource stream_id, string ref, string pattern, string content)
    Read list of mailboxes containing a certain string */
 PHP_FUNCTION(imap_listscan)
 {

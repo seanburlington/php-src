@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.9 2008/04/28 22:39:54 cellog Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.10 2008/06/11 09:01:56 dmitry Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1724,7 +1724,7 @@ PHPAPI php_stream *_php_stream_opendir(char *path, int options,
 
 		if (stream) {
 			stream->wrapper = wrapper;
-			stream->flags |= PHP_STREAM_FLAG_NO_BUFFER;
+			stream->flags |= PHP_STREAM_FLAG_NO_BUFFER | PHP_STREAM_FLAG_IS_DIR;
 		}
 	} else if (wrapper) {
 		php_stream_wrapper_log_error(wrapper, options ^ REPORT_ERRORS TSRMLS_CC, "not implemented");

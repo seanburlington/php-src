@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.103.2.1.2.4.2.3 2008/03/27 10:33:40 dmitry Exp $ */
+/* $Id: php_streams.h,v 1.103.2.1.2.4.2.4 2008/06/11 09:01:56 dmitry Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -181,6 +181,8 @@ struct _php_stream_wrapper	{
 
 #define PHP_STREAM_FLAG_NO_CLOSE					32
 	
+#define PHP_STREAM_FLAG_IS_DIR						64
+
 struct _php_stream  {
 	php_stream_ops *ops;
 	void *abstract;  		/* convenience pointer for abstraction */

@@ -1,9 +1,9 @@
 --TEST--
-Phar: phpinfo display 3
+Phar: phpinfo display 2
 --SKIPIF--
 <?php if (!extension_loaded("phar")) die("skip"); ?>
-<?php if (extension_loaded("zlib")) die("skip zlib loaded"); ?>
-<?php if (extension_loaded("bz2")) die("skip bz2 loaded"); ?>
+<?php if (!extension_loaded("zlib")) die("skip zlib not loaded"); ?>
+<?php if (!extension_loaded("bz2")) die("skip bz2 not loaded"); ?>
 --INI--
 phar.readonly=1
 phar.require_hash=1
@@ -20,12 +20,12 @@ Phar
 Phar: PHP Archive support => enabled
 Phar EXT version => %s
 Phar API version => 1.1.1
-CVS revision => %cRevision: %s $
+CVS revision => %sRevision: %s $
 Phar-based phar archives => enabled
 Tar-based phar archives => enabled
 ZIP-based phar archives => enabled
-gzip compression => disabled (install ext/zlib)
-bzip2 compression => disabled (install pecl/bz2)
+gzip compression => enabled
+bzip2 compression => enabled
 
 
 Phar based on pear/PHP_Archive, original concept by Davey Shafik.

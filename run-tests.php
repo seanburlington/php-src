@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.355 2008/06/12 10:38:49 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.356 2008/06/12 12:02:01 sfox Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -445,7 +445,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.355 $' . "\n";
+					echo '$Revision: 1.356 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1783,7 +1783,7 @@ COMMAND $cmd
 	if (!$passed) {
 
 		// write .exp
-		if (strpos($log_format, 'E') !== false && file_put_contents($exp_filename, $wanted) === false) {
+		if (strpos($log_format, 'E') !== false && file_put_contents($exp_filename, (binary)$wanted, FILE_BINARY) === false) {
 			error("Cannot create expected test output - $exp_filename");
 		}
 
@@ -1796,7 +1796,7 @@ COMMAND $cmd
 		$diff = generate_diff($wanted, $wanted_re, $output);
 		show_file_block('diff', $diff);
 
-		if (strpos($log_format, 'D') !== false && file_put_contents($diff_filename, $diff) === false) {
+		if (strpos($log_format, 'D') !== false && file_put_contents($diff_filename, (binary)$diff, FILE_BINARY) === false) {
 			error("Cannot create test diff - $diff_filename");
 		}
 
@@ -2008,10 +2008,10 @@ function generate_diff($wanted, $wanted_re, $output)
 	$diff = generate_array_diff($r, $o, !is_null($wanted_re), $w);
 
 	if (is_binary($output)) {
-		return implode(b"\r\n", $diff);
+		return implode(b"\n", $diff);
 	}
 
-	return implode("\r\n", $diff);
+	return implode("\n", $diff);
 }
 
 function error($message)

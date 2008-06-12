@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+putenv('TEST_PHP_EXECUTABLE=C:/sandbox/php6/Debug_TS/php.exe');
 /*
    +----------------------------------------------------------------------+
    | PHP Version 6                                                        |
@@ -24,7 +25,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.353 2008/06/11 17:41:13 sfox Exp $ */
+/* $Id: run-tests.php,v 1.354 2008/06/12 09:38:50 sfox Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -153,7 +154,7 @@ if (getenv('TEST_PHP_DETAILED')) {
 
 // Check whether user test dirs are requested.
 if (getenv('TEST_PHP_USER')) {
-	$user_tests = explode (', ', getenv('TEST_PHP_USER'));
+	$user_tests = explode (',', getenv('TEST_PHP_USER'));
 } else {
 	$user_tests = array();
 }
@@ -445,11 +446,10 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.353 $' . "\n";
+					echo '$Revision: 1.354 $' . "\n";
 					exit(1);
 				default:
-					echo "Illegal switch specified!\n";
-					//break
+					echo "Illegal switch '$switch' specified!\n";
 				case 'h':
 				case '-help':
 				case '--help':
@@ -900,12 +900,12 @@ function save_text($filename, $text, $filename_copy = null)
 	global $DETAILED;
 
 	if ($filename_copy && $filename_copy != $filename) {
-		if (@file_put_contents($filename_copy, $text) === false) {
+		if (@file_put_contents($filename_copy, $text, FILE_BINARY) === false) {
 			error("Cannot open file '" . $filename_copy . "' (save_text)");
 		}
 	}
 
-	if (@file_put_contents($filename, $text) === false) {
+	if (@file_put_contents($filename, $text, FILE_BINARY) === false) {
 		error("Cannot open file '" . $filename . "' (save_text)");
 	}
 
@@ -1725,7 +1725,7 @@ COMMAND $cmd
 
 		$wanted = trim($section_text['EXPECT']);
 
-		if (is_binary($wanted)) {
+		if (is_binary($output)) {
 			$wanted = preg_replace(b'/\r\n/', b"\n", (binary)$wanted);
 		} else {
 			$wanted = preg_replace('/\r\n/', "\n", $wanted);

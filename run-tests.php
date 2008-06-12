@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.356 2008/06/12 12:02:01 sfox Exp $ */
+/* $Id: run-tests.php,v 1.357 2008/06/12 21:59:25 hnangelo Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -218,7 +218,7 @@ More .INIs  : " , (function_exists(\'php_ini_scanned_files\') ? str_replace("\n"
 
 	// load list of enabled extensions
 	save_text($info_file, '<?php echo join(",", get_loaded_extensions()); ?>');
-	$exts_to_test = explode(', ',`$php $pass_options $info_params "$info_file"`);
+	$exts_to_test = explode(',',`$php $pass_options $info_params "$info_file"`);
 	// check for extensions that need special handling and regenerate
 	$info_params_ex = array(
 		'session' => array('session.auto_start=0'),
@@ -445,7 +445,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.356 $' . "\n";
+					echo '$Revision: 1.357 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

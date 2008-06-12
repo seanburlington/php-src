@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-putenv('TEST_PHP_EXECUTABLE=C:/sandbox/php6/Debug_TS/php.exe');
 /*
    +----------------------------------------------------------------------+
    | PHP Version 6                                                        |
@@ -25,7 +24,7 @@ putenv('TEST_PHP_EXECUTABLE=C:/sandbox/php6/Debug_TS/php.exe');
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.354 2008/06/12 09:38:50 sfox Exp $ */
+/* $Id: run-tests.php,v 1.355 2008/06/12 10:38:49 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -446,7 +445,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.354 $' . "\n";
+					echo '$Revision: 1.355 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

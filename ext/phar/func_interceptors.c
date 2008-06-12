@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.1 2008/05/14 21:29:50 sfox Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.2 2008/06/12 04:57:24 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -102,7 +102,7 @@ PHAR_FUNC(phar_file_get_contents) /* {{{ */
 	}
 	/* Parse arguments */
 	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "s|br!ll", &filename, &filename_len, &use_include_path, &zcontext, &offset, &maxlen) == FAILURE) {
-		return;
+		goto skip_phar;
 	}
 	if (use_include_path || (!IS_ABSOLUTE_PATH(filename, filename_len) && !strstr(filename, "://"))) {
 		char *arch, *entry, *fname;

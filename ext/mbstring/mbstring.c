@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.276 2008/02/16 08:49:07 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.277 2008/06/13 14:47:48 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1029,9 +1029,14 @@ PHP_RSHUTDOWN_FUNCTION(mbstring)
  	/*  clear overloaded function. */
 	if (MBSTRG(func_overload)){
 		p = &(mb_ovld[0]);
-		while (p->type > 0 && zend_hash_find(EG(function_table), p->save_func, strlen(p->save_func)+1 , (void **)&orig) == SUCCESS) {
-			zend_hash_update(EG(function_table), p->orig_func, strlen(p->orig_func)+1, orig, sizeof(zend_function), NULL);
-			zend_hash_del(EG(function_table), p->save_func, strlen(p->save_func)+1);
+		while (p->type > 0) {
+			if ((MBSTRG(func_overload) & p->type) == p->type && 
+				zend_hash_find(EG(function_table), p->save_func,
+							   strlen(p->save_func)+1, (void **)&orig) == SUCCESS) {
+				
+				zend_hash_update(EG(function_table), p->orig_func, strlen(p->orig_func)+1, orig, sizeof(zend_function), NULL);
+				zend_hash_del(EG(function_table), p->save_func, strlen(p->save_func)+1);
+			}
 			p++;
 		}
 	}

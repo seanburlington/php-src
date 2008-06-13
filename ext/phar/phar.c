@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.13 2008/06/13 06:34:41 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.14 2008/06/13 13:06:46 felipe Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -610,6 +610,8 @@ static int phar_hex_str(const char *digest, size_t digest_len, char ** signature
 {
 	int pos = -1;
 	size_t len = 0;
+	
+	TSRMLS_FETCH();
 
 	*signature = (char*)safe_pemalloc(digest_len, 2, 1, PHAR_G(persist));
 
@@ -3533,7 +3535,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.13 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.14 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

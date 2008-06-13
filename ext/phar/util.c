@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.5 2008/06/13 06:34:41 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.6 2008/06/13 13:06:46 felipe Exp $ */
 
 #include "phar_internal.h"
 #ifdef PHAR_HAVE_OPENSSL
@@ -1344,6 +1344,8 @@ static int phar_hex_str(const char *digest, size_t digest_len, char ** signature
 {
 	int pos = -1;
 	size_t len = 0;
+	
+	TSRMLS_FETCH();
 
 	*signature = (char*)safe_pemalloc(digest_len, 2, 1, PHAR_G(persist));
 

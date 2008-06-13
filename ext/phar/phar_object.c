@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.18 2008/06/13 20:15:19 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.19 2008/06/13 22:07:44 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -2705,11 +2705,6 @@ PHP_METHOD(Phar, setSignatureAlgorithm)
 	if (PHAR_G(readonly) && !phar_obj->arc.archive->is_data) {
 		zend_throw_exception_ex(spl_ce_UnexpectedValueException, 0 TSRMLS_CC,
 			"Cannot set signature algorithm, phar is read-only");
-		return;
-	}
-	if (phar_obj->arc.archive->is_tar) {
-		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC,
-			"Cannot set signature algorithm, not possible with tar-based phar archives");
 		return;
 	}
 	if (phar_obj->arc.archive->is_zip) {

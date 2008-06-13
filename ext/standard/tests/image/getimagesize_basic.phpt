@@ -9,13 +9,13 @@ Test getimagesize() function : basic functionality
 
 $imagetype_filenames = array(
       // GIF file
-      "GIF image file" => "200x100.gif",
+      "GIF image file" => "200x100.GIF",
 
       //JPEG file
-      "JPEG image file" => "200x100.jpg",
+      "JPEG image file" => "200x100.JPG",
 
       //PNG file
-      "PNG image file" => "200x100.png",
+      "PNG image file" => "200x100.PNG",
     
       //SWF file
       "SWF image file" => "200x100.swf",
@@ -24,7 +24,7 @@ $imagetype_filenames = array(
       "BMP image file" => "200x100.bmp",
       
       //TIFF intel byte order
-      "TIFF intel byte order image file" => "200x100.tif",
+      "TIFF intel byte order image file" => "200x100.TIF",
 
       //JPC file
       "JPC image file" => "test1pix.jpc",
@@ -49,7 +49,7 @@ foreach($imagetype_filenames as $key => $filename) {
 --EXPECTF--
 *** Testing getimagesize() : basic functionality ***
 
--- GIF image file (200x100.gif) --
+-- GIF image file (200x100.GIF) --
 array(7) {
   [0]=>
   int(200)
@@ -69,7 +69,7 @@ array(7) {
 array(0) {
 }
 
--- JPEG image file (200x100.jpg) --
+-- JPEG image file (200x100.JPG) --
 array(7) {
   [0]=>
   int(200)
@@ -88,10 +88,10 @@ array(7) {
 }
 array(1) {
   ["APP0"]=>
-  string(%d)%s
+  string(14)%sJFIF%s
 }
 
--- PNG image file (200x100.png) --
+-- PNG image file (200x100.PNG) --
 array(6) {
   [0]=>
   int(200)
@@ -143,7 +143,7 @@ array(6) {
 array(0) {
 }
 
--- TIFF intel byte order image file (200x100.tif) --
+-- TIFF intel byte order image file (200x100.TIF) --
 array(5) {
   [0]=>
   int(200)

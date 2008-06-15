@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.9 2008/06/15 18:15:48 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.10 2008/06/15 22:51:46 cellog Exp $ */
 
 #include "phar_internal.h"
 #ifdef PHAR_HAVE_OPENSSL
@@ -702,6 +702,8 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 	}
 	if (FAILURE == zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry)) {
 		efree(ret);
+		php_stream_close(etemp.fp);
+		efree(etemp.filename);
 		if (error) {
 			spprintf(error, 0, "phar error: unable to add new entry \"%s\" to phar \"%s\"", etemp.filename, phar->fname);
 		}

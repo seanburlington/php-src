@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.112 2008/05/07 15:45:02 davidc Exp $ */
+/* $Id: php_sdl.c,v 1.113 2008/06/18 07:24:14 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -721,12 +721,12 @@ static sdlPtr load_wsdl(char *struri TSRMLS_DC)
 					}
 				  trav2 = trav2->next;
 				}
-				if (!address) {
+				if (!address || tmpbinding->bindingType == BINDING_HTTP) {
 					if (has_soap_port || trav->next || i < n-1) {
 						efree(tmpbinding);
 						trav = trav->next;
 						continue;
-					} else {
+					} else if (!address) {
 						soap_error0(E_ERROR, "Parsing WSDL: No address associated with <port>");
 					}
 				}

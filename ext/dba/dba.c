@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.125 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: dba.c,v 1.126 2008/06/19 22:39:03 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -360,7 +360,7 @@ static dba_handler handler[] = {
 	DBA_HND(db3, DBA_LOCK_ALL) /* No lock in lib */
 #endif
 #if DBA_DB4
-	DBA_HND(db4, DBA_LOCK_EXT) /* Locking done in library itself */
+	DBA_HND(db4, DBA_LOCK_ALL) /* No lock in lib */
 #endif
 #if DBA_INIFILE
 	DBA_HND(inifile, DBA_STREAM_OPEN|DBA_LOCK_ALL|DBA_CAST_AS_FD) /* No lock in lib */

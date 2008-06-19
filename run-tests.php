@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-putenv('TEST_PHP_EXECUTABLE=C:/sandbox/php5/Debug_TS/php.exe');
 /*
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
@@ -25,7 +24,7 @@ putenv('TEST_PHP_EXECUTABLE=C:/sandbox/php5/Debug_TS/php.exe');
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.23 2008/06/19 21:08:13 sfox Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.24 2008/06/19 21:08:56 sfox Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -448,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.23 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.24 $'."\n";
 					exit(1);
 
 				case 'u':

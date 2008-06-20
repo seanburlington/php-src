@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.24 2008/06/20 05:42:58 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.25 2008/06/20 12:21:32 sfox Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -115,7 +115,7 @@ static void phar_split_cache_list(TSRMLS_D)
 
 	/* fake request startup */
 	PHAR_GLOBALS->request_init = 1;
-	if (zend_hash_init(&EG(regular_list), 0, NULL, list_entry_destructor, 0) == SUCCESS) {
+	if (zend_hash_init(&EG(regular_list), 0, NULL, NULL, 0) == SUCCESS) {
 		EG(regular_list).nNextFreeElement=1;	/* we don't want resource id 0 */
 	}
 	PHAR_G(has_bz2) = zend_hash_exists(&module_registry, "bz2", sizeof("bz2"));
@@ -3406,7 +3406,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.24 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.25 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

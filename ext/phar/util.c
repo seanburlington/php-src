@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.14 2008/06/20 06:37:14 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.15 2008/06/20 16:29:36 sfox Exp $ */
 
 #include "phar_internal.h"
 #ifdef PHAR_HAVE_OPENSSL
@@ -336,7 +336,7 @@ splitted:
 
 	efree(entry);
 	if (*filename == '.') {
-		phar_archive_data **pphar;
+		phar_archive_data **pphar = NULL;
 		int try_len;
 
 		if (FAILURE == phar_get_archive(pphar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {

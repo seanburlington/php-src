@@ -7,3 +7,4 @@ phpt.*
 *.php
 *.gcda
 *.gcno
+*.txt

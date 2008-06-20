@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.18.2.8 2008/06/20 14:53:57 felipe Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.18.2.9 2008/06/20 18:05:45 ohill Exp $ */
 
 /* {{{ includes
 */
@@ -172,12 +172,8 @@ PHP_FUNCTION(var_dump)
 	int argc;
 	int	i;
 
-	argc = ZEND_NUM_ARGS();
-
-	args = (zval ***)safe_emalloc(argc, sizeof(zval **), 0);
-	if (ZEND_NUM_ARGS() == 0 || zend_get_parameters_array_ex(argc, args) == FAILURE) {
-		efree(args);
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &args, &argc) == FAILURE) {
+		return;
 	}
 
 	for (i = 0; i < argc; i++) {
@@ -328,12 +324,8 @@ PHP_FUNCTION(debug_zval_dump)
 	int argc;
 	int	i;
 
-	argc = ZEND_NUM_ARGS();
-
-	args = (zval ***)safe_emalloc(argc, sizeof(zval **), 0);
-	if (ZEND_NUM_ARGS() == 0 || zend_get_parameters_array_ex(argc, args) == FAILURE) {
-		efree(args);
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &args, &argc) == FAILURE) {
+		return;
 	}
 
 	for (i = 0; i < argc; i++) {

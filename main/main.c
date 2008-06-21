@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.22 2008/05/21 15:55:31 pajoye Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.23 2008/06/21 02:41:27 felipe Exp $ */
 
 /* {{{ includes
  */
@@ -1033,8 +1033,8 @@ PHP_FUNCTION(set_time_limit)
 		RETURN_FALSE;
 	}
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &new_timeout) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z", &new_timeout) == FAILURE) {
+		return;
 	}
 
 	convert_to_string_ex(new_timeout);

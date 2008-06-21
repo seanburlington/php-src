@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.109.2.17 2008/06/20 05:42:58 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.109.2.18 2008/06/21 17:05:32 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,11 +72,15 @@
 #endif
 
 #ifndef E_RECOVERABLE_ERROR
-#define E_RECOVERABLE_ERROR E_ERROR
+# define E_RECOVERABLE_ERROR E_ERROR
 #endif
 
 #ifndef pestrndup
-#define pestrndup(s, length, persistent) ((persistent)?zend_strndup((s),(length)):estrndup((s),(length)))
+# define pestrndup(s, length, persistent) ((persistent)?zend_strndup((s),(length)):estrndup((s),(length)))
+#endif
+
+#ifndef ALLOC_PERMANENT_ZVAL
+# define ALLOC_PERMANENT_ZVAL (z) = (zval*)malloc(sizeof(zval));
 #endif
 
 /* PHP_ because this is public information via MINFO */

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57.2.5.2.6.2.3 2008/06/20 20:54:32 davidc Exp $ */
+/* $Id: pack.c,v 1.57.2.5.2.6.2.4 2008/06/21 23:20:40 felipe Exp $ */
 
 #include "php.h"
 
@@ -120,6 +120,8 @@ PHP_FUNCTION(pack)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &argv, &num_args) == FAILURE) {
 		return;
 	}
+
+	convert_to_string_ex(argv[0]);
 
 	format = Z_STRVAL_PP(argv[0]);
 	formatlen = Z_STRLEN_PP(argv[0]);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.26 2008/06/21 06:53:10 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.27 2008/06/21 06:55:56 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -1736,6 +1736,8 @@ PHP_METHOD(Phar, buildFromDirectory)
 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, error);
 			efree(error);
 		}
+	} else {
+		php_stream_close(pass.fp);
 	}
 }
 
@@ -1785,6 +1787,8 @@ PHP_METHOD(Phar, buildFromIterator)
 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, error);
 			efree(error);
 		}
+	} else {
+		php_stream_close(pass.fp);
 	}
 
 }

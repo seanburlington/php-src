@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.109.2.18 2008/06/21 17:05:32 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.109.2.19 2008/06/21 19:40:41 sfox Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -80,7 +80,8 @@
 #endif
 
 #ifndef ALLOC_PERMANENT_ZVAL
-# define ALLOC_PERMANENT_ZVAL (z) = (zval*)malloc(sizeof(zval));
+# define ALLOC_PERMANENT_ZVAL(z) \
+	(z) = (zval*)malloc(sizeof(zval))
 #endif
 
 /* PHP_ because this is public information via MINFO */

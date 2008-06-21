@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.15 2008/06/20 16:29:36 sfox Exp $ */
+/* $Id: util.c,v 1.55.2.16 2008/06/21 06:21:58 cellog Exp $ */
 
 #include "phar_internal.h"
 #ifdef PHAR_HAVE_OPENSSL
@@ -289,6 +289,7 @@ splitted:
 				return ret;
 			}
 		}
+		efree(test);
 	}
 	spprintf(&path, MAXPATHLEN, "phar://%s/%s%c%s", arch, PHAR_G(cwd), DEFAULT_DIR_SEPARATOR, PG(include_path));
 	efree(arch);

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.18 2008/06/21 19:15:46 sfox Exp $ */
+/* $Id: util.c,v 1.55.2.19 2008/06/21 21:37:39 sfox Exp $ */
 
 #include "phar_internal.h"
 
@@ -746,12 +746,12 @@ phar_entry_data *phar_get_or_create_entry_data(char *fname, int fname_len, char 
 		etemp.tar_type = TAR_FILE;
 	}
 	if (FAILURE == zend_hash_add(&phar->manifest, etemp.filename, path_len, (void*)&etemp, sizeof(phar_entry_info), (void **) &entry)) {
-		efree(ret);
 		php_stream_close(etemp.fp);
-		efree(etemp.filename);
 		if (error) {
 			spprintf(error, 0, "phar error: unable to add new entry \"%s\" to phar \"%s\"", etemp.filename, phar->fname);
 		}
+		efree(ret);
+		efree(etemp.filename);
 		return NULL;
 	}
 	

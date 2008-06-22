@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.88 2008/06/22 18:08:45 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.89 2008/06/22 22:16:41 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -308,7 +308,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.88 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.89 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );
@@ -332,7 +332,7 @@ PHP_FUNCTION(nsapi_virtual)
 	Request *rq;
 	nsapi_request_context *rc = (nsapi_request_context *)SG(server_context);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &uri, &uri_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s&", &uri, &uri_len, UG(utf8_conv)) == FAILURE) {
 		return;
 	}
 

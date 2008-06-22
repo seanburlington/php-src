@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.8.6.2 2008/05/14 03:13:17 auroraeosrose Exp $
+// $Id: config.w32,v 1.8.6.3 2008/06/22 21:49:06 pajoye Exp $
 // vim:ft=javascript
 
 ARG_WITH("libxml", "LibXML support", "yes");
@@ -15,6 +15,9 @@ if (PHP_LIBXML == "yes") {
 			ADD_DEF_FILE("ext\\libxml\\php_libxml2.def");
 		}
 		ADD_EXTENSION_DEP('libxml', 'iconv');
+	} else {
+		WARNING("libxml support can't be enabled, iconv or libxml are missing")
+		PHP_LIBXML = "no"
 	}
 }
 

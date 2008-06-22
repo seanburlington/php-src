@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.19 2008/06/21 21:37:39 sfox Exp $ */
+/* $Id: util.c,v 1.55.2.20 2008/06/22 13:10:03 sfox Exp $ */
 
 #include "phar_internal.h"
 
@@ -356,7 +356,7 @@ splitted:
 				return ret;
 			}
 		} else {
-			if (zend_hash_exists(&(phar)->manifest), test, try_len)) {
+			if (zend_hash_exists(&(phar->manifest), test, try_len)) {
 				spprintf(&ret, 0, "phar://%s/%s", arch, test);
 				efree(arch);
 				efree(test);

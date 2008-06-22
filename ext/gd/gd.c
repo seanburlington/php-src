@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.7 2008/06/22 08:06:48 sebastian Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.8 2008/06/22 11:36:46 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -3267,7 +3267,6 @@ PHP_FUNCTION(imagecolorsforindex)
 PHP_FUNCTION(imagegammacorrect)
 {
 	zval *IM;
-	double inputgamma, outputgamma;
 	gdImagePtr im;
 	int i;
 	double input, output;
@@ -4721,7 +4720,6 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 	char *fn_org = NULL;
 	char *fn_dest = NULL;
 	FILE *org, *dest;
-	int argc = ZEND_NUM_ARGS();
 	int dest_height = -1;
 	int dest_width = -1;
 	int org_height, org_width;

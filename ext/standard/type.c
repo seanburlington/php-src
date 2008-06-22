@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.30.2.2.2.3.2.6 2008/06/20 13:02:33 felipe Exp $ */
+/* $Id: type.c,v 1.30.2.2.2.3.2.7 2008/06/22 11:36:46 felipe Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -92,7 +92,6 @@ PHP_FUNCTION(settype)
 {
 	zval **var;
 	char *type;
-	char *new_type;
 	int type_len = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Zs", &var, &type, &type_len) == FAILURE) {

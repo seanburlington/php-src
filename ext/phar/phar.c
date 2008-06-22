@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.27 2008/06/21 18:57:53 sfox Exp $ */
+/* $Id: phar.c,v 1.370.2.28 2008/06/22 00:50:32 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -986,6 +986,11 @@ static int phar_parse_pharfile(php_stream *fp, char *fname, int fname_len, char 
 		zend_get_hash_value, NULL, (zend_bool)mydata->is_persistent);
 	zend_hash_init(&mydata->virtual_dirs, manifest_count * 2,
 		zend_get_hash_value, NULL, (zend_bool)mydata->is_persistent);
+	mydata->fname = pestrndup(fname, fname_len, mydata->is_persistent);
+#ifdef PHP_WIN32
+	phar_unixify_path_separators(mydata->fname, fname_len);
+#endif
+	mydata->fname_len = fname_len;
 	offset = halt_offset + manifest_len + 4;
 	memset(&entry, 0, sizeof(phar_entry_info));
 	entry.phar = mydata;
@@ -1096,11 +1101,6 @@ static int phar_parse_pharfile(php_stream *fp, char *fname, int fname_len, char 
 	mydata->internal_file_start = halt_offset + manifest_len + 4;
 	mydata->halt_offset = halt_offset;
 	mydata->flags = manifest_flags;
-	mydata->fname = pestrndup(fname, fname_len, mydata->is_persistent);
-#ifdef PHP_WIN32
-	phar_unixify_path_separators(mydata->fname, fname_len);
-#endif
-	mydata->fname_len = fname_len;
 	endbuffer = strrchr(mydata->fname, '/');
 	if (endbuffer) {
 		mydata->ext = memchr(endbuffer, '.', (mydata->fname + fname_len) - endbuffer);
@@ -3408,7 +3408,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.27 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.28 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.15 2008/04/24 16:04:59 sfox Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.16 2008/06/22 23:16:31 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -264,7 +264,7 @@ function probe_basic_headers()
 		ADD_FLAG("LDFLAGS", '/libpath:"' + p + '" ');
 		php_usual_lib_suspects += ";" + p;
 	} else if (!p) {
-		ERROR("We really need that arpa\\nameser.h file - it is part of the win32build package");
+		ERROR("We really need that arpa\\nameser.h file - it is part of the bindlib package");
 	}
 }
 

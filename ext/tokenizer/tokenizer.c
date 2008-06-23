@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.6 2008/06/23 17:17:46 felipe Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.7 2008/06/23 17:28:06 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,7 +45,7 @@ static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_token_name, 0, 0, 1)
 	ZEND_ARG_INFO(0, token)
 ZEND_END_ARG_INFO()
-
+/* }}} */
 
 /* {{{ tokenizer_functions[]
  *

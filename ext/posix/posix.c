@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70.2.3.2.16.2.8 2008/06/23 16:41:00 felipe Exp $ */
+/* $Id: posix.c,v 1.70.2.3.2.16.2.9 2008/06/23 17:28:06 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -247,6 +247,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_posix_initgroups, 0, 0, 2)
 	ZEND_ARG_INFO(0, base_group_id)
 ZEND_END_ARG_INFO()
 #endif
+/* }}} */
 
 /* {{{ posix_functions[]
  */
@@ -344,7 +345,7 @@ const zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.16.2.8 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.16.2.9 $");
 	php_info_print_table_end();
 }
 /* }}} */

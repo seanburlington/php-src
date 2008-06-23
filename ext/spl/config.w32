@@ -1,6 +1,6 @@
-// $Id: config.w32,v 1.7.6.5 2008/06/18 14:54:39 colder Exp $
+// $Id: config.w32,v 1.7.6.6 2008/06/23 10:22:42 pajoye Exp $
 // vim:ft=javascript
 
-	EXTENSION("spl", "php_spl.c spl_functions.c spl_engine.c spl_iterators.c spl_array.c spl_directory.c spl_sxe.c spl_exceptions.c spl_observer.c spl_dllist.c spl_heap.c spl_fixedarray.c", false /*never shared */);
-	AC_DEFINE('HAVE_SPL', 1);
-
+EXTENSION("spl", "php_spl.c spl_functions.c spl_engine.c spl_iterators.c spl_array.c spl_directory.c spl_sxe.c spl_exceptions.c spl_observer.c spl_dllist.c spl_heap.c spl_fixedarray.c", false /*never shared */);
+AC_DEFINE('HAVE_SPL', 1);
+PHP_SPL="yes";

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.355 2008/04/15 11:32:13 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.356 2008/06/23 11:38:10 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -721,12 +721,16 @@ static int sapi_cgi_activate(TSRMLS_D)
 	    (PG(user_ini_filename) && *PG(user_ini_filename))) {
 		/* Prepare search path */
 		path_len = strlen(SG(request_info).path_translated);
-		path = estrndup(SG(request_info).path_translated, path_len);
-		path_len = zend_dirname(path, path_len);
 
 		/* Make sure we have trailing slash! */
-		if (!IS_SLASH(path[path_len])) {
+		if (!IS_SLASH(SG(request_info).path_translated[path_len])) {
+			path = emalloc(path_len + 2);
+			memcpy(path, SG(request_info).path_translated, path_len + 1);
+			path_len = zend_dirname(path, path_len);
 			path[path_len++] = DEFAULT_SLASH;
+		} else {
+			path = estrndup(SG(request_info).path_translated, path_len);
+			path_len = zend_dirname(path, path_len);
 		}
 		path[path_len] = 0;
 

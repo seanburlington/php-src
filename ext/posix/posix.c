@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.100 2008/05/05 21:28:47 rasmus Exp $ */
+/* $Id: posix.c,v 1.101 2008/06/23 01:16:49 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,6 +36,11 @@
 #endif
 
 #include <sys/resource.h>
+
+#if defined(_GNU_SOURCE) && !defined(__USE_GNU)
+# define __USE_GNU
+#endif
+
 #include <sys/utsname.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -147,7 +152,7 @@ const zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.100 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.101 $");
 	php_info_print_table_end();
 }
 /* }}} */

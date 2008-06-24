@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5.2.22 2008/06/24 13:19:29 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.5.2.23 2008/06/24 22:22:48 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -466,6 +466,7 @@ PHPAPI void _mysqlnd_end_psession(MYSQLND *conn TSRMLS_DC)
 {
 	DBG_ENTER("_mysqlnd_end_psession");
 	/* The thd zval cache is always freed on request shutdown, so this has happened already */
+	mysqlnd_palloc_free_thd_cache_reference(&conn->zval_cache);
 	conn->zval_cache = NULL;
 	DBG_VOID_RETURN;
 }

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.12 2008/05/06 17:05:14 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.7.2.5.2.13 2008/06/24 11:01:38 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -170,7 +170,7 @@ void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_conne
 							if (!mysql_ping(mysql->mysql)) {
 #endif
 #ifdef MYSQLI_USE_MYSQLND
-								mysqlnd_restart_psession(mysql->mysql);
+								mysqlnd_restart_psession(mysql->mysql, MyG(mysqlnd_thd_zval_cache));
 #endif
 								MyG(num_active_persistent)++;
 								goto end;

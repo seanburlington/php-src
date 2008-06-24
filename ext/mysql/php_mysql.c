@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.17 2008/04/16 12:57:38 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.18 2008/06/24 11:01:38 andrey Exp $ */
 
 /* TODO:
  *
@@ -791,7 +791,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				}
 			} else {
 #ifdef MYSQL_USE_MYSQLND
-				mysqlnd_restart_psession(mysql->conn);
+				mysqlnd_restart_psession(mysql->conn, MySG(mysqlnd_thd_zval_cache));
 #endif
 			}
 		}

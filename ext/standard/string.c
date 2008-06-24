@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.23 2008/06/22 19:22:41 ohill Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.24 2008/06/24 06:07:08 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1291,9 +1291,9 @@ PHP_FUNCTION(strtoupper)
 		return;
 	}
 
-	php_strtoupper(arg, arglen);
-	
-	RETURN_STRINGL(arg, arglen, 1);
+	arg = estrndup(arg, arglen);
+	php_strtoupper(arg, arglen);	
+	RETURN_STRINGL(arg, arglen, 0);
 }
 /* }}} */
 
@@ -1325,8 +1325,9 @@ PHP_FUNCTION(strtolower)
 		return;
 	}
 
+	str = estrndup(str, arglen);
 	php_strtolower(str, arglen);
-	RETURN_STRINGL(str, arglen, 1);
+	RETURN_STRINGL(str, arglen, 0);
 }
 /* }}} */
 

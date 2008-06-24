@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.17 2008/05/07 15:16:27 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.18 2008/06/24 11:19:07 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.4-dev - 080501 - $Revision: 1.17 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.4-dev - 080501 - $Revision: 1.18 $"
 #define MYSQLND_VERSION_ID 50004
 
 /* This forces inlining of some accessor functions */
@@ -67,9 +67,10 @@
 void mysqlnd_library_init(TSRMLS_D);
 void mysqlnd_library_end(TSRMLS_D);
 
-#define mysqlnd_restart_psession(conn) _mysqlnd_restart_psession((conn) TSRMLS_CC)
-PHPAPI void _mysqlnd_restart_psession(MYSQLND *conn TSRMLS_DC);
-PHPAPI void mysqlnd_end_psession(MYSQLND *conn);
+#define mysqlnd_restart_psession(conn, cache) _mysqlnd_restart_psession((conn), (cache) TSRMLS_CC)
+PHPAPI void _mysqlnd_restart_psession(MYSQLND *conn, MYSQLND_THD_ZVAL_PCACHE *cache TSRMLS_DC);
+#define mysqlnd_end_psession(conn) _mysqlnd_end_psession((conn) TSRMLS_CC)
+PHPAPI void _mysqlnd_end_psession(MYSQLND *conn TSRMLS_DC);
 PHPAPI void mysqlnd_minfo_print_hash(zval *values);
 #define mysqlnd_thread_safe()	TRUE
 

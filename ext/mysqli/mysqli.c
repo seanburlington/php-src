@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.24 2008/05/06 17:05:14 andrey Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.25 2008/06/24 13:19:29 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -232,6 +232,9 @@ static void mysqli_link_free_storage(void *object TSRMLS_DC)
 		MY_MYSQL *mysql = (MY_MYSQL *)my_res->ptr;
 		if (mysql->mysql) {
 			if (!mysql->persistent) {
+#ifdef MYSQLI_USE_MYSQLND
+				mysqlnd_end_psession(mysql->mysql);
+#endif
 				mysqli_close(mysql->mysql, MYSQLI_CLOSE_IMPLICIT);
 			} else {
 				zend_rsrc_list_entry *le;

@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.25 2008/06/19 21:09:43 pajoye Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.26 2008/06/24 06:05:29 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.25 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.26 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -929,6 +929,7 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 	if (is_string($stdin)) {
 		fwrite($pipes[0], $stdin);
 	}
+	fclose($pipes[0]);
 
 	$timeout = $leak_check ? 300 : (isset($env['TEST_TIMEOUT']) ? $env['TEST_TIMEOUT'] : 60);
 
@@ -942,7 +943,6 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 		if ($n === 0) {
 			/* timed out */
 			$data .= "\n ** ERROR: process timed out **\n";
-			fclose($pipes[0]);
 			proc_terminate($proc);
 			return $data;
 		} else if ($n > 0) {
@@ -958,7 +958,6 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 	if ($stat['signaled']) {
 		$data .= "\nTermsig=".$stat['stopsig'];
 	}
-	fclose($pipes[0]);
 	$code = proc_close($proc);
 	return $data;
 }

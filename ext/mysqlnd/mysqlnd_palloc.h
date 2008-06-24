@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.h,v 1.2.2.5 2008/01/23 19:11:28 andrey Exp $ */
+/* $Id: mysqlnd_palloc.h,v 1.2.2.6 2008/06/24 08:01:13 andrey Exp $ */
 #ifndef MYSQLND_PALLOC_H
 #define MYSQLND_PALLOC_H
 
@@ -68,6 +68,8 @@ typedef struct st_mysqlnd_zval {
 
 typedef struct st_mysqlnd_ndzval_list {
 	mysqlnd_zval 	**ptr_line;		/* we allocate this, all are pointers to the block */
+	void			*canary1;
+	void			*canary2;
 	mysqlnd_zval	**last_added;	/* this points to the ptr_line, and moves left-right. It's our stack */
 } mysqlnd_ndzval_list;
 

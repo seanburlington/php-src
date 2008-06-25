@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.82.2.1.2.16.2.4 2008/06/24 22:53:01 davidc Exp $ */
+/* $Id: formatted_print.c,v 1.82.2.1.2.16.2.5 2008/06/25 08:56:42 davidc Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -760,14 +760,22 @@ PHP_FUNCTION(vfprintf)
 	php_stream *stream;
 	zval **arg1;
 	char *result;
-	int len;
+	int num_args, len;
 	
+	/**
+	 * Here's the deal, I extract the first resource, it's 
+	 * a ressource, then a string and then an array. In theory
+	 * the parsing should be "rsa" however, if I do so, the 
+	 * Argument number checking in php_formatted_print fails.
+	 * I am therefore leaving this check here so I do not break
+	 * php_formatted_print
+	 */
 	if (ZEND_NUM_ARGS() != 3) {
 		WRONG_PARAM_COUNT;
 	}
 	
-	if (zend_get_parameters_ex(1, &arg1)==FAILURE) {
-		RETURN_FALSE;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z+", &arg1, &num_args) == FAILURE) {
+		return;
 	}
 	
 	php_stream_from_zval(stream, arg1);

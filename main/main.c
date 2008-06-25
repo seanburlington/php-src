@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.770 2008/03/26 14:46:17 scottmac Exp $ */
+/* $Id: main.c,v 1.771 2008/06/25 12:18:51 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1576,6 +1576,8 @@ void php_request_shutdown(void *dummy)
 	 */
 	EG(opline_ptr) = NULL;
 	EG(active_op_array) = NULL;
+
+	php_deactivate_ticks(TSRMLS_C);
 
 	/* 1. Call all possible __destruct() functions */
 	zend_try {

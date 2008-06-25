@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.h,v 1.17 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: php_ticks.h,v 1.18 2008/06/25 12:18:51 dmitry Exp $ */
 
 #ifndef PHP_TICKS_H
 #define PHP_TICKS_H
 
 int php_startup_ticks(TSRMLS_D);
+void php_deactivate_ticks(TSRMLS_D);
 void php_shutdown_ticks(TSRMLS_D);
 void php_run_ticks(int count);
 

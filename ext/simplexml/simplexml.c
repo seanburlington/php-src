@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.14 2008/05/23 15:46:13 iliaa Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.15 2008/06/27 15:46:44 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2381,10 +2381,36 @@ PHP_FUNCTION(simplexml_import_dom)
 }
 /* }}} */
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_file, 0, 0, 1)
+	ZEND_ARG_INFO(0, filename)
+	ZEND_ARG_INFO(0, class_name)
+	ZEND_ARG_INFO(0, options)
+	ZEND_ARG_INFO(0, ns)
+	ZEND_ARG_INFO(0, is_prefix)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_string, 0, 0, 1)
+	ZEND_ARG_INFO(0, data)
+	ZEND_ARG_INFO(0, class_name)
+	ZEND_ARG_INFO(0, options)
+	ZEND_ARG_INFO(0, ns)
+	ZEND_ARG_INFO(0, is_prefix)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_import_dom, 0, 0, 1)
+	ZEND_ARG_INFO(0, node)
+	ZEND_ARG_INFO(0, class_name)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 const zend_function_entry simplexml_functions[] = { /* {{{ */
-	PHP_FE(simplexml_load_file, NULL)
-	PHP_FE(simplexml_load_string, NULL)
-	PHP_FE(simplexml_import_dom, NULL)
+	PHP_FE(simplexml_load_file, 	arginfo_simplexml_load_file)
+	PHP_FE(simplexml_load_string,	arginfo_simplexml_load_string)
+	PHP_FE(simplexml_import_dom,	arginfo_simplexml_import_dom)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -2478,7 +2504,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.14 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.15 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

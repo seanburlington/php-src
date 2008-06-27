@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.297 2008/06/25 12:34:14 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.298 2008/06/27 06:43:38 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2615,7 +2615,7 @@ ZEND_METHOD(reflection_function, inNamespace)
 	    (colon.u = u_memrchr(Z_USTRVAL_PP(name), ':', Z_USTRLEN_PP(name))) &&
 	    colon.u > Z_USTRVAL_PP(name) && *(colon.u-1) == ':') {
 		RETURN_TRUE;
-    }
+	}
 	RETURN_FALSE;
 }
 /* }}} */
@@ -2639,7 +2639,7 @@ ZEND_METHOD(reflection_function, getNamespaceName)
 	    (colon.u = u_memrchr(Z_USTRVAL_PP(name), ':', Z_USTRLEN_PP(name))) &&
 	    colon.u > Z_USTRVAL_PP(name) && *(colon.u-1) == ':') {
 		RETURN_UNICODEL(Z_USTRVAL_PP(name), colon.u - Z_USTRVAL_PP(name) - 1, 1);
-    }
+	}
 	RETURN_EMPTY_TEXT();
 }
 /* }}} */
@@ -2663,8 +2663,8 @@ ZEND_METHOD(reflection_function, getShortName)
 	    (colon.u = u_memrchr(Z_USTRVAL_PP(name), ':', Z_USTRLEN_PP(name))) &&
 	    colon.u > Z_USTRVAL_PP(name) && *(colon.u-1) == ':') {
 		RETURN_UNICODEL(colon.u + 1, Z_USTRLEN_PP(name) - (colon.u - Z_USTRVAL_PP(name) + 1), 1);
-    }
-    RETURN_ZVAL(*name, 1, 0);
+	}
+	RETURN_ZVAL(*name, 1, 0);
 }
 /* }}} */
 
@@ -5210,7 +5210,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.297 2008/06/25 12:34:14 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.298 2008/06/27 06:43:38 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

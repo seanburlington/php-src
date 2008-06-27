@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.29 2008/06/23 19:18:01 sfox Exp $ */
+/* $Id: phar.c,v 1.370.2.30 2008/06/27 01:21:12 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3187,7 +3187,6 @@ static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type 
 				/* compressed phar */
 #if PHP_VERSION_ID >= 50300
 				file_handle->type = ZEND_HANDLE_STREAM;
-				file_handle->free_filename = 0;
 				/* we do our own reading directly from the phar, don't change the next line */
 				file_handle->handle.stream.handle  = phar;
 				file_handle->handle.stream.reader  = phar_zend_stream_reader;
@@ -3200,7 +3199,6 @@ static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type 
 				memset(&file_handle->handle.stream.mmap, 0, sizeof(file_handle->handle.stream.mmap));
 #else /* PHP_VERSION_ID */
 				file_handle->type = ZEND_HANDLE_STREAM;
-				file_handle->free_filename = 0;
 				/* we do our own reading directly from the phar, don't change the next line */
 				file_handle->handle.stream.handle = phar;
 				file_handle->handle.stream.reader = phar_zend_stream_reader;
@@ -3408,7 +3406,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.29 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.30 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

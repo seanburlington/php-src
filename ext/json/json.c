@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.35 2008/01/30 08:10:28 dmitry Exp $ */
+/* $Id: json.c,v 1.36 2008/06/27 19:17:29 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,13 +37,26 @@ static const char digits[] = "0123456789abcdef";
 #define PHP_JSON_HEX_APOS	(1<<2)
 #define PHP_JSON_HEX_QUOT	(1<<3)
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_json_encode, 0, 0, 1)
+	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_json_decode, 0, 0, 1)
+	ZEND_ARG_INFO(0, json)
+	ZEND_ARG_INFO(0, assoc)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 /* {{{ json_functions[]
  *
  * Every user visible function must have an entry in json_functions[].
  */
 const function_entry json_functions[] = {
-	PHP_FE(json_encode, NULL)
-	PHP_FE(json_decode, NULL)
+    PHP_FE(json_encode, arginfo_json_encode)
+    PHP_FE(json_decode, arginfo_json_decode)
 	{NULL, NULL, NULL}  /* Must be the last line in json_functions[] */
 };
 /* }}} */

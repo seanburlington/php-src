@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.11 2008/06/01 18:24:38 bjori Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.12 2008/06/28 09:17:39 hnangelo Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4653,16 +4653,21 @@ PHP_FUNCTION(openssl_decrypt)
 		return;
 	}
 
-	if (!raw_input) {
-		base64_str = (char*)php_base64_decode((unsigned char*)data, data_len, &base64_str_len);
-		data_len = base64_str_len;
-		data = base64_str;
+	if (!method_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown cipher algorithm");
+		RETURN_FALSE;
 	}
 
 	cipher_type = EVP_get_cipherbyname(method);
 	if (!cipher_type) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown cipher algorithm");
 		RETURN_FALSE;
+	}
+
+	if (!raw_input) {
+		base64_str = (char*)php_base64_decode((unsigned char*)data, data_len, &base64_str_len);
+		data_len = base64_str_len;
+		data = base64_str;
 	}
 
 	keylen = EVP_CIPHER_key_length(cipher_type);

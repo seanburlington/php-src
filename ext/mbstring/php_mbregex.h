@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.h,v 1.12.2.1.2.1.2.1 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: php_mbregex.h,v 1.12.2.1.2.1.2.2 2008/06/28 18:04:19 indeyets Exp $ */
  
 #ifndef _PHP_MBREGEX_H
 #define _PHP_MBREGEX_H
@@ -45,8 +45,8 @@
 #define PHP_MBREGEX_FUNCTION_ENTRIES \
 	PHP_FE(mb_regex_encoding,	NULL) \
 	PHP_FE(mb_regex_set_options,	NULL) \
-	PHP_FE(mb_ereg,			third_arg_force_ref) \
-	PHP_FE(mb_eregi,			third_arg_force_ref) \
+	PHP_FE(mb_ereg,			mb_ereg_arginfo) \
+	PHP_FE(mb_eregi,			mb_ereg_arginfo) \
 	PHP_FE(mb_ereg_replace,			NULL) \
 	PHP_FE(mb_eregi_replace,			NULL) \
 	PHP_FE(mb_split,					NULL) \

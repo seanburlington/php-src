@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.25 2008/06/25 12:16:16 ohill Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.26 2008/06/30 10:10:44 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -998,7 +998,7 @@ PHPAPI void php_explode_negative_limit(zval *delim, zval *str, zval *return_valu
 PHP_FUNCTION(explode)
 {
 	zval **str, **delim, **zlimit = NULL;
-	int limit = -1;
+	long limit = -1;
 	int argc = ZEND_NUM_ARGS();
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ZZ|l", &delim, &str, &limit) == FAILURE) {

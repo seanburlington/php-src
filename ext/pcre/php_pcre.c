@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.234 2008/06/01 18:50:00 bjori Exp $ */
+/* $Id: php_pcre.c,v 1.235 2008/06/30 13:47:22 felipe Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -2142,9 +2142,6 @@ zend_module_entry pcre_module_entry = {
 
 #ifdef COMPILE_DL_PCRE
 ZEND_GET_MODULE(pcre)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif
 
 /* }}} */

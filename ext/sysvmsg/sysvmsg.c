@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.35 2008/05/21 12:01:55 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.36 2008/06/30 13:47:22 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -96,9 +96,6 @@ zend_module_entry sysvmsg_module_entry = {
 
 #ifdef COMPILE_DL_SYSVMSG
 ZEND_GET_MODULE(sysvmsg)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif
 
 /* {{{ PHP_INI
@@ -137,7 +134,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.35 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.36 $");
 	php_info_print_table_end();
 }
 /* }}} */

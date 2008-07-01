@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.146 2008/05/06 10:57:54 kalle Exp $ */
+/* $Id: math.c,v 1.147 2008/07/01 08:17:19 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1068,7 +1068,7 @@ PHP_FUNCTION(number_format)
 {
 	zval *sep1 = NULL, *sep2 = NULL;
 	double num;
-	int dec = 0;
+	long dec = 0;
 	char thousand_sep=',', dec_point='.';
 	char *tmp;
 	

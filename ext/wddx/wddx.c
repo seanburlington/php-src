@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.17.2.7 2008/06/27 14:33:12 felipe Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.17.2.8 2008/07/01 07:56:24 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1290,7 +1290,7 @@ PHP_FUNCTION(wddx_add_vars)
 	long packet_id;
 	wddx_packet *packet = NULL;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l+", packet_id, &args, &num_args) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l+", &packet_id, &args, &num_args) == FAILURE) {
 		return;
 	}
 

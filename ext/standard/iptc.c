@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.62 2007/12/31 07:12:16 sebastian Exp $ */
+/* $Id: iptc.c,v 1.63 2008/07/01 08:15:44 tony2001 Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -183,7 +183,8 @@ PHP_FUNCTION(iptcembed)
 	int jpeg_file_len, iptcdata_len;
     FILE *fp;
 	unsigned int marker;
-	unsigned int spool = 0, done = 0, inx;	
+	unsigned int done = 0, inx;	
+	long spool = 0;
 	unsigned char *spoolbuf=0, *poi=0;
 	struct stat sb;
 	zend_bool written = 0;

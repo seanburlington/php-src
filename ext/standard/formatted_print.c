@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.82.2.1.2.16.2.6 2008/06/25 10:16:52 davidc Exp $ */
+/* $Id: formatted_print.c,v 1.82.2.1.2.16.2.7 2008/07/01 10:01:08 dmitry Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -379,16 +379,13 @@ php_formatted_print(int ht, int *len, int use_array, int format_offset TSRMLS_DC
 	char *format, *result, padding;
 	int always_sign;
 
-	argc = ZEND_NUM_ARGS();
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &args, &argc) == FAILURE) {
+		return NULL;
+	}
 
 	/* verify the number of args */
 	if ((use_array && argc != (2 + format_offset)) 
 			|| (!use_array && argc < (1 + format_offset))) {
-		WRONG_PARAM_COUNT_WITH_RETVAL(NULL);
-	}
-	args = (zval ***)safe_emalloc(argc, sizeof(zval *), 0);
-
-	if (zend_get_parameters_array_ex(argc, args) == FAILURE) {
 		efree(args);
 		WRONG_PARAM_COUNT_WITH_RETVAL(NULL);
 	}

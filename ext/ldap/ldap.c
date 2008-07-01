@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.161.2.3.2.11.2.15 2008/06/30 12:15:52 felipe Exp $ */
+/* $Id: ldap.c,v 1.161.2.3.2.11.2.16 2008/07/01 07:43:36 tony2001 Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.15 2008/06/30 12:15:52 felipe Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.16 2008/07/01 07:43:36 tony2001 Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1576,7 +1576,7 @@ PHP_FUNCTION(ldap_get_option)
 {
 	zval *link, *retval;
 	ldap_linkdata *ld;
-	int option;
+	long option;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlz", &link, &option, &retval) != SUCCESS) {
 		return;
@@ -1678,7 +1678,7 @@ PHP_FUNCTION(ldap_set_option)
 	zval *link, **newval;
 	ldap_linkdata *ld;
 	LDAP *ldap;
-	int option;
+	long option;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zlZ", &link, &option, &newval) != SUCCESS) {
 		return;
@@ -2011,7 +2011,7 @@ PHP_FUNCTION(ldap_rename)
 	int dn_len, newrdn_len, newparent_len;
 	zend_bool deleteoldrdn;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rssb", &link, &dn, &dn_len, &newrdn, &newrdn_len, &newparent, &newparent_len, &deleteoldrdn) != SUCCESS) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rsssb", &link, &dn, &dn_len, &newrdn, &newrdn_len, &newparent, &newparent_len, &deleteoldrdn) != SUCCESS) {
 		return;
 	}
 

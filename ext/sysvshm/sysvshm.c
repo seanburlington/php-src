@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.3 2008/06/27 00:22:18 felipe Exp $ */
+/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.4 2008/07/01 15:45:54 felipe Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -39,15 +39,53 @@
 #include "ext/standard/php_smart_str.h"
 #include "php_ini.h"
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_attach, 0, 0, 1)
+	ZEND_ARG_INFO(0, key)
+	ZEND_ARG_INFO(0, memsize)
+	ZEND_ARG_INFO(0, perm)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_detach, 0, 0, 1)
+	ZEND_ARG_INFO(0, shm_identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_remove, 0, 0, 1)
+	ZEND_ARG_INFO(0, shm_identifier)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_put_var, 0, 0, 3)
+	ZEND_ARG_INFO(0, shm_identifier)
+	ZEND_ARG_INFO(0, variable_key)
+	ZEND_ARG_INFO(0, variable)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_get_var, 0, 0, 2)
+	ZEND_ARG_INFO(0, id)
+	ZEND_ARG_INFO(0, variable_key)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_remove_var, 0, 0, 2)
+	ZEND_ARG_INFO(0, id)
+	ZEND_ARG_INFO(0, variable_key)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 /* {{{ sysvshm_functions[]
  */
 const zend_function_entry sysvshm_functions[] = {
-	PHP_FE(shm_attach, NULL)
-	PHP_FE(shm_remove, NULL)
-	PHP_FE(shm_detach, NULL)
-	PHP_FE(shm_put_var, NULL)
-	PHP_FE(shm_get_var, NULL)
-	PHP_FE(shm_remove_var, NULL)
+	PHP_FE(shm_attach,		arginfo_shm_attach)
+	PHP_FE(shm_remove,		arginfo_shm_detach)
+	PHP_FE(shm_detach, 		arginfo_shm_remove)
+	PHP_FE(shm_put_var,		arginfo_shm_put_var)
+	PHP_FE(shm_get_var,		arginfo_shm_get_var)
+	PHP_FE(shm_remove_var,	arginfo_shm_remove_var)
 	{NULL, NULL, NULL}	
 };
 /* }}} */

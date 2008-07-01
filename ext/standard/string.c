@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.27 2008/06/30 10:39:34 tony2001 Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.28 2008/07/01 11:27:05 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -997,7 +997,7 @@ PHPAPI void php_explode_negative_limit(zval *delim, zval *str, zval *return_valu
    Splits a string on string separator and return array of components. If limit is positive only limit number of components is returned. If limit is negative all components except the last abs(limit) are returned. */
 PHP_FUNCTION(explode)
 {
-	zval **str, **delim, **zlimit = NULL;
+	zval **str, **delim;
 	long limit = -1;
 	int argc = ZEND_NUM_ARGS();
 	
@@ -4096,7 +4096,6 @@ PHP_FUNCTION(parse_str)
 {
 	char *arg;
 	zval **arrayArg = NULL;
-	zval *sarg;
 	char *res = NULL;
 	int arglen;
 

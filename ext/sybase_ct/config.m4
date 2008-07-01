@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2007/07/03 17:24:37 sniper Exp $
+dnl $Id: config.m4,v 1.17 2008/07/01 17:29:48 felipe Exp $
 dnl
 
 PHP_ARG_WITH(sybase-ct, for Sybase-CT support,
@@ -8,7 +8,7 @@ PHP_ARG_WITH(sybase-ct, for Sybase-CT support,
 
 if test "$PHP_SYBASE_CT" != "no"; then
 
-  if test "$PHP_SYBASE" != "no" && test "$ext_shared" = "no"; then
+  if test "$PHP_SYBASE" && test "$PHP_SYBASE" != "no" && test "$ext_shared" = "no"; then
     AC_MSG_ERROR([You can not use both --with-sybase and --with-sybase-ct in same build!])
   fi
 

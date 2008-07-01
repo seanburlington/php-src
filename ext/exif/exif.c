@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.20.2.6 2008/06/22 14:13:01 indeyets Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.20.2.7 2008/07/01 07:39:33 tony2001 Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.6 2008/06/22 14:13:01 indeyets Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.7 2008/07/01 07:39:33 tony2001 Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3913,7 +3913,7 @@ static int exif_read_file(image_info_type *ImageInfo, char *FileName, int read_t
 PHP_FUNCTION(exif_read_data)
 {
 	char *p_name, *p_sections_needed;
-	long p_name_len, p_sections_needed_len;
+	int p_name_len, p_sections_needed_len;
 	zend_bool sub_arrays=0, read_thumbnail=0, read_all=0;
 
 	int i, ac = ZEND_NUM_ARGS(), ret, sections_needed=0;
@@ -4155,7 +4155,7 @@ PHP_FUNCTION(exif_thumbnail)
 PHP_FUNCTION(exif_imagetype)
 {
 	char *imagefile;
-	long imagefile_len;
+	int imagefile_len;
 	php_stream * stream;
  	int itype = 0;
 

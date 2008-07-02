@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.8 2008/06/30 12:15:53 felipe Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.9 2008/07/02 23:48:22 rrichards Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -881,12 +881,13 @@ PHP_FUNCTION(xmlrpc_server_destroy)
 {
 	zval *arg1;
 	int bSuccess = FAILURE, type;
+	xmlrpc_server_data *server;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &arg1) == FAILURE) {
 		return;
 	}
 
-	xmlrpc_server_data *server = zend_list_find(Z_LVAL_P(arg1), &type);
+	server = zend_list_find(Z_LVAL_P(arg1), &type);
 
 	if (server && type == le_xmlrpc_server) {
 		bSuccess = zend_list_delete(Z_LVAL_P (arg1));

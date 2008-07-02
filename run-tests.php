@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.357 2008/06/12 21:59:25 hnangelo Exp $ */
+/* $Id: run-tests.php,v 1.358 2008/07/02 12:46:48 pajoye Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -445,7 +445,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.357 $' . "\n";
+					echo '$Revision: 1.358 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -544,7 +544,9 @@ HELP;
 		}
 	}
 
-	if (strlen($conf_passed)) {
+	if (substr(PHP_OS, 0, 3) != "WIN")) {
+		$pass_options .= " -c " . escapeshellarg($conf_passed);
+	} else {
 		$pass_options .= " -c '$conf_passed'";
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.28 2008/07/01 11:27:05 felipe Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.29 2008/07/03 14:00:20 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -183,7 +183,8 @@ PHP_MSHUTDOWN_FUNCTION(localeconv)
 PHP_FUNCTION(bin2hex)
 {
 	char *result, *data;
-	size_t newlen, datalen;
+	size_t newlen;
+	int datalen;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &data, &datalen) == FAILURE) {
 		return;

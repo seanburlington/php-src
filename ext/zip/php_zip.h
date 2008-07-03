@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.10.2.3.2.3 2008/05/21 09:27:41 pajoye Exp $ */
+/* $Id: php_zip.h,v 1.10.2.3.2.4 2008/07/03 12:53:12 felipe Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -94,16 +94,16 @@ extern php_stream_wrapper php_stream_zip_wrapper;
 #endif
 
 /* zip_open is a macro for renaming libzip zipopen, so we need to use PHP_NAMED_FUNCTION */
-static PHP_NAMED_FUNCTION(zif_zip_open);
-static PHP_NAMED_FUNCTION(zif_zip_read);
-static PHP_NAMED_FUNCTION(zif_zip_close);
-static PHP_NAMED_FUNCTION(zif_zip_entry_read);
-static PHP_NAMED_FUNCTION(zif_zip_entry_filesize);
-static PHP_NAMED_FUNCTION(zif_zip_entry_name);
-static PHP_NAMED_FUNCTION(zif_zip_entry_compressedsize);
-static PHP_NAMED_FUNCTION(zif_zip_entry_compressionmethod);
-static PHP_NAMED_FUNCTION(zif_zip_entry_open);
-static PHP_NAMED_FUNCTION(zif_zip_entry_close);
+PHP_NAMED_FUNCTION(zif_zip_open);
+PHP_NAMED_FUNCTION(zif_zip_read);
+PHP_NAMED_FUNCTION(zif_zip_close);
+PHP_NAMED_FUNCTION(zif_zip_entry_read);
+PHP_NAMED_FUNCTION(zif_zip_entry_filesize);
+PHP_NAMED_FUNCTION(zif_zip_entry_name);
+PHP_NAMED_FUNCTION(zif_zip_entry_compressedsize);
+PHP_NAMED_FUNCTION(zif_zip_entry_compressionmethod);
+PHP_NAMED_FUNCTION(zif_zip_entry_open);
+PHP_NAMED_FUNCTION(zif_zip_entry_close);
 
 #endif	/* PHP_ZIP_H */
 

@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.46 2008/05/08 04:52:30 mattwil Exp $
+# $Id: Makefile,v 1.47 2008/07/04 11:09:06 rrichards Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -109,19 +109,7 @@ clean-pecl:
 test:
 	<<test_suite_uses_lame_env_vars.bat
 set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
-$(BUILD_DIR)\php.exe -d open_basedir= -d output_buffering=0 run-tests.php -U $(TESTS)
-<<NOKEEP
-
-utest:
-	<<test_suite_uses_lame_env_vars.bat
-set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
-$(BUILD_DIR)\php.exe -d open_basedir= -d output_buffering=0 run-tests.php -u $(TESTS)
-<<NOKEEP
-
-ntest:
-	<<test_suite_uses_lame_env_vars.bat
-set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
-$(BUILD_DIR)\php.exe -d open_basedir= -d output_buffering=0 run-tests.php -N $(TESTS)
+$(BUILD_DIR)\php.exe -d open_basedir= -d output_buffering=0 run-tests.php $(TESTS)
 <<NOKEEP
 
 build-snap: generated_files

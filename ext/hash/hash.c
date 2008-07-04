@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.5.2.7.2.8 2008/07/01 07:41:38 tony2001 Exp $ */
+/* $Id: hash.c,v 1.18.2.5.2.7.2.9 2008/07/04 21:00:16 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -621,7 +621,7 @@ static void mhash_init(INIT_FUNC_ARGS)
 
 		len = slprintf(buf, 127, "MHASH_%s", algorithm.mhash_name, strlen(algorithm.mhash_name));
 		{
-			char name[len+1];
+			char name[128];
 			memcpy(name, buf, len+1);
 			REGISTER_LONG_CONSTANT(name, algorithm.value, CONST_CS | CONST_PERSISTENT);
 		}

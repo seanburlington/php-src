@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: win95nt.h,v 1.20.2.2.2.2.2.2 2008/07/05 18:36:34 pajoye Exp $ */
+/* $Id: win95nt.h,v 1.20.2.2.2.2.2.3 2008/07/05 18:51:17 pajoye Exp $ */
 
 /* Defines and types for Windows 95/NT */
 #define HAVE_DECLARED_TIMEZONE
@@ -74,7 +74,10 @@ typedef long pid_t;
 #endif
 
 /* General Windows stuff */
-#define WINDOWS 1
+#ifndef WINDOWS
+# define WINDOWS 1
+#endif
+
 
 /* Prevent use of VC5 OpenFile function */
 #define NOOPENFILE

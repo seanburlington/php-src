@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.177 2008/07/01 15:35:17 felipe Exp $ */
+/* $Id: xml.c,v 1.178 2008/07/05 20:19:47 felipe Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -62,9 +62,6 @@ ZEND_DECLARE_MODULE_GLOBALS(xml)
 /* {{{ dynamically loadable module stuff */
 #ifdef COMPILE_DL_XML
 ZEND_GET_MODULE(xml)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif /* COMPILE_DL_XML */
 /* }}} */
 

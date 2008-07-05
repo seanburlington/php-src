@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.4.2.7 2008/06/29 15:11:48 felipe Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.4.2.8 2008/07/05 20:09:33 felipe Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -221,9 +221,6 @@ zend_module_entry mssql_module_entry =
 
 #ifdef COMPILE_DL_MSSQL
 ZEND_GET_MODULE(mssql)
-# ifdef PHP_WIN32
-# include "zend_arg_defs.c"
-# endif
 #endif
 
 #define CHECK_LINK(link) { if (link==-1) { php_error_docref(NULL TSRMLS_CC, E_WARNING, "A link to the server could not be established"); RETURN_FALSE; } }

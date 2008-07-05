@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: win95nt.h,v 1.24 2007/12/31 07:12:18 sebastian Exp $ */
+/* $Id: win95nt.h,v 1.25 2008/07/05 18:36:13 pajoye Exp $ */
 
 /* Defines and types for Windows 95/NT */
 #define HAVE_DECLARED_TIMEZONE
@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
+#include <process.h>
+
 typedef int uid_t;
 typedef int gid_t;
 typedef char * caddr_t;

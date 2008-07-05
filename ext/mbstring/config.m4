@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.58.2.4.2.12 2008/07/15 18:07:42 moriyoshi Exp $
+dnl $Id: config.m4,v 1.58.2.4.2.11.2.1 2008/07/05 06:52:03 hirokawa Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -72,17 +72,19 @@ int foo(int x, ...) {
 	return 0;
 }
 int main() { return foo(10, "", 3.14); }
-      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], [
-        dnl cross-compile needs something here
-        case $host_alias in
-        *netware*)
-          cv_php_mbstring_stdarg=yes
-          ;;
-        *)
-          cv_php_mbstring_stdarg=no
-          ;;
-        esac
-      ])
+      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], 
+ [
+  dnl cross-compile needs something here
+case $host_alias in
+*netware*)
+cv_php_mbstring_stdarg=yes
+;;
+*)
+cv_php_mbstring_stdarg=no
+;;
+esac
+]
+)
     ])
 
     AC_CHECK_HEADERS([stdlib.h string.h strings.h unistd.h sys/time.h sys/times.h stdarg.h])
@@ -95,6 +97,7 @@ int main() { return foo(10, "", 3.14); }
     AC_FUNC_MEMCMP
 
     AC_DEFINE([HAVE_MBREGEX], 1, [whether to have multibyte regex support])
+
 
     if test "$PHP_MBREGEX_BACKTRACK" != "no"; then
       AC_DEFINE([USE_COMBINATION_EXPLOSION_CHECK],1,[whether to check multibyte regex backtrack])
@@ -218,6 +221,8 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
      libmbfl/filters/mbfilter_utf7imap.c
      libmbfl/filters/mbfilter_utf8.c
      libmbfl/filters/mbfilter_uuencode.c
+     libmbfl/filters/mbfilter_koi8u.c
+     libmbfl/filters/mbfilter_cp1254.c
      libmbfl/mbfl/mbfilter.c
      libmbfl/mbfl/mbfilter_8bit.c
      libmbfl/mbfl/mbfilter_pass.c
@@ -240,6 +245,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
      libmbfl/nls/nls_zh.c
      libmbfl/nls/nls_hy.c
      libmbfl/nls/nls_tr.c
+     libmbfl/nls/nls_ua.c
     ])
     PHP_MBSTRING_ADD_CFLAG([-DHAVE_CONFIG_H])
   else

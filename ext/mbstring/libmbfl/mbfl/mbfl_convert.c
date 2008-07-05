@@ -58,11 +58,13 @@
 #include "filters/mbfilter_euc_jp_win.h"
 #include "filters/mbfilter_ascii.h"
 #include "filters/mbfilter_koi8r.h"
+#include "filters/mbfilter_koi8u.h"
 #include "filters/mbfilter_cp866.h"
 #include "filters/mbfilter_cp932.h"
 #include "filters/mbfilter_cp936.h"
 #include "filters/mbfilter_cp1251.h"
 #include "filters/mbfilter_cp1252.h"
+#include "filters/mbfilter_cp1254.h"
 #include "filters/mbfilter_iso8859_1.h"
 #include "filters/mbfilter_iso8859_2.h"
 #include "filters/mbfilter_iso8859_3.h"
@@ -140,8 +142,12 @@ const struct mbfl_convert_vtbl *mbfl_convert_filter_list[] = {
 	&vtbl_wchar_cp866,
 	&vtbl_koi8r_wchar,
 	&vtbl_wchar_koi8r,
+	&vtbl_koi8u_wchar,
+	&vtbl_wchar_koi8u,
 	&vtbl_cp1252_wchar,
 	&vtbl_wchar_cp1252,
+	&vtbl_cp1254_wchar,
+	&vtbl_wchar_cp1254,
 	&vtbl_ascii_wchar,
 	&vtbl_wchar_ascii,
 	&vtbl_8859_1_wchar,
@@ -357,6 +363,22 @@ int mbfl_convert_filter_strcat(mbfl_convert_filter *filter, const unsigned char 
 	return 0;
 }
 
+#if 0
+static int
+mbfl_convert_filter_strncat(mbfl_convert_filter *filter, const unsigned char *p, 
+			    int n)
+{
+	while (n > 0) {
+		if ((*filter->filter_function)(*p++, filter) < 0) {
+			return -1;
+		}
+		n--;
+	}
+
+	return n;
+}
+#endif
+
 /* illegal character output function for conv-filter */
 int
 mbfl_filt_conv_illegal_output(int c, mbfl_convert_filter *filter)
@@ -371,9 +393,14 @@ mbfl_filt_conv_illegal_output(int c, mbfl_convert_filter *filter)
 		ret = (*filter->filter_function)(filter->illegal_substchar, filter);
 		break;
 	case MBFL_OUTPUTFILTER_ILLEGAL_MODE_LONG:
+	case MBFL_OUTPUTFILTER_ILLEGAL_MODE_ENTITY:
 		if (c >= 0) {
 			if (c < MBFL_WCSGROUP_UCS4MAX) {	/* unicode */
-				ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)"U+");
+			  if (mode_backup == MBFL_OUTPUTFILTER_ILLEGAL_MODE_LONG) {
+			    ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)"U+");
+			  } else { /* entity */
+			    ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)"&#");
+			  }
 			} else {
 				if (c < MBFL_WCSGROUP_WCHARMAX) {
 					m = c & ~MBFL_WCSPLANE_MASK;
@@ -417,38 +444,9 @@ mbfl_filt_conv_illegal_output(int c, mbfl_convert_filter *filter)
 				if (m == 0 && ret >= 0) {
 					ret = (*filter->filter_function)(mbfl_hexchar_table[0], filter);
 				}
-			}
-		}
-		break;
-	case MBFL_OUTPUTFILTER_ILLEGAL_MODE_ENTITY:
-		if (c >= 0) {
-			if (c < MBFL_WCSGROUP_UCS4MAX) {	/* unicode */
-				ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)"&#x");
-				if (ret < 0)
-					break;
-
-				m = 0;
-				r = 28;
-				while (r >= 0) {
-					n = (c >> r) & 0xf;
-					if (n || m) {
-						m = 1;
-						ret = (*filter->filter_function)(mbfl_hexchar_table[n], filter);
-						if (ret < 0) {
-							break;
-						}
-					}
-					r -= 4;
+				if (mode_backup == MBFL_OUTPUTFILTER_ILLEGAL_MODE_ENTITY) {
+				  ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)";");
 				}
-				if (ret < 0) {
-					break;
-				}
-				if (m == 0) {
-					ret = (*filter->filter_function)(mbfl_hexchar_table[0], filter);
-				}
-				ret = mbfl_convert_filter_strcat(filter, (const unsigned char *)";");
-			} else {
-				ret = (*filter->filter_function)(filter->illegal_substchar, filter);
 			}
 		}
 		break;
@@ -470,8 +468,8 @@ const struct mbfl_convert_vtbl * mbfl_convert_filter_get_vtbl(enum mbfl_no_encod
 	    to == mbfl_no_encoding_7bit) {
 		from = mbfl_no_encoding_8bit;
 	} else if (from == mbfl_no_encoding_base64 ||
-			   from == mbfl_no_encoding_qprint ||
-			   from == mbfl_no_encoding_uuencode) {
+	           from == mbfl_no_encoding_qprint ||
+				  from == mbfl_no_encoding_uuencode) {
 		to = mbfl_no_encoding_8bit;
 	}
 

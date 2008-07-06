@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.8 2008/06/22 11:36:46 felipe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.9 2008/07/06 17:07:26 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2168,8 +2168,6 @@ PHP_FUNCTION(imagegrabscreen)
 	HDC memDC;
 	HBITMAP memBM;
 	HBITMAP hOld;
-	HINSTANCE handle;
-	long lwindow_handle;
 	typedef BOOL (WINAPI *tPrintWindow)(HWND, HDC,UINT);
 	tPrintWindow pPrintWindow = 0;
 	gdImagePtr im;

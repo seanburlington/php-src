@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.15 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.16 2008/07/07 00:02:22 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1190,9 +1190,9 @@ static void spl_array_method(INTERNAL_FUNCTION_PARAMETERS, char *fname, int fnam
 			zend_throw_exception(spl_ce_BadMethodCallException, "Function expects exactly one argument", 0 TSRMLS_CC);
 			return;
 		}
-		zend_call_method(NULL, NULL, NULL, fname, fname_len, &return_value, 2, &tmp, arg TSRMLS_CC);
+		zend_call_method(NULL, NULL, NULL, fname, fname_len, return_value_ptr, 2, &tmp, arg TSRMLS_CC);
 	} else {
-		zend_call_method(NULL, NULL, NULL, fname, fname_len, &return_value, 1, &tmp, NULL TSRMLS_CC);
+		zend_call_method(NULL, NULL, NULL, fname, fname_len, return_value_ptr, 1, &tmp, NULL TSRMLS_CC);
 	}
 }
 

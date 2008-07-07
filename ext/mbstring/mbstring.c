@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.281 2008/07/07 13:52:44 felipe Exp $ */
+/* $Id: mbstring.c,v 1.282 2008/07/07 13:55:42 felipe Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2604,7 +2604,6 @@ PHP_FUNCTION(mb_strwidth)
    Trim the string in terminal width */
 PHP_FUNCTION(mb_strimwidth)
 {
-	zval **arg1, **arg2, **arg3, **arg4, **arg5;
 	char *str, *trimmarker, *encoding;
 	long from, width;
 	int str_len, trimmarker_len, encoding_len;

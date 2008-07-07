@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.8 2008/07/03 08:06:55 tony2001 Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.9 2008/07/07 01:25:53 sfox Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -46,18 +46,6 @@ ZEND_EXTERN_MODULE_GLOBALS(mbstring)
 #if HAVE_ICONV
 #include "ext/iconv/php_iconv.h"
 ZEND_EXTERN_MODULE_GLOBALS(iconv)
-#endif
-
-#if _MSC_VER >= 1500
-#	define PHP_WINAPI_COMPILER "MSVC9 (2008)"
-#elif _MSC_VER >= 1400
-#	define PHP_WINAPI_COMPILER "MSVC8 (2005)"
-#elif _MSC_VER >= 1310
-#	define PHP_WINAPI_COMPILER "MSVC7.1 (.NET 2003)"
-#elif _MSC_VER >= 1300
-#	define PHP_WINAPI_COMPILER "MSVC7 (.NET 2002)"
-#elif _MSC_VER < 1300
-#	define PHP_WINAPI_COMPILER "MSVC6 "
 #endif
 
 #define SECTION(name)	if (!sapi_module.phpinfo_as_text) { \
@@ -473,13 +461,14 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_start();
 		php_info_print_table_row(2, "System", php_uname );
 		php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__ );
+#ifdef COMPILER
+		php_info_print_table_row(2, "Compiler", COMPILER);
+#endif
+#ifdef ARCHITECTURE
+		php_info_print_table_row(2, "Architecture", ARCHITECTURE);
+#endif
 #ifdef CONFIGURE_COMMAND
 		php_info_print_table_row(2, "Configure Command", CONFIGURE_COMMAND );
-#endif
-
-
-#ifdef PHP_WIN32
-		php_info_print_table_row(2, "Windows Compiler and Version", PHP_WINAPI_COMPILER );
 #endif
 
 		if (sapi_module.pretty_name) {

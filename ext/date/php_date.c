@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.40 2008/07/08 17:55:40 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.41 2008/07/08 19:29:18 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3148,11 +3148,13 @@ zval *date_interval_read_property(zval *object, zval *member, int type TSRMLS_DC
 	GET_VALUE_FROM_STRUCT(invert, "invert");
 	GET_VALUE_FROM_STRUCT(days, "days");
 
+	ALLOC_INIT_ZVAL(retval);
+	Z_SET_REFCOUNT_P(retval, 0);
+
 	if (value == -1) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unknown property (%s)", Z_STRVAL_P(member));
 	}
 
-	ALLOC_INIT_ZVAL(retval);
 	ZVAL_LONG(retval, value);
 
 	if (member == &tmp_member) {
@@ -3168,6 +3170,7 @@ void date_interval_write_property(zval *object, zval *member, zval *value TSRMLS
 {
 	php_interval_obj *obj;
 	zval tmp_member, tmp_value;
+	int found = 0;
 
  	if (member->type != IS_STRING) {
 		tmp_member = *member;
@@ -3185,6 +3188,7 @@ void date_interval_write_property(zval *object, zval *member, zval *value TSRMLS
 			convert_to_long(&tmp_value);      \
 			value = &tmp_value;               \
 		}                                     \
+		found = 1;                            \
 		obj->diff->n = Z_LVAL_P(value); \
 		if (value == &tmp_value) {         \
 			zval_dtor(value);              \
@@ -3199,7 +3203,7 @@ void date_interval_write_property(zval *object, zval *member, zval *value TSRMLS
 	SET_VALUE_FROM_STRUCT(s, "s");
 	SET_VALUE_FROM_STRUCT(invert, "invert");
 
-	if (value == -1) {
+	if (!found) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unknown property (%s)", Z_STRVAL_P(member));
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.12.2.14 2008/07/08 17:55:59 derick Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.12.2.15 2008/07/08 18:28:49 derick Exp $ */
 
 #include "timelib.h"
 
@@ -858,7 +858,7 @@ tzcorrection = "GMT"? [+-] hour24 ":"? minute?;
 daysuf = "st" | "nd" | "rd" | "th";
 
 month = "0"? [0-9] | "1"[0-2];
-day   = ([0-2]?[0-9] | "3"[01]) daysuf?;
+day   = (([0-2]?[0-9]) | ("3"[01])) daysuf?;
 year  = [0-9]{1,4};
 year2 = [0-9]{2};
 year4 = [0-9]{4};
@@ -908,11 +908,11 @@ iso8601date2     = year2 "-" monthlz "-" daylz;
 gnudateshorter   = year4 "-" month;
 gnudateshort     = year "-" month "-" day;
 pointeddate4     = day [.\t-] month [.-] year4;
-pointeddate2     = day [.\t-] month [.-] year2;
+pointeddate2     = day [.\t] month "." year2;
 datefull         = day ([ \t.-])* monthtext ([ \t.-])* year;
 datenoday        = monthtext ([ .\t-])* year4;
 datenodayrev     = year4 ([ .\t-])* monthtext;
-datetextual      = monthtext ([ .\t-])* day [,.stndrh\t ]* year;
+datetextual      = monthtext ([ .\t-])* day [,.stndrh\t ]+ year;
 datenoyear       = monthtext ([ .\t-])* day [,.stndrh\t ]*;
 datenoyearrev    = day ([ .\t-])* monthtext;
 datenocolon      = year4 monthlz daylz;

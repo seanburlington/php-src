@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.9 2008/07/07 01:25:53 sfox Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.10 2008/07/08 08:37:56 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -515,9 +515,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Zend Memory Manager", is_zend_mm(TSRMLS_C) ? "enabled" : "disabled" );
 
 #ifdef ZEND_MULTIBYTE
-		php_info_print_table_row(2, "Zend multibyte support", "enabled");
+		php_info_print_table_row(2, "Zend Multibyte Support", "enabled");
 #else
-		php_info_print_table_row(2, "Zend multibyte support", "disabled");
+		php_info_print_table_row(2, "Zend Multibyte Support", "disabled");
 #endif
 
 #if HAVE_IPV6

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.9 2008/07/06 17:07:26 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.10 2008/07/08 15:24:12 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4176,7 +4176,7 @@ static void php_free_ps_enc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
    Load a new font from specified file */
 PHP_FUNCTION(imagepsloadfont)
 {
-	zval *file;
+	char *file;
 	int file_len, f_ind, *font;
 #ifdef PHP_WIN32
 	struct stat st;

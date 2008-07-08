@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.360 2008/07/03 10:24:44 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.361 2008/07/08 18:18:49 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -75,6 +75,8 @@ putenv('SSH_CONNECTION=deleted');
 
 $cwd = getcwd();
 set_time_limit(0);
+
+ini_set('pcre.backtrack_limit', PHP_INT_MAX);
 
 $valgrind_version = 0;
 $valgrind_header = '';
@@ -445,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.360 $' . "\n";
+					echo '$Revision: 1.361 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

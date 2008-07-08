@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.28 2008/07/02 15:00:21 ohill Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.29 2008/07/08 18:18:08 nlopess Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -75,6 +75,8 @@ putenv('SSH_CONNECTION=deleted');
 
 $cwd = getcwd();
 set_time_limit(0);
+
+ini_set('pcre.backtrack_limit', PHP_INT_MAX);
 
 $valgrind_version = 0;
 $valgrind_header = '';
@@ -447,7 +449,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.28 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.29 $'."\n";
 					exit(1);
 
 				case 'u':

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.235 2008/06/30 13:47:22 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.236 2008/07/08 07:05:04 dmitry Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1460,7 +1460,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 	}
 
 	if (is_callable_replace) {
-		if (Z_TYPE_P(replace) != IS_ARRAY) {
+		if (Z_TYPE_P(replace) != IS_ARRAY && Z_TYPE_P(replace) != IS_OBJECT) {
 			convert_to_text(replace);
 		}
 		if (!zend_is_callable(replace, 0, &callback_name)) {

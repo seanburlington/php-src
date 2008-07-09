@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.30 2008/06/27 01:21:12 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.31 2008/07/09 14:15:41 tony2001 Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -102,7 +102,7 @@ static void phar_split_cache_list(TSRMLS_D)
 {
 	char *tmp;
 	char *key, *lasts, *end;
-	char ds[1];
+	char ds[2];
 	phar_archive_data *phar;
 	uint i = 0;
 
@@ -111,6 +111,7 @@ static void phar_split_cache_list(TSRMLS_D)
 	}
 
 	ds[0] = DEFAULT_DIR_SEPARATOR;
+	ds[1] = '\0';
 	tmp = estrdup(PHAR_GLOBALS->cache_list);
 
 	/* fake request startup */
@@ -3406,7 +3407,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.30 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.31 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

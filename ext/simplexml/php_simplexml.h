@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.29 2008/01/03 16:18:29 nlopess Exp $ */
+/* $Id: php_simplexml.h,v 1.30 2008/07/09 21:27:10 colder Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -68,6 +68,7 @@ typedef struct {
 		zval                  *data;
 	} iter;
 	zval *tmp;
+	zend_function *fptr_count;
 } php_sxe_object;
 
 #ifdef ZTS

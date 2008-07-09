@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.23 2008/07/07 13:51:35 pajoye Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.24 2008/07/09 08:15:46 sfox Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -364,3 +364,10 @@ if (PHP_SNAPSHOT_TEMPLATE == "no") {
 DEFINE('SNAPSHOT_TEMPLATE', PHP_SNAPSHOT_TEMPLATE);
 
 ARG_ENABLE('summary', 'Enable configuration summary', 'yes');
+
+if (PHP_DSP != "no") {
+	if (FSO.FolderExists("tmp")) {
+		FSO.DeleteFolder("tmp");
+	}
+	FSO.CreateFolder("tmp");
+}

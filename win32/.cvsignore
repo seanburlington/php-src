@@ -13,3 +13,8 @@ Release_TSDbg
 Release_TS_inline
 Debug_TS
 phpts.def
+wsyslog.h
+*.gcda
+*.gcno
+win32.dsp
+php.dsw

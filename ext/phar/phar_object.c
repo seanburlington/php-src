@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.33 2008/07/07 01:11:07 sfox Exp $ */
+/* $Id: phar_object.c,v 1.266.2.34 2008/07/09 08:47:05 dmitry Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3884,12 +3884,12 @@ PHP_METHOD(Phar, extractTo)
 	}
 
 	fp = php_stream_open_wrapper(phar_obj->arc.archive->fname, "rb", IGNORE_URL|STREAM_MUST_SEEK, &actual);
-	efree(actual);
 	if (!fp) {
 		zend_throw_exception_ex(spl_ce_InvalidArgumentException, 0 TSRMLS_CC,
 			"Invalid argument, %s cannot be found", phar_obj->arc.archive->fname);
 		return;
 	}
+	efree(actual);
 	php_stream_close(fp);
 
 	if (pathto_len < 1) {

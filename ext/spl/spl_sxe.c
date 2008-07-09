@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.8.2.5.2.2.2.2 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: spl_sxe.c,v 1.8.2.5.2.2.2.3 2008/07/09 21:27:28 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -145,17 +145,6 @@ SPL_METHOD(SimpleXMLIterator, getChildren)
 	RETURN_ZVAL(sxe->iter.data, 1, 0);
 }
 
-/* {{{ proto int SimpleXMLIterator::count()
- Get number of child elements */
-SPL_METHOD(SimpleXMLIterator, count)
-{
-	long count = 0;
-
-	Z_OBJ_HANDLER_P(getThis(), count_elements)(getThis(), &count TSRMLS_CC);
-	
-	RETURN_LONG(count);
-}
-
 static const zend_function_entry spl_funcs_SimpleXMLIterator[] = {
 	SPL_ME(SimpleXMLIterator, rewind,                 NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SimpleXMLIterator, valid,                  NULL, ZEND_ACC_PUBLIC)
@@ -164,7 +153,6 @@ static const zend_function_entry spl_funcs_SimpleXMLIterator[] = {
 	SPL_ME(SimpleXMLIterator, next,                   NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SimpleXMLIterator, hasChildren,            NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SimpleXMLIterator, getChildren,            NULL, ZEND_ACC_PUBLIC)
-	SPL_ME(SimpleXMLIterator, count,                  NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 /* }}} */

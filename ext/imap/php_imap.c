@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.32 2008/06/11 02:32:22 philip Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.33 2008/07/10 17:44:09 felipe Exp $ */
 
 #define IMAP41
 
@@ -1587,8 +1587,8 @@ PHP_FUNCTION(imap_headerinfo)
 	convert_to_long_ex(msgno);
 	if (myargc >= 3) {
 		convert_to_long_ex(fromlength);
-		if (Z_LVAL_PP(fromlength) < 0 || Z_LVAL_PP(fromlength) >= MAILTMPLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "From length has to be between 1 and %i", MAILTMPLEN);
+		if (Z_LVAL_PP(fromlength) < 0 || Z_LVAL_PP(fromlength) > MAILTMPLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "From length has to be between 0 and %d", MAILTMPLEN);
 			RETURN_FALSE;
 		}
 	} else {
@@ -1596,8 +1596,8 @@ PHP_FUNCTION(imap_headerinfo)
 	}
 	if (myargc >= 4) {
 		convert_to_long_ex(subjectlength);
-		if (Z_LVAL_PP(subjectlength) < 0 || Z_LVAL_PP(subjectlength) >= MAILTMPLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Subject length has to be between 1 and %i", MAILTMPLEN);
+		if (Z_LVAL_PP(subjectlength) < 0 || Z_LVAL_PP(subjectlength) > MAILTMPLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Subject length has to be between 0 and %d", MAILTMPLEN);
 			RETURN_FALSE;
 		}
 	} else {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.109.2.19 2008/06/21 19:40:41 sfox Exp $ */
+/* $Id: phar_internal.h,v 1.109.2.20 2008/07/10 11:36:50 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -158,6 +158,7 @@ ZEND_BEGIN_MODULE_GLOBALS(phar)
 	int         has_bz2;
 	zend_bool   readonly_orig;
 	zend_bool   require_hash_orig;
+	zend_bool	intercepted;
 	int         request_init;
 	int         require_hash;
 	int         request_done;

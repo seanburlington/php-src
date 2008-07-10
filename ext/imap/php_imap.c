@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.14 2008/07/07 17:18:43 felipe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.15 2008/07/10 17:50:51 felipe Exp $ */
 
 #define IMAP41
 
@@ -1977,16 +1977,16 @@ PHP_FUNCTION(imap_headerinfo)
 	ZEND_FETCH_RESOURCE(imap_le_struct, pils *, &streamind, -1, "imap", le_imap);
 
 	if (argc >= 3) {
-		if (fromlength < 0 || fromlength >= MAILTMPLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "From length has to be between 1 and %i", MAILTMPLEN);
+		if (fromlength < 0 || fromlength > MAILTMPLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "From length has to be between 0 and %d", MAILTMPLEN);
 			RETURN_FALSE;
 		}
 	} else {
 		fromlength = 0x00;
 	}
 	if (argc >= 4) {
-		if (subjectlength < 0 || subjectlength >= MAILTMPLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Subject length has to be between 1 and %i", MAILTMPLEN);
+		if (subjectlength < 0 || subjectlength > MAILTMPLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Subject length has to be between 0 and %d", MAILTMPLEN);
 			RETURN_FALSE;
 		}
 	} else {

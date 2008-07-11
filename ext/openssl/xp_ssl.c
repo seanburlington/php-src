@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.37 2008/04/14 12:17:38 bjori Exp $ */
+/* $Id: xp_ssl.c,v 1.38 2008/07/11 10:24:29 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -555,7 +555,9 @@ static inline int php_openssl_tcp_sockop_accept(php_stream *stream, php_openssl_
 			
 			xparam->outputs.client = php_stream_alloc_rel(stream->ops, clisockdata, NULL, "r+");
 			if (xparam->outputs.client) {
-				xparam->outputs.client->context = stream->context;
+				if (stream->context) {
+					zend_list_addref(stream->context->rsrc_id);
+				}
 			}
 		}
 

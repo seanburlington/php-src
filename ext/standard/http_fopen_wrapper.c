@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.133 2008/04/29 08:15:49 dmitry Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.134 2008/07/11 10:24:29 tony2001 Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -659,6 +659,9 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		if (location[0] != '\0')
 			php_stream_notify_info(context, PHP_STREAM_NOTIFY_REDIRECTED, location, 0);
 
+		if (context) { /* keep the context for the next try */
+			zend_list_addref(context->rsrc_id);
+		}
 		php_stream_close(stream);
 		stream = NULL;
 

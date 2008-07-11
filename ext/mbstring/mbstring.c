@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.282 2008/07/07 13:55:42 felipe Exp $ */
+/* $Id: mbstring.c,v 1.283 2008/07/11 13:54:47 felipe Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3927,7 +3927,7 @@ PHP_FUNCTION(mb_send_mail)
 					if (strcasecmp(param_name, "charset") == 0) {
 						enum mbfl_no_encoding _tran_cs = tran_cs;
 						
-						charset = php_strtok_r(NULL, "= ", &tmp);
+						charset = php_strtok_r(NULL, "= \"", &tmp);
 						if (charset != NULL) {
 							_tran_cs = mbfl_name2no_encoding(charset);
 						}

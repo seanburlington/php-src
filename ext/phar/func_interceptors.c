@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.9 2008/07/10 16:16:15 dmitry Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.10 2008/07/11 08:53:43 tony2001 Exp $ */
 
 #include "phar_internal.h"
 
@@ -883,13 +883,13 @@ PharFileFunction(phar_is_readable, FS_IS_R, orig_is_readable)
 PharFileFunction(phar_is_executable, FS_IS_X, orig_is_executable)
 /* }}} */
 
-/* {{{ proto bool is_executable(string filename)
-   Returns true if file is executable */
+/* {{{ proto bool file_exists(string filename)
+   Returns true if filename exists */
 PharFileFunction(phar_file_exists, FS_EXISTS, orig_file_exists)
 /* }}} */
 
-/* {{{ proto bool is_executable(string filename)
-   Returns true if file is executable */
+/* {{{ proto bool is_dir(string filename)
+   Returns true if file is directory */
 PharFileFunction(phar_is_dir, FS_IS_DIR, orig_is_dir)
 /* }}} */
 
@@ -1018,7 +1018,7 @@ found_it:
 		}
 	}
 skip_phar:
-	PHAR_G(orig_file_exists)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	PHAR_G(orig_is_link)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	return;
 }
 /* }}} */

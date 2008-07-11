@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.11 2008/07/11 10:25:15 tony2001 Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.12 2008/07/11 12:40:28 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1806,8 +1806,9 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 				opened_path, context STREAMS_REL_CC TSRMLS_CC);
 		}
 
-		if (context) {
-			zend_list_addref(context->rsrc_id);
+		/* increase context refcount only if the context is really used */
+		if (stream && stream->context) {
+			zend_list_addref(stream->context->rsrc_id);
 		}
 
 		/* if the caller asked for a persistent stream but the wrapper did not

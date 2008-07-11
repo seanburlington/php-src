@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.74 2008/05/09 12:59:41 scottmac Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.75 2008/07/11 12:16:05 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4519,12 +4519,13 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 				/* fall-through */
 
 			case 'l':
+			case 'L':
 
 				/* swm: If we encounter '<?xml' then we shouldn't be in
 				 * state == 2 (PHP). Switch back to HTML.
 				 */
 
-				if (state == 2 && p > buf+2 && *(p-1) == 'm' && *(p-2) == 'x') {
+				if (state == 2 && p > buf+2 && strncasecmp(p-2, "xm", 2) == 0) {
 					state = 1;
 					break;
 				}

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.15 2008/07/10 17:50:51 felipe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.16 2008/07/11 11:27:32 felipe Exp $ */
 
 #define IMAP41
 
@@ -1968,7 +1968,7 @@ PHP_FUNCTION(imap_headerinfo)
 	pils *imap_le_struct;
 	MESSAGECACHE *cache;
 	ENVELOPE *en;
-	char dummy[2000], fulladdress[MAILTMPLEN];
+	char dummy[2000], fulladdress[MAILTMPLEN + 1];
 	
 	if (zend_parse_parameters(argc TSRMLS_CC, "rl|lls", &streamind, &msgno, &fromlength, &subjectlength, &defaulthost, &defaulthost_len) == FAILURE) {
 		return;

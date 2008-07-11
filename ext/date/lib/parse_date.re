@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.82 2008/07/08 20:23:38 derick Exp $ */
+/* $Id: parse_date.re,v 1.83 2008/07/11 08:42:11 derick Exp $ */
 
 #include "timelib.h"
 
@@ -1820,11 +1820,8 @@ timelib_time *timelib_parse_from_format(char *format, char *string, int len, tim
 		switch (*fptr) {
 			case 'D': /* three letter day */
 			case 'l': /* full day */
-				tmp = timelib_lookup_relunit((char **) &ptr);
-				if (!tmp) {
+				if (!timelib_lookup_relunit((char **) &ptr)) {
 					add_pbf_error(s, "A textual day could not be found", string, begin);
-				} else {
-					s->time->m = tmp;
 				}
 				break;
 			case 'd': /* two digit day, with leading zero */

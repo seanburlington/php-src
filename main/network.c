@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.9 2008/03/11 10:27:23 tony2001 Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.10 2008/07/11 13:12:18 jani Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -162,7 +162,9 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 	struct sockaddr **sap;
 	int n;
 #if HAVE_GETADDRINFO
+# if HAVE_IPV6
 	static int ipv6_borked = -1; /* the way this is used *is* thread safe */
+# endif
 	struct addrinfo hints, *res, *sai;
 #else
 	struct hostent *host_info;

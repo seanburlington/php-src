@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.6 2008/07/01 07:54:30 tony2001 Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.7 2008/07/11 13:50:43 jani Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1160,7 +1160,6 @@ PHP_FUNCTION(mb_ereg_search_getpos)
 PHP_FUNCTION(mb_ereg_search_setpos)
 {
 	long position;
-	int n;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &position) == FAILURE) {
 		return;

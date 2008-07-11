@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.33.2.2.2.6.2.3 2008/03/10 19:54:47 andrey Exp $ */
+/* $Id: xp_socket.c,v 1.33.2.2.2.6.2.4 2008/07/11 10:25:15 tony2001 Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -716,8 +716,10 @@ static inline int php_tcp_sockop_accept(php_stream *stream, php_netstream_data_t
 
 			xparam->outputs.client = php_stream_alloc_rel(stream->ops, clisockdata, NULL, "r+");
 			if (xparam->outputs.client) {
-				/* TODO: addref ? */
 				xparam->outputs.client->context = stream->context;
+				if (stream->context) {
+					zend_list_addref(stream->context->rsrc_id);
+				}
 			}
 		}
 	}

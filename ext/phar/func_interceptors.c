@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.10 2008/07/11 08:53:43 tony2001 Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.11 2008/07/11 09:11:18 tony2001 Exp $ */
 
 #include "phar_internal.h"
 
@@ -1036,8 +1036,6 @@ PharFileFunction(phar_stat, FS_STAT, orig_stat)
 /* {{{ void phar_intercept_functions(TSRMLS_D) */
 void phar_intercept_functions(TSRMLS_D)
 {
-	zend_function *orig;
-
 	if (!PHAR_G(request_init)) {
 		PHAR_G(cwd) = NULL;
 		PHAR_G(cwd_len) = 0;

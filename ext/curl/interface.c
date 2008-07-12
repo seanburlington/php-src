@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.10 2008/06/21 21:51:05 indeyets Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.11 2008/07/12 21:16:50 felipe Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -786,7 +786,7 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 {
 	php_curl       *ch = (php_curl *) ctx;
 	php_curl_read  *t  = ch->handlers->read;
-	int             length = -1;
+	int             length = 0;
 
 	switch (t->method) {
 		case PHP_CURL_DIRECT:
@@ -833,7 +833,9 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 			ch->in_callback = 0;
 			if (error == FAILURE) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot call the CURLOPT_READFUNCTION"); 
-				length = -1;
+#if LIBCURL_VERSION_NUM >= 0x070c01 /* 7.12.1 */
+				length = CURL_READFUNC_ABORT;
+#endif
 			} else if (retval_ptr) {
 				if (Z_TYPE_P(retval_ptr) == IS_STRING) {
 					length = MIN(size * nmemb, Z_STRLEN_P(retval_ptr));

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.28.2.17.2.21 2008/07/12 14:58:41 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.28.2.17.2.22 2008/07/13 21:45:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -388,10 +388,9 @@ PHP_FUNCTION(spl_autoload_call)
 			zend_hash_get_current_key_ex(SPL_G(autoload_functions), &func_name, &func_name_len, &dummy, 0, &function_pos);
 			zend_hash_get_current_data_ex(SPL_G(autoload_functions), (void **) &alfi, &function_pos);
 			zend_call_method(alfi->obj ? &alfi->obj : NULL, alfi->ce, &alfi->func_ptr, func_name, func_name_len, &retval, 1, class_name, NULL TSRMLS_CC);
+			zend_exception_set_previous(exception TSRMLS_CC);
 			if (EG(exception)) {
-				if (exception) {
-					zend_update_property(zend_exception_get_default(TSRMLS_C), EG(exception), "previous", sizeof("previous")-1, exception TSRMLS_CC);
-				}
+				zend_exception_set_previous(exception TSRMLS_CC);
 				exception = EG(exception);
 				EG(exception) = NULL;
 			}

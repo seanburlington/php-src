@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.17.2.2.2.4.2.3 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: firebird_driver.c,v 1.17.2.2.2.4.2.4 2008/07/13 10:55:50 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -608,7 +608,7 @@ static int pdo_firebird_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval 
 			strcpy(&buf[i++], " ");
 		}
 		add_next_index_string(info, buf, 1);
-	} else {
+	} else if (H->last_app_error) {
 		add_next_index_long(info, -999);
 		add_next_index_string(info, const_cast(H->last_app_error),1);
 	}

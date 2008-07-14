@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: spl_fixedarray.c,v 1.1.2.4 2008/07/13 15:59:52 colder Exp $ */
+/* $Id: spl_fixedarray.c,v 1.1.2.5 2008/07/14 08:09:09 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -317,7 +317,11 @@ static inline zval **spl_fixedarray_object_read_dimension_helper(spl_fixedarray_
 		return NULL;
 	}
 
-	index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	if (Z_TYPE_P(offset) != IS_LONG) {
+		index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	} else {
+		index = Z_LVAL_P(offset);
+	}
 	
 	if (index < 0 || intern->array == NULL || index >= intern->array->size) {
 		zend_throw_exception(spl_ce_RuntimeException, "Index invalid or out of range", 0 TSRMLS_CC);
@@ -369,7 +373,11 @@ static inline void spl_fixedarray_object_write_dimension_helper(spl_fixedarray_o
 		return;
 	}
 
-	index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	if (Z_TYPE_P(offset) != IS_LONG) {
+		index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	} else {
+		index = Z_LVAL_P(offset);
+	}
 
 	if (index < 0 || intern->array == NULL || index >= intern->array->size) {
 		zend_throw_exception(spl_ce_RuntimeException, "Index invalid or out of range", 0 TSRMLS_CC);
@@ -407,7 +415,11 @@ static inline void spl_fixedarray_object_unset_dimension_helper(spl_fixedarray_o
 {
 	long index;
 	
-	index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	if (Z_TYPE_P(offset) != IS_LONG) {
+		index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	} else {
+		index = Z_LVAL_P(offset);
+	}
 	
 	if (index < 0 || intern->array == NULL || index >= intern->array->size) {
 		zend_throw_exception(spl_ce_RuntimeException, "Index invalid or out of range", 0 TSRMLS_CC);
@@ -444,7 +456,11 @@ static inline int spl_fixedarray_object_has_dimension_helper(spl_fixedarray_obje
 	long index;
 	int retval;
 	
-	index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	if (Z_TYPE_P(offset) != IS_LONG) {
+		index = spl_offset_convert_to_long(offset TSRMLS_CC);
+	} else {
+		index = Z_LVAL_P(offset);
+	}
 	
 	if (index < 0 || intern->array == NULL || index >= intern->array->size) {
 		retval = 0;

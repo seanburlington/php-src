@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.46 2008/07/05 00:34:24 scottmac Exp $ */
+/* $Id: hash.c,v 1.47 2008/07/14 10:49:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -828,7 +828,7 @@ PHP_FUNCTION(mhash)
    Gets the name of hash */
 PHP_FUNCTION(mhash_get_hash_name)
 {
-	int algorithm;
+	long algorithm;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &algorithm) == FAILURE) {
 		return;
@@ -859,7 +859,7 @@ PHP_FUNCTION(mhash_count)
    Gets the block size of hash */
 PHP_FUNCTION(mhash_get_block_size)
 {
-	int algorithm;
+	long algorithm;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &algorithm) == FAILURE) {
 		return;
@@ -884,7 +884,7 @@ PHP_FUNCTION(mhash_get_block_size)
    Generates a key using hash functions */
 PHP_FUNCTION(mhash_keygen_s2k)
 {
-	int algorithm, bytes;
+	long algorithm, bytes;
 	char *password, *salt;
 	int password_len, salt_len;
 	char padded_salt[SALT_SIZE];

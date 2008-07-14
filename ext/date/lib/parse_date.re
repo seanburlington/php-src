@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.83 2008/07/11 08:42:11 derick Exp $ */
+/* $Id: parse_date.re,v 1.84 2008/07/14 17:30:09 derick Exp $ */
 
 #include "timelib.h"
 
@@ -1768,6 +1768,11 @@ timelib_time* timelib_strtotime(char *s, int len, struct timelib_error_container
 #endif
 	} while(t != EOI);
 
+	/* do funky checking whether the parsed date was valid date */
+	if (in.time->have_date && !timelib_valid_date( in.time->y, in.time->m, in.time->d)) {
+		add_warning(&in, "The parsed date was invalid");
+	}
+
 	free(in.str);
 	if (errors) {
 		*errors = in.errors;
@@ -2035,6 +2040,12 @@ timelib_time *timelib_parse_from_format(char *format, char *string, int len, tim
 		}
 	}
 
+	/* do funky checking whether the parsed date was valid date */
+	if (s->time->y != TIMELIB_UNSET && s->time->m != TIMELIB_UNSET &&
+		s->time->d != TIMELIB_UNSET && 
+		!timelib_valid_date( s->time->y, s->time->m, s->time->d)) {
+		add_pbf_warning(s, "The parsed date was invalid", string, ptr);
+	}
 
 	if (errors) {
 		*errors = in.errors;

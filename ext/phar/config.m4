@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.27.2.4 2008/06/01 04:21:26 cellog Exp $
+dnl $Id: config.m4,v 1.27.2.5 2008/07/14 09:02:26 jani Exp $
 dnl config.m4 for extension phar
 
 PHP_ARG_ENABLE(phar, for phar archive support,
-[  --disable-phar         Disable phar support], yes)
+[  --disable-phar          Disable phar support], yes)
 
 if test "$PHP_PHAR" != "no"; then
   PHP_NEW_EXTENSION(phar, util.c tar.c zip.c stream.c func_interceptors.c dirstream.c phar.c phar_object.c phar_path_check.c, $ext_shared)

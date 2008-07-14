@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.17 2008/06/30 17:14:48 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.18 2008/07/14 09:49:02 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1312,7 +1312,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 	}
 
 	SEPARATE_ZVAL(replace);
-	if (Z_TYPE_PP(replace) != IS_ARRAY)
+	if (Z_TYPE_PP(replace) != IS_ARRAY && (Z_TYPE_PP(replace) != IS_OBJECT || !is_callable_replace))
 		convert_to_string_ex(replace);
 	if (is_callable_replace) {
 		if (!zend_is_callable(*replace, 0, &callback_name)) {

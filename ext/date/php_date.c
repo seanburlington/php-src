@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.42 2008/07/09 12:50:57 felipe Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.43 2008/07/14 17:35:52 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1610,7 +1610,7 @@ PHP_FUNCTION(checkdate)
 		RETURN_FALSE;
 	}
 
-	if (y < 1 || y > 32767 || m < 1 || m > 12 || d < 1 || d > timelib_days_in_month(y, m)) {
+	if (y < 1 || y > 32767 || timelib_valid_date(y, m, d)) {
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;	/* True : This month, day, year arguments are valid */

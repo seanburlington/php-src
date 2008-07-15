@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.163 2008/07/15 03:04:25 hnangelo Exp $ */
+/* $Id: openssl.c,v 1.164 2008/07/15 03:21:56 hnangelo Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4164,7 +4164,7 @@ PHP_FUNCTION(openssl_seal)
 				&pos) == SUCCESS) {
 		pkeys[i] = php_openssl_evp_from_zval(pubkey, 1, NULL, 0, &key_resources[i] TSRMLS_CC);
 		if (pkeys[i] == NULL) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "not a public key (%dth member of pubkeys)", i);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "not a public key (%dth member of pubkeys)", i+1);
 			RETVAL_FALSE;
 			goto clean_exit;
 		}

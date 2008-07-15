@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.75 2008/07/11 12:16:05 felipe Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.76 2008/07/15 14:58:58 scottmac Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4355,6 +4355,9 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 			case '\0':
 				break;
 			case '<':
+				if (in_q) {
+					break;
+				}
 				if (isspace(*(p + 1)) && !allow_tag_spaces) {
 					goto reg_char;
 				}

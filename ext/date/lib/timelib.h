@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.31 2008/07/14 17:30:09 derick Exp $ */
+/* $Id: timelib.h,v 1.32 2008/07/15 17:37:33 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -56,6 +56,7 @@ timelib_sll timelib_day_of_year(timelib_sll y, timelib_sll m, timelib_sll d);
 timelib_sll timelib_daynr_from_weeknr(timelib_sll y, timelib_sll w, timelib_sll d);
 timelib_sll timelib_days_in_month(timelib_sll y, timelib_sll m);
 void timelib_isoweek_from_date(timelib_sll y, timelib_sll m, timelib_sll d, timelib_sll *iw, timelib_sll *iy);
+int timelib_valid_time(timelib_sll h, timelib_sll i, timelib_sll s);
 int timelib_valid_date(timelib_sll y, timelib_sll m, timelib_sll d);
 
 /* From parse_date.re */

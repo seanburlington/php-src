@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.20 2008/06/24 22:22:48 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.21 2008/07/15 13:11:08 andrey Exp $ */
 
 /* TODO:
  *
@@ -687,6 +687,8 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			client_flags ^= CLIENT_LOCAL_FILES;
 		}
 
+		client_flags &= ~CLIENT_MULTI_STATEMENTS;   /* don't allow multi_queries via connect parameter */
+
 		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%ld", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
 	}
 
@@ -738,7 +740,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			/* create the link */
 			mysql = (php_mysql_conn *) malloc(sizeof(php_mysql_conn));
 			mysql->active_result_id = 0;
-			mysql->multi_query = 1;
+			mysql->multi_query = client_flags & CLIENT_MULTI_STATEMENTS? 1:0;
 #ifndef MYSQL_USE_MYSQLND
 			mysql->conn = mysql_init(NULL);
 #else
@@ -786,7 +788,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			}
 			mysql = (php_mysql_conn *) le->ptr;
 			mysql->active_result_id = 0;
-			mysql->multi_query = 1;
+			mysql->multi_query = client_flags & CLIENT_MULTI_STATEMENTS? 1:0;
 			/* ensure that the link did not die */
 			if (mysql_ping(mysql->conn)) {
 				if (mysql_errno(mysql->conn) == 2006) {

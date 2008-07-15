@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.c,v 1.2.2.11 2008/06/24 22:22:48 andrey Exp $ */
+/* $Id: mysqlnd_palloc.c,v 1.2.2.12 2008/07/15 13:11:09 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -172,7 +172,7 @@ MYSQLND_THD_ZVAL_PCACHE* _mysqlnd_palloc_get_thd_cache_reference(MYSQLND_THD_ZVA
 	if (cache) {
 		++cache->references;
 		DBG_INF_FMT("cache=%p new_refc=%d gc_list.canary1=%p gc_list.canary2=%p",
-					*cache, cache->references, cache->gc_list.canary1, cache->gc_list.canary2);
+					cache, cache->references, cache->gc_list.canary1, cache->gc_list.canary2);
 		mysqlnd_palloc_get_cache_reference(cache->parent);
 	}
 	DBG_RETURN(cache);

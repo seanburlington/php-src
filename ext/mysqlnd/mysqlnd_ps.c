@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.3.2.14 2008/04/24 14:22:19 andrey Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.3.2.15 2008/07/15 13:11:09 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -582,7 +582,7 @@ MYSQLND_METHOD(mysqlnd_stmt, execute)(MYSQLND_STMT * const stmt TSRMLS_DC)
 	SET_ERROR_AFF_ROWS(stmt);
 	SET_ERROR_AFF_ROWS(stmt->conn);
 	
-	if (stmt->state > MYSQLND_STMT_PREPARED && stmt->field_count) {
+	if (stmt->result && stmt->state > MYSQLND_STMT_PREPARED && stmt->field_count) {
 		/*
 		  We don need to copy the data from the buffers which we will clean.
 		  Because it has already been copied. See

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.20 2008/07/15 13:11:19 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.21 2008/07/15 13:39:17 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -866,6 +866,39 @@ static void php_cgi_usage(char *argv0)
 }
 /* }}} */
 
+/* {{{ is_valid_path
+ *
+ * some server configurations allow '..' to slip through in the
+ * translated path.   We'll just refuse to handle such a path.
+ */
+static int is_valid_path(const char *path)
+{
+	const char *p;
+
+	if (!path) {
+		return 0;
+	}
+	p = strstr(path, "..");
+	if (p) {
+		if ((p == path || IS_SLASH(*(p-1))) &&
+		    (*(p+2) == 0 || IS_SLASH(*(p+2)))) {
+			return 0;
+		}
+		while (1) {
+			p = strstr(p+1, "..");
+			if (!p) {
+				break;
+			}
+			if (IS_SLASH(*(p-1)) &&
+			    (*(p+2) == 0 || IS_SLASH(*(p+2)))) {
+					return 0;
+			}
+		}
+	}
+	return 1;
+}
+/* }}} */
+
 /* {{{ init_request_info
 
   initializes request_info structure
@@ -1161,9 +1194,7 @@ static void init_request_info(TSRMLS_D)
 				if (pt) {
 					efree(pt);
 				}
-				/* some server configurations allow '..' to slip through in the
-				   translated path.   We'll just refuse to handle such a path. */
-				if (script_path_translated && !strstr(script_path_translated, "..")) {
+				if (is_valid_path(script_path_translated)) {
 					SG(request_info).path_translated = estrdup(script_path_translated);
 				}
 			} else {
@@ -1194,9 +1225,7 @@ static void init_request_info(TSRMLS_D)
 				} else {
 					SG(request_info).request_uri = env_script_name;
 				}
-				/* some server configurations allow '..' to slip through in the
-				   translated path.   We'll just refuse to handle such a path. */
-				if (script_path_translated && !strstr(script_path_translated, "..")) {
+				if (is_valid_path(script_path_translated)) {
 					SG(request_info).path_translated = estrdup(script_path_translated);
 				}
 				free(real_path);
@@ -1211,9 +1240,7 @@ static void init_request_info(TSRMLS_D)
 			if (!CGIG(discard_path) && env_path_translated) {
 				script_path_translated = env_path_translated;
 			}
-			/* some server configurations allow '..' to slip through in the
-			   translated path.   We'll just refuse to handle such a path. */
-			if (script_path_translated && !strstr(script_path_translated, "..")) {
+			if (is_valid_path(script_path_translated)) {
 				SG(request_info).path_translated = estrdup(script_path_translated);
 			}
 		}

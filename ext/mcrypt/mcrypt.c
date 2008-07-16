@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.113 2008/07/15 17:04:17 pajoye Exp $ */
+/* $Id: mcrypt.c,v 1.114 2008/07/16 08:00:43 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1232,7 +1232,7 @@ int php_mcrypt_iv(php_mcrypt_iv_source source, int size, char **iv_str, int *iv_
 			*iv_len = size;
 #else
 			size_t read_bytes = 0;
-			int fd;
+			int fd, n;
 
 			fd = open(source == PHP_MCRYPT_IV_SOURCE_RANDOM ? "/dev/random" : "/dev/urandom", O_RDONLY);
 			if (fd < 0) {

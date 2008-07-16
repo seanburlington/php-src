@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.29 2008/07/08 18:18:08 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.30 2008/07/16 15:41:58 pajoye Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -449,7 +449,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.29 $'."\n";
+					echo '$Revision: 1.226.2.37.2.35.2.30 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -552,7 +552,7 @@ HELP;
 	}
 	if (strlen($conf_passed))
 	{
-		if (substr(PHP_OS, 0, 3) != "WIN") {
+		if (substr(PHP_OS, 0, 3) == "WIN") {
 			$pass_options .= " -c " . escapeshellarg($conf_passed);
 		} else {
 			$pass_options .= " -c '$conf_passed'";

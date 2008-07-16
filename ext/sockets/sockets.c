@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.198 2008/07/04 14:10:24 felipe Exp $ */
+/* $Id: sockets.c,v 1.199 2008/07/16 14:08:04 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1318,8 +1318,8 @@ PHP_FUNCTION(socket_connect)
 			memset(&s_un, 0, sizeof(struct sockaddr_un));
 
 			s_un.sun_family = AF_UNIX;
-			snprintf(s_un.sun_path, 108, "%s", addr);
-			retval = connect(php_sock->bsd_socket, (struct sockaddr *) &s_un, SUN_LEN(&s_un));
+			memcpy(&s_un.sun_path, addr, addr_len);
+			retval = connect(php_sock->bsd_socket, (struct sockaddr *) &s_un, (socklen_t) XtOffsetOf(struct sockaddr_un, sun_path) + addr_len);
 			break;
 
 		default:

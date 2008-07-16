@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.87 2008/03/19 16:37:48 rasmus Exp $ */
+/* $Id: aolserver.c,v 1.88 2008/07/16 11:59:34 felipe Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -205,7 +205,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int i;
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.87 2008/03/19 16:37:48 rasmus Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.88 2008/07/16 11:59:34 felipe Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -240,8 +240,14 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 
 PHP_FUNCTION(getallheaders);
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO(arginfo_aolserver_getallheaders, 0)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 static const zend_function_entry aolserver_functions[] = {
-	PHP_FE(getallheaders, NULL)
+	PHP_FE(getallheaders, arginfo_aolserver_getallheaders)
 	{NULL, NULL, NULL}
 };
 

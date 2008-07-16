@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.32 2008/03/04 23:39:14 felipe Exp $ */
+/* $Id: php_functions.c,v 1.33 2008/07/16 11:59:34 felipe Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -478,17 +478,64 @@ PHP_MINFO_FUNCTION(apache)
 	}
 }
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2handler_lookup_uri, 0, 0, 1)
+	ZEND_ARG_INFO(0, filename)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2handler_virtual, 0, 0, 1)
+	ZEND_ARG_INFO(0, uri)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_apache2handler_response_headers, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_apache2handler_getallheaders, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2handler_note, 0, 0, 1)
+	ZEND_ARG_INFO(0, note_name)
+	ZEND_ARG_INFO(0, note_value)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2handler_setenv, 0, 0, 2)
+	ZEND_ARG_INFO(0, variable)
+	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_INFO(0, walk_to_top)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2handler_getenv, 0, 0, 1)
+	ZEND_ARG_INFO(0, variable)
+	ZEND_ARG_INFO(0, walk_to_top)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_apache2handler_get_version, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_apache2handler_get_modules, 0)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 static const zend_function_entry apache_functions[] = {
-	PHP_FE(apache_lookup_uri, NULL)
-	PHP_FE(virtual, NULL) 
-	PHP_FE(apache_request_headers, NULL)
-	PHP_FE(apache_response_headers, NULL)
-	PHP_FE(apache_setenv, NULL)
-	PHP_FE(apache_getenv, NULL)
-	PHP_FE(apache_note, NULL)
-	PHP_FE(apache_get_version, NULL)
-	PHP_FE(apache_get_modules, NULL)
-	PHP_FALIAS(getallheaders, apache_request_headers, NULL)
+	PHP_FE(apache_lookup_uri, 		arginfo_apache2handler_lookup_uri)
+	PHP_FE(virtual, 				arginfo_apache2handler_virtual) 
+	PHP_FE(apache_request_headers, 	arginfo_apache2handler_getallheaders)
+	PHP_FE(apache_response_headers, arginfo_apache2handler_response_headers)
+	PHP_FE(apache_setenv, 		arginfo_apache2handler_setenv)
+	PHP_FE(apache_getenv, 		arginfo_apache2handler_getenv)
+	PHP_FE(apache_note, 		arginfo_apache2handler_note)
+	PHP_FE(apache_get_version, 	arginfo_apache2handler_get_version)
+	PHP_FE(apache_get_modules, 	arginfo_apache2handler_get_modules)
+	PHP_FALIAS(getallheaders, 	apache_request_headers, arginfo_apache2handler_getallheaders)
 	{NULL, NULL, NULL}
 };
 

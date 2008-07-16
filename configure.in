@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.22 2008/07/16 16:22:43 jani Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.23 2008/07/16 16:29:37 jani Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -168,7 +168,7 @@ PHP_PROG_RE2C
 dnl Check if bison generated files exist when bison does not..
 case $php_cv_bison_version in
   ""|invalid[)]
-    if ! test -f "$abs_srcdir/Zend/zend_language_parser.h" || ! test -f "$abs_srcdir/Zend/zend_language_parser.c" ; then
+    if ! test -f "$abs_srcdir/Zend/zend_language_parser.h" || ! test -f "$abs_srcdir/Zend/zend_language_parser.c" ; then
       AC_MSG_ERROR([bison is required to build PHP/Zend when building a CVS checkout!])
     fi
     ;;

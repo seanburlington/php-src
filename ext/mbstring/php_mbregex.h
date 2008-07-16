@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.h,v 1.12.2.1.2.1.2.4 2008/07/16 02:30:48 moriyoshi Exp $ */
+/* $Id: php_mbregex.h,v 1.12.2.1.2.1.2.5 2008/07/16 12:21:46 hirokawa Exp $ */
  
 #ifndef _PHP_MBREGEX_H
 #define _PHP_MBREGEX_H
@@ -26,7 +26,7 @@
 #include "php.h"
 #include "zend.h"
 #include "php_onig_compat.h" /* must come prior to the oniguruma header */
-#include "oniguruma.h"
+#include "oniguruma/oniguruma.h"
 #undef UChar
 
 /* {{{ PHP_MBREGEX_GLOBALS */

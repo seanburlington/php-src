@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.12.2.19 2008/07/15 17:38:27 derick Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.12.2.20 2008/07/16 15:41:01 derick Exp $ */
 
 #include "timelib.h"
 
@@ -798,7 +798,7 @@ static long timelib_get_zone(char **ptr, int *dst, timelib_time *t, int *tz_not_
 		}
 #endif
 		/* If we have a TimeZone identifier to start with, use it */
-		if (strstr(tz_abbr, "/")) {
+		if (strstr(tz_abbr, "/") || strcmp(tz_abbr, "UTC") == 0) {
 			if ((res = timelib_parse_tzfile(tz_abbr, tzdb)) != NULL) {
 				t->tz_info = res;
 				t->zone_type = TIMELIB_ZONETYPE_ID;

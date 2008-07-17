@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.165 2008/04/24 14:04:58 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.166 2008/07/17 09:52:51 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1457,7 +1457,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 {
 	MY_MYSQL	*mysql;
 	zval		*mysql_link;
-	zval		callback_name, *p_callback_name;
+	zval		callback_name;
 	zval		*callback_func;
 
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oz", &mysql_link, mysqli_link_class_entry,
@@ -1467,7 +1467,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);
 
-	if (UG(unicode)) {
+	if (UG(unicode) && Z_TYPE_P(callback_func) != IS_ARRAY && Z_TYPE_P(callback_func) != IS_OBJECT) {
 		convert_to_string(callback_func);
 	}
 
@@ -1477,6 +1477,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 		zval_dtor(&callback_name);
 		RETURN_FALSE;
 	}
+	zval_dtor(&callback_name);
 
 	/* save callback function */
 	if (!mysql->li_read) {
@@ -1484,8 +1485,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 	} else {
 		zval_dtor(mysql->li_read);
 	}
-	p_callback_name = &callback_name;
-	ZVAL_ZVAL(mysql->li_read, p_callback_name, 0, 0);
+	ZVAL_ZVAL(mysql->li_read, callback_func, 1, 0);
 
 	RETURN_TRUE;
 }

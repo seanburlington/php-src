@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.178 2008/07/05 20:19:47 felipe Exp $ */
+/* $Id: xml.c,v 1.179 2008/07/17 09:52:51 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -515,7 +515,7 @@ static void xml_set_handler(zval **handler, zval **data TSRMLS_DC)
 	}
 
 	/* IS_ARRAY might indicate that we're using array($obj, 'method') syntax */
-	if (Z_TYPE_PP(data) != IS_ARRAY) {
+	if (Z_TYPE_PP(data) != IS_ARRAY && Z_TYPE_PP(data) != IS_OBJECT) {
 		convert_to_text_ex(data);
 		if (((Z_TYPE_PP(data)==IS_UNICODE) && (Z_USTRLEN_PP(data) == 0)) ||
 			((Z_TYPE_PP(data)==IS_STRING) && (Z_STRLEN_PP(data) == 0))) {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.33 2008/07/17 13:22:32 dmitry Exp $ */
+/* $Id: phar.c,v 1.370.2.34 2008/07/17 14:05:07 dmitry Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1427,7 +1427,9 @@ static inline char *phar_strnstr(const char *buf, int buf_len, const char *searc
 	const char *c;
 	int so_far = 0;
 
-	/* this assumes buf_len > search_len */
+	if (buf_len < search_len) {
+		return NULL;
+	}
 	c = buf - 1;
 	do {
 		if (!(c = memchr(c + 1, search[0], buf_len - search_len - so_far))) {
@@ -1579,7 +1581,7 @@ static int phar_open_from_fp(php_stream* fp, char *fname, int fname_len, char *a
 				}
 			}
 		}
-		if ((pos = phar_strnstr(buffer, 1024 + sizeof(token), token, sizeof(token)-1)) != NULL) {
+		if (got > 0 && (pos = phar_strnstr(buffer, got + sizeof(token), token, sizeof(token)-1)) != NULL) {
 			halt_offset += (pos - buffer); /* no -tokenlen+tokenlen here */
 			return phar_parse_pharfile(fp, fname, fname_len, alias, alias_len, halt_offset, pphar, compression, error TSRMLS_CC);
 		}
@@ -3412,7 +3414,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.33 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.34 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

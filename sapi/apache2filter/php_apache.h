@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.25.2.1.2.2.2.2 2008/01/30 09:41:12 dmitry Exp $ */
+/* $Id: php_apache.h,v 1.25.2.1.2.2.2.3 2008/07/18 13:08:08 scottmac Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -49,7 +49,6 @@ typedef struct php_struct {
 } php_struct;
 
 typedef struct _php_apr_bucket_brigade {
-	unsigned int total_len;
 	apr_bucket_brigade *bb;
 } php_apr_bucket_brigade;
 
@@ -60,8 +59,7 @@ void apply_config(void *);
 extern const command_rec php_dir_cmds[];
 
 static size_t php_apache_read_stream(void *, char *, size_t TSRMLS_DC);
-static void php_apache_close_stream(void * TSRMLS_DC);
-static long php_apache_fteller_stream(void * TSRMLS_DC);
+static size_t php_apache_fsizer_stream(void * TSRMLS_DC);
 
 #define APR_ARRAY_FOREACH_OPEN(arr, key, val) 		\
 {													\

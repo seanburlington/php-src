@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.59.2.3.2.5.2.3 2008/07/18 01:16:25 scottmac Exp $ */
+/* $Id: php_gd.h,v 1.59.2.3.2.5.2.4 2008/07/18 01:51:49 scottmac Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -71,7 +71,7 @@ PHP_MINIT_FUNCTION(gd);
 #if HAVE_LIBT1 || HAVE_GD_FONTMUTEX
 PHP_MSHUTDOWN_FUNCTION(gd);
 #endif
-#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
+#if HAVE_GD_STRINGFT
 PHP_RSHUTDOWN_FUNCTION(gd);
 #endif
 
@@ -101,7 +101,6 @@ PHP_FUNCTION(imagecreate);
 PHP_FUNCTION(imageftbbox);
 PHP_FUNCTION(imagefttext);
 
-#ifdef HAVE_LIBGD20
 PHP_FUNCTION(imagecreatetruecolor);
 PHP_FUNCTION(imagetruecolortopalette);
 PHP_FUNCTION(imagesetthickness);
@@ -114,7 +113,6 @@ PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);
 PHP_FUNCTION(imagecopyresampled);
-#endif
 
 #ifdef PHP_WIN32
 PHP_FUNCTION(imagegrabwindow);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.28 2008/05/01 16:14:29 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.29 2008/07/18 14:33:27 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -97,6 +97,14 @@ typedef struct tlinfo
 	int32_t  offset;
 } tlinfo;
 
+typedef struct tlocinfo
+{
+	char country_code[3];
+	double latitude;
+	double longitude;
+	char *comments;
+} tlocinfo;
+
 typedef struct timelib_tzinfo
 {
 	char    *name;
@@ -114,6 +122,8 @@ typedef struct timelib_tzinfo
 	char    *timezone_abbr;
 
 	tlinfo  *leap_times;
+	unsigned char bc;
+	tlocinfo location;
 } timelib_tzinfo;
 
 typedef struct timelib_special {

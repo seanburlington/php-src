@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.40 2008/05/02 12:48:19 derick Exp $ */
+/* $Id: php_date.h,v 1.41 2008/07/18 14:33:27 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -77,6 +77,7 @@ PHP_FUNCTION(timezone_name_get);
 PHP_FUNCTION(timezone_name_from_abbr);
 PHP_FUNCTION(timezone_offset_get);
 PHP_FUNCTION(timezone_transitions_get);
+PHP_FUNCTION(timezone_location_get);
 PHP_FUNCTION(timezone_identifiers_list);
 PHP_FUNCTION(timezone_abbreviations_list);
 

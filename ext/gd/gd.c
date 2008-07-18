@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.13 2008/07/18 01:51:48 scottmac Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.14 2008/07/18 07:39:53 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -3041,7 +3041,7 @@ PHP_FUNCTION(imagecolorat)
 		}
 	} else {
 		if (im->pixels && gdImageBoundsSafe(im, x, y)) {
-			RETURN_LONG(im->pixels[x][y]);
+			RETURN_LONG(im->pixels[y][x]);
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%ld,%ld is out of bounds", x, y);
 			RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.9 2008/07/19 19:24:07 derick Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.10 2008/07/19 19:45:55 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -538,7 +538,7 @@ static void spl_recursive_it_it_construct(INTERNAL_FUNCTION_PARAMETERS, zend_cla
    Creates a RecursiveIteratorIterator from a RecursiveIterator. */
 SPL_METHOD(RecursiveIteratorIterator, __construct)
 {
-	spl_recursive_it_it_construct(INTERNAL_FUNCTION_PARAM_PASSTHRU, spl_ce_RecursiveIteratorIterator, zend_ce_iterator, RIT_RecursiveIteratorIterator TSRMLS_CC);
+	spl_recursive_it_it_construct(INTERNAL_FUNCTION_PARAM_PASSTHRU, spl_ce_RecursiveIteratorIterator, zend_ce_iterator, RIT_RecursiveIteratorIterator);
 } /* }}} */
 
 /* {{{ proto void RecursiveIteratorIterator::rewind()
@@ -937,7 +937,7 @@ static void spl_recursive_tree_iterator_get_postfix(spl_recursive_it_object * ob
    RecursiveIteratorIterator to generate ASCII graphic trees for the entries in a RecursiveIterator */
 SPL_METHOD(RecursiveTreeIterator, __construct)
 {
-	spl_recursive_it_it_construct(INTERNAL_FUNCTION_PARAM_PASSTHRU, spl_ce_RecursiveTreeIterator, zend_ce_iterator, RIT_RecursiveTreeIterator TSRMLS_CC);
+	spl_recursive_it_it_construct(INTERNAL_FUNCTION_PARAM_PASSTHRU, spl_ce_RecursiveTreeIterator, zend_ce_iterator, RIT_RecursiveTreeIterator);
 } /* }}} */
 
 /* {{{ proto void RecursiveTreeIterator::setPrefixPart() throws OutOfRangeException

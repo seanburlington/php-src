@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.44 2008/05/20 21:46:13 colder Exp $ */
+/* $Id: spl_directory.h,v 1.45 2008/07/19 11:20:04 colder Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -82,6 +82,9 @@ struct _spl_filesystem_object {
 			int                sub_path_len;
 			int                index;
 			int                is_recursive;
+			zend_function      *func_rewind;
+			zend_function      *func_next;
+			zend_function      *func_valid;
 		} dir;
 		struct {
 			php_stream         *stream;

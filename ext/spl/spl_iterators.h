@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.44 2007/12/31 07:12:15 sebastian Exp $ */
+/* $Id: spl_iterators.h,v 1.45 2008/07/19 15:43:35 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -76,6 +76,13 @@ typedef enum {
 #endif
 	DIT_Unknown = ~0
 } dual_it_type;
+
+typedef enum {
+	RIT_Default = 0,
+	RIT_RecursiveIteratorIterator = RIT_Default,
+	RIT_RecursiveTreeIterator,
+	RIT_Unknow = ~0
+} recursive_it_it_type;
 
 enum {
 	/* public */

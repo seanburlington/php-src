@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.46 2008/07/18 14:33:53 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.47 2008/07/19 17:38:29 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3781,7 +3781,7 @@ PHP_FUNCTION(timezone_identifiers_list)
 
 	/* Extra validation */
 	if (what == PHP_DATE_TIMEZONE_PER_COUNTRY && option_len != 2) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "A two-letter ISO 639-2 compatible country code is expected");
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "A two-letter ISO 3166-1 compatible country code is expected");
 		RETURN_FALSE;
 	}
 

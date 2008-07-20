@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.19 2008/07/14 09:49:03 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.20 2008/07/20 16:51:28 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -417,7 +417,7 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 	
 	/* Static methods */
 	if (&ce->function_table) {
-		/* counting static properties */		
+		/* counting static methods */		
 		count = zend_hash_num_elements(&ce->function_table);
 		if (count > 0) {
 			HashPosition pos;
@@ -426,14 +426,15 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 			zend_hash_internal_pointer_reset_ex(&ce->function_table, &pos);
 
 			while (zend_hash_get_current_data_ex(&ce->function_table, (void **) &mptr, &pos) == SUCCESS) {
-				if (mptr->common.fn_flags & ZEND_ACC_STATIC) {
+				if (mptr->common.fn_flags & ZEND_ACC_STATIC
+					&& ((mptr->common.fn_flags & ZEND_ACC_PRIVATE) == 0 || mptr->common.scope == ce)) {
 					count_static_funcs++;
 				}
 				zend_hash_move_forward_ex(&ce->function_table, &pos);
 			}
 		}
 
-		/* static properties */		
+		/* static methods */		
 		string_printf(str, "\n%s  - Static methods [%d] {", indent, count_static_funcs);
 		if (count_static_funcs > 0) {
 			HashPosition pos;
@@ -442,7 +443,8 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 			zend_hash_internal_pointer_reset_ex(&ce->function_table, &pos);
 
 			while (zend_hash_get_current_data_ex(&ce->function_table, (void **) &mptr, &pos) == SUCCESS) {
-				if (mptr->common.fn_flags & ZEND_ACC_STATIC) {
+				if (mptr->common.fn_flags & ZEND_ACC_STATIC
+					&& ((mptr->common.fn_flags & ZEND_ACC_PRIVATE) == 0 || mptr->common.scope == ce)) {
 					string_printf(str, "\n");
 					_function_string(str, mptr, ce, sub_indent.string TSRMLS_CC);
 				}
@@ -5114,7 +5116,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.19 2008/07/14 09:49:03 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.20 2008/07/20 16:51:28 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

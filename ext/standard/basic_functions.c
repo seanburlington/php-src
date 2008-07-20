@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.37 2008/07/17 19:29:34 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.38 2008/07/20 14:28:41 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -687,6 +687,19 @@ ZEND_BEGIN_ARG_INFO(arginfo_array_combine, 0)
 ZEND_END_ARG_INFO()
 /* }}} */
 /* {{{ basic_functions.c */
+static
+ZEND_BEGIN_ARG_INFO(arginfo_get_magic_quotes_gpc, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO(arginfo_get_magic_quotes_runtime, 0)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_set_magic_quotes_runtime, 0, 0, 1)
+	ZEND_ARG_INFO(0, new_setting)
+ZEND_END_ARG_INFO()
+
 static
 ZEND_BEGIN_ARG_INFO(arginfo_constant, 0)
 	ZEND_ARG_INFO(0, const_name)
@@ -3345,10 +3358,10 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(set_time_limit,													arginfo_set_time_limit)
 	PHP_FE(get_cfg_var,														arginfo_get_cfg_var)
 
-	PHP_DEP_FALIAS(magic_quotes_runtime,	set_magic_quotes_runtime,		NULL)
-	PHP_DEP_FE(set_magic_quotes_runtime,									NULL)
-	PHP_FE(get_magic_quotes_gpc,										NULL)
-	PHP_FE(get_magic_quotes_runtime,									NULL)
+	PHP_DEP_FALIAS(magic_quotes_runtime,	set_magic_quotes_runtime,		arginfo_set_magic_quotes_runtime)
+	PHP_DEP_FE(set_magic_quotes_runtime,									arginfo_set_magic_quotes_runtime)
+	PHP_FE(get_magic_quotes_gpc,											arginfo_get_magic_quotes_gpc)
+	PHP_FE(get_magic_quotes_runtime,										arginfo_get_magic_quotes_runtime)
 
 	PHP_FE(import_request_variables,										arginfo_import_request_variables)
 	PHP_FE(error_log,														arginfo_error_log)

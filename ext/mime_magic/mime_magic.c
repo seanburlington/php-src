@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.42.2.5.2.7.2.2 2007/12/31 07:17:10 sebastian Exp $ 
+  $Id: mime_magic.c,v 1.42.2.5.2.7.2.3 2008/07/20 14:28:40 felipe Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -217,9 +217,16 @@ static PHP_GINIT_FUNCTION(mime_magic);
 /* True global resources - no need for thread safety here */
 static magic_server_config_rec mime_global;
 
+/* {{{ arginfo */
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_mime_content_type, 0, 0, 1)
+	ZEND_ARG_INFO(0, filename)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 /* {{{ mime_magic_functions[] */
 const zend_function_entry mime_magic_functions[] = {
-	PHP_FE(mime_content_type,	NULL)	   
+	PHP_FE(mime_content_type,	arginfo_mime_content_type)	   
 	{NULL, NULL, NULL}	
 };
 /* }}} */

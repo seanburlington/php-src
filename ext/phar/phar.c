@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.34 2008/07/17 14:05:07 dmitry Exp $ */
+/* $Id: phar.c,v 1.370.2.35 2008/07/20 14:42:34 dmitry Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -431,13 +431,11 @@ void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC) /* {{{ */
 		if (idata->fp && idata->fp != idata->phar->fp && idata->fp != idata->phar->ufp && idata->fp != idata->internal_file->fp) {
 			php_stream_close(idata->fp);
 		}
-		phar_delete_virtual_dirs(idata->phar, idata->internal_file->filename, idata->internal_file->filename_len TSRMLS_CC);
 		zend_hash_del(&idata->phar->manifest, idata->internal_file->filename, idata->internal_file->filename_len);
 		idata->phar->refcount--;
 		efree(idata);
 	} else {
 		idata->internal_file->is_deleted = 1;
-		phar_delete_virtual_dirs(idata->phar, idata->internal_file->filename, idata->internal_file->filename_len TSRMLS_CC);
 		phar_entry_delref(idata TSRMLS_CC);
 	}
 
@@ -3414,7 +3412,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.34 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.35 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.15.2.4 2008/01/30 15:28:46 rrichards Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.15.2.5 2008/07/21 09:38:04 bjori Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -700,7 +700,7 @@ static PHP_FUNCTION(libxml_set_streams_context)
 }
 /* }}} */
 
-/* {{{ proto void libxml_use_internal_errors([boolean use_errors]) 
+/* {{{ proto bool libxml_use_internal_errors([boolean use_errors]) 
    Disable libxml errors and allow user to fetch error information as needed */
 static PHP_FUNCTION(libxml_use_internal_errors)
 {

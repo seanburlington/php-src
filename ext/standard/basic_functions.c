@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.904 2008/07/21 10:16:32 jani Exp $ */
+/* $Id: basic_functions.c,v 1.905 2008/07/21 11:27:45 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5083,8 +5083,12 @@ PHPAPI char *php_get_current_user(void) /* {{{ */
 		if ((pwd=getpwuid(pstat->st_uid))==NULL) {
 			return "";
 		}
+#endif
 		SG(request_info).current_user_length = strlen(pwd->pw_name);
 		SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);
+#if defined(ZTS) && defined(HAVE_GETPWUID_R) && defined(_SC_GETPW_R_SIZE_MAX)
+		efree(pwbuf);
+#endif
 		return SG(request_info).current_user;
 #endif
 	}

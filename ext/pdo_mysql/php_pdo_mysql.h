@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql.h,v 1.7 2008/01/03 16:18:28 nlopess Exp $ */
+/* $Id: php_pdo_mysql.h,v 1.8 2008/07/21 13:05:51 johannes Exp $ */
 
 #ifndef PHP_PDO_MYSQL_H
 #define PHP_PDO_MYSQL_H
@@ -24,15 +24,16 @@
 extern zend_module_entry pdo_mysql_module_entry;
 #define phpext_pdo_mysql_ptr &pdo_mysql_module_entry
 
+#ifdef PHP_WIN32
+#define PHP_PDO_MYSQL_API __declspec(dllexport)
+#else
+#define PHP_PDO_MYSQL_API
+#endif
+
 #ifdef ZTS
 #include "TSRM.h"
 #endif
 
-PHP_MINIT_FUNCTION(pdo_mysql);
-PHP_MSHUTDOWN_FUNCTION(pdo_mysql);
-PHP_RINIT_FUNCTION(pdo_mysql);
-PHP_RSHUTDOWN_FUNCTION(pdo_mysql);
-PHP_MINFO_FUNCTION(pdo_mysql);
 
 #endif	/* PHP_PDO_MYSQL_H */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.10.2.7.2.1 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.10.2.7.2.2 2008/07/21 17:35:50 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -557,7 +557,7 @@ static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC) /* {{{ */
 
 		case SQLT_BIN:
 		default:
-			if (dtype == SQLT_DAT || dtype == SQLT_NUM
+			if (dtype == SQLT_DAT || dtype == SQLT_NUM || dtype == SQLT_RDD
 #ifdef SQLT_TIMESTAMP
 					|| dtype == SQLT_TIMESTAMP
 #endif

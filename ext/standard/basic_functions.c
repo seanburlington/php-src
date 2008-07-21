@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.902 2008/07/20 14:29:29 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.903 2008/07/21 10:10:34 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2322,7 +2322,7 @@ ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_supports_lock, 0, 0, 1)
-    ZEND_ARG_INFO(0, stream)
+	ZEND_ARG_INFO(0, stream)
 ZEND_END_ARG_INFO()
 
 static
@@ -3902,8 +3902,8 @@ static void basic_globals_dtor(php_basic_globals *basic_globals_p TSRMLS_DC) /* 
 }
 /* }}} */
 
-#define PHP_DOUBLE_INFINITY_HIGH       0x7ff00000
-#define PHP_DOUBLE_QUIET_NAN_HIGH      0xfff80000
+#define PHP_DOUBLE_INFINITY_HIGH	0x7ff00000
+#define PHP_DOUBLE_QUIET_NAN_HIGH	0xfff80000
 
 PHPAPI double php_get_nan(void) /* {{{ */
 {

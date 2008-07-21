@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.46 2008/02/28 14:16:24 felipe Exp $ */ 
+/* $Id: unicode.c,v 1.47 2008/07/21 11:32:49 felipe Exp $ */ 
 
 #include "php_unicode.h"
 #include "zend_unicode.h"
@@ -122,14 +122,6 @@ static PHP_FUNCTION(unicode_encode)
 	ucnv_close(conv);	
 
 	RETVAL_STRINGL(dest, dest_len, 0);
-}
-/* }}} */
-
-/* {{{ proto bool unicode_semantics() U
-   Check whether unicode semantics are enabled */
-static PHP_FUNCTION(unicode_semantics)
-{
-	RETURN_BOOL(UG(unicode));
 }
 /* }}} */
 
@@ -303,7 +295,6 @@ const zend_function_entry unicode_functions[] = {
 	PHP_FE(locale_get_default, NULL)
 	PHP_FE(locale_set_default, NULL)
 	PHP_FE(unicode_decode, NULL)
-	PHP_FE(unicode_semantics, NULL)
 	PHP_FE(unicode_encode, NULL)
 	PHP_FE(unicode_set_error_handler, NULL)
 	PHP_FE(unicode_restore_error_handler, NULL)

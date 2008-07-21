@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.22 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.23 2008/07/21 13:01:41 andrey Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -87,4 +87,13 @@ enum {
 	PDO_MYSQL_ATTR_MAX_BUFFER_SIZE,
 	PDO_MYSQL_ATTR_DIRECT_QUERY,
 };
+
+#ifndef PDO_MYSQL_UNIX_ADDR
+# ifdef PHP_WIN32
+#  define PDO_MYSQL_UNIX_ADDR	"MySQL"
+# else
+#  define PDO_MYSQL_UNIX_ADDR	"/tmp/mysql.sock"
+# endif
+#endif
+
 #endif

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.26 2005/09/24 23:22:43 sniper Exp $
+dnl $Id: config.m4,v 1.27 2008/07/21 13:01:41 andrey Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -47,7 +47,11 @@ Note that the MySQL client library is not bundled anymore!])
 	PDO_MYSQL_SOCKET=`$PDO_MYSQL_CONFIG --socket` 
   fi
 
-  AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PDO_MYSQL_SOCKET", [ ])
+  if test "$PHP_MYSQL_SOCK" != "no" && test "$PHP_MYSQL_SOCK" != "yes"; then
+    AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PHP_MYSQL_SOCK", [ ])  
+  else
+    AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PDO_MYSQL_SOCKET", [ ])
+  fi
 
   PHP_ADD_LIBRARY_WITH_PATH(mysqlclient, $PDO_MYSQL_LIB_DIR, PDO_MYSQL_SHARED_LIBADD)
   PHP_ADD_INCLUDE($PDO_MYSQL_INC_DIR)

@@ -1,11 +1,11 @@
-dnl $Id: config.m4,v 1.13 2008/06/28 15:20:49 scottmac Exp $
+dnl $Id: config.m4,v 1.14 2008/07/21 07:27:00 tony2001 Exp $
 dnl config.m4 for extension hash
 
 PHP_ARG_ENABLE(hash, whether to enable hash support,
 [  --disable-hash          Disable hash support], yes)
 
 if test "$PHP_MHASH" != "no"; then
-  if test "$PHP_HASH" == "no"; then
+  if test "$PHP_HASH" = "no"; then
     PHP_HASH="yes"
   fi
 

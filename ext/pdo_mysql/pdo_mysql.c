@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.8.2.13.2.1.2.2 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: pdo_mysql.c,v 1.8.2.13.2.1.2.3 2008/07/21 12:58:51 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,6 +102,7 @@ PHP_MINFO_FUNCTION(pdo_mysql)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PDO Driver for MySQL, client library version", mysql_get_client_info());
+	php_info_print_table_row(2, "MYSQL_SOCKET", PDO_MYSQL_UNIX_ADDR);
 	php_info_print_table_end();
 }
 /* }}} */

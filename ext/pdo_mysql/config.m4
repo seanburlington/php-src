@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.7.2.6 2007/07/31 13:02:00 jani Exp $
+dnl $Id: config.m4,v 1.25.2.7.2.6.2.1 2008/07/21 12:58:51 andrey Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -96,8 +96,12 @@ if test "$PHP_PDO_MYSQL" != "no"; then
     PDO_MYSQL_INCLUDE=-I$PDO_MYSQL_INC_DIR
   fi
 
-  AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PDO_MYSQL_SOCKET", [ ])
 
+  if test "$PHP_MYSQL_SOCK" != "no" && test "$PHP_MYSQL_SOCK" != "yes"; then
+    AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PHP_MYSQL_SOCK", [ ])  
+  else
+    AC_DEFINE_UNQUOTED(PDO_MYSQL_UNIX_ADDR, "$PDO_MYSQL_SOCKET", [ ])
+  fi
 
   PHP_CHECK_LIBRARY($PDO_MYSQL_LIBNAME, mysql_query,
   [

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59.2.13.2.5.2.1 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: mysql_driver.c,v 1.59.2.13.2.5.2.2 2008/07/21 12:58:51 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -423,13 +423,6 @@ static struct pdo_dbh_methods mysql_methods = {
 	pdo_mysql_check_liveness
 };
 
-#ifndef PDO_MYSQL_UNIX_ADDR
-# ifdef PHP_WIN32
-#  define PDO_MYSQL_UNIX_ADDR	"MySQL"
-# else
-#  define PDO_MYSQL_UNIX_ADDR	"/tmp/mysql.sock"
-# endif
-#endif
 
 static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */
 {

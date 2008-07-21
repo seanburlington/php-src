@@ -18,7 +18,7 @@
 */
 
 
-/* $Id: php_mysql_structs.h,v 1.1.2.4 2008/03/10 20:15:38 andrey Exp $ */
+/* $Id: php_mysql_structs.h,v 1.1.2.5 2008/07/21 12:58:51 andrey Exp $ */
 
 #ifndef PHP_MYSQL_STRUCTS_H
 #define PHP_MYSQL_STRUCTS_H
@@ -40,6 +40,13 @@
 #include "mysql_mysqlnd.h"
 #else
 #include <mysql.h>
+#endif
+
+#ifdef PHP_MYSQL_UNIX_SOCK_ADDR
+#ifdef MYSQL_UNIX_ADDR
+#undef MYSQL_UNIX_ADDR
+#endif
+#define MYSQL_UNIX_ADDR PHP_MYSQL_UNIX_SOCK_ADDR
 #endif
 
 #if (MYSQL_VERSION_ID >= 40113 && MYSQL_VERSION_ID < 50000) || MYSQL_VERSION_ID >= 50007 || MYSQL_USE_MYSQLND

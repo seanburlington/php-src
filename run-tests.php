@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.361 2008/07/08 18:18:49 nlopess Exp $ */
+/* $Id: run-tests.php,v 1.362 2008/07/21 09:36:21 bjori Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -166,7 +166,7 @@ $ini_overwrites = array(
 		'open_basedir=',
 		'disable_functions=',
 		'output_buffering=Off',
-		'error_reporting=16383',
+		'error_reporting=30719',
 		'display_errors=1',
 		'display_startup_errors=1',
 		'log_errors=0',
@@ -447,7 +447,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.361 $' . "\n";
+					echo '$Revision: 1.362 $' . "\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.66.2.11.2.6.2.3 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: php_pdo_driver.h,v 1.66.2.11.2.6.2.4 2008/07/21 13:09:28 johannes Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -44,7 +44,7 @@ PDO_API char *php_pdo_int64_to_str(pdo_int64_t i64 TSRMLS_DC);
 # define FALSE 0
 #endif
 
-#define PDO_DRIVER_API	20060511
+#define PDO_DRIVER_API	20080721
 
 enum pdo_param_type {
 	PDO_PARAM_NULL,
@@ -67,7 +67,12 @@ enum pdo_param_type {
 	PDO_PARAM_STMT, /* hierarchical result set */
 
 	/* get_col ptr should point to a zend_bool */
-	PDO_PARAM_BOOL
+	PDO_PARAM_BOOL,
+
+	/* get_col ptr should point to a zval*
+	   and the driver is responsible for adding correct type information to get_column_meta()
+	 */
+	PDO_PARAM_ZVAL
 };
 
 /* magic flag to denote a parameter as being input/output */

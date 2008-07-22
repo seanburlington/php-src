@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.7.2.12.2.3 2008/07/19 15:49:21 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.7.2.12.2.4 2008/07/22 22:54:35 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -35,6 +35,7 @@
 
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIteratorIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveTreeIterator;
 extern PHPAPI zend_class_entry *spl_ce_FilterIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveFilterIterator;
 extern PHPAPI zend_class_entry *spl_ce_ParentIterator;

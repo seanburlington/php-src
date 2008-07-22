@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.134 2008/07/22 16:18:37 scottmac Exp $ */
+/* $Id: exec.c,v 1.135 2008/07/22 21:56:25 scottmac Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -287,7 +287,7 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 #else
 			/* This is Windows specific for enviromental variables */
 			case '%':
-				cmd[y++] = '';
+				cmd[y++] = ' ';
 				break;
 #endif
 			case '#': /* This is character-set independent */

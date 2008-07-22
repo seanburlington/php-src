@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.61 2008/04/08 08:42:05 jani Exp $ */
+/* $Id: proc_open.c,v 1.62 2008/07/22 14:06:16 felipe Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -971,7 +971,7 @@ PHP_FUNCTION(proc_open)
 					zval *retfp;
 
 					/* nasty hack; don't copy it */
-					stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
+					stream->flags |= PHP_STREAM_FLAG_NO_SEEK | PHP_STREAM_FLAG_FCLOSE;
 
 					if (UG(unicode) && !binary_pipes) {
 						if (write_stream) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.290 2008/07/21 09:58:28 sfox Exp $ */
+/* $Id: info.c,v 1.291 2008/07/22 10:04:53 pajoye Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -553,10 +553,6 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 #endif
 #ifdef CONFIGURE_COMMAND
 		php_info_print_table_row(2, "Configure Command", CONFIGURE_COMMAND );
-#endif
-
-#ifdef PHP_WIN32
-		php_info_print_table_row(2, "Windows Compiler and Version", PHP_WINAPI_COMPILER );
 #endif
 
 		if (sapi_module.pretty_name) {

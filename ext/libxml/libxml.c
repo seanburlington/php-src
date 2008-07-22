@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.15.2.5 2008/07/21 09:38:04 bjori Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.15.2.6 2008/07/22 10:30:38 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -523,7 +523,7 @@ static void php_libxml_internal_error_handler(int error_type, void *ctx, const c
 	}
 }
 
-void php_libxml_ctx_error(void *ctx, const char *msg, ...)
+PHP_LIBXML_API void php_libxml_ctx_error(void *ctx, const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -531,7 +531,7 @@ void php_libxml_ctx_error(void *ctx, const char *msg, ...)
 	va_end(args);
 }
 
-void php_libxml_ctx_warning(void *ctx, const char *msg, ...)
+PHP_LIBXML_API void php_libxml_ctx_warning(void *ctx, const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -974,7 +974,7 @@ PHP_LIBXML_API int php_libxml_decrement_doc_ref(php_libxml_node_object *object T
 	return ret_refcount;
 }
 
-void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC)
+PHP_LIBXML_API void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC)
 {
 	if (!node) {
 		return;
@@ -1010,7 +1010,7 @@ void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC)
 	}
 }
 
-void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC)
+PHP_LIBXML_API void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC)
 {
 	int ret_refcount = -1;
 	xmlNodePtr nodep;

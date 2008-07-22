@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.12 2008/01/03 16:18:27 nlopess Exp $ */
+/* $Id: php_json.h,v 1.13 2008/07/22 15:31:00 jani Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -29,11 +29,6 @@ extern zend_module_entry json_module_entry;
 #ifdef ZTS
 #include "TSRM.h"
 #endif
-
-PHP_MINFO_FUNCTION(json);
-
-PHP_FUNCTION(json_encode);
-PHP_FUNCTION(json_decode);
 
 #endif  /* PHP_JSON_H */
 

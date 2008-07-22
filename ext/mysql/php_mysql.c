@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.23 2008/07/22 17:41:15 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.24 2008/07/22 23:44:23 andrey Exp $ */
 
 /* TODO:
  *
@@ -794,6 +794,9 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			mysql->active_result_id = 0;
 			mysql->multi_query = client_flags & CLIENT_MULTI_STATEMENTS? 1:0;
 			/* ensure that the link did not die */
+#if defined(MYSQL_USE_MYSQLND)
+			mysqlnd_end_psession(mysql->conn);
+#endif	
 			if (mysql_ping(mysql->conn)) {
 				if (mysql_errno(mysql->conn) == 2006) {
 #ifndef MYSQL_USE_MYSQLND

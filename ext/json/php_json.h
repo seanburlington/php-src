@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.8.2.2.2.2 2008/01/03 16:20:31 nlopess Exp $ */
+/* $Id: php_json.h,v 1.8.2.2.2.3 2008/07/22 14:57:46 jani Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -30,14 +30,7 @@ extern zend_module_entry json_module_entry;
 #include "TSRM.h"
 #endif
 
-#ifdef ZTS
-#define JSON_G(v) TSRMG(json_globals_id, zend_json_globals *, v)
-#else
-#define JSON_G(v) (json_globals.v)
-#endif
-
 #endif  /* PHP_JSON_H */
-
 
 /*
  * Local variables:

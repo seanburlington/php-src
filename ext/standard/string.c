@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.676 2008/07/15 14:44:46 scottmac Exp $ */
+/* $Id: string.c,v 1.677 2008/07/22 01:05:55 scottmac Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2795,7 +2795,7 @@ PHP_FUNCTION(strrpos)
 			u_e = haystack.u + haystack_len - needle_len;
 		} else {
 			u_p = haystack.u;
-			if (-offset > haystack_len) {
+			if (-offset > haystack_len || offset < -INT_MAX) {
 				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Offset is greater than the length of haystack string");
 				RETURN_FALSE;
 			} else {
@@ -2832,7 +2832,7 @@ PHP_FUNCTION(strrpos)
 			p = haystack.s + offset;
 			e = haystack.s + haystack_len - needle_len;
 		} else {
-			if (-offset > haystack_len) {
+			if (-offset > haystack_len || offset < -INT_MAX) {
 				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Offset is greater than the length of haystack string");
 				RETURN_FALSE;
 			}

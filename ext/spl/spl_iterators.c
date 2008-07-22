@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.173 2008/07/19 19:45:25 colder Exp $ */
+/* $Id: spl_iterators.c,v 1.174 2008/07/22 22:54:14 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -35,6 +35,7 @@
 #include "spl_directory.h"
 #include "spl_array.h"
 #include "spl_exceptions.h"
+#include "spl_observer.h"
 #include "ext/standard/php_smart_str.h"
 
 #ifdef accept

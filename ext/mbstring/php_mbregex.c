@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.9 2008/07/17 16:08:37 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.10 2008/07/22 09:18:30 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -32,10 +32,6 @@
 #include "ext/standard/info.h"
 #include "php_mbregex.h"
 #include "mbstring.h"
-
-#include "php_onig_compat.h" /* must come prior to the oniguruma header */
-#include <oniguruma.h>
-#undef UChar
  
 #include "php_onig_compat.h" /* must come prior to the oniguruma header */
 #include <oniguruma.h>

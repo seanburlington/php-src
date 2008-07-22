@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.22.2.8 2008/03/25 21:58:29 helly Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.22.2.9 2008/07/22 14:09:24 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -501,6 +501,10 @@ static void cli_register_file_handles(TSRMLS_D) /* {{{ */
 		if (s_err) php_stream_close(s_err);
 		return;
 	}
+	
+	s_in->flags  |= PHP_STREAM_FLAG_FCLOSE;
+	s_out->flags |= PHP_STREAM_FLAG_FCLOSE;
+	s_err->flags |= PHP_STREAM_FLAG_FCLOSE;
 
 #if PHP_DEBUG
 	/* do not close stdout and stderr */

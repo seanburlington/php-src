@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.364 2008/07/21 16:07:57 jani Exp $ */
+/* $Id: run-tests.php,v 1.365 2008/07/22 09:34:40 sfox Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -478,7 +478,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.364 $' . "\n";
+					echo '$Revision: 1.365 $' . "\n";
 					exit(1);
 
 				default:
@@ -517,7 +517,7 @@ Options:
 
     -s <file>   Write output to <file>.
 
-    -x          FIXME: STEPH WRITES THE HELP TEXT HERE!!
+    -x          Sets 'SKIP_SLOW_TESTS' environmental variable.
 
     --verbose
     -v          Verbose mode.
@@ -539,8 +539,10 @@ Options:
                 Do not delete 'all' files, 'php' test file, 'skip' or 'clean'
                 file.
 
-    --set-timeout
-                FIXME: STEPH WRITES THE HELP TEXT HERE!!
+    --set-timeout [n]
+                Set timeout for individual tests, where [n] is the number of
+                seconds. The default value is 60 seconds, or 300 seconds when
+                testing for memory leaks.
 
     --show-[all|php|skip|clean|exp|diff|out]
                 Show 'all' files, 'php' test file, 'skip' or 'clean' file. You

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.261 2008/07/21 13:01:41 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.262 2008/07/22 17:40:43 andrey Exp $ */
 
 /* TODO:
  *
@@ -1004,6 +1004,15 @@ PHP_FUNCTION(mysql_close)
 	}
 	
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, mysql_link, id, "MySQL-Link", le_link, le_plink);
+
+#ifdef MYSQL_USE_MYSQLND
+	{
+		int tmp;
+		if ((mysql = zend_list_find(Z_RESVAL_PP(mysql_link), &tmp)) && tmp == le_plink) {
+			mysqlnd_end_psession(mysql->conn);
+		}
+	}
+#endif
 
 	if (id==-1) { /* explicit resource number */
 		PHPMY_UNBUFFERED_QUERY_CHECK();

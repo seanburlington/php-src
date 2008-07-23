@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.87 2008/07/23 18:49:37 derick Exp $ */
+/* $Id: parse_date.re,v 1.88 2008/07/23 19:52:51 derick Exp $ */
 
 #include "timelib.h"
 
@@ -957,7 +957,7 @@ relative = relnumber space? (reltextunit | 'week' );
 relativetext = (reltextnumber|reltexttext) space reltextunit;
 relativetextweek = reltexttext space 'week';
 
-weekdayof        = (reltextnumber|reltexttext) space (dayfull|dayabbr) ' of';
+weekdayof        = (reltextnumber|reltexttext) space (dayfull|dayabbr) space 'of';
 
 */
 
@@ -1071,13 +1071,12 @@ weekdayof        = (reltextnumber|reltexttext) space (dayfull|dayabbr) ' of';
 
 		i = timelib_get_relative_text((char **) &ptr, &behavior);
 		timelib_eat_spaces((char **) &ptr);
-		timelib_set_relative((char **) &ptr, i, behavior, s);
 		if (i > 0) { /* first, second... etc */
 			s->time->relative.special.type = TIMELIB_SPECIAL_DAY_OF_WEEK_IN_MONTH;
-			timelib_set_relative((char **) &ptr, i, behavior, s);
+			timelib_set_relative((char **) &ptr, i, 1, s);
 		} else { /* last */
 			s->time->relative.special.type = TIMELIB_SPECIAL_LAST_DAY_OF_WEEK_IN_MONTH;
-			timelib_set_relative((char **) &ptr, -i, behavior, s);
+			timelib_set_relative((char **) &ptr, i, behavior, s);
 		}
 		TIMELIB_DEINIT;
 		return TIMELIB_WEEK_DAY_OF_MONTH;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.103.2.1.2.4.2.5 2008/07/22 14:09:24 felipe Exp $ */
+/* $Id: php_streams.h,v 1.103.2.1.2.4.2.6 2008/07/23 11:25:14 tony2001 Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -183,7 +183,7 @@ struct _php_stream_wrapper	{
 	
 #define PHP_STREAM_FLAG_IS_DIR						64
 
-#define PHP_STREAM_FLAG_FCLOSE						128
+#define PHP_STREAM_FLAG_NO_FCLOSE					128
 
 struct _php_stream  {
 	php_stream_ops *ops;

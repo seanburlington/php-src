@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.12.2.7 2008/06/11 09:01:56 dmitry Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.12.2.8 2008/07/23 11:25:14 tony2001 Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -220,6 +220,8 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	if (dirp == NULL) {
 		RETURN_FALSE;
 	}
+
+	dirp->flags |= PHP_STREAM_FLAG_NO_FCLOSE;
 		
 	php_set_default_dir(dirp->rsrc_id TSRMLS_CC);
 

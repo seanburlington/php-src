@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.18 2008/07/22 14:09:24 felipe Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.19 2008/07/23 11:25:14 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -155,8 +155,6 @@ PHP_FUNCTION(stream_socket_client)
 		RETURN_FALSE;
 	}
 	
-	stream->flags |= PHP_STREAM_FLAG_FCLOSE;
-	
 	if (errstr) {
 		efree(errstr);
 	}
@@ -204,8 +202,6 @@ PHP_FUNCTION(stream_socket_server)
 			STREAM_XPORT_SERVER | flags,
 			NULL, NULL, context, &errstr, &err);
 			
-	stream->flags |= PHP_STREAM_FLAG_FCLOSE;
-
 	if (stream == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to %s (%s)", host, errstr == NULL ? "Unknown error" : errstr);
 	}
@@ -270,8 +266,6 @@ PHP_FUNCTION(stream_socket_accept)
 				NULL, NULL,
 				&tv, &errstr
 				TSRMLS_CC) && clistream) {
-		
-		clistream->flags |= PHP_STREAM_FLAG_FCLOSE;
 		
 		if (peername) {
 			ZVAL_STRINGL(zpeername, peername, peername_len, 0);

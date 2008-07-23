@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.13 2007/12/31 07:20:04 sebastian Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.14 2008/07/23 08:56:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -247,7 +247,9 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 			if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD, (void **) &fd, REPORT_ERRORS)) {
 				bz_file = BZ2_bzdopen(fd, mode);
 			}
+			stream->flags |= PHP_STREAM_FLAG_FCLOSE;
 		}
+
 		/* remove the file created by php_stream_open_wrapper(), it is not needed since BZ2 functions
 		 * failed.
 		 */
@@ -259,6 +261,7 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 	if (bz_file) {
 		retstream = _php_stream_bz2open_from_BZFILE(bz_file, mode, stream STREAMS_REL_CC TSRMLS_CC);
 		if (retstream) {
+			retstream->flags |= PHP_STREAM_FLAG_FCLOSE;
 			return retstream;
 		}
 

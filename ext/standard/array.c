@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.35 2008/07/09 21:29:52 colder Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.36 2008/07/23 16:28:46 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2837,8 +2837,12 @@ static void php_array_intersect_key(INTERNAL_FUNCTION_PARAMETERS, int data_compa
 	/* Get the argument count */
 	argc = ZEND_NUM_ARGS();
 	if (data_compare_type == INTERSECT_COMP_DATA_USER) {
-		if (argc < 3 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+f", &args, &argc, &BG(user_compare_fci), &BG(user_compare_fci_cache)) == FAILURE) {
+		if (argc < 3) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "at least 3 parameters are required, %d given", ZEND_NUM_ARGS());
+			return;
+		}
+		
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+f", &args, &argc, &BG(user_compare_fci), &BG(user_compare_fci_cache)) == FAILURE) {
 			return;
 		}
 		intersect_data_compare_func = zval_user_compare;

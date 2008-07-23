@@ -1,4 +1,4 @@
-/* $Id: zip_stream.c,v 1.1.2.6 2008/07/23 09:09:20 tony2001 Exp $ */
+/* $Id: zip_stream.c,v 1.1.2.7 2008/07/23 11:25:50 tony2001 Exp $ */
 #ifdef HAVE_CONFIG_H
 #   include "config.h"
 #endif
@@ -140,7 +140,6 @@ php_stream *php_stream_zip_open(char *filename, char *path, char *mode STREAMS_D
 	if (!stream) {
 		return NULL;
 	} else {
-		stream->flags |= PHP_STREAM_FLAG_FCLOSE;
 		return stream;
 	}
 

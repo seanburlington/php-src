@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.45 2008/03/13 13:51:40 felipe Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.46 2008/07/23 13:43:05 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -58,6 +58,11 @@ NO_PROC_OPEN_ERROR;
 exit;
 }
 
+// If timezone is not set, use UTC.
+if (ini_get('date.timezone') == '') {
+	date_default_timezone_set('UTC');
+}
+
 // store current directory
 $CUR_DIR = getcwd();
 
@@ -75,6 +80,8 @@ putenv('SSH_CONNECTION=deleted');
 
 $cwd = getcwd();
 set_time_limit(0);
+
+ini_set('pcre.backtrack_limit', PHP_INT_MAX);
 
 $valgrind_version = 0;
 
@@ -421,7 +428,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.45 $'."\n";
+					echo '$Revision: 1.226.2.37.2.46 $'."\n";
 					exit(1);
 
 				case 'u':

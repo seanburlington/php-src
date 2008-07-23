@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.12.2.20 2008/07/16 15:41:01 derick Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.12.2.21 2008/07/23 18:50:18 derick Exp $ */
 
 #include "timelib.h"
 
@@ -1680,7 +1680,7 @@ weekdayof        = (reltextnumber|reltexttext) space (dayfull|dayabbr) ' of';
 		while(*ptr) {
 			i = timelib_get_unsigned_nr((char **) &ptr, 24);
 			timelib_eat_spaces((char **) &ptr);
-			timelib_set_relative((char **) &ptr, i, 0, s);
+			timelib_set_relative((char **) &ptr, i, 1, s);
 		}
 		TIMELIB_DEINIT;
 		return TIMELIB_RELATIVE;

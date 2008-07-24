@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite.c,v 1.17 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: pdo_sqlite.c,v 1.18 2008/07/24 01:01:42 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -95,12 +95,6 @@ PHP_MINFO_FUNCTION(pdo_sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PDO Driver for SQLite 3.x", "enabled");
-	php_info_print_table_row(2, "PECL Module version",
-#if PDO_SQLITE_BUNDLED
-	"(bundled) "
-#endif
-		PHP_PDO_SQLITE_MODULE_VERSION 
-		" $Id: pdo_sqlite.c,v 1.17 2007/12/31 07:12:13 sebastian Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite3_libversion());
 	php_info_print_table_end();
 }

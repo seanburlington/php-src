@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.17 2008/03/31 09:37:51 sfox Exp $ */
+/* $Id: fileinfo.c,v 1.18 2008/07/24 13:40:21 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(fileinfo)
 PHP_FUNCTION(finfo_open)
 {
 	long options = MAGIC_NONE;
-	char *file = PHP_DEFAULT_MAGIC_FILE;
+	char *file = NULL;
 	int file_len = 0;
 	struct php_fileinfo *finfo;
 	FILEINFO_DECLARE_INIT_OBJECT(object)

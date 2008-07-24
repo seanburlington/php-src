@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.11 2008/07/19 11:20:18 colder Exp $ */
+/* $Id: spl_directory.h,v 1.12.2.5.2.4.2.12 2008/07/24 08:55:52 sfox Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -133,6 +133,7 @@ static inline spl_filesystem_object* spl_filesystem_iterator_to_object(spl_files
 #define SPL_FILE_DIR_KEY(intern,mode)      ((intern->flags&SPL_FILE_DIR_KEY_MODE_MASK)==mode)
 
 #define SPL_FILE_DIR_SKIPDOTS              0x00001000 /* Tells whether it should skip dots or not */
+#define SPL_FILE_DIR_UNIXPATHS             0x00002000 /* Whether to unixify path separators */
 
 #endif /* SPL_DIRECTORY_H */
 

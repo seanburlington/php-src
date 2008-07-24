@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.367 2008/07/23 16:10:14 lstrojny Exp $ */
+/* $Id: run-tests.php,v 1.368 2008/07/24 19:50:22 felipe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -189,7 +189,11 @@ $ini_overwrites = array(
 		'safe_mode=0',
 		'disable_functions=',
 		'output_buffering=Off',
+<<<<<<< run-tests.php
+		'error_reporting=32767', /* E_ALL | E_STRICT */
+=======
 		'error_reporting=' . (E_ALL | E_STRICT),
+>>>>>>> 1.367
 		'display_errors=1',
 		'display_startup_errors=1',
 		'log_errors=0',
@@ -478,7 +482,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.367 $' . "\n";
+					echo '$Revision: 1.368 $' . "\n";
 					exit(1);
 
 				default:

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.58.2.4.2.11.2.5 2008/07/16 02:30:48 moriyoshi Exp $
+dnl $Id: config.m4,v 1.58.2.4.2.11.2.6 2008/07/24 13:01:49 moriyoshi Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -111,6 +111,7 @@ int main() { return foo(10, "", 3.14); }
         AC_DEFINE([HAVE_STDARG_PROTOTYPES], [1], [Define to 1 if you have the <stdarg.h> header file.])
       ], [])
       AC_DEFINE([PHP_ONIG_BUNDLED], [1], [Define to 1 if the bundled oniguruma is used])
+      AC_DEFINE([HAVE_ONIG], [1], [Define to 1 if the oniguruma library is available]) 
       PHP_MBSTRING_ADD_CFLAG([-DNOT_RUBY])
       PHP_MBSTRING_ADD_BUILD_DIR([oniguruma])
       PHP_MBSTRING_ADD_BUILD_DIR([oniguruma/enc])
@@ -170,6 +171,7 @@ int main() { return foo(10, "", 3.14); }
 
       PHP_CHECK_LIBRARY(onig, onig_init, [
         PHP_ADD_LIBRARY_WITH_PATH(onig, $PHP_ONIG/$PHP_LIBDIR, MBSTRING_SHARED_LIBADD)
+        AC_DEFINE([HAVE_ONIG], [1], [Define to 1 if the oniguruma library is available]) 
       ],[
         AC_MSG_ERROR([Problem with oniguruma. Please check config.log for more information.])
       ], [

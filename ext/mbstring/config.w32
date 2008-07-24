@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.14 2007/07/16 19:07:22 tony2001 Exp $
+// $Id: config.w32,v 1.15 2008/07/24 16:59:53 moriyoshi Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("mbstring", "multibyte string functions", "no");
@@ -52,6 +52,7 @@ if (PHP_MBSTRING == "yes") {
 	if (PHP_MBREGEX != "no") {
 		AC_DEFINE('HAVE_STDARG_PROTOTYPES', 1, 'have stdarg.h');
 		AC_DEFINE('HAVE_MBREGEX', 1);
+		AC_DEFINE('HAVE_ONIG', 1);
 		ADD_SOURCES("ext/mbstring/oniguruma", "regcomp.c regerror.c \
 			regenc.c regexec.c reggnu.c regparse.c regposerr.c \
 			regext.c regsyntax.c regtrav.c regversion.c st.c", "mbstring");

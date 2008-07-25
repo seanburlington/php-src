@@ -1,54 +1,21 @@
-dnl $Id: config.m4,v 1.1 2004/02/13 01:06:06 iliaa Exp $
+dnl $Id: config.m4,v 1.11.2.1 2008/07/25 09:16:22 jani Exp $
 dnl config.m4 for extension fileinfo
 
-PHP_ARG_WITH(fileinfo, for fileinfo support,
-[  --with-fileinfo=DIR   Include fileinfo support])
+PHP_ARG_ENABLE(fileinfo, for fileinfo support,
+[  --disable-fileinfo      Disable fileinfo support], yes)
 
 if test "$PHP_FILEINFO" != "no"; then
-  SEARCH_PATH="/usr/local /usr"
-  SEARCH_FOR="/include/magic.h"
-  if test -r $PHP_FILEINFO/$SEARCH_FOR; then
-    FILEINFO_DIR=$PHP_FILEINFO
-  else
-    AC_MSG_CHECKING([for magic files in default path])
-    for i in $SEARCH_PATH ; do
-      if test -r $i/$SEARCH_FOR; then
-        FILEINFO_DIR=$i
-        AC_MSG_RESULT(found in $i)
-      fi
-    done
-  fi
-  
-  if test -z "$FILEINFO_DIR"; then
-    AC_MSG_RESULT([not found])
-    AC_MSG_ERROR([Please reinstall the libmagic distribution])
-  fi
 
-  PHP_ADD_INCLUDE($FILEINFO_DIR/include)
+  libmagic_sources=" \
+    libmagic/apprentice.c libmagic/apptype.c libmagic/ascmagic.c \
+    libmagic/compress.c libmagic/fsmagic.c libmagic/funcs.c \
+    libmagic/getopt_long.c libmagic/is_tar.c libmagic/magic.c libmagic/print.c \
+    libmagic/readelf.c libmagic/softmagic.c"
 
-  LIBNAME=magic
-  LIBSYMBOL=magic_open
+  PHP_NEW_EXTENSION(fileinfo, fileinfo.c $libmagic_sources, $ext_shared,,-I@ext_srcdir@/libmagic)
+  PHP_ADD_BUILD_DIR($ext_builddir/libmagic)
 
-  PHP_CHECK_LIBRARY($LIBNAME,$LIBSYMBOL,
-  [
-    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $FILEINFO_DIR/lib, FILEINFO_SHARED_LIBADD)
-    AC_DEFINE(HAVE_FILEINFOLIB,1,[ ])
-  ],[
-    AC_MSG_ERROR([wrong magic lib version or lib not found])
-  ],[
-    -L$FILEINFO_DIR/lib -lm -ldl
-  ])
+  AC_CHECK_FUNCS([utimes])
 
-  MAGIC_MIME_LOCATIONS="/usr/local/share/file/magic /usr/share/file/magic /etc/magic"
-  for i in $MAGIC_MIME_LOCATIONS; do
-    if test -f $i; then
-       PHP_DEFAULT_MAGIC_FILE=$i
-       break
-    fi
-  done
-  AC_DEFINE_UNQUOTED(PHP_DEFAULT_MAGIC_FILE,"$PHP_DEFAULT_MAGIC_FILE",[magic file path])
-
-  PHP_SUBST(FILEINFO_SHARED_LIBADD)
-
-  PHP_NEW_EXTENSION(fileinfo, fileinfo.c, $ext_shared)
+  PHP_ADD_MAKEFILE_FRAGMENT
 fi

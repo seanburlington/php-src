@@ -16,11 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.6 2004/05/08 17:34:07 derick Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.1 2008/07/25 09:16:22 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include "php.h"
 
 #include <magic.h>
 /* 
@@ -31,25 +32,20 @@
 #define HOWMANY 65536
 #endif
 
-
-#include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/file.h" /* needed for context stuff */
 #include "php_fileinfo.h"
 #include "fopen_wrappers.h" /* needed for is_url */
 
+/* {{{ macros and type definitions */
 struct php_fileinfo {
 	long options;
 	struct magic_set *magic;
 };
 
-#ifndef PHP_DEFAULT_MAGIC_FILE
-#define PHP_DEFAULT_MAGIC_FILE NULL
-#endif
-
 #ifdef ZEND_ENGINE_2
-
+/* {{{ */
 static zend_object_handlers finfo_object_handlers;
 zend_class_entry *finfo_class_entry;
 
@@ -100,11 +96,15 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 	zend_object_value retval;
 	struct finfo_object *intern;
 
-	intern = emalloc(sizeof(struct finfo_object));
+	intern = ecalloc(1, sizeof(struct finfo_object));
 	intern->zo.ce = class_type;
+	intern->zo.properties = NULL;
+#if ZEND_MODULE_API_NO >= 20050922
+	intern->zo.guards = NULL;
+#else
 	intern->zo.in_get = 0;
 	intern->zo.in_set = 0;
-	intern->zo.properties = NULL;
+#endif
 	intern->ptr = NULL;
 
 	retval.handle = zend_objects_store_put(intern, finfo_objects_dtor, NULL, NULL TSRMLS_CC);
@@ -117,23 +117,32 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 /* {{{ finfo_class_functions
  */
 function_entry finfo_class_functions[] = {
-	ZEND_ME_MAPPING(finfo,		finfo_open,	NULL)
-	ZEND_ME_MAPPING(set_flags,	finfo_set_flags,NULL)
-	ZEND_ME_MAPPING(file,		finfo_file,	NULL)
-	ZEND_ME_MAPPING(buffer,		finfo_buffer,	NULL)
+#if PHP_VERSION_ID >= 50200
+	ZEND_ME_MAPPING(finfo,          finfo_open,     NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(set_flags,      finfo_set_flags,NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(file,           finfo_file,     NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME_MAPPING(buffer,         finfo_buffer,   NULL, ZEND_ACC_PUBLIC)
+#else
+	ZEND_ME_MAPPING(finfo,          finfo_open,     NULL)
+	ZEND_ME_MAPPING(set_flags,      finfo_set_flags,NULL)
+	ZEND_ME_MAPPING(file,           finfo_file,     NULL)
+	ZEND_ME_MAPPING(buffer,         finfo_buffer,   NULL)
+#endif
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
+/* }}} */
 #else 
-
+/* {{{ */
 #define FILEINFO_REGISTER_OBJECT(_object, _ptr) {}
 #define FILEINFO_FROM_OBJECT(socket_id, object) {}
 
 #define FILEINFO_DECLARE_INIT_OBJECT(object)
 #define object 0
 
-#endif
+/* }}} */
+#endif /* ZEND_ENGINE_2 */
 
 #define FINFO_SET_OPTION(magic, options) \
 	if (magic_setflags(magic, options) == -1) { \
@@ -144,8 +153,9 @@ function_entry finfo_class_functions[] = {
 
 /* True global resources - no need for thread safety here */
 static int le_fileinfo;
+/* }}} */
 
-void finfo_resource_destructor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+void finfo_resource_destructor(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
 {
 	if (rsrc->ptr) {
 		struct php_fileinfo *finfo = (struct php_fileinfo *) rsrc->ptr;
@@ -154,6 +164,7 @@ void finfo_resource_destructor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		rsrc->ptr = NULL;
 	}
 }
+/* }}} */
 
 /* {{{ fileinfo_functions[]
  */
@@ -189,8 +200,12 @@ PHP_MINIT_FUNCTION(finfo)
 	REGISTER_LONG_CONSTANT("FILEINFO_COMPRESS",		MAGIC_COMPRESS, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILEINFO_DEVICES",		MAGIC_DEVICES, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILEINFO_CONTINUE",		MAGIC_CONTINUE, CONST_CS|CONST_PERSISTENT);
+#ifdef MAGIC_PRESERVE_ATIME
 	REGISTER_LONG_CONSTANT("FILEINFO_PRESERVE_ATIME",	MAGIC_PRESERVE_ATIME, CONST_CS|CONST_PERSISTENT);
+#endif
+#ifdef MAGIC_RAW
 	REGISTER_LONG_CONSTANT("FILEINFO_RAW",			MAGIC_RAW, CONST_CS|CONST_PERSISTENT);
+#endif
 
 	return SUCCESS;
 }
@@ -210,7 +225,7 @@ zend_module_entry fileinfo_module_entry = {
 	NULL,
 	PHP_MINFO(fileinfo),
 #if ZEND_MODULE_API_NO >= 20010901
-	"0.1", /* Replace with version number for your extension */
+	PHP_FILEINFO_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -226,6 +241,7 @@ PHP_MINFO_FUNCTION(fileinfo)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "fileinfo support", "enabled");
+	php_info_print_table_row(2, "version", PHP_FILEINFO_VERSION);
 	php_info_print_table_end();
 }
 /* }}} */
@@ -235,7 +251,7 @@ PHP_MINFO_FUNCTION(fileinfo)
 PHP_FUNCTION(finfo_open)
 {
 	long options = MAGIC_NONE;
-	char *file = PHP_DEFAULT_MAGIC_FILE;
+	char *file = NULL;
 	int file_len = 0;
 	struct php_fileinfo *finfo;
 	FILEINFO_DECLARE_INIT_OBJECT(object)
@@ -269,8 +285,8 @@ PHP_FUNCTION(finfo_open)
 
 	if (magic_load(finfo->magic, file) == -1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to load magic database at '%s'.", file);
-		efree(finfo);
 		magic_close(finfo->magic);
+		efree(finfo);
 		RETURN_FALSE;
 	}	
 
@@ -289,7 +305,7 @@ PHP_FUNCTION(finfo_close)
 	struct php_fileinfo *finfo;
 	zval *zfinfo;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &zfinfo) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zfinfo) == FAILURE) {
 		RETURN_FALSE;
 	}
 	ZEND_FETCH_RESOURCE(finfo, struct php_fileinfo *, &zfinfo, -1, "file_info", le_fileinfo);
@@ -315,7 +331,7 @@ PHP_FUNCTION(finfo_set_flags)
 		}
 		FILEINFO_FROM_OBJECT(finfo, object);
 	} else {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zl", &zfinfo, &options) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl", &zfinfo, &options) == FAILURE) {
 			RETURN_FALSE;
 		}
 		ZEND_FETCH_RESOURCE(finfo, struct php_fileinfo *, &zfinfo, -1, "file_info", le_fileinfo);
@@ -328,7 +344,7 @@ PHP_FUNCTION(finfo_set_flags)
 }
 /* }}} */
 
-static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
+static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode) /* {{{ */
 {
 	long options = 0;
 	char *buffer, *tmp, *ret_val;
@@ -338,12 +354,12 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	FILEINFO_DECLARE_INIT_OBJECT(object)
 
 	if (object) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lbz", &buffer, &buffer_len, &options, &zcontext) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lbr", &buffer, &buffer_len, &options, &zcontext) == FAILURE) {
 			RETURN_FALSE;
 		}
 		FILEINFO_FROM_OBJECT(finfo, object);
 	} else {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zs|lbz", &zfinfo, &buffer, &buffer_len, &options, &zcontext) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|lbr", &zfinfo, &buffer, &buffer_len, &options, &zcontext) == FAILURE) {
 			RETURN_FALSE;
 		}
 		ZEND_FETCH_RESOURCE(finfo, struct php_fileinfo *, &zfinfo, -1, "file_info", le_fileinfo);
@@ -357,7 +373,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	if (mode) { /* file */
 		/* determine if the file is a local file or remote URL */
 		char *tmp2;
-		php_stream_wrapper *wrap = php_stream_locate_url_wrapper(buffer, &tmp2, 0 TSRMLS_DC);
+		php_stream_wrapper *wrap = php_stream_locate_url_wrapper(buffer, &tmp2, 0 TSRMLS_CC);
 		if (wrap && wrap->is_url) {
 #ifdef ZEND_ENGINE_2
 			php_stream_context *context = php_stream_context_from_zval(zcontext, 0);
@@ -406,6 +422,7 @@ common:
 		RETURN_STRING(ret_val, 1);
 	}
 }
+/* }}} */
 
 /* {{{ proto string finfo_file(resource finfo, char *file_name [, int options [, resource context]])
    Return information about a file. */

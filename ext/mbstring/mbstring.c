@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.289 2008/07/25 12:50:14 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.290 2008/07/25 13:56:50 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -4862,7 +4862,7 @@ MBSTRING_API int php_mb_set_zend_encoding(TSRMLS_D)
 			list_size += strlen(name) + 1;
 			if (!list) {
 				list = (char*)emalloc(list_size);
-				*list = (char)NULL;
+				*list = '\0';
 			} else {
 				list = (char*)erealloc(list, list_size);
 				strcat(list, ",");

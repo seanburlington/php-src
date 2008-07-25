@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.192 2008/07/24 09:11:48 lbarnaud Exp $ */
+/* $Id: php_cli.c,v 1.193 2008/07/25 15:05:33 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -296,7 +296,7 @@ static char *script_filename = "";
 
 static void sapi_cli_register_variables(zval *track_vars_array TSRMLS_DC) /* {{{ */
 {
-	size_t len;
+	unsigned int len;
 	char   *docroot = "";
 
 	/* In CGI mode, we consider the environment to be a part of the server

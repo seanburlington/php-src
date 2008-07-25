@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20 2008/07/24 15:07:37 tony2001 Exp $ */
+/* $Id: fileinfo.c,v 1.21 2008/07/25 09:16:09 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,10 +43,6 @@ struct php_fileinfo {
 	long options;
 	struct magic_set *magic;
 };
-
-#ifndef PHP_DEFAULT_MAGIC_FILE
-#define PHP_DEFAULT_MAGIC_FILE NULL
-#endif
 
 #ifdef ZEND_ENGINE_2
 /* {{{ */

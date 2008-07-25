@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2007/04/25 07:47:15 sniper Exp $
+dnl $Id: config.m4,v 1.20 2008/07/25 13:38:40 jani Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -31,6 +31,9 @@ PHP_ARG_ENABLE(pdo, whether to enable PDO support,
 [  --disable-pdo           Disable PHP Data Objects support], yes)
 
 if test "$PHP_PDO" != "no"; then
+
+  dnl Make sure $PHP_PDO is 'yes' when it's not 'no' :)
+  PHP_PDO=yes
 
   PHP_PDO_PEAR_CHECK
 

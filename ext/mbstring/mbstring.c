@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.290 2008/07/25 13:56:50 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.291 2008/07/25 14:04:39 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2269,7 +2269,7 @@ PHP_FUNCTION(mb_strripos)
 		RETURN_FALSE;
 	}
 
-	if (offset > haystack.len) {
+	if ((unsigned int)offset > haystack.len) {
 		RETURN_FALSE;
 	}
 
@@ -2677,11 +2677,11 @@ PHP_FUNCTION(mb_strcut)
 		}
 	}
 
-	if (from > string.len) {
+	if ((unsigned int)from > string.len) {
 		RETURN_FALSE;
 	}
 
-	if (((unsigned) from + (unsigned) len) > string.len) {
+	if (((unsigned int)from + (unsigned int)len) > string.len) {
 		len = string.len - from;
 	}
 
@@ -3063,7 +3063,7 @@ PHP_FUNCTION(mb_detect_encoding)
 	}
 
 	if (ZEND_NUM_ARGS() < 3) {
-		strict = MBSTRG(strict_detection);
+		strict = (zend_bool)MBSTRG(strict_detection);
 	}
 
 	if (size > 0 && list != NULL) {

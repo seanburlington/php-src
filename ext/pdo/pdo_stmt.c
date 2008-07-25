@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.17 2008/07/21 13:09:28 johannes Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.18 2008/07/25 08:23:06 dmitry Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -760,6 +760,7 @@ static int do_fetch_class_prepare(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 		fcc->initialized = 1;
 		fcc->function_handler = ce->constructor;
 		fcc->calling_scope = EG(scope);
+		fcc->called_scope = ce;
 		return 1;
 	} else if (stmt->fetch.cls.ctor_args) {
 		pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "user-supplied class does not have a constructor, use NULL for the ctor_params parameter, or simply omit it" TSRMLS_CC);
@@ -859,6 +860,7 @@ static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * 
 	fcc->initialized = 1;
 	fcc->function_handler = function_handler;
 	fcc->calling_scope = EG(scope);
+	fcc->called_scope = Z_OBJCE_P(object);
 	fcc->object_pp = object;
 	
 	return 1;

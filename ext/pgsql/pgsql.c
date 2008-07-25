@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.24.2.10 2008/07/23 00:17:19 hholzgra Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.24.2.11 2008/07/25 08:23:07 dmitry Exp $ */
 
 #include <stdlib.h>
 
@@ -2639,6 +2639,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, long result_type,
 			fcc.initialized = 1;
 			fcc.function_handler = ce->constructor;
 			fcc.calling_scope = EG(scope);
+			fcc.called_scope = Z_OBJCE_P(return_value);
 			fcc.object_pp = &return_value;
 		
 			if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {

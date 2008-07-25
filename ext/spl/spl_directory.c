@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.27 2008/07/24 08:55:52 sfox Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.28 2008/07/25 08:23:07 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1812,6 +1812,7 @@ static int spl_filesystem_file_call(spl_filesystem_object *intern, zend_function
 	fcic.initialized = 1;
 	fcic.function_handler = func_ptr;
 	fcic.calling_scope = NULL;
+	fcic.called_scope = NULL;
 	fcic.object_pp = NULL;
 
 	result = zend_call_function(&fci, &fcic TSRMLS_CC);

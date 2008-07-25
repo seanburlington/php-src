@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.10 2008/04/22 13:01:45 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.11 2008/07/25 08:23:06 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -477,6 +477,7 @@ static void pdo_stmt_construct(pdo_stmt_t *stmt, zval *object, zend_class_entry 
 		fcc.initialized = 1;
 		fcc.function_handler = dbstmt_ce->constructor;
 		fcc.calling_scope = EG(scope);
+		fcc.called_scope = Z_OBJCE_P(object);
 		fcc.object_pp = &object;
 
 		if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {

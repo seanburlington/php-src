@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.28 2008/07/21 12:58:51 andrey Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.29 2008/07/25 08:23:06 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1305,6 +1305,7 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 			fcc.initialized = 1;
 			fcc.function_handler = ce->constructor;
 			fcc.calling_scope = EG(scope);
+			fcc.called_scope = Z_OBJCE_P(return_value);
 			fcc.object_pp = &return_value;
 
 			if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.263 2008/07/22 23:43:14 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.264 2008/07/25 08:53:11 dmitry Exp $ */
 
 /* TODO:
  *
@@ -2209,6 +2209,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 			fcc.initialized = 1;
 			fcc.function_handler = ce->constructor;
 			fcc.calling_scope = EG(scope);
+			fcc.called_scope = Z_OBJCE_P(return_value);
 			fcc.object_pp = &return_value;
 		
 			if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {

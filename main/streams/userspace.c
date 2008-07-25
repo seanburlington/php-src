@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.47 2008/07/11 10:24:29 tony2001 Exp $ */
+/* $Id: userspace.c,v 1.48 2008/07/25 08:53:11 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -262,6 +262,7 @@ static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, char *filena
 		fcc.initialized = 1;
 		fcc.function_handler = uwrap->ce->constructor;
 		fcc.calling_scope = EG(scope);
+		fcc.called_scope = Z_OBJCE_P(us->object);
 		fcc.object_pp = &us->object;
 
 		if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {

@@ -17,15 +17,10 @@ AC_DEFUN([PHP_ALWAYS_SHARED],[
   test "[$]$1" = "no" && $1=yes
 ])dnl
 dnl
-
-test -z "$CFLAGS" && auto_cflags=1
-
 abs_srcdir=`(cd $srcdir && pwd)`
 abs_builddir=`pwd`
 
-AC_PROG_CC([cc gcc])
-PHP_DETECT_ICC
-PHP_DETECT_SUNCC
+AC_PROG_CC
 AC_PROG_CC_C_O
 
 dnl Support systems with system libraries in e.g. /usr/lib64
@@ -63,84 +58,13 @@ AC_MSG_RESULT([$EXTENSION_DIR])
 AC_MSG_CHECKING([for PHP installed headers prefix])
 AC_MSG_RESULT([$phpincludedir])
 
-dnl Checks for PHP_DEBUG / ZEND_DEBUG / ZTS
-AC_MSG_CHECKING([if debug is enabled])
-old_CPPFLAGS=$CPPFLAGS
-CPPFLAGS="-I$phpincludedir"
-AC_EGREP_CPP(php_debug_is_enabled,[
-#include <main/php_config.h>
-#if ZEND_DEBUG
-php_debug_is_enabled
-#endif
-],[
-  PHP_DEBUG=yes
-],[
-  PHP_DEBUG=no
-])
-AC_MSG_RESULT([$PHP_DEBUG])
-
-AC_MSG_CHECKING([if zts is enabled])
-old_CPPFLAGS=$CPPFLAGS
-CPPFLAGS="-I$phpincludedir"
-AC_EGREP_CPP(php_zts_is_enabled,[
-#include <main/php_config.h>
-#if ZTS
-php_zts_is_enabled
-#endif
-],[
-  PHP_THREAD_SAFETY=yes
-],[
-  PHP_THREAD_SAFETY=no
-])
-CPPFLAGS=$old_CPPFLAGS
-AC_MSG_RESULT([$PHP_DEBUG])
-
-dnl Support for building and testing Zend extensions
-if test "$PHP_DEBUG" = "yes" && test "$PHP_THREAD_SAFETY" = "yes; then
-  ZEND_EXT_TYPE="zend_extension_debug_ts"
-elif test "$PHP_DEBUG" = "yes"; then
-  ZEND_EXT_TYPE="zend_extension_debug"
-elif test "$PHP_THREAD_SAFETY" = "yes; then
-  ZEND_EXT_TYPE="zend_extension_ts"
-else
-  ZEND_EXT_TYPE="zend_extension"
-fi
-PHP_SUBST(ZEND_EXT_TYPE)
-
-dnl Discard optimization flags when debugging is enabled
-if test "$PHP_DEBUG" = "yes"; then
-  PHP_DEBUG=1
-  ZEND_DEBUG=yes
-  changequote({,})
-  CFLAGS=`echo "$CFLAGS" | $SED -e 's/-O[0-9s]*//g'`
-  CXXFLAGS=`echo "$CXXFLAGS" | $SED -e 's/-O[0-9s]*//g'`
-  changequote([,])
-  dnl add -O0 only if GCC or ICC is used
-  if test "$GCC" = "yes" || test "$ICC" = "yes"; then
-    CFLAGS="$CFLAGS -O0"
-    CXXFLAGS="$CXXFLAGS -O0"
-  fi
-  if test "$SUNCC" = "yes"; then
-    if test -n "$auto_cflags"; then
-      CFLAGS="-g"
-      CXXFLAGS="-g"
-    else
-      CFLAGS="$CFLAGS -g"
-      CXXFLAGS="$CFLAGS -g"
-    fi
-  fi
-else
-  PHP_DEBUG=0
-  ZEND_DEBUG=no
-fi
-
 dnl Always shared
 PHP_BUILD_SHARED
 
 dnl Required programs
 PHP_PROG_RE2C
 PHP_PROG_AWK
-
+    
 sinclude(config.m4)
 
 enable_static=no
@@ -152,11 +76,11 @@ AC_PROVIDE_IFELSE([PHP_REQUIRE_CXX], [], [
   undefine([AC_PROG_CXX])
   AC_DEFUN([AC_PROG_CXX], [])
   undefine([AC_PROG_CXXCPP])
-  AC_DEFUN([AC_PROG_CXXCPP], [php_prog_cxxcpp=disabled])
+  AC_DEFUN([AC_PROG_CXXCPP], [])
 ])
 AC_PROG_LIBTOOL
 
-all_targets='$(PHP_MODULES) $(PHP_ZEND_EX)'
+all_targets='$(PHP_MODULES)'
 install_targets="install-modules install-headers"
 phplibdir="`pwd`/modules"
 CPPFLAGS="$CPPFLAGS -DHAVE_CONFIG_H"
@@ -167,8 +91,6 @@ test "$prefix" = "NONE" && prefix="/usr/local"
 test "$exec_prefix" = "NONE" && exec_prefix='$(prefix)'
 
 PHP_SUBST(PHP_MODULES)
-PHP_SUBST(PHP_ZEND_EX)
-
 PHP_SUBST(all_targets)
 PHP_SUBST(install_targets)
 

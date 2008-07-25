@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.18 2008/07/25 08:23:06 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.19 2008/07/25 08:45:09 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -860,7 +860,7 @@ static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * 
 	fcc->initialized = 1;
 	fcc->function_handler = function_handler;
 	fcc->calling_scope = EG(scope);
-	fcc->called_scope = Z_OBJCE_P(object);
+	fcc->called_scope = Z_OBJCE_PP(object);
 	fcc->object_pp = object;
 	
 	return 1;

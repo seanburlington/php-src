@@ -1,15 +1,17 @@
-dnl $Id: config.m4,v 1.26.2.9.2.7.2.3 2008/07/24 14:25:33 scottmac Exp $
+dnl $Id: config.m4,v 1.26.2.9.2.7.2.4 2008/07/25 13:46:24 jani Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
-
-if test "$PHP_PDO" != "no"; then
 
 PHP_ARG_WITH(pdo-sqlite, for sqlite 3 support for PDO,
 [  --without-pdo-sqlite[=DIR]
                             PDO: sqlite 3 support.  DIR is the sqlite base
-                            install directory [BUNDLED]], yes)
+                            install directory [BUNDLED]], $PHP_PDO)
 
 if test "$PHP_PDO_SQLITE" != "no"; then
+
+  if test "$PHP_PDO" = "no" && test "$ext_shared" = "no"; then
+    AC_MSG_ERROR([PDO is not enabled! Add --enable-pdo to your configure line.])
+  fi
 
   ifdef([PHP_CHECK_PDO_INCLUDES],
   [
@@ -97,6 +99,4 @@ if test "$PHP_PDO_SQLITE" != "no"; then
   [
     PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)
   ])
-fi
-
 fi

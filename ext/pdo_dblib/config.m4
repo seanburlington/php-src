@@ -1,23 +1,24 @@
 dnl
-dnl $Id: config.m4,v 1.2.2.2.2.2 2008/10/04 13:19:22 felipe Exp $
+dnl $Id: config.m4,v 1.2.2.2.2.1.2.1 2008/07/25 13:46:23 jani Exp $
 dnl
 
-if test "$PHP_PDO" != "no"; then
 PHP_ARG_WITH(pdo-dblib, for PDO_DBLIB support via FreeTDS,
-[  --with-pdo-dblib[=DIR]    PDO: DBLIB-DB support.  DIR is the FreeTDS home
-                            directory])
-
+[  --with-pdo-dblib[=DIR]    PDO: DBLIB-DB support.  DIR is the FreeTDS home directory])
 
 if test "$PHP_PDO_DBLIB" != "no"; then
+
+  if test "$PHP_PDO" = "no" && test "$ext_shared" = "no"; then
+    AC_MSG_ERROR([PDO is not enabled! Add --enable-pdo to your configure line.])
+  fi
 
   if test "$PHP_PDO_DBLIB" = "yes"; then
 
     for i in /usr/local /usr; do
-      if test -f $i/include/sybdb.h; then
+      if test -f $i/include/tds.h; then
         PDO_FREETDS_INSTALLATION_DIR=$i
         PDO_FREETDS_INCLUDE_DIR=$i/include
         break
-      elif test -f $i/include/freetds/sybdb.h; then
+      elif test -f $i/include/freetds/tds.h; then
         PDO_FREETDS_INSTALLATION_DIR=$i
         PDO_FREETDS_INCLUDE_DIR=$i/include/freetds
         break;
@@ -30,10 +31,10 @@ if test "$PHP_PDO_DBLIB" != "no"; then
 
   elif test "$PHP_PDO_DBLIB" != "no"; then
 
-    if test -f $PHP_PDO_DBLIB/include/sybdb.h; then
+    if test -f $PHP_PDO_DBLIB/include/tds.h; then
       PDO_FREETDS_INSTALLATION_DIR=$PHP_PDO_DBLIB
       PDO_FREETDS_INCLUDE_DIR=$PHP_PDO_DBLIB/include
-    elif test -f $PHP_PDO_DBLIB/include/freetds/sybdb.h; then
+    elif test -f $PHP_PDO_DBLIB/include/freetds/tds.h; then
       PDO_FREETDS_INSTALLATION_DIR=$PHP_PDO_DBLIB
       PDO_FREETDS_INCLUDE_DIR=$PHP_PDO_DBLIB/include/freetds
     else
@@ -45,8 +46,8 @@ if test "$PHP_PDO_DBLIB" != "no"; then
     PHP_LIBDIR=lib
   fi
 
-  if test ! -r "$PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libsybdb.a" && test ! -r "$PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libsybdb.so"; then
-     AC_MSG_ERROR(Could not find $PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libsybdb.[a|so])
+  if test ! -r "$PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.a" && test ! -r "$PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.so"; then
+     AC_MSG_ERROR(Could not find $PDO_FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.[a|so])
   fi
 
   PHP_ADD_INCLUDE($PDO_FREETDS_INCLUDE_DIR)
@@ -83,6 +84,4 @@ if test "$PHP_PDO_DBLIB" != "no"; then
   [
     PHP_ADD_EXTENSION_DEP(pdo_dblib, pdo)
   ])
-fi
-
 fi

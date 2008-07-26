@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.4 2008/07/26 22:58:45 jani Exp $ */
+/* $Id: sqlite3.c,v 1.5 2008/07/26 23:57:48 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,6 +27,7 @@
 #include "ext/standard/info.h"
 #include "ext/standard/file.h"
 #include "php_sqlite3.h"
+#include "php_sqlite3_structs.h"
 
 #include <sqlite3.h>
 

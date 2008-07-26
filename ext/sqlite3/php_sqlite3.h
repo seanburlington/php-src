@@ -14,9 +14,9 @@
    +----------------------------------------------------------------------+
    | Authors: Scott MacVicar <scottmac@php.net>                           |
    +----------------------------------------------------------------------+
-
-   $Id: php_sqlite3.h,v 1.1.2.1 2008/07/25 02:44:57 scottmac Exp $
 */
+
+/* $Id: php_sqlite3.h,v 1.1.2.2 2008/07/26 23:42:53 jani Exp $ */
 
 #ifndef PHP_SQLITE_H
 #define PHP_SQLITE_H

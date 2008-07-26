@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.25.2.7.2.6.2.3 2008/07/25 13:46:23 jani Exp $
-+ dnl config.m4 for extension pdo_mysql
-+ dnl vim: se ts=2 sw=2 et:
+dnl $Id: config.m4,v 1.25.2.7.2.6.2.4 2008/07/26 23:38:14 jani Exp $
+dnl config.m4 for extension pdo_mysql
+dnl vim: se ts=2 sw=2 et:
 
 PHP_ARG_WITH(pdo-mysql, for MySQL support for PDO,
 [  --with-pdo-mysql[=DIR]    PDO: MySQL support. DIR is the MySQL base directoy

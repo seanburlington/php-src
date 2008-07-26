@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2008/07/26 23:21:02 jani Exp $
+dnl $Id: config.m4,v 1.5 2008/07/26 23:45:54 jani Exp $
 dnl config.m4 for extension sqlite3
 dnl vim:et:ts=2:sw=2
 
@@ -72,7 +72,6 @@ if test $PHP_SQLITE3 != "no"; then
 dnl    if test "$PHP_MAJOR_VERSION" -ge "6"; then
 dnl      other_flags="$other_flags -DSQLITE_ENABLE_ICU=1"
 dnl    fi
-
     PHP_SQLITE3_CFLAGS="-I@ext_srcdir@/libsqlite -I@ext_builddir@/libsqlite $other_flags $threadsafe_flags $debug_flags"
   fi
 
@@ -81,6 +80,6 @@ dnl    fi
   sqlite3_sources="sqlite3.c $sqlite3_extra_sources"
 
   PHP_NEW_EXTENSION(sqlite3, $sqlite3_sources, $ext_shared,,$PHP_SQLITE3_CFLAGS)
+  PHP_ADD_BUILD_DIR([$ext_builddir/libsqlite])
   PHP_SUBST(SQLITE3_SHARED_LIBADD)
-
 fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.3 2008/07/26 22:39:56 jani Exp $ */
+/* $Id: sqlite3.c,v 1.4 2008/07/26 22:58:45 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -742,8 +742,6 @@ static int sqlite3_do_callback(struct php_sqlite3_fci *fc, zval *cb, int argc, s
 	if (retval) {
 		zval_ptr_dtor(&retval);
 	}
-/* }}} */
-
 	return ret;
 }
 /* }}}*/

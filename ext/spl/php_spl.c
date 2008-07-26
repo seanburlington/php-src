@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.138 2008/07/24 10:14:00 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.139 2008/07/26 13:14:56 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -453,7 +453,7 @@ PHP_FUNCTION(spl_autoload_register)
 			zval_dtor(&ztmp);
 		}
 	
-		if (!zend_is_callable_ex(zcallable, IS_CALLABLE_STRICT, &zfunc_name, &fcc, &error TSRMLS_CC)) {
+		if (!zend_is_callable_ex(zcallable, NULL, IS_CALLABLE_STRICT, &zfunc_name, &fcc, &error TSRMLS_CC)) {
 			alfi.ce = fcc.calling_scope;
 			alfi.func_ptr = fcc.function_handler;
 			obj_ptr = fcc.object_pp;
@@ -583,7 +583,7 @@ PHP_FUNCTION(spl_autoload_unregister)
 		return;
 	}
 
-	if (!zend_is_callable_ex(zcallable, IS_CALLABLE_CHECK_SYNTAX_ONLY, &zfunc_name, &fcc, &error TSRMLS_CC)) {
+	if (!zend_is_callable_ex(zcallable, NULL, IS_CALLABLE_CHECK_SYNTAX_ONLY, &zfunc_name, &fcc, &error TSRMLS_CC)) {
 		zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Unable to unregister invalid function (%s)", error);
 		if (error) {
 			efree(error);

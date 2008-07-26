@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.303 2008/07/25 09:48:36 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.304 2008/07/26 13:14:56 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1279,7 +1279,7 @@ static void _reflection_export(INTERNAL_FUNCTION_PARAMETERS, zend_class_entry *c
 	params[0] = &reflector_ptr;
 	params[1] = &output_ptr;
 
-	ZVAL_ASCII_STRINGL(&fname, "export", sizeof("export") - 1, 1);
+	ZVAL_ASCII_STRINGL(&fname, "reflection::export", sizeof("reflection::export") - 1, 1);
 	fci.function_table = &reflection_ptr->function_table;
 	fci.function_name = &fname;
 	fci.object_pp = NULL;
@@ -5259,7 +5259,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.303 2008/07/25 09:48:36 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.304 2008/07/26 13:14:56 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

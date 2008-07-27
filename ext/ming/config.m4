@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22.2.6.2.4 2007/03/06 10:13:40 tony2001 Exp $
+dnl $Id: config.m4,v 1.22.2.6.2.4.2.1 2008/07/27 21:32:48 helly Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -40,9 +40,12 @@ if test "$PHP_MING" != "no"; then
   PHP_ADD_INCLUDE($MING_INC_DIR)
   PHP_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/$PHP_LIBDIR, MING_SHARED_LIBADD)
 
-  PHP_CHECK_LIBRARY(ming, SWFPrebuiltClip, [ AC_DEFINE(HAVE_SWFPREBUILTCLIP, 1, [ ]) ], [], []) 
-  PHP_CHECK_LIBRARY(ming, SWFMovie_namedAnchor, [ AC_DEFINE(HAVE_SWFMOVIE_NAMEDANCHOR, 1, [ ]) ], [], []) 
-  PHP_CHECK_LIBRARY(ming, Ming_setSWFCompression, [ AC_DEFINE(HAVE_MING_SETSWFCOMPRESSION, 1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, SWFPrebuiltClip,             [ AC_DEFINE(HAVE_SWFPREBUILTCLIP,             1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, SWFMovie_namedAnchor,        [ AC_DEFINE(HAVE_SWFMOVIE_NAMEDANCHOR,        1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, Ming_setSWFCompression,      [ AC_DEFINE(HAVE_MING_SETSWFCOMPRESSION,      1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, SWFVideoStream_seek,         [ AC_DEFINE(HAVE_SWFVIDEOSTREAM_SEEK,         1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, SWFVideoStream_setFrameMode, [ AC_DEFINE(HAVE_SWFVIDEOSTREAM_SETFRAMEMODE, 1, [ ]) ], [], []) 
+  PHP_CHECK_LIBRARY(ming, SWFVideoStream_nextFrame,    [ AC_DEFINE(HAVE_SWFVIDEOSTREAM_NEXTFRAME,    1, [ ]) ], [], []) 
 
   old_CPPFLAGS=$CPPFLAGS
   CPPFLAGS=-I$MING_INC_DIR

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.48 2008/07/20 20:58:51 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.49 2008/07/27 19:10:22 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3063,7 +3063,7 @@ PHP_FUNCTION(date_timestamp_set)
 	}
 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);
 	DATE_CHECK_INITIALIZED(dateobj->time, DateTime);
-	timelib_unixtime2gmt(dateobj->time, (timelib_sll)timestamp);
+	timelib_unixtime2local(dateobj->time, (timelib_sll)timestamp);
 	timelib_update_ts(dateobj->time, NULL);
 }
 /* }}} */

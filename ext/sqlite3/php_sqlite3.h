@@ -15,33 +15,24 @@
    | Authors: Scott MacVicar <scottmac@php.net>                           |
    +----------------------------------------------------------------------+
 */
-
-/* $Id: php_sqlite3.h,v 1.4 2008/07/26 23:57:48 jani Exp $ */
-
+/* $Id: php_sqlite3.h,v 1.5 2008/07/28 09:03:39 pajoye Exp $ */
 #ifndef PHP_SQLITE_H
 #define PHP_SQLITE_H
-
 #define PHP_SQLITE3_VERSION	 "0.7-dev"
-
 extern zend_module_entry sqlite3_module_entry;
 #define phpext_sqlite3_ptr &sqlite3_module_entry
-
 ZEND_BEGIN_MODULE_GLOBALS(sqlite3)
 	char *extension_dir;
 ZEND_END_MODULE_GLOBALS(sqlite3)
-
 #ifdef ZTS
 # define SQLITE3G(v) TSRMG(sqlite3_globals_id, zend_sqlite3_globals *, v)
 #else
 # define SQLITE3G(v) (sqlite3_globals.v)
 #endif
-
 #define PHP_SQLITE3_ASSOC	1<<0
 #define PHP_SQLITE3_NUM	1<<1
 #define PHP_SQLITE3_BOTH	(PHP_SQLITE3_ASSOC|PHP_SQLITE3_NUM)
-
 #endif
-
 /*
  * Local variables:
  * tab-width: 4

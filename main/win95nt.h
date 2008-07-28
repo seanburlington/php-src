@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: win95nt.h,v 1.26 2008/07/05 18:50:10 pajoye Exp $ */
+/* $Id: win95nt.h,v 1.27 2008/07/28 11:35:36 pajoye Exp $ */
 
 /* Defines and types for Windows 95/NT */
 #define HAVE_DECLARED_TIMEZONE
@@ -48,7 +48,9 @@ typedef char * caddr_t;
 #define rmdir(a)	_rmdir(a)
 #define getpid		_getpid
 #define php_sleep(t)	Sleep(t*1000)
+#ifndef getcwd
 #define getcwd(a, b)		_getcwd(a, b)
+#endif
 #define off_t		_off_t
 typedef unsigned int uint;
 typedef unsigned long ulong;

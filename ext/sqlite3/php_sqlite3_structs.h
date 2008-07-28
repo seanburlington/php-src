@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3_structs.h,v 1.1 2008/07/26 23:57:48 jani Exp $ */
+/* $Id: php_sqlite3_structs.h,v 1.2 2008/07/28 09:11:19 pajoye Exp $ */
 
 #ifndef PHP_SQLITE_STRUCTS_H
 #define PHP_SQLITE_STRUCTS_H
@@ -113,7 +113,6 @@ struct _php_sqlite3_stmt_object  {
 };
 
 #endif
-
 
 /*
  * Local variables:

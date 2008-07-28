@@ -1,5 +1,5 @@
 /*
-  $Id: crypt_freesec.c,v 1.1.2.2 2008/07/28 11:50:34 pajoye Exp $ 
+  $Id: crypt_freesec.c,v 1.1.2.3 2008/07/28 16:33:17 pajoye Exp $ 
 */
 /*
  * This version is derived from the original implementation of FreeSec
@@ -40,7 +40,7 @@
  * SUCH DAMAGE.
  *
  *	$Owl: Owl/packages/glibc/crypt_freesec.c,v 1.4 2005/11/16 13:08:32 solar Exp $
- *	$Id: crypt_freesec.c,v 1.1.2.2 2008/07/28 11:50:34 pajoye Exp $
+ *	$Id: crypt_freesec.c,v 1.1.2.3 2008/07/28 16:33:17 pajoye Exp $
  *
  * This is an original implementation of the DES and the crypt(3) interfaces
  * by David Burren <davidb at werj.com.au>.
@@ -172,7 +172,7 @@ static u_int32_t bits32[32] =
 
 static u_char	bits8[8] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
 
-static u_char	ascii64[] =
+static unsigned char	ascii64[] =
 	 "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 /*	  0000000000111111111122222222223333333333444444444455555555556666 */
 /*	  0123456789012345678901234567890123456789012345678901234567890123 */

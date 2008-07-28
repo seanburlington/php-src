@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.5 2008/07/26 23:57:48 jani Exp $ */
+/* $Id: sqlite3.c,v 1.6 2008/07/28 23:03:26 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1281,9 +1281,11 @@ PHP_METHOD(sqlite3_result, fetchArray)
 					add_u_assoc_zval(return_value, IS_UNICODE, ZSTR(ustr), data);
 				}
 			}
-		break;
+			break;
+
 		case SQLITE_DONE:
 			RETURN_FALSE;
+			break;
 
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to execute statement: %s", sqlite3_errmsg(sqlite3_db_handle(result_obj->stmt_obj->stmt)));

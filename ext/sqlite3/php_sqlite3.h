@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3.h,v 1.1.2.3 2008/07/26 23:58:06 jani Exp $ */
+/* $Id: php_sqlite3.h,v 1.1.2.4 2008/07/28 11:59:35 jani Exp $ */
 
 #ifndef PHP_SQLITE_H
 #define PHP_SQLITE_H
@@ -37,7 +37,7 @@ ZEND_END_MODULE_GLOBALS(sqlite3)
 #endif
 
 #define PHP_SQLITE3_ASSOC	1<<0
-#define PHP_SQLITE3_NUM	1<<1
+#define PHP_SQLITE3_NUM		1<<1
 #define PHP_SQLITE3_BOTH	(PHP_SQLITE3_ASSOC|PHP_SQLITE3_NUM)
 
 #endif

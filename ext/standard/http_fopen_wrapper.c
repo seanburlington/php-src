@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.9 2008/07/25 08:27:37 mike Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.10 2008/07/28 19:08:02 lbarnaud Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -252,10 +252,17 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 
 	if (context && php_stream_context_get_option(context, "http", "method", &tmpzval) == SUCCESS) {
 		if (Z_TYPE_PP(tmpzval) == IS_STRING && Z_STRLEN_PP(tmpzval) > 0) {
-			scratch_len = strlen(path) + 29 + Z_STRLEN_PP(tmpzval);
-			scratch = emalloc(scratch_len);
-			strlcpy(scratch, Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval) + 1);
-			strcat(scratch, " ");
+			/* As per the RFC, automatically redirected requests MUST NOT use other methods than
+			 * GET and HEAD unless it can be confirmed by the user */
+			if (redirect_max == PHP_URL_REDIRECT_MAX
+				|| (Z_STRLEN_PP(tmpzval) == 3 && memcmp("GET", Z_STRVAL_PP(tmpzval), 3) == 0)
+				|| (Z_STRLEN_PP(tmpzval) == 4 && memcmp("HEAD",Z_STRVAL_PP(tmpzval), 4) == 0)
+			) {
+				scratch_len = strlen(path) + 29 + Z_STRLEN_PP(tmpzval);
+				scratch = emalloc(scratch_len);
+				strlcpy(scratch, Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval) + 1);
+				strcat(scratch, " ");
+			}
 		}
 	}
  

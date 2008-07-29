@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.26 2008/07/29 11:09:00 tony2001 Exp $ */
+/* $Id: util.c,v 1.55.2.27 2008/07/29 11:18:40 tony2001 Exp $ */
 
 #include "phar_internal.h"
 
@@ -1902,6 +1902,13 @@ int phar_create_signature(phar_archive_data *phar, php_stream *fp, char **signat
 			key = PEM_read_bio_PrivateKey(in, NULL,NULL, "");
 
 			BIO_free(in);
+			if (!key) {
+				if (error) {
+					spprintf(error, 0, "unable to process private key");
+				}
+				return FAILURE;
+			}
+
 			siglen = EVP_PKEY_size(key);
 			sigbuf = emalloc(siglen + 1);
 

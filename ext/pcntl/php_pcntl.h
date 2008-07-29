@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.25 2008/07/29 16:46:03 lbarnaud Exp $ */
+/* $Id: php_pcntl.h,v 1.26 2008/07/29 16:56:26 lbarnaud Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -45,6 +45,13 @@ PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
 PHP_FUNCTION(pcntl_signal_dispatch);
+#ifdef HAVE_SIGPROCMASK
+PHP_FUNCTION(pcntl_sigprocmask);
+#endif
+#if HAVE_SIGWAITINFO && HAVE_SIGTIMEDWAIT
+PHP_FUNCTION(pcntl_sigwaitinfo);
+PHP_FUNCTION(pcntl_sigtimedwait);
+#endif
 PHP_FUNCTION(pcntl_exec);
 #ifdef HAVE_GETPRIORITY
 PHP_FUNCTION(pcntl_getpriority);

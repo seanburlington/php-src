@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.677 2008/07/22 01:05:55 scottmac Exp $ */
+/* $Id: string.c,v 1.678 2008/07/29 16:51:21 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -7842,7 +7842,7 @@ PHP_FUNCTION(money_format)
 	}
 	str[str_len] = 0;
 
-	RETURN_RT_STRINGL(erealloc(str, str_len + 1), str_len, 0);
+	RETURN_RT_STRINGL(erealloc(str, str_len + 1), str_len, ZSTR_AUTOFREE);
 }
 /* }}} */
 #endif

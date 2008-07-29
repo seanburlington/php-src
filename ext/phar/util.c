@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.25 2008/07/29 10:52:08 tony2001 Exp $ */
+/* $Id: util.c,v 1.55.2.26 2008/07/29 11:09:00 tony2001 Exp $ */
 
 #include "phar_internal.h"
 
@@ -1510,10 +1510,9 @@ static int phar_call_openssl_signverify(int is_sign, php_stream *fp, off_t end, 
 		zval_dtor(zsig);
 		zval_dtor(zkey);
 		zval_dtor(openssl);
+		efree(openssl);
 		return FAILURE;
 	}
-	zval_dtor(openssl);
-	efree(openssl);
 
 	fci.param_count = 3;
 	fci.params = zp;
@@ -1536,11 +1535,16 @@ static int phar_call_openssl_signverify(int is_sign, php_stream *fp, off_t end, 
 		zval_dtor(zdata);
 		zval_dtor(zsig);
 		zval_dtor(zkey);
+		zval_dtor(openssl);
+		efree(openssl);
 		efree(zdata);
 		efree(zkey);
 		efree(zsig);
 		return FAILURE;
 	}
+	zval_dtor(openssl);
+	efree(openssl);
+
 #if PHP_VERSION_ID < 50300
 	--(zdata->refcount);
 	--(zsig->refcount);

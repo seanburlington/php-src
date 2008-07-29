@@ -1,4 +1,4 @@
-/* $Id: php_crypt_r.h,v 1.1.2.2 2008/07/28 11:50:34 pajoye Exp $ */
+/* $Id: php_crypt_r.h,v 1.1.2.3 2008/07/29 01:20:28 scottmac Exp $ */
 /*
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
@@ -32,6 +32,8 @@ extern "C"
 #else
 #define __CONST
 #endif
+#else
+#define __CONST __const
 #endif
 
 void php_init_crypt_r();

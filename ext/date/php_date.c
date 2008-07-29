@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.49 2008/07/27 19:10:22 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.50 2008/07/29 12:56:52 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1842,6 +1842,7 @@ PHP_FUNCTION(getdate)
 /* define an overloaded iterator structure */
 typedef struct {
 	zend_object_iterator  intern;
+	zval                 *date_period_zval;
 	zval                 *current;
 	php_period_obj       *object;
 	int                   current_index;
@@ -1866,6 +1867,8 @@ static void date_period_it_dtor(zend_object_iterator *iter TSRMLS_DC)
 	date_period_it *iterator = (date_period_it *)iter;
 
 	date_period_it_invalidate_current(iter TSRMLS_CC);
+
+	zval_ptr_dtor(&iterator->date_period_zval);
 
 	efree(iterator);
 }
@@ -1980,7 +1983,7 @@ zend_object_iterator *date_object_period_get_iterator(zend_class_entry *ce, zval
     Z_ADDREF_P(object);
     iterator->intern.data = (void*) dpobj;
     iterator->intern.funcs = &date_period_it_funcs;
-    MAKE_STD_ZVAL(iterator->current);
+	iterator->date_period_zval = object;
     iterator->object = dpobj;
     iterator->current = NULL;
 

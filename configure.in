@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.103 2008/07/27 15:05:48 jani Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.104 2008/07/29 08:33:52 tony2001 Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -188,21 +188,6 @@ case $host_cpu in
     fi
     ;;
 esac
-
-dnl activate some gcc specific optimizations for gcc >= 4
-if test "$GCC" = "yes"; then
-  case $host_alias in
-  *darwin*)
-    GCC_MAJOR_VERSION=`$CC -dumpversion | /usr/bin/sed -nE '1s/([[0-9]]+)\.[[0-9]]+\..*/\1/;1p'`
-    ;;
-  *)
-    GCC_MAJOR_VERSION=`$CC --version | $SED -n '1s/[[^0-9]]*//;1s/\..*//;1p'`
-    ;;
-  esac
-  if test $GCC_MAJOR_VERSION -ge 4; then
-    CFLAGS="$CFLAGS -fvisibility=hidden"
-  fi
-fi
 
 case $host_alias in
   *solaris*)

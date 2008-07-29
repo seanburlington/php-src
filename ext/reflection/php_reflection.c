@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.305 2008/07/29 07:29:22 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.306 2008/07/29 07:32:52 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -850,7 +850,7 @@ static void _property_string(string *str, zend_property_info *prop, zstr sz_prop
 }
 /* }}} */
 
-static int _extension_ini_string(zend_ini_entry *ini_entry, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
+static int _extension_ini_string(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
 {
 	string *str = va_arg(args, string *);
 	char *indent = va_arg(args, char *);
@@ -886,7 +886,7 @@ static int _extension_ini_string(zend_ini_entry *ini_entry, int num_args, va_lis
 }
 /* }}} */
 
-static int _extension_class_string(zend_class_entry **pce, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
+static int _extension_class_string(zend_class_entry **pce TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
 {
 	string *str = va_arg(args, string *);
 	char *indent = va_arg(args, char *);
@@ -5257,7 +5257,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.305 2008/07/29 07:29:22 tony2001 Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.306 2008/07/29 07:32:52 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

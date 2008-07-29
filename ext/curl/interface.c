@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.124 2008/07/12 21:20:10 felipe Exp $ */
+/* $Id: interface.c,v 1.125 2008/07/29 10:42:15 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1427,7 +1427,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_READFUNCTION:
 			if (ch->handlers->read->func_name) {
 				zval_ptr_dtor(&ch->handlers->read->func_name);
-				ch->handlers->write->fci_cache = empty_fcall_info_cache;
+				ch->handlers->read->fci_cache = empty_fcall_info_cache;
 			}
 			zval_add_ref(zvalue);
 			ch->handlers->read->func_name = *zvalue;
@@ -1436,7 +1436,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_HEADERFUNCTION:
 			if (ch->handlers->write_header->func_name) {
 				zval_ptr_dtor(&ch->handlers->write_header->func_name);
-				ch->handlers->write->fci_cache = empty_fcall_info_cache;
+				ch->handlers->write_header->fci_cache = empty_fcall_info_cache;
 			}
 			zval_add_ref(zvalue);
 			ch->handlers->write_header->func_name = *zvalue;

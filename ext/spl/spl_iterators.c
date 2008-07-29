@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.10 2008/07/19 19:45:55 colder Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.11 2008/07/29 11:50:05 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -924,7 +924,12 @@ static void spl_recursive_tree_iterator_get_entry(spl_recursive_it_object * obje
 
 	php_set_error_handling(EH_THROW, spl_ce_UnexpectedValueException TSRMLS_CC);
 	RETVAL_ZVAL(*data, 1, 0);
-	convert_to_string(return_value);
+	if (Z_TYPE_P(return_value) == IS_ARRAY) {
+		zval_dtor(return_value);
+		ZVAL_STRINGL(return_value, "Array", sizeof("Array")-1, 1);
+	} else {
+		convert_to_string(return_value);
+	}
 	php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.2 2008/01/03 16:20:32 nlopess Exp $ */
+/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.3 2008/07/29 16:46:11 lbarnaud Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -44,6 +44,7 @@ PHP_FUNCTION(pcntl_wexitstatus);
 PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
+PHP_FUNCTION(pcntl_signal_dispatch);
 PHP_FUNCTION(pcntl_exec);
 #ifdef HAVE_GETPRIORITY
 PHP_FUNCTION(pcntl_getpriority);

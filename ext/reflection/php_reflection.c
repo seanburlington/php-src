@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.304 2008/07/26 13:14:56 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.305 2008/07/29 07:29:22 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4565,15 +4565,13 @@ ZEND_METHOD(reflection_extension, getFunctions)
 }
 /* }}} */
 
-static int _addconstant(zend_constant *constant, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
+static int _addconstant(zend_constant *constant TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */
 {
 	zval *const_val;
 	zval *retval = va_arg(args, zval*);
 	int number = va_arg(args, int);
 
 	if (number == constant->module_number) {
-		TSRMLS_FETCH();
-
 		ALLOC_ZVAL(const_val);
 		*const_val = constant->value;
 		zval_copy_ctor(const_val);
@@ -5259,7 +5257,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.304 2008/07/26 13:14:56 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.305 2008/07/29 07:29:22 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

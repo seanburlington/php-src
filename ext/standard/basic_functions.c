@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.41 2008/07/24 19:52:24 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.42 2008/07/29 17:28:41 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4078,6 +4078,7 @@ PHP_MSHUTDOWN_FUNCTION(basic) /* {{{ */
 	basic_globals_dtor(&basic_globals TSRMLS_CC);
 #ifdef PHP_WIN32
 	php_win32_core_globals_dtor(&the_php_win32_core_globals TSRMLS_CC);
+	PHP_MSHUTDOWN(crypt);
 #endif
 #endif
 

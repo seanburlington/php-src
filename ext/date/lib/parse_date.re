@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.88 2008/07/23 19:52:51 derick Exp $ */
+/* $Id: parse_date.re,v 1.89 2008/07/30 17:48:20 derick Exp $ */
 
 #include "timelib.h"
 
@@ -1258,6 +1258,7 @@ weekdayof        = (reltextnumber|reltexttext) space (dayfull|dayabbr) space 'of
 		TIMELIB_HAVE_DATE();
 		s->time->y = timelib_get_nr((char **) &ptr, 4);
 		s->time->m = timelib_get_nr((char **) &ptr, 2);
+		s->time->d = 1;
 		TIMELIB_PROCESS_YEAR(s->time->y);
 		TIMELIB_DEINIT;
 		return TIMELIB_ISO_DATE;

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.10.2.1.2.4.2.2 2008/07/24 17:00:03 moriyoshi Exp $
+// $Id: config.w32,v 1.10.2.1.2.4.2.3 2008/07/30 09:26:15 pajoye Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("mbstring", "multibyte string functions", "no");
@@ -12,7 +12,7 @@ if (PHP_MBSTRING == "yes") {
 	FSO.CopyFile("ext\\mbstring\\oniguruma\\win32\\config.h",
 		"ext\\mbstring\\oniguruma\\config.h", true);
 	
-	EXTENSION("mbstring", "mbstring.c php_unicode.c mb_gpc.c", null,
+	EXTENSION("mbstring", "mbstring.c php_unicode.c mb_gpc.c", true,
 		"-Iext/mbstring/libmbfl -Iext/mbstring/libmbfl/mbfl \
 		-Iext/mbstring/oniguruma /D NOT_RUBY=1 /D LIBMBFL_EXPORTS=1 \
 		/D HAVE_STDARG_PROTOTYPES=1 /D HAVE_CONFIG_H /D HAVE_STDLIB_H \

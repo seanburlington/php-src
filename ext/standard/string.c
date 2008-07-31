@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.32 2008/07/22 01:10:58 scottmac Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.33 2008/07/31 14:20:40 ohill Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4101,10 +4101,6 @@ PHP_FUNCTION(parse_str)
 	int arglen;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|Z", &arg, &arglen, &arrayArg) == FAILURE) {
-		return;
-	}
-
-	if (!arglen) {
 		return;
 	}
 

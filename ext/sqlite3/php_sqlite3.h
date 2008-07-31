@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3.h,v 1.1.2.4 2008/07/28 11:59:35 jani Exp $ */
+/* $Id: php_sqlite3.h,v 1.1.2.5 2008/07/31 22:24:05 scottmac Exp $ */
 
-#ifndef PHP_SQLITE_H
-#define PHP_SQLITE_H
+#ifndef PHP_SQLITE3_H
+#define PHP_SQLITE3_H
 
 #define PHP_SQLITE3_VERSION	 "0.7-dev"
 

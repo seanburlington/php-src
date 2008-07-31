@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.5 2008/07/29 00:56:53 scottmac Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.6 2008/07/31 16:31:12 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -149,7 +149,6 @@ PHP_METHOD(sqlite3, close)
 		zend_llist_clean(&(db_obj->free_list));
 		errcode = sqlite3_close(db_obj->db);
 		if (errcode != SQLITE_OK) {
-			RETURN_TRUE;
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to close database: %d, %s", errcode, sqlite3_errmsg(db_obj->db));
 			RETURN_FALSE;
 		}

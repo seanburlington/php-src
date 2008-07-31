@@ -1,5 +1,0 @@
-*.lo
-*.la
-*.gcda
-*.gcno
-.libs

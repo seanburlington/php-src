@@ -535,10 +535,6 @@ void gdImagePngCtxEx (gdImagePtr im, gdIOCtx * outfile, int level, int basefilte
 				++colors;
 			}
 		}
-		if (colors == 0) {
-			php_gd_error("gd-png error: no colors in palette");
-			goto bail;
-		}
 		if (colors < im->colorsTotal) {
 			remap = TRUE;
 		}
@@ -736,7 +732,6 @@ void gdImagePngCtxEx (gdImagePtr im, gdIOCtx * outfile, int level, int basefilte
 		}
 	}
 	/* 1.6.3: maybe we should give that memory BACK! TBB */
- bail:
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 

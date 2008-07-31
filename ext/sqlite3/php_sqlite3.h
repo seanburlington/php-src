@@ -15,10 +15,10 @@
    | Authors: Scott MacVicar <scottmac@php.net>                           |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_sqlite3.h,v 1.6 2008/07/28 11:56:46 jani Exp $ */
+/* $Id: php_sqlite3.h,v 1.7 2008/07/31 22:25:18 scottmac Exp $ */
 
-#ifndef PHP_SQLITE_H
-#define PHP_SQLITE_H
+#ifndef PHP_SQLITE3_H
+#define PHP_SQLITE3_H
 
 #define PHP_SQLITE3_VERSION	 "0.7-dev"
 

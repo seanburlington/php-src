@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.49 2008/07/27 17:48:16 sixd Exp $ */
+/* $Id: php_oci8.h,v 1.50 2008/08/01 15:06:56 pajoye Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -43,7 +43,7 @@
 
 extern zend_module_entry oci8_module_entry;
 #define phpext_oci8_ptr &oci8_module_entry
-
+#define phpext_oci8_11g_ptr &oci8_module_entry
 
 PHP_MINIT_FUNCTION(oci);
 PHP_RINIT_FUNCTION(oci);

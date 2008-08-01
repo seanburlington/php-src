@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.6 2008/05/14 21:27:31 sfox Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.7 2008/08/01 13:36:19 sfox Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -246,7 +246,7 @@ class corrupt_zipmaker
 		$mtime = $this->getMTime($mtime ? $mtime : null);
 
 		$uncomplength = strlen($data);
-		$crc32 = crc32((binary)$data) & 0xFFFFFFFF;
+		$crc32 = crc32($data) & 0xFFFFFFFF;
 		$compmethod = 0;
 		switch ($compress) {
 			case 'gz' :

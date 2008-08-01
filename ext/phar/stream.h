@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | phar php single-file executable PHP extension                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2007 The PHP Group                                |
+  | Copyright (c) 2006-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: stream.h,v 1.4 2008/05/30 22:39:33 cellog Exp $ */
+/* $Id: stream.h,v 1.5 2008/08/01 13:45:06 sfox Exp $ */
 
 BEGIN_EXTERN_C()
 int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_data *idata, php_uint32 crc32, char **error TSRMLS_DC);

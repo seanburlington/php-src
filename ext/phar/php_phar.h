@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | phar php single-file executable PHP extension                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2008 The PHP Group                                |
+  | Copyright (c) 2005-2008 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,25 +17,25 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dirstream.h,v 1.5.2.2 2008/08/01 13:48:44 sfox Exp $ */
+/* $Id: php_phar.h,v 1.16.2.1 2008/08/01 13:48:44 sfox Exp $ */
 
-BEGIN_EXTERN_C()
-int phar_wrapper_mkdir(php_stream_wrapper *wrapper, char *url_from, int mode, int options, php_stream_context *context TSRMLS_DC);
-int phar_wrapper_rmdir(php_stream_wrapper *wrapper, char *url, int options, php_stream_context *context TSRMLS_DC);
+#ifndef PHP_PHAR_H
+#define PHP_PHAR_H
 
-#ifdef PHAR_DIRSTREAM
-php_url* phar_parse_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
+#define PHP_PHAR_VERSION "2.0.0b2-dev"
 
-/* directory handlers */
-static size_t phar_dir_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);
-static size_t phar_dir_read( php_stream *stream, char *buf, size_t count TSRMLS_DC);
-static int    phar_dir_close(php_stream *stream, int close_handle TSRMLS_DC);
-static int    phar_dir_flush(php_stream *stream TSRMLS_DC);
-static int    phar_dir_seek( php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC);
+#include "ext/standard/basic_functions.h"
+extern zend_module_entry phar_module_entry;
+#define phpext_phar_ptr &phar_module_entry
+
+#ifdef PHP_WIN32
+#define PHP_PHAR_API __declspec(dllexport)
 #else
-php_stream* phar_wrapper_open_dir(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
+#define PHP_PHAR_API
 #endif
-END_EXTERN_C()
+
+#endif /* PHP_PHAR_H */
+
 
 /*
  * Local variables:

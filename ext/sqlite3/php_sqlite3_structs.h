@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3_structs.h,v 1.1.2.4 2008/07/29 00:56:53 scottmac Exp $ */
+/* $Id: php_sqlite3_structs.h,v 1.1.2.5 2008/08/01 08:27:56 tony2001 Exp $ */
 
 #ifndef PHP_SQLITE_STRUCTS_H
 #define PHP_SQLITE_STRUCTS_H
@@ -41,7 +41,7 @@ struct php_sqlite3_bound_param  {
 	long param_number;
 	char *name;
 	int name_len;
-	int type;
+	long type;
 
 	zval *parameter;
 };

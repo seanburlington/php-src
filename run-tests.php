@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.40 2008/07/25 09:55:45 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.41 2008/08/02 13:39:42 felipe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -284,7 +284,7 @@ define('QA_SUBMISSION_PAGE', 'http://qa.php.net/buildtest-process.php');
 function save_or_mail_results()
 {
 	global $sum_results, $just_save_results, $failed_test_summary,
-	       $PHP_FAILED_TESTS, $CUR_DIR, $php, $output_file;
+	       $PHP_FAILED_TESTS, $CUR_DIR, $php, $output_file, $compression;
 
 	/* We got failed Tests, offer the user to send an e-mail to QA team, unless NO_INTERACTION is set */
 	if (!getenv('NO_INTERACTION')) {
@@ -608,7 +608,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.40 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.41 $' . "\n";
 					exit(1);
 
 				default:

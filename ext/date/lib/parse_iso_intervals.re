@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_iso_intervals.re,v 1.4 2008/08/02 13:50:30 derick Exp $ */
+/* $Id: parse_iso_intervals.re,v 1.5 2008/08/02 16:49:56 pajoye Exp $ */
 
 #include "timelib.h"
 
@@ -268,6 +268,11 @@ static long timelib_get_zone(char **ptr, int *dst, timelib_time *t, int *tz_not_
 	}                              \
 }
 
+/* date parser's scan function too large for VC6 - VC7.x
+   drop the optimization solves the problem */
+#ifdef PHP_WIN32
+#pragma optimize( "", off )
+#endif
 static int scan(Scanner *s)
 {
 	uchar *cursor = s->cur;
@@ -422,6 +427,9 @@ isoweek          = year4 "-"? "W" weekofyear;
 	}
 */
 }
+#ifdef PHP_WIN32
+#pragma optimize( "", on )
+#endif
 
 /*!max:re2c */
 

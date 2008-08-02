@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.20 2008/07/25 09:44:47 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.21 2008/08/02 04:46:06 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -809,7 +809,7 @@ static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * 
 		method = &callable;
 	}
 	
-	if (!method || !zend_is_callable(callable, 0, &fname)) {
+	if (!method || !zend_is_callable(callable, 0, &fname TSRMLS_CC)) {
 		pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "user-supplied function must be a valid callback" TSRMLS_CC);
 		if (fname) {
 			efree(fname);

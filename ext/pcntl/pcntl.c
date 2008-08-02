@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.4.2.7 2008/07/29 16:59:10 lbarnaud Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.4.2.8 2008/08/02 04:46:06 felipe Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -728,7 +728,7 @@ PHP_FUNCTION(pcntl_signal)
 		RETURN_TRUE;
 	}
 	
-	if (!zend_is_callable(handle, 0, &func_name)) {
+	if (!zend_is_callable(handle, 0, &func_name TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s is not a callable function name error", func_name);
 		efree(func_name);
 		RETURN_FALSE;

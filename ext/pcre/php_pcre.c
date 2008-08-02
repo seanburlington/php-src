@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.18 2008/07/14 09:49:02 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.19 2008/08/02 04:46:06 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1315,7 +1315,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 	if (Z_TYPE_PP(replace) != IS_ARRAY && (Z_TYPE_PP(replace) != IS_OBJECT || !is_callable_replace))
 		convert_to_string_ex(replace);
 	if (is_callable_replace) {
-		if (!zend_is_callable(*replace, 0, &callback_name)) {
+		if (!zend_is_callable(*replace, 0, &callback_name TSRMLS_CC)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Requires argument 2, '%s', to be a valid callback", callback_name);
 			efree(callback_name);
 			*return_value = **subject;

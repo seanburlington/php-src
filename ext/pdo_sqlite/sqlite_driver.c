@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.20.2.5.2.2.2.2 2007/12/31 07:17:12 sebastian Exp $ */
+/* $Id: sqlite_driver.c,v 1.20.2.5.2.2.2.3 2008/08/02 04:46:06 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -479,7 +479,7 @@ static PHP_METHOD(SQLite, sqliteCreateFunction)
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	PDO_CONSTRUCT_CHECK;
 
-	if (!zend_is_callable(callback, 0, &cbname)) {
+	if (!zend_is_callable(callback, 0, &cbname TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "function '%s' is not callable", cbname);
 		efree(cbname);
 		RETURN_FALSE;
@@ -551,13 +551,13 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	PDO_CONSTRUCT_CHECK;
 
-	if (!zend_is_callable(step_callback, 0, &cbname)) {
+	if (!zend_is_callable(step_callback, 0, &cbname TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "function '%s' is not callable", cbname);
 		efree(cbname);
 		RETURN_FALSE;
 	}
 	efree(cbname);
-	if (!zend_is_callable(fini_callback, 0, &cbname)) {
+	if (!zend_is_callable(fini_callback, 0, &cbname TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "function '%s' is not callable", cbname);
 		efree(cbname);
 		RETURN_FALSE;

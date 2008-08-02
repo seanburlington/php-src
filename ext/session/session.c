@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.40.2.10 2008/06/27 16:16:23 felipe Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.40.2.11 2008/08/02 04:46:06 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1583,7 +1583,7 @@ PHP_FUNCTION(session_set_save_handler)
 	}
 	
 	for (i = 0; i < 6; i++) {
-		if (!zend_is_callable(*args[i], 0, &name)) {
+		if (!zend_is_callable(*args[i], 0, &name TSRMLS_CC)) {
 			efree(args);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument %d is not a valid callback", i+1);
 			efree(name);

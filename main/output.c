@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.3.2.4.2.6 2008/07/17 09:53:42 dmitry Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.4.2.7 2008/08/02 04:46:07 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -418,7 +418,7 @@ static int php_ob_init_named(uint initial_size, uint block_size, char *handler_n
 {
 	php_ob_buffer tmp_buf;
 
-	if (output_handler && !zend_is_callable(output_handler, 0, NULL)) {
+	if (output_handler && !zend_is_callable(output_handler, 0, NULL TSRMLS_CC)) {
 		return FAILURE;
 	}
 	
@@ -508,7 +508,7 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 		}
 	} else if (output_handler && output_handler->type == IS_ARRAY) {
 		/* do we have array(object,method) */
-		if (zend_is_callable(output_handler, 0, &handler_name)) {
+		if (zend_is_callable(output_handler, 0, &handler_name TSRMLS_CC)) {
 			SEPARATE_ZVAL(&output_handler);
 			Z_ADDREF_P(output_handler);
 			result = php_ob_init_named(initial_size, block_size, handler_name, output_handler, chunk_size, erase TSRMLS_CC);
@@ -527,7 +527,7 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 		}
 	} else if (output_handler && output_handler->type == IS_OBJECT) {
 		/* do we have callable object */
-		if (zend_is_callable(output_handler, 0, &handler_name)) {
+		if (zend_is_callable(output_handler, 0, &handler_name TSRMLS_CC)) {
 			SEPARATE_ZVAL(&output_handler);
 			Z_ADDREF_P(output_handler);
 			result = php_ob_init_named(initial_size, block_size, handler_name, output_handler, chunk_size, erase TSRMLS_CC);

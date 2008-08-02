@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.19 2008/07/25 12:46:03 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.20 2008/08/02 04:46:06 felipe Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1420,7 +1420,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_VALID);
 
 	/* check callback function */
-	if (!zend_is_callable(callback_func, 0, &callback_name)) {
+	if (!zend_is_callable(callback_func, 0, &callback_name TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not a valid callback function %s", callback_name);
 		efree(callback_name);
 		RETURN_FALSE;

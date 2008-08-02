@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.167 2008/07/25 12:45:27 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.168 2008/08/02 04:40:44 felipe Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1477,7 +1477,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 	}
 
 	/* check callback function */
-	if (!zend_is_callable(callback_func, 0, &callback_name)) {
+	if (!zend_is_callable(callback_func, 0, &callback_name TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not a valid callback function %R", Z_TYPE(callback_name), Z_UNIVAL(callback_name));
 		zval_dtor(&callback_name);
 		RETURN_FALSE;

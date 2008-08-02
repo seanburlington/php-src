@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: property.c,v 1.19 2008/07/01 08:19:53 tony2001 Exp $ */ 
+/* $Id: property.c,v 1.20 2008/08/02 04:40:45 felipe Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -868,7 +868,7 @@ PHP_FUNCTION(char_enum_names)
         return;               
     }   
     
-	if (!zend_is_callable(callback, 0, NULL)) {
+	if (!zend_is_callable(callback, 0, NULL TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid enumeration callback");
 		return;
 	}
@@ -927,7 +927,7 @@ PHP_FUNCTION(char_enum_types)
         return;               
     }   
     
-	if (!zend_is_callable(callback, 0, NULL)) {
+	if (!zend_is_callable(callback, 0, NULL TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid enumeration callback");
 		return;
 	}

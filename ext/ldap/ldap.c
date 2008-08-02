@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.188 2008/07/16 13:42:51 felipe Exp $ */
+/* $Id: ldap.c,v 1.189 2008/08/02 04:40:44 felipe Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.188 2008/07/16 13:42:51 felipe Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.189 2008/08/02 04:40:44 felipe Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -2140,7 +2140,7 @@ PHP_FUNCTION(ldap_set_rebind_proc)
 	}
 
 	/* callable? */
-	if (!zend_is_callable(callback, 0, &callback_name)) {
+	if (!zend_is_callable(callback, 0, &callback_name TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Two arguments expected for '%R' to be a valid callback", Z_TYPE(callback_name), Z_UNIVAL(callback_name));
 		zval_dtor(&callback_name);
 		RETURN_FALSE;

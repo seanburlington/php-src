@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.175 2008/07/29 11:50:23 dmitry Exp $ */
+/* $Id: spl_iterators.c,v 1.176 2008/08/02 04:40:45 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1234,7 +1234,7 @@ int spl_dual_it_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
 	intern = (spl_dual_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	ZVAL_TEXT(&func, method, 0);
-	if (!zend_is_callable(&func, 0, &method)) {
+	if (!zend_is_callable(&func, 0, &method TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Method %v::%R() does not exist", intern->inner.ce->name, Z_TYPE(method), Z_UNIVAL(method));
 		return FAILURE;
 	}

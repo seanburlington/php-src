@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.211 2008/07/25 08:53:11 dmitry Exp $
+   $Id: sqlite.c,v 1.212 2008/08/02 04:40:45 felipe Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1612,7 +1612,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.211 2008/07/25 08:53:11 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.212 2008/08/02 04:40:45 felipe Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -3556,14 +3556,14 @@ PHP_FUNCTION(sqlite_create_aggregate)
 		DB_FROM_ZVAL(db, &zdb);
 	}
 
-	if (!zend_is_callable(zstep, 0, &callable)) {
+	if (!zend_is_callable(zstep, 0, &callable TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "step function `%R' is not callable", Z_TYPE(callable), Z_UNIVAL(callable));
 		zval_dtor(&callable);
 		return;
 	}
 	zval_dtor(&callable);
 
-	if (!zend_is_callable(zfinal, 0, &callable)) {
+	if (!zend_is_callable(zfinal, 0, &callable TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "finalize function `%R' is not callable", Z_TYPE(callable), Z_UNIVAL(callable));
 		zval_dtor(&callable);
 		return;
@@ -3607,7 +3607,7 @@ PHP_FUNCTION(sqlite_create_function)
 		DB_FROM_ZVAL(db, &zdb);
 	}
 
-	if (!zend_is_callable(zcall, 0, &callable)) {
+	if (!zend_is_callable(zcall, 0, &callable TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "function `%R' is not callable", Z_TYPE(callable), Z_UNIVAL(callable));
 		zval_dtor(&callable);
 		return;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.35 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: sqlite_driver.c,v 1.36 2008/08/02 04:40:44 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -502,7 +502,7 @@ static PHP_METHOD(SQLite, sqliteCreateFunction)
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	PDO_CONSTRUCT_CHECK;
 
-	if (!zend_is_callable(callback, 0, NULL)) {
+	if (!zend_is_callable(callback, 0, NULL TSRMLS_CC)) {
 		pdo_sqlite_errmsg(dbh, NULL, "callback is not callable");
 		RETURN_FALSE;
 	}
@@ -571,11 +571,11 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
 	PDO_CONSTRUCT_CHECK;
 
-	if (!zend_is_callable(step_callback, 0, NULL)) {
+	if (!zend_is_callable(step_callback, 0, NULL TSRMLS_CC)) {
 		pdo_sqlite_errmsg(dbh, NULL, "step callback is not callable");
 		RETURN_FALSE;
 	}
-	if (!zend_is_callable(fini_callback, 0, NULL)) {
+	if (!zend_is_callable(fini_callback, 0, NULL TSRMLS_CC)) {
 		pdo_sqlite_errmsg(dbh, NULL, "fini callback is not callable");
 		RETURN_FALSE;
 	}

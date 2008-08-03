@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.293 2008/08/03 00:04:06 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.294 2008/08/03 11:56:45 jani Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1175,12 +1175,12 @@ static PHP_INI_MH(OnUpdate_mbstring_internal_encoding)
 	if (stage == PHP_INI_STAGE_STARTUP || stage == PHP_INI_STAGE_SHUTDOWN) {
 		return _php_mb_ini_mbstring_internal_encoding_set(new_value, new_value_length TSRMLS_CC);
 	} else {
-		// the corresponding mbstring globals needs to be set according to the
-		// ini value in the later stage because it never falls back to the
-		// default value if 1. no value for mbstring.internal_encoding is given,
-		// 2. mbstring.language directive is processed in per-dir or runtime
-		// context and 3. call to the handler for mbstring.language is done
-		// after mbstring.internal_encoding is handled.
+		/* the corresponding mbstring globals needs to be set according to the
+		 * ini value in the later stage because it never falls back to the
+		 * default value if 1. no value for mbstring.internal_encoding is given,
+		 * 2. mbstring.language directive is processed in per-dir or runtime
+		 * context and 3. call to the handler for mbstring.language is done
+		 * after mbstring.internal_encoding is handled. */
 		return SUCCESS;
 	}
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.125 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: php_fbsql.c,v 1.126 2008/08/03 12:12:38 jani Exp $ */
 
 /* TODO:
  *
@@ -903,13 +903,13 @@ static void php_fbsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		{
 			FBCMetaData *md;
 			phpLink = (PHPFBLink*)lep->ptr;
-			// Check if connection still there.
+			/* Check if connection still there. */
 			md = fbcdcRollback(phpLink->connection);
 			if ( !mdOk(phpLink, md, "Rollback;") ) {
 				if (FB_SQL_G(generateWarnings)) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "FrontBase link is not connected, ty to reconnect");
 				}
-				// Make sure select_db will reconnect.
+				/* Make sure select_db will reconnect. */
 				fbcmdRelease(md);
 				fbcdcClose(phpLink->connection);
 				fbcdcRelease(phpLink->connection);
@@ -2993,7 +2993,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 			if (FB_SQL_G(showTimestampDecimals)) {
 				phpfbestrdup(v, length, value);
 			}
-			// Copy only YYYY-MM-DD HH:MM:SS
+			/* Copy only YYYY-MM-DD HH:MM:SS */
 			else {
 				int stringLength = strlen(v);
 				stringLength = min(stringLength, 19);

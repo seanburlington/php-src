@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.37 2008/01/29 15:55:14 sebastian Exp $ */
+/* $Id: xpath.c,v 1.38 2008/08/03 12:12:38 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -211,7 +211,7 @@ static void dom_xpath_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs,
 		
 	} else if ( intern->registerPhpFunctions == 2 && zend_u_hash_exists(intern->registered_phpfunctions, Z_TYPE(callable), Z_UNIVAL(callable), Z_UNILEN(callable) + 1) == 0) { 
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not allowed to call handler '%R()'", Z_TYPE(callable), Z_UNIVAL(callable));
-		// Push an empty string, so that we at least have a result...
+		/* Push an empty string, so that we at least have a result... */
 		valuePush(ctxt, xmlXPathNewString((xmlChar *)""));
 	} else {
 		result = zend_call_function(&fci, NULL TSRMLS_CC);

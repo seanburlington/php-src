@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.275 2008/07/24 19:50:23 felipe Exp $ */
+/* $Id: var.c,v 1.276 2008/08/03 12:03:02 jani Exp $ */
 
 /* {{{ includes
 */
@@ -569,7 +569,7 @@ static void php_unicode_export(UChar *ustr, int ustr_len TSRMLS_DC) /* {{{ */
 				break;
 		}
 	}
-	if (state == 1) { // if we are in double quotes, go back to single */
+	if (state == 1) { /* if we are in double quotes, go back to single */
 		PHPWRITE("\" . '", 5);
 	}
 }

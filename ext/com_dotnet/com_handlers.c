@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.30.2.5.2.6.2.3 2007/12/31 07:17:06 sebastian Exp $ */
+/* $Id: com_handlers.c,v 1.30.2.5.2.6.2.4 2008/08/03 12:15:47 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -566,8 +566,8 @@ zend_object_handlers php_com_object_handlers = {
 	com_read_dimension,
 	com_write_dimension,
 	NULL,
-	NULL, //com_object_get,
-	NULL, //com_object_set,
+	NULL, /* com_object_get, */
+	NULL, /* com_object_set, */
 	com_property_exists,
 	com_property_delete,
 	com_dimension_exists,

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.136.2.2.2.8.2.3 2008/07/18 13:08:08 scottmac Exp $ */
+/* $Id: sapi_apache2.c,v 1.136.2.2.2.8.2.4 2008/08/03 12:15:55 jani Exp $ */
 
 #include <fcntl.h>
 
@@ -471,13 +471,13 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 	}
 
 	if(ap_save_brigade(NULL, &pbb->bb, &bb, f->r->pool) != APR_SUCCESS) {
-		// Bad
+		/* Bad */
 	}
 	
 	apr_brigade_cleanup(bb);
 	
-	// Check to see if the last bucket in this brigade, it not
-	// we have to wait until then.
+	/* Check to see if the last bucket in this brigade, it not
+	 * we have to wait until then. */
 	if(!APR_BUCKET_IS_EOS(APR_BRIGADE_LAST(pbb->bb))) {
 		return 0;
 	}	
@@ -514,8 +514,8 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 	apply_config(conf);
 	php_apache_request_ctor(f, ctx TSRMLS_CC);
 	
-	// It'd be nice if we could highlight based of a zend_file_handle here....
-	// ...but we can't.
+	/* It'd be nice if we could highlight based of a zend_file_handle here....
+	 * ...but we can't. */
 	
 	zfd.type = ZEND_HANDLE_STREAM;
 	

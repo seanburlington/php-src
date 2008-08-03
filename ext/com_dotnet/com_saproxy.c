@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.15.2.2.2.3.2.2 2007/12/31 07:17:06 sebastian Exp $ */
+/* $Id: com_saproxy.c,v 1.15.2.2.2.3.2.3 2008/08/03 12:15:47 jani Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -386,8 +386,8 @@ zend_object_handlers php_com_saproxy_handlers = {
 	saproxy_read_dimension,
 	saproxy_write_dimension,
 	NULL,
-	NULL, //saproxy_object_get,
-	NULL, //saproxy_object_set,
+	NULL, /* saproxy_object_get, */
+	NULL, /* saproxy_object_set, */
 	saproxy_property_exists,
 	saproxy_property_delete,
 	saproxy_dimension_exists,

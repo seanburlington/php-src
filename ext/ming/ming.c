@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.79.2.4.2.8.2.9 2008/07/27 21:32:48 helly Exp $ */
+/* $Id: ming.c,v 1.79.2.4.2.8.2.10 2008/08/03 12:15:47 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2508,7 +2508,7 @@ PHP_METHOD(swffiltermatrix, __construct)
 	}
 	
 	matrix = newSWFFilterMatrix(cols, rows, values);
-	free(values); // array is copied by libming
+	free(values); /* array is copied by libming */
 	ret = zend_list_insert(matrix, le_swffiltermatrixp);
 	object_init_ex(getThis(), filtermatrix_class_entry_ptr);
 	add_property_resource(getThis(), "filtermatrix", ret);
@@ -3452,7 +3452,7 @@ PHP_METHOD(swfvideostream, __construct)
 	case 0:
 		stream = newSWFVideoStream();
 		break;
-	default: // warn
+	default: /* warn */
 		return;
 	}
 	

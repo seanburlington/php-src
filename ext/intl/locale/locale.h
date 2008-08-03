@@ -10,9 +10,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Kirti Velankar <kirtig@yahoo-inc.com>                 	  |
+   | Authors: Kirti Velankar <kirtig@yahoo-inc.com>                       |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: locale.h,v 1.1.2.2 2008/08/03 11:33:45 jani Exp $ */
 
 #ifndef LOCALE_LOCALE_H
 #define LOCALE_LOCALE_H

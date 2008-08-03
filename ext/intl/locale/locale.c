@@ -10,9 +10,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Kirti Velankar <kirtig@yahoo-inc.com>                  	  |
+   | Author: Kirti Velankar <kirtig@yahoo-inc.com>                        |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: locale.c,v 1.1.2.2 2008/08/03 11:33:44 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

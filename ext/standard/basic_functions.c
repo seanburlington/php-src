@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.911 2008/08/02 04:40:45 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.912 2008/08/03 12:04:57 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2998,7 +2998,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_uniqid, 0, 0, 0)
 	ZEND_ARG_INFO(0, more_entropy)
 ZEND_END_ARG_INFO()
 #endif
-/* }}} *//* {{{ url.c */
+/* }}} */
+/* {{{ url.c */
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_url, 0, 0, 1)
 	ZEND_ARG_INFO(0, url)

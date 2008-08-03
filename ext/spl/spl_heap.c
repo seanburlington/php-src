@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.1.2.6 2008/07/06 23:45:55 colder Exp $ */
+/* $Id: spl_heap.c,v 1.1.2.7 2008/08/03 18:16:10 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -227,7 +227,7 @@ static spl_ptr_heap *spl_ptr_heap_init(spl_ptr_heap_cmp_func cmp, spl_ptr_heap_c
 	heap->dtor     = dtor;
 	heap->ctor     = ctor;
 	heap->cmp      = cmp;
-	heap->elements = (void **) safe_emalloc(sizeof(spl_ptr_heap_element), PTR_HEAP_BLOCK_SIZE, 0);
+	heap->elements = safe_emalloc(sizeof(spl_ptr_heap_element), PTR_HEAP_BLOCK_SIZE, 0);
 	heap->max_size = PTR_HEAP_BLOCK_SIZE;
 	heap->count    = 0;
 	heap->flags    = 0;
@@ -323,7 +323,7 @@ static spl_ptr_heap *spl_ptr_heap_clone(spl_ptr_heap *from TSRMLS_DC) { /* {{{ *
 	heap->count    = from->count;
 	heap->flags    = from->flags;
 
-	heap->elements = (void **) safe_emalloc(sizeof(spl_ptr_heap_element),from->max_size,0);
+	heap->elements = safe_emalloc(sizeof(spl_ptr_heap_element),from->max_size,0);
 	memcpy(heap->elements, from->elements, sizeof(spl_ptr_heap_element)*from->max_size);
 
 	for (i=0; i < heap->count; ++i) {
@@ -383,6 +383,7 @@ static zend_object_value spl_heap_object_new_ex(zend_class_entry *class_type, sp
 	int                inherited = 0;
 
 	intern = ecalloc(1, sizeof(spl_heap_object));
+	*obj = intern;
 	ALLOC_INIT_ZVAL(intern->retval);
 
 	zend_object_std_init(&intern->std, class_type TSRMLS_CC);

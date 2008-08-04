@@ -1,5 +1,6 @@
 *.lo
 *.la
+.libs
 .deps
 *.plg
 *.opt
@@ -12,3 +13,5 @@ Release_TSDbg
 Release_TS_inline
 Debug_TS
 config.h
+*.gcda
+*.gcno

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.16 2008/07/11 11:27:32 felipe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.17 2008/08/04 20:51:46 jani Exp $ */
 
 #define IMAP41
 
@@ -1137,12 +1137,26 @@ PHP_RSHUTDOWN_FUNCTION(imap)
 }
 /* }}} */
 
+#if !defined(CCLIENTVERSION)
+#if HAVE_IMAP2004
+#define CCLIENTVERSION "2004"
+#elif HAVE_IMAP2001
+#define CCLIENTVERSION "2001"
+#elif HAVE_IMAP2000
+#define CCLIENTVERSION "2000"
+#elif defined(IMAP41)
+#define CCLIENTVERSION "4.1"
+#else
+#define CCLIENTVERSION "4.0"
+#endif
+#endif
 
 /* {{{ PHP_MINFO_FUNCTION
  */
 PHP_MINFO_FUNCTION(imap)
 {
 	php_info_print_table_start();
+	php_info_print_table_row(2, "IMAP c-Client Version", CCLIENTVERSION);
 #if HAVE_IMAP2007b
 	php_info_print_table_row(2, "IMAP c-Client Version", "2007b");
 #elif HAVE_IMAP2007a

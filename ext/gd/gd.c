@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.15 2008/08/04 18:23:33 felipe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.16 2008/08/04 23:48:09 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2583,7 +2583,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 				break;
 #if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)
 			case PHP_GDIMG_TYPE_XPM:
-				im = gdImageCreateFromXpm(fn);
+				im = gdImageCreateFromXpm(file);
 				break;
 #endif
 

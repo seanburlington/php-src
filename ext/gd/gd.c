@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.390 2008/07/17 23:28:11 pajoye Exp $ */
+/* $Id: gd.c,v 1.391 2008/08/04 18:22:02 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4528,12 +4528,12 @@ convert_done:
 #ifdef HAVE_GD_BUNDLED
 
 #define PHP_GD_SINGLE_RES	\
-	zval **SIM;	\
+	zval *SIM;	\
 	gdImagePtr im_src;	\
-	if (zend_get_parameters_ex(1, &SIM) == FAILURE) {	\
+	if (zend_parse_parameters(1 TSRMLS_CC, "r", &SIM) == FAILURE) {	\
 		RETURN_FALSE;	\
 	}	\
-	ZEND_FETCH_RESOURCE(im_src, gdImagePtr, SIM, -1, "Image", le_gd);	\
+	ZEND_FETCH_RESOURCE(im_src, gdImagePtr, &SIM, -1, "Image", le_gd);	\
 	if (im_src == NULL) {	\
 		RETURN_FALSE;	\
 	}

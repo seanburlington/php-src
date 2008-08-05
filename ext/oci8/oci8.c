@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.38.2.20 2008/07/24 15:24:14 sixd Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.38.2.21 2008/08/05 20:56:25 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,7 +107,7 @@ static sword php_oci_ping_init(php_oci_connection *connection, OCIError *errh TS
 /* }}} */
 
 /* {{{ dynamically loadable module stuff */
-#ifdef COMPILE_DL_OCI8
+#if defined(COMPILE_DL_OCI8) || defined(COMPILE_DL_OCI8_11G)
 ZEND_GET_MODULE(oci8)
 #endif /* COMPILE_DL */
 /* }}} */
@@ -1018,7 +1018,7 @@ zend_function_entry php_oci_coll_class_functions[] = {
 
 zend_module_entry oci8_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"oci8",				  /* extension name */
+	"oci8_11g",				  /* extension name */
 	php_oci_functions,	  /* extension function list */
 	PHP_MINIT(oci),		  /* extension-wide startup function */
 	PHP_MSHUTDOWN(oci),	  /* extension-wide shutdown function */
@@ -1311,7 +1311,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.20 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.21 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

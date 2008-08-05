@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.101.2.2.2.5.2.2 2008/03/07 23:20:32 gwynne Exp $ */
+/* $Id: php_session.h,v 1.101.2.2.2.5.2.3 2008/08/05 23:04:31 jani Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -240,7 +240,7 @@ PHPAPI const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 				(key_type = zend_hash_get_current_key_ex(_ht, &key, &key_length, &num_key, 0, NULL)) != HASH_KEY_NON_EXISTANT; \
 				zend_hash_move_forward(_ht)) {				\
 			if (key_type == HASH_KEY_IS_LONG) {                                             \
-				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Skipping numeric key %ld.", num_key); \
+				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Skipping numeric key %ld", num_key); \
 				continue;                                                               \
 			}										\
 			key_length--;										\

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.487 2008/08/04 06:18:27 kalle Exp $ */
+/* $Id: session.c,v 1.488 2008/08/05 22:52:35 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1527,7 +1527,7 @@ static PHP_FUNCTION(session_save_path)
 
 	if (name) {
 		if (memchr(name, '\0', name_len) != NULL) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The save_path cannot contain NULL characters.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The save_path cannot contain NULL characters");
 
 			zval_dtor(return_value);
 			RETURN_FALSE;

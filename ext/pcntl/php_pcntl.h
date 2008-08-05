@@ -16,14 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.4 2008/07/29 16:59:10 lbarnaud Exp $ */
+/* $Id: php_pcntl.h,v 1.20.2.1.2.1.2.5 2008/08/05 15:12:19 jani Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
 
-#include <sys/wait.h>
-#include "php_signal.h"
-#include "php_ticks.h"
 extern zend_module_entry pcntl_module_entry;
 #define phpext_pcntl_ptr &pcntl_module_entry
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_signal.c,v 1.9.2.1.2.1.2.1 2007/12/31 07:17:11 sebastian Exp $ */
+/* $Id: php_signal.c,v 1.9.2.1.2.1.2.2 2008/08/05 15:12:19 jani Exp $ */
 
 #include "php_signal.h"
 
@@ -24,7 +24,6 @@
  * in the Unix Environment by W. Richard Stevens p 298. */
 Sigfunc *php_signal(int signo, Sigfunc *func, int restart)
 {
- 
 	struct sigaction act,oact;
 	act.sa_handler = func;
 	sigemptyset(&act.sa_mask);
@@ -44,3 +43,11 @@ Sigfunc *php_signal(int signo, Sigfunc *func, int restart)
 	return oact.sa_handler;
 }
 
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

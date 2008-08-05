@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.4 2008/08/04 21:39:08 pajoye Exp $
+// $Id: config.w32,v 1.5 2008/08/05 17:19:32 pajoye Exp $
 // vim:ft=javascript
 
 ARG_WITH("mcrypt", "mcrypt support", "no");
@@ -9,7 +9,7 @@ if (PHP_MCRYPT != "no") {
 			CHECK_LIB('libmcrypt_a.lib;libmcrypt.lib', 'mcrypt') &&
 			CHECK_LIB('Advapi32.lib', 'mcrypt')
 		) {
-		EXTENSION('mcrypt', 'mcrypt.c');
+		EXTENSION('mcrypt', 'mcrypt.c', false);
 		AC_DEFINE('HAVE_LIBMCRYPT', 1);
 		AC_DEFINE('HAVE_LIBMCRYPT24', 1);
 	} else {

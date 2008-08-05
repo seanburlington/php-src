@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2008/07/29 16:56:26 lbarnaud Exp $
+dnl $Id: config.m4,v 1.12 2008/08/05 15:12:10 jani Exp $
 dnl
 
 dnl Process Control (pcntl) extentsion --EXPERIMENTAL--
@@ -9,11 +9,9 @@ PHP_ARG_ENABLE(pcntl, whether to enable pcntl support,
 [  --enable-pcntl          Enable experimental pcntl support (CLI/CGI only)])
 
 if test "$PHP_PCNTL" != "no"; then
- 
   AC_CHECK_FUNCS(fork, [ AC_DEFINE(HAVE_FORK,1,[ ]) ], [ AC_MSG_ERROR(pcntl: fork() not supported by this platform) ])
   AC_CHECK_FUNCS(waitpid, [ AC_DEFINE(HAVE_WAITPID,1,[ ]) ], [ AC_MSG_ERROR(pcntl: fork() not supported by this platform) ])
   AC_CHECK_FUNCS(sigaction, [ AC_DEFINE(HAVE_SIGACTION,1,[ ]) ], [ AC_MSG_ERROR(pcntl: sigaction() not supported by this platform) ])
-  AC_CHECK_FUNCS(getpriority setpriority wait3 sigprocmask sigwaitinfo sigtimedwait)
-   
+  AC_CHECK_FUNCS([getpriority setpriority wait3 sigprocmask sigwaitinfo sigtimedwait])
   PHP_NEW_EXTENSION(pcntl, pcntl.c php_signal.c, $ext_shared, cli)
 fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.28 2008/07/08 17:56:36 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.29 2008/08/05 18:02:39 derick Exp $ */
 
 #include "timelib.h"
 
@@ -277,6 +277,7 @@ static void do_adjust_special_early(timelib_time* time)
 				break;
 		}
 	}
+	do_normalize(time);
 }
 
 static timelib_sll do_years(timelib_sll year)

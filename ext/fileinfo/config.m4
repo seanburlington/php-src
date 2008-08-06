@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2008/08/06 14:29:27 derick Exp $
+dnl $Id: config.m4,v 1.14 2008/08/06 14:42:06 derick Exp $
 dnl config.m4 for extension fileinfo
 
 PHP_ARG_ENABLE(fileinfo, for fileinfo support,
@@ -15,7 +15,7 @@ if test "$PHP_FILEINFO" != "no"; then
   PHP_NEW_EXTENSION(fileinfo, fileinfo.c $libmagic_sources, $ext_shared,,-I@ext_srcdir@/libmagic)
   PHP_ADD_BUILD_DIR($ext_builddir/libmagic)
 
-  AC_CHECK_FUNCS([utimes])
+  AC_CHECK_FUNCS([utimes strndup])
 
   PHP_ADD_MAKEFILE_FRAGMENT
 fi

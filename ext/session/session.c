@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.43 2008/06/11 07:46:43 dmitry Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.44 2008/08/06 21:28:38 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1923,6 +1923,21 @@ PHP_RINIT_FUNCTION(session)
 			PS(session_status) = php_session_disabled;
 			return SUCCESS;
 		}
+	}
+
+	if (PS(serializer) == NULL) {
+		char *value;
+
+		value = zend_ini_string("session.serialize_handler", sizeof("session.serialize_handler"), 0);
+		if (value) {
+			PS(serializer) = _php_find_ps_serializer(value TSRMLS_CC);
+		}
+	}
+
+	if (PS(mod) == NULL || PS(serializer) == NULL) {
+		/* current status is unusable */
+		PS(session_status) = php_session_disabled;
+		return SUCCESS;
 	}
 
 	if (PS(auto_start)) {

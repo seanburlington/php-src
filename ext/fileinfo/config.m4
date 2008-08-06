@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.12 2008/07/25 09:16:09 jani Exp $
+dnl $Id: config.m4,v 1.13 2008/08/06 14:29:27 derick Exp $
 dnl config.m4 for extension fileinfo
 
 PHP_ARG_ENABLE(fileinfo, for fileinfo support,
@@ -9,7 +9,7 @@ if test "$PHP_FILEINFO" != "no"; then
   libmagic_sources=" \
     libmagic/apprentice.c libmagic/apptype.c libmagic/ascmagic.c \
     libmagic/compress.c libmagic/fsmagic.c libmagic/funcs.c \
-    libmagic/getopt_long.c libmagic/is_tar.c libmagic/magic.c libmagic/print.c \
+    libmagic/is_tar.c libmagic/magic.c libmagic/print.c \
     libmagic/readelf.c libmagic/softmagic.c"
 
   PHP_NEW_EXTENSION(fileinfo, fileinfo.c $libmagic_sources, $ext_shared,,-I@ext_srcdir@/libmagic)

@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.2.2.2 2008/08/05 22:37:32 gwang Exp $
+dnl $Id: config.m4,v 1.2.2.3 2008/08/07 16:41:30 gwang Exp $
 dnl
 
 AC_MSG_CHECKING(for LiteSpeed support)
 
-AC_ARG_WITH(litespeed,
+PHP_ARG_WITH(litespeed,
 [  --with-litespeed        Build PHP as litespeed module],
 [
   PHP_SAPI_LITESPEED=$withval

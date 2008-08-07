@@ -1,12 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.12 2008/08/05 15:12:10 jani Exp $
+dnl $Id: config.m4,v 1.13 2008/08/07 13:10:22 tony2001 Exp $
 dnl
 
-dnl Process Control (pcntl) extentsion --EXPERIMENTAL--
-dnl TODO - Add platform checks 
-
 PHP_ARG_ENABLE(pcntl, whether to enable pcntl support,
-[  --enable-pcntl          Enable experimental pcntl support (CLI/CGI only)])
+[  --enable-pcntl          Enable pcntl support (CLI/CGI only)])
 
 if test "$PHP_PCNTL" != "no"; then
   AC_CHECK_FUNCS(fork, [ AC_DEFINE(HAVE_FORK,1,[ ]) ], [ AC_MSG_ERROR(pcntl: fork() not supported by this platform) ])

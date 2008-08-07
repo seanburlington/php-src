@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.14.2.6 2008/03/10 22:12:36 felipe Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.14.2.7 2008/08/07 09:25:33 lbarnaud Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -712,8 +712,11 @@ PHP_FUNCTION(touch)
 
 /* {{{ php_clear_stat_cache()
 */
-PHPAPI void php_clear_stat_cache(TSRMLS_D)
+PHPAPI void php_clear_stat_cache(zend_bool clear_realpath_cache, const char *filename, int filename_len TSRMLS_DC)
 {
+	/* always clear CurrentStatFile and CurrentLStatFile even if filename is not NULL
+	 * as it may contains outdated data (e.g. "nlink" for a directory when deleting a file
+	 * in this directory, as shown by lstat_stat_variation9.phpt) */
 	if (BG(CurrentStatFile)) {
 		efree(BG(CurrentStatFile));
 		BG(CurrentStatFile) = NULL;
@@ -722,18 +725,29 @@ PHPAPI void php_clear_stat_cache(TSRMLS_D)
 		efree(BG(CurrentLStatFile));
 		BG(CurrentLStatFile) = NULL;
 	}
-	realpath_cache_clean(TSRMLS_C);
+	if (clear_realpath_cache) {
+		if (filename != NULL) {
+			realpath_cache_del(filename, filename_len TSRMLS_CC);
+		} else {
+			realpath_cache_clean(TSRMLS_C);
+		}
+	}
 }
 /* }}} */
 
-/* {{{ proto void clearstatcache(void)
+/* {{{ proto void clearstatcache([bool clear_realpath_cache[, string filename]])
    Clear file stat cache */
 PHP_FUNCTION(clearstatcache)
 {
-	if (zend_parse_parameters_none() == FAILURE) {
+	zend_bool  clear_realpath_cache = 0;
+	char      *filename             = NULL;
+	int        filename_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|bs", &clear_realpath_cache, &filename, &filename_len) == FAILURE) {
 		return;
 	}
-	php_clear_stat_cache(TSRMLS_C);
+
+	php_clear_stat_cache(clear_realpath_cache, filename, filename_len TSRMLS_CC);
 }
 /* }}} */
 

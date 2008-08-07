@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.45 2008/08/03 12:15:55 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.46 2008/08/07 09:25:32 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1507,7 +1507,9 @@ ZEND_END_ARG_INFO()
 #endif
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_clearstatcache, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_clearstatcache, 0, 0, 0)
+	ZEND_ARG_INFO(0, clear_realpath_cache)
+	ZEND_ARG_INFO(0, filename)
 ZEND_END_ARG_INFO()
 
 static

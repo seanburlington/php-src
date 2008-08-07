@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.7 2008/04/13 22:19:10 cellog Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.23.2.8 2008/08/07 09:25:33 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1039,8 +1039,8 @@ static int php_plain_files_unlink(php_stream_wrapper *wrapper, char *url, int op
 		return 0;
 	}
 
-	/* Clear stat cache */
-	php_clear_stat_cache(TSRMLS_C);
+	/* Clear stat cache (and realpath cache) */
+	php_clear_stat_cache(1, NULL, 0 TSRMLS_CC);
 
 	return 1;
 }
@@ -1111,8 +1111,8 @@ static int php_plain_files_rename(php_stream_wrapper *wrapper, char *url_from, c
         return 0;
 	}
 
-	/* Clear stat cache */
-	php_clear_stat_cache(TSRMLS_C);
+	/* Clear stat cache (and realpath cache) */
+	php_clear_stat_cache(1, NULL, 0 TSRMLS_CC);
 
 	return 1;
 }
@@ -1225,8 +1225,8 @@ static int php_plain_files_rmdir(php_stream_wrapper *wrapper, char *url, int opt
 		return 0;
 	}
 
-	/* Clear stat cache */
-	php_clear_stat_cache(TSRMLS_C);
+	/* Clear stat cache (and realpath cache) */
+	php_clear_stat_cache(1, NULL, 0 TSRMLS_CC);
 
 	return 1;
 }

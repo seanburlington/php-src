@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.12 2008/07/04 14:43:53 felipe Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.13 2008/08/08 10:12:27 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -515,9 +515,9 @@ int php_zip_glob(char *pattern, int pattern_len, long flags, zval *return_value 
 
 int php_zip_pcre(char *regexp, int regexp_len, char *path, int path_len, zval *return_value TSRMLS_DC) /* {{{ */
 {
+#ifdef ZTS
 	char cwd[MAXPATHLEN];
 	int cwd_skip = 0;
-#ifdef ZTS
 	char work_path[MAXPATHLEN];
 	char *result;
 #endif
@@ -2618,7 +2618,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.12 2008/07/04 14:43:53 felipe Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.13 2008/08/08 10:12:27 tony2001 Exp $");
 	php_info_print_table_row(2, "Zip version", "@PACKAGE_VERSION@");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.257 2008/07/09 21:27:10 colder Exp $ */
+/* $Id: simplexml.c,v 1.258 2008/08/08 22:06:42 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2226,22 +2226,22 @@ PHP_FUNCTION(simplexml_load_string)
    SimpleXMLElement constructor */
 SXE_METHOD(__construct)
 {
-	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
-	zstr            data;
-	char           *ns = NULL;
-	int             data_len, ns_len = 0;
-	xmlDocPtr       docp;
-	long            options = 0;
-	zend_bool       is_url = 0, isprefix = 0;
-	zend_uchar      data_type;
+	php_sxe_object      *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
+	zstr                 data;
+	char                *ns = NULL;
+	int                  data_len, ns_len = 0;
+	xmlDocPtr            docp;
+	long                 options = 0;
+	zend_bool            is_url = 0, isprefix = 0;
+	zend_uchar           data_type;
+	zend_error_handling  error_handling;
 
-	php_set_error_handling(EH_THROW, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	zend_replace_error_handling(EH_THROW, NULL, &error_handling TSRMLS_CC);
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t|lbs&b", &data, &data_len, &data_type, &options, &is_url, &ns, &ns_len, UG(utf8_conv), &isprefix) == FAILURE) {
-		php_std_error_handling();
 		return;
 	}
 
-	php_std_error_handling();
+	zend_restore_error_handling(&error_handling TSRMLS_CC);
 
 	if (data_type == IS_UNICODE) {
 		if (is_url) {
@@ -2640,7 +2640,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.257 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.258 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

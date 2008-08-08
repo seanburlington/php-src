@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqli_driver.c,v 1.15 2008/03/18 16:58:42 andrey Exp $ */
+/* $Id: mysqli_driver.c,v 1.16 2008/08/08 22:06:42 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,8 +82,8 @@ static int name(mysqli_object *obj, zval *value TSRMLS_DC) \
 static int driver_report_write(mysqli_object *obj, zval *value TSRMLS_DC)
 {
 	MyG(report_mode) = Z_LVAL_P(value);
-	php_set_error_handling(MyG(report_mode) & MYSQLI_REPORT_STRICT ? EH_THROW : EH_NORMAL, 
-							zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	/* FIXME */
+	zend_replace_error_handling(MyG(report_mode) & MYSQLI_REPORT_STRICT ? EH_THROW : EH_NORMAL, NULL, NULL TSRMLS_CC);
 	return SUCCESS;
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.36.2.4.2.8.2.5 2008/06/14 11:22:57 rrichards Exp $ */
+/* $Id: element.c,v 1.36.2.4.2.8.2.6 2008/08/08 22:07:07 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -181,13 +181,13 @@ PHP_METHOD(domelement, __construct)
 	int errorcode = 0, uri_len = 0;
 	int name_len, value_len = 0, name_valid;
 	xmlNsPtr nsptr = NULL;
+	zend_error_handling error_handling;
 
-	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
+	zend_replace_error_handling(EH_THROW, dom_domexception_class_entry, &error_handling TSRMLS_CC);
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s!s", &id, dom_element_class_entry, &name, &name_len, &value, &value_len, &uri, &uri_len) == FAILURE) {
-		php_std_error_handling();
 		return;
 	}
-	php_std_error_handling();
+	zend_restore_error_handling(&error_handling TSRMLS_CC);
 
 	name_valid = xmlValidateName((xmlChar *) name, 0);
 	if (name_valid != 0) {

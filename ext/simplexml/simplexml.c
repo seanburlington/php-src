@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.16 2008/07/09 21:27:28 colder Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.17 2008/08/08 22:07:07 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2176,14 +2176,14 @@ SXE_METHOD(__construct)
 	xmlDocPtr       docp;
 	long            options = 0;
 	zend_bool       is_url = 0, isprefix = 0;
+	zend_error_handling error_handling;
 
-	php_set_error_handling(EH_THROW, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	zend_replace_error_handling(EH_THROW, NULL, &error_handling TSRMLS_CC);
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lbsb", &data, &data_len, &options, &is_url, &ns, &ns_len, &isprefix) == FAILURE) {
-		php_std_error_handling();
 		return;
 	}
 
-	php_std_error_handling();
+	zend_restore_error_handling(&error_handling TSRMLS_CC);
 
 	docp = is_url ? xmlReadFile(data, NULL, options) : xmlReadMemory(data, data_len, NULL, NULL, options);
 
@@ -2558,7 +2558,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.17 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

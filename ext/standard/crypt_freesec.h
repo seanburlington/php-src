@@ -1,10 +1,10 @@
-/* $Id: crypt_freesec.h,v 1.1.2.2 2008/07/28 11:50:34 pajoye Exp $ */
+/* $Id: crypt_freesec.h,v 1.1.2.3 2008/08/08 08:20:27 bjori Exp $ */
 #ifndef _CRYPT_FREESEC_H
 #define _CRYPT_FREESEC_H
 
 #if PHP_WIN32
 # include "win32/php_stdint.h"
-#else
+#elif HAVE_STDINT_H
 # include <stdint.h>
 #endif
 

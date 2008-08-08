@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.26 2008/07/26 13:14:03 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.27 2008/08/08 10:52:48 felixdv Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1565,7 +1565,7 @@ ZEND_METHOD(reflection_function, getStaticVariables)
 /* }}} */
 
 /* {{{ proto public mixed ReflectionFunction::getClosure()
-   Invokes the function */
+   Returns a dynamically created closure for the function */
 ZEND_METHOD(reflection_function, getClosure)
 {
 	reflection_object *intern;
@@ -5117,7 +5117,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.26 2008/07/26 13:14:03 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.27 2008/08/08 10:52:48 felixdv Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

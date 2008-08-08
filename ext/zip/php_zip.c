@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.17 2008/08/08 15:56:44 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.18 2008/08/08 16:05:38 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2482,7 +2482,7 @@ static ZIPARCHIVE_METHOD(getStream)
 /* }}} */
 
 /* {{{ ze_zip_object_class_functions */
-static zend_function_entry zip_class_functions[] = {
+static const zend_function_entry zip_class_functions[] = {
 	ZIPARCHIVE_ME(open,				NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(close,				NULL, ZEND_ACC_PUBLIC)
 	ZIPARCHIVE_ME(getStatusString,		NULL, ZEND_ACC_PUBLIC)
@@ -2619,9 +2619,9 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.17 2008/08/08 15:56:44 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.18 2008/08/08 16:05:38 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", PHP_ZIP_VERSION_STRING);
-	php_info_print_table_row(2, "Libzip version", "0.7.1");
+	php_info_print_table_row(2, "Libzip version", "0.9.0");
 
 	php_info_print_table_end();
 }

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.13 2008/08/08 10:12:27 tony2001 Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.14 2008/08/08 15:37:37 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,15 +57,6 @@ static int le_zip_dir;
 #define le_zip_dir_name "Zip Directory"
 static int le_zip_entry;
 #define le_zip_entry_name "Zip Entry"
-/* }}} */
-
-/* {{{ SAFEMODE_CHECKFILE(filename) */
-#if (PHP_MAJOR_VERSION < 6)
-#define SAFEMODE_CHECKFILE(filename) \
-	(PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(filename TSRMLS_CC)
-#else 
-#define SAFEMODE_CHECKFILE(filename) (0)
-#endif
 /* }}} */
 
 /* {{{ PHP_ZIP_STAT_INDEX(za, index, flags, sb) */
@@ -142,7 +133,7 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 
 		php_basename(file, file_len, NULL, 0, &file_basename, (unsigned int *)&file_basename_len TSRMLS_CC);
 
-		if (SAFEMODE_CHECKFILE(file_dirname_fullpath)) {
+		if (OPENBASEDIR_CHECKPATH(file_dirname_fullpath)) {
 			efree(file_dirname_fullpath);
 			efree(file_basename);
 			return 0;
@@ -191,7 +182,7 @@ static int php_zip_extract_file(struct zip * za, char *dest, char *file, int fil
 	 * is required, does a file can have a different
 	 * safemode status as its parent folder?
 	 */
-	if (SAFEMODE_CHECKFILE(fullpath)) {
+	if (OPENBASEDIR_CHECKPATH(fullpath)) {
 		efree(file_dirname_fullpath);
 		efree(file_basename);
 		return 0;
@@ -236,7 +227,7 @@ static int php_zip_add_file(struct zip *za, const char *filename, int filename_l
 	char resolved_path[MAXPATHLEN];
 
 
-	if (SAFEMODE_CHECKFILE(filename)) {
+	if (OPENBASEDIR_CHECKPATH(filename)) {
 		return -1;
 	}
 
@@ -1103,7 +1094,7 @@ static PHP_NAMED_FUNCTION(zif_zip_open)
 		return;
 	}
 
-	if (SAFEMODE_CHECKFILE(filename)) {
+	if (OPENBASEDIR_CHECKPATH(filename)) {
 		RETURN_FALSE;
 	}
 
@@ -2618,7 +2609,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.13 2008/08/08 10:12:27 tony2001 Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.14 2008/08/08 15:37:37 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", "@PACKAGE_VERSION@");
 	php_info_print_table_row(2, "Libzip version", "0.7.1");
 

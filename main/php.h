@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.246 2008/08/08 14:14:52 helly Exp $ */
+/* $Id: php.h,v 1.247 2008/08/08 17:10:49 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -286,7 +286,10 @@ END_EXTERN_C()
 #define error_handling_t zend_error_handling_t
 
 BEGIN_EXTERN_C()
-PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC);
+static inline ZEND_ATTRIBUTE_DEPRECATED void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC)
+{
+	zend_replace_error_handling(error_handling, exception_class, NULL TSRMLS_CC);
+}
 static inline ZEND_ATTRIBUTE_DEPRECATED void php_std_error_handling() {}
 
 PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC);

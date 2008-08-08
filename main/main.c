@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.775 2008/07/25 13:39:39 felipe Exp $ */
+/* $Id: main.c,v 1.776 2008/08/08 17:10:49 helly Exp $ */
 
 /* {{{ includes
  */
@@ -874,21 +874,6 @@ PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, 
 PHPAPI void php_html_puts(const char *str, uint size TSRMLS_DC)
 {
 	zend_html_puts(str, size TSRMLS_CC);
-}
-/* }}} */
-
-/* {{{ php_suppress_errors */
-PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC)
-{
-	EG(error_handling) = error_handling;
-	EG(exception_class) = exception_class;
-
-	if (error_handling == EH_NORMAL) {
-		EG(user_error_handler)     = EG(user_error_handler_old);
-	} else {
-		EG(user_error_handler_old) = EG(user_error_handler);
-		EG(user_error_handler)     = NULL;
-	}
 }
 /* }}} */
 

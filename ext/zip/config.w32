@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.6 2008/08/07 23:23:19 pajoye Exp $
+// $Id: config.w32,v 1.7 2008/08/08 18:13:55 pajoye Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("zip", "ZIP support", "yes");
@@ -28,6 +28,7 @@ if (PHP_ZIP != "no") {
                      zip_set_archive_comment.c zip_set_file_comment.c \
                      zip_unchange_archive.c zip_memdup.c zip_stat_init.c \
                      zip_add_dir.c zip_file_error_clear.c zip_error_clear.c", "zip");
+
 		AC_DEFINE('HAVE_ZIP', 1);
 	} else {
 		WARNING("zip not enabled; libraries and headers not found");

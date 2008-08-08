@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.17 2008/01/18 01:24:29 pajoye Exp $ */
+/* $Id: php_zip.h,v 1.18 2008/08/08 18:13:55 pajoye Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -30,13 +30,13 @@ extern zend_module_entry zip_module_entry;
 
 #include "lib/zip.h"
 
-#define PHP_ZIP_VERSION_STRING "1.8.11"
+#define PHP_ZIP_VERSION_STRING "1.9.1"
 
 /* {{{ OPENBASEDIR_CHECKPATH(filename) */
 #if (PHP_MAJOR_VERSION < 6)
-#define OPENBASEDIR_CHECKPATH(filename) \
+# define OPENBASEDIR_CHECKPATH(filename) \
 	(PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(filename TSRMLS_CC)
-#else 
+#else
 #define OPENBASEDIR_CHECKPATH(filename) \
 	php_check_open_basedir(filename TSRMLS_CC)
 #endif

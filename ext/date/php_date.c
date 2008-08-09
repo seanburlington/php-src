@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.205 2008/08/08 22:06:42 colder Exp $ */
+/* $Id: php_date.c,v 1.206 2008/08/09 21:58:40 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2311,7 +2311,7 @@ static HashTable *date_object_get_properties(zval *object TSRMLS_DC)
 					abs(utc_offset / 60),
 					abs((utc_offset % 60)));
 
-				ZVAL_ASCII_STRING(zv, tmpstr, 0);
+				ZVAL_ASCII_STRING(zv, tmpstr, ZSTR_AUTOFREE);
 				}
 				break;
 			case TIMELIB_ZONETYPE_ABBR:

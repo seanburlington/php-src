@@ -1,4 +1,4 @@
-/* $Id: php_crypt_r.c,v 1.2 2008/07/28 16:48:38 auroraeosrose Exp $ */
+/* $Id: php_crypt_r.c,v 1.3 2008/08/10 21:34:02 pajoye Exp $ */
 /*
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
@@ -204,7 +204,7 @@ char * php_md5_crypt_r(const char *pw, const char *salt, char *out) {
 
 	memcpy(passwd, MD5_MAGIC, MD5_MAGIC_LEN);
 
-#ifdef strncpy_s
+#if _MSC_VER >= 1500
  	if (strncpy_s(passwd + MD5_MAGIC_LEN, MD5_HASH_MAX_LEN - MD5_MAGIC_LEN, sp, sl + 1) != 0) {
  		goto _destroyCtx1;
  	}

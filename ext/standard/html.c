@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.133 2008/04/11 19:08:04 felipe Exp $ */
+/* $Id: html.c,v 1.134 2008/08/10 13:25:52 lbarnaud Exp $ */
 
 /*
  * HTML entity resources:
@@ -1197,9 +1197,20 @@ encode_amp:
 					} else {
 						if (*s == '#') { /* numeric entities */
 							s++;
-							while (s < e) {
-								if (!isdigit(*s++)) {
-									goto encode_amp;
+							/* Hex (&#x5A;) */
+							if (*s == 'x' || *s == 'X') {
+								s++;
+								while (s < e) {
+									if (!isxdigit(*s++)) {
+										goto encode_amp;
+									}
+								}
+							/* Dec (&#90;)*/
+							} else {
+								while (s < e) {
+									if (!isdigit(*s++)) {
+										goto encode_amp;
+									}
 								}
 							}
 						} else { /* text entities */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.3 2008/03/05 13:34:12 dmitry Exp $ */
+/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.4 2008/08/11 15:33:02 lbarnaud Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -26,6 +26,7 @@ BEGIN_EXTERN_C()
 
 PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC);
 PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC);
+PHPAPI char *expand_filepath_ex(const char *filepath, char *real_path, const char *relative_to, size_t relative_to_len TSRMLS_DC);
 
 PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC);
 PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC);

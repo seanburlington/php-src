@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.5.2.1 2008/08/11 03:53:57 cellog Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.5.2.2 2008/08/11 22:43:02 cellog Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -284,6 +284,12 @@ class corrupt_zipmaker
 		switch ($corrupt) {
 			case null :
 				$write .= "PK\x05\x06\x00\x00\x00\x00" .
+					pack("vvVVv", $this->count, $this->count,
+					$this->offset, strlen($this->start),
+					strlen($this->comment)) . $this->comment;
+				break;
+			case 'disknumber' :
+				$write .= "PK\x05\x06\x01\x00\x01\x00" .
 					pack("vvVVv", $this->count, $this->count,
 					$this->offset, strlen($this->start),
 					strlen($this->comment)) . $this->comment;

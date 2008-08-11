@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.295 2008/08/04 21:10:17 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.296 2008/08/11 15:40:41 nlopess Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -86,7 +86,7 @@
 #include <oniguruma.h>
 #undef UChar
 #elif HAVE_PCRE || HAVE_BUNDLED_PCRE
-#include <pcre.h>
+#include "ext/pcre/php_pcre.h"
 #endif
 /* }}} */
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.52 2008/08/11 00:50:02 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.53 2008/08/11 22:08:58 cseiler Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1871,7 +1871,7 @@ ZEND_METHOD(reflection_parameter, __construct)
 				if (zend_hash_find(&ce->function_table, lcname, lcname_len + 1, (void **) &fptr) == FAILURE) {
 					efree(lcname);
 					zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
-						"Method %s::%s() does not exist", Z_STRVAL_PP(classref), Z_TYPE_PP(method), Z_STRVAL_PP(method));
+						"Method %s::%s() does not exist", ce->name, Z_STRVAL_PP(method));
 					return;
 				}
 				efree(lcname);
@@ -4908,7 +4908,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.52 2008/08/11 00:50:02 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.53 2008/08/11 22:08:58 cseiler Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

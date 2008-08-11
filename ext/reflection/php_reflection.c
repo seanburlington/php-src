@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.314 2008/08/11 19:34:49 helly Exp $ */
+/* $Id: php_reflection.c,v 1.315 2008/08/11 22:30:44 cseiler Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,6 +225,28 @@ static void reflection_register_implement(zend_class_entry *class_entry, zend_cl
 
 	class_entry->interfaces = (zend_class_entry **) realloc(class_entry->interfaces, sizeof(zend_class_entry *) * num_interfaces);
 	class_entry->interfaces[num_interfaces - 1] = interface_entry;
+}
+/* }}} */
+
+static zend_function *_copy_function(zend_function *fptr TSRMLS_DC) /* {{{ */
+{
+	if (fptr
+		&& fptr->type == ZEND_INTERNAL_FUNCTION
+		&& (fptr->internal_function.fn_flags & ZEND_ACC_CALL_VIA_HANDLER) != 0)
+	{
+		zend_function *copy_fptr;
+		copy_fptr = emalloc(sizeof(zend_function));
+		memcpy(copy_fptr, fptr, sizeof(zend_function));
+		if (UG(unicode)) {
+			copy_fptr->internal_function.function_name.u = eustrdup(fptr->internal_function.function_name.u);
+		} else {
+			copy_fptr->internal_function.function_name.s = estrdup(fptr->internal_function.function_name.s);
+		}
+		return copy_fptr;
+	} else {
+		/* no copy needed */
+		return fptr;
+	}
 }
 /* }}} */
 
@@ -1812,7 +1834,7 @@ ZEND_METHOD(reflection_function, getParameters)
 		zval *parameter;   
 
 		ALLOC_ZVAL(parameter);
-		reflection_parameter_factory(fptr, arg_info, i, fptr->common.required_num_args, parameter TSRMLS_CC);
+		reflection_parameter_factory(_copy_function(fptr TSRMLS_CC), arg_info, i, fptr->common.required_num_args, parameter TSRMLS_CC);
 		add_next_index_zval(return_value, parameter);
 
 		arg_info++;
@@ -1956,7 +1978,7 @@ ZEND_METHOD(reflection_parameter, __construct)
 				} else if (zend_u_hash_find(&ce->function_table, Z_TYPE_PP(method), lcname, lcname_len + 1, (void **) &fptr) == FAILURE) {
 					efree(lcname.v);
 					zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
-						"Method %R::%R() does not exist", Z_TYPE_PP(classref), Z_UNIVAL_PP(classref), Z_TYPE_PP(method), Z_UNIVAL_PP(method));
+						"Method %v::%R() does not exist", ce->name, Z_TYPE_PP(method), Z_UNIVAL_PP(method));
 					return;
 				}
 				efree(lcname.v);
@@ -2064,9 +2086,9 @@ ZEND_METHOD(reflection_parameter, getDeclaringFunction)
 	GET_REFLECTION_OBJECT_PTR(param);
 
 	if (!param->fptr->common.scope) {
-		reflection_function_factory(param->fptr, return_value TSRMLS_CC);
+		reflection_function_factory(_copy_function(param->fptr TSRMLS_CC), return_value TSRMLS_CC);
 	} else {
-		reflection_method_factory(param->fptr->common.scope, param->fptr, return_value TSRMLS_CC);
+		reflection_method_factory(param->fptr->common.scope, _copy_function(param->fptr TSRMLS_CC), return_value TSRMLS_CC);
 	}
 }
 /* }}} */
@@ -2458,7 +2480,14 @@ ZEND_METHOD(reflection_method, getClosure)
 			/* Returns from this function */
 		}
 
-		zend_create_closure(return_value, mptr, mptr->common.scope, obj TSRMLS_CC);
+		/* This is an original closure object and __invoke is to be called. */
+		if (Z_OBJCE_P(obj) == zend_ce_closure && mptr->type == ZEND_INTERNAL_FUNCTION &&
+			(mptr->internal_function.fn_flags & ZEND_ACC_CALL_VIA_HANDLER) != 0)
+		{
+			RETURN_ZVAL(obj, 1, 0);
+		} else {
+			zend_create_closure(return_value, mptr, mptr->common.scope, obj TSRMLS_CC);
+		}
 	}
 }
 /* }}} */
@@ -5394,7 +5423,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.314 2008/08/11 19:34:49 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.315 2008/08/11 22:30:44 cseiler Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

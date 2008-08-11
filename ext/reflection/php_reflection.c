@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.30 2008/08/11 12:48:22 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.31 2008/08/11 13:56:24 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3307,7 +3307,7 @@ ZEND_METHOD(reflection_class, hasProperty)
 		{
 			MAKE_STD_ZVAL(property);
 			ZVAL_STRINGL(property, name, name_len, 1);
-			if (Z_OBJ_HANDLER_P(intern->obj, has_property)(intern->obj, property, 2 TSRMLS_CC)) {
+			if (Z_OBJ_HANDLER_P(intern->obj, has_property)(intern->obj, property, 0 TSRMLS_CC)) {
 				zval_ptr_dtor(&property);
 				RETURN_TRUE;
 			}
@@ -5207,7 +5207,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.30 2008/08/11 12:48:22 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.31 2008/08/11 13:56:24 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.29 2008/08/11 12:43:21 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.30 2008/08/11 12:48:22 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3274,7 +3274,7 @@ ZEND_METHOD(reflection_class, getMethods)
 
 	array_init(return_value);
 	zend_hash_apply_with_arguments(&ce->function_table TSRMLS_CC, (apply_func_args_t) _addmethod_va, 4, &ce, return_value, filter, intern->obj);
-	if (intern->obj && instanceof_function(ce, zend_ce_closure)) {
+	if (intern->obj && instanceof_function(ce, zend_ce_closure TSRMLS_CC)) {
 		zend_function *closure = zend_get_closure_invoke_method(intern->obj TSRMLS_CC);
 		if (closure) {
 			_addmethod(closure, ce, return_value, filter, intern->obj TSRMLS_CC);
@@ -5207,7 +5207,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.29 2008/08/11 12:43:21 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.30 2008/08/11 12:48:22 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

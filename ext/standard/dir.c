@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.147.2.3.2.12.2.10 2008/08/11 22:38:31 lbarnaud Exp $ */
+/* $Id: dir.c,v 1.147.2.3.2.12.2.11 2008/08/11 23:14:36 lbarnaud Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -296,7 +296,7 @@ PHP_FUNCTION(chroot)
 		RETURN_FALSE;
 	}
 
-	realpath_cache_clean(TSRMLS_C);
+	php_clear_stat_cache(1, NULL, 0 TSRMLS_CC);
 	
 	ret = chdir("/");
 	

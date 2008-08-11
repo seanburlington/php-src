@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.27 2008/08/08 10:52:48 felixdv Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.28 2008/08/11 00:47:45 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -642,7 +642,7 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 			*zv = precv->op2.u.constant;
 			zval_copy_ctor(zv);
 			INIT_PZVAL(zv);
-			zval_update_constant(&zv, (void*)1 TSRMLS_CC);
+			zval_update_constant_ex(&zv, (void*)1, fptr->common.scope TSRMLS_CC);
 			if (Z_TYPE_P(zv) == IS_BOOL) {
 				if (Z_LVAL_P(zv)) {
 					string_write(str, "true", sizeof("true")-1);
@@ -5117,7 +5117,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.27 2008/08/08 10:52:48 felixdv Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.33.2.45.2.28 2008/08/11 00:47:45 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

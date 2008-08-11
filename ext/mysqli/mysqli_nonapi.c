@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.85 2008/07/22 23:43:14 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.86 2008/08/11 12:32:47 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -278,11 +278,7 @@ end:
 
 	MyG(num_links)++;
 
-#if !defined(MYSQLI_USE_MYSQLND)
 	mysql->multi_query = 0;
-#else
-	mysql->multi_query = 1;
-#endif
 
 	if (!object || !instanceof_function(Z_OBJCE_P(object), mysqli_link_class_entry TSRMLS_CC)) {
 		MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.9 2008/08/02 04:46:06 felipe Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.10 2008/08/12 13:37:32 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1069,6 +1069,7 @@ PHP_METHOD(sqlite3stmt, execute)
 			/* If the ZVAL is null then it should be bound as that */
 			if (Z_TYPE_P(param->parameter) == IS_NULL) {
 				sqlite3_bind_null(stmt_obj->stmt, param->param_number);
+				zend_hash_move_forward(stmt_obj->bound_params);
 				continue;
 			}
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.12 2008/08/01 13:48:44 sfox Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.13 2008/08/12 14:56:52 helly Exp $ */
 
 #include "phar_internal.h"
 
@@ -950,7 +950,9 @@ found_it:
 					}
 				}
 			}
-			efree(entry);
+			if (entry != filename) {
+				efree(entry);
+			}
 			efree(arch);
 			RETURN_FALSE;
 		}

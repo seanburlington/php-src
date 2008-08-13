@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.315 2008/08/11 22:30:44 cseiler Exp $ */
+/* $Id: php_reflection.c,v 1.316 2008/08/13 21:57:00 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3357,9 +3357,9 @@ static void _addmethod(zend_function *mptr, zend_class_entry *ce, zval *retval, 
 	zend_function *closure;
 
 	if (mptr->common.fn_flags & filter) {
-		ALLOC_ZVAL(method);
 		unsigned int lc_name_len;
 		zstr lc_name = zend_u_str_case_fold(ZEND_STR_TYPE, mptr->common.function_name, len, 1, &lc_name_len);
+		ALLOC_ZVAL(method);
 		if (ce == zend_ce_closure && obj && (lc_name_len == sizeof(ZEND_INVOKE_FUNC_NAME)-1)
 			&& ZEND_U_EQUAL(ZEND_STR_TYPE, lc_name, lc_name_len, ZEND_INVOKE_FUNC_NAME, sizeof(ZEND_INVOKE_FUNC_NAME)-1)
 			&& (closure = zend_get_closure_invoke_method(obj TSRMLS_CC)) != NULL)
@@ -5423,7 +5423,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.315 2008/08/11 22:30:44 cseiler Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.316 2008/08/13 21:57:00 pajoye Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

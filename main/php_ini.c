@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.168 2008/08/13 00:49:59 jani Exp $ */
+/* $Id: php_ini.c,v 1.169 2008/08/13 21:51:54 pajoye Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -340,6 +340,7 @@ int php_init_config(TSRMLS_D)
 {
 	char *php_ini_file_name = NULL;
 	char *php_ini_search_path = NULL;
+	int php_ini_scanned_path_len;
 	char *open_basedir;
 	int free_ini_search_path = 0;
 	zend_file_handle fh;
@@ -598,7 +599,7 @@ int php_init_config(TSRMLS_D)
 		/* Or fall back using possible --with-config-file-scan-dir setting (defaults to empty string!) */
 		php_ini_scanned_path = PHP_CONFIG_FILE_SCAN_DIR;
 	}
-	int php_ini_scanned_path_len = strlen(php_ini_scanned_path);
+	php_ini_scanned_path_len = strlen(php_ini_scanned_path);
 
 	/* Scan and parse any .ini files found in scan path if path not empty. */
 	if (!sapi_module.php_ini_ignore && php_ini_scanned_path_len) {

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.22 2008/08/04 07:20:15 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.23 2008/08/13 00:53:28 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1725,17 +1725,6 @@ consult the installation file that came with this distribution, or visit \n\
 			CG(interactive) = 0;
 
 			if (!cgi && !fastcgi) {
-				if (cgi_sapi_module.php_ini_path_override && cgi_sapi_module.php_ini_ignore) {
-					no_headers = 1;
-					php_output_startup();
-					php_output_activate(TSRMLS_C);
-					SG(headers_sent) = 1;
-					php_printf("You cannot use both -n and -c switch. Use -h for help.\n");
-					php_end_ob_buffers(1 TSRMLS_CC);
-					exit_status = 1;
-					goto out;
-				}
-
 				while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 					switch (c) {
 

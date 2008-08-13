@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.8.2.8 2008/08/08 17:47:24 helly Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.8.2.9 2008/08/13 22:40:39 kalle Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -54,12 +54,6 @@
 #	endif
 #	define PHP_DIR_SEPARATOR '\\'
 #	define PHP_EOL "\r\n"
-#	if defined(NTDDI_VERSION) && NTDDI_VERSION >= 0x06000000
-#		undef NTDDI_VERSION
-#	endif
-#	ifndef NTDDI_VERSION
-#		define NTDDI_VERSION 0x05000000
-#	endif
 #else
 #	if defined(__GNUC__) && __GNUC__ >= 4
 #		define PHPAPI __attribute__ ((visibility("default")))

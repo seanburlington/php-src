@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.193 2008/07/25 15:05:33 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.194 2008/08/13 00:49:59 jani Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -759,12 +759,6 @@ int main(int argc, char *argv[])
 	zend_first_try {
 		CG(in_compilation) = 0; /* not initialized but needed for several options */
 		EG(uninitialized_zval_ptr) = NULL;
-
-		if (cli_sapi_module.php_ini_path_override && cli_sapi_module.php_ini_ignore) {
-			PUTS("You cannot use both -n and -c switch. Use -h for help.\n");
-			exit_status=1;
-			goto err;
-		}
 
 		while ((c = php_getopt(argc, argv, OPTIONS, &php_optarg, &php_optind, 0, 2)) != -1) {
 			switch (c) {

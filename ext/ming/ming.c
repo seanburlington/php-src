@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.79.2.4.2.8.2.11 2008/08/04 12:19:50 tony2001 Exp $ */
+/* $Id: ming.c,v 1.79.2.4.2.8.2.12 2008/08/13 11:43:14 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1395,7 +1395,7 @@ PHP_METHOD(swfbutton, addAction)
 PHP_FUNCTION(ming_keypress)
 {
 	char *key;
-	long key_len;
+	int key_len;
 	char c;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &key, &key_len) == FAILURE) {
@@ -4301,7 +4301,7 @@ PHP_METHOD(swfmovie, importChar)
 	SWFCharacter character;
 	int ret;
 	char *libswf, *name;
-	long libswf_len, name_len;
+	int libswf_len, name_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &libswf, &libswf_len, &name, &name_len) == FAILURE) {
 		return;
@@ -4378,7 +4378,7 @@ PHP_METHOD(swfmovie, addFont)
 PHP_METHOD(swfmovie, replace)
 {
 	SWFMovie movie;
-	zval *zitem, **zblock;
+	zval *zitem, *zblock;
 	SWFDisplayItem item;
 	SWFBlock block;
 	SWFMovieBlockType ublock;

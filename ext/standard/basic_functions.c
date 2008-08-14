@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.48 2008/08/14 09:27:33 kalle Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.49 2008/08/14 09:41:16 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2737,7 +2737,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_hebrevc, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_nl2br, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_nl2br, 0, 0, 1)
 	ZEND_ARG_INFO(0, str)
 	ZEND_ARG_INFO(0, is_xhtml)
 ZEND_END_ARG_INFO()

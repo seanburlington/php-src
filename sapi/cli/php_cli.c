@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.195 2008/08/13 06:17:15 dmitry Exp $ */
+/* $Id: php_cli.c,v 1.196 2008/08/14 09:46:12 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -578,8 +578,6 @@ static const char *param_mode_conflict = "Either execute direct code, process st
  */
 static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file, int *lineno TSRMLS_DC)
 {
-	int c;
-
 	*lineno = 1;
 
 	file_handle->type = ZEND_HANDLE_FP;

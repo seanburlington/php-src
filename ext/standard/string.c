@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.679 2008/08/14 02:55:13 kalle Exp $ */
+/* $Id: string.c,v 1.680 2008/08/14 10:10:56 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -656,6 +656,7 @@ PHP_FUNCTION(nl_langinfo)
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Item '%ld' is not valid", item);
 			RETURN_FALSE;
 	}
+	/* }}} */
 
 	value = nl_langinfo(item);
 	if (value == NULL) {

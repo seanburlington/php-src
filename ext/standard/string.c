@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.33 2008/07/31 14:20:40 ohill Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.34 2008/08/14 02:56:23 kalle Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3887,18 +3887,19 @@ PHP_FUNCTION(hebrevc)
 }
 /* }}} */
 
-/* {{{ proto string nl2br(string str)
+/* {{{ proto string nl2br(string str [, bool is_xhtml])
    Converts newlines to HTML line breaks */
 PHP_FUNCTION(nl2br)
 {
-	/* in brief this inserts <br /> before matched regexp \n\r?|\r\n? */
-	char	*tmp, *str;
-	int	new_length;
-	char	*end, *target;
-	int	repl_cnt = 0;
-	int	str_len;
+	/* in brief this inserts <br /> or <br> before matched regexp \n\r?|\r\n? */
+	char		*tmp, *str;
+	int		new_length;
+	char		*end, *target;
+	int		repl_cnt = 0;
+	int		str_len;
+	zend_bool	is_xhtml = 1;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &str, &str_len, &is_xhtml) == FAILURE) {
 		return;
 	}
 	
@@ -3927,7 +3928,12 @@ PHP_FUNCTION(nl2br)
 		RETURN_STRINGL(str, str_len, 1);
 	}
 
-	new_length = str_len + repl_cnt * (sizeof("<br />") - 1);
+	if (is_xhtml) {
+		new_length = str_len + repl_cnt * (sizeof("<br />") - 1);
+	} else {
+		new_length = str_len + repl_cnt * (sizeof("<br>") - 1);
+	}
+
 	tmp = target = emalloc(new_length + 1);
 
 	while (str < end) {
@@ -3937,8 +3943,12 @@ PHP_FUNCTION(nl2br)
 				*target++ = '<';
 				*target++ = 'b';
 				*target++ = 'r';
-				*target++ = ' ';
-				*target++ = '/';
+
+				if (is_xhtml) {
+					*target++ = ' ';
+					*target++ = '/';
+				}
+
 				*target++ = '>';
 				
 				if ((*str == '\r' && *(str+1) == '\n') || (*str == '\n' && *(str+1) == '\r')) {

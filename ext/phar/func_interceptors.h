@@ -17,13 +17,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.h,v 1.2 2008/08/01 13:45:05 sfox Exp $ */
+/* $Id: func_interceptors.h,v 1.3 2008/08/14 13:02:13 dmitry Exp $ */
 
 BEGIN_EXTERN_C()
 void phar_intercept_functions(TSRMLS_D);
 void phar_release_functions(TSRMLS_D);
 void phar_intercept_functions_init(TSRMLS_D);
 void phar_intercept_functions_shutdown(TSRMLS_D);
+void phar_save_orig_functions(TSRMLS_D);
+void phar_restore_orig_functions(TSRMLS_D);
 END_EXTERN_C()
 
 /*

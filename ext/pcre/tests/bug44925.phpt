@@ -54,35 +54,33 @@ array(7) {
   [0]=>
   string(1) "1"
   [1]=>
-  int(2)
+  string(1) "2"
   [2]=>
-  int(3)
+  string(1) "3"
   [3]=>
-  float(1.1)
+  string(3) "1.1"
   [6]=>
-  array(0) {
-  }
+  string(5) "Array"
   [7]=>
   string(1) "a"
   [8]=>
-  &string(1) "b"
+  string(1) "b"
 }
 array(7) {
   [0]=>
   string(1) "1"
   [1]=>
-  int(2)
+  string(1) "2"
   [2]=>
-  int(3)
+  string(1) "3"
   [3]=>
-  float(1.1)
+  string(3) "1.1"
   [6]=>
-  array(0) {
-  }
+  string(5) "Array"
   [7]=>
   string(1) "a"
   [8]=>
-  &string(1) "y"
+  string(1) "b"
 }
 array(9) {
   [0]=>

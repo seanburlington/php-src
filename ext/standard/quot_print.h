@@ -16,13 +16,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: quot_print.h,v 1.13.2.1.2.1.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: quot_print.h,v 1.13.2.1.2.1.2.2 2008/08/14 10:12:20 tony2001 Exp $ */
 
 #ifndef QUOT_PRINT_H
 #define QUOT_PRINT_H
 
 PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t length, size_t *ret_length, int replace_us_by_ws);
+PHPAPI unsigned char *php_quot_print_encode(const unsigned char *str, size_t length, size_t *ret_length);
 
 PHP_FUNCTION(quoted_printable_decode);
+PHP_FUNCTION(quoted_printable_encode);
 
 #endif /* QUOT_PRINT_H */

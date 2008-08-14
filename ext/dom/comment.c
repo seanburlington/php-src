@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: comment.c,v 1.11.2.1.2.1.2.4 2008/08/08 22:07:07 colder Exp $ */
+/* $Id: comment.c,v 1.11.2.1.2.1.2.5 2008/08/14 08:39:04 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -81,4 +81,14 @@ PHP_METHOD(domcomment, __construct)
 	}
 }
 /* }}} end DOMComment::__construct */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

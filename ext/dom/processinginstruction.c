@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.17.2.1.2.1.2.5 2008/08/08 22:07:07 colder Exp $ */
+/* $Id: processinginstruction.c,v 1.17.2.1.2.1.2.6 2008/08/14 08:39:05 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -114,8 +114,6 @@ int dom_processinginstruction_target_read(dom_object *obj, zval **retval TSRMLS_
 
 /* }}} */
 
-
-
 /* {{{ data	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-837822393
@@ -179,3 +177,12 @@ int dom_processinginstruction_data_write(dom_object *obj, zval *newval TSRMLS_DC
 /* }}} */
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

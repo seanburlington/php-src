@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: string_extend.c,v 1.5.2.1.2.1.2.3 2008/02/04 15:22:59 sebastian Exp $ */
+/* $Id: string_extend.c,v 1.5.2.1.2.1.2.4 2008/08/14 08:39:05 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /* {{{ arginfo */
 static
@@ -55,7 +54,6 @@ const zend_function_entry php_dom_string_extend_class_functions[] = {
 
 /* {{{ attribute protos, not implemented yet */
 
-
 /* {{{ proto int dom_string_extend_find_offset16(int offset32);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#i18n-methods-StringExtend-findOffset16
 Since: 
@@ -66,7 +64,6 @@ PHP_FUNCTION(dom_string_extend_find_offset16)
 }
 /* }}} end dom_string_extend_find_offset16 */
 
-
 /* {{{ proto int dom_string_extend_find_offset32(int offset16);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#i18n-methods-StringExtend-findOffset32
 Since: 
@@ -76,4 +73,16 @@ PHP_FUNCTION(dom_string_extend_find_offset32)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_string_extend_find_offset32 */
+
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

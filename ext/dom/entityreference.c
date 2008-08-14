@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.12.2.1.2.2.2.4 2008/08/08 22:07:07 colder Exp $ */
+/* $Id: entityreference.c,v 1.12.2.1.2.2.2.5 2008/08/14 08:39:04 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /* {{{ arginfo */
 static
@@ -87,6 +86,15 @@ PHP_METHOD(domentityreference, __construct)
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, node, (void *)intern TSRMLS_CC);
 	}
 }
-
 /* }}} end DOMEntityReference::__construct */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

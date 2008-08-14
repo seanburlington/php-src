@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: typeinfo.c,v 1.6.2.1.2.1.2.2 2007/12/31 07:17:07 sebastian Exp $ */
+/* $Id: typeinfo.c,v 1.6.2.1.2.1.2.3 2008/08/14 08:39:05 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -55,8 +55,6 @@ int dom_typeinfo_type_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
-
-
 /* {{{ type_namespace	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#TypeInfo-typeNamespace
@@ -71,4 +69,15 @@ int dom_typeinfo_type_namespace_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

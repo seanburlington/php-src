@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domstringlist.c,v 1.6.2.1.2.1.2.3 2008/02/04 15:22:59 sebastian Exp $ */
+/* $Id: domstringlist.c,v 1.6.2.1.2.1.2.4 2008/08/14 08:39:04 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /* {{{ arginfo */
 static
@@ -63,9 +62,6 @@ int dom_domstringlist_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
-
-
-
 /* {{{ proto domstring dom_domstringlist_item(int index);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMStringList-item
 Since: 
@@ -75,4 +71,16 @@ PHP_FUNCTION(dom_domstringlist_item)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_domstringlist_item */
+
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.23.2.1.2.2.2.2 2008/01/30 09:41:12 dmitry Exp $ */
+/* $Id: xml_common.h,v 1.23.2.1.2.2.2.3 2008/08/14 08:39:05 tony2001 Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
@@ -95,3 +95,12 @@ PHP_DOM_EXPORT xmlNodePtr dom_object_get_node(dom_object *obj);
 	DOM_GET_OBJ(__ptr, __id, __prtype, __intern);
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

@@ -1,7 +1,5 @@
 --TEST--
 Bug #20539 (PHP CLI Segmentation Fault)
---SKIPIF--
-<?php if (!extension_loaded("session")) die("skip session extension not available"); ?>
 --INI--
 session.auto_start=1
 session.save_handler=files

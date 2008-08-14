@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.913 2008/08/07 09:24:04 lbarnaud Exp $ */
+/* $Id: basic_functions.c,v 1.914 2008/08/14 02:55:13 kalle Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2742,6 +2742,7 @@ ZEND_END_ARG_INFO()
 static
 ZEND_BEGIN_ARG_INFO(arginfo_nl2br, 0)
 	ZEND_ARG_INFO(0, str)
+	ZEND_ARG_INFO(0, is_xhtml)
 ZEND_END_ARG_INFO()
 
 static

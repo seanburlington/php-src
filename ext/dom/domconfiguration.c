@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.11 2008/02/04 15:22:40 sebastian Exp $ */
+/* $Id: domconfiguration.c,v 1.12 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /* {{{ arginfo */
 static
@@ -95,4 +94,16 @@ PHP_FUNCTION(dom_domconfiguration_can_set_parameter)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_domconfiguration_can_set_parameter */
+
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

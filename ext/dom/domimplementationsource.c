@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementationsource.c,v 1.11 2008/02/04 15:22:40 sebastian Exp $ */
+/* $Id: domimplementationsource.c,v 1.12 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,4 +76,16 @@ PHP_FUNCTION(dom_domimplementationsource_get_domimplementations)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_domimplementationsource_get_domimplementations */
+
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: notation.c,v 1.15 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: notation.c,v 1.16 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /*
 * class DOMNotation extends DOMNode 
@@ -69,8 +68,6 @@ int dom_notation_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
-
-
 /* {{{ systemId	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-E8AAB1D0
@@ -99,4 +96,15 @@ int dom_notation_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

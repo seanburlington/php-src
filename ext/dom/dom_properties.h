@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_properties.h,v 1.10 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: dom_properties.h,v 1.11 2008/08/14 08:38:37 tony2001 Exp $ */
 #ifndef DOM_PROPERTIES_H
 #define DOM_PROPERTIES_H
 
@@ -160,3 +160,12 @@ int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC);
 #endif
 
 #endif /* DOM_PROPERTIERS_H */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

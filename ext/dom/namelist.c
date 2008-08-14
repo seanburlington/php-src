@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.13 2008/02/04 15:22:40 sebastian Exp $ */
+/* $Id: namelist.c,v 1.14 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /* {{{ arginfo */
 static
@@ -67,9 +66,6 @@ int dom_namelist_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 /* }}} */
 
-
-
-
 /* {{{ proto string dom_namelist_get_name(int index) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getName
 Since: 
@@ -80,7 +76,6 @@ PHP_FUNCTION(dom_namelist_get_name)
 }
 /* }}} end dom_namelist_get_name */
 
-
 /* {{{ proto string dom_namelist_get_namespace_uri(int index) U
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getNamespaceURI
 Since: 
@@ -90,4 +85,14 @@ PHP_FUNCTION(dom_namelist_get_namespace_uri)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_namelist_get_namespace_uri */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

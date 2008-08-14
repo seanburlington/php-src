@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.37 2008/02/28 14:16:12 felipe Exp $ */
+/* $Id: php_dom.h,v 1.38 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -154,3 +154,12 @@ PHP_MSHUTDOWN_FUNCTION(dom);
 PHP_MINFO_FUNCTION(dom);
 
 #endif /* PHP_DOM_H */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

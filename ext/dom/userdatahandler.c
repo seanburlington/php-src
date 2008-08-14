@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userdatahandler.c,v 1.11 2007/12/31 07:12:09 sebastian Exp $ */
+/* $Id: userdatahandler.c,v 1.12 2008/08/14 08:38:37 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,6 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
-
 
 /*
 * class domuserdatahandler 
@@ -52,4 +51,16 @@ PHP_FUNCTION(dom_userdatahandler_handle)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_userdatahandler_handle */
+
+/* }}} */
+
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.22 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: dom_fe.h,v 1.23 2008/08/14 08:38:37 tony2001 Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -268,3 +268,12 @@ PHP_FUNCTION(dom_xpath_register_php_functions);
 #endif
 
 #endif /* DOM_FE_H */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

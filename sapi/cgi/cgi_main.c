@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.59 2008/08/13 01:01:29 jani Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.60 2008/08/15 07:30:31 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -238,6 +238,7 @@ static void print_extensions(TSRMLS_D)
 	zend_llist sorted_exts;
 
 	zend_llist_copy(&sorted_exts, &zend_extensions);
+	sorted_exts.dtor = NULL;
 	zend_llist_sort(&sorted_exts, extension_name_cmp TSRMLS_CC);
 	zend_llist_apply_with_argument(&sorted_exts, (llist_apply_with_arg_func_t) print_extension_info, NULL TSRMLS_CC);
 	zend_llist_destroy(&sorted_exts);

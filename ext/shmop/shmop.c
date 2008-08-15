@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.43 2008/07/03 12:21:25 felipe Exp $ */
+/* $Id: shmop.c,v 1.44 2008/08/15 19:57:24 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -267,7 +267,6 @@ PHP_FUNCTION(shmop_read)
 	int type;
 	char *startaddr;
 	int bytes;
-	char *return_string;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll", &shmid, &start, &count) == FAILURE) {
 		return;

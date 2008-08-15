@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.47 2008/02/26 00:14:25 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.48 2008/08/15 19:57:24 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,10 +51,6 @@ static int pgsql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 
 #if HAVE_PQPREPARE
 	if (S->stmt_name) {
-		pdo_pgsql_db_handle *H = S->H;
-		char *q = NULL;
-		PGresult *res;
-
 		efree(S->stmt_name);
 		S->stmt_name = NULL;
 	}

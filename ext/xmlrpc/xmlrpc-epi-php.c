@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.59 2008/08/02 04:40:45 felipe Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.60 2008/08/15 22:13:58 felipe Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -275,7 +275,7 @@ int set_zval_xmlrpc_type(zval* value, XMLRPC_VALUE_TYPE type);
 * startup / shutdown *
 *********************/
 
-static void destroy_server_data(xmlrpc_server_data *server) /* {{{ */
+static void destroy_server_data(xmlrpc_server_data *server TSRMLS_DC) /* {{{ */
 {
 	if (server) {
 		XMLRPC_ServerDestroy(server->server_ptr);
@@ -296,7 +296,7 @@ static void destroy_server_data(xmlrpc_server_data *server) /* {{{ */
 static void xmlrpc_server_destructor(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
 {
 	if (rsrc && rsrc->ptr) {
-		destroy_server_data((xmlrpc_server_data*) rsrc->ptr);
+		destroy_server_data((xmlrpc_server_data*) rsrc->ptr TSRMLS_CC);
 	}
 }
 /* }}} */

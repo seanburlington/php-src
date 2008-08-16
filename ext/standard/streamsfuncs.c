@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.120 2008/07/23 11:24:35 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.121 2008/08/16 10:57:26 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1154,6 +1154,28 @@ PHP_FUNCTION(stream_context_get_default)
 		parse_context_options(context, params TSRMLS_CC);
 	}
 	
+	php_stream_context_to_zval(context, return_value);
+}
+/* }}} */
+
+/* {{{ proto resource stream_context_set_default(array options) U
+   Set default file/stream context, returns the context as a resource */
+PHP_FUNCTION(stream_context_set_default)
+{
+	zval *options = NULL;
+	php_stream_context *context;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &options) == FAILURE) {
+		return;
+	}
+
+	if (FG(default_context) == NULL) {
+		FG(default_context) = php_stream_context_alloc();
+	}
+	context = FG(default_context);
+
+	parse_context_options(context, options TSRMLS_CC);
+
 	php_stream_context_to_zval(context, return_value);
 }
 /* }}} */

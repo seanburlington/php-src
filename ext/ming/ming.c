@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.79.2.4.2.8.2.13 2008/08/13 19:06:10 felipe Exp $ */
+/* $Id: ming.c,v 1.79.2.4.2.8.2.14 2008/08/17 17:04:09 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4389,7 +4389,7 @@ PHP_METHOD(swfmovie, replace)
 
 	item = getDisplayItem(zitem TSRMLS_CC);
 
-	block = (SWFBlock) getCharacter(*zblock TSRMLS_CC);
+	block = (SWFBlock) getCharacter(zblock TSRMLS_CC);
 	movie =  getMovie(getThis() TSRMLS_CC);
 	ublock.block = block;
 

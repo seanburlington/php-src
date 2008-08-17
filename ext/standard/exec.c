@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.135 2008/07/22 21:56:25 scottmac Exp $ */
+/* $Id: exec.c,v 1.136 2008/08/17 15:23:22 pajoye Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -272,9 +272,9 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 		}
 
 		switch (str[x]) {
+#ifndef PHP_WIN32
 			case '"':
 			case '\'':
-#ifndef PHP_WIN32
 				if (!p && (p = memchr(str + x + 1, str[x], l - x - 1))) {
 					/* noop */
 				} else if (p && *p == str[x]) {
@@ -285,7 +285,9 @@ PHPAPI char *php_escape_shell_cmd(char *str)
 				cmd[y++] = str[x];
 				break;
 #else
-			/* This is Windows specific for enviromental variables */
+			/* % is Windows specific for enviromental variables, ^%PATH% will 
+				output PATH whil ^%PATH^% not. escapeshellcmd will escape all %.
+			*/
 			case '%':
 				cmd[y++] = ' ';
 				break;

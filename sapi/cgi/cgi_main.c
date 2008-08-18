@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.361 2008/08/15 07:31:07 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.362 2008/08/18 10:48:49 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -585,10 +585,10 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 		ulong idx;
 		int filter_arg = (array_ptr == PG(http_globals)[TRACK_VARS_ENV])?PARSE_ENV:PARSE_SERVER;
 
-		for (zend_hash_internal_pointer_reset_ex(&request->env, &pos);
-			 zend_hash_get_current_key_ex(&request->env, &var, &var_len, &idx, 0, &pos) == HASH_KEY_IS_STRING &&
-			 zend_hash_get_current_data_ex(&request->env, (void **) &val, &pos) == SUCCESS;
-			 zend_hash_move_forward_ex(&request->env, &pos)
+		for (zend_hash_internal_pointer_reset_ex(request->env, &pos);
+			 zend_hash_get_current_key_ex(request->env, &var, &var_len, &idx, 0, &pos) == HASH_KEY_IS_STRING &&
+			 zend_hash_get_current_data_ex(request->env, (void **) &val, &pos) == SUCCESS;
+			 zend_hash_move_forward_ex(request->env, &pos)
 		) {
 			unsigned int new_val_len;
 

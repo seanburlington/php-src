@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.h,v 1.10 2007/12/31 07:12:19 sebastian Exp $ */
+/* $Id: fastcgi.h,v 1.11 2008/08/18 10:48:49 dmitry Exp $ */
 
 /* FastCGI protocol */
 
@@ -108,7 +108,7 @@ typedef struct _fcgi_request {
 	unsigned char  out_buf[1024*8];
 	unsigned char  reserved[sizeof(fcgi_end_request_rec)];
 
-	HashTable      env;
+	HashTable     *env;
 } fcgi_request;
 
 int fcgi_init(void);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.210 2008/03/04 23:39:15 felipe Exp $ */
+/* $Id: output.c,v 1.211 2008/08/18 03:54:49 lbarnaud Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -913,7 +913,8 @@ static inline int php_output_handler_append(php_output_handler *handler, const p
 			size_t grow_buf = PHP_OUTPUT_HANDLER_INITBUF_SIZE(buf->used - (handler->buffer.size - handler->buffer.used));
 			size_t grow_max = MAX(grow_int, grow_buf);
 			
-			handler->buffer.data = erealloc(handler->buffer.data, handler->buffer.size += grow_max);
+			handler->buffer.data = erealloc(handler->buffer.data, handler->buffer.size + grow_max);
+			handler->buffer.size += grow_max;
 		}
 		memcpy(handler->buffer.data + handler->buffer.used, buf->data, buf->used);
 		handler->buffer.used += buf->used;

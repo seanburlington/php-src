@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.211 2008/08/18 03:54:49 lbarnaud Exp $ */
+/* $Id: output.c,v 1.212 2008/08/18 04:07:54 lbarnaud Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -1275,7 +1275,11 @@ static inline int php_output_stack_pop(int flags TSRMLS_DC)
 		
 		/* pass output along */
 		if (context.out.data && context.out.used && !(flags & PHP_OUTPUT_POP_DISCARD)) {
-			php_output_write(context.out.data, context.out.used TSRMLS_CC);
+			/* in case of unclean_shutdown, do not output the buffer if it is not
+			* meant to be until end of script or ob_end_*() call */
+			if (!CG(unclean_shutdown) || orphan->size) {
+				php_output_write(context.out.data, context.out.used TSRMLS_CC);
+			}
 		}
 		
 		/* destroy the handler (after write!) */

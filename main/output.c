@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.3.2.5 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.6 2008/08/18 04:09:37 lbarnaud Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -336,7 +336,13 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 PHPAPI void php_end_ob_buffers(zend_bool send_buffer TSRMLS_DC)
 {
 	while (OG(ob_nesting_level)!=0) {
-		php_end_ob_buffer(send_buffer, 0 TSRMLS_CC);
+		/* in case of unclean_shutdown, do not output the buffer if it is not 
+		 * meant to be until end of script or ob_end_*() call */
+		if (CG(unclean_shutdown) && !OG(active_ob_buffer).chunk_size) {
+			php_end_ob_buffer(0, 0 TSRMLS_CC);
+		} else {
+			php_end_ob_buffer(send_buffer, 0 TSRMLS_CC);
+		}
 	}
 }
 /* }}} */

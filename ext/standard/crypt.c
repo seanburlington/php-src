@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crypt.c,v 1.62.2.1.2.6.2.3 2008/07/28 11:50:34 pajoye Exp $ */
+/* $Id: crypt.c,v 1.62.2.1.2.6.2.4 2008/08/19 15:14:46 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -107,15 +107,16 @@ PHP_MINIT_FUNCTION(crypt) /* {{{ */
 
 	return SUCCESS;
 }
+/* }}} */
 
-#ifdef PHP_USE_PHP_CRYPT_R
-PHP_MSHUTDOWN_FUNCTION(crypt)
+PHP_MSHUTDOWN_FUNCTION(crypt) /* {{{ */
 {
+#ifdef PHP_USE_PHP_CRYPT_R
 	php_shutdown_crypt_r();
+#endif
 
 	return SUCCESS;
 }
-#endif
 /* }}} */
 
 static unsigned char itoa64[] = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

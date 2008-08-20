@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.26 2008/08/08 09:34:08 lbarnaud Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.27 2008/08/20 00:52:13 jani Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1528,7 +1528,7 @@ PHPAPI void php_pcre_split_impl(pcre_cache_entry *pce, char *subject, int subjec
 					if (re_bump == NULL) {
 						int dummy;
 
-						if ((re_bump = pcre_get_compiled_regex("/./u", &extra_bump, &dummy TSRMLS_CC)) == NULL) {
+						if ((re_bump = pcre_get_compiled_regex("/./us", &extra_bump, &dummy TSRMLS_CC)) == NULL) {
 							RETURN_FALSE;
 						}
 					}

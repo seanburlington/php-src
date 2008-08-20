@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70.2.3.2.18 2008/04/11 11:00:24 tony2001 Exp $ */
+/* $Id: posix.c,v 1.70.2.3.2.19 2008/08/20 20:04:52 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,7 @@ zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.18 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70.2.3.2.19 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -467,7 +467,7 @@ PHP_FUNCTION(posix_uname)
 	add_assoc_string(return_value, "release",  u.release,  1);
 	add_assoc_string(return_value, "version",  u.version,  1);
 	add_assoc_string(return_value, "machine",  u.machine,  1);
-#ifdef _GNU_SOURCE
+#if defined(_GNU_SOURCE) && !defined(DARWIN)
 	add_assoc_string(return_value, "domainname", u.domainname, 1);
 #endif
 }

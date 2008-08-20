@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.461 2008/08/17 22:11:21 felipe Exp $ */
+/* $Id: array.c,v 1.462 2008/08/20 20:35:16 lstrojny Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4296,7 +4296,7 @@ PHP_FUNCTION(array_product)
 }
 /* }}} */
 
-/* {{{ proto mixed array_reduce(array input, mixed callback [, int initial]) U
+/* {{{ proto mixed array_reduce(array input, mixed callback [, mixed initial]) U
    Iteratively reduce the array to a single value via the callback. */
 PHP_FUNCTION(array_reduce)
 {
@@ -4307,18 +4307,19 @@ PHP_FUNCTION(array_reduce)
 	zval *retval;
 	zend_fcall_info fci;
 	zend_fcall_info_cache fci_cache = empty_fcall_info_cache;
-	long initial;
+	zval *initial;
 	HashPosition pos;
 	HashTable *htbl;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "af|l", &input, &fci, &fci_cache, &initial) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "af|z", &input, &fci, &fci_cache, &initial) == FAILURE) {
 		return;
 	}
 
 	if (ZEND_NUM_ARGS() > 2) {
 		ALLOC_ZVAL(result);
+		*result = *initial;
+		zval_copy_ctor(result);
 		INIT_PZVAL(result);
-		ZVAL_LONG(result, initial);
 	} else {
 		MAKE_STD_ZVAL(result);
 		ZVAL_NULL(result);

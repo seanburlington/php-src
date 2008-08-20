@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.13.4.1.2.2 2008/08/05 11:47:17 pajoye Exp $
+<?php # $Id: mkdist.php,v 1.13.4.1.2.3 2008/08/20 20:09:13 pajoye Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -294,6 +294,25 @@ foreach ($extra_dll_deps as $dll) {
 	}
 	copy($dll, "$dist_dir/" . basename($dll));
 }
+
+$ICU_DLLS = array(
+	'icudt36.dll',
+	'icuin36.dll',
+	'icuio36.dll',
+	'icule36.dll',
+	'iculx36.dll',
+	'icutu36.dll',
+	'icuuc36.dll'
+);
+foreach ($ICU_DLLS as $dll) {
+	$tdll = '../deps/bin/' . basename($dll);
+	if (!file_exists($tdll)) {
+		echo "WARNING: distro depends on $dll, but could not find it on your system\n";
+		continue;
+	}
+	copy($tdll, "$dist_dir/" . basename($dll));
+}
+
 /* and those for pecl */
 foreach ($pecl_dll_deps as $dll) {
 	if (in_array($dll, $extra_dll_deps)) {

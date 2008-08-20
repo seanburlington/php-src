@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.86.2.5.2.7.2.4 2008/06/04 19:35:15 rrichards Exp $ */
+/* $Id: url.c,v 1.86.2.5.2.7.2.5 2008/08/20 20:35:39 lstrojny Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -65,21 +65,23 @@ PHPAPI char *php_replace_controlchars_ex(char *str, int len)
 {
 	unsigned char *s = (unsigned char *)str;
 	unsigned char *e = (unsigned char *)str + len;
-	
+	unsigned char *r[len + 1];
+	unsigned int c = 0;
+
 	if (!str) {
-		return (NULL);
+		return NULL;
 	}
-	
+
 	while (s < e) {
-	    
-		if (iscntrl(*s)) {
-			*s='_';
-		}	
+		if (0 == iscntrl(*s)) {
+			r[c] = *s;
+			c++;
+		}
 		s++;
 	}
-	
-	return (str);
-} 
+
+	return (unsigned char *)r;
+}
 /* }}} */
 
 PHPAPI char *php_replace_controlchars(char *str)

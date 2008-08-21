@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.21 2007/12/31 07:20:07 sebastian Exp $ */
+/* $Id: json.c,v 1.9.2.22 2008/08/21 18:10:48 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -251,8 +251,14 @@ static void json_escape_string(smart_str *buf, char *s, int len) /* {{{ */
         {
             efree(utf16);
         }
-
-        smart_str_appendl(buf, "\"\"", 2);
+	if(len < 0) {
+		if(!PG(display_errors)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid UTF-8 sequence in argument");
+		}
+	        smart_str_appendl(buf, "null", 4);
+	} else {
+	        smart_str_appendl(buf, "\"\"", 2);
+	}
         return;
     }
 

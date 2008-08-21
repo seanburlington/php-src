@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.126 2008/07/12 23:25:42 pajoye Exp $ */
+/* $Id: ftp.c,v 1.127 2008/08/21 23:37:39 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,7 @@
 #include <string.h>
 #include <time.h>
 #ifdef PHP_WIN32
+#include "win32/inet.h"
 #include <winsock2.h>
 #elif defined(NETWARE)
 #ifdef USE_WINSOCK    /* Modified to use Winsock (NOVSOCK2.H), atleast for now */

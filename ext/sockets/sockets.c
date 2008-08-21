@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.199 2008/07/16 14:08:04 jani Exp $ */
+/* $Id: sockets.c,v 1.200 2008/08/21 23:37:39 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,8 +33,15 @@
 #include "ext/standard/file.h"
 #include "ext/standard/info.h"
 #include "php_ini.h"
-
-#ifndef PHP_WIN32
+#ifdef PHP_WIN32
+# include "win32/inet.h"
+# include <winsock2.h>
+# include <windows.h>
+# include <Ws2tcpip.h>
+# include "php_sockets.h"
+# include "php_sockets_win.h"
+# define IS_INVALID_SOCKET(a)	(a->bsd_socket == INVALID_SOCKET)
+#else
 # include "php_sockets.h"
 # include <sys/types.h>
 # include <sys/socket.h>
@@ -51,10 +58,6 @@
 # include <sys/uio.h>
 # define IS_INVALID_SOCKET(a)	(a->bsd_socket < 0)
 # define set_errno(a) (errno = a)
-#else /* windows */
-# include "php_sockets.h"
-# include "php_sockets_win.h"
-# define IS_INVALID_SOCKET(a)	(a->bsd_socket == INVALID_SOCKET)
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(sockets)

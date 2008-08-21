@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sockets_win.c,v 1.16 2007/12/31 07:12:14 sebastian Exp $ */
+/* $Id: php_sockets_win.c,v 1.17 2008/08/21 23:37:39 pajoye Exp $ */
 
 
 #ifdef PHP_WIN32
@@ -72,13 +72,4 @@ int socketpair(int domain, int type, int protocol, SOCKET sock[2]) {
 	return 0;
 }
 
-int inet_aton(const char *cp, struct in_addr *inp) {
-  inp->s_addr = inet_addr(cp);
-
-  if (inp->s_addr == INADDR_NONE) {
-	  return 0;
-  }
-
-  return 1;
-}
 #endif

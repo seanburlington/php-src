@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.134 2008/07/11 13:11:37 jani Exp $ */
+/* $Id: network.c,v 1.135 2008/08/21 23:37:40 pajoye Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -26,8 +26,9 @@
 #include <stddef.h>
 
 #ifdef PHP_WIN32
-#define O_RDONLY _O_RDONLY
-#include "win32/param.h"
+# include "win32/inet.h"
+# define O_RDONLY _O_RDONLY
+# include "win32/param.h"
 #elif defined(NETWARE)
 #include <sys/timeval.h>
 #include <sys/param.h>

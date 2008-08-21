@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.926 2008/08/21 16:55:31 helly Exp $ */
+/* $Id: basic_functions.c,v 1.927 2008/08/21 23:37:40 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -61,7 +61,11 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #include <netinet/in.h>
 #endif
 
-#include <netdb.h>
+#ifndef PHP_WIN32
+# include <netdb.h>
+#else
+#include "win32/inet.h"
+#endif
 
 #if HAVE_ARPA_INET_H
 # include <arpa/inet.h>

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.58 2008/08/20 22:23:16 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.59 2008/08/21 07:38:16 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4551,8 +4551,6 @@ PHP_FUNCTION(putenv)
 #endif
 			RETURN_TRUE;
 		} else {
-			int error = GetLastError();
-			printf("error: %i\n", error);
 			efree(pe.putenv_string);
 			efree(pe.key);
 			RETURN_FALSE;

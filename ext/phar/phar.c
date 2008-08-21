@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.39 2008/08/14 13:01:28 dmitry Exp $ */
+/* $Id: phar.c,v 1.370.2.40 2008/08/21 05:17:26 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2383,7 +2383,7 @@ int phar_open_executed_filename(char *alias, int alias_len, char **error TSRMLS_
 /**
  * Validate the CRC32 of a file opened from within the phar
  */
-int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_data *idata, php_uint32 crc32, char **error TSRMLS_DC) /* {{{ */
+int phar_postprocess_file(phar_entry_data *idata, php_uint32 crc32, char **error, int process_zip TSRMLS_DC) /* {{{ */
 {
 	php_uint32 crc = ~0;
 	int len = idata->internal_file->uncompressed_filesize;
@@ -2394,7 +2394,7 @@ int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_d
 		*error = NULL;
 	}
 
-	if (entry->is_zip) {
+	if (entry->is_zip && process_zip > 0) {
 		/* verify local file header */
 		phar_zip_file_header local;
 
@@ -2424,6 +2424,7 @@ int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_d
 			idata->zero = entry->offset_abs;
 		}
 	}
+	if (process_zip == 1) return SUCCESS;
 
 	php_stream_seek(fp, idata->zero, SEEK_SET);
 
@@ -2437,7 +2438,7 @@ int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_d
 		entry->is_crc_checked = 1;
 		return SUCCESS;
 	} else {
-		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: internal corruption of phar \"%s\" (crc32 mismatch on file \"%s\")", idata->phar->fname, entry->filename);
+		spprintf(error, 0, "phar error: internal corruption of phar \"%s\" (crc32 mismatch on file \"%s\")", idata->phar->fname, entry->filename);
 		return FAILURE;
 	}
 }
@@ -3733,7 +3734,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.39 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.40 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

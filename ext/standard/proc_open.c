@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.63 2008/07/23 11:24:35 tony2001 Exp $ */
+/* $Id: proc_open.c,v 1.64 2008/08/21 11:28:09 dmitry Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -762,6 +762,8 @@ PHP_FUNCTION(proc_open)
 	}
 	
 	if (FALSE == newprocok) {
+		DWORD dw = GetLastError();
+
 		/* clean up all the descriptors */
 		for (i = 0; i < ndesc; i++) {
 			CloseHandle(descriptors[i].childend);
@@ -769,7 +771,7 @@ PHP_FUNCTION(proc_open)
 				CloseHandle(descriptors[i].parentend);
 			}
 		}
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "CreateProcess failed");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "CreateProcess failed, error code - %u", dw);
 		goto exit_fail;
 	}
 

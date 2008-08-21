@@ -26,7 +26,7 @@
  * @author     Vincent Lascaux <vincentlascaux@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.gnu.org/copyleft/lesser.html  LGPL
- * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.7 2008/08/01 13:36:19 sfox Exp $
+ * @version    CVS: $Id: corrupt_zipmaker.php.inc,v 1.8 2008/08/21 20:35:12 cellog Exp $
  * @link       http://pear.php.net/package/File_Archive
  */
 
@@ -237,6 +237,15 @@ class corrupt_zipmaker
 						$filename . $comment;
 				$offset = strlen($central);
 				break;
+			case 'extralen1' :
+				$extra = 'nu' . 0xffff; // way huge size
+				$central = "PK\x01\x02\x00\x00\x14\x00\x00\x00" . pack('v', $compmethod) .
+						$mtime .
+						pack("VVVvvvvvVV", $crc32, $complength, $uncomplength, strlen($filename), strlen($extra),strlen($comment),0x00,0x00,
+							0x0000, $this->offset).
+						$filename . $extra . $comment;
+				$offset = strlen($central);
+				break;
 		}
 		return $central;
 	}
@@ -275,6 +284,12 @@ class corrupt_zipmaker
 		switch ($corrupt) {
 			case null :
 				$write .= "PK\x05\x06\x00\x00\x00\x00" .
+					pack("vvVVv", $this->count, $this->count,
+					$this->offset, strlen($this->start),
+					strlen($this->comment)) . $this->comment;
+				break;
+			case 'disknumber' :
+				$write .= "PK\x05\x06\x01\x00\x01\x00" .
 					pack("vvVVv", $this->count, $this->count,
 					$this->offset, strlen($this->start),
 					strlen($this->comment)) . $this->comment;

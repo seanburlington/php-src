@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.59 2008/08/21 07:38:16 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.60 2008/08/21 08:37:19 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4966,7 +4966,7 @@ PHP_FUNCTION(get_current_user)
  */
 static int add_config_entry_cb(zval *entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)
 {
-	zval *retval = (zval *)(long)va_arg(args, int);
+	zval *retval = (zval *)va_arg(args, int);
 	zval *tmp;
 
 	if (Z_TYPE_P(entry) == IS_STRING) {

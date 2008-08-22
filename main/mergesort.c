@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: mergesort.c,v 1.14 2003/02/19 08:40:18 sniper Exp $ */
+/* $Id: mergesort.c,v 1.15.6.1 2008/08/22 12:59:46 helly Exp $ */
 
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)merge.c	8.2 (Berkeley) 2/14/94";
@@ -64,11 +64,6 @@ static char sccsid[] = "@(#)merge.c	8.2 (Berkeley) 2/14/94";
 
 #ifdef PHP_WIN32
 #include <winsock2.h> /* Includes definition for u_char */
-#endif
-
-#if defined(NETWARE) && !defined(NEW_LIBC)
-/*#include <ws2nlm.h>*/
-#include <sys/socket.h>
 #endif
 
 static void setup(u_char *list1, u_char *list2, size_t n, size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC);
@@ -107,7 +102,7 @@ static void insertionsort(u_char *a, size_t n, size_t size, int (*cmp)(const voi
 /* {{{ php_mergesort
  * Arguments are as for qsort.
  */
-int php_mergesort(void *base, size_t nmemb, size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC)
+PHPAPI int php_mergesort(void *base, size_t nmemb, size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC)
 {
 	register unsigned int i;
 	register int sense;

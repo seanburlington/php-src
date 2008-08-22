@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.8.2.9 2008/08/13 22:40:39 kalle Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.8.2.10 2008/08/22 12:59:46 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -317,12 +317,10 @@ END_EXTERN_C()
 
 /* functions */
 BEGIN_EXTERN_C()
-int php_register_internal_extensions(TSRMLS_D);
-
-int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC);
-
+PHPAPI extern int (*php_register_internal_extensions_func)(TSRMLS_D);
+PHPAPI int php_register_internal_extensions(TSRMLS_D);
+PHPAPI int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC);
 PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userdata);
-
 PHPAPI void php_com_initialize(TSRMLS_D);
 END_EXTERN_C()
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.29 2008/08/15 19:47:33 felipe Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.30 2008/08/22 12:59:46 helly Exp $ */
 
 /* {{{ includes
  */
@@ -90,6 +90,8 @@
 #include "SAPI.h"
 #include "rfc1867.h"
 /* }}} */
+
+PHPAPI int (*php_register_internal_extensions_func)(TSRMLS_D) = php_register_internal_extensions;
 
 #ifndef ZTS
 php_core_globals core_globals;
@@ -1868,7 +1870,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	zend_register_default_classes(TSRMLS_C);
 
 	/* startup extensions staticly compiled in */
-	if (php_register_internal_extensions(TSRMLS_C) == FAILURE) {
+	if (php_register_internal_extensions_func(TSRMLS_C) == FAILURE) {
 		php_printf("Unable to start builtin modules\n");
 		return FAILURE;
 	}

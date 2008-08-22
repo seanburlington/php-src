@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.927 2008/08/21 23:37:40 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.928 2008/08/22 15:51:50 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4945,7 +4945,7 @@ static int add_config_entry_cb(zval *entry TSRMLS_DC, int num_args, va_list args
 	} else if (Z_TYPE_P(entry) == IS_ARRAY) {
 		MAKE_STD_ZVAL(tmp);
 		array_init(tmp);
-		zend_hash_apply_with_arguments(Z_ARRVAL_P(entry) TSRMLS_CC, (apply_func_args_t) add_config_entry_cb, 1, tmp TSRMLS_CC);
+		zend_hash_apply_with_arguments(Z_ARRVAL_P(entry) TSRMLS_CC, (apply_func_args_t) add_config_entry_cb, 1, tmp);
 		add_assoc_zval_ex(retval, hash_key->arKey.s, hash_key->nKeyLength, tmp);
 	}
 	return 0;

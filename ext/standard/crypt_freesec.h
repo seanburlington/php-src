@@ -1,8 +1,7 @@
-/* $Id: crypt_freesec.h,v 1.1.2.5 2008/08/23 20:42:18 pajoye Exp $ */
+/* $Id: crypt_freesec.h,v 1.1.2.6 2008/08/23 21:08:09 pajoye Exp $ */
 #ifndef _CRYPT_FREESEC_H
 #define _CRYPT_FREESEC_H
 
-#include "php_config.h"
 
 #if PHP_WIN32
 # include "win32/php_stdint.h"
@@ -11,11 +10,6 @@
 # if HAVE_STDINT_H
 # include <stdint.h>
 # endif
-# ifndef HAVE_U_INT32_T
-   typedef uint32_t u_int32_t;
-# endif
-#endif
-#if !PHP_WIN32
 # ifndef HAVE_U_INT32_T
    typedef uint32_t u_int32_t;
 # endif

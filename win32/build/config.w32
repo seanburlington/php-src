@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.84 2008/08/23 19:39:07 pajoye Exp $
+// $Id: config.w32,v 1.85 2008/08/23 19:50:36 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -338,6 +338,8 @@ ADD_SOURCES("main", "main.c snprintf.c spprintf.c fopen_wrappers.c \
 	strlcat.c mergesort.c reentrancy.c php_variables.c php_ticks.c network.c \
 	php_open_temporary_file.c php_logos.c output.c internal_functions.c php_sprintf.c \
 	getopt.c");
+
+ADD_SOURCES("win32", "inet.c");
 
 ADD_SOURCES("main/streams", "streams.c cast.c memory.c filter.c plain_wrapper.c \
 	userspace.c transports.c xp_socket.c mmap.c unicode_filter.c glob_wrapper.c");

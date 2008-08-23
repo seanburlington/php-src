@@ -1,7 +1,11 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.16 2008/07/28 11:34:53 pajoye Exp $
+	$Id: config.w32.h.in,v 1.17 2008/08/23 20:03:29 pajoye Exp $
 */
+
+/* Define the minimum supported version */
+#define _WIN32_WINNT 0x500
+#define NTDDI_VERSION  _WIN32_WIN2K
 
 /* Default PHP / PEAR directories */
 #define PHP_CONFIG_FILE_PATH (getenv("SystemRoot"))?getenv("SystemRoot"):""

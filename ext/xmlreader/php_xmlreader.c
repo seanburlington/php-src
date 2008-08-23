@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.52 2008/06/16 15:44:22 rrichards Exp $ */
+/* $Id: php_xmlreader.c,v 1.53 2008/08/23 18:06:43 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -958,7 +958,7 @@ PHP_METHOD(xmlreader, resetState)
 */
 
 #if LIBXML_VERSION >= 20620
-/* {{{ proto boolean XMLReader::readInnerXml() U
+/* {{{ proto string XMLReader::readInnerXml() U
 Reads the contents of the current node, including child nodes and markup. */
 PHP_METHOD(xmlreader, readInnerXml)
 {

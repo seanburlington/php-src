@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.89 2008/07/28 11:34:53 pajoye Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.90 2008/08/23 13:57:01 lbarnaud Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -462,6 +462,27 @@ int __tmp__() { mbstate_t a; }
 if test "$ac_cv_type_mbstate_t" = "yes"; then
   AC_DEFINE([HAVE_MBSTATE_T], 1, [Define if your system has mbstate_t in wchar.h])
 fi
+
+dnl
+dnl Check for u_int32_t
+dnl
+AC_CACHE_CHECK([for u_int32_t], [ac_cv_type_u_int32_t],[
+AC_TRY_COMPILE([
+#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+],[
+int __tmp__() { u_int32_t a; }
+],[
+  ac_cv_type_u_int32_t=yes
+],[
+  ac_cv_type_u_int32_t=no
+])])
+if test "$ac_cv_type_u_int32_t" = "yes"; then
+  AC_DEFINE([HAVE_U_INT32_T], 1, [Define if your system has u_int32_t in sys/types.h])
+fi
+
+AC_C_INLINE
 
 dnl
 dnl Setup extension sources

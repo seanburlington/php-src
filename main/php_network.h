@@ -16,26 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.56.2.1.2.1.2.2 2007/12/31 07:17:17 sebastian Exp $ */
+/* $Id: php_network.h,v 1.56.2.1.2.1.2.3 2008/08/23 19:22:10 pajoye Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
 
 #ifdef PHP_WIN32
-# ifndef WINNT
-#  define WINNT 1
-# endif
-# undef FD_SETSIZE
-# include "arpa/inet.h"
-  /* Apache folks decided that strtoul was evil and redefined
-   * it to something that breaks the windows headers */
-# undef strtoul
-/* defines socklen_t and some IPV6 stuff */
-# include <ws2tcpip.h>
-# if HAVE_WSPIAPI_H
-   /* getaddrinfo */
-#  include <wspiapi.h>
-# endif
+# include "win32/inet.h"
 #else
 # undef closesocket
 # define closesocket close

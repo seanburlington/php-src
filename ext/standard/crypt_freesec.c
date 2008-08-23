@@ -1,5 +1,5 @@
 /*
-  $Id: crypt_freesec.c,v 1.1.2.4 2008/08/23 13:57:19 lbarnaud Exp $ 
+  $Id: crypt_freesec.c,v 1.1.2.5 2008/08/23 20:42:18 pajoye Exp $ 
 */
 /*
  * This version is derived from the original implementation of FreeSec
@@ -40,7 +40,7 @@
  * SUCH DAMAGE.
  *
  *	$Owl: Owl/packages/glibc/crypt_freesec.c,v 1.4 2005/11/16 13:08:32 solar Exp $
- *	$Id: crypt_freesec.c,v 1.1.2.4 2008/08/23 13:57:19 lbarnaud Exp $
+ *	$Id: crypt_freesec.c,v 1.1.2.5 2008/08/23 20:42:18 pajoye Exp $
  *
  * This is an original implementation of the DES and the crypt(3) interfaces
  * by David Burren <davidb at werj.com.au>.
@@ -67,6 +67,20 @@
 
 #ifdef TEST
 #include <stdio.h>
+#endif
+
+
+#if defined(__GNUC__)
+# ifdef inline
+# undef inline
+# endif
+# define inline inline __attribute__((always_inline))
+#elif defined(_MSC_VER)
+# define inline __forceinline
+#else
+# ifndef inline
+#  define inline
+# endif
 #endif
 
 #include "crypt_freesec.h"

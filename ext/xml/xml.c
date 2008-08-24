@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157.2.4.2.5.2.10 2008/07/17 10:24:51 tony2001 Exp $ */
+/* $Id: xml.c,v 1.157.2.4.2.5.2.11 2008/08/24 02:13:23 felipe Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1478,12 +1478,10 @@ PHP_FUNCTION(xml_parse)
 	xml_parser *parser;
 	zval *pind;
 	char *data;
-	int data_len, argc, ret;
+	int data_len, ret;
 	long isFinal = 0;
 
-	argc = ZEND_NUM_ARGS();
-	
-	if (zend_parse_parameters(argc TSRMLS_CC, "rs|l", &pind, &data, &data_len, &isFinal) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|l", &pind, &data, &data_len, &isFinal) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(parser,xml_parser *, &pind, -1, "XML Parser", le_xml_parser);

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.80.2.3.2.3.2.4 2008/08/23 13:57:19 lbarnaud Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.80.2.3.2.3.2.5 2008/08/25 12:15:05 jani Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -481,8 +481,6 @@ int __tmp__() { u_int32_t a; }
 if test "$ac_cv_type_u_int32_t" = "yes"; then
   AC_DEFINE([HAVE_U_INT32_T], 1, [Define if your system has u_int32_t in sys/types.h])
 fi
-
-AC_C_INLINE
 
 dnl
 dnl Setup extension sources

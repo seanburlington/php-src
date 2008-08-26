@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.26 2008/08/26 09:56:08 dmitry Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.27 2008/08/26 15:37:01 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -175,7 +175,7 @@ typedef struct _user_config_cache_entry {
 	HashTable *user_config;
 } user_config_cache_entry;
 
-static void user_config_cache_entry_dtor(user_config_cache_entry *entry) /* {{{ */
+static void user_config_cache_entry_dtor(user_config_cache_entry *entry)
 {
 	zend_hash_destroy(entry->user_config);
 	free(entry->user_config);

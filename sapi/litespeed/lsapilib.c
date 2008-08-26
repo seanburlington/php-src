@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lsapilib.c,v 1.5 2008/08/03 11:46:02 jani Exp $ */
+/* $Id: lsapilib.c,v 1.6 2008/08/26 21:59:56 gwang Exp $ */
 
 /*
 Copyright (c) 2007, Lite Speed Technologies Inc.
@@ -575,6 +575,10 @@ int LSAPI_Init(void)
     if ( !g_inited ) {
         lsapi_signal(SIGPIPE, lsapi_sigpipe);
         lsapi_signal(SIGUSR1, lsapi_siguser1);
+
+#if defined(SIGXFSZ) && defined(SIG_IGN)
+        signal(SIGXFSZ, SIG_IGN);
+#endif
 
         if ( LSAPI_InitRequest( &g_req, LSAPI_SOCK_FILENO ) == -1 ) {
             return -1;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.63 2008/06/25 12:18:21 dmitry Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.64 2008/08/26 23:19:22 jani Exp $ */
 
 /* {{{ includes
  */
@@ -352,8 +352,9 @@ static PHP_INI_MH(OnChangeMailForceExtra)
 #	define PHP_SAFE_MODE_EXEC_DIR ""
 #endif
 
-/* Windows and Netware use the internal mail */
-#if defined(PHP_WIN32) || defined(NETWARE)
+#if defined(PHP_PROG_SENDMAIL) && !defined(NETWARE)
+#	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
+#elif defined(PHP_WIN32)
 #	define DEFAULT_SENDMAIL_PATH NULL
 #else
 #	define DEFAULT_SENDMAIL_PATH "/usr/sbin/sendmail -t -i" 

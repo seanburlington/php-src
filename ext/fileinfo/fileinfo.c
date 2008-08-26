@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20.2.3 2008/08/26 15:06:28 felipe Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.4 2008/08/26 16:22:27 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -402,7 +402,7 @@ PHP_FUNCTION(finfo_set_flags)
 static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode) /* {{{ */
 {
 	long options = 0;
-	char *buffer, *tmp, *ret_val;
+	char *tmp, *ret_val, *buffer = NULL;
 	int buffer_len;
 	struct php_fileinfo *finfo;
 	zval *zfinfo, *zcontext = NULL;
@@ -449,7 +449,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode) /* {{{ *
 		} else { /* local file */
 			char resolved_path[MAXPATHLEN];
 
-			if (buffer_len && VCWD_REALPATH(buffer, resolved_path)) {
+			if (*buffer && VCWD_REALPATH(buffer, resolved_path)) {
 				ret_val = (char *) magic_file(finfo->magic, buffer);
 			} else {
 				RETURN_FALSE;

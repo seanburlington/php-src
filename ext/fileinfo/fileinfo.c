@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20.2.5 2008/08/27 01:04:23 felipe Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.6 2008/08/27 07:40:44 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -316,7 +316,7 @@ PHP_FUNCTION(finfo_open)
 		RETURN_FALSE;
 	}
 
-	if (*file) { /* user specified filed, perform open_basedir checks */
+	if (file && *file) { /* user specified file, perform open_basedir checks */
 		if (!VCWD_REALPATH(file, resolved_path)) {
 			RETURN_FALSE;
 		}

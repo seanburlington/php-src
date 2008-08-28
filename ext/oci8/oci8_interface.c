@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.13.2.7 2008/06/05 23:43:10 sixd Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.13.2.8 2008/08/28 06:19:45 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1399,7 +1399,7 @@ PHP_FUNCTION(oci_fetch_all)
 				if (flags & PHP_OCI_NUM) {
 					zend_hash_next_index_insert(Z_ARRVAL_P(row), &element, sizeof(zval*), NULL);
 				} else { /* default to ASSOC */
-					zend_hash_update(Z_ARRVAL_P(row), columns[ i ]->name, columns[ i ]->name_len+1, &element, sizeof(zval*), NULL);
+					zend_symtable_update(Z_ARRVAL_P(row), columns[ i ]->name, columns[ i ]->name_len+1, &element, sizeof(zval*), NULL);
 				}
 			}
 
@@ -1431,7 +1431,7 @@ PHP_FUNCTION(oci_fetch_all)
 				
 				MAKE_STD_ZVAL(tmp);
 				array_init(tmp);
-				zend_hash_update(Z_ARRVAL_P(array), columns[ i ]->name, columns[ i ]->name_len+1, (void *) &tmp, sizeof(zval*), (void **) &(outarrs[ i ]));
+				zend_symtable_update(Z_ARRVAL_P(array), columns[ i ]->name, columns[ i ]->name_len+1, (void *) &tmp, sizeof(zval*), (void **) &(outarrs[ i ]));
 			}
 		}
 

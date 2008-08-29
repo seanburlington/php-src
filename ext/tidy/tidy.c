@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.122 2008/07/03 12:21:25 felipe Exp $ */
+/* $Id: tidy.c,v 1.123 2008/08/29 22:59:41 hnangelo Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1180,7 +1180,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.122 2008/07/03 12:21:25 felipe Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.123 2008/08/29 22:59:41 hnangelo Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1313,7 +1313,7 @@ static PHP_FUNCTION(tidy_parse_string)
 
 	TIDY_APPLY_CONFIG_ZVAL(obj->ptdoc->doc, options);
 
-	if (php_tidy_parse_string(obj, input.s, input_len, enc TSRMLS_CC) == FAILURE) {
+	if (php_tidy_parse_string(obj, input.s, USTR_BYTES(input_type, input_len), enc TSRMLS_CC) == FAILURE) {
 		zval_dtor(return_value);
 		INIT_ZVAL(*return_value);
 		RETVAL_FALSE;

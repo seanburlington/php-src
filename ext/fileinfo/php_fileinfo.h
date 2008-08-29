@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fileinfo.h,v 1.3 2008/03/31 09:37:51 sfox Exp $ */
+/* $Id: php_fileinfo.h,v 1.4 2008/08/29 13:29:18 derick Exp $ */
 
 #ifndef PHP_FILEINFO_H
 #define PHP_FILEINFO_H
@@ -43,6 +43,7 @@ PHP_FUNCTION(finfo_close);
 PHP_FUNCTION(finfo_set_flags);
 PHP_FUNCTION(finfo_file);
 PHP_FUNCTION(finfo_buffer);
+PHP_FUNCTION(mime_content_type);
 
 #ifdef ZTS
 #define FILEINFO_G(v) TSRMG(fileinfo_globals_id, zend_fileinfo_globals *, v)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.60.2.1.2.1.2.1 2007/12/31 07:17:11 sebastian Exp $ */
+/* $Id: php_odbc.h,v 1.60.2.1.2.1.2.2 2008/08/29 16:44:29 iodbc Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -33,7 +33,7 @@
 extern zend_module_entry odbc_module_entry;
 #define odbc_module_ptr &odbc_module_entry
 
-#if defined(HAVE_DBMAKER) || defined(PHP_WIN32) || defined(HAVE_IBMDB2) || defined(HAVE_UNIXODBC) || defined(HAVE_BIRDSTEP)
+#if defined(HAVE_DBMAKER) || defined(PHP_WIN32) || defined(HAVE_IBMDB2) || defined(HAVE_UNIXODBC) || defined(HAVE_BIRDSTEP) || defined(HAVE_IODBC)
 # define PHP_ODBC_HAVE_FETCH_HASH 1
 #endif
 

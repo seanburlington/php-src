@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.12.2.1.2.4.2.2 2008/08/29 16:44:29 iodbc Exp $ */
+/* $Id: php_odbc_includes.h,v 1.12.2.1.2.4.2.3 2008/08/29 19:16:58 iodbc Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -265,6 +265,7 @@ ZEND_BEGIN_MODULE_GLOBALS(odbc)
 	int defConn;
     long defaultlrl;
     long defaultbinmode;
+    long default_cursortype;
     char laststate[6];
     char lasterrormsg[SQL_MAX_MESSAGE_LENGTH];
 	HashTable *resource_list;

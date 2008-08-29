@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.392 2008/08/24 04:02:20 felipe Exp $ */
+/* $Id: gd.c,v 1.393 2008/08/29 11:09:05 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -75,7 +75,7 @@ static void php_free_ps_enc(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #include <gdfontl.h>  /* 4 Large font */
 #include <gdfontg.h>  /* 5 Giant font */
 #include "libgd/wbmp.h"
-
+#include <gdhelpers.h>
 #ifdef ENABLE_GD_TTF
 # ifdef HAVE_LIBFREETYPE
 #  include <ft2build.h>

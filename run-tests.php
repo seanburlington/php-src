@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.43 2008/08/14 20:53:56 jani Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.44 2008/08/29 10:25:54 felixdv Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -608,7 +608,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.43 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.44 $' . "\n";
 					exit(1);
 
 				default:
@@ -1725,6 +1725,11 @@ COMMAND $cmd
 
 		if (isset($section_text['EXPECTF'])) {
 			$wanted_re = preg_quote($wanted_re, '/');
+			$wanted_re = str_replace(
+				array('%unicode_string_optional%'),
+				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? 'string' : 'Unicode string',
+				$wanted_re
+			);
 			$wanted_re = str_replace(
 				array('%unicode\|string%', '%string\|unicode%'),
 				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? 'string' : 'unicode',

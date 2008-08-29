@@ -16,13 +16,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fileinfo.h,v 1.2 2004/05/08 17:37:28 iliaa Exp $ */
+/* $Id: php_fileinfo.h,v 1.3.2.1 2008/08/29 13:29:42 derick Exp $ */
 
 #ifndef PHP_FILEINFO_H
 #define PHP_FILEINFO_H
 
 extern zend_module_entry fileinfo_module_entry;
 #define phpext_fileinfo_ptr &fileinfo_module_entry
+
+#define PHP_FILEINFO_VERSION "1.0.5-dev"
 
 #ifdef PHP_WIN32
 #define PHP_FILEINFO_API __declspec(dllexport)
@@ -41,6 +43,7 @@ PHP_FUNCTION(finfo_close);
 PHP_FUNCTION(finfo_set_flags);
 PHP_FUNCTION(finfo_file);
 PHP_FUNCTION(finfo_buffer);
+PHP_FUNCTION(mime_content_type);
 
 #ifdef ZTS
 #define FILEINFO_G(v) TSRMG(fileinfo_globals_id, zend_fileinfo_globals *, v)

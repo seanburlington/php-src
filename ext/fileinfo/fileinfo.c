@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.30 2008/08/29 13:48:26 tony2001 Exp $ */
+/* $Id: fileinfo.c,v 1.31 2008/08/29 15:17:25 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -551,7 +551,7 @@ PHP_FUNCTION(mime_content_type)
 				char resolved_path[MAXPATHLEN];
 
 				if (*Z_STRVAL_P(what) && VCWD_REALPATH(Z_STRVAL_P(what), resolved_path)) {
-					if ((PG(safe_mode) && (!php_checkuid(resolved_path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(resolved_path TSRMLS_CC)) {
+					if (php_check_open_basedir(resolved_path TSRMLS_CC)) {
 						goto cleanup;
 					}
 					ret_val = (char *) magic_file(magic, resolved_path);

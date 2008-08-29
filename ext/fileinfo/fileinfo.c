@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20.2.8 2008/08/29 13:39:01 derick Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.9 2008/08/29 13:48:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -550,7 +550,7 @@ PHP_FUNCTION(mime_content_type)
 			} else { /* local file */
 				char resolved_path[MAXPATHLEN];
 
-				if (Z_STRVAL_P(what) && VCWD_REALPATH(Z_STRVAL_P(what), resolved_path)) {
+				if (*Z_STRVAL_P(what) && VCWD_REALPATH(Z_STRVAL_P(what), resolved_path)) {
 					if ((PG(safe_mode) && (!php_checkuid(resolved_path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(resolved_path TSRMLS_CC)) {
 						goto cleanup;
 					}

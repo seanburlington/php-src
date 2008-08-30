@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.375 2008/08/29 10:25:35 felixdv Exp $ */
+/* $Id: run-tests.php,v 1.376 2008/08/30 11:24:56 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -559,6 +559,7 @@ if (isset($argc) && $argc > 1) {
 				case 'p':
 					$php = $argv[++$i];
 					putenv("TEST_PHP_EXECUTABLE=$php");
+					$environment['TEST_PHP_EXECUTABLE'] = $php;
 					break;
 				case 'q':
 					putenv('NO_INTERACTION=1');
@@ -608,7 +609,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.375 $' . "\n";
+					echo '$Revision: 1.376 $' . "\n";
 					exit(1);
 
 				default:
@@ -999,11 +1000,16 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 
 	$data = '';
 
+	$bin_env = array();
+	foreach($env as $key => $value) {
+		$bin_env[(binary)$key] = (binary)$value;
+	}
+
 	$proc = proc_open($commandline, array(
 		0 => array('pipe', 'r'),
 		1 => array('pipe', 'w'),
 		2 => array('pipe', 'w')
-		), $pipes, null, $env, array('suppress_errors' => true, 'binary_pipes' => true));
+		), $pipes, null, $bin_env, array('suppress_errors' => true, 'binary_pipes' => true));
 
 	if (!$proc) {
 		return false;

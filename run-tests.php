@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.44 2008/08/29 10:25:54 felixdv Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.45 2008/08/30 11:25:34 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -559,6 +559,7 @@ if (isset($argc) && $argc > 1) {
 				case 'p':
 					$php = $argv[++$i];
 					putenv("TEST_PHP_EXECUTABLE=$php");
+					$environment['TEST_PHP_EXECUTABLE'] = $php;
 					break;
 				case 'q':
 					putenv('NO_INTERACTION=1');
@@ -608,7 +609,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.44 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.45 $' . "\n";
 					exit(1);
 
 				default:

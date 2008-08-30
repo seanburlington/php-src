@@ -2,7 +2,7 @@
 Delete entries
 --SKIPIF--
 <?php
-/* $Id: oo_delete.phpt,v 1.1.4.1 2008/05/21 09:27:41 pajoye Exp $ */
+/* $Id: oo_delete.phpt,v 1.1.4.2 2008/08/30 16:24:33 pajoye Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -63,7 +63,8 @@ $sb = $zip->statIndex(1);
 var_dump($sb);
 $sb = $zip->statIndex(2);
 var_dump($sb);
-@unlink($file);
+unset($zip);
+unlink($file);
 ?>
 --EXPECTF--
 ok

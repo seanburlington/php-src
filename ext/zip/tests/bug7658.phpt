@@ -2,7 +2,7 @@
 Bug #7658 (modify archive with general bit flag 3 set)
 --SKIPIF--
 <?php
-/* $Id: bug7658.phpt,v 1.1.2.2.2.1 2008/05/21 09:27:41 pajoye Exp $ */
+/* $Id: bug7658.phpt,v 1.1.2.2.2.2 2008/08/30 16:24:33 pajoye Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -47,7 +47,8 @@ for($i=0; $i < $zip->numFiles; $i++) {
 $ar = array_diff($found, $expect);
 
 var_dump($ar);
-@unlink($file);
+unset($zip);
+unlink($file);
 ?>
 --EXPECTF--
 array(0) {

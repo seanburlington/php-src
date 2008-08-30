@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.10.2.13 2008/08/30 16:50:24 rasmus Exp $ */
+/* $Id: php_variables.c,v 1.104.2.10.2.14 2008/08/30 18:28:01 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -68,7 +68,7 @@ PHPAPI void php_register_variable_ex(char *var_name, zval *val, zval *track_vars
 	zend_bool is_array = 0;
 	HashTable *symtable1 = NULL;
 
-	assert(var != NULL);
+	assert(var_name != NULL);
 	
 	if (track_vars_array) {
 		symtable1 = Z_ARRVAL_P(track_vars_array);

@@ -17,10 +17,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: stream.h,v 1.5 2008/08/01 13:45:06 sfox Exp $ */
+/* $Id: stream.h,v 1.6 2008/08/31 20:54:27 sfox Exp $ */
 
 BEGIN_EXTERN_C()
-int phar_postprocess_file(php_stream_wrapper *wrapper, int options, phar_entry_data *idata, php_uint32 crc32, char **error TSRMLS_DC);
 
 php_url* phar_parse_url(php_stream_wrapper *wrapper, char *filename, char *mode, int options TSRMLS_DC);
 void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC);

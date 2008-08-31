@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.42 2008/08/31 06:38:09 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.43 2008/08/31 06:42:46 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -4638,7 +4638,6 @@ PHP_METHOD(PharFileInfo, compress)
 		case PHAR_ENT_COMPRESSED_GZ:
 			if (entry_obj->ent.entry->flags & PHAR_ENT_COMPRESSED_GZ) {
 				RETURN_TRUE;
-				return;
 			}
 
 			if ((entry_obj->ent.entry->flags & PHAR_ENT_COMPRESSED_BZ2) != 0) {
@@ -4670,7 +4669,6 @@ PHP_METHOD(PharFileInfo, compress)
 		case PHAR_ENT_COMPRESSED_BZ2:
 			if (entry_obj->ent.entry->flags & PHAR_ENT_COMPRESSED_BZ2) {
 				RETURN_TRUE;
-				return;
 			}
 
 			if ((entry_obj->ent.entry->flags & PHAR_ENT_COMPRESSED_GZ) != 0) {
@@ -4732,7 +4730,6 @@ PHP_METHOD(PharFileInfo, decompress)
 
 	if ((entry_obj->ent.entry->flags & PHAR_ENT_COMPRESSION_MASK) == 0) {
 		RETURN_TRUE;
-		return;
 	}
 
 	if (PHAR_G(readonly) && !entry_obj->ent.entry->phar->is_data) {

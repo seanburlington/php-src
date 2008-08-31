@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.74 2008/08/18 10:50:10 jani Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.75 2008/08/31 00:21:19 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6305,7 +6305,11 @@ PHP_FUNCTION(parse_ini_file)
 	Z_TYPE(fh) = ZEND_HANDLE_FILENAME;
 
 	array_init(return_value);
-	zend_parse_ini_file(&fh, 0, ini_parser_cb, return_value);
+	if (zend_parse_ini_file(&fh, 0, ini_parser_cb, return_value) == FAILURE) {
+		zend_hash_destroy(Z_ARRVAL_P(return_value));
+		efree(Z_ARRVAL_P(return_value));
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

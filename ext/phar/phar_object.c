@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.45 2008/08/31 19:38:40 cellog Exp $ */
+/* $Id: phar_object.c,v 1.266.2.46 2008/08/31 21:02:55 sfox Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -5033,12 +5033,12 @@ zend_function_entry php_archive_methods[] = {
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_entry___construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, filename)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_entry_chmod, 0, 0, 1)
 	ZEND_ARG_INFO(0, perms)
-ZEND_END_ARG_INFO();
+ZEND_END_ARG_INFO()
 
 zend_function_entry php_entry_methods[] = {
 	PHP_ME(PharFileInfo, __construct,        arginfo_entry___construct,  ZEND_ACC_PUBLIC)

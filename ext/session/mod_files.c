@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.100.2.3.2.10.2.1 2007/12/31 07:17:13 sebastian Exp $ */
+/* $Id: mod_files.c,v 1.100.2.3.2.10.2.2 2008/08/31 14:49:57 indeyets Exp $ */
 
 #include "php.h"
 
@@ -278,13 +278,11 @@ PS_OPEN_FUNC(files)
 		/* if save path is an empty string, determine the temporary dir */
 		save_path = php_get_temporary_directory();
 
-		if (strcmp(save_path, "/tmp")) {
-			if (PG(safe_mode) && (!php_checkuid(save_path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-				return FAILURE;
-			}
-			if (php_check_open_basedir(save_path TSRMLS_CC)) {
-				return FAILURE;
-			}
+		if (PG(safe_mode) && (!php_checkuid(save_path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+			return FAILURE;
+		}
+		if (php_check_open_basedir(save_path TSRMLS_CC)) {
+			return FAILURE;
 		}
 	}
 	

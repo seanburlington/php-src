@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.42 2008/08/31 06:13:42 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.43 2008/08/31 06:28:01 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3182,7 +3182,6 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		}
 
 		if (phar->flags & PHAR_FILE_COMPRESSED_GZ) {
-			php_stream_filter *filter;
 			/* to properly compress, we have to tell zlib to add a zlib header */
 			zval filterparams;
 
@@ -3206,8 +3205,6 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 			/* use the temp stream as our base */
 			phar->fp = newfile;
 		} else if (phar->flags & PHAR_FILE_COMPRESSED_BZ2) {
-			php_stream_filter *filter;
-
 			filter = php_stream_filter_create("bzip2.compress", NULL, php_stream_is_persistent(phar->fp) TSRMLS_CC);
 			php_stream_filter_append(&phar->fp->writefilters, filter);
 			php_stream_copy_to_stream(newfile, phar->fp, PHP_STREAM_COPY_ALL);
@@ -3613,7 +3610,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.42 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.43 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

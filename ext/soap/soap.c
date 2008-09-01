@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.247 2008/07/22 01:46:43 felipe Exp $ */
+/* $Id: soap.c,v 1.248 2008/09/01 14:55:42 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2685,7 +2685,10 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 			EG(objects_store).object_buckets = old_objects;
 			PG(display_errors) = old;
 			zend_bailout();
-		} else {
+		} else if (!client->exceptions ||
+		           !SOAP_GLOBAL(error_code) ||
+		           strcmp(SOAP_GLOBAL(error_code),"WSDL") != 0) {
+			/* Ignore libxml warnings during WSDL parsing */
 			call_old_error_handler(error_num, error_filename, error_lineno, format, args);
 		}
 	} else {

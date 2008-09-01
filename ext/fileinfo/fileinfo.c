@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20.2.10 2008/09/01 18:56:06 pajoye Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.11 2008/09/01 23:44:00 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -437,6 +437,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode, int mime
 			case IS_STRING:
 				buffer = Z_STRVAL_P(what);
 				buffer_len = Z_STRLEN_P(what);
+				mode = FILEINFO_MODE_FILE;
 				break;
 
 			case IS_RESOURCE:
@@ -505,7 +506,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode, int mime
 			php_stream_wrapper *wrap;
 			struct stat sb;
 
-			if (buffer_len < 1) {
+			if (buffer == NULL || !*buffer) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty filename or path");
 				RETURN_FALSE;
 			}
@@ -523,6 +524,9 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode, int mime
 				php_stream *stream = php_stream_open_wrapper_ex(buffer, "rb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, context);
 
 				if (!stream) {
+					if (mimetype_emu) {
+						magic_close(magic);
+					}
 					RETURN_FALSE;
 				}
 

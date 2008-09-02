@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.783 2008/08/26 23:25:40 jani Exp $ */
+/* $Id: main.c,v 1.784 2008/09/02 09:46:00 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -668,8 +668,8 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	char *docref_target = "", *docref_root = "";
 	char *p;
 	int buffer_len = 0;
-	char *space;
-	zstr class_name = get_active_class_name(&space TSRMLS_CC);
+	char *space = "";
+	zstr class_name = EMPTY_ZSTR;
 	int origin_len;
 	zstr function = NULL_ZSTR;
 	char *origin;
@@ -721,6 +721,8 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 		if (!function.v || !USTR_LEN(function)) {
 			stage = "Unknown";
 			function.v = NULL;
+		} else {
+			class_name = get_active_class_name(&space TSRMLS_CC);
 		}
 	}
 

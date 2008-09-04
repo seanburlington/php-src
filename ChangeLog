@@ -1,3 +1,18 @@
+2008-09-03  Stanislav Malyshev  <stas@zend.com>
+
+    * ext/pdo_oci/config.m4
+      ext/pdo_oci/config.m4:
+      revert last change
+
+    * ext/pdo_oci/config.m4
+      ext/pdo_oci/config.m4:
+      better detection for client libraries
+
+2008-09-03  Lukas Smith  <smith@pooteeweet.org>
+
+    * README.RELEASE_PROCESS:
+      - made it clear which steps are relevant for RCs only
+
 2008-09-02  Felipe Pena  <felipensp@gmail.com>
 
     * (PHP_5_3)
@@ -4844,7 +4859,7 @@
 
     * sapi/litespeed/lsapi_main.c
       sapi/litespeed/lsapilib.c:
-      - Added missing $Id: ChangeLog,v 1.3158 2008/09/03 01:32:02 changelog Exp $ tags and nuked c++ comments
+      - Added missing $Id: ChangeLog,v 1.3159 2008/09/04 01:31:51 changelog Exp $ tags and nuked c++ comments
 
     * (PHP_5_3)
       ext/intl/locale/locale.c

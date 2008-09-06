@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.173.2.1.2.9.2.2 2008/03/14 13:11:12 tony2001 Exp $ */
+/* $Id: rfc1867.c,v 1.173.2.1.2.9.2.3 2008/09/06 17:18:40 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -925,7 +925,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				if (sapi_module.input_filter(PARSE_POST, param, &value, value_len, &new_val_len TSRMLS_CC)) {
 					if (php_rfc1867_callback != NULL) {
 						multipart_event_formdata event_formdata;
-						size_t newlength = 0;
+						size_t newlength = new_val_len;
 
 						event_formdata.post_bytes_processed = SG(read_post_bytes);
 						event_formdata.name = param;

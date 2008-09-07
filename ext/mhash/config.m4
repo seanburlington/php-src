@@ -1,9 +1,6 @@
 dnl
-dnl $Id: config.m4,v 1.15.4.1.2.1 2008/06/26 22:33:16 scottmac Exp $
+dnl $Id: config.m4,v 1.15.4.1.2.2 2008/09/07 13:15:59 lbarnaud Exp $
 dnl
-
-PHP_ARG_WITH(mhash, for mhash support,
-[  --with-mhash[=DIR]      Include mhash support])
 
 if test "$PHP_MHASH" != "no"; then
   PHP_NEW_EXTENSION(mhash, mhash.c, $ext_shared)

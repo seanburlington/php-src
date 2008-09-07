@@ -1,5 +1,8 @@
-dnl $Id: config.m4,v 1.14 2008/07/21 07:27:00 tony2001 Exp $
+dnl $Id: config.m4,v 1.15 2008/09/07 13:13:52 lbarnaud Exp $
 dnl config.m4 for extension hash
+
+PHP_ARG_WITH(mhash, for mhash support,
+[  --with-mhash[=DIR]      Include mhash support])
 
 PHP_ARG_ENABLE(hash, whether to enable hash support,
 [  --disable-hash          Disable hash support], yes)

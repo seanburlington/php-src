@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.196 2008/09/06 17:17:44 lbarnaud Exp $ */
+/* $Id: rfc1867.c,v 1.197 2008/09/07 14:17:24 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1335,12 +1335,12 @@ var_done:
 				}
 
 
-				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
+				if (PG(upload_max_filesize) > 0 && (total_bytes+blen) > PG(upload_max_filesize)) {
 #if DEBUG_FILE_UPLOAD
 					sapi_module.sapi_error(E_NOTICE, "upload_max_filesize of %ld bytes exceeded - file [%r=%r] not saved", PG(upload_max_filesize), param, filename);
 #endif
 					cancel_upload = UPLOAD_ERROR_A;
-				} else if (max_file_size && (total_bytes > max_file_size)) {
+				} else if (max_file_size && ((total_bytes+blen) > max_file_size)) {
 #if DEBUG_FILE_UPLOAD
 					sapi_module.sapi_error(E_NOTICE, "MAX_FILE_SIZE of %ld bytes exceeded - file [%r=%r] not saved", max_file_size, param, filename);
 #endif
@@ -1882,12 +1882,12 @@ static SAPI_POST_HANDLER_FUNC(rfc1867_post_handler_legacy)
 				}
 				
 			
-				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
+				if (PG(upload_max_filesize) > 0 && (total_bytes+blen) > PG(upload_max_filesize)) {
 #if DEBUG_FILE_UPLOAD
 					sapi_module.sapi_error(E_NOTICE, "upload_max_filesize of %ld bytes exceeded - file [%s=%s] not saved", PG(upload_max_filesize), param, filename);
 #endif
 					cancel_upload = UPLOAD_ERROR_A;
-				} else if (max_file_size && (total_bytes > max_file_size)) {
+				} else if (max_file_size && ((total_bytes+blen) > max_file_size)) {
 #if DEBUG_FILE_UPLOAD
 					sapi_module.sapi_error(E_NOTICE, "MAX_FILE_SIZE of %ld bytes exceeded - file [%s=%s] not saved", max_file_size, param, filename);
 #endif

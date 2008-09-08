@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.45 2008/08/30 11:25:34 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.46 2008/09/08 09:23:51 lbarnaud Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -609,7 +609,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.45 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.46 $' . "\n";
 					exit(1);
 
 				default:
@@ -1734,6 +1734,11 @@ COMMAND $cmd
 			$wanted_re = str_replace(
 				array('%unicode\|string%', '%string\|unicode%'),
 				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? 'string' : 'unicode',
+				$wanted_re
+			);
+			$wanted_re = str_replace(
+				array('%u\|b%', '%b\|u%'),
+				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? '' : 'u',
 				$wanted_re
 			);
 			// Stick to basics

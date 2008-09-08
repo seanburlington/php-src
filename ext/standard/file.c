@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.525 2008/08/12 19:38:04 felipe Exp $ */
+/* $Id: file.c,v 1.526 2008/09/08 01:30:55 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2132,7 +2132,7 @@ PHP_FUNCTION(fgetcsv)
 	zval *zstream;
 	zend_uchar delimiter_free = 0, enclosure_free = 0, escape_free = 0;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "r|l!ttt", &zstream, &len,
+	if (zend_parse_parameters(argc TSRMLS_CC, "r|lttt", &zstream, &len,
 						&delimiter, &delimiter_len, &delimiter_type,
 						&enclosure, &enclosure_len, &enclosure_type,
 						&escape,    &escape_len,    &escape_type) == FAILURE) {

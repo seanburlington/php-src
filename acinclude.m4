@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.332.2.14.2.26.2.9 2008/07/24 14:17:54 tony2001 Exp $
+dnl $Id: acinclude.m4,v 1.332.2.14.2.26.2.10 2008/09/08 10:24:25 tony2001 Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -2416,6 +2416,7 @@ AC_DEFUN([PHP_SETUP_ICONV], [
   $php_shtool mkdir -p ext/iconv
 
   echo > ext/iconv/php_have_bsd_iconv.h
+  echo > ext/iconv/php_have_ibm_iconv.h
   echo > ext/iconv/php_have_glibc_iconv.h
   echo > ext/iconv/php_have_libiconv.h
   echo > ext/iconv/php_have_iconv.h

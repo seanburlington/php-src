@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.197 2008/09/07 14:17:24 lbarnaud Exp $ */
+/* $Id: rfc1867.c,v 1.198 2008/09/08 09:12:02 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -446,7 +446,9 @@ static int fill_buffer(multipart_buffer *self TSRMLS_DC)
 			bytes_to_read -= actual_read;
 		} else {
 			if (!done) {
+#ifdef DEBUG_FILE_UPLOAD_INTENSIVE
 				fprintf(stderr, "\n###################\n%s\n#################\n", self->buffer);
+#endif
 				done = 1;
 			}
 			break;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.198 2008/09/08 09:12:02 lbarnaud Exp $ */
+/* $Id: rfc1867.c,v 1.199 2008/09/08 09:12:51 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1172,6 +1172,7 @@ static SAPI_POST_HANDLER_FUNC(rfc1867_post_handler_unicode)
 						goto var_done;
 					}
 				} else {
+					u_val_len = 0;
 					u_val = USTR_MAKE("");
 				}
 

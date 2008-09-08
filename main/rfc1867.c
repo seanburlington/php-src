@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.199 2008/09/08 09:12:51 lbarnaud Exp $ */
+/* $Id: rfc1867.c,v 1.200 2008/09/08 09:20:33 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1484,6 +1484,7 @@ var_done:
 				s = u_strchr(ucd, 0x3b /*';'*/);
 				if (s != NULL) {
 					*s = 0;
+					ucd_len = u_strlen(ucd);
 				}
 			}
 

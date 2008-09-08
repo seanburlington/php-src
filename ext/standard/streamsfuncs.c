@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.20 2008/08/16 10:57:56 bjori Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.21 2008/09/08 01:33:08 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -94,7 +94,7 @@ PHP_FUNCTION(stream_socket_client)
 
 	RETVAL_FALSE;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|zzd!lr", &host, &host_len, &zerrno, &zerrstr, &timeout, &flags, &zcontext) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|zzdlr", &host, &host_len, &zerrno, &zerrstr, &timeout, &flags, &zcontext) == FAILURE) {
 		RETURN_FALSE;
 	}
 	

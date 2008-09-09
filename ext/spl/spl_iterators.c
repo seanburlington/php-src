@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.177 2008/08/08 22:06:42 colder Exp $ */
+/* $Id: spl_iterators.c,v 1.178 2008/09/09 19:43:52 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1499,6 +1499,9 @@ static inline void spl_dual_it_rewind(spl_dual_it_object *intern TSRMLS_DC)
 
 static inline int spl_dual_it_valid(spl_dual_it_object *intern TSRMLS_DC)
 {
+	if (!intern->inner.iterator) {
+		return FAILURE;
+	}
 	/* FAILURE / SUCCESS */
 	return intern->inner.iterator->funcs->valid(intern->inner.iterator TSRMLS_CC);
 }

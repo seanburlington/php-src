@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.17 2008/08/08 22:07:07 colder Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.18 2008/09/10 11:21:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1270,7 +1270,7 @@ SXE_METHOD(xpath)
 			if (nodeptr->type == XML_TEXT_NODE) {
 				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_NONE, NULL, NULL, 0 TSRMLS_CC);
 			} else if (nodeptr->type == XML_ATTRIBUTE_NODE) {
-				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_ATTRLIST, (char*)nodeptr->name, NULL, 0 TSRMLS_CC);
+				_node_as_zval(sxe, nodeptr->parent, value, SXE_ITER_ATTRLIST, (char*)nodeptr->name, nodeptr->ns ? nodeptr->ns->href : NULL, 0 TSRMLS_CC);
 			} else {
 				_node_as_zval(sxe, nodeptr, value, SXE_ITER_NONE, NULL, NULL, 0 TSRMLS_CC);
 			}
@@ -2558,7 +2558,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.18 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

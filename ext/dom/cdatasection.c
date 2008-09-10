@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cdatasection.c,v 1.22 2008/08/14 08:38:36 tony2001 Exp $ */
+/* $Id: cdatasection.c,v 1.23 2008/09/10 15:39:43 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,7 +72,7 @@ PHP_METHOD(domcdatasection, __construct)
 
 	intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 	if (intern != NULL) {
-		oldnode = (xmlNodePtr)intern->ptr;
+		oldnode = dom_object_get_node(intern);
 		if (oldnode != NULL) {
 			php_libxml_node_free_resource(oldnode  TSRMLS_CC);
 		}

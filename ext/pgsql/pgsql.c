@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.24.2.13 2008/09/08 01:33:07 felipe Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.24.2.14 2008/09/10 01:39:35 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -3392,7 +3392,7 @@ PHP_FUNCTION(pg_lo_import)
 	int id = -1, name_len;
 	int argc = ZEND_NUM_ARGS();
 	PGconn *pgsql;
-	Oid wanted_oid, returned_oid;
+	Oid returned_oid;
 
 	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, argc TSRMLS_CC,
 								 "rs|z", &pgsql_link, &file_in, &name_len, &oid) == SUCCESS) {
@@ -3430,6 +3430,7 @@ PHP_FUNCTION(pg_lo_import)
 #ifndef HAVE_PG_LO_IMPORT_WITH_OID
 		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "OID value passing not supported");
 #else
+		Oid wanted_oid;
 		switch (Z_TYPE_P(oid)) {
 		case IS_STRING:
 			{	

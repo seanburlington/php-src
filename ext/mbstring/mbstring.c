@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.297 2008/08/18 00:36:03 felipe Exp $ */
+/* $Id: mbstring.c,v 1.298 2008/09/10 23:19:50 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2961,7 +2961,7 @@ PHP_FUNCTION(mb_convert_encoding)
 			s_free = _from_encodings;
 			break;
 		default:
-			convert_to_string_ex(&arg_old);
+			convert_to_string(arg_old);
 			_from_encodings = Z_STRVAL_P(arg_old);
 			break;
 		}
@@ -3082,7 +3082,7 @@ PHP_FUNCTION(mb_detect_encoding)
 			}
 			break;
 		default:
-			convert_to_string_ex(&encoding_list);
+			convert_to_string(encoding_list);
 			if (!php_mb_parse_encoding_list(Z_STRVAL_P(encoding_list), Z_STRLEN_P(encoding_list), &list, &size, 0 TSRMLS_CC)) {
 				if (list) {
 					efree(list);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.3.2.3.2.5 2008/08/02 04:46:06 felipe Exp $ */
+/* $Id: readline.c,v 1.42.2.3.2.3.2.6 2008/09/10 13:47:29 felipe Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -553,6 +553,7 @@ PHP_FUNCTION(readline_callback_handler_install)
 
 	if (!zend_is_callable(callback, 0, &name TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s is not callable", name);
+		efree(name);
 		RETURN_FALSE;
 	}
 

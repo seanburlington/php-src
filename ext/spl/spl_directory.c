@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.30 2008/09/11 15:22:48 lbarnaud Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.31 2008/09/11 15:31:58 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2469,7 +2469,9 @@ SPL_METHOD(SplFileObject, seek)
 	spl_filesystem_file_rewind(getThis(), intern TSRMLS_CC);
 	
 	while(intern->u.file.current_line_num < line_pos) {
-		spl_filesystem_file_read_line(getThis(), intern, 1 TSRMLS_CC);
+		if (spl_filesystem_file_read_line(getThis(), intern, 1 TSRMLS_CC) == FAILURE) {
+			break;
+		}
 	}
 } /* }}} */
 

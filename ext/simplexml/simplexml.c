@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.43 2008/09/10 16:29:17 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.44 2008/09/11 14:23:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1101,9 +1101,13 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 				SKIP_TEXT(node);
 			} else {
 				if (node->type == XML_TEXT_NODE) {
-					MAKE_STD_ZVAL(value);
-					ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
-					zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
+					const xmlChar *cur = node->content;
+					
+					if (*cur != 0) {
+						MAKE_STD_ZVAL(value);
+						ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
+						zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
+					}
 					goto next_iter;
 				}
 			}
@@ -2446,7 +2450,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.43 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.44 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.29 2008/08/08 22:07:07 colder Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.27.2.23.2.30 2008/09/11 15:22:48 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -478,6 +478,7 @@ static spl_filesystem_object * spl_filesystem_object_create_type(int ht, spl_fil
 					&use_include_path, &intern->u.file.zcontext) == FAILURE) {
 				zend_restore_error_handling(&error_handling TSRMLS_CC);
 				intern->u.file.open_mode = NULL;
+				intern->file_name = NULL;
 				zval_dtor(return_value);
 				Z_TYPE_P(return_value) = IS_NULL;
 				return NULL;

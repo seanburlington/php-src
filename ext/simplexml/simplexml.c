@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.260 2008/09/10 16:28:20 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.261 2008/09/11 14:20:30 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1142,13 +1142,17 @@ static HashTable * sxe_get_prop_hash(zval *object, int is_debug TSRMLS_DC) /* {{
 				SKIP_TEXT(node);
 			} else {
 				if (node->type == XML_TEXT_NODE) {
-					xmlChar *tmp;
-
-					MAKE_STD_ZVAL(value);
-					tmp = xmlNodeListGetString(node->doc, node, 1);
-					ZVAL_XML_STRING(value, (char *)tmp, ZSTR_DUPLICATE);
-					xmlFree(tmp);
-					zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
+					const xmlChar *cur = node->content;
+					
+					if (*cur != 0) {
+						xmlChar *tmp;
+	
+						MAKE_STD_ZVAL(value);
+						tmp = xmlNodeListGetString(node->doc, node, 1);
+						ZVAL_XML_STRING(value, (char *)tmp, ZSTR_DUPLICATE);
+						xmlFree(tmp);
+						zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
+					}
 					goto next_iter;
 				}
 			}
@@ -2640,7 +2644,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.260 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.261 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.377 2008/09/08 09:23:24 lbarnaud Exp $ */
+/* $Id: run-tests.php,v 1.378 2008/09/12 14:14:52 lbarnaud Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -609,7 +609,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.377 $' . "\n";
+					echo '$Revision: 1.378 $' . "\n";
 					exit(1);
 
 				default:
@@ -996,7 +996,7 @@ function error_report($testname, $logname, $tested)
 
 function system_with_timeout($commandline, $env = null, $stdin = null)
 {
-	global $leak_check;
+	global $leak_check, $cwd;
 
 	$data = '';
 
@@ -1009,7 +1009,7 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 		0 => array('pipe', 'r'),
 		1 => array('pipe', 'w'),
 		2 => array('pipe', 'w')
-		), $pipes, null, $bin_env, array('suppress_errors' => true, 'binary_pipes' => true));
+		), $pipes, $cwd, $bin_env, array('suppress_errors' => true, 'binary_pipes' => true));
 
 	if (!$proc) {
 		return false;

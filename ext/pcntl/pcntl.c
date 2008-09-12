@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.4.2.9 2008/08/05 15:12:19 jani Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.4.2.10 2008/09/12 19:49:18 lbarnaud Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -602,7 +602,7 @@ PHP_FUNCTION(pcntl_wstopsig)
    Executes specified program in current process space as defined by exec(2) */
 PHP_FUNCTION(pcntl_exec)
 {
-	zval *args, *envs;
+	zval *args = NULL, *envs = NULL;
 	zval **element;
 	HashTable *args_hash, *envs_hash;
 	int argc = 0, argi = 0;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.527 2008/09/12 01:10:56 felipe Exp $ */
+/* $Id: file.c,v 1.528 2008/09/12 10:30:18 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2053,7 +2053,7 @@ PHP_FUNCTION(fputcsv)
 
 	count = zend_hash_num_elements(Z_ARRVAL_P(fields));
 	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(fields), &pos);
-	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(fields), (void **) &field, &pos) == SUCCESS) {
+	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(fields), (void **) &field_tmp, &pos) == SUCCESS) {
 		field = **field_tmp;
 
 		if (Z_TYPE_PP(field_tmp) != IS_STRING) {

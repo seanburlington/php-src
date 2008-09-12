@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_iterators.c,v 1.48 2008/02/28 14:16:24 felipe Exp $ */
+/* $Id: unicode_iterators.c,v 1.49 2008/09/12 17:30:53 felipe Exp $ */
 
 /*
  * TODO
@@ -155,6 +155,11 @@ static int text_iter_cp_offset(text_iter_obj* object, long flags, int32_t *cp_of
 static void text_iter_cp_next(text_iter_obj* object, long flags TSRMLS_DC)
 {
 	if (object->u.cp.offset == UBRK_DONE) {
+		return;
+	}
+	
+	if (object->text == NULL) {
+		object->u.cp.offset = object->u.cp.cp_offset = UBRK_DONE;
 		return;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.301 2008/09/13 00:22:10 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.302 2008/09/13 19:50:26 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1165,7 +1165,8 @@ static int _php_mb_ini_mbstring_internal_encoding_set(const char *new_value, uin
 /* {{{ static PHP_INI_MH(OnUpdate_mbstring_internal_encoding) */
 static PHP_INI_MH(OnUpdate_mbstring_internal_encoding)
 {
-	if (stage == PHP_INI_STAGE_STARTUP || stage == PHP_INI_STAGE_SHUTDOWN) {
+	if (stage == PHP_INI_STAGE_STARTUP || stage == PHP_INI_STAGE_SHUTDOWN
+			|| stage == PHP_INI_STAGE_RUNTIME) {
 		return _php_mb_ini_mbstring_internal_encoding_set(new_value, new_value_length TSRMLS_CC);
 	} else {
 		/* the corresponding mbstring globals needs to be set according to the

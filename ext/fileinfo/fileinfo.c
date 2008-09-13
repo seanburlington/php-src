@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.32 2008/09/07 20:29:54 felipe Exp $ */
+/* $Id: fileinfo.c,v 1.33 2008/09/13 21:32:15 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -499,6 +499,8 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode, int mime
 				php_stream_seek(stream, 0, SEEK_SET);
 
 				ret_val = (char *) magic_stream(magic, stream);
+
+				php_stream_seek(stream, streampos, SEEK_SET);
 				break;
 		}
 

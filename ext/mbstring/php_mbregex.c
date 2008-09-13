@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.11 2008/07/25 14:04:54 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.53.2.1.2.4.2.12 2008/09/13 02:33:15 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -114,6 +114,7 @@ void php_mb_regex_globals_free(zend_mb_regex_globals *pglobals TSRMLS_DC)
 /* {{{ PHP_MINIT_FUNCTION(mb_regex) */
 PHP_MINIT_FUNCTION(mb_regex)
 {
+	onig_init();
 	return SUCCESS;
 }
 /* }}} */
@@ -121,6 +122,7 @@ PHP_MINIT_FUNCTION(mb_regex)
 /* {{{ PHP_MSHUTDOWN_FUNCTION(mb_regex) */
 PHP_MSHUTDOWN_FUNCTION(mb_regex)
 {
+	onig_end();
 	return SUCCESS;
 }
 /* }}} */

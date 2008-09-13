@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.17 2008/08/31 06:26:19 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.18 2008/09/13 22:30:55 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -438,7 +438,7 @@ skip_phar:
 
 /* {{{ php_stat
  */
-void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value TSRMLS_DC)
+static void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value TSRMLS_DC)
 {
 	zval *stat_dev, *stat_ino, *stat_mode, *stat_nlink, *stat_uid, *stat_gid, *stat_rdev,
 		 *stat_size, *stat_atime, *stat_mtime, *stat_ctime, *stat_blksize, *stat_blocks;
@@ -607,7 +607,7 @@ void phar_fancy_stat(struct stat *stat_sb, int type, zval *return_value TSRMLS_D
 }
 /* }}} */
 
-void phar_file_stat(const char *filename, php_stat_len filename_length, int type, void (*orig_stat_func)(INTERNAL_FUNCTION_PARAMETERS), INTERNAL_FUNCTION_PARAMETERS) /* {{{ */
+static void phar_file_stat(const char *filename, php_stat_len filename_length, int type, void (*orig_stat_func)(INTERNAL_FUNCTION_PARAMETERS), INTERNAL_FUNCTION_PARAMETERS) /* {{{ */
 {
 	if (!filename_length) {
 		RETURN_FALSE;

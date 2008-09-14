@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.53 2008/06/02 14:12:04 jani Exp $
+dnl $Id: config0.m4,v 1.54 2008/09/14 14:37:10 nlopess Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -52,7 +52,7 @@ PHP_ARG_WITH(pcre-regex,,
   else
     AC_MSG_CHECKING([for PCRE library to use])
     AC_MSG_RESULT([bundled])
-    pcrelib_sources="pcrelib/pcre_chartables.c pcrelib/pcre_ucp_searchfuncs.c \
+    pcrelib_sources="pcrelib/pcre_chartables.c pcrelib/pcre_ucd.c \
     				 pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_exec.c \
     				 pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c \
     				 pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_newline.c \

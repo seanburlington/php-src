@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.117 2008/09/13 22:31:18 cellog Exp $ */
+/* $Id: phar_internal.h,v 1.118 2008/09/14 06:32:52 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -555,7 +555,7 @@ static inline void phar_unixify_path_separators(char *path, int path_len)
 static inline int phar_validate_alias(const char *alias, int alias_len) /* {{{ */
 {
 	return !(memchr(alias, '/', alias_len) || memchr(alias, '\\', alias_len) || memchr(alias, ':', alias_len) ||
-		memchr(alias, ';', alias_len));
+		memchr(alias, ';', alias_len) || memchr(alias, '\n', alias_len) || memchr(alias, '\r', alias_len));
 }
 /* }}} */
 

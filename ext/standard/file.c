@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.528 2008/09/12 10:30:18 tony2001 Exp $ */
+/* $Id: file.c,v 1.529 2008/09/14 14:55:50 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1185,6 +1185,9 @@ PHPAPI PHP_FUNCTION(fgetc)
 		UChar *buf = php_stream_read_unicode_chars(stream, &buflen);
 
 		if (!buf || !buflen) {
+			if (buf) {
+				efree(buf);
+			}
 			RETURN_FALSE;
 		}
 		RETURN_UNICODEL(buf, buflen, 0);

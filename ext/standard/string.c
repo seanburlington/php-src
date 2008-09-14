@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.681 2008/08/16 21:16:24 felipe Exp $ */
+/* $Id: string.c,v 1.682 2008/09/14 14:56:34 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2664,7 +2664,7 @@ PHP_FUNCTION(stripos)
 		if (Z_TYPE_PP(haystack) == IS_UNICODE) {
 			/* calculate code unit offset */
 			U16_FWD_N(Z_USTRVAL_PP(haystack), cu_offset, haystack_len, offset);
-			found = php_u_stristr(Z_USTRVAL_PP(haystack) + cu_offset, Z_USTRVAL_PP(needle), haystack_len, needle_len, 1 TSRMLS_CC);
+			found = php_u_stristr(Z_USTRVAL_PP(haystack) + cu_offset, Z_USTRVAL_PP(needle), haystack_len - cu_offset, needle_len, 1 TSRMLS_CC);
 		} else {
 			haystack_dup = estrndup(Z_STRVAL_PP(haystack), haystack_len);
 			php_strtolower((char *)haystack_dup, haystack_len);
@@ -2686,7 +2686,7 @@ PHP_FUNCTION(stripos)
 			/* calculate code unit offset */
 			U16_FWD_N(Z_USTRVAL_PP(haystack), cu_offset, haystack_len, offset);
 			found = php_u_stristr(Z_USTRVAL_PP(haystack) + cu_offset,
-								  u_needle_char, haystack_len, needle_len, 1 TSRMLS_CC);
+								  u_needle_char, haystack_len - cu_offset, needle_len, 1 TSRMLS_CC);
 		} else {
 			c = tolower((char)Z_LVAL_PP(needle));
 			needle_char[0] = c;

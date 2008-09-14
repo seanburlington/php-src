@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.25.2.3.2.4.2.2 2008/07/17 14:34:51 nlopess Exp $ */
+/* $Id: php_compat.h,v 1.25.2.3.2.4.2.3 2008/09/14 14:15:52 nlopess Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -28,32 +28,30 @@
 #endif
 
 #if defined(HAVE_BUNDLED_PCRE) || !defined(PHP_VERSION)
-#define pcre_compile 			php_pcre_compile
-#define pcre_compile2 			php_pcre_compile2
+#define pcre_compile			php_pcre_compile
+#define pcre_compile2			php_pcre_compile2
 #define pcre_copy_substring		php_pcre_copy_substring
-#define pcre_exec				php_pcre_exec
+#define pcre_exec			php_pcre_exec
 #define pcre_get_substring		php_pcre_get_substring
-#define pcre_get_substring_list	php_pcre_get_substring_list
-#define pcre_info				php_pcre_info
+#define pcre_get_substring_list		php_pcre_get_substring_list
+#define pcre_info			php_pcre_info
 #define pcre_maketables			php_pcre_maketables
-#define pcre_study				php_pcre_study
+#define pcre_study			php_pcre_study
 #define pcre_version			php_pcre_version
 #define pcre_fullinfo			php_pcre_fullinfo
-#define pcre_free				php_pcre_free
-#define pcre_malloc				php_pcre_malloc
-#define pcre_config				php_pcre_config
-#define pcre_copy_named_substring php_pcre_copy_named_substring
-#define pcre_free_substring 	php_pcre_free_substring
-#define pcre_free_substring_list php_pcre_free_substring_list
-#define pcre_get_named_substring php_pcre_get_named_substring
-#define pcre_get_stringnumber 	php_pcre_get_stringnumber
-#define pcre_refcount 			php_pcre_refcount
-#define _pcre_ord2utf8 			php__pcre_ord2utf8
-#define _pcre_try_flipped 		php__pcre_try_flipped
-#define _pcre_ucp_findprop 		php__pcre_ucp_findprop
-#define _pcre_ucp_othercase 	php__pcre_ucp_othercase
-#define _pcre_valid_utf8 		php__pcre_valid_utf8
-#define _pcre_xclass	 		php__pcre_xclass
+#define pcre_free			php_pcre_free
+#define pcre_malloc			php_pcre_malloc
+#define pcre_config			php_pcre_config
+#define pcre_copy_named_substring	php_pcre_copy_named_substring
+#define pcre_free_substring		php_pcre_free_substring
+#define pcre_free_substring_list	php_pcre_free_substring_list
+#define pcre_get_named_substring	php_pcre_get_named_substring
+#define pcre_get_stringnumber		php_pcre_get_stringnumber
+#define pcre_refcount			php_pcre_refcount
+#define _pcre_ord2utf8			php__pcre_ord2utf8
+#define _pcre_try_flipped		php__pcre_try_flipped
+#define _pcre_valid_utf8		php__pcre_valid_utf8
+#define _pcre_xclass			php__pcre_xclass
 #define pcre_callout			php_pcre_callout
 #define _pcre_OP_lengths		php__pcre_OP_lengths
 #define _pcre_utt_names			php__pcre_utt_names
@@ -70,6 +68,10 @@
 #define _pcre_utt			php__pcre_utt
 #define _pcre_utt_size			php__pcre_utt_size
 #define _pcre_was_newline		php__pcre_was_newline
+#define _pcre_ucd_records		php__pcre_ucd_records
+#define _pcre_ucd_stage1		php__pcre_ucd_stage1
+#define _pcre_ucd_stage2		php__pcre_ucd_stage2
+#define _pcre_ucp_gentype		php__pcre_ucp_gentype
 #endif
 
 #define lookup				php_lookup

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_enum_n_def.h,v 1.9 2008/09/12 15:06:55 andrey Exp $ */
+/* $Id: mysqlnd_enum_n_def.h,v 1.10 2008/09/15 18:10:38 andrey Exp $ */
 #ifndef MYSQLND_ENUM_N_DEF_H
 #define MYSQLND_ENUM_N_DEF_H
 
@@ -136,7 +136,7 @@ typedef enum mysqlnd_option
 	MYSQLND_OPT_NUMERIC_AND_DATETIME_AS_UNICODE = 200,
 #endif
 #ifdef MYSQLND_STRING_TO_INT_CONVERSION
-	MYSQLND_OPT_INT_AND_YEAR_AS_INT = 201,
+	MYSQLND_OPT_INT_AND_FLOAT_NATIVE = 201,
 #endif
 	MYSQLND_OPT_NET_CMD_BUFFER_SIZE = 202,
 	MYSQLND_OPT_NET_READ_BUFFER_SIZE = 203,

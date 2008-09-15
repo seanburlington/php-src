@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.20.2.13 2008/09/13 21:32:21 tony2001 Exp $ */
+/* $Id: fileinfo.c,v 1.20.2.14 2008/09/15 22:13:25 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,15 +100,11 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 	zend_object_value retval;
 	struct finfo_object *intern;
 
-	intern = ecalloc(1, sizeof(struct finfo_object));
-	intern->zo.ce = class_type;
-	intern->zo.properties = NULL;
-#if ZEND_MODULE_API_NO >= 20050922
-	intern->zo.guards = NULL;
-#else
-	intern->zo.in_get = 0;
-	intern->zo.in_set = 0;
-#endif
+	intern = emalloc(sizeof(struct finfo_object));
+
+	zend_object_std_init(&intern->zo, class_type TSRMLS_CC);
+	zend_hash_copy(intern->zo.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref,(void *) &tmp, sizeof(zval *));
+
 	intern->ptr = NULL;
 
 	retval.handle = zend_objects_store_put(intern, finfo_objects_dtor, NULL, NULL TSRMLS_CC);

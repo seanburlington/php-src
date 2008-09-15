@@ -18,19 +18,19 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.16 2008/06/24 11:01:38 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.17 2008/09/15 14:07:44 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.4-dev - 080501 - $Revision: 1.3.2.16 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.4-dev - 080501 - $Revision: 1.3.2.17 $"
 #define MYSQLND_VERSION_ID 50004
 
 /* This forces inlining of some accessor functions */
-#define MYSQLND_USE_OPTIMISATIONS 0
+#define MYSQLND_USE_OPTIMISATIONS 1
 
 
-/* #define MYSQLND_STRING_TO_INT_CONVERSION */
+#define MYSQLND_STRING_TO_INT_CONVERSION
 /*
   This force mysqlnd to do a single (or more depending on ammount of data)
   non-blocking read() calls before sending a command to the server. Useful

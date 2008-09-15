@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.15 2008/04/24 14:04:58 andrey Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.16 2008/09/15 18:07:58 andrey Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H
@@ -177,7 +177,7 @@ typedef struct st_mysqlnd_option
 
 	zend_bool	numeric_and_datetime_as_unicode;
 #ifdef MYSQLND_STRING_TO_INT_CONVERSION
-	zend_bool	int_and_year_as_int;
+	zend_bool	int_and_float_native;
 #endif
 	unsigned int net_read_buffer_size;
 } MYSQLND_OPTION;

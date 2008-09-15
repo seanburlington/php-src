@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.132 2008/07/25 08:53:11 dmitry Exp $ 
+  $Id: mysqli.c,v 1.133 2008/09/15 18:07:58 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -783,7 +783,7 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_OPT_NET_READ_BUFFER_SIZE", MYSQLND_OPT_NET_READ_BUFFER_SIZE, CONST_CS | CONST_PERSISTENT);
 #endif
 #ifdef MYSQLND_STRING_TO_INT_CONVERSION
-	REGISTER_LONG_CONSTANT("MYSQLI_OPT_INT_AND_YEAR_AS_INT", MYSQLND_OPT_INT_AND_YEAR_AS_INT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("MYSQLI_OPT_INT_AND_FLOAT_NATIVE", MYSQLND_OPT_INT_AND_FLOAT_NATIVE, CONST_CS | CONST_PERSISTENT);
 #endif
 
 	/* mysqli_real_connect flags */	

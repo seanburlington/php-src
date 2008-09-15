@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5.2.26 2008/08/19 10:42:11 johannes Exp $ */
+/* $Id: mysqlnd.c,v 1.5.2.27 2008/09/15 18:09:20 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1711,8 +1711,8 @@ MYSQLND_METHOD(mysqlnd_conn, set_client_option)(MYSQLND * const conn,
 			conn->options.net_read_buffer_size = *(uint*) value;
 			break;
 #ifdef MYSQLND_STRING_TO_INT_CONVERSION
-		case MYSQLND_OPT_INT_AND_YEAR_AS_INT:
-			conn->options.int_and_year_as_int = *(uint*) value;
+		case MYSQLND_OPT_INT_AND_FLOAT_NATIVE:
+			conn->options.int_and_float_native = *(uint*) value;
 			break;
 #endif
 		case MYSQL_OPT_CONNECT_TIMEOUT:

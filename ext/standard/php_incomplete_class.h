@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.24 2007/12/31 07:12:16 sebastian Exp $ */
+/* $Id: php_incomplete_class.h,v 1.25 2008/09/16 14:36:10 tony2001 Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -31,6 +31,14 @@
 	if (Z_OBJ_HT_P(struc)->get_class_entry && \
             Z_OBJCE_P(struc) == BG(incomplete_class)) {	\
 		class_name = php_lookup_class_name(struc, &name_len); \
+		if (!class_name.v) { \
+			name_len = sizeof(INCOMPLETE_CLASS) - 1; \
+			if (UG(unicode)) { \
+				class_name.u = USTR_MAKE(INCOMPLETE_CLASS); \
+			} else { \
+				class_name.s = estrndup(INCOMPLETE_CLASS, name_len); \
+			} \
+		} \
 		free_class_name = 1; \
 		incomplete_class = 1; \
 	} else { \

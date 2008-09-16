@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.34 2008/09/15 22:15:16 scottmac Exp $ */
+/* $Id: fileinfo.c,v 1.35 2008/09/16 09:45:06 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,8 @@ static void finfo_objects_dtor(void *object, zend_object_handle handle TSRMLS_DC
 		magic_close(intern->ptr->magic);
 		efree(intern->ptr);
 	}
-
+	
+	zend_object_std_dtor(&intern->zo TSRMLS_CC);
 	efree(intern);
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73.2.12.2.12.2.7 2008/08/14 08:39:05 tony2001 Exp $ */
+/* $Id: php_dom.c,v 1.73.2.12.2.12.2.8 2008/09/16 00:38:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -965,8 +965,10 @@ void dom_xpath_objects_free_storage(void *object TSRMLS_DC)
 		intern->ptr = NULL;
 	}
 
-	zend_hash_destroy(intern->registered_phpfunctions);
-	FREE_HASHTABLE(intern->registered_phpfunctions);
+	if (intern->registered_phpfunctions) {
+		zend_hash_destroy(intern->registered_phpfunctions);
+		FREE_HASHTABLE(intern->registered_phpfunctions);
+	}
 	
 	if (intern->node_list) {
 		zend_hash_destroy(intern->node_list);

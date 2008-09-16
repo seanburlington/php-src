@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.h,v 1.4.2.9 2008/09/14 22:10:24 pajoye Exp $ */
+/* $Id: mysqlnd_statistics.h,v 1.4.2.10 2008/09/16 14:35:01 andrey Exp $ */
 
 #ifndef MYSQLND_STATISTICS_H
 #define MYSQLND_STATISTICS_H
@@ -111,8 +111,8 @@ extern const MYSQLND_STRING mysqlnd_stats_values_names[];
 		if (statistic2 != STAT_LAST) mysqlnd_global_stats->values[(statistic2)]+= v2; \
 		tsrm_mutex_unlock(mysqlnd_global_stats->LOCK_access); \
 		if ((conn_stats)) { \
-			((MYSQLND_STATS *) conn_stats)->values[(statistic1)]+= v1; \
-			((MYSQLND_STATS *) conn_stats)->values[(statistic2)]+= v2; \
+			if (statistic1 != STAT_LAST) ((MYSQLND_STATS *) conn_stats)->values[(statistic1)]+= v1; \
+			if (statistic2 != STAT_LAST) ((MYSQLND_STATS *) conn_stats)->values[(statistic2)]+= v2; \
 		} \
 	} \
  }
@@ -205,8 +205,8 @@ extern const MYSQLND_STRING mysqlnd_stats_values_names[];
 		if (statistic1 != STAT_LAST) mysqlnd_global_stats->values[(statistic1)]+= v1; \
 		if (statistic2 != STAT_LAST) mysqlnd_global_stats->values[(statistic2)]+= v2; \
 		if ((conn_stats)) { \
-			((MYSQLND_STATS *) conn_stats)->values[(statistic1)]+= v1; \
-			((MYSQLND_STATS *) conn_stats)->values[(statistic2)]+= v2; \
+			if (statistic1 != STAT_LAST) ((MYSQLND_STATS *) conn_stats)->values[(statistic1)]+= v1; \
+			if (statistic2 != STAT_LAST) ((MYSQLND_STATS *) conn_stats)->values[(statistic2)]+= v2; \
 		} \
 	} \
  }

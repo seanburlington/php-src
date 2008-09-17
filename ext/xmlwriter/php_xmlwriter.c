@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.53 2008/06/27 13:17:27 felipe Exp $ */
+/* $Id: php_xmlwriter.c,v 1.54 2008/09/17 23:28:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1886,6 +1886,9 @@ static PHP_FUNCTION(xmlwriter_open_uri)
 	intern->uri_output = out_buffer;
 #else
 	if (this) {
+		if (ze_obj->xmlwriter_ptr) {
+			xmlwriter_free_resource_ptr(ze_obj->xmlwriter_ptr TSRMLS_CC);
+		}
 		ze_obj->xmlwriter_ptr = intern;
 		RETURN_TRUE;
 	} else
@@ -1936,6 +1939,9 @@ static PHP_FUNCTION(xmlwriter_open_memory)
 	intern->uri_output = NULL;
 #else
 	if (this) {
+		if (ze_obj->xmlwriter_ptr) {
+			xmlwriter_free_resource_ptr(ze_obj->xmlwriter_ptr TSRMLS_CC);
+		}
 		ze_obj->xmlwriter_ptr = intern;
 		RETURN_TRUE;
 	} else

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.117 2008/09/11 11:51:07 lbarnaud Exp $ */
+/* $Id: php_session.h,v 1.118 2008/09/17 17:22:06 lbarnaud Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -110,6 +110,7 @@ typedef struct _php_session_rfc1867_progress {
 	zval      *current_file;
 	zval      *current_file_bytes_processed;
 	zend_bool apply_trans_sid;
+	zend_bool cancel_upload;
 } php_session_rfc1867_progress;
 
 typedef struct _php_ps_globals {

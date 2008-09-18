@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.45 2007/12/31 07:12:17 sebastian Exp $ */
+/* $Id: php_xsl.c,v 1.46 2008/09/18 11:46:54 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,6 +102,9 @@ void xsl_objects_free_storage(void *object TSRMLS_DC)
 
 		xsltFreeStylesheet((xsltStylesheetPtr) intern->ptr);
 		intern->ptr = NULL;
+	}
+	if (intern->profiling) {
+		efree(intern->profiling);
 	}
 	efree(object);
 }

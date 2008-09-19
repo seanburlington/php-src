@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.20 2008/08/02 04:46:06 felipe Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.21 2008/09/19 11:38:46 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1311,7 +1311,13 @@ PHP_FUNCTION(mysqli_info)
 PHP_FUNCTION(mysqli_init)
 {
 	MYSQLI_RESOURCE *mysqli_resource;
-	MY_MYSQL *mysql = (MY_MYSQL *)ecalloc(1, sizeof(MY_MYSQL));
+	MY_MYSQL *mysql;
+
+	if (getThis() && instanceof_function(Z_OBJCE_P(getThis()), mysqli_link_class_entry TSRMLS_CC)) {
+		return;
+	}
+
+	mysql = (MY_MYSQL *)ecalloc(1, sizeof(MY_MYSQL));
 
 #if !defined(MYSQLI_USE_MYSQLND)
 	if (!(mysql->mysql = mysql_init(NULL)))

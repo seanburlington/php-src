@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.133 2008/09/15 18:07:58 andrey Exp $ 
+  $Id: mysqli.c,v 1.134 2008/09/19 11:35:37 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1255,7 +1255,7 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 			} else {
 				ZVAL_STRINGL(res, row[i], field_len[i], 1);	
 			}
-
+			if (m
 			if (fetchtype & MYSQLI_NUM) {
 				add_index_zval(return_value, i, res);
 			}

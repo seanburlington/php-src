@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: collator.c,v 1.17 2008/03/04 23:39:15 felipe Exp $ */
+/* $Id: collator.c,v 1.18 2008/09/20 22:06:18 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_array.h"
@@ -180,10 +180,14 @@ PHP_FUNCTION(collator_create)
 	int               collator_name_len;
 	zval 			 *object;
 	UCollator		 *ucoll;
+	zend_error_handling error_handling;
+
+	zend_replace_error_handling(EH_THROW, NULL, &error_handling TSRMLS_CC);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &collator_name, &collator_name_len) == FAILURE) {
 		RETURN_FALSE;
 	}
+	zend_restore_error_handling(&error_handling TSRMLS_CC);
 
 	if ((object = getThis()) == NULL) {
 		object = return_value;

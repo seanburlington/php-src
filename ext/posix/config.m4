@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12.4.7 2009/01/21 19:23:03 jani Exp $
+dnl $Id: config.m4,v 1.12.4.5.2.1 2008/09/20 22:12:43 lbarnaud Exp $
 dnl
 
 PHP_ARG_ENABLE(posix,whether to enable POSIX-like functions,
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
       ac_cv_have_utsname_domainname=no
     ])
   ])
-  if test "$ac_cv_have_utsname_domainname" = yes; then
+  if test ac_cv_have_utsname_domainname=yes; then
     AC_DEFINE(HAVE_UTSNAME_DOMAINNAME, 1, [Wether struct utsname has domainname])
   fi
 fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lsapilib.c,v 1.7 2008/09/21 02:34:48 gwang Exp $ */
+/* $Id: lsapilib.c,v 1.8 2008/09/21 02:37:57 gwang Exp $ */
 
 /*
 Copyright (c) 2007, Lite Speed Technologies Inc.
@@ -2125,8 +2125,7 @@ void LSAPI_Init_Env_Parameters( fn_select_t fp )
 
 #if defined( RLIMIT_CORE )
     p = getenv( "LSAPI_ALLOW_CORE_DUMP" );
-    if ( !p )
-    {
+    if ( !p ) {
         struct rlimit limit = { 0, 0 };
         setrlimit( RLIMIT_CORE, &limit );
     }

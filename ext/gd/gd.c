@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.393 2008/08/29 11:09:05 pajoye Exp $ */
+/* $Id: gd.c,v 1.394 2008/09/22 15:30:59 rrichards Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4231,10 +4231,10 @@ PHP_FUNCTION(imagepsbbox)
 	/*
 	printf("%d %d %d %d\n", str_bbox.llx, str_bbox.lly, str_bbox.urx, str_bbox.ury);
 	*/
-	add_next_index_long(return_value, (int) ceil(((double) str_bbox.llx)*Z_LVAL_PP(sz)/1000));
-	add_next_index_long(return_value, (int) ceil(((double) str_bbox.lly)*Z_LVAL_PP(sz)/1000));
-	add_next_index_long(return_value, (int) ceil(((double) str_bbox.urx)*Z_LVAL_PP(sz)/1000));
-	add_next_index_long(return_value, (int) ceil(((double) str_bbox.ury)*Z_LVAL_PP(sz)/1000));
+	add_next_index_long(return_value, (int) ceil(((double) str_bbox.llx)*sz/1000));
+	add_next_index_long(return_value, (int) ceil(((double) str_bbox.lly)*sz/1000));
+	add_next_index_long(return_value, (int) ceil(((double) str_bbox.urx)*sz/1000));
+	add_next_index_long(return_value, (int) ceil(((double) str_bbox.ury)*sz/1000));
 }
 /* }}} */
 #endif

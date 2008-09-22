@@ -1,3 +1,19 @@
+2008-09-21  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_3)
+      NEWS:
+      WS
+
+2008-09-21  George Wang  <gwang@litespeedtech.com>
+
+    * sapi/litespeed/lsapilib.c
+      sapi/litespeed/lsapilib.c:
+      -** empty log message ***
+
+    * sapi/litespeed/lsapilib.c
+      sapi/litespeed/lsapilib.c:
+      disable core dump by default
+
 2008-09-20  Pierre-Alain Joye  <pierre.dev@gmail.com>
 
     * (PHP_5_3)
@@ -6444,7 +6460,7 @@
 
     * sapi/litespeed/lsapi_main.c
       sapi/litespeed/lsapilib.c:
-      - Added missing $Id: ChangeLog,v 1.3175 2008/09/21 01:32:17 changelog Exp $ tags and nuked c++ comments
+      - Added missing $Id: ChangeLog,v 1.3176 2008/09/22 01:31:57 changelog Exp $ tags and nuked c++ comments
 
     * (PHP_5_3)
       ext/intl/locale/locale.c

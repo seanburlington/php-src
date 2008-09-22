@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.12 2008/08/14 08:38:37 tony2001 Exp $ */
+/* $Id: domconfiguration.c,v 1.13 2008/09/22 15:09:06 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_set_parameter, 0, 0, 2)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_OBJ_INFO(0, value, DOMUserData, 0)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO();
 
 static
@@ -42,7 +42,7 @@ ZEND_END_ARG_INFO();
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_can_set_parameter, 0, 0, 0)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_OBJ_INFO(0, value, DOMUserData, 0)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO();
 /* }}} */
 

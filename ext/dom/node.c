@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.62 2008/08/14 08:38:37 tony2001 Exp $ */
+/* $Id: node.c,v 1.63 2008/09/22 15:09:06 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ ZEND_END_ARG_INFO();
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_node_set_user_data, 0, 0, 3)
 	ZEND_ARG_INFO(0, key)
-	ZEND_ARG_OBJ_INFO(0, data, DOMUserData, 0)
+	ZEND_ARG_INFO(0, data)
 	ZEND_ARG_INFO(0, handler)
 ZEND_END_ARG_INFO();
 

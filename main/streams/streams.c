@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.169 2008/08/26 16:06:23 dsp Exp $ */
+/* $Id: streams.c,v 1.170 2008/09/22 01:26:38 cellog Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -454,6 +454,10 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 		int err_flag = 0;
 		php_stream_bucket_brigade brig_in = { NULL, NULL }, brig_out = { NULL, NULL };
 		php_stream_bucket_brigade *brig_inp = &brig_in, *brig_outp = &brig_out, *brig_swap;
+
+		/* Invalidate the existing cache, otherwise reads can fail, see note in
+		   main/streams/filter.c::_php_stream_filter_append */
+		stream->writepos = stream->readpos = 0;
 
 		/* allocate a buffer for reading chunks */
 		chunk_buf = emalloc(stream->chunk_size);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.463 2008/08/29 02:48:28 felipe Exp $ */
+/* $Id: array.c,v 1.464 2008/09/23 15:22:05 nlopess Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3574,7 +3574,6 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 	} else if (behavior & DIFF_ASSOC) { /* triggered also if DIFF_KEY */
 		/* DIFF_KEY is subset of DIFF_ASSOC. When having the former
 		 * no comparison of the data is done (part of DIFF_ASSOC) */
-		diff_key_compare_func = php_array_key_compare;
 
 		if (data_compare_type == DIFF_COMP_DATA_INTERNAL && key_compare_type == DIFF_COMP_KEY_INTERNAL) {
 			/* array_diff_assoc() or array_diff_key() */

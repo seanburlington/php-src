@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.202 2008/09/18 19:44:01 lbarnaud Exp $ */
+/* $Id: rfc1867.c,v 1.203 2008/09/23 15:22:05 nlopess Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -189,7 +189,8 @@ static void normalize_protected_variable(char *varname TSRMLS_DC)
 			index = NULL;
 		}	
 	}
-	*s++='\0';
+
+	*s = '\0';
 }
 
 
@@ -784,7 +785,7 @@ static char *substring_conf(char *start, int len, char quote TSRMLS_DC)
 		}
 	}
 
-	*resp++ = '\0';
+	*resp = '\0';
 	return result;
 }
 

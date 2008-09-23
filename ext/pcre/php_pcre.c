@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.240 2008/09/02 19:13:24 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.241 2008/09/23 15:22:05 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1023,7 +1023,6 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 				} else {
 					esc_match = "";
 					esc_match_len = 0;
-					match_len = 0;
 				}
 				smart_str_appendl(&code, esc_match, esc_match_len);
 

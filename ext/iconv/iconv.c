@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20.2.7 2008/05/21 15:03:20 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.20.2.8 2008/09/23 15:18:26 nlopess Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1295,7 +1295,6 @@ static php_iconv_err_t _php_iconv_mime_encode(smart_str *pretval, const char *fn
 						char_cnt -= 3;
 					}
 				}
-				prev_in_left = in_left;
 
 				smart_str_appendl(pretval, "?=", sizeof("?=") - 1);
 				char_cnt -= 2;

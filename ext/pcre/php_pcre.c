@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.23 2008/09/02 19:10:38 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.24 2008/09/23 15:18:26 nlopess Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -894,7 +894,6 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 				} else {
 					esc_match = "";
 					esc_match_len = 0;
-					match_len = 0;
 				}
 				smart_str_appendl(&code, esc_match, esc_match_len);
 

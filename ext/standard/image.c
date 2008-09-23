@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.114.2.2.2.5.2.5 2008/06/20 14:53:57 felipe Exp $ */
+/* $Id: image.c,v 1.114.2.2.2.5.2.6 2008/09/23 15:18:26 nlopess Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -653,7 +653,7 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 	}
 
 	/* Collect bit depth info */
-	highest_bit_depth = bit_depth = 0;
+	highest_bit_depth = 0;
 	for (i = 0; i < result->channels; i++) {
 		bit_depth = php_stream_getc(stream); /* Ssiz[i] */
 		bit_depth++;

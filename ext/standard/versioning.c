@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.19.2.1.2.3.2.1 2007/12/31 07:17:15 sebastian Exp $ */
+/* $Id: versioning.c,v 1.19.2.1.2.3.2.2 2008/09/23 15:18:26 nlopess Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -45,7 +45,7 @@ php_canonicalize_version(const char *version)
     p = version;
     q = buf;
     *q++ = lp = *p++;
-    lq = '\0';
+
     while (*p) {
 /*  s/[-_+]/./g;
  *  s/([^\d\.])([^\D\.])/$1.$2/g;
@@ -55,22 +55,22 @@ php_canonicalize_version(const char *version)
 #define isndig(x) (!isdigit(x)&&(x)!='.')
 #define isspecialver(x) ((x)=='-'||(x)=='_'||(x)=='+')
 
-        lq = *(q - 1);
+		lq = *(q - 1);
 		if (isspecialver(*p)) {
 			if (lq != '.') {
-				lq = *q++ = '.';
+				*q++ = '.';
 			}
 		} else if ((isndig(lp) && isdig(*p)) || (isdig(lp) && isndig(*p))) {
 			if (lq != '.') {
 				*q++ = '.';
 			}
-			lq = *q++ = *p;
+			*q++ = *p;
 		} else if (!isalnum(*p)) {
 			if (lq != '.') {
-				lq = *q++ = '.';
+				*q++ = '.';
 			}
 		} else {
-			lq = *q++ = *p;
+			*q++ = *p;
 		}
 		lp = *p++;
     }

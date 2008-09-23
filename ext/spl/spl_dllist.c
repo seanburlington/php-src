@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_dllist.c,v 1.1.2.13 2008/07/06 23:45:55 colder Exp $ */
+/* $Id: spl_dllist.c,v 1.1.2.14 2008/09/23 12:06:01 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -818,6 +818,7 @@ SPL_METHOD(SplDoublyLinkedList, offsetSet)
 		index = spl_offset_convert_to_long(zindex TSRMLS_CC);
 
 		if (index < 0 || index >= intern->llist->count) {
+			zval_ptr_dtor(&value);
 			zend_throw_exception(spl_ce_OutOfRangeException, "Offset invalid or out of range", 0 TSRMLS_CC);
 			return;
 		}
@@ -840,6 +841,7 @@ SPL_METHOD(SplDoublyLinkedList, offsetSet)
 				intern->llist->ctor(element TSRMLS_CC);
 			}
 		} else {
+			zval_ptr_dtor(&value);
 			zend_throw_exception(spl_ce_OutOfRangeException, "Offset invalid", 0 TSRMLS_CC);
 			return;
 		}

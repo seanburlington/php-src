@@ -1,3 +1,16 @@
+2008-09-24  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_3)
+      NEWS:
+      
+      Fixed typo
+
+2008-09-24  Antony Dovgal  <tony@daylessday.org>
+
+    * (PHP_5_2)
+      ext/standard/tests/strings/levenshtein.phpt:
+      fix test
+
 2008-09-23  Felipe Pena  <felipensp@gmail.com>
 
     * (PHP_5_2)
@@ -6573,7 +6586,7 @@
 
     * sapi/litespeed/lsapi_main.c
       sapi/litespeed/lsapilib.c:
-      - Added missing $Id: ChangeLog,v 1.3178 2008/09/24 01:31:52 changelog Exp $ tags and nuked c++ comments
+      - Added missing $Id: ChangeLog,v 1.3179 2008/09/25 01:31:47 changelog Exp $ tags and nuked c++ comments
 
     * (PHP_5_3)
       ext/intl/locale/locale.c

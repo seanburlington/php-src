@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.45 2008/09/13 22:30:55 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.46 2008/09/26 16:29:43 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -439,6 +439,11 @@ int phar_entry_delref(phar_entry_data *idata TSRMLS_DC) /* {{{ */
 
 		if (idata->fp && idata->fp != idata->phar->fp && idata->fp != idata->phar->ufp && idata->fp != idata->internal_file->fp) {
 			php_stream_close(idata->fp);
+		}
+		/* if phar_get_or_create_entry_data returns a sub-directory, we have to free it */
+		if (idata->internal_file->is_temp_dir) {
+			destroy_phar_manifest_entry((void *)idata->internal_file);
+			efree(idata->internal_file);
 		}
 	}
 
@@ -3613,7 +3618,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.45 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.46 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

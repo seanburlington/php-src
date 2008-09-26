@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.19 2008/09/26 04:41:22 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.20 2008/09/26 04:54:08 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -686,6 +686,7 @@ splitted:
 				int save_len;
 
 notfound:
+				efree(entry);
 				save = PHAR_G(cwd);
 				save_len = PHAR_G(cwd_len);
 				/* this file is not in the current directory, use the original path */

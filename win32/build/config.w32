@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.32 2008/09/25 15:00:59 pajoye Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.33 2008/09/26 13:29:11 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -183,6 +183,9 @@ if (PHP_DEBUG == "yes") {
 if (PHP_ZTS == "yes") {
 	ADD_FLAG("CFLAGS", "/D ZTS=1");
 }
+
+DEFINE("PHP_ZTS_ARCHIVE_POSTFIX", PHP_ZTS == "yes" ? '' : "-nts");
+
 
 // we want msvcrt in the PHP DLL
 ADD_FLAG("PHP_LDFLAGS", "/nodefaultlib:libcmt");

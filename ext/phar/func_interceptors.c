@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: func_interceptors.c,v 1.20.2.18 2008/09/13 22:30:55 cellog Exp $ */
+/* $Id: func_interceptors.c,v 1.20.2.19 2008/09/26 04:41:22 cellog Exp $ */
 
 #include "phar_internal.h"
 
@@ -646,6 +646,7 @@ static void phar_file_stat(const char *filename, php_stat_len filename_length, i
 			entry_len = (int) filename_length;
 			if (FAILURE == phar_get_archive(&phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {
 				efree(arch);
+				efree(entry);
 				goto skip_phar;
 			}
 splitted:

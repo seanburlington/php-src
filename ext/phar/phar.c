@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.385 2008/09/26 16:30:10 cellog Exp $ */
+/* $Id: phar.c,v 1.386 2008/09/26 23:35:11 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3561,7 +3561,6 @@ void phar_request_initialize(TSRMLS_D) /* {{{ */
 		PHAR_G(cwd) = NULL;
 		PHAR_G(cwd_len) = 0;
 		PHAR_G(cwd_init) = 0;
-		phar_intercept_functions(TSRMLS_C);
 	}
 }
 /* }}} */
@@ -3618,7 +3617,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.385 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.386 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

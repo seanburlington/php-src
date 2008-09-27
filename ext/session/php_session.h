@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.118 2008/09/17 17:22:06 lbarnaud Exp $ */
+/* $Id: php_session.h,v 1.119 2008/09/27 09:08:41 lbarnaud Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -103,6 +103,7 @@ typedef struct _php_session_rfc1867_progress {
 	zval      key;
 	long      update_step;
 	long      next_update;
+	double    last_update_time;
 	zval      *data;
 	size_t    content_length;
 	zval      *post_bytes_processed;
@@ -166,6 +167,7 @@ typedef struct _php_ps_globals {
 	zstr rfc1867_prefix;
 	zstr rfc1867_name;
 	long rfc1867_freq;
+	double rfc1867_min_freq;
 	php_session_rfc1867_progress *rfc1867_progress;
 } php_ps_globals;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.93 2008/08/14 08:38:37 tony2001 Exp $ */
+/* $Id: document.c,v 1.94 2008/09/28 11:59:54 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -155,7 +155,7 @@ ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_document_savexml, 0, 0, 0)
-	ZEND_ARG_OBJ_INFO(0, node, DOMNode, 0)
+	ZEND_ARG_OBJ_INFO(0, node, DOMNode, 1)
 ZEND_END_ARG_INFO();
 
 static

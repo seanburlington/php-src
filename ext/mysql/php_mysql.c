@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.26 2008/08/06 19:25:03 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.27 2008/09/29 21:18:31 johannes Exp $ */
 
 /* TODO:
  *
@@ -274,7 +274,7 @@ void timeout(int sig);
 							\
 			mysql_result = (MYSQL_RES *) zend_list_find(mysql->active_result_id, &type);	\
 			if (mysql_result && type==le_result) {						\
-				if (mysqli_result_is_unbuffered(mysql_result) && !mysql_eof(mysql_result)) { \
+				if (mysql_result_is_unbuffered(mysql_result) && !mysql_eof(mysql_result)) { \
 					php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Function called without first fetching all rows from a previous unbuffered query");	\
 				}						\
 				zend_list_delete(mysql->active_result_id);	\
@@ -888,7 +888,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 			/* free mysql structure */
 #ifdef MYSQL_USE_MYSQLND
-			mysqli_close(mysql->conn, MYSQLI_CLOSE_DISCONNECTED);
+			mysqlnd_close(mysql->conn, MYSQLND_CLOSE_DISCONNECTED);
 #endif
 			efree(hashed_details);
 			efree(mysql);

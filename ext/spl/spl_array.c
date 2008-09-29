@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.25 2008/09/19 12:48:33 dmitry Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.26 2008/09/29 22:45:27 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1593,7 +1593,7 @@ void spl_array_unserialize_helper(spl_array_object *intern, const unsigned char 
 	++p;
 
 	if (*p!='m') {
-		if (*p!='a') {
+		if (*p!='a' && *p!='O' && *p!='C') {
 			goto outexcept;
 		}
 		intern->ar_flags &= ~SPL_ARRAY_CLONE_MASK;

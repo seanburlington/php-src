@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.47 2008/09/12 14:15:05 lbarnaud Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.48 2008/09/30 13:21:48 rrichards Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -111,6 +111,9 @@ SAFE_MODE_WARNING;
 }
 
 $environment = isset($_ENV) ? $_ENV : array();
+if ((substr(PHP_OS, 0, 3) == "WIN") && empty($environment["SystemRoot"])) {
+  $environment["SystemRoot"] = getenv("SystemRoot");
+}
 
 // Don't ever guess at the PHP executable location.
 // Require the explicit specification.
@@ -609,7 +612,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.47 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.48 $' . "\n";
 					exit(1);
 
 				default:

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.39 2007/12/31 07:20:11 sebastian Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.40 2008/10/01 08:39:49 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1014,7 +1014,15 @@ static zval *to_zval_double(encodeTypePtr type, xmlNodePtr data)
 					Z_DVAL_P(ret) = dval;
 					break;
 				default:
-					soap_error0(E_ERROR, "Encoding: Violation of encoding rules");
+					if (strncasecmp((char*)data->children->content, "NaN", sizeof("NaN")-1) == 0) {
+						ZVAL_DOUBLE(ret, php_get_nan());
+					} else if (strncasecmp((char*)data->children->content, "INF", sizeof("INF")-1) == 0) {
+						ZVAL_DOUBLE(ret, php_get_inf());
+					} else if (strncasecmp((char*)data->children->content, "-INF", sizeof("-INF")-1) == 0) {
+						ZVAL_DOUBLE(ret, -php_get_inf());
+					} else {
+						soap_error0(E_ERROR, "Encoding: Violation of encoding rules");
+					}
 			}
 		} else {
 			soap_error0(E_ERROR, "Encoding: Violation of encoding rules");

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.28 2008/09/15 18:10:38 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.29 2008/10/01 19:46:58 johannes Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1261,10 +1261,12 @@ MYSQLND_METHOD(mysqlnd_conn, close)(MYSQLND * conn, enum_connection_close_type c
 	DBG_ENTER("mysqlnd_conn::close");
 	DBG_INF_FMT("conn=%llu", conn->thread_id);
 
-	MYSQLND_INC_CONN_STATISTIC(&conn->stats, stat);
-	MYSQLND_DEC_CONN_STATISTIC(&conn->stats, STAT_OPENED_CONNECTIONS);
-	if (conn->persistent) {
-		MYSQLND_DEC_CONN_STATISTIC(&conn->stats, STAT_OPENED_PERSISTENT_CONNECTIONS);
+	if (conn->state >= CONN_READY) {
+		MYSQLND_INC_CONN_STATISTIC(&conn->stats, stat);
+		MYSQLND_DEC_CONN_STATISTIC(&conn->stats, STAT_OPENED_CONNECTIONS);
+		if (conn->persistent) {
+			MYSQLND_DEC_CONN_STATISTIC(&conn->stats, STAT_OPENED_PERSISTENT_CONNECTIONS);
+		}
 	}
 
 	/*

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.7 2008/05/07 15:16:27 andrey Exp $ */
+/* $Id: php_mysqlnd.c,v 1.8 2008/10/01 21:35:27 johannes Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"
@@ -107,18 +107,19 @@ PHP_MINFO_FUNCTION(mysqlnd)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "mysqlnd", "enabled");
 	php_info_print_table_row(2, "Version", mysqlnd_get_client_info());
-
-	/* Print client stats */
-	php_info_print_table_header(2, "Client statistics", "");
-	mysqlnd_get_client_stats(&values);
-	mysqlnd_minfo_print_hash(&values);
-	php_info_print_table_row(2, "Collecting statistics", MYSQLND_G(collect_statistics)? "Yes":"No");
-	php_info_print_table_row(2, "Collecting memory statistics", MYSQLND_G(collect_memory_statistics)? "Yes":"No");
-
 	snprintf(buf, sizeof(buf), "%ld", MYSQLND_G(net_cmd_buffer_size));
 	php_info_print_table_row(2, "Command buffer size", buf);
 	snprintf(buf, sizeof(buf), "%ld", MYSQLND_G(net_read_buffer_size));
 	php_info_print_table_row(2, "Read buffer size", buf);
+	php_info_print_table_row(2, "Collecting statistics", MYSQLND_G(collect_statistics)? "Yes":"No");
+	php_info_print_table_row(2, "Collecting memory statistics", MYSQLND_G(collect_memory_statistics)? "Yes":"No");
+	php_info_print_table_end();
+
+	/* Print client stats */
+	php_info_print_table_start();
+	php_info_print_table_header(2, "Client statistics", "");
+	mysqlnd_get_client_stats(&values);
+	mysqlnd_minfo_print_hash(&values);
 
 	zval_dtor(&values);
 	php_info_print_table_end();

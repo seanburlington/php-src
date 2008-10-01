@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.318 2008/08/22 15:51:50 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.319 2008/10/01 07:30:52 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2005,6 +2005,12 @@ ZEND_METHOD(reflection_parameter, __construct)
 	if (Z_TYPE_PP(parameter) == IS_LONG) {
 		position= Z_LVAL_PP(parameter);
 		if (position < 0 || (zend_uint)position >= fptr->common.num_args) {
+			if (fptr->common.fn_flags & ZEND_ACC_CALL_VIA_HANDLER) {
+				if (fptr->type != ZEND_OVERLOADED_FUNCTION) {
+					efree(fptr->common.function_name.v);
+				}
+				efree(fptr);
+			}
 			_DO_THROW("The parameter specified by its offset could not be found");
 			/* returns out of this function */
 		}
@@ -2023,6 +2029,12 @@ ZEND_METHOD(reflection_parameter, __construct)
 			}
 		}
 		if (position == -1) {
+			if (fptr->common.fn_flags & ZEND_ACC_CALL_VIA_HANDLER) {
+				if (fptr->type != ZEND_OVERLOADED_FUNCTION) {
+					efree(fptr->common.function_name.v);
+				}
+				efree(fptr);
+			}
 			_DO_THROW("The parameter specified by its name could not be found");
 			/* returns out of this function */
 		}
@@ -5416,7 +5428,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.318 2008/08/22 15:51:50 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.319 2008/10/01 07:30:52 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

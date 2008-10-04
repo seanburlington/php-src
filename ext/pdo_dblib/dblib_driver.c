@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.15 2007/12/31 07:12:13 sebastian Exp $ */
+/* $Id: dblib_driver.c,v 1.16 2008/10/04 12:44:58 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -249,7 +249,7 @@ cleanup:
 	dbh->driver_data = H;
 
 	if (!ret) {
-		zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC,
+		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC,
 			"SQLSTATE[%s] %s (severity %d)",
 			DBLIB_G(err).sqlstate,
 			DBLIB_G(err).dberrstr,

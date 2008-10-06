@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.17 2008/08/29 11:09:28 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.18 2008/10/06 17:57:32 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4165,20 +4165,18 @@ PHP_FUNCTION(imagepsloadfont)
 /* The function in t1lib which this function uses seem to be buggy...
 PHP_FUNCTION(imagepscopyfont)
 {
-	zval **fnt;
 	int l_ind, type;
 	gd_ps_font *nf_ind, *of_ind;
+	long fnt;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &fnt) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &fnt) == FAILURE) {
+		return;
 	}
 
-	convert_to_long_ex(fnt);
-
-	of_ind = zend_list_find(Z_LVAL_PP(fnt), &type);
+	of_ind = zend_list_find(fnt, &type);
 
 	if (type != le_ps_font) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%ld is not a Type 1 font index", Z_LVAL_PP(fnt));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%ld is not a Type 1 font index", fnt);
 		RETURN_FALSE;
 	}
 

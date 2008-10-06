@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.5 2007/12/31 07:17:09 sebastian Exp $ */
+/* $Id: ibase_query.c,v 1.23.2.1.2.10.2.6 2008/10/06 14:33:34 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1862,16 +1862,17 @@ PHP_FUNCTION(ibase_execute)
 		if (bind_n != expected_n) {
 			php_error_docref(NULL TSRMLS_CC, (bind_n < expected_n) ? E_WARNING : E_NOTICE,
 				"Statement expects %d arguments, %d given", expected_n, bind_n);
+
 			if (bind_n < expected_n) {
 				break;
 			}
+		}
 
-		} else if (bind_n > 0) { /* have variables to bind */
-			args = (zval ***) do_alloca(ZEND_NUM_ARGS() * sizeof(zval **), use_heap);
+		/* have variables to bind */
+		args = (zval ***) do_alloca((expected_n + 1) * sizeof(zval **), use_heap);
 	
-			if (FAILURE == zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args)) {
-				break;
-			}
+		if (FAILURE == zend_get_parameters_array_ex((expected_n + 1), args)) {
+			break;
 		}
 
 		/* Have we used this cursor before and it's still open (exec proc has no cursor) ? */

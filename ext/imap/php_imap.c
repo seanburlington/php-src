@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.18 2008/08/04 21:14:28 jani Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.19 2008/10/06 01:18:54 iliaa Exp $ */
 
 #define IMAP41
 
@@ -2753,7 +2753,7 @@ PHP_FUNCTION(imap_utf7_decode)
 #if PHP_DEBUG
 	/* warn if we computed outlen incorrectly */
 	if (outp - out != outlen) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "outp - out [%d] != outlen [%d]", outp - out, outlen);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "outp - out [%ld] != outlen [%d]", outp - out, outlen);
 	}
 #endif
 
@@ -2870,7 +2870,7 @@ PHP_FUNCTION(imap_utf7_encode)
 #if PHP_DEBUG
 	/* warn if we computed outlen incorrectly */
 	if (outp - out != outlen) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "outp - out [%d] != outlen [%d]", outp - out, outlen);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "outp - out [%ld] != outlen [%d]", outp - out, outlen);
 	}
 #endif
 

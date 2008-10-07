@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22.2.3.2.12 2008/05/07 20:01:56 bjori Exp $ */
+/* $Id: xp_ssl.c,v 1.22.2.3.2.13 2008/10/07 14:35:04 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -417,7 +417,7 @@ static inline int php_openssl_enable_crypto(php_stream *stream,
 				n = SSL_connect(sslsock->ssl_handle);
 				gettimeofday(&tve, &tz);
 
-				timeout -= (tve.tv_sec + tve.tv_usec / 1000000) - (tvs.tv_sec + tvs.tv_usec / 1000000);
+				timeout -= (tve.tv_sec + (float) tve.tv_usec / 1000000) - (tvs.tv_sec + (float) tvs.tv_usec / 1000000);
 				if (timeout < 0) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "SSL: connection timeout");
 					return -1;

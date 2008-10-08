@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.386 2008/10/01 20:31:02 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.387 2008/10/08 23:04:58 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -2877,7 +2877,7 @@ PHP_FUNCTION(pg_free_result)
 	if (Z_LVAL_P(result) == 0) {
 		RETURN_FALSE;
 	}
-	zend_list_delete(Z_LVAL_P(result));
+	zend_list_delete(Z_RESVAL_P(result));
 	RETURN_TRUE;
 }
 /* }}} */

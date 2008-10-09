@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.387 2008/09/30 02:40:37 cellog Exp $ */
+/* $Id: phar.c,v 1.388 2008/10/09 00:51:27 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -838,7 +838,7 @@ static int phar_parse_pharfile(php_stream *fp, char *fname, int fname_len, char 
 				efree(sig);
 			}
 			break;
-#if HAVE_HASH_EXT
+#if PHAR_HASH_OK
 			case PHAR_SIG_SHA512: {
 				unsigned char digest[64];
 
@@ -3108,7 +3108,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		}
 
 		switch(phar->sig_flags) {
-#ifndef HAVE_HASH_EXT
+#ifndef PHAR_HASH_OK
 			case PHAR_SIG_SHA512:
 			case PHAR_SIG_SHA256:
 				if (closeoldfile) {
@@ -3620,7 +3620,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.387 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.388 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

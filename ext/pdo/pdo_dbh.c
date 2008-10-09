@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.152 2008/09/16 23:34:31 johannes Exp $ */
+/* $Id: pdo_dbh.c,v 1.153 2008/10/09 12:59:47 felipe Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1188,8 +1188,7 @@ int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 	if (!dbh || !dbh->methods || !dbh->methods->get_driver_methods) {
 		return 0;
 	}
-	funcs =	dbh->methods->get_driver_methods(dbh,
-			PDO_DBH_DRIVER_METHOD_KIND_DBH TSRMLS_CC);
+	funcs =	dbh->methods->get_driver_methods(dbh, kind TSRMLS_CC);
 	if (!funcs) {
 		return 0;
 	}

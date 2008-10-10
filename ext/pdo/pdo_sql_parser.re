@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.9.2.3 2007/12/31 07:15:43 sebastian Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.9.2.4 2008/10/10 12:10:41 felipe Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -50,15 +50,15 @@ static int scan(Scanner *s)
 	QUESTION	= [?];
 	SPECIALS	= [:?"'];
 	MULTICHAR	= [:?];
-	EOF		= [\000];
+	EOF			= [\000];
 	ANYNOEOF	= [\001-\377];
 	*/
 
 	/*!re2c
-		(["] ([^"])* ["])		{ RET(PDO_PARSER_TEXT); }
-		(['] ([^'])* ['])		{ RET(PDO_PARSER_TEXT); }
+		(["](([\\]ANYNOEOF)|ANYNOEOF\["\\])*["]) { RET(PDO_PARSER_TEXT); }
+		(['](([\\]ANYNOEOF)|ANYNOEOF\['\\])*[']) { RET(PDO_PARSER_TEXT); }
 		MULTICHAR{2,}							{ RET(PDO_PARSER_TEXT); }
-		BINDCHR						{ RET(PDO_PARSER_BIND); }
+		BINDCHR									{ RET(PDO_PARSER_BIND); }
 		QUESTION								{ RET(PDO_PARSER_BIND_POS); }
 		SPECIALS								{ SKIP_ONE(PDO_PARSER_TEXT); }
 		(ANYNOEOF\SPECIALS)+ 					{ RET(PDO_PARSER_TEXT); }

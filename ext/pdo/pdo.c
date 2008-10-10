@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.81 2008/06/27 19:17:29 felipe Exp $ */
+/* $Id: pdo.c,v 1.82 2008/10/10 23:37:51 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,6 +102,10 @@ PHP_FUNCTION(pdo_drivers)
 {
 	HashPosition pos;
 	pdo_driver_t **pdriver;
+
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
+	}
 	
 	array_init(return_value);
 

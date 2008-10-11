@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.11 2008/02/26 00:14:04 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.12 2008/10/11 19:05:30 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -293,10 +293,16 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 								S->param_types[param->paramno] = OIDOID;
 								return 1;
 							} else {
+								int len;
+								
 								SEPARATE_ZVAL_IF_NOT_REF(&param->parameter);
 								Z_TYPE_P(param->parameter) = IS_STRING;
-								Z_STRLEN_P(param->parameter) = php_stream_copy_to_mem(stm,
-										&Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0);
+								
+								if ((len = php_stream_copy_to_mem(stm, &Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0)) > 0) {
+									Z_STRLEN_P(param->parameter) = len;
+								} else {
+									ZVAL_EMPTY_STRING(param->parameter);
+								}
 							}
 						} else {
 							/* expected a stream resource */

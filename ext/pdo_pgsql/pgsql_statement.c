@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.12.2.7.2.6 2008/10/11 19:03:23 felipe Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.12.2.7.2.7 2008/10/12 15:01:12 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -246,6 +246,9 @@ static int pgsql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *
 				break;
 
 			case PDO_PARAM_EVT_ALLOC:
+			case PDO_PARAM_EVT_EXEC_POST:
+			case PDO_PARAM_EVT_FETCH_PRE:
+			case PDO_PARAM_EVT_FETCH_POST:
 				/* work is handled by EVT_NORMALIZE */
 				return 1;
 
@@ -604,6 +607,8 @@ static int pgsql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned 
 			case PDO_PARAM_STR:
 			case PDO_PARAM_STMT:
 			case PDO_PARAM_INPUT_OUTPUT:
+			case PDO_PARAM_ZVAL:
+			default:
 				break;
 		}
 	}

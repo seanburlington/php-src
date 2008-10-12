@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.389 2008/10/12 19:40:29 cellog Exp $ */
+/* $Id: phar.c,v 1.390 2008/10/12 21:09:10 tony2001 Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -2737,7 +2737,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 		}
 		/* after excluding deleted files, calculate manifest size in bytes and number of entries */
 		++new_manifest_count;
-		phar_add_virtual_dirs(phar, entry->filename, entry->filename_len);
+		phar_add_virtual_dirs(phar, entry->filename, entry->filename_len TSRMLS_CC);
 
 		if (entry->is_dir) {
 			/* we use this to calculate API version, 1.1.1 is used for phars with directories */
@@ -3622,7 +3622,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.389 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.390 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

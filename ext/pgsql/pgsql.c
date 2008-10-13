@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.29 2008/10/07 14:35:04 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.30 2008/10/13 13:46:25 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -1983,10 +1983,9 @@ PHP_FUNCTION(pg_fetch_result)
 	if (PQgetisnull(pgsql_result, pgsql_row, field_offset)) {
 		Z_TYPE_P(return_value) = IS_NULL;
 	} else {
-		Z_STRVAL_P(return_value) = PQgetvalue(pgsql_result, pgsql_row, field_offset);
-		Z_STRLEN_P(return_value) = (Z_STRVAL_P(return_value) ? strlen(Z_STRVAL_P(return_value)) : 0);
-		Z_STRVAL_P(return_value) = safe_estrndup(Z_STRVAL_P(return_value),Z_STRLEN_P(return_value));
-		Z_TYPE_P(return_value) = IS_STRING;
+		char *value = PQgetvalue(pgsql_result, pgsql_row, field_offset);
+		int value_len = PQgetlength(pgsql_result, pgsql_row, field_offset);
+		ZVAL_STRINGL(return_value, value, value_len, 1);
 	}
 }
 /* }}} */

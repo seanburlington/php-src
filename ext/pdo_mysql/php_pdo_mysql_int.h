@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.24 2008/07/21 13:05:51 johannes Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.25 2008/10/14 19:00:11 johannes Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -158,6 +158,7 @@ enum {
 	PDO_MYSQL_ATTR_READ_DEFAULT_FILE,
 	PDO_MYSQL_ATTR_READ_DEFAULT_GROUP,
 	PDO_MYSQL_ATTR_MAX_BUFFER_SIZE,
+	PDO_MYSQL_ATTR_COMPRESS,
 #endif
 	PDO_MYSQL_ATTR_DIRECT_QUERY,
 };

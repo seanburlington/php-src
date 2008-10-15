@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.929 2008/08/31 00:19:20 jani Exp $ */
+/* $Id: basic_functions.c,v 1.930 2008/10/15 18:41:18 kalle Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2886,9 +2886,6 @@ ZEND_END_ARG_INFO()
 /* }}} */
 /* {{{ syslog.c */
 #ifdef HAVE_SYSLOG_H
-static
-ZEND_BEGIN_ARG_INFO(arginfo_define_syslog_variables, 0)
-ZEND_END_ARG_INFO()
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_openlog, 0)
@@ -3702,7 +3699,6 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(openlog,															arginfo_openlog)
 	PHP_FE(syslog,															arginfo_syslog)
 	PHP_FE(closelog,														arginfo_closelog)
-	PHP_FE(define_syslog_variables,											arginfo_define_syslog_variables)
 #endif
 
 	/* functions from lcg.c */

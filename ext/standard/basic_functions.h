@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.164 2008/05/24 14:36:16 pajoye Exp $ */
+/* $Id: basic_functions.h,v 1.165 2008/10/15 18:41:18 kalle Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -200,7 +200,6 @@ typedef struct _php_basic_globals {
 	zend_bool mt_rand_is_seeded; /* Whether mt_rand() has been seeded */
     
 	/* syslog.c */
-	int syslog_started;
 	char *syslog_device;
 
 	/* var.c */

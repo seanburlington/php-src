@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.388 2008/10/13 13:41:16 felipe Exp $ */
+/* $Id: pgsql.c,v 1.389 2008/10/15 13:34:13 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -1713,7 +1713,9 @@ static void _php_pgsql_free_params(char **params, int num_params)
 	if (num_params > 0) {
 		int i;
 		for (i = 0; i < num_params; i++) {
-			efree(params[i]);
+			if (params[i]) {
+				efree(params[i]);
+			}
 		}
 		efree(params);
 	}

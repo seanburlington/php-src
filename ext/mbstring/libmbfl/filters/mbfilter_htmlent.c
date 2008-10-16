@@ -120,7 +120,7 @@ int mbfl_filt_conv_html_enc(int c, mbfl_convert_filter *filter)
 		}
 
 		{
-			int *p = tmp + sizeof(tmp);
+			int *p = tmp + sizeof(tmp) / sizeof(tmp[0]);
 
 			CK((*filter->output_function)('#', filter->data));
 
@@ -145,7 +145,7 @@ int mbfl_filt_conv_html_enc(int c, mbfl_convert_filter *filter)
 int mbfl_filt_conv_html_enc_flush(mbfl_convert_filter *filter)
 {
 	filter->status = 0;
-	filter->cache = 0;
+	filter->opaque = NULL;
 	return 0;
 }
 
@@ -158,24 +158,24 @@ static const char html_entity_chars[] = "#0123456789abcdefghijklmnopqrstuvwxyzAB
 void mbfl_filt_conv_html_dec_ctor(mbfl_convert_filter *filter)
 {
 	filter->status = 0;
-	filter->cache = (int)mbfl_malloc(html_enc_buffer_size+1);
+	filter->opaque = mbfl_malloc(html_enc_buffer_size+1);
 }
 	
 void mbfl_filt_conv_html_dec_dtor(mbfl_convert_filter *filter)
 {
 	filter->status = 0;
-	if (filter->cache)
+	if (filter->opaque)
 	{
-		mbfl_free((void*)filter->cache);
+		mbfl_free((void*)filter->opaque);
 	}
-	filter->cache = 0;
+	filter->opaque = NULL;
 }
 
 int mbfl_filt_conv_html_dec(int c, mbfl_convert_filter *filter)
 {
 	int  pos, ent = 0;
 	mbfl_html_entity_entry *entity;
-	char *buffer = (char*)filter->cache;
+	char *buffer = (char*)filter->opaque;
 
 	if (!filter->status) {
 		if (c == '&' ) {
@@ -232,8 +232,7 @@ int mbfl_filt_conv_html_dec(int c, mbfl_convert_filter *filter)
 				mbfl_filt_conv_html_dec_flush(filter);
 				if (c=='&')
 				{
-					filter->status = 1;
-					buffer[0] = '&';
+					buffer[filter->status++] = '&';
 				}
 			}
 		}
@@ -244,17 +243,19 @@ int mbfl_filt_conv_html_dec(int c, mbfl_convert_filter *filter)
 int mbfl_filt_conv_html_dec_flush(mbfl_convert_filter *filter)
 {
 	int status, pos = 0;
-	char *buffer;
+	unsigned char *buffer;
+	int err = 0;
 
-	buffer = (char*)filter->cache;
+	buffer = (unsigned char*)filter->opaque;
 	status = filter->status;
+	filter->status = 0;
 	/* flush fragments */
 	while (status--) {
-		CK((*filter->output_function)(buffer[pos++], filter->data));
+		int e = (*filter->output_function)(buffer[pos++], filter->data);
+		if (e != 0)
+			err = e;
 	}
-	filter->status = 0;
-	/*filter->buffer = 0; of cause NOT*/
-	return 0;
+	return err;
 }
 
 

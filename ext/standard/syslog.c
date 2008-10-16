@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.49.2.3.2.2.2.4 2008/10/15 18:41:57 kalle Exp $ */
+/* $Id: syslog.c,v 1.49.2.3.2.2.2.5 2008/10/16 23:19:13 kalle Exp $ */
 
 #include "php.h"
 
@@ -206,8 +206,6 @@ PHP_FUNCTION(define_syslog_variables)
 	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
-
-	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "define_syslog_variables is deprecated, please use the syslog constants instead");
 
 	if (!BG(syslog_started)) {
 		start_syslog(TSRMLS_C);

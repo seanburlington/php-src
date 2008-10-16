@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.21.2.37.2.8 2008/10/16 15:36:59 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.21.2.37.2.9 2008/10/16 15:49:29 dmitry Exp $ */
 
 #include <time.h>
 
@@ -448,21 +448,21 @@ static xmlNodePtr master_to_xml_int(encodePtr encode, zval *data, int style, xml
 				    zend_binary_strncasecmp(ce->name, ce->name_length, Z_STRVAL_PP(tmp), ce->name_length, ce->name_length) == 0 &&
 				    zend_hash_get_current_key_ex(SOAP_GLOBAL(class_map), &type_name, &type_len, &idx, 0, &pos) == HASH_KEY_IS_STRING) {
 
-				    /* TODO: namespace isn't stored */
-			    	encodePtr enc = NULL;
-			    	if (SOAP_GLOBAL(sdl)) {
-			    		enc = get_encoder(SOAP_GLOBAL(sdl), SOAP_GLOBAL(sdl)->target_ns, type_name);
-				    	if (!enc) {
-					 		enc = find_encoder_by_type_name(SOAP_GLOBAL(sdl), type_name);
-					 	}
-			    	}
-			    	if (enc) {
-			    		if (encode != enc && style == SOAP_LITERAL) {
+					/* TODO: namespace isn't stored */
+					encodePtr enc = NULL;
+					if (SOAP_GLOBAL(sdl)) {
+						enc = get_encoder(SOAP_GLOBAL(sdl), SOAP_GLOBAL(sdl)->target_ns, type_name);
+						if (!enc) {
+							enc = find_encoder_by_type_name(SOAP_GLOBAL(sdl), type_name);
+						}
+					}
+					if (enc) {
+						if (encode != enc && style == SOAP_LITERAL) {
 							add_type = 1;			    			
-			    		}
-			    		encode = enc;
-				 	}
-			        break;
+						}
+						encode = enc;
+					}
+					break;
 				}
 			}
 		}

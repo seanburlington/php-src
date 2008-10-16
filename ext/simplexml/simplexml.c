@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.261 2008/09/11 14:20:30 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.262 2008/10/16 11:42:20 indeyets Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -69,7 +69,7 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC);
 
 /* {{{ _node_as_zval()
  */
-static void _node_as_zval(php_sxe_object *sxe, xmlNodePtr node, zval *value, SXE_ITER itertype, char *name, xmlChar *nsprefix, int isprefix TSRMLS_DC)
+static void _node_as_zval(php_sxe_object *sxe, xmlNodePtr node, zval *value, SXE_ITER itertype, char *name, const xmlChar *nsprefix, int isprefix TSRMLS_DC)
 {
 	php_sxe_object *subnode;
 
@@ -81,7 +81,7 @@ static void _node_as_zval(php_sxe_object *sxe, xmlNodePtr node, zval *value, SXE
 		subnode->iter.name = xmlStrdup((xmlChar *)name);
 	}
 	if (nsprefix && *nsprefix) {
-		subnode->iter.nsprefix = xmlStrdup((xmlChar *)nsprefix);
+		subnode->iter.nsprefix = xmlStrdup(nsprefix);
 		subnode->iter.isprefix = isprefix;
 	}
 
@@ -2644,7 +2644,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.261 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.262 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

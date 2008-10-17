@@ -488,7 +488,9 @@ class PharCommand extends CLICommand
 
 			if (isset($loader)) {
 				$s = "<?php if (!class_exists('PHP_Archive')) {\n?>";
-				$s .= file_get_contents($loader);
+				if (is_file($loader)) {
+					$s .= file_get_contents($loader);
+				}
 				$s .= "<?php\n";
 				$s .= "}\n";
 				$s .= "if (!in_array('phar', stream_get_wrappers())) {\n";
@@ -1550,7 +1552,7 @@ class PharCommand extends CLICommand
 		$use_ext = extension_loaded('phar');
 		$version = array(
 			'PHP Version' => phpversion(),
-			'phar.phar version' => '$Revision: 1.49.2.12 $',
+			'phar.phar version' => '$Revision: 1.49.2.13 $',
 			'Phar EXT version' => $use_ext ? phpversion('phar') : 'Not available',
 			'Phar API version' => Phar::apiVersion(),
 			'Phar-based phar archives' => true,

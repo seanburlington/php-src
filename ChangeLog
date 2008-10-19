@@ -1,3 +1,9 @@
+2008-10-18  Antony Dovgal  <tony@daylessday.org>
+
+    * (PHP_5_2)
+      ext/spl/spl_array.c:
+      revert the patch, it's not needed in this branch
+
 2008-10-17  Antony Dovgal  <tony@daylessday.org>
 
     * ext/spl/spl_array.c:
@@ -8588,7 +8594,7 @@
 
     * sapi/litespeed/lsapi_main.c
       sapi/litespeed/lsapilib.c:
-      - Added missing $Id: ChangeLog,v 1.3202 2008/10/18 01:32:05 changelog Exp $ tags and nuked c++ comments
+      - Added missing $Id: ChangeLog,v 1.3203 2008/10/19 01:32:26 changelog Exp $ tags and nuked c++ comments
 
     * (PHP_5_3)
       ext/intl/locale/locale.c

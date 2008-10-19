@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.152 2008/10/17 22:09:35 tony2001 Exp $ */
+/* $Id: spl_array.c,v 1.153 2008/10/19 17:59:39 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1016,7 +1016,7 @@ SPL_METHOD(Array, __construct)
 	spl_array_object *intern;
 	zval **array;
 	long ar_flags = 0;
-	zend_class_entry *ce_get_iterator = zend_ce_iterator;
+	zend_class_entry *ce_get_iterator = spl_ce_Iterator;
 
 	if (ZEND_NUM_ARGS() == 0) {
 		return; /* nothing to do */
@@ -1046,7 +1046,7 @@ SPL_METHOD(Array, setIteratorClass)
 {
 	zval *object = getThis();
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
-	zend_class_entry *ce_get_iterator = zend_ce_iterator;
+	zend_class_entry *ce_get_iterator = spl_ce_Iterator;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "C", &ce_get_iterator) == FAILURE) {
 		return;

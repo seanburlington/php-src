@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.47 2008/08/14 20:53:00 jani Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.48 2008/10/19 18:07:04 johannes Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -428,7 +428,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.47 $'."\n";
+					echo '$Revision: 1.226.2.37.2.48 $'."\n";
 					exit(1);
 
 				case 'u':
@@ -1551,7 +1551,9 @@ COMMAND $cmd
 			// Stick to basics
 			$wanted_re = str_replace('%e', '\\' . DIRECTORY_SEPARATOR, $wanted_re);
 			$wanted_re = str_replace('%s', '[^\r\n]+', $wanted_re);
+			$wanted_re = str_replace('%S', '[^\r\n]*', $wanted_re);
 			$wanted_re = str_replace('%a', '.+', $wanted_re);
+			$wanted_re = str_replace('%A', '.*', $wanted_re);
 			$wanted_re = str_replace('%w', '\s*', $wanted_re);
 			$wanted_re = str_replace('%i', '[+-]?\d+', $wanted_re);
 			$wanted_re = str_replace('%d', '\d+', $wanted_re);

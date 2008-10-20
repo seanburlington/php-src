@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.173.2.1.2.9.2.5 2008/09/23 15:18:26 nlopess Exp $ */
+/* $Id: rfc1867.c,v 1.173.2.1.2.9.2.6 2008/10/20 17:09:10 lbarnaud Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1283,8 +1283,6 @@ filedone:
 			/* Initialize variables */
 			add_protected_variable(param TSRMLS_CC);
 
-			magic_quotes_gpc = PG(magic_quotes_gpc);
-			PG(magic_quotes_gpc) = 0;
 			/* if param is of form xxx[.*] this will cut it to xxx */
 			if (!is_anonymous) {
 				safe_php_register_variable(param, temp_filename, strlen(temp_filename), NULL, 1 TSRMLS_CC);
@@ -1298,8 +1296,6 @@ filedone:
 			}
 			add_protected_variable(lbuf TSRMLS_CC);
 			register_http_post_files_variable(lbuf, temp_filename, http_post_files, 1 TSRMLS_CC);
-
-			PG(magic_quotes_gpc) = magic_quotes_gpc;
 
 			{
 				zval file_size, error_type;

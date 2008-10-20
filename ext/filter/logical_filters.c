@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.28 2008/03/18 23:32:56 iliaa Exp $ */
+/* $Id: logical_filters.c,v 1.29 2008/10/20 23:23:53 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -533,6 +533,7 @@ static int _php_filter_validate_ipv6(char *str, int str_len TSRMLS_DC) /* {{{ */
 	char *ipv4;
 	char *end;
 	int ip4elm[4];
+	char *s = str;
 
 	if (!memchr(str, ':', str_len)) {
 		return 0;
@@ -572,6 +573,8 @@ static int _php_filter_validate_ipv6(char *str, int str_len TSRMLS_DC) /* {{{ */
 					return 1;
 				}
 				compressed = 1;
+			} else if ((str - 1) == s) {
+				return 0;
 			}				
 		}
 		n = 0;

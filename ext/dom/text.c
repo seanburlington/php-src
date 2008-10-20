@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.23.2.1.2.4.2.6 2008/09/10 15:40:11 rrichards Exp $ */
+/* $Id: text.c,v 1.23.2.1.2.4.2.7 2008/10/20 12:45:47 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -171,19 +171,19 @@ PHP_FUNCTION(dom_text_split_text)
 	if (cur == NULL) {
 		RETURN_FALSE;
 	}
-	length = xmlStrlen(cur);
+	length = xmlUTF8Strlen(cur);
 
 	if (offset > length || offset < 0) {
 		xmlFree(cur);
 		RETURN_FALSE;
 	}
 
-	first = xmlStrndup(cur, offset);
-	second = xmlStrdup(cur + offset);
+	first = xmlUTF8Strndup(cur, offset);
+	second = xmlUTF8Strsub(cur, offset, length - offset);
 	
 	xmlFree(cur);
 
-	xmlNodeSetContentLen(node, first, offset);
+	xmlNodeSetContent(node, first);
 	nnode = xmlNewDocText(node->doc, second);
 	
 	xmlFree(first);

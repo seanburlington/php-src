@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.200 2008/08/21 23:37:39 pajoye Exp $ */
+/* $Id: sockets.c,v 1.201 2008/10/21 23:36:17 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -976,7 +976,7 @@ PHP_FUNCTION(socket_write)
 	zval		*arg1;
 	php_socket	*php_sock;
 	int			retval, str_len;
-	long		length;
+	long		length = 0;
 	char		*str;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|l", &arg1, &str, &str_len, &length) == FAILURE) {
@@ -1270,7 +1270,7 @@ PHP_FUNCTION(socket_connect)
 	struct sockaddr_un	s_un;
 	char				*addr;
 	int					retval, addr_len;
-	long				port;
+	long				port = 0;
 	int					argc = ZEND_NUM_ARGS();
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "rs|l", &arg1, &addr, &addr_len, &port) == FAILURE) {

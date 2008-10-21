@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.394 2008/09/22 15:30:59 rrichards Exp $ */
+/* $Id: gd.c,v 1.395 2008/10/21 23:36:17 lbarnaud Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4144,7 +4144,7 @@ PHP_FUNCTION(imagepstext)
 PHP_FUNCTION(imagepsbbox)
 {
 	zval *fnt;
-	long sz = 0, sp, wd;
+	long sz = 0, sp = 0, wd = 0;
 	char *str;
 	int i, space = 0, add_width = 0, char_width, amount_kern;
 	int cur_x, cur_y, dx, dy;
@@ -4152,7 +4152,7 @@ PHP_FUNCTION(imagepsbbox)
 	int *f_ind;
 	int str_len, per_char = 0;
 	int argc = ZEND_NUM_ARGS();
-	double angle, sin_a = 0, cos_a = 0;
+	double angle = 0, sin_a = 0, cos_a = 0;
 	BBox char_bbox, str_bbox = {0, 0, 0, 0};
 
 	if (argc != 3 && argc != 6) {

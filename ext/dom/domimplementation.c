@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.27 2008/08/14 08:38:37 tony2001 Exp $ */
+/* $Id: domimplementation.c,v 1.28 2008/10/21 23:36:17 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,7 +98,7 @@ PHP_METHOD(domimplementation, createDocumentType)
 	zval *rv = NULL;
 	xmlDtd *doctype;
 	int ret, name_len = 0, publicid_len = 0, systemid_len = 0;
-	char *name, *publicid, *systemid;
+	char *name = NULL, *publicid = NULL, *systemid = NULL;
 	xmlChar *pch1 = NULL, *pch2 = NULL, *localname = NULL;
 	xmlURIPtr uri;
 
@@ -161,7 +161,7 @@ PHP_METHOD(domimplementation, createDocument)
 	xmlDtdPtr doctype = NULL;
 	xmlNsPtr nsptr = NULL;
 	int ret, uri_len = 0, name_len = 0, errorcode = 0;
-	char *uri, *name;
+	char *uri = NULL, *name = NULL;
 	char *prefix = NULL, *localname = NULL;
 	dom_object *doctobj;
 

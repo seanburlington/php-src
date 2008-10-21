@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.263 2008/10/20 19:28:36 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.264 2008/10/21 23:36:17 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1546,7 +1546,7 @@ SXE_METHOD(children)
 {
 	php_sxe_object *sxe;
 	char           *nsprefix = NULL;
-	int             nsprefix_len;
+	int             nsprefix_len = 0;
 	xmlNodePtr      node;
 	zend_bool       isprefix = 0;
 
@@ -1595,7 +1595,7 @@ SXE_METHOD(attributes)
 {
 	php_sxe_object *sxe;
 	char           *nsprefix = NULL;
-	int             nsprefix_len;
+	int             nsprefix_len = 0;
 	xmlNodePtr      node;
 	zend_bool       isprefix = 0;
 
@@ -2644,7 +2644,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.263 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.264 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

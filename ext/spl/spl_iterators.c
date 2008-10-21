@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.15 2008/09/22 13:09:09 felipe Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.30.2.28.2.16 2008/10/21 22:08:20 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1287,8 +1287,8 @@ static spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAMETERS, z
 		}
 		case DIT_IteratorIterator: {
 			zend_class_entry **pce_cast;
-			char * class_name;
-			int class_name_len;
+			char * class_name = NULL;
+			int class_name_len = 0;
 
 			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|s", &zobject, ce_inner, &class_name, &class_name_len) == FAILURE) {
 				return NULL;

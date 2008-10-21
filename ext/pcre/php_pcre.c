@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.24 2008/09/23 15:18:26 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.25 2008/10/21 22:08:06 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1286,11 +1286,11 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, int is_callable_repl
 				   **replace,
 				   **subject,
 				   **subject_entry,
-				   **zcount;
+				   **zcount = NULL;
 	char			*result;
 	int				 result_len;
 	int				 limit_val = -1;
-	long			limit;
+	long			limit = -1;
 	char			*string_key;
 	ulong			 num_key;
 	char			*callback_name;
@@ -1607,7 +1607,7 @@ static PHP_FUNCTION(preg_quote)
 	int		 in_str_len;
 	char	*in_str;		/* Input string argument */
 	char	*in_str_end;    /* End of the input string */
-	int		 delim_len;
+	int		 delim_len = 0;
 	char	*delim = NULL;	/* Additional delimiter argument */
 	char	*out_str,		/* Output string with quoted characters */
 		 	*p,				/* Iterator for input string */

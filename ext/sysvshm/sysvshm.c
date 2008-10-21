@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.4 2008/07/01 15:45:54 felipe Exp $ */
+/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.5 2008/10/21 23:39:15 lbarnaud Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -145,8 +145,8 @@ PHP_MINIT_FUNCTION(sysvshm)
    Creates or open a shared memory segment */
 PHP_FUNCTION(shm_attach)
 {
-	long arg_key, arg_size, arg_flag;
-	long shm_size, shm_flag;
+	long arg_key, arg_size, arg_flag = 0;
+	long shm_size = 0, shm_flag;
 	sysvshm_shm *shm_list_ptr;
 	char *shm_ptr;
 	sysvshm_chunk_head *chunk_ptr;

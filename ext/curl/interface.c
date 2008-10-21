@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.12 2008/07/29 10:42:44 tony2001 Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.13 2008/10/21 23:39:14 lbarnaud Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1090,7 +1090,7 @@ PHP_FUNCTION(curl_init)
 	php_curl    *ch;
 	CURL        *cp;
 	char	    *url = NULL;
-	int	     url_len;
+	int	     url_len = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &url, &url_len) == FAILURE) {
 		return;
@@ -1727,7 +1727,7 @@ PHP_FUNCTION(curl_getinfo)
 	zval        *zid;
 	php_curl    *ch;
 	int          argc = ZEND_NUM_ARGS();
-	long         option;
+	long         option = 0;
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "r|l", &zid, &option) == FAILURE) {
 		return;

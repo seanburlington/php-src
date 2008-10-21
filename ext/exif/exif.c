@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.20.2.8 2008/08/03 12:11:07 jani Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.20.2.9 2008/10/21 23:39:15 lbarnaud Exp $ */
 
 /*  ToDos
  *
@@ -142,7 +142,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.8 2008/08/03 12:11:07 jani Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.9 2008/10/21 23:39:15 lbarnaud Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3908,8 +3908,8 @@ static int exif_read_file(image_info_type *ImageInfo, char *FileName, int read_t
    Reads header data from the JPEG/TIFF image filename and optionally reads the internal thumbnails */
 PHP_FUNCTION(exif_read_data)
 {
-	char *p_name, *p_sections_needed;
-	int p_name_len, p_sections_needed_len;
+	char *p_name, *p_sections_needed = NULL;
+	int p_name_len, p_sections_needed_len = 0;
 	zend_bool sub_arrays=0, read_thumbnail=0, read_all=0;
 
 	int i, ac = ZEND_NUM_ARGS(), ret, sections_needed=0;

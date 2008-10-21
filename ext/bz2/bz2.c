@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.3.2.12.2.6 2008/07/23 11:25:14 tony2001 Exp $ */
+/* $Id: bz2.c,v 1.14.2.3.2.12.2.7 2008/10/21 23:39:14 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -482,8 +482,8 @@ static PHP_FUNCTION(bzerror)
 static PHP_FUNCTION(bzcompress)
 {
 	char             *source;          /* Source data to compress */
-	long              zblock_size;     /* Optional block size to use */
-	long              zwork_factor;    /* Optional work factor to use */
+	long              zblock_size = 0; /* Optional block size to use */
+	long              zwork_factor = 0;/* Optional work factor to use */
 	char             *dest = NULL;     /* Destination to place the compressed data into */
 	int               error,           /* Error Container */
 					  block_size  = 4, /* Block size for compression algorithm */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.62.2.2.2.8.2.3 2008/06/24 16:01:32 felipe Exp $ */
+/* $Id: bcmath.c,v 1.62.2.2.2.8.2.4 2008/10/21 23:39:14 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -215,7 +215,7 @@ static void php_str2num(bc_num *num, char *str TSRMLS_DC)
 PHP_FUNCTION(bcadd)
 {
 	char *left, *right;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second, result;
 	int left_len, right_len;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
@@ -255,7 +255,7 @@ PHP_FUNCTION(bcsub)
 {
 	char *left, *right;
 	int left_len, right_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second, result;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 
@@ -294,7 +294,7 @@ PHP_FUNCTION(bcmul)
 {
 	char *left, *right;
 	int left_len, right_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second, result;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 
@@ -333,7 +333,7 @@ PHP_FUNCTION(bcdiv)
 {
 	char *left, *right;
 	int left_len, right_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second, result;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 
@@ -457,7 +457,7 @@ PHP_FUNCTION(bcpow)
 {
 	char *left, *right;
 	int left_len, right_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second, result;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 
@@ -496,7 +496,7 @@ PHP_FUNCTION(bcsqrt)
 {
 	char *left;
 	int left_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num result;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 
@@ -533,7 +533,7 @@ PHP_FUNCTION(bccomp)
 {
 	char *left, *right;
 	int left_len, right_len;
-	long scale_param;
+	long scale_param = 0;
 	bc_num first, second;
 	int scale = BCG(bc_precision), argc = ZEND_NUM_ARGS();
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: assert.c,v 1.77 2008/07/23 19:33:58 felipe Exp $ */
+/* $Id: assert.c,v 1.78 2008/10/21 22:06:48 lbarnaud Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -262,7 +262,7 @@ PHP_FUNCTION(assert)
    Set/get the various assert flags */
 PHP_FUNCTION(assert_options)
 {
-	zval **value;
+	zval **value = NULL;
 	long what;
 	int oldint;
 	int ac = ZEND_NUM_ARGS();

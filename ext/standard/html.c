@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.135 2008/08/18 03:26:06 moriyoshi Exp $ */
+/* $Id: html.c,v 1.136 2008/10/21 22:06:48 lbarnaud Exp $ */
 
 /*
  * HTML entity resources:
@@ -1418,7 +1418,7 @@ PHP_FUNCTION(html_entity_decode)
 {
 	zstr str;
 	char *hint_charset = NULL;
-	int str_len, hint_charset_len, len;
+	int str_len, hint_charset_len = 0, len;
 	char *str_utf8;
 	int str_utf8_len;
 	zend_uchar type;

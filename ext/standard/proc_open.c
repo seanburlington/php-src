@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.64 2008/08/21 11:28:09 dmitry Exp $ */
+/* $Id: proc_open.c,v 1.65 2008/10/21 22:06:48 lbarnaud Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -432,7 +432,7 @@ PHP_FUNCTION(proc_open)
 {
 	zval **ppcommand, **ppcwd = NULL;
 	char *command, *cwd=NULL;
-	int command_len, cwd_len;
+	int command_len, cwd_len = 0;
 	zval *descriptorspec;
 	zval *pipes;
 	zval *environment = NULL;

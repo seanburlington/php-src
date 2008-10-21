@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.123 2008/10/02 08:46:04 tony2001 Exp $ */
+/* $Id: streamsfuncs.c,v 1.124 2008/10/21 22:06:48 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1427,7 +1427,7 @@ PHP_FUNCTION(stream_set_blocking)
 PHP_FUNCTION(stream_set_timeout)
 {
 	zval *socket;
-	long seconds, microseconds;
+	long seconds, microseconds = 0;
 	struct timeval t;
 	php_stream *stream;
 	int argc = ZEND_NUM_ARGS();
@@ -1489,7 +1489,7 @@ PHP_FUNCTION(stream_set_write_buffer)
    Enable or disable a specific kind of crypto on the stream */
 PHP_FUNCTION(stream_socket_enable_crypto)
 {
-	long cryptokind;
+	long cryptokind = 0;
 	zval *zstream, *zsessstream = NULL;
 	php_stream *stream, *sessstream = NULL;
 	zend_bool enable;

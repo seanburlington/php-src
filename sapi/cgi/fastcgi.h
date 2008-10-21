@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.h,v 1.2.2.4.2.5.2.3 2008/08/26 09:56:08 dmitry Exp $ */
+/* $Id: fastcgi.h,v 1.2.2.4.2.5.2.4 2008/10/21 03:19:28 lbarnaud Exp $ */
 
 /* FastCGI protocol */
 
@@ -132,6 +132,10 @@ int fcgi_flush(fcgi_request *req, int close);
 #ifdef PHP_WIN32
 void fcgi_impersonate(void);
 #endif
+
+void fcgi_set_mgmt_var(const char * name, size_t name_len, const char * value, size_t value_len);
+void fcgi_free_mgmt_var_cb(void * ptr);
+
 /*
  * Local variables:
  * tab-width: 4

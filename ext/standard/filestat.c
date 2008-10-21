@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.136.2.8.2.14.2.7 2008/08/07 09:25:33 lbarnaud Exp $ */
+/* $Id: filestat.c,v 1.136.2.8.2.14.2.8 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -741,7 +741,7 @@ PHP_FUNCTION(clearstatcache)
 {
 	zend_bool  clear_realpath_cache = 0;
 	char      *filename             = NULL;
-	int        filename_len;
+	int        filename_len         = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|bs", &clear_realpath_cache, &filename, &filename_len) == FAILURE) {
 		return;

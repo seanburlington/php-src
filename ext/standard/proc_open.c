@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.36.2.1.2.17.2.5 2008/08/21 11:27:57 dmitry Exp $ */
+/* $Id: proc_open.c,v 1.36.2.1.2.17.2.6 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -466,7 +466,7 @@ struct php_proc_open_descriptor_item {
 PHP_FUNCTION(proc_open)
 {
 	char *command, *cwd=NULL;
-	int command_len, cwd_len;
+	int command_len, cwd_len = 0;
 	zval *descriptorspec;
 	zval *pipes;
 	zval *environment = NULL;

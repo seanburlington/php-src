@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.131.2.2.2.6.2.8 2008/05/08 04:23:26 mattwil Exp $ */
+/* $Id: math.c,v 1.131.2.2.2.6.2.9 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1040,7 +1040,7 @@ PHPAPI char *_php_math_number_format(double d, int dec, char dec_point, char tho
 PHP_FUNCTION(number_format)
 {
 	double num;
-	long dec;
+	long dec = 0;
 	char *thousand_sep = NULL, *dec_point = NULL;
 	char thousand_sep_chr = ',', dec_point_chr = '.';
 	int thousand_sep_len = 0, dec_point_len = 0;

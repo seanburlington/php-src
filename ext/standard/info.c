@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.12 2008/10/02 08:46:16 tony2001 Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.13 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1001,15 +1001,10 @@ void register_phpinfo_constants(INIT_FUNC_ARGS)
    Output a page of useful information about PHP and the current request */
 PHP_FUNCTION(phpinfo)
 {
-	int argc = ZEND_NUM_ARGS();
-	long flag;
+	long flag = PHP_INFO_ALL;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "|l", &flag) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &flag) == FAILURE) {
 		return;
-	}
-
-	if(!argc) {
-		flag = PHP_INFO_ALL;
 	}
 
 	/* Andale!  Andale!  Yee-Hah! */
@@ -1052,16 +1047,11 @@ PHP_FUNCTION(phpversion)
    Prints the list of people who've contributed to the PHP project */
 PHP_FUNCTION(phpcredits)
 {
-	int argc = ZEND_NUM_ARGS();
-	long flag;
+	long flag = PHP_CREDITS_ALL;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "|l", &flag) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &flag) == FAILURE) {
 		return;
 	}
-
-	if(!argc) {
-		flag = PHP_CREDITS_ALL;
-	} 
 
 	php_print_credits(flag TSRMLS_CC);
 	RETURN_TRUE;
@@ -1164,7 +1154,7 @@ PHP_FUNCTION(php_sapi_name)
 PHP_FUNCTION(php_uname)
 {
 	char *mode = "a";
-	int modelen;
+	int modelen = sizeof("a")-1;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &mode, &modelen) == FAILURE) {
 		return;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.30.2.2.2.3.2.8 2008/08/02 04:46:07 felipe Exp $ */
+/* $Id: type.c,v 1.30.2.2.2.3.2.9 2008/10/21 22:08:38 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -356,7 +356,7 @@ PHP_FUNCTION(is_scalar)
    Returns true if var is callable. */
 PHP_FUNCTION(is_callable)
 {
-	zval *var, **callable_name;
+	zval *var, **callable_name = NULL;
 	char *name;
 	zend_bool retval;
 	zend_bool syntax_only = 0;

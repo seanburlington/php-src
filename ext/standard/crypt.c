@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crypt.c,v 1.62.2.1.2.6.2.4 2008/08/19 15:14:46 tony2001 Exp $ */
+/* $Id: crypt.c,v 1.62.2.1.2.6.2.5 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include <stdlib.h>
 
@@ -136,7 +136,7 @@ PHP_FUNCTION(crypt)
 {
 	char salt[PHP_MAX_SALT_LEN + 1];
 	char *str, *salt_in = NULL;
-	int str_len, salt_in_len;
+	int str_len, salt_in_len = 0;
 
 	salt[0] = salt[PHP_MAX_SALT_LEN] = '\0';
 

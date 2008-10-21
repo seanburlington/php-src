@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.85.2.2.2.3.2.9 2008/08/29 14:14:09 tony2001 Exp $ */
+/* $Id: browscap.c,v 1.85.2.2.2.3.2.10 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_browscap.h"
@@ -326,7 +326,7 @@ static int browser_reg_compare(zval **browser TSRMLS_DC, int num_args, va_list a
 PHP_FUNCTION(get_browser)
 {
 	char *agent_name = NULL;
-	int agent_name_len;
+	int agent_name_len = 0;
 	zend_bool return_array = 0;
 	zval **agent, **z_agent_name;
 	zval *found_browser_entry, *tmp_copy;

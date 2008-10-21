@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.19.2.1.2.3.2.2 2008/09/23 15:18:26 nlopess Exp $ */
+/* $Id: versioning.c,v 1.19.2.1.2.3.2.3 2008/10/21 22:08:38 lbarnaud Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -210,8 +210,8 @@ php_version_compare(const char *orig_ver1, const char *orig_ver2)
 
 PHP_FUNCTION(version_compare)
 {
-	char *v1, *v2, *op;
-	int v1_len, v2_len, op_len;
+	char *v1, *v2, *op = NULL;
+	int v1_len, v2_len, op_len = 0;
 	int compare, argc;
 
 	argc = ZEND_NUM_ARGS();

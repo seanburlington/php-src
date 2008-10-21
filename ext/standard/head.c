@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.84.2.1.2.7.2.4 2008/06/10 08:14:52 tony2001 Exp $ */
+/* $Id: head.c,v 1.84.2.1.2.7.2.5 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -197,7 +197,7 @@ PHP_FUNCTION(setrawcookie)
    Returns true if headers have already been sent, false otherwise */
 PHP_FUNCTION(headers_sent)
 {
-	zval *arg1, *arg2;
+	zval *arg1 = NULL, *arg2 = NULL;
 	char *file="";
 	int line=0;
 

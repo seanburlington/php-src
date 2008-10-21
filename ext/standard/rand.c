@@ -23,7 +23,7 @@
    |                     Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.70.2.1.2.2.2.3 2008/10/01 11:03:15 scottmac Exp $ */
+/* $Id: rand.c,v 1.70.2.1.2.2.2.4 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include <stdlib.h>
 
@@ -230,7 +230,7 @@ PHPAPI php_uint32 php_mt_rand(TSRMLS_D)
    Seeds random number generator */
 PHP_FUNCTION(srand)
 {
-	long seed;
+	long seed = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &seed) == FAILURE)
 		return;
@@ -246,7 +246,7 @@ PHP_FUNCTION(srand)
    Seeds Mersenne Twister random number generator */
 PHP_FUNCTION(mt_srand)
 {
-	long seed;
+	long seed = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &seed) == FAILURE) 
 		return;

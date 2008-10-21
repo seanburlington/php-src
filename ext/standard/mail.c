@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.87.2.1.2.7.2.4 2008/10/03 13:32:41 mkoppanen Exp $ */
+/* $Id: mail.c,v 1.87.2.1.2.7.2.5 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -95,8 +95,8 @@ PHP_FUNCTION(mail)
 {
 	char *to=NULL, *message=NULL, *headers=NULL;
 	char *subject=NULL, *extra_cmd=NULL;
-	int to_len, message_len, headers_len;
-	int subject_len, extra_cmd_len, i;
+	int to_len, message_len, headers_len = 0;
+	int subject_len, extra_cmd_len = 0, i;
 	char *force_extra_parameters = INI_STR("mail.force_extra_parameters");
 	char *to_r, *subject_r;
 	char *p, *e;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.111.2.2.2.14.2.11 2008/08/18 03:26:21 moriyoshi Exp $ */
+/* $Id: html.c,v 1.111.2.2.2.14.2.12 2008/10/21 22:08:37 lbarnaud Exp $ */
 
 /*
  * HTML entity resources:
@@ -1371,7 +1371,7 @@ done:
 PHP_FUNCTION(html_entity_decode)
 {
 	char *str, *hint_charset = NULL;
-	int str_len, hint_charset_len, len;
+	int str_len, hint_charset_len = 0, len;
 	long quote_style = ENT_COMPAT;
 	char *replaced;
 

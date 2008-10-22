@@ -1,19 +1,17 @@
-dnl $Id: config.m4,v 1.14.2.5.2.6.2.4 2008/10/10 20:05:05 stas Exp $
+dnl $Id: config.m4,v 1.14.2.5.2.6.2.5 2008/10/22 19:29:24 stas Exp $
 dnl config.m4 for extension pdo_oci
 dnl vim:et:sw=2:ts=2:
 
-SUPPORTED_VERS="9 10 11"
+SUPPORTED_LIB_VERS="9.0 10.1 11.1"  # This caters for all Oracle 9.x, 10.x and 11.1 installs
 AC_DEFUN([AC_PDO_OCI_VERSION],[
   AC_MSG_CHECKING([Oracle version])
-  for OCI_VER in $SUPPORTED_VERS; do
-          if test -f $PDO_OCI_DIR/lib/libclntsh.$SHLIB_SUFFIX_NAME.$OCI_VER.*; then
-            PDO_OCI_VERSION="$OCI_VER.x"
-          fi
+  for OCI_VER in $SUPPORTED_LIB_VERS; do
+    if test -f $PDO_OCI_DIR/lib/libclntsh.$SHLIB_SUFFIX_NAME.$OCI_VER; then
+      PDO_OCI_VERSION="$OCI_VER"
+    fi
   done
-  if test -z "$PDO_OCI_VERSION" ;then
-    { { echo "$as_me:$LINENO: error: Oracle-OCI needed libraries not found under $PDO_OCI_DIR" >&5
-        echo "$as_me: error: Oracle-OCI needed libraries not found under $PDO_OCI_DIR" >&2;}
-   { (exit 1); exit 1; }; }
+  if test -z "$PDO_OCI_VERSION"; then
+    AC_MSG_ERROR([Oracle required OCI8 libraries not found under $PDO_OCI_DIR])
   fi
   AC_MSG_RESULT($PDO_OCI_VERSION)
 ])                                                                                                                                                                
@@ -37,7 +35,7 @@ AC_DEFUN([AC_PDO_OCI_CHECK_LIB_DIR],[
   elif test -d "$PDO_OCI_DIR/lib" && test -d "$PDO_OCI_DIR/lib32"; then
     PDO_OCI_LIB_DIR=$TMP_PDO_OCI_LIB_DIR
   else
-    AC_MSG_ERROR([Oracle (OCI8) required libraries not found])
+    AC_MSG_ERROR([Oracle required OCI8 libraries not found])
   fi
   AC_MSG_RESULT($PDO_OCI_LIB_DIR)
 ])
@@ -134,12 +132,12 @@ You need to tell me where to find your Oracle Instant Client SDK, or set ORACLE_
   fi
 
   case $PDO_OCI_VERSION in
-    9.x|10.x|11.x)
+    9.0|10.1|10.2|11.1)
       PHP_ADD_LIBRARY(clntsh, 1, PDO_OCI_SHARED_LIBADD)
       ;;
 
     *)
-      AC_MSG_ERROR(Unsupported Oracle version! $PDO_OCI_VERSION)
+      AC_MSG_ERROR(Unsupported Oracle version $PDO_OCI_VERSION)
       ;;
   esac
 

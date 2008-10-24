@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.52 2008/07/20 14:29:29 felipe Exp $ */
+/* $Id: php_functions.c,v 1.53 2008/10/24 16:02:16 felipe Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
@@ -360,48 +360,39 @@ PHP_MINFO_FUNCTION(apache)
 }
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2filter_lookup_uri, 0, 0, 1)
 	ZEND_ARG_INFO(0, filename)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2filter_virtual, 0, 0, 1)
 	ZEND_ARG_INFO(0, uri)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_apache2filter_getallheaders, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_apache2filter_response_headers, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2filter_note, 0, 0, 1)
 	ZEND_ARG_INFO(0, note_name)
 	ZEND_ARG_INFO(0, note_value)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2filter_setenv, 0, 0, 2)
 	ZEND_ARG_INFO(0, variable)
 	ZEND_ARG_INFO(0, value)
 	ZEND_ARG_INFO(0, walk_to_top)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_apache2filter_getenv, 0, 0, 1)
 	ZEND_ARG_INFO(0, variable)
 	ZEND_ARG_INFO(0, walk_to_top)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_apache2filter_get_version, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_apache2filter_get_modules, 0)
 ZEND_END_ARG_INFO()
 /* }}} */

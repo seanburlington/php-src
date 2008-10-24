@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.18.2.12 2008/08/20 21:26:04 lstrojny Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.18.2.13 2008/10/24 10:28:29 felipe Exp $ */
 
 /* {{{ includes
 */
@@ -410,7 +410,7 @@ PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC) /* {{{ */
 			php_printf("\n%*c", level - 1, ' ');
 		}
 		PUTS ("array (\n");
-		zend_hash_apply_with_arguments(myht TSRMLS_CC, (apply_func_args_t) php_array_element_export, 1, level, (Z_TYPE_PP(struc) == IS_ARRAY ? 0 : 1));
+		zend_hash_apply_with_arguments(myht TSRMLS_CC, (apply_func_args_t) php_array_element_export, 1, level, 0);
 		if (level > 1) {
 			php_printf("%*c", level - 1, ' ');
 		}

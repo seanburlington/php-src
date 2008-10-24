@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.55 2008/10/05 01:40:02 lbarnaud Exp $ */
+/* $Id: user_filters.c,v 1.56 2008/10/24 14:34:16 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -59,7 +59,6 @@ static PHP_FUNCTION(user_filter_nop)
 }
 /* }}} */
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_filter, 0)
 	ZEND_ARG_INFO(0, in)
 	ZEND_ARG_INFO(0, out)
@@ -67,11 +66,9 @@ ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_filter, 0)
 	ZEND_ARG_INFO(0, closing)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_onCreate, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_onClose, 0)
 ZEND_END_ARG_INFO()
 

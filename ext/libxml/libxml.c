@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.69 2008/07/22 10:29:14 rrichards Exp $ */
+/* $Id: libxml.c,v 1.70 2008/10/24 14:34:14 felipe Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -87,25 +87,20 @@ static PHP_MINFO_FUNCTION(libxml);
 /* }}} */
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO(arginfo_libxml_set_streams_context, 0)
 	ZEND_ARG_INFO(0, context)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_libxml_use_internal_errors, 0)
 	ZEND_ARG_INFO(0, use_errors)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_libxml_get_last_error, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_libxml_get_errors, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_libxml_clear_errors, 0)
 ZEND_END_ARG_INFO()
 

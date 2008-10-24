@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.9 2008/08/03 19:07:21 colder Exp $ */
+/* $Id: spl_heap.c,v 1.10 2008/10/24 14:34:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1126,24 +1126,20 @@ zend_object_iterator *spl_pqueue_get_iterator(zend_class_entry *ce, zval *object
 }
 /* }}} */
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_heap_insert, 0)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_heap_compare, 0)
 	ZEND_ARG_INFO(0, a)
 	ZEND_ARG_INFO(0, b)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_pqueue_insert, 0)
 	ZEND_ARG_INFO(0, value)
 	ZEND_ARG_INFO(0, priority)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_pqueue_setflags, 0)
 	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO()

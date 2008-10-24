@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cdatasection.c,v 1.11.2.1.2.1.2.6 2008/09/10 15:40:11 rrichards Exp $ */
+/* $Id: cdatasection.c,v 1.11.2.1.2.1.2.7 2008/10/24 14:35:33 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,6 @@
 
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_cdatasection_construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO();

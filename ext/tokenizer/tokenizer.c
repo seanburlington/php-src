@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.9 2008/07/26 15:30:28 dmitry Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.5.2.7.2.10 2008/10/24 14:35:39 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,12 +36,10 @@
 #define zendleng LANG_SCNG(yy_leng)
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_token_get_all, 0, 0, 1)
 	ZEND_ARG_INFO(0, source)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_token_name, 0, 0, 1)
 	ZEND_ARG_INFO(0, token)
 ZEND_END_ARG_INFO()

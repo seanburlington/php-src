@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.51.2.3.2.2.2.3 2008/06/29 12:40:22 felipe Exp $ */
+/* $Id: sysvsem.c,v 1.51.2.3.2.2.2.4 2008/10/24 14:35:39 felipe Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -57,7 +57,6 @@ union semun {
 #endif
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sem_get, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, max_acquire)
@@ -65,17 +64,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_sem_get, 0, 0, 1)
 	ZEND_ARG_INFO(0, auto_release)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sem_acquire, 0, 0, 1)
 	ZEND_ARG_INFO(0, sem_identifier)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sem_release, 0, 0, 1)
 	ZEND_ARG_INFO(0, sem_identifier)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sem_remove, 0, 0, 1)
 	ZEND_ARG_INFO(0, sem_identifier)
 ZEND_END_ARG_INFO()

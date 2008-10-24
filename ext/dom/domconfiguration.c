@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.5.2.1.2.1.2.5 2008/09/22 15:09:46 rrichards Exp $ */
+/* $Id: domconfiguration.c,v 1.5.2.1.2.1.2.6 2008/10/24 14:35:33 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,18 +28,15 @@
 #include "php_dom.h"
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_set_parameter, 0, 0, 2)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_get_parameter, 0, 0, 0)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_configuration_can_set_parameter, 0, 0, 0)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_INFO(0, value)

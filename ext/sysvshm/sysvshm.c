@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.5 2008/10/21 23:39:15 lbarnaud Exp $ */
+/* $Id: sysvshm.c,v 1.70.2.2.2.5.2.6 2008/10/24 14:35:39 felipe Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -40,37 +40,31 @@
 #include "php_ini.h"
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_attach, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, memsize)
 	ZEND_ARG_INFO(0, perm)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_detach, 0, 0, 1)
 	ZEND_ARG_INFO(0, shm_identifier)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_remove, 0, 0, 1)
 	ZEND_ARG_INFO(0, shm_identifier)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_put_var, 0, 0, 3)
 	ZEND_ARG_INFO(0, shm_identifier)
 	ZEND_ARG_INFO(0, variable_key)
 	ZEND_ARG_INFO(0, variable)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_get_var, 0, 0, 2)
 	ZEND_ARG_INFO(0, id)
 	ZEND_ARG_INFO(0, variable_key)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shm_remove_var, 0, 0, 2)
 	ZEND_ARG_INFO(0, id)
 	ZEND_ARG_INFO(0, variable_key)

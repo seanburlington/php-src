@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.12.2.1.2.2.2.5 2008/08/14 08:39:04 tony2001 Exp $ */
+/* $Id: entityreference.c,v 1.12.2.1.2.2.2.6 2008/10/24 14:35:33 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,7 +28,6 @@
 #include "php_dom.h"
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_entityreference_construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO();

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.289 2008/10/24 14:34:15 felipe Exp $ */
+/* $Id: phar_object.c,v 1.290 2008/10/26 05:49:24 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -4583,6 +4583,15 @@ PHP_METHOD(PharFileInfo, getMetadata)
 	PHAR_ENTRY_OBJECT();
 
 	if (entry_obj->ent.entry->metadata) {
+		if (entry_obj->ent.entry->is_persistent) {
+			zval *ret;
+			char *buf = estrndup((char *) entry_obj->ent.entry->metadata, entry_obj->ent.entry->metadata_len);
+			/* assume success, we would have failed before */
+			phar_parse_metadata(&buf, &ret, entry_obj->ent.entry->metadata_len TSRMLS_CC);
+			efree(buf);
+			RETURN_ZVAL(ret, 0, 1);
+			return;
+		}
 		RETURN_ZVAL(entry_obj->ent.entry->metadata, 1, 0);
 	}
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.20.2.6.2.16 2008/08/09 22:01:35 tony2001 Exp $ */
+/* $Id: parse_tz.c,v 1.20.2.6.2.17 2008/10/26 11:27:32 derick Exp $ */
 
 #include "timelib.h"
 
@@ -397,7 +397,7 @@ timelib_sll timelib_get_current_offset(timelib_time *t)
 	switch (t->zone_type) {
 		case TIMELIB_ZONETYPE_ABBR:
 		case TIMELIB_ZONETYPE_OFFSET:
-			return (t->z + t->dst) * 60;
+			return (t->z + t->dst) * -60;
 			
 		case TIMELIB_ZONETYPE_ID:
 			gmt_offset = timelib_get_time_zone_info(t->sse, t->tz_info);

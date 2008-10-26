@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.5.2.41.2.21 2008/10/24 14:35:36 felipe Exp $ */
+/* $Id: openssl.c,v 1.98.2.5.2.41.2.22 2008/10/26 14:35:41 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3439,7 +3439,7 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 		}
 	}
 
-	BIO_reset(infile);
+	(void)BIO_reset(infile);
 
 	/* write the encrypted data */
 	SMIME_write_PKCS7(outfile, p7, infile, flags);
@@ -3528,7 +3528,7 @@ PHP_FUNCTION(openssl_pkcs7_sign)
 		goto clean_exit;
 	}
 
-	BIO_reset(infile);
+	(void)BIO_reset(infile);
 
 	/* tack on extra headers */
 	if (zheaders) {

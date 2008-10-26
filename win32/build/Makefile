@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.50 2008/09/26 13:31:01 pajoye Exp $
+# $Id: Makefile,v 1.51 2008/10/26 00:15:56 pajoye Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -131,13 +131,16 @@ build-dist: $(BUILD_DIR)\deplister.exe
 	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip
 	$(BUILD_DIR)\php.exe -n win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS) $(PHP_EXTRA_DIST_FILES)" "$(PECL_TARGETS) $(PECL_EXTRA_DIST_FILES)" "$(SNAPSHOT_TEMPLATE)"
 	cd $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip .
+	-$(ZIP) -9 -q -r ..\php-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip .
 	cd ..\..
 	cd $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip .
+	-$(ZIP) -9 -q -r ..\pecl-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip .
+	cd ..\..
+	cd $(BUILD_DIR)\php-test-pack-$(PHP_VERSION_STRING)
+	-$(ZIP) -9 -q -r ..\php-test-pack-$(PHP_VERSION_STRING).zip .
 	cd ..\..
 	cd $(BUILD_DIR)
-	-$(ZIP) -9 php-debug-pack-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip *.pdb
+	-$(ZIP) -9 -q php-debug-pack-$(PHP_VERSION_STRING)$(PHP_ZTS_ARCHIVE_POSTFIX)-Win32-$(PHP_COMPILER_SHORT)-$(PHP_ARCHITECTURE).zip *.pdb
 	cd ..\..
 
 dist: all build-dist

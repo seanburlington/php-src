@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.51 2008/10/12 21:09:22 tony2001 Exp $ */
+/* $Id: phar.c,v 1.370.2.52 2008/10/26 05:49:09 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1114,7 +1114,9 @@ static int phar_parse_pharfile(php_stream *fp, char *fname, int fname_len, char 
 		}
 
 		if (entry.is_persistent) {
-			if (phar_parse_metadata(&buffer, &entry.metadata, 0 TSRMLS_CC) == FAILURE) {
+			PHAR_GET_32(buffer, entry.metadata_len);
+			if (!entry.metadata_len) buffer -= 4;
+			if (phar_parse_metadata(&buffer, &entry.metadata, entry.metadata_len TSRMLS_CC) == FAILURE) {
 				pefree(entry.filename, entry.is_persistent);
 				MAPPHAR_FAIL("unable to read file metadata in .phar file \"%s\"");
 			}
@@ -3622,7 +3624,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.51 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.52 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

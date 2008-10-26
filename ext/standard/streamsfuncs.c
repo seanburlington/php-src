@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.23 2008/10/21 22:08:37 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.24 2008/10/26 13:25:06 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -829,12 +829,13 @@ static void user_space_stream_notifier(php_stream_context *context, int notifyco
 		INIT_ZVAL(zvs[i]);
 		ps[i] = &zvs[i];
 		ptps[i] = &ps[i];
+		MAKE_STD_ZVAL(ps[i]);
 	}
 		
 	ZVAL_LONG(ps[0], notifycode);
 	ZVAL_LONG(ps[1], severity);
 	if (xmsg) {
-		ZVAL_STRING(ps[2], xmsg, 0);
+		ZVAL_STRING(ps[2], xmsg, 1);
 	} else {
 		ZVAL_NULL(ps[2]);
 	}
@@ -844,6 +845,9 @@ static void user_space_stream_notifier(php_stream_context *context, int notifyco
 
 	if (FAILURE == call_user_function_ex(EG(function_table), NULL, callback, &retval, 6, ptps, 0, NULL TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to call user notifier");
+	}
+	for (i = 0; i < 6; i++) {
+		zval_ptr_dtor(&ps[i]);
 	}
 	if (retval) {
 		zval_ptr_dtor(&retval);

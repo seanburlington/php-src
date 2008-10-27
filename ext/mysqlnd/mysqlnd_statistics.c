@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.c,v 1.7 2008/09/12 15:06:55 andrey Exp $ */
+/* $Id: mysqlnd_statistics.c,v 1.8 2008/10/27 14:38:17 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -107,7 +107,7 @@ const MYSQLND_STRING mysqlnd_stats_values_names[STAT_LAST] =
 	{ STR_W_LEN("mem_malloc_ammount") },
 	{ STR_W_LEN("mem_calloc_count") },
 	{ STR_W_LEN("mem_calloc_ammount") },
-	{ STR_W_LEN("mem_realloc_calloc") },
+	{ STR_W_LEN("mem_realloc_count") },
 	{ STR_W_LEN("mem_realloc_ammount") },
 	{ STR_W_LEN("mem_free_count") },
 	{ STR_W_LEN("proto_text_fetched_null") },

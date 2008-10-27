@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.86 2008/08/11 12:32:47 johannes Exp $ 
+  $Id: mysqli_nonapi.c,v 1.87 2008/10/27 12:07:35 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -60,6 +60,14 @@ void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_conne
 	zend_bool			new_connection = FALSE;
 	zend_rsrc_list_entry	*le;
 	mysqli_plist_entry *plist = NULL;
+
+#if !defined(MYSQL_USE_MYSQLND)
+	if ((MYSQL_VERSION_ID / 100) != (mysql_get_client_version() / 100)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING,
+						"Headers and client library minor version mismatch. Headers:%d Library:%d",
+						MYSQL_VERSION_ID, mysql_get_client_version());
+	}
+#endif
 
 	if (getThis() && !ZEND_NUM_ARGS() && in_ctor) {
 		RETURN_NULL();

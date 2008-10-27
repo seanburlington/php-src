@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.87 2008/10/27 12:07:35 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.88 2008/10/27 14:30:51 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -121,7 +121,9 @@ void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_conne
 	if (!socket_len || !socket) {
 		socket = MyG(default_socket);
 	}
-
+	if (!port){
+		port = MyG(default_port);
+	}
 	if (!passwd) {
 		passwd = MyG(default_pw);
 		passwd_len = strlen(SAFE_STR(passwd));

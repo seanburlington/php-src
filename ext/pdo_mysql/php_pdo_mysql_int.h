@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.25 2008/10/14 19:00:11 johannes Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.26 2008/10/27 18:29:56 johannes Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -161,6 +161,8 @@ enum {
 	PDO_MYSQL_ATTR_COMPRESS,
 #endif
 	PDO_MYSQL_ATTR_DIRECT_QUERY,
+	PDO_MYSQL_ATTR_FOUND_ROWS,
+	PDO_MYSQL_ATTR_IGNORE_SPACE
 };
 
 #endif

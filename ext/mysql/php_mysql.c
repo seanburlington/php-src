@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.267 2008/10/27 12:07:35 andrey Exp $ */
+/* $Id: php_mysql.c,v 1.268 2008/10/28 10:45:31 andrey Exp $ */
 
 /* TODO:
  *
@@ -634,7 +634,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #if !defined(MYSQL_USE_MYSQLND)
 	if ((MYSQL_VERSION_ID / 100) != (mysql_get_client_version() / 100)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING,
-						"Headers and client library minor version mismatch. Headers:%d Library:%d",
+						"Headers and client library minor version mismatch. Headers:%d Library:%ld",
 						MYSQL_VERSION_ID, mysql_get_client_version());
 	}
 #endif

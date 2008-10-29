@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.321 2008/10/29 12:41:22 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.322 2008/10/29 13:01:44 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4295,7 +4295,7 @@ ZEND_METHOD(reflection_property, __construct)
 			}
 		}
 		if (dynam_prop == 0) {
-			zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Property %s::$%v does not exist", ce->name, name_str);
+			zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Property %v::$%v does not exist", ce->name, name_str);
 			return;
 		}
 	}
@@ -5429,7 +5429,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.321 2008/10/29 12:41:22 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.322 2008/10/29 13:01:44 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

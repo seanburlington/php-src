@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.148 2008/10/29 20:17:43 iliaa Exp $ */
+/* $Id: math.c,v 1.149 2008/10/29 21:43:30 felixdv Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -73,7 +73,7 @@ static double php_round(double val, int places) {
 		}
 	} else {
 		t = ceil(-x);
-		if ((t x) > 0.50000000001) {
+		if ((t + x) > 0.50000000001) {
 			t -= 1.0;
 		}
 		t = -t; 

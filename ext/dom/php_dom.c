@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.112 2008/10/24 14:34:12 felipe Exp $ */
+/* $Id: php_dom.c,v 1.113 2008/10/29 21:21:06 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -163,7 +163,7 @@ int dom_set_doc_classmap(php_libxml_ref_obj *document, zend_class_entry *basece,
 		if (ce) {
 			return zend_u_hash_update(doc_props->classmap, UG(unicode)?IS_UNICODE:IS_STRING, basece->name, basece->name_length + 1, &ce, sizeof(ce), NULL);
 		} else {
-			return zend_u_hash_del(doc_props->classmap, UG(unicode)?IS_UNICODE:IS_STRING, basece->name, basece->name_length + 1);
+			zend_u_hash_del(doc_props->classmap, UG(unicode)?IS_UNICODE:IS_STRING, basece->name, basece->name_length + 1);
 		}
 	}
 	return SUCCESS;

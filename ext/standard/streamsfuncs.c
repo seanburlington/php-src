@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.24 2008/10/26 13:48:15 felipe Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.25 2008/10/30 10:11:51 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -406,7 +406,7 @@ PHP_FUNCTION(stream_get_contents)
 
 	php_stream_from_zval(stream, &zsrc);
 
-	if (pos > 0 && php_stream_seek(stream, pos, SEEK_SET) < 0) {
+	if (pos >= 0 && php_stream_seek(stream, pos, SEEK_SET) < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to seek to position %ld in the stream", pos);
 		RETURN_FALSE;
 	}

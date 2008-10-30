@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.26 2008/10/30 14:34:25 felipe Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.27 2008/10/30 15:53:18 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -416,18 +416,16 @@ PHP_FUNCTION(stream_get_contents)
 		RETURN_FALSE;
 	}
 
-	if ((len = php_stream_copy_to_mem(stream, &contents, maxlen, 0)) > 0) {
-		
-		if (PG(magic_quotes_runtime)) {
+	len = php_stream_copy_to_mem(stream, &contents, maxlen, 0);
+	
+	if (contents) {
+		if (len && PG(magic_quotes_runtime)) {
 			contents = php_addslashes(contents, len, &newlen, 1 TSRMLS_CC); /* 1 = free source string */
 			len = newlen;
 		}
-
 		RETVAL_STRINGL(contents, len, 0);
-	} else if (len == 0) {
-		RETVAL_EMPTY_STRING();
 	} else {
-		RETVAL_FALSE;
+		RETVAL_EMPTY_STRING();
 	}
 }
 /* }}} */

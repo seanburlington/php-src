@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.c,v 1.12 2008/07/15 13:12:27 andrey Exp $ */
+/* $Id: mysqlnd_palloc.c,v 1.13 2008/10/31 20:30:33 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"

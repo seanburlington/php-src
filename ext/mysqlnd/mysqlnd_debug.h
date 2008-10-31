@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.h,v 1.7 2008/04/16 12:53:18 andrey Exp $ */
+/* $Id: mysqlnd_debug.h,v 1.8 2008/10/31 20:30:33 andrey Exp $ */
 
 #ifndef MYSQLND_DEBUG_H
 #define MYSQLND_DEBUG_H

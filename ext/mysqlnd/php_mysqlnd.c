@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.8 2008/10/01 21:35:27 johannes Exp $ */
+/* $Id: php_mysqlnd.c,v 1.9 2008/10/31 20:30:33 andrey Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"

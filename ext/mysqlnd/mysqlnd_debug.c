@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.c,v 1.9 2008/09/12 15:06:55 andrey Exp $ */
+/* $Id: mysqlnd_debug.c,v 1.10 2008/10/31 20:30:33 andrey Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"

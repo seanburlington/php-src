@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.h,v 1.5 2008/06/24 08:02:06 andrey Exp $ */
+/* $Id: mysqlnd_palloc.h,v 1.6 2008/10/31 20:30:33 andrey Exp $ */
 #ifndef MYSQLND_PALLOC_H
 #define MYSQLND_PALLOC_H
 

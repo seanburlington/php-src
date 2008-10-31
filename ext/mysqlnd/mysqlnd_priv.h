@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.4.2.13 2008/08/19 10:42:11 johannes Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.4.2.14 2008/10/31 20:32:17 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -98,7 +98,7 @@
 #define MAX_CHARSET_LEN			32
 
 
-#define SET_ERROR_AFF_ROWS(s)	(s)->upsert_status.affected_rows = (uint64) ~0
+#define SET_ERROR_AFF_ROWS(s)	(s)->upsert_status.affected_rows = (uint64_t) ~0
 
 /* Error handling */
 #define SET_NEW_MESSAGE(buf, buf_len, message, len, persistent) \

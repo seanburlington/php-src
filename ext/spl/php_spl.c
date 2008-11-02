@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.142 2008/10/24 14:34:15 felipe Exp $ */
+/* $Id: php_spl.c,v 1.143 2008/11/02 21:10:11 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -765,57 +765,70 @@ PHP_MINFO_FUNCTION(spl)
 /* }}} */
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_iterator_to_array, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, iterator, Traversable, 0)
 	ZEND_ARG_INFO(0, use_keys)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_iterator, 0)
 	ZEND_ARG_OBJ_INFO(0, iterator, Traversable, 0)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_iterator_apply, 0, 0, 2)
 	ZEND_ARG_OBJ_INFO(0, iterator, Traversable, 0)
 	ZEND_ARG_INFO(0, function)
 	ZEND_ARG_ARRAY_INFO(0, args, 1)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_class_parents, 0, 0, 1)
 	ZEND_ARG_INFO(0, instance)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_class_implements, 0, 0, 1)
 	ZEND_ARG_INFO(0, what)
 	ZEND_ARG_INFO(0, autoload)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_spl_classes, 0)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_spl_autoload_functions, 0)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_autoload, 0, 0, 1)
 	ZEND_ARG_INFO(0, class_name)
 	ZEND_ARG_INFO(0, file_extensions)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_autoload_extensions, 0, 0, 0)
 	ZEND_ARG_INFO(0, file_extensions)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_autoload_call, 0, 0, 1)
 	ZEND_ARG_INFO(0, class_name)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_autoload_register, 0, 0, 0)
 	ZEND_ARG_INFO(0, autoload_function)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_autoload_unregister, 0, 0, 1)
 	ZEND_ARG_INFO(0, autoload_function)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_spl_object_hash, 0, 0, 1)
 	ZEND_ARG_INFO(0, obj)
 ZEND_END_ARG_INFO()

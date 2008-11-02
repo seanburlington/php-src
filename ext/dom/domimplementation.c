@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.29 2008/10/24 14:34:12 felipe Exp $ */
+/* $Id: domimplementation.c,v 1.30 2008/11/02 21:10:07 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,20 +28,24 @@
 #include "php_dom.h"
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementation_get_feature, 0, 0, 2)
 	ZEND_ARG_INFO(0, feature)
 	ZEND_ARG_INFO(0, version)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementation_has_feature, 0, 0, 0)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementation_create_documenttype, 0, 0, 3)
 	ZEND_ARG_INFO(0, qualifiedName)
 	ZEND_ARG_INFO(0, publicId)
 	ZEND_ARG_INFO(0, systemId)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementation_create_document, 0, 0, 3)
 	ZEND_ARG_INFO(0, namespaceURI)
 	ZEND_ARG_INFO(0, qualifiedName)

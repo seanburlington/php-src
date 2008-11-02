@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domerrorhandler.c,v 1.13 2008/10/24 14:34:12 felipe Exp $ */
+/* $Id: domerrorhandler.c,v 1.14 2008/11/02 21:10:07 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,7 @@
 #include "php_dom.h"
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_domerrorhandler_handle_error, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, error, DOMError, 0)
 ZEND_END_ARG_INFO();

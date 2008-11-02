@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.154 2008/10/24 14:34:15 felipe Exp $ */
+/* $Id: spl_array.c,v 1.155 2008/11/02 21:10:11 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1733,44 +1733,54 @@ int spl_array_unserialize(zval **object, zend_class_entry *ce, int type, const z
 }
 /* }}} */
 
-/* {{{ ZEND_BEGIN_ARG_INFO */
+/* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array___construct, 0)
 	ZEND_ARG_INFO(0, array)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetGet, 0, 0, 1)
 	ZEND_ARG_INFO(0, index)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetSet, 0, 0, 2)
 	ZEND_ARG_INFO(0, index)
 	ZEND_ARG_INFO(0, newval)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_append, 0)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_seek, 0)
 	ZEND_ARG_INFO(0, position)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_exchangeArray, 0)
 	ZEND_ARG_INFO(0, array)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_setFlags, 0)
 	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_setIteratorClass, 0)
 	ZEND_ARG_INFO(0, iteratorClass)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_uXsort, 0)
 	ZEND_ARG_INFO(0, cmp_function)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_array_unserialize, 0)
 	ZEND_ARG_INFO(0, serialized)
 ZEND_END_ARG_INFO();

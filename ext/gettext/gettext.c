@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.62 2008/11/02 21:06:46 tony2001 Exp $ */
+/* $Id: gettext.c,v 1.63 2008/11/02 21:10:08 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,31 +31,37 @@
 #include "php_gettext.h"
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO(arginfo_textdomain, 0)
 	ZEND_ARG_INFO(0, domain)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_gettext, 0)
 	ZEND_ARG_INFO(0, msgid)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_dgettext, 0)
 	ZEND_ARG_INFO(0, domain_name)
 	ZEND_ARG_INFO(0, msgid)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_dcgettext, 0)
 	ZEND_ARG_INFO(0, domain_name)
 	ZEND_ARG_INFO(0, msgid)
 	ZEND_ARG_INFO(0, category)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_bindtextdomain, 0)
 	ZEND_ARG_INFO(0, domain_name)
 	ZEND_ARG_INFO(0, dir)
 ZEND_END_ARG_INFO()
 
 #if HAVE_NGETTEXT
+static
 ZEND_BEGIN_ARG_INFO(arginfo_ngettext, 0)
 	ZEND_ARG_INFO(0, msgid1)
 	ZEND_ARG_INFO(0, msgid2)
@@ -64,6 +70,7 @@ ZEND_END_ARG_INFO()
 #endif
 
 #if HAVE_DNGETTEXT
+static
 ZEND_BEGIN_ARG_INFO(arginfo_dngettext, 0)
 	ZEND_ARG_INFO(0, domain)
 	ZEND_ARG_INFO(0, msgid1)
@@ -73,6 +80,7 @@ ZEND_END_ARG_INFO()
 #endif
 
 #if HAVE_DCNGETTEXT
+static
 ZEND_BEGIN_ARG_INFO(arginfo_dcngettext, 0)
 	ZEND_ARG_INFO(0, domain)
 	ZEND_ARG_INFO(0, msgid1)
@@ -83,6 +91,7 @@ ZEND_END_ARG_INFO()
 #endif
 
 #if HAVE_BIND_TEXTDOMAIN_CODESET
+static
 ZEND_BEGIN_ARG_INFO(arginfo_bind_textdomain_codeset, 0)
 	ZEND_ARG_INFO(0, domain)
 	ZEND_ARG_INFO(0, codeset)

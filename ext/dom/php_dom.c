@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.113 2008/10/29 21:21:06 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.114 2008/11/02 21:10:07 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -482,6 +482,7 @@ zend_object_value dom_objects_store_clone_obj(zval *zobject TSRMLS_DC)
 }
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_import_simplexml, 0, 0, 1)
 	ZEND_ARG_INFO(0, node)
 ZEND_END_ARG_INFO()

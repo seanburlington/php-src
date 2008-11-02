@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.45 2008/10/24 14:34:15 felipe Exp $ */
+/* $Id: shmop.c,v 1.46 2008/11/02 21:10:11 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,6 +46,7 @@ php_shmop_globals shmop_globals;
 int shm_type;
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_open, 0, 0, 4)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, flags)
@@ -53,26 +54,31 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_open, 0, 0, 4)
 	ZEND_ARG_INFO(0, size)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_read, 0, 0, 3)
 	ZEND_ARG_INFO(0, shmid)
 	ZEND_ARG_INFO(0, start)
 	ZEND_ARG_INFO(0, count)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_close, 0, 0, 1)
 	ZEND_ARG_INFO(0, shmid)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_size, 0, 0, 1)
 	ZEND_ARG_INFO(0, shmid)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_write, 0, 0, 3)
 	ZEND_ARG_INFO(0, shmid)
 	ZEND_ARG_INFO(0, data)
 	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_shmop_delete, 0, 0, 1)
 	ZEND_ARG_INFO(0, shmid)
 ZEND_END_ARG_INFO()

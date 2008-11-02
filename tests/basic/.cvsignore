@@ -1,3 +1,4 @@
+sess_*
 phpt.*
 *.mem
 *.diff

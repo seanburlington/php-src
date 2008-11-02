@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.49.2.5.2.1.2.8 2008/10/24 14:35:36 felipe Exp $ 
+  $Id: mysqli_fe.c,v 1.49.2.5.2.1.2.9 2008/11/02 21:19:34 felipe Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -30,15 +30,18 @@
 #include "php_mysqli_structs.h"
 
 
+static
 ZEND_BEGIN_ARG_INFO(second_arg_force_by_ref_rest, 1)
 	ZEND_ARG_PASS_INFO(0)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO(third_arg_force_by_ref_rest, 1)
 	ZEND_ARG_PASS_INFO(0)
 	ZEND_ARG_PASS_INFO(0)
 ZEND_END_ARG_INFO();
 
+static
 ZEND_BEGIN_ARG_INFO(all_args_force_by_ref, 1)
 ZEND_END_ARG_INFO();
 

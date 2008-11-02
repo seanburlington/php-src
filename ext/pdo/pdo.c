@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.17.2.9.2.5 2008/10/24 14:35:37 felipe Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.9.2.6 2008/11/02 21:19:35 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,6 +118,7 @@ PHP_FUNCTION(pdo_drivers)
 /* }}} */
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO(arginfo_pdo_drivers, 0)
 ZEND_END_ARG_INFO()
 /* }}} */

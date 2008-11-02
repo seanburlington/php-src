@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.49 2008/10/19 18:05:43 johannes Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.50 2008/11/02 21:19:30 felipe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -612,7 +612,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.49 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.50 $' . "\n";
 					exit(1);
 
 				default:
@@ -812,6 +812,24 @@ foreach ($test_dirs as $dir) {
 
 foreach ($user_tests as $dir) {
 	find_files($dir, ($dir == 'ext'));
+}
+
+function find_ini_skip($path)
+{
+	$skip_dir = $path;
+	$cwd = getcwd();
+	
+	do {
+		if (in_array(basename($skip_dir), array('Zend', 'ext', '')) || $skip_dir == $cwd) {
+			break;
+		}
+		$ini_skip_file = $skip_dir .'/skip.ini';	
+		if (file_exists($ini_skip_file)) {
+			return $ini_skip_file;
+		}
+	} while ($skip_dir = dirname($skip_dir));
+	
+	return false;
 }
 
 function find_files($dir, $is_ext_dir = false, $ignore = false)
@@ -1385,21 +1403,56 @@ TEST $file
 	// Check if test should be skipped.
 	$info = '';
 	$warn = false;
+	$skip_codes = array();
+	
+	/* Using skip.ini */
+	if ($skip_ini = find_ini_skip($file)) {	
+		$ini = parse_ini_file($skip_ini, true);
+		
+		/* Skip on 32-bit architecture */
+		if (PHP_INT_SIZE == 4 && isset($ini['SKIP_32']['test']) 
+			&& in_array(basename($file), $ini['SKIP_32']['test'])) {
+			show_result('SKIP', $tested, $tested_file, 'This test is for non 32-bit', $temp_filenames);
+			return 'SKIPPED';
+		}
+		/* Skip on 64-bit architecture */
+		if (PHP_INT_SIZE != 4 && isset($ini['SKIP_64']['test']) 
+			&& in_array(basename($file), $ini['SKIP_64']['test'])) {
+			show_result('SKIP', $tested, $tested_file, 'This test is for 32-bit only', $temp_filenames);
+			return 'SKIPPED';
+		}
 
-	if (array_key_exists('SKIPIF', $section_text)) {
-
-		if (trim($section_text['SKIPIF'])) {
-			show_file_block('skip', $section_text['SKIPIF']);
-			save_text($test_skipif, $section_text['SKIPIF'], $temp_skipif);
-			$extra = substr(PHP_OS, 0, 3) !== "WIN" ?
-				"unset REQUEST_METHOD; unset QUERY_STRING; unset PATH_TRANSLATED; unset SCRIPT_FILENAME; unset REQUEST_METHOD;": "";
-
-			if ($leak_check) {
-				$env['USE_ZEND_ALLOC'] = '0';
-			} else {
-				$env['USE_ZEND_ALLOC'] = '1';
+		$labels = array_keys($ini);
+		foreach ($labels as $label) {
+			if (in_array($label, array('SKIP_32', 'SKIP_64'))) {
+				continue;
 			}
+			if (isset($ini[$label]['skip']) && isset($ini[$label]['test'])) {
+				if (!in_array(basename($file), $ini[$label]['test'])) {
+					continue;
+				}					
+				$code = '<?php ';
+				foreach ($ini[$label]['skip'] as $skip_file) {
+					$code .= 'require_once "'. $skip_file .'";';
+				}
+				$skip_codes[$label] = $code;
+			}
+		}
+	}
 
+	if (isset($section_text['SKIPIF']) && trim($section_text['SKIPIF'])) {
+		$skip_codes[] = $section_text['SKIPIF'];
+	}
+	
+	$env['USE_ZEND_ALLOC'] = $leak_check ? '0' : '1';
+	$extra = substr(PHP_OS, 0, 3) !== "WIN" ?
+			"unset REQUEST_METHOD; unset QUERY_STRING; unset PATH_TRANSLATED; unset SCRIPT_FILENAME; unset REQUEST_METHOD;": "";
+	
+	if (!empty($skip_codes)) {
+		foreach ($skip_codes as $label => $code) {
+			show_file_block('skip', $code);
+			save_text($test_skipif, $code, $temp_skipif);
+			
 			$output = system_with_timeout("$extra $php $pass_options -q $ini_settings $test_skipif", $env);
 
 			if (!$cfg['keep']['skip']) {
@@ -1407,12 +1460,10 @@ TEST $file
 			}
 
 			if (!strncasecmp('skip', ltrim($output), 4)) {
-
-				if (preg_match('/^\s*skip\s*(.+)\s*/i', $output, $m)) {
-					show_result('SKIP', $tested, $tested_file, "reason: $m[1]", $temp_filenames);
-				} else {
-					show_result('SKIP', $tested, $tested_file, '', $temp_filenames);
-				}
+				preg_match('/^\s*skip\s*(.+)\s*/i', $output, $m);
+				
+				$reason = (is_string($label) && empty($m)) ? $label : (empty($m) ? 'not specified' : $m[1]);
+				show_result('SKIP', $tested, $tested_file, 'reason: '. $reason, $temp_filenames);
 
 				if (isset($old_php)) {
 					$php = $old_php;

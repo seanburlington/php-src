@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.20.2.3.2.6.2.6 2008/10/24 14:35:39 felipe Exp $ */
+/* $Id: sysvmsg.c,v 1.20.2.3.2.6.2.7 2008/11/02 21:19:38 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,11 +40,13 @@
 static int le_sysvmsg;
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_get_queue, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, perms)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_send, 0, 0, 3)
 	ZEND_ARG_INFO(0, queue)
 	ZEND_ARG_INFO(0, msgtype)
@@ -54,6 +56,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_send, 0, 0, 3)
 	ZEND_ARG_INFO(1, errorcode)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_receive, 0, 0, 5)
 	ZEND_ARG_INFO(0, queue)
 	ZEND_ARG_INFO(0, desiredmsgtype)
@@ -65,19 +68,23 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_receive, 0, 0, 5)
 	ZEND_ARG_INFO(1, errorcode)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_remove_queue, 0, 0, 1)
 	ZEND_ARG_INFO(0, queue)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_stat_queue, 0, 0, 1)
 	ZEND_ARG_INFO(0, queue)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_set_queue, 0, 0, 2)
 	ZEND_ARG_INFO(0, queue)
 	ZEND_ARG_INFO(0, data)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_msg_queue_exists, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
@@ -145,7 +152,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.6.2.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.3.2.6.2.7 $");
 	php_info_print_table_end();
 }
 /* }}} */

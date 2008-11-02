@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.26 2008/10/24 14:35:36 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.27 2008/11/02 21:19:34 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1819,6 +1819,7 @@ static PHP_FUNCTION(preg_last_error)
 /* {{{ module definition structures */
 
 /* {{{ arginfo */
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_match, 0, 0, 2)
     ZEND_ARG_INFO(0, pattern)
     ZEND_ARG_INFO(0, subject)
@@ -1827,6 +1828,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_match, 0, 0, 2)
     ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_match_all, 0, 0, 3)
     ZEND_ARG_INFO(0, pattern)
     ZEND_ARG_INFO(0, subject)
@@ -1835,6 +1837,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_match_all, 0, 0, 3)
     ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_replace, 0, 0, 2)
     ZEND_ARG_INFO(0, regex)
     ZEND_ARG_INFO(0, replace)
@@ -1843,6 +1846,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_replace, 0, 0, 2)
     ZEND_ARG_INFO(1, count)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_replace_callback, 0, 0, 3)
     ZEND_ARG_INFO(0, regex)
     ZEND_ARG_INFO(0, callback)
@@ -1851,6 +1855,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_replace_callback, 0, 0, 3)
     ZEND_ARG_INFO(1, count)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_split, 0, 0, 2)
     ZEND_ARG_INFO(0, pattern)
     ZEND_ARG_INFO(0, subject)
@@ -1858,17 +1863,20 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_split, 0, 0, 2)
     ZEND_ARG_INFO(0, flags) 
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_quote, 0, 0, 1)
     ZEND_ARG_INFO(0, str)
     ZEND_ARG_INFO(0, delim_char)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_preg_grep, 0, 0, 2)
     ZEND_ARG_INFO(0, regex)
     ZEND_ARG_INFO(0, input) /* array */
     ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO()
 
+static
 ZEND_BEGIN_ARG_INFO(arginfo_preg_last_error, 0)
 ZEND_END_ARG_INFO()
 /* }}} */

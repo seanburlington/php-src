@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.66 2008/10/24 14:35:38 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.67 2008/11/02 18:24:34 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2344,6 +2344,13 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_str, 0, 0, 1)
 	ZEND_ARG_INFO(1, result)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_str_getcsv, 0, 0, 1)
+	ZEND_ARG_INFO(0, string)
+	ZEND_ARG_INFO(0, delimiter)
+	ZEND_ARG_INFO(0, enclosure)
+	ZEND_ARG_INFO(0, escape)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO(arginfo_str_repeat, 0)
 	ZEND_ARG_INFO(0, input)
 	ZEND_ARG_INFO(0, mult)
@@ -2745,6 +2752,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(chr,																arginfo_chr)
 	PHP_FE(ord,																arginfo_ord)
 	PHP_FE(parse_str,														arginfo_parse_str)
+	PHP_FE(str_getcsv,														arginfo_str_getcsv)
 	PHP_FE(str_pad,															arginfo_str_pad)
 	PHP_FALIAS(chop,				rtrim,									arginfo_rtrim)
 	PHP_FALIAS(strchr,				strstr,									arginfo_strstr)

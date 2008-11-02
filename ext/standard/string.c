@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.36 2008/10/21 22:08:37 lbarnaud Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.37 2008/11/02 18:24:34 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -49,6 +49,9 @@
 #ifdef ZTS
 #include "TSRM.h"
 #endif
+
+/* For str_getcsv() support */
+#include "ext/standard/file.h"
 
 #define STR_PAD_LEFT			0
 #define STR_PAD_RIGHT			1
@@ -4453,6 +4456,27 @@ reg_char:
 		*stateptr = state;
 
 	return (size_t)(rp - rbuf);
+}
+/* }}} */
+
+/* {{{ proto array str_getcsv(string input[, string delimiter[, string enclosure[, string escape]]])
+Parse a CSV string into an array */
+PHP_FUNCTION(str_getcsv)
+{
+	char *str, delim = ',', enc = '"', esc = '\\';
+	char *delim_str = NULL, *enc_str = NULL, *esc_str = NULL;
+	int str_len = 0, delim_len = 0, enc_len = 0, esc_len = 0;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sss", &str, &str_len, &delim_str, &delim_len, 
+		&enc_str, &enc_len, &esc_str, &esc_len) == FAILURE) {
+		return;
+	}
+	
+	delim = delim_len ? delim_str[0] : delim;
+	enc = enc_len ? enc_str[0] : enc;
+	esc = esc_len ? esc_str[0] : esc;
+
+	php_fgetcsv(NULL, delim, enc, esc, str_len, str, return_value TSRMLS_CC);
 }
 /* }}} */
 

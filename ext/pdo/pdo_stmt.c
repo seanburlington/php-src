@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.30 2008/11/02 21:19:35 felipe Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.31 2008/11/03 15:33:22 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2614,6 +2614,9 @@ static zval *row_prop_or_dim_read(zval *object, zval *member, int type TSRMLS_DC
 	pdo_stmt_t * stmt = (pdo_stmt_t *) zend_object_store_get_object(object TSRMLS_CC);
 	int colno = -1;
 
+	if (Z_TYPE_P(member) == IS_STRING && strcmp(Z_STRVAL_P(member), "queryString") == 0) {
+		return std_object_handlers.read_property(object, member, IS_STRING TSRMLS_CC);
+	}
 	MAKE_STD_ZVAL(return_value);
 		
 	if (Z_TYPE_P(member) == IS_LONG) {

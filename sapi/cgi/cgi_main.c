@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.63 2008/10/21 16:43:59 lbarnaud Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.64 2008/11/03 23:26:23 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1964,7 +1964,7 @@ consult the installation file that came with this distribution, or visit \n\
 			/* #!php support */
 			c = fgetc(file_handle.handle.fp);
 			if (c == '#') {
-				while (c != '\n' && c != '\r') {
+				while (c != '\n' && c != '\r' && c != EOF) {
 					c = fgetc(file_handle.handle.fp);	/* skip to end of line */
 				}
 				/* handle situations where line is terminated by \r\n */

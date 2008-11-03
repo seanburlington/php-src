@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.42 2008/11/03 15:41:35 felipe Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.43 2008/11/03 20:55:01 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2189,6 +2189,7 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
 				param->is_param,
 				param->param_type);
 			
+			zend_hash_move_forward_ex(stmt->bound_params, &pos);
 		}
 	}
 

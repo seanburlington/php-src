@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.15 2008/09/22 01:26:14 cellog Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.16 2008/11/03 15:47:31 lbarnaud Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1521,7 +1521,7 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 		n++;
 	}
 
-	if ((*p == ':') && (n > 1) && (!strncmp("//", p+1, 2) || !memcmp("data", path, 4))) {
+	if ((*p == ':') && (n > 1) && (!strncmp("//", p+1, 2) || (n == 4 && !memcmp("data:", path, 5)))) {
 		protocol = path;
 	} else if (n == 5 && strncasecmp(path, "zlib:", 5) == 0) {
 		/* BC with older php scripts and zlib wrapper */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.70.2.7.2.5.2.7 2008/08/23 19:22:08 pajoye Exp $ */
+/* $Id: dns.c,v 1.70.2.7.2.5.2.8 2008/11/03 11:35:11 felipe Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -446,13 +446,22 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int 
 			cp += n;
 			break;
 		case DNS_T_TXT:
-			add_assoc_string(*subarray, "type", "TXT", 1);
-			n = cp[0];
-			tp = emalloc(n + 1);
-			memcpy(tp, cp + 1, n);
-			tp[n] = '\0';
-			cp += dlen;
-			add_assoc_stringl(*subarray, "txt", (char*)tp, n, 0);
+			{
+				int ll = 0;
+
+				add_assoc_string(*subarray, "type", "TXT", 1);
+				tp = emalloc(dlen + 1);
+				
+				while (ll < dlen) {
+					n = cp[ll];
+					memcpy(tp + ll , cp + ll + 1, n);
+					ll = ll + n + 1;
+				}
+				tp[dlen] = '\0';
+				cp += dlen;
+
+				add_assoc_stringl(*subarray, "txt", tp, dlen, 0);
+			}
 			break;
 		case DNS_T_SOA:
 			add_assoc_string(*subarray, "type", "SOA", 1);

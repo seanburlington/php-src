@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.153 2008/10/09 12:59:47 felipe Exp $ */
+/* $Id: pdo_dbh.c,v 1.154 2008/11/04 18:25:26 davidc Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -988,7 +988,12 @@ static PHP_METHOD(PDO, errorCode)
 	if (dbh->query_stmt) {
 		RETURN_STRING(dbh->query_stmt->error_code, 1);
 	}
-	
+
+	if (dbh->error_code[0] == '\0') {
+		RETURN_NULL();
+	}
+
+	// Fallback to default documented value	
 	RETURN_STRING(dbh->error_code, 1);
 }
 /* }}} */
@@ -1010,6 +1015,8 @@ static PHP_METHOD(PDO, errorInfo)
 		add_next_index_string(return_value, dbh->query_stmt->error_code, 1);
 	} else {
 		add_next_index_string(return_value, dbh->error_code, 1);
+		add_next_index_null(return_value);
+		add_next_index_null(return_value);
 	}
 	if (dbh->methods->fetch_err) {
 		dbh->methods->fetch_err(dbh, dbh->query_stmt, return_value TSRMLS_CC);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.27 2008/10/30 15:53:18 felipe Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.28 2008/11/04 00:42:41 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -792,6 +792,12 @@ PHP_FUNCTION(stream_select)
 
 		retval = stream_array_emulate_read_fd_set(r_array TSRMLS_CC);
 		if (retval > 0) {
+			if (w_array != NULL) {
+				zend_hash_clean(Z_ARRVAL_P(w_array));
+			}
+			if (e_array != NULL) {
+				zend_hash_clean(Z_ARRVAL_P(e_array));
+			}
 			RETURN_LONG(retval);
 		}
 	}

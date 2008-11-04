@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.397 2008/11/02 21:10:08 felipe Exp $ */
+/* $Id: gd.c,v 1.398 2008/11/04 20:24:46 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1327,10 +1327,16 @@ PHP_MINFO_FUNCTION(gd)
 	php_info_print_table_row(2, "GIF Create Support", "enabled");
 #endif
 #ifdef HAVE_GD_JPG
-	php_info_print_table_row(2, "JPG Support", "enabled");
+	{
+		char tmp[256];
+		snprintf(tmp, sizeof(tmp), "%d", JPEG_LIB_VERSION);
+		php_info_print_table_row(2, "JPG Support", "enabled");
+		php_info_print_table_row(2, "libJPEG Version", tmp);
+	}
 #endif
 #ifdef HAVE_GD_PNG
 	php_info_print_table_row(2, "PNG Support", "enabled");
+	php_info_print_table_row(2, "libPNG Version", PNG_LIBPNG_VER_STRING);
 #endif
 	php_info_print_table_row(2, "WBMP Support", "enabled");
 #if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)

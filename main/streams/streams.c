@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.17 2008/11/03 23:29:17 lbarnaud Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.18 2008/11/04 17:05:55 lbarnaud Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -890,6 +890,9 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 		}
 
 		if (!e) {
+			if (seek_len < maxlen && !stream->eof) {
+				return NULL;
+			}
 			toread = maxlen;
 		} else {
 			toread = e - (char *) stream->readbuf - stream->readpos;

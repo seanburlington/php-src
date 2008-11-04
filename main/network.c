@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.11 2008/10/24 10:46:05 felipe Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.12 2008/11/04 20:41:37 lbarnaud Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -641,6 +641,7 @@ PHPAPI int php_network_get_peer_name(php_socket_t sock,
 {
 	php_sockaddr_storage sa;
 	socklen_t sl = sizeof(sa);
+	memset(&sa, 0, sizeof(sa));
 	
 	if (getpeername(sock, (struct sockaddr*)&sa, &sl) == 0) {
 		php_network_populate_name_from_sockaddr((struct sockaddr*)&sa, sl,
@@ -660,6 +661,7 @@ PHPAPI int php_network_get_sock_name(php_socket_t sock,
 {
 	php_sockaddr_storage sa;
 	socklen_t sl = sizeof(sa);
+	memset(&sa, 0, sizeof(sa));
 	
 	if (getsockname(sock, (struct sockaddr*)&sa, &sl) == 0) {
 		php_network_populate_name_from_sockaddr((struct sockaddr*)&sa, sl,

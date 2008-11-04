@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.128 2008/11/04 00:42:19 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.129 2008/11/04 16:45:42 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -68,6 +68,11 @@ PHP_FUNCTION(stream_socket_pair)
 
 	s1 = php_stream_sock_open_from_socket(pair[0], 0);
 	s2 = php_stream_sock_open_from_socket(pair[1], 0);
+
+	/* set the __exposed flag. 
+	 * php_stream_to_zval() does, add_next_index_resource() does not */
+	php_stream_auto_cleanup(s1);
+	php_stream_auto_cleanup(s2);
 
 	add_next_index_resource(return_value, php_stream_get_resource_id(s1));
 	add_next_index_resource(return_value, php_stream_get_resource_id(s2));

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.9 2007/12/31 07:20:13 sebastian Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.10 2008/11/04 21:05:55 lbarnaud Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -290,9 +290,23 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 		return NULL;
 	}
 
+#if defined(S_IFSOCK) && !defined(WIN32) && !defined(__BEOS__)
+	do {
+		struct stat st;
+		memset(&st, 0, sizeof(st));
+		if (fstat(fd, &st) == 0 && (st.st_mode & S_IFMT) == S_IFSOCK) {
+			stream = php_stream_sock_open_from_socket(fd, NULL);
+			if (stream) {
+				stream->ops = &php_stream_socket_ops;
+				return stream;
+			}
+		}
+	} while (0);
+#endif
+
 	if (file) {
 		stream = php_stream_fopen_from_file(file, mode);
-	} else {	
+	} else {
 		stream = php_stream_fopen_from_fd(fd, mode, NULL);
 		if (stream == NULL) {
 			close(fd);

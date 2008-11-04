@@ -18,9 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: util.c,v 1.55.2.39 2008/10/26 05:49:09 cellog Exp $ */
+/* $Id: util.c,v 1.55.2.40 2008/11/04 01:27:52 helly Exp $ */
 
 #include "phar_internal.h"
+#ifdef PHAR_HASH_OK
+#include "ext/hash/php_hash_sha.h"
+#endif
 
 #ifdef PHAR_HAVE_OPENSSL
 /* OpenSSL includes */

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.44 2008/11/03 23:45:17 felipe Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.45 2008/11/05 23:42:05 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2178,14 +2178,14 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
 			uint len;
 			ulong num;
 
-			if (zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos) == HASH_KEY_IS_STRING) {
-				php_stream_printf(out TSRMLS_CC, "Key: Position #%d:\n", num);
+			if (zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos) == HASH_KEY_IS_LONG) {
+				php_stream_printf(out TSRMLS_CC, "Key: Position #%ld:\n", num);
 			} else {
 				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, str);
 			}
 
-			php_stream_printf(out TSRMLS_CC, "paramno=%d\nname=[%d] %.*s\nis_param=%d\nparam_type=%d\n",
-				param->paramno, param->namelen, param->namelen, param->name,
+			php_stream_printf(out TSRMLS_CC, "paramno=%d\nname=[%d] \"%.*s\"\nis_param=%d\nparam_type=%d\n",
+				param->paramno, param->namelen, param->namelen, param->name ? param->name : "",
 				param->is_param,
 				param->param_type);
 			

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.27.2.12.2.24 2008/08/29 12:01:57 derick Exp $ */
+/* $Id: parse_date.re,v 1.26.2.27.2.12.2.25 2008/11/05 10:42:42 derick Exp $ */
 
 #include "timelib.h"
 
@@ -624,6 +624,7 @@ static void timelib_eat_spaces(char **ptr)
 
 static void timelib_eat_until_separator(char **ptr)
 {
+	++*ptr;
 	while (strchr(" \t.,:;/-0123456789", **ptr) == NULL) {
 		++*ptr;
 	}

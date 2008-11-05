@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.165 2008/10/15 18:41:18 kalle Exp $ */
+/* $Id: basic_functions.h,v 1.166 2008/11/05 21:33:19 lbarnaud Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -126,6 +126,7 @@ PHP_FUNCTION(move_uploaded_file);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);
+PHP_FUNCTION(parse_ini_string);
 #if ZEND_DEBUG
 PHP_FUNCTION(config_get_hash);
 #endif

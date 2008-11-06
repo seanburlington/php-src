@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.25.2.7.2.6.2.4 2008/07/26 23:38:14 jani Exp $
+dnl $Id: config.m4,v 1.25.2.7.2.6.2.5 2008/11/06 11:12:21 johannes Exp $
 dnl config.m4 for extension pdo_mysql
 dnl vim: se ts=2 sw=2 et:
 
@@ -18,8 +18,6 @@ if test "$PHP_PDO_MYSQL" != "no"; then
     AC_MSG_ERROR([PDO is not enabled! Add --enable-pdo to your configure line.])
   fi
 
-  PHP_MYSQLND_ENABLED=yes
-
   AC_DEFUN([PDO_MYSQL_LIB_CHK], [
     str="$PDO_MYSQL_DIR/$1/libmysqlclient*"
     for j in `echo $str`; do
@@ -32,7 +30,7 @@ if test "$PHP_PDO_MYSQL" != "no"; then
 
   if test "$PHP_PDO_MYSQL" = "mysqlnd"; then
     dnl enables build of mysqnd library
-    PHP_MYSQL_ENABLED=yes
+    PHP_MYSQLND_ENABLED=yes
     AC_DEFINE([PDO_USE_MYSQLND], 1, [Whether pdo_mysql uses mysqlnd])
   else
     AC_DEFINE(HAVE_MYSQL, 1, [Whether you have MySQL])

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.398 2008/11/04 20:24:46 pajoye Exp $ */
+/* $Id: gd.c,v 1.399 2008/11/06 10:23:52 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -27,11 +27,6 @@
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
-
-#ifdef HAVE_GD_PNG
-/* needs to be first */
-#include <png.h>
 #endif
 
 #include "php.h"
@@ -59,6 +54,15 @@
 #endif
 
 #if HAVE_LIBGD
+
+#ifdef HAVE_GD_PNG
+/* needs to be first */
+# include <png.h>
+#endif
+
+#ifdef HAVE_GD_JPG
+# include <jpeglib.h>
+#endif
 
 static int le_gd, le_gd_font;
 #if HAVE_LIBT1
@@ -1328,15 +1332,15 @@ PHP_MINFO_FUNCTION(gd)
 #endif
 #ifdef HAVE_GD_JPG
 	{
-		char tmp[256];
-		snprintf(tmp, sizeof(tmp), "%d", JPEG_LIB_VERSION);
+		char tmp[12];
+		snprintf(tmp, sizeof(tmp), "%d", gdJpegGetVersionInt());
 		php_info_print_table_row(2, "JPG Support", "enabled");
 		php_info_print_table_row(2, "libJPEG Version", tmp);
 	}
 #endif
 #ifdef HAVE_GD_PNG
 	php_info_print_table_row(2, "PNG Support", "enabled");
-	php_info_print_table_row(2, "libPNG Version", PNG_LIBPNG_VER_STRING);
+	php_info_print_table_row(2, "libPNG Version", gdPngGetVersionString());
 #endif
 	php_info_print_table_row(2, "WBMP Support", "enabled");
 #if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)

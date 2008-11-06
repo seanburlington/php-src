@@ -18,15 +18,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.266 2008/11/02 21:10:11 felipe Exp $ */
+/* $Id: simplexml.c,v 1.267 2008/11/06 00:36:28 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
-#if HAVE_LIBXML && HAVE_SIMPLEXML
-
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
@@ -35,9 +33,7 @@
 #include "php_simplexml_exports.h"
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
-#ifdef HAVE_SPL
-#include "ext/spl/spl_sxe.h"
-#endif
+#include "sxe.h"
 
 #define SXE_ELEMENT_BY_NAME 0
 
@@ -2617,11 +2613,7 @@ PHP_MINIT_FUNCTION(simplexml)
 	sxe_object_handlers.get_class_entry = zend_get_std_object_handlers()->get_class_entry;
 	sxe_object_handlers.get_class_name = zend_get_std_object_handlers()->get_class_name;
 
-#ifdef HAVE_SPL
-	if (zend_get_module_started("spl") == SUCCESS) {
-		PHP_MINIT(spl_sxe)(INIT_FUNC_ARGS_PASSTHRU);
-	}
-#endif /* HAVE_SPL */
+	PHP_MINIT(sxe)(INIT_FUNC_ARGS_PASSTHRU);
 
 	php_libxml_register_export(sxe_class_entry, simplexml_export_node);
 
@@ -2644,7 +2636,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.266 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.267 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");
@@ -2654,8 +2646,6 @@ PHP_MINFO_FUNCTION(simplexml)
 	php_info_print_table_end();
 }
 /* }}} */
-
-#endif
 
 /**
  * Local Variables:

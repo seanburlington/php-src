@@ -18,13 +18,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.20 2008/10/31 20:30:33 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.21 2008/11/06 10:36:30 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.4-dev - 080501 - $Revision: 1.20 $"
-#define MYSQLND_VERSION_ID 50004
+#define MYSQLND_VERSION "mysqlnd 5.0.5-dev - 081106 - $Revision: 1.21 $"
+#define MYSQLND_VERSION_ID 50005
 
 /* This forces inlining of some accessor functions */
 #define MYSQLND_USE_OPTIMISATIONS 1
@@ -74,7 +74,7 @@ PHPAPI void _mysqlnd_end_psession(MYSQLND *conn TSRMLS_DC);
 PHPAPI void mysqlnd_minfo_print_hash(zval *values);
 #define mysqlnd_thread_safe()	TRUE
 
-PHPAPI const MYSQLND_CHARSET * mysqlnd_find_charset_nr(uint charsetno);
+PHPAPI const MYSQLND_CHARSET * mysqlnd_find_charset_nr(unsigned int charsetno);
 PHPAPI const MYSQLND_CHARSET * mysqlnd_find_charset_name(const char * const charsetname);
 
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_priv.h,v 1.17 2008/10/31 20:30:33 andrey Exp $ */
+/* $Id: mysqlnd_priv.h,v 1.18 2008/11/06 10:36:30 andrey Exp $ */
 
 #ifndef MYSQLND_PRIV_H
 #define MYSQLND_PRIV_H
@@ -150,7 +150,7 @@
 
 /* PS stuff */
 typedef void (*ps_field_fetch_func)(zval *zv, const MYSQLND_FIELD * const field,
-									uint pack_len, zend_uchar **row,
+									unsigned int pack_len, zend_uchar **row,
 									zend_bool everything_as_unicode TSRMLS_DC);
 struct st_mysqlnd_perm_bind {
 	ps_field_fetch_func func;
@@ -173,7 +173,7 @@ enum_func_status mysqlnd_handle_local_infile(MYSQLND *conn, const char *filename
 void _mysqlnd_init_ps_subsystem();/* This one is private, mysqlnd_library_init() will call it */
 
 void ps_fetch_from_1_to_8_bytes(zval *zv, const MYSQLND_FIELD * const field,
-								uint pack_len, zend_uchar **row, zend_bool as_unicode,
+								unsigned int pack_len, zend_uchar **row, zend_bool as_unicode,
 								unsigned int byte_count TSRMLS_DC);
 
 

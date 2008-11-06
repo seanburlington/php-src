@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_wireprotocol.h,v 1.11 2008/10/31 20:30:33 andrey Exp $ */
+/* $Id: mysqlnd_wireprotocol.h,v 1.12 2008/11/06 10:36:30 andrey Exp $ */
 
 #ifndef MYSQLND_WIREPROTOCOL_H
 #define MYSQLND_WIREPROTOCOL_H
@@ -325,10 +325,10 @@ extern char * const mysqlnd_empty_string;
 
 
 void php_mysqlnd_rowp_read_binary_protocol(MYSQLND_MEMORY_POOL_CHUNK * row_buffer, zval ** fields,
-										   uint field_count, MYSQLND_FIELD *fields_metadata, MYSQLND *conn TSRMLS_DC);
+										   unsigned int field_count, MYSQLND_FIELD *fields_metadata, MYSQLND *conn TSRMLS_DC);
 
 void php_mysqlnd_rowp_read_text_protocol(MYSQLND_MEMORY_POOL_CHUNK * row_buffer, zval ** fields,
-										 uint field_count, MYSQLND_FIELD *fields_metadata, MYSQLND *conn TSRMLS_DC);
+										 unsigned int field_count, MYSQLND_FIELD *fields_metadata, MYSQLND *conn TSRMLS_DC);
 
 #endif /* MYSQLND_WIREPROTOCOL_H */
 

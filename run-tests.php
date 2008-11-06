@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.380 2008/10/19 18:04:35 johannes Exp $ */
+/* $Id: run-tests.php,v 1.381 2008/11/06 03:08:58 scottmac Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -543,7 +543,7 @@ if (isset($argc) && $argc > 1) {
 					if (!$valgrind_header) {
 						error("Valgrind returned no version info, cannot proceed.\nPlease check if Valgrind is installed.");
 					} else {
-						$valgrind_version = preg_replace("/valgrind-([0-9])\.([0-9])\.([0-9]+)(-\w+)?(\s+)/", '$1$2$3', $valgrind_header, 1, $replace_count);
+						$valgrind_version = preg_replace("/valgrind-([0-9])\.([0-9])\.([0-9]+)([.-]\w+)?(\s+)/", '$1$2$3', $valgrind_header, 1, $replace_count);
 						if ($replace_count != 1 || !is_numeric($valgrind_version)) {
 							error("Valgrind returned invalid version info (\"$valgrind_header\"), cannot proceed.");
 						}
@@ -612,7 +612,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.380 $' . "\n";
+					echo '$Revision: 1.381 $' . "\n";
 					exit(1);
 
 				default:

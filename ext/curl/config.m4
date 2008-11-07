@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.39 2007/05/25 12:48:39 mike Exp $ 
+dnl $Id: config.m4,v 1.40 2008/11/07 21:11:26 felipe Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for cURL support,
@@ -75,7 +75,7 @@ if test "$PHP_CURL" != "no"; then
     }
    ],[
     AC_MSG_RESULT([yes])
-    AC_CHECK_HEADER([openssl/crypto.h], [
+    AC_CHECK_HEADERS([openssl/crypto.h], [
      AC_DEFINE([HAVE_CURL_OPENSSL], [1], [Have cURL with OpenSSL support])
     ])
    ], [

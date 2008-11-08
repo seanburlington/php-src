@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.103.2.5.2.13.2.8 2008/11/02 21:19:38 felipe Exp $ */
+/* $Id: php_sybase_ct.c,v 1.103.2.5.2.13.2.9 2008/11/08 12:05:46 thekid Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1200,7 +1200,7 @@ static int php_sybase_fetch_result_row (sybase_result *result, int numrows)
 	}
 	
 	if (numrows!=-1) numrows+= result->num_rows;
-	while ((retcode=ct_fetch(result->sybase_ptr->cmd, CS_UNUSED, CS_UNUSED, CS_UNUSED, NULL))==CS_SUCCEED) {
+	while ((retcode=ct_fetch(result->sybase_ptr->cmd, CS_UNUSED, CS_UNUSED, CS_UNUSED, NULL))==CS_SUCCEED || retcode == CS_ROW_FAIL) {
 		result->num_rows++;
 		i= result->store ? result->num_rows- 1 : 0;
 		if (i >= result->blocks_initialized*SYBASE_ROWS_BLOCK) {

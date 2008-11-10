@@ -16,11 +16,18 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_signal.h,v 1.12 2007/12/31 07:12:12 sebastian Exp $ */
+/* $Id: php_signal.h,v 1.13 2008/11/10 05:56:22 lbarnaud Exp $ */
 
 #include <signal.h>
 #ifndef PHP_SIGNAL_H
 #define PHP_SIGNAL_H
+
+#ifndef NSIG
+# define NSIG 32
+#endif
+#ifndef SIGRTMAX
+# define SIGRTMAX 64
+#endif
 
 typedef void Sigfunc(int);
 Sigfunc *php_signal(int signo, Sigfunc *func, int restart);

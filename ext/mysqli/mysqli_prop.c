@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.38 2008/11/10 19:03:57 iliaa Exp $ 
+  $Id: mysqli_prop.c,v 1.39 2008/11/10 20:04:56 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -88,7 +88,7 @@ static int __func(mysqli_object *obj, zval **retval TSRMLS_DC) \
 			ZVAL_LONG(*retval, l);\
 		} else { \
 			char *ret; \
-			int ret_len = spprintf(&ret, 0, __ret_type_sprint_mod, (my_ulonglong)l); \
+			int ret_len = spprintf(&ret, 0, __ret_type_sprint_mod, l); \
 			ZVAL_STRINGL(*retval, ret, ret_len, 0); \
 		} \
 	}\

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.82.2.6.2.18.2.18 2008/11/04 17:05:55 lbarnaud Exp $ */
+/* $Id: streams.c,v 1.82.2.6.2.18.2.19 2008/11/11 01:55:51 lbarnaud Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1243,7 +1243,7 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 
 	if (maxlen > 0) {
 		ptr = *buf = pemalloc_rel_orig(maxlen + 1, persistent);
-		while ((len < maxlen) & !php_stream_eof(src)) {
+		while ((len < maxlen) && !php_stream_eof(src)) {
 			ret = php_stream_read(src, ptr, maxlen - len);
 			len += ret;
 			ptr += ret;

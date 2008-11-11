@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.530 2008/10/21 22:06:48 lbarnaud Exp $ */
+/* $Id: file.c,v 1.531 2008/11/11 00:40:04 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1984,19 +1984,11 @@ PHPAPI PHP_FUNCTION(fread)
 		int buflen = len;
 		UChar *buf = php_stream_read_unicode_chars(stream, &buflen);
 
-		if (!buf) {
-			RETURN_FALSE;
-		}
-
 		RETURN_UNICODEL(buf, buflen, 0);
 	} else { /* IS_STRING */
 		char *buf = emalloc(len + 1);
 		int buflen = php_stream_read(stream, buf, len);
 
-		if (!buflen) {
-			efree(buf);
-			RETURN_FALSE;
-		}
 		buf[buflen] = 0;
 		RETURN_STRINGL(buf, buflen, 0);
 	}

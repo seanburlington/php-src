@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.173 2008/11/04 17:05:17 lbarnaud Exp $ */
+/* $Id: streams.c,v 1.174 2008/11/11 01:55:19 lbarnaud Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1672,7 +1672,7 @@ PHPAPI size_t _php_stream_copy_to_mem_ex(php_stream *src, zend_uchar rettype, vo
 	if (maxlen > 0) {
 		if (rettype == IS_UNICODE) {
 			ptr.u = *buf = pemalloc_rel_orig(UBYTES(maxlen + 1), persistent);
-			while ((len < maxlen) & !php_stream_eof(src)) {
+			while ((len < maxlen) && !php_stream_eof(src)) {
 				int ulen;
 
 				ret = php_stream_read_unicode_ex(src, ptr.u, maxlen - len, maxchars);
@@ -1685,7 +1685,7 @@ PHPAPI size_t _php_stream_copy_to_mem_ex(php_stream *src, zend_uchar rettype, vo
 			return len;
 		} else {
 			ptr.s = *buf = pemalloc_rel_orig(maxlen + 1, persistent);
-			while ((len < maxlen) & !php_stream_eof(src)) {
+			while ((len < maxlen) && !php_stream_eof(src)) {
 				ret = php_stream_read(src, ptr.s, maxlen - len);
 				len += ret;
 				ptr.s += ret;

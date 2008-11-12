@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.66 2008/11/12 11:24:48 pajoye Exp $ */
+/* $Id: php_zip.c,v 1.67 2008/11/12 17:26:19 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,9 +99,6 @@ static int le_zip_entry;
 static char * php_zip_make_relative_path(char *path, int path_len) /* {{{ */
 {
 	char *path_begin = path;
-	int prev_is_slash = 0;
-	char *e = path + path_len - 1;
-	size_t pos = path_len - 1;
 	size_t i;
 
 	if (IS_SLASH(path[0])) {
@@ -2758,7 +2755,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.66 2008/11/12 11:24:48 pajoye Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.67 2008/11/12 17:26:19 felipe Exp $");
 	php_info_print_table_row(2, "Zip version", PHP_ZIP_VERSION_STRING);
 	php_info_print_table_row(2, "Libzip version", "0.9.0");
 

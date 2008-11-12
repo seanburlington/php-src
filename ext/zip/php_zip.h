@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.18 2008/08/08 18:13:55 pajoye Exp $ */
+/* $Id: php_zip.h,v 1.19 2008/11/12 11:24:48 pajoye Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -41,6 +41,10 @@ extern zend_module_entry zip_module_entry;
 	php_check_open_basedir(filename TSRMLS_CC)
 #endif
 /* }}} */
+
+#if ((PHP_MAJOR_VERSION >= 5 && PHP_MINOR_VERSION >= 2) || PHP_MAJOR_VERSION >= 6)
+# define PHP_ZIP_USE_OO 1
+#endif
 
 typedef struct _ze_zip_rsrc {
 	struct zip *za;

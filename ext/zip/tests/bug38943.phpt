@@ -2,25 +2,12 @@
 #38943, properties in extended class cannot be set
 --SKIPIF--
 <?php
-/* $Id: bug38943.phpt,v 1.3 2008/05/27 02:55:52 felipe Exp $ */
+/* $Id: bug38943.phpt,v 1.4 2008/11/12 11:24:48 pajoye Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
 <?php
-class myZip extends ZipArchive {
-	private $test = 0;
-	public $testp = 1;
-	private $testarray = array();
-
-	public function __construct() {
-		$this->testarray[] = 1;
-		var_dump($this->testarray);
-	}
-}
-
-$z = new myZip;
-$z->testp = "foobar";
-var_dump($z);
+include dirname(__FILE__) . '/bug38943.inc';
 ?>
 --EXPECTF--
 array(1) {
@@ -37,14 +24,14 @@ object(myZip)#1 (8) {
     [0]=>
     int(1)
   }
-  [u"status"]=>
+  ["status"]=>
   int(0)
-  [u"statusSys"]=>
+  ["statusSys"]=>
   int(0)
-  [u"numFiles"]=>
+  ["numFiles"]=>
   int(0)
-  [u"filename"]=>
+  ["filename"]=>
   string(0) ""
-  [u"comment"]=>
+  ["comment"]=>
   string(0) ""
 }

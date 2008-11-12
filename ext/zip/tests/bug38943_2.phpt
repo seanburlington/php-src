@@ -2,9 +2,9 @@
 #38943, properties in extended class cannot be set (5.3)
 --SKIPIF--
 <?php
-/* $Id: bug38943_2.phpt,v 1.2 2008/11/12 11:24:48 pajoye Exp $ */
+/* $Id: bug38943_2.phpt,v 1.3 2008/11/12 17:17:38 felipe Exp $ */
 if(!extension_loaded('zip')) die('skip');
-if (!defined('PHP_VERSION_MAJOR')) die('skip test for5.3+ only');
+if (version_compare(PHP_VERSION, "5.3", "<")) die('skip test for5.3+ only');
 ?>
 --FILE--
 <?php

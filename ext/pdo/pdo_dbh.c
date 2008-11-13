@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.15 2008/11/10 18:47:28 davidc Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.16 2008/11/13 14:40:06 pajoye Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1031,9 +1031,9 @@ static PHP_METHOD(PDO, errorInfo)
 	error_count = zend_hash_num_elements(Z_ARRVAL_P(return_value));
 
 	if (error_expected_count > error_count) {
-		error_count_diff = error_expected_count - error_count;
-
 		int current_index;
+
+		error_count_diff = error_expected_count - error_count;
 		for (current_index = 0; current_index < error_count_diff; current_index++) {
 			add_next_index_null(return_value);
 		}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.15 2008/11/13 13:09:47 felipe Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.16 2008/11/13 14:53:55 felipe Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -321,7 +321,7 @@ rewrite:
 				snprintf(idxbuf, sizeof(idxbuf), tmpl, bind_no++);
 			} else {
 				memset(idxbuf, 0, sizeof(idxbuf));
-				memcpy(idxbuf, p, strlen(p));
+				memcpy(idxbuf, p, sizeof(idxbuf));
 				skip_map = 1;
 			}
 

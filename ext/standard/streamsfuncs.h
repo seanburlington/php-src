@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.h,v 1.13.2.1.2.4.2.3 2008/08/16 10:57:56 bjori Exp $ */
+/* $Id: streamsfuncs.h,v 1.13.2.1.2.4.2.4 2008/11/13 05:47:47 lbarnaud Exp $ */
 
 /* Flags for stream_socket_client */
 #define PHP_STREAM_CLIENT_PERSISTENT	1
@@ -46,6 +46,7 @@ PHP_FUNCTION(stream_wrapper_unregister);
 PHP_FUNCTION(stream_wrapper_restore);
 PHP_FUNCTION(stream_context_create);
 PHP_FUNCTION(stream_context_set_params);
+PHP_FUNCTION(stream_context_get_params);
 PHP_FUNCTION(stream_context_set_option);
 PHP_FUNCTION(stream_context_get_options);
 PHP_FUNCTION(stream_context_get_default);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.29 2008/11/04 16:46:03 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.30 2008/11/13 05:47:47 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1035,6 +1035,34 @@ PHP_FUNCTION(stream_context_set_params)
 	}
 
 	RETVAL_BOOL(parse_context_params(context, params TSRMLS_CC) == SUCCESS);
+}
+/* }}} */
+
+/* {{{ proto bool stream_context_get_params(resource context|resource stream)
+   Get parameters of a file context */
+PHP_FUNCTION(stream_context_get_params)
+{
+	zval *zcontext, *options;
+	php_stream_context *context;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zcontext) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	context = decode_context_param(zcontext TSRMLS_CC);
+	if (!context) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid stream/context parameter");
+		RETURN_FALSE;
+	}
+
+	array_init(return_value);
+	if (context->notifier && context->notifier->ptr && context->notifier->func == user_space_stream_notifier) {
+		add_assoc_zval_ex(return_value, ZEND_STRS("notification"), context->notifier->ptr);
+		Z_ADDREF_P(context->notifier->ptr);
+	}
+	ALLOC_INIT_ZVAL(options);
+	ZVAL_ZVAL(options, context->options, 1, 0);
+	add_assoc_zval_ex(return_value, ZEND_STRS("options"), options);
 }
 /* }}} */
 

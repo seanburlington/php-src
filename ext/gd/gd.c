@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.399 2008/11/06 10:23:52 pajoye Exp $ */
+/* $Id: gd.c,v 1.400 2008/11/13 11:32:04 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -54,15 +54,6 @@
 #endif
 
 #if HAVE_LIBGD
-
-#ifdef HAVE_GD_PNG
-/* needs to be first */
-# include <png.h>
-#endif
-
-#ifdef HAVE_GD_JPG
-# include <jpeglib.h>
-#endif
 
 static int le_gd, le_gd_font;
 #if HAVE_LIBT1

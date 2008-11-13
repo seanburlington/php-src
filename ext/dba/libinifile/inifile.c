@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.21 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: inifile.c,v 1.22 2008/11/13 18:21:54 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.21 $";
+	return "1.0, $Revision: 1.22 $";
 }
 /* }}} */ 
 
@@ -507,7 +507,9 @@ static int inifile_delete_replace_append(inifile *dba, const key_type *key, cons
 	
 	/* 5 */
 	if (ret == SUCCESS) {
-		ret = inifile_truncate(dba, append ? pos_grp_next : pos_grp_start TSRMLS_CC); /* writes error on fail */
+		if (!value || (key->name && strlen(key->name))) {
+			ret = inifile_truncate(dba, append ? pos_grp_next : pos_grp_start TSRMLS_CC); /* writes error on fail */
+		}
 	}
 
 	if (ret == SUCCESS) {

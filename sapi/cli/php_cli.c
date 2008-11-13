@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.22.2.15 2008/08/14 09:46:26 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.22.2.16 2008/11/13 10:14:04 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -347,11 +347,8 @@ static char* sapi_cli_read_cookies(TSRMLS_D) /* {{{ */
 }
 /* }}} */
 
-static int sapi_cli_header_handler(sapi_header_struct *h, sapi_headers_struct *s TSRMLS_DC) /* {{{ */
+static int sapi_cli_header_handler(sapi_header_struct *h, sapi_header_op_enum op, sapi_headers_struct *s TSRMLS_DC) /* {{{ */
 {
-	/* free allocated header line */
-	efree(h->header);
-	/* avoid pushing headers into SAPI headers list */
 	return 0;
 }
 /* }}} */

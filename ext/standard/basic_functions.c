@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.70 2008/11/13 05:47:47 lbarnaud Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.71 2008/11/13 10:14:03 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1689,6 +1689,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_header, 0, 0, 1)
 	ZEND_ARG_INFO(0, header)
 	ZEND_ARG_INFO(0, replace)
 	ZEND_ARG_INFO(0, http_response_code)
+ZEND_END_ARG_INFO()
+
+static
+ZEND_BEGIN_ARG_INFO_EX(arginfo_header_remove, 0, 0, 0)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 static
@@ -3455,6 +3460,7 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(setcookie,														arginfo_setcookie)
 	PHP_FE(setrawcookie,													arginfo_setrawcookie)
 	PHP_FE(header,															arginfo_header)
+	PHP_FE(header_remove,													arginfo_header_remove)
 	PHP_FE(headers_sent,													arginfo_headers_sent)
 	PHP_FE(headers_list,													arginfo_headers_list)
 

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.84.2.1.2.7.2.5 2008/10/21 22:08:37 lbarnaud Exp $ */
+/* $Id: head.c,v 1.84.2.1.2.7.2.6 2008/11/13 10:14:04 lbarnaud Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -47,6 +47,20 @@ PHP_FUNCTION(header)
 		return;
 	
 	sapi_header_op(rep ? SAPI_HEADER_REPLACE:SAPI_HEADER_ADD, &ctr TSRMLS_CC);
+}
+/* }}} */
+
+/* {{{ proto void header_remove([string name])
+   Removes an HTTP header previously set using header() */
+PHP_FUNCTION(header_remove)
+{
+	sapi_header_line ctr = {0};
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|s", &ctr.line,
+	                          &ctr.line_len) == FAILURE)
+		return;
+
+	sapi_header_op(ZEND_NUM_ARGS() == 0 ? SAPI_HEADER_DELETE_ALL : SAPI_HEADER_DELETE, &ctr TSRMLS_CC);
 }
 /* }}} */
 

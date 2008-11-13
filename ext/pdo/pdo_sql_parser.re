@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.16 2008/11/13 14:53:55 felipe Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.28.2.4.2.17 2008/11/13 23:23:11 felipe Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -299,9 +299,8 @@ rewrite:
 
 	} else if (query_type == PDO_PLACEHOLDER_POSITIONAL) {
 		/* rewrite ? to :pdoX */
-		char idxbuf[32];
+		char *name, *idxbuf;
 		const char *tmpl = stmt->named_rewrite_template ? stmt->named_rewrite_template : ":pdo%d";
-		char *name;
 		int bind_no = 1;
 		
 		newbuffer_len = inquery_len;
@@ -318,21 +317,19 @@ rewrite:
 
 			/* check if bound parameter is already available */
 			if (!strcmp(name, "?") || zend_hash_find(stmt->bound_param_map, name, plc->len + 1, (void**) &p) == FAILURE) {
-				snprintf(idxbuf, sizeof(idxbuf), tmpl, bind_no++);
+				spprintf(&idxbuf, 0, tmpl, bind_no++);
 			} else {
-				memset(idxbuf, 0, sizeof(idxbuf));
-				memcpy(idxbuf, p, sizeof(idxbuf));
+				idxbuf = estrdup(p);
 				skip_map = 1;
 			}
 
-			plc->quoted = estrdup(idxbuf);
+			plc->quoted = idxbuf;
 			plc->qlen = strlen(plc->quoted);
 			plc->freeq = 1;
 			newbuffer_len += plc->qlen;
 
 			if (!skip_map && stmt->named_rewrite_template) {
 				/* create a mapping */
-				
 				zend_hash_update(stmt->bound_param_map, name, plc->len + 1, idxbuf, plc->qlen + 1, NULL);
 			}
 

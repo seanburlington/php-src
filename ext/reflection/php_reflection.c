@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.323 2008/11/02 21:10:10 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.324 2008/11/14 19:22:09 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -375,7 +375,11 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 	if (ce->num_interfaces) {
 		zend_uint i;
 
-		string_printf(str, " implements %v", ce->interfaces[0]->name);
+		if (ce->ce_flags & ZEND_ACC_INTERFACE) {
+			string_printf(str, " extends %v", ce->interfaces[0]->name);
+		} else {
+			string_printf(str, " implements %v", ce->interfaces[0]->name);
+		}
 		for (i = 1; i < ce->num_interfaces; ++i) {
 			string_printf(str, ", %v", ce->interfaces[i]->name);
 		}
@@ -5467,7 +5471,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.323 2008/11/02 21:10:10 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.324 2008/11/14 19:22:09 bjori Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

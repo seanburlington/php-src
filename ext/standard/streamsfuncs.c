@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.130 2008/11/13 05:46:51 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.131 2008/11/14 06:00:33 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1151,7 +1151,7 @@ PHP_FUNCTION(stream_context_set_params)
 }
 /* }}} */
 
-/* {{{ proto bool stream_context_get_params(resource context|resource stream) U
+/* {{{ proto array stream_context_get_params(resource context|resource stream) U
    Get parameters of a file context */
 PHP_FUNCTION(stream_context_get_params)
 {

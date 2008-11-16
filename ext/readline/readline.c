@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.3.2.3.2.8 2008/11/02 21:19:35 felipe Exp $ */
+/* $Id: readline.c,v 1.42.2.3.2.3.2.9 2008/11/16 18:00:50 iliaa Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -187,7 +187,7 @@ PHP_RSHUTDOWN_FUNCTION(readline)
 #if HAVE_RL_CALLBACK_READ_CHAR
 	if (_prepped_callback) {
 		rl_callback_handler_remove();
-		FREE_ZVAL(_prepped_callback);
+		zval_ptr_dtor(&_prepped_callback);
 		_prepped_callback = 0;
 	}
 #endif
@@ -556,10 +556,11 @@ PHP_FUNCTION(readline_callback_handler_install)
 		efree(name);
 		RETURN_FALSE;
 	}
+	efree(name);
 
 	if (_prepped_callback) {
 		rl_callback_handler_remove();
-		FREE_ZVAL(_prepped_callback);
+		zval_ptr_dtor(&_prepped_callback);
 	}
 
 	MAKE_STD_ZVAL(_prepped_callback);

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.22.2.35.2.26 2008/11/06 00:37:13 colder Exp $ */
+/* $Id: simplexml.c,v 1.151.2.22.2.35.2.27 2008/11/17 11:27:58 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2437,7 +2437,6 @@ PHP_FUNCTION(simplexml_import_dom)
 /* }}} */
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_file, 0, 0, 1)
 	ZEND_ARG_INFO(0, filename)
 	ZEND_ARG_INFO(0, class_name)
@@ -2446,7 +2445,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_file, 0, 0, 1)
 	ZEND_ARG_INFO(0, is_prefix)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_string, 0, 0, 1)
 	ZEND_ARG_INFO(0, data)
 	ZEND_ARG_INFO(0, class_name)
@@ -2455,7 +2453,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_load_string, 0, 0, 1)
 	ZEND_ARG_INFO(0, is_prefix)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_simplexml_import_dom, 0, 0, 1)
 	ZEND_ARG_INFO(0, node)
 	ZEND_ARG_INFO(0, class_name)
@@ -2557,7 +2554,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.26 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.22.2.35.2.27 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.19.2.11 2008/11/02 21:19:33 felipe Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.12 2008/11/17 11:27:56 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,12 +42,10 @@ static const char digits[] = "0123456789abcdef";
 #define PHP_JSON_HEX_QUOT	(1<<3)
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_json_encode, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_json_decode, 0, 0, 1)
 	ZEND_ARG_INFO(0, json)
 	ZEND_ARG_INFO(0, assoc)

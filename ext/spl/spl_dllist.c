@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_dllist.c,v 1.1.2.16 2008/11/02 21:19:36 felipe Exp $ */
+/* $Id: spl_dllist.c,v 1.1.2.17 2008/11/17 11:27:59 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1122,22 +1122,18 @@ zend_object_iterator *spl_dllist_get_iterator(zend_class_entry *ce, zval *object
 /* }}} */
 
 /*  Function/Class/Method definitions */
-static
 ZEND_BEGIN_ARG_INFO(arginfo_dllist_setiteratormode, 0)
 	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_dllist_push, 0)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dllist_offsetGet, 0, 0, 1)
 	ZEND_ARG_INFO(0, index)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dllist_offsetSet, 0, 0, 2)
 	ZEND_ARG_INFO(0, index)
 	ZEND_ARG_INFO(0, newval)

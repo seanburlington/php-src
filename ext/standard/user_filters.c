@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.9.2.8 2008/11/02 21:19:37 felipe Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.9.2.9 2008/11/17 11:27:59 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -54,7 +54,6 @@ static int le_bucket;
 PHP_FUNCTION(user_filter_nop)
 {
 }
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_filter, 0)
 	ZEND_ARG_INFO(0, in)
 	ZEND_ARG_INFO(0, out)
@@ -62,11 +61,9 @@ ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_filter, 0)
 	ZEND_ARG_INFO(0, closing)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_onCreate, 0)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_php_user_filter_onClose, 0)
 ZEND_END_ARG_INFO()
 

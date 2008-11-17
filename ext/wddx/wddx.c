@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.156 2008/11/02 21:10:12 felipe Exp $ */
+/* $Id: wddx.c,v 1.157 2008/11/17 11:26:24 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,36 +103,30 @@ typedef struct {
 static void php_wddx_process_data(void *user_data, const XML_Char *s, int len);
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_serialize_value, 0, 0, 1)
 	ZEND_ARG_INFO(0, var)
 	ZEND_ARG_INFO(0, comment)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_serialize_vars, 0, 0, 1)
 	ZEND_ARG_INFO(0, var_name)
 	ZEND_ARG_INFO(0, ...)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_serialize_start, 0, 0, 0)
 	ZEND_ARG_INFO(0, comment)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_packet_end, 0, 0, 1)
 	ZEND_ARG_INFO(0, packet_id)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_add_vars, 0, 0, 2)
 	ZEND_ARG_INFO(0, packet_id)
 	ZEND_ARG_INFO(0, var_name)
 	ZEND_ARG_INFO(0, ...)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_wddx_unserialize, 0, 0, 1)
 	ZEND_ARG_INFO(0, packet)
 ZEND_END_ARG_INFO()

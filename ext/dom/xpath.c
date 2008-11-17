@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.42 2008/11/02 21:10:07 felipe Exp $ */
+/* $Id: xpath.c,v 1.43 2008/11/17 11:26:20 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,30 +37,25 @@
 #if defined(LIBXML_XPATH_ENABLED)
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_xpath_construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, doc, DOMDocument, 0)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_xpath_register_ns, 0, 0, 2)
 	ZEND_ARG_INFO(0, prefix)
 	ZEND_ARG_INFO(0, uri)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_xpath_query, 0, 0, 1)
 	ZEND_ARG_INFO(0, expr)
 	ZEND_ARG_OBJ_INFO(0, context, DOMNode, 0)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_xpath_evaluate, 0, 0, 1)
 	ZEND_ARG_INFO(0, expr)
 	ZEND_ARG_OBJ_INFO(0, context, DOMNode, 0)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_xpath_register_php_functions, 0, 0, 0)
 ZEND_END_ARG_INFO();
 /* }}} */

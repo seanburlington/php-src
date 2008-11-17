@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementationsource.c,v 1.14 2008/11/02 21:10:07 felipe Exp $ */
+/* $Id: domimplementationsource.c,v 1.15 2008/11/17 11:26:19 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,12 +29,10 @@
 
 
 /* {{{ arginfo */
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementationsource_getdomimplementation, 0, 0, 1)
 	ZEND_ARG_INFO(0, features)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dom_implementationsource_getdomimplementations, 0, 0, 1)
 	ZEND_ARG_INFO(0, features)
 ZEND_END_ARG_INFO();

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.27 2008/11/02 21:10:11 felipe Exp $ */
+/* $Id: spl_observer.c,v 1.28 2008/11/17 11:26:24 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -43,7 +43,6 @@ SPL_METHOD(SplSubject, attach);
 SPL_METHOD(SplSubject, detach);
 SPL_METHOD(SplSubject, notify);
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_SplObserver_update, 0)
 	ZEND_ARG_OBJ_INFO(0, SplSubject, SplSubject, 0)
 ZEND_END_ARG_INFO();
@@ -53,13 +52,11 @@ static const zend_function_entry spl_funcs_SplObserver[] = {
 	{NULL, NULL, NULL}
 };
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_SplSubject_attach, 0)
 	ZEND_ARG_OBJ_INFO(0, SplObserver, SplObserver, 0)
 ZEND_END_ARG_INFO();
 
-/*static
-ZEND_BEGIN_ARG_INFO_EX(arginfo_SplSubject_notify, 0, 0, 1)
+/*ZEND_BEGIN_ARG_INFO_EX(arginfo_SplSubject_notify, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, ignore, SplObserver, 1)
 ZEND_END_ARG_INFO();*/
 
@@ -566,33 +563,27 @@ outexcept:
 
 } /* }}} */
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_Object, 0)
 	ZEND_ARG_INFO(0, object)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_attach, 0, 0, 1)
 	ZEND_ARG_INFO(0, object)
 	ZEND_ARG_INFO(0, inf)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_Serialized, 0)
 	ZEND_ARG_INFO(0, serialized)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO(arginfo_setInfo, 0)
 	ZEND_ARG_INFO(0, info)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_offsetGet, 0, 0, 1)
 	ZEND_ARG_INFO(0, object)
 ZEND_END_ARG_INFO()
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_offsetSet, 0, 0, 2)
 	ZEND_ARG_INFO(0, object)
 	ZEND_ARG_INFO(0, info)
@@ -854,18 +845,15 @@ SPL_METHOD(MultipleIterator, key)
 }
 /* }}} */
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_MultipleIterator_attachIterator, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
 	ZEND_ARG_INFO(0, infos)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_MultipleIterator_detachIterator, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
 ZEND_END_ARG_INFO();
 
-static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_MultipleIterator_containsIterator, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
 ZEND_END_ARG_INFO();

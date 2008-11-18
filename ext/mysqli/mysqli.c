@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.17.2.31 2008/10/03 16:19:49 pajoye Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.17.2.32 2008/11/18 17:02:17 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -793,6 +793,9 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_USE_RESULT", MYSQLI_USE_RESULT, CONST_CS | CONST_PERSISTENT);
 #if defined(MYSQLI_USE_MYSQLND) && defined(MYSQLND_THREADED)
 	REGISTER_LONG_CONSTANT("MYSQLI_BG_STORE_RESULT", MYSQLI_BG_STORE_RESULT, CONST_CS | CONST_PERSISTENT);
+#endif
+#if defined (MYSQLI_USE_MYSQLND)
+	REGISTER_LONG_CONSTANT("MYSQLI_ASYNC", MYSQLI_ASYNC, CONST_CS | CONST_PERSISTENT);
 #endif
 
 	/* for mysqli_fetch_assoc */

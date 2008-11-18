@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.23.2.5.2.2.2.8 2008/11/10 20:06:23 andrey Exp $ 
+  $Id: mysqli_prop.c,v 1.23.2.5.2.2.2.9 2008/11/18 17:02:17 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -176,7 +176,7 @@ static int link_affected_rows_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 			ZVAL_LONG(*retval, rc);
 		} else {
 			char *ret;
-			int l = spprintf(&ret, 0, MYSQLI_LLU_SPEC, (my_ulonglong) rc);
+			int l = spprintf(&ret, 0, MYSQLI_LLU_SPEC, rc);
 			ZVAL_STRINGL(*retval, ret, l, 0);
 		}
 	}
@@ -294,7 +294,7 @@ static int stmt_affected_rows_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 			ZVAL_LONG(*retval, rc);
 		} else {
 			char *ret;
-			int l = spprintf(&ret, 0, MYSQLI_LLU_SPEC, (my_ulonglong) rc);
+			int l = spprintf(&ret, 0, MYSQLI_LLU_SPEC, rc);
 			ZVAL_STRINGL(*retval, ret, l, 0);
 		}
 	}

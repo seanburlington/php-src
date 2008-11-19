@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.2.2.6.2.3.2.12 2008/11/17 11:27:59 felipe Exp $ */
+/* $Id: spl_observer.c,v 1.2.2.6.2.3.2.13 2008/11/19 02:00:53 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -630,15 +630,18 @@ SPL_METHOD(MultipleIterator, __construct)
 {
 	spl_SplObjectStorage   *intern;
 	long                    flags = MIT_NEED_ALL|MIT_KEYS_NUMERIC;
+	zend_error_handling error_handling;
 
-	zend_replace_error_handling(EH_THROW, spl_ce_InvalidArgumentException, NULL TSRMLS_CC);
+	zend_replace_error_handling(EH_THROW, spl_ce_InvalidArgumentException, &error_handling TSRMLS_CC);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &flags) == FAILURE) {
+		zend_restore_error_handling(&error_handling TSRMLS_CC);
 		return;
 	}
 
 	intern = (spl_SplObjectStorage*)zend_object_store_get_object(getThis() TSRMLS_CC);
 	intern->flags = flags;
+	zend_restore_error_handling(&error_handling TSRMLS_CC);
 }
 /* }}} */
 

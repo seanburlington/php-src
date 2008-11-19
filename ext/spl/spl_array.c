@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.34 2008/11/19 14:41:40 lbarnaud Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.35 2008/11/19 17:53:47 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -95,8 +95,8 @@ static void spl_array_rewind(spl_array_object *intern TSRMLS_DC);
 
 static void spl_array_update_pos(spl_array_object* intern) /* {{{ */
 {
-	Bucket *pos;
-	if ((pos = intern->pos)) {
+	Bucket *pos = intern->pos;
+	if (pos != NULL) {
 		intern->pos_h = pos->h;
 	}
 } /* }}} */

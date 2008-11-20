@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.20 2008/11/19 01:59:07 colder Exp $ */
+/* $Id: sqlite3.c,v 1.21 2008/11/20 10:20:37 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1409,8 +1409,9 @@ PHP_METHOD(sqlite3result, __construct)
 {
 	php_sqlite3_result *result_obj;
 	zval *object = getThis();
-	result_obj = (php_sqlite3_result *)zend_object_store_get_object(object TSRMLS_CC);
 	zend_error_handling error_handling;
+
+	result_obj = (php_sqlite3_result *)zend_object_store_get_object(object TSRMLS_CC);
 
 	zend_replace_error_handling(EH_THROW, NULL, &error_handling TSRMLS_CC);
 

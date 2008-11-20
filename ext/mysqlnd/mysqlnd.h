@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.22 2008/11/18 16:54:38 andrey Exp $ */
+/* $Id: mysqlnd.h,v 1.23 2008/11/20 17:29:55 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.5-dev - 081106 - $Revision: 1.22 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.5-dev - 081106 - $Revision: 1.23 $"
 #define MYSQLND_VERSION_ID 50005
 
 /* This forces inlining of some accessor functions */
@@ -111,7 +111,7 @@ PHPAPI void _mysqlnd_debug(const char *mode TSRMLS_DC);
 #define mysqlnd_reap_async_query(conn)					(conn)->m->reap_query((conn) TSRMLS_CC)
 #define mysqlnd_unbuffered_skip_result(result)			(result)->m.skip_result((result) TSRMLS_CC)
 
-enum_func_status _mysqlnd_poll(MYSQLND **r_array, MYSQLND **e_array, MYSQLND ***dont_poll, long sec, long usec, uint * desc_num TSRMLS_DC);
+PHPAPI enum_func_status _mysqlnd_poll(MYSQLND **r_array, MYSQLND **e_array, MYSQLND ***dont_poll, long sec, long usec, uint * desc_num TSRMLS_DC);
 
 #define mysqlnd_use_result(conn)		(conn)->m->use_result((conn) TSRMLS_CC)
 #define mysqlnd_store_result(conn)		(conn)->m->store_result((conn) TSRMLS_CC)

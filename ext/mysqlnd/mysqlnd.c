@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.35 2008/11/19 17:41:25 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.36 2008/11/20 17:29:55 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1382,7 +1382,7 @@ MYSQLND_METHOD(mysqlnd_conn, set_charset)(MYSQLND * const conn, const char * con
 
 /* {{{ mysqlnd_conn::refresh */
 static enum_func_status
-MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, unsigned long options TSRMLS_DC)
+MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, uint8_t options TSRMLS_DC)
 {
 	zend_uchar bits[1];
 	DBG_ENTER("mysqlnd_conn::refresh");
@@ -1397,7 +1397,7 @@ MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, unsigned long option
 
 /* {{{ mysqlnd_conn::shutdown */
 static enum_func_status
-MYSQLND_METHOD(mysqlnd_conn, shutdown)(MYSQLND * const conn, unsigned long level TSRMLS_DC)
+MYSQLND_METHOD(mysqlnd_conn, shutdown)(MYSQLND * const conn, uint8_t level TSRMLS_DC)
 {
 	zend_uchar bits[1];
 	DBG_ENTER("mysqlnd_conn::shutdown");

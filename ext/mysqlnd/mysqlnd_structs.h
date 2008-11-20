@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.19 2008/11/18 16:54:38 andrey Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.20 2008/11/20 17:29:55 andrey Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H
@@ -247,8 +247,8 @@ struct st_mysqlnd_conn_methods
 
 	MYSQLND_STMT *		(*stmt_init)(MYSQLND * const conn TSRMLS_DC);
 
-	enum_func_status	(*shutdown_server)(MYSQLND * const conn, unsigned long level TSRMLS_DC);
-	enum_func_status	(*refresh_server)(MYSQLND * const conn, unsigned long options TSRMLS_DC);
+	enum_func_status	(*shutdown_server)(MYSQLND * const conn, uint8_t level TSRMLS_DC);
+	enum_func_status	(*refresh_server)(MYSQLND * const conn, uint8_t options TSRMLS_DC);
 
 	enum_func_status	(*ping)(MYSQLND * const conn TSRMLS_DC);
 	enum_func_status	(*kill_connection)(MYSQLND *conn, unsigned int pid TSRMLS_DC);

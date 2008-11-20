@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.119.2.10.2.17.2.15 2008/11/20 14:14:05 magicaltux Exp $ */
+/* $Id: wddx.c,v 1.119.2.10.2.17.2.16 2008/11/20 14:48:41 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1278,7 +1278,10 @@ PHP_FUNCTION(wddx_add_vars)
 		return;
 	}
 
-	ZEND_FETCH_RESOURCE(packet, wddx_packet *, &packet_id, -1, "WDDX packet ID", le_wddx);
+	if (!ZEND_FETCH_RESOURCE_NO_RETURN(packet, wddx_packet *, &packet_id, -1, "WDDX packet ID", le_wddx)) {
+		efree(args);
+		RETURN_FALSE;
+	}
 	
 	if (!packet) {
 		efree(args);

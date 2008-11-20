@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.c,v 1.5.2.34 2008/11/19 17:45:43 andrey Exp $ */
+/* $Id: mysqlnd.c,v 1.5.2.35 2008/11/20 17:21:36 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1003,7 +1003,7 @@ static int mysqlnd_stream_array_from_fd_set(MYSQLND **conn_array, fd_set *fds TS
 #endif
 
 /* {{{ _mysqlnd_poll */
-enum_func_status
+PHPAPI enum_func_status
 _mysqlnd_poll(MYSQLND **r_array, MYSQLND **e_array, MYSQLND ***dont_poll, long sec, long usec, uint * desc_num TSRMLS_DC)
 {
 
@@ -1382,7 +1382,7 @@ MYSQLND_METHOD(mysqlnd_conn, set_charset)(MYSQLND * const conn, const char * con
 
 /* {{{ mysqlnd_conn::refresh */
 static enum_func_status
-MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, unsigned long options TSRMLS_DC)
+MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, uint8_t options TSRMLS_DC)
 {
 	zend_uchar bits[1];
 	DBG_ENTER("mysqlnd_conn::refresh");
@@ -1397,7 +1397,7 @@ MYSQLND_METHOD(mysqlnd_conn, refresh)(MYSQLND * const conn, unsigned long option
 
 /* {{{ mysqlnd_conn::shutdown */
 static enum_func_status
-MYSQLND_METHOD(mysqlnd_conn, shutdown)(MYSQLND * const conn, unsigned long level TSRMLS_DC)
+MYSQLND_METHOD(mysqlnd_conn, shutdown)(MYSQLND * const conn, uint8_t level TSRMLS_DC)
 {
 	zend_uchar bits[1];
 	DBG_ENTER("mysqlnd_conn::shutdown");

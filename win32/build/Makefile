@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.35.2.1.2.6.2.9 2008/10/26 00:14:23 pajoye Exp $
+# $Id: Makefile,v 1.35.2.1.2.6.2.10 2008/11/21 14:18:27 pajoye Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -22,6 +22,7 @@ LD="$(LINK)"
 MC="$(MC)"
 MT="$(MT)"
 RE2C="$(RE2C)"
+PHP_BUILD=$(PHP_BUILD)
 
 MCFILE=$(BUILD_DIR)\wsyslog.rc
 
@@ -118,6 +119,7 @@ $(BUILD_DIR)\php.exe -d open_basedir= -d safe_mode=0 -d output_buffering=0 run-t
 <<NOKEEP
 
 build-snap: generated_files
+	SET PATH=$(PATH);$(PHP_BUILD)\bin
 	@$(MAKE) "$(BUILD_DIR)\$(PHPDLL)"
 	-for %T in ($(SAPI_TARGETS)) do $(MAKE) /I /nologo "%T"
 	-for %T in ($(EXT_TARGETS)) do $(MAKE) /I /nologo "%T"

@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.34 2008/10/20 14:47:33 pajoye Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.35 2008/11/21 14:18:27 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -236,6 +236,7 @@ if (PHP_PHP_BUILD == 'no') {
 		}
 	}
 }
+DEFINE("PHP_BUILD", PHP_PHP_BUILD);
 
 ARG_WITH('extra-includes', 'Extra include path to use when building everything', '');
 ARG_WITH('extra-libs', 'Extra library path to use when linking everything', '');

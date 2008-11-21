@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.64 2008/09/15 11:47:27 dmitry Exp $ */
+/* $Id: snprintf.c,v 1.65 2008/11/21 21:49:52 scottmac Exp $ */
 
 
 #include "php.h"
@@ -1312,6 +1312,30 @@ PHPAPI int ap_php_vsnprintf(char *buf, size_t len, const char *format, va_list a
 
 	strx_printv(&cc, buf, len, format, ap);
 	return (cc);
+}
+/* }}} */
+
+PHPAPI int ap_php_vasprintf(char **buf, const char *format, va_list ap) /* {{{ */
+{
+	va_list ap2;
+	int cc;
+
+	va_copy(ap2, ap);
+	cc = ap_php_vsnprintf(NULL, 0, format, ap2);
+	va_end(ap2);
+
+	*buf = NULL;
+
+	if (cc >= 0) {
+		if ((*buf = emalloc(++cc)) != NULL) {
+			if ((cc = ap_php_vsnprintf(*buf, cc, format, ap)) < 0) {
+				efree(*buf);
+				*buf = NULL;
+			}
+		}
+	}
+
+	return cc;
 }
 /* }}} */
 

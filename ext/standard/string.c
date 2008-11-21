@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.37 2008/11/02 18:24:34 felipe Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.38 2008/11/21 19:16:50 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4353,7 +4353,10 @@ PHPAPI size_t php_strip_tags_ex(char *rbuf, int len, int *stateptr, char *allow,
 
 			case '"':
 			case '\'':
-				if (state == 2 && *(p-1) != '\\') {
+				if (state == 4) {
+					/* Inside <!-- comment --> */
+					break;
+				} else if (state == 2 && *(p-1) != '\\') {
 					if (lc == c) {
 						lc = '\0';
 					} else if (lc != '\\') {

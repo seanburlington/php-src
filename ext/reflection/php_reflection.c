@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.325 2008/11/17 11:26:23 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.326 2008/11/21 23:32:50 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3488,8 +3488,8 @@ ZEND_METHOD(reflection_class, getProperty)
 	if (zend_u_hash_find(&ce->properties_info, name_type, name, name_len + 1, (void**) &property_info) == SUCCESS) {
 		if ((property_info->flags & ZEND_ACC_SHADOW) == 0) {
 			reflection_property_factory(ce, property_info, return_value TSRMLS_CC);
+			return;
 		}
-		return;
 	} else if (intern->obj) {
 		/* Check for dynamic properties */
 		if (zend_u_hash_exists(Z_OBJ_HT_P(intern->obj)->get_properties(intern->obj TSRMLS_CC), name_type, name, name_len+1)) {
@@ -5433,7 +5433,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.325 2008/11/17 11:26:23 felipe Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.326 2008/11/21 23:32:50 felipe Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

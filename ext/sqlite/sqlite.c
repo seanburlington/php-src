@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.218 2008/11/19 01:59:07 colder Exp $
+   $Id: sqlite.c,v 1.219 2008/11/22 11:48:38 scottmac Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -160,15 +160,19 @@ PHP_INI_END()
 		} \
 	}
 
-#define RES_FROM_OBJECT(res, object) \
+#define RES_FROM_OBJECT_RESTORE_ERH(res, object, error_handling) \
 	{ \
 		sqlite_object *obj = (sqlite_object*) zend_object_store_get_object(object TSRMLS_CC); \
 		res = obj->u.res; \
 		if (!res) { \
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "No result set available"); \
+			if (error_handling) \
+				zend_restore_error_handling(error_handling TSRMLS_CC); \
 			RETURN_NULL(); \
 		} \
 	}
+
+#define RES_FROM_OBJECT(res, object) RES_FROM_OBJECT_RESTORE_ERH(res, object, NULL)
 
 #define PHP_SQLITE_EMPTY_QUERY \
 	if (!sql_len) { \
@@ -1546,7 +1550,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.218 2008/11/19 01:59:07 colder Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.219 2008/11/22 11:48:38 scottmac Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2573,7 +2577,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 			zend_restore_error_handling(&error_handling TSRMLS_CC);
 			return;
 		}
-		RES_FROM_OBJECT(res, object);
+		RES_FROM_OBJECT_RESTORE_ERH(res, object, &error_handling);
 		if (!ZEND_NUM_ARGS()) {
 			ce = zend_standard_class_def;
 		} else {

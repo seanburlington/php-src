@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.3 2008/11/22 12:39:16 scottmac Exp $
+	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.4 2008/11/22 13:34:15 pajoye Exp $
 */
 
 /* Define the minimum supported version */
@@ -160,4 +160,4 @@
 #endif
 #define HAVE_STDLIB_H 1
 
-#define va_copy(ap1, ap2) memcpy(&ap1, &ap2, sizeof(va_list))
+#define va_copy(ap1, ap2) memcpy((&ap1), (&ap2), sizeof(va_list))

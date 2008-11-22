@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.64 2008/11/17 11:26:20 felipe Exp $ */
+/* $Id: gettext.c,v 1.65 2008/11/22 15:44:07 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -253,7 +253,7 @@ PHP_NAMED_FUNCTION(zif_bindtextdomain)
 
 	PHP_GETTEXT_DOMAIN_LENGTH_CHECK
 
-	if (!domain_len) {
+	if (!domain_len || !*domain_str) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "the first parameter must not be empty");
 		RETURN_FALSE;
 	}

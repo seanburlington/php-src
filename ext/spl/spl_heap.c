@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_heap.c,v 1.1.2.11 2008/11/17 11:27:59 felipe Exp $ */
+/* $Id: spl_heap.c,v 1.1.2.12 2008/11/22 14:19:47 davidc Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -970,8 +970,8 @@ static void spl_heap_it_move_forward(zend_object_iterator *iter TSRMLS_DC) /* {{
 SPL_METHOD(SplHeap, key)
 {
 	spl_heap_object *intern = (spl_heap_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
-
-	RETURN_LONG(intern->heap->count);
+	
+	RETURN_LONG(intern->heap->count - 1);
 }
 /* }}} */
 

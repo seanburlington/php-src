@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.249 2008/08/22 12:59:38 helly Exp $ */
+/* $Id: php.h,v 1.250 2008/11/22 15:16:42 scottmac Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -170,6 +170,14 @@ typedef unsigned int socklen_t;
 #else
 # if HAVE_SYS_VARARGS_H
 # include <sys/varargs.h>
+# endif
+#endif
+
+#ifndef va_copy
+# ifdef __va_copy
+#  define va_copy(ap1, ap2)         __va_copy((ap1), (ap2))
+# else
+#  define va_copy(ap1, ap2)         memcpy((&ap1), (&ap2), sizeof(va_list))
 # endif
 #endif
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.221.2.4.2.8.2.10 2008/08/22 12:59:46 helly Exp $ */
+/* $Id: php.h,v 1.221.2.4.2.8.2.11 2008/11/22 15:16:47 scottmac Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -173,6 +173,13 @@ typedef unsigned int socklen_t;
 # endif
 #endif
 
+#ifndef va_copy
+# ifdef __va_copy
+#  define va_copy(ap1, ap2)         __va_copy((ap1), (ap2))
+# else
+#  define va_copy(ap1, ap2)         memcpy((&ap1), (&ap2), sizeof(va_list))
+# endif
+#endif
 
 #include "zend_hash.h"
 #include "php3_compat.h"

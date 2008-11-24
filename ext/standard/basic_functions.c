@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.76 2008/11/13 19:22:01 stas Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.77 2008/11/24 19:17:56 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4131,6 +4131,7 @@ PHP_RINIT_FUNCTION(basic)
 	memset(BG(strtok_table), 0, 256);
 	BG(strtok_string) = NULL;
 	BG(strtok_zval) = NULL;
+	BG(strtok_last) = NULL;
 	BG(locale_string) = NULL;
 	BG(user_compare_func_name) = NULL;
 	BG(array_walk_func_name) = NULL;

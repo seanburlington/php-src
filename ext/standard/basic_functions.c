@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.74 2008/11/24 18:12:17 stas Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.75 2008/11/24 19:17:34 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3677,6 +3677,7 @@ PHP_RINIT_FUNCTION(basic) /* {{{ */
 	memset(BG(strtok_table), 0, 256);
 	BG(strtok_string) = NULL;
 	BG(strtok_zval) = NULL;
+	BG(strtok_last) = NULL;
 	BG(locale_string) = NULL;
 	BG(array_walk_fci) = empty_fcall_info;
 	BG(array_walk_fci_cache) = empty_fcall_info_cache;

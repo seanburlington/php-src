@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.73 2008/11/17 11:27:59 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.74 2008/11/24 18:12:17 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4770,7 +4770,7 @@ PHP_FUNCTION(call_user_method_array)
 	HashTable *params_ar;
 	int num_elems, element = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/za/", &callback, &object, &params) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/zA/", &callback, &object, &params) == FAILURE) {
 		return;
 	}
 

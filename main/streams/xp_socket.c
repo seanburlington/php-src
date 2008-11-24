@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.33.2.2.2.6.2.6 2008/08/26 16:06:36 dsp Exp $ */
+/* $Id: xp_socket.c,v 1.33.2.2.2.6.2.7 2008/11/24 15:36:47 dsp Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -280,12 +280,8 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 
 				if (sock->socket == -1) {
 					alive = 0;
-				} else {
-					if (php_pollfd_for(sock->socket, PHP_POLLREADABLE|POLLPRI, &tv) > 0) {
-						if (0 == recv(sock->socket, &buf, sizeof(buf), MSG_PEEK) && php_socket_errno() != EAGAIN) {
-							alive = 0;
-						}
-					} else {
+				} else if (php_pollfd_for(sock->socket, PHP_POLLREADABLE|POLLPRI, &tv) > 0) {
+					if (0 == recv(sock->socket, &buf, sizeof(buf), MSG_PEEK) && php_socket_errno() != EAGAIN) {
 						alive = 0;
 					}
 				}

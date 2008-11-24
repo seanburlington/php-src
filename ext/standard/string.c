@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.685 2008/11/24 19:21:20 lbarnaud Exp $ */
+/* $Id: string.c,v 1.686 2008/11/24 19:31:02 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3986,7 +3986,7 @@ PHPAPI UChar *php_u_strtr(UChar *str, int len, UChar *str_from, int str_from_len
 	}
 	if (can_optimize) {
 		for (i = trlen; i < str_to_len; i++) {
-			if (str_from[i] > 255) {
+			if (str_to[i] > 255) {
 				can_optimize = 0;
 				break;
 			}

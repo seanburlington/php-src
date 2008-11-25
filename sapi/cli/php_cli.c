@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.200 2008/11/17 11:26:25 felipe Exp $ */
+/* $Id: php_cli.c,v 1.201 2008/11/25 03:49:21 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -264,11 +264,10 @@ static int sapi_cli_ub_write(const char *str, uint str_length TSRMLS_DC) /* {{{ 
 	{
 		ret = sapi_cli_single_write(ptr, remaining);
 		if (!ret) {
-#ifdef PHP_CLI_WIN32_NO_CONSOLE
-			break;
-#else
+#ifndef PHP_CLI_WIN32_NO_CONSOLE
 			php_handle_aborted_connection();
 #endif
+			break;
 		}
 		ptr += ret;
 		remaining -= ret;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.h,v 1.24 2008/08/23 20:31:27 pajoye Exp $ */
+/* $Id: flock_compat.h,v 1.25 2008/11/26 04:18:24 lbarnaud Exp $ */
 
 #ifndef FLOCK_COMPAT_H
 #define FLOCK_COMPAT_H
@@ -34,6 +34,12 @@ PHPAPI int php_flock(int fd, int operation);
 #	define LOCK_UN 8
 PHPAPI int flock(int fd, int operation);
 #endif
+
+/* Userland LOCK_* constants */
+#define PHP_LOCK_SH 1
+#define PHP_LOCK_EX 2
+#define PHP_LOCK_UN 3
+#define PHP_LOCK_NB 4
 
 #ifdef PHP_WIN32
 #define EWOULDBLOCK WSAEWOULDBLOCK

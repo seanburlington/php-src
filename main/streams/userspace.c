@@ -17,11 +17,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.49 2008/11/15 12:50:17 lbarnaud Exp $ */
+/* $Id: userspace.c,v 1.50 2008/11/26 04:18:24 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/file.h"
+#include "ext/standard/flock_compat.h"
+#ifdef HAVE_SYS_FILE_H
+#include <sys/file.h>
+#endif
 
 static int le_protocols;
 
@@ -942,7 +946,23 @@ static int php_userstreamop_set_option(php_stream *stream, int option, int value
 
 	case PHP_STREAM_OPTION_LOCKING:
 		MAKE_STD_ZVAL(zvalue);
-		ZVAL_LONG(zvalue, value);
+		ZVAL_LONG(zvalue, 0);
+
+		if (value & LOCK_NB) {
+			Z_LVAL_P(zvalue) |= PHP_LOCK_NB;
+		}
+		switch(value & ~LOCK_NB) {
+		case LOCK_SH:
+			Z_LVAL_P(zvalue) |= PHP_LOCK_SH;
+			break;
+		case LOCK_EX:
+			Z_LVAL_P(zvalue) |= PHP_LOCK_EX;
+			break;
+		case LOCK_UN:
+			Z_LVAL_P(zvalue) |= PHP_LOCK_UN;
+			break;
+		}
+
 		args[0] = &zvalue;
 		
 		/* TODO wouldblock */

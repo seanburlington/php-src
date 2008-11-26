@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.136 2008/10/21 22:06:48 lbarnaud Exp $ */
+/* $Id: html.c,v 1.137 2008/11/26 02:43:43 lbarnaud Exp $ */
 
 /*
  * HTML entity resources:
@@ -533,6 +533,10 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 				do {
 					if (this_char < 0x80) {
 						more = 0;
+						if(stat) {
+							/* we didn't finish the UTF sequence correctly */
+							*status = FAILURE;
+						}
 						break;
 					} else if (this_char < 0xc0) {
 						switch (stat) {

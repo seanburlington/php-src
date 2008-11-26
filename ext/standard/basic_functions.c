@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.75 2008/11/24 19:17:34 lbarnaud Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.76 2008/11/26 04:08:19 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -330,7 +330,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_array_search, 0, 0, 2)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_extract, 0, 0, 1)
-	ZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */
+	ZEND_ARG_INFO(ZEND_SEND_PREFER_REF, arg) /* ARRAY_INFO(0, arg, 0) */
 	ZEND_ARG_INFO(0, extract_type)
 	ZEND_ARG_INFO(0, prefix)
 ZEND_END_ARG_INFO()

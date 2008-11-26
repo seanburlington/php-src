@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.11 2008/11/11 00:45:36 lbarnaud Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.45.2.4.2.12 2008/11/26 01:21:10 lbarnaud Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,17 +48,11 @@ static int php_stream_output_close(php_stream *stream, int close_handle TSRMLS_D
 	return 0;
 }
 
-static int php_stream_output_flush(php_stream *stream TSRMLS_DC)
-{
-	sapi_flush(TSRMLS_C);
-	return 0;
-}
-
 php_stream_ops php_stream_output_ops = {
 	php_stream_output_write,
 	php_stream_output_read,
 	php_stream_output_close,
-	php_stream_output_flush,
+	NULL, /* flush */
 	"Output",
 	NULL, /* seek */
 	NULL, /* cast */

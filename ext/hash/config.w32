@@ -1,7 +1,8 @@
-// $Id: config.w32,v 1.10 2008/06/28 15:30:45 scottmac Exp $
+// $Id: config.w32,v 1.11 2008/11/27 21:57:15 pajoye Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("hash", "enable hash support", "yes");
+ARG_WITH("mhash", "mhash support", "no"); 
 
 if (PHP_MHASH != "no") {
 	if (PHP_HASH == "no") {
@@ -9,7 +10,6 @@ if (PHP_MHASH != "no") {
 	}
 	AC_DEFINE('PHP_MHASH_BC', 1);
 }
-
 
 if (PHP_HASH != "no") {
 	AC_DEFINE('HAVE_HASH_EXT', 1);

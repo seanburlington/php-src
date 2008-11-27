@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.24.2.22 2008/11/17 11:27:57 felipe Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.24.2.23 2008/11/27 19:01:22 dmitry Exp $ */
 
 #include <stdlib.h>
 
@@ -2529,7 +2529,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, long result_type,
 			fci.function_table = &ce->function_table;
 			fci.function_name = NULL;
 			fci.symbol_table = NULL;
-			fci.object_pp = &return_value;
+			fci.object_ptr = return_value;
 			fci.retval_ptr_ptr = &retval_ptr;
 			if (ctor_params && Z_TYPE_P(ctor_params) != IS_NULL) {
 				if (Z_TYPE_P(ctor_params) == IS_ARRAY) {
@@ -2563,7 +2563,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, long result_type,
 			fcc.function_handler = ce->constructor;
 			fcc.calling_scope = EG(scope);
 			fcc.called_scope = Z_OBJCE_P(return_value);
-			fcc.object_pp = &return_value;
+			fcc.object_ptr = return_value;
 		
 			if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {
 				zend_throw_exception_ex(zend_exception_get_default(TSRMLS_C), 0 TSRMLS_CC, "Could not execute %s::%s()", ce->name, ce->constructor->common.function_name);

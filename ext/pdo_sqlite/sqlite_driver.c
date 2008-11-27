@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.20.2.5.2.2.2.3 2008/08/02 04:46:06 felipe Exp $ */
+/* $Id: sqlite_driver.c,v 1.20.2.5.2.2.2.4 2008/11/27 19:01:22 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -308,7 +308,7 @@ static int do_callback(struct pdo_sqlite_fci *fc, zval *cb,
 	fc->fci.function_table = EG(function_table);
 	fc->fci.function_name = cb;
 	fc->fci.symbol_table = NULL;
-	fc->fci.object_pp = NULL;
+	fc->fci.object_ptr = NULL;
 	fc->fci.retval_ptr_ptr = &retval;
 	fc->fci.param_count = fake_argc;
 	

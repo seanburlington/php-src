@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.26.2.1.2.1.2.10 2008/11/19 02:00:53 colder Exp $ */
+/* $Id: xpath.c,v 1.26.2.1.2.1.2.11 2008/11/27 19:01:22 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,7 +197,7 @@ static void dom_xpath_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs,
 
 	fci.function_name = &handler;
 	fci.symbol_table = NULL;
-	fci.object_pp = NULL;
+	fci.object_ptr = NULL;
 	fci.retval_ptr_ptr = &retval;
 	fci.no_separation = 0;
 

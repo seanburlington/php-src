@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.12 2008/11/17 11:28:00 felipe Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.13 2008/11/27 19:01:23 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -306,7 +306,7 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 	
 	fci.function_name = &handler;
 	fci.symbol_table = NULL;
-	fci.object_pp = NULL;
+	fci.object_ptr = NULL;
 	fci.retval_ptr_ptr = &retval;
 	fci.no_separation = 0;
 	/*fci.function_handler_cache = &function_ptr;*/

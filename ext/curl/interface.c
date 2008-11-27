@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.36 2008/07/29 10:42:59 tony2001 Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.37 2008/11/27 17:01:29 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1481,17 +1481,37 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 					 * must be explicitly cast to long in curl_formadd
 					 * use since curl needs a long not an int. */
 					if (*postval == '@') {
+						char *type;
 						++postval;
+
+						if ((type = php_memnstr(postval, ";type=", sizeof(";type=") - 1, postval + strlen(postval)))) {
+							*type = '\0';
+						}
 						/* safe_mode / open_basedir check */
 						if (php_check_open_basedir(postval TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(postval, "rb+", CHECKUID_CHECK_MODE_PARAM))) {
+							if (type) {
+								*type = ';';
+							}
 							RETVAL_FALSE;
 							return 1;
 						}
-						error = curl_formadd(&first, &last, 
+						if (type) {
+							type++;
+							error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,
 											 CURLFORM_NAMELENGTH, (long)string_key_len - 1,
-											 CURLFORM_FILE, postval, 
+											 CURLFORM_FILE, postval,
+											 CURLFORM_CONTENTTYPE, type,
 											 CURLFORM_END);
+							*(type - 1) = ';';
+						} else {
+							error = curl_formadd(&first, &last, 
+											 CURLFORM_COPYNAME, string_key,
+											 CURLFORM_NAMELENGTH, (long)string_key_len - 1,
+											 CURLFORM_FILE, postval,
+											 CURLFORM_END);
+
+						}
 					} else {
 						error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,

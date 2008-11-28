@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.371 2008/11/17 11:26:25 felipe Exp $ */
+/* $Id: cgi_main.c,v 1.372 2008/11/28 11:57:11 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1087,6 +1087,9 @@ static void init_request_info(TSRMLS_D)
 			if (script_path_translated &&
 				(script_path_translated_len = strlen(script_path_translated)) > 0 &&
 				(script_path_translated[script_path_translated_len-1] == '/' ||
+#ifdef PHP_WIN32
+				 script_path_translated[script_path_translated_len-1] == '\\' ||
+#endif
 				(real_path = tsrm_realpath(script_path_translated, NULL TSRMLS_CC)) == NULL)
 			) {
 				char *pt = estrndup(script_path_translated, script_path_translated_len);

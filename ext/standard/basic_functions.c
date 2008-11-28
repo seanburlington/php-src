@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.78 2008/11/26 04:08:30 lbarnaud Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.79 2008/11/28 23:27:46 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3917,6 +3917,8 @@ static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 	memset(&BG(mblen_state), 0, sizeof(BG(mblen_state)));
 #endif
 	BG(incomplete_class) = incomplete_class_entry;
+	BG(page_uid) = -1;
+	BG(page_gid) = -1;
 }
 
 
@@ -4220,6 +4222,8 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 
 	PHP_RSHUTDOWN(user_filters)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	
+	BG(page_uid) = -1;
+	BG(page_gid) = -1;
 	return SUCCESS;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.20 2008/11/27 19:01:23 dmitry Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.21 2008/11/28 15:37:02 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -791,6 +791,7 @@ PHP_METHOD(sqlite3, createFunction)
 		MAKE_STD_ZVAL(func->func);
 		*(func->func) = *callback_func;
 		zval_copy_ctor(func->func);
+		INIT_PZVAL(func->func);
 
 		func->argc = sql_func_num_args;
 		func->next = db_obj->funcs;
@@ -849,10 +850,12 @@ PHP_METHOD(sqlite3, createAggregate)
 		MAKE_STD_ZVAL(func->step);
 		*(func->step) = *step_callback;
 		zval_copy_ctor(func->step);
+		INIT_PZVAL(func->step);
 
 		MAKE_STD_ZVAL(func->fini);
 		*(func->fini) = *fini_callback;
 		zval_copy_ctor(func->fini);
+		INIT_PZVAL(func->fini);
 
 		func->argc = sql_func_num_args;
 		func->next = db_obj->funcs;

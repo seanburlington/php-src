@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.7.2.15 2008/11/24 22:18:25 stas Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.7.2.16 2008/11/28 23:22:39 stas Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -597,6 +597,8 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		return OK;
 	}
 
+	SG(server_context) = r;
+
 	zend_first_try {
 
 		/* Make sure file exists */
@@ -654,8 +656,6 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		/* Init timeout */
 		hard_timeout("send", r);
 
-		SG(server_context) = r;
-		
 		php_save_umask();
 		add_common_vars(r);
 		add_cgi_vars(r);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.69.2.3.2.12 2008/11/29 19:59:27 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.69.2.3.2.13 2008/11/29 23:44:44 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -308,7 +308,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.12 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.13 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );
@@ -754,6 +754,13 @@ static int php_nsapi_startup(sapi_module_struct *sapi_module)
 	return SUCCESS;
 }
 
+static struct stat* sapi_nsapi_get_stat(TSRMLS_D)
+{
+	return request_stat_path(
+		SG(request_info).path_translated,
+		((nsapi_request_context *)SG(server_context))->rq
+	);
+}
 
 static sapi_module_struct nsapi_sapi_module = {
 	"nsapi",                                /* name */
@@ -767,7 +774,7 @@ static sapi_module_struct nsapi_sapi_module = {
 
 	sapi_nsapi_ub_write,                    /* unbuffered write */
 	sapi_nsapi_flush,                       /* flush */
-	NULL,                                   /* get uid */
+	sapi_nsapi_get_stat,                    /* get uid/stat */
 	NULL,                                   /* getenv */
 
 	php_error,                              /* error handler */

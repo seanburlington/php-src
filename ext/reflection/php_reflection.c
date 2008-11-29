@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.327 2008/11/27 19:02:45 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.328 2008/11/29 15:58:29 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4537,7 +4537,7 @@ ZEND_METHOD(reflection_property, setValue)
 	METHOD_NOTSTATIC(reflection_property_ptr);
 	GET_REFLECTION_OBJECT_PTR(ref);
 
-	if (!(ref->prop.flags & ZEND_ACC_PUBLIC)) {
+	if (!(ref->prop.flags & ZEND_ACC_PUBLIC) && ref->ignore_visibility == 0) {
 		_default_get_entry(getThis(), "name", sizeof("name"), &name TSRMLS_CC);
 		zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 			"Cannot access non-public member %v::%v", intern->ce->name, Z_UNIVAL(name));
@@ -4581,10 +4581,15 @@ ZEND_METHOD(reflection_property, setValue)
 			zend_u_hash_quick_update(prop_table, utype, ref->prop.name, ref->prop.name_length+1, ref->prop.h, &value, sizeof(zval *), (void **) &foo);
 		}
 	} else {
+		zstr class_name, prop_name;
+		int prop_name_len;
+
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "oz", &object, &value) == FAILURE) {
 			return;
 		}
-		zend_u_update_property(Z_OBJCE_P(object), object, UG(unicode)?IS_UNICODE:IS_STRING, ref->prop.name, ref->prop.name_length, value TSRMLS_CC);
+		zend_u_unmangle_property_name(UG(unicode)?IS_UNICODE:IS_STRING, ref->prop.name, ref->prop.name_length, &class_name, &prop_name);
+		prop_name_len = UG(unicode) ? u_strlen(prop_name.u) : strlen(prop_name.s);
+		zend_u_update_property(Z_OBJCE_P(object), object, UG(unicode)?IS_UNICODE:IS_STRING, prop_name, prop_name_len, value TSRMLS_CC);
 	}
 }
 /* }}} */
@@ -5433,7 +5438,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.327 2008/11/27 19:02:45 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.328 2008/11/29 15:58:29 sebastian Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.69.2.3.2.6.2.11 2008/11/29 19:37:06 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.69.2.3.2.6.2.12 2008/11/29 19:57:49 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -321,7 +321,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.11 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.12 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );
@@ -488,7 +488,7 @@ static void sapi_nsapi_flush(void *server_context)
 	}
 
 	/* flushing is only supported in iPlanet servers from version 6.1 on, make it conditional */
-#if defined(net_flush)
+#if NSAPI_VERSION >= 302
 	if (net_flush(rc->sn->csd) < 0) {
 		php_handle_aborted_connection();
 	}
@@ -912,12 +912,10 @@ int NSAPI_PUBLIC php5_init(pblock *pb, Session *sn, Request *rq)
 	int threads=128; /* default for server */
 
 	/* fetch max threads from NSAPI and initialize TSRM with it */
-#if defined(pool_maxthreads)
-	threads=pool_maxthreads;
+	threads=conf_getglobals()->Vpool_maxthreads;
 	if (threads<1) {
 		threads=128; /* default for server */
 	}
-#endif
 	tsrm_startup(threads, 1, 0, NULL);
 
 	core_globals = ts_resource(core_globals_id);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.21 2008/11/27 19:01:22 dmitry Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.22 2008/11/30 17:30:50 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1733,17 +1733,17 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
    Set an option for a cURL transfer */
 PHP_FUNCTION(curl_setopt)
 {
-	zval        *zid, *zvalue;
+	zval        *zid, **zvalue;
 	long        zoption;
 	php_curl    *ch;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlz", &zid, &zoption, &zvalue) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlZ", &zid, &zoption, &zvalue) == FAILURE) {
 		return;
 	}
 
 	ZEND_FETCH_RESOURCE(ch, php_curl *, &zid, -1, le_curl_name, le_curl);
 
-	if (!_php_curl_setopt(ch, zoption, &zvalue, return_value TSRMLS_CC)) {
+	if (!_php_curl_setopt(ch, zoption, zvalue, return_value TSRMLS_CC)) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;

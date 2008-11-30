@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.146 2008/11/27 19:02:45 dmitry Exp $ */
+/* $Id: php_spl.c,v 1.147 2008/11/30 00:12:11 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,7 +79,7 @@ static zend_class_entry * spl_find_ce_by_name(zend_uchar ztype, zstr name, int l
 	return *ce;
 }
 
-/* {{{ proto array class_parents(object instance) U
+/* {{{ proto array class_parents(object instance [, boolean autoload = true]) U
  Return an array containing the names of all parent classes */
 PHP_FUNCTION(class_parents)
 {

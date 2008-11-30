@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.147 2008/11/30 00:12:11 bjori Exp $ */
+/* $Id: php_spl.c,v 1.148 2008/11/30 00:22:52 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -780,6 +780,7 @@ ZEND_END_ARG_INFO();
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_class_parents, 0, 0, 1)
 	ZEND_ARG_INFO(0, instance)
+	ZEND_ARG_INFO(0, autoload)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_class_implements, 0, 0, 1)

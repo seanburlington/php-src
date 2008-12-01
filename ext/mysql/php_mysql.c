@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.32 2008/11/28 20:23:49 johannes Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.33 2008/12/01 21:20:47 johannes Exp $ */
 
 /* TODO:
  *
@@ -1963,8 +1963,6 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 	} else
 #endif
 	{
-		result_type = MYSQL_BOTH;
-
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &res, &result_type) == FAILURE) {
 			return;
 		}
@@ -2109,7 +2107,7 @@ PHP_FUNCTION(mysql_fetch_row)
 	MYSQL_RES		*result;
 	zval			*mysql_result;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &mysql_result) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &mysql_result) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, -1, "MySQL result", le_result);
@@ -2146,7 +2144,7 @@ PHP_FUNCTION(mysql_fetch_array)
 	zval			*mysql_result;
 	long			mode = MYSQLND_FETCH_BOTH;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|l", &mysql_result, &mode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &mysql_result, &mode) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, -1, "MySQL result", le_result);
@@ -2167,7 +2165,7 @@ PHP_FUNCTION(mysql_fetch_assoc)
 	MYSQL_RES		*result;
 	zval			*mysql_result;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &mysql_result) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &mysql_result) == FAILURE) {
 		return;
 	}
 	ZEND_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, -1, "MySQL result", le_result);

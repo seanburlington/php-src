@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.37 2008/11/27 19:02:45 dmitry Exp $ */
+/* $Id: sqlite_driver.c,v 1.38 2008/12/02 21:00:23 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -392,8 +392,8 @@ static int do_callback(struct pdo_sqlite_fci *fc, zval *cb,
 	}
 
 	/* clean up the params */
-	if (argc) {
-		for (i = is_agg; i < argc; i++) {
+	if (zargs) {
+		for (i = is_agg; i < fake_argc; i++) {
 			zval_ptr_dtor(zargs[i]);
 			efree(zargs[i]);
 		}
@@ -519,6 +519,7 @@ static PHP_METHOD(SQLite, sqliteCreateFunction)
 		MAKE_STD_ZVAL(func->func);
 		*(func->func) = *callback;
 		zval_copy_ctor(func->func);
+		INIT_PZVAL(func->func);
 		
 		func->argc = argc;
 
@@ -592,10 +593,12 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 		MAKE_STD_ZVAL(func->step);
 		*(func->step) = *step_callback;
 		zval_copy_ctor(func->step);
+		INIT_PZVAL(func->step);
 
 		MAKE_STD_ZVAL(func->fini);
 		*(func->fini) = *fini_callback;
 		zval_copy_ctor(func->fini);
+		INIT_PZVAL(func->fini);
 		
 		func->argc = argc;
 

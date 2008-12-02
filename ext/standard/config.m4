@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.80.2.3.2.3.2.6 2008/08/25 13:42:54 jani Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.80.2.3.2.3.2.7 2008/12/02 16:27:15 cseiler Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -221,31 +221,6 @@ AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpcl
 AC_FUNC_FNMATCH	
 
 divert(5)dnl
-
-dnl
-dnl round fuzz
-dnl
-AC_MSG_CHECKING([whether rounding works as expected])
-AC_TRY_RUN([
-#include <math.h>
-  /* keep this out-of-line to prevent use of gcc inline floor() */
-  double somefn(double n) {
-    return floor(n*pow(10,2) + 0.5);
-  }
-  int main() {
-    return somefn(0.045)/10.0 != 0.5;
-  }
-],[
-  PHP_ROUND_FUZZ=0.5
-  AC_MSG_RESULT(yes)
-],[
-  PHP_ROUND_FUZZ=0.50000000001
-  AC_MSG_RESULT(no)
-],[
-  PHP_ROUND_FUZZ=0.50000000001
-  AC_MSG_RESULT(cross compile)
-])
-AC_DEFINE_UNQUOTED(PHP_ROUND_FUZZ, $PHP_ROUND_FUZZ, [ see #24142 ])
 
 dnl
 dnl Check if there is a support means of creating a new process

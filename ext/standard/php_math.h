@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.28.2.2.2.3.2.2 2008/05/05 07:29:41 kalle Exp $ */
+/* $Id: php_math.h,v 1.28.2.2.2.3.2.3 2008/12/02 16:27:15 cseiler Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -150,6 +150,23 @@ PHP_FUNCTION(atanh);
 
 #ifndef M_SQRT3
 #define M_SQRT3	       1.73205080756887729352  /* sqrt(3) */
+#endif
+
+/* Define rounding modes (all are round-to-nearest) */
+#ifndef PHP_ROUND_HALF_UP
+#define PHP_ROUND_HALF_UP        0x01    /* Arithmetic rounding, up == away from zero */
+#endif
+
+#ifndef PHP_ROUND_HALF_DOWN
+#define PHP_ROUND_HALF_DOWN      0x02    /* Down == towards zero */
+#endif
+
+#ifndef PHP_ROUND_HALF_EVEN
+#define PHP_ROUND_HALF_EVEN      0x03    /* Banker's rounding */
+#endif
+
+#ifndef PHP_ROUND_HALF_ODD
+#define PHP_ROUND_HALF_ODD       0x04
 #endif
 
 #endif /* PHP_MATH_H */

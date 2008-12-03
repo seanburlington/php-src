@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.23 2008/11/17 11:27:55 felipe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.24 2008/12/03 01:04:13 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3174,11 +3174,16 @@ PHP_FUNCTION(imap_fetch_overview)
 		return;
 	}
 
+	if (flags && !(flags & FT_UID)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid value for the options parameter");
+		RETURN_FALSE;
+	}
+
 	ZEND_FETCH_RESOURCE(imap_le_struct, pils *, &streamind, -1, "imap", le_imap);
 
 	array_init(return_value);
-	
-	status = (flags & FT_UID) 
+
+	status = (flags & FT_UID)
 		? mail_uid_sequence(imap_le_struct->imap_stream, sequence)
 		: mail_sequence(imap_le_struct->imap_stream, sequence);
 	

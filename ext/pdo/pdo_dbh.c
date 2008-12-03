@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.17 2008/11/27 19:01:22 dmitry Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.18 2008/12/03 00:10:17 mattwil Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -923,7 +923,7 @@ static PHP_METHOD(PDO, exec)
 	}
 
 	if (!statement_len) {
-		pdo_raise_impl_error(dbh, NULL, "HY000",  "trying to execute and empty query" TSRMLS_CC);
+		pdo_raise_impl_error(dbh, NULL, "HY000",  "trying to execute an empty query" TSRMLS_CC);
 		RETURN_FALSE;
 	}
 	PDO_DBH_CLEAR_ERR();

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.38 2008/11/27 19:01:22 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.39 2008/12/03 10:18:42 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2203,10 +2203,12 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
 			char *str;
 			uint len;
 			ulong num;
+			int res;
 
-			if (zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos) == HASH_KEY_IS_LONG) {
+			res = zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos);
+			if (res == HASH_KEY_IS_LONG) {
 				php_stream_printf(out TSRMLS_CC, "Key: Position #%ld:\n", num);
-			} else {
+			} else if (res == HASH_KEY_IS_STRING) {
 				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, str);
 			}
 

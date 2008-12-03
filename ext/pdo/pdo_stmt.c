@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.212 2008/11/27 19:02:44 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.213 2008/12/03 10:11:04 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2202,11 +2202,15 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
 			zstr str;
 			uint len;
 			ulong num;
+			int res;
 
-			if (zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos) == HASH_KEY_IS_LONG) {
+			res = zend_hash_get_current_key_ex(stmt->bound_params, &str, &len, &num, 0, &pos);
+			if (res == HASH_KEY_IS_LONG) {
 				php_stream_printf(out TSRMLS_CC, "Key: Position #%ld:\n", num);
-			} else {
-				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, str);
+			} else if (res == HASH_KEY_IS_STRING) {
+				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, str.s);
+			} else if (res == HASH_KEY_IS_UNICODE) {
+				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*r\n", len, len, str.u);
 			}
 
 			php_stream_printf(out TSRMLS_CC, "paramno=%d\nname=[%d] \"%.*s\"\nis_param=%d\nparam_type=%d\n",

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.37 2008/11/27 17:01:29 iliaa Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.38 2008/12/04 13:13:41 mkoppanen Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1770,6 +1770,11 @@ PHP_FUNCTION(curl_getinfo)
 		if (curl_easy_getinfo(ch->cp, CURLINFO_CONTENT_TYPE, &s_code) == CURLE_OK) {
 			if (s_code != NULL) {
 				CAAS("content_type", s_code);
+			} else {
+				zval *retnull;
+				MAKE_STD_ZVAL(retnull);
+				ZVAL_NULL(retnull);
+				CAAZ("content_type", retnull);
 			}
 		}
 		if (curl_easy_getinfo(ch->cp, CURLINFO_HTTP_CODE, &l_code) == CURLE_OK) {

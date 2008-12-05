@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.37 2008/10/16 16:20:53 dmitry Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.38 2008/12/05 11:59:01 zoe Exp $ */
 
 #define IMAP41
 
@@ -2895,6 +2895,10 @@ PHP_FUNCTION(imap_fetch_overview)
 	if(myargc == 3) {
 		convert_to_long_ex(pflags);
 		flags = Z_LVAL_PP(pflags);
+                if (flags && ((flags & ~FT_UID) != 0)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid value for the options parameter");
+		 	RETURN_FALSE;
+		} 
 	}
 
 	array_init(return_value);

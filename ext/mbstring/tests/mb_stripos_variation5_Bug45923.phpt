@@ -1,6 +1,5 @@
 --TEST--
 Test mb_stripos() function : usage variations - Pass different integers as $offset argument
---XFAIL--
 --SKIPIF--
 <?php
 extension_loaded('mbstring') or die('skip');
@@ -52,11 +51,11 @@ echo "Done";
 **-- Offset is: -10 --**
 -- ASCII String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 --Multibyte String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 
 **-- Offset is: 0 --**
@@ -80,40 +79,35 @@ int(20)
 **-- Offset is: 30 --**
 -- ASCII String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 --Multibyte String --
-
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
 bool(false)
 
 **-- Offset is: 40 --**
 -- ASCII String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 --Multibyte String --
-
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
 bool(false)
 
 **-- Offset is: 50 --**
 -- ASCII String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 --Multibyte String --
-
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
 bool(false)
 
 **-- Offset is: 60 --**
 -- ASCII String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 --Multibyte String --
 
-Warning: mb_stripos(): Offset not contained in string in %s on line %d
+Warning: mb_stripos(): Offset not contained in string. in %s on line %d
 bool(false)
 Done
+

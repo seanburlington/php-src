@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.14 2008/05/04 15:15:01 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.15 2008/12/05 18:36:16 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,23 +30,23 @@
 /* {{{ arginfo */
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_import_stylesheet, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, doc, DOMDocument, 0)
+	ZEND_ARG_INFO(0, doc)
 ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_doc, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, doc, DOMNode, 0)
+	ZEND_ARG_INFO(0, doc)
 ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_uri, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, doc, DOMDocument, 0)
+	ZEND_ARG_INFO(0, doc)
 	ZEND_ARG_INFO(0, uri)
 ZEND_END_ARG_INFO();
 
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_xsl_xsltprocessor_transform_to_xml, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, doc, DOMDocument, 0)
+	ZEND_ARG_INFO(0, doc)
 ZEND_END_ARG_INFO();
 
 static

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_engine.h,v 1.27 2008/06/06 23:53:10 colder Exp $ */
+/* $Id: spl_engine.h,v 1.28 2008/12/06 15:14:46 helly Exp $ */
 
 #ifndef SPL_ENGINE_H
 #define SPL_ENGINE_H
@@ -25,17 +25,6 @@
 #include "php_spl.h"
 #include "zend_interfaces.h"
 #include "zend_unicode.h"
-
-/* {{{ zend_class_entry */
-static inline zend_class_entry *spl_get_class_entry(zval *obj TSRMLS_DC)
-{
-	if (obj && Z_TYPE_P(obj) == IS_OBJECT && Z_OBJ_HT_P(obj)->get_class_entry) {
-		return Z_OBJ_HT_P(obj)->get_class_entry(obj TSRMLS_CC);
-	} else {
-		return NULL;
-	}
-}
-/* }}} */
 
 PHPAPI void spl_instantiate(zend_class_entry *pce, zval **object, int alloc TSRMLS_DC);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.28.2.3.2.3.2.3 2007/12/31 07:17:14 sebastian Exp $ */
+/* $Id: spl_functions.c,v 1.28.2.3.2.3.2.4 2008/12/06 15:24:47 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -26,14 +26,6 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_spl.h"
-
-/* {{{ spl_destroy_class */
-void spl_destroy_class(zend_class_entry ** ppce)
-{                           
-	SPL_DEBUG(fprintf(stderr, "Destroy(%s): %s\n", (*ppce)->type == ZEND_USER_CLASS ? "user" : "other", (*ppce)->name);)
-	destroy_zend_class(ppce);
-}
-/* }}} */
 
 /* {{{ spl_register_interface */
 void spl_register_interface(zend_class_entry ** ppce, char * class_name, const zend_function_entry * functions TSRMLS_DC)
@@ -74,20 +66,6 @@ PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * 
 	} else {
 		(*ppce)->create_object = parent_ce->create_object;
 	}
-}
-/* }}} */
-
-/* {{{ spl_register_parent_ce */
-void spl_register_parent_ce(zend_class_entry * class_entry, zend_class_entry * parent_class TSRMLS_DC)
-{
-	class_entry->parent = parent_class;
-}
-/* }}} */
-
-/* {{{ spl_register_functions */
-void spl_register_functions(zend_class_entry * class_entry, const zend_function_entry * function_list TSRMLS_DC)
-{
-	zend_register_functions(class_entry, function_list, &class_entry->function_table, MODULE_PERSISTENT TSRMLS_CC);
 }
 /* }}} */
 

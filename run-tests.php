@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.382 2008/12/06 11:59:36 zoe Exp $ */
+/* $Id: run-tests.php,v 1.383 2008/12/08 12:36:38 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -57,6 +57,11 @@ if (!function_exists('proc_open')) {
 
 NO_PROC_OPEN_ERROR;
 exit;
+}
+
+// If __DIR__ is not defined, define it
+if (!defined('__DIR__')) {
+	define('__DIR__', realpath(dirname(__FILE__)));
 }
 
 // If timezone is not set, use UTC.
@@ -612,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.382 $' . "\n";
+					echo '$Revision: 1.383 $' . "\n";
 					exit(1);
 
 				default:

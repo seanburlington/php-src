@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.53 2008/12/06 12:00:37 zoe Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.54 2008/12/08 12:36:10 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -57,6 +57,11 @@ if (!function_exists('proc_open')) {
 
 NO_PROC_OPEN_ERROR;
 exit;
+}
+
+// If __DIR__ is not defined, define it
+if (!defined('__DIR__')) {
+	define('__DIR__', realpath(dirname(__FILE__)));
 }
 
 // If timezone is not set, use UTC.
@@ -612,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.53 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.54 $' . "\n";
 					exit(1);
 
 				default:
@@ -1003,11 +1008,16 @@ function system_with_timeout($commandline, $env = null, $stdin = null)
 
 	$data = '';
 
+	$bin_env = array();
+	foreach($env as $key => $value) {
+		$bin_env[(binary)$key] = (binary)$value;
+	}
+
 	$proc = proc_open($commandline, array(
 		0 => array('pipe', 'r'),
 		1 => array('pipe', 'w'),
 		2 => array('pipe', 'w')
-		), $pipes, $cwd, $env, array('suppress_errors' => true, 'binary_pipes' => true));
+		), $pipes, $cwd, $bin_env, array('suppress_errors' => true, 'binary_pipes' => true));
 
 	if (!$proc) {
 		return false;

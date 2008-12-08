@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22.2.3.2.14 2008/11/16 23:12:38 pajoye Exp $ */
+/* $Id: xp_ssl.c,v 1.22.2.3.2.15 2008/12/08 02:33:46 scottmac Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -152,9 +152,10 @@ static int handle_ssl_error(php_stream *stream, int nr_bytes, zend_bool is_init 
 							ERR_error_string_n(ecode, esbuf, sizeof(esbuf) - 1);
 						}
 						code = strlen(esbuf);
-						esbuf[code] = '\0';
 
 						ebuf = erealloc(ebuf, ebuf_size + code + 1);
+						ebuf_size += code;
+
 						if (wptr == NULL) {
 							wptr = ebuf;
 						}	

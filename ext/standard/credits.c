@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.36.2.4.2.7 2008/06/18 05:21:08 philip Exp $ */
+/* $Id: credits.c,v 1.36.2.4.2.8 2008/12/09 10:54:04 jani Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -65,7 +65,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		php_info_print_table_header(2, "Contribution", "Authors");
 		CREDIT_LINE("Zend Scripting Language Engine", "Andi Gutmans, Zeev Suraski");
 		CREDIT_LINE("Extension Module API", "Andi Gutmans, Zeev Suraski, Andrei Zmievski");
-		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann");
+		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann, Jani Taskinen");
 		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski, Wez Furlong");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
 		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong, Sara Golemon");

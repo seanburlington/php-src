@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.8.4.3.2.1 2008/09/10 00:07:44 felipe Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.8.4.3.2.2 2008/12/09 17:22:12 iliaa Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -43,6 +43,11 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.8.4.3.2.1 2008/09/10 00:07:4
  *   9/1999 - 10/2000
  * HISTORY
  *   $Log: xmlrpc.c,v $
+ *   Revision 1.8.4.3.2.2  2008/12/09 17:22:12  iliaa
+ *
+ *   MFH: Fixed bug #46746 (xmlrpc_decode_request outputs non-suppressable error
+ *   when given bad data).
+ *
  *   Revision 1.8.4.3.2.1  2008/09/10 00:07:44  felipe
  *   MFH:
  *   - Merged fix from SF project (Import Jeff Lawsons patches for XML datetime bug fixes)
@@ -1168,13 +1173,13 @@ int XMLRPC_AddValueToVector(XMLRPC_VALUE target, XMLRPC_VALUE source) {
                   }
                }
                else {
-					fprintf (stderr,
-								"xmlrpc: attempted to add key/val pair to vector of type array\n");
+					/* fprintf (stderr,
+								"xmlrpc: attempted to add key/val pair to vector of type array\n"); */
                }
                break;
             default:
-				fprintf (stderr,
-							"xmlrpc: attempted to add value of unknown type to vector\n");
+				/* fprintf (stderr,
+							"xmlrpc: attempted to add value of unknown type to vector\n"); */
                break;
          }
       }
@@ -1504,8 +1509,8 @@ void XMLRPC_CleanupValue(XMLRPC_VALUE value) {
                my_free(value);
                break;
             default:
-				fprintf (stderr,
-							"xmlrpc: attempted to free value of invalid type\n");
+				/* fprintf (stderr,
+							"xmlrpc: attempted to free value of invalid type\n"); */
                break;
          }
       }

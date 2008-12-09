@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.23 2008/12/04 13:13:22 mkoppanen Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.24 2008/12/09 17:17:27 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1273,6 +1273,7 @@ PHP_FUNCTION(curl_copy_handle)
 	TSRMLS_SET_CTX(dupch->thread_ctx);
 
 	dupch->cp = cp;
+	dupch->uses = 0;
 	dupch->handlers->write->method = ch->handlers->write->method;
 	dupch->handlers->write->type   = ch->handlers->write->type;
 	dupch->handlers->read->method  = ch->handlers->read->method;

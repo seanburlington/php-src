@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.15 2008/12/09 17:54:01 pajoye Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.16 2008/12/09 17:57:59 pajoye Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -252,15 +252,6 @@ PHPAPI char *php_info_html_esc(char *string TSRMLS_DC)
 
 #ifdef PHP_WIN32
 /* {{{  */
-typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
-typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
-
-#include "winver.h"
-
-#if _MSC_VER < 1300
-#define OSVERSIONINFOEX php_win_OSVERSIONINFOEX
-#endif
-
 char* php_get_windows_name()
 {
 	OSVERSIONINFOEX osvi;

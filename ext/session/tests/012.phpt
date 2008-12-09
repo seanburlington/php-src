@@ -9,6 +9,7 @@ register_globals=1
 session.bug_compat_42=1
 session.bug_compat_warn=0
 session.serialize_handler=php
+session.save_handler=files
 --FILE--
 <?php
 error_reporting(E_ALL);
@@ -30,5 +31,6 @@ session_destroy();
 
 print "I live\n";
 ?>
---EXPECT--
+--EXPECTF--
+Deprecated: Function session_register() is deprecated in %s on line %d
 I live

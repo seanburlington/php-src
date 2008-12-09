@@ -7,6 +7,7 @@ session.use_cookies=0
 session.cache_limiter=
 register_globals=1
 session.serialize_handler=php
+session.save_handler=files
 --FILE--
 <?php
 
@@ -46,6 +47,7 @@ var_dump($_SESSION);
 session_destroy();
 ?>
 --EXPECTF--
+Deprecated: Function session_register() is deprecated in %s on line %d
 array(2) {
   ["o1"]=>
   &object(TFoo)#%d (1) {

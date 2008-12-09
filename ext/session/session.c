@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.40.2.17 2008/11/17 11:27:58 felipe Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.40.2.18 2008/12/09 14:03:58 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2099,9 +2099,9 @@ static const zend_function_entry session_functions[] = {
 	PHP_FE(session_id,                arginfo_session_id)
 	PHP_FE(session_regenerate_id,     arginfo_session_regenerate_id)
 	PHP_FE(session_decode,            arginfo_session_decode)
-	PHP_FE(session_register,          arginfo_session_register)
-	PHP_FE(session_unregister,        arginfo_session_unregister)
-	PHP_FE(session_is_registered,     arginfo_session_is_registered)
+	PHP_DEP_FE(session_register,      arginfo_session_register)
+	PHP_DEP_FE(session_unregister,    arginfo_session_unregister)
+	PHP_DEP_FE(session_is_registered, arginfo_session_is_registered)
 	PHP_FE(session_encode,            arginfo_session_void)
 	PHP_FE(session_start,             arginfo_session_void)
 	PHP_FE(session_destroy,           arginfo_session_void)

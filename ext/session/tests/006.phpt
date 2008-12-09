@@ -7,6 +7,7 @@ session.use_cookies=0
 session.cache_limiter=
 register_globals=1
 session.serialize_handler=php
+session.save_handler=files
 --FILE--
 <?php
 error_reporting(E_ALL);
@@ -56,6 +57,14 @@ object(b)#%d (1) {
     string(5) "hallo"
   }
 }
+
+Deprecated: Function session_register() is deprecated in %s on line %d
+
+Deprecated: Function session_register() is deprecated in %s on line %d
+
+Deprecated: Function session_unregister() is deprecated in %s on line %d
+
+Deprecated: Function session_unregister() is deprecated in %s on line %d
 values after session:
 object(a)#%d (1) {
   ["test"]=>

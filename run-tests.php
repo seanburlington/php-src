@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.383 2008/12/08 12:36:38 jani Exp $ */
+/* $Id: run-tests.php,v 1.384 2008/12/09 15:20:58 jani Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -59,8 +59,8 @@ NO_PROC_OPEN_ERROR;
 exit;
 }
 
-// If __DIR__ is not defined, define it
-if (!defined('__DIR__')) {
+// __DIR__ is available from 5.3.0
+if (PHP_VERSION_ID < 50300) {
 	define('__DIR__', realpath(dirname(__FILE__)));
 }
 
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.383 $' . "\n";
+					echo '$Revision: 1.384 $' . "\n";
 					exit(1);
 
 				default:

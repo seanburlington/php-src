@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8.2.5 2008/10/23 16:13:50 pajoye Exp $
+dnl $Id: config.m4,v 1.8.2.6 2008/12/09 09:21:59 pajoye Exp $
 dnl
 
 PHP_ARG_ENABLE(zip, for zip archive read/writesupport,
@@ -70,5 +70,4 @@ if test "$PHP_ZIP" != "no"; then
 	PHP_SUBST(ZIP_SHARED_LIBADD)
 	
 	dnl so we always include the known-good working hack.
-	PHP_ADD_MAKEFILE_FRAGMENT
 fi

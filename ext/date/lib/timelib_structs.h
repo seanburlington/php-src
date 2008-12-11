@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.6 2008/07/18 14:33:53 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.6.2.3.2.7 2008/12/11 13:12:22 pajoye Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
 
-#include <timelib_config.h>
+#include "timelib_config.h"
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>

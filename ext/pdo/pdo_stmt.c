@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.39 2008/12/03 10:18:42 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.38.2.24.2.40 2008/12/11 15:32:24 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2209,7 +2209,9 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
 			if (res == HASH_KEY_IS_LONG) {
 				php_stream_printf(out TSRMLS_CC, "Key: Position #%ld:\n", num);
 			} else if (res == HASH_KEY_IS_STRING) {
-				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, str);
+				char *s = estrndup(str, len);
+				php_stream_printf(out TSRMLS_CC, "Key: Name: [%d] %.*s\n", len, len, s);
+				efree(s);
 			}
 
 			php_stream_printf(out TSRMLS_CC, "paramno=%d\nname=[%d] \"%.*s\"\nis_param=%d\nparam_type=%d\n",

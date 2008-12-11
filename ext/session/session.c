@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.498 2008/11/17 11:26:23 felipe Exp $ */
+/* $Id: session.c,v 1.499 2008/12/11 01:20:58 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@
 #include "ext/standard/md5.h"
 #include "ext/standard/sha1.h"
 #include "ext/standard/php_var.h"
-#include "ext/standard/datetime.h"
+#include "ext/date/php_date.h"
 #include "ext/standard/php_lcg.h"
 #include "ext/standard/url_scanner_ex.h"
 #include "ext/standard/php_rand.h" /* for RAND_MAX */
@@ -1175,7 +1175,7 @@ static void php_session_send_cookie(TSRMLS_D) /* {{{ */
 		t = tv.tv_sec + PS(cookie_lifetime);
 
 		if (t > 0) {
-			date_fmt = php_std_date(t TSRMLS_CC);
+			date_fmt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0 TSRMLS_CC);
 			smart_str_appends(&ncookie, COOKIE_EXPIRES);
 			smart_str_appends(&ncookie, date_fmt);
 			efree(date_fmt);

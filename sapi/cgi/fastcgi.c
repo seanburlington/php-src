@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.4.2.13.2.28.2.8 2008/12/07 10:55:16 mattwil Exp $ */
+/* $Id: fastcgi.c,v 1.4.2.13.2.28.2.9 2008/12/11 00:13:48 pajoye Exp $ */
 
 #include "php.h"
 #include "fastcgi.h"
@@ -456,35 +456,35 @@ int fcgi_listen(const char *path, int backlog)
 	if (!tcp) {
 		chmod(path, 0777);
 	} else {
-	    char *ip = getenv("FCGI_WEB_SERVER_ADDRS");
-	    char *cur, *end;
-	    int n;
-	    
-	    if (ip) {
-	    	ip = strdup(ip);
-	    	cur = ip;
-	    	n = 0;
-	    	while (*cur) {
-	    		if (*cur == ',') n++;
-	    		cur++;
-	    	}
-	    	allowed_clients = malloc(sizeof(in_addr_t) * (n+2));
-	    	n = 0;
-	    	cur = ip;
-	    	while (cur) {
-		    	end = strchr(cur, ',');
-		    	if (end) {
-	    			*end = 0;
-	    			end++;
-	    		}
-	    		allowed_clients[n] = inet_addr(cur);
-	    		if (allowed_clients[n] == INADDR_NONE) {
+			char *ip = getenv("FCGI_WEB_SERVER_ADDRS");
+			char *cur, *end;
+			int n;
+			
+			if (ip) {
+				ip = strdup(ip);
+				cur = ip;
+				n = 0;
+				while (*cur) {
+					if (*cur == ',') n++;
+					cur++;
+				}
+				allowed_clients = malloc(sizeof(in_addr_t) * (n+2));
+				n = 0;
+				cur = ip;
+				while (cur) {
+					end = strchr(cur, ',');
+					if (end) {
+						*end = 0;
+						end++;
+					}
+					allowed_clients[n] = inet_addr(cur);
+					if (allowed_clients[n] == INADDR_NONE) {
 					fprintf(stderr, "Wrong IP address '%s' in FCGI_WEB_SERVER_ADDRS\n", cur);
-	    		}
-	    		n++;
-	    		cur = end;
-	    	}
-	    	allowed_clients[n] = INADDR_NONE;
+					}
+					n++;
+					cur = end;
+				}
+				allowed_clients[n] = INADDR_NONE;
 			free(ip);
 		}
 	}

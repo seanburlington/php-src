@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.9 2008/12/10 20:54:47 iliaa Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.10 2008/12/11 15:30:18 pajoye Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -885,6 +885,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 				res_buf[res_length] = '\0';
 				ZVAL_STRINGL(result, res_buf, res_length, 0);
 			}
+			}
 			break;
 		case SQLNUMERIC:
 		default: {
@@ -937,7 +938,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 	}
 }
 
-static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int offset,zval *result, int column_type TSRMLS_DC)
+static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr, int offset,zval *result, int column_type TSRMLS_DC)
 {
 	if (dbdatlen(mssql_ptr->link,offset) == 0) {
 		ZVAL_NULL(result);

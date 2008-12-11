@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.183 2008/12/10 20:53:58 iliaa Exp $ */
+/* $Id: php_mssql.c,v 1.184 2008/12/11 15:33:18 pajoye Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -985,6 +985,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 				memcpy(res_buf,bin,res_length);
 				res_buf[res_length] = '\0';
 				ZVAL_STRINGL(result, res_buf, res_length, 0);
+			}
 			}
 			break;
 		case SQLNUMERIC:

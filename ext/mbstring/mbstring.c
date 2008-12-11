@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.305 2008/11/17 11:26:21 felipe Exp $ */
+/* $Id: mbstring.c,v 1.306 2008/12/11 02:56:08 scottmac Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3058,7 +3058,7 @@ PHP_FUNCTION(mb_detect_encoding)
 	}
 
 	if (ret == NULL) {
-		RETVAL_FALSE;
+		RETURN_FALSE;
 	}
 
 	RETVAL_STRING((char *)ret, 1);

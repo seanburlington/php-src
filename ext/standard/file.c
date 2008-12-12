@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.25 2008/11/26 04:19:20 lbarnaud Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.26 2008/12/12 12:44:48 bjori Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1355,7 +1355,7 @@ PHPAPI int php_mkdir_ex(char *dir, long mode, int options TSRMLS_DC)
 		return -1;
 	}
 
-	if ((ret = VCWD_MKDIR(dir, (mode_t)mode)) < 0 && (options & REPORT_ERRORS) == 1) {
+	if ((ret = VCWD_MKDIR(dir, (mode_t)mode)) < 0 && (options & REPORT_ERRORS)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
 	}
 

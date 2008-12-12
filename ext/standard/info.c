@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.295 2008/12/08 07:33:41 stas Exp $ */
+/* $Id: info.c,v 1.296 2008/12/12 10:33:05 pajoye Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -36,6 +36,17 @@
 #include "zend_highlight.h"
 #ifdef HAVE_SYS_UTSNAME_H
 #include <sys/utsname.h>
+#endif
+
+
+#ifdef PHP_WIN32
+typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
+typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
+# include "winver.h"
+
+# if _MSC_VER < 1300
+#  define OSVERSIONINFOEX php_win_OSVERSIONINFOEX
+# endif
 #endif
 
 #if HAVE_MBSTRING
@@ -341,14 +352,6 @@ PHPAPI char *php_info_html_esc(char *string TSRMLS_DC)
 
 #ifdef PHP_WIN32
 /* {{{  */
-typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
-typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
-
-#include "winver.h"
-
-#if _MSC_VER < 1300
-#define OSVERSIONINFOEX php_win_OSVERSIONINFOEX
-#endif
 
 char* php_get_windows_name()
 {

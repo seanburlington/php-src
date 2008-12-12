@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.19.2.12 2008/11/17 11:27:56 felipe Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.13 2008/12/12 23:19:47 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -523,13 +523,7 @@ static PHP_FUNCTION(json_decode)
 				RETURN_DOUBLE(d);
 			}
 		}
-		if (str_len > 1 && *str == '"' && str[str_len-1] == '"') {
-			RETURN_STRINGL(str+1, str_len-2, 1);
-		} else if (*str == '{' || *str == '[') { /* invalid JSON string */
-			RETURN_NULL();
-		} else {
-			RETURN_STRINGL(str, str_len, 1);
-		}
+		RETURN_NULL();
 	}
 }
 /* }}} */

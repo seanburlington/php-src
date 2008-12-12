@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.130 2008/11/17 11:26:19 felipe Exp $ */
+/* $Id: dba.c,v 1.131 2008/12/12 13:05:58 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -524,6 +524,7 @@ PHP_MINFO_FUNCTION(dba)
 		php_info_print_table_row(2, "Supported handlers", "none");
 	}
 	php_info_print_table_end();
+	DISPLAY_INI_ENTRIES();
 }
 /* }}} */
 

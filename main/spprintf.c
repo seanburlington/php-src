@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.25.2.2.2.10.2.4 2008/02/07 18:41:35 helly Exp $ */
+/* $Id: spprintf.c,v 1.25.2.2.2.10.2.5 2008/12/12 23:43:18 nlopess Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -76,6 +76,7 @@
  * SIO stdio-replacement strx_* functions by Panos Tsirigotis
  * <panos@alumni.cs.colorado.edu> for xinetd.
  */
+#define _GNU_SOURCE
 #include "php.h"
 
 #include <stddef.h>
@@ -179,6 +180,14 @@
 } while (0)
 
 /* }}} */
+
+
+#if !HAVE_STRNLEN
+static size_t strnlen(const char *s, size_t maxlen) {
+	char *r = memchr(s, '\0', maxlen);
+	return r ? r-s : maxlen;
+}
+#endif
 
 /*
  * Do format conversion placing the output in buffer
@@ -561,9 +570,11 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap) 
 				case 'v':
 					s = va_arg(ap, char *);
 					if (s != NULL) {
-						s_len = strlen(s);
-						if (adjust_precision && precision < s_len)
-							s_len = precision;
+						if (!adjust_precision) {
+							s_len = strlen(s);
+						} else {
+							s_len = strnlen(s, precision);
+						}
 					} else {
 						s = S_NULL;
 						s_len = S_NULL_LEN;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.25 2008/11/17 11:27:55 felipe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.26 2008/12/12 13:07:28 bjori Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1114,6 +1114,7 @@ PHP_MSHUTDOWN_FUNCTION(gd)
 #if HAVE_GD_FONTMUTEX && HAVE_LIBFREETYPE
 	gdFontCacheMutexShutdown();
 #endif
+	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 #endif
@@ -1312,6 +1313,7 @@ PHP_MINFO_FUNCTION(gd)
 	php_info_print_table_row(2, "JIS-mapped Japanese Font Support", "enabled");
 #endif
 	php_info_print_table_end();
+	DISPLAY_INI_ENTRIES();
 }
 /* }}} */
 

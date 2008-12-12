@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.47 2008/11/26 00:59:41 lbarnaud Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.48 2008/12/12 19:20:49 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2668,7 +2668,7 @@ PHP_FUNCTION(array_change_key_case)
 }
 /* }}} */
 
-/* {{{ proto array array_unique(array input)
+/* {{{ proto array array_unique(array input [, int sort_flags])
    Removes duplicate values from array */
 PHP_FUNCTION(array_unique)
 {
@@ -2680,10 +2680,13 @@ PHP_FUNCTION(array_unique)
 	};
 	struct bucketindex *arTmp, *cmpdata, *lastkept;
 	unsigned int i;
+	long sort_type = PHP_SORT_REGULAR;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &array) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a|l", &array, &sort_type) == FAILURE) {
 		return;
 	}
+
+	php_set_compare_func(sort_type TSRMLS_CC);
 
 	array_init_size(return_value, zend_hash_num_elements(Z_ARRVAL_P(array)));
 	zend_hash_copy(Z_ARRVAL_P(return_value), Z_ARRVAL_P(array), (copy_ctor_func_t) zval_add_ref, (void *)&tmp, sizeof(zval*));
@@ -2703,7 +2706,6 @@ PHP_FUNCTION(array_unique)
 		arTmp[i].i = i;
 	}
 	arTmp[i].b = NULL;
-	php_set_compare_func(PHP_SORT_STRING TSRMLS_CC);
 	zend_qsort((void *) arTmp, i, sizeof(struct bucketindex), php_array_data_compare TSRMLS_CC);
 
 	/* go through the sorted array and delete duplicates from the copy */

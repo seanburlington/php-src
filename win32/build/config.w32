@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.35 2008/11/21 14:18:27 pajoye Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.36 2008/12/13 11:47:06 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -314,6 +314,9 @@ ADD_SOURCES("win32", "inet.c");
 // Newer versions have it
 if (VCVERS <= 1300) {
 	ADD_SOURCES("win32", "strtoi64.c");
+}
+if (VCVERS >= 1400) {
+	AC_DEFINE('HAVE_STRNLEN', 1);
 }
 
 ADD_SOURCES("main/streams", "streams.c cast.c memory.c filter.c plain_wrapper.c \

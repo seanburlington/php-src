@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.13.4.1.2.6 2008/10/26 00:14:23 pajoye Exp $
+<?php # $Id: mkdist.php,v 1.13.4.1.2.7 2008/12/13 11:46:23 pajoye Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -322,7 +322,6 @@ foreach ($pecl_dll_deps as $dll) {
 	}
 	copy($dll, "$pecl_dir/" . basename($dll));
 }
-
 function copy_dir($source, $dest)
 {
 	if (!is_dir($dest)) {
@@ -333,7 +332,7 @@ function copy_dir($source, $dest)
 
 	$d = opendir($source);
 	while (($f = readdir($d)) !== false) {
-		if ($f == '.' || $f == '..' || $f == 'CVS') {
+		if ($f == '.' || $f == '..' || $f == 'CVS' || $f == '.cvsignore') {
 			continue;
 		}
 		$fs = $source . '/' . $f;
@@ -398,7 +397,6 @@ $dirs = array(
 foreach ($dirs as $dir) {
 	copy_test_dir($dir, $test_dir);
 }
-
 /* change this next line to true to use good-old
  * hand-assembled go-pear-bundle from the snapshot template */
 $use_pear_template = true;

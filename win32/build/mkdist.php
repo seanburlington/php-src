@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.19 2008/10/26 00:15:56 pajoye Exp $
+<?php # $Id: mkdist.php,v 1.20 2008/12/13 11:59:34 pajoye Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -333,7 +333,7 @@ function copy_dir($source, $dest)
 
 	$d = opendir($source);
 	while (($f = readdir($d)) !== false) {
-		if ($f == '.' || $f == '..' || $f == 'CVS') {
+		if ($f == '.' || $f == '..' || $f == 'CVS' || $f == '.cvsignore') {
 			continue;
 		}
 		$fs = $source . '/' . $f;

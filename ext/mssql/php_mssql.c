@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.184 2008/12/11 15:33:18 pajoye Exp $ */
+/* $Id: php_mssql.c,v 1.185 2008/12/14 15:35:51 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -980,11 +980,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			if (!res_length) {
 				ZVAL_NULL(result);
 			} else {
-				bin = ((DBBINARY *)dbdata(mssql_ptr->link, offset));
-				res_buf = (unsigned char *) emalloc(res_length+1);
-				memcpy(res_buf,bin,res_length);
-				res_buf[res_length] = '\0';
-				ZVAL_STRINGL(result, res_buf, res_length, 0);
+				ZVAL_STRINGL(result, (char *)dbdata(mssql_ptr->link, offset)), res_length, 1);
 			}
 			}
 			break;

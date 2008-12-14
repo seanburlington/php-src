@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.175 2008/11/24 15:35:03 dsp Exp $ */
+/* $Id: streams.c,v 1.176 2008/12/14 16:27:30 lstrojny Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2104,8 +2104,8 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 					n = sizeof(wrapper_name) - 1;
 				}
 				PHP_STRLCPY(wrapper_name, protocol, sizeof(wrapper_name), n);
-			
-				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Unable to find the wrapper \"%s\" - did you forget to enable it when you configured PHP?", wrapper_name);
+
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to find the wrapper \"%s\" - did you forget to enable it when you configured PHP?", wrapper_name);
 
 				wrapperpp = NULL;
 				protocol = NULL;

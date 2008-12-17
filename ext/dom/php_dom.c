@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.116 2008/12/16 12:51:58 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.117 2008/12/17 12:03:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -164,6 +164,8 @@ static void dom_copy_doc_props(php_libxml_ref_obj *source_doc, php_libxml_ref_ob
 		dest->stricterror = source->stricterror;
 		dest->recover = source->recover;
 		if (source->classmap) {
+			TSRMLS_FETCH();
+
 			ALLOC_HASHTABLE(dest->classmap);
 			zend_u_hash_init(dest->classmap, 0, NULL, NULL, 0, UG(unicode));
 			zend_hash_copy(dest->classmap, source->classmap, NULL, NULL, sizeof(zend_class_entry *));

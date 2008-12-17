@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.149 2008/11/13 13:41:59 lbarnaud Exp $ */
+/* $Id: sapi_apache2.c,v 1.150 2008/12/17 11:33:56 stas Exp $ */
 
 #include <fcntl.h>
 
@@ -434,6 +434,10 @@ static void php_apache_request_ctor(ap_filter_t *f, php_struct *ctx TSRMLS_DC)
 	apr_table_unset(f->r->headers_out, "ETag");
 	auth = apr_table_get(f->r->headers_in, "Authorization");
 	php_handle_auth_data(auth TSRMLS_CC);
+	if (SG(request_info).auth_user == NULL && f->r->user) {
+		SG(request_info).auth_user = estrdup(f->r->user);
+	}
+	ctx->r->user = apr_pstrdup(ctx->r->pool, SG(request_info).auth_user);
 	php_request_startup(TSRMLS_C);
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.7.2.4.2.6.2.6 2008/05/04 20:52:56 derick Exp $ */
+/* $Id: timelib.c,v 1.7.2.4.2.6.2.7 2008/12/17 21:32:29 iliaa Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -133,6 +133,7 @@ void timelib_tzinfo_dtor(timelib_tzinfo *tz)
 	TIMELIB_TIME_FREE(tz->type);
 	TIMELIB_TIME_FREE(tz->timezone_abbr);
 	TIMELIB_TIME_FREE(tz->leap_times);
+	TIMELIB_TIME_FREE(tz->location.comments);
 	TIMELIB_TIME_FREE(tz);
 	tz = NULL;
 }

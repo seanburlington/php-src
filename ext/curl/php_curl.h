@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.49 2007/12/31 07:12:08 sebastian Exp $ */
+/* $Id: php_curl.h,v 1.50 2008/12/17 14:13:25 jani Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -114,7 +114,9 @@ struct _php_curl_send_headers {
 };
 
 struct _php_curl_free {
+#if LIBCURL_VERSION_NUM < 0x071100
 	zend_llist str;
+#endif
 	zend_llist post;
 	zend_llist slist;
 };

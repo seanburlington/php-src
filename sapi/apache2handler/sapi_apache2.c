@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.10.2.17 2008/01/16 15:50:37 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.10.2.18 2008/12/18 14:28:35 stas Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -456,6 +456,9 @@ static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	if (!PG(safe_mode) || (PG(safe_mode) && !ap_auth_type(r))) {
 		auth = apr_table_get(r->headers_in, "Authorization");
 		php_handle_auth_data(auth TSRMLS_CC);
+		if (SG(request_info).auth_user == NULL && r->user) {
+			SG(request_info).auth_user = estrdup(r->user);
+		}
 		ctx->r->user = apr_pstrdup(ctx->r->pool, SG(request_info).auth_user);
 	} else {
 		SG(request_info).auth_user = NULL;

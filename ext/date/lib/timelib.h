@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10.2.11.2.3.2.8 2008/07/15 17:38:27 derick Exp $ */
+/* $Id: timelib.h,v 1.10.2.11.2.3.2.9 2008/12/18 14:55:36 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -28,6 +28,7 @@
 
 #define TIMELIB_NONE             0x00
 #define TIMELIB_OVERRIDE_TIME    0x01
+#define TIMELIB_NO_CLONE         0x02
 
 #define TIMELIB_SPECIAL_WEEKDAY                   0x01
 #define TIMELIB_SPECIAL_DAY_OF_WEEK_IN_MONTH      0x02

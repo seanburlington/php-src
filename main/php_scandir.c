@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.12.2.1.2.6 2007/12/31 07:20:15 sebastian Exp $ */
+/* $Id: php_scandir.c,v 1.12.2.1.2.7 2008/12/18 17:41:59 pajoye Exp $ */
 
 #include "php.h"
 #include "php_scandir.h"
@@ -50,14 +50,14 @@
 #include <string.h>
 #endif
 
-int php_alphasort(const struct dirent **a, const struct dirent **b)
+PHPAPI int php_alphasort(const struct dirent **a, const struct dirent **b)
 {
 	return strcoll((*a)->d_name,(*b)->d_name);
 }
 #endif /* HAVE_ALPHASORT */
 
 #ifndef HAVE_SCANDIR
-int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector) (const struct dirent *entry), int (*compare) (const struct dirent **a, const struct dirent **b))
+PHPAPI int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector) (const struct dirent *entry), int (*compare) (const struct dirent **a, const struct dirent **b))
 {
 	DIR *dirp = NULL;
 	struct dirent **vector = NULL;

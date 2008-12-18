@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.57 2008/11/17 11:26:25 felipe Exp $ */
+/* $Id: php_xmlwriter.c,v 1.58 2008/12/18 20:04:26 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -168,7 +168,7 @@ static zend_object_value xmlwriter_object_new(zend_class_entry *class_type TSRML
 
 #define XMLW_NAME_CHK(__err) \
 	if (xmlValidateName((xmlChar *) name, 0) != 0) {	\
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, __err);	\
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", __err);	\
 		RETURN_FALSE;	\
 	}	\
 	

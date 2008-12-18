@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.138 2008/11/27 19:02:44 dmitry Exp $ 
+  $Id: mysqli.c,v 1.139 2008/12/18 20:04:26 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1390,7 +1390,7 @@ if (a) {\
 #define LOCAL_INFILE_ERROR_MSG(source,dest)\
 	memset(source, 0, LOCAL_INFILE_ERROR_LEN);\
 	memcpy(source, dest, MIN(strlen(dest), LOCAL_INFILE_ERROR_LEN-1));\
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, dest);
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", dest);
 
 
 /* {{{ php_local_infile_init

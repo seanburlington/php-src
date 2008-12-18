@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.214 2008/12/18 14:54:50 derick Exp $ */
+/* $Id: php_date.c,v 1.215 2008/12/18 20:32:44 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2871,6 +2871,7 @@ PHP_FUNCTION(date_modify)
 
 	timelib_update_ts(dateobj->time, NULL);
 	timelib_update_from_sse(dateobj->time);
+	dateobj->time->have_relative = 0;
 
 	RETURN_ZVAL(object, 1, 0);
 }
@@ -2915,6 +2916,7 @@ PHP_FUNCTION(date_add)
 
 	timelib_update_ts(dateobj->time, NULL);
 	timelib_update_from_sse(dateobj->time);
+	dateobj->time->have_relative = 0;
 
 	RETURN_ZVAL(object, 1, 0);
 }

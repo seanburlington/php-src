@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.62 2008/12/02 18:01:57 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.63 2008/12/18 14:56:46 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1143,7 +1143,7 @@ PHP_FUNCTION(strtotime)
 	t = timelib_strtotime(times, time_len, &error, DATE_TIMEZONEDB);
 	error1 = error->error_count;
 	timelib_error_container_dtor(error);
-	timelib_fill_holes(t, now, 0);
+	timelib_fill_holes(t, now, TIMELIB_NO_CLONE);
 	timelib_update_ts(t, tzi);
 	ts = timelib_date_to_int(t, &error2);
 

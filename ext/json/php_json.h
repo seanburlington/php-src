@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.13 2008/07/22 15:31:00 jani Exp $ */
+/* $Id: php_json.h,v 1.14 2008/12/19 02:00:59 scottmac Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -28,6 +28,16 @@ extern zend_module_entry json_module_entry;
 
 #ifdef ZTS
 #include "TSRM.h"
+#endif
+
+ZEND_BEGIN_MODULE_GLOBALS(json)
+	int error_code;
+ZEND_END_MODULE_GLOBALS(json)
+
+#ifdef ZTS
+# define JSON_G(v) TSRMG(json_globals_id, zend_json_globals *, v)
+#else
+# define JSON_G(v) (json_globals.v)
 #endif
 
 #endif  /* PHP_JSON_H */

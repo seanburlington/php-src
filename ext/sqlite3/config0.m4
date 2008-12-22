@@ -1,4 +1,4 @@
-dnl $Id: config0.m4,v 1.7 2008/07/31 22:32:46 bjori Exp $
+dnl $Id: config0.m4,v 1.8 2008/12/22 16:42:34 scottmac Exp $
 dnl config.m4 for extension sqlite3
 dnl vim:et:ts=2:sw=2
 
@@ -67,11 +67,8 @@ if test $PHP_SQLITE3 != "no"; then
       debug_flags="-DSQLITE_DEBUG=1"
     fi
 
-    other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1"
+    other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1 -DSQLITE_ENABLE_ICU=1"
 
-dnl    if test "$PHP_MAJOR_VERSION" -ge "6"; then
-dnl      other_flags="$other_flags -DSQLITE_ENABLE_ICU=1"
-dnl    fi
     PHP_SQLITE3_CFLAGS="-I@ext_srcdir@/libsqlite -I@ext_builddir@/libsqlite $other_flags $threadsafe_flags $debug_flags"
   fi
 

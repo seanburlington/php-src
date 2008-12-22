@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1.2.8 2008/07/31 22:30:25 bjori Exp $
+dnl $Id: config.m4,v 1.1.2.9 2008/12/22 16:43:21 scottmac Exp $
 dnl config.m4 for extension sqlite3
 dnl vim:et:ts=2:sw=2
 
@@ -69,9 +69,11 @@ if test $PHP_SQLITE3 != "no"; then
 
     other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1"
 
-dnl    if test "$PHP_MAJOR_VERSION" -ge "6"; then
-dnl      other_flags="$other_flags -DSQLITE_ENABLE_ICU=1"
-dnl    fi
+	dnl As long as intl is not shared we can have ICU support
+    if test "$PHP_INTL" = "yes"; then
+      other_flags="$other_flags -DSQLITE_ENABLE_ICU=1"
+    fi
+
     PHP_SQLITE3_CFLAGS="-I@ext_srcdir@/libsqlite $other_flags $threadsafe_flags $debug_flags"
   fi
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3_structs.h,v 1.4 2008/08/01 08:27:46 tony2001 Exp $ */
+/* $Id: php_sqlite3_structs.h,v 1.5 2008/12/24 19:21:42 scottmac Exp $ */
 
 #ifndef PHP_SQLITE_STRUCTS_H
 #define PHP_SQLITE_STRUCTS_H
@@ -71,6 +71,12 @@ typedef struct _php_sqlite3_db_object  {
 
 	zend_llist free_list;
 } php_sqlite3_db_object;
+
+/* Structure for SQLite Database object. */
+typedef struct _php_sqlite3_agg_context  {
+	zval *zval_context;
+	long row_count;
+} php_sqlite3_agg_context;
 
 typedef struct _php_sqlite3_stmt_object php_sqlite3_stmt;
 typedef struct _php_sqlite3_result_object php_sqlite3_result;

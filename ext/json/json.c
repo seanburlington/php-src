@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.45 2008/12/19 02:00:59 scottmac Exp $ */
+/* $Id: json.c,v 1.46 2008/12/24 18:09:00 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -551,6 +551,8 @@ static PHP_FUNCTION(json_decode)
 
 		if (str_len == 4) {
 			if (!strcasecmp(str.s, "null")) {
+				/* We need to explicitly clear the error because its an actual NULL and not an error */
+				jp->error_code = PHP_JSON_ERROR_NONE;
 				RETVAL_NULL();
 			} else if (!strcasecmp(str.s, "true")) {
 				RETVAL_BOOL(1);
@@ -566,6 +568,10 @@ static PHP_FUNCTION(json_decode)
 				RETVAL_DOUBLE(d);
 			}
 		}
+
+		if (Z_TYPE_P(return_value) != IS_NULL) {
+			jp->error_code = PHP_JSON_ERROR_NONE;
+		}
 	}
 	else
 	{
@@ -578,6 +584,8 @@ static PHP_FUNCTION(json_decode)
 
 		if (str_len == 4) {
 			if (ZEND_U_CASE_EQUAL(IS_UNICODE, str, str_len, "null", sizeof("null")-1)) {
+				/* We need to explicitly clear the error because its an actual NULL and not an error */
+				jp->error_code = PHP_JSON_ERROR_NONE;
 				RETVAL_NULL();
 			} else if (ZEND_U_CASE_EQUAL(IS_UNICODE, str, str_len, "true", sizeof("true")-1)) {
 				RETVAL_BOOL(1);
@@ -592,6 +600,10 @@ static PHP_FUNCTION(json_decode)
 			} else if (type == IS_DOUBLE) {
 				RETVAL_DOUBLE(d);
 			}
+		}
+		
+		if (Z_TYPE_P(return_value) != IS_NULL) {
+			jp->error_code = PHP_JSON_ERROR_NONE;
 		}
 	}
 

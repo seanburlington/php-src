@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.40 2008/12/16 21:35:42 zoe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.41 2008/12/24 11:24:38 felipe Exp $ */
 
 #define IMAP41
 
@@ -2201,7 +2201,7 @@ PHP_FUNCTION(imap_rfc822_parse_adrlist)
 
 	/* rfc822_parse_adrlist() modifies passed string. Copy it. */
 	str_copy = estrndup(Z_STRVAL_PP(str), Z_STRLEN_PP(str));
-	rfc822_parse_adrlist(&env->to, str_copy, defaulthost);
+	rfc822_parse_adrlist(&env->to, str_copy, Z_STRVAL_PP(defaulthost));
 	efree(str_copy);
 
 	array_init(return_value);

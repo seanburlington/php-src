@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.27 2008/12/16 21:35:01 zoe Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.28 2008/12/24 13:31:16 felipe Exp $ */
 
 #define IMAP41
 
@@ -2524,6 +2524,8 @@ PHP_FUNCTION(imap_rfc822_parse_adrlist)
 		}
 		add_next_index_object(return_value, tovals TSRMLS_CC);
 	} while ((addresstmp = addresstmp->next));
+	
+	mail_free_envelope(&env);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.27 2008/06/02 14:13:49 scottmac Exp $ */
+/* $Id: php_hash.h,v 1.28 2008/12/25 13:34:49 scottmac Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -82,6 +82,8 @@ extern const php_hash_ops php_hash_gost_ops;
 extern const php_hash_ops php_hash_adler32_ops;
 extern const php_hash_ops php_hash_crc32_ops;
 extern const php_hash_ops php_hash_crc32b_ops;
+extern const php_hash_ops php_hash_salsa10_ops;
+extern const php_hash_ops php_hash_salsa20_ops;
 
 #define PHP_HASH_HAVAL_OPS(p,b)	extern const php_hash_ops php_hash_##p##haval##b##_ops;
 

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.4.8.4 2008/12/25 00:47:32 pajoye Exp $
+// $Id: config.w32,v 1.4.8.5 2008/12/25 01:00:26 pajoye Exp $
 // vim:ft=javascript
 
 ARG_WITH("simplexml", "Simple XML support", "yes");
@@ -9,9 +9,11 @@ if (PHP_SIMPLEXML == "yes" && PHP_LIBXML == "yes"
 	AC_DEFINE("HAVE_SIMPLEXML", 1, "Simple XML support");
 	if (!PHP_SIMPLEXML_SHARED) {
 		ADD_FLAG("CFLAGS_SIMPLEXML", "/D LIBXML_STATIC");
-// be tricky for now, we actually need a macro like the one in m4 (PHP_SETUP_LIBXML)
-		ADD_FLAG("CFLAGS_SIMPLEXML", "$(CFLAGS_LIBXML)");
 	}
+	
+	// be tricky for now, we actually need a macro like the one in m4 (PHP_SETUP_LIBXML)
+	ADD_FLAG("CFLAGS_SIMPLEXML", "$(CFLAGS_LIBXML)");
+
 	if (!ADD_EXTENSION_DEP('simplexml', 'spl', true)) {
 		MESSAGE("\tSPL support in simplexml disabled");
 	}

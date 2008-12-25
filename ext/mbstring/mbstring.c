@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.25.2.39 2008/12/11 02:56:45 scottmac Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.25.2.40 2008/12/25 19:30:47 felipe Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1989,7 +1989,9 @@ PHP_FUNCTION(mb_substitute_character)
 			if (Z_LVAL_P(arg1) < 0xffff && Z_LVAL_P(arg1) > 0x0) {
 				MBSTRG(current_filter_illegal_mode) = MBFL_OUTPUTFILTER_ILLEGAL_MODE_CHAR;
 				MBSTRG(current_filter_illegal_substchar) = Z_LVAL_P(arg1);
+				zval_ptr_dtor(&arg1);
 			} else {
+				zval_ptr_dtor(&arg1);
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown character.");
 				RETURN_FALSE;
 			}

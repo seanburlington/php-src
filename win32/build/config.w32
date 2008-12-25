@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.91 2008/12/18 23:20:44 pajoye Exp $
+// $Id: config.w32,v 1.92 2008/12/25 00:03:39 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -397,8 +397,6 @@ if (PHP_SNAPSHOT_TEMPLATE == "no") {
 }
 
 DEFINE('SNAPSHOT_TEMPLATE', PHP_SNAPSHOT_TEMPLATE);
-
-ARG_ENABLE('summary', 'Enable configuration summary', 'yes');
 
 if (PHP_DSP != "no") {
 	if (FSO.FolderExists("tmp")) {

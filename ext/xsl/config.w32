@@ -1,10 +1,12 @@
-// $Id: config.w32,v 1.9 2004/07/18 13:23:33 rrichards Exp $
+// $Id: config.w32,v 1.10 2008/12/26 14:06:29 pajoye Exp $
 // vim: ft=javascript
 
 ARG_WITH("xsl", "xsl support", "no");
 
 if (PHP_XSL != "no") {
-	if (PHP_DOM == "yes" && PHP_LIBXML == "yes") {
+	if (PHP_DOM == "yes" && PHP_LIBXML == "yes"
+	&& ADD_EXTENSION_DEP('xsl', 'libxml')
+	&& ADD_EXTENSION_DEP('xsl', 'dom')) {
 		var ext_xsl_lib_found = false;
 		var ext_exslt_lib_found = false;
 

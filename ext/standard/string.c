@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.686 2008/11/24 19:31:02 lbarnaud Exp $ */
+/* $Id: string.c,v 1.687 2008/12/27 05:13:29 shire Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1294,10 +1294,12 @@ PHP_FUNCTION(explode)
 	array_init(return_value);
 
 	if ( str_len == 0 ) {
-		if ( str_type == IS_UNICODE ) {
-			add_next_index_unicodel(return_value, USTR_MAKE(""), sizeof("")-1, 0);
-		} else {
-			add_next_index_stringl(return_value, "", sizeof("")-1, 1);
+	  	if (limit >= 0 || argc == 2) {
+			if ( str_type == IS_UNICODE ) {
+				add_next_index_unicodel(return_value, USTR_MAKE(""), sizeof("")-1, 0);
+			} else {
+				add_next_index_stringl(return_value, "", sizeof("")-1, 1);
+			}
 		}
 		return;
 	}

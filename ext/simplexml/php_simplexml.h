@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.20.2.2.2.3.2.4 2008/12/26 20:28:43 rrichards Exp $ */
+/* $Id: php_simplexml.h,v 1.20.2.2.2.3.2.5 2008/12/27 01:07:49 rrichards Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -77,17 +77,7 @@ typedef struct {
 #define SIMPLEXML_G(v) (simplexml_globals.v)
 #endif
 
-#ifdef PHP_WIN32
-#ifdef SIMPLEXML_EXPORTS
-#define PHP_SXE_API __declspec(dllexport)
-#else
-#define PHP_SXE_API __declspec(dllimport)
-#endif /* SIMPLEXML_EXPORTS */
-#elif defined(__GNUC__) && __GNUC__ >= 4
-#define PHP_SXE_API __attribute__ ((visibility("default")))
-#else
-#define PHP_SXE_API
-#endif /* PHP_WIN32 */
+#define PHP_SXE_API ZEND_DLEXPORT
 
 PHP_SXE_API zend_class_entry *sxe_get_element_class_entry();
 

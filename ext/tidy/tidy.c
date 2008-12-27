@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.127 2008/12/27 20:21:57 tony2001 Exp $ */
+/* $Id: tidy.c,v 1.128 2008/12/27 20:23:05 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -213,8 +213,8 @@ static char *php_tidy_file_to_mem(char *, zend_bool, int * TSRMLS_DC);
 static void tidy_object_free_storage(void * TSRMLS_DC);
 static zend_object_value tidy_object_new_node(zend_class_entry * TSRMLS_DC);
 static zend_object_value tidy_object_new_doc(zend_class_entry * TSRMLS_DC);
-static zend_class_entry *tidy_get_ce_node(zval * TSRMLS_DC);
-static zend_class_entry *tidy_get_ce_doc(zval * TSRMLS_DC);
+static zend_class_entry *tidy_get_ce_node(const zval * TSRMLS_DC);
+static zend_class_entry *tidy_get_ce_doc(const zval * TSRMLS_DC);
 static zval * tidy_instanciate(zend_class_entry *, zval * TSRMLS_DC);
 static int tidy_doc_cast_handler(zval *, zval *, int, void * TSRMLS_DC);
 static int tidy_node_cast_handler(zval *, zval *, int, void * TSRMLS_DC);
@@ -1156,7 +1156,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.127 2008/12/27 20:21:57 tony2001 Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.128 2008/12/27 20:23:05 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

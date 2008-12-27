@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.77 2008/11/05 18:55:02 felipe Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.78 2008/12/27 05:20:27 shire Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1033,7 +1033,9 @@ PHP_FUNCTION(explode)
 	array_init(return_value);
 
 	if (! Z_STRLEN_PP(str)) {
-		add_next_index_stringl(return_value, "", sizeof("") - 1, 1);
+	  	if (limit >= 0 || argc == 2) {
+			add_next_index_stringl(return_value, "", sizeof("") - 1, 1);
+		} 
 		return;
 	}
 

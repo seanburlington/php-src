@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.687 2008/12/27 05:13:29 shire Exp $ */
+/* $Id: string.c,v 1.688 2008/12/28 20:16:48 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2129,7 +2129,7 @@ PHP_FUNCTION(pathinfo)
 		if (zend_hash_get_current_data(Z_ARRVAL_P(tmp), (void **) &element) == SUCCESS) {
 			RETVAL_ZVAL(*element, 1, 0);
 		} else {
-			ZVAL_EMPTY_STRING(return_value);
+			ZVAL_EMPTY_UNICODE(return_value);
 		}
 	}
 

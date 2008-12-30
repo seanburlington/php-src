@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.25.2.41 2008/12/27 13:32:24 felipe Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.25.2.42 2008/12/30 02:17:30 felipe Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2555,7 +2555,8 @@ PHP_FUNCTION(mb_strrchr)
 PHP_FUNCTION(mb_stristr)
 {
 	zend_bool part = 0;
-	unsigned int n, from_encoding_len, len, mblen;
+	unsigned int from_encoding_len, len, mblen;
+	int n;
 	mbfl_string haystack, needle, result, *ret = NULL;
 	const char *from_encoding = mbfl_no2preferred_mime_name(MBSTRG(current_internal_encoding));
 	mbfl_string_init(&haystack);

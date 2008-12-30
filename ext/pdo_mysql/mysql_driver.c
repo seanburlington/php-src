@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59.2.13.2.6 2007/12/31 07:20:09 sebastian Exp $ */
+/* $Id: mysql_driver.c,v 1.59.2.13.2.7 2008/12/30 19:10:59 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -496,12 +496,12 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		if ((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) {
 			local_infile = 0;
 		}
-
+#ifdef MYSQL_OPT_LOCAL_INFILE
 		if (mysql_options(H->server, MYSQL_OPT_LOCAL_INFILE, (const char *)&local_infile)) {
 			pdo_mysql_error(dbh);
 			goto cleanup;
 		}
-
+#endif
 #ifdef MYSQL_OPT_RECONNECT
 		/* since 5.0.3, the default for this option is 0 if not specified.
 		 * we want the old behaviour */

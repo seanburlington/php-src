@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.35 2008/11/19 17:53:47 lbarnaud Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.36 2008/12/30 23:34:29 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -433,10 +433,6 @@ static void spl_array_write_dimension_ex(int check_inherited, zval *object, zval
 	}
 	switch(Z_TYPE_P(offset)) {
 	case IS_STRING:
-		if (*Z_STRVAL_P(offset) == '\0') {
-			zend_throw_exception(spl_ce_InvalidArgumentException, "An offset must not begin with \\0 or be empty", 0 TSRMLS_CC);
-			return;
-		}
 		Z_ADDREF_P(value);
 		zend_symtable_update(spl_array_get_hash_table(intern, 0 TSRMLS_CC), Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void**)&value, sizeof(void*), NULL);
 		return;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.296 2008/12/12 10:33:05 pajoye Exp $ */
+/* $Id: info.c,v 1.297 2008/12/30 12:48:00 felipe Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1323,6 +1323,10 @@ PHP_FUNCTION(php_uname)
    Return comma-separated string of .ini files parsed from the additional ini dir */
 PHP_FUNCTION(php_ini_scanned_files)
 {
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
+	}
+	
 	if (strlen(PHP_CONFIG_FILE_SCAN_DIR) && php_ini_scanned_files) {
 		RETURN_RT_STRING(php_ini_scanned_files, ZSTR_DUPLICATE);
 	} else {
@@ -1335,6 +1339,10 @@ PHP_FUNCTION(php_ini_scanned_files)
    Return the actual loaded ini filename */
 PHP_FUNCTION(php_ini_loaded_file)
 {
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
+	}
+	
 	if (php_ini_opened_path) {
 		RETURN_STRING(php_ini_opened_path, 1);
 	} else {

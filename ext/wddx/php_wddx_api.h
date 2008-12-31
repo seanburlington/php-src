@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.30 2008/01/20 15:33:42 iliaa Exp $ */
+/* $Id: php_wddx_api.h,v 1.31 2008/12/31 11:12:37 sebastian Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H

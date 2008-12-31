@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bz2.h,v 1.14 2008/01/30 09:56:21 dmitry Exp $ */
+/* $Id: php_bz2.h,v 1.15 2008/12/31 11:12:29 sebastian Exp $ */
 
 #ifndef PHP_BZ2_H
 #define PHP_BZ2_H

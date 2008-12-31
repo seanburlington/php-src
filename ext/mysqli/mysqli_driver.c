@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqli_driver.c,v 1.17 2008/11/19 01:59:07 colder Exp $ */
+/* $Id: mysqli_driver.c,v 1.18 2008/12/31 11:12:33 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

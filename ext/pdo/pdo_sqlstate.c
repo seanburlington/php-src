@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlstate.c,v 1.12 2008/01/25 19:58:51 nlopess Exp $ */
+/* $Id: pdo_sqlstate.c,v 1.13 2008/12/31 11:12:34 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

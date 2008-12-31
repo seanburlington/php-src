@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.48 2008/01/03 16:18:27 nlopess Exp $ */
+/* $Id: php_mssql.h,v 1.49 2008/12/31 11:12:32 sebastian Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H

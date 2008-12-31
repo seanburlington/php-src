@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.118 2008/03/19 16:37:48 rasmus Exp $ */
+/* $Id: php_globals.h,v 1.119 2008/12/31 11:12:38 sebastian Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H

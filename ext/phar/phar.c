@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | phar php single-file executable PHP extension                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2005-2008 The PHP Group                                |
+  | Copyright (c) 2005-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.392 2008/10/26 05:51:04 cellog Exp $ */
+/* $Id: phar.c,v 1.393 2008/12/31 11:12:35 sebastian Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3624,7 +3624,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.392 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.393 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");
@@ -3656,7 +3656,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	PUTS(!sapi_module.phpinfo_as_text?"<br />":"\n");
 	PUTS("Phar fully realized by Gregory Beaver and Marcus Boerger.");
 	PUTS(!sapi_module.phpinfo_as_text?"<br />":"\n");
-	PUTS("Portions of tar implementation Copyright (c) 2003-2008 Tim Kientzle.");
+	PUTS("Portions of tar implementation Copyright (c) 2003-2009 Tim Kientzle.");
 	php_info_print_box_end();
 
 	DISPLAY_INI_ENTRIES();

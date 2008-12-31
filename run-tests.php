@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.57 2008/12/31 11:15:31 sebastian Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.58 2008/12/31 17:35:50 zoe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.57 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.58 $' . "\n";
 					exit(1);
 
 				default:
@@ -1786,9 +1786,15 @@ COMMAND $cmd
 			if (isset($old_php)) {
 				$php = $old_php;
 			}
+
 			if (!$leaked && !$failed_headers) {
+                            if (isset($section_text['XFAIL'] )) {
+                                $warn = true;
+				$info = " (warn: XFAIL section but test passes)";
+                            }else {
 				show_result("PASS", $tested, $tested_file, '', $temp_filenames);
 				return 'PASSED';
+                            }
 			}
 		}
 
@@ -1811,8 +1817,13 @@ COMMAND $cmd
 			}
 
 			if (!$leaked && !$failed_headers) {
+                              if (isset($section_text['XFAIL'] )) {
+                                $warn = true;
+				$info = " (warn: XFAIL section but test passes)";
+                              }else {
 				show_result("PASS", $tested, $tested_file, '', $temp_filenames);
 				return 'PASSED';
+                              }
 			}
 		}
 

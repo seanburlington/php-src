@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.29 2008/12/31 11:12:40 sebastian Exp $ */
+/* $Id: php_embed.c,v 1.30 2008/12/31 14:15:41 helly Exp $ */
 
 #include "php_embed.h"
 #include <ext/standard/dl.h>
@@ -140,6 +140,7 @@ sapi_module_struct php_embed_module = {
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 /* }}} */
+
 /* {{{ arginfo ext/standard/dl.c */
 ZEND_BEGIN_ARG_INFO(arginfo_dl, 0)
 	ZEND_ARG_INFO(0, extension_filename)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.202 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: php_cli.c,v 1.203 2008/12/31 14:15:41 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -429,6 +429,7 @@ static sapi_module_struct cli_sapi_module = {
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 /* }}} */
+
 /* {{{ arginfo ext/standard/dl.c */
 ZEND_BEGIN_ARG_INFO(arginfo_dl, 0)
 	ZEND_ARG_INFO(0, extension_filename)

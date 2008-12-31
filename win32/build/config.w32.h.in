@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.5 2008/11/22 15:16:47 scottmac Exp $
+	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.6 2008/12/31 14:30:38 iliaa Exp $
 */
 
 /* Define the minimum supported version */
@@ -53,6 +53,7 @@
 /* its in win32/time.c */
 #define HAVE_USLEEP 1
 
+#define HAVE_GETHOSTNAME 1
 #define HAVE_GETCWD 1
 #define HAVE_POSIX_READDIR_R 1
 #define NEED_ISBLANK 1

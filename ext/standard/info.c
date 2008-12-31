@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.299 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: info.c,v 1.300 2008/12/31 12:52:28 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -849,8 +849,10 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		} else {
 			SECTION("Configuration");
 		}	
-		SECTION("PHP Core");
-		display_ini_entries(NULL);
+		if (!(flag & PHP_INFO_MODULES)) {
+			SECTION("PHP Core");
+			display_ini_entries(NULL);
+		}
 	}
 
 	if (flag & PHP_INFO_MODULES) {

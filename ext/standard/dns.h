@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.23 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: dns.h,v 1.24 2008/12/31 14:33:41 iliaa Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -30,6 +30,10 @@
 PHP_FUNCTION(gethostbyaddr);
 PHP_FUNCTION(gethostbyname);
 PHP_FUNCTION(gethostbynamel);
+
+#ifdef HAVE_GETHOSTNAME
+PHP_FUNCTION(gethostname);
+#endif
 
 #if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
 

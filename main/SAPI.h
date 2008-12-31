@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.114.2.1.2.3.2.6 2008/12/31 14:27:09 helly Exp $ */
+/* $Id: SAPI.h,v 1.114.2.1.2.3.2.7 2008/12/31 17:33:05 helly Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
 
 #include "zend.h"
+#include "zend_API.h"
 #include "zend_llist.h"
 #include "zend_operators.h"
 #ifdef PHP_WIN32

@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.20 2008/11/22 15:16:42 scottmac Exp $
+	$Id: config.w32.h.in,v 1.21 2008/12/31 19:49:06 pajoye Exp $
 */
 
 /* Define the minimum supported version */
@@ -40,6 +40,7 @@
 #define HAVE_GETSERVBYPORT 1
 #define HAVE_GETPROTOBYNAME 1
 #define HAVE_GETPROTOBYNUMBER 1
+#define HAVE_GETHOSTNAME 1
 #define STDIN_FILENO 0
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.h,v 1.20.2.1.2.1.2.4 2008/11/26 04:19:20 lbarnaud Exp $ */
+/* $Id: flock_compat.h,v 1.20.2.1.2.1.2.5 2008/12/31 11:15:45 sebastian Exp $ */
 
 #ifndef FLOCK_COMPAT_H
 #define FLOCK_COMPAT_H

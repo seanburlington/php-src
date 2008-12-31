@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2008 The PHP Group                                |
+  | Copyright (c) 2006-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.1.2.7 2008/10/01 21:36:43 johannes Exp $ */
+/* $Id: php_mysqlnd.c,v 1.1.2.8 2008/12/31 11:15:39 sebastian Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"

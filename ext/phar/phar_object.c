@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | phar php single-file executable PHP extension                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2005-2008 The PHP Group                                |
+  | Copyright (c) 2005-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.266.2.56 2008/11/17 11:27:57 felipe Exp $ */
+/* $Id: phar_object.c,v 1.266.2.57 2008/12/31 11:15:42 sebastian Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"

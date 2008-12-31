@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2008 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.18 2008/12/03 00:10:17 mattwil Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.19 2008/12/31 11:15:40 sebastian Exp $ */
 
 /* The PDO Database Handle Class */
 

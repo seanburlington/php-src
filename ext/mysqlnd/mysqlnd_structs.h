@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2008 The PHP Group                                |
+  | Copyright (c) 2006-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h,v 1.2.2.18 2008/11/20 17:21:36 andrey Exp $ */
+/* $Id: mysqlnd_structs.h,v 1.2.2.19 2008/12/31 11:15:39 sebastian Exp $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H

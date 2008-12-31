@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.11 2008/07/29 13:57:43 lbarnaud Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.9.2.12 2008/12/31 11:15:45 sebastian Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"

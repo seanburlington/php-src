@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.173.2.5.2.20.2.13 2008/12/12 13:07:28 bjori Exp $ */
+/* $Id: exif.c,v 1.173.2.5.2.20.2.14 2008/12/31 11:15:36 sebastian Exp $ */
 
 /*  ToDos
  *
@@ -138,7 +138,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.13 2008/12/12 13:07:28 bjori Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.5.2.20.2.14 2008/12/31 11:15:36 sebastian Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

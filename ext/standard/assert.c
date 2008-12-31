@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: assert.c,v 1.60.2.3.2.6.2.4 2008/10/21 22:08:36 lbarnaud Exp $ */
+/* $Id: assert.c,v 1.60.2.3.2.6.2.5 2008/12/31 11:15:44 sebastian Exp $ */
 
 /* {{{ includes */
 #include "php.h"

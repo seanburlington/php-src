@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.14.2.1.2.3.2.2 2008/11/13 18:21:40 iliaa Exp $ */
+/* $Id: inifile.c,v 1.14.2.1.2.3.2.3 2008/12/31 11:15:36 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.14.2.1.2.3.2.2 $";
+	return "1.0, $Revision: 1.14.2.1.2.3.2.3 $";
 }
 /* }}} */ 
 

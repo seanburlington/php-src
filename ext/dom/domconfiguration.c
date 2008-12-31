@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2008 The PHP Group                                |
+   | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domconfiguration.c,v 1.5.2.1.2.1.2.8 2008/11/17 11:27:54 felipe Exp $ */
+/* $Id: domconfiguration.c,v 1.5.2.1.2.1.2.9 2008/12/31 11:15:36 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

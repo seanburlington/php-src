@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.39 2008/12/31 13:25:21 helly Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.40 2008/12/31 14:05:22 helly Exp $ */
 
 /* {{{ includes
  */
@@ -1738,7 +1738,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	zuf.vspprintf_function = vspprintf;
 	zuf.getenv_function = sapi_getenv;
 	zuf.resolve_path_function = php_resolve_path_for_zend;
-	zend_startup(&zuf, NULL, 1 TSRMLS_CC);
+	zend_startup(&zuf, NULL TSRMLS_CC);
 
 #ifdef ZTS
 	executor_globals = ts_resource(executor_globals_id);

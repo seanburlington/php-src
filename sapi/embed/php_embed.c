@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.11.2.1.2.5.2.4 2008/12/31 11:15:49 sebastian Exp $ */
+/* $Id: php_embed.c,v 1.11.2.1.2.5.2.5 2008/12/31 14:27:09 helly Exp $ */
 
 #include "php_embed.h"
 
@@ -140,6 +140,17 @@ sapi_module_struct php_embed_module = {
 };
 /* }}} */
 
+/* {{{ arginfo ext/standard/dl.c */
+ZEND_BEGIN_ARG_INFO(arginfo_dl, 0)
+	ZEND_ARG_INFO(0, extension_filename)
+ZEND_END_ARG_INFO()
+/* }}} */
+
+static const zend_function_entry additional_functions[] = {
+	ZEND_FE(dl, arginfo_dl)
+	{NULL, NULL, NULL}
+};
+
 int php_embed_init(int argc, char **argv PTSRMLS_DC)
 {
 	zend_llist global_vars;
@@ -175,6 +186,8 @@ int php_embed_init(int argc, char **argv PTSRMLS_DC)
 
   php_embed_module.ini_entries = malloc(sizeof(HARDCODED_INI));
   memcpy(php_embed_module.ini_entries, HARDCODED_INI, sizeof(HARDCODED_INI));
+
+  php_embed_module.additional_functions = additional_functions;
 
   if (argv) {
 	php_embed_module.executable_location = argv[0];

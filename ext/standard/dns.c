@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.97 2008/12/31 14:33:41 iliaa Exp $ */
+/* $Id: dns.c,v 1.98 2008/12/31 15:48:06 tony2001 Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -115,7 +115,7 @@ PHP_FUNCTION(gethostname)
 	char buf[4096];
 
 	if (zend_parse_parameters_none() == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
 
 	if (gethostname(buf, sizeof(buf) - 1)) {

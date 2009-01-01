@@ -1,4 +1,4 @@
-/*      $Id: glob.h,v 1.1.24.1 2008/08/23 19:22:10 pajoye Exp $ */
+/*      $Id: glob.h,v 1.1.24.2 2009/01/01 12:32:49 pajoye Exp $ */
 /*	OpenBSD: glob.h,v 1.7 2002/02/17 19:42:21 millert Exp 	*/
 /*	NetBSD: glob.h,v 1.5 1994/10/26 00:55:56 cgd Exp 	*/
 
@@ -96,7 +96,7 @@ typedef struct {
 #define GLOB_ABEND	GLOB_ABORTED
 
 BEGIN_EXTERN_C()
-int	glob(const char *, int, int (*)(const char *, int), glob_t *);
-void	globfree(glob_t *);
+PHPAPI int	glob(const char *, int, int (*)(const char *, int), glob_t *);
+PHPAPI void	globfree(glob_t *);
 END_EXTERN_C()
 #endif /* !_GLOB_H_ */

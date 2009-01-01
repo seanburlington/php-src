@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.14.2.12 2008/12/31 11:15:43 sebastian Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.14.2.13 2009/01/01 05:24:29 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -223,7 +223,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_socket_set_option, 0, 0, 4)
 	ZEND_ARG_INFO(0, optval)
 ZEND_END_ARG_INFO()
 
-#ifdef HAVE_SOCKETPAIR
+#if defined(HAVE_SOCKETPAIR) || defined(PHP_WIN32)
 ZEND_BEGIN_ARG_INFO_EX(arginfo_socket_create_pair, 0, 0, 4)
 	ZEND_ARG_INFO(0, domain)
 	ZEND_ARG_INFO(0, type)
@@ -254,7 +254,7 @@ const zend_function_entry sockets_functions[] = {
 	PHP_FE(socket_select,			arginfo_socket_select)
 	PHP_FE(socket_create,			arginfo_socket_create)
 	PHP_FE(socket_create_listen,	arginfo_socket_create_listen)
-#ifdef HAVE_SOCKETPAIR
+#if defined(HAVE_SOCKETPAIR) || defined(PHP_WIN32)
 	PHP_FE(socket_create_pair,		arginfo_socket_create_pair)
 #endif
 	PHP_FE(socket_accept,			arginfo_socket_accept)
@@ -1867,7 +1867,7 @@ PHP_FUNCTION(socket_set_option)
 }
 /* }}} */
 
-#ifdef HAVE_SOCKETPAIR
+#if defined(HAVE_SOCKETPAIR) || defined(PHP_WIN32)
 /* {{{ proto bool socket_create_pair(int domain, int type, int protocol, array &fd) U
    Creates a pair of indistinguishable sockets and stores them in fds. */
 PHP_FUNCTION(socket_create_pair)

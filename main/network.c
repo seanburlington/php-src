@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.118.2.2.2.6.2.12 2009/01/02 21:28:28 felipe Exp $ */
+/* $Id: network.c,v 1.118.2.2.2.6.2.13 2009/01/02 21:42:52 felipe Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1147,7 +1147,9 @@ PHPAPI int php_poll2(php_pollfd *ufds, unsigned int nfds, int timeout)
 		tv.tv_sec = timeout / 1000;
 		tv.tv_usec = (timeout - (tv.tv_sec * 1000)) * 1000;
 	}
+#ifndef PHP_WIN32
 	errno = 0;
+#endif
 	n = select(max_fd + 1, &rset, &wset, &eset, timeout >= 0 ? &tv : NULL);
 
 	if (n >= 0) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.13.2.22.2.19 2008/12/31 14:27:09 helly Exp $ */
+/* $Id: php_cli.c,v 1.129.2.13.2.22.2.20 2009/01/02 13:14:49 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1123,7 +1123,7 @@ int main(int argc, char *argv[])
 					}
 
 					if (EG(exception)) {
-						zend_exception_error(EG(exception) TSRMLS_CC);
+						zend_exception_error(EG(exception), E_WARNING TSRMLS_CC);
 					}
 
 					php_last_char = '\0';

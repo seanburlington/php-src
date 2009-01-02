@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.55 2008/12/31 11:15:42 sebastian Exp $ */
+/* $Id: phar.c,v 1.370.2.56 2009/01/02 20:43:41 iliaa Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3122,7 +3122,7 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 				return EOF;
 #endif
 			default: {
-				char *digest;
+				char *digest = NULL;
 				int digest_len;
 
 				if (FAILURE == phar_create_signature(phar, newfile, &digest, &digest_len, error TSRMLS_CC)) {
@@ -3131,7 +3131,9 @@ int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, 
 						spprintf(error, 0, "phar error: unable to write signature: %s", save);
 						efree(save);
 					}
-					efree(digest);
+					if (digest) {
+						efree(digest);
+					}
 					if (closeoldfile) {
 						php_stream_close(oldfile);
 					}
@@ -3624,7 +3626,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.55 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.56 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

@@ -6,16 +6,13 @@ Bug #46944 (json_encode() doesn't handle 3 byte utf8 correctly)
 <?php
 
 for ($i = 1; $i <= 16; $i++) {
-	$first = 0xf0|($i >> 2);
-	$second = 0x8f|($i & 3) << 4;
-	$string = sprintf("aa%c%c\xbf\xbdzz", $first, $second);
-	echo json_encode($string) . "\n";
+	echo json_encode(b"aa" . (0xf0|($i >> 2)) . (0x8f|($i & 3) << 4) . "\xbf\xbdzz") . "\n";
 }
 
 
 echo "Done\n";
 ?>
---EXPECT--
+--EXPECT--	
 "aa\ud83f\udffdzz"
 "aa\ud87f\udffdzz"
 "aa\ud8bf\udffdzz"

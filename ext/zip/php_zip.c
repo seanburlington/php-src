@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.47 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_zip.c,v 1.1.2.48 2009/01/02 00:12:29 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -534,7 +534,7 @@ static int php_zip_property_reader(ze_zip_object *obj, zip_prop_handler *hnd, zv
 	switch (hnd->type) {
 		case IS_STRING:
 			if (retchar) {
-				ZVAL_STRINGL(*retval, (char *) retchar, len, 1);
+				ZVAL_STRING(*retval, (char *) retchar, 1);
 			} else {
 				ZVAL_EMPTY_STRING(*retval);
 			}
@@ -2273,7 +2273,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.47 2008/12/31 11:17:47 sebastian Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.48 2009/01/02 00:12:29 pajoye Exp $");
 	php_info_print_table_row(2, "Zip version", PHP_ZIP_VERSION_STRING);
 	php_info_print_table_row(2, "Libzip version", "0.9.0");
 

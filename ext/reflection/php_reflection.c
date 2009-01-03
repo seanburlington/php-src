@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.331 2009/01/03 12:20:27 helly Exp $ */
+/* $Id: php_reflection.c,v 1.332 2009/01/03 12:27:43 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -857,8 +857,6 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 						fptr->op_array.line_start,
 						fptr->op_array.line_end);
 	}
-	string_init(&param_indent);
-	string_printf(&param_indent, "%s  ", indent);
 	if (closure) {
 		const zend_function *closure_fptr = zend_get_closure_method_def(closure TSRMLS_CC);
 		if (closure_fptr->type == ZEND_USER_FUNCTION && closure_fptr->op_array.static_variables) {
@@ -881,6 +879,8 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 			}
 		}
 	}
+	string_init(&param_indent);
+	string_printf(&param_indent, "%s  ", indent);
 	_function_parameter_string(str, fptr, param_indent.string TSRMLS_CC);
 	string_free(&param_indent);
 	string_printf(str, "%s}\n", indent);
@@ -5482,7 +5482,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.331 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.332 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5496,7 +5496,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.331 $",
+	"$Revision: 1.332 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

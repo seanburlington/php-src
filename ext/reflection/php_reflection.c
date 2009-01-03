@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.336 2009/01/03 20:03:45 helly Exp $ */
+/* $Id: php_reflection.c,v 1.337 2009/01/03 20:40:22 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -886,7 +886,7 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 			string_printf(str, "\n");
 			string_printf(str, "%s  - Static Parameters [%d] {\n", indent, count);
 			if (closure_this) {
-				string_printf(str, "%s    Parameter #%d [ %v $this ]\n", indent, ++index, Z_OBJCE_P(closure_this)->name);
+				string_printf(str, "%s    Parameter #%d [ %v $this ]\n", indent, index++, Z_OBJCE_P(closure_this)->name);
 			}
 			if (static_variables) {
 				HashPosition pos;
@@ -894,7 +894,7 @@ static void _function_string(string *str, zend_function *fptr, zend_class_entry 
 				zstr key;
 				ulong num_index;
 				zend_hash_internal_pointer_reset_ex(static_variables, &pos);
-				while (index++ < count) {
+				while (index < count) {
 					zend_hash_get_current_key_ex(static_variables, &key, &key_len, &num_index, 0, &pos);
 					string_printf(str, "%s    Parameter #%d [ $%v ]\n", indent, index++, key);
 					zend_hash_move_forward_ex(static_variables, &pos);
@@ -1605,7 +1605,9 @@ ZEND_METHOD(reflection_function, getClosureThis)
 	GET_REFLECTION_OBJECT_PTR(fptr);
 	if (intern->obj) {
 		closure_this = zend_get_closure_this_ptr(intern->obj TSRMLS_CC);
-		RETURN_ZVAL(closure_this, 1, 0);
+		if (closure_this) {
+			RETURN_ZVAL(closure_this, 1, 0);
+		}
 	}
 }
 /* }}} */
@@ -5558,7 +5560,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.336 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.337 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5572,7 +5574,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.336 $",
+	"$Revision: 1.337 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

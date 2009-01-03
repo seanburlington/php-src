@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.334 2009/01/03 19:02:06 helly Exp $ */
+/* $Id: php_reflection.c,v 1.335 2009/01/03 19:08:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1591,10 +1591,14 @@ ZEND_METHOD(reflection_function, getClosureThis)
 {
 	reflection_object *intern;
 	zend_function *fptr;
+	zval* closure_this;
 
 	METHOD_NOTSTATIC_NUMPARAMS(reflection_function_abstract_ptr, 0);
 	GET_REFLECTION_OBJECT_PTR(fptr);
-	RETURN_ZVAL(intern->obj, 1, 0);
+	if (intern->obj) {
+		closure_this = zend_get_closure_this_ptr(intern->obj TSRMLS_CC);
+		RETURN_ZVAL(closure_this, 1, 0);
+	}
 }
 /* }}} */
 
@@ -5546,7 +5550,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.334 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.335 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5560,7 +5564,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.334 $",
+	"$Revision: 1.335 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

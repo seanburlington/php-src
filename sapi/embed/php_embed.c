@@ -15,9 +15,10 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.11.2.1.2.5.2.5 2008/12/31 14:27:09 helly Exp $ */
+/* $Id: php_embed.c,v 1.11.2.1.2.5.2.6 2009/01/04 20:18:57 pajoye Exp $ */
 
 #include "php_embed.h"
+#include "ext/standard/php_standard.h"
 
 #ifdef PHP_WIN32
 #include <io.h>

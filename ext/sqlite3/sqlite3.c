@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.24 2009/01/03 22:08:38 felipe Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.25 2009/01/04 16:31:12 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,7 +70,7 @@ PHP_METHOD(sqlite3, open)
 	php_sqlite3_db_object *db_obj;
 	zval *object = getThis();
 	char *filename, *encryption_key, *fullpath;
-	int filename_len, encryption_key_len;
+	int filename_len, encryption_key_len = 0;
 	long flags = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE;
 	db_obj = (php_sqlite3_db_object *)zend_object_store_get_object(object TSRMLS_CC);
 

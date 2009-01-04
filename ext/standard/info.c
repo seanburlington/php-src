@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.21 2008/12/31 13:49:14 helly Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.22 2009/01/04 15:19:57 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -685,7 +685,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Configuration File (php.ini) Path", PHP_CONFIG_FILE_PATH);
 		php_info_print_table_row(2, "Loaded Configuration File", php_ini_opened_path ? php_ini_opened_path : "(none)");
 		php_info_print_table_row(2, "Scan this dir for additional .ini files", php_ini_scanned_path ? php_ini_scanned_path : "(none)");
-		php_info_print_table_row(2, "additional .ini files parsed", php_ini_scanned_files ? php_ini_scanned_files : "(none)");
+		php_info_print_table_row(2, "Additional .ini files parsed", php_ini_scanned_files ? php_ini_scanned_files : "(none)");
 
 		snprintf(temp_api, sizeof(temp_api), "%d", PHP_API_VERSION);
 		php_info_print_table_row(2, "PHP API", temp_api);

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.38 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: php_apache.c,v 1.39 2009/01/05 16:24:14 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1551,18 +1551,17 @@ PHP_FUNCTION(apache_child_terminate)
    Get and set Apache request notes */
 PHP_FUNCTION(apache_note)
 {
-	char *arg_name, *arg_val;
+	char *arg_name, *arg_val = NULL;
 	int arg_name_len, arg_val_len;
 	char *note_val;
-	int arg_count = ZEND_NUM_ARGS();
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &arg_name, &arg_name_len, &arg_val, &arg_val_len) == FAILURE) {
 		return;
 	}
 
 	note_val = (char *) table_get(((request_rec *)SG(server_context))->notes, arg_name);
-	
-	if (arg_count == 2) {
+
+	if (arg_val) {
 		table_set(((request_rec *)SG(server_context))->notes, arg_name, arg_val);
 	}
 

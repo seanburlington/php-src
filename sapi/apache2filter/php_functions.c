@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.57 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.58 2009/01/05 16:24:14 iliaa Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
@@ -193,12 +193,11 @@ PHP_FUNCTION(apache_response_headers)
 PHP_FUNCTION(apache_note)
 {
 	php_struct *ctx;
-	char *note_name, *note_val;
+	char *note_name, *note_val = NULL;
 	int note_name_len, note_val_len;
 	char *old_note_val=NULL;
-	int arg_count = ZEND_NUM_ARGS();
 
-	if (zend_parse_parameters(arg_count TSRMLS_CC, "s|s", &note_name, &note_name_len, &note_val, &note_val_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &note_name, &note_name_len, &note_val, &note_val_len) == FAILURE) {
 		return;
 	}
 
@@ -206,7 +205,7 @@ PHP_FUNCTION(apache_note)
 
 	old_note_val = (char *) apr_table_get(ctx->r->notes, note_name);
 
-	if (arg_count == 2) {
+	if (note_val) {
 		apr_table_set(ctx->r->notes, note_name, note_val);
 	}
 

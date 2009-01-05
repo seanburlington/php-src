@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.59 2009/01/04 15:56:45 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.60 2009/01/05 09:19:09 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.59 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.60 $' . "\n";
 					exit(1);
 
 				default:
@@ -1870,7 +1870,9 @@ COMMAND $cmd
 
 		// write .diff
 		$diff = generate_diff($wanted, $wanted_re, $output);
-		$diff = "# original source file: $shortname\n" . $diff;
+		if (is_array($IN_REDIRECT)) {
+			$diff = "# original source file: $shortname\n" . $diff;
+		}
 		show_file_block('diff', $diff);
 		if (strpos($log_format, 'D') !== false && file_put_contents($diff_filename, (binary) $diff, FILE_BINARY) === false) {
 			error("Cannot create test diff - $diff_filename");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.27 2009/01/04 16:32:05 iliaa Exp $ */
+/* $Id: sqlite3.c,v 1.28 2009/01/05 09:32:48 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1467,6 +1467,9 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_sqlite3_createaggregate, 0, 0, 3)
 	ZEND_ARG_INFO(0, step_callback)
 	ZEND_ARG_INFO(0, final_callback)
 	ZEND_ARG_INFO(0, argument_count)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO(arginfo_sqlite3stmt_execute, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sqlite3stmt_bindparam, 0, 0, 2)

@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.389 2009/01/05 09:18:57 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.390 2009/01/05 11:14:37 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.389 $' . "\n";
+					echo '$Revision: 1.390 $' . "\n";
 					exit(1);
 
 				default:
@@ -1786,15 +1786,15 @@ COMMAND $cmd
 				$php = $old_php;
 			}
 
-                        if (!$leaked && !$failed_headers) {
-                            if (isset($section_text['XFAIL'] )) {
-                                $warn = true;
-                                $info = " (warn: XFAIL section but test passes)";
-                            }else {
-                                show_result("PASS", $tested, $tested_file, '', $temp_filenames);
-                                return 'PASSED';
-                            }
-                        }
+			if (!$leaked && !$failed_headers) {
+				if (isset($section_text['XFAIL'] )) {
+					$warn = true;
+					$info = " (warn: XFAIL section but test passes)";
+				}else {
+					show_result("PASS", $tested, $tested_file, '', $temp_filenames);
+					return 'PASSED';
+				}
+			}
 		}
 
 	} else {
@@ -1815,14 +1815,14 @@ COMMAND $cmd
 				$php = $old_php;
 			}
 
-                        if (!$leaked && !$failed_headers) {
-                            if (isset($section_text['XFAIL'] )) {
-                                $warn = true;
-                                $info = " (warn: XFAIL section but test passes)";
-                            }else {
-                                show_result("PASS", $tested, $tested_file, '', $temp_filenames);
-                                return 'PASSED';
-                            }
+			if (!$leaked && !$failed_headers) {
+				if (isset($section_text['XFAIL'] )) {
+					$warn = true;
+					$info = " (warn: XFAIL section but test passes)";
+				}else {
+					show_result("PASS", $tested, $tested_file, '', $temp_filenames);
+					return 'PASSED';
+				}
 			}
 		}
 

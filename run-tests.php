@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.35.2.60 2009/01/05 09:19:09 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.35.2.61 2009/01/05 11:14:43 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.35.2.60 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.35.2.61 $' . "\n";
 					exit(1);
 
 				default:
@@ -1787,13 +1787,13 @@ COMMAND $cmd
 			}
 
 			if (!$leaked && !$failed_headers) {
-                            if (isset($section_text['XFAIL'] )) {
-                                $warn = true;
-				$info = " (warn: XFAIL section but test passes)";
-                            }else {
-				show_result("PASS", $tested, $tested_file, '', $temp_filenames);
-				return 'PASSED';
-                            }
+				if (isset($section_text['XFAIL'] )) {
+					$warn = true;
+					$info = " (warn: XFAIL section but test passes)";
+				}else {
+					show_result("PASS", $tested, $tested_file, '', $temp_filenames);
+					return 'PASSED';
+				}
 			}
 		}
 
@@ -1816,13 +1816,13 @@ COMMAND $cmd
 			}
 
 			if (!$leaked && !$failed_headers) {
-                              if (isset($section_text['XFAIL'] )) {
-                                $warn = true;
-				$info = " (warn: XFAIL section but test passes)";
-                              }else {
-				show_result("PASS", $tested, $tested_file, '', $temp_filenames);
-				return 'PASSED';
-                              }
+				if (isset($section_text['XFAIL'] )) {
+					$warn = true;
+					$info = " (warn: XFAIL section but test passes)";
+				}else {
+					show_result("PASS", $tested, $tested_file, '', $temp_filenames);
+					return 'PASSED';
+				}
 			}
 		}
 

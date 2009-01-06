@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.94 2009/01/06 20:47:06 pajoye Exp $
+// $Id: config.w32,v 1.95 2009/01/06 20:51:37 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -143,6 +143,10 @@ if (VCVERS >= 1400) {
 		// Set some debug/release specific options
 		ADD_FLAG('CFLAGS', ' /RTC1 ');
 	}
+}
+
+if (VCVERS >= 1500) {
+	ADD_FLAG('CFLAGS', ' /MP ');
 }
 
 // General link flags

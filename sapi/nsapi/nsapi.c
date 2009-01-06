@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.69.2.3.2.6.2.15 2008/12/31 11:15:49 sebastian Exp $ */
+/* $Id: nsapi.c,v 1.69.2.3.2.6.2.16 2009/01/06 13:46:20 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -238,13 +238,6 @@ char *nsapi_dll = NULL;
  */
 static void php_nsapi_init_dynamic_symbols(void)
 {
-#if defined(servact_uri2path) && defined(servact_pathchecks) && defined(servact_fileinfo) && defined(servact_service)
-	/* use functions from nsapi.h if available */
-	nsapi_servact_uri2path = &servact_uri2path;
-	nsapi_servact_pathchecks = &servact_pathchecks;
-	nsapi_servact_fileinfo = &servact_fileinfo;
-	nsapi_servact_service = &servact_service;
-#else
 	/* find address of internal NSAPI functions */
 #ifdef PHP_WIN32
 	register int i;
@@ -278,7 +271,6 @@ static void php_nsapi_init_dynamic_symbols(void)
 		nsapi_servact_fileinfo = NULL;
 		nsapi_servact_service = NULL;
 	}
-#endif
 }
 /* }}} */
 
@@ -315,7 +307,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.15 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.16 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );

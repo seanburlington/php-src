@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.24 2008/12/31 14:33:41 iliaa Exp $ */
+/* $Id: dns.h,v 1.25 2009/01/06 20:44:56 pajoye Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -35,21 +35,20 @@ PHP_FUNCTION(gethostbynamel);
 PHP_FUNCTION(gethostname);
 #endif
 
-#if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
+#if defined(PHP_WIN32) || (HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(NETWARE)))
 
-PHP_FUNCTION(dns_check_record);
-# if HAVE_DN_SKIPNAME && HAVE_DN_EXPAND
+# if defined(PHP_WIN32) || (HAVE_DN_SKIPNAME && HAVE_DN_EXPAND)
 PHP_FUNCTION(dns_get_mx);
+PHP_FUNCTION(dns_check_record);
 # endif
 
-# if HAVE_DNS_FUNCS
-
+#if defined(PHP_WIN32) || HAVE_DNS_FUNCS
 PHP_FUNCTION(dns_get_record);
 
 PHP_MINIT_FUNCTION(dns);
-
 # endif
-#endif
+
+#endif /* defined(PHP_WIN32) || (HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(NETWARE))) */
 
 #ifndef INT16SZ
 #define INT16SZ		2

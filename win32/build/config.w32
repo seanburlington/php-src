@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.39 2008/12/26 14:11:44 pajoye Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.40 2009/01/06 20:46:36 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -157,7 +157,7 @@ DEFINE("PHP_LDFLAGS", "$(DLL_LDFLAGS)");
 
 // General libs
 // urlmon.lib ole32.lib oleaut32.lib uuid.lib gdi32.lib winspool.lib comdlg32.lib
-DEFINE("LIBS", "kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib");
+DEFINE("LIBS", "kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib");
 
 // Set some debug/release specific options
 if (PHP_DEBUG == "yes") {

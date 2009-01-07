@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.128 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: dl.c,v 1.129 2009/01/07 13:03:37 pajoye Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -52,7 +52,7 @@
 
 /* {{{ proto int dl(string extension_filename) U
    Load a PHP extension at runtime */
-PHP_FUNCTION(dl)
+PHPAPI PHP_FUNCTION(dl)
 {
 	char *filename;
 	int filename_len;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.70.2.7.2.5.2.15 2009/01/07 13:46:13 pajoye Exp $ */
+/* $Id: dns.c,v 1.70.2.7.2.5.2.16 2009/01/07 13:49:53 pajoye Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -681,6 +681,7 @@ PHP_FUNCTION(dns_get_record)
 	if (addtl) {
 		zval_dtor(addtl);
 		array_init(addtl);
+		addtl_recs = 1;
 	}
 
 	if (type_param & ~PHP_DNS_ALL && type_param != PHP_DNS_ANY) {
@@ -819,7 +820,7 @@ PHP_FUNCTION(dns_get_record)
 		}
 	}
 
-	if (addtl) {
+	if (addtl_recs && addtl) {
 		/* Additional records associated with authoritative name servers */
 		while (ar-- > 0 && cp && cp < end) {
 			zval *retval = NULL;

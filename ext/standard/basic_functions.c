@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.82 2009/01/06 20:48:20 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.83 2009/01/07 08:53:47 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3038,9 +3038,6 @@ const zend_function_entry basic_functions[] = { /* {{{ */
 	PHP_FE(is_object,														arginfo_is_object)
 	PHP_FE(is_scalar,														arginfo_is_scalar)
 	PHP_FE(is_callable,														arginfo_is_callable)
-
-	/* functions from dl.c */
-//	PHP_FE(dl,																arginfo_dl)
 
 	/* functions from file.c */
 	PHP_FE(pclose,															arginfo_pclose)

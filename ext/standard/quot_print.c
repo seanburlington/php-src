@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.29.2.2.2.1.2.5 2008/12/31 11:15:45 sebastian Exp $ */
+/* $Id: quot_print.c,v 1.29.2.2.2.1.2.6 2009/01/07 17:20:18 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -203,7 +203,7 @@ PHP_FUNCTION(quoted_printable_decode)
 	int arg1_len, i = 0, j = 0, k;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg1, &arg1_len) == FAILURE) {
-		WRONG_PARAM_COUNT;
+		return;
 	}
     
 	if (arg1_len == 0) {

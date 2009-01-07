@@ -1,9 +1,9 @@
 --TEST--
-ReflectionClass::getConstructor() - bad params
+ReflectionObject::getConstructor() - invalid params
 --FILE--
 <?php
 class C {}
-$rc = new ReflectionClass('C');
+$rc = new ReflectionObject(new C);
 var_dump($rc->getConstructor(null));
 var_dump($rc->getConstructor('X'));
 var_dump($rc->getConstructor(true));

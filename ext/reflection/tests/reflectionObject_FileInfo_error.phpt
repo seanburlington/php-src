@@ -1,10 +1,10 @@
 --TEST--
-ReflectionClass::getFileName(), ReflectionClass::getStartLine(), ReflectionClass::getEndLine() - bad params
+ReflectionObject::getFileName(), ReflectionObject::getStartLine(), ReflectionObject::getEndLine() -invalid aparams 
 --FILE-- 
 <?php
 Class C { }
 
-$rc = new ReflectionClass("C");
+$rc = new ReflectionObject(new C);
 $methods = array("getFileName", "getStartLine", "getEndLine");
 
 foreach ($methods as $method) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.29.2.2.2.4 2009/01/07 17:24:20 felipe Exp $ */
+/* $Id: quot_print.c,v 1.29.2.2.2.5 2009/01/07 17:38:13 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -156,7 +156,7 @@ PHP_FUNCTION(quoted_printable_decode)
 	int i = 0, j = 0, k;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg1) == FAILURE) {
-		return;
+		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg1);
     

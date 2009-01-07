@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.29 2008/12/31 11:15:37 sebastian Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.30 2009/01/07 18:26:27 felipe Exp $ */
 
 #define IMAP41
 
@@ -1212,7 +1212,7 @@ PHP_FUNCTION(imap_reopen)
 	int argc = ZEND_NUM_ARGS();
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "rs|ll", &streamind, &mailbox, &mailbox_len, &options, &retries) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
+		return;
 	}
 
 	ZEND_FETCH_RESOURCE(imap_le_struct, pils *, &streamind, -1, "imap", le_imap);

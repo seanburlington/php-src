@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.3.2.4.2.10 2008/12/31 11:15:47 sebastian Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.4.2.11 2009/01/07 18:34:18 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -558,11 +558,10 @@ static int php_ob_list_each(php_ob_buffer *ob_buffer, zval *ob_handler_array)
  */
 PHP_FUNCTION(ob_list_handlers)
 {
-	if (ZEND_NUM_ARGS()!=0) {
-		ZEND_WRONG_PARAM_COUNT();
-		RETURN_FALSE;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
-
+	
 	array_init(return_value);
 	if (OG(ob_nesting_level)) {
 		if (OG(ob_nesting_level)>1) {

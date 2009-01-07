@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.203.2.7.2.18.2.14 2008/12/31 11:15:46 sebastian Exp $ */
+/* $Id: var.c,v 1.203.2.7.2.18.2.15 2009/01/07 14:36:06 derick Exp $ */
 
 /* {{{ includes
 */
@@ -363,13 +363,15 @@ static int php_object_element_export(zval **zv TSRMLS_DC, int num_args, va_list 
 
 	level = va_arg(args, int);
 
+	php_printf("%*c", level + 1, ' ');
 	if (hash_key->nKeyLength != 0) {
-		php_printf("%*c", level + 1, ' ');
 		zend_unmangle_property_name(hash_key->arKey, hash_key->nKeyLength - 1, &class_name, &prop_name);
 		php_printf(" '%s' => ", prop_name);
-		php_var_export(zv, level + 2 TSRMLS_CC);
-		PUTS (",\n");
+	} else {
+		php_printf(" %ld => ", hash_key->h);
 	}
+	php_var_export(zv, level + 2 TSRMLS_CC);
+	PUTS (",\n");
 	return 0;
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.60 2008/12/31 11:12:35 sebastian Exp $ */
+/* $Id: readline.c,v 1.61 2009/01/07 22:54:43 felipe Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -339,10 +339,9 @@ PHP_FUNCTION(readline_clear_history)
 PHP_FUNCTION(readline_list_history)
 {
 	HIST_ENTRY **history;
-	int ac = ZEND_NUM_ARGS();
 
-	if (ac) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters_none() == FAILURE) {
+		return;
 	}
 
 	history = history_list();

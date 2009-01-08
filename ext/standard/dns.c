@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.70.2.7.2.5.2.16 2009/01/07 13:49:53 pajoye Exp $ */
+/* $Id: dns.c,v 1.70.2.7.2.5.2.17 2009/01/08 17:19:50 felipe Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -469,7 +469,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int 
 				tp[dlen] = '\0';
 				cp += dlen;
 
-				add_assoc_stringl(*subarray, "txt", tp, dlen, 0);
+				add_assoc_stringl(*subarray, "txt", tp, dlen - 1, 0);
 			}
 			break;
 		case DNS_T_SOA:

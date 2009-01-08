@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.187 2008/12/31 11:12:32 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.188 2009/01/08 00:11:57 felipe Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -851,24 +851,18 @@ PHP_FUNCTION(mssql_pconnect)
 PHP_FUNCTION(mssql_close)
 {
 	zval *mssql_link_index = NULL;
-	int id;
+	int id = -1;
 	mssql_link *mssql_ptr;
 	
-	switch (ZEND_NUM_ARGS()) {
-		case 0:
-			id = php_mssql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-			CHECK_LINK(id);
-			break;
-		case 1:
-			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &mssql_link_index) == FAILURE) {
-				return;
-			}
-			id = -1;
-			break;
-		default:
-			WRONG_PARAM_COUNT;
-			break;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|r", &mssql_link_index) == FAILURE) {
+		return;
 	}
+
+	if (mssql_link_index == NULL) {
+		id = php_mssql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+		CHECK_LINK(id);
+	}
+
 	ZEND_FETCH_RESOURCE2(mssql_ptr, mssql_link *, &mssql_link_index, id, "MS SQL-Link", le_link, le_plink);
 
 	if (mssql_link_index) {

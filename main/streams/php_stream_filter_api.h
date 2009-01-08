@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.24 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.25 2009/01/08 17:01:11 lbarnaud Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -152,7 +152,9 @@ struct _php_stream_filter {
 /* stack filter onto a stream */
 BEGIN_EXTERN_C()
 PHPAPI void _php_stream_filter_prepend(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
+PHPAPI int php_stream_filter_prepend_ex(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
 PHPAPI void _php_stream_filter_append(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
+PHPAPI int php_stream_filter_append_ex(php_stream_filter_chain *chain, php_stream_filter *filter TSRMLS_DC);
 PHPAPI int _php_stream_filter_check_chain(php_stream_filter_chain *chain TSRMLS_DC);
 PHPAPI int _php_stream_filter_output_prefer_unicode(php_stream_filter *filter TSRMLS_DC);
 PHPAPI int _php_stream_filter_product(php_stream_filter_chain *chain, int type TSRMLS_DC);

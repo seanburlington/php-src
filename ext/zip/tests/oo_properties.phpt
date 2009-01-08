@@ -2,7 +2,7 @@
 ziparchive::properties isset()/empty() checks
 --SKIPIF--
 <?php
-/* $Id: oo_properties.phpt,v 1.1.2.4.2.2 2008/05/21 09:27:41 pajoye Exp $ */
+/* $Id: oo_properties.phpt,v 1.1.2.4.2.3 2009/01/08 22:03:32 tony2001 Exp $ */
 if(!extension_loaded('zip')) die('skip');
 ?>
 --FILE--
@@ -51,8 +51,8 @@ zip->status (0):
 zip->numFiles (5):
 	empty(): 0
 	isset(): 1
-zip->filename (0):
-	empty(): 1
+zip->filename (%d):
+	empty(): 0
 	isset(): 1
 zip->comment (19):
 	empty(): 0

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.177 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: streams.c,v 1.178 2009/01/08 18:43:12 felipe Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2387,6 +2387,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 
 	if (!path || !*path) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Filename cannot be empty");
 		return NULL;
 	}
 

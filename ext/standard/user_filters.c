@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.31.2.4.2.12 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: user_filters.c,v 1.31.2.4.2.13 2009/01/08 18:40:56 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -246,6 +246,14 @@ php_stream_filter_status_t userfilter_filter(
 			/* Remove unconsumed buckets from the brigade */
 			php_stream_bucket_unlink(bucket TSRMLS_CC);
 			php_stream_bucket_delref(bucket TSRMLS_CC);
+		}
+	}
+	if (ret != PSFS_PASS_ON) {
+		php_stream_bucket *bucket = buckets_out->head;
+		while (bucket != NULL) {
+			php_stream_bucket_unlink(bucket TSRMLS_CC);
+			php_stream_bucket_delref(bucket TSRMLS_CC);
+			bucket = buckets_out->head;
 		}
 	}
 

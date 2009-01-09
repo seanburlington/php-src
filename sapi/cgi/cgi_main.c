@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.373 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: cgi_main.c,v 1.374 2009/01/09 22:13:40 dsp Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1062,7 +1062,9 @@ static void init_request_info(TSRMLS_D)
 				TRANSLATE_SLASHES(env_document_root);
 			}
 
-			if (env_path_translated != NULL && env_redirect_url != NULL) {
+			if (env_path_translated != NULL && env_redirect_url != NULL &&
+			    orig_script_filename != NULL && script_path_translated != NULL &&
+			    strcmp(orig_script_filename, script_path_translated) != 0) {
 				/*
 				   pretty much apache specific.  If we have a redirect_url
 				   then our script_filename and script_name point to the

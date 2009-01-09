@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.101 2009/01/09 15:00:36 iliaa Exp $ */
+/* $Id: mail.c,v 1.102 2009/01/09 16:33:57 tony2001 Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -227,7 +227,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		char *f;
 		size_t f_len;
 
-		php_basename(tmp, strlen(tmp), NULL, 0,&f, &f_len);
+		php_basename(tmp, strlen(tmp), NULL, 0,&f, &f_len TSRMLS_CC);
 
 		if (headers != NULL) {
 			spprintf(&hdr, 0, "%s\r\nX-PHP-Originating-Script: %ld:%s\n", headers, php_getuid(), f);

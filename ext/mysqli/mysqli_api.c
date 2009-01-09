@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.170 2008/12/31 11:12:33 sebastian Exp $ 
+  $Id: mysqli_api.c,v 1.171 2009/01/09 14:28:31 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1366,7 +1366,7 @@ PHP_FUNCTION(mysqli_init)
 	MYSQLI_RESOURCE *mysqli_resource;
 	MY_MYSQL *mysql;
 
-	if (getThis() && instanceof_function(Z_OBJCE_P(getThis()), mysqli_link_class_entry TSRMLS_CC)) {
+	if (getThis() && ((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->ptr) {
 		return;
 	}
 

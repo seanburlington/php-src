@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.535 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: file.c,v 1.536 2009/01/09 18:23:45 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -911,17 +911,18 @@ PHP_FUNCTION(tempnam)
 {
 	zval **ppdir, **ppprefix;
 	char *dir, *prefix;
-	int dir_len, prefix_len, p_len;
+	int dir_len;
 	char *opened_path;
 	char *p;
 	int fd;
+	size_t p_len, prefix_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ZZ", &ppdir, &ppprefix) == FAILURE) {
 		return;
 	}
 
 	if (php_stream_path_param_encode(ppdir, &dir, &dir_len, REPORT_ERRORS, FG(default_context)) == FAILURE ||
-		php_stream_path_param_encode(ppprefix, &prefix, &prefix_len, REPORT_ERRORS, FG(default_context)) == FAILURE) {
+		php_stream_path_param_encode(ppprefix, &prefix, (int *)&prefix_len, REPORT_ERRORS, FG(default_context)) == FAILURE) {
 		RETURN_FALSE;
 	}
 

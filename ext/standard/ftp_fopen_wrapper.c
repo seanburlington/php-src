@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.104 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.105 2009/01/09 18:23:45 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -592,7 +592,7 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 	php_stream *innerstream = (php_stream *)stream->abstract;
 	size_t tmp_len;
 	char *basename;
-	int basename_len;
+	size_t basename_len;
 
 	if (count != sizeof(php_stream_dirent)) {
 		return 0;

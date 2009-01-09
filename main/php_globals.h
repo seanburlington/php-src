@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.98.2.1.2.7.2.6 2008/12/31 11:15:47 sebastian Exp $ */
+/* $Id: php_globals.h,v 1.98.2.1.2.7.2.7 2009/01/09 14:59:30 iliaa Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -165,6 +165,9 @@ struct _php_core_globals {
 	long user_ini_cache_ttl;
 
 	char *request_order;
+
+	zend_bool mail_x_header;
+	char *mail_log;
 };
 
 

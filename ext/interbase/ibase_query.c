@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.40 2008/12/31 11:12:32 sebastian Exp $ */
+/* $Id: ibase_query.c,v 1.41 2009/01/11 23:52:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1210,7 +1210,7 @@ PHP_FUNCTION(ibase_affected_rows)
 {
 	ibase_trans *trans = NULL;
 	ibase_db_link *ib_link;
-	zval *arg;
+	zval *arg = NULL;
 		
 	RESET_ERRMSG;
 	
@@ -1218,7 +1218,7 @@ PHP_FUNCTION(ibase_affected_rows)
 		return;
 	}
 
-	if (ZEND_NUM_ARGS() == 0) {
+	if (!arg) {
 		ZEND_FETCH_RESOURCE2(ib_link, ibase_db_link *, NULL, IBG(default_link), LE_LINK, le_link, le_plink);
 		if (ib_link->tr_list == NULL || ib_link->tr_list->trans == NULL) {
 			RETURN_FALSE;

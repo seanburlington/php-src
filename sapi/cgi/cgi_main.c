@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.374 2009/01/09 22:13:40 dsp Exp $ */
+/* $Id: cgi_main.c,v 1.375 2009/01/11 08:35:53 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1545,7 +1545,9 @@ int main(int argc, char *argv[])
 #endif
 
 	cgi_sapi_module.executable_location = argv[0];
-	cgi_sapi_module.additional_functions = additional_functions;
+	if (!cgi && !fastcgi && !bindpath) {
+		cgi_sapi_module.additional_functions = additional_functions;
+	}
 
 	/* startup after we get the above ini override se we get things right */
 	if (cgi_sapi_module.startup(&cgi_sapi_module) == FAILURE) {

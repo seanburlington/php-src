@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.69.2.3.2.6.2.16 2009/01/06 13:46:20 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.69.2.3.2.6.2.17 2009/01/11 13:39:39 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -55,7 +55,14 @@
 #define XP_UNIX
 #endif
 #endif
-
+ 
+/*
+ * For windows do some sanity checks, because time_t must be 32bit for NSAPI on win32
+ */
+#if defined(PHP_WIN32) && !defined(_WIN64) && sizeof(time_t)!=4
+#error "NSAPI module needs time_t to have a size of 32 bits on win32"
+#endif
+ 
 /*
  * NSAPI includes
  */
@@ -307,7 +314,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.16 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.6.2.17 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );

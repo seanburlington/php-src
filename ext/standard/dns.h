@@ -18,12 +18,24 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.25 2009/01/06 20:44:56 pajoye Exp $ */
+/* $Id: dns.h,v 1.26 2009/01/11 23:47:52 scottmac Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
 
-#if HAVE_RES_NMKQUERY && HAVE_RES_NSEND && HAVE_DN_EXPAND && HAVE_DN_SKIPNAME
+#if HAVE_RES_MKQUERY && !defined(HAVE_RES_NMKQUERY) && HAVE_RES_SEND && !defined(HAVE_RES_NSEND)
+#define HAVE_DEPRECATED_DNS_FUNCS 1
+#endif
+
+#if HAVE_DEPRECATED_DNS_FUNCS
+#define res_nmkquery(res, op, dname, class, type, data, datalen, newrr, buf, buflen) \
+	res_mkquery(op, dname, class, type, data, datalen, newrr, buf, buflen)
+#define res_nsend(res, msg, msglen, answer, anslen) \
+	res_send(msg, msglen, answer, anslen);
+#define res_nclose(res) /* noop */
+#endif
+
+#if ((HAVE_RES_NMKQUERY && HAVE_RES_NSEND) || HAVE_DEPRECATED_DNS_FUNCS) && HAVE_DN_EXPAND && HAVE_DN_SKIPNAME
 #define HAVE_DNS_FUNCS 1
 #endif
 

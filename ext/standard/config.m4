@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.93 2008/12/02 16:25:06 cseiler Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.94 2009/01/11 23:47:52 scottmac Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -251,7 +251,17 @@ dnl ext/standard/dns.h will collect these in a single define: HAVE_DNS_FUNCS
 dnl
 PHP_CHECK_FUNC(res_nmkquery, resolv, bind, socket)
 PHP_CHECK_FUNC(res_nsend, resolv, bind, socket)
+PHP_CHECK_FUNC(res_search, resolv, bind, socket)
 PHP_CHECK_FUNC(dn_expand, resolv, bind, socket)
+PHP_CHECK_FUNC(dn_skipname, resolv, bind, socket)
+
+dnl
+dnl These are old deprecated functions, a single define of HAVE_DEPRECATED_DNS_FUNCS
+dnl will be set in ext/standard/dns.h
+dnl
+
+PHP_CHECK_FUNC(res_mkquery, resolv, bind, socket)
+PHP_CHECK_FUNC(res_send, resolv, bind, socket)
 
 dnl
 dnl Check if atof() accepts NAN

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.83 2009/01/07 08:53:47 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.84 2009/01/13 21:29:12 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5360,6 +5360,7 @@ PHP_FUNCTION(ini_set)
 		if (_CHECK_PATH(varname, varname_len, "error_log") ||
 			_CHECK_PATH(varname, varname_len, "java.class.path") ||
 			_CHECK_PATH(varname, varname_len, "java.home") ||
+			_CHECK_PATH(varname, varname_len, "mail.log") ||
 			_CHECK_PATH(varname, varname_len, "java.library.path") ||
 			_CHECK_PATH(varname, varname_len, "vpopmail.directory")) {
 			if (PG(safe_mode) && (!php_checkuid(new_value, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {

@@ -16,12 +16,14 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.17 2008/04/16 09:30:16 pajoye Exp $
+  $Id: enchant.c,v 1.18 2009/01/13 13:30:04 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <glib/glist.h>
+#include <glib/ghash.h>
 #include <enchant.h>
 #include "php.h"
 #include "php_ini.h"
@@ -83,7 +85,7 @@ function_entry enchant_functions[] = {
 	PHP_FE(enchant_dict_store_replacement, NULL)
 	PHP_FE(enchant_dict_get_error, NULL)
 	PHP_FE(enchant_dict_describe, NULL)
-	PHP_FE(enchant_dict_quick_check, third_arg_force_ref)
+	PHP_FE(enchant_dict_quick_check, NULL)
 
 	{NULL, NULL, NULL}	/* Must be the last line in enchant_functions[] */
 };
@@ -259,7 +261,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_ENCHANT_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -569,12 +571,12 @@ PHP_FUNCTION(enchant_dict_quick_check)
 	PHP_ENCHANT_GET_DICT;
 
 	if (enchant_dict_check(pdict->pdict, word, wordlen) > 0) {
+		int n_sugg;
+		char **suggs;
+
 		if (!sugg && ZEND_NUM_ARGS() == 2) {
 			RETURN_FALSE;
 		}
-
-		int n_sugg;
-		char **suggs;
 
 		array_init(sugg);
 

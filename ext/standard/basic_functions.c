@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.946 2009/01/06 20:44:56 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.947 2009/01/13 21:29:45 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5385,6 +5385,7 @@ PHP_FUNCTION(ini_set)
 		if (_CHECK_PATH(varname, varname_len, "error_log") ||
 			_CHECK_PATH(varname, varname_len, "java.class.path") ||
 			_CHECK_PATH(varname, varname_len, "java.home") ||
+			_CHECK_PATH(varname, varname_len, "mail.log") ||
 			_CHECK_PATH(varname, varname_len, "java.library.path") ||
 			_CHECK_PATH(varname, varname_len, "vpopmail.directory")) {
 

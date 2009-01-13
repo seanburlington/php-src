@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.396 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: pgsql.c,v 1.397 2009/01/13 19:08:37 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -2412,13 +2412,13 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, long result_type,
 	zend_class_entry *ce = NULL;
 
 	if (into_object) {
-		char *class_name;
+		char *class_name = NULL;
 		int class_name_len;
 
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|z!sz", &result, &zrow, &class_name, &class_name_len, &ctor_params) == FAILURE) {
 			return;
-			}
-		if (ZEND_NUM_ARGS() < 3) {
+		}
+		if (!class_name) {
 			ce = zend_standard_class_def;
 		} else {
 			ce = zend_fetch_class(class_name, class_name_len, ZEND_FETCH_CLASS_AUTO TSRMLS_CC);

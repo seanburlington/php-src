@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.27 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: sqlite_statement.c,v 1.28 2009/01/13 02:50:23 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -322,6 +322,13 @@ static int pdo_sqlite_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_v
 	if (str) {
 		add_assoc_string(return_value, "sqlite:decl_type", str, 1);
 	}
+
+#ifdef SQLITE_ENABLE_COLUMN_METADATA
+	str = sqlite3_column_table_name(S->stmt, colno);
+	if (str) {
+		add_assoc_string(return_value, "table", str, 1);
+	}
+#endif
 
 	add_assoc_zval(return_value, "flags", flags);
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.41 2009/01/12 19:02:41 scottmac Exp $
+dnl $Id: config.m4,v 1.42 2009/01/13 02:50:22 scottmac Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -79,7 +79,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
         threadsafe_flags="-DSQLITE_THREADSAFE=0"
       fi
 
-      other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1"
+      other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
 
       if test "$PHP_SQLITE3" != "yes"; then
         PHP_ADD_SOURCES(PHP_EXT_DIR(sqlite3), libsqlite/sqlite3.c)

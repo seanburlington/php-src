@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.14.2.1.2.4.2.5 2008/12/31 11:15:36 sebastian Exp $ */
+/* $Id: dom_fe.h,v 1.14.2.1.2.4.2.6 2009/01/13 18:06:48 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -168,6 +168,7 @@ PHP_FUNCTION(dom_node_get_user_data);
 PHP_METHOD(domnode, C14N);
 PHP_METHOD(domnode, C14NFile);
 PHP_METHOD(domnode, getNodePath);
+PHP_METHOD(domnode, getLineNo);
 
 /* domnodelist methods */
 PHP_FUNCTION(dom_nodelist_item);

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26.2.9.2.7.2.7 2009/01/12 19:03:07 scottmac Exp $
+dnl $Id: config.m4,v 1.26.2.9.2.7.2.8 2009/01/13 02:50:54 scottmac Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -79,7 +79,12 @@ if test "$PHP_PDO_SQLITE" != "no"; then
         threadsafe_flags="-DSQLITE_THREADSAFE=0"
       fi
 
-      other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1"
+      other_flags="-DSQLITE_ENABLE_FTS3=1 -DSQLITE_CORE=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
+
+	  dnl As long as intl is not shared we can have ICU support
+      if test "$PHP_INTL" = "yes" && test "$PHP_INTL_SHARED" != "yes"; then
+        other_flags="$other_flags -DSQLITE_ENABLE_ICU=1"
+      fi
 
       if test "$PHP_SQLITE3" != "yes"; then
         PHP_ADD_SOURCES(PHP_EXT_DIR(sqlite3), libsqlite/sqlite3.c)

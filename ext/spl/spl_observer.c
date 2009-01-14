@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.30 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: spl_observer.c,v 1.31 2009/01/14 15:51:54 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -166,6 +166,31 @@ static HashTable* spl_object_storage_debug_info(zval *obj, int *is_temp TSRMLS_D
 	efree(zname.v);
 
 	return rv;
+}
+/* }}} */
+
+static int spl_object_storage_compare_info(spl_SplObjectStorageElement *e1, spl_SplObjectStorageElement *e2 TSRMLS_DC) /* {{{ */
+{
+	zval result;
+
+	if (compare_function(&result, e1->inf, e2->inf TSRMLS_CC) == FAILURE) {
+		return 1;
+	}
+
+	return Z_LVAL(result);
+}
+/* }}} */
+
+static int spl_object_storage_compare_objects(zval *o1, zval *o2 TSRMLS_DC) /* {{{ */
+{
+	zend_object *zo1 = (zend_object *)zend_object_store_get_object(o1 TSRMLS_CC);
+	zend_object *zo2 = (zend_object *)zend_object_store_get_object(o2 TSRMLS_CC);
+
+	if (zo1->ce != spl_ce_SplObjectStorage || zo2->ce != spl_ce_SplObjectStorage) {
+		return 1;
+	}
+
+	return zend_hash_compare(&((spl_SplObjectStorage *)zo1)->storage, &((spl_SplObjectStorage *)zo2)->storage, (compare_func_t) spl_object_storage_compare_info, 0 TSRMLS_CC);
 }
 /* }}} */
 
@@ -911,7 +936,9 @@ PHP_MINIT_FUNCTION(spl_observer)
 
 	REGISTER_SPL_STD_CLASS_EX(SplObjectStorage, spl_SplObjectStorage_new, spl_funcs_SplObjectStorage);
 	memcpy(&spl_handler_SplObjectStorage, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
-	spl_handler_SplObjectStorage.get_debug_info = spl_object_storage_debug_info;
+
+	spl_handler_SplObjectStorage.get_debug_info  = spl_object_storage_debug_info;
+	spl_handler_SplObjectStorage.compare_objects = spl_object_storage_compare_objects;
 
 	REGISTER_SPL_IMPLEMENTS(SplObjectStorage, Countable);
 	REGISTER_SPL_IMPLEMENTS(SplObjectStorage, Iterator);

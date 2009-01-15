@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.28 2009/01/14 19:06:01 tabe Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.29 2009/01/15 07:57:11 kalle Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4922,9 +4922,10 @@ static void php_image_filter_pixelate(INTERNAL_FUNCTION_PARAMETERS)
 {
 	zval *IM;
 	gdImagePtr im;
-	long tmp, blocksize, mode = 0;
+	long tmp, blocksize;
+	zend_bool mode = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rll|l", &IM, &tmp, &blocksize, &mode) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rll|b", &IM, &tmp, &blocksize, &mode) == FAILURE) {
 		RETURN_FALSE;
 	}
 

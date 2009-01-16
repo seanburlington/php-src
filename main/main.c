@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.43 2009/01/16 00:57:05 pajoye Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.44 2009/01/16 10:26:32 pajoye Exp $ */
 
 /* {{{ includes
  */
@@ -123,6 +123,7 @@ static php_win32_disable_functions() {
 			}
 		}
 	}
+	return SUCCESS;
 }
 #endif
 
@@ -1967,7 +1968,10 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 
 #ifdef PHP_WIN32
 	/* Disable incompatible functions for the running platform */
-	php_win32_disable_functions();
+	if (php_win32_disable_functions() == FAILURE) {
+		php_printf("Unable to disable unsupported functions\n");
+		return FAILURE;
+	}
 #endif
 
 #ifdef ZTS

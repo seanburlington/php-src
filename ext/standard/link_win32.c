@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link_win32.c,v 1.2 2009/01/16 10:04:29 pajoye Exp $ */
+/* $Id: link_win32.c,v 1.3 2009/01/16 15:35:50 pajoye Exp $ */
 #ifdef PHP_WIN32
 
 #include "php.h"
@@ -49,6 +49,10 @@ TODO:
 - define link/readlink/symlink to their php_ equivalent and use them in ext/standart/link.c
 - this file is then useless and we have a portable link API
 */
+
+#ifndef VOLUME_NAME_NT
+#define VOLUME_NAME_NT 0x2
+#endif
 
 /* {{{ proto string readlink(string filename)
    Return the target of a symbolic link */
@@ -149,7 +153,7 @@ PHP_FUNCTION(symlink)
 	size_t len;
 	DWORD attr;
 	HINSTANCE kernel32;
-	typedef BOOLEAN (WINAPI *csla_func)( __in LPCSTR, __in LPCSTR, __in DWORD);
+	typedef BOOLEAN (WINAPI *csla_func)(LPCSTR, LPCSTR, DWORD);
 	csla_func pCreateSymbolicLinkA;
 
 	kernel32 = LoadLibrary("kernel32.dll");

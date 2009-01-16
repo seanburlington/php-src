@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.6 2008/12/31 11:15:47 sebastian Exp $ */
+/* $Id: fopen_wrappers.h,v 1.44.2.1.2.2.2.7 2009/01/16 10:06:10 pajoye Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -32,6 +32,16 @@ PHPAPI char *expand_filepath_ex(const char *filepath, char *real_path, const cha
 PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC);
 PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC);
 PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path TSRMLS_DC);
+
+/* {{{ OPENBASEDIR_CHECKPATH(filename) to ease merge between 6.x and 5.x */
+#if (PHP_MAJOR_VERSION < 6)
+# define OPENBASEDIR_CHECKPATH(filename) \
+	(PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(filename TSRMLS_CC)
+#else
+#define OPENBASEDIR_CHECKPATH(filename) \
+	php_check_open_basedir(filename TSRMLS_CC)
+#endif
+/* }}} */
 
 PHPAPI int php_check_safe_mode_include_dir(const char *path TSRMLS_DC);
 

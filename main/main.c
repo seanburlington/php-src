@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.790 2009/01/16 10:26:06 pajoye Exp $ */
+/* $Id: main.c,v 1.791 2009/01/16 10:27:52 pajoye Exp $ */
 
 /* {{{ includes
  */
@@ -2096,7 +2096,10 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 		return FAILURE;
 	}
 #endif
+
+#ifdef ZTS
 	zend_post_startup(TSRMLS_C);
+#endif
 
 	module_initialized = 1;
 	sapi_deactivate(TSRMLS_C);

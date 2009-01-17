@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.44 2009/01/16 10:26:32 pajoye Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.45 2009/01/17 01:12:36 stas Exp $ */
 
 /* {{{ includes
  */
@@ -1705,10 +1705,6 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 #ifdef ZTS
 	zend_executor_globals *executor_globals;
 	void ***tsrm_ls;
-#ifdef PHP_WIN32
-	DWORD dwVersion = GetVersion();
-#endif
-
 	php_core_globals *core_globals;
 #endif
 #if defined(PHP_WIN32) || (defined(NETWARE) && defined(USE_WINSOCK))
@@ -1716,12 +1712,13 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	WSADATA wsaData;
 #endif
 #ifdef PHP_WIN32
-		/* Get build numbers for Windows NT or Win95 */
-		if (dwVersion < 0x80000000){
-			php_os="WINNT";
-		} else {
-			php_os="WIN32";
-		}
+	DWORD dwVersion = GetVersion();
+	/* Get build numbers for Windows NT or Win95 */
+	if (dwVersion < 0x80000000){
+		php_os="WINNT";
+	} else {
+		php_os="WIN32";
+	}
 #if defined(_MSC_VER) && (_MSC_VER >= 1400)
 	old_invalid_parameter_handler =
 		_set_invalid_parameter_handler(dummy_invalid_parameter_handler);

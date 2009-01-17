@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.690 2009/01/09 18:23:45 tony2001 Exp $ */
+/* $Id: string.c,v 1.691 2009/01/17 20:36:22 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2913,7 +2913,7 @@ PHP_FUNCTION(strripos)
 	if (haystack_type == IS_UNICODE) {
 		if (offset >= 0) {
 			U16_FWD_N(haystack.u, cu_offset, haystack_len, offset);
-			if (cu_offset > haystack_len - needle_len) {
+			if (cu_offset > haystack_len) {
 				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Offset is greater than the length of haystack string");
 				RETURN_FALSE;
 			}

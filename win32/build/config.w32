@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.95 2009/01/06 20:51:37 pajoye Exp $
+// $Id: config.w32,v 1.96 2009/01/17 02:07:46 stas Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -20,6 +20,7 @@ VCVERS = probe_binary(CL).substr(0, 5).replace('.', '');
 STDOUT.WriteLine("  Detected compiler " + VC_VERSIONS[VCVERS]);
 AC_DEFINE('COMPILER', VC_VERSIONS[VCVERS], "Detected compiler version");
 DEFINE("PHP_COMPILER_SHORT", VC_VERSIONS_SHORT[VCVERS]);
+AC_DEFINE('PHP_COMPILER_ID', VC_VERSIONS_SHORT[VCVERS], "Compiler compatibility ID");
 
 // do we use x64 or 80x86 version of compiler?
 X64 = probe_binary(CL, 64);

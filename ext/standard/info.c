@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.10.2.14.2.22 2009/01/04 15:19:57 tony2001 Exp $ */
+/* $Id: info.c,v 1.249.2.10.2.14.2.23 2009/01/17 02:05:13 stas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -695,6 +695,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 
 		snprintf(temp_api, sizeof(temp_api), "%d", ZEND_EXTENSION_API_NO);
 		php_info_print_table_row(2, "Zend Extension", temp_api);
+
+		php_info_print_table_row(2, "Zend Extension Build", ZEND_EXTENSION_BUILD_ID);
+		php_info_print_table_row(2, "PHP Extension Build", ZEND_MODULE_BUILD_ID);
 
 #if ZEND_DEBUG
 		php_info_print_table_row(2, "Debug Build", "yes" );

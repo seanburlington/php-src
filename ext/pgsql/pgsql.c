@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.397 2009/01/13 19:08:37 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.398 2009/01/18 23:49:11 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -4830,7 +4830,7 @@ PHP_PGSQL_API int php_pgsql_meta_data(PGconn *pg_link, const char *table_name, z
 	src = estrdup(table_name);
 	tmp_name = php_strtok_r(src, ".", &tmp_name2);
 	
-	if (!*tmp_name2) {
+	if (!tmp_name2 || !*tmp_name2) {
 		/* Default schema */
 		tmp_name2 = tmp_name;
 		tmp_name = "public";

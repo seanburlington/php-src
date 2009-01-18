@@ -4,7 +4,7 @@
 
 /******************************************************************************
 ** This file is an amalgamation of many separate C source files from SQLite
-** version 3.6.8.  By combining all the individual C code files into this 
+** version 3.6.10.  By combining all the individual C code files into this 
 ** single large file, the entire code can be compiled as a one translation
 ** unit.  This allows many compilers to do optimizations that would not be
 ** possible if the files were compiled separately.  Performance improvements
@@ -21,7 +21,7 @@
 ** is also in a separate file.  This file contains only code for the core
 ** SQLite library.
 **
-** This amalgamation was generated on 2009-01-12 15:45:58 UTC.
+** This amalgamation was generated on 2009-01-15 16:03:22 UTC.
 */
 #define SQLITE_CORE 1
 #define SQLITE_AMALGAMATION 1
@@ -45,7 +45,7 @@
 *************************************************************************
 ** Internal interface definitions for SQLite.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITEINT_H_
 #define _SQLITEINT_H_
@@ -74,7 +74,7 @@
 ** 
 ** This file defines various limits of what SQLite can process.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -424,16 +424,22 @@
 ** where multiple cases go to the same block of code, testcase()
 ** can insure that all cases are evaluated.
 **
-** The TESTONLY macro is used to enclose variable declarations or
-** other bits of code that are needed to support the arguments
-** within testcase() macros.
 */
 #ifdef SQLITE_COVERAGE_TEST
 SQLITE_PRIVATE   void sqlite3Coverage(int);
 # define testcase(X)  if( X ){ sqlite3Coverage(__LINE__); }
-# define TESTONLY(X)  X
 #else
 # define testcase(X)
+#endif
+
+/*
+** The TESTONLY macro is used to enclose variable declarations or
+** other bits of code that are needed to support the arguments
+** within testcase() and assert() macros.
+*/
+#if !defined(NDEBUG) || defined(SQLITE_COVERAGE_TEST)
+# define TESTONLY(X)  X
+#else
 # define TESTONLY(X)
 #endif
 
@@ -526,7 +532,7 @@ SQLITE_PRIVATE   int sqlite3Assert(void);
 ** the version number) and changes its name to "sqlite3.h" as
 ** part of the build process.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITE3_H_
 #define _SQLITE3_H_
@@ -603,8 +609,8 @@ extern "C" {
 **          with the value (X*1000000 + Y*1000 + Z) where X, Y, and Z
 **          are the major version, minor version, and release number.
 */
-#define SQLITE_VERSION         "3.6.8"
-#define SQLITE_VERSION_NUMBER  3006008
+#define SQLITE_VERSION         "3.6.10"
+#define SQLITE_VERSION_NUMBER  3006010
 
 /*
 ** CAPI3REF: Run-Time Library Version Numbers {H10020} <S60100>
@@ -7249,7 +7255,7 @@ struct sqlite3_pcache_methods {
 ** This is the header file for the generic hash-table implemenation
 ** used in SQLite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITE_HASH_H_
 #define _SQLITE_HASH_H_
@@ -7805,7 +7811,7 @@ typedef struct WhereLevel WhereLevel;
 ** subsystem.  See comments in the source code for a detailed description
 ** of what each interface routine does.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _BTREE_H_
 #define _BTREE_H_
@@ -8037,7 +8043,7 @@ SQLITE_PRIVATE   void sqlite3BtreeMutexArrayInsert(BtreeMutexArray*, Btree*);
 ** or VDBE.  The VDBE implements an abstract machine that runs a
 ** simple program to access and modify the underlying database.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITE_VDBE_H_
 #define _SQLITE_VDBE_H_
@@ -8430,7 +8436,7 @@ SQLITE_PRIVATE   void sqlite3VdbeNoopComment(Vdbe*, const char*, ...);
 ** subsystem.  The page cache subsystem reads and writes a file a page
 ** at a time and provides a journal for rollback.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef _PAGER_H_
@@ -8580,7 +8586,7 @@ void enable_simulated_io_errors(void);
 ** This header file defines the interface that the sqlite page cache
 ** subsystem. 
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef _PCACHE_H_
@@ -8748,7 +8754,7 @@ SQLITE_PRIVATE void sqlite3PCacheSetDefault(void);
 ** This header file is #include-ed by sqliteInt.h and thus ends up
 ** being included by every source file.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITE_OS_H_
 #define _SQLITE_OS_H_
@@ -8976,6 +8982,7 @@ SQLITE_PRIVATE int sqlite3OsLock(sqlite3_file*, int);
 SQLITE_PRIVATE int sqlite3OsUnlock(sqlite3_file*, int);
 SQLITE_PRIVATE int sqlite3OsCheckReservedLock(sqlite3_file *id, int *pResOut);
 SQLITE_PRIVATE int sqlite3OsFileControl(sqlite3_file*,int,void*);
+#define SQLITE_FCNTL_DB_UNCHANGED 0xca093fa0
 SQLITE_PRIVATE int sqlite3OsSectorSize(sqlite3_file *id);
 SQLITE_PRIVATE int sqlite3OsDeviceCharacteristics(sqlite3_file *id);
 
@@ -9030,7 +9037,7 @@ SQLITE_PRIVATE int sqlite3OsCloseFree(sqlite3_file *);
 ** Source files should #include the sqliteInt.h file and let that file
 ** include this one indirectly.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -11195,7 +11202,7 @@ SQLITE_PRIVATE void (*sqlite3IoTrace)(const char*,...);
 **
 ** This file contains definitions of global variables and contants.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -11302,7 +11309,7 @@ SQLITE_PRIVATE SQLITE_WSD FuncDefHash sqlite3GlobalFunctions;
 ** This module implements the sqlite3_status() interface and related
 ** functionality.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -11429,7 +11436,7 @@ SQLITE_API int sqlite3_db_status(
 ** sqlite3RegisterDateTimeFunctions() found at the bottom of the file.
 ** All other code has file scope.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** SQLite processes all times and dates as Julian Day numbers.  The
 ** dates and times are stored as the number of days since noon
@@ -12514,7 +12521,7 @@ SQLITE_PRIVATE void sqlite3RegisterDateTimeFunctions(void){
 ** This file contains OS interface code that is common to all
 ** architectures.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #define _SQLITE_OS_C_ 1
 #undef _SQLITE_OS_C_
@@ -12791,7 +12798,7 @@ SQLITE_API int sqlite3_vfs_unregister(sqlite3_vfs *pVfs){
 **
 *************************************************************************
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -12890,7 +12897,7 @@ SQLITE_PRIVATE void sqlite3EndBenignMalloc(void){
 ** are merely placeholders.  Real drivers must be substituted using
 ** sqlite3_config() before SQLite will operate.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -12954,7 +12961,7 @@ SQLITE_PRIVATE void sqlite3MemSetDefault(void){
 ** This file contains implementations of the low-level memory allocation
 ** routines specified in the sqlite3_mem_methods object.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -13103,7 +13110,7 @@ SQLITE_PRIVATE void sqlite3MemSetDefault(void){
 ** This file contains implementations of the low-level memory allocation
 ** routines specified in the sqlite3_mem_methods object.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -13548,7 +13555,7 @@ SQLITE_PRIVATE int sqlite3MemdebugMallocCount(){
 ** This version of the memory allocation subsystem is included
 ** in the build only if SQLITE_ENABLE_MEMSYS3 is defined.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -14238,7 +14245,7 @@ SQLITE_PRIVATE const sqlite3_mem_methods *sqlite3MemGetMemsys3(void){
 ** This version of the memory allocation subsystem is included
 ** in the build only if SQLITE_ENABLE_MEMSYS5 is defined.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -14719,7 +14726,7 @@ SQLITE_PRIVATE const sqlite3_mem_methods *sqlite3MemGetMemsys5(void){
 ** This file contains code that is common across all mutex implementations.
 
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_MUTEX_OMIT
@@ -14879,7 +14886,7 @@ SQLITE_API int sqlite3_mutex_notheld(sqlite3_mutex *p){
 ** that does error checking on mutexes to make sure they are being
 ** called correctly.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -15053,7 +15060,7 @@ SQLITE_PRIVATE sqlite3_mutex_methods *sqlite3DefaultMutex(void){
 *************************************************************************
 ** This file contains the C functions that implement mutexes for OS/2
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -15328,7 +15335,7 @@ SQLITE_PRIVATE sqlite3_mutex_methods *sqlite3DefaultMutex(void){
 *************************************************************************
 ** This file contains the C functions that implement mutexes for pthreads
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -15658,7 +15665,7 @@ SQLITE_PRIVATE sqlite3_mutex_methods *sqlite3DefaultMutex(void){
 *************************************************************************
 ** This file contains the C functions that implement mutexes for win32
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -15915,7 +15922,7 @@ SQLITE_PRIVATE sqlite3_mutex_methods *sqlite3DefaultMutex(void){
 **
 ** Memory allocation functions used throughout sqlite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -16700,7 +16707,7 @@ SQLITE_PRIVATE int sqlite3ApiExit(sqlite3* db, int rc){
 ** an historical reference.  Most of the "enhancements" have been backed
 ** out so that the functionality is now the same as standard printf().
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 **************************************************************************
 **
@@ -17648,7 +17655,7 @@ SQLITE_PRIVATE void sqlite3DebugPrintf(const char *zFormat, ...){
 ** Random numbers are used by some of the database backends in order
 ** to generate random integer keys for tables or random filenames.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -17794,7 +17801,7 @@ SQLITE_PRIVATE void sqlite3PrngResetState(void){
 ** This file contains routines used to translate between UTF-8, 
 ** UTF-16, UTF-16BE, and UTF-16LE.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** Notes on UTF-8:
 **
@@ -17836,7 +17843,7 @@ SQLITE_PRIVATE void sqlite3PrngResetState(void){
 ** 6000 lines long) it was split up into several smaller files and
 ** this header information was factored out.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _VDBEINT_H_
 #define _VDBEINT_H_
@@ -18738,7 +18745,7 @@ SQLITE_PRIVATE void sqlite3UtfSelfTest(void){
 ** This file contains functions for allocating memory, comparing
 ** strings, and stuff like that.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -19729,7 +19736,7 @@ SQLITE_PRIVATE int sqlite3SafetyCheckSickOrOk(sqlite3 *db){
 ** This is the implementation of generic hash-tables
 ** used in SQLite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /* Turn bulk memory into a hash table object by initializing the
@@ -20190,7 +20197,7 @@ SQLITE_PRIVATE const char *sqlite3OpcodeName(int i){
 **
 ** This file contains code that is specific to OS/2.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -20253,7 +20260,7 @@ SQLITE_PRIVATE const char *sqlite3OpcodeName(int i){
 ** This file should be #included by the os_*.c files only.  It is not a
 ** general purpose header file.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _OS_COMMON_H_
 #define _OS_COMMON_H_
@@ -20324,7 +20331,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
 ** This file contains inline asm code for retrieving "high-performance"
 ** counters for x86 class CPUs.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _HWTIME_H_
 #define _HWTIME_H_
@@ -21582,7 +21589,7 @@ SQLITE_API int sqlite3_os_end(void){
 **   *  Definitions of sqlite3_vfs objects for all locking methods
 **      plus implementations of sqlite3_os_init() and sqlite3_os_end().
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #if SQLITE_OS_UNIX              /* This file is used on unix only */
 
@@ -21727,6 +21734,18 @@ struct unixFile {
   int isDelete;                    /* Delete on close if true */
   struct vxworksFileId *pId;       /* Unique file ID */
 #endif
+#ifndef NDEBUG
+  /* The next group of variables are used to track whether or not the
+  ** transaction counter in bytes 24-27 of database files are updated
+  ** whenever any part of the database changes.  An assertion fault will
+  ** occur if a file is updated without also updating the transaction
+  ** counter.  This test is made to avoid new problems similar to the
+  ** one described by ticket #3584. 
+  */
+  unsigned char transCntrChng;   /* True if the transaction counter changed */
+  unsigned char dbUpdate;        /* True if any part of database file changed */
+  unsigned char inNormalWrite;   /* True if in a normal write operation */
+#endif
 #ifdef SQLITE_TEST
   /* In test mode, increase the size of this structure a bit so that 
   ** it is larger than the struct CrashFile defined in test6.c.
@@ -21759,7 +21778,7 @@ struct unixFile {
 ** This file should be #included by the os_*.c files only.  It is not a
 ** general purpose header file.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _OS_COMMON_H_
 #define _OS_COMMON_H_
@@ -21830,7 +21849,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
 ** This file contains inline asm code for retrieving "high-performance"
 ** counters for x86 class CPUs.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _HWTIME_H_
 #define _HWTIME_H_
@@ -23086,6 +23105,24 @@ static int unixLock(sqlite3_file *id, int locktype){
     }
   }
   
+
+#ifndef NDEBUG
+  /* Set up the transaction-counter change checking flags when
+  ** transitioning from a SHARED to a RESERVED lock.  The change
+  ** from SHARED to RESERVED marks the beginning of a normal
+  ** write operation (not a hot journal rollback).
+  */
+  if( rc==SQLITE_OK
+   && pFile->locktype<=SHARED_LOCK
+   && locktype==RESERVED_LOCK
+  ){
+    pFile->transCntrChng = 0;
+    pFile->dbUpdate = 0;
+    pFile->inNormalWrite = 1;
+  }
+#endif
+
+
   if( rc==SQLITE_OK ){
     pFile->locktype = locktype;
     pLock->locktype = locktype;
@@ -23135,6 +23172,23 @@ static int unixUnlock(sqlite3_file *id, int locktype){
     SimulateIOErrorBenign(1);
     SimulateIOError( h=(-1) )
     SimulateIOErrorBenign(0);
+
+#ifndef NDEBUG
+    /* When reducing a lock such that other processes can start
+    ** reading the database file again, make sure that the
+    ** transaction counter was updated if any part of the database
+    ** file changed.  If the transaction counter is not updated,
+    ** other connections to the same file might not realize that
+    ** the file has changed and hence might not know to flush their
+    ** cache.  The use of a stale cache can lead to database corruption.
+    */
+    assert( pFile->inNormalWrite==0
+         || pFile->dbUpdate==0
+         || pFile->transCntrChng==1 );
+    pFile->inNormalWrite = 0;
+#endif
+
+
     if( locktype==SHARED_LOCK ){
       lock.l_type = F_RDLCK;
       lock.l_whence = SEEK_SET;
@@ -24467,6 +24521,29 @@ static int unixWrite(
   int wrote = 0;
   assert( id );
   assert( amt>0 );
+
+#ifndef NDEBUG
+  /* If we are doing a normal write to a database file (as opposed to
+  ** doing a hot-journal rollback or a write to some file other than a
+  ** normal database file) then record the fact that the database
+  ** has changed.  If the transaction counter is modified, record that
+  ** fact too.
+  */
+  if( ((unixFile*)id)->inNormalWrite ){
+    unixFile *pFile = (unixFile*)id;
+    pFile->dbUpdate = 1;  /* The database has been modified */
+    if( offset<=24 && offset+amt>=27 ){
+      char oldCntr[4];
+      SimulateIOErrorBenign(1);
+      seekAndRead(pFile, 24, oldCntr, 4);
+      SimulateIOErrorBenign(0);
+      if( memcmp(oldCntr, &((char*)pBuf)[24-offset], 4)!=0 ){
+        pFile->transCntrChng = 1;  /* The transaction counter has changed */
+      }
+    }
+  }
+#endif
+
   while( amt>0 && (wrote = seekAndWrite((unixFile*)id, offset, pBuf, amt))>0 ){
     amt -= wrote;
     offset += wrote;
@@ -24576,9 +24653,11 @@ static int full_fsync(int fd, int fullSync, int dataOnly){
 #else 
   if( dataOnly ){
     rc = fdatasync(fd);
-    if( OS_VXWORKS && rc==-1 && errno==ENOTSUP ){
+#if OS_VXWORKS
+    if( rc==-1 && errno==ENOTSUP ){
       rc = fsync(fd);
     }
+#endif
   }else{
     rc = fsync(fd);
   }
@@ -24726,6 +24805,17 @@ static int unixFileControl(sqlite3_file *id, int op, void *pArg){
       *(int*)pArg = ((unixFile*)id)->lastErrno;
       return SQLITE_OK;
     }
+#ifndef NDEBUG
+    /* The pager calls this method to signal that it has done
+    ** a rollback and that the database is therefore unchanged and
+    ** it hence it is OK for the transaction change counter to be
+    ** unchanged.
+    */
+    case SQLITE_FCNTL_DB_UNCHANGED: {
+      ((unixFile*)id)->dbUpdate = 0;
+      return SQLITE_OK;
+    }
+#endif
 #if SQLITE_ENABLE_LOCKING_STYLE && defined(__APPLE__)
     case SQLITE_SET_LOCKPROXYFILE:
     case SQLITE_GET_LOCKPROXYFILE: {
@@ -26755,7 +26845,7 @@ SQLITE_API int sqlite3_os_end(void){
 **
 ** This file contains code that is specific to windows.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #if SQLITE_OS_WIN               /* This file is used for windows only */
 
@@ -26823,7 +26913,7 @@ SQLITE_API int sqlite3_os_end(void){
 ** This file should be #included by the os_*.c files only.  It is not a
 ** general purpose header file.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _OS_COMMON_H_
 #define _OS_COMMON_H_
@@ -26894,7 +26984,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
 ** This file contains inline asm code for retrieving "high-performance"
 ** counters for x86 class CPUs.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _HWTIME_H_
 #define _HWTIME_H_
@@ -28734,7 +28824,7 @@ SQLITE_API int sqlite3_os_end(void){
 ** start of a transaction, and is thus usually less than a few thousand,
 ** but can be as large as 2 billion for a really big database.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /* Size of the Bitvec structure in bytes. */
@@ -29099,7 +29189,7 @@ bitvec_end:
 *************************************************************************
 ** This file implements that page cache.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -29686,7 +29776,7 @@ SQLITE_PRIVATE void sqlite3PcacheIterateDirty(PCache *pCache, void (*xIter)(PgHd
 ** If the default page cache implementation is overriden, then neither of
 ** these two features are available.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -30447,6 +30537,8 @@ SQLITE_PRIVATE void sqlite3PcacheStats(
 **
 ** Big chunks of rowid/next-ptr pairs are allocated at a time, to
 ** reduce the malloc overhead.
+**
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -30679,7 +30771,7 @@ SQLITE_PRIVATE int sqlite3RowSetNext(RowSet *p, i64 *pRowid){
 ** file simultaneously, or one process from reading the database while
 ** another is writing.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef SQLITE_OMIT_DISKIO
 
@@ -31645,10 +31737,7 @@ static int addToSavepointBitvecs(Pager *pPager, Pgno pgno){
 */
 static void pager_unlock(Pager *pPager){
   if( !pPager->exclusiveMode ){
-    int rc = osUnlock(pPager->fd, NO_LOCK);
-    if( rc ) pPager->errCode = rc;
-    pPager->dbSizeValid = 0;
-    IOTRACE(("UNLOCK %p\n", pPager))
+    int rc;
 
     /* Always close the journal file when dropping the database lock.
     ** Otherwise, another connection with journal_mode=delete might
@@ -31662,6 +31751,11 @@ static void pager_unlock(Pager *pPager){
       sqlite3BitvecDestroy(pPager->pAlwaysRollback);
       pPager->pAlwaysRollback = 0;
     }
+
+    rc = osUnlock(pPager->fd, NO_LOCK);
+    if( rc ) pPager->errCode = rc;
+    pPager->dbSizeValid = 0;
+    IOTRACE(("UNLOCK %p\n", pPager))
 
     /* If Pager.errCode is set, the contents of the pager cache cannot be
     ** trusted. Now that the pager file is unlocked, the contents of the
@@ -31763,6 +31857,7 @@ static int pager_end_transaction(Pager *pPager, int hasMaster){
   if( !pPager->exclusiveMode ){
     rc2 = osUnlock(pPager->fd, SHARED_LOCK);
     pPager->state = PAGER_SHARED;
+    pPager->changeCountDone = 0;
   }else if( pPager->state==PAGER_SYNCED ){
     pPager->state = PAGER_EXCLUSIVE;
   }
@@ -32380,6 +32475,16 @@ static int pager_playback(Pager *pPager, int isHot){
   assert( 0 );
 
 end_playback:
+  /* Following a rollback, the database file should be back in its original
+  ** state prior to the start of the transaction, so invoke the
+  ** SQLITE_FCNTL_DB_UNCHANGED file-control method to disable the
+  ** assertion that the transaction counter was modified.
+  */
+  assert(
+    pPager->fd->pMethods==0 ||
+    sqlite3OsFileControl(pPager->fd,SQLITE_FCNTL_DB_UNCHANGED,0)>=SQLITE_OK
+  );
+
   if( rc==SQLITE_OK ){
     zMaster = pPager->pTmpSpace;
     rc = readMasterJournal(pPager->jfd, zMaster, pPager->pVfs->mxPathname+1);
@@ -35202,7 +35307,7 @@ SQLITE_PRIVATE i64 sqlite3PagerJournalSizeLimit(Pager *pPager, i64 iLimit){
 **
 *************************************************************************
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** This file contains code used to implement mutexes on Btree objects.
 ** This code really belongs in btree.c.  But btree.c is getting too
@@ -35222,7 +35327,7 @@ SQLITE_PRIVATE i64 sqlite3PagerJournalSizeLimit(Pager *pPager, i64 iLimit){
 **    May you share freely, never taking more than you give.
 **
 *************************************************************************
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** This file implements a external (disk-based) database using BTrees.
 ** For a detailed discussion of BTrees, refer to
@@ -36154,7 +36259,7 @@ SQLITE_PRIVATE void sqlite3BtreeMutexArrayLeave(BtreeMutexArray *pArray){
 **    May you share freely, never taking more than you give.
 **
 *************************************************************************
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** This file implements a external (disk-based) database using BTrees.
 ** See the header comment on "btreeInt.h" for additional information.
@@ -43647,7 +43752,7 @@ SQLITE_PRIVATE void sqlite3BtreeCacheOverflow(BtCursor *pCur){
 ** only within the VDBE.  Interface routines refer to a Mem using the
 ** name sqlite_value
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -44734,7 +44839,7 @@ SQLITE_PRIVATE int sqlite3ValueBytes(sqlite3_value *pVal, u8 enc){
 ** to version 2.8.7, all this code was combined into the vdbe.c source file.
 ** But that file was getting too big so this subroutines were split out.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -47278,7 +47383,7 @@ SQLITE_PRIVATE sqlite3 *sqlite3VdbeDb(Vdbe *v){
 ** This file contains code use to implement APIs that are part of the
 ** VDBE.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #if 0 && defined(SQLITE_ENABLE_MEMORY_MANAGEMENT)
@@ -48619,7 +48724,7 @@ SQLITE_API int sqlite3_stmt_status(sqlite3_stmt *pStmt, int op, int resetFlag){
 ** in this file for details.  If in doubt, do not deviate from existing
 ** commenting and indentation practices when changing or adding code.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -49055,7 +49160,7 @@ static void registerTrace(FILE *out, int iReg, Mem *p){
 ** This file contains inline asm code for retrieving "high-performance"
 ** counters for x86 class CPUs.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _HWTIME_H_
 #define _HWTIME_H_
@@ -52572,6 +52677,7 @@ case OP_Last: {        /* jump */
   rc = sqlite3BtreeLast(pCrsr, &res);
   pC->nullRow = (u8)res;
   pC->deferredMoveto = 0;
+  pC->rowidIsValid = 0;
   pC->cacheStatus = CACHE_STALE;
   if( res && pOp->p2>0 ){
     pc = pOp->p2 - 1;
@@ -52622,6 +52728,7 @@ case OP_Rewind: {        /* jump */
     pC->atFirst = res==0 ?1:0;
     pC->deferredMoveto = 0;
     pC->cacheStatus = CACHE_STALE;
+    pC->rowidIsValid = 0;
   }else{
     res = 1;
   }
@@ -54015,7 +54122,7 @@ abort_due_to_interrupt:
 **
 ** This file contains code used to implement incremental BLOB I/O.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -54362,7 +54469,7 @@ SQLITE_API int sqlite3_blob_bytes(sqlite3_blob *pBlob){
 **
 *************************************************************************
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifdef SQLITE_ENABLE_ATOMIC_WRITE
@@ -54607,7 +54714,7 @@ SQLITE_PRIVATE int sqlite3JournalSize(sqlite3_vfs *pVfs){
 ** The in-memory rollback journal is used to journal transactions for
 ** ":memory:" databases and when the journal_mode=MEMORY pragma is used.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /* Forward references to internal structures */
@@ -54852,7 +54959,7 @@ SQLITE_PRIVATE int sqlite3MemJournalSize(void){
 ** This file contains routines used for walking the parser tree for
 ** an SQL statement.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -54988,7 +55095,7 @@ SQLITE_PRIVATE int sqlite3WalkSelect(Walker *pWalker, Select *p){
 ** resolve all identifiers by associating them with a particular
 ** table and column.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -56155,7 +56262,7 @@ SQLITE_PRIVATE void sqlite3ResolveSelectNames(
 ** This file contains routines used for analyzing expressions and
 ** for generating VDBE code that evaluates expressions in SQLite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -59242,7 +59349,7 @@ SQLITE_PRIVATE void sqlite3ReleaseTempRange(Parse *pParse, int iReg, int nReg){
 ** This file contains C code routines that used to generate VDBE code
 ** that implements the ALTER TABLE command.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -59868,7 +59975,7 @@ exit_begin_add_column:
 *************************************************************************
 ** This file contains code associated with the ANALYZE command.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef SQLITE_OMIT_ANALYZE
 
@@ -60297,7 +60404,7 @@ SQLITE_PRIVATE int sqlite3AnalysisLoad(sqlite3 *db, int iDb){
 *************************************************************************
 ** This file contains code used to implement the ATTACH and DETACH commands.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_OMIT_ATTACH
@@ -60841,7 +60948,7 @@ SQLITE_PRIVATE int sqlite3FixTriggerStep(
 ** systems that do not need this facility may omit it by recompiling
 ** the library with -DSQLITE_OMIT_AUTHORIZATION=1
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -61085,7 +61192,7 @@ SQLITE_PRIVATE void sqlite3AuthContextPop(AuthContext *pContext){
 **     COMMIT
 **     ROLLBACK
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -64684,7 +64791,7 @@ SQLITE_PRIVATE KeyInfo *sqlite3IndexKeyinfo(Parse *pParse, Index *pIdx){
 ** This file contains functions used to access the internal hash tables
 ** of user defined functions and collation sequences.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -65136,7 +65243,7 @@ SQLITE_PRIVATE Schema *sqlite3SchemaGet(sqlite3 *db, Btree *pBt){
 ** This file contains C code routines that are called by the parser
 ** in order to generate code for DELETE FROM statements.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -65772,7 +65879,7 @@ SQLITE_PRIVATE int sqlite3GenerateIndexKey(
 ** sqliteRegisterBuildinFunctions() found at the bottom of the file.
 ** All other code has file scope.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -67168,7 +67275,7 @@ SQLITE_PRIVATE void sqlite3RegisterGlobalFunctions(void){
 ** This file contains C code routines that are called by the parser
 ** to handle INSERT statements in SQLite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -68909,7 +69016,7 @@ static int xferOptimization(
 ** other files are for internal use by SQLite and should not be
 ** accessed by users of the library.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -69054,7 +69161,7 @@ exec_out:
 ** This file contains code used to dynamically load extensions into
 ** the SQLite library.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_CORE
@@ -69079,7 +69186,7 @@ exec_out:
 ** as extensions by SQLite should #include this file instead of 
 ** sqlite3.h.
 **
-** @(#) $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** @(#) $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef _SQLITE3EXT_H_
 #define _SQLITE3EXT_H_
@@ -70040,7 +70147,7 @@ SQLITE_PRIVATE int sqlite3AutoLoadExtensions(sqlite3 *db){
 *************************************************************************
 ** This file contains code used to implement the PRAGMA command.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /* Ignore this whole file if pragmas are disabled
@@ -70552,7 +70659,7 @@ SQLITE_PRIVATE void sqlite3Pragma(
   **  PRAGMA [database.]journal_size_limit
   **  PRAGMA [database.]journal_size_limit=N
   **
-  ** Get or set the (boolean) value of the database 'auto-vacuum' parameter.
+  ** Get or set the size limit on rollback journal files.
   */
   if( sqlite3StrICmp(zLeft,"journal_size_limit")==0 ){
     Pager *pPager = sqlite3BtreePager(pDb->pBt);
@@ -70574,7 +70681,8 @@ SQLITE_PRIVATE void sqlite3Pragma(
   **  PRAGMA [database.]auto_vacuum
   **  PRAGMA [database.]auto_vacuum=N
   **
-  ** Get or set the (boolean) value of the database 'auto-vacuum' parameter.
+  ** Get or set the value of the database 'auto-vacuum' parameter.
+  ** The value is one of:  0 NONE 1 FULL 2 INCREMENTAL
   */
 #ifndef SQLITE_OMIT_AUTOVACUUM
   if( sqlite3StrICmp(zLeft,"auto_vacuum")==0 ){
@@ -71476,7 +71584,7 @@ pragma_out:
 ** interface, and routines that contribute to loading the database schema
 ** from disk.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -72287,7 +72395,7 @@ SQLITE_API int sqlite3_prepare16_v2(
 ** This file contains C code routines that are called by the parser
 ** to handle SELECT statements in SQLite.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 
@@ -76477,7 +76585,7 @@ SQLITE_PRIVATE void sqlite3PrintSelect(Select *p, int indent){
 ** These routines are in a separate files so that they will not be linked
 ** if they are not used.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_OMIT_GET_TABLE
@@ -76672,7 +76780,7 @@ SQLITE_API void sqlite3_free_table(
 *************************************************************************
 **
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_OMIT_TRIGGER
@@ -77531,7 +77639,7 @@ SQLITE_PRIVATE int sqlite3CodeRowTrigger(
 ** This file contains C code routines that are called by the parser
 ** to handle UPDATE statements.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifndef SQLITE_OMIT_VIRTUALTABLE
@@ -78220,7 +78328,7 @@ static void updateVirtualTable(
 ** Most of the code in this file may be omitted by defining the
 ** SQLITE_OMIT_VACUUM macro.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #if !defined(SQLITE_OMIT_VACUUM) && !defined(SQLITE_OMIT_ATTACH)
@@ -78518,7 +78626,7 @@ end_of_vacuum:
 *************************************************************************
 ** This file contains code used to help implement virtual tables.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef SQLITE_OMIT_VIRTUALTABLE
 
@@ -79368,7 +79476,7 @@ SQLITE_PRIVATE void sqlite3VtabMakeWritable(Parse *pParse, Table *pTab){
 ** so is applicable.  Because this module is responsible for selecting
 ** indices, you might also think of this module as the "query optimizer".
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -81197,6 +81305,7 @@ static void bestIndex(
       WhereClause *pOrWC = &pTerm->u.pOrInfo->wc;
       WhereTerm *pOrTerm;
       int j;
+      int sortable = 0;
       double rTotal = 0;
       nRow = 0;
       for(j=0, pOrTerm=pOrWC->a; j<pOrWC->nTerm; j++, pOrTerm++){
@@ -81216,6 +81325,14 @@ static void bestIndex(
         nRow += sTermCost.nRow;
         if( rTotal>=pCost->rCost ) break;
       }
+      if( pOrderBy!=0 ){
+        if( sortableByRowid(iCur, pOrderBy, pWC->pMaskSet, &rev) && !rev ){
+          sortable = 1;
+        }else{
+          rTotal += nRow*estLog(nRow);
+          WHERETRACE(("... sorting increases OR cost to %.9g\n", rTotal));
+        }
+      }
       WHERETRACE(("... multi-index OR cost=%.9g nrow=%.9g\n",
                   rTotal, nRow));
       if( rTotal<pCost->rCost ){
@@ -81223,10 +81340,7 @@ static void bestIndex(
         pCost->nRow = nRow;
         pCost->plan.wsFlags = WHERE_MULTI_OR;
         pCost->plan.u.pTerm = pTerm;
-        if( pOrderBy!=0
-         && sortableByRowid(iCur, pOrderBy, pWC->pMaskSet, &rev)
-         && !rev
-        ){
+        if( sortable ){
           pCost->plan.wsFlags = WHERE_ORDERBY|WHERE_MULTI_OR;
         }
       }
@@ -86017,7 +86131,7 @@ SQLITE_PRIVATE void sqlite3Parser(
 ** individual tokens and sends those tokens one-by-one over to the
 ** parser for analysis.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 /*
@@ -86070,7 +86184,7 @@ const unsigned char ebcdicToAscii[] = {
 **
 ** The code in this file has been automatically generated by
 **
-**     $Header: /repository/php-src/ext/sqlite3/libsqlite/sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+**     $Header: /repository/php-src/ext/sqlite3/libsqlite/sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** The code in this file implements a function that determines whether
 ** or not a given identifier is really an SQL keyword.  The same thing
@@ -86804,7 +86918,7 @@ abort_parse:
 ** separating it out, the code will be automatically omitted from
 ** static links that do not use it.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 #ifndef SQLITE_OMIT_COMPLETE
 
@@ -87081,7 +87195,7 @@ SQLITE_API int sqlite3_complete16(const void *zSql){
 ** other files are for internal use by SQLite and should not be
 ** accessed by users of the library.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #ifdef SQLITE_ENABLE_FTS3
@@ -89498,8 +89612,8 @@ SQLITE_API int sqlite3_test_control(int op, ...){
 **
 **
 **** Segment merging ****
-** To amortize update costs, segments are groups into levels and
-** merged in matches.  Each increase in level represents exponentially
+** To amortize update costs, segments are grouped into levels and
+** merged in batches.  Each increase in level represents exponentially
 ** more documents.
 **
 ** New documents (actually, document updates) are tokenized and
@@ -99174,7 +99288,7 @@ SQLITE_PRIVATE void sqlite3Fts3SimpleTokenizerModule(
 ** This file contains code for implementations of the r-tree and r*-tree
 ** algorithms packaged as an SQLite virtual table module.
 **
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #if !defined(SQLITE_CORE) || defined(SQLITE_ENABLE_RTREE)
@@ -102029,7 +102143,7 @@ SQLITE_API int sqlite3_extension_init(
 **    May you share freely, never taking more than you give.
 **
 *************************************************************************
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 **
 ** This file implements an integration between the ICU library 
 ** ("International Components for Unicode", an open-source library 
@@ -102530,7 +102644,7 @@ SQLITE_API int sqlite3_extension_init(
 *************************************************************************
 ** This file implements a tokenizer for fts3 based on the ICU library.
 ** 
-** $Id: sqlite3.c,v 1.1.2.15 2009/01/12 18:55:20 scottmac Exp $
+** $Id: sqlite3.c,v 1.1.2.16 2009/01/18 18:01:38 iliaa Exp $
 */
 
 #if !defined(SQLITE_CORE) || defined(SQLITE_ENABLE_FTS3)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.25 2009/01/04 16:31:12 iliaa Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.26 2009/01/19 22:43:58 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -229,7 +229,7 @@ PHP_METHOD(sqlite3, lastErrorCode)
 	zval *object = getThis();
 	db_obj = (php_sqlite3_db_object *)zend_object_store_get_object(object TSRMLS_CC);
 
-	SQLITE3_CHECK_INITIALIZED(db_obj->initialised, SQLite3)
+	SQLITE3_CHECK_INITIALIZED(db_obj->db, SQLite3)
 
 	if (zend_parse_parameters_none() == FAILURE) {
 		return;
@@ -247,7 +247,7 @@ PHP_METHOD(sqlite3, lastErrorMsg)
 	zval *object = getThis();
 	db_obj = (php_sqlite3_db_object *)zend_object_store_get_object(object TSRMLS_CC);
 
-	SQLITE3_CHECK_INITIALIZED(db_obj->initialised, SQLite3)
+	SQLITE3_CHECK_INITIALIZED(db_obj->db, SQLite3)
 
 	if (zend_parse_parameters_none() == FAILURE) {
 		return;
@@ -943,7 +943,7 @@ PHP_METHOD(sqlite3stmt, clear)
 	}
 
 	if (sqlite3_clear_bindings(stmt_obj->stmt) != SQLITE_OK) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to execute statement: %s", sqlite3_errmsg(sqlite3_db_handle(stmt_obj->stmt)));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to clear statement: %s", sqlite3_errmsg(sqlite3_db_handle(stmt_obj->stmt)));
 		RETURN_FALSE;
 	}
 

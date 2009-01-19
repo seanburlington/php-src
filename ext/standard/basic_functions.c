@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.948 2009/01/16 10:04:29 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.949 2009/01/19 02:31:18 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -37,6 +37,7 @@
 
 #ifdef PHP_WIN32
 #include "win32/php_win32_globals.h"
+#include "win32/time.h"
 #endif
 
 typedef struct yy_buffer_state *YY_BUFFER_STATE;

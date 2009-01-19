@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.11.2.16 2008/12/31 11:17:43 sebastian Exp $ */
+/* $Id: php_http.c,v 1.77.2.11.2.17 2009/01/19 21:57:45 iliaa Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -438,7 +438,11 @@ try_again:
 				smart_str_appendl(&soap_headers, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp));
 				smart_str_append_const(&soap_headers, "\r\n");
 			}
-		} else{
+		} else if (FG(user_agent)) {
+			smart_str_append_const(&soap_headers, "User-Agent: ");
+			smart_str_appends(&soap_headers, FG(user_agent));
+			smart_str_append_const(&soap_headers, "\r\n");
+		} else {
 			smart_str_append_const(&soap_headers, "User-Agent: PHP-SOAP/"PHP_VERSION"\r\n");
 		}
 

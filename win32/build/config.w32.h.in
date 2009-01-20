@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.22 2009/01/19 02:30:18 pajoye Exp $
+	$Id: config.w32.h.in,v 1.23 2009/01/20 01:37:17 pajoye Exp $
 */
 
 /* Define the minimum supported version */
@@ -138,6 +138,7 @@
 # define SIZEOF_SIZE_T 4
 # define SIZEOF_PTRDIFF_T 4
 #endif
+#define HAVE_FNMATCH
 #define HAVE_GLOB
 #define PHP_SHLIB_SUFFIX "dll"
 #define HAVE_SQLDATASOURCES

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.108 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.109 2009/01/20 18:03:33 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -358,6 +358,7 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 	if ((adjust & ADJ_PRECISION) == 0) {
 		precision = FLOAT_PRECISION;
 	} else if (precision > MAX_FLOAT_PRECISION) {
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Requested precision of %d digits was truncated to PHP maximum of %d digits", precision, MAX_FLOAT_PRECISION);
 		precision = MAX_FLOAT_PRECISION;
 	}
 	

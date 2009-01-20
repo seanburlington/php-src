@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.537 2009/01/09 22:50:45 tony2001 Exp $ */
+/* $Id: file.c,v 1.538 2009/01/20 01:41:18 pajoye Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -48,6 +48,7 @@
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #include "win32/winutil.h"
+#include "win32/fnmatch.h"
 #elif defined(NETWARE)
 #include <sys/param.h>
 #include <sys/select.h>
@@ -115,7 +116,7 @@ int file_globals_id;
 php_file_globals file_globals;
 #endif
 
-#ifdef HAVE_FNMATCH
+#if defined(HAVE_FNMATCH) && !defined(PHP_WIN32)
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif

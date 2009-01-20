@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.188 2009/01/08 00:11:57 felipe Exp $ */
+/* $Id: php_mssql.c,v 1.189 2009/01/20 20:02:37 felipe Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1479,6 +1479,7 @@ static void php_mssql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &mssql_result_index, &resulttype) == FAILURE) {
 				return;
 			}
+			result_type = (resulttype > 0 && (resulttype & MSSQL_BOTH)) ? resulttype : result_type;
 			break;
 		default:
 			return;
@@ -1552,8 +1553,8 @@ PHP_FUNCTION(mssql_fetch_row)
 }
 /* }}} */
 
-/* {{{ proto object mssql_fetch_object(resource result_id [, int result_type])
-   Returns a psuedo-object of the current row in the result set specified by result_id */
+/* {{{ proto object mssql_fetch_object(resource result_id)
+   Returns a pseudo-object of the current row in the result set specified by result_id */
 PHP_FUNCTION(mssql_fetch_object)
 {
 	php_mssql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MSSQL_ASSOC);

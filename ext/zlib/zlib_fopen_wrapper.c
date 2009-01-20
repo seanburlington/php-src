@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib_fopen_wrapper.c,v 1.52 2008/12/31 11:12:38 sebastian Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.53 2009/01/20 15:41:04 felipe Exp $ */
 
 #define _GNU_SOURCE
 
@@ -60,6 +60,10 @@ static int php_gziop_seek(php_stream *stream, off_t offset, int whence, off_t *n
 
 	assert(self != NULL);
 
+	if (whence == SEEK_END) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SEEK_END is not supported");
+		return -1;
+	}
 	*newoffs = gzseek(self->gz_file, offset, whence);
 
 	return (*newoffs < 0) ? -1 : 0;

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.43.2.2.2.3.2.4 2008/12/31 11:15:44 sebastian Exp $ */
+/* $Id: base64.c,v 1.43.2.2.2.3.2.5 2009/01/21 15:38:37 iliaa Exp $ */
 
 #include <string.h>
 
@@ -151,7 +151,14 @@ PHPAPI unsigned char *php_base64_decode_ex(const unsigned char *str, int length,
 
 	/* run through the whole string, converting as we go */
 	while ((ch = *current++) != '\0' && length-- > 0) {
-		if (ch == base64_pad) break;
+		if (ch == base64_pad) {
+			if (*current != '=' && (i % 4) == 1) {
+				efree(result);
+				return NULL;
+			}
+			i++;
+			continue;
+		}
 
 		ch = base64_reverse_table[ch];
 		if ((!strict && ch < 0) || ch == -1) { /* a space or some other separator character, we simply skip over */

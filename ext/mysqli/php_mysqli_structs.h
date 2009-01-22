@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli_structs.h,v 1.19 2008/12/31 11:12:33 sebastian Exp $ 
+  $Id: php_mysqli_structs.h,v 1.20 2009/01/22 20:57:32 johannes Exp $ 
 */
 
 #ifndef PHP_MYSQLI_STRUCTS_H
@@ -483,6 +483,7 @@ PHP_FUNCTION(mysqli_embedded_server_start);
 PHP_FUNCTION(mysqli_sqlstate);
 PHP_FUNCTION(mysqli_ssl_set);
 PHP_FUNCTION(mysqli_stat);
+PHP_FUNCTION(mysqli_refresh);
 PHP_FUNCTION(mysqli_stmt_affected_rows);
 PHP_FUNCTION(mysqli_stmt_close);
 PHP_FUNCTION(mysqli_stmt_data_seek);

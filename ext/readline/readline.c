@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.3.2.3.2.15 2009/01/16 00:07:03 iliaa Exp $ */
+/* $Id: readline.c,v 1.42.2.3.2.3.2.16 2009/01/22 14:40:20 iliaa Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -225,7 +225,7 @@ PHP_FUNCTION(readline_info)
 		return;
 	}
 
-	if (what) {
+	if (!what) {
 		array_init(return_value);
 		add_assoc_string(return_value,"line_buffer",SAFE_STRING(rl_line_buffer),1);
 		add_assoc_long(return_value,"point",rl_point);

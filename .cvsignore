@@ -70,3 +70,4 @@ php_lcov.info
 lcov_data
 lcov_html
 tmp-php.ini
+.project

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.23 2009/01/09 14:30:00 johannes Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.24 2009/01/22 21:01:56 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -2067,6 +2067,22 @@ PHP_FUNCTION(mysqli_stat)
 	}
 }
 
+/* }}} */
+
+/* {{{ proto bool mysqli_refresh(object link, long options)
+   Flush tables or caches, or reset replication server information */
+PHP_FUNCTION(mysqli_refresh)
+{
+	MY_MYSQL *mysql;
+	zval *mysql_link = NULL;
+	long options;
+
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &mysql_link, mysqli_link_class_entry, &options) == FAILURE) {
+		return;
+	}
+	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
+	RETURN_BOOL(!mysql_refresh(mysql->mysql, options));
+}
 /* }}} */
  
 /* {{{ proto int mysqli_stmt_attr_set(object stmt, long attr, long mode)

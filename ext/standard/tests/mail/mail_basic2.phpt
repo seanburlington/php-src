@@ -1,12 +1,12 @@
 --TEST--
 Test mail() function : basic functionality 
+--INI--
+sendmail_path=echo --- > mailBasic2.out
 --SKIPIF--
 <?php
 if(substr(PHP_OS, 0, 3) == "WIN")
   die("skip Won't run on Windows");
 ?>
---INI--
-sendmail_path="echo --- > /tmp/php_test_mailBasic2.out"
 --FILE--
 <?php
 /* Prototype  : int mail(string to, string subject, string message [, string additional_headers [, string additional_parameters]])
@@ -24,20 +24,15 @@ $subject = 'Test Subject';
 $message = 'A Message';
 $additional_headers = 'KHeaders';
 $additional_parameters = "Extras";
-$outFile = "/tmp/php_test_mailBasic2.out";
+$outFile = "mailBasic2.out";
 @unlink($outFile);
 
 echo "-- extra parameters --\n";
 // Calling mail() with all possible arguments
 var_dump( mail($to, $subject, $message, $additional_headers, $additional_parameters) );
-
-//This test is just using a shell command (see the INI setting). The sleep()
-//is used because that can take a while. If you see the test failing sometimes try 
-//increasing the length of the sleep. 
-
-sleep(5);
+sleep(1);
 echo file_get_contents($outFile);
-unlink($outFile);
+//unlink($outFile);
 ?>
 ===DONE===
 --EXPECT--

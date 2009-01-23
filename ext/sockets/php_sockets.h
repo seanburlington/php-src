@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.36.2.1.2.4.2.4 2009/01/01 05:24:29 kalle Exp $ */
+/* $Id: php_sockets.h,v 1.36.2.1.2.4.2.5 2009/01/23 15:49:48 kalle Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -43,7 +43,7 @@ PHP_RSHUTDOWN_FUNCTION(sockets);
 
 PHP_FUNCTION(socket_select);
 PHP_FUNCTION(socket_create_listen);
-#if defined(HAVE_SOCKETPAIR) || defined(PHP_WIN32)
+#ifdef PHP_WIN32
 PHP_FUNCTION(socket_create_pair);
 #endif
 PHP_FUNCTION(socket_accept);
@@ -83,6 +83,13 @@ typedef struct {
 	int		error;
 	int		blocking;
 } php_socket;
+
+#ifdef PHP_WIN32
+struct	sockaddr_un {
+	short	sun_family;
+	char	sun_path[108];
+};
+#endif
 
 /* Prototypes */
 #ifdef ilia_0 /* not needed, only causes a compiler warning */

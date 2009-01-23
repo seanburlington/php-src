@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.h,v 1.13.2.1.2.4.2.5 2008/12/31 11:15:45 sebastian Exp $ */
+/* $Id: streamsfuncs.h,v 1.13.2.1.2.4.2.6 2009/01/23 15:49:49 kalle Exp $ */
 
 /* Flags for stream_socket_client */
 #define PHP_STREAM_CLIENT_PERSISTENT	1
@@ -56,9 +56,12 @@ PHP_FUNCTION(stream_filter_append);
 PHP_FUNCTION(stream_filter_remove);
 PHP_FUNCTION(stream_socket_enable_crypto);
 PHP_FUNCTION(stream_socket_shutdown);
-PHP_FUNCTION(stream_socket_pair);
 PHP_FUNCTION(stream_is_local);
 PHP_FUNCTION(stream_supports_lock);
+
+#if HAVE_SOCKETPAIR
+PHP_FUNCTION(stream_socket_pair);
+#endif
 
 /*
  * Local variables:

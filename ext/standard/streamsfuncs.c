@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.33 2009/01/08 17:01:58 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.34 2009/01/23 15:49:49 kalle Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -36,6 +36,7 @@
 typedef unsigned long long php_timeout_ull;
 #else
 #include "win32/select.h"
+#include "win32/sockets.h"
 typedef unsigned __int64 php_timeout_ull;
 #endif
 

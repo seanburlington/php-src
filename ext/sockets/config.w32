@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/19 17:00:12 wez Exp $
+// $Id: config.w32,v 1.2 2009/01/23 15:48:53 kalle Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("sockets", "SOCKETS support", "no");
@@ -6,7 +6,7 @@ ARG_ENABLE("sockets", "SOCKETS support", "no");
 if (PHP_SOCKETS != "no") {
 
 	if (CHECK_LIB("ws2_32.lib", "sockets", PHP_SOCKETS)) {
-		EXTENSION('sockets', 'sockets.c php_sockets_win.c');
+		EXTENSION('sockets', 'sockets.c');
 		AC_DEFINE('HAVE_SOCKETS', 1);
 	} else {
 		WARNING("sockets not enabled; libraries and headers not found");

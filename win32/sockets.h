@@ -19,29 +19,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sockets_win.h,v 1.17 2008/12/31 11:12:36 sebastian Exp $ */
+/* $Id: sockets.h,v 1.1 2009/01/23 15:48:58 kalle Exp $ */
 
+/* Code originally from ext/sockets */
 
-#ifdef PHP_WIN32
-
-#define EPROTONOSUPPORT	WSAEPROTONOSUPPORT
-#define ECONNRESET		WSAECONNRESET
-
-#ifdef errno
-#undef errno
-#endif
-
-#define errno WSAGetLastError()
-#define h_errno WSAGetLastError()
-#define set_errno(a) WSASetLastError(a)
-#define close(a) closesocket(a)
-
-struct	sockaddr_un {
-	short	sun_family;
-	char	sun_path[108];
-};
-
-int socketpair(int domain, int type, int protocol, SOCKET sock[2]);
-int inet_aton(const char *cp, struct in_addr *inp);
-
-#endif
+PHPAPI int socketpair(int domain, int type, int protocol, SOCKET sock[2]);

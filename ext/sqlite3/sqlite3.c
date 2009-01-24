@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.29 2009/01/24 12:17:47 scottmac Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.30 2009/01/24 13:08:04 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1053,7 +1053,7 @@ PHP_METHOD(sqlite3, openBlob)
 	sqlite3_stream->position = 0;
 	sqlite3_stream->size = sqlite3_blob_bytes(blob);
 	
-	stream = php_stream_alloc_rel(&php_stream_sqlite3_ops, sqlite3_stream, 0, "rb");
+	stream = php_stream_alloc(&php_stream_sqlite3_ops, sqlite3_stream, 0, "rb");
 
 	if (stream) {
 		php_stream_to_zval(stream, return_value);

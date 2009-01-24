@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.14.2.14 2009/01/23 15:49:48 kalle Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.14.2.15 2009/01/24 13:06:21 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,7 +51,6 @@
 # define set_errno(a)		WSASetLastError(a)
 # define close(a)		closesocket(a)
 #else
-# include "php_sockets.h"
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <netdb.h>
@@ -67,6 +66,7 @@
 # include <sys/uio.h>
 # define IS_INVALID_SOCKET(a)	(a->bsd_socket < 0)
 # define set_errno(a) (errno = a)
+# include "php_sockets.h"
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(sockets)

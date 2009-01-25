@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.143 2009/01/25 17:12:22 pajoye Exp $ */
+/* $Id: interface.c,v 1.144 2009/01/25 22:33:19 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -681,9 +681,6 @@ PHP_MINIT_FUNCTION(curl)
 #endif
 #if LIBCURL_VERSION_NUM >= 0x070b00
 	REGISTER_CURL_CONSTANT(CURLE_FTP_SSL_FAILED);
-#endif
-#ifdef LIBCURL_VERSION_NUM >= 0x071300
-	REGISTER_CURL_CONSTANT(CURLE_SSH);
 #endif
 	REGISTER_CURL_CONSTANT(CURLPROXY_HTTP);
 	REGISTER_CURL_CONSTANT(CURLPROXY_SOCKS4);

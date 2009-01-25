@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.144 2009/01/25 22:33:19 tony2001 Exp $ */
+/* $Id: interface.c,v 1.145 2009/01/25 23:02:18 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -719,7 +719,7 @@ PHP_MINIT_FUNCTION(curl)
 #endif
 
 /* SSH support works in 7.19.0+ using libssh2 */
-#ifdef LIBCURL_VERSION_NUM >= 0x071300
+#if LIBCURL_VERSION_NUM >= 0x071300
 	REGISTER_CURL_CONSTANT(CURLSSH_AUTH_NONE);
 	REGISTER_CURL_CONSTANT(CURLSSH_AUTH_PUBLICKEY);
 	REGISTER_CURL_CONSTANT(CURLSSH_AUTH_PASSWORD);

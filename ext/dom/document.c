@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.5.2.13 2008/12/31 11:15:36 sebastian Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.5.2.14 2009/01/26 19:10:53 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1625,7 +1625,7 @@ static xmlDocPtr dom_document_parser(zval *id, int mode, char *source, int optio
 			EG(error_reporting) = old_error_reporting;
 		}
 		/* If loading from memory, set the base reference uri for the document */
-		if (ret->URL == NULL && ctxt->directory != NULL) {
+		if (ret && ret->URL == NULL && ctxt->directory != NULL) {
 			ret->URL = xmlStrdup(ctxt->directory);
 		}
 	} else {

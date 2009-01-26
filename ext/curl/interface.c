@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.29 2009/01/25 22:33:10 tony2001 Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.30 2009/01/26 15:19:55 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -379,7 +379,7 @@ PHP_MINFO_FUNCTION(curl)
 #if LIBCURL_VERSION_NUM > 0x070f03 /* 7.15.4 */
 			{"CharConv", CURL_VERSION_CONV},
 #endif
-			NULL, 0
+			{NULL, 0}
 		};
 
 		php_info_print_table_row(1, "Features");
@@ -1626,14 +1626,13 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 							return 1;
 						}
 						if (type) {
-							type++;
 							error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,
 											 CURLFORM_NAMELENGTH, (long)string_key_len - 1,
 											 CURLFORM_FILE, postval,
-											 CURLFORM_CONTENTTYPE, type,
+											 CURLFORM_CONTENTTYPE, type + sizeof(";type=") - 1,
 											 CURLFORM_END);
-							*(type - 1) = ';';
+							*type = ';';
 						} else {
 							error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,

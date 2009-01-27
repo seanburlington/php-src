@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.91 2008/12/31 11:12:33 sebastian Exp $ 
+  $Id: mysqli_nonapi.c,v 1.92 2009/01/27 15:35:22 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -173,9 +173,8 @@ void mysqli_common_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_real_conne
 							mysqlnd_end_psession(mysql->mysql);
 #endif	
 							/* reset variables */
-							/* todo: option for ping or change_user */
 
-#if G0
+#ifndef MYSQLI_NO_CHANGE_USER_ON_PCONNECT
 							if (!mysql_change_user(mysql->mysql, username, passwd, dbname)) {
 #else
 							if (!mysql_ping(mysql->mysql)) {

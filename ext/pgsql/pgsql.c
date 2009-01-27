@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.35 2009/01/27 14:40:13 felipe Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.36 2009/01/27 14:44:07 felipe Exp $ */
 
 #include <stdlib.h>
 
@@ -1735,7 +1735,7 @@ PHP_FUNCTION(pg_field_table)
 	char *table_name;
 	zend_rsrc_list_entry *field_table;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl|b!", &result, &fnum, &return_oid) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl|b", &result, &fnum, &return_oid) == FAILURE) {
 		return;
 	}
 

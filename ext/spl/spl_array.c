@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.37 2008/12/31 11:15:43 sebastian Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.38 2009/01/27 14:50:27 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1725,7 +1725,7 @@ int spl_array_unserialize(zval **object, zend_class_entry *ce, const unsigned ch
 		zval *zdata;
 		php_unserialize_data_t *before;
 		MAKE_STD_ZVAL(zdata);
-		ZVAL_STRINGL(zdata, buf, buf_len, 1);
+		ZVAL_STRINGL(zdata, (char *)buf, buf_len, 1);
 
 		before = intern->unserialize_data;
 		intern->unserialize_data = (php_unserialize_data_t *)data;

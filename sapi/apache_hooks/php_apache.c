@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.19.2.3.2.5.2.10 2009/01/05 16:24:26 iliaa Exp $ */
+/* $Id: php_apache.c,v 1.19.2.3.2.5.2.11 2009/01/27 21:59:30 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -222,7 +222,7 @@ static void apache_request_string_slot(int offset, INTERNAL_FUNCTION_PARAMETERS)
 {
 	zval *id;
 	request_rec *r;
-	char *old_value, *new_value;
+	char *old_value, *new_value = NULL;
 	int new_value_len;
 	char **target;
 
@@ -235,19 +235,13 @@ static void apache_request_string_slot(int offset, INTERNAL_FUNCTION_PARAMETERS)
 	target = (char **)((char*)r + offset);
 	old_value = *target;
 
-	switch (ZEND_NUM_ARGS()) {
-		case 0:
-			break;
-		case 1:
-			*target = ap_pstrdup(r->pool, new_value);
-			break;
-		default:
-			WRONG_PARAM_COUNT;
-			break;
+	if (new_value) {
+		*target = ap_pstrdup(r->pool, new_value);
 	}
 
-	if (old_value)
+	if (old_value) {
 		RETURN_STRING(old_value, 1);
+	}
 
 	RETURN_EMPTY_STRING();
 }

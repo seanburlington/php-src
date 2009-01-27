@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.12 2008/12/31 11:17:46 sebastian Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.13 2009/01/27 15:02:43 felipe Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -658,7 +658,7 @@ PHP_FUNCTION(xmlrpc_encode_request)
 		}
 	}
 	
-	if (out.xmlrpc_out.xml_elem_opts.encoding != ENCODING_DEFAULT) {
+	if (strcmp(out.xmlrpc_out.xml_elem_opts.encoding, ENCODING_DEFAULT) != 0) {
 		efree((char *)out.xmlrpc_out.xml_elem_opts.encoding);
 	}
 }

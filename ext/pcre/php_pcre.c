@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.245 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.246 2009/01/28 22:40:34 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1856,6 +1856,7 @@ static PHP_FUNCTION(preg_quote)
 			case '<':
 			case '|':
 			case ':':
+			case '-':
 				*q++ = '\\';
 				*q++ = c;
 				break;

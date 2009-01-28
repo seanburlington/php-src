@@ -16,14 +16,16 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.18 2009/01/13 13:30:04 pajoye Exp $
+  $Id: enchant.c,v 1.19 2009/01/28 22:43:25 felipe Exp $
 */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#if PHP_WIN32
 #include <glib/glist.h>
 #include <glib/ghash.h>
+#endif
 #include <enchant.h>
 #include "php.h"
 #include "php_ini.h"
@@ -261,7 +263,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_ENCHANT_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();
@@ -435,7 +437,7 @@ PHP_FUNCTION(enchant_broker_request_pwl_dict)
 		RETURN_FALSE;
 	}
 
-	if ((PG(safe_mode) && (!php_checkuid(pwl, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(pwl TSRMLS_CC)) {
+	if (php_check_open_basedir(pwl TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

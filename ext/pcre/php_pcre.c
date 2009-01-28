@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.29 2008/12/31 11:15:40 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.30 2009/01/28 22:39:30 nlopess Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1661,6 +1661,7 @@ static PHP_FUNCTION(preg_quote)
 			case '<':
 			case '|':
 			case ':':
+			case '-':
 				*q++ = '\\';
 				*q++ = c;
 				break;

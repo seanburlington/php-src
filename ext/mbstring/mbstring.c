@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.42 2008/12/31 11:17:39 sebastian Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.43 2009/01/29 22:58:52 scottmac Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2666,6 +2666,7 @@ PHP_FUNCTION(mb_detect_encoding)
 			if (!php_mb_parse_encoding_array(*arg_list, &list, &size, 0 TSRMLS_CC)) {
 				if (list) {
 					efree(list);
+					list = NULL;
 					size = 0;
 				}
 			}
@@ -2675,6 +2676,7 @@ PHP_FUNCTION(mb_detect_encoding)
 			if (!php_mb_parse_encoding_list(Z_STRVAL_PP(arg_list), Z_STRLEN_PP(arg_list), &list, &size, 0 TSRMLS_CC)) {
 				if (list) {
 					efree(list);
+					list = NULL;
 					size = 0;
 				}
 			}

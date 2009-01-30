@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.20 2009/01/29 00:36:25 felipe Exp $
+  $Id: enchant.c,v 1.21 2009/01/30 00:16:12 felipe Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -309,7 +309,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_ENCHANT_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.20 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.21 $");
 	php_info_print_table_end();
 
 	php_info_print_table_start();

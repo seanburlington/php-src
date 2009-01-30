@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Pierre-Alain Joye <paj@pearfr.org>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_enchant.h,v 1.2 2004/03/09 00:31:17 iliaa Exp $
+  $Id: php_enchant.h,v 1.4.2.1 2009/01/30 00:16:32 felipe Exp $
 */
 
 #ifndef PHP_ENCHANT_H
@@ -23,6 +23,8 @@
 
 extern zend_module_entry enchant_module_entry;
 #define phpext_enchant_ptr &enchant_module_entry
+
+#define PHP_ENCHANT_VERSION "1.0.2-dev"
 
 #ifdef PHP_WIN32
 #define PHP_ENCHANT_API __declspec(dllexport)
@@ -44,6 +46,7 @@ PHP_MINFO_FUNCTION(enchant);
 PHP_FUNCTION(enchant_broker_init);
 PHP_FUNCTION(enchant_broker_free);
 PHP_FUNCTION(enchant_broker_get_error);
+PHP_FUNCTION(enchant_broker_list_dicts);
 PHP_FUNCTION(enchant_broker_request_dict);
 PHP_FUNCTION(enchant_broker_request_pwl_dict);
 PHP_FUNCTION(enchant_broker_free_dict);

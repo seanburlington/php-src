@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.406 2009/01/19 16:35:40 tabe Exp $ */
+/* $Id: gd.c,v 1.407 2009/01/31 15:27:11 kalle Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -814,6 +814,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_imagefilter, 0, 0, 2)
 	ZEND_ARG_INFO(0, arg1)
 	ZEND_ARG_INFO(0, arg2)
 	ZEND_ARG_INFO(0, arg3)
+	ZEND_ARG_INFO(0, arg4)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO(arginfo_imageconvolution, 0)

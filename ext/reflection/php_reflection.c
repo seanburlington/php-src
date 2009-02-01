@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.52 2009/01/26 22:54:33 cseiler Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.53 2009/02/01 15:06:19 cseiler Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2077,6 +2077,9 @@ ZEND_METHOD(reflection_parameter, __construct)
 				}
 				efree(fptr);
 			}
+			if (is_closure) {
+				zval_ptr_dtor(&reference);
+			}
 			_DO_THROW("The parameter specified by its offset could not be found");
 			/* returns out of this function */
 		}
@@ -2097,6 +2100,9 @@ ZEND_METHOD(reflection_parameter, __construct)
 					efree(fptr->common.function_name);
 				}
 				efree(fptr);
+			}
+			if (is_closure) {
+				zval_ptr_dtor(&reference);
 			}
 			_DO_THROW("The parameter specified by its name could not be found");
 			/* returns out of this function */
@@ -5429,7 +5435,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.52 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.53 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5443,7 +5449,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.164.2.33.2.45.2.52 $",
+	"$Revision: 1.164.2.33.2.45.2.53 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.19.2.3.2.5.2.12 2009/01/30 14:38:12 felipe Exp $ */
+/* $Id: php_apache.c,v 1.19.2.3.2.5.2.13 2009/02/02 08:47:23 pajoye Exp $ */
 
 #include "php_apache_http.h"
 
@@ -91,7 +91,7 @@ const zend_function_entry apache_functions[] = {
 	PHP_FE(apache_response_headers,					arginfo_apachehooks__void)
 	PHP_FE(apache_get_version,						arginfo_apachehooks__void)
 	PHP_FE(apache_get_modules,						arginfo_apachehooks__void)
-	PHP_FALIAS(getallheaders, apache_request_headers, arginfo_apachehooks_request_headers)
+	PHP_FALIAS(getallheaders, apache_request_headers, arginfo_apachehooks__void)
 	{NULL, NULL, NULL}
 };
 

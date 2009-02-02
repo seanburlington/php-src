@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.10 2009/01/23 15:49:49 kalle Exp $
+	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.11 2009/02/02 09:40:55 pajoye Exp $
 */
 
 /* Define the minimum supported version */
@@ -149,6 +149,7 @@
 
 /* Win32 supports socketpair by the emulation in win32/sockets.c */
 #define HAVE_SOCKETPAIR 1
+#define HAVE_SOCKLEN_T 1
 
 /* Win32 support proc_open */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1

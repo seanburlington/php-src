@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.209 2009/01/24 13:09:13 tony2001 Exp $ */
+/* $Id: sockets.c,v 1.210 2009/02/03 19:23:12 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1036,6 +1036,9 @@ PHP_FUNCTION(socket_read)
 
 		efree(tmpbuf);
 		RETURN_FALSE;
+	} else if (!retval) {
+		efree(tmpbuf);
+		RETURN_EMPTY_STRING();
 	}
 
 	tmpbuf = erealloc(tmpbuf, retval + 1);

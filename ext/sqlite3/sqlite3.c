@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.33 2009/01/24 13:08:35 tony2001 Exp $ */
+/* $Id: sqlite3.c,v 1.34 2009/02/04 09:58:39 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1038,7 +1038,7 @@ static int php_sqlite3_stream_stat(php_stream *stream, php_stream_statbuf *ssb T
 	return -1;
 }
 
-PHPAPI php_stream_ops	php_stream_sqlite3_ops = {
+static php_stream_ops	php_stream_sqlite3_ops = {
 	php_sqlite3_stream_write,
 	php_sqlite3_stream_read,
 	php_sqlite3_stream_close,

@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.121 2009/02/01 21:52:32 dsp Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.122 2009/02/04 15:03:11 iliaa Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -579,6 +579,7 @@ strcoll \
 strdup \
 strerror \
 strftime \
+strnlen \
 strptime \
 strstr \
 strtok_r \

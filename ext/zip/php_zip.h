@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.h,v 1.10.2.8 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_zip.h,v 1.10.2.9 2009/02/05 19:53:22 pajoye Exp $ */
 
 #ifndef PHP_ZIP_H
 #define PHP_ZIP_H
@@ -24,9 +24,7 @@
 extern zend_module_entry zip_module_entry;
 #define phpext_zip_ptr &zip_module_entry
 
-#ifdef ZTS
 #include "TSRM.h"
-#endif
 
 #include "lib/zip.h"
 

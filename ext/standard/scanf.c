@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.31.2.2.2.5.2.4 2009/01/19 09:52:24 tony2001 Exp $ */
+/* $Id: scanf.c,v 1.31.2.2.2.5.2.5 2009/02/06 10:20:09 felipe Exp $ */
 
 /*
 	scanf.c --
@@ -1078,7 +1078,7 @@ addToInt:
 						} else if (numVars) {
 							current = args[objIndex++];
 							zval_dtor(*current);
-							Z_LVAL(**current) = value;
+							ZVAL_LONG(*current, value);
 						} else {
 							add_index_long(*return_value, objIndex++, value);
 						}
@@ -1183,7 +1183,7 @@ addToFloat:
 					} else if (numVars) {
 						current = args[objIndex++];
 						zval_dtor(*current);
-						Z_DVAL_PP( current ) = dvalue;
+						ZVAL_DOUBLE(*current, dvalue);
 					} else {
 						add_index_double( *return_value, objIndex++, dvalue );
 					}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.25 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: firebird_statement.c,v 1.26 2009/02/09 12:07:10 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -466,6 +466,9 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 		case PDO_PARAM_EVT_ALLOC:
 			if (param->is_param) {
 				/* allocate the parameter */
+				if (var->sqlind) {
+					efree(var->sqlind);
+				}
 				var->sqlind = (void*)emalloc(var->sqllen + 2*sizeof(short));
 				var->sqldata = &((char*)var->sqlind)[sizeof(short)];
 			}

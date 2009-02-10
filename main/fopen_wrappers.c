@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.211 2009/02/10 14:22:19 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.212 2009/02/10 16:14:35 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -636,7 +636,7 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 			*end = '\0';
 			end++;
 		}
-		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) > MAXPATHLEN) {
+		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) >= MAXPATHLEN) {
 			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
 		}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.98 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: plain_wrapper.c,v 1.99 2009/02/10 14:22:19 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1289,7 +1289,9 @@ not_relative_path:
 		/* getcwd() will return always return [DRIVE_LETTER]:/) on windows. */
 		*(cwd+3) = '\0';
 	
-		snprintf(trypath, MAXPATHLEN, "%s%s", cwd, filename);
+		if (snprintf(trypath, MAXPATHLEN, "%s%s", cwd, filename) > MAXPATHLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", cwd, filename, MAXPATHLEN);
+		}
 		
 		free(cwd);
 		
@@ -1341,7 +1343,9 @@ not_relative_path:
 		if (*ptr == '\0') {
 			goto stream_skip;
 		}
-		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
+		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) > MAXPATHLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
+		}
 
 		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir_ex(trypath, 0 TSRMLS_CC)) {
 			goto stream_skip;

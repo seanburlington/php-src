@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.175.2.3.2.21 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: fopen_wrappers.c,v 1.175.2.3.2.22 2009/02/10 14:18:29 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -528,7 +528,9 @@ PHPAPI FILE *php_fopen_with_path(const char *filename, const char *mode, const c
 			*end = '\0';
 			end++;
 		}
-		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
+		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) > MAXPATHLEN) {
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
+		}
 		if (PG(safe_mode)) {
 			if (VCWD_STAT(trypath, &sb) == 0) {
 				/* file exists ... check permission */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52.2.6.2.30 2009/02/10 14:18:29 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.6.2.31 2009/02/10 14:21:10 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1388,7 +1388,7 @@ not_relative_path:
 			goto stream_skip;
 		}
 		if (snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename) > MAXPATHLEN) {
-			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %file", ptr, filename, MAXPATHLEN);
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s/%s path was truncated to %d", ptr, filename, MAXPATHLEN);
 		}
 
 		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir_ex(trypath, 0 TSRMLS_CC)) {

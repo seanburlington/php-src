@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.63 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.64 2009/02/12 18:30:31 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2839,7 +2839,7 @@ PHP_FUNCTION(array_unique)
 	};
 	struct bucketindex *arTmp, *cmpdata, *lastkept;
 	unsigned int i;
-	long sort_type = SORT_REGULAR;
+	long sort_type = SORT_STRING;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|l", &array, &sort_type) == FAILURE) {
 		return;

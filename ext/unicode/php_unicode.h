@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.16 2008/01/30 09:56:22 dmitry Exp $ */ 
+/* $Id: php_unicode.h,v 1.17 2009/02/12 20:04:59 moriyoshi Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -31,6 +31,8 @@ extern "C" {
 
 #include <php_ini.h>
 #include <SAPI.h>
+#include <unicode/uchar.h>
+#include <unicode/utrans.h>
 #include <ext/standard/info.h>
 
 extern zend_module_entry unicode_module_entry;

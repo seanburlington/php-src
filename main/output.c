@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167.2.3.2.4.2.11 2009/01/07 18:34:18 felipe Exp $ */
+/* $Id: output.c,v 1.167.2.3.2.4.2.12 2009/02/13 11:48:17 davidc Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -771,6 +771,11 @@ PHP_FUNCTION(ob_flush)
 
 	if (!OG(ob_nesting_level)) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to flush buffer. No buffer to flush.");
+		RETURN_FALSE;
+	}
+	
+	if (!OG(active_ob_buffer).status && !OG(active_ob_buffer).erase) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to flush buffer %s.", OG(active_ob_buffer).handler_name);
 		RETURN_FALSE;
 	}
 	

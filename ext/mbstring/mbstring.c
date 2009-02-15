@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.25.2.48 2009/02/14 07:34:15 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.25.2.49 2009/02/15 07:11:04 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2385,7 +2385,7 @@ PHP_FUNCTION(mb_stripos)
 		RETURN_FALSE;
 	}
 	if (needle.len == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter");
 		RETURN_FALSE;
 	}
 	n = php_mb_stripos(0, (char *)haystack.val, haystack.len, (char *)needle.val, needle.len, offset, from_encoding TSRMLS_CC);
@@ -2454,7 +2454,7 @@ PHP_FUNCTION(mb_strstr)
 	}
 
 	if (needle.len <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty delimiter.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter");
 		RETURN_FALSE;
 	}
 	n = mbfl_strpos(&haystack, &needle, 0, 0);
@@ -2564,7 +2564,7 @@ PHP_FUNCTION(mb_stristr)
 	}
 
 	if (!needle.len) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty delimiter.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter");
 		RETURN_FALSE;
 	}
 
@@ -2683,7 +2683,7 @@ PHP_FUNCTION(mb_substr_count)
 	}
 
 	if (needle.len <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING,"Empty substring.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty substring");
 		RETURN_FALSE;
 	}
 

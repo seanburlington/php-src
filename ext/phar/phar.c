@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.56 2009/01/02 20:43:41 iliaa Exp $ */
+/* $Id: phar.c,v 1.370.2.57 2009/02/15 20:29:13 cellog Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -510,12 +510,19 @@ void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC) /* {{{ */
 	var = ((((unsigned char*)(buffer))[1]) <<  8) \
 		| (((unsigned char*)(buffer))[0]); \
 	(buffer) += 2
-# define PHAR_ZIP_32(buffer) ((((unsigned char*)(buffer))[3]) << 24) \
-		| ((((unsigned char*)(buffer))[2]) << 16) \
-		| ((((unsigned char*)(buffer))[1]) <<  8) \
-		| (((unsigned char*)(buffer))[0])
-# define PHAR_ZIP_16(buffer) ((((unsigned char*)(buffer))[1]) <<  8) \
-		| (((unsigned char*)(buffer))[0])
+static inline php_uint32 phar_fix_32(php_uint32 buffer)
+{
+	return ((((unsigned char *)&buffer)[3]) << 24) |
+		((((unsigned char *)&buffer)[2]) << 16) |
+		((((unsigned char *)&buffer)[1]) << 8) |
+		(((unsigned char *)&buffer)[0]);
+}
+static inline php_uint16 phar_fix_16(php_uint16 buffer)
+{
+	return ((((unsigned char *)&buffer)[1]) << 8) | ((unsigned char *)&buffer)[0];
+}
+# define PHAR_ZIP_32(buffer) phar_fix_32((php_uint32)(buffer))
+# define PHAR_ZIP_16(buffer) phar_fix_16((php_uint16)(buffer))
 #else
 # define PHAR_GET_32(buffer, var) \
 	var = *(php_uint32*)(buffer); \
@@ -3626,7 +3633,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.56 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.57 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

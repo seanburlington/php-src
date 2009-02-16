@@ -1,15 +1,10 @@
-dnl $Id: config.m4,v 1.27.2.12 2009/02/15 18:53:22 cellog Exp $
+dnl $Id: config.m4,v 1.27.2.13 2009/02/16 16:41:40 cellog Exp $
 dnl config.m4 for extension phar
 
 PHP_ARG_ENABLE(phar, for phar archive support,
 [  --disable-phar          Disable phar support], yes)
 
 if test "$PHP_PHAR" != "no"; then
-  PHP_C_BIGENDIAN
-  if test $ac_cv_c_bigendian_php = yes; then
-    AC_MSG_WARN([Disabling Phar due to crash bugs on big endian systems])
-    PHP_PHAR=no
-  else
   PHP_NEW_EXTENSION(phar, util.c tar.c zip.c stream.c func_interceptors.c dirstream.c phar.c phar_object.c phar_path_check.c, $ext_shared)
   AC_MSG_CHECKING([for phar openssl support])
   if test "$PHP_HASH_SHARED" != "yes"; then
@@ -32,5 +27,4 @@ if test "$PHP_PHAR" != "no"; then
   PHP_ADD_EXTENSION_DEP(phar, hash, true)
   PHP_ADD_EXTENSION_DEP(phar, spl, true)
   PHP_ADD_MAKEFILE_FRAGMENT
-  fi
 fi

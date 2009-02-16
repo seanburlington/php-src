@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps_codec.c,v 1.14 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: mysqlnd_ps_codec.c,v 1.15 2009/02/16 17:25:37 johannes Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -433,8 +433,8 @@ void ps_fetch_bit(zval *zv, const MYSQLND_FIELD * const field,
 /* }}} */
 
 
-/* {{{ _mysqlnd_init_ps_subsystem */
-void _mysqlnd_init_ps_subsystem()
+/* {{{ _mysqlnd_init_ps_fetch_subsystem */
+void _mysqlnd_init_ps_fetch_subsystem()
 {
 	memset(mysqlnd_ps_fetch_functions, 0, sizeof(mysqlnd_ps_fetch_functions));
 	mysqlnd_ps_fetch_functions[MYSQL_TYPE_NULL].func		= ps_fetch_null;

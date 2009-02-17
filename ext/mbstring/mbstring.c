@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.22.2.25.2.49 2009/02/15 07:11:04 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.224.2.22.2.25.2.50 2009/02/17 16:29:59 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -4314,6 +4314,9 @@ PHP_FUNCTION(mb_get_info)
 		if ((name = (char *)mbfl_no_encoding2name(MBSTRG(current_http_output_encoding))) != NULL) {
 			add_assoc_string(return_value, "http_output", name, 1);
 		}
+		if ((name = (char *)zend_ini_string("mbstring.http_output_conv_mimetypes", sizeof("mbstring.http_output_conv_mimetypes"), 0)) != NULL) {
+			add_assoc_string(return_value, "http_output_conv_mimetypes", name, 1);
+		}
 		add_assoc_long(return_value, "func_overload", MBSTRG(func_overload));
 		if (MBSTRG(func_overload)){
 			over_func = &(mb_ovld[0]);
@@ -4405,6 +4408,10 @@ PHP_FUNCTION(mb_get_info)
 		if ((name = (char *)mbfl_no_encoding2name(MBSTRG(current_http_output_encoding))) != NULL) {
 			RETVAL_STRING(name, 1);
 		}		
+	} else if (!strcasecmp("http_output_conv_mimetypes", typ)) {
+		if ((name = (char *)zend_ini_string("mbstring.http_output_conv_mimetypes", sizeof("mbstring.http_output_conv_mimetypes"), 0)) != NULL) {
+			RETVAL_STRING(name, 1);
+		}
 	} else if (!strcasecmp("func_overload", typ)) {
  		RETVAL_LONG(MBSTRG(func_overload));
 	} else if (!strcasecmp("func_overload_list", typ)) {

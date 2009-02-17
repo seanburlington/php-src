@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.72.2.16.2.27 2008/12/31 11:17:40 sebastian Exp $ 
+  $Id: mysqli.c,v 1.72.2.16.2.28 2009/02/17 10:40:18 johannes Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -254,13 +254,6 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	}
 
 	if (ret == SUCCESS) {
-		if (strcmp(obj->zo.ce->name, "mysqli_driver") &&
-            (!obj->ptr || ((MYSQLI_RESOURCE *)(obj->ptr))->status < MYSQLI_STATUS_INITIALIZED)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", obj->zo.ce->name );
-			retval = EG(uninitialized_zval_ptr);
-			return(retval);
-		}
-
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */

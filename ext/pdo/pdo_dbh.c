@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.161 2009/02/13 12:54:20 felipe Exp $ */
+/* $Id: pdo_dbh.c,v 1.162 2009/02/17 14:39:58 johannes Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1366,7 +1366,7 @@ static union _zend_function *dbh_method_get(
 
 out:
 	if (std_object_handlers.get_method) {
-		fbc = std_object_handlers.get_method(object_pp, lc_method_name, method_len TSRMLS_CC);
+		fbc = std_object_handlers.get_method(object_pp, method_name, method_len TSRMLS_CC);
 	}
 
 	pdo_zstr_efree(lc_method_name);

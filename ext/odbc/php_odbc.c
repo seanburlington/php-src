@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.215 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: php_odbc.c,v 1.216 2009/02/17 12:03:43 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -121,7 +121,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_odbc_fetch_into, 0, 0, 2)
 	ZEND_ARG_INFO(0, result_id)
-	ZEND_ARG_INFO(0, result_array)
+	ZEND_ARG_INFO(1, result_array)
 	ZEND_ARG_INFO(0, rownumber)
 ZEND_END_ARG_INFO()
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.216 2009/02/17 12:03:43 felipe Exp $ */
+/* $Id: php_odbc.c,v 1.217 2009/02/17 12:32:06 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1763,7 +1763,7 @@ PHP_FUNCTION(odbc_fetch_array)
 /* }}} */
 #endif
 
-/* {{{ proto int odbc_fetch_into(resource result_id, array result_array, [, int rownumber])
+/* {{{ proto int odbc_fetch_into(resource result_id, array &result_array, [, int rownumber])
    Fetch one result row into an array */ 
 PHP_FUNCTION(odbc_fetch_into)
 {

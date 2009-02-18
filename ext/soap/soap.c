@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.259 2009/02/02 09:59:49 felipe Exp $ */
+/* $Id: soap.c,v 1.260 2009/02/18 13:25:59 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4821,7 +4821,17 @@ static xmlDocPtr serialize_function_call(zval *this_ptr, sdlFunctionPtr function
 		/*style = SOAP_RPC;*/
 		if (style == SOAP_RPC) {
 			ns = encode_add_ns(body, uri);
-			method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);
+			if (function_name) {
+				method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);
+			} else if (function && function->requestName) {
+				method = xmlNewChild(body, ns, BAD_CAST(function->requestName), NULL);
+			} else if (function && function->functionName) {
+				method = xmlNewChild(body, ns, BAD_CAST(function->functionName), NULL);
+			} else {
+				method = body;
+			}
+		} else {
+			method = body;
 		}
 
 		if (client->use == SOAP_LITERAL) {

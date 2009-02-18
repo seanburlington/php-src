@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.216 2008/12/31 11:12:38 sebastian Exp $ */
+/* $Id: output.c,v 1.217 2009/02/18 16:42:52 robinf Exp $ */
 
 #ifndef PHP_OUTPUT_DEBUG
 #	define PHP_OUTPUT_DEBUG 0
@@ -1342,8 +1342,6 @@ PHP_FUNCTION(ob_start)
 	}
 	if (chunk_size < 0) {
 		chunk_size = 0;
-	} else if (chunk_size == 1) {
-		chunk_size = 4096;
 	}
 	
 	if (SUCCESS != php_output_start_user(output_handler, chunk_size, flags TSRMLS_CC)) {

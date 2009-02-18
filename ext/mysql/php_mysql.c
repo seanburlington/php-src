@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.34 2008/12/31 11:15:38 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.35 2009/02/18 16:34:47 johannes Exp $ */
 
 /* TODO:
  *
@@ -2318,7 +2318,7 @@ PHP_FUNCTION(mysql_fetch_field)
 	
 	ZEND_FETCH_RESOURCE(mysql_result, MYSQL_RES *, &result, -1, "MySQL result", le_result);
 
-	if (field) {
+	if (ZEND_NUM_ARGS() > 1) {
 		if (field<0 || field>=(int)mysql_num_fields(mysql_result)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Bad field offset");
 			RETURN_FALSE;

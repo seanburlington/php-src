@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.32 2009/02/02 23:51:19 iliaa Exp $ */
+/* $Id: logical_filters.c,v 1.33 2009/02/23 16:52:45 iliaa Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -658,6 +658,12 @@ void php_filter_validate_ip(PHP_INPUT_FILTER_PARAM_DECL) /* {{{ */
 				res = _php_filter_validate_ipv6(Z_STRVAL_P(value), Z_STRLEN_P(value) TSRMLS_CC);
 				if (res < 1) {
 					RETURN_VALIDATION_FAILED
+				}
+				/* Check flags */
+				if (flags & FILTER_FLAG_NO_PRIV_RANGE) {
+					if (Z_STRLEN_P(value) >=2 && (!strncasecmp("FC", Z_STRVAL_P(value), 2) || !strncasecmp("FD", Z_STRVAL_P(value), 2))) {
+						RETURN_VALIDATION_FAILED
+					}
 				}
 			}
 			break;

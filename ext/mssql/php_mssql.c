@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.13.2.11 2008/12/31 11:17:40 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.13.2.12 2009/02/23 21:21:23 kalle Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2158,11 +2158,12 @@ PHP_FUNCTION(mssql_execute)
 	int num_fields;
 	int batchsize;
 	int ac = ZEND_NUM_ARGS();
+	int exec_retval;
 
 	batchsize = MS_SQL_G(batchsize);
 	if (ac < 1 || ac > 2 || zend_get_parameters_ex(ac, &stmt, &skip)==FAILURE) {
-        WRONG_PARAM_COUNT;
-    }
+		WRONG_PARAM_COUNT;
+	}
 	if (ac == 2) {
 		skip_results = Z_BVAL_PP(skip);
 	}
@@ -2170,10 +2171,15 @@ PHP_FUNCTION(mssql_execute)
 	ZEND_FETCH_RESOURCE(statement, mssql_statement *, stmt, -1, "MS SQL-Statement", le_statement);
 
 	mssql_ptr=statement->link;
+	exec_retval = dbrpcexec(mssql_ptr->link);
 
-	if (dbrpcexec(mssql_ptr->link)==FAIL || dbsqlok(mssql_ptr->link)==FAIL) {
+	if (exec_retval == FAIL || dbsqlok(mssql_ptr->link) == FAIL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "stored procedure execution failed");
-		dbcancel(mssql_ptr->link);
+
+		if (exec_retval == FAIL) {
+			dbcancel(mssql_ptr->link);
+		}
+
 		RETURN_FALSE;
 	}
 

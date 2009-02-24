@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zip.c,v 1.1.2.38.2.28 2009/02/22 17:54:50 iliaa Exp $ */
+/* $Id: php_zip.c,v 1.1.2.38.2.29 2009/02/24 23:55:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -780,6 +780,7 @@ static int php_zip_property_reader(ze_zip_object *obj, zip_prop_handler *hnd, zv
 			} else {
 				if (hnd->read_const_char_from_obj_func) {
 					retchar = hnd->read_const_char_from_obj_func(obj TSRMLS_CC);
+					len = strlen(retchar);
 				}
 			}
 		}
@@ -2673,7 +2674,7 @@ static PHP_MINFO_FUNCTION(zip)
 	php_info_print_table_start();
 
 	php_info_print_table_row(2, "Zip", "enabled");
-	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.28 2009/02/22 17:54:50 iliaa Exp $");
+	php_info_print_table_row(2, "Extension Version","$Id: php_zip.c,v 1.1.2.38.2.29 2009/02/24 23:55:14 iliaa Exp $");
 	php_info_print_table_row(2, "Zip version", PHP_ZIP_VERSION_STRING);
 	php_info_print_table_row(2, "Libzip version", "0.9.0");
 

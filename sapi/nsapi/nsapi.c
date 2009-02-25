@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.69.2.3.2.16 2009/01/06 13:46:49 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.69.2.3.2.17 2009/02/25 19:52:06 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -294,7 +294,7 @@ PHP_MSHUTDOWN_FUNCTION(nsapi)
 PHP_MINFO_FUNCTION(nsapi)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.16 $");
+	php_info_print_table_row(2, "NSAPI Module Revision", "$Revision: 1.69.2.3.2.17 $");
 	php_info_print_table_row(2, "Server Software", system_version());
 	php_info_print_table_row(2, "Sub-requests with nsapi_virtual()",
 	 (nsapi_servact_service)?((zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0))?"not supported with zlib.output_compression":"enabled"):"not supported on this platform" );
@@ -473,7 +473,7 @@ static int sapi_nsapi_header_handler(sapi_header_struct *sapi_header, sapi_heade
 	char *header_name, *header_content, *p;
 	nsapi_request_context *rc = (nsapi_request_context *)SG(server_context);
 
-	header_name = sapi_header->header;
+	header_name = nsapi_strdup(sapi_header->header);
 	header_content = p = strchr(header_name, ':');
 	if (p == NULL) {
 		efree(sapi_header->header);
@@ -497,9 +497,9 @@ static int sapi_nsapi_header_handler(sapi_header_struct *sapi_header, sapi_heade
 		pblock_nvinsert(header_name, header_content, rc->rq->srvhdrs);
 	}
 
-	sapi_free_header(sapi_header);
+	nsapi_free(header_name);
 
-	return 0;	/* don't use the default SAPI mechanism, NSAPI duplicates this functionality */
+	return SAPI_HEADER_ADD;
 }
 
 static int sapi_nsapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)

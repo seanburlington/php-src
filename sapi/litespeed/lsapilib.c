@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lsapilib.c,v 1.5.2.5 2008/09/21 02:38:32 gwang Exp $ */
+/* $Id: lsapilib.c,v 1.5.2.6 2009/02/27 23:33:01 gwang Exp $ */
 
 /*
 Copyright (c) 2007, Lite Speed Technologies Inc.
@@ -581,6 +581,9 @@ int LSAPI_Init(void)
 #if defined(SIGXFSZ) && defined(SIG_IGN)
         signal(SIGXFSZ, SIG_IGN);
 #endif
+        /* let STDOUT function as STDERR, 
+           just in case writing to STDOUT directly */
+        dup2( 2, 1 );
 
         if ( LSAPI_InitRequest( &g_req, LSAPI_SOCK_FILENO ) == -1 ) {
             return -1;

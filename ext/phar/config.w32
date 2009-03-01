@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.31 2009/03/01 07:07:14 cellog Exp $
+// $Id: config.w32,v 1.32 2009/03/01 07:25:24 cellog Exp $
 // vim:ft=javascript
 
-ARG_ENABLE("phar", "disable phar support", "yes");
+ARG_ENABLE("phar", "enable phar support", "no");
 ARG_ENABLE("phar-native-ssl", "enable phar with native OpenSSL support", "no");
 
 if (PHP_PHAR_NATIVE_SSL != "no") {

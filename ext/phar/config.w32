@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.27.2.8 2008/09/01 16:32:55 sfox Exp $
+// $Id: config.w32,v 1.27.2.9 2009/03/01 07:07:05 cellog Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "disable phar support", "yes");
@@ -33,6 +33,13 @@ if (PHP_PHAR != "no") {
 			STDOUT.WriteLine('        Native OpenSSL support in Phar enabled');
 		} else {
 			STDOUT.WriteLine('        Native OpenSSL support in Phar disabled');
+		}
+	}
+	if (PHP_HASH != "no") {
+		if (PHP_HASH_SHARED == "no") {
+			AC_DEFINE("PHAR_HASH_OK", 1);
+		} else {
+			WARNING('Phar: sha256/sha512 signature support disabled if ext/hash is built shared');
 		}
 	}
 	ADD_EXTENSION_DEP('phar', 'spl', true);

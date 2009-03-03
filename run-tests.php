@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.390 2009/01/05 11:14:37 tony2001 Exp $ */
+/* $Id: run-tests.php,v 1.391 2009/03/03 10:52:56 zoe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.390 $' . "\n";
+					echo '$Revision: 1.391 $' . "\n";
 					exit(1);
 
 				default:
@@ -1737,7 +1737,32 @@ COMMAND $cmd
 		$wanted_re = preg_replace('/\r\n/', "\n", $wanted);
 
 		if (isset($section_text['EXPECTF'])) {
-			$wanted_re = preg_quote($wanted_re, '/');
+			
+                // do preg_quote, but miss out any %r delimited sections
+                $temp = "";
+                $r = "%r";
+                $startOffset = 0;
+                $length = strlen($wanted_re);
+                while($startOffset < $length) {
+                  $start = strpos($wanted_re, $r, $startOffset);
+                  if ($start !== false) {
+                    // we have found a start tag
+                    $end = strpos($wanted_re, $r, $start+2);
+                    if ($end === false) {
+                      // unbalanced tag, ignore it.
+                      $end = $start = $length;
+                    }
+                  } else {
+                    // no more %r sections
+                    $start = $end = $length;
+                  }
+                  // quote a non re portion of the string
+                  $temp = $temp . preg_quote(substr($wanted_re, $startOffset, ($start - $startOffset)),  '/');
+                  // add the re unquoted.
+                  $temp = $temp . substr($wanted_re, $start+2, ($end - $start-2));
+                  $startOffset = $end + 2;
+                }
+                $wanted_re = $temp;
 			$wanted_re = str_replace(
 				array('%binary_string_optional%'),
 				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? 'string' : 'binary string',

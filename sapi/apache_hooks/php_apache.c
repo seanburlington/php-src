@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.19.2.3.2.5.2.13 2009/02/02 08:47:23 pajoye Exp $ */
+/* $Id: php_apache.c,v 1.19.2.3.2.5.2.14 2009/03/07 21:56:43 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -713,7 +713,7 @@ PHP_FUNCTION(apache_request_server_port)
 PHP_FUNCTION(apache_request_remote_host)
 {
 	zval *id;
-	long ztype;
+	long ztype = NULL;
 	request_rec *r;
 	char *res;
 	int type = REMOTE_NAME;
@@ -722,14 +722,9 @@ PHP_FUNCTION(apache_request_remote_host)
 		return;
 	}
 
-	switch (ZEND_NUM_ARGS()) {
-		case 0:
-			break;
-		case 1:
-			type = ztype;
-			break;
+	if (ztype) {
+		type = ztype;
 	}
-
 
 	APREQ_GET_REQUEST(id, r);
 

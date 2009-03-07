@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.43 2009/03/07 21:56:52 iliaa Exp $ */
+/* $Id: php_apache.c,v 1.44 2009/03/07 22:36:42 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -713,22 +713,21 @@ PHP_FUNCTION(apache_request_server_port)
 PHP_FUNCTION(apache_request_remote_host)
 {
 	zval *id;
-	long ztype = NULL;
+	long type = 0;
 	request_rec *r;
 	char *res;
-	int type = REMOTE_NAME;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &ztype) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &type) == FAILURE) {
 		return;
 	}
 
-	if (ztype) {
-		type = ztype;
+	if (!type) {
+		type = REMOTE_NAME
 	}
 
 	APREQ_GET_REQUEST(id, r);
 
-	res = (char *)ap_get_remote_host(r->connection, r->per_dir_config, type);
+	res = (char *)ap_get_remote_host(r->connection, r->per_dir_config, (int)type);
 
 	if (res) {
 		RETURN_STRING(res, 1);

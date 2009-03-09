@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.47 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: php_oci8_int.h,v 1.48 2009/03/09 20:07:39 sixd Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -329,7 +329,7 @@ typedef struct { /* php_oci_out_column {{{ */
 	} while (0)
 
 #define PHP_OCI_ZVAL_TO_CONNECTION(zval, connection) \
-	ZEND_FETCH_RESOURCE2(connection, php_oci_connection *, &zval, -1, "oci8 connection", le_connection, le_pconnection);
+	ZEND_FETCH_RESOURCE2(connection, php_oci_connection *, &zval, -1, "oci8 connection", le_connection, le_pconnection)
 
 #define PHP_OCI_ZVAL_TO_STATEMENT(zval, statement) \
 	ZEND_FETCH_RESOURCE(statement, php_oci_statement *, &zval, -1, "oci8 statement", le_statement)

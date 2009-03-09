@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.14.2.28.2.11 2008/12/31 11:15:39 sebastian Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.14.2.28.2.12 2009/03/09 20:58:51 sixd Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -883,7 +883,7 @@ int php_oci_bind_post_exec(void *data TSRMLS_DC)
 
 /* {{{ php_oci_bind_by_name()
  Bind zval to the given placeholder */
-int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len, zval* var, long maxlength, long type TSRMLS_DC)
+int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len, zval* var, long maxlength, ub2 type TSRMLS_DC)
 {
 	php_oci_collection *bind_collection = NULL;
 	php_oci_descriptor *bind_descriptor = NULL;
@@ -975,7 +975,7 @@ int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len,
 			break;
 
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %ld", type);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %d", (int)type);
 			return 1;
 			break;
 	}
@@ -1008,14 +1008,14 @@ int php_oci_bind_by_name(php_oci_statement *statement, char *name, int name_len,
 	PHP_OCI_CALL_RETURN(statement->errcode,
 		OCIBindByName,
 		(
-			statement->stmt,				/* statement handle */
-			(OCIBind **)&bindp->bind,		/* bind hdl (will alloc) */
-			statement->err,				  /* error handle */
+			statement->stmt,				 /* statement handle */
+			(OCIBind **)&bindp->bind,		 /* bind hdl (will alloc) */
+			statement->err,				  	 /* error handle */
 			(text*) name,					 /* placeholder name */					
 			name_len,						 /* placeholder length */
 			(dvoid *)bind_data,				 /* in/out data */
 			value_sz, /* PHP_OCI_MAX_DATA_SIZE, */ /* max size of input/output data */
-			(ub2)type,						 /* in/out data type */
+			type,							 /* in/out data type */
 			(dvoid *)&bindp->indicator,		 /* indicator (ignored) */
 			(ub2 *)0,						 /* size array (ignored) */
 			(ub2 *)&bindp->retcode,			 /* return code (ignored) */

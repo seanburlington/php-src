@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.360 2009/03/09 17:40:59 sixd Exp $ */
+/* $Id: oci8.c,v 1.361 2009/03/09 18:03:34 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -852,6 +852,22 @@ static void php_oci_init_global_handles(TSRMLS_D)
 		goto oci_error;
 	}
 
+#if !defined(OCI_MAJOR_VERSION) || (OCI_MAJOR_VERSION < 11)
+	/* This works around PECL bug #15988 (sqlnet.ora not being read).
+	 * The root cause was fixed in Oracle 10.2.0.4 but there is no
+	 * compile time method to check for that precise patch level, nor
+	 * can it be guaranteed that runtime will use the same patch level
+	 * the code was compiled with.  So, we do this code for all non
+	 * 11g versions.
+	 */
+	OCICPool *cpoolh;
+	ub4 cpoolmode = 0x80000000;	/* Pass invalid mode to OCIConnectionPoolCreate */
+	PHP_OCI_CALL(OCIHandleAlloc, (OCI_G(env), (dvoid **) &cpoolh, OCI_HTYPE_CPOOL, (size_t) 0, (dvoid **) 0));
+	PHP_OCI_CALL(OCIConnectionPoolCreate, (OCI_G(env), OCI_G(err), cpoolh, NULL, 0, NULL, 0, 0, 0, 0, NULL, 0, NULL, 0, cpoolmode));
+	PHP_OCI_CALL(OCIConnectionPoolDestroy, (cpoolh, OCI_G(err), OCI_DEFAULT));
+	PHP_OCI_CALL(OCIHandleFree, (cpoolh, OCI_HTYPE_CPOOL));
+#endif
+
 	return;
 
 oci_error:
@@ -1072,7 +1088,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.360 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.361 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

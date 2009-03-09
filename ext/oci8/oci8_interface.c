@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_interface.c,v 1.8.2.7.2.13.2.10 2009/02/05 21:43:31 sixd Exp $ */
+/* $Id: oci8_interface.c,v 1.8.2.7.2.13.2.11 2009/03/09 20:20:07 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1635,7 +1635,7 @@ go_out:
 	}
 
 	if (!errh) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIError: unable to find error handle");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Oci_error: unable to find error handle");
 		RETURN_FALSE;
 	}
 

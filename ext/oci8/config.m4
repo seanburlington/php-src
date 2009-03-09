@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.3.2.11.2.5 2008/06/05 23:43:10 sixd Exp $
+dnl $Id: config.m4,v 1.55.2.3.2.11.2.6 2009/03/09 17:42:22 sixd Exp $
 dnl
 
 if test -z "$SED"; then
@@ -169,6 +169,8 @@ fi
 
 if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
 
+dnl Using an ORACLE_HOME install
+
   AC_MSG_CHECKING([Oracle Install Directory])
   if test "$PHP_OCI8" = "yes"; then
     OCI8_DIR=$ORACLE_HOME
@@ -239,7 +241,13 @@ if test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" = "no"; then
   PHP_SUBST_OLD(OCI8_DIR)
   PHP_SUBST_OLD(OCI8_ORACLE_VERSION)
   
+dnl Fix bug #46623
+  AC_DEFINE_UNQUOTED(PHP_OCI8_DEF_DIR, "$OCI8_DIR", [ ])
+  AC_DEFINE_UNQUOTED(PHP_OCI8_DEF_SHARED_LIBADD, "$OCI8_SHARED_LIBADD", [ ])
+
 elif test "$PHP_OCI8" != "no" && test "$PHP_OCI8_INSTANT_CLIENT" != "no"; then
+
+dnl Using an Oracle Instant Client directory
 
   AC_CHECK_SIZEOF(long int, 4)
   LIBDIR_SUFFIX=""
@@ -315,5 +323,5 @@ dnl Header directory for manual installation
   PHP_SUBST_OLD(OCI8_SHARED_LIBADD)
   PHP_SUBST_OLD(OCI8_DIR)
   PHP_SUBST_OLD(OCI8_ORACLE_VERSION)
- 
+
 fi

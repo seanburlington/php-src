@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.16.2.38.2.27 2008/12/31 11:15:39 sebastian Exp $ */
+/* $Id: oci8.c,v 1.269.2.16.2.38.2.28 2009/03/09 17:42:22 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1159,8 +1159,6 @@ PHP_MINIT_FUNCTION(oci)
 	return SUCCESS;
 }
 
-/* ----------------------------------------------------------------- */
-
 PHP_RINIT_FUNCTION(oci)
 {
 	OCI_G(debug_mode) = 0; /* start "fresh" */
@@ -1185,8 +1183,6 @@ PHP_MSHUTDOWN_FUNCTION(oci)
 
 PHP_RSHUTDOWN_FUNCTION(oci)
 {
-	/* Set this to indicate request shutdown for all further processing */
-
 #ifdef ZTS
 	zend_hash_apply_with_argument(&EG(regular_list), (apply_func_arg_t) php_oci_list_helper, (void *)le_descriptor TSRMLS_CC);
 	zend_hash_apply_with_argument(&EG(regular_list), (apply_func_arg_t) php_oci_list_helper, (void *)le_collection TSRMLS_CC);
@@ -1218,7 +1214,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.27 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.16.2.38.2.28 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1229,17 +1225,15 @@ PHP_MINFO_FUNCTION(oci)
 #ifdef PHP_OCI8_ORACLE_VERSION
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_ORACLE_VERSION);
 #endif
-#ifdef PHP_OCI8_DIR
-	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR);
+#ifdef PHP_OCI8_DEF_DIR
+	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DEF_DIR);
 #endif
-#ifdef PHP_OCI8_SHARED_LIBADD
-	php_info_print_table_row(2, "Libraries Used", PHP_OCI8_SHARED_LIBADD);
+#ifdef PHP_OCI8_DEF_SHARED_LIBADD
+	php_info_print_table_row(2, "Libraries Used", PHP_OCI8_DEF_SHARED_LIBADD);
 #endif
-#else
-#if defined(HAVE_OCI_INSTANT_CLIENT) && defined(OCI_MAJOR_VERSION) && defined(OCI_MINOR_VERSION)
+#elif defined(HAVE_OCI_INSTANT_CLIENT) && defined(OCI_MAJOR_VERSION) && defined(OCI_MINOR_VERSION)
 	snprintf(buf, sizeof(buf), "%d.%d", OCI_MAJOR_VERSION, OCI_MINOR_VERSION);
 	php_info_print_table_row(2, "Oracle Instant Client Version", buf);
-#endif
 #endif
 
 	php_info_print_table_row(2, "Temporary Lob support", "enabled");

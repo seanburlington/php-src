@@ -1,6 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5                                                        |
+  | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.18 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: pdo_pgsql.c,v 1.19 2009/03/10 23:39:31 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,7 +128,7 @@ PHP_MINFO_FUNCTION(pdo_pgsql)
 	php_info_print_table_row(2, "PostgreSQL(libpq) Version", PG_VERSION);
 #endif	
 	php_info_print_table_row(2, "Module version", pdo_pgsql_module_entry.version);
-	php_info_print_table_row(2, "Revision", " $Id: pdo_pgsql.c,v 1.18 2008/12/31 11:12:34 sebastian Exp $ ");
+	php_info_print_table_row(2, "Revision", " $Id: pdo_pgsql.c,v 1.19 2009/03/10 23:39:31 helly Exp $ ");
 
 	php_info_print_table_end();
 }

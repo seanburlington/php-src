@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.25 2009/01/08 17:01:11 lbarnaud Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.26 2009/03/10 23:40:01 helly Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although

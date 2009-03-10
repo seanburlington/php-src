@@ -1,6 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5                                                        |
+  | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_phpvers_compat.h,v 1.7 2008/12/31 11:12:34 sebastian Exp $ */
+/* $Id: php_pdo_phpvers_compat.h,v 1.8 2009/03/10 23:39:28 helly Exp $ */
 
 /* macros for backwards compatibility with PHP 5, so that HEAD of PDO and its
  * drivers may still build against PHP 5 */

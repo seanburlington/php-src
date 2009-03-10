@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: locale_class.h,v 1.3 2008/08/03 11:32:45 jani Exp $ */
+/* $Id: locale_class.h,v 1.4 2009/03/10 23:39:26 helly Exp $ */
 
 #ifndef LOCALE_CLASS_H
 #define LOCALE_CLASS_H

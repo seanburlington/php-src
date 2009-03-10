@@ -1,6 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5                                                        |
+  | PHP Version 6                                                        |
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: deplister.c,v 1.7 2008/12/31 11:12:40 sebastian Exp $ */
+/* $Id: deplister.c,v 1.8 2009/03/10 23:40:06 helly Exp $ */
 
 /* This little application will list the DLL dependencies for a PE
  * module to it's stdout for use by distro/installer building tools */

@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.339 2009/01/07 22:37:07 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.340 2009/03/10 23:39:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -5693,7 +5693,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.339 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.340 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5707,7 +5707,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.339 $",
+	"$Revision: 1.340 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

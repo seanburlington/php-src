@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_glob_wrapper.h,v 1.7 2008/12/31 11:12:39 sebastian Exp $ */
+/* $Id: php_stream_glob_wrapper.h,v 1.8 2009/03/10 23:40:01 helly Exp $ */
 
 PHPAPI extern php_stream_wrapper  php_glob_stream_wrapper;
 PHPAPI extern php_stream_ops      php_glob_stream_ops;

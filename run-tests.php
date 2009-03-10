@@ -2,7 +2,7 @@
 <?php
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5, 6                                                     |
+   | PHP Version 6, 6                                                     |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2009 The PHP Group                                |
    +----------------------------------------------------------------------+
@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.391 2009/03/03 10:52:56 zoe Exp $ */
+/* $Id: run-tests.php,v 1.392 2009/03/10 23:39:10 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.391 $' . "\n";
+					echo '$Revision: 1.392 $' . "\n";
 					exit(1);
 
 				default:

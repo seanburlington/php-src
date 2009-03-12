@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.58 2009/03/03 10:54:16 zoe Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.59 2009/03/12 20:45:43 zoe Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -617,7 +617,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.58 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.59 $' . "\n";
 					exit(1);
 
 				default:
@@ -1739,31 +1739,32 @@ COMMAND $cmd
 
 		if (isset($section_text['EXPECTF'])) {
 			
-                // do preg_quote, but miss out any %r delimited sections
-                $temp = "";
-                $r = "%r";
-                $startOffset = 0;
-                $length = strlen($wanted_re);
-                while($startOffset < $length) {
-                  $start = strpos($wanted_re, $r, $startOffset);
-                  if ($start !== false) {
-                    // we have found a start tag
-                    $end = strpos($wanted_re, $r, $start+2);
-                    if ($end === false) {
-                      // unbalanced tag, ignore it.
-                      $end = $start = $length;
-                    }
-                  } else {
-                    // no more %r sections
-                    $start = $end = $length;
-                  }
-                  // quote a non re portion of the string
-                  $temp = $temp . preg_quote(substr($wanted_re, $startOffset, ($start - $startOffset)),  '/');
-                  // add the re unquoted.
-                  $temp = $temp . substr($wanted_re, $start+2, ($end - $start-2));
-                  $startOffset = $end + 2;
-                }
-                $wanted_re = $temp;
+			// do preg_quote, but miss out any %r delimited sections
+			$temp = "";
+			$r = "%r";
+			$startOffset = 0;
+			$length = strlen($wanted_re);
+			while($startOffset < $length) {
+				$start = strpos($wanted_re, $r, $startOffset);
+				if ($start !== false) {
+					// we have found a start tag
+					$end = strpos($wanted_re, $r, $start+2);
+					if ($end === false) {
+						// unbalanced tag, ignore it.
+						$end = $start = $length;
+					}
+				} else {
+					// no more %r sections
+					$start = $end = $length;
+				}
+				// quote a non re portion of the string
+				$temp = $temp . preg_quote(substr($wanted_re, $startOffset, ($start - $startOffset)),	'/');
+				// add the re unquoted.
+				$temp = $temp . '(' . substr($wanted_re, $start+2, ($end - $start-2)). ')';
+				$startOffset = $end + 2;
+			}
+			$wanted_re = $temp;
+		
 			$wanted_re = str_replace(
 				array('%binary_string_optional%'),
 				version_compare(PHP_VERSION, '6.0.0-dev') == -1 ? 'string' : 'binary string',

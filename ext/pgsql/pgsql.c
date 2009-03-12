@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.331.2.13.2.24.2.26 2009/01/18 23:49:31 felipe Exp $ */
+/* $Id: pgsql.c,v 1.331.2.13.2.24.2.27 2009/03/12 22:53:16 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -3890,7 +3890,7 @@ PHP_FUNCTION(pg_copy_from)
 
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 
-	spprintf(&query, 0, "COPY \"%s\" FROM STDIN DELIMITERS '%c' WITH NULL AS '%s'", table_name, *pg_delim, pg_null_as);
+	spprintf(&query, 0, "COPY \"%s\" FROM STDIN DELIMITERS E'%c' WITH NULL AS E'%s'", table_name, *pg_delim, pg_null_as);
 	while ((pgsql_result = PQgetResult(pgsql))) {
 		PQclear(pgsql_result);
 	}

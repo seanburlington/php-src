@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.5.2.14 2009/01/26 19:10:53 rrichards Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.5.2.15 2009/03/13 13:43:29 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -251,12 +251,14 @@ int dom_document_doctype_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
+
 	dtdptr = xmlGetIntSubset(docp);
 	if (!dtdptr) {
-		return FAILURE;
+		ZVAL_NULL(*retval);
+		return SUCCESS;
 	}
 
-	ALLOC_ZVAL(*retval);
 	if (NULL == (*retval = php_dom_create_object((xmlNodePtr) dtdptr, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
@@ -299,12 +301,14 @@ int dom_document_document_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
+
 	root = xmlDocGetRootElement(docp);
 	if (!root) {
-		return FAILURE;
+		ZVAL_NULL(*retval);
+		return SUCCESS;
 	}
 
-	ALLOC_ZVAL(*retval);
 	if (NULL == (*retval = php_dom_create_object(root, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;

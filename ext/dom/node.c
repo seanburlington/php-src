@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.37.2.3.2.8.2.13 2009/01/13 18:06:48 rrichards Exp $ */
+/* $Id: node.c,v 1.37.2.3.2.8.2.14 2009/03/13 13:43:29 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -260,7 +260,6 @@ int dom_node_node_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 			break;
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Node Type");
-			return FAILURE;
 	}
 
 	ALLOC_ZVAL(*retval);
@@ -422,12 +421,13 @@ int dom_node_parent_node_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
+
 	nodeparent = nodep->parent;
 	if (!nodeparent) {
-		return FAILURE;
+		ZVAL_NULL(*retval);
+		return SUCCESS;
 	}
-
-	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
@@ -491,11 +491,12 @@ int dom_node_first_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 		first = nodep->children;
 	}
 
-	if (!first) {
-		return FAILURE;
-	}
-
 	ALLOC_ZVAL(*retval);
+
+	if (!first) {
+		ZVAL_NULL(*retval);
+		return SUCCESS;
+	}
 
 	if (NULL == (*retval = php_dom_create_object(first, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
@@ -527,11 +528,12 @@ int dom_node_last_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 		last = nodep->last;
 	}
 
-	if (!last) {
-		return FAILURE;
-	}
-
 	ALLOC_ZVAL(*retval);
+
+	if (!last) {
+		ZVAL_NULL(*retval);
+		return SUCCESS;
+	}
 
 	if (NULL == (*retval = php_dom_create_object(last, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
@@ -559,12 +561,13 @@ int dom_node_previous_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 		return FAILURE;
 	}
 
+	ALLOC_ZVAL(*retval);
+
 	prevsib = nodep->prev;
 	if (!prevsib) {
-		return FAILURE;
+		ZVAL_NULL(*retval);
+		return SUCCESS;
 	}
-
-	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(prevsib, &ret, NULL, *retval, obj TSRMLS_CC))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");

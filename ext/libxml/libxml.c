@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.32.2.7.2.15.2.10 2008/12/31 11:15:38 sebastian Exp $ */
+/* $Id: libxml.c,v 1.32.2.7.2.15.2.11 2009/03/14 17:30:28 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -592,6 +592,7 @@ static PHP_MINIT_FUNCTION(libxml)
 
 	REGISTER_LONG_CONSTANT("LIBXML_VERSION",			LIBXML_VERSION,			CONST_CS | CONST_PERSISTENT);
 	REGISTER_STRING_CONSTANT("LIBXML_DOTTED_VERSION",	LIBXML_DOTTED_VERSION,	CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("LIBXML_LOADED_VERSION",	(char *)xmlParserVersion,		CONST_CS | CONST_PERSISTENT);
 
 	/* For use with loading xml */
 	REGISTER_LONG_CONSTANT("LIBXML_NOENT",		XML_PARSE_NOENT,		CONST_CS | CONST_PERSISTENT);
@@ -671,7 +672,8 @@ static PHP_MINFO_FUNCTION(libxml)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "libXML support", "active");
-	php_info_print_table_row(2, "libXML Version", LIBXML_DOTTED_VERSION);
+	php_info_print_table_row(2, "libXML Compiled Version", LIBXML_DOTTED_VERSION);
+	php_info_print_table_row(2, "libXML Loaded Version", (char *)xmlParserVersion);
 	php_info_print_table_row(2, "libXML streams", "enabled");
 	php_info_print_table_end();
 }

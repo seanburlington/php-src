@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.363 2009/03/09 20:07:39 sixd Exp $ */
+/* $Id: oci8.c,v 1.364 2009/03/16 05:29:48 sixd Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,6 +50,16 @@
 ZEND_DECLARE_MODULE_GLOBALS(oci)
 static PHP_GINIT_FUNCTION(oci);
 static PHP_GSHUTDOWN_FUNCTION(oci);
+
+/* For a user friendly message about environment setup */
+/* TODO: add cases for SHLIB_PATH, LIBPATH, LD_LIBRARY_PATH_64 etc */
+#if defined(PHP_WIN32)
+#define PHP_OCI8_LIB_PATH_MSG "PATH"
+#elif defined(__APPLE__)
+#define PHP_OCI8_LIB_PATH_MSG "DYLD_LIBRARY_PATH"
+#else
+#define PHP_OCI8_LIB_PATH_MSG "LD_LIBRARY_PATH"
+#endif
 
 /* True globals, no need for thread safety */
 int le_connection;
@@ -852,13 +862,9 @@ static void php_oci_init_global_handles(TSRMLS_D)
 
 	if (errstatus == OCI_ERROR) {
 #ifdef HAVE_OCI_INSTANT_CLIENT
-# ifdef PHP_WIN32
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that PATH includes the directory with Oracle Instant Client libraries");
-# else
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that LD_LIBRARY_PATH includes the directory with Oracle Instant Client libraries");
-# endif
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that " PHP_OCI8_LIB_PATH_MSG " includes the directory with Oracle Instant Client libraries");
 #else
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that ORACLE_HOME is set and points to the right directory");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that ORACLE_HOME and " PHP_OCI8_LIB_PATH_MSG " are set and point to the right directories");
 #endif
 		OCI_G(env) = NULL;
 		OCI_G(err) = NULL;
@@ -1084,7 +1090,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.363 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.364 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -2599,14 +2605,11 @@ static OCIEnv *php_oci_create_env(ub2 charsetid TSRMLS_DC)
 	PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIEnvNlsCreate, (&retenv, OCI_G(events) ? PHP_OCI_INIT_MODE | OCI_EVENTS : PHP_OCI_INIT_MODE, 0, NULL, NULL, NULL, 0, NULL, charsetid, charsetid));
 
 	if (OCI_G(errcode) != OCI_SUCCESS) {
+
 #ifdef HAVE_OCI_INSTANT_CLIENT
-# ifdef PHP_WIN32
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that PATH includes the directory with Oracle Instant Client libraries");
-# else
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that LD_LIBRARY_PATH includes the directory with Oracle Instant Client libraries");
-# endif
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that " PHP_OCI8_LIB_PATH_MSG " includes the directory with Oracle Instant Client libraries");
 #else
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that ORACLE_HOME is set and points to the right directory");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCIEnvNlsCreate() failed. There is something wrong with your system - please check that ORACLE_HOME and " PHP_OCI8_LIB_PATH_MSG " are set and point to the right directories");
 #endif
 		return NULL;
 	}

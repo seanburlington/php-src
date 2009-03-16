@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.19.2.3.2.5.2.17 2009/03/16 10:08:51 pajoye Exp $ */
+/* $Id: php_apache.c,v 1.19.2.3.2.5.2.18 2009/03/16 10:13:18 pajoye Exp $ */
 
 #include "php_apache_http.h"
 
@@ -722,7 +722,7 @@ PHP_FUNCTION(apache_request_remote_host)
 	}
 
 	if (!type) {
-		type = REMOTE_NAME
+		type = REMOTE_NAME;
 	}
 
 	APREQ_GET_REQUEST(id, r);

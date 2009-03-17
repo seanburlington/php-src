@@ -1,4 +1,4 @@
-dnl $Id: config0.m4,v 1.1.2.11 2009/01/13 02:50:54 scottmac Exp $
+dnl $Id: config0.m4,v 1.1.2.12 2009/03/17 02:45:12 scottmac Exp $
 dnl config.m4 for extension sqlite3
 dnl vim:et:ts=2:sw=2
 
@@ -49,6 +49,10 @@ if test $PHP_SQLITE3 != "no"; then
 
     PHP_CHECK_LIBRARY(sqlite3,sqlite3_key,[
       AC_DEFINE(HAVE_SQLITE3_KEY, 1, [have commercial sqlite3 with crypto support])
+    ])
+
+    PHP_CHECK_LIBRARY(sqlite3,sqlite3_load_extension,[
+      AC_DEFINE(SQLITE_OMIT_LOAD_EXTENSION, 1, [have sqlite3 with extension support])
     ])
 
   else

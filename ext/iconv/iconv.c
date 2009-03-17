@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.8.2.20.2.13 2008/12/31 11:15:37 sebastian Exp $ */
+/* $Id: iconv.c,v 1.124.2.8.2.20.2.14 2009/03/17 05:31:04 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2759,7 +2759,7 @@ static php_stream_filter *php_iconv_stream_filter_factory_create(const char *nam
 		return NULL;
 	}
 	++from_charset;
-	if ((to_charset = strchr(from_charset, '/')) == NULL) {
+	if ((to_charset = strpbrk(from_charset, "/.")) == NULL) {
 		return NULL;
 	}
 	from_charset_len = to_charset - from_charset;

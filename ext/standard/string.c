@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.43 2009/03/03 11:47:31 kalle Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.44 2009/03/17 00:02:39 mattwil Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1130,7 +1130,6 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value TSRMLS_DC)
 PHP_FUNCTION(implode)
 {
 	zval **arg1 = NULL, **arg2 = NULL, *delim, *arr;
-	HashPosition pos;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|Z", &arg1, &arg2) == FAILURE) {
 		return;
@@ -1162,12 +1161,8 @@ PHP_FUNCTION(implode)
 			return;
 		}
 	}
-
-	pos = Z_ARRVAL_P(arr)->pInternalPointer;
 	
 	php_implode(delim, arr, return_value TSRMLS_CC);
-
-	Z_ARRVAL_P(arr)->pInternalPointer = pos;
 
 	if (arg2 == NULL) {
 		FREE_ZVAL(delim);

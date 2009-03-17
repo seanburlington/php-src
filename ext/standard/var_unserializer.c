@@ -4,7 +4,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2006 The PHP Group                                |
+  | Copyright (c) 1997-2009 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.70.2.4.2.7.2.9 2009/03/17 22:04:10 mattwil Exp $ */
+/* $Id: var_unserializer.c,v 1.70.2.4.2.7.2.10 2009/03/17 23:07:40 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"

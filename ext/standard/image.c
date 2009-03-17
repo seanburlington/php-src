@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.136 2009/03/10 23:39:39 helly Exp $ */
+/* $Id: image.c,v 1.137 2009/03/17 03:25:44 scottmac Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -1134,7 +1134,7 @@ PHPAPI char * php_image_type_to_mime_type(int image_type)
 		case IMAGE_FILETYPE_PSD:
 			return "image/psd";
 		case IMAGE_FILETYPE_BMP:
-			return "image/bmp";
+			return "image/x-ms-bmp";
 		case IMAGE_FILETYPE_TIFF_II:
 		case IMAGE_FILETYPE_TIFF_MM:
 			return "image/tiff";

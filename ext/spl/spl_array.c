@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.17.2.13.2.38 2009/01/27 14:50:27 tony2001 Exp $ */
+/* $Id: spl_array.c,v 1.71.2.17.2.13.2.39 2009/03/19 03:01:37 colder Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -346,7 +346,7 @@ static zval **spl_array_get_dimension_ptr_ptr(int check_inherited, zval *object,
 				zend_hash_index_find(ht, index, (void **) &retval);
 				return retval;
 			} else {
-				zend_error(E_NOTICE, "Undefined offset:  %ld", Z_LVAL_P(offset));
+				zend_error(E_NOTICE, "Undefined offset:  %ld", index);
 				return &EG(uninitialized_zval_ptr);
 			}
 		} else {

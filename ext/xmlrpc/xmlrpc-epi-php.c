@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.67 2009/03/10 23:39:52 helly Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.68 2009/03/19 00:19:20 iliaa Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -687,14 +687,14 @@ PHP_FUNCTION(xmlrpc_encode_request)
 {
 	XMLRPC_REQUEST xRequest = NULL;
 	char *outBuf;
-	zval **method, **vals, *out_opts;
+	zval **method, **vals, *out_opts = NULL;
 	php_output_options out;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ZZ|a", &method, &vals, &out_opts) == FAILURE) {
 		return;
 	}
 
-	set_output_options(&out, (ZEND_NUM_ARGS() == 3) ? out_opts : 0);
+	set_output_options(&out, out_opts ? out_opts : 0);
 
 	if (return_value_used) {
 		xRequest = XMLRPC_RequestNew();

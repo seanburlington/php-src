@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.87 2009/03/17 23:22:05 iliaa Exp $ */
+/* $Id: sysvshm.c,v 1.88 2009/03/19 23:11:54 iliaa Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -357,7 +357,7 @@ static int php_put_shm_data(sysvshm_chunk_head *ptr, long key, const char *data,
 	long total_size;
 	long shm_varpos;
 
-	total_size = ((long) (len + sizeof(sysvshm_chunk) - 1) / 4) * 4 + 4; /* 4-byte alligment */
+	total_size = ((long) (len + sizeof(sysvshm_chunk) - 1) / sizeof(long)) * sizeof(long) + sizeof(long); /* long alligment */
 
 	if ((shm_varpos = php_check_shm_data(ptr, key)) > 0) {
 		php_remove_shm_data(ptr, shm_varpos);

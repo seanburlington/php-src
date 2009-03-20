@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.218 2009/03/10 23:39:11 helly Exp $ */
+/* $Id: php_date.c,v 1.219 2009/03/20 08:38:42 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1082,6 +1082,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 	int                  rfc_colon;
 
 	if (!format_len) {
+		*return_len = 0;
 		if (UG(unicode)) {
 			return (char*)eustrdup(EMPTY_STR);
 		} else {		

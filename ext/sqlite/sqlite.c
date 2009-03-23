@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.224 2009/03/22 15:07:31 iliaa Exp $
+   $Id: sqlite.c,v 1.225 2009/03/23 11:01:07 felipe Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1550,7 +1550,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.224 2009/03/22 15:07:31 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.225 2009/03/23 11:01:07 felipe Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2578,7 +2578,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 			return;
 		}
 		RES_FROM_OBJECT_RESTORE_ERH(res, object, &error_handling);
-		if (!class_name) {
+		if (!class_name.v) {
 			ce = zend_standard_class_def;
 		} else {
 			ce = zend_u_fetch_class(class_name_type, class_name, class_name_len, ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
@@ -2589,7 +2589,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 			return;
 		}
 		ZEND_FETCH_RESOURCE(res, struct php_sqlite_result *, &zres, -1, "sqlite result", le_sqlite_result);
-		if (!class_name) {
+		if (!class_name.v) {
 			ce = zend_standard_class_def;
 		} else {
 			ce = zend_u_fetch_class(class_name_type, class_name, class_name_len, ZEND_FETCH_CLASS_AUTO TSRMLS_CC);

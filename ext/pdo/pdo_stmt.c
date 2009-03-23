@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.216 2009/03/12 16:12:44 andrei Exp $ */
+/* $Id: pdo_stmt.c,v 1.217 2009/03/23 23:02:06 felipe Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1239,7 +1239,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 		
 		switch (how) {
 			case PDO_FETCH_CLASS:
-				if (ce->constructor && !(flags & PDO_FETCH_PROPS_LATE)) {
+				if (ce->constructor && !(flags & (PDO_FETCH_PROPS_LATE | PDO_FETCH_SERIALIZE))) {
 					stmt->fetch.cls.fci.object_ptr = return_value;
 					stmt->fetch.cls.fcc.object_ptr = return_value;
 					if (zend_call_function(&stmt->fetch.cls.fci, &stmt->fetch.cls.fcc TSRMLS_CC) == FAILURE) {

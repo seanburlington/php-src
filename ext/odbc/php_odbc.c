@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.15 2009/03/23 22:30:56 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.16 2009/03/24 09:24:35 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1631,7 +1631,7 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 	SQLUSMALLINT RowStatus[1];
 	SQLLEN rownum;
 	zval *pv_res, *tmp;
-	long pv_row - 1;
+	long pv_row = 1;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &pv_res, &pv_row) == FAILURE) {
 		return;

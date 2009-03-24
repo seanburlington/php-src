@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.13.4.1.2.7 2008/12/13 11:46:23 pajoye Exp $
+<?php # $Id: mkdist.php,v 1.13.4.1.2.8 2009/03/24 22:15:46 pajoye Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -220,8 +220,8 @@ copy_file_list($build_dir, $pecl_dir, $pecl_targets);
 $text_files = array(
 	"LICENSE" => 		"license.txt",
 	"NEWS" => 			"news.txt",
-	"php.ini-dist" => 	"php.ini-dist",
-	"php.ini-recommended" => "php.ini-recommended",
+	"php.ini-development" => 	"php.ini-development",
+	"php.ini-production" => "php.ini-production",
 	"win32/install.txt" => 	"install.txt",
 	"win32/pws-php5cgi.reg" => "pws-php5cgi.reg",
 	"win32/pws-php5isapi.reg" => "pws-php5isapi.reg",

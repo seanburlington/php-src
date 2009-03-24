@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.32 2009/03/24 09:41:42 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.33 2009/03/24 12:48:52 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1295,7 +1295,7 @@ PHP_MINFO_FUNCTION(gd)
 	{
 		char tmp[12];
 		snprintf(tmp, sizeof(tmp), "%d", gdJpegGetVersionInt());
-		php_info_print_table_row(2, "JEPG Support", "enabled");
+		php_info_print_table_row(2, "JPEG Support", "enabled");
 		php_info_print_table_row(2, "libJPEG Version", tmp);
 	}
 #endif

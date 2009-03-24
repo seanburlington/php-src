@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.6.2.5.2.9 2008/12/31 11:15:47 sebastian Exp $ */
+/* $Id: zlib.c,v 1.183.2.6.2.5.2.10 2009/03/24 01:57:53 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1034,7 +1034,7 @@ static void php_gzip_output_handler(char *output, uint output_len, char **handle
 {
 	zend_bool do_start, do_end;
 
-	if (!ZLIBG(output_compression)) {
+	if (!ZLIBG(output_compression) || SG(sapi_headers).http_response_code == 204 || SG(sapi_headers).http_response_code == 304) {
 		*handled_output = NULL;
 	} else {
 		do_start = (mode & PHP_OUTPUT_HANDLER_START ? 1 : 0);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.31.2.3.2.7.2.8 2008/12/31 11:15:48 sebastian Exp $ */
+/* $Id: userspace.c,v 1.31.2.3.2.7.2.9 2009/03/25 19:55:59 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -249,6 +249,11 @@ typedef struct _php_userstream_data php_userstream_data_t;
 	function dir_rewinddir()
 	{
 		reset to start of dir list;
+	}
+
+	function stream_lock($operation)
+	{
+		return true / false;
 	}
   
 	}}} **/

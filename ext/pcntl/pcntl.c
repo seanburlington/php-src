@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.73 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: pcntl.c,v 1.74 2009/03/25 22:49:42 felipe Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -264,8 +264,8 @@ void php_register_signal_constants(INIT_FUNC_ARGS)
 	/* {{{ "how" argument for sigprocmask */
 #ifdef HAVE_SIGPROCMASK
 	REGISTER_LONG_CONSTANT("SIG_BLOCK",   SIG_BLOCK, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("SIG_UNBLOCK", SIG_BLOCK, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("SIG_SETMASK", SIG_BLOCK, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SIG_UNBLOCK", SIG_UNBLOCK, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SIG_SETMASK", SIG_SETMASK, CONST_CS | CONST_PERSISTENT);
 #endif
 	/* }}} */
 

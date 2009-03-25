@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.273 2009/02/18 16:33:28 johannes Exp $ */
+/* $Id: php_mysql.c,v 1.274 2009/03/25 10:27:21 johannes Exp $ */
 
 /* TODO:
  *
@@ -1505,10 +1505,7 @@ PHP_FUNCTION(mysql_db_query)
 		CHECK_LINK(id);
 	}
 
-	/* FIXME: Unicode support??? */
-	if (MySG(trace_mode) || !strcasecmp(get_active_function_name(TSRMLS_C).s, "mysql")) {
-		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "use mysql_query() instead");
-	}
+	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "use mysql_query() instead");
 	
 	php_mysql_do_query_general(query, &mysql_link, id, db, MYSQL_STORE_RESULT, return_value TSRMLS_CC);
 }

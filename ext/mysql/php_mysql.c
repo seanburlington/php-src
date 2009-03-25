@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.35 2009/02/18 16:34:47 johannes Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.36 2009/03/25 10:27:38 johannes Exp $ */
 
 /* TODO:
  *
@@ -1472,9 +1472,7 @@ PHP_FUNCTION(mysql_db_query)
 		CHECK_LINK(id);
 	}
 
-	if (MySG(trace_mode) || !strcasecmp(get_active_function_name(TSRMLS_C), "mysql")) {
-		php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "This function is deprecated; use mysql_query() instead.");
-	}
+	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "This function is deprecated; use mysql_query() instead");
 	
 	php_mysql_do_query_general(query, query_len, mysql_link, id, db, MYSQL_STORE_RESULT, return_value TSRMLS_CC);
 }

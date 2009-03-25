@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.56 2009/03/10 23:39:51 helly Exp $ */
+/* $Id: tokenizer.c,v 1.57 2009/03/25 15:24:27 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -173,6 +173,7 @@ PHP_FUNCTION(token_get_all)
 	zend_save_lexical_state(&original_lex_state TSRMLS_CC);
 
 	if (zend_prepare_string_for_scanning(&source_z, "" TSRMLS_CC) == FAILURE) {
+		zend_restore_lexical_state(&original_lex_state TSRMLS_CC);
 		RETURN_EMPTY_STRING();
 	}
 
@@ -180,10 +181,6 @@ PHP_FUNCTION(token_get_all)
 
 	tokenize(return_value TSRMLS_CC);
 	
-	while (!zend_stack_is_empty(&LANG_SCNG(state_stack))) {
-		zend_stack_del_top(&LANG_SCNG(state_stack));
-	}
-
 	zend_restore_lexical_state(&original_lex_state TSRMLS_CC);
 	zval_dtor(&source_z);
 }

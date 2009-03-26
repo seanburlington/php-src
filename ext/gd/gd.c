@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.33 2009/03/24 12:48:52 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.34 2009/03/26 00:43:45 felipe Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1360,9 +1360,9 @@ PHP_FUNCTION(gd_info)
 	add_assoc_bool(return_value, "GIF Create Support", 0);
 #endif
 #ifdef HAVE_GD_JPG
-	add_assoc_bool(return_value, "JPG Support", 1);
+	add_assoc_bool(return_value, "JPEG Support", 1);
 #else
-	add_assoc_bool(return_value, "JPG Support", 0);
+	add_assoc_bool(return_value, "JPEG Support", 0);
 #endif
 #ifdef HAVE_GD_PNG
 	add_assoc_bool(return_value, "PNG Support", 1);

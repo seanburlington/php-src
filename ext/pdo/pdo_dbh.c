@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.165 2009/03/25 12:05:51 felipe Exp $ */
+/* $Id: pdo_dbh.c,v 1.166 2009/03/26 12:51:30 felipe Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1342,8 +1342,7 @@ static union _zend_function *dbh_method_get(
 
 	lc_method_name = zend_u_str_tolower_dup(ztype, method_name, method_len);
 
-	if (zend_u_hash_find(&dbh->ce->function_table, ztype, lc_method_name,
-			method_len+1, (void**)&fbc) == FAILURE) {
+	if ((fbc = std_object_handlers.get_method(object_pp, method_name, method_len TSRMLS_CC)) == NULL) {
 		/* not a pre-defined method, nor a user-defined method; check
 		 * the driver specific methods */
 		if (!dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH]) {
@@ -1356,20 +1355,13 @@ static union _zend_function *dbh_method_get(
 
 		if (zend_u_hash_find(dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH],
 				ztype, lc_method_name, method_len+1, (void**)&fbc) == FAILURE) {
-
 			if (!fbc) {
 				fbc = NULL;
 			}
-			goto out;
 		}
-		/* got it */
 	}
 
 out:
-	if (!fbc && std_object_handlers.get_method) {
-		fbc = std_object_handlers.get_method(object_pp, method_name, method_len TSRMLS_CC);
-	}
-
 	pdo_zstr_efree(lc_method_name);
 	return fbc;
 }

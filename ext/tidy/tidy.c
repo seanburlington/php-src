@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.131 2009/03/10 23:39:51 helly Exp $ */
+/* $Id: tidy.c,v 1.132 2009/03/26 20:02:53 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -862,11 +862,7 @@ static void tidy_doc_update_properties(PHPTidyObj *obj TSRMLS_DC)
 
 	if (output.size) {
 		MAKE_STD_ZVAL(temp);
-		if (UG(unicode)) {
-			ZVAL_U_STRINGL(obj->converter->conv, temp, (char *) output.bp, output.size-1, 1);
-		} else {
-			ZVAL_STRINGL(temp, (char *) output.bp, output.size-1, 1);
-		}
+		ZVAL_U_STRINGL(obj->converter->conv, temp, (char *) output.bp, output.size-1, 1);
 		zend_ascii_hash_update(obj->std.properties, "value", sizeof("value"), (void *)&temp, sizeof(zval *), NULL);
 	}
 
@@ -1091,11 +1087,9 @@ static int php_tidy_parse_string(PHPTidyObj *obj, char *string, int len, char *e
 		}
 	}
 
-	if (UG(unicode)) {
-		obj->converter = emalloc(sizeof(PHPTidyConv));
-		obj->converter->conv = ucnv_open(tidyOptGetEncName(obj->ptdoc->doc, TidyOutCharEncoding), &Uerror);
-		obj->converter->ref_count = 1;
-	}
+	obj->converter = emalloc(sizeof(PHPTidyConv));
+	obj->converter->conv = ucnv_open(tidyOptGetEncName(obj->ptdoc->doc, TidyOutCharEncoding), &Uerror);
+	obj->converter->ref_count = 1;
 
 	tidyBufInit(&buf);
 	tidyBufAttach(&buf, (byte *) string, len);
@@ -1156,7 +1150,7 @@ static PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.131 2009/03/10 23:39:51 helly Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.132 2009/03/26 20:02:53 felipe Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.121 2009/03/10 23:39:32 helly Exp $ */
+/* $Id: mod_files.c,v 1.122 2009/03/26 20:02:12 felipe Exp $ */
 
 #include "php.h"
 
@@ -121,7 +121,7 @@ static char *ps_files_path_create(char *buf, size_t buflen, ps_files *data, cons
 	n += key_len;
 	buf[n] = '\0';
 
-	if (UG(unicode) && UG(filesystem_encoding_conv) &&
+	if (UG(filesystem_encoding_conv) &&
 		ucnv_getType(UG(filesystem_encoding_conv)) != UCNV_UTF8) {
 		char *newbuf = NULL;
 		int newlen;

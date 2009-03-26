@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.173 2009/03/17 05:27:00 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.174 2009/03/26 20:01:56 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -342,12 +342,10 @@ static int php_iconv_output_handler(void **nothing, php_output_context *output_c
 			return FAILURE;
 		}
 		
-		if (UG(unicode)) {
-			output_encoding = INI_STR("unicode.output_encoding");
-			if (output_encoding && *output_encoding && ucnv_compareNames(output_encoding, ICONVG(internal_encoding))) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "unicode.output_encoding differs from iconv.internal_encoding (%s, %s)", output_encoding, ICONVG(internal_encoding));
-				zend_alter_ini_entry(ZEND_STRS("iconv.internal_encoding"), output_encoding, strlen(output_encoding), PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
-			}
+		output_encoding = INI_STR("unicode.output_encoding");
+		if (output_encoding && *output_encoding && ucnv_compareNames(output_encoding, ICONVG(internal_encoding))) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "unicode.output_encoding differs from iconv.internal_encoding (%s, %s)", output_encoding, ICONVG(internal_encoding));
+			zend_alter_ini_entry(ZEND_STRS("iconv.internal_encoding"), output_encoding, strlen(output_encoding), PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
 		}
 		
 		if (SG(sapi_headers).mimetype && !strncasecmp(SG(sapi_headers).mimetype, "text/", 5)) {

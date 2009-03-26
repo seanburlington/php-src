@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.205 2009/03/10 23:39:53 helly Exp $ */
+/* $Id: rfc1867.c,v 1.206 2009/03/26 20:02:53 felipe Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -2160,11 +2160,7 @@ fileupload_done:
 
 SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
-	if (UG(unicode)) {
-		rfc1867_post_handler_unicode(content_type_dup, arg TSRMLS_CC);
-	} else {
-		rfc1867_post_handler_legacy(content_type_dup, arg TSRMLS_CC);
-	}
+	rfc1867_post_handler_unicode(content_type_dup, arg TSRMLS_CC);
 }
 
 /*

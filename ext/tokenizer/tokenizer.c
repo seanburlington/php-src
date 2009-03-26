@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.57 2009/03/25 15:24:27 dmitry Exp $ */
+/* $Id: tokenizer.c,v 1.58 2009/03/26 20:02:53 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,7 +107,7 @@ static void tokenize(zval *return_value TSRMLS_DC)
 	zend_bool destroy;
 	int token_line = 1;
 
-	CG(literal_type) = UG(unicode)?IS_UNICODE:IS_STRING;
+	CG(literal_type) = IS_UNICODE;
 
 	array_init(return_value);
 

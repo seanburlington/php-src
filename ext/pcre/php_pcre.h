@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.57 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: php_pcre.h,v 1.58 2009/03/26 20:01:57 felipe Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -50,7 +50,6 @@ typedef struct {
 #endif
 	int compile_options;
 	int refcount;
-	zend_bool unicode_mode;
 } pcre_cache_entry;
 
 PHPAPI pcre_cache_entry* pcre_get_compiled_regex_cache(zend_uchar utype, char *regex, int regex_len TSRMLS_DC);

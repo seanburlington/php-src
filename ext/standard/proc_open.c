@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.67 2009/03/10 23:39:40 helly Exp $ */
+/* $Id: proc_open.c,v 1.68 2009/03/26 20:02:29 felipe Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -317,6 +317,8 @@ PHP_FUNCTION(proc_get_status)
 	int wstatus;
 	pid_t wait_pid;
 #endif
+	UChar *ucmd;
+	int ucmd_len;
 	int running = 1, signaled = 0, stopped = 0;
 	int exitcode = -1, termsig = 0, stopsig = 0;
 	
@@ -328,17 +330,10 @@ PHP_FUNCTION(proc_get_status)
 
 	array_init(return_value);
 
-	if (UG(unicode)) {
-		UChar *ucmd;
-		int ucmd_len;
-
-		if (SUCCESS == php_stream_path_decode(&php_plain_files_wrapper, &ucmd, &ucmd_len, proc->command, strlen(proc->command), REPORT_ERRORS, FG(default_context))) {
-			add_ascii_assoc_unicodel(return_value, "command", ucmd, ucmd_len, 0);
-		} else {
-			/* Fallback on original binary string */
-			add_ascii_assoc_string(return_value, "command", proc->command, 1);
-		}
+	if (SUCCESS == php_stream_path_decode(&php_plain_files_wrapper, &ucmd, &ucmd_len, proc->command, strlen(proc->command), REPORT_ERRORS, FG(default_context))) {
+		add_ascii_assoc_unicodel(return_value, "command", ucmd, ucmd_len, 0);
 	} else {
+		/* Fallback on original binary string */
 		add_ascii_assoc_string(return_value, "command", proc->command, 1);
 	}
 	add_ascii_assoc_long(return_value, "pid", (long) proc->child);
@@ -975,7 +970,7 @@ PHP_FUNCTION(proc_open)
 					/* nasty hack; don't copy it */
 					stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 
-					if (UG(unicode) && !binary_pipes) {
+					if (!binary_pipes) {
 						if (write_stream) {
 							char *encoding = (context && context->output_encoding) ? context->output_encoding : UG(stream_encoding);
 

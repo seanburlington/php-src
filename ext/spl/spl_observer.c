@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.34 2009/03/19 02:44:04 colder Exp $ */
+/* $Id: spl_observer.c,v 1.35 2009/03/26 20:02:12 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -268,7 +268,7 @@ static HashTable* spl_object_storage_debug_info(zval *obj, int *is_temp TSRMLS_D
 	}
 
 	zname = spl_gen_private_prop_name(spl_ce_SplObjectStorage, "storage", sizeof("storage")-1, &name_len TSRMLS_CC);
-	zend_u_symtable_update(rv, ZEND_STR_TYPE, zname, name_len+1, &storage, sizeof(zval *), NULL);
+	zend_u_symtable_update(rv, IS_UNICODE, zname, name_len+1, &storage, sizeof(zval *), NULL);
 	efree(zname.v);
 
 	return rv;

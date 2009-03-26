@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.38 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: oci8_lob.c,v 1.39 2009/03/26 20:01:57 felipe Exp $ */
 
 
 
@@ -172,9 +172,7 @@ sb4 php_oci_lob_callback (dvoid *ctxp, CONST dvoid *bufxp, ub4 len, ub1 piece)
 			memcpy(*(ctx->lob_data) + *(ctx->lob_len), bufxp, (size_t) lenp);
 			*(ctx->lob_len) += lenp;
 			
-			if (UG(unicode)) {
-				*(*(ctx->lob_data) + *(ctx->lob_len) + 1) = 0;
-			}
+			*(*(ctx->lob_data) + *(ctx->lob_len) + 1) = 0;
 			*(*(ctx->lob_data) + *(ctx->lob_len)) = 0;
 			
 			return OCI_CONTINUE;

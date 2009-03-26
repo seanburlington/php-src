@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.24 2009/03/10 23:39:11 helly Exp $ */
+/* $Id: com_variant.c,v 1.25 2009/03/26 20:01:38 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -217,13 +217,7 @@ PHPAPI int php_com_zval_from_variant(zval *z, VARIANT *v, int codepage TSRMLS_DC
 			break;
 		case VT_BSTR:
 			if (V_BSTR(v)) {
-				if (UG(unicode)) {
-					ZVAL_UNICODE(z, V_BSTR(v), 1);
-				} else {
-					Z_TYPE_P(z) = IS_STRING;
-					Z_STRVAL_P(z) = php_com_olestring_to_string(V_BSTR(v),
-						&Z_STRLEN_P(z), codepage TSRMLS_CC);
-				}
+				ZVAL_UNICODE(z, V_BSTR(v), 1);
 			}
 			break;
 		case VT_UNKNOWN:

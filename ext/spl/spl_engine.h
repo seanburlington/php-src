@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_engine.h,v 1.30 2009/03/10 23:39:38 helly Exp $ */
+/* $Id: spl_engine.h,v 1.31 2009/03/26 20:02:12 felipe Exp $ */
 
 #ifndef SPL_ENGINE_H
 #define SPL_ENGINE_H
@@ -35,7 +35,7 @@ static inline int spl_instantiate_arg_ex1(zend_class_entry *pce, zval **retval, 
 {
 	spl_instantiate(pce, retval, alloc TSRMLS_CC);
 
-	zend_u_call_method(retval, pce, &pce->constructor, ZEND_STR_TYPE, pce->constructor->common.function_name, USTR_LEN(pce->constructor->common.function_name), NULL, 1, arg1, NULL TSRMLS_CC);
+	zend_u_call_method(retval, pce, &pce->constructor, IS_UNICODE, pce->constructor->common.function_name, USTR_LEN(pce->constructor->common.function_name), NULL, 1, arg1, NULL TSRMLS_CC);
 	return 0;
 }
 /* }}} */
@@ -45,7 +45,7 @@ static inline int spl_instantiate_arg_ex2(zend_class_entry *pce, zval **retval, 
 {
 	spl_instantiate(pce, retval, alloc TSRMLS_CC);
 	
-	zend_u_call_method(retval, pce, &pce->constructor, ZEND_STR_TYPE, pce->constructor->common.function_name, USTR_LEN(pce->constructor->common.function_name), NULL, 2, arg1, arg2 TSRMLS_CC);
+	zend_u_call_method(retval, pce, &pce->constructor, IS_UNICODE, pce->constructor->common.function_name, USTR_LEN(pce->constructor->common.function_name), NULL, 2, arg1, arg2 TSRMLS_CC);
 	return 0;
 }
 /* }}} */

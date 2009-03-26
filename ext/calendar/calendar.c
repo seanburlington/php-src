@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.61 2009/03/10 23:39:11 helly Exp $ */
+/* $Id: calendar.c,v 1.62 2009/03/26 20:01:38 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -632,7 +632,7 @@ PHP_FUNCTION(jdtojewish)
 			efree(yearp);
 		}
 
-		if (UG(unicode) && CALENDAR_G(iso_8859_8_conv)) {
+		if (CALENDAR_G(iso_8859_8_conv)) {
 			RETURN_U_STRING(CALENDAR_G(iso_8859_8_conv), hebdate, ZSTR_DUPLICATE);
 		} else {
 			RETURN_STRING(hebdate, 1);
@@ -747,7 +747,7 @@ PHP_FUNCTION(jdmonthname)
 	case CAL_MONTH_JEWISH:		/* jewish month */
 		SdnToJewish(julday, &year, &month, &day);
 		monthname = JewishMonthName[month];
-		if (UG(unicode) && CALENDAR_G(iso_8859_8_conv)) {
+		if (CALENDAR_G(iso_8859_8_conv)) {
 			RETURN_U_STRING(CALENDAR_G(iso_8859_8_conv), monthname, ZSTR_DUPLICATE);
 		} else {
 			RETURN_STRING(monthname, 1);

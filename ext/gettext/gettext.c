@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.67 2009/03/10 23:39:18 helly Exp $ */
+/* $Id: gettext.c,v 1.68 2009/03/26 20:01:56 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -159,9 +159,8 @@ PHP_MINFO_FUNCTION(php_gettext)
 
 #define RETVAL_FS_STRING(s, f) \
 	RETVAL_STRING((s), (f)); \
-	if (UG(unicode)) { \
-		zval_string_to_unicode_ex(return_value, ZEND_U_CONVERTER(UG(filesystem_encoding_conv)) TSRMLS_CC); \
-	}
+	zval_string_to_unicode_ex(return_value, ZEND_U_CONVERTER(UG(filesystem_encoding_conv)) TSRMLS_CC);
+
 #define RETURN_FS_STRING(s, f) \
 	RETVAL_FS_STRING((s), (f)); \
 	return;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.119 2009/03/10 23:39:34 helly Exp $ */
+/* $Id: php_http.c,v 1.120 2009/03/26 20:02:12 felipe Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -867,9 +867,7 @@ try_again:
 			array_init(zcookie);
 			MAKE_STD_ZVAL(zvalue);
 			ZVAL_STRINGL(zvalue, eqpos + 1, cookie_len, 1);
-			if (UG(unicode)) {
-				zval_string_to_unicode_ex(zvalue, UG(utf8_conv) TSRMLS_CC);
-			}
+			zval_string_to_unicode_ex(zvalue, UG(utf8_conv) TSRMLS_CC);
 			add_index_zval(zcookie, 0, zvalue);
 
 			if (sempos != NULL) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.53 2009/03/10 23:39:40 helly Exp $ */
+/* $Id: uniqid.c,v 1.54 2009/03/26 20:02:29 felipe Exp $ */
 
 #include "php.h"
 
@@ -45,7 +45,7 @@ PHP_FUNCTION(uniqid)
 {
 	zstr prefix = EMPTY_ZSTR;
 	int prefix_len = 0;
-	zend_uchar str_type = ZEND_STR_TYPE;
+	zend_uchar str_type = IS_UNICODE;
 #if defined(__CYGWIN__)
 	zend_bool more_entropy = 1;
 #else

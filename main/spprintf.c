@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.56 2009/03/10 23:39:53 helly Exp $ */
+/* $Id: spprintf.c,v 1.57 2009/03/26 20:02:53 felipe Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -605,11 +605,7 @@ static void xbuf_format_converter(int unicode, smart_str *xbuf, const char *fmt,
 					break;
 
 				case 'v':
-					if (UG(unicode)) {
-						goto fmt_unicode;
-					} else {
-						goto fmt_string;
-					}
+					goto fmt_unicode;
 					break;
 
 				case 'R':

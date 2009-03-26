@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.62 2009/03/10 23:39:40 helly Exp $ */
+/* $Id: syslog.c,v 1.63 2009/03/26 22:30:05 felipe Exp $ */
 
 #include "php.h"
 
@@ -35,8 +35,6 @@
 #include <stdio.h>
 #include "basic_functions.h"
 #include "php_ext_syslog.h"
-
-static void start_syslog(TSRMLS_D);
 
 /* {{{ PHP_MINIT_FUNCTION
  */

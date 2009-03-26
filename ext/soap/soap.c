@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.262 2009/03/26 20:02:12 felipe Exp $ */
+/* $Id: soap.c,v 1.263 2009/03/26 22:16:48 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1373,7 +1373,7 @@ static HashTable* soap_create_typemap(sdlPtr sdl, HashTable *ht TSRMLS_DC)
 
 		if (Z_TYPE_PP(tmp) != IS_ARRAY) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong 'typemap' option");
-			return;
+			return NULL;
 		}
 		ht2 = Z_ARRVAL_PP(tmp);
 

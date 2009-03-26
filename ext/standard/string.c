@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.695 2009/03/26 20:02:29 felipe Exp $ */
+/* $Id: string.c,v 1.696 2009/03/26 22:16:48 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3643,7 +3643,6 @@ PHP_FUNCTION(chr)
 	UChar buf[2];
 	int buf_len;
 	long num;
-	char temp[2];
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &num) == FAILURE) {
 		return;

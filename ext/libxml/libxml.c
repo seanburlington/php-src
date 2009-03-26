@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.76 2009/03/26 20:01:57 felipe Exp $ */
+/* $Id: libxml.c,v 1.77 2009/03/26 22:16:48 felipe Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -850,7 +850,6 @@ int php_libxml_xmlCheckUTF8(const unsigned char *s)
 int php_libxml_register_export(zend_class_entry *ce, php_libxml_export_node export_function)
 {
 	php_libxml_func_handler export_hnd;
-	TSRMLS_FETCH();
 	
 	/* Initialize in case this module hasnt been loaded yet */
 	php_libxml_initialize();

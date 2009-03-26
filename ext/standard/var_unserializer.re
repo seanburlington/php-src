@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.78 2009/03/26 20:02:29 felipe Exp $ */
+/* $Id: var_unserializer.re,v 1.79 2009/03/26 22:16:48 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -691,7 +691,7 @@ use_double:
 }
 
 object ":" uiv ":" ["]	{
-	size_t len, len2, len3, maxlen;
+	size_t len, len2, maxlen;
 	long elements;
 	zstr class_name;
 	zend_class_entry *ce;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.59 2009/03/26 20:02:53 felipe Exp $ */
+/* $Id: php_xmlreader.c,v 1.60 2009/03/27 23:08:28 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1372,7 +1372,7 @@ PHP_MINIT_FUNCTION(xmlreader)
 	ce.create_object = xmlreader_objects_new;
 	xmlreader_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
 
-	zend_u_hash_init(&xmlreader_prop_handlers, 0, NULL, NULL, 1, (zend_bool)zend_ini_long("unicode.semantics", sizeof("unicode.semantics"), 1));
+	zend_u_hash_init(&xmlreader_prop_handlers, 0, NULL, NULL, 1, 1);
 
 	xmlreader_register_prop_handler(&xmlreader_prop_handlers, "attributeCount", xmlTextReaderAttributeCount, NULL, IS_LONG TSRMLS_CC);
 	xmlreader_register_prop_handler(&xmlreader_prop_handlers, "baseURI", NULL, xmlTextReaderConstBaseUri, IS_STRING TSRMLS_CC);

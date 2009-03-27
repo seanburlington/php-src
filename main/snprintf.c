@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.68 2009/03/10 23:39:53 helly Exp $ */
+/* $Id: snprintf.c,v 1.69 2009/03/27 19:50:56 felipe Exp $ */
 
 
 #include "php.h"
@@ -957,11 +957,7 @@ static int format_converter(register buffy * odp, const char *fmt, va_list ap) /
 					break;
 
 				case 'v':
-					if (UG(unicode)) {
-						goto fmt_unicode;
-					} else {
-						goto fmt_string;
-					}
+					goto fmt_unicode;
 					break;
 
 				case 'R':

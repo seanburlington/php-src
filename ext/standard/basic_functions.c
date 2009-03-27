@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.86 2009/01/19 02:35:21 pajoye Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.87 2009/03/27 02:32:56 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5640,8 +5640,6 @@ PHP_FUNCTION(register_tick_function)
 	if (tick_fe.arg_count < 1) {
 		WRONG_PARAM_COUNT;
 	}
-	
-	php_error_docref(NULL TSRMLS_CC, E_DEPRECATED, "Ticks is deprecated and will be removed in PHP 6");
 
 	tick_fe.arguments = (zval **) safe_emalloc(sizeof(zval *), tick_fe.arg_count, 0);
 

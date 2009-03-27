@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_statistics.c,v 1.10 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: mysqlnd_statistics.c,v 1.11 2009/03/27 19:28:26 felipe Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -168,7 +168,7 @@ mysqlnd_fill_stats_hash(const MYSQLND_STATS * const stats, zval *return_value TS
 		
 		sprintf((char *)&tmp, MYSQLND_LLU_SPEC, stats->values[i]);
 #if PHP_MAJOR_VERSION >= 6
-		if (UG(unicode)) {
+		{
 			UChar *ustr, *tstr;
 			int ulen, tlen;
 
@@ -178,12 +178,11 @@ mysqlnd_fill_stats_hash(const MYSQLND_STATS * const stats, zval *return_value TS
 			add_u_assoc_unicode_ex(return_value, IS_UNICODE, ZSTR(ustr), ulen, tstr, 1);
 			efree(ustr);
 			efree(tstr);
-		} else
-#endif		
-		{	
-			add_assoc_string_ex(return_value, mysqlnd_stats_values_names[i].s,
-								mysqlnd_stats_values_names[i].l + 1, tmp, 1);
 		}
+#else
+		add_assoc_string_ex(return_value, mysqlnd_stats_values_names[i].s,
+							mysqlnd_stats_values_names[i].l + 1, tmp, 1);
+#endif
 	}
 }
 /* }}} */

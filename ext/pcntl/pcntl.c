@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.4.2.19 2009/03/28 03:12:52 mbeccati Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.4.2.20 2009/03/28 03:21:04 mbeccati Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -922,6 +922,14 @@ static void pcntl_sigwaitinfo(INTERNAL_FUNCTION_PARAMETERS, int timedwait) /* {{
 	}
 	if (signo == -1 && errno != EAGAIN) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
+	}
+
+	/*
+	 * sigtimedwait and sigwaitinfo can return 0 on success on some 
+	 * platforms, e.g. NetBSD
+	 */
+	if (!signo && siginfo.si_signo) {
+		signo = siginfo.si_signo;
 	}
 
 	if (signo > 0 && user_siginfo) {

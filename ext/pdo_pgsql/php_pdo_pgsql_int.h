@@ -12,16 +12,19 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Edin Kadribasic <edink@emini.dk>                             |
+  | Authors: Edin Kadribasic <edink@emini.dk>                            |
+  |          Ilia Alshanestsky <ilia@prohost.org>                        |
+  |          Wez Furlong <wez@php.net>                                   |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.18 2009/03/10 23:39:31 helly Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.19 2009/03/28 02:34:02 mbeccati Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
 
 #include <libpq-fe.h>
+#include <libpq/libpq-fs.h>
 #include <php.h>
 
 #define PHP_PDO_PGSQL_CONNECTION_FAILURE_SQLSTATE "08006"
@@ -57,17 +60,17 @@ typedef struct {
 	char *cursor_name;
 #if HAVE_PQPREPARE
 	char *stmt_name;
+	char *query;
 	char **param_values;
 	int *param_lengths;
 	int *param_formats;
+	Oid *param_types;
+	zend_bool is_prepared;
 #endif
 } pdo_pgsql_stmt;
 
 typedef struct {
-	char		*repr;
-	long		repr_len;
-	int		pgsql_type;
-	void		*thing;	/* for LOBS, REFCURSORS etc. */
+	Oid     oid;
 } pdo_pgsql_bound_param;
 
 extern pdo_driver_t pdo_pgsql_driver;
@@ -87,6 +90,17 @@ extern struct pdo_stmt_methods pgsql_stmt_methods;
 enum {
 	PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT = PDO_ATTR_DRIVER_SPECIFIC,
 };
+
+struct pdo_pgsql_lob_self {
+	pdo_dbh_t *dbh;
+	PGconn *conn;
+	int lfd;
+	Oid oid;
+};
+
+
+php_stream *pdo_pgsql_create_lob_stream(pdo_dbh_t *stmt, int lfd, Oid oid TSRMLS_DC);
+extern php_stream_ops pdo_pgsql_lob_stream_ops;
 
 #endif /* PHP_PDO_PGSQL_INT_H */
 

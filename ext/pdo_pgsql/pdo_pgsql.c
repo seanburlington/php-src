@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.19 2009/03/10 23:39:31 helly Exp $ */
+/* $Id: pdo_pgsql.c,v 1.20 2009/03/28 02:34:02 mbeccati Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,7 +70,7 @@ zend_module_entry pdo_pgsql_module_entry = {
 	PHP_RINIT(pdo_pgsql),
 	PHP_RSHUTDOWN(pdo_pgsql),
 	PHP_MINFO(pdo_pgsql),
-	"0.9",
+	"1.0.2",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -86,7 +86,7 @@ ZEND_GET_MODULE(pdo_pgsql)
 PHP_MINIT_FUNCTION(pdo_pgsql)
 {
 	php_pdo_register_driver(&pdo_pgsql_driver);
-	REGISTER_PDO_CONST_LONG("PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT", PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT);
+	REGISTER_PDO_CLASS_CONST_LONG("PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT", PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT);
 	return SUCCESS;
 }
 /* }}} */
@@ -128,7 +128,7 @@ PHP_MINFO_FUNCTION(pdo_pgsql)
 	php_info_print_table_row(2, "PostgreSQL(libpq) Version", PG_VERSION);
 #endif	
 	php_info_print_table_row(2, "Module version", pdo_pgsql_module_entry.version);
-	php_info_print_table_row(2, "Revision", " $Id: pdo_pgsql.c,v 1.19 2009/03/10 23:39:31 helly Exp $ ");
+	php_info_print_table_row(2, "Revision", " $Id: pdo_pgsql.c,v 1.20 2009/03/28 02:34:02 mbeccati Exp $ ");
 
 	php_info_print_table_end();
 }

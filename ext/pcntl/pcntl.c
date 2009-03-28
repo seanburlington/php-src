@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.48.2.2.2.4.2.18 2009/03/28 01:32:50 mbeccati Exp $ */
+/* $Id: pcntl.c,v 1.48.2.2.2.4.2.19 2009/03/28 03:12:52 mbeccati Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -757,7 +757,7 @@ PHP_FUNCTION(pcntl_signal)
 	zend_bool restart_syscalls = 1;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz|b", &signo, &handle, &restart_syscalls) == FAILURE) {
-		RETURN_FALSE;
+		return;
 	}
 
 	if (!PCNTL_G(spares)) {

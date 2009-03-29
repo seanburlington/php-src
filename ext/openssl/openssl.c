@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.179 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: openssl.c,v 1.180 2009/03/29 23:32:17 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -557,10 +557,12 @@ static void add_ascii_assoc_name_entry(zval * val, char * key, X509_NAME * name,
 				str = X509_NAME_ENTRY_get_data(ne);
 				if (ASN1_STRING_type(str) != V_ASN1_UTF8STRING) {
 					to_add_len = ASN1_STRING_to_UTF8(&to_add, str);
-					add_next_index_utf8_stringl(subentries, (char *)to_add, to_add_len, 1);
 				} else {
 					to_add = ASN1_STRING_data(str);
 					to_add_len = ASN1_STRING_length(str);
+				}
+
+				if (to_add_len != -1) {
 					add_next_index_utf8_stringl(subentries, (char *)to_add, to_add_len, 1);
 				}
 			}
@@ -573,7 +575,7 @@ static void add_ascii_assoc_name_entry(zval * val, char * key, X509_NAME * name,
 		} else {
 			zval_dtor(subentries);
 			FREE_ZVAL(subentries);
-			if (obj_cnt && str) {
+			if (obj_cnt && str && to_add_len != -1) {
 				add_ascii_assoc_utf8_stringl(subitem, sname, (char *)to_add, to_add_len, 1);
 			}
 		}

@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.13.4.1.2.8 2009/03/24 22:15:46 pajoye Exp $
+<?php # $Id: mkdist.php,v 1.13.4.1.2.9 2009/03/30 14:32:52 kalle Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -214,7 +214,9 @@ copy_file_list($build_dir, "$dist_dir", $sapi_targets);
 copy_file_list($build_dir, "$dist_dir/ext", $ext_targets);
 
 /* pecl sapi and extensions */
-copy_file_list($build_dir, $pecl_dir, $pecl_targets);
+if(sizeof($pecl_targets)) {
+	copy_file_list($build_dir, $pecl_dir, $pecl_targets);
+}
 
 /* populate reading material */
 $text_files = array(

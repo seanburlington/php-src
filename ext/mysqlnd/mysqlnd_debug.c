@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.c,v 1.13 2009/03/27 19:28:26 felipe Exp $ */
+/* $Id: mysqlnd_debug.c,v 1.14 2009/03/30 13:53:35 johannes Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -618,7 +618,7 @@ MYSQLND_CLASS_METHODS_END;
 
 
 /* {{{ mysqlnd_debug_init */
-MYSQLND_DEBUG *mysqlnd_debug_init(TSRMLS_D)
+PHPAPI MYSQLND_DEBUG *mysqlnd_debug_init(TSRMLS_D)
 {
 	MYSQLND_DEBUG *ret = ecalloc(1, sizeof(MYSQLND_DEBUG));
 #ifdef ZTS

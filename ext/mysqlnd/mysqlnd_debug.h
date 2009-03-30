@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.h,v 1.11 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: mysqlnd_debug.h,v 1.12 2009/03/30 13:53:35 johannes Exp $ */
 
 #ifndef MYSQLND_DEBUG_H
 #define MYSQLND_DEBUG_H
@@ -58,7 +58,7 @@ struct st_mysqlnd_debug
 };
 
 
-MYSQLND_DEBUG *mysqlnd_debug_init(TSRMLS_D);
+PHPAPI MYSQLND_DEBUG *mysqlnd_debug_init(TSRMLS_D);
 
 #define MYSQLND_MEM_D 	TSRMLS_DC ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC
 

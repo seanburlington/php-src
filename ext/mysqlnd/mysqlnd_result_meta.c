@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_result_meta.c,v 1.11 2009/03/27 19:28:26 felipe Exp $ */
+/* $Id: mysqlnd_result_meta.c,v 1.12 2009/03/30 19:43:47 felipe Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -143,8 +143,10 @@ MYSQLND_METHOD(mysqlnd_res_meta, read_metadata)(MYSQLND_RES_METADATA * const met
 {
 	unsigned int i = 0;
 	php_mysql_packet_res_field field_packet;
+#if PHP_MAJOR_VERSION >= 6
 	UChar *ustr;
 	int ulen;
+#endif
 
 	DBG_ENTER("mysqlnd_res_meta::read_metadata");
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.17 2009/03/24 09:44:16 pajoye Exp $ */
+/* $Id: php_odbc.c,v 1.189.2.4.2.7.2.18 2009/03/30 14:25:54 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3367,7 +3367,6 @@ PHP_FUNCTION(odbc_primarykeys)
 	char *cat = NULL, *schema = NULL, *table = NULL;
 	int cat_len, schema_len, table_len;
 	RETCODE rc;
-	int argc;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rsss", &pv_conn, &cat, &cat_len, &schema, &schema_len, &table, &table_len) == FAILURE) {
 		return;

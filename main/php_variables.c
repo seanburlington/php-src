@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.153 2009/03/26 20:02:53 felipe Exp $ */
+/* $Id: php_variables.c,v 1.154 2009/03/30 14:21:03 kalle Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -531,6 +531,9 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 	
 	while (var) {
 		int var_len;
+		UChar *u_var, *u_val;
+		int u_var_len, u_val_len;
+		UErrorCode status = U_ZERO_ERROR;
 
 		val = strchr(var, '=');
 
@@ -549,10 +552,6 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 		}
 		var_len = strlen(var);
 		php_url_decode(var, var_len);
-
-		UChar *u_var, *u_val;
-		int u_var_len, u_val_len;
-		UErrorCode status = U_ZERO_ERROR;
 
 		zend_string_to_unicode_ex(input_conv, &u_var, &u_var_len, var, var_len, &status);
 		if (U_FAILURE(status)) {

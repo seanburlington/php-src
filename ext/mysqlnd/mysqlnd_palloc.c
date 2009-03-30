@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.c,v 1.2.2.14 2008/12/31 11:15:39 sebastian Exp $ */
+/* $Id: mysqlnd_palloc.c,v 1.2.2.15 2009/03/30 16:52:33 felipe Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -36,13 +36,6 @@ char * mysqlnd_palloc_get_zval_name = "mysqlnd_palloc_get_zval";
 #else
 #define LOCK_PCACHE(cache)
 #define UNLOCK_PCACHE(cache)
-#endif
-
-
-#if PHP_MAJOR_VERSION < 6
-#define IS_UNICODE_DISABLED  (1)
-#else
-#define IS_UNICODE_DISABLED  (!UG(unicode))
 #endif
 
 

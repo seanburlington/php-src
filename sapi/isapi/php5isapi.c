@@ -16,7 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5isapi.c,v 1.16 2009/03/10 23:40:02 helly Exp $ */
+/* $Id: php5isapi.c,v 1.17 2009/03/30 14:24:01 kalle Exp $ */
 
 #include "php.h"
 #include <httpext.h>
@@ -215,7 +215,7 @@ static int sapi_isapi_ub_write(const char *str, uint str_length TSRMLS_DC)
 }
 
 
-static int sapi_isapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC)
+static int sapi_isapi_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
 	return SAPI_HEADER_ADD;
 }

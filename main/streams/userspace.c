@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.54 2009/03/25 19:55:50 bjori Exp $ */
+/* $Id: userspace.c,v 1.55 2009/03/31 16:25:58 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -515,7 +515,7 @@ PHP_FUNCTION(stream_wrapper_register)
 			RETURN_TRUE;
 		} else {
 			/* We failed.  But why? */
-			if (zend_hash_exists(php_stream_get_url_stream_wrappers_hash(), protocol, protocol_len)) {
+			if (zend_hash_exists(php_stream_get_url_stream_wrappers_hash(), protocol, protocol_len+1)) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Protocol %s:// is already defined", protocol);
 			} else {
 				/* Hash doesn't exist so it must have been an invalid protocol scheme */

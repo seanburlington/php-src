@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.59.2.3.2.5.2.5 2008/12/31 11:15:37 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.59.2.3.2.5.2.6 2009/03/31 18:05:36 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -25,7 +25,9 @@
 #define HAVE_GDIMAGECREATEFROMPNG 1
 
 #if HAVE_LIBFREETYPE
-#define ENABLE_GD_TTF
+# ifndef ENABLE_GD_TTF
+#  define ENABLE_GD_TTF
+# endif
 #endif
 
 #if HAVE_LIBGD

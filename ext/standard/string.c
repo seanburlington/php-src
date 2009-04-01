@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.69.2.44 2009/03/17 00:02:39 mattwil Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.69.2.45 2009/04/01 14:00:38 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1595,13 +1595,15 @@ PHP_FUNCTION(stristr)
 	haystack_orig = estrndup(Z_STRVAL_PP(haystack), Z_STRLEN_PP(haystack));
 
 	if (Z_TYPE_PP(needle) == IS_STRING) {
+		char *orig_needle;
 		if (!Z_STRLEN_PP(needle)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter");
 			efree(haystack_orig);
 			RETURN_FALSE;
 		}
-
-		found = php_stristr(Z_STRVAL_PP(haystack), Z_STRVAL_PP(needle),	Z_STRLEN_PP(haystack), Z_STRLEN_PP(needle));
+		orig_needle = estrndup(Z_STRVAL_PP(needle), Z_STRLEN_PP(needle));
+		found = php_stristr(Z_STRVAL_PP(haystack), orig_needle,	Z_STRLEN_PP(haystack), Z_STRLEN_PP(needle));
+		efree(orig_needle);
 	} else {
 		SEPARATE_ZVAL(needle);
 		convert_to_long(*needle);

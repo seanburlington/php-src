@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.445.2.14.2.82 2009/03/03 11:50:32 kalle Exp $ */
+/* $Id: string.c,v 1.445.2.14.2.83 2009/04/01 17:07:46 mattwil Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1042,7 +1042,7 @@ PHP_FUNCTION(explode)
 
 	if (limit == 0 || limit == 1) {
 		add_index_stringl(return_value, 0, Z_STRVAL_PP(str), Z_STRLEN_PP(str), 1);
-	} else if (limit < -1 && argc == 3) {
+	} else if (limit < 0 && argc == 3) {
 		php_explode_negative_limit(*delim, *str, return_value, limit);
 	} else {
 		php_explode(*delim, *str, return_value, limit);

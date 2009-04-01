@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.13.4.1.2.9 2009/03/30 14:32:52 kalle Exp $
+<?php # $Id: mkdist.php,v 1.13.4.1.2.10 2009/04/01 09:21:31 kalle Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -112,6 +112,13 @@ function copy_file_list($source_dir, $dest_dir, $list)
 	global $is_debug, $dist_dir;
 
 	foreach ($list as $item) {
+		if (empty($item)) {
+			continue;
+		} elseif (!is_file($source_dir . DIRECTORY_SEPARATOR . $item)) {
+			echo "WARNING: $item not found\n";
+			continue;
+		}
+
 		echo "Copying $item from $source_dir to $dest_dir\n";
 		copy($source_dir . DIRECTORY_SEPARATOR . $item, $dest_dir . DIRECTORY_SEPARATOR . $item);
 		if ($is_debug) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.53 2009/02/01 15:06:19 cseiler Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.54 2009/04/02 21:30:09 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -218,6 +218,7 @@ static void _default_get_entry(zval *object, char *name, int name_len, zval *ret
 	INIT_PZVAL(return_value);
 }
 
+#ifdef ilia_0
 static void _default_lookup_entry(zval *object, char *name, int name_len, zval **return_value TSRMLS_DC) /* {{{ */
 {
 	zval **value;
@@ -229,6 +230,7 @@ static void _default_lookup_entry(zval *object, char *name, int name_len, zval *
 	}
 }
 /* }}} */
+#endif
 
 static void reflection_register_implement(zend_class_entry *class_entry, zend_class_entry *interface_entry TSRMLS_DC)
 {
@@ -5435,7 +5437,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.53 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.54 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5449,7 +5451,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.164.2.33.2.45.2.53 $",
+	"$Revision: 1.164.2.33.2.45.2.54 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

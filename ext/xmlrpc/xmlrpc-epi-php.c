@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.19 2009/03/19 00:18:48 iliaa Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.6.2.20 2009/04/02 15:52:57 felipe Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -1157,8 +1157,8 @@ PHP_FUNCTION(xmlrpc_server_call_method)
 			}
 
 			/* cleanup after ourselves.  what a sty! */
-			zval_dtor(data.xmlrpc_method);
-			FREE_ZVAL(data.xmlrpc_method);
+			zval_ptr_dtor(&data.xmlrpc_method);
+
 			zval_dtor(data.return_data);
 			FREE_ZVAL(data.return_data);
 

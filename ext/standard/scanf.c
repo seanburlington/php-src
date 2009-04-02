@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.47 2009/03/10 23:39:40 helly Exp $ */
+/* $Id: scanf.c,v 1.48 2009/04/02 05:16:55 kalle Exp $ */
 
 /*
 	scanf.c --
@@ -574,7 +574,7 @@ notXpg:
 		gotSequential = 1;
 		if (gotXpg) {
 mixedXPG:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", "cannot mix \"\%\" and \"\%n$\" conversion specifiers");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", "cannot mix \"%\" and \"%n$\" conversion specifiers");
 			goto error;
 		}
 

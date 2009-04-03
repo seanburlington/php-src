@@ -1,4 +1,4 @@
-$Id: UPGRADING,v 1.1.2.3.2.1.2.2 2009/03/28 01:29:14 lbarnaud Exp $
+$Id: UPGRADING,v 1.1.2.3.2.1.2.3 2009/04/03 23:56:26 felipe Exp $
 
 UPGRADE NOTES - PHP 5.3
 
@@ -391,6 +391,13 @@ UPGRADE NOTES - PHP 5.3
                        DateTime::getLastErrors()
        - PDO_Firebird: PDO::setAttribute()
        - Reflection:   ReflectionProperty::setAccessible()
+                       ReflectionFunction::getClosureThis()
+                       ReflectionFunction::inNamespace()
+                       ReflectionFunction::getNamespaceName()
+                       ReflectionFunction::getShortName()
+                       ReflectionClass::inNamespace()
+                       ReflectionClass::getNamespaceName()
+                       ReflectionClass::getShortName()
        - XSL:          XSLTProcessor::setProfiling()
 
      h. New class constants

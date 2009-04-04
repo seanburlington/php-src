@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.341 2009/03/26 20:01:57 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.342 2009/04/04 14:35:28 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4726,7 +4726,7 @@ ZEND_METHOD(reflection_property, getValue)
 		}
 		zend_u_unmangle_property_name(IS_UNICODE, ref->prop.name, ref->prop.name_length, &class_name, &prop_name);
 		prop_name_len = u_strlen(prop_name.u);
-		member_p = zend_u_read_property(Z_OBJCE_P(object), object, IS_UNICODE, prop_name, prop_name_len, 1 TSRMLS_CC);
+		member_p = zend_u_read_property(ref->ce, object, IS_UNICODE, prop_name, prop_name_len, 1 TSRMLS_CC);
 		*return_value= *member_p;
 		zval_copy_ctor(return_value);
 		INIT_PZVAL(return_value);
@@ -4807,7 +4807,7 @@ ZEND_METHOD(reflection_property, setValue)
 		}
 		zend_u_unmangle_property_name(IS_UNICODE, ref->prop.name, ref->prop.name_length, &class_name, &prop_name);
 		prop_name_len = u_strlen(prop_name.u);
-		zend_u_update_property(Z_OBJCE_P(object), object, IS_UNICODE, prop_name, prop_name_len, value TSRMLS_CC);
+		zend_u_update_property(ref->ce, object, IS_UNICODE, prop_name, prop_name_len, value TSRMLS_CC);
 	}
 }
 /* }}} */
@@ -5680,7 +5680,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.341 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.342 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5694,7 +5694,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.341 $",
+	"$Revision: 1.342 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

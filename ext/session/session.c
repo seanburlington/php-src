@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.417.2.8.2.40.2.20 2008/12/31 11:15:42 sebastian Exp $ */
+/* $Id: session.c,v 1.417.2.8.2.40.2.21 2009/04/06 11:45:25 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -770,7 +770,7 @@ static PHP_INI_MH(OnUpdateHashFunc) /* {{{ */
 		return SUCCESS;
 	}
 }
-#endif /* HAVE_HASH_EXT */
+#endif /* HAVE_HASH_EXT }}} */
 
 	return FAILURE;
 }

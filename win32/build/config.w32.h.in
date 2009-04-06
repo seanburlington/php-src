@@ -1,9 +1,11 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.11 2009/02/02 09:40:55 pajoye Exp $
+	$Id: config.w32.h.in,v 1.7.2.4.2.3.2.12 2009/04/06 09:14:54 kalle Exp $
 */
 
 /* Define the minimum supported version */
+#undef _WIN32_WINNT
+#undef NTDDI_VERSION
 #define _WIN32_WINNT 0x500
 #define NTDDI_VERSION  _WIN32_WIN2K
 

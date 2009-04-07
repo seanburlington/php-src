@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.20.2.32.2.35 2009/04/07 09:26:22 pajoye Exp $ */
+/* $Id: gd.c,v 1.312.2.20.2.32.2.36 2009/04/07 12:45:26 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -48,9 +48,9 @@
 #ifdef PHP_WIN32
 # include <io.h>
 # include <fcntl.h>
-#include <windows.h>
-#include <Winuser.h>
-#include <Wingdi.h>
+# include <windows.h>
+# include <Winuser.h>
+# include <Wingdi.h>
 #endif
 
 #if HAVE_LIBGD

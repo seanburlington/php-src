@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.68.2.3.2.5.2.15 2009/03/13 13:43:29 rrichards Exp $ */
+/* $Id: document.c,v 1.68.2.3.2.5.2.16 2009/04/07 15:32:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1196,6 +1196,9 @@ PHP_FUNCTION(dom_document_import_node)
 	if (nodep->doc == docp) {
 		retnodep = nodep;
 	} else {
+		if ((recursive == 0) && (nodep->type == XML_ELEMENT_NODE)) {
+			recursive = 2;
+		}
 		retnodep = xmlDocCopyNode(nodep, docp, recursive);
 		if (!retnodep) {
 			RETURN_FALSE;

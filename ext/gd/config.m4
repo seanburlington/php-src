@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.175 2009/01/14 18:57:51 tabe Exp $
+dnl $Id: config.m4,v 1.176 2009/04/07 09:44:21 pajoye Exp $
 dnl
 
 dnl
@@ -309,7 +309,7 @@ elif test "$PHP_GD" != "no"; then
   fi
 
   GD_MODULE_TYPE=external
-  extra_sources="gdcache.c"
+  extra_sources="gdcache.c libgd/gd_compat.c"
 
   GD_FEATURES=`$GDLIB_CONFIG --features`
 

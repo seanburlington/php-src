@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.154.2.1.2.6.2.2 2009/01/14 19:05:59 tabe Exp $
+dnl $Id: config.m4,v 1.154.2.1.2.6.2.3 2009/04/07 09:26:22 pajoye Exp $
 dnl
 
 dnl
@@ -184,6 +184,7 @@ AC_DEFUN([PHP_GD_FREETYPE2],[
       PHP_ADD_INCLUDE($FREETYPE2_INC_DIR)
       AC_DEFINE(USE_GD_IMGSTRTTF, 1, [ ])
       AC_DEFINE(HAVE_LIBFREETYPE,1,[ ])
+      AC_DEFINE(ENABLE_GD_TTF,1,[ ])
     ],[
       AC_MSG_ERROR([Problem with freetype.(a|so). Please check config.log for more information.])
     ],[
@@ -328,7 +329,8 @@ dnl enable the support in bundled GD library
   if test -n "$FREETYPE2_DIR"; then
     AC_DEFINE(HAVE_GD_STRINGFT,   1, [ ])
     AC_DEFINE(HAVE_GD_STRINGFTEX, 1, [ ])
-    GDLIB_CFLAGS="$GDLIB_CFLAGS -DHAVE_LIBFREETYPE"
+    AC_DEFINE(ENABLE_GD_TTF, 1, [ ])
+    GDLIB_CFLAGS="$GDLIB_CFLAGS -DHAVE_LIBFREETYPE -DENABLE_GD_TTF"
   fi
 
   if test -n "$USE_GD_JIS_CONV"; then
@@ -340,7 +342,7 @@ else
 
  if test "$PHP_GD" != "no"; then
   GD_MODULE_TYPE=external
-  extra_sources="gdcache.c"
+  extra_sources="gdcache.c libgd/gd_compat.c"
 
 dnl Various checks for GD features
   PHP_GD_ZLIB

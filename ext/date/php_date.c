@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.66 2009/03/27 19:22:29 bjori Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.67 2009/04/07 20:05:50 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2268,10 +2268,6 @@ static void date_object_free_storage_period(void *object TSRMLS_DC)
 /* Advanced Interface */
 static zval * date_instantiate(zend_class_entry *pce, zval *object TSRMLS_DC)
 {
-	if (!object) {
-		ALLOC_ZVAL(object);
-	}
-
 	Z_TYPE_P(object) = IS_OBJECT;
 	object_init_ex(object, pce);
 	Z_SET_REFCOUNT_P(object, 1);
@@ -2461,12 +2457,14 @@ static int php_date_initialize_from_hash(zval **return_value, php_date_obj **dat
 
 						tzi = php_date_parse_tzfile(Z_STRVAL_PP(z_timezone), DATE_TIMEZONEDB TSRMLS_CC);
 
+						ALLOC_INIT_ZVAL(tmp_obj);
 						tzobj = zend_object_store_get_object(date_instantiate(date_ce_timezone, tmp_obj TSRMLS_CC) TSRMLS_CC);
 						tzobj->type = TIMELIB_ZONETYPE_ID;
 						tzobj->tzi.tz = tzi;
 						tzobj->initialized = 1;
 
 						date_initialize(*dateobj, Z_STRVAL_PP(z_date), Z_STRLEN_PP(z_date), NULL, tmp_obj, 0 TSRMLS_CC);
+						zval_ptr_dtor(&tmp_obj);
 						return 1;
 				}
 			}

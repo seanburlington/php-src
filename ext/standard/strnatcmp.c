@@ -38,7 +38,7 @@
 
 #if 0
 static char const *version UNUSED =
-    "$Id: strnatcmp.c,v 1.9 2003/04/16 21:10:29 moriyoshi Exp $";
+    "$Id: strnatcmp.c,v 1.10.6.1 2009/04/08 18:16:06 rasmus Exp $";
 #endif
 /* {{{ compare_right
  */
@@ -116,10 +116,10 @@ PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len
 		ca = *ap; cb = *bp;
 
 		/* skip over leading spaces or zeros */
-		while (isspace((int)(unsigned char)ca))
+		while (isspace((int)(unsigned char)ca) || (ca == '0' && ap+1 < aend))
 			ca = *++ap;
 
-		while (isspace((int)(unsigned char)cb))
+		while (isspace((int)(unsigned char)cb) || (cb == '0' && bp+1 < bend))
 			cb = *++bp;
 
 		/* process run of digits */
@@ -153,13 +153,13 @@ PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len
 			return +1;
 
 		++ap; ++bp;
-		if (ap == aend && bp == bend)
+		if (ap >= aend && bp >= bend)
 			/* The strings compare the same.  Perhaps the caller
 			   will want to call strcmp to break the tie. */
 			return 0;
-		else if (ap == aend)
+		else if (ap >= aend)
 			return -1;
-		else if (bp == bend)
+		else if (bp >= bend)
 			return 1;
 	}
 }

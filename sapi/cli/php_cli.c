@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.209 2009/04/09 10:07:24 bjori Exp $ */
+/* $Id: php_cli.c,v 1.210 2009/04/09 10:19:15 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -510,9 +510,9 @@ static void php_cli_usage(char *argv0)
 				"  -F <file>        Parse and execute <file> for every input line\n"
 				"  -E <end_code>    Run PHP <end_code> after processing all input lines\n"
 				"  -H               Hide any passed arguments from external tools.\n"
-				"  -s               Outputs HTML syntax highlighted source.\n"
+				"  -s               Output HTML syntax highlighted source.\n"
 				"  -v               Version number\n"
-				"  -w               Outputs source with stripped comments and whitespace.\n"
+				"  -w               Output source with stripped comments and whitespace.\n"
 				"  -z <file>        Load Zend extension <file>.\n"
 				"\n"
 				"  args...          Arguments passed to script. Use -- args when first argument\n"

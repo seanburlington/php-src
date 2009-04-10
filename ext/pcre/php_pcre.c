@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.250 2009/03/30 14:21:03 kalle Exp $ */
+/* $Id: php_pcre.c,v 1.251 2009/04/10 15:48:22 nlopess Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -220,7 +220,7 @@ static char **make_subpats_table(int num_subpats, pcre_cache_entry *pce TSRMLS_D
 		}
 
 		while (ni++ < name_cnt) {
-			name_idx = 0xff * name_table[0] + name_table[1];
+			name_idx = 0xff * (unsigned char)name_table[0] + (unsigned char)name_table[1];
 			subpat_names[name_idx] = name_table + 2;
 			if (is_numeric_string(subpat_names[name_idx], strlen(subpat_names[name_idx]), NULL, NULL, 0) > 0) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Numeric named subpatterns are not allowed");

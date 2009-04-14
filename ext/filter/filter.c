@@ -19,7 +19,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.52.2.46 2009/04/13 19:37:35 stas Exp $ */
+/* $Id: filter.c,v 1.52.2.47 2009/04/14 14:18:49 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,7 +101,7 @@ zend_module_entry filter_module_entry = {
 	filter_functions,
 	PHP_MINIT(filter),
 	PHP_MSHUTDOWN(filter),
-	PHP_RINIT(filter),
+	NULL,
 	PHP_RSHUTDOWN(filter),
 	PHP_MINFO(filter),
 	"0.11.0",
@@ -249,20 +249,6 @@ PHP_MSHUTDOWN_FUNCTION(filter)
 }
 /* }}} */
 
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(filter)
-{
-	IF_G(get_array) = NULL;
-	IF_G(post_array) = NULL;
-	IF_G(cookie_array) = NULL;
-	IF_G(server_array) = NULL;
-	IF_G(env_array) = NULL;
-	IF_G(session_array) = NULL;
-	return SUCCESS;
-}
-/* }}} */
-
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
 #define VAR_ARRAY_COPY_DTOR(a)   \
@@ -289,7 +275,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.46 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.52.2.47 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

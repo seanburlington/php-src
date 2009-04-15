@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.105 2009/03/10 23:39:40 helly Exp $ */
+/* $Id: mail.c,v 1.106 2009/04/15 14:25:20 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -75,7 +75,7 @@ extern long php_getuid(void);
 PHP_FUNCTION(ezmlm_hash)
 {
 	char *str = NULL;
-	unsigned long h = 5381L;
+	unsigned int h = 5381;
 	int j, str_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s&", &str, &str_len, UG(ascii_conv)) == FAILURE) {

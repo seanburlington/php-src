@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.22 2009/02/03 19:22:40 iliaa Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.23 2009/04/16 05:32:38 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -229,7 +229,7 @@ static int php_open_listen_sock(php_socket **php_sock, int port, int backlog TSR
 	sock->type = PF_INET;
 
 	if (bind(sock->bsd_socket, (struct sockaddr *)&la, sizeof(la)) < 0) {
-		PHP_SOCKET_ERROR(sock, "unable to bind to given adress", errno);
+		PHP_SOCKET_ERROR(sock, "unable to bind to given address", errno);
 		close(sock->bsd_socket);
 		efree(sock);
 		return 0;

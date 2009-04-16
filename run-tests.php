@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.37.2.59 2009/03/12 20:45:43 zoe Exp $ */
+/* $Id: run-tests.php,v 1.226.2.37.2.60 2009/04/16 13:41:50 bjori Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -59,10 +59,25 @@ NO_PROC_OPEN_ERROR;
 exit;
 }
 
-// __DIR__ is available from 5.3.0
+// Version constants only available as of 5.2.8
+if (!defined("PHP_VERSION_ID")) {
+	list($major, $minor, $bug) = explode(".", phpversion(), 3);
+	$bug = (int)$bug; // Many distros make up their own versions
+	if ($bug < 10) {
+		$bug = "0$bug";
+	}
+
+	define("PHP_VERSION_ID", "{$major}0{$minor}$bug");
+	define("PHP_MAJOR_VERSION", $major);
+}
+
+// __DIR__ and FILE_BINARY is available from 5.3.0
 if (PHP_VERSION_ID < 50300) {
 	define('__DIR__', realpath(dirname(__FILE__)));
+	define('FILE_BINARY', 0);
 }
+
+
 
 // If timezone is not set, use UTC.
 if (ini_get('date.timezone') == '') {
@@ -617,7 +632,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.37.2.59 $' . "\n";
+					echo '$Revision: 1.226.2.37.2.60 $' . "\n";
 					exit(1);
 
 				default:

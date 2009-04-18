@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.28 2009/04/16 22:14:44 iliaa Exp $ */
+/* $Id: firebird_driver.c,v 1.29 2009/04/18 18:55:18 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,7 @@
 #include "php.h"
 #ifdef ZEND_ENGINE_2
 # include "zend_exceptions.h"
-#else
+#endif
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "pdo/php_pdo.h"

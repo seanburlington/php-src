@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.113.2.3.2.11 2008/12/31 11:17:44 sebastian Exp $ */
+/* $Id: exec.c,v 1.113.2.3.2.12 2009/04/19 15:01:11 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -131,7 +131,9 @@ int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 
 			if (type == 1) {
 				PHPWRITE(buf, bufl);
-				sapi_flush(TSRMLS_C);
+				if (OG(ob_nesting_level) < 1) {
+					sapi_flush(TSRMLS_C);
+				}
 			} else if (type == 2) {
 				/* strip trailing whitespaces */	
 				l = bufl;

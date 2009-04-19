@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.409.2.6.2.28.2.29 2009/01/20 01:40:05 pajoye Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.28.2.30 2009/04/19 13:46:46 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -627,7 +627,10 @@ PHP_FUNCTION(file_put_contents)
 
 	switch (Z_TYPE_P(data)) {
 		case IS_RESOURCE:
-			numbytes = php_stream_copy_to_stream(srcstream, stream, PHP_STREAM_COPY_ALL);
+			numbytes = (int) php_stream_copy_to_stream_ex(srcstream, stream, PHP_STREAM_COPY_ALL);
+			if ((size_t)numbytes == PHP_STREAM_FAILURE) {
+				numbytes = -1;
+			}
 			break;
 		case IS_NULL:
 		case IS_LONG:
@@ -1783,7 +1786,7 @@ safe_to_copy:
 	deststream = php_stream_open_wrapper(dest, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 
 	if (srcstream && deststream) {
-		ret = php_stream_copy_to_stream(srcstream, deststream, PHP_STREAM_COPY_ALL) == 0 ? FAILURE : SUCCESS;
+		ret = php_stream_copy_to_stream_ex(srcstream, deststream, PHP_STREAM_COPY_ALL) == PHP_STREAM_FAILURE ? FAILURE : SUCCESS;
 	}
 	if (srcstream) {
 		php_stream_close(srcstream);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.140 2009/03/10 23:39:53 helly Exp $ */
+/* $Id: php_streams.h,v 1.141 2009/04/19 13:50:25 lbarnaud Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -525,13 +525,24 @@ END_EXTERN_C()
  * Uses mmap if the src is a plain file and at offset 0 */
 #define PHP_STREAM_COPY_ALL		((size_t)-1)
 
+#define PHP_STREAM_FAILURE		((size_t)-1)
+
 BEGIN_EXTERN_C()
+ZEND_ATTRIBUTE_DEPRECATED
 PHPAPI size_t _php_stream_ucopy_to_stream(php_stream *src, php_stream *dest, size_t maxlen, size_t maxchars STREAMS_DC TSRMLS_DC);
+ZEND_ATTRIBUTE_DEPRECATED
 PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);
 /* Preserve "characters" semantics by having maxlen refer to maxchars in a unicode context */
 #define php_stream_copy_to_stream(src, dest, maxlen)	( ((src)->readbuf_type == IS_STRING) \
 		? _php_stream_copy_to_stream((src), (dest), (maxlen) STREAMS_CC TSRMLS_CC) \
 		: _php_stream_ucopy_to_stream((src), (dest), -1, (maxlen) STREAMS_CC TSRMLS_CC) )
+
+PHPAPI size_t _php_stream_ucopy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen, size_t maxchars STREAMS_DC TSRMLS_DC);
+PHPAPI size_t _php_stream_copy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);
+/* Preserve "characters" semantics by having maxlen refer to maxchars in a unicode context */
+#define php_stream_copy_to_stream_ex(src, dest, maxlen)	( ((src)->readbuf_type == IS_STRING) \
+		? _php_stream_copy_to_stream_ex((src), (dest), (maxlen) STREAMS_CC TSRMLS_CC) \
+		: _php_stream_ucopy_to_stream_ex((src), (dest), -1, (maxlen) STREAMS_CC TSRMLS_CC) )
 
 /* read all data from stream and put into a buffer. Caller must free buffer when done.
  * The copy will use mmap if available. */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.35 2009/04/19 13:46:46 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.58.2.6.2.15.2.36 2009/04/19 17:10:35 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -443,7 +443,8 @@ PHP_FUNCTION(stream_copy_to_stream)
 	php_stream *src, *dest;
 	zval *zsrc, *zdest;
 	long maxlen = PHP_STREAM_COPY_ALL, pos = 0;
-	size_t ret;
+	size_t len;
+	int ret;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|ll", &zsrc, &zdest, &maxlen, &pos) == FAILURE) {
 		RETURN_FALSE;
@@ -457,12 +458,12 @@ PHP_FUNCTION(stream_copy_to_stream)
 		RETURN_FALSE;
 	}
 
-	ret = php_stream_copy_to_stream_ex(src, dest, maxlen);
+	ret = php_stream_copy_to_stream_ex(src, dest, maxlen, &len);
 
-	if (ret == PHP_STREAM_FAILURE) {
+	if (ret != SUCCESS) {
 		RETURN_FALSE;
 	}
-	RETURN_LONG(ret);
+	RETURN_LONG(len);
 }
 /* }}} */
 

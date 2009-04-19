@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.103.2.1.2.4.2.9 2009/04/19 13:46:47 lbarnaud Exp $ */
+/* $Id: php_streams.h,v 1.103.2.1.2.4.2.10 2009/04/19 17:10:34 lbarnaud Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -420,14 +420,12 @@ END_EXTERN_C()
  * Uses mmap if the src is a plain file and at offset 0 */
 #define PHP_STREAM_COPY_ALL		((size_t)-1)
 
-#define PHP_STREAM_FAILURE		((size_t)-1)
-
 BEGIN_EXTERN_C()
 ZEND_ATTRIBUTE_DEPRECATED
 PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);
 #define php_stream_copy_to_stream(src, dest, maxlen)	_php_stream_copy_to_stream((src), (dest), (maxlen) STREAMS_CC TSRMLS_CC)
-PHPAPI size_t _php_stream_copy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);
-#define php_stream_copy_to_stream_ex(src, dest, maxlen)	_php_stream_copy_to_stream_ex((src), (dest), (maxlen) STREAMS_CC TSRMLS_CC)
+PHPAPI size_t _php_stream_copy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen, size_t *len STREAMS_DC TSRMLS_DC);
+#define php_stream_copy_to_stream_ex(src, dest, maxlen, len)	_php_stream_copy_to_stream_ex((src), (dest), (maxlen), (len) STREAMS_CC TSRMLS_CC)
 
 
 /* read all data from stream and put into a buffer. Caller must free buffer when done.

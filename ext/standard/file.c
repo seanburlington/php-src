@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.541 2009/04/19 13:50:24 lbarnaud Exp $ */
+/* $Id: file.c,v 1.542 2009/04/19 17:09:46 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -661,12 +661,15 @@ PHP_FUNCTION(file_put_contents)
 	}
 
 	switch (Z_TYPE_P(data)) {
-		case IS_RESOURCE:
-			numchars = (int) php_stream_copy_to_stream_ex(srcstream, stream, PHP_STREAM_COPY_ALL);
-			if ((size_t)numchars == PHP_STREAM_FAILURE) {
+		case IS_RESOURCE: {
+			size_t len;
+			if (php_stream_copy_to_stream_ex(srcstream, stream, PHP_STREAM_COPY_ALL, &len) != SUCCESS) {
 				numchars = -1;
+			} else {
+				numchars = len;
 			}
 			break;
+		}
 		case IS_ARRAY:
 			if (zend_hash_num_elements(Z_ARRVAL_P(data))) {
 				zval **tmp;
@@ -1952,7 +1955,7 @@ safe_to_copy:
 	deststream = php_stream_open_wrapper(dest, "wb", REPORT_ERRORS, NULL);
 
 	if (srcstream && deststream) {
-		ret = php_stream_copy_to_stream_ex(srcstream, deststream, PHP_STREAM_COPY_ALL) == PHP_STREAM_FAILURE ? FAILURE : SUCCESS;
+		ret = php_stream_copy_to_stream_ex(srcstream, deststream, PHP_STREAM_COPY_ALL, NULL);
 	}
 	if (srcstream) {
 		php_stream_close(srcstream);

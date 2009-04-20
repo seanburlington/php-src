@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.54 2009/03/26 20:02:29 felipe Exp $ */
+/* $Id: uniqid.c,v 1.55 2009/04/20 06:55:11 pajoye Exp $ */
 
 #include "php.h"
 
@@ -27,6 +27,7 @@
 
 #include <string.h>
 #include <errno.h>
+#include <unicode/ustdio.h>
 
 #include <stdio.h>
 #ifdef PHP_WIN32

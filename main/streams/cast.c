@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.12.2.1.2.1.2.5 2009/04/19 17:10:34 lbarnaud Exp $ */
+/* $Id: cast.c,v 1.12.2.1.2.1.2.6 2009/04/20 08:28:44 pajoye Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -219,7 +219,7 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 				if (ret != SUCCESS) {
 					php_stream_close(newstream);
 				} else {
-					int retcode = php_stream_cast(newstream, castas | flags, ret, show_err);
+					int retcode = php_stream_cast(newstream, castas | flags, (void**)ret, show_err);
 
 					if (retcode == SUCCESS)
 						rewind(*(FILE**)ret);

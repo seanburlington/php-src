@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.88 2009/03/15 20:42:30 moriyoshi Exp $ */
+/* $Id: mbstring.h,v 1.89 2009/04/20 17:06:00 jani Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -216,16 +216,6 @@ struct mb_overload_def {
 #else
 #define MBSTRG(v) (mbstring_globals.v)
 #endif
-
-#ifdef ZEND_MULTIBYTE
-MBSTRING_API int php_mb_set_zend_encoding(TSRMLS_D);
-char* php_mb_encoding_detector(const char *string, int length, char *list
-		TSRMLS_DC);
-int php_mb_encoding_converter(char **to, int *to_length, const char *from,
-		int from_length, const char *encoding_to, const char *encoding_from
-		TSRMLS_DC);
-int php_mb_oddlen(const char *string, int length, const char *encoding TSRMLS_DC);
-#endif /* ZEND_MULTIBYTE */
 
 #else	/* HAVE_MBSTRING */
 

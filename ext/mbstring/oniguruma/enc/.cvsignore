@@ -1,7 +1,7 @@
 *.lo
 *.la
-.libs
 .deps
+.libs
 *.plg
 *.opt
 *.ncb

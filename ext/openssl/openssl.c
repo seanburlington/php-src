@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.180 2009/03/29 23:32:17 scottmac Exp $ */
+/* $Id: openssl.c,v 1.181 2009/04/20 09:43:45 mkoppanen Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4628,6 +4628,7 @@ SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC) /* {{{
 	char *cipherlist = NULL;
 	int ok = 1;
 
+	ERR_clear_error();
 
 	/* look at context options in the stream and set appropriate verification flags */
 	if (GET_VER_OPT("verify_peer") && zval_is_true(*val)) {

@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.141 2009/04/19 15:00:11 iliaa Exp $ */
+/* $Id: exec.c,v 1.142 2009/04/20 06:36:05 pajoye Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -111,8 +111,9 @@ PHPAPI int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_
 			}
 
 			if (type == 1) {
+				int ob_level;
 				PHPWRITE(buf, bufl);
-				if (OG(ob_nesting_level) < 1) {
+				if ((php_output_handler_hook(PHP_OUTPUT_HANDLER_HOOK_GET_LEVEL, &ob_level TSRMLS_CC) == SUCCESS) && ob_level < 1) {
 					sapi_flush(TSRMLS_C);
 				}
 			} else if (type == 2) {

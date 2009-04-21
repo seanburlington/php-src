@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.161.2.3.2.11.2.24 2009/04/21 12:26:19 iliaa Exp $ */
+/* $Id: ldap.c,v 1.161.2.3.2.11.2.25 2009/04/21 18:08:34 bjori Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.24 2009/04/21 12:26:19 iliaa Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.25 2009/04/21 18:08:34 bjori Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -2208,6 +2208,11 @@ PHP_FUNCTION(ldap_8859_to_t61)
 ZEND_BEGIN_ARG_INFO_EX(arginfo_ldap_connect, 0, 0, 0)
 	ZEND_ARG_INFO(0, hostname)
 	ZEND_ARG_INFO(0, port)
+#ifdef HAVE_ORALDAP
+	ZEND_ARG_INFO(0, wallet)
+	ZEND_ARG_INFO(0, wallet_passwd)
+	ZEND_ARG_INFO(0, authmode)
+#endif
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_ldap_resource, 0, 0, 1)

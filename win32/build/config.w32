@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.8.2.10.2.45 2009/03/18 10:18:10 dmitry Exp $
+// $Id: config.w32,v 1.40.2.8.2.10.2.46 2009/04/23 20:19:06 pajoye Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -146,8 +146,16 @@ if (VCVERS >= 1400) {
 	}
 }
 
-if (VCVERS >= 1500) {
-	ADD_FLAG('CFLAGS', ' /MP ');
+ARG_WITH('mp', 'Tell VC9 use up to [n,auto,disable] processes for compilation', 'auto');
+if (VCVERS >= 1500 && PHP_MP != 'disable') {
+		if(PHP_MP == 'auto') {
+			 ADD_FLAG('CFLAGS', ' /MP ');
+		}
+		if(parseInt(PHP_MP) != 0) {
+			ADD_FLAG('CFLAGS', ' /MP'+ PHP_MP +' ');
+		} else {
+			STDOUT.WriteLine('WARNING: Invalid argument for MP: ' + PHP_MP);
+		}
 }
 
 // General link flags

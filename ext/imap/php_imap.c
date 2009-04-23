@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.44 2009/04/05 14:10:49 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.45 2009/04/23 22:32:41 pajoye Exp $ */
 
 #define IMAP41
 
@@ -1219,6 +1219,8 @@ PHP_FUNCTION(imap_body)
 	pils *imap_le_struct; 
 	int msgindex, myargc=ZEND_NUM_ARGS();
 	long flags=0L;
+	char *body;
+	unsigned long body_len = 0;
 
 	if (myargc < 2 || myargc > 3 || zend_get_parameters_ex(myargc, &streamind, &msgno, &pflags) == FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
@@ -1249,8 +1251,13 @@ PHP_FUNCTION(imap_body)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Bad message number");
 		RETURN_FALSE;
 	}
-
-	RETVAL_STRING(mail_fetchtext_full (imap_le_struct->imap_stream, Z_LVAL_PP(msgno), NIL, myargc==3 ? Z_LVAL_PP(pflags) : NIL), 1);
+	body = mail_fetchtext_full (imap_le_struct->imap_stream, Z_LVAL_PP(msgno), NIL, (myargc==3 ? Z_LVAL_PP(pflags) : NIL));
+	if (body_len == 0) {
+		RETVAL_EMPTY_STRING();
+	} else {
+		RETVAL_STRINGL(body, body_len, 1);
+	}
+	free(body);
 }
 /* }}} */
 

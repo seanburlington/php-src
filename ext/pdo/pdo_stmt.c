@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.221 2009/04/02 16:40:33 mbeccati Exp $ */
+/* $Id: pdo_stmt.c,v 1.222 2009/04/23 13:22:12 mbeccati Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -583,6 +583,7 @@ static inline void fetch_value(pdo_stmt_t *stmt, zval *dest, int colno, int *typ
 			if (value == NULL) {
 				ZVAL_NULL(dest);
 			} else if (value_len == 0) {
+				/* Warning, empty strings need to be passed as stream */
 				if (stmt->dbh->stringify || new_type == PDO_PARAM_STR) {
 					char *buf = NULL;
 					size_t len;

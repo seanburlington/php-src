@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.272 2009/03/10 23:39:22 helly Exp $ */
+/* $Id: php_imap.c,v 1.273 2009/04/23 22:24:54 pajoye Exp $ */
 
 #define IMAP41
 
@@ -1560,6 +1560,8 @@ PHP_FUNCTION(imap_body)
 	long msgno, flags = 0;
 	pils *imap_le_struct; 
 	int msgindex, argc = ZEND_NUM_ARGS();
+	char *body;
+	unsigned long body_len;
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "rl|l", &streamind, &msgno, &flags) == FAILURE) {
 		return;
@@ -1586,7 +1588,13 @@ PHP_FUNCTION(imap_body)
 		RETURN_FALSE;
 	}
 
-	RETVAL_STRING(mail_fetchtext_full(imap_le_struct->imap_stream, msgno, NIL, (argc == 3 ? flags : NIL)), 1);
+	body = mail_fetchtext_full (imap_le_struct->imap_stream, msgno, &body_len, (argc == 3 ? flags : NIL));
+	if (body_len == 0) {
+		RETVAL_EMPTY_STRING();
+	} else {
+		RETVAL_STRINGL(body, body_len, 1);
+	}
+	free(body);
 }
 /* }}} */
 

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.45 2009/04/23 22:32:41 pajoye Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.46 2009/04/24 14:53:59 pajoye Exp $ */
 
 #define IMAP41
 
@@ -1251,7 +1251,7 @@ PHP_FUNCTION(imap_body)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Bad message number");
 		RETURN_FALSE;
 	}
-	body = mail_fetchtext_full (imap_le_struct->imap_stream, Z_LVAL_PP(msgno), NIL, (myargc==3 ? Z_LVAL_PP(pflags) : NIL));
+	body = mail_fetchtext_full (imap_le_struct->imap_stream, Z_LVAL_PP(msgno), &body_len, (myargc==3 ? Z_LVAL_PP(pflags) : NIL));
 	if (body_len == 0) {
 		RETVAL_EMPTY_STRING();
 	} else {

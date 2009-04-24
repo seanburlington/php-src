@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.698 2009/04/24 21:23:47 lbarnaud Exp $ */
+/* $Id: string.c,v 1.699 2009/04/24 21:50:51 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -6519,7 +6519,7 @@ PHPAPI int php_u_strip_tags(UChar *rbuf, int len, int *stateptr, UChar *allow, i
 				tp = ((tp-tbuf) >= UBYTES(PHP_TAG_BUF_SIZE) ? tbuf: tp);
 				*(tp++) = ch;
 			}
-			if (state && prev1 != 0x27 /*'\\'*/ && (!in_q || ch == in_q)) {
+			if (state && prev1 != 0x5C /*'\\'*/ && (!in_q || ch == in_q)) {
 				if (in_q) {
 					in_q = 0;
 				} else {

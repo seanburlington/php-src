@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.33 2009/04/25 11:21:14 pajoye Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.34 2009/04/25 14:59:21 pajoye Exp $ */
 
 #define IMAP41
 
@@ -1204,7 +1204,7 @@ PHP_FUNCTION(imap_reopen)
 	zval *streamind;
 	char *mailbox;
 	int mailbox_len;
-	long options = NULL, retries = NULL;
+	long options = 0, retries = 0;
 	pils *imap_le_struct; 
 	MAILSTREAM *imap_stream;
 	long flags=NIL;
@@ -2857,7 +2857,7 @@ PHP_FUNCTION(imap_setflag_full)
 	zval *streamind;
 	char *sequence, *flag;
 	int sequence_len, flag_len;
-	long flags = NULL;
+	long flags = 0;
 	pils *imap_le_struct;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rss|l", &streamind, &sequence, &sequence_len, &flag, &flag_len, &flags) == FAILURE) {

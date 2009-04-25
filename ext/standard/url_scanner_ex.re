@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: url_scanner_ex.re,v 1.83 2008/03/12 19:35:24 felipe Exp $ */
+/* $Id: url_scanner_ex.re,v 1.84 2009/04/25 21:07:07 lbarnaud Exp $ */
 
 #include "php.h"
 
@@ -431,7 +431,7 @@ static void php_url_scanner_output_handler(char *output, uint output_len, char *
 	size_t len;
 
 	if (BG(url_adapt_state_ex).url_app.len != 0) {
-		*handled_output = url_adapt_ext(output, output_len, &len, (zend_bool) (mode & (PHP_OUTPUT_HANDLER_END | PHP_OUTPUT_HANDLER_CONT) ? 1 : 0) TSRMLS_CC);
+		*handled_output = url_adapt_ext(output, output_len, &len, (zend_bool) (mode & (PHP_OUTPUT_HANDLER_END | PHP_OUTPUT_HANDLER_CONT | PHP_OUTPUT_HANDLER_FLUSH | PHP_OUTPUT_HANDLER_FINAL) ? 1 : 0) TSRMLS_CC);
 		if (sizeof(uint) < sizeof(size_t)) {
 			if (len > UINT_MAX)
 				len = UINT_MAX;

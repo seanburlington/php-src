@@ -11,11 +11,7 @@ Testfest 2009 Munich
  $b = 'A';
 
 setlocale (LC_COLLATE, 'C');
-$result = strcoll($a, $b);
-if($result > 0) {
-	echo "Pass\n";
-}
+print "C: " . strcoll ($a, $b) . "\n"; // prints 1
 ?>
 --EXPECT--
-Pass
-
+C: 1

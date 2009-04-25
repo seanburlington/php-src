@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.273 2009/04/23 22:24:54 pajoye Exp $ */
+/* $Id: php_imap.c,v 1.274 2009/04/25 11:21:41 pajoye Exp $ */
 
 #define IMAP41
 
@@ -1594,7 +1594,6 @@ PHP_FUNCTION(imap_body)
 	} else {
 		RETVAL_STRINGL(body, body_len, 1);
 	}
-	free(body);
 }
 /* }}} */
 

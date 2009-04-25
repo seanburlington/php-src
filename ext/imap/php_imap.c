@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.34 2009/04/25 14:59:21 pajoye Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.35 2009/04/25 15:02:36 pajoye Exp $ */
 
 #define IMAP41
 
@@ -3902,6 +3902,7 @@ PHP_FUNCTION(imap_search)
 	char *search_criteria;
 	MESSAGELIST *cur;
 	int argc = ZEND_NUM_ARGS();
+	SEARCHPGM *pgm = NIL;
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "rs|ls", &streamind, &criteria, &criteria_len, &flags, &charset, &charset_len) == FAILURE) {
 		return;
@@ -3912,7 +3913,14 @@ PHP_FUNCTION(imap_search)
 	search_criteria = estrndup(criteria, criteria_len);
 	
 	IMAPG(imap_messages) = IMAPG(imap_messages_tail) = NIL;
-	mail_search_full(imap_le_struct->imap_stream, (argc == 4 ? charset : NIL), mail_criteria(search_criteria), flags);
+	pgm = mail_criteria(search_criteria);
+
+	mail_search_full(imap_le_struct->imap_stream, (argc == 4 ? charset : NIL), pgm, flags);
+
+	if (pgm) {
+		mail_free_searchpgm(&pgm);
+	}
+
 	if (IMAPG(imap_messages) == NIL) {
 		efree(search_criteria);
 		RETURN_FALSE;
@@ -4518,6 +4526,7 @@ PHP_FUNCTION(imap_thread)
 	char criteria[] = "ALL";
 	THREADNODE *top;
 	int argc = ZEND_NUM_ARGS();
+	SEARCHPGM *pgm = NIL;
 
 	if (zend_parse_parameters(argc TSRMLS_CC, "r|l", &streamind, &flags) == FAILURE) {
 		return;
@@ -4525,7 +4534,11 @@ PHP_FUNCTION(imap_thread)
 	
 	ZEND_FETCH_RESOURCE(imap_le_struct, pils *, &streamind, -1, "imap", le_imap);
 	
-	top = mail_thread(imap_le_struct->imap_stream, "REFERENCES", NIL, mail_criteria(criteria), flags);
+	pgm = mail_criteria(criteria);
+	top = mail_thread(imap_le_struct->imap_stream, "REFERENCES", NIL, pgm, flags);
+	if (pgm) {
+		mail_free_searchpgm(&pgm);
+	}
 
 	if(top == NIL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Function returned an empty tree");

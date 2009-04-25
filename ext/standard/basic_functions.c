@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.952 2009/03/26 20:02:28 felipe Exp $ */
+/* $Id: basic_functions.c,v 1.953 2009/04/25 21:06:01 lbarnaud Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5499,7 +5499,7 @@ PHP_FUNCTION(set_include_path)
 
 	if (zend_alter_ini_entry_ex("include_path", sizeof("include_path"), new_value.s, new_value_len, PHP_INI_USER, PHP_INI_STAGE_RUNTIME, 0 TSRMLS_CC) == FAILURE) {
 		zval_dtor(return_value);
-		RETURN_FALSE;
+		RETVAL_FALSE;
 	}
 
 	if (free_new_value) {

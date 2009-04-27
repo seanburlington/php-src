@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3_structs.h,v 1.7 2009/03/10 23:39:39 helly Exp $ */
+/* $Id: php_sqlite3_structs.h,v 1.8 2009/04/27 18:15:54 scottmac Exp $ */
 
 #ifndef PHP_SQLITE_STRUCTS_H
 #define PHP_SQLITE_STRUCTS_H
@@ -68,6 +68,7 @@ typedef struct _php_sqlite3_db_object  {
 	int initialised;
 	sqlite3 *db;
 	php_sqlite3_func *funcs;
+	zend_bool exception;
 
 	zend_llist free_list;
 } php_sqlite3_db_object;

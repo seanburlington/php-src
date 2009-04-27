@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.87 2009/03/27 02:32:56 lbarnaud Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.88 2009/04/27 12:52:31 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4780,7 +4780,9 @@ PHP_FUNCTION(call_user_method)
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s()", Z_STRVAL_P(callback));
 	}
-	efree(params);
+	if (n_params) {
+		efree(params);
+	}
 }
 /* }}} */
 

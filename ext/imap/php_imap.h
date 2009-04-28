@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.32.2.2.2.1.2.2 2008/12/31 11:15:37 sebastian Exp $ */
+/* $Id: php_imap.h,v 1.32.2.2.2.1.2.3 2009/04/28 08:22:57 pajoye Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -115,6 +115,7 @@ PHP_FUNCTION(imap_body);
 PHP_FUNCTION(imap_fetchstructure);
 PHP_FUNCTION(imap_fetchbody);
 PHP_FUNCTION(imap_savebody);
+PHP_FUNCTION(imap_gc);
 PHP_FUNCTION(imap_expunge);
 PHP_FUNCTION(imap_delete);
 PHP_FUNCTION(imap_undelete);

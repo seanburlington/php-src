@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_internal.h,v 1.121 2008/12/31 11:12:35 sebastian Exp $ */
+/* $Id: phar_internal.h,v 1.122 2009/04/29 03:24:08 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -519,6 +519,23 @@ union _phar_entry_object {
 # if PHP_VERSION_ID >= 50300
 extern char *(*phar_save_resolve_path)(const char *filename, int filename_len TSRMLS_DC);
 # endif
+#endif
+
+#if PHP_VERSION_ID < 50209
+static inline size_t phar_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen, size_t *len STREAMS_DC TSRMLS_DC)
+{
+	size_t ret = php_stream_copy_to_stream(src, dest, maxlen);
+	if (len) {
+		*len = ret;
+	}
+	if (ret) {
+		return SUCCESS;
+	}
+	return FAILURE;
+}
+#else
+# define phar_stream_copy_to_stream(src, dest, maxlen, len)	_php_stream_copy_to_stream_ex((src), (dest), (maxlen), (len) STREAMS_CC TSRMLS_CC)
+
 #endif
 
 #if PHP_VERSION_ID >= 60000

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.81 2009/04/28 22:31:25 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.82 2009/04/29 22:06:28 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -4372,16 +4372,17 @@ PHP_FUNCTION(ip2long)
    Converts an (IPv4) Internet network address into a string in Internet standard dotted format */
 PHP_FUNCTION(long2ip)
 {
-	zval **num;
+	/* "It's a long but it's not, PHP ints are signed */
+	char *ip;
+	int ip_len;
 	unsigned long n;
 	struct in_addr myaddr;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &num) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &ip, &ip_len) == FAILURE) {
+		return;
 	}
-	convert_to_string_ex(num);
-	
-	n = strtoul(Z_STRVAL_PP(num), NULL, 0);
+
+	n = strtoul(ip, NULL, 0);
 
 	myaddr.s_addr = htonl(n);
 	RETURN_STRING(inet_ntoa(myaddr), 1);

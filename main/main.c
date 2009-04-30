@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.796 2009/04/28 07:13:43 dmitry Exp $ */
+/* $Id: main.c,v 1.797 2009/04/30 09:12:26 pajoye Exp $ */
 
 /* {{{ includes
  */
@@ -95,6 +95,9 @@
 # ifndef PAGE_SIZE
 #  define PAGE_SIZE 4096
 # endif
+#endif
+#ifdef PHP_WIN32
+# define PAGE_SIZE 4096
 #endif
 /* }}} */
 

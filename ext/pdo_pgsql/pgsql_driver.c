@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.14.2.9.2.7 2009/04/30 12:38:43 mbeccati Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.14.2.9.2.8 2009/04/30 12:56:00 mbeccati Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -356,25 +356,9 @@ static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned
 	} else {
 		PGresult *res;
 		ExecStatusType status;
-#ifdef HAVE_PQEXECPARAMS
 		const char *q[1];
 		q[0] = name;
 		res = PQexecParams(H->server, "SELECT CURRVAL($1)", 1, NULL, q, NULL, NULL, 0);
-#else
-		char *name_escaped, *q;
-		size_t l = strlen(name);
-        
-		name_escaped = safe_emalloc(l, 2, 1);
-#ifndef HAVE_PQESCAPE_CONN
-		PQescapeString(name_escaped, name, l);
-#else
-		PQescapeStringConn(H->server, name_escaped, name, l, NULL);
-#endif
-		spprintf(&q, 0, "SELECT CURRVAL('%s')", name_escaped);
-		res = PQexec(H->server, q);
-		efree(name_escaped); 
-		efree(q);
-#endif
 		status = PQresultStatus(res);
 
 		if (res && (status == PGRES_TUPLES_OK)) {

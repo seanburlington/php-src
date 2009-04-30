@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.19 2009/03/28 02:34:02 mbeccati Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.20 2009/04/30 12:35:36 mbeccati Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -81,11 +81,7 @@ extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const
 
 extern struct pdo_stmt_methods pgsql_stmt_methods;
 
-#ifdef HAVE_PQRESULTERRORFIELD
 #define pdo_pgsql_sqlstate(r) PQresultErrorField(r, PG_DIAG_SQLSTATE)
-#else
-#define pdo_pgsql_sqlstate(r) (const char *)NULL
-#endif
 
 enum {
 	PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT = PDO_ATTR_DRIVER_SPECIFIC,

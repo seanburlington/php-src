@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.208.2.7.2.26.2.43 2009/04/28 08:29:55 pajoye Exp $ */
+/* $Id: php_imap.c,v 1.208.2.7.2.26.2.44 2009/04/30 18:56:25 pajoye Exp $ */
 
 #define IMAP41
 
@@ -850,7 +850,7 @@ PHP_MINIT_FUNCTION(imap)
 	REGISTER_LONG_CONSTANT("NIL", NIL, CONST_PERSISTENT | CONST_CS);
 
 	/* plug in our gets */
-	mail_parameters(NIL, SET_GETS, (void *) php_mail_gets);
+	mail_parameters(NIL, SET_GETS, (void *) NULL);
 
 	/* set default timeout values */
 	mail_parameters(NIL, SET_OPENTIMEOUT, (void *) FG(default_socket_timeout));
@@ -2330,7 +2330,9 @@ PHP_FUNCTION(imap_savebody)
 	}
 
 	IMAPG(gets_stream) = writer;
+	mail_parameters(NIL, SET_GETS, (void *) php_mail_gets);
 	mail_fetchbody_full(imap_ptr->imap_stream, msgno, section, NULL, flags);
+	mail_parameters(NIL, SET_GETS, (void *) NULL);
 	IMAPG(gets_stream) = NULL;
 
 	if (close_stream) {

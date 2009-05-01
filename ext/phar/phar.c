@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.370.2.60 2009/04/30 04:43:10 cellog Exp $ */
+/* $Id: phar.c,v 1.370.2.61 2009/05/01 09:22:16 tony2001 Exp $ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -1263,7 +1263,7 @@ int phar_open_or_create_filename(char *fname, int fname_len, char *alias, int al
 	if (FAILURE == phar_detect_phar_fname_ext(fname, fname_len, &ext_str, &ext_len, !is_data, 1, 1 TSRMLS_CC)) {
 		if (error) {
 			if (ext_len == -2) {
-				spprintf(error, 0, "Cannot create a phar archive from a URL like \"%s\".  Phar objects can only be created from local files", fname);
+				spprintf(error, 0, "Cannot create a phar archive from a URL like \"%s\". Phar objects can only be created from local files", fname);
 			} else {
 				spprintf(error, 0, "Cannot create phar '%s', file extension (or combination) not recognised", fname);
 			}
@@ -1897,6 +1897,7 @@ int phar_detect_phar_fname_ext(const char *filename, int filename_len, const cha
 	const char *pos, *slash;
 
 	*ext_str = NULL;
+	*ext_len = 0;
 
 	if (!filename_len || filename_len == 1) {
 		return FAILURE;
@@ -3634,7 +3635,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.60 $");
+	php_info_print_table_row(2, "CVS revision", "$Revision: 1.370.2.61 $");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

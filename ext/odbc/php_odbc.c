@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.218 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: php_odbc.c,v 1.219 2009/05/01 03:02:32 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1274,7 +1274,7 @@ PHP_FUNCTION(odbc_execute)
 			}
 
 			otype = (*tmp)->type;
-			convert_to_string(*tmp);
+			convert_to_string_ex(tmp);
 			if (Z_TYPE_PP(tmp) != IS_STRING) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Error converting parameter");
 				SQLFreeStmt(result->stmt, SQL_RESET_PARAMS);

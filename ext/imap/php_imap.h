@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.39 2009/04/28 08:23:32 pajoye Exp $ */
+/* $Id: php_imap.h,v 1.40 2009/05/02 17:32:35 pajoye Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -165,6 +165,8 @@ PHP_FUNCTION(imap_search);
 PHP_FUNCTION(imap_utf8);
 PHP_FUNCTION(imap_utf7_decode);
 PHP_FUNCTION(imap_utf7_encode);
+PHP_FUNCTION(imap_utf8_to_mutf7);
+PHP_FUNCTION(imap_mutf7_to_utf8);
 PHP_FUNCTION(imap_mime_header_decode);
 PHP_FUNCTION(imap_thread);
 PHP_FUNCTION(imap_timeout);

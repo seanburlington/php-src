@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.17.2.12 2009/05/02 01:38:36 kalle Exp $ */
+/* $Id: pdo.c,v 1.57.2.17.2.13 2009/05/02 15:58:39 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,10 +103,10 @@ PHP_FUNCTION(pdo_drivers)
 	HashPosition pos;
 	pdo_driver_t **pdriver;
 
-	if (zend_parse_parameters_none() == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
 	}
-	
+
 	array_init(return_value);
 
 	zend_hash_internal_pointer_reset_ex(&pdo_driver_hash, &pos);

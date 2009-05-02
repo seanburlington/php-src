@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.27 2009/05/02 01:38:36 kalle Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.28 2009/05/02 15:58:39 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1134,10 +1134,10 @@ static PHP_METHOD(PDO, getAvailableDrivers)
 	HashPosition pos;
 	pdo_driver_t **pdriver;
 
-	if (zend_parse_parameters_none() == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
 	}
-	
+
 	array_init(return_value);
 
 	zend_hash_internal_pointer_reset_ex(&pdo_driver_hash, &pos);

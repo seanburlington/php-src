@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.24 2009/04/02 16:41:23 mbeccati Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.31.2.17.2.25 2009/05/02 01:37:33 kalle Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1180,7 +1180,7 @@ static PHP_METHOD(PDO, __sleep)
 }
 /* }}} */
 
-/* {{{ proto array pdo_drivers()
+/* {{{ proto array PDO::getAvailableDrivers()
    Return array of available PDO drivers */
 static PHP_METHOD(PDO, getAvailableDrivers)
 {

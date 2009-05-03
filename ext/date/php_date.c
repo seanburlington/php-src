@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.224 2009/04/27 14:21:57 kalle Exp $ */
+/* $Id: php_date.c,v 1.225 2009/05/03 18:21:52 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1135,7 +1135,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 			/* year */
 			case 'L': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%d", timelib_is_leap((int) t->y)); break;
 			case 'y': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%02d", (int) t->y % 100); break;
-			case 'Y': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%s%04d", t->y < 0 ? "-" : "", abs((int) t->y)); break;
+			case 'Y': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%s%04ld", t->y < 0 ? "-" : "", llabs(t->y)); break;
 
 			/* time */
 			case 'a': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%R", localized ? IS_UNICODE : IS_STRING, am_pm_lower_full(t->h >= 12 ? 1 : 0, localized)); break;

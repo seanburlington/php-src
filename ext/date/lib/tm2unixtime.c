@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.31 2009/03/10 23:39:12 helly Exp $ */
+/* $Id: tm2unixtime.c,v 1.32 2009/05/03 18:21:52 derick Exp $ */
 
 #include "timelib.h"
 
@@ -31,20 +31,12 @@ static int days_in_month[13]      = {  31,  31,  28,  31,  30,  31,  30,  31,  3
 static int do_range_limit(timelib_sll start, timelib_sll end, timelib_sll adj, timelib_sll *a, timelib_sll *b)
 {
 	if (*a < start) {
-		*a += adj;
-		(*b)--;
-		return 1;
+		*b -= (start - *a - 1) / adj + 1;
+		*a += adj * ((start - *a - 1) / adj + 1);
 	}
 	if (*a >= end) {
-		if (start == 0) {
-			(*b) += (*a / end);
-			(*a) -= (end * (*a / end));
-			return 0;
-		}
-
-		*a -= adj;
-		(*b)++;
-		return 1;
+		*b += *a / adj;
+		*a -= adj * (*a / adj);
 	}
 	return 0;
 }
@@ -90,6 +82,12 @@ static int do_range_limit_days(timelib_sll *y, timelib_sll *m, timelib_sll *d)
 	timelib_sll days_this_month;
 	timelib_sll last_month, last_year;
 	timelib_sll days_last_month;
+	
+	/* can jump an entire leap year period quickly */
+	if (*d >= DAYS_PER_LYEAR_PERIOD || *d <= -DAYS_PER_LYEAR_PERIOD) {
+		*y += YEARS_PER_LYEAR_PERIOD * (*d / DAYS_PER_LYEAR_PERIOD);
+		*d -= DAYS_PER_LYEAR_PERIOD * (*d / DAYS_PER_LYEAR_PERIOD);
+	}
 
 	do_range_limit(1, 13, 12, m, y);
 

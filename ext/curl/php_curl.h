@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.44.2.2.2.2.2.3 2008/12/31 11:15:35 sebastian Exp $ */
+/* $Id: php_curl.h,v 1.44.2.2.2.2.2.4 2009/05/03 14:59:46 pajoye Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -97,10 +97,17 @@ typedef struct {
 } php_curl_read;
 
 typedef struct {
+	zval 		*func_name;
+	zend_fcall_info_cache fci_cache;
+	int    	        method;
+} php_curl_progress;
+
+typedef struct {
 	php_curl_write *write;
 	php_curl_write *write_header;
 	php_curl_read  *read;
 	zval           *passwd;
+	php_curl_progress *progress;
 } php_curl_handlers;
 
 struct _php_curl_error  {

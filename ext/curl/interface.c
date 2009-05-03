@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.150 2009/05/03 14:58:06 pajoye Exp $ */
+/* $Id: interface.c,v 1.151 2009/05/03 15:03:53 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -962,7 +962,7 @@ static size_t curl_progress(void *clientp,
 			error = zend_call_function(&fci, &t->fci_cache TSRMLS_CC);
 			ch->in_callback = 0;
 			if (error == FAILURE) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot call the CURLOPT_READFUNCTION"); 
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot call the CURLOPT_PROGRESSFUNCTION"); 
 				length = -1;
 			} else if (retval_ptr) {
 				if (Z_TYPE_P(retval_ptr) != IS_LONG) {

@@ -9,6 +9,7 @@ register_globals=1
 session.bug_compat_42=1
 session.bug_compat_warn=0
 session.serialize_handler=php
+session.save_handler=files
 --FILE--
 <?php
 error_reporting(E_ALL);
@@ -24,3 +25,4 @@ print "I live\n";
 ?>
 --EXPECT--
 I live
+PHP Warning:  Directive 'register_globals' is deprecated in PHP 5.3 and greater in Unknown on line 0

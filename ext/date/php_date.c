@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.65 2009/05/03 18:22:59 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.66 2009/05/04 17:08:43 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -29,6 +29,10 @@
 #include "php_date.h"
 #include "lib/timelib.h"
 #include <time.h>
+
+#ifdef PHP_WIN32
+static inline __int64 llabs( __int64 i ) { return i >= 0? i: -i; }
+#endif
 
 /* {{{ arginfo */
 static

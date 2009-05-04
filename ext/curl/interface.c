@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.35 2009/05/03 15:16:10 pajoye Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.36 2009/05/04 12:12:57 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -444,6 +444,10 @@ PHP_MINIT_FUNCTION(curl)
 	le_curl_multi_handle = zend_register_list_destructors_ex(_php_curl_multi_close, NULL, "curl", module_number);
 
 	/* Constants for curl_setopt() */
+	REGISTER_CURL_CONSTANT(CURLOPT_IPRESOLVE);
+	REGISTER_CURL_CONSTANT(CURL_IPRESOLVE_WHATEVER);
+	REGISTER_CURL_CONSTANT(CURL_IPRESOLVE_V4);
+	REGISTER_CURL_CONSTANT(CURL_IPRESOLVE_V6);
 	REGISTER_CURL_CONSTANT(CURLOPT_DNS_USE_GLOBAL_CACHE);
 	REGISTER_CURL_CONSTANT(CURLOPT_DNS_CACHE_TIMEOUT);
 	REGISTER_CURL_CONSTANT(CURLOPT_PORT);
@@ -1512,6 +1516,7 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 		case CURLOPT_REDIR_PROTOCOLS:
 		case CURLOPT_PROTOCOLS:
 #endif
+		case CURLOPT_IPRESOLVE:
 			convert_to_long_ex(zvalue);
 			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
 			break;

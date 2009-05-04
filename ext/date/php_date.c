@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.51.2.71 2009/05/03 19:58:49 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.51.2.72 2009/05/04 16:28:50 pajoye Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -30,6 +30,11 @@
 #include "zend_interfaces.h"
 #include "lib/timelib.h"
 #include <time.h>
+
+#ifdef PHP_WIN32
+# include "win32/php_stdint.h"
+static inline int64_t llabs( int64_t i ) { return i >= 0? i: -i; }
+#endif
 
 /* {{{ arginfo */
 ZEND_BEGIN_ARG_INFO_EX(arginfo_date, 0, 0, 1)

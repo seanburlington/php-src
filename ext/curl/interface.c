@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.155 2009/05/04 14:09:12 pajoye Exp $ */
+/* $Id: interface.c,v 1.156 2009/05/04 14:11:34 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -441,6 +441,11 @@ PHP_MINIT_FUNCTION(curl)
 {
 	le_curl = zend_register_list_destructors_ex(_php_curl_close, NULL, "curl", module_number);
 	le_curl_multi_handle = zend_register_list_destructors_ex(_php_curl_multi_close, NULL, "curl", module_number);
+
+
+	/* See http://curl.haxx.se/lxr/source/docs/libcurl/symbols-in-versions
+	   or curl src/docs/libcurl/symbols-in-versions for a (almost) complete list 
+	   of options and which version they were introduced */
 
 	/* Constants for curl_setopt() */
 	REGISTER_CURL_CONSTANT(CURLOPT_IPRESOLVE);

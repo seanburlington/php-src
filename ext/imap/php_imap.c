@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.287 2009/05/05 01:22:31 jani Exp $ */
+/* $Id: php_imap.c,v 1.288 2009/05/05 01:28:10 jani Exp $ */
 
 #define IMAP41
 
@@ -2942,7 +2942,6 @@ PHP_FUNCTION(imap_utf8_to_mutf7)
 {
 	php_imap_mutf7(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
-#endif
 
 /* {{{ proto string imap_mutf7_to_utf8(string in)
    Decode a modified UTF-7 string to UTF-8 */
@@ -2950,7 +2949,7 @@ PHP_FUNCTION(imap_mutf7_to_utf8)
 {
 	php_imap_mutf7(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 }
-
+#endif
 
 /* {{{ proto bool imap_setflag_full(resource stream_id, string sequence, string flag [, int options])
    Sets flags on messages */

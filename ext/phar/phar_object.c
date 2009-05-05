@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.296 2009/05/04 04:30:50 cellog Exp $ */
+/* $Id: phar_object.c,v 1.297 2009/05/05 01:42:06 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -310,11 +310,9 @@ static int phar_file_action(phar_archive_data *phar, phar_entry_info *info, char
 					efree(new_op_array);
 
 
-#if PHP_VERSION_ID < 50300
 					if (EG(return_value_ptr_ptr) && *EG(return_value_ptr_ptr)) {
 						zval_ptr_dtor(EG(return_value_ptr_ptr));
 					}
-#endif
 				} zend_catch {
 					if (PHAR_G(cwd)) {
 						efree(PHAR_G(cwd));

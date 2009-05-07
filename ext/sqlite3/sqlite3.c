@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.1.2.35 2009/04/27 18:16:46 scottmac Exp $ */
+/* $Id: sqlite3.c,v 1.1.2.36 2009/05/07 16:49:26 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -307,6 +307,15 @@ PHP_METHOD(sqlite3, loadExtension)
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &extension, &extension_len)) {
 		return;
 	}
+
+#ifdef ZTS
+	if ((strncmp(sapi_module.name, "cgi", 3) != 0) &&
+		(strcmp(sapi_module.name, "cli") != 0) &&
+		(strncmp(sapi_module.name, "embed", 5) != 0)
+	) {		php_sqlite3_error(db_obj, "Not supported in multithreaded Web servers");
+		RETURN_FALSE;
+	}
+#endif
 
 	if (!SQLITE3G(extension_dir)) {
 		php_sqlite3_error(db_obj, "SQLite Extension are disabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.40 2009/05/07 16:52:40 scottmac Exp $ */
+/* $Id: sqlite3.c,v 1.41 2009/05/07 22:44:37 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,7 @@
 #include "ext/standard/file.h"
 #include "php_sqlite3.h"
 #include "php_sqlite3_structs.h"
+#include "main/SAPI.h"
 
 #include <sqlite3.h>
 

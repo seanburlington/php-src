@@ -1,4 +1,4 @@
-$Id: UPGRADING,v 1.1.2.3.2.1.2.6 2009/05/07 03:16:28 kalle Exp $
+$Id: UPGRADING,v 1.1.2.3.2.1.2.7 2009/05/07 06:58:57 kalle Exp $
 
 UPGRADE NOTES - PHP 5.3
 
@@ -31,7 +31,7 @@ UPGRADE NOTES - PHP 5.3
 1. Reserved words and classes
 =============================
 
-- **namespace**, **use** and **goto** are now reserved keywords.
+- **namespace** and **goto** are now reserved keywords.
 
 - **Closure** is now a reserved class. (Used by lambda and closure.)
 

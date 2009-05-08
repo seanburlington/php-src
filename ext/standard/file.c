@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.542 2009/04/19 17:09:46 lbarnaud Exp $ */
+/* $Id: file.c,v 1.543 2009/05/08 09:50:11 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -852,11 +852,15 @@ uparse_eol:
 			} while ((p = u_memchr(p, eol_marker, (e-p))));
 		} else {
 			do {
-				if (skip_blank_lines && !(p-s)) {
+				int windows_eol = 0;
+				if (eol_marker == '\n' && *(p - 1) == '\r') {
+					windows_eol++;
+				}
+				if (skip_blank_lines && !(p-s-windows_eol)) {
 					s = ++p;
 					continue;
 				}
-				add_index_unicodel(return_value, i++, eustrndup(s, p-s), p-s, 0);
+				add_index_unicodel(return_value, i++, eustrndup(s, p-s-windows_eol), p-s-windows_eol, 0);
 				s = ++p;
 			} while ((p = u_memchr(p, eol_marker, (e-p))));
 		}
@@ -889,11 +893,15 @@ parse_eol:
 			} while ((p = memchr(p, eol_marker, (e-p))));
 		} else {
 			do {
-				if (skip_blank_lines && !(p-s)) {
+				int windows_eol = 0;
+				if (p != target_buf && eol_marker == '\n' && *(p - 1) == '\r') {
+					windows_eol++;
+				}
+				if (skip_blank_lines && !(p-s-windows_eol)) {
 					s = ++p;
 					continue;
 				}
-				add_index_stringl(return_value, i++, estrndup(s, p-s), p-s, 0);
+				add_index_stringl(return_value, i++, estrndup(s, p-s-windows_eol), p-s-windows_eol, 0);
 				s = ++p;
 			} while ((p = memchr(p, eol_marker, (e-p))));
 		}

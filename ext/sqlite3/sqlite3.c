@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.41 2009/05/07 22:44:37 felipe Exp $ */
+/* $Id: sqlite3.c,v 1.42 2009/05/08 07:58:12 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,6 +34,7 @@
 
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
+#include "SAPI.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(sqlite3)
 

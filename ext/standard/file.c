@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.543 2009/05/08 09:50:11 lbarnaud Exp $ */
+/* $Id: file.c,v 1.544 2009/05/08 10:00:09 lbarnaud Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -853,7 +853,7 @@ uparse_eol:
 		} else {
 			do {
 				int windows_eol = 0;
-				if (eol_marker == '\n' && *(p - 1) == '\r') {
+				if (p != (UChar*)target_buf && eol_marker == '\n' && *(p - 1) == '\r') {
 					windows_eol++;
 				}
 				if (skip_blank_lines && !(p-s-windows_eol)) {

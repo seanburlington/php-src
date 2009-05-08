@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.55 2009/03/31 16:25:58 bjori Exp $ */
+/* $Id: userspace.c,v 1.56 2009/05/08 11:36:43 bjori Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1212,7 +1212,7 @@ static int user_wrapper_mkdir(php_stream_wrapper *wrapper, char *url, int mode, 
 		add_property_null(object, "context");
 	}
 
-	/* call the unlink method */
+	/* call the mkdir method */
 	MAKE_STD_ZVAL(zfilename);
 	ZVAL_STRING(zfilename, url, 1);
 	args[0] = &zfilename;
@@ -1277,7 +1277,7 @@ static int user_wrapper_rmdir(php_stream_wrapper *wrapper, char *url, int option
 		add_property_null(object, "context");
 	}
 
-	/* call the unlink method */
+	/* call the rmdir method */
 	MAKE_STD_ZVAL(zfilename);
 	ZVAL_STRING(zfilename, url, 1);
 	args[0] = &zfilename;
@@ -1337,9 +1337,7 @@ static int user_wrapper_stat_url(php_stream_wrapper *wrapper, char *url, int fla
 		add_property_null(object, "context");
 	}
 
-	/* call the stat_url method */
-	
-	/* call it's stream_open method - set up params first */
+	/* call it's stat_url method - set up params first */
 	MAKE_STD_ZVAL(zfilename);
 	ZVAL_STRING(zfilename, url, 1);
 	args[0] = &zfilename;

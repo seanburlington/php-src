@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.189 2009/05/09 19:37:34 scottmac Exp $ */
+/* $Id: spl_iterators.c,v 1.190 2009/05/09 19:42:43 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -600,7 +600,9 @@ SPL_METHOD(RecursiveIteratorIterator, current)
 	zval                      **data;
 
 	iterator->funcs->get_current_data(iterator, &data TSRMLS_CC);
-	RETURN_ZVAL(*data, 1, 0);
+	if (data && *data) {
+		RETURN_ZVAL(*data, 1, 0);
+	}
 } /* }}} */
 
 /* {{{ proto void RecursiveIteratorIterator::next() U

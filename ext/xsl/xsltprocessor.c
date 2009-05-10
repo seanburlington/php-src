@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.15 2008/12/31 11:15:47 sebastian Exp $ */
+/* $Id: xsltprocessor.c,v 1.39.2.2.2.9.2.16 2009/05/10 15:13:05 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -153,11 +153,13 @@ static char **php_xsl_xslt_make_params(HashTable *parht, int xpath_params TSRMLS
 			if (!xpath_params) {
 				xpath_expr = php_xsl_xslt_string_to_xpathexpr(Z_STRVAL_PP(value) TSRMLS_CC);
 			} else {
-				xpath_expr = estrndup(Z_STRVAL_PP(value), strlen(Z_STRVAL_PP(value)));
+				xpath_expr = estrndup(Z_STRVAL_PP(value), Z_STRLEN_PP(value));
 			}
 			if (xpath_expr) {
 				params[i++] = string_key;
 				params[i++] = xpath_expr;
+			} else {
+				efree(string_key);
 			}
 		}
 	}

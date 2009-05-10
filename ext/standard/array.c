@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.475 2009/03/26 20:02:28 felipe Exp $ */
+/* $Id: array.c,v 1.476 2009/05/10 16:45:30 colder Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4113,10 +4113,6 @@ PHP_FUNCTION(array_rand)
 		}
 		num_avail--;
 		zend_hash_move_forward_ex(Z_ARRVAL_P(input), &pos);
-	}
-
-	if (num_req == num_avail) {
-		php_array_data_shuffle(return_value TSRMLS_CC);
 	}
 }
 /* }}} */

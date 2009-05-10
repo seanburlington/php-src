@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.9.2.14.2.17 2009/04/16 05:33:13 pajoye Exp $ */
+/* $Id: sockets.c,v 1.171.2.9.2.14.2.18 2009/05/10 01:03:45 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1563,6 +1563,7 @@ PHP_FUNCTION(socket_recvfrom)
 			sin.sin_family = AF_INET;
 
 			if (arg6 == NULL) {
+				efree(recv_buf);
 				WRONG_PARAM_COUNT;
 			}
 
@@ -1591,6 +1592,7 @@ PHP_FUNCTION(socket_recvfrom)
 			sin6.sin6_family = AF_INET6;
 
 			if (arg6 == NULL) {
+				efree(recv_buf);
 				WRONG_PARAM_COUNT;
 			}
 

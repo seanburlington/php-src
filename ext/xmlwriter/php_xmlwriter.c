@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.60 2009/03/10 23:39:52 helly Exp $ */
+/* $Id: php_xmlwriter.c,v 1.61 2009/05/11 12:22:19 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1787,6 +1787,7 @@ static PHP_FUNCTION(xmlwriter_open_uri)
 		if (source_type == IS_UNICODE) {
 			efree(source);
 		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to resolve file path");
 		RETURN_FALSE;
 	}
 

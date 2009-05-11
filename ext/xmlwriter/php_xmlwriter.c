@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.20 2008/12/31 11:17:47 sebastian Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.21 2009/05/11 12:35:00 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1451,6 +1451,7 @@ static PHP_FUNCTION(xmlwriter_open_uri)
 
 	valid_file = _xmlwriter_get_valid_file_path(source, resolved_path, MAXPATHLEN TSRMLS_CC);
 	if (!valid_file) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to resolve file path");
 		RETURN_FALSE;
 	}
 

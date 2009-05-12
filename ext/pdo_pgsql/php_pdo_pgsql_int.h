@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.13.2.4.2.1.2.3 2009/04/30 12:38:43 mbeccati Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.13.2.4.2.1.2.4 2009/05/12 22:18:14 mbeccati Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -65,8 +65,8 @@ typedef struct {
 	int *param_lengths;
 	int *param_formats;
 	Oid *param_types;
-	zend_bool is_prepared;
 #endif
+	zend_bool is_prepared;
 } pdo_pgsql_stmt;
 
 typedef struct {

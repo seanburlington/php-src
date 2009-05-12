@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.54 2009/04/30 12:35:36 mbeccati Exp $ */
+/* $Id: pgsql_statement.c,v 1.55 2009/05/12 22:17:50 mbeccati Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,6 +131,13 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	if (S->cursor_name) {
 		char *q = NULL;
+
+		if (S->is_prepared) {
+			spprintf(&q, 0, "CLOSE %s", S->cursor_name);
+			S->result = PQexec(H->server, q);
+			efree(q);
+		}
+
 		spprintf(&q, 0, "DECLARE %s SCROLL CURSOR WITH HOLD FOR %s", S->cursor_name, stmt->active_query_string);
 		S->result = PQexec(H->server, q);
 		efree(q);
@@ -141,6 +148,9 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			pdo_pgsql_error_stmt(stmt, status, pdo_pgsql_sqlstate(S->result));
 			return 0;
 		}
+
+		/* the cursor was declared correctly */
+		S->is_prepared = 1;
 
 		/* fetch to be able to get the number of tuples later, but don't advance the cursor pointer */
 		spprintf(&q, 0, "FETCH FORWARD 0 FROM %s", S->cursor_name);

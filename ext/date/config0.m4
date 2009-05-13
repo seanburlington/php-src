@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2008/04/25 12:55:16 derick Exp $
+dnl $Id: config0.m4,v 1.1 2009/05/13 00:45:57 jani Exp $
 dnl config.m4 for date extension
 
 sinclude(ext/date/lib/timelib.m4)

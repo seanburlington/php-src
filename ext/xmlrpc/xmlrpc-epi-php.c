@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.14 2009/04/02 15:55:01 felipe Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.5.2.15 2009/05/13 14:25:58 iliaa Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -1300,7 +1300,7 @@ int set_zval_xmlrpc_type(zval* value, XMLRPC_VALUE_TYPE newtype)
 			if(newtype == xmlrpc_datetime) {
 				XMLRPC_VALUE v = XMLRPC_CreateValueDateTime_ISO8601(NULL, value->value.str.val);
 				if(v) {
-					time_t timestamp = XMLRPC_GetValueDateTime(v);
+					time_t timestamp = (time_t) php_parse_date(XMLRPC_GetValueDateTime_ISO8601(v), NULL);
 					if(timestamp) {
 						zval* ztimestamp;
 

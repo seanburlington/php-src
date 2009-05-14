@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.19.2.19 2009/03/17 23:26:02 scottmac Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.20 2009/05/14 22:02:08 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -494,7 +494,7 @@ static PHP_FUNCTION(json_decode)
 	char *str;
 	int str_len, utf16_len;
 	zend_bool assoc = 0; /* return JS objects as PHP objects by default */
-	long depth = JSON_PARSER_MAX_DEPTH;
+	long depth = JSON_PARSER_DEFAULT_DEPTH;
 	zval *z;
 	unsigned short *utf16;
 	JSON_parser jp;
@@ -517,9 +517,9 @@ static PHP_FUNCTION(json_decode)
 		RETURN_NULL();
 	}
 
-	/* can be removed once we remove the max depth limit */
-	if (depth <= 0 || depth > JSON_PARSER_MAX_DEPTH) {
-		depth = JSON_PARSER_MAX_DEPTH;
+	if (depth <= 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Depth must greater than zero.");
+		RETURN_NULL();
 	}
 
 	ALLOC_INIT_ZVAL(z);

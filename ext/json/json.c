@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.51 2009/05/14 00:13:57 scottmac Exp $ */
+/* $Id: json.c,v 1.52 2009/05/14 22:00:38 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -536,7 +536,8 @@ static PHP_FUNCTION(json_decode)
 	}
 
 	if (depth <= 0) {
-		depth = JSON_PARSER_DEFAULT_DEPTH;
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Depth must greater than zero.");
+		RETURN_NULL();
 	}
 
 	ALLOC_INIT_ZVAL(z);

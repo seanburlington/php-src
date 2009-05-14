@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.15 2009/05/05 00:33:02 jani Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.99.2.12.2.16 2009/05/14 13:49:50 jani Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -394,7 +394,9 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 				 have_header |= HTTP_HEADER_TYPE;
 			}
 		}
-		efree(tmp);
+		if (tmp) {
+			efree(tmp);
+		}
 	}
 
 	/* auth header if it was specified */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.22 2009/03/10 23:39:11 helly Exp $ */
+/* $Id: bz2_filter.c,v 1.23 2009/05/15 17:27:56 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -89,7 +89,8 @@ static php_stream_filter_status_t php_bz2_decompress_filter(
 	streamp = &(data->strm);
 
 	while (buckets_in->head) {
-		size_t bin = 0, desired;
+		int bin = 0;
+		size_t desired;
 
 		bucket = buckets_in->head;
 
@@ -234,7 +235,8 @@ static php_stream_filter_status_t php_bz2_compress_filter(
 	streamp = &(data->strm);
 
 	while (buckets_in->head) {
-		size_t bin = 0, desired;
+		int bin = 0;
+		size_t desired;
 
 		bucket = buckets_in->head;
 

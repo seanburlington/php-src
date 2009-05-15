@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.21.2.37.2.54 2009/05/10 16:45:21 colder Exp $ */
+/* $Id: array.c,v 1.308.2.21.2.37.2.55 2009/05/15 16:46:22 sixd Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3789,7 +3789,7 @@ PHP_FUNCTION(array_multisort)
 		}
 	}
 
-	/* If all arrays are empty or have only one entry, we don't need to do anything. */
+	/* If all arrays are empty we don't need to do anything. */
 	if (array_size < 1) {
 		for (k = 0; k < MULTISORT_LAST; k++) {
 			efree(ARRAYG(multisort_flags)[k]);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.19.2.20 2009/05/14 22:02:08 scottmac Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.21 2009/05/15 09:10:55 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,6 +57,7 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_json_decode, 0, 0, 1)
 	ZEND_ARG_INFO(0, json)
 	ZEND_ARG_INFO(0, assoc)
+	ZEND_ARG_INFO(0, depth)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO(arginfo_json_last_error, 0)

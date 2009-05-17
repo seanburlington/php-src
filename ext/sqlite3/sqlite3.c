@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite3.c,v 1.42 2009/05/08 07:58:12 tony2001 Exp $ */
+/* $Id: sqlite3.c,v 1.43 2009/05/17 16:39:30 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -920,14 +920,14 @@ PHP_METHOD(sqlite3, createAggregate)
 	}
 
 	if (!zend_is_callable(step_callback, 0, &callback_name TSRMLS_CC)) {
-		php_sqlite3_error(db_obj, "Not a valid callback function %s", callback_name);
+		php_sqlite3_error(db_obj, "Not a valid callback function %v", Z_UNIVAL(callback_name));
 		zval_dtor(&callback_name);
 		RETURN_FALSE;
 	}
 	zval_dtor(&callback_name);
 
 	if (!zend_is_callable(fini_callback, 0, &callback_name TSRMLS_CC)) {
-		php_sqlite3_error(db_obj, "Not a valid callback function %s", callback_name);
+		php_sqlite3_error(db_obj, "Not a valid callback function %v", Z_UNIVAL(callback_name));
 		zval_dtor(&callback_name);
 		RETURN_FALSE;
 	}

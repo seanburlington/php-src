@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.44 2009/05/18 11:58:04 pajoye Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.45 2009/05/18 12:01:44 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -223,7 +223,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO(arginfo_curl_setopt_array, 0)
 	ZEND_ARG_INFO(0, ch)
-	ZEND_ARG_INFO(0, options)
+	ZEND_ARG_ARRAY_INFO(0, options, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO(arginfo_curl_exec, 0)

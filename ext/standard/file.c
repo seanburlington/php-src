@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.6.2.41 2009/05/08 09:49:27 lbarnaud Exp $ */
+/* $Id: file.c,v 1.409.2.6.2.42 2009/05/18 18:46:06 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2384,8 +2384,12 @@ PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, size
 		}
 
 		/* 3. Now pass our field back to php */
-		*comp_end = '\0';
-		add_next_index_stringl(return_value, temp, comp_end - temp, 1);
+		if (comp_end - temp) {
+			*comp_end = '\0';
+			add_next_index_stringl(return_value, temp, comp_end - temp, 1);
+		} else {
+			add_next_index_null(return_value);
+		}
 	} while (inc_len > 0);
 
 out:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.40 2009/05/18 10:31:08 pajoye Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.41 2009/05/18 11:17:51 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -582,14 +582,14 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURL_TIMECOND_LASTMOD);
 
 #if LIBCURL_VERSION_NUM > 0x070a05 /* CURLOPT_HTTPAUTH is available since curl 7.10.6 */
- 	REGISTER_CURL_CONSTANT(CURLOPT_HTTPAUTH);
- 	/* http authentication options */
- 	REGISTER_CURL_CONSTANT(CURLAUTH_BASIC);
- 	REGISTER_CURL_CONSTANT(CURLAUTH_DIGEST);
- 	REGISTER_CURL_CONSTANT(CURLAUTH_GSSNEGOTIATE);
- 	REGISTER_CURL_CONSTANT(CURLAUTH_NTLM);
- 	REGISTER_CURL_CONSTANT(CURLAUTH_ANY);
- 	REGISTER_CURL_CONSTANT(CURLAUTH_ANYSAFE);
+	REGISTER_CURL_CONSTANT(CURLOPT_HTTPAUTH);
+	/* http authentication options */
+	REGISTER_CURL_CONSTANT(CURLAUTH_BASIC);
+	REGISTER_CURL_CONSTANT(CURLAUTH_DIGEST);
+	REGISTER_CURL_CONSTANT(CURLAUTH_GSSNEGOTIATE);
+	REGISTER_CURL_CONSTANT(CURLAUTH_NTLM);
+	REGISTER_CURL_CONSTANT(CURLAUTH_ANY);
+	REGISTER_CURL_CONSTANT(CURLAUTH_ANYSAFE);
 #endif
 
 #if LIBCURL_VERSION_NUM > 0x070a06 /* CURLOPT_PROXYAUTH & CURLOPT_FTP_CREATE_MISSING_DIRS are available since curl 7.10.7 */
@@ -2134,13 +2134,13 @@ PHP_FUNCTION(curl_getinfo)
 			case CURLINFO_PRIVATE:
 			case CURLINFO_EFFECTIVE_URL:
 			case CURLINFO_CONTENT_TYPE: {
- 				char *s_code = NULL;
+				char *s_code = NULL;
 
- 				if (curl_easy_getinfo(ch->cp, option, &s_code) == CURLE_OK && s_code) {
- 					RETURN_STRING(s_code, 1);
- 				} else {
- 					RETURN_FALSE;
- 				}
+				if (curl_easy_getinfo(ch->cp, option, &s_code) == CURLE_OK && s_code) {
+					RETURN_STRING(s_code, 1);
+				} else {
+					RETURN_FALSE;
+				}
 				break;
 			}
 			case CURLINFO_HTTP_CODE:

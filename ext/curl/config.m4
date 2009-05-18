@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.3.2.7.2.3 2009/05/18 10:31:08 pajoye Exp $ 
+dnl $Id: config.m4,v 1.28.2.3.2.7.2.4 2009/05/18 10:32:04 pajoye Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for cURL support,
@@ -10,7 +10,6 @@ PHP_ARG_WITH(curlwrappers, if we should use cURL for url streams,
 [  --with-curlwrappers     Use cURL for url streams], no, no)
 
 if test "$PHP_CURL" != "no"; then
-  AC_MSG_CHECKING($PHP_CURL ..........................)
   if test -r $PHP_CURL/include/curl/easy.h; then
     CURL_DIR=$PHP_CURL
   else

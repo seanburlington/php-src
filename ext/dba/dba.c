@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.133 2009/03/10 23:39:12 helly Exp $ */
+/* $Id: dba.c,v 1.134 2009/05/18 20:21:39 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,6 +50,7 @@
 #include "php_flatfile.h"
 #include "php_inifile.h"
 #include "php_qdbm.h"
+#include "php_tcadb.h"
 
 /* {{{ arginfo */
 ZEND_BEGIN_ARG_INFO_EX(arginfo_dba_popen, 0, 0, 2)
@@ -337,6 +338,9 @@ static dba_handler handler[] = {
 #if DBA_QDBM
 	DBA_HND(qdbm, DBA_LOCK_EXT)
 #endif
+#if DBA_TCADB
+	DBA_HND(tcadb, DBA_LOCK_ALL)
+#endif
 	{ NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }
 };
 
@@ -358,6 +362,8 @@ static dba_handler handler[] = {
 #define DBA_DEFAULT "dbm"
 #elif DBA_QDBM
 #define DBA_DEFAULT "qdbm"
+#elif DBA_TCADB
+#define DBA_DEFAULT "tcadb"
 #else
 #define DBA_DEFAULT ""
 #endif

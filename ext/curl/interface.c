@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.158 2009/05/18 11:40:25 pajoye Exp $ */
+/* $Id: interface.c,v 1.159 2009/05/18 11:48:56 pajoye Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -2000,7 +2000,7 @@ type_conflict:
 PHP_FUNCTION(curl_setopt)
 {
 	zval       *zid, **zvalue;
-	long	   options;
+	long		options;
 	php_curl    *ch;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zlZ", &zid, &options, &zvalue) == FAILURE) {

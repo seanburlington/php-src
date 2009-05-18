@@ -24,7 +24,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.396 2009/04/25 17:12:56 jani Exp $ */
+/* $Id: run-tests.php,v 1.397 2009/05/18 14:07:59 bjori Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -633,7 +633,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.396 $' . "\n";
+					echo '$Revision: 1.397 $' . "\n";
 					exit(1);
 
 				default:
@@ -2251,6 +2251,19 @@ EXPECTED FAILED TEST SUMMARY
 		foreach ($PHP_FAILED_TESTS['XFAILED'] as $failed_test_data) {
 			$failed_test_summary .= $failed_test_data['test_name'] . $failed_test_data['info'] . "\n";
 		}
+		$failed_test_summary .=  "=====================================================================\n";
+	}
+
+	if (count($PHP_FAILED_TESTS['WARNED'])) {
+		$failed_test_summary .= '
+=====================================================================
+WARNED TEST SUMMARY
+---------------------------------------------------------------------
+';
+		foreach ($PHP_FAILED_TESTS['WARNED'] as $failed_test_data) {
+			$failed_test_summary .= $failed_test_data['test_name'] . $failed_test_data['info'] . "\n";
+		}
+
 		$failed_test_summary .=  "=====================================================================\n";
 	}
 

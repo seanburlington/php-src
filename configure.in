@@ -1,4 +1,4 @@
-## $Id: configure.in,v 1.579.2.52.2.77.2.51 2009/05/06 18:57:45 johannes Exp $ -*- autoconf -*-
+## $Id: configure.in,v 1.579.2.52.2.77.2.52 2009/05/18 21:33:38 derick Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1332,15 +1332,7 @@ if test "$PHP_THREAD_SAFETY" = "yes" && test "$PHP_MYSQL" = "yes"; then
   CPPFLAGS="$CPPFLAGS -DTHREAD=1"
 fi
 
-if test "$PHP_DEBUG" = "1" && test "$PHP_THREAD_SAFETY" = "yes"; then
-  ZEND_EXT_TYPE="zend_extension_debug_ts"
-elif test "$PHP_DEBUG" = "1"; then
-  ZEND_EXT_TYPE="zend_extension_debug"
-elif test "$PHP_THREAD_SAFETY" = "yes"; then
-  ZEND_EXT_TYPE="zend_extension_ts"
-else
-  ZEND_EXT_TYPE="zend_extension"
-fi
+ZEND_EXT_TYPE="zend_extension"
 PHP_SUBST(ZEND_EXT_TYPE)
 
 dnl

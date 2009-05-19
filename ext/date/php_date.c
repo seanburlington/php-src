@@ -16,9 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.68 2009/05/14 18:34:27 jani Exp $ */
-
-#define _ISOC9X_SOURCE
+/* $Id: php_date.c,v 1.43.2.45.2.69 2009/05/19 15:37:38 jani Exp $ */
 
 #include "php.h"
 #include "php_streams.h"

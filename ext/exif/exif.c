@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.211 2009/03/10 23:39:17 helly Exp $ */
+/* $Id: exif.c,v 1.212 2009/05/19 10:23:51 kalle Exp $ */
 
 /*  ToDos
  *
@@ -138,7 +138,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.211 2009/03/10 23:39:17 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.212 2009/05/19 10:23:51 kalle Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3883,7 +3883,7 @@ static int exif_read_file(image_info_type *ImageInfo, char *FileName, int read_t
    Reads header data from the JPEG/TIFF image filename and optionally reads the internal thumbnails */
 PHP_FUNCTION(exif_read_data)
 {
-	zval **p_name, **p_read_all;
+	zval **p_name;
 	int i, ac = ZEND_NUM_ARGS(), ret, sections_needed=0;
 	zend_bool sub_arrays=0, read_thumbnail=0, read_all=0;
 	image_info_type ImageInfo;
@@ -3927,15 +3927,7 @@ PHP_FUNCTION(exif_read_data)
 #endif
 	}
 
-	if(ac >= 5) {
-		convert_to_long_ex(p_read_all);
-		read_all = Z_LVAL_PP(p_read_all);
-	}
-	/* parameters 3,4 will be working in later versions.... */
-	read_all = 0;       /* just to make function work for 4.2 tree */
-
 	ret = exif_read_file(&ImageInfo, filename, read_thumbnail, read_all TSRMLS_CC);
-
    	sections_str = exif_get_sectionlist(ImageInfo.sections_found TSRMLS_CC);
 
 #ifdef EXIF_DEBUG

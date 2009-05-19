@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zlib_filter.c,v 1.26 2009/03/10 23:39:52 helly Exp $ */
+/* $Id: zlib_filter.c,v 1.27 2009/05/19 16:12:04 kalle Exp $ */
 
 #include "php.h"
 #include "php_zlib.h"
@@ -88,7 +88,7 @@ static php_stream_filter_status_t php_zlib_inflate_filter(
 		}
 
 		bucket = php_stream_bucket_make_writeable(buckets_in->head TSRMLS_CC);
-		while (bin < bucket->buflen) {
+		while (bin < (unsigned int) bucket->buflen) {
 
 			if (data->finished) {
 				consumed += bucket->buflen;
@@ -220,7 +220,7 @@ static php_stream_filter_status_t php_zlib_deflate_filter(
 
 		bucket = php_stream_bucket_make_writeable(bucket TSRMLS_CC);
 
-		while (bin < bucket->buflen) {
+		while (bin < (unsigned int) bucket->buflen) {
 			desired = bucket->buflen - bin;
 			if (desired > data->inbuf_len) {
 				desired = data->inbuf_len;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_session.h,v 1.122 2009/05/18 16:09:51 jani Exp $ */
+/* $Id: php_session.h,v 1.123 2009/05/19 07:40:51 tony2001 Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H
@@ -256,7 +256,7 @@ PHPAPI const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 				continue;											\
 			}														\
 			key_length--;											\
-			if (php_get_session_var(key, key_length, &struc TSRMLS_CC) == SUCCESS) {	\
+			if (php_get_session_var(key.s, key_length, &struc TSRMLS_CC) == SUCCESS) {	\
 				code;		 										\
 			} 														\
 		}															\

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.186 2009/05/17 16:52:35 lbarnaud Exp $ */
+/* $Id: streams.c,v 1.187 2009/05/19 10:04:35 lbarnaud Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1857,7 +1857,11 @@ static size_t _php_stream_copy_to_stream_common(php_stream *src, php_stream *des
 				}
 
 				towrite -= didwrite;
-				writeptr.v += ZBYTES(utype, didwrite);
+				if (utype == IS_UNICODE) {
+					writeptr.u += didwrite;
+				} else {
+					writeptr.s += didwrite;
+				}
 			}
 		} else {
 			break;

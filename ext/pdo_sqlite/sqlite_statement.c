@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.32 2009/05/07 23:04:02 mbeccati Exp $ */
+/* $Id: sqlite_statement.c,v 1.33 2009/05/19 16:14:46 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -265,6 +265,10 @@ static int pdo_sqlite_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsi
 		case SQLITE3_TEXT:
 			*ptr = (char*)sqlite3_column_text(S->stmt, colno);
 			*len = sqlite3_column_bytes(S->stmt, colno);
+			if (*len) {
+				/* sqlite3.h says "the NUL terminator is included in the byte count for TEXT values" */
+				*len--; /* do not remove this, even though it generates a warning */
+			}
 			return 1;
 		
 		default:

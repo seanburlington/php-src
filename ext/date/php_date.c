@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.232 2009/05/19 15:38:21 jani Exp $ */
+/* $Id: php_date.c,v 1.233 2009/05/19 19:23:12 bjori Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -340,11 +340,13 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_date_interval_create_from_date_string, 0, 0, 1)
 	ZEND_ARG_INFO(0, time)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_date_interval_format, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_date_interval_format, 0, 0, 2)
 	ZEND_ARG_INFO(0, object)
+	ZEND_ARG_INFO(0, format)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO(arginfo_date_method_interval_format, 0)
+	ZEND_ARG_INFO(0, format)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_date_period_construct, 0, 0, 3)

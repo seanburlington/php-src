@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.37 2009/01/19 18:17:32 dsp Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.15.2.50.2.38 2009/05/19 16:02:55 kalle Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -471,7 +471,8 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 
 static int sapi_cgi_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 {
-	int read_bytes=0, tmp_read_bytes;
+	uint read_bytes = 0;
+	int tmp_read_bytes;
 
 	count_bytes = MIN(count_bytes, (uint) SG(request_info).content_length - SG(read_post_bytes));
 	while (read_bytes < count_bytes) {

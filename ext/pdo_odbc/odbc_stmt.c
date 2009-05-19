@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.28 2009/03/10 23:39:31 helly Exp $ */
+/* $Id: odbc_stmt.c,v 1.29 2009/05/19 10:25:38 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -181,7 +181,7 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 						break;
 				}
 
-				rc = SQLDescribeParam(S->stmt, param->paramno+1, &sqltype, &precision, &scale, &nullable);
+				rc = SQLDescribeParam(S->stmt, (SQLUSMALLINT) param->paramno+1, &sqltype, &precision, &scale, &nullable);
 				if (rc != SQL_SUCCESS && rc != SQL_SUCCESS_WITH_INFO) {
 					/* MS Access, for instance, doesn't support SQLDescribeParam,
 					 * so we need to guess */
@@ -229,7 +229,7 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 					return 0;
 				}
 
-				rc = SQLBindParameter(S->stmt, param->paramno+1,
+				rc = SQLBindParameter(S->stmt, (SQLUSMALLINT) param->paramno+1,
 						P->paramtype, ctype, sqltype, precision, scale,
 						P->paramtype == SQL_PARAM_INPUT ? 
 							(SQLPOINTER)param :

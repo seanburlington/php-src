@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.25 2009/03/26 20:01:38 felipe Exp $ */
+/* $Id: com_variant.c,v 1.26 2009/05/19 17:38:08 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ static void safe_array_from_zval(VARIANT *v, zval *z, int codepage TSRMLS_DC)
 	SAFEARRAYBOUND bound;
 	HashPosition pos;
 	int keytype;
-	char *strindex;
+	zstr strindex;
 	int strindexlen;
 	long intindex = -1;
 	long max_index = 0;

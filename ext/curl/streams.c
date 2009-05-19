@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.14.2.2.2.11.2.5 2009/05/05 00:31:56 jani Exp $ */
+/* $Id: streams.c,v 1.14.2.2.2.11.2.6 2009/05/19 18:08:57 kalle Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -132,7 +132,7 @@ static int on_progress_avail(php_stream *stream, double dltotal, double dlnow, d
 
 	/* our notification system only works in a single direction; we should detect which
 	 * direction is important and use the correct values in this call */
-	php_stream_notify_progress(stream->context, dlnow, dltotal);
+	php_stream_notify_progress(stream->context, (size_t) dlnow, (size_t) dltotal);
 	return 0;
 }
 

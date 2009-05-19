@@ -17,14 +17,18 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_dblib.h,v 1.8 2009/03/10 23:39:28 helly Exp $ */
+/* $Id: php_pdo_dblib.h,v 1.9 2009/05/19 10:22:10 kalle Exp $ */
 
 #ifndef PHP_PDO_DBLIB_H
 #define PHP_PDO_DBLIB_H
 
-
+#if PDO_DBLIB_IS_MSSQL
+extern zend_module_entry pdo_mssql_module_entry;
+#define phpext_pdo_mssql_ptr &pdo_mssql_module_entry
+#else
 extern zend_module_entry pdo_dblib_module_entry;
 #define phpext_pdo_dblib_ptr &pdo_dblib_module_entry
+#endif
 
 #ifdef ZTS
 # include "TSRM.h"

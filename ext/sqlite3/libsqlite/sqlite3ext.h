@@ -15,7 +15,7 @@
 ** as extensions by SQLite should #include this file instead of 
 ** sqlite3.h.
 **
-** @(#) $Id: sqlite3ext.h,v 1.18 2009/05/07 11:24:20 scottmac Exp $
+** @(#) $Id: sqlite3ext.h,v 1.19 2009/05/19 18:44:00 iliaa Exp $
 */
 #ifndef _SQLITE3EXT_H_
 #define _SQLITE3EXT_H_

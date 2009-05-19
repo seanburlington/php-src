@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.233 2009/05/19 19:23:12 bjori Exp $ */
+/* $Id: php_date.c,v 1.234 2009/05/19 19:43:44 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -831,11 +831,6 @@ static char* guess_timezone(const timelib_tzdb *tzdb TSRMLS_DC)
 	/* Checking configure timezone */
 	if (DATEG(timezone) && (strlen(DATEG(timezone)) > 0)) {
 		return DATEG(timezone);
-	}
-	/* Check environment variable */
-	env = getenv("TZ");
-	if (env && *env && timelib_timezone_id_is_valid(env, tzdb)) {
-		return env;
 	}
 	/* Check config setting for default timezone */
 	if (DATEG(default_timezone) && (strlen(DATEG(default_timezone)) > 0) && timelib_timezone_id_is_valid(DATEG(default_timezone), tzdb)) {

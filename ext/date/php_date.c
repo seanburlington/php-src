@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.234 2009/05/19 19:43:44 derick Exp $ */
+/* $Id: php_date.c,v 1.235 2009/05/20 08:18:07 kalle Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -826,8 +826,6 @@ static timelib_tzinfo *php_date_parse_tzfile(char *formal_tzname, const timelib_
 /* {{{ Helper functions */
 static char* guess_timezone(const timelib_tzdb *tzdb TSRMLS_DC)
 {
-	char *env;
-
 	/* Checking configure timezone */
 	if (DATEG(timezone) && (strlen(DATEG(timezone)) > 0)) {
 		return DATEG(timezone);

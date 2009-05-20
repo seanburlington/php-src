@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.48 2009/05/19 13:50:32 jani Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.49 2009/05/20 09:26:20 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1094,7 +1094,8 @@ PHP_FUNCTION(curl_version)
 		array_init(protocol_list);
 
 		while (*p != NULL) {
-			add_next_index_string(protocol_list,  *p++, 1);
+			add_next_index_string(protocol_list,  *p, 1);
+			p++;
 		}
 		CAAZ("protocols", protocol_list);
 	}

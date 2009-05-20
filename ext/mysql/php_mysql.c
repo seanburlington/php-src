@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.36 2009/03/25 10:27:38 johannes Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.6.2.16.2.37 2009/05/20 08:30:12 kalle Exp $ */
 
 /* TODO:
  *
@@ -1166,7 +1166,7 @@ PHP_FUNCTION(mysql_thread_id)
 	}
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &mysql_link, id, "MySQL-Link", le_link, le_plink);
 
-	RETURN_LONG(mysql_thread_id(mysql->conn));
+	RETURN_LONG((long) mysql_thread_id(mysql->conn));
 }
 /* }}} */
 

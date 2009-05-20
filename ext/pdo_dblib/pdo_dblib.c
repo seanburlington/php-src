@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.9.2.6.2.6 2009/05/19 10:22:31 kalle Exp $ */
+/* $Id: pdo_dblib.c,v 1.9.2.6.2.7 2009/05/20 10:19:28 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -79,7 +79,11 @@ zend_module_entry pdo_dblib_module_entry = {
 };
 
 #if defined(COMPILE_DL_PDO_DBLIB) || defined(COMPILE_DL_PDO_MSSQL)
+#if PDO_DBLIB_IS_MSSQL
+ZEND_GET_MODULE(pdo_mssql)
+#else
 ZEND_GET_MODULE(pdo_dblib)
+#endif
 #endif
 
 int error_handler(DBPROCESS *dbproc, int severity, int dberr,

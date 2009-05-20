@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.70.2.7.2.5.2.23 2009/05/20 12:15:39 jani Exp $ */
+/* $Id: dns.c,v 1.70.2.7.2.5.2.24 2009/05/20 12:44:19 jani Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -917,10 +917,9 @@ PHP_FUNCTION(dns_get_mx)
 }
 /* }}} */
 #endif /* HAVE_DN_SKIPNAME && HAVE_DN_EXPAND */
-#endif /* defined(PHP_WIN32) && (HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(NETWARE))) */
+#endif /* !defined(PHP_WIN32) && (HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(NETWARE))) */
 
 #if HAVE_DNS_FUNCS || defined(PHP_WIN32)
-
 PHP_MINIT_FUNCTION(dns) {
 	REGISTER_LONG_CONSTANT("DNS_A",     PHP_DNS_A,     CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("DNS_NS",    PHP_DNS_NS,    CONST_CS | CONST_PERSISTENT);

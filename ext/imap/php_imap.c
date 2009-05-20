@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.289 2009/05/05 01:44:08 jani Exp $ */
+/* $Id: php_imap.c,v 1.290 2009/05/20 08:22:38 kalle Exp $ */
 
 #define IMAP41
 
@@ -3368,7 +3368,7 @@ PHP_FUNCTION(imap_fetch_overview)
 PHP_FUNCTION(imap_mail_compose)
 {
 	zval *envelope, *body;
-	char *key;
+	zstr key;
 	zval **data, **pvalue, **disp_data, **env_data;
 	ulong ind;
 	char *cookie = NIL;
@@ -3482,7 +3482,7 @@ PHP_FUNCTION(imap_mail_compose)
 				while (zend_hash_get_current_data(Z_ARRVAL_PP(pvalue), (void **) &disp_data) == SUCCESS) {
 					disp_param = mail_newbody_parameter();
 					zend_hash_get_current_key(Z_ARRVAL_PP(pvalue), &key, &ind, 0);
-					disp_param->attribute = cpystr(key);
+					disp_param->attribute = cpystr(key.s);
 					convert_to_string_ex(disp_data);
 					disp_param->value = (char *) fs_get(Z_STRLEN_PP(disp_data) + 1);
 					memcpy(disp_param->value, Z_STRVAL_PP(disp_data), Z_STRLEN_PP(disp_data) + 1);
@@ -3516,7 +3516,7 @@ PHP_FUNCTION(imap_mail_compose)
 				while (zend_hash_get_current_data(Z_ARRVAL_PP(pvalue), (void **) &disp_data) == SUCCESS) {
 					disp_param = mail_newbody_parameter();
 					zend_hash_get_current_key(Z_ARRVAL_PP(pvalue), &key, &ind, 0);
-					disp_param->attribute = cpystr(key);
+					disp_param->attribute = cpystr(key.s);
 					convert_to_string_ex(disp_data);
 					disp_param->value = (char *) fs_get(Z_STRLEN_PP(disp_data) + 1);
 					memcpy(disp_param->value, Z_STRVAL_PP(disp_data), Z_STRLEN_PP(disp_data) + 1);
@@ -3595,7 +3595,7 @@ PHP_FUNCTION(imap_mail_compose)
 					while (zend_hash_get_current_data(Z_ARRVAL_PP(pvalue), (void **) &disp_data) == SUCCESS) {
 						disp_param = mail_newbody_parameter();
 						zend_hash_get_current_key(Z_ARRVAL_PP(pvalue), &key, &ind, 0);
-						disp_param->attribute = cpystr(key);
+						disp_param->attribute = cpystr(key.s);
 						convert_to_string_ex(disp_data);
 						disp_param->value = (char *) fs_get(Z_STRLEN_PP(disp_data) + 1);
 						memcpy(disp_param->value, Z_STRVAL_PP(disp_data), Z_STRLEN_PP(disp_data) + 1);
@@ -3629,7 +3629,7 @@ PHP_FUNCTION(imap_mail_compose)
 					while (zend_hash_get_current_data(Z_ARRVAL_PP(pvalue), (void **) &disp_data) == SUCCESS) {
 						disp_param = mail_newbody_parameter();
 						zend_hash_get_current_key(Z_ARRVAL_PP(pvalue), &key, &ind, 0);
-						disp_param->attribute = cpystr(key);
+						disp_param->attribute = cpystr(key.s);
 						convert_to_string_ex(disp_data);
 						disp_param->value = (char *) fs_get(Z_STRLEN_PP(disp_data) + 1);
 						memcpy(disp_param->value, Z_STRVAL_PP(disp_data), Z_STRLEN_PP(disp_data) + 1);

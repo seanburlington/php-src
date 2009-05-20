@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.19.2.1.2.5 2009/05/19 19:38:00 jani Exp $ */
+/* $Id: dns.h,v 1.19.2.1.2.6 2009/05/20 12:09:33 jani Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -31,7 +31,7 @@ PHP_FUNCTION(gethostbyaddr);
 PHP_FUNCTION(gethostbyname);
 PHP_FUNCTION(gethostbynamel);
 
-#if defined(PHP_WIN32) || (HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(NETWARE)))
+#if HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(PHP_WIN32) || defined(NETWARE))
 PHP_FUNCTION(dns_check_record);
 # if HAVE_DN_SKIPNAME && HAVE_DN_EXPAND
 PHP_FUNCTION(dns_get_mx);

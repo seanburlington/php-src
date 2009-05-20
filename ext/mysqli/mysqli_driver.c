@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqli_driver.c,v 1.18 2008/12/31 11:12:33 sebastian Exp $ */
+/* $Id: mysqli_driver.c,v 1.19 2009/05/20 08:29:23 kalle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,12 +134,14 @@ MAP_PROPERTY_MYG_LONG_READ(driver_report_read, report_mode);
 
 ZEND_FUNCTION(mysqli_driver_construct)
 {
+#if G0
 	MYSQLI_RESOURCE 	*mysqli_resource;
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = 1;
 	mysqli_resource->status = (ZEND_NUM_ARGS() == 1) ? MYSQLI_STATUS_INITIALIZED : MYSQLI_STATUS_VALID;
 	((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->ptr = mysqli_resource;
+#endif
 }
 
 const mysqli_property_entry mysqli_driver_property_entries[] = {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.27.2.48 2009/05/20 09:26:12 tony2001 Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.27.2.49 2009/05/21 12:52:05 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1649,12 +1649,24 @@ static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue, zval *retu
 			error = CURLE_OK;
 			switch (option) {
 				case CURLOPT_FILE:
-					ch->handlers->write->fp = fp;
-					ch->handlers->write->method = PHP_CURL_FILE;
+					if (((php_stream *) what)->mode[0] != 'r') {
+						ch->handlers->write->fp = fp;
+						ch->handlers->write->method = PHP_CURL_FILE;
+					} else {
+						php_error_docref(NULL TSRMLS_CC, E_WARNING, "the provided file handle is not writable");
+						RETVAL_FALSE;
+						return 1;
+					}
 					break;
 				case CURLOPT_WRITEHEADER:
-					ch->handlers->write_header->fp = fp;
-					ch->handlers->write_header->method = PHP_CURL_FILE;
+					if (((php_stream *) what)->mode[0] != 'r') {
+						ch->handlers->write_header->fp = fp;
+						ch->handlers->write_header->method = PHP_CURL_FILE;
+					} else {
+						php_error_docref(NULL TSRMLS_CC, E_WARNING, "the provided file handle is not writable");
+						RETVAL_FALSE;
+						return 1;
+					}
 					break;
 				case CURLOPT_INFILE:
 					zend_list_addref(Z_LVAL_PP(zvalue));

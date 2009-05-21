@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.56 2009/04/27 19:48:45 felipe Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.33.2.45.2.57 2009/05/21 16:01:37 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4603,6 +4603,10 @@ ZEND_METHOD(reflection_property, getDeclaringClass)
 			break;
 		}
 		ce = tmp_ce;
+		if (tmp_ce == tmp_info->ce) {
+			/* declared in this class, done */
+			break;
+		}
 		tmp_ce = tmp_ce->parent;
 	}
 
@@ -5438,7 +5442,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.56 $");
+	php_info_print_table_row(2, "Version", "$Revision: 1.164.2.33.2.45.2.57 $");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -5452,7 +5456,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Revision: 1.164.2.33.2.45.2.56 $",
+	"$Revision: 1.164.2.33.2.45.2.57 $",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

@@ -1,4 +1,4 @@
-$Id: UPGRADING,v 1.1.2.3.2.1.2.8 2009/05/15 09:44:08 kalle Exp $
+$Id: UPGRADING,v 1.1.2.3.2.1.2.9 2009/05/22 03:32:20 kalle Exp $
 
 UPGRADE NOTES - PHP 5.3
 
@@ -411,7 +411,6 @@ UPGRADE NOTES - PHP 5.3
                        DateTime::getLastErrors()
        - PDO_Firebird: PDO::setAttribute()
        - Reflection:   ReflectionProperty::setAccessible()
-                       ReflectionFunction::getClosureThis()
                        ReflectionFunction::inNamespace()
                        ReflectionFunction::getNamespaceName()
                        ReflectionFunction::getShortName()

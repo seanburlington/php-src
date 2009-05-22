@@ -1,10 +1,11 @@
-// $Id: config.w32,v 1.1.2.3 2009/05/22 19:41:15 kalle Exp $
+// $Id: config.w32,v 1.1.2.4 2009/05/22 19:47:15 kalle Exp $
 // vim:ft=javascript
 
 ARG_WITH("sqlite3", "SQLite 3 support", "no");
 
 if (PHP_SQLITE3 != "no") {
-	ADD_FLAG("CFLAGS_SQLITE3", "/D SQLITE_THREADSAFE=" + (PHP_ZTS ? "1" : "0") + " /D SQLITE_ENABLE_FTS3=1 /D SQLITE_CORE=1 ");
+WARNING(PHP_ZTS);
+	ADD_FLAG("CFLAGS_SQLITE3", "/D SQLITE_THREADSAFE=" + (PHP_ZTS == "yes" ? "1" : "0") + " /D SQLITE_ENABLE_FTS3=1 /D SQLITE_CORE=1 ");
 	EXTENSION("sqlite3", "sqlite3.c", null, "/I" + configure_module_dirname + "/libsqlite /I" + configure_module_dirname);
 
 	ADD_SOURCES(configure_module_dirname + "/libsqlite", "sqlite3.c", "sqlite3");

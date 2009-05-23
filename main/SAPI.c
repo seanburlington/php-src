@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.236 2009/05/23 18:03:27 andrei Exp $ */
+/* $Id: SAPI.c,v 1.237 2009/05/23 18:10:13 jani Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -394,7 +394,7 @@ SAPI_API void sapi_activate(TSRMLS_D)
 	}
 	SG(rfc1867_uploaded_files) = NULL;
 	SG(rfc1867_vars) = NULL;
-	SG(rfc1867_vars) = NULL;
+	SG(rfc1867_files_vars) = NULL;
 
 	/* handle request mehtod */
 	if (SG(server_context)) {

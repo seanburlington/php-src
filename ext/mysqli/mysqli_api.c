@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.26 2009/05/20 13:10:49 iliaa Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.22.2.16.2.27 2009/05/23 02:58:15 kalle Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -2081,7 +2081,11 @@ PHP_FUNCTION(mysqli_refresh)
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
+#ifdef MYSQLI_USE_MYSQLND
+	RETURN_BOOL(!mysql_refresh(mysql->mysql, (uint8_t) options));
+#else
 	RETURN_BOOL(!mysql_refresh(mysql->mysql, options));
+#endif
 }
 /* }}} */
  

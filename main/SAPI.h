@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.129 2009/04/28 22:59:07 stas Exp $ */
+/* $Id: SAPI.h,v 1.130 2009/05/23 18:03:27 andrei Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -131,6 +131,10 @@ typedef struct _sapi_globals_struct {
 	zend_bool sapi_started;
 	time_t global_request_time;
 	HashTable known_post_content_types;
+
+	/* raw POST and FILES variables from RFC1867 handler */
+	HashTable *rfc1867_vars;
+	HashTable *rfc1867_files_vars;
 } sapi_globals_struct;
 
 

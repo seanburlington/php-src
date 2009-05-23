@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.168 2009/03/10 23:39:39 helly Exp $ */
+/* $Id: basic_functions.h,v 1.169 2009/05/23 18:03:27 andrei Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -140,6 +140,10 @@ PHP_FUNCTION(stream_bucket_append);
 PHP_FUNCTION(stream_bucket_new);
 PHP_MINIT_FUNCTION(user_filters);
 PHP_RSHUTDOWN_FUNCTION(user_filters);
+
+/* Unicode-related */
+PHP_FUNCTION(request_set_encoding);
+PHP_FUNCTION(request_had_errors);
 
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC);
 PHPAPI char *php_get_current_user(void);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.114 2009/04/01 17:04:16 mattwil Exp $ */
+/* $Id: php_string.h,v 1.115 2009/05/23 18:03:27 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -129,9 +129,9 @@ PHPAPI UChar *php_u_strtoupper(UChar *s, int *len, const char *locale);
 PHPAPI UChar *php_u_strtolower(UChar *s, int *len, const char *locale);
 PHPAPI char *php_strtr(char *str, int len, char *str_from, char *str_to, int trlen);
 PHPAPI UChar *php_u_addslashes(UChar *str, int length, int *new_length, int freeit TSRMLS_DC);
-PHPAPI UChar *php_u_addslashes_ex(UChar *str, int length, int *new_length, int freeit, int ignore_sybase TSRMLS_DC);
+PHPAPI UChar *php_u_addslashes_ex(UChar *str, int length, int *new_length, int freeit TSRMLS_DC);
 PHPAPI char *php_addslashes(char *str, int length, int *new_length, int freeit TSRMLS_DC);
-PHPAPI char *php_addslashes_ex(char *str, int length, int *new_length, int freeit, int ignore_sybase TSRMLS_DC);
+PHPAPI char *php_addslashes_ex(char *str, int length, int *new_length, int freeit TSRMLS_DC);
 PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int freeit, char *what, int wlength TSRMLS_DC);
 PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC);
 PHPAPI void php_u_stripslashes(UChar *str, int *len TSRMLS_DC);

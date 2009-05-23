@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.121 2009/03/10 23:39:53 helly Exp $ */
+/* $Id: php_globals.h,v 1.122 2009/05/23 18:03:27 andrei Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -154,6 +154,8 @@ struct _php_core_globals {
 
 	zend_bool mail_x_header;
 	char *mail_log;
+
+	zend_bool request_decoding_error;
 };
 
 

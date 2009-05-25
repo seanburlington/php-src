@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.c,v 1.546 2009/05/21 01:39:48 jani Exp $ */
+/* $Id: file.c,v 1.547 2009/05/25 13:02:55 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2360,6 +2360,15 @@ PHPAPI void php_fgetcsv_ex(php_stream *stream,
 
 	array_init(return_value);
 
+	while (*p == ' ' || *p == '\t') {
+		p++;
+	}
+
+	if (*p == '\r' || *p == '\n') {
+		add_next_index_null(return_value);
+		goto end;
+	}
+
 	while(p < e) {
 		switch (state) {
 			case PHP_FGETCSV_READY:
@@ -2551,7 +2560,7 @@ post_enc:
 				break;
 		}
 	}
-
+end:
 	if (stream) {
 		efree(buffer);
 	}
@@ -2567,6 +2576,15 @@ PHPAPI void php_u_fgetcsv(php_stream *stream, UChar *delimiter, int delimiter_le
 	UChar *p = buffer, *e = buffer + buffer_len, *field_start = NULL, *field_end = NULL;
 
 	array_init(return_value);
+
+	while (*p == ' ' || *p == '\t') {
+		p++;
+	}
+
+	if (*p == '\r' || *p == '\n') {
+		add_next_index_null(return_value);
+		goto end;
+	}
 
 	while(p < e) {
 		switch (state) {
@@ -2756,7 +2774,7 @@ post_enc:
 				break;
 		}
 	}
-
+end:
 	if (stream) {
 		efree(buffer);
 	}

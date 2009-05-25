@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20.2.12.2.15.2.13 2009/05/25 15:35:03 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.20.2.12.2.15.2.14 2009/05/25 16:09:27 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -615,7 +615,7 @@ static char *_xmlwriter_get_valid_file_path(char *source, char *resolved_path, i
 	if (uri->scheme != NULL) {
 		/* absolute file uris - libxml only supports localhost or empty host */
 		if (strncasecmp(source, "file:///", 8) == 0) {
-			if (strlen(source) == 8) {
+			if (source[sizeof("file:///") - 1] == '\0') {
 				return NULL;
 			}
 			isFileUri = 1;
@@ -625,7 +625,7 @@ static char *_xmlwriter_get_valid_file_path(char *source, char *resolved_path, i
 			source += 7;
 #endif
 		} else if (strncasecmp(source, "file://localhost/",17) == 0) {
-			if (strlen(source) == 17) {
+			if (source[sizeof("file://localhost/") - 1] == '\0') {
 				return NULL;
 			}
 
@@ -659,6 +659,8 @@ static char *_xmlwriter_get_valid_file_path(char *source, char *resolved_path, i
 		}
 
 		file_dest = resolved_path;
+	} else {
+		file_dest = source;
 	}
 
 	xmlFreeURI(uri);

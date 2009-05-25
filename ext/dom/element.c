@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.66 2009/03/10 23:39:13 helly Exp $ */
+/* $Id: element.c,v 1.67 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -357,7 +357,7 @@ PHP_FUNCTION(dom_element_get_attribute)
 	}
 
 	if (value == NULL) {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	} else {
 		RETVAL_XML_STRING(value, ZSTR_DUPLICATE);
 		xmlFree(value);
@@ -685,10 +685,10 @@ PHP_FUNCTION(dom_element_get_attribute_ns)
 			if (nsptr != NULL) {
 				RETVAL_XML_STRING((char *) nsptr->href, ZSTR_DUPLICATE);
 			} else {
-				RETVAL_EMPTY_TEXT();
+				RETVAL_EMPTY_UNICODE();
 			}
 		} else {
-			RETVAL_EMPTY_TEXT();
+			RETVAL_EMPTY_UNICODE();
 		}
 	}
 

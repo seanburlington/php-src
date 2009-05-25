@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.39 2009/03/13 13:43:57 rrichards Exp $ */
+/* $Id: attr.c,v 1.40 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,7 +160,7 @@ int dom_attr_value_read(dom_object *obj, zval **retval TSRMLS_DC)
 		ZVAL_XML_STRING(*retval, (char *)content, ZSTR_DUPLICATE);
 		xmlFree(content);
 	} else {
-		ZVAL_EMPTY_TEXT(*retval);
+		ZVAL_EMPTY_UNICODE(*retval);
 	}
 
 	return SUCCESS;

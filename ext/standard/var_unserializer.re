@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.79 2009/03/26 22:16:48 felipe Exp $ */
+/* $Id: var_unserializer.re,v 1.80 2009/05/25 14:32:15 felipe Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -749,7 +749,7 @@ object ":" uiv ":" ["]	{
 		ZVAL_STRING(user_func, PG(unserialize_callback_func), 1);
 		args[0] = &arg_func_name;
 		MAKE_STD_ZVAL(arg_func_name);
-		ZVAL_TEXT(arg_func_name, class_name, 1);
+		ZVAL_UNICODE(arg_func_name, class_name.u, 1);
 		if (call_user_function_ex(CG(function_table), NULL, user_func, &retval_ptr, 1, args, 0, NULL TSRMLS_CC) != SUCCESS) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "defined (%s) but not found", user_func->value.str.val);
 			incomplete_class = 1;

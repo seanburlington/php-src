@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.365 2009/03/26 20:01:57 felipe Exp $ */
+/* $Id: oci8.c,v 1.366 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1090,7 +1090,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
 	php_info_print_table_row(2, "Version", PHP_OCI8_VERSION);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.365 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.366 $");
 
 	snprintf(buf, sizeof(buf), "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -2220,9 +2220,9 @@ int php_oci_column_to_zval(php_oci_out_column *column, zval *value, int mode TSR
 			switch (lob_type) {
 				case OCI_IS_CLOB:
 					if (lob_length > 0) {
-						ZVAL_TEXTL(value, lob_buffer, TEXT_CHARS(lob_length), 0);
+						ZVAL_UNICODEL(value, lob_buffer.u, TEXT_CHARS(lob_length), 0);
 					} else {
-						ZVAL_EMPTY_TEXT(value);
+						ZVAL_EMPTY_UNICODE(value);
 					}
 					break;
 				case OCI_IS_BLOB:
@@ -2256,7 +2256,7 @@ int php_oci_column_to_zval(php_oci_out_column *column, zval *value, int mode TSR
 				return 0;
 		}
 
-		ZVAL_TEXTL(value, zstr_data, TEXT_CHARS(column_size), 1);
+		ZVAL_UNICODEL(value, zstr_data.u, TEXT_CHARS(column_size), 1);
 	}
 	return 0;
 }

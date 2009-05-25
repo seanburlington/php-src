@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.138 2009/04/19 17:09:46 lbarnaud Exp $ */
+/* $Id: streamsfuncs.c,v 1.139 2009/05/25 14:32:15 felipe Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -125,7 +125,7 @@ PHP_FUNCTION(stream_socket_client)
 	}
 	if (zerrstr) {
 		zval_dtor(zerrstr);
-		ZVAL_EMPTY_TEXT(zerrstr);
+		ZVAL_EMPTY_UNICODE(zerrstr);
 	}
 
 	stream = php_stream_xport_create(host, host_len, REPORT_ERRORS,
@@ -202,7 +202,7 @@ PHP_FUNCTION(stream_socket_server)
 	}
 	if (zerrstr) {
 		zval_dtor(zerrstr);
-		ZVAL_EMPTY_TEXT(zerrstr);
+		ZVAL_EMPTY_UNICODE(zerrstr);
 	}
 
 	stream = php_stream_xport_create(host, host_len, REPORT_ERRORS,

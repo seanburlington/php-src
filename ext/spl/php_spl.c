@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.156 2009/05/02 06:27:08 kalle Exp $ */
+/* $Id: php_spl.c,v 1.157 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -681,12 +681,12 @@ PHP_FUNCTION(spl_autoload_functions)
 					Z_ADDREF_P(alfi->obj);
 					add_next_index_zval(tmp, alfi->obj);
 				} else {
-					add_next_index_text(tmp, alfi->ce->name, 1);
+					add_next_index_unicode(tmp, alfi->ce->name.u, 1);
 				}
-				add_next_index_text(tmp, alfi->func_ptr->common.function_name, 1);
+				add_next_index_unicode(tmp, alfi->func_ptr->common.function_name.u, 1);
 				add_next_index_zval(return_value, tmp);
 			} else {
-				add_next_index_text(return_value, alfi->func_ptr->common.function_name, 1);
+				add_next_index_unicode(return_value, alfi->func_ptr->common.function_name.u, 1);
 			}
 
 			zend_hash_move_forward_ex(SPL_G(autoload_functions), &function_pos);
@@ -695,7 +695,7 @@ PHP_FUNCTION(spl_autoload_functions)
 	}
 
 	array_init(return_value);
-	add_next_index_text(return_value, EG(autoload_func)->common.function_name, 1);
+	add_next_index_unicode(return_value, EG(autoload_func)->common.function_name.u, 1);
 } /* }}} */
 
 /* {{{ proto string spl_object_hash(object obj) U

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.32 2009/03/10 23:39:12 helly Exp $ */
+/* $Id: characterdata.c,v 1.33 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ int dom_characterdata_data_read(dom_object *obj, zval **retval TSRMLS_DC)
 		ZVAL_XML_STRING(*retval, content, ZSTR_DUPLICATE);
 		xmlFree(content);
 	} else {
-		ZVAL_EMPTY_TEXT(*retval);
+		ZVAL_EMPTY_UNICODE(*retval);
 	}
 
 	return SUCCESS;
@@ -210,7 +210,7 @@ PHP_FUNCTION(dom_characterdata_substring_data)
 		RETVAL_XML_STRING(substring, ZSTR_DUPLICATE);
 		xmlFree(substring);
 	} else {
-		RETVAL_EMPTY_TEXT();
+		RETVAL_EMPTY_UNICODE();
 	}
 }
 /* }}} end dom_characterdata_substring_data */

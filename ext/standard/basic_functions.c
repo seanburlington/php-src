@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.956 2009/05/23 18:03:27 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.957 2009/05/25 14:32:15 felipe Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -6174,7 +6174,7 @@ PHP_FUNCTION(import_request_variables)
 		}
 	} else {
 		MAKE_STD_ZVAL(prefix);
-		ZVAL_EMPTY_TEXT(prefix);
+		ZVAL_EMPTY_UNICODE(prefix);
 	}
 
 	for (p = types; p && *p; p++) {

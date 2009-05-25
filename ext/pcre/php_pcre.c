@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.252 2009/05/23 18:03:27 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.253 2009/05/25 14:32:14 felipe Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1795,7 +1795,7 @@ static PHP_FUNCTION(preg_quote)
 
 	/* Nothing to do if we got an empty string */
 	if (in_str == in_str_end) {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 
 	if (delim && *delim) {

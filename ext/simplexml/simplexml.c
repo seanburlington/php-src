@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.275 2009/03/30 14:21:03 kalle Exp $ */
+/* $Id: simplexml.c,v 1.276 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1570,7 +1570,7 @@ SXE_METHOD(getName)
 		namelen = xmlStrlen(node->name);
 		RETVAL_XML_STRING_LEN((char *) node->name, namelen, ZSTR_DUPLICATE);
 	} else {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */
@@ -1853,7 +1853,7 @@ SXE_METHOD(__toString)
 		RETURN_ZVAL(result, 1, 1);
 	} else {
 		zval_ptr_dtor(&result);
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */
@@ -2616,7 +2616,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.275 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.276 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

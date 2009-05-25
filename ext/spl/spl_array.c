@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.165 2009/05/21 13:25:48 lbarnaud Exp $ */
+/* $Id: spl_array.c,v 1.166 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1099,7 +1099,7 @@ SPL_METHOD(Array, getIteratorClass)
 	zval *object = getThis();
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 
-	RETURN_TEXTL(intern->ce_get_iterator->name, intern->ce_get_iterator->name_length, 1);
+	RETURN_UNICODEL(intern->ce_get_iterator->name.u, intern->ce_get_iterator->name_length, 1);
 }
 /* }}} */
 

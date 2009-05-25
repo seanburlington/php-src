@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.46 2009/03/26 20:02:12 felipe Exp $ */
+/* $Id: spl_functions.c,v 1.47 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -85,7 +85,7 @@ void spl_add_class_name(zval *list, zend_class_entry * pce, int allow, int ce_fl
 
 		if (zend_u_hash_find(Z_ARRVAL_P(list), IS_UNICODE, pce->name, len+1, (void*)&tmp) == FAILURE) {
 			MAKE_STD_ZVAL(tmp);
-			ZVAL_TEXTL(tmp, pce->name, pce->name_length, 1);
+			ZVAL_UNICODEL(tmp, pce->name.u, pce->name_length, 1);
 			zend_u_hash_add(Z_ARRVAL_P(list), IS_UNICODE, pce->name, len+1, &tmp, sizeof(zval *), NULL);
 		}
 	}

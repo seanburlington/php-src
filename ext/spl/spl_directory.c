@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.181 2009/05/09 21:05:18 colder Exp $ */
+/* $Id: spl_directory.c,v 1.182 2009/05/25 14:32:14 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1425,7 +1425,7 @@ SPL_METHOD(RecursiveDirectoryIterator, getSubPath)
 	if (intern->u.dir.sub_path.v) {
 		RETURN_ZSTRL(intern->u.dir.sub_path_type, intern->u.dir.sub_path, intern->u.dir.sub_path_len, ZSTR_DUPLICATE);
 	} else {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */

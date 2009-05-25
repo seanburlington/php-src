@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.700 2009/05/23 18:03:27 andrei Exp $ */
+/* $Id: string.c,v 1.701 2009/05/25 14:32:15 felipe Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3193,7 +3193,7 @@ PHP_FUNCTION(chunk_split)
 	}
 
 	if (!str_len) {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 
 	result.v = php_chunk_split(str.v, str_len, ending.v, ending_len, chunklen, &result_len, str_type);
@@ -5517,7 +5517,7 @@ static void php_str_replace_in_subject(zval *search, zval *replace, zval **subje
 	convert_to_unicode_ex(subject);
 	Z_TYPE_P(result) = IS_UNICODE;
 	if (Z_UNILEN_PP(subject) == 0) {
-		ZVAL_EMPTY_TEXT(result);
+		ZVAL_EMPTY_UNICODE(result);
 		return;
 	}
 

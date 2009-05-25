@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.60 2009/03/27 23:08:28 felipe Exp $ */
+/* $Id: php_xmlreader.c,v 1.61 2009/05/25 14:32:15 felipe Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ static int xmlreader_property_reader(xmlreader_object *obj, xmlreader_prop_handl
 			if (retchar) {
 				ZVAL_XML_STRING(*retval, (char *) retchar, ZSTR_DUPLICATE);
 			} else {
-				ZVAL_EMPTY_TEXT(*retval);
+				ZVAL_EMPTY_UNICODE(*retval);
 			}
 			break;
 		case IS_BOOL:
@@ -487,7 +487,7 @@ static void php_xmlreader_no_arg_string(INTERNAL_FUNCTION_PARAMETERS, xmlreader_
 		xmlFree(retchar);
 		return;
 	} else {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */
@@ -612,7 +612,7 @@ PHP_METHOD(xmlreader, getAttributeNo)
 		xmlFree(retchar);
 		return;
 	} else {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */
@@ -647,7 +647,7 @@ PHP_METHOD(xmlreader, getAttributeNs)
 		xmlFree(retchar);
 		return;
 	} else {
-		RETURN_EMPTY_TEXT();
+		RETURN_EMPTY_UNICODE();
 	}
 }
 /* }}} */

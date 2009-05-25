@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: incomplete_class.c,v 1.41 2009/03/26 20:02:28 felipe Exp $ */
+/* $Id: incomplete_class.c,v 1.42 2009/05/25 14:32:15 felipe Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -165,7 +165,7 @@ PHPAPI void php_store_class_name(zval *object, zstr name, zend_uint len)
 	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(val);
-	ZVAL_TEXTL(val, name, len, 1);
+	ZVAL_UNICODEL(val, name.u, len, 1);
 
 	zend_hash_update(Z_OBJPROP_P(object), MAGIC_MEMBER, sizeof(MAGIC_MEMBER), &val, sizeof(val), NULL);
 }

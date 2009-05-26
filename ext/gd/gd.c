@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.412 2009/05/26 14:26:39 pajoye Exp $ */
+/* $Id: gd.c,v 1.413 2009/05/26 19:34:17 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1184,7 +1184,9 @@ PHP_RSHUTDOWN_FUNCTION(gd)
 #if HAVE_GD_BUNDLED
 #define PHP_GD_VERSION_STRING "bundled (2.0.34 compatible)"
 #else
+#ifndef PHP_GD_VERSION_STRING
 #define PHP_GD_VERSION_STRING "2.0"
+#endif
 #endif
 
 /* {{{ PHP_MINFO_FUNCTION
@@ -3046,12 +3048,7 @@ PHP_FUNCTION(imageellipse)
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, &IM, -1, "Image", le_gd);
 
-#ifdef HAVE_GD_IMAGEELLIPSE  /* this function is missing from GD 2.0.1 */
 	gdImageEllipse(im, cx, cy, w, h, color);
-#else
-	gdImageArc(im, cx, cy, w, h, 0, 360, color);
-#endif
-
 	RETURN_TRUE;
 }
 /* }}} */

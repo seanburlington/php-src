@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.191 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: php_mssql.c,v 1.192 2009/05/26 12:26:49 felipe Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -967,8 +967,6 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 		case SQLVARBINARY:
 		case SQLBINARY:
 		case SQLIMAGE: {
-			DBBINARY *bin;
-			unsigned char *res_buf;
 			int res_length = dbdatlen(mssql_ptr->link, offset);
 
 			if (!res_length) {

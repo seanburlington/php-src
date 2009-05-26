@@ -3,7 +3,7 @@ Test pcntl wait functionality
 --SKIPIF--
 <?php
 	if (!extension_loaded("pcntl")) print "skip"; 
-	if (!function_exists("posix_kill")) print "skip posix_kill() not avaliable";
+	if (!function_exists("posix_kill")) print "skip posix_kill() not available";
 ?>
 --FILE--
 <?php 
@@ -73,7 +73,7 @@ test_stop_signal();
 Staring wait.h tests....
 
 Testing pcntl_wifexited and wexitstatus....
-Exited With: -1
+Exited With: 255
 
 Testing pcntl_wifsignaled....
 Process was terminated by signal : SIGTERM

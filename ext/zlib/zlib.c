@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.6.2.12 2009/05/26 05:57:40 jani Exp $ */
+/* $Id: zlib.c,v 1.183.2.6.2.13 2009/05/26 08:03:29 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1039,6 +1039,7 @@ static int php_zlib_output_compression_start(TSRMLS_D)
 			break;
 		case 1:
 			ZLIBG(output_compression) = 4096;
+			/* break omitted intentionally */
 		default:
 			/* ZLIBG(compression_coding) should be 0 when zlib compression hasn't been started yet.. */
 			if (ZLIBG(compression_coding) == 0) {

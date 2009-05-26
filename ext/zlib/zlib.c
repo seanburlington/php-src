@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.225 2009/03/10 23:39:52 helly Exp $ */
+/* $Id: zlib.c,v 1.226 2009/05/26 08:02:31 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #	include "config.h"
@@ -95,6 +95,7 @@ void php_zlib_output_compression_start(TSRMLS_D)
 			break;
 		case 1:
 			ZLIBG(output_compression) = PHP_OUTPUT_HANDLER_DEFAULT_SIZE;
+			/* break omitted intentionally */
 		default:
 			MAKE_STD_ZVAL(tmp);
 			ZVAL_ASCII_STRING(tmp, PHP_ZLIB_OUTPUT_HANDLER_NAME, ZSTR_DUPLICATE);

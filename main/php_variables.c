@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.158 2009/05/23 18:52:03 jani Exp $ */
+/* $Id: php_variables.c,v 1.159 2009/05/27 14:53:05 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -563,6 +563,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 		} else {
 			free_buffer = 0;
 		}
+		conv = UG(request_encoding_conv);
 	} else if (arg == PARSE_STRING) {		/* String data */
 		res = str;
 		free_buffer = 1;

@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.44 2009/05/27 14:16:00 andrey Exp $ 
+  $Id: mysqli_prop.c,v 1.45 2009/05/27 15:04:55 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -85,7 +85,7 @@ static int __func(mysqli_object *obj, zval **retval TSRMLS_DC) \
 	} else {\
 		l = (__ret_type)__int_func(p);\
 		if (l < LONG_MAX) {\
-			ZVAL_LONG(*retval, (long) l);\
+			ZVAL_LONG(*retval, l);\
 		} else { \
 			char *ret; \
 			int ret_len = spprintf(&ret, 0, __ret_type_sprint_mod, l); \
@@ -171,7 +171,7 @@ static int link_affected_rows_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 	} else {
 		CHECK_STATUS(MYSQLI_STATUS_VALID);
 
-		rc = (my_ulonglong) mysql_affected_rows(mysql->mysql);
+		rc = mysql_affected_rows(mysql->mysql);
 
 		if (rc == (my_ulonglong) -1) {
 			ZVAL_LONG(*retval, -1);
@@ -288,7 +288,7 @@ static int stmt_affected_rows_read(mysqli_object *obj, zval **retval TSRMLS_DC)
 	if (!p) {
 		ZVAL_NULL(*retval);
 	} else {
-		rc = (my_ulonglong) mysql_stmt_affected_rows(p->stmt);
+		rc = mysql_stmt_affected_rows(p->stmt);
 	
 		if (rc == (my_ulonglong) -1) {
 			ZVAL_LONG(*retval, -1);

@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.53 2009/03/30 14:32:20 kalle Exp $
+# $Id: Makefile,v 1.54 2009/05/27 01:46:27 kalle Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -113,10 +113,7 @@ clean-all:
 	-@del /f /q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\*.rc $(BUILD_DIR)\*.dbg $(BUILD_DIR)\*.bin $(BUILD_DIR)\php*.dll $(BUILD_DIR)\php*.exe > NUL
 
 test:
-	<<test_suite_uses_lame_env_vars.bat
-set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
-$(BUILD_DIR)\php.exe -d open_basedir= -d output_buffering=0 run-tests.php $(TESTS)
-<<NOKEEP
+	"$(BUILD_DIR)\php.exe" -d open_basedir= -d output_buffering=0 run-tests.php $(TESTS) -p "$(BUILD_DIR)\php.exe"
 
 build-snap: generated_files
 	SET PATH=$(PATH);$(PHP_BUILD)\bin

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.59.2.3.2.5.2.7 2009/05/26 12:50:40 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.59.2.3.2.5.2.8 2009/05/27 07:17:54 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -121,8 +121,9 @@ PHP_FUNCTION(imagegrabwindow);
 PHP_FUNCTION(imagegrabscreen);
 #endif
 
-#ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imagerotate);
+
+#ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imageantialias);
 #endif
 

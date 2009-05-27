@@ -17,6 +17,7 @@ configuration-parser.h
 configuration-parser.output
 configuration-scanner.c
 configure
+configure.bat
 conftest
 conftest.c
 generated_lists

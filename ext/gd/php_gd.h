@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.81 2009/05/27 07:16:55 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.82 2009/05/27 08:12:07 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -190,9 +190,10 @@ PHP_FUNCTION(image2wbmp);
 
 #if HAVE_GD_BUNDLED
 PHP_FUNCTION(imagelayereffect);
-PHP_FUNCTION(imagecolormatch);
 PHP_FUNCTION(imagexbm);
 #endif
+
+PHP_FUNCTION(imagecolormatch);
 
 PHP_FUNCTION(imagefilter);
 PHP_FUNCTION(imageconvolution);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.14.2.51 2009/05/26 15:50:44 jani Exp $ */
+/* $Id: interface.c,v 1.62.2.14.2.52 2009/05/27 09:57:13 tony2001 Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -2061,7 +2061,7 @@ static void _php_curl_close_ex(php_curl *ch TSRMLS_DC)
 #endif
 
 	/* Prevent crash inside cURL if passed file has already been closed */
-	if (ch->handlers->stderr && Z_REFCOUNT_P(ch->handlers->stderr) <= 0) {
+	if (ch->handlers->stderr && ch->handlers->stderr->refcount <= 0) {
 		curl_easy_setopt(ch->cp, CURLOPT_STDERR, stderr);
 	}
 

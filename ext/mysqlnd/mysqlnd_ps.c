@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps.c,v 1.28 2009/05/28 16:35:16 andrey Exp $ */
+/* $Id: mysqlnd_ps.c,v 1.29 2009/05/28 17:47:18 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -1373,6 +1373,7 @@ MYSQLND_METHOD(mysqlnd_stmt, bind_parameters)(MYSQLND_STMT * const stmt,
 			/* Prevent from freeing */
 			/* Don't update is_ref, or we will leak during conversion */
 			Z_ADDREF_P(stmt->param_bind[i].zv);
+			stmt->param_bind[i].flags = 0;
 			if (stmt->param_bind[i].type == MYSQL_TYPE_LONG_BLOB) {
 				stmt->param_bind[i].flags &= ~MYSQLND_PARAM_BIND_BLOB_USED;
 			}

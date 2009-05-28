@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_ps_codec.c,v 1.16 2009/03/27 19:28:26 felipe Exp $ */
+/* $Id: mysqlnd_ps_codec.c,v 1.17 2009/05/28 16:35:16 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_wireprotocol.h"
@@ -405,12 +405,14 @@ void ps_fetch_string(zval *zv, const MYSQLND_FIELD * const field,
 	DBG_ENTER("ps_fetch_string");
 	DBG_INF_FMT("len = %lu", length);
 #if PHP_MAJOR_VERSION < 6
+	DBG_INF("copying from the row buffer");
 	ZVAL_STRINGL(zv, (char *)*row, length, 1);	
 #else
 	if (field->charsetnr == MYSQLND_BINARY_CHARSET_NR) {
 		DBG_INF("Binary charset");
 		ZVAL_STRINGL(zv, (char *)*row, length, 1);
 	} else {
+		DBG_INF_FMT("copying from the row buffer");
 		ZVAL_UTF8_STRINGL(zv, (char*)*row, length, ZSTR_DUPLICATE);
 	}
 #endif

@@ -18,12 +18,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd.h,v 1.3.2.22 2009/02/16 17:26:43 johannes Exp $ */
+/* $Id: mysqlnd.h,v 1.3.2.23 2009/05/28 11:47:48 andrey Exp $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.5-dev - 081106 - $Revision: 1.3.2.22 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.5-dev - 081106 - $Revision: 1.3.2.23 $"
 #define MYSQLND_VERSION_ID 50005
 
 /* This forces inlining of some accessor functions */
@@ -158,8 +158,8 @@ PHPAPI enum_func_status _mysqlnd_poll(MYSQLND **r_array, MYSQLND **e_array, MYSQ
 #define mysqlnd_field_seek(result, ofs)			(result)->m.seek_field((result), (ofs))
 #define mysqlnd_field_tell(result)				((result)->meta? (result)->meta->current_field:0)
 #define mysqlnd_fetch_field(result)				(result)->m.fetch_field((result) TSRMLS_CC)
-#define mysqlnd_fetch_field_direct(result,fnr)	((result)->meta? &((result)->meta->fields[(fnr)]):NULL)
-#define mysqlnd_fetch_fields(result)			((result)->meta? (result)->meta->fields: NULL)
+#define mysqlnd_fetch_field_direct(result,fnr)	(result)->m.fetch_field_direct((result), (fnr) TSRMLS_CC)
+#define mysqlnd_fetch_fields(result)			(result)->m.fetch_fields((result) TSRMLS_CC)
 
 /* mysqlnd metadata */
 #define mysqlnd_get_client_info()		MYSQLND_VERSION

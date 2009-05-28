@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.c,v 1.1.2.15 2009/03/30 16:52:33 felipe Exp $ */
+/* $Id: mysqlnd_debug.c,v 1.1.2.16 2009/05/28 11:47:48 andrey Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -815,7 +815,7 @@ void * _mysqlnd_perealloc(void *ptr, size_t new_size, zend_bool persistent MYSQL
 	if (persistent == FALSE) {
 		DBG_INF_FMT("after : %lu", zend_memory_usage(persistent TSRMLS_CC));
 	}
-	MYSQLND_INC_GLOBAL_STATISTIC(persistent? STAT_MEM_EREALLOC_COUNT:STAT_MEM_REALLOC_COUNT);
+	MYSQLND_INC_GLOBAL_STATISTIC(persistent? STAT_MEM_REALLOC_COUNT:STAT_MEM_EREALLOC_COUNT);
 	if (MYSQLND_G(collect_memory_statistics)) {
 		enum mysqlnd_collected_stats s1 = persistent? STAT_MEM_REALLOC_COUNT:STAT_MEM_EREALLOC_COUNT;
 		enum mysqlnd_collected_stats s2 = persistent? STAT_MEM_REALLOC_AMMOUNT:STAT_MEM_EREALLOC_AMMOUNT;

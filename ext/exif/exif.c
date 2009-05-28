@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.212 2009/05/19 10:23:51 kalle Exp $ */
+/* $Id: exif.c,v 1.213 2009/05/28 13:44:43 pajoye Exp $ */
 
 /*  ToDos
  *
@@ -138,7 +138,7 @@ const zend_function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.212 2009/05/19 10:23:51 kalle Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.213 2009/05/28 13:44:43 pajoye Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3186,6 +3186,10 @@ static void exif_process_TIFF_in_JPEG(image_info_type *ImageInfo, char *CharBuf,
 	offset_of_ifd = php_ifd_get32u(CharBuf+4, ImageInfo->motorola_intel);
 	if ( exif_value_2a != 0x2a || offset_of_ifd < 0x08) {
 		exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_WARNING, "Invalid TIFF start (1)");
+		return;
+	}
+	if (offset_of_ifd > length) {
+		exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_WARNING, "Invalid IFD start");
 		return;
 	}
 

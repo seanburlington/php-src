@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.6.2.13 2009/05/26 08:03:29 jani Exp $ */
+/* $Id: zlib.c,v 1.183.2.6.2.14 2009/05/28 10:14:22 lbarnaud Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -267,7 +267,9 @@ static PHP_RINIT_FUNCTION(zlib)
 	ZLIBG(ob_gzhandler_status) = 0;
 	ZLIBG(compression_coding) = 0;
 
-	return php_zlib_output_compression_start(TSRMLS_C);
+	php_zlib_output_compression_start(TSRMLS_C);
+
+	return SUCCESS;
 }
 /* }}} */
 

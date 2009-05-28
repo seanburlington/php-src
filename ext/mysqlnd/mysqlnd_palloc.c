@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_palloc.c,v 1.2.2.15 2009/03/30 16:52:33 felipe Exp $ */
+/* $Id: mysqlnd_palloc.c,v 1.2.2.16 2009/05/28 16:35:41 andrey Exp $ */
 #include "php.h"
 #include "mysqlnd.h"
 #include "mysqlnd_priv.h"
@@ -497,9 +497,14 @@ void mysqlnd_palloc_zval_ptr_dtor(zval **zv, MYSQLND_THD_ZVAL_PCACHE * const thd
 		*(thd_cache->gc_list.last_added++) = (mysqlnd_zval *)*zv;
 		UNLOCK_PCACHE(cache);
 	} else {
+		DBG_INF("No user reference");
 		/* No user reference */
 		if (((mysqlnd_zval *)*zv)->point_type == MYSQLND_POINTS_EXT_BUFFER) {
-			/* PS are here and also in Unicode mode, for non-binary  */
+			DBG_INF("Points to external buffer. Calling zval_dtor");
+			/*
+			  PS are here
+			  Unicode mode goes also here if the column is not binary but a text
+			*/
 			zval_dtor(*zv);
 		}
 		LOCK_PCACHE(cache);

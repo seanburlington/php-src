@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.380 2009/05/23 18:59:17 jani Exp $ */
+/* $Id: cgi_main.c,v 1.381 2009/05/28 20:47:01 kalle Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -625,9 +625,7 @@ void cgi_php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 			zend_hash_get_current_data_ex(request->env, (void **) &val, &pos) == SUCCESS;
 			zend_hash_move_forward_ex(request->env, &pos)
 		) {
-			unsigned int new_val_len;
-
-			if (php_register_variable_with_conv(conv, var.s, strlen(var.s), val, strlen(*val), array_ptr, filter_arg TSRMLS_CC) == FAILURE) {
+			if (php_register_variable_with_conv(conv, var.s, strlen(var.s), *val, strlen(*val), array_ptr, filter_arg TSRMLS_CC) == FAILURE) {
 				php_error(E_WARNING, "Failed to decode %s array entry", (filter_arg == PARSE_ENV?"_ENV":"_SERVER"));
 			}
 		}

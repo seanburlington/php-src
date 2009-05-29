@@ -17,7 +17,7 @@
   |          Ulf Wendel <uw@php.net>                                     |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.175 2009/05/28 19:40:37 kalle Exp $ 
+  $Id: mysqli_api.c,v 1.176 2009/05/29 13:09:22 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1537,7 +1537,7 @@ PHP_FUNCTION(mysqli_next_result) {
 /* }}} */
 
 
-#ifdef MYSQLI_USE_MYSQLND
+#ifdef HAVE_STMT_NEXT_RESULT
 /* {{{ proto bool mysqli_stmt_next_result(object link)
    check if there any more query results from a multi query */
 PHP_FUNCTION(mysqli_stmt_more_results)

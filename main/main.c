@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.640.2.23.2.57.2.52 2009/05/04 21:18:21 kalle Exp $ */
+/* $Id: main.c,v 1.640.2.23.2.57.2.53 2009/05/30 09:48:16 scottmac Exp $ */
 
 /* {{{ includes
  */
@@ -1276,7 +1276,7 @@ static void php_message_handler_for_zend(long message, void *data TSRMLS_DC)
 void php_on_timeout(int seconds TSRMLS_DC)
 {
 	PG(connection_status) |= PHP_CONNECTION_TIMEOUT;
-	zend_set_timeout(EG(timeout_seconds), 0);
+	zend_set_timeout(EG(timeout_seconds), 1);
 	if(PG(exit_on_timeout)) sapi_terminate_process(TSRMLS_C);
 }
 

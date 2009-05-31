@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.106.2.2.2.8 2008/12/31 11:17:43 sebastian Exp $ */
+/* $Id: snmp.c,v 1.106.2.2.2.9 2009/05/31 14:14:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -490,9 +490,14 @@ retry:
 					if (st >= SNMP_CMD_WALK && st != SNMP_CMD_SET) {
 						if (vars->type != SNMP_ENDOFMIBVIEW && 
 							vars->type != SNMP_NOSUCHOBJECT && vars->type != SNMP_NOSUCHINSTANCE) {
-							memmove((char *)name, (char *)vars->name,vars->name_length * sizeof(oid));
-							name_length = vars->name_length;
-							keepwalking = 1;
+							if (snmp_oid_compare(name, name_length, vars->name, vars->name_length) >= 0) {
+								php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error: OID not increasing: %s",name);
+								keepwalking = 0;
+							} else {
+								memmove((char *)name, (char *)vars->name,vars->name_length * sizeof(oid));
+								name_length = vars->name_length;
+								keepwalking = 1;
+							}
 						}
 					}
 				}	

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.69 2009/05/19 15:37:38 jani Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.70 2009/05/31 20:43:57 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -343,6 +343,7 @@ static PHP_GINIT_FUNCTION(date)
 {
 	date_globals->default_timezone = NULL;
 	date_globals->timezone = NULL;
+	date_globals->tzcache = NULL;
 }
 /* }}} */
 
@@ -361,7 +362,7 @@ PHP_RINIT_FUNCTION(date)
 		efree(DATEG(timezone));
 	}
 	DATEG(timezone) = NULL;
-	zend_hash_init(&DATEG(tzcache), 4, NULL, _php_date_tzinfo_dtor, 0);
+	DATEG(tzcache) = NULL;
 
 	return SUCCESS;
 }
@@ -374,8 +375,11 @@ PHP_RSHUTDOWN_FUNCTION(date)
 		efree(DATEG(timezone));
 	}
 	DATEG(timezone) = NULL;
-	zend_hash_destroy(&DATEG(tzcache));
-
+	if(DATEG(tzcache)) {
+		zend_hash_destroy(DATEG(tzcache));
+		FREE_HASHTABLE(DATEG(tzcache));
+		DATEG(tzcache) = NULL;
+	}
 	return SUCCESS;
 }
 /* }}} */
@@ -552,13 +556,18 @@ static timelib_tzinfo *php_date_parse_tzfile(char *formal_tzname, const timelib_
 {
 	timelib_tzinfo *tzi, **ptzi;
 
-	if (zend_hash_find(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void **) &ptzi) == SUCCESS) {
+	if(!DATEG(tzcache)) {
+		ALLOC_HASHTABLE(DATEG(tzcache));
+		zend_hash_init(DATEG(tzcache), 4, NULL, _php_date_tzinfo_dtor, 0);
+	}
+
+	if (zend_hash_find(DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void **) &ptzi) == SUCCESS) {
 		return *ptzi;
 	}
 
 	tzi = timelib_parse_tzfile(formal_tzname, tzdb);
 	if (tzi) {
-		zend_hash_add(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
+		zend_hash_add(DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
 	}
 	return tzi;
 }
@@ -654,7 +663,7 @@ PHPAPI timelib_tzinfo *get_timezone_info(TSRMLS_D)
 {
 	char *tz;
 	timelib_tzinfo *tzi;
-	
+
 	tz = guess_timezone(DATE_TIMEZONEDB TSRMLS_CC);
 	tzi = php_date_parse_tzfile(tz, DATE_TIMEZONEDB TSRMLS_CC);
 	if (! tzi) {

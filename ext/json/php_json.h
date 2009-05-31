@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.8.2.4 2008/12/31 11:17:38 sebastian Exp $ */
+/* $Id: php_json.h,v 1.8.2.5 2009/05/31 01:43:45 andrei Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -41,6 +41,9 @@ extern zend_module_entry json_module_entry;
 #else
 #define JSON_G(v) (json_globals.v)
 #endif
+
+PHPAPI void php_json_encode(smart_str *buf, zval *val TSRMLS_DC);
+PHPAPI void php_json_decode(zval *return_value, char *buf, int buf_len, zend_bool assoc);
 
 #endif  /* PHP_JSON_H */
 

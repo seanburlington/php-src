@@ -16,12 +16,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_json.h,v 1.8.2.5 2009/05/31 01:43:45 andrei Exp $ */
+/* $Id: php_json.h,v 1.8.2.6 2009/05/31 18:55:36 andrei Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
 
 #define PHP_JSON_VERSION "1.2.1"
+
+#include "ext/standard/php_smart_str.h"
 
 extern zend_module_entry json_module_entry;
 #define phpext_json_ptr &json_module_entry

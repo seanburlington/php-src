@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.45 2009/05/03 19:57:35 derick Exp $ */
+/* $Id: php_date.h,v 1.46 2009/05/31 21:29:54 stas Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -153,7 +153,7 @@ struct _php_period_obj {
 ZEND_BEGIN_MODULE_GLOBALS(date)
 	char      *default_timezone;
 	char      *timezone;
-	HashTable  tzcache;
+	HashTable *tzcache;
 	timelib_error_container *last_errors;
 ZEND_END_MODULE_GLOBALS(date)
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.19.2.22 2009/05/31 01:44:07 andrei Exp $ */
+/* $Id: json.c,v 1.9.2.19.2.23 2009/05/31 13:51:08 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -442,7 +442,7 @@ PHPAPI void php_json_encode(smart_str *buf, zval *val, int options TSRMLS_DC) /*
 					smart_str_appendl(buf, d, len);
 					efree(d);
 				} else {
-					zend_error(E_WARNING, "[json] (php_json_encode) double %.9g does not conform to the JSON spec, encoded as 0.", dbl);
+					zend_error(E_WARNING, "[json] (php_json_encode) double %.9g does not conform to the JSON spec, encoded as 0", dbl);
 					smart_str_appendc(buf, '0');
 				}
 			}
@@ -458,7 +458,7 @@ PHPAPI void php_json_encode(smart_str *buf, zval *val, int options TSRMLS_DC) /*
 			break;
 
 		default:
-			zend_error(E_WARNING, "[json] (php_json_encode) type is unsupported, encoded as null.");
+			zend_error(E_WARNING, "[json] (php_json_encode) type is unsupported, encoded as null");
 			smart_str_appendl(buf, "null", 4);
 			break;
 	}
@@ -485,7 +485,7 @@ PHPAPI void php_json_decode(zval *return_value, char *str, int str_len, zend_boo
 	}
 
 	if (depth <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Depth must greater than zero.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Depth must greater than zero");
 		RETURN_NULL();
 	}
 

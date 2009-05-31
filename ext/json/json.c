@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.9.2.27 2009/05/31 01:43:45 andrei Exp $ */
+/* $Id: json.c,v 1.9.2.28 2009/05/31 13:51:23 jani Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -371,7 +371,7 @@ PHPAPI void php_json_encode(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
 			smart_str_appendl(buf, d, len);
 			efree(d);
                 } else {
-                    zend_error(E_WARNING, "[json] (php_json_encode) double %.9g does not conform to the JSON spec, encoded as 0.", dbl);
+                    zend_error(E_WARNING, "[json] (php_json_encode) double %.9g does not conform to the JSON spec, encoded as 0", dbl);
                     smart_str_appendc(buf, '0');
                 }
             }
@@ -384,7 +384,7 @@ PHPAPI void php_json_encode(smart_str *buf, zval *val TSRMLS_DC) /* {{{ */
             json_encode_array(buf, &val TSRMLS_CC);
             break;
         default:
-            zend_error(E_WARNING, "[json] (php_json_encode) type is unsupported, encoded as null.");
+            zend_error(E_WARNING, "[json] (php_json_encode) type is unsupported, encoded as null");
             smart_str_appendl(buf, "null", 4);
             break;
     }

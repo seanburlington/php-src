@@ -16,7 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: json.c,v 1.53 2009/05/15 09:10:01 kalle Exp $ */
+/* $Id: json.c,v 1.54 2009/05/31 01:45:05 andrei Exp $ */
+
+/*
+ * UTODO
+ * - take a look at json_decode, some weird IS_STRING checks there
+ * - expose encode/decode API once that's done
+ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

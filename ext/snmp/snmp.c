@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.106.2.2.2.9 2009/05/31 14:14:07 iliaa Exp $ */
+/* $Id: snmp.c,v 1.106.2.2.2.10 2009/06/01 13:10:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -479,7 +479,7 @@ retry:
 						return;
 					} else if (st == SNMP_CMD_WALK) {
 						add_next_index_zval(return_value,snmpval); /* Add to returned array */
-					} else if (st == SNMP_CMD_REALWALK)  {
+					} else if (st == SNMP_CMD_REALWALK && vars->type != SNMP_ENDOFMIBVIEW && vars->type != SNMP_NOSUCHOBJECT && vars->type != SNMP_NOSUCHINSTANCE) {
 #ifdef HAVE_NET_SNMP
 						snprint_objid(buf2, sizeof(buf2), vars->name, vars->name_length);
 #else

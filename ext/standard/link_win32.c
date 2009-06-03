@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link_win32.c,v 1.1.2.3 2009/01/16 14:10:16 pajoye Exp $ */
+/* $Id: link_win32.c,v 1.1.2.4 2009/06/03 07:56:53 pajoye Exp $ */
 #ifdef PHP_WIN32
 
 #include "php.h"
@@ -231,7 +231,9 @@ PHP_FUNCTION(link)
 	char source_p[MAXPATHLEN];
 	char dest_p[MAXPATHLEN];
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &topath, &topath_len, &frompath, &frompath_len) == FAILURE) {
+	/*First argument to link function is the target and hence should go to frompath
+	  Second argument to link function is the link itself and hence should go to topath */
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &frompath, &frompath_len, &topath, &topath_len) == FAILURE) {
 		return;
 	}
 
@@ -260,7 +262,8 @@ PHP_FUNCTION(link)
 #else 
 	ret = CreateHardLinkA(dest_p, source_p, NULL);	
 #endif	
-	if (ret == -1) {
+
+	if (ret == 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", strerror(errno));
 		RETURN_FALSE;
 	}

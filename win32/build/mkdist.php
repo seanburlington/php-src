@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.23 2009/04/01 09:20:35 kalle Exp $
+<?php # $Id: mkdist.php,v 1.24 2009/06/03 01:13:37 kalle Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -488,8 +488,7 @@ if (file_exists($snapshot_template)) {
 		}
 	}
 } else {
-	echo "WARNING: you don't have a snapshot template\n";
-	echo "         your dist will not be complete\n";
+	echo "WARNING: you don't have a snapshot template, your dist will not be complete\n";
 }
 
 ?>

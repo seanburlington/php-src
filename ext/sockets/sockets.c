@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.214 2009/05/19 11:57:52 lbarnaud Exp $ */
+/* $Id: sockets.c,v 1.215 2009/06/04 18:18:24 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1601,10 +1601,11 @@ PHP_FUNCTION(socket_recvfrom)
 			zval_dtor(arg5);
 			zval_dtor(arg6);
 
+			memset(addr6, 0, INET6_ADDRSTRLEN);
 			inet_ntop(AF_INET6, &sin6.sin6_addr, addr6, INET6_ADDRSTRLEN);
 
 			ZVAL_STRINGL(arg2, recv_buf, retval, 0);
-			ZVAL_STRING(arg5, addr6 ? addr6 : "::", 1);
+			ZVAL_STRING(arg5, addr6[0] ? addr6 : "::", 1);
 			ZVAL_LONG(arg6, ntohs(sin6.sin6_port));
 			break;
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.45.2.70 2009/05/31 20:43:57 stas Exp $ */
+/* $Id: php_date.c,v 1.43.2.45.2.71 2009/06/05 22:34:30 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -32,6 +32,10 @@
 
 #ifdef PHP_WIN32
 static __inline __int64 llabs( __int64 i ) { return i >= 0? i: -i; }
+#endif
+
+#if defined(__GNUC__) && __GNUC__ < 3
+static __inline __int64_t llabs( __int64_t i ) { return i >= 0 ? i : -i; }
 #endif
 
 /* {{{ arginfo */

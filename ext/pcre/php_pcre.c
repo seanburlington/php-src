@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.253 2009/05/25 14:32:14 felipe Exp $ */
+/* $Id: php_pcre.c,v 1.254 2009/06/05 18:50:10 mattwil Exp $ */
 
 /*  TODO
  *  php_pcre_replace_impl():
@@ -1025,7 +1025,7 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 	UG(runtime_encoding_conv) = UG(utf8_conv);
 	compiled_string_description = zend_make_compiled_string_description("regexp code" TSRMLS_CC);
 	/* Run the code */
-	if (zend_eval_string(code.c, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
+	if (zend_eval_stringl(code.c, code.len, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 		efree(compiled_string_description);
 		UG(runtime_encoding_conv) = orig_runtime_conv;
 		php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code: %s%s", PHP_EOL, code.c);

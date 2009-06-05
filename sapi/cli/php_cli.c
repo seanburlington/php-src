@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.210 2009/04/09 10:19:15 bjori Exp $ */
+/* $Id: php_cli.c,v 1.211 2009/06/05 18:50:10 mattwil Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1169,7 +1169,7 @@ int main(int argc, char *argv[])
 						continue;
 					}
 
-					zend_eval_string(code, NULL, "php shell code" TSRMLS_CC);
+					zend_eval_stringl(code, pos, NULL, "php shell code" TSRMLS_CC);
 					pos = 0;
 					
 					if (php_last_char != '\0' && php_last_char != '\n') {

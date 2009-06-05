@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar_object.c,v 1.298 2009/05/24 18:50:37 cellog Exp $ */
+/* $Id: phar_object.c,v 1.299 2009/06/05 04:44:55 cellog Exp $ */
 
 #include "phar_internal.h"
 #include "func_interceptors.h"
@@ -3526,6 +3526,9 @@ PHP_METHOD(Phar, offsetExists)
 		}
 		RETURN_TRUE;
 	} else {
+		if (zend_hash_exists(&phar_obj->arc.archive->virtual_dirs, fname, (uint) fname_len)) {
+			RETURN_TRUE;
+		}
 		RETURN_FALSE;
 	}
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.31 2009/04/10 15:47:15 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.21.2.32 2009/06/05 18:50:32 mattwil Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -913,7 +913,7 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 
 	compiled_string_description = zend_make_compiled_string_description("regexp code" TSRMLS_CC);
 	/* Run the code */
-	if (zend_eval_string(code.c, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
+	if (zend_eval_stringl(code.c, code.len, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 		efree(compiled_string_description);
 		php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code: %s%s", PHP_EOL, code.c);
 		/* zend_error() does not return in this case */

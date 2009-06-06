@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.89 2009/04/28 22:26:59 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.31.2.64.2.90 2009/06/06 02:40:48 mattwil Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -5917,7 +5917,7 @@ PHP_FUNCTION(parse_ini_file)
 	}
 
 	if (filename_len == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Filename can not be empty!");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Filename cannot be empty!");
 		RETURN_FALSE;
 	}
 

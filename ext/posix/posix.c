@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.108 2009/03/10 23:39:32 helly Exp $ */
+/* $Id: posix.c,v 1.109 2009/06/06 02:40:14 mattwil Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -310,7 +310,7 @@ const zend_function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.108 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -886,7 +886,7 @@ PHP_FUNCTION(posix_mknod)
 #if defined(HAVE_MAKEDEV) || defined(makedev)
 			php_dev = makedev(major, minor);
 #else
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can not create a block or character device, creating a normal file instead");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create a block or character device, creating a normal file instead");
 #endif
 		}
 	}

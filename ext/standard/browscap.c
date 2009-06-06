@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.105 2009/03/10 23:39:39 helly Exp $ */
+/* $Id: browscap.c,v 1.106 2009/06/06 02:40:14 mattwil Exp $ */
 
 #include "php.h"
 #include "php_browscap.h"
@@ -122,7 +122,7 @@ static void php_browscap_parser_cb(zval *arg1, zval *arg2, zval *arg3, int callb
 					current_section_name != NULL &&
 					!strcasecmp(current_section_name, Z_STRVAL_P(arg2))
 				) {
-					zend_error(E_CORE_ERROR, "Invalid browscap ini file: 'Parent' value can not be same as the section name: %s (in file %s)", current_section_name, INI_STR("browscap"));
+					zend_error(E_CORE_ERROR, "Invalid browscap ini file: 'Parent' value cannot be same as the section name: %s (in file %s)", current_section_name, INI_STR("browscap"));
 					return;
 				}
 

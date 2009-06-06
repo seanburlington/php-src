@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.106 2009/03/26 20:02:28 felipe Exp $ */
+/* $Id: head.c,v 1.107 2009/06/06 02:40:14 mattwil Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -84,12 +84,12 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 	int result;
 	
 	if (name && strpbrk(name, "=,; \t\r\n\013\014") != NULL) {   /* man isspace for \013 and \014 */
-		zend_error( E_WARNING, "Cookie names can not contain any of the following '=,; \\t\\r\\n\\013\\014'" );
+		zend_error( E_WARNING, "Cookie names cannot contain any of the following '=,; \\t\\r\\n\\013\\014'" );
 		return FAILURE;
 	}
 
 	if (!url_encode && value && strpbrk(value, ",; \t\r\n\013\014") != NULL) { /* man isspace for \013 and \014 */
-		zend_error( E_WARNING, "Cookie values can not contain any of the following ',; \\t\\r\\n\\013\\014'" );
+		zend_error( E_WARNING, "Cookie values cannot contain any of the following ',; \\t\\r\\n\\013\\014'" );
 		return FAILURE;
 	}
 

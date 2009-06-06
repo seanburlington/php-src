@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.75 2009/05/10 20:00:58 davidc Exp $ */
+/* $Id: xsltprocessor.c,v 1.76 2009/06/06 02:40:14 mattwil Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -344,7 +344,7 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 			} else if (retval->type == IS_BOOL) {
 				valuePush(ctxt, xmlXPathNewBoolean(retval->value.lval));
 			} else if (retval->type == IS_OBJECT) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "A PHP Object can not be converted to a XPath-string");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "A PHP Object cannot be converted to a XPath-string");
 				valuePush(ctxt, xmlXPathNewString(""));
 			} else {
 				convert_to_string_with_converter(retval, UG(utf8_conv));

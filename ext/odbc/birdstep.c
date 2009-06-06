@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.26 2009/03/10 23:39:27 helly Exp $ */
+/* $Id: birdstep.c,v 1.27 2009/06/06 02:40:14 mattwil Exp $ */
 
 /*
  * TODO:
@@ -369,7 +369,7 @@ PHP_FUNCTION(birdstep_exec)
 	}
 	stat = SQLExecDirect(res->hstmt,query,SQL_NTS);
 	if ( stat != SQL_SUCCESS && stat != SQL_SUCCESS_WITH_INFO ) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Birdstep: Can not execute \"%s\" query",query);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Birdstep: Cannot execute \"%s\" query",query);
 		SQLFreeStmt(res->hstmt,SQL_DROP);
 		efree(res);
 		RETURN_FALSE;

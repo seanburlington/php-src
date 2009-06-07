@@ -19,11 +19,12 @@
    |          Jani Taskinen  <sniper@iki.fi>                              |
    |          Stig Venaas    <venaas@uninett.no>                          |
    |          Doug Goldstein <cardoe@cardoe.com>                          |
+   |          Patrick Allaert <patrickallaert@php.net>                    |
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.161.2.3.2.11.2.25 2009/04/21 18:08:34 bjori Exp $ */
+/* $Id: ldap.c,v 1.161.2.3.2.11.2.26 2009/06/07 13:07:58 patrickallaert Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -224,7 +225,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.25 2009/04/21 18:08:34 bjori Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.161.2.3.2.11.2.26 2009/06/07 13:07:58 patrickallaert Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -961,9 +962,6 @@ PHP_FUNCTION(ldap_get_entries)
 	ldap = ld->link;
 	num_entries = ldap_count_entries(ldap, ldap_result);
 
-	array_init(return_value);
-	add_assoc_long(return_value, "count", num_entries);
-
 	if (num_entries == 0) {
 		RETURN_NULL();
 	}
@@ -973,6 +971,9 @@ PHP_FUNCTION(ldap_get_entries)
 	if (ldap_result_entry == NULL) {
 		RETURN_FALSE;
 	}
+
+	array_init(return_value);
+	add_assoc_long(return_value, "count", num_entries);
 
 	while (ldap_result_entry != NULL) {
 

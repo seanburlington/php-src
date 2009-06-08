@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sqlite3_structs.h,v 1.8 2009/04/27 18:15:54 scottmac Exp $ */
+/* $Id: php_sqlite3_structs.h,v 1.9 2009/06/08 02:15:42 scottmac Exp $ */
 
 #ifndef PHP_SQLITE_STRUCTS_H
 #define PHP_SQLITE_STRUCTS_H
@@ -55,7 +55,7 @@ struct php_sqlite3_fci {
 typedef struct _php_sqlite3_func {
 	struct _php_sqlite3_func *next;
 
-	const char *func_name;
+	const UChar *func_name;
 	int argc;
 
 	zval *func, *step, *fini;

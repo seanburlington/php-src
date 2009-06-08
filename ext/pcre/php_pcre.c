@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.9.2.31 2009/04/14 20:31:31 nlopess Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.9.2.32 2009/06/08 21:52:08 scottmac Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -842,8 +842,8 @@ static int preg_do_repl_func(zval *function, char *subject, int *offsets, char *
 		result_len = offsets[1] - offsets[0];
 		*result = estrndup(&subject[offsets[0]], result_len);
 	}
-	zval_dtor(subpats);
-	FREE_ZVAL(subpats);
+
+	zval_ptr_dtor(&subpats);
 
 	return result_len;
 }

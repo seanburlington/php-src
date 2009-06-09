@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mysqlnd.c,v 1.14 2009/06/08 10:19:29 andrey Exp $ */
+/* $Id: php_mysqlnd.c,v 1.15 2009/06/09 09:51:56 pajoye Exp $ */
 #include "php.h"
 #include "php_ini.h"
 #include "mysqlnd.h"
@@ -46,7 +46,7 @@ PHPAPI void mysqlnd_minfo_print_hash(zval *values)
 
 	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(values), &pos_values);
 	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(values),
-										(void **)&values_entry, &pos_values) == SUCCESS) {
+		(void **)&values_entry, &pos_values) == SUCCESS) {
 		TSRMLS_FETCH();
 		zstr	string_key;
 		uint	string_key_len;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.157 2009/05/25 14:32:14 felipe Exp $ */
+/* $Id: php_spl.c,v 1.158 2009/06/09 01:57:57 scottmac Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -409,6 +409,7 @@ PHP_FUNCTION(spl_autoload_call)
 	(ht)->pListTail->pListNext = (ht)->pListHead;			\
 	(ht)->pListHead = (ht)->pListTail;						\
 	(ht)->pListTail = (ht)->pListHead->pListLast;			\
+	(ht)->pListHead->pListNext->pListLast = (ht)->pListHead;\
 	(ht)->pListTail->pListNext = NULL;						\
 	(ht)->pListHead->pListLast = NULL;
 

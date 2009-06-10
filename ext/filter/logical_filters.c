@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: logical_filters.c,v 1.1.2.22.2.11 2009/03/31 11:22:08 mattwil Exp $ */
+/* $Id: logical_filters.c,v 1.1.2.22.2.12 2009/06/10 19:01:17 felipe Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -570,7 +570,7 @@ static int _php_filter_validate_ipv6(char *str, int str_len TSRMLS_DC) /* {{{ */
 			}
 			if (*str == ':') {
 				if (compressed || --blocks == 0) {
-					return ipv4 != NULL;
+					return 0;
 				}			
 				if (++str == end || (ipv4 && ipv4 == str)) {
 					return 1;

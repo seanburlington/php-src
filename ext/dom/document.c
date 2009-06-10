@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.103 2009/04/07 15:31:15 rrichards Exp $ */
+/* $Id: document.c,v 1.104 2009/06/10 12:25:41 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1966,11 +1966,7 @@ PHP_FUNCTION(dom_document_validate)
 	}
 
 	DOM_GET_OBJ(docp, id, xmlDocPtr, intern);
-	
-	if (docp->intSubset == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "No DTD given in XML-Document");
-	}
-	
+
 	cvp = xmlNewValidCtxt();
 	
 	cvp->userData = NULL;

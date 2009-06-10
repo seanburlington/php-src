@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.276 2009/05/25 14:32:14 felipe Exp $ */
+/* $Id: simplexml.c,v 1.277 2009/06/10 14:28:06 bjori Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2532,6 +2532,7 @@ const zend_function_entry simplexml_functions[] = { /* {{{ */
 
 static const zend_module_dep simplexml_deps[] = { /* {{{ */
 	ZEND_MOD_REQUIRED("libxml")
+	ZEND_MOD_REQUIRED("spl")
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -2616,7 +2617,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.276 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.277 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

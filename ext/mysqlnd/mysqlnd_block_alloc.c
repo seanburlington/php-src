@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_block_alloc.c,v 1.1.2.5 2008/12/31 11:15:39 sebastian Exp $ */
+/* $Id: mysqlnd_block_alloc.c,v 1.1.2.6 2009/06/11 08:52:06 andrey Exp $ */
 
 #include "php.h"
 #include "mysqlnd.h"
@@ -183,10 +183,12 @@ void
 mysqlnd_mempool_destroy(MYSQLND_MEMORY_POOL * pool TSRMLS_DC)
 {
 	DBG_ENTER("mysqlnd_mempool_destroy");
-	/* mnd_free will reference LOCK_access and might crash, depending on the caller...*/
-	mysqlnd_mempool_free_contents(pool TSRMLS_CC);
-	mnd_free(pool->arena);
-	mnd_free(pool);
+	if (pool) {
+		/* mnd_free will reference LOCK_access and might crash, depending on the caller...*/
+		mysqlnd_mempool_free_contents(pool TSRMLS_CC);
+		mnd_free(pool->arena);
+		mnd_free(pool);
+	}
 	DBG_VOID_RETURN;
 }
 /* }}} */
